@@ -46,10 +46,7 @@ async function updateEmail() {
 		emailStatus.value = "Email updated successfully.";
 		refreshRole();
 	} catch (err: any) {
-		emailError.value =
-			err.response?.data?.message ??
-			err.message ??
-			"Unable to update email.";
+		emailError.value = err.response?.data?.message ?? err.message ?? "Unable to update email.";
 	}
 }
 
@@ -73,10 +70,7 @@ async function updatePassword() {
 		passwordStatus.value = "Password updated successfully.";
 		currentPassword.value = newPassword.value = confirmPassword.value = "";
 	} catch (err: any) {
-		passwordError.value =
-			err.response?.data?.message ??
-			err.message ??
-			"Unable to update password.";
+		passwordError.value = err.response?.data?.message ?? err.message ?? "Unable to update password.";
 	}
 }
 </script>
@@ -90,20 +84,9 @@ async function updatePassword() {
 			<h5>Change email</h5>
 			<div class="field">
 				<label for="account-email">Email</label>
-				<input
-					id="account-email"
-					v-model="email"
-					name="account-email"
-					type="email"
-				/>
+				<input id="account-email" v-model="email" name="account-email" type="email" />
 			</div>
-			<button
-				class="btn btn-secondary"
-				type="button"
-				@click="updateEmail"
-			>
-				Update email
-			</button>
+			<button class="btn btn-secondary" type="button" @click="updateEmail">Update email</button>
 			<p v-if="emailStatus" class="status">{{ emailStatus }}</p>
 			<p v-if="emailError" class="error">{{ emailError }}</p>
 		</div>
@@ -140,13 +123,7 @@ async function updatePassword() {
 					type="password"
 				/>
 			</div>
-			<button
-				class="btn btn-primary"
-				type="button"
-				@click="updatePassword"
-			>
-				Update password
-			</button>
+			<button class="btn btn-primary" type="button" @click="updatePassword">Update password</button>
 			<p v-if="passwordStatus" class="status">{{ passwordStatus }}</p>
 			<p v-if="passwordError" class="error">{{ passwordError }}</p>
 		</div>

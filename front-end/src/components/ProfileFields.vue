@@ -24,18 +24,14 @@ type Displayable = string | number | boolean | null | undefined;
 <template>
 	<template v-for="f in fields" :key="f.key">
 		<li v-if="editing">
-			<label>
+			<label @click.stop>
 				{{ f.label }}:&ensp;
 				<input
 					:value="entity[f.key]"
 					class="editTutor"
 					type="text"
-					@input="
-						onInput(
-							f.key,
-							($event.target as HTMLInputElement).value
-						)
-					"
+					@input="onInput(f.key, ($event.target as HTMLInputElement).value)"
+					@click.stop
 				/>
 			</label>
 		</li>

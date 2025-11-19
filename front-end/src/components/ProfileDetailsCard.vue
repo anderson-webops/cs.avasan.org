@@ -41,20 +41,10 @@ function forwardUpdate(key: string, value: Displayable) {
 <template>
 	<div class="profile-details-card">
 		<ul class="field-list">
-			<ProfileFields
-				:editing="editing"
-				:entity="entity"
-				:fields="fields"
-				@update="forwardUpdate"
-			/>
+			<ProfileFields :editing="editing" :entity="entity" :fields="fields" @update="forwardUpdate" />
 		</ul>
 
-		<AccountSecurity
-			v-if="showSecurity"
-			:email="securityEmail"
-			:entity-id="entityId"
-			:role="role"
-		/>
+		<AccountSecurity v-if="showSecurity" :email="securityEmail" :entity-id="entityId" :role="role" />
 	</div>
 </template>
 
