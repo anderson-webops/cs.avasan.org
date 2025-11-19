@@ -31,10 +31,10 @@ const adminDraft = ref<typeof currentAdmin.value | null>(null);
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
 const courseOptions = computed(() => courses.value ?? []);
-const courseNameMap = computed(() => {
-	const map: Record<string, string> = {};
-	for (const course of courseOptions.value) map[course.id] = course.name;
-	return map;
+const courseNameMap = computed<Record<string, string>>(() => {
+        const map: Record<string, string> = {};
+        for (const course of courseOptions.value ?? []) map[course.id] = course.name;
+        return map;
 });
 
 /* editable helper for the admin card */
@@ -133,13 +133,17 @@ watch(
 );
 
 function activateCard(id: string) {
-	// Prevent collapsing the admin card while editing.
-	if (adminEdit.value && id === "admin") return;
-	if (id.startsWith("user-")) {
-		const userID = id.slice("user-".length);
-		if (userEditing.value[userID]) return; // keep open while editing
-	}
-	activeCard.value = activeCard.value === id ? null : id;
+        // Prevent collapsing the admin card while editing.
+        if (adminEdit.value && id === "admin") return;
+        if (id.startsWith("tutor-")) {
+                const tutorID = id.slice("tutor-".length);
+                if (tutorEditing.value[tutorID]) return; // keep open while editing
+        }
+        if (id.startsWith("user-")) {
+                const userID = id.slice("user-".length);
+                if (userEditing.value[userID]) return; // keep open while editing
+        }
+        activeCard.value = activeCard.value === id ? null : id;
 }
 
 function isCardActive(id: string) {

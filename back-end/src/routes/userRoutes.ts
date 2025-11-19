@@ -14,7 +14,12 @@ import {
 	setUserCourseAccess,
 	setUserTutors
 } from "../controllers/users/userExtraController.js";
-import { validAdmin, validTutor, validUser } from "../middleware/auth.js";
+import {
+        validAdmin,
+        validTutor,
+        validTutorOrAdminSession,
+        validUser
+} from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -39,8 +44,8 @@ router.put("/:userID/tutors", validAdmin, setUserTutors);
 // Promote a user to tutor (admin only)
 router.post("/:userID/promote", validAdmin, promoteUserToTutor);
 
-// Allow tutors to manage course visibility for their students
-router.put("/:userID/courses", validTutor, setUserCourseAccess);
+// Allow tutors and admins to manage course visibility for their students
+router.put("/:userID/courses", validTutorOrAdminSession, setUserCourseAccess);
 
 // Delete the user by the user themselves
 router.delete("/user/:userID", validUser, deleteUser);
