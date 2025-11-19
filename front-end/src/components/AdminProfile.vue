@@ -133,6 +133,12 @@ watch(
 );
 
 function activateCard(id: string) {
+	// Prevent collapsing the admin card while editing.
+	if (adminEdit.value && id === "admin") return;
+	if (id.startsWith("user-")) {
+		const userID = id.slice("user-".length);
+		if (userEditing.value[userID]) return; // keep open while editing
+	}
 	activeCard.value = activeCard.value === id ? null : id;
 }
 
@@ -140,11 +146,27 @@ function isCardActive(id: string) {
 	return activeCard.value === id;
 }
 
-function toggleUserEdit(userID: string) {
-	userEditing.value = {
-		...userEditing.value,
-		[userID]: !userEditing.value[userID]
-	};
+function startUserEdit(userID: string) {
+	userEditing.value = { ...userEditing.value, [userID]: true };
+	success.value = "";
+	error.value = "";
+}
+
+function cancelUserEdit(userID: string) {
+	const user = users.value.find(u => u._id === userID);
+	if (user) {
+		userAssignments.value = {
+			...userAssignments.value,
+			[userID]: (user.tutors ?? []).map(t =>
+				typeof t === "string" ? t : t._id
+			)
+		};
+		userCourseSelections.value = {
+			...userCourseSelections.value,
+			[userID]: [...(user.courseAccess ?? [])]
+		};
+	}
+	userEditing.value = { ...userEditing.value, [userID]: false };
 	success.value = "";
 	error.value = "";
 }
@@ -154,6 +176,19 @@ function toggleTutorEdit(tutorID: string) {
 		...tutorEditing.value,
 		[tutorID]: !tutorEditing.value[tutorID]
 	};
+	success.value = "";
+	error.value = "";
+}
+
+function cancelTutorEdit(tutorID: string) {
+	const tutor = tutors.value.find(t => t._id === tutorID);
+	if (tutor) {
+		tutorCourseSelections.value = {
+			...tutorCourseSelections.value,
+			[tutorID]: [...(tutor.coursePermissions ?? [])]
+		};
+	}
+	tutorEditing.value = { ...tutorEditing.value, [tutorID]: false };
 	success.value = "";
 	error.value = "";
 }
@@ -238,6 +273,8 @@ function toggleAdminEdit() {
 		adminDraft.value = { ...currentAdmin.value };
 	}
 	toggleAdmin();
+	// Ensure card stays open when entering edit mode.
+	if (adminEdit.value) activeCard.value = "admin";
 }
 
 function cancelAdminEdit() {
@@ -248,6 +285,7 @@ function cancelAdminEdit() {
 async function saveAdminProfile() {
 	if (!adminDraft.value) return;
 	await saveAdmin(adminDraft.value);
+	adminEdit.value = false; // Explicitly leave edit mode.
 	success.value = "Profile updated.";
 }
 
@@ -368,9 +406,9 @@ function confirmDeleteAdmin() {
 				@click="activateCard('admin')"
 			>
 				<br />
-				<p v-if="!isCardActive('admin')" class="card-hint">
+				<!--				<p v-if="!isCardActive('admin')" class="card-hint">
 					Click to edit admin details or security settings.
-				</p>
+				</p> -->
 				<ProfileDetailsCard
 					v-if="currentAdmin"
 					:editing="adminEdit"
@@ -385,7 +423,10 @@ function confirmDeleteAdmin() {
 				/>
 				<br />
 
-				<div v-if="isCardActive('admin')" class="card-actions">
+				<div
+					v-if="adminEdit || isCardActive('admin')"
+					class="card-actions"
+				>
 					<button
 						v-if="adminEdit"
 						class="btn btn-secondary"
@@ -428,11 +469,12 @@ function confirmDeleteAdmin() {
 				</p>
 				<div v-if="isCardActive(`tutor-${t._id}`)" class="card-actions">
 					<button
+						v-if="!tutorEditing[t._id]"
 						class="btn-secondary btn"
 						type="button"
 						@click.stop="toggleTutorEdit(t._id)"
 					>
-						{{ tutorEditing[t._id] ? "Close" : "Edit courses" }}
+						Edit courses
 					</button>
 				</div>
 				<div v-if="tutorEditing[t._id]" class="course-editor">
@@ -472,6 +514,13 @@ function confirmDeleteAdmin() {
 						>
 							Save courses
 						</button>
+						<button
+							class="btn btn-secondary"
+							type="button"
+							@click.stop="cancelTutorEdit(t._id)"
+						>
+							Cancel
+						</button>
 					</div>
 				</div>
 			</div>
@@ -510,14 +559,17 @@ function confirmDeleteAdmin() {
 				</p>
 				<div v-if="isCardActive(`user-${u._id}`)" class="card-actions">
 					<button
+						v-if="!userEditing[u._id]"
 						class="btn-secondary btn"
 						type="button"
-						@click.stop="toggleUserEdit(u._id)"
+						@click.stop="startUserEdit(u._id)"
 					>
-						{{ userEditing[u._id] ? "Close" : "Edit assignments" }}
+						Edit assignments
 					</button>
 				</div>
+
 				<div v-if="userEditing[u._id]" class="assignmentControls">
+					<!-- Tutor assignment select -->
 					<label
 						class="assignmentLabel"
 						:for="`tutor-select-${u._id}`"
@@ -537,16 +589,8 @@ function confirmDeleteAdmin() {
 							{{ t.name }}
 						</option>
 					</select>
-					<div class="assignmentActions">
-						<button
-							class="btn btn-primary"
-							type="button"
-							@click.stop="saveAssignments(u._id)"
-						>
-							Save Tutors
-						</button>
-					</div>
 
+					<!-- Courses editor -->
 					<div class="course-editor">
 						<p class="helperText">
 							Enable courses available from the user's assigned
@@ -587,13 +631,29 @@ function confirmDeleteAdmin() {
 								{{ course.name }}
 							</label>
 						</div>
+
+						<!-- Unified actions -->
 						<div class="assignmentActions">
+							<button
+								class="btn btn-primary"
+								type="button"
+								@click.stop="saveAssignments(u._id)"
+							>
+								Save Tutors
+							</button>
 							<button
 								class="btn btn-primary"
 								type="button"
 								@click.stop="saveUserCourses(u._id)"
 							>
 								Save Courses
+							</button>
+							<button
+								class="btn btn-secondary"
+								type="button"
+								@click.stop="cancelUserEdit(u._id)"
+							>
+								Cancel
 							</button>
 						</div>
 					</div>

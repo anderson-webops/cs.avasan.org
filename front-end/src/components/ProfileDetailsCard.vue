@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
-import ProfileFields from "@/components/ProfileFields.vue";
 
 type Displayable = string | number | boolean | null | undefined;
 type Role = "admin" | "tutor" | "user";
@@ -20,10 +19,6 @@ const props = defineProps<{
 	entityId: string;
 }>();
 
-const emit = defineEmits<{
-	(e: "update", key: string, value: Displayable): void;
-}>();
-
 const securityEmail = ref<string>(String(props.entity.email ?? ""));
 
 watch(
@@ -32,25 +27,24 @@ watch(
 		securityEmail.value = String(value ?? "");
 	}
 );
-
-function forwardUpdate(key: string, value: Displayable) {
-	emit("update", key, value);
-}
 </script>
 
 <template>
 	<div class="profile-details-card">
 		<ul class="field-list">
-			<ProfileFields
-				:editing="editing"
-				:entity="entity"
-				:fields="fields"
-				@update="forwardUpdate"
-			/>
+			<template v-for="f in fields" :key="f.key">
+				<li v-if="!editing">
+					<strong v-if="false">{{ f.label }}</strong>
+					&ensp;
+					<p class="d-inline">
+						{{ entity[f.key] }}
+					</p>
+				</li>
+			</template>
 		</ul>
 
 		<AccountSecurity
-			v-if="showSecurity"
+			v-if="editing"
 			:email="securityEmail"
 			:entity-id="entityId"
 			:role="role"
