@@ -3,11 +3,17 @@ import { storeToRefs } from "pinia";
 import type { CourseModule } from "@/stores/courses";
 import { computed, ref, watch, watchEffect } from "vue";
 import { useCoursesStore } from "@/stores/courses";
+import { useAppStore } from "@/stores/app";
 
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
 
 const courseList = computed(() => courses.value ?? []);
+
+const appStore = useAppStore();
+const { currentTutor } = storeToRefs(appStore);
+
+const canViewSolutions = computed(() => !!currentTutor.value);
 
 const selectedCourseId = ref("");
 const activeModuleId = ref<string | null>(null);
@@ -166,10 +172,50 @@ function hasSupplemental(module: CourseModule) {
 											"
 											class="item-content"
 										>
-											<pre>{{ item.content }}</pre>
-										</div>
-									</transition>
-								</li>
+                                                                                <div class="item-content-body">
+                                                                                        <pre v-if="item.content">{{ item.content }}</pre>
+                                                                                        <div
+                                                                                                v-if="
+                                                                                                        item.projectLink ||
+                                                                                                        (canViewSolutions &&
+                                                                                                                item.solutionLink)
+                                                                                                "
+                                                                                                class="item-links"
+                                                                                        >
+                                                                                                <p
+                                                                                                        v-if="item.projectLink"
+                                                                                                        class="item-link"
+                                                                                                >
+                                                                                                        <strong>Project:</strong>
+                                                                                                        <a
+                                                                                                                :href="item.projectLink"
+                                                                                                                rel="noreferrer"
+                                                                                                                target="_blank"
+                                                                                                        >
+                                                                                                                {{ item.projectLink }}
+                                                                                                        </a>
+                                                                                                </p>
+                                                                                                <p
+                                                                                                        v-if="
+                                                                                                                canViewSolutions &&
+                                                                                                                item.solutionLink
+                                                                                                        "
+                                                                                                        class="item-link"
+                                                                                                >
+                                                                                                        <strong>Solution:</strong>
+                                                                                                        <a
+                                                                                                                :href="item.solutionLink"
+                                                                                                                rel="noreferrer"
+                                                                                                                target="_blank"
+                                                                                                        >
+                                                                                                                {{ item.solutionLink }}
+                                                                                                        </a>
+                                                                                                </p>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </transition>
+                                                        </li>
 							</ol>
 						</div>
 
@@ -229,12 +275,54 @@ function hasSupplemental(module: CourseModule) {
 													)
 												)
 											"
-											class="item-content"
-										>
-											<pre>{{ item.content }}</pre>
-										</div>
-									</transition>
-								</li>
+                                                                                        class="item-content"
+                                                                                >
+                                                                                        <div class="item-content-body">
+                                                                                                <pre v-if="item.content">{{
+                                                                                                        item.content
+                                                                                                }}</pre>
+                                                                                                <div
+                                                                                                        v-if="
+                                                                                                                item.projectLink ||
+                                                                                                                (canViewSolutions &&
+                                                                                                                        item.solutionLink)
+                                                                                                        "
+                                                                                                        class="item-links"
+                                                                                                >
+                                                                                                        <p
+                                                                                                                v-if="item.projectLink"
+                                                                                                                class="item-link"
+                                                                                                        >
+                                                                                                                <strong>Project:</strong>
+                                                                                                                <a
+                                                                                                                        :href="item.projectLink"
+                                                                                                                        rel="noreferrer"
+                                                                                                                        target="_blank"
+                                                                                                                >
+                                                                                                                        {{ item.projectLink }}
+                                                                                                                </a>
+                                                                                                        </p>
+                                                                                                        <p
+                                                                                                                v-if="
+                                                                                                                        canViewSolutions &&
+                                                                                                                        item.solutionLink
+                                                                                                                "
+                                                                                                                class="item-link"
+                                                                                                        >
+                                                                                                                <strong>Solution:</strong>
+                                                                                                                <a
+                                                                                                                        :href="item.solutionLink"
+                                                                                                                        rel="noreferrer"
+                                                                                                                        target="_blank"
+                                                                                                                >
+                                                                                                                        {{ item.solutionLink }}
+                                                                                                                </a>
+                                                                                                        </p>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </transition>
+                                                                </li>
 							</ol>
 						</div>
 					</div>
@@ -409,23 +497,50 @@ function hasSupplemental(module: CourseModule) {
 }
 
 .item-content {
-	padding: 0 1.1rem 1rem;
-	border-top: 1px solid rgba(15, 23, 42, 0.06);
+        padding: 0 1.1rem 1rem;
+        border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.item-content-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
 }
 
 .item-content pre {
-	margin: 0;
-	white-space: pre-wrap;
-	font-family:
-		"Inter",
+        margin: 0;
+        white-space: pre-wrap;
+        font-family:
+                "Inter",
 		"SF Pro Text",
 		-apple-system,
 		BlinkMacSystemFont,
 		"Segoe UI",
 		sans-serif;
-	font-size: 0.9rem;
-	line-height: 1.6;
-	color: #1e293b;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #1e293b;
+}
+
+.item-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        font-size: 0.9rem;
+}
+
+.item-link {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        color: #1e293b;
+}
+
+.item-link a {
+        color: #2563eb;
+        text-decoration: underline;
+        word-break: break-all;
 }
 
 .empty-copy {
