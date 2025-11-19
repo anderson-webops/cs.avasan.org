@@ -33,10 +33,13 @@ const { courses } = storeToRefs(coursesStore);
 const courseOptions = computed(() => courses.value ?? []);
 const courseNameMap = computed<Record<string, string>>(
 	() =>
-		courseOptions.value?.reduce((map, course) => {
-			map[course.id] = course.name;
-			return map;
-		}, {} as Record<string, string>) ?? {}
+		courseOptions.value?.reduce(
+			(map, course) => {
+				map[course.id] = course.name;
+				return map;
+			},
+			{} as Record<string, string>
+		) ?? {}
 );
 
 /* editable helper for the admin card */
@@ -136,17 +139,17 @@ watch(
 );
 
 function activateCard(id: string) {
-        // Prevent collapsing the admin card while editing.
-        if (adminEdit.value && id === "admin") return;
-        if (id.startsWith("tutor-")) {
-                const tutorID = id.slice("tutor-".length);
-                if (tutorEditing.value[tutorID]) return; // keep open while editing
-        }
-        if (id.startsWith("user-")) {
-                const userID = id.slice("user-".length);
-                if (userEditing.value[userID]) return; // keep open while editing
-        }
-        activeCard.value = activeCard.value === id ? null : id;
+	// Prevent collapsing the admin card while editing.
+	if (adminEdit.value && id === "admin") return;
+	if (id.startsWith("tutor-")) {
+		const tutorID = id.slice("tutor-".length);
+		if (tutorEditing.value[tutorID]) return; // keep open while editing
+	}
+	if (id.startsWith("user-")) {
+		const userID = id.slice("user-".length);
+		if (userEditing.value[userID]) return; // keep open while editing
+	}
+	activeCard.value = activeCard.value === id ? null : id;
 }
 
 function isCardActive(id: string) {
@@ -551,20 +554,20 @@ function confirmDeleteAdmin() {
 						:fields="fields"
 					/>
 				</ul>
-                                <p class="assignment">
-                                        <strong>Assigned tutors:</strong>
-                                        {{ formatAssignedTutors(u._id) }}
-                                </p>
-                                <p class="assignment">
-                                        <strong>Course access:</strong>
-{{
-(userCourseSelections[u._id]?.length ?? 0)
-? (userCourseSelections[u._id] ?? [])
-.map(id => courseNameMap.value?.[id] ?? id)
-.join(", ")
-: "No courses assigned"
-}}
-</p>
+				<p class="assignment">
+					<strong>Assigned tutors:</strong>
+					{{ formatAssignedTutors(u._id) }}
+				</p>
+				<p class="assignment">
+					<strong>Course access:</strong>
+					{{
+						(userCourseSelections[u._id]?.length ?? 0)
+							? (userCourseSelections[u._id] ?? [])
+									.map(id => courseNameMap.value?.[id] ?? id)
+									.join(", ")
+							: "No courses assigned"
+					}}
+				</p>
 				<div v-if="isCardActive(`user-${u._id}`)" class="card-actions">
 					<button
 						v-if="!userEditing[u._id]"

@@ -4,7 +4,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
 import AccountSecurity from "@/components/AccountSecurity.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
-import { useDeleteAccount } from "@/composables/useDeleteAccount";
+// import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
@@ -14,7 +14,7 @@ const app = useAppStore();
 const { currentTutor, users } = storeToRefs(app);
 const error = ref("");
 const success = ref("");
-const deleteMe = useDeleteAccount("tutor");
+// const deleteMe = useDeleteAccount("tutor");
 
 /* editable (the tutor card itself) */
 const {
@@ -23,7 +23,7 @@ const {
 	save: saveTutor
 } = useEditable("tutor");
 
-/* field list */
+/* field list (read-only for now) */
 const tutorFields = [
 	{ key: "name", label: "Name" },
 	{ key: "email", label: "Email" },
@@ -50,9 +50,12 @@ const usersHeader = computed(() =>
 	currentTutor.value && users.value.length === 0 ? "No Users" : "Users"
 );
 
+/* card open/close state */
 const cardState = ref<string | null>(null);
 
 function activateCard(id: string) {
+	// While editing the tutor, clicking the card should not toggle open/closed
+	if (id === "tutor" && tutorEdit.value) return;
 	cardState.value = cardState.value === id ? null : id;
 }
 
@@ -64,6 +67,25 @@ function userCardId(id: string) {
 	return `user-${id}`;
 }
 
+/* tutor edit flow */
+function onStartTutorEdit() {
+	if (!currentTutor.value) return;
+	if (cardState.value !== "tutor") cardState.value = "tutor";
+	toggleTutor();
+}
+
+function onCancelTutorEdit() {
+	// Just leave edit mode; card stays open
+	toggleTutor();
+}
+
+async function onSaveTutorEdit() {
+	if (!currentTutor.value) return;
+	await saveTutor(currentTutor.value);
+	// If useEditable doesn't flip tutorEdit to false, you could toggleTutor() here.
+}
+
+/* users under this tutor: course editing */
 const userEditing = ref<Record<string, boolean>>({});
 const userCourseSelections = ref<Record<string, string[]>>({});
 
@@ -145,19 +167,8 @@ async function saveUserCourses(userID: string) {
 			@click="activateCard('tutor')"
 		>
 			<br />
-			<p v-if="!isCardActive('tutor')" class="card-hint">
-				Click your card to edit details or manage security.
-			</p>
-			<ul>
-				<li><h4>Tutor</h4></li>
 
-				<ProfileFields
-					:editing="tutorEdit"
-					:entity="currentTutor"
-					:fields="tutorFields"
-				/>
-			</ul>
-			<br />
+			<!-- Top: courses enabled moved above name/email -->
 			<p class="assignment">
 				<strong>Courses enabled:</strong>
 				{{
@@ -167,29 +178,66 @@ async function saveUserCourses(userID: string) {
 				}}
 			</p>
 
-			<div v-if="isCardActive('tutor')" class="card-actions">
-				<button
-					class="btn-danger btn"
-					@click.stop="deleteMe(currentTutor!._id)"
-				>
-					Delete
-				</button>
-				<button
-					class="btn-primary btn"
-					@click.stop="
-						tutorEdit ? saveTutor(currentTutor) : toggleTutor()
-					"
-				>
-					{{ tutorEdit ? "Save" : "Edit" }}
-				</button>
+			<!-- Middle: either profile fields (read-only) OR AccountSecurity while editing -->
+			<div class="content-block">
+				<ul v-if="!tutorEdit">
+					<li><h4>Tutor</h4></li>
+					<ProfileFields
+						:editing="false"
+						:entity="currentTutor"
+						:fields="tutorFields"
+					/>
+				</ul>
+
+				<AccountSecurity
+					v-else
+					:email="currentTutor.email"
+					:entity-id="currentTutor._id"
+					role="tutor"
+					@click.stop
+				/>
 			</div>
 
-			<AccountSecurity
-				v-if="isCardActive('tutor')"
-				:email="currentTutor.email"
-				:entity-id="currentTutor._id"
-				role="tutor"
-			/>
+			<!-- Bottom actions:
+				 - Card open + NOT editing → only Edit button
+				 - Editing → Cancel / Save (Delete commented out) -->
+			<div v-if="isCardActive('tutor')" class="card-actions" @click.stop>
+				<template v-if="!tutorEdit">
+					<button
+						class="btn-primary btn"
+						type="button"
+						@click.stop="onStartTutorEdit"
+					>
+						Edit
+					</button>
+				</template>
+
+				<template v-else>
+					<!--
+					<button
+					  class="btn-danger btn"
+					  type="button"
+					  @click.stop="deleteMe(currentTutor!._id)"
+					>
+					  Delete account
+					</button>
+					-->
+					<button
+						class="btn-secondary btn"
+						type="button"
+						@click.stop="onCancelTutorEdit"
+					>
+						Cancel
+					</button>
+					<button
+						class="btn-primary btn"
+						type="button"
+						@click.stop="onSaveTutorEdit"
+					>
+						Save
+					</button>
+				</template>
+			</div>
 		</div>
 
 		<!-- ───── Users under this tutor (read-only) ───── -->
@@ -293,10 +341,6 @@ li {
 	align-self: center;
 }
 
-.hidden {
-	display: none;
-}
-
 div.tutorList {
 	outline: black solid 1px;
 	padding-bottom: 1%;
@@ -313,20 +357,23 @@ div.tutorList {
 	box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
 }
 
-.card-hint {
-	color: rgba(15, 23, 42, 0.7);
-	margin-bottom: 0.5rem;
+.assignment {
+	text-align: left;
+	width: 90%;
+	margin: 0.25rem auto;
 }
 
-.assignment {
-	margin: 0.5rem 0 1rem;
+.content-block {
+	margin: 0.75rem auto 0.5rem;
+	width: 90%;
 }
 
 .card-actions {
 	display: flex;
+	flex-direction: column;
 	gap: 0.75rem;
-	justify-content: center;
-	flex-wrap: wrap;
+	margin: 0.5rem auto 1rem;
+	width: 90%;
 }
 
 .course-editor {

@@ -15,10 +15,10 @@ import {
 	setUserTutors
 } from "../controllers/users/userExtraController.js";
 import {
-        validAdmin,
-        validTutor,
-        validTutorOrAdminSession,
-        validUser
+	validAdmin,
+	validTutor,
+	validTutorOrAdminSession,
+	validUser
 } from "../middleware/auth.js";
 
 const router = express.Router();
