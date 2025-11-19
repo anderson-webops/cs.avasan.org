@@ -1,23 +1,57 @@
 // src/controllers/users/userExtraController.ts
 import type { RequestHandler } from "express";
 import { Types } from "mongoose";
+import { Tutor } from "../../models/schemas/Tutor.js";
 import { User } from "../../models/schemas/User.js";
 
 export const getUsersOfTutor: RequestHandler = async (req, res) => {
-	const users = await User.find({ tutor: new Types.ObjectId(req.params.tutorID) });
+	const { tutorID } = req.params;
+	if (!Types.ObjectId.isValid(tutorID)) return res.status(400).json({ message: "Invalid tutor ID" });
+	const users = await User.find({ tutors: new Types.ObjectId(tutorID) });
 	res.json(users);
 };
 
-export const assignTutorToUser: RequestHandler = async (req, res) => {
-	const { userID, tutorID } = req.params;
+export const setUserTutors: RequestHandler = async (req, res) => {
+	const { userID } = req.params;
+	const { tutorIDs } = req.body as { tutorIDs?: string[] };
+	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });
+	if (!Array.isArray(tutorIDs)) return res.status(400).json({ message: "tutorIDs must be an array" });
+
+	const cleanTutorIDs = [...new Set(tutorIDs)]
+		.filter(id => Types.ObjectId.isValid(id))
+		.map(id => new Types.ObjectId(id));
+
+	const validTutors = await Tutor.find({ _id: { $in: cleanTutorIDs } }, { _id: 1 });
+	const validTutorIds = validTutors.map(t => t._id);
 	const user = await User.findById(userID);
 	if (!user) return res.sendStatus(404);
-	user.tutor = new Types.ObjectId(tutorID);
+	user.tutors = validTutorIds;
 	await user.save();
-	res.sendStatus(200);
+	res.json({ tutors: user.tutors });
 };
 
-export const deleteUsersUnderTutor: RequestHandler = async (req, res) => {
-	await User.deleteMany({ tutor: new Types.ObjectId(req.params.tutorID) });
-	res.sendStatus(200);
+export const promoteUserToTutor: RequestHandler = async (req, res) => {
+	const { userID } = req.params;
+	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });
+	const user = await User.findById(userID);
+	if (!user) return res.sendStatus(404);
+
+	if (await Tutor.exists({ email: user.email })) {
+		return res.status(409).json({ message: "Tutor with this email already exists" });
+	}
+
+	const tutor = new Tutor({
+		name: user.name,
+		email: user.email,
+		age: user.age,
+		state: user.state,
+		password: user.password,
+		role: "tutor"
+	} as any);
+	(tutor as any).skipPasswordHash = true;
+
+	await tutor.save();
+	await user.deleteOne();
+
+	res.status(201).json({ tutor });
 };

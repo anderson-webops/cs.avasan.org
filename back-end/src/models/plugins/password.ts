@@ -4,7 +4,14 @@ import argon2 from "argon2";
 
 // Make sure T includes both password: string AND Document
 export function passwordPlugin<T extends Document & { password: string }>(schema: Schema<T>) {
-	schema.pre("save", async function (this: T, next) {
+	schema.pre("save", async function (this: T & { skipPasswordHash?: boolean }, next) {
+		// allow manual migrations (e.g., promoting a user to tutor) to skip re-hashing an
+		// already-hashed password by setting `doc.skipPasswordHash = true`
+		if (this.skipPasswordHash) {
+			delete this.skipPasswordHash;
+			return next();
+		}
+
 		// 'isModified' comes from Document
 		if (!this.isModified("password")) return next();
 		this.password = await argon2.hash(this.password);

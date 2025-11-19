@@ -25,6 +25,7 @@ export interface User {
 	email: string;
 	age: number;
 	state: string;
+	tutors?: string[];
 	editUsers: boolean;
 	saveEdit: string;
 	[key: string]: Displayable;
