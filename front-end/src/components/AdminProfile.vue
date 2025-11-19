@@ -31,11 +31,13 @@ const adminDraft = ref<typeof currentAdmin.value | null>(null);
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
 const courseOptions = computed(() => courses.value ?? []);
-const courseNameMap = computed<Record<string, string>>(() => {
-        const map: Record<string, string> = {};
-        for (const course of courseOptions.value ?? []) map[course.id] = course.name;
-        return map;
-});
+const courseNameMap = computed<Record<string, string>>(
+	() =>
+		courseOptions.value?.reduce((map, course) => {
+			map[course.id] = course.name;
+			return map;
+		}, {} as Record<string, string>) ?? {}
+);
 
 /* editable helper for the admin card */
 const {
@@ -121,7 +123,8 @@ function formatAssignedTutors(userID: string) {
 function formatTutorCourses(tutorID: string) {
 	const list = tutorCourseSelections.value[tutorID] ?? [];
 	if (list.length === 0) return "No courses enabled";
-	return list.map(id => courseNameMap.value[id] ?? id).join(", ");
+	const names = courseNameMap.value ?? {};
+	return list.map(id => names[id] ?? id).join(", ");
 }
 
 watch(
@@ -176,6 +179,7 @@ function cancelUserEdit(userID: string) {
 }
 
 function toggleTutorEdit(tutorID: string) {
+	if (!tutorEditing.value[tutorID]) activeCard.value = `tutor-${tutorID}`;
 	tutorEditing.value = {
 		...tutorEditing.value,
 		[tutorID]: !tutorEditing.value[tutorID]
@@ -547,20 +551,20 @@ function confirmDeleteAdmin() {
 						:fields="fields"
 					/>
 				</ul>
-				<p class="assignment">
-					<strong>Assigned tutors:</strong>
-					{{ formatAssignedTutors(u._id) }}
-				</p>
-				<p class="assignment">
-					<strong>Course access:</strong>
-					{{
-						(userCourseSelections[u._id]?.length ?? 0)
-							? (userCourseSelections[u._id] ?? [])
-									.map(id => courseNameMap.value[id] ?? id)
-									.join(", ")
-							: "No courses assigned"
-					}}
-				</p>
+                                <p class="assignment">
+                                        <strong>Assigned tutors:</strong>
+                                        {{ formatAssignedTutors(u._id) }}
+                                </p>
+                                <p class="assignment">
+                                        <strong>Course access:</strong>
+{{
+(userCourseSelections[u._id]?.length ?? 0)
+? (userCourseSelections[u._id] ?? [])
+.map(id => courseNameMap.value?.[id] ?? id)
+.join(", ")
+: "No courses assigned"
+}}
+</p>
 				<div v-if="isCardActive(`user-${u._id}`)" class="card-actions">
 					<button
 						v-if="!userEditing[u._id]"
