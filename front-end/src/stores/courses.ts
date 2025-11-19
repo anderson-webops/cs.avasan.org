@@ -2,10 +2,10 @@ import { defineStore } from "pinia";
 import { computed } from "vue";
 
 interface RawCourseModuleItem {
-        title: string;
-        content: string;
-        projectLink?: string;
-        solutionLink?: string;
+	title: string;
+	content: string;
+	projectLink?: string;
+	solutionLink?: string;
 }
 
 interface RawCourseModule {
@@ -20,7 +20,7 @@ interface RawCourse {
 }
 
 export interface CourseModuleItem extends RawCourseModuleItem {
-        id: string;
+	id: string;
 }
 
 export interface CourseModule {
@@ -37,50 +37,25 @@ export interface CourseDefinition {
 }
 
 function slugify(value: string): string {
-        return value
-                .toLowerCase()
-                .normalize("NFKD")
-                .replace(/[\u0300-\u036F]/g, "")
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/^-+/, "")
-                .replace(/-+$/, "");
+	return value
+		.toLowerCase()
+		.normalize("NFKD")
+		.replace(/[\u0300-\u036F]/g, "")
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/^-+/, "")
+		.replace(/-+$/, "");
 }
 
 function normalizeContent(content: string): string {
-        return content.replace(/\n{3,}/g, "\n\n").trim();
-}
-
-function extractLinks(item: RawCourseModuleItem) {
-        let content = item.content;
-        let projectLink = item.projectLink;
-        let solutionLink = item.solutionLink;
-
-        const projectMatch = content.match(/Project link:\s*(\S+)/i);
-        const solutionMatch = content.match(/Solution link:\s*(\S+)/i);
-
-        if (projectMatch) {
-                projectLink ??= projectMatch[1];
-                content = content.replace(projectMatch[0], "");
-        }
-
-        if (solutionMatch) {
-                solutionLink ??= solutionMatch[1];
-                content = content.replace(solutionMatch[0], "");
-        }
-
-        return {
-                content: normalizeContent(content),
-                projectLink,
-                solutionLink
-        };
+	return content.replace(/\n{3,}/g, "\n\n").trim();
 }
 
 const rawCourses: RawCourse[] = [
-        {
-                name: "Scratch Level 1",
-                modules: [
-                        {
-                                title: "GS1 Starting in Scratch",
+	{
+		name: "Scratch Level 1",
+		modules: [
+			{
+				title: "GS1 Starting in Scratch",
 				curriculum: [
 					{
 						title: "Scratch basics",
@@ -88,9 +63,11 @@ const rawCourses: RawCourse[] = [
 					},
 					{
 						title: "Project 1 – Hungry Hippo",
-						content: `Project link: https://scratch.mit.edu/projects/304003593/
-Solution link: https://scratch.mit.edu/projects/313184786/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304003593/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/313184786/",
+						content: `
 •  Play a sample Hungry Hippo game.
 •  Create a custom version of the game using a sprite of your choice.
 •  Make the sprite move using the left, right, up and down arrow keys (use the “point in direction” and “move 10 steps” blocks).
@@ -111,9 +88,11 @@ Solution link: https://scratch.mit.edu/projects/313184786/
 					},
 					{
 						title: "Project 1 – Spinner",
-						content: `Project link: https://scratch.mit.edu/projects/287920173/
-Solution link: https://scratch.mit.edu/projects/287887351/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/287920173/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/287887351/",
+						content: `
 It’s time to build a fun spinner:
 
 1. When the green flag is clicked, make the arrow point to the right.
@@ -126,9 +105,11 @@ It’s time to build a fun spinner:
 					},
 					{
 						title: "Project 2 – Bouncy Ball Room",
-						content: `Project link: https://scratch.mit.edu/projects/287924505/
-Solution link: https://scratch.mit.edu/projects/287922077/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/287924505/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/287922077/",
+						content: `
 1. When the green flag is clicked, have the ball go to a random position.
 2. When the space key is pressed, make the ball move 10 steps and bounce off the edge.
 3. When the right-arrow key is pressed, change the backdrop.
@@ -139,9 +120,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 3 – Dragonfly Events",
-						content: `Project link: https://scratch.mit.edu/projects/287707460/
-Solution link: https://scratch.mit.edu/projects/284408078/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/287707460/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/284408078/",
+						content: `
 1. When the green flag is clicked, move the dragonfly to a random spot.
 2. Use the arrow keys to move the dragonfly 20 steps.
 3. When the dragonfly is clicked, change its color.
@@ -165,9 +148,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 1 – Bouncy Ball with Pen",
-						content: `Project link: https://scratch.mit.edu/projects/313084455/
-Solution link: https://scratch.mit.edu/projects/287952358/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/313084455/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/287952358/",
+						content: `
 1. When the green flag is clicked, send the ball to a random position.
 2. When the spacebar is pressed, make the ball move 10 steps and bounce off the edge.
 3. Each time the ball moves, put the pen down so the ball leaves a trail.
@@ -178,9 +163,11 @@ Have the student create and share a Recording Studio Video.`
 					},
 					{
 						title: "Project 2 – Stencil Pencil",
-						content: `Project link: https://scratch.mit.edu/projects/287738652/
-Solution link: https://scratch.mit.edu/projects/285312799/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/287738652/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/285312799/",
+						content: `
 1. The up arrow moves the pencil forward; the down arrow moves it backward.
 2. The left arrow rotates the pencil 10 degrees left; the right arrow rotates it 10 degrees right.
 3. Pressing “1” lowers the pen (start drawing).
@@ -196,9 +183,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 3 – Beetle Artist",
-						content: `Project link: https://scratch.mit.edu/projects/288003770/
-Solution link: https://scratch.mit.edu/projects/287999903/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/288003770/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/287999903/",
+						content: `
 1. Use the arrow keys to move the beetle 10 steps.
 2. When the green flag is clicked, erase all drawings.
 3. Press “1” to draw a square.
@@ -222,9 +211,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 1 – Elephant Effects",
-						content: `Project link: https://scratch.mit.edu/projects/291122885/
-Solution link: https://scratch.mit.edu/projects/291119943/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/291122885/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/291119943/",
+						content: `
 1. When the “1” key is pressed, grow the elephant ten times (increase size by 10, ten times).
 2. When the “2” key is pressed, shrink the elephant ten times.
 3. When the “3” key is pressed, change the elephant’s color effect forever.
@@ -236,9 +227,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 2 – Hot Cross Buns",
-						content: `Project link: https://scratch.mit.edu/projects/291117784/
-Solution link: https://scratch.mit.edu/projects/291115434/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/291117784/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/291115434/",
+						content: `
 This project uses the Music extension.  When the green flag is clicked, play the song “Hot Cross Buns” twice:
 
 E D C  E D C  C C C C  D D D D  E D C.
@@ -249,9 +242,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 3 – Drawing Mouse",
-						content: `Project link: https://scratch.mit.edu/projects/289744824/
-Solution link: https://scratch.mit.edu/projects/289445069/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/289744824/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/289445069/",
+						content: `
 1. Add an event listener so that when the green flag is clicked, all drawings are erased.
 2. When the “1” key is pressed, make the mouse draw a square using a loop at a random location.
 3. When the “2” key is pressed, make the mouse draw a triangle.
@@ -264,9 +259,11 @@ Have the student record a Recording Studio Video and share their project.`
 				supplementalProjects: [
 					{
 						title: "GS4 Supplemental Project 1 – Shapify",
-						content: `Project link: https://scratch.mit.edu/projects/330468686/
-Solution link: https://scratch.mit.edu/projects/330429172/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330468686/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330429172/",
+						content: `
 1. Use Pen blocks to draw a hexagon. (Hint: divide 360 degrees by the number of sides.)
 2. Use the same method to draw an octagon, a decagon, a dodecagon and a circle.
 3. Predict what happens if the loop around the circle is replaced with a forever loop, and then try it.
@@ -283,9 +280,11 @@ Challenge: Draw a different circle using different numbers.`
 					},
 					{
 						title: "Project 1 – Dino’s Colors",
-						content: `Project link: https://scratch.mit.edu/projects/291223299/
-Solution link: https://scratch.mit.edu/projects/291220849/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/291223299/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/291220849/",
+						content: `
 1. Make the dinosaur follow the mouse pointer forever.
 2. Use conditionals to make the dinosaur say “I’m in red!” when standing in red; similarly, add conditions for yellow, blue and grey.
 
@@ -295,9 +294,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 2 – Noisy Reactions",
-						content: `Project link: https://scratch.mit.edu/projects/291542721/
-Solution link: https://scratch.mit.edu/projects/291530292/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/291542721/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/291530292/",
+						content: `
 1. When the green flag is clicked, make the ball bounce around the screen forever.
 2. Use a conditional so that when the bell touches the ball, the bell swings back and forth and rings four times.
 3. When the ball touches lightning, make the lightning strike the ground and play a thunder sound, then return the lightning to the cloud. (Introduce the “go to [sprite]” block.)
@@ -307,9 +308,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 3 – Magic Wand",
-						content: `Project link: https://scratch.mit.edu/projects/304279087/
-Solution link: https://scratch.mit.edu/projects/304279316/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304279087/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/304279316/",
+						content: `
 1. Make a magic wand move to the frog and turn it into a wizard.
 2. Make the wand move to the piano and play three notes (any instrument/notes are fine).
 3. Make the wand move to the ghost and send the ghost toward the star.
@@ -323,18 +326,22 @@ Have the student record a Recording Studio Video and share their project.`
 				supplementalProjects: [
 					{
 						title: "GS5 Supplemental Project 1 – Camouflaging Octopus",
-						content: `Project link: https://scratch.mit.edu/projects/326209430/
-Solution link: https://scratch.mit.edu/projects/326209241/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/326209430/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/326209241/",
+						content: `
 1. Use event listeners to control the octopus with the arrow keys.
 2. Use conditionals so the octopus turns blue when on a blue background.
 3. Add conditionals for yellow, green and red backgrounds.`
 					},
 					{
 						title: "GS5 Supplemental Project 2 – Playing Catch",
-						content: `Project link: https://scratch.mit.edu/projects/326211768/
-Solution link: https://scratch.mit.edu/projects/326211724/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/326211768/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/326211724/",
+						content: `
 1. When the green flag is clicked, make the basketball go to Gobo and move forever.
 2. When Pico has the ball, use conditionals to pass it back to Gobo.
 3. When Gobo has the ball, pass it to Pico.
@@ -347,16 +354,20 @@ Challenge: Add more sprites to the game and have the ball pass between them.`
 				curriculum: [
 					{
 						title: "Conditionals: if/then/else",
-						content: `Project link: https://scratch.mit.edu/projects/293372295/
-Solution link: https://scratch.mit.edu/projects/293366003/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/293372295/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/293366003/",
+						content: `
 Explain that “if … then … else” allows multiple outcomes. Discuss real-life examples of decisions with two possible results. Introduce the “if … then … else” block and demonstrate how it can be used to choose between two actions.`
 					},
 					{
 						title: "Project 1 – Dino’s Colors II",
-						content: `Project link: https://scratch.mit.edu/projects/293788691/
-Solution link: https://scratch.mit.edu/projects/293787944/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/293788691/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/293787944/",
+						content: `
 1. Create controls for the dinosaur using the arrow keys.
 2. When the “b” key is pressed, have the dinosaur say “Move me to blue!” for 2 seconds.
 3. After speaking, use an if/then/else to check if the dinosaur is touching blue; if it is, say “Good job!”, otherwise say “This isn’t the right color!”.
@@ -367,9 +378,11 @@ Have the student record a Recording Studio Video and share their project.`
 					},
 					{
 						title: "Project 2 – Hungry Dinosaur",
-						content: `Project link: https://scratch.mit.edu/projects/293457751/
-Solution link: https://scratch.mit.edu/projects/293291715/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/293457751/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/293291715/",
+						content: `
 1. When the green flag is clicked, use if/then blocks to control the dinosaur with the arrow keys.
 2. When the space bar is pressed, the dinosaur attempts to eat bananas: if it is touching bananas, change the dinosaur’s costume, play a sound or otherwise show the bananas being eaten; if not touching bananas, say “There aren’t any bananas here!”.
 3. When the space bar is pressed, if the bananas are touching the dinosaur, wait one second then move the bananas to a random location; otherwise have the bananas say “I’m over here!”.
@@ -382,18 +395,22 @@ Have the student record a Recording Studio Video and share their project.`
 				supplementalProjects: [
 					{
 						title: "GS6 Supplemental Project 1 – Blast Off Rocketship",
-						content: `Project link: https://scratch.mit.edu/projects/332463981/
-Solution link: https://scratch.mit.edu/projects/332459692/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/332463981/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/332459692/",
+						content: `
 1. When the green flag is clicked, start the rocketship at the center bottom of the stage.
 2. If the user clicks the mouse, make the rocketship move up 5 steps; otherwise, it goes down 5 steps (always pointing upward).
 3. When the rocketship reaches the star, make it blast off using sounds, motion or visual effects.`
 					},
 					{
 						title: "GS6 Supplemental Project 2 – Baby Fish",
-						content: `Project link: https://scratch.mit.edu/projects/332468797/
-Solution link: https://scratch.mit.edu/projects/332464646/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/332468797/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/332464646/",
+						content: `
 1. When the green flag is clicked, make the baby fish continuously go to the mouse pointer.
 2. If the baby fish is touching the mom fish, make it say “I found her”; otherwise say “Take me to my mom”.
 3. Make the mom fish glide around the screen randomly.`
@@ -409,9 +426,11 @@ Solution link: https://scratch.mit.edu/projects/332464646/
 					},
 					{
 						title: "Project 1 – Math Facts",
-						content: `Project link: https://scratch.mit.edu/projects/295332936/
-Solution link: https://scratch.mit.edu/projects/294539961/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/295332936/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/294539961/",
+						content: `
 1. When the “1” key is pressed, have Gobo ask a math question (e.g., “What’s 9 – 7?”). Indicate whether the answer is correct or incorrect via costume, sound or speech.
 2. When the “2” key is pressed, have Gobo ask a question like “What’s a number less than 0?” and indicate whether the answer is correct or incorrect.
 3. When the “3” key is pressed, have Gobo ask a harder math question and allow the user to keep answering until the answer is correct. If the answer is too low, Gobo should say “Higher!”; if too high, say “Lower!”.
@@ -420,9 +439,11 @@ Solution link: https://scratch.mit.edu/projects/294539961/
 					},
 					{
 						title: "Project 2 – Fortune Teller",
-						content: `Project link: https://scratch.mit.edu/projects/295333590/
-Solution link: https://scratch.mit.edu/projects/294540150/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/295333590/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/294540150/",
+						content: `
 1. When the green flag is clicked, play an introduction and ask the user their name.
 2. Ask the user “What do you want to know? (Type Love, Money, or Friendship)”.
 3. Use conditionals to give a fortune based on the user’s input.
@@ -431,9 +452,11 @@ Challenge: Add more fortunes and questions to make the fortune teller more detai
 					},
 					{
 						title: "Project 3 – Number Guesser",
-						content: `Project link: https://scratch.mit.edu/projects/295335247/
-Solution link: https://scratch.mit.edu/projects/294541979/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/295335247/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/294541979/",
+						content: `
 1. When the green flag is clicked, have the sprite choose a random number between 1 and 20.
 2. Ask the user to guess the number.
 3. Use if/then/else blocks to tell the user if their guess is too high or too low.
@@ -444,9 +467,11 @@ Challenge: Add a counter for the number of guesses and congratulate the player i
 				supplementalProjects: [
 					{
 						title: "GS7 Supplemental Project 1 – Animal Crossing",
-						content: `Project link: https://scratch.mit.edu/projects/330320360/
-Solution link: https://scratch.mit.edu/projects/330316142/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330320360/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330316142/",
+						content: `
 1. Ask the user if they want to build a shop, plant a tree or explore the island.
 2. Use the answer to determine which event occurs.
 3. Ask the user yes/no questions to further customize the experience.
@@ -455,9 +480,11 @@ Solution link: https://scratch.mit.edu/projects/330316142/
 					},
 					{
 						title: "GS7 Supplemental Project 2 – Space Cadets",
-						content: `Project link: https://scratch.mit.edu/projects/330321409/
-Solution link: https://scratch.mit.edu/projects/330316808/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330321409/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330316808/",
+						content: `
 1. Ask the user for their name and call them “Captain”.
 2. Ask which planet (Mars, Jupiter or Saturn) they want to explore.
 3. Use conditionals to set the scene for the chosen planet.
@@ -475,9 +502,11 @@ Solution link: https://scratch.mit.edu/projects/330316808/
 					},
 					{
 						title: "Project 1 – Bug Eater",
-						content: `Project link: https://scratch.mit.edu/projects/302997680/
-Solution link: https://scratch.mit.edu/projects/302865707/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/302997680/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/302865707/",
+						content: `
 1. When the green flag is clicked, make the praying mantis appear at a random position.
 2. When the mouse is clicked, make the mantis glide to the mouse pointer’s X and Y position.
 3. If the mantis touches a bug, broadcast a message to make the bug disappear and increase the score.
@@ -486,9 +515,11 @@ Solution link: https://scratch.mit.edu/projects/302865707/
 					},
 					{
 						title: "Project 2 – Cake Chaser",
-						content: `Project link: https://scratch.mit.edu/projects/302998723/
-Solution link: https://scratch.mit.edu/projects/302865909/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/302998723/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/302865909/",
+						content: `
 1. Set up two sprites: a person and a slice of cake.
 2. Use the arrow keys to move the person around the stage.
 3. Make the cake appear at random X and Y coordinates.
@@ -497,9 +528,11 @@ Solution link: https://scratch.mit.edu/projects/302865909/
 					},
 					{
 						title: "Project 3 – Talent Show",
-						content: `Project link: https://scratch.mit.edu/projects/302999957/
-Solution link: https://scratch.mit.edu/projects/302866259/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/302999957/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/302866259/",
+						content: `
 1. Choose three performers (sprites).
 2. When the green flag is clicked, have each performer go to their starting position using X and Y coordinates.
 3. Use broadcast messages to make each performer do an act in sequence (dance, jump or play an instrument).
@@ -509,18 +542,22 @@ Solution link: https://scratch.mit.edu/projects/302866259/
 				supplementalProjects: [
 					{
 						title: "GS8 Supplemental Project 1 – Quadrant Practice",
-						content: `Project link: https://scratch.mit.edu/projects/330290958/
-Solution link: https://scratch.mit.edu/projects/330287678/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330290958/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330287678/",
+						content: `
 1. Use the arrow keys to move a sprite to each quadrant of the stage.
 2. When the sprite reaches a quadrant, display a message such as “I’m in Quadrant I”.
 3. Challenge: Add shapes or obstacles that must be avoided.`
 					},
 					{
 						title: "GS8 Supplemental Project 2 – Coordinate Drawings",
-						content: `Project link: https://scratch.mit.edu/projects/330291711/
-Solution link: https://scratch.mit.edu/projects/330288612/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330291711/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330288612/",
+						content: `
 1. Using the Pen extension, draw a picture by moving the sprite to various X and Y coordinates.
 2. Allow the user to enter coordinates to draw their own shapes.
 3. Encourage students to draw their initials or simple pictures.`
@@ -536,9 +573,11 @@ Solution link: https://scratch.mit.edu/projects/330288612/
 					},
 					{
 						title: "Project 1 – Speed Click",
-						content: `Project link: https://scratch.mit.edu/projects/302996579/
-Solution link: https://scratch.mit.edu/projects/302864606/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/302996579/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/302864606/",
+						content: `
 1. When the green flag is clicked, create a timer variable and set it to 20.
 2. Make a target sprite (e.g., a button) appear in random positions.
 3. Each time the target is clicked, increase a score variable by 1.
@@ -547,9 +586,11 @@ Solution link: https://scratch.mit.edu/projects/302864606/
 					},
 					{
 						title: "Project 2 – Spider Smash",
-						content: `Project link: https://scratch.mit.edu/projects/302996964/
-Solution link: https://scratch.mit.edu/projects/302865093/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/302996964/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/302865093/",
+						content: `
 1. When the green flag is clicked, have spiders appear at random positions and move downward.
 2. When a spider is clicked, hide it, play a sound and increase the score.
 3. Create a timer that counts down; end the game when it reaches zero.
@@ -559,9 +600,11 @@ Solution link: https://scratch.mit.edu/projects/302865093/
 				supplementalProjects: [
 					{
 						title: "GS9 Supplemental Project 1 – Counting Steps",
-						content: `Project link: https://scratch.mit.edu/projects/330293454/
-Solution link: https://scratch.mit.edu/projects/330289893/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330293454/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330289893/",
+						content: `
 1. Use the arrow keys to move a sprite around the stage.
 2. Make a variable called “steps” that increases each time the sprite moves.
 3. Display the number of steps taken.
@@ -569,18 +612,22 @@ Solution link: https://scratch.mit.edu/projects/330289893/
 					},
 					{
 						title: "GS9 Supplemental Project 2 – Hungry Crab",
-						content: `Project link: https://scratch.mit.edu/projects/330294193/
-Solution link: https://scratch.mit.edu/projects/330290622/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330294193/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330290622/",
+						content: `
 1. Control a crab with the arrow keys.
 2. Create a variable called “food” and increase it each time the crab eats a piece of food.
 3. Add a timer; when time runs out, end the game and display how much food was collected.`
 					},
 					{
 						title: "GS9 Supplemental Project 3 – Lunch Money",
-						content: `Project link: https://scratch.mit.edu/projects/330294909/
-Solution link: https://scratch.mit.edu/projects/330291357/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330294909/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330291357/",
+						content: `
 1. Start with a variable “money” set to 10.
 2. Ask the user what they want to buy for lunch (e.g., pizza, sandwich or salad) and subtract the cost from the money variable.
 3. If the user can’t afford an item, display a message.
@@ -601,9 +648,11 @@ Using this project as a rough guide, show the student how to make the ball start
 					},
 					{
 						title: "GS10 Project 1 – Dance Off",
-						content: `Project link: https://scratch.mit.edu/projects/301002220/
-Solution link: https://scratch.mit.edu/projects/300644693/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/301002220/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/300644693/",
+						content: `
 It’s dancing time! Let’s give each sprite a turn to “perform” on the stage.
 
 1. When the green flag is clicked, make the ballerina glide to the middle of the stage and cycle twice through all of her costumes. When she’s done, have her glide off to the right side of the stage.
@@ -615,9 +664,11 @@ Have the student record a Recording Studio Video and share the project.`
 					},
 					{
 						title: "GS10 Project 2 – Bowl Fill",
-						content: `Project link: https://scratch.mit.edu/projects/303008513/
-Solution link: https://scratch.mit.edu/projects/302811491/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/303008513/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/302811491/",
+						content: `
 Let’s make a game where you control a bowl and try to collect various items!
 
 1. Start by programming the bowl so that it can be controlled by the arrow keys once the green flag is clicked.
@@ -634,9 +685,11 @@ When your student finishes their project, have them make a Recording Studio Vide
 				supplementalProjects: [
 					{
 						title: "GS10 Supplemental Project 1 – Magical Quest",
-						content: `Project link: https://scratch.mit.edu/projects/330301165/
-Solution link: https://scratch.mit.edu/projects/328309254/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330301165/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328309254/",
+						content: `
 **Instructor Note**: This project allows for a lot of creativity – keep your student on track by deciding on a premise or short scene for the play, and cast relevant characters that already exist in Scratch or can be drawn quickly. Make sure they can map out the sequence of events (they can even write it in a comment block) before implementing their code!
 
 Design your own play, and use the broadcast blocks to set up the scene changes and dialogue between characters!
@@ -647,9 +700,11 @@ Design your own play, and use the broadcast blocks to set up the scene changes a
 					},
 					{
 						title: "GS10 Supplemental Project 2 – Cartoon Crash",
-						content: `Project link: https://scratch.mit.edu/projects/330302209/
-Solution link: https://scratch.mit.edu/projects/328312475/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330302209/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328312475/",
+						content: `
 Pick a partner for Dani to play with, and they will bounce around the screen together!
 
 1. When the green flag is clicked, set up the Start button in the correct position and have Dani explain the instructions.
@@ -663,9 +718,11 @@ Pick a partner for Dani to play with, and they will bounce around the screen tog
 				curriculum: [
 					{
 						title: "GS11 Project 1 – Hedgehog Race",
-						content: `Project link: https://scratch.mit.edu/projects/304551665/
-Solution link: https://scratch.mit.edu/projects/305082197/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304551665/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/305082197/",
+						content: `
 Let’s put our skills to the test! Let’s use what we’ve learned in the course to build this Hedgehog Race game.
 
 Have your student play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?
@@ -684,9 +741,11 @@ When your student finishes their project, have them make a Recording Studio Vide
 				supplementalProjects: [
 					{
 						title: "GS11 Supplemental Project 1 – Save the Wizard",
-						content: `Project link: https://scratch.mit.edu/projects/332395747/
-Solution link: https://scratch.mit.edu/projects/330724703/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/332395747/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/330724703/",
+						content: `
 Have your student play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?
 
 Create a comment in the project to write out the different steps of what we will need to code.
@@ -711,9 +770,11 @@ The wizard has been turned into a frog! Help him collect potions while avoiding 
 				curriculum: [
 					{
 						title: "GS12 Project 1 – Asteroid Dodge",
-						content: `Project link: https://scratch.mit.edu/projects/303001451/
-Solution link: https://scratch.mit.edu/projects/302948550/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/303001451/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/302948550/",
+						content: `
 Have your student play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?
 
 Create a comment in the project to write out the different steps of what we will need to code.
@@ -816,9 +877,11 @@ Challenge: Can you add another sprite that moves around using the W-A-S-D keys?`
 					},
 					{
 						title: "GM1 Project 3: Math Facts",
-						content: `Project link: https://scratch.mit.edu/projects/295332936/
-Solution link: https://scratch.mit.edu/projects/295539961/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/295332936/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/295539961/",
+						content: `
 1. When 1 is pressed, have Gobo ask a question like “What’s 3 − 7?” After the user answers, Gobo should change its costume, make a sound and/or say something to indicate whether the answer is correct or incorrect.
 2. When 2 is pressed, have Gobo ask a question like “What’s a number less than 0?” Based on the answer, Gobo should change his costume, make a sound and/or say something to indicate whether the answer is correct or incorrect.
 3. When 3 is pressed, have Gobo ask a harder math question that allows the user to keep answering until the answer is correct. Gobo should indicate each time whether the answer is correct or incorrect. **Instructor Note**: Emphasize the need to ask forever until the user answers correctly. The conditional logic must be inside a loop (a nested conditional).`
@@ -835,9 +898,11 @@ Solution link: https://scratch.mit.edu/projects/295539961/
 					},
 					{
 						title: "GM2 Project 1: Square Inception",
-						content: `Project link: https://scratch.mit.edu/projects/304012026/
-Solution link: https://scratch.mit.edu/projects/303954115/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304012026/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303954115/",
+						content: `
 1. Open the Jackson Pollock project from Scratch Level 1 and click “See Inside”.
 2. Add another repeat loop around the existing loop to draw a series of squares inside each other.
 3. Use the Pen extension to set the color and size of each square.
@@ -846,9 +911,11 @@ Solution link: https://scratch.mit.edu/projects/303954115/
 					},
 					{
 						title: "GM2 Project 2: Pyramid",
-						content: `Project link: https://scratch.mit.edu/projects/304012956/
-Solution link: https://scratch.mit.edu/projects/303955461/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304012956/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303955461/",
+						content: `
 1. Use nested loops and the Pen extension to draw a series of triangles that increase in size to form a pyramid shape.
 2. Encourage the student to adjust the angle and length parameters to perfect their pyramid.
 3. Show how changing the repeat counts affects the number of triangles.
@@ -858,9 +925,11 @@ Solution link: https://scratch.mit.edu/projects/303955461/
 				supplementalProjects: [
 					{
 						title: "GM2 Supplemental Project 1: Playing Baseball",
-						content: `Project link: https://scratch.mit.edu/projects/330302948/
-Solution link: https://scratch.mit.edu/projects/328314692/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330302948/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328314692/",
+						content: `
 1. Program a pitcher sprite to pitch the ball when the green flag is clicked.
 2. Program a batter sprite to swing the bat when the ball gets close.
 3. Use a broadcast message (e.g., “Batter up!”) to start the game.
@@ -869,18 +938,22 @@ Solution link: https://scratch.mit.edu/projects/328314692/
 					},
 					{
 						title: "GM2 Supplemental Project 2: Grid",
-						content: `Project link: https://scratch.mit.edu/projects/330303721/
-Solution link: https://scratch.mit.edu/projects/328315826/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330303721/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328315826/",
+						content: `
 1. Use nested loops to draw a grid of squares on the stage.
 2. Ask the user for the number of rows and columns and draw the corresponding grid.
 3. Challenge: Color the squares randomly or create a checkerboard pattern.`
 					},
 					{
 						title: "GM2 Supplemental Project 3: Rainbow Flower",
-						content: `Project link: https://scratch.mit.edu/projects/330304501/
-Solution link: https://scratch.mit.edu/projects/328316339/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330304501/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328316339/",
+						content: `
 1. Use a repeat loop to create a spiral pattern.
 2. Within that loop, create a second loop that changes the pen color and draws petals.
 3. Adjust the angle and length to make the flower look like a rainbow spiral.`
@@ -896,9 +969,11 @@ Solution link: https://scratch.mit.edu/projects/328316339/
 					},
 					{
 						title: "GM3 Project 1: Color Spotter",
-						content: `Project link: https://scratch.mit.edu/projects/304013663/
-Solution link: https://scratch.mit.edu/projects/303956811/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304013663/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303956811/",
+						content: `
 1. Program the cat sprite to move around the stage using the arrow keys.
 2. When the cat touches the red color, have it say something like “Red!”.
 3. When the cat touches blue, have it say “Blue!”.
@@ -909,9 +984,11 @@ Solution link: https://scratch.mit.edu/projects/303956811/
 					},
 					{
 						title: "GM3 Project 2: Strength Tester",
-						content: `Project link: https://scratch.mit.edu/projects/304014220/
-Solution link: https://scratch.mit.edu/projects/303957902/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304014220/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303957902/",
+						content: `
 1. Use a broadcast message to start the strength tester.
 2. When the broadcast is received, generate a random number and use that number to set the height of an arrow.
 3. If the arrow height is below 3, display a weak message.
@@ -924,9 +1001,11 @@ Solution link: https://scratch.mit.edu/projects/303957902/
 				supplementalProjects: [
 					{
 						title: "GM3 Supplemental Project 1: Baby Chick",
-						content: `Project link: https://scratch.mit.edu/projects/330305574/
-Solution link: https://scratch.mit.edu/projects/328318062/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330305574/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328318062/",
+						content: `
 1. Move the baby chick with the arrow keys.
 2. Make the rooster and hen move back and forth across the stage.
 3. When the chick touches the rooster, display “Hi Dad!”; when it touches the hen, display “Hi Mom!”.
@@ -935,9 +1014,11 @@ Solution link: https://scratch.mit.edu/projects/328318062/
 					},
 					{
 						title: "GM3 Supplemental Project 2: Save the Butterfly",
-						content: `Project link: https://scratch.mit.edu/projects/330306402/
-Solution link: https://scratch.mit.edu/projects/328318577/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330306402/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328318577/",
+						content: `
 1. When the green flag is clicked, broadcast a message to start the game.
 2. Program the frog to move randomly around the stage.
 3. Program the butterfly to fly away by alternating between the left and right arrow keys.
@@ -956,9 +1037,11 @@ Solution link: https://scratch.mit.edu/projects/328318577/
 					},
 					{
 						title: "GM4 Project 1: Jackson Pollock Clones",
-						content: `Project link: https://scratch.mit.edu/projects/304043508/
-Solution link: https://scratch.mit.edu/projects/303958509/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304043508/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303958509/",
+						content: `
 1. Use a pencil sprite as the parent.
 2. Have the parent create clones continuously.
 3. Each clone should go to a random location, choose a random size and pen color, and glide to a random position while drawing.
@@ -969,9 +1052,11 @@ Encourage the student to record a video and share the project.`
 					},
 					{
 						title: "GM4 Project 2: Rainy Day",
-						content: `Project link: https://scratch.mit.edu/projects/304044182/
-Solution link: https://scratch.mit.edu/projects/303959602/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304044182/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303959602/",
+						content: `
 1. Program an umbrella controlled by the arrow keys.
 2. Program a chick to move around and bounce off the edges.
 3. Use a rain sprite that continuously creates clones falling from the sky.
@@ -983,9 +1068,11 @@ Solution link: https://scratch.mit.edu/projects/303959602/
 				supplementalProjects: [
 					{
 						title: "GM4 Supplemental Project 1: Fruity Fest",
-						content: `Project link: https://scratch.mit.edu/projects/330307274/
-Solution link: https://scratch.mit.edu/projects/328320105/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330307274/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328320105/",
+						content: `
 1. Move the parrot using the arrow keys.
 2. Create clones of fruit every second that appear at random positions.
 3. Keep track of how many pieces of fruit are collected. When 10 fruits have been collected, display a victory message.
@@ -1002,9 +1089,11 @@ Solution link: https://scratch.mit.edu/projects/328320105/
 					},
 					{
 						title: "GM5 Project 1: Security Bot",
-						content: `Project link: https://scratch.mit.edu/projects/304048236/
-Solution link: https://scratch.mit.edu/projects/303961395/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304048236/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303961395/",
+						content: `
 1. Ask the user for their name and respond with a greeting.
 2. Ask the user to type a word that starts with the letter “q”; check if the first letter is q and respond accordingly.
 3. Ask the user to type a seven-letter word; check the length and respond accordingly.
@@ -1014,9 +1103,11 @@ Encourage the student to record and share the project.`
 					},
 					{
 						title: "GM5 Project 2: Spelling Bee",
-						content: `Project link: https://scratch.mit.edu/projects/304048878/
-Solution link: https://scratch.mit.edu/projects/303962521/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304048878/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303962521/",
+						content: `
 1. When the key 1 is pressed, ask the user to type a word and then spell all of its letters.
 2. When 2 is pressed, ask for a word and spell all but the first letter.
 3. When 3 is pressed, ask for a word and spell all but the last letter.
@@ -1030,18 +1121,22 @@ Encourage the student to record and share the project.`
 				supplementalProjects: [
 					{
 						title: "GM5 Supplemental Project 1: Crazy Country",
-						content: `Project link: https://scratch.mit.edu/projects/330309012/
-Solution link: https://scratch.mit.edu/projects/328322024/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330309012/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328322024/",
+						content: `
 1. Ask the user for the name of a country, its leader and what the country is known for.
 2. Use the say and join blocks to make the program respond with a silly sentence that combines those answers.
 3. Challenge: Use one say block with multiple join blocks to create the sentence.`
 					},
 					{
 						title: "GM5 Supplemental Project 2: Beary Spelly",
-						content: `Project link: https://scratch.mit.edu/projects/330309721/
-Solution link: https://scratch.mit.edu/projects/328322577/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330309721/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328322577/",
+						content: `
 1. Store a secret word using a variable or list.
 2. Use text-to-speech to say the word.
 3. Ask the user to type the letters of the word one by one.
@@ -1059,9 +1154,11 @@ Solution link: https://scratch.mit.edu/projects/328322577/
 					},
 					{
 						title: "GM6 Project 1: Calculator",
-						content: `Project link: https://scratch.mit.edu/projects/304052069/
-Solution link: https://scratch.mit.edu/projects/303963892/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304052069/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303963892/",
+						content: `
 1. Ask the user for two numbers and which operation to perform (add, subtract, multiply or divide).
 2. Use conditionals to perform the correct operation and display the result.
 3. Challenge: Add remainder and exponent operations.
@@ -1069,9 +1166,11 @@ Solution link: https://scratch.mit.edu/projects/303963892/
 					},
 					{
 						title: "GM6 Project 2: FizzBuzz",
-						content: `Project link: https://scratch.mit.edu/projects/304052734/
-Solution link: https://scratch.mit.edu/projects/303964901/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304052734/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303964901/",
+						content: `
 1. Have a butterfly count from 1 to 50.
 2. For multiples of 3, the butterfly says “Fizz”.
 3. For multiples of 5, the butterfly says “Buzz”.
@@ -1083,9 +1182,11 @@ Solution link: https://scratch.mit.edu/projects/303964901/
 				supplementalProjects: [
 					{
 						title: "GM6 Supplemental Project 1: Times Tables",
-						content: `Project link: https://scratch.mit.edu/projects/330310535/
-Solution link: https://scratch.mit.edu/projects/328323094/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330310535/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328323094/",
+						content: `
 1. Ask the user what number they want to practice multiples of.
 2. Set a variable (e.g., “multiplier”) to 1.
 3. Use a repeat loop to display the product of the number and the multiplier.
@@ -1094,9 +1195,11 @@ Solution link: https://scratch.mit.edu/projects/328323094/
 					},
 					{
 						title: "GM6 Supplemental Project 2: Stamping with Dotty",
-						content: `Project link: https://scratch.mit.edu/projects/330311348/
-Solution link: https://scratch.mit.edu/projects/328323614/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330311348/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328323614/",
+						content: `
 1. Ask the user for an x-coordinate.
 2. Set y to the absolute value of x.
 3. Stamp the sprite at the (x, y) position.
@@ -1114,9 +1217,11 @@ Solution link: https://scratch.mit.edu/projects/328323614/
 					},
 					{
 						title: "GM7 Project 1: Bucket List",
-						content: `Project link: https://scratch.mit.edu/projects/304055981/
-Solution link: https://scratch.mit.edu/projects/303967022/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304055981/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303967022/",
+						content: `
 1. Ask the user for five things they want to do in their lifetime.
 2. Store each answer in a list called “bucket list”.
 3. After all items are entered, repeat through the list and display each item.
@@ -1124,9 +1229,11 @@ Solution link: https://scratch.mit.edu/projects/303967022/
 					},
 					{
 						title: "GM7 Project 2: List Practice",
-						content: `Project link: https://scratch.mit.edu/projects/304056597/
-Solution link: https://scratch.mit.edu/projects/303968062/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304056597/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303968062/",
+						content: `
 1. When the spacebar is pressed, ask the user for a number and add it to a list.
 2. When the green flag is clicked, reset the list.
 3. When the key 1 is pressed, display all numbers in the list.
@@ -1137,9 +1244,11 @@ Solution link: https://scratch.mit.edu/projects/303968062/
 					},
 					{
 						title: "GM7 Project 3: Music Memory",
-						content: `Project link: https://scratch.mit.edu/projects/304057210/
-Solution link: https://scratch.mit.edu/projects/303969274/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304057210/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303969274/",
+						content: `
 1. Create two lists: one for the correct sequence of notes and one for the player’s guesses.
 2. When the green flag is clicked, play a sequence of notes (e.g., C-E-G).
 3. Ask the user to repeat the sequence.
@@ -1152,9 +1261,11 @@ Solution link: https://scratch.mit.edu/projects/303969274/
 				supplementalProjects: [
 					{
 						title: "GM7 Supplemental Project 1: Multiple Magic",
-						content: `Project link: https://scratch.mit.edu/projects/330312164/
-Solution link: https://scratch.mit.edu/projects/328324158/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330312164/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328324158/",
+						content: `
 1. Choose a random number between 1 and 10.
 2. Ask the user to enter multiples of that number.
 3. Store the entered multiples in a list.
@@ -1164,9 +1275,11 @@ Solution link: https://scratch.mit.edu/projects/328324158/
 					},
 					{
 						title: "GM7 Supplemental Project 2: Wheel of Fortune",
-						content: `Project link: https://scratch.mit.edu/projects/330312909/
-Solution link: https://scratch.mit.edu/projects/328324694/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330312909/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328324694/",
+						content: `
 1. Create a list of words (your word bank).
 2. Choose a random word from the list.
 3. Create a second list that contains all the unique letters of the chosen word.
@@ -1186,9 +1299,11 @@ Solution link: https://scratch.mit.edu/projects/328324694/
 					},
 					{
 						title: "GM8 Project 1: My First Functions",
-						content: `Project link: https://scratch.mit.edu/projects/304059607/
-Solution link: https://scratch.mit.edu/projects/303970399/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304059607/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303970399/",
+						content: `
 Define four functions:
 1. A function that makes the cat say a message a given number of times.
 2. A function that draws a square with a given side length.
@@ -1199,9 +1314,11 @@ Use inputs for each function and then call the functions from the main script.`
 					},
 					{
 						title: "GM8 Project 2: Talent Show II",
-						content: `Project link: https://scratch.mit.edu/projects/304060264/
-Solution link: https://scratch.mit.edu/projects/303971615/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304060264/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303971615/",
+						content: `
 1. Decide on several “talents” for a sprite to perform (such as playing a song, dancing or spinning).
 2. Create a custom block (function) for each talent.
 3. When the program starts, ask the user which talent they would like to see.
@@ -1213,9 +1330,11 @@ Solution link: https://scratch.mit.edu/projects/303971615/
 				supplementalProjects: [
 					{
 						title: "GM8 Supplemental Project 1: Extra Functions",
-						content: `Project link: https://scratch.mit.edu/projects/330313635/
-Solution link: https://scratch.mit.edu/projects/328325212/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330313635/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328325212/",
+						content: `
 Write the following functions:
 1. A function that draws a shape when given the number of sides and the size of each side.
 2. A function that counts from a starting number to an ending number (it should count down if the ending number is smaller).
@@ -1224,9 +1343,11 @@ Write the following functions:
 					},
 					{
 						title: "GM8 Supplemental Project 2: Rock Paper Scissors",
-						content: `Project link: https://scratch.mit.edu/projects/330314302/
-Solution link: https://scratch.mit.edu/projects/328325745/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/330314302/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/328325745/",
+						content: `
 1. Create a function called get computer answer that returns a random choice from a list of rock, paper and scissors.
 2. Create a function called get player answer that repeatedly asks the player for a valid answer until they type rock, paper or scissors.
 3. Create a function called find winner that compares the player’s answer to the computer’s answer and calls one of three functions: player wins, computer wins or tie.
@@ -1239,9 +1360,11 @@ Solution link: https://scratch.mit.edu/projects/328325745/
 				curriculum: [
 					{
 						title: "GM9 Project 1: Fish Food",
-						content: `Project link: https://scratch.mit.edu/projects/304062617/
-Solution link: https://scratch.mit.edu/projects/303972772/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304062617/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303972772/",
+						content: `
 Have your student play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?
 
 Create a comment in the project to write out the different steps of what we will need to code.
@@ -1262,9 +1385,11 @@ When your student finishes their project, have them make a Recording Studio Vide
 				curriculum: [
 					{
 						title: "GM10 Project 1: Treasure Cave",
-						content: `Project link: https://scratch.mit.edu/projects/304063312/
-Solution link: https://scratch.mit.edu/projects/303973845/
-
+						projectLink:
+							"https://scratch.mit.edu/projects/304063312/",
+						solutionLink:
+							"https://scratch.mit.edu/projects/303973845/",
+						content: `
 Have your student play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?
 
 Create a comment in the project to write out the different steps of what we will need to code.
@@ -1346,505 +1471,544 @@ Assuming you have followed the Instructor Note at the beginning of this module, 
 **Instructor Note**: If your student is still developing their typing skills, it can be helpful to start their Python classes with a “warmup” of five minutes working on these typing games.`
 					}
 				],
-                                supplementalProjects: []
-                        }
-                ]
-        },
-        {
-                name: "PyGames",
-                modules: [
-                        {
-                                title: "PyG1 Object-Oriented Programming: Actors",
-                                curriculum: [
-                                        {
-                                                title: "Actors",
-                                                content:
-                                                        "Define **WIDTH** and **HEIGHT** variables (all caps) to set the window size. Explain that an object in computer science has data and functions—like Python’s turtle. Create an alien actor using `alien = Actor('alien')`. Implement `draw()` to call `screen.clear()` and then draw the alien. In `update()`, increment `alien.x` to move the alien right. Experiment with different speeds and directions by adjusting the increment values:contentReference[oaicite:5]{index=5}."
-                                        },
-                                        {
-                                                title: "Position Keywords",
-                                                content:
-                                                        "Show how to position actors using keywords like `alien.bottomleft = (0, HEIGHT)` or `alien.topleft`, etc. Add code in `update()` to move the alien and wrap it around: `if alien.left > WIDTH: alien.right = 0`. Create an `xspeed` attribute and set it, then update the alien’s position with `alien.x += alien.xspeed`. Reverse direction when hitting edges by setting `alien.xspeed = -alien.xspeed`:contentReference[oaicite:6]{index=6}."
-                                        },
-                                        {
-                                                title: "PyG1 Project 1: Rainbow Fill",
-                                                content:
-                                                        "Create a list of colors. In `draw()`, clear the screen and fill rows of the screen with rectangles of different colors from the list. Each time through the game loop, rotate the list so that the colors appear to scroll.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg1_rainbow_fill.py"
-                                        },
-                                        {
-                                                title: "PyG1 Project 2: Bouncing Alien",
-                                                content:
-                                                        "Use the alien actor and give it `xspeed` and `yspeed` dynamic attributes. Move the alien by adding these speeds to `alien.x` and `alien.y` in `update()`. When the alien hits a wall (left/right or top/bottom), multiply the corresponding speed by −1 to bounce it. Bonus: start the alien at a random position and increase its speed each time it hits a wall.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg1_bouncing_alien.py"
-                                        },
-                                        {
-                                                title: "PyG1 Project 3: Wandering Ball",
-                                                content:
-                                                        "Create a ball actor at the center of the screen. Define global `xspeed` and `yspeed`. Define a `resetBall()` function that assigns random non-zero speeds between −5 and 5 to `xspeed` and `yspeed`. In `update()`, move the ball by adding `xspeed` and `yspeed` to its position. If the ball goes offscreen, call `resetBall()` to choose new speeds. Bonus: ensure speeds are never zero.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg1_wandering_ball.py"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "PyG2 Event Handling",
-                                curriculum: [
-                                        {
-                                                title: "Keyboard Events",
-                                                content:
-                                                        "Use `on_key_down(key)` to move an actor when a key is pressed. For example, move an alien right on any key press or use `if key == keys.RIGHT:` to move only when the right arrow is pressed. For continuous movement, in `update()` check `if keyboard.right:` to move right. Use `alien.angle = 180` when the **W** key is pressed to flip the alien upside-down, and reset orientation on **S**. Use `alien.angle += 5` when **A** is pressed to rotate left and `alien.angle -= 5` on **D** to rotate right:contentReference[oaicite:7]{index=7}."
-                                        },
-                                        {
-                                                title: "Mouse Events",
-                                                content:
-                                                        "Implement `on_mouse_down(pos, button)` to respond to mouse clicks. Use `alien.image = 'alien_hurt'` when the alien is clicked and revert the image in `on_mouse_up()`. Check if a click is on the alien with `alien.collidepoint(pos)` and detect left clicks via `button == mouse.LEFT`. Use `sounds.eep.play()` to play a sound when clicked:contentReference[oaicite:8]{index=8}. Add `on_mouse_move(pos)` to make the alien follow the mouse by updating `alien.pos = pos`."
-                                        },
-                                        {
-                                                title: "PyG2 Project 1: Arrow Point",
-                                                content:
-                                                        "Create an arrow actor that always points toward the mouse. Use `arrow.angle` to rotate the arrow so it faces the current mouse position. Update the angle either continuously in `update()` or in a mouse-move event.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg2_arrow_point.py"
-                                        },
-                                        {
-                                                title: "PyG2 Project 2: Apple Collector",
-                                                content:
-                                                        "Create an apple actor that appears at random positions. When the apple is clicked, play a sound, increment a score variable and move the apple to a new random location. Display the score on the screen.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg2_apple_collector.py"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "PyG3 Object-Oriented Programming: Advanced Actors",
-                                curriculum: [
-                                        {
-                                                title: "ZRect Class",
-                                                content:
-                                                        "Explain that a **ZRect** is a rectangle with `x`, `y`, width and height. It can be used to draw shapes or detect overlaps. Create `WIDTH` and `HEIGHT` constants. Create a ZRect: `box = ZRect((100, 100), (50, 50))`. In `draw()`, draw it with `screen.draw.rect(box, (255, 0, 0))`. Experiment with different colors like blue, purple, orange and white by changing the RGB tuple:contentReference[oaicite:9]{index=9}."
-                                        },
-                                        {
-                                                title: "Colliderect and Contains",
-                                                content:
-                                                        "Create two ZRects: `randomBox` (50×50) at a random location and `middleBox` (200×200) centered on the screen. In `draw()`, use `middleBox.colliderect(randomBox)` to check if they collide. If they collide, draw `randomBox` in blue (`(0,0,255)`); otherwise draw it in red (`(255,0,0)`). Encourage experimenting with collision detection for more shapes:contentReference[oaicite:10]{index=10}."
-                                        },
-                                        {
-                                                title: "Dynamic Attributes",
-                                                content:
-                                                        "Discuss using actor-specific dynamic attributes (e.g., `xspeed`, `yspeed`, `lives`, `color`) instead of global variables when values are tied to a particular actor. Use global variables only for game-wide info like score, timer or `isGameOver`."
-                                        },
-                                        {
-                                                title: "PyG3 Project 2: Light Control",
-                                                content:
-                                                        "Create two actors: a bulb in the middle of the screen and a battery in the top-left corner. Add an `on_mouse_move()` handler so that when the left mouse button is held down, the battery follows the mouse. In `update()`, check if the bulb and battery are touching; if they collide, change the bulb’s image to the 'on' state, otherwise use the 'off' image. In `draw()`, draw both actors:contentReference[oaicite:11]{index=11}.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg3_light_control.py"
-                                        },
-                                        {
-                                                title: "PyG3 Project 3: Beach Ball Chase",
-                                                content:
-                                                        "Create a beach ball actor with random `x` and `y` positions and random `xspeed` and `yspeed` values. Let the player control an alien actor using arrow keys (move up, down, left, right). In `update()`, move the ball by its speeds and have it bounce off the walls. When the alien collides with the ball, move the ball to a new random position and increase a `score` variable. In `draw()`, draw the ball, the alien and display the score at the top left (e.g., `screen.draw.text(score, (10, 10))`). **Instructor Note**: Encourage breaking the program into helper functions: one to handle keyboard movement, one to move the ball and one to check collisions. Bonus: prevent the alien from moving offscreen:contentReference[oaicite:12]{index=12}.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg3_beach_ball_chase.py"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "PyG4 Managing Multiple Objects: Collectibles",
-                                curriculum: [
-                                        {
-                                                title: "Lists of Actors",
-                                                content:
-                                                        "Instead of defining many variables, create a list to store multiple actors. Define `WIDTH` and `HEIGHT`. Use a loop to create 10 alien actors, set each alien’s `xspeed = 5` and append it to a list with `aliens.append(a)`. In `draw()`, loop through `aliens` and call `alien.draw()` for each. In `update()`, loop through the list to move each alien by its `xspeed` and reverse direction when it hits the screen edges. Emphasize using dynamic attributes for per-object values and global variables for overall game state."
-                                        },
-                                        {
-                                                title: "PyG4 Project 1: Bouncy Ball Room",
-                                                content:
-                                                        "Create multiple ball actors with random `x` and `y` positions and random `xspeed` and `yspeed`, storing them in a list. In `draw()`, loop through the list and draw each ball. In `update()`, move each ball and bounce it off the walls by checking `ball.top`, `ball.left`, `ball.right` and `ball.bottom`—reverse the appropriate speed when a wall is hit. **Nested loops**: to make balls bounce off each other, write a function `checkBallCollision(b1, b2)` that multiplies the `xspeed` and `yspeed` of both balls by −1 when they collide, and call it inside a double loop over the list:contentReference[oaicite:13]{index=13}.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg4_bouncy_ball_room.py"
-                                        },
-                                        {
-                                                title: "PyG4 Project 2: Falling Squares",
-                                                content:
-                                                        "Show the final solution. Define a `resetSquares()` function that resets the positions of square actors to the top of the screen and randomizes their order of blue and red squares. Call this function when the blue square is clicked or when squares reach the bottom. Maintain a list of possible x-positions for squares to avoid overlapping; monitor when a row of squares reaches the bottom to trigger `resetSquares()`. Use a `speed` variable for how fast the squares fall and increase it each time the blue square is clicked.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg4_falling_squares.py"
-                                        },
-                                        {
-                                                title: "PyG4 Project 3: Jewel Catch",
-                                                content:
-                                                        "Show the student the final solution. Set the background to white with `screen.fill((255, 255, 255))`. Create a list of 5 gem actors and 4 bomb actors. Set each gem and bomb at a random x-position and assign an `xspeed` between 1 and 3, ensuring they aren’t clumped together. Write `moveShip()` to move a rocket left and right with arrow keys, preventing it from leaving the screen. In `update()`, continuously move the gems and bombs downward. Write `checkGemCollision(gem)` to reset a gem to the top when it reaches the bottom or the rocket catches it, adding 5 points when caught. Write `checkBombCollision(bomb)` to reset a bomb to the top when it reaches the bottom or hits the rocket, subtracting 10 points if hit. Gems and bombs move left and right while falling; when they hit the screen sides, reverse their horizontal direction. Implement these checks inside `checkGemCollision()` and `checkBombCollision()`:contentReference[oaicite:14]{index=14}.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg4_jewel_catch.py"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "PyG5 Physics",
-                                curriculum: [
-                                        {
-                                                title: "Gravity and Wind",
-                                                content:
-                                                        "Introduce gravity as a force that pulls actors downward; we can add a gravity factor to actors to simulate this. Create a `beach_ball` actor with dynamic attributes `xspeed` and `yspeed`. In `draw()`, draw the ball. In `update()`, update `ball.x` and `ball.y` using `ball.x += ball.xspeed` and `ball.y += ball.yspeed`. Then add a global `GRAVITY` variable (e.g., `0.1`) and in `update()` increase `ball.yspeed` by `GRAVITY`. Test how the ball accelerates. Discuss adding wind by introducing a `WIND` variable that modifies `ball.xspeed`; explore what happens when `WIND` is zero or nonzero:contentReference[oaicite:15]{index=15}.",
-                                                projectLink: "https://static.junilearning.com/pygame/pyg5_gravity"
-                                        },
-                                        {
-                                                title: "PyG5 Project 1: Keep Up",
-                                                content:
-                                                        "Create a ball actor with `xspeed` and `yspeed`. Create global `GRAVITY` and `score` variables. In `draw()`, show the score and draw the ball. In `update()`, add `GRAVITY` to the ball’s y-speed, update the ball’s position using `xspeed` and `yspeed`, and make the ball bounce off the left and right walls. Implement `on_mouse_down(pos)` to check if the click collides with the ball; if so, set the y-speed of the ball to −3, set the x-speed to a random value between −15 and 15, and increment the score. Make the ball bounce off the right wall using a conditional like `if ball.right >= WIDTH: ball.right = WIDTH; ball.xspeed = -ball.xspeed` and similarly for the left wall. Bonus: add a small amount of wind and play a popping sound each time the ball is clicked:contentReference[oaicite:16]{index=16}.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg5_keep_up.py"
-                                        },
-                                        {
-                                                title: "Friction",
-                                                content:
-                                                        "Create dynamic variables `xspeed` and `yspeed` for a ball, set `xspeed` to 10 and `yspeed` to 0. Create a global `FRICTION` variable (e.g., 0.95). In `update()`, multiply `ball.xspeed` and `ball.yspeed` by `FRICTION` to slowly decrease the speed. Run the program with different starting speeds and friction values; observe that higher friction slows the ball more quickly. Discuss the effect of friction values greater than 1 or less than 1:contentReference[oaicite:17]{index=17}."
-                                        },
-                                        {
-                                                title: "PyG5 Project 2: Golf",
-                                                content:
-                                                        "Create actors for the golf ball, hole and flag. Assign dynamic attributes for the ball’s `xspeed` and `yspeed`. Make global variables for the `FRICTION` and the number of `strokes`. Position the hole and flag in the center of the screen and place the hole where the flag is. When the player clicks on the screen, set `xspeed` and `yspeed` of the ball to move it toward the click location. In `draw()`, set the background color to green (`screen.fill((50, 100, 50))`), display the number of strokes in the top-left corner and draw the hole, flag and ball. In `update()`, apply friction to reduce speeds, update the ball’s position based on `xspeed` and `yspeed`, and make it bounce off walls. When the ball reaches the hole, center it in the hole and stop movement. Record the number of strokes and display a congratulatory message when finished:contentReference[oaicite:18]{index=18}.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg5_golf.py"
-                                        },
-                                        {
-                                                title: "PyG5 Project 3: Multi-Ball Physics",
-                                                content:
-                                                        "Create a list of 10 ball actors, each with a random location and random `xspeed` and `yspeed`. Create global `GRAVITY` and `FRICTION` variables. Define `draw()` to draw each ball. In `update()`, for each ball: add `GRAVITY` to its y-speed, multiply `xspeed` and `yspeed` by `FRICTION` to slow it down, update its position by adding the speeds, and if a ball goes offscreen reverse the corresponding speed and set its position back on screen. Add an `on_key_down()` event that randomizes the location and speeds of all balls when the space key is pressed. Add an `on_mouse_down(pos)` event that loops through the balls; if a ball is clicked (using `collidepoint()`), set its `xspeed` and `yspeed` to random values. **Bonus**: Add wind controlled by arrow keys: left arrow decreases the wind, right arrow increases the wind, and pressing spacebar resets wind to zero:contentReference[oaicite:19]{index=19}.",
-                                                solutionLink: "https://static.junilearning.com/pygame/pyg5_multiball_physics.py"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        }
-                ]
-        },
-        {
-                name: "C++ Level 1",
-                modules: [
-                        {
-                                title: "CPPF1 Variables, Types, and Input/Output",
-                                curriculum: [
-                                        {
-                                                title: "Creating and Running a C++ Script",
-                                                content:
-                                                        "**Instructor Note**: Students new to C++ may be unfamiliar with its syntax and structure. Guide them through setting up an account on repl.it, choosing C++ 11, creating a file (e.g., Objects and Variables), and running code. Introduce a basic program: `std::cout << \"Hello World!\\n\";` and show how it prints to the console. Emphasize compiling/running via Repl.it’s Run button."
-                                        },
-                                        {
-                                                title: "Primitive Types",
-                                                content:
-                                                        "Discuss fundamental data types in C++: integers, floating-point numbers, booleans and characters. Show how to declare variables of each type and assign values. Explain arithmetic operations including modulus. Demonstrate printing values using `std::cout` and reading values with `std::cin`."
-                                        },
-                                        {
-                                                title: "String",
-                                                content:
-                                                        "Explain the `std::string` class. Demonstrate declaring strings, concatenating them, indexing characters, using `string.length()` and adding characters. Show how to modify and print strings."
-                                        },
-                                        {
-                                                title: "Input and Output",
-                                                content:
-                                                        "Introduce `iostream` and explain insertion (`<<`) and extraction (`>>`) operators. Demonstrate reading input from the user with `std::cin` and printing results with `std::cout`. Example: prompt the user for their name and greet them by printing “Nice to meet you, <name>”."
-                                        },
-                                        {
-                                                title: "Comments",
-                                                content:
-                                                        "Teach single-line comments using `//` and multi-line comments using `/* … */`. Explain why comments are useful for documenting code."
-                                        },
-                                        {
-                                                title: "Compilation (Advanced Concept)",
-                                                content:
-                                                        "Briefly explain what happens when a C++ program is compiled. Touch on namespaces (`std::`), the scope-resolution operator `::`, object files and linking."
-                                        },
-                                        {
-                                                title: "CPPF1 Project 1: Mad Libs",
-                                                content:
-                                                        "Have the student play a Mad Libs game from the solution to understand the goal. Then have them build their own Mad Libs: create several string variables and prompt the user to enter words (nouns, verbs, adjectives, etc.) via `std::cin`. After gathering inputs, concatenate the strings into a story using `std::cout`. Encourage creativity. Finally, have the student record a video explaining the project and share it.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF1-Mad-Libs-Solution"
-                                        },
-                                        {
-                                                title: "CPPF1 Project 2: Chatbot",
-                                                content:
-                                                        "Create a simple chatbot that interacts with the user. Ask for the user’s name and respond. Ask for a sentence, use `str.insert()` to insert “achoo” into the user’s sentence, and have the bot “sneeze.” Ask for a temperature in Fahrenheit and convert it to Celsius using floating-point arithmetic. Ask for an amount in dollars and convert it to another currency. Emphasize correct use of floats. When finished, have the student record a video explaining and share the project.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF1-Chatbot-Solution"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF2 Loops and Conditionals",
-                                curriculum: [
-                                        {
-                                                title: "For Loops",
-                                                content:
-                                                        "Introduce the structure of a `for` loop: initialization, condition and increment. Practice writing loops to print numbers from 11 to 20, print even numbers from 2 to 10, print numbers from 10 down to 1, ask the user for a word and print its letters one by one, print the word backward, sum the numbers from 1 to 100 and calculate the factorial of 10. Discuss the `++` and `--` operators and compound assignment."
-                                        },
-                                        {
-                                                title: "While Loops",
-                                                content:
-                                                        "Explain `while` loops and how they repeat until a condition becomes false. Practice converting the for-loop exercises into while-loop versions. Emphasize careful loop termination to avoid infinite loops."
-                                        },
-                                        {
-                                                title: "CPPF2 Project 1: Loop Practice",
-                                                content:
-                                                        "Ask the user for two numbers (a smaller and a larger). Print all the numbers between them. Then ask how many numbers the user wants to enter; read that many numbers and print their sum. Finally, compute and print the average (using a `double` for precision). Implement each part using both `for` and `while` loops. Finish by recording and sharing a video of the project."
-                                        },
-                                        {
-                                                title: "Conditionals and Logical Operators",
-                                                content:
-                                                        "Introduce comparison operators (`==`, `!=`, `>`, `<`, `>=`, `<=`) and logical operators (`&&` for AND, `||` for OR). Show how to construct `if`, `else if` and `else` chains. Demonstrate simple decision-making based on user input."
-                                        },
-                                        {
-                                                title: "CPPF2 Project 2: Rock, Paper, Scissors",
-                                                content:
-                                                        "Discuss how to implement Rock–Paper–Scissors using conditionals. Prompt both players for their choice, then use nested conditionals to determine the winner by comparing the choices. After coding, have the student record a video explaining and share the project.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF2-Rock-Paper-Scissors-Solution"
-                                        },
-                                        {
-                                                title: "CPPF2 Project 3: FizzBuzz",
-                                                content:
-                                                        "Print the numbers 1 through 50, but for multiples of 3 print “Fizz,” for multiples of 5 print “Buzz,” and for multiples of both 3 and 5 print “FizzBuzz.” Emphasize using the modulo operator. Challenge: allow the user to input two numbers and print a customized FizzBuzz. Record a video and share.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF2-FizzBuzz-Solution"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF3 Functions",
-                                curriculum: [
-                                        {
-                                                title: "Basic Function Structure in C++",
-                                                content:
-                                                        "Explain that a function is a reusable block of code that takes inputs (parameters) and returns a value. Show the syntax: return type, function name and parameters. Demonstrate defining functions outside `main` and calling them from `main`. Explain prototypes and how return types determine what a function returns."
-                                        },
-                                        {
-                                                title: "CPPF3 Project 1: Function Practice",
-                                                content:
-                                                        "Write several functions: (1) a function that takes two integers and returns their average (use `double` for precision); (2) a function that takes an integer and returns `true` if it’s even, `false` otherwise; (3) a function that takes three doubles and returns the smallest; (4) a function that takes an integer and returns its factorial; (5) a function that takes a base and exponent and returns the base raised to that power. Have the student test each function, record a video explaining, and share.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF3-Function-Practice-Solution"
-                                        },
-                                        {
-                                                title: "Random Numbers",
-                                                content:
-                                                        "Introduce `rand()` from `<cstdlib>` to generate random numbers. Show how to seed the random number generator using `srand(time(NULL))` for varied results. Explain using modulo to restrict random numbers to a range (e.g., `rand() % (max - min) + min`)."
-                                        },
-                                        {
-                                                title: "CPPF3 Project 2: Probability Events and Random",
-                                                content:
-                                                        "Write functions to simulate random events: (1) flip a coin and return “heads” or “tails”; (2) roll two dice and return the sum; (3) draw a card from a standard 52-card deck and return a string like “10 of Diamonds” or “King of Spades.” Discuss how to use random numbers to choose card values and suits. Record and share a video.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF3-Probability-Events-Solution"
-                                        },
-                                        {
-                                                title: "CPPF3 Project 3: Number Guesser",
-                                                content:
-                                                        "Create a game where the program picks a random number within a range specified by the user. Ask the user for the range bounds and for the number of guesses allowed. Implement separate functions for asking the range, generating the number, prompting guesses and giving feedback (higher/lower). End the game when the user guesses correctly or runs out of guesses. Record and share a video.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF3-Number-Guesser-Solution"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF4 Classes and Objects",
-                                curriculum: [
-                                        {
-                                                title: "Introduction to Classes and Objects",
-                                                content:
-                                                        "Explain object-oriented programming and why classes are useful. Show how to define a class with private member variables and public member functions. Demonstrate creating objects, constructors and destructors."
-                                        },
-                                        {
-                                                title: "Public and Private Variables",
-                                                content:
-                                                        "Discuss encapsulation and why member variables should be private. Show how to use getter and setter functions to access and modify private data."
-                                        },
-                                        {
-                                                title: "More about Classes (getters, setters, printing, etc.)",
-                                                content:
-                                                        "Expand on class features: default constructors, copy constructors, overloaded constructors, and how to print class objects by writing a `print()` method."
-                                        },
-                                        {
-                                                title: "CPPF4 Project 1: Cat Class",
-                                                content:
-                                                        "Create a `Cat` class with private attributes such as name, age and weight. Write appropriate constructors, getters and setters. Add a method `meow()` that prints a message. In `main`, instantiate several cats and call their methods. Record a video explaining and share.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF4-Cat-Class-Solution"
-                                        },
-                                        {
-                                                title: "CPPF4 Project 2: Bookcase",
-                                                content:
-                                                        "Design a `Book` class with attributes like title, author and page count. Then design a `Bookcase` class that stores multiple books. Implement methods to add books, remove books and list all books. Encourage using arrays or vectors. Record and share a video.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF4-Bookcase-Solution"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF5 Pointers",
-                                curriculum: [
-                                        {
-                                                title: "Memory and Pointers",
-                                                content:
-                                                        "**Instructor Note**: The reference code includes material on pointers and references; a formal walkthrough is provided later. Use it to guide discussion. Pointers allow us to store memory addresses of variables. Every variable has a memory address, which we can obtain using the `&` operator. A pointer is declared by placing `*` after the type (e.g., `int* p1`), and we assign it the address of a variable using `&`. A pointer’s type must match the type of the variable it points to. Use `nullptr` to indicate that a pointer doesn’t point anywhere.",
-                                                projectLink: "https://repl.it/@JuniLearning/CPPF5-Pointers-Reference"
-                                        },
-                                        {
-                                                title: "CPPF5 Project 1: Pointers Introduction",
-                                                content:
-                                                        "Project questions walk through pointer fundamentals, including dereferencing, copying pointers, and handling `nullptr`. When your student finishes the project, have them create a Recording Studio video explaining what the project does and how they programmed it, then share it.",
-                                                projectLink: "https://repl.it/@JuniLearning/CPPF5-Pointers-Starter?skipMigration=1",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF5-Pointers?skipMigration=1"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF6 References and Parameter Passing",
-                                curriculum: [
-                                        {
-                                                title: "References",
-                                                content:
-                                                        "Explain that a reference is an alias for another variable. Create a reference using `&` after the type (e.g., `int& ref1 = intVal1`). Modifying the reference changes the original variable. References are often used for passing parameters to functions."
-                                        },
-                                        {
-                                                title: "Parameter Passing",
-                                                content:
-                                                        "Discuss three ways to pass parameters: by value, by reference and by const reference. • Pass by value copies the argument; modifications don’t affect the original. • Pass by reference allows the function to modify the original value. • Pass by const reference allows the function to read the value without modifying it. Show examples where spacing around `&` doesn’t matter (e.g., `int& ref` vs. `int &ref`)."
-                                        },
-                                        {
-                                                title: "CPPF6 Project 1: Parameter Passing Tracing",
-                                                content:
-                                                        "Write comments predicting what will happen to parameters passed by value, reference and const reference, then run the program to test the predictions. Discuss why parameters passed by const reference cannot be changed inside the function. After finishing, have the student record a video explaining and share the project.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Tracing?skipMigration=1"
-                                        },
-                                        {
-                                                title: "CPPF6 Project 2: Defanging a Website Address",
-                                                content:
-                                                        "Write a program that replaces periods in a URL with `[.]` to “defang” the address. Create one function that defangs by editing the string directly (pass the string by reference) and another function that returns a defanged copy (pass by value). Use `str.replace()` to substitute each period. At the end, record a video explaining the project and share it.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF6-Defanging?skipMigration=1"
-                                        },
-                                        {
-                                                title: "CPPF6 Project 3: Chaos Monkeys",
-                                                content:
-                                                        "Write functions that insert random uppercase characters into a string. Create three functions that each take a string and (a) pass by value, (b) pass by reference, and (c) pass by const reference; each function should insert characters differently. Use the string method `.insert(int index, int count, char newChar)` to add characters at random positions. Note: be careful when iterating over a changing string—if you call `.length()` each time, the loop might not terminate. Challenge the student to explore other string-scrambling functions. After finishing, record and share a video.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF6-Chaos-Monkeys?skipMigration=1"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF7 Arrays",
-                                curriculum: [
-                                        {
-                                                title: "Array Basics",
-                                                content:
-                                                        "Explain that arrays hold multiple values of the same type. Declare an array by specifying its type, name and size, e.g., `int arr[10]`. Ask the student to create an array `nums` with 10 ints. Show how to initialise arrays with an initializer list: `int arr[] = {1, 2, 3}`. Access elements by index (0-based) and modify them. Explain how `sizeof(array) / sizeof(array[0])` gives the number of rows or columns. Demonstrate iterating over an array with a loop and using pointers to traverse arrays, but caution against undefined behaviour when accessing memory out of bounds."
-                                        },
-                                        {
-                                                title: "CPPF7 Project 1: Array Practice",
-                                                content:
-                                                        "1. Create and print an array containing the first 10 perfect squares. 2. Write a function that takes an array of ints and returns `true` if the first and last elements are the same. 3. Write a function that sums all elements in an array of ints. 4. Write a function that takes an array of strings and returns the total number of letters in all strings. Explain how arrays are passed to functions: either as `type arr[]` or as a pointer. At the end, have the student record and share a video.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF7-Array-Practice?skipMigration=1"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF8 Two-Dimensional Arrays",
-                                curriculum: [
-                                        {
-                                                title: "Two-Dimensional Arrays",
-                                                content:
-                                                        "Explain how to create a 2D array in C++ (an array of arrays). For example, `int arr[10][10];` allocates 10×10 integers. Show initializer lists for 2D arrays, e.g., `int arr[3][3] = { {1,2,3}, {4,5,6}, {7,8,9} };`. Teach how to compute the number of rows using `sizeof(array) / sizeof(array[0])` and the number of columns using `sizeof(array[0]) / sizeof(array[0][0])`. Demonstrate accessing `arr[i][j]` and printing all elements with nested loops. Discuss passing 2D arrays to functions and returning them using pointers (`int**`) or arrays."
-                                        },
-                                        {
-                                                title: "Using Two-Dimensional Arrays in Functions",
-                                                content:
-                                                        "Explain that when passing a 2D array to a function, the array parameter should be written as `(int *arr, int row, int col)` so that the function can access the memory. Within functions, 2D arrays are continuous blocks of memory; to access element `(i, j)` in an `m-by-n` array, use `*((arr + i*n) + j)`. Show how to return a 2D array from a function using `int**` for a 2D array and `int*` for a 1D array. Demonstrate creating a basic array-generating function that returns an array with numbers 0 through `n`."
-                                        },
-                                        {
-                                                title: "CPPF8 Project 1: Two-Dimensional Array Practice",
-                                                content:
-                                                        "Solve the following problems using 2D arrays: • Write a method that takes in a 2D array of integers and returns the sum of all of the integers in the array. • Write a method that takes in a 2D array of integers and returns the minimum of all of the integers in the array. • Write a method that takes in an integer `n` and returns a 2D array of the `n × n` multiplication table. Then, print the array in grid format. • Write a method that takes in a 2D array of integers and returns a one-dimensional array of the averages of the integers in each row (averages returned as floats). When your student finishes, have them make a Recording Studio video explaining the project and share it.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF8-2D-Array-Practice?skipMigration=1"
-                                        },
-                                        {
-                                                title: "CPPF8 Project 2: Bank Balances",
-                                                content:
-                                                        "Show the student what you are trying to create and ask what components might be needed. How can we use a 2D array? How might we store a customer and their recurring transactions to show their total balance? Work with the student on the `print()` function to print out a grid. How can we use nested `for` loops to do this? Once the `print()` method is complete, have the student implement the necessary data structure to allow user interaction. When your student finishes their project, have them make a Recording Studio video where they explain what the project does and how they programmed it. Finally, have them share their project!",
-                                                projectLink: "https://repl.it/@JuniLearning/CPPF8-Two-Dimensional-Arrays-Reference",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF8-Bank-Transactions?skipMigration=1"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF9 Dynamic Arrays and Memory",
-                                curriculum: [
-                                        {
-                                                title: "Dynamic Variables",
-                                                content:
-                                                        "Pointers let us point to values that don’t have variable names. Variables we define manually are called static variables. Variables created during runtime via pointers are called dynamic (or anonymous) variables. Use the `new` operator to allocate memory and create dynamic variables (e.g., `int* p1 = new int;`). Assign values to them using `*p1 = 5` or `std::cin >> *p1`. Always call `delete p1` when done to avoid memory leaks. After deleting, a pointer becomes invalid (a dangling pointer) and dereferencing it leads to undefined behaviour. Use `nullptr` to indicate that a pointer doesn’t point to anything.",
-                                                projectLink: "https://repl.it/@JuniLearning/CPPF9-Dynamic-Variables-Reference"
-                                        },
-                                        {
-                                                title: "CPPF9 Project 1: Assembly Line",
-                                                content:
-                                                        "1. Create a basic Object class with variables for its name and weight (in pounds), a constructor using the BMI, and a `print()` function that prints the name, the weight of the object in pounds, and the weight of the object in kilograms (1 kg = 2.205 lbs). 2. Repeatedly ask the user for the necessary information to create a new Object and store that Object using a dynamic variable. 3. Print out the newly created Object and then free up the memory that was allocated for it in preparation for processing the next Object. 4. Bonus: Ask the user how many Objects they will be processing and then store that many Objects in an array. Once the information is entered, loop through the array and print out the information for each of the Objects. 5. When the student finishes the project, have them make a Recording Studio video explaining what the project does and how they programmed it. Finally, have them share their project.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF9-Assembly-Line?skipMigration=1"
-                                        },
-                                        {
-                                                title: "Introduction to Dynamic Arrays",
-                                                content:
-                                                        "Static arrays are limited because their size is fixed at compile time. If we need more data than the array can hold, we must create a new array of a larger size and copy the data over. If we keep appending data past the array’s end without checking capacity, we could overwrite memory we don’t own. To create dynamic arrays: (1) declare a pointer to the array; (2) create the array with `new`; (3) use the pointer as the array; (4) if we run out of space, allocate a new (larger) array, copy over the elements and delete the old one; (5) remember to free memory with `delete` when done."
-                                        },
-                                        {
-                                                title: "Dynamic Arrays and Memory",
-                                                content:
-                                                        "A dynamic array automatically resizes itself when it runs out of room. We’ll write our own `DynamicArray` class that creates a new array with more space when the old one runs out, copies old values to the new array and deletes the old one. Failing to call `delete` can cause memory leaks. When a class allocates memory, write a destructor (prefixed with `~`) that frees that memory. Destructors are called automatically when the object goes out of scope."
-                                        },
-                                        {
-                                                title: "CPPF9 Project 2: Dynamic Array Implementation",
-                                                content:
-                                                        "Implement your own `DynamicArray` class. Include private members: `mysize` (number of elements), `maxSize` (capacity) and `int* myVals` (pointer to the array). Optionally define a constant `DEFAULT_SIZE` for initial capacity. Write: • A default constructor that sets `mysize` to 0, `maxSize` to a default size and `myVals` to a new array of that size. • A destructor that deletes `myVals` and sets `mysize` to 0. • `addVal(int val)`: check if there’s enough space; if not, create a new array with double the previous capacity, copy values over, swap pointers, delete the old array and then add the new value. Increment `mysize`. • `printVals()`: print out the values stored, iterating over `myVals` based on `mysize`. • `get(int index)`: return the value at a specific index. When finished, have the student record a video explaining and share the project.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF9-Dynamic-Array-Implementation?skipMigration=1"
-                                        },
-                                        {
-                                                title: "Introduction to Structs",
-                                                content:
-                                                        "Explain that a struct is like a class but defaults to public members. Structs are useful for grouping small, related data items (e.g., a `node` struct with `int data` and `node* next`). They appear often in code because they’re concise. In the next project we’ll create a Grocery List using structs to combine item names and prices."
-                                        },
-                                        {
-                                                title: "CPPF9 Project 3: Grocery List",
-                                                content:
-                                                        "We need to change the DynamicArray implementation to store Groceries instead of ints. Because groceries contain just a name and a price, create a simple struct in the DynamicArray.h file. Include a basic constructor and an all-members constructor to initialize its private variables. Modify the dynamic array to store this struct instead of int; update any functions that depend on the array’s data type. Desired functionality: printing the list and adding an item. To remove an item at an index, shift elements by copying into a new array and skipping the removed item (ensure the Grocery item being added is newly constructed to avoid pass-by-value errors). Create a basic menu that lets the user add, remove, print and quit. When finished, record a video explaining what the project does and how it was programmed, then share it.",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF9-Grocery-List?skipMigration=1"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF10 Master Project: Matrix Fun",
-                                curriculum: [
-                                        {
-                                                title: "CPPF10 Master Project: Matrix Fun",
-                                                content:
-                                                        "We can call grids of numbers matrices. There’s a lot of operations we can do with matrices such as addition. It’s important to remember that two matrices need to have the same dimension for us to do matrix addition. Show the student what we’re trying to create and have them map out the process they would take to make this matrix addition possible. Create variables for the number of rows, columns, and for each of the matrices. Ask the user for the dimensions of the matrix and for the elements of the matrix. Add the matrices and print out the result in a grid layout. When your student finishes their project, have them make a Recording Studio Video where they explain what the project does and how they programmed it. Finally, have them share their project!",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF10-Matrix-Addition?skipMigration=1"
-                                        }
-                                ],
-                                supplementalProjects: []
-                        },
-                        {
-                                title: "CPPF11 Master Project: Profile Posts",
-                                curriculum: [
-                                        {
-                                                title: "CPPF11 Master Project: Profile Posts",
-                                                content:
-                                                        "Create a Profile class that stores posts that have a caption and a number of hearts on them. The user can then add posts to their profile, and print out the posts’ captions and the total number of hearts on all of the posts. The Profile class needs to store a changing amount of Post structs: we need to be able to add more Posts as necessary. Variables: numPosts, maxSize, myPosts. Functions include addPost(newPost), printPost(index), printPosts(), addHearts(index, numHearts) and a helper to validate indexes. Bonus extensions include adding more fields, duplicating posts, and summing hearts. When your student finishes their project, have them make a Recording Studio Video where they explain what the project does and how they programmed it. Finally, have them share their project!",
-                                                solutionLink: "https://repl.it/@JuniLearning/CPPF11-Profile-Posts?skipMigration=1"
-                                        },
-                                        {
-                                                title: "Course recap",
-                                                content:
-                                                        "We've learned a lot over these past few months! Can you recap what this course covered? Discuss with the student the next Juni course they will be starting."
-                                        }
-                                ],
-                                supplementalProjects: []
-                        }
-                ]
-        }
+				supplementalProjects: []
+			}
+		]
+	},
+	{
+		name: "PyGames",
+		modules: [
+			{
+				title: "PyG1 Object-Oriented Programming: Actors",
+				curriculum: [
+					{
+						title: "Actors",
+						content:
+							"Define **WIDTH** and **HEIGHT** variables (all caps) to set the window size. Explain that an object in computer science has data and functions—like Python’s turtle. Create an alien actor using `alien = Actor('alien')`. Implement `draw()` to call `screen.clear()` and then draw the alien. In `update()`, increment `alien.x` to move the alien right. Experiment with different speeds and directions by adjusting the increment values:contentReference[oaicite:5]{index=5}."
+					},
+					{
+						title: "Position Keywords",
+						content:
+							"Show how to position actors using keywords like `alien.bottomleft = (0, HEIGHT)` or `alien.topleft`, etc. Add code in `update()` to move the alien and wrap it around: `if alien.left > WIDTH: alien.right = 0`. Create an `xspeed` attribute and set it, then update the alien’s position with `alien.x += alien.xspeed`. Reverse direction when hitting edges by setting `alien.xspeed = -alien.xspeed`:contentReference[oaicite:6]{index=6}."
+					},
+					{
+						title: "PyG1 Project 1: Rainbow Fill",
+						content:
+							"Create a list of colors. In `draw()`, clear the screen and fill rows of the screen with rectangles of different colors from the list. Each time through the game loop, rotate the list so that the colors appear to scroll.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg1_rainbow_fill.py"
+					},
+					{
+						title: "PyG1 Project 2: Bouncing Alien",
+						content:
+							"Use the alien actor and give it `xspeed` and `yspeed` dynamic attributes. Move the alien by adding these speeds to `alien.x` and `alien.y` in `update()`. When the alien hits a wall (left/right or top/bottom), multiply the corresponding speed by −1 to bounce it. Bonus: start the alien at a random position and increase its speed each time it hits a wall.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg1_bouncing_alien.py"
+					},
+					{
+						title: "PyG1 Project 3: Wandering Ball",
+						content:
+							"Create a ball actor at the center of the screen. Define global `xspeed` and `yspeed`. Define a `resetBall()` function that assigns random non-zero speeds between −5 and 5 to `xspeed` and `yspeed`. In `update()`, move the ball by adding `xspeed` and `yspeed` to its position. If the ball goes offscreen, call `resetBall()` to choose new speeds. Bonus: ensure speeds are never zero.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg1_wandering_ball.py"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "PyG2 Event Handling",
+				curriculum: [
+					{
+						title: "Keyboard Events",
+						content:
+							"Use `on_key_down(key)` to move an actor when a key is pressed. For example, move an alien right on any key press or use `if key == keys.RIGHT:` to move only when the right arrow is pressed. For continuous movement, in `update()` check `if keyboard.right:` to move right. Use `alien.angle = 180` when the **W** key is pressed to flip the alien upside-down, and reset orientation on **S**. Use `alien.angle += 5` when **A** is pressed to rotate left and `alien.angle -= 5` on **D** to rotate right:contentReference[oaicite:7]{index=7}."
+					},
+					{
+						title: "Mouse Events",
+						content:
+							"Implement `on_mouse_down(pos, button)` to respond to mouse clicks. Use `alien.image = 'alien_hurt'` when the alien is clicked and revert the image in `on_mouse_up()`. Check if a click is on the alien with `alien.collidepoint(pos)` and detect left clicks via `button == mouse.LEFT`. Use `sounds.eep.play()` to play a sound when clicked:contentReference[oaicite:8]{index=8}. Add `on_mouse_move(pos)` to make the alien follow the mouse by updating `alien.pos = pos`."
+					},
+					{
+						title: "PyG2 Project 1: Arrow Point",
+						content:
+							"Create an arrow actor that always points toward the mouse. Use `arrow.angle` to rotate the arrow so it faces the current mouse position. Update the angle either continuously in `update()` or in a mouse-move event.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg2_arrow_point.py"
+					},
+					{
+						title: "PyG2 Project 2: Apple Collector",
+						content:
+							"Create an apple actor that appears at random positions. When the apple is clicked, play a sound, increment a score variable and move the apple to a new random location. Display the score on the screen.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg2_apple_collector.py"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "PyG3 Object-Oriented Programming: Advanced Actors",
+				curriculum: [
+					{
+						title: "ZRect Class",
+						content:
+							"Explain that a **ZRect** is a rectangle with `x`, `y`, width and height. It can be used to draw shapes or detect overlaps. Create `WIDTH` and `HEIGHT` constants. Create a ZRect: `box = ZRect((100, 100), (50, 50))`. In `draw()`, draw it with `screen.draw.rect(box, (255, 0, 0))`. Experiment with different colors like blue, purple, orange and white by changing the RGB tuple:contentReference[oaicite:9]{index=9}."
+					},
+					{
+						title: "Colliderect and Contains",
+						content:
+							"Create two ZRects: `randomBox` (50×50) at a random location and `middleBox` (200×200) centered on the screen. In `draw()`, use `middleBox.colliderect(randomBox)` to check if they collide. If they collide, draw `randomBox` in blue (`(0,0,255)`); otherwise draw it in red (`(255,0,0)`). Encourage experimenting with collision detection for more shapes:contentReference[oaicite:10]{index=10}."
+					},
+					{
+						title: "Dynamic Attributes",
+						content:
+							"Discuss using actor-specific dynamic attributes (e.g., `xspeed`, `yspeed`, `lives`, `color`) instead of global variables when values are tied to a particular actor. Use global variables only for game-wide info like score, timer or `isGameOver`."
+					},
+					{
+						title: "PyG3 Project 2: Light Control",
+						content:
+							"Create two actors: a bulb in the middle of the screen and a battery in the top-left corner. Add an `on_mouse_move()` handler so that when the left mouse button is held down, the battery follows the mouse. In `update()`, check if the bulb and battery are touching; if they collide, change the bulb’s image to the 'on' state, otherwise use the 'off' image. In `draw()`, draw both actors:contentReference[oaicite:11]{index=11}.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg3_light_control.py"
+					},
+					{
+						title: "PyG3 Project 3: Beach Ball Chase",
+						content:
+							"Create a beach ball actor with random `x` and `y` positions and random `xspeed` and `yspeed` values. Let the player control an alien actor using arrow keys (move up, down, left, right). In `update()`, move the ball by its speeds and have it bounce off the walls. When the alien collides with the ball, move the ball to a new random position and increase a `score` variable. In `draw()`, draw the ball, the alien and display the score at the top left (e.g., `screen.draw.text(score, (10, 10))`). **Instructor Note**: Encourage breaking the program into helper functions: one to handle keyboard movement, one to move the ball and one to check collisions. Bonus: prevent the alien from moving offscreen:contentReference[oaicite:12]{index=12}.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg3_beach_ball_chase.py"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "PyG4 Managing Multiple Objects: Collectibles",
+				curriculum: [
+					{
+						title: "Lists of Actors",
+						content:
+							"Instead of defining many variables, create a list to store multiple actors. Define `WIDTH` and `HEIGHT`. Use a loop to create 10 alien actors, set each alien’s `xspeed = 5` and append it to a list with `aliens.append(a)`. In `draw()`, loop through `aliens` and call `alien.draw()` for each. In `update()`, loop through the list to move each alien by its `xspeed` and reverse direction when it hits the screen edges. Emphasize using dynamic attributes for per-object values and global variables for overall game state."
+					},
+					{
+						title: "PyG4 Project 1: Bouncy Ball Room",
+						content:
+							"Create multiple ball actors with random `x` and `y` positions and random `xspeed` and `yspeed`, storing them in a list. In `draw()`, loop through the list and draw each ball. In `update()`, move each ball and bounce it off the walls by checking `ball.top`, `ball.left`, `ball.right` and `ball.bottom`—reverse the appropriate speed when a wall is hit. **Nested loops**: to make balls bounce off each other, write a function `checkBallCollision(b1, b2)` that multiplies the `xspeed` and `yspeed` of both balls by −1 when they collide, and call it inside a double loop over the list:contentReference[oaicite:13]{index=13}.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg4_bouncy_ball_room.py"
+					},
+					{
+						title: "PyG4 Project 2: Falling Squares",
+						content:
+							"Show the final solution. Define a `resetSquares()` function that resets the positions of square actors to the top of the screen and randomizes their order of blue and red squares. Call this function when the blue square is clicked or when squares reach the bottom. Maintain a list of possible x-positions for squares to avoid overlapping; monitor when a row of squares reaches the bottom to trigger `resetSquares()`. Use a `speed` variable for how fast the squares fall and increase it each time the blue square is clicked.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg4_falling_squares.py"
+					},
+					{
+						title: "PyG4 Project 3: Jewel Catch",
+						content:
+							"Show the student the final solution. Set the background to white with `screen.fill((255, 255, 255))`. Create a list of 5 gem actors and 4 bomb actors. Set each gem and bomb at a random x-position and assign an `xspeed` between 1 and 3, ensuring they aren’t clumped together. Write `moveShip()` to move a rocket left and right with arrow keys, preventing it from leaving the screen. In `update()`, continuously move the gems and bombs downward. Write `checkGemCollision(gem)` to reset a gem to the top when it reaches the bottom or the rocket catches it, adding 5 points when caught. Write `checkBombCollision(bomb)` to reset a bomb to the top when it reaches the bottom or hits the rocket, subtracting 10 points if hit. Gems and bombs move left and right while falling; when they hit the screen sides, reverse their horizontal direction. Implement these checks inside `checkGemCollision()` and `checkBombCollision()`:contentReference[oaicite:14]{index=14}.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg4_jewel_catch.py"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "PyG5 Physics",
+				curriculum: [
+					{
+						title: "Gravity and Wind",
+						content:
+							"Introduce gravity as a force that pulls actors downward; we can add a gravity factor to actors to simulate this. Create a `beach_ball` actor with dynamic attributes `xspeed` and `yspeed`. In `draw()`, draw the ball. In `update()`, update `ball.x` and `ball.y` using `ball.x += ball.xspeed` and `ball.y += ball.yspeed`. Then add a global `GRAVITY` variable (e.g., `0.1`) and in `update()` increase `ball.yspeed` by `GRAVITY`. Test how the ball accelerates. Discuss adding wind by introducing a `WIND` variable that modifies `ball.xspeed`; explore what happens when `WIND` is zero or nonzero:contentReference[oaicite:15]{index=15}.",
+						projectLink:
+							"https://static.junilearning.com/pygame/pyg5_gravity"
+					},
+					{
+						title: "PyG5 Project 1: Keep Up",
+						content:
+							"Create a ball actor with `xspeed` and `yspeed`. Create global `GRAVITY` and `score` variables. In `draw()`, show the score and draw the ball. In `update()`, add `GRAVITY` to the ball’s y-speed, update the ball’s position using `xspeed` and `yspeed`, and make the ball bounce off the left and right walls. Implement `on_mouse_down(pos)` to check if the click collides with the ball; if so, set the y-speed of the ball to −3, set the x-speed to a random value between −15 and 15, and increment the score. Make the ball bounce off the right wall using a conditional like `if ball.right >= WIDTH: ball.right = WIDTH; ball.xspeed = -ball.xspeed` and similarly for the left wall. Bonus: add a small amount of wind and play a popping sound each time the ball is clicked:contentReference[oaicite:16]{index=16}.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg5_keep_up.py"
+					},
+					{
+						title: "Friction",
+						content:
+							"Create dynamic variables `xspeed` and `yspeed` for a ball, set `xspeed` to 10 and `yspeed` to 0. Create a global `FRICTION` variable (e.g., 0.95). In `update()`, multiply `ball.xspeed` and `ball.yspeed` by `FRICTION` to slowly decrease the speed. Run the program with different starting speeds and friction values; observe that higher friction slows the ball more quickly. Discuss the effect of friction values greater than 1 or less than 1:contentReference[oaicite:17]{index=17}."
+					},
+					{
+						title: "PyG5 Project 2: Golf",
+						content:
+							"Create actors for the golf ball, hole and flag. Assign dynamic attributes for the ball’s `xspeed` and `yspeed`. Make global variables for the `FRICTION` and the number of `strokes`. Position the hole and flag in the center of the screen and place the hole where the flag is. When the player clicks on the screen, set `xspeed` and `yspeed` of the ball to move it toward the click location. In `draw()`, set the background color to green (`screen.fill((50, 100, 50))`), display the number of strokes in the top-left corner and draw the hole, flag and ball. In `update()`, apply friction to reduce speeds, update the ball’s position based on `xspeed` and `yspeed`, and make it bounce off walls. When the ball reaches the hole, center it in the hole and stop movement. Record the number of strokes and display a congratulatory message when finished:contentReference[oaicite:18]{index=18}.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg5_golf.py"
+					},
+					{
+						title: "PyG5 Project 3: Multi-Ball Physics",
+						content:
+							"Create a list of 10 ball actors, each with a random location and random `xspeed` and `yspeed`. Create global `GRAVITY` and `FRICTION` variables. Define `draw()` to draw each ball. In `update()`, for each ball: add `GRAVITY` to its y-speed, multiply `xspeed` and `yspeed` by `FRICTION` to slow it down, update its position by adding the speeds, and if a ball goes offscreen reverse the corresponding speed and set its position back on screen. Add an `on_key_down()` event that randomizes the location and speeds of all balls when the space key is pressed. Add an `on_mouse_down(pos)` event that loops through the balls; if a ball is clicked (using `collidepoint()`), set its `xspeed` and `yspeed` to random values. **Bonus**: Add wind controlled by arrow keys: left arrow decreases the wind, right arrow increases the wind, and pressing spacebar resets wind to zero:contentReference[oaicite:19]{index=19}.",
+						solutionLink:
+							"https://static.junilearning.com/pygame/pyg5_multiball_physics.py"
+					}
+				],
+				supplementalProjects: []
+			}
+		]
+	},
+	{
+		name: "C++ Level 1",
+		modules: [
+			{
+				title: "CPPF1 Variables, Types, and Input/Output",
+				curriculum: [
+					{
+						title: "Creating and Running a C++ Script",
+						content:
+							'**Instructor Note**: Students new to C++ may be unfamiliar with its syntax and structure. Guide them through setting up an account on repl.it, choosing C++ 11, creating a file (e.g., Objects and Variables), and running code. Introduce a basic program: `std::cout << "Hello World!\\n";` and show how it prints to the console. Emphasize compiling/running via Repl.it’s Run button.'
+					},
+					{
+						title: "Primitive Types",
+						content:
+							"Discuss fundamental data types in C++: integers, floating-point numbers, booleans and characters. Show how to declare variables of each type and assign values. Explain arithmetic operations including modulus. Demonstrate printing values using `std::cout` and reading values with `std::cin`."
+					},
+					{
+						title: "String",
+						content:
+							"Explain the `std::string` class. Demonstrate declaring strings, concatenating them, indexing characters, using `string.length()` and adding characters. Show how to modify and print strings."
+					},
+					{
+						title: "Input and Output",
+						content:
+							"Introduce `iostream` and explain insertion (`<<`) and extraction (`>>`) operators. Demonstrate reading input from the user with `std::cin` and printing results with `std::cout`. Example: prompt the user for their name and greet them by printing “Nice to meet you, <name>”."
+					},
+					{
+						title: "Comments",
+						content:
+							"Teach single-line comments using `//` and multi-line comments using `/* … */`. Explain why comments are useful for documenting code."
+					},
+					{
+						title: "Compilation (Advanced Concept)",
+						content:
+							"Briefly explain what happens when a C++ program is compiled. Touch on namespaces (`std::`), the scope-resolution operator `::`, object files and linking."
+					},
+					{
+						title: "CPPF1 Project 1: Mad Libs",
+						content:
+							"Have the student play a Mad Libs game from the solution to understand the goal. Then have them build their own Mad Libs: create several string variables and prompt the user to enter words (nouns, verbs, adjectives, etc.) via `std::cin`. After gathering inputs, concatenate the strings into a story using `std::cout`. Encourage creativity. Finally, have the student record a video explaining the project and share it.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF1-Mad-Libs-Solution"
+					},
+					{
+						title: "CPPF1 Project 2: Chatbot",
+						content:
+							"Create a simple chatbot that interacts with the user. Ask for the user’s name and respond. Ask for a sentence, use `str.insert()` to insert “achoo” into the user’s sentence, and have the bot “sneeze.” Ask for a temperature in Fahrenheit and convert it to Celsius using floating-point arithmetic. Ask for an amount in dollars and convert it to another currency. Emphasize correct use of floats. When finished, have the student record a video explaining and share the project.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF1-Chatbot-Solution"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF2 Loops and Conditionals",
+				curriculum: [
+					{
+						title: "For Loops",
+						content:
+							"Introduce the structure of a `for` loop: initialization, condition and increment. Practice writing loops to print numbers from 11 to 20, print even numbers from 2 to 10, print numbers from 10 down to 1, ask the user for a word and print its letters one by one, print the word backward, sum the numbers from 1 to 100 and calculate the factorial of 10. Discuss the `++` and `--` operators and compound assignment."
+					},
+					{
+						title: "While Loops",
+						content:
+							"Explain `while` loops and how they repeat until a condition becomes false. Practice converting the for-loop exercises into while-loop versions. Emphasize careful loop termination to avoid infinite loops."
+					},
+					{
+						title: "CPPF2 Project 1: Loop Practice",
+						content:
+							"Ask the user for two numbers (a smaller and a larger). Print all the numbers between them. Then ask how many numbers the user wants to enter; read that many numbers and print their sum. Finally, compute and print the average (using a `double` for precision). Implement each part using both `for` and `while` loops. Finish by recording and sharing a video of the project."
+					},
+					{
+						title: "Conditionals and Logical Operators",
+						content:
+							"Introduce comparison operators (`==`, `!=`, `>`, `<`, `>=`, `<=`) and logical operators (`&&` for AND, `||` for OR). Show how to construct `if`, `else if` and `else` chains. Demonstrate simple decision-making based on user input."
+					},
+					{
+						title: "CPPF2 Project 2: Rock, Paper, Scissors",
+						content:
+							"Discuss how to implement Rock–Paper–Scissors using conditionals. Prompt both players for their choice, then use nested conditionals to determine the winner by comparing the choices. After coding, have the student record a video explaining and share the project.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF2-Rock-Paper-Scissors-Solution"
+					},
+					{
+						title: "CPPF2 Project 3: FizzBuzz",
+						content:
+							"Print the numbers 1 through 50, but for multiples of 3 print “Fizz,” for multiples of 5 print “Buzz,” and for multiples of both 3 and 5 print “FizzBuzz.” Emphasize using the modulo operator. Challenge: allow the user to input two numbers and print a customized FizzBuzz. Record a video and share.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF2-FizzBuzz-Solution"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF3 Functions",
+				curriculum: [
+					{
+						title: "Basic Function Structure in C++",
+						content:
+							"Explain that a function is a reusable block of code that takes inputs (parameters) and returns a value. Show the syntax: return type, function name and parameters. Demonstrate defining functions outside `main` and calling them from `main`. Explain prototypes and how return types determine what a function returns."
+					},
+					{
+						title: "CPPF3 Project 1: Function Practice",
+						content:
+							"Write several functions: (1) a function that takes two integers and returns their average (use `double` for precision); (2) a function that takes an integer and returns `true` if it’s even, `false` otherwise; (3) a function that takes three doubles and returns the smallest; (4) a function that takes an integer and returns its factorial; (5) a function that takes a base and exponent and returns the base raised to that power. Have the student test each function, record a video explaining, and share.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF3-Function-Practice-Solution"
+					},
+					{
+						title: "Random Numbers",
+						content:
+							"Introduce `rand()` from `<cstdlib>` to generate random numbers. Show how to seed the random number generator using `srand(time(NULL))` for varied results. Explain using modulo to restrict random numbers to a range (e.g., `rand() % (max - min) + min`)."
+					},
+					{
+						title: "CPPF3 Project 2: Probability Events and Random",
+						content:
+							"Write functions to simulate random events: (1) flip a coin and return “heads” or “tails”; (2) roll two dice and return the sum; (3) draw a card from a standard 52-card deck and return a string like “10 of Diamonds” or “King of Spades.” Discuss how to use random numbers to choose card values and suits. Record and share a video.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF3-Probability-Events-Solution"
+					},
+					{
+						title: "CPPF3 Project 3: Number Guesser",
+						content:
+							"Create a game where the program picks a random number within a range specified by the user. Ask the user for the range bounds and for the number of guesses allowed. Implement separate functions for asking the range, generating the number, prompting guesses and giving feedback (higher/lower). End the game when the user guesses correctly or runs out of guesses. Record and share a video.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF3-Number-Guesser-Solution"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF4 Classes and Objects",
+				curriculum: [
+					{
+						title: "Introduction to Classes and Objects",
+						content:
+							"Explain object-oriented programming and why classes are useful. Show how to define a class with private member variables and public member functions. Demonstrate creating objects, constructors and destructors."
+					},
+					{
+						title: "Public and Private Variables",
+						content:
+							"Discuss encapsulation and why member variables should be private. Show how to use getter and setter functions to access and modify private data."
+					},
+					{
+						title: "More about Classes (getters, setters, printing, etc.)",
+						content:
+							"Expand on class features: default constructors, copy constructors, overloaded constructors, and how to print class objects by writing a `print()` method."
+					},
+					{
+						title: "CPPF4 Project 1: Cat Class",
+						content:
+							"Create a `Cat` class with private attributes such as name, age and weight. Write appropriate constructors, getters and setters. Add a method `meow()` that prints a message. In `main`, instantiate several cats and call their methods. Record a video explaining and share.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF4-Cat-Class-Solution"
+					},
+					{
+						title: "CPPF4 Project 2: Bookcase",
+						content:
+							"Design a `Book` class with attributes like title, author and page count. Then design a `Bookcase` class that stores multiple books. Implement methods to add books, remove books and list all books. Encourage using arrays or vectors. Record and share a video.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF4-Bookcase-Solution"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF5 Pointers",
+				curriculum: [
+					{
+						title: "Memory and Pointers",
+						content:
+							"**Instructor Note**: The reference code includes material on pointers and references; a formal walkthrough is provided later. Use it to guide discussion. Pointers allow us to store memory addresses of variables. Every variable has a memory address, which we can obtain using the `&` operator. A pointer is declared by placing `*` after the type (e.g., `int* p1`), and we assign it the address of a variable using `&`. A pointer’s type must match the type of the variable it points to. Use `nullptr` to indicate that a pointer doesn’t point anywhere.",
+						projectLink:
+							"https://repl.it/@JuniLearning/CPPF5-Pointers-Reference"
+					},
+					{
+						title: "CPPF5 Project 1: Pointers Introduction",
+						content:
+							"Project questions walk through pointer fundamentals, including dereferencing, copying pointers, and handling `nullptr`. When your student finishes the project, have them create a Recording Studio video explaining what the project does and how they programmed it, then share it.",
+						projectLink:
+							"https://repl.it/@JuniLearning/CPPF5-Pointers-Starter?skipMigration=1",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF5-Pointers?skipMigration=1"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF6 References and Parameter Passing",
+				curriculum: [
+					{
+						title: "References",
+						content:
+							"Explain that a reference is an alias for another variable. Create a reference using `&` after the type (e.g., `int& ref1 = intVal1`). Modifying the reference changes the original variable. References are often used for passing parameters to functions."
+					},
+					{
+						title: "Parameter Passing",
+						content:
+							"Discuss three ways to pass parameters: by value, by reference and by const reference. • Pass by value copies the argument; modifications don’t affect the original. • Pass by reference allows the function to modify the original value. • Pass by const reference allows the function to read the value without modifying it. Show examples where spacing around `&` doesn’t matter (e.g., `int& ref` vs. `int &ref`)."
+					},
+					{
+						title: "CPPF6 Project 1: Parameter Passing Tracing",
+						content:
+							"Write comments predicting what will happen to parameters passed by value, reference and const reference, then run the program to test the predictions. Discuss why parameters passed by const reference cannot be changed inside the function. After finishing, have the student record a video explaining and share the project.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Tracing?skipMigration=1"
+					},
+					{
+						title: "CPPF6 Project 2: Defanging a Website Address",
+						content:
+							"Write a program that replaces periods in a URL with `[.]` to “defang” the address. Create one function that defangs by editing the string directly (pass the string by reference) and another function that returns a defanged copy (pass by value). Use `str.replace()` to substitute each period. At the end, record a video explaining the project and share it.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF6-Defanging?skipMigration=1"
+					},
+					{
+						title: "CPPF6 Project 3: Chaos Monkeys",
+						content:
+							"Write functions that insert random uppercase characters into a string. Create three functions that each take a string and (a) pass by value, (b) pass by reference, and (c) pass by const reference; each function should insert characters differently. Use the string method `.insert(int index, int count, char newChar)` to add characters at random positions. Note: be careful when iterating over a changing string—if you call `.length()` each time, the loop might not terminate. Challenge the student to explore other string-scrambling functions. After finishing, record and share a video.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF6-Chaos-Monkeys?skipMigration=1"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF7 Arrays",
+				curriculum: [
+					{
+						title: "Array Basics",
+						content:
+							"Explain that arrays hold multiple values of the same type. Declare an array by specifying its type, name and size, e.g., `int arr[10]`. Ask the student to create an array `nums` with 10 ints. Show how to initialise arrays with an initializer list: `int arr[] = {1, 2, 3}`. Access elements by index (0-based) and modify them. Explain how `sizeof(array) / sizeof(array[0])` gives the number of rows or columns. Demonstrate iterating over an array with a loop and using pointers to traverse arrays, but caution against undefined behaviour when accessing memory out of bounds."
+					},
+					{
+						title: "CPPF7 Project 1: Array Practice",
+						content:
+							"1. Create and print an array containing the first 10 perfect squares. 2. Write a function that takes an array of ints and returns `true` if the first and last elements are the same. 3. Write a function that sums all elements in an array of ints. 4. Write a function that takes an array of strings and returns the total number of letters in all strings. Explain how arrays are passed to functions: either as `type arr[]` or as a pointer. At the end, have the student record and share a video.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF7-Array-Practice?skipMigration=1"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF8 Two-Dimensional Arrays",
+				curriculum: [
+					{
+						title: "Two-Dimensional Arrays",
+						content:
+							"Explain how to create a 2D array in C++ (an array of arrays). For example, `int arr[10][10];` allocates 10×10 integers. Show initializer lists for 2D arrays, e.g., `int arr[3][3] = { {1,2,3}, {4,5,6}, {7,8,9} };`. Teach how to compute the number of rows using `sizeof(array) / sizeof(array[0])` and the number of columns using `sizeof(array[0]) / sizeof(array[0][0])`. Demonstrate accessing `arr[i][j]` and printing all elements with nested loops. Discuss passing 2D arrays to functions and returning them using pointers (`int**`) or arrays."
+					},
+					{
+						title: "Using Two-Dimensional Arrays in Functions",
+						content:
+							"Explain that when passing a 2D array to a function, the array parameter should be written as `(int *arr, int row, int col)` so that the function can access the memory. Within functions, 2D arrays are continuous blocks of memory; to access element `(i, j)` in an `m-by-n` array, use `*((arr + i*n) + j)`. Show how to return a 2D array from a function using `int**` for a 2D array and `int*` for a 1D array. Demonstrate creating a basic array-generating function that returns an array with numbers 0 through `n`."
+					},
+					{
+						title: "CPPF8 Project 1: Two-Dimensional Array Practice",
+						content:
+							"Solve the following problems using 2D arrays: • Write a method that takes in a 2D array of integers and returns the sum of all of the integers in the array. • Write a method that takes in a 2D array of integers and returns the minimum of all of the integers in the array. • Write a method that takes in an integer `n` and returns a 2D array of the `n × n` multiplication table. Then, print the array in grid format. • Write a method that takes in a 2D array of integers and returns a one-dimensional array of the averages of the integers in each row (averages returned as floats). When your student finishes, have them make a Recording Studio video explaining the project and share it.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF8-2D-Array-Practice?skipMigration=1"
+					},
+					{
+						title: "CPPF8 Project 2: Bank Balances",
+						content:
+							"Show the student what you are trying to create and ask what components might be needed. How can we use a 2D array? How might we store a customer and their recurring transactions to show their total balance? Work with the student on the `print()` function to print out a grid. How can we use nested `for` loops to do this? Once the `print()` method is complete, have the student implement the necessary data structure to allow user interaction. When your student finishes their project, have them make a Recording Studio video where they explain what the project does and how they programmed it. Finally, have them share their project!",
+						projectLink:
+							"https://repl.it/@JuniLearning/CPPF8-Two-Dimensional-Arrays-Reference",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF8-Bank-Transactions?skipMigration=1"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF9 Dynamic Arrays and Memory",
+				curriculum: [
+					{
+						title: "Dynamic Variables",
+						content:
+							"Pointers let us point to values that don’t have variable names. Variables we define manually are called static variables. Variables created during runtime via pointers are called dynamic (or anonymous) variables. Use the `new` operator to allocate memory and create dynamic variables (e.g., `int* p1 = new int;`). Assign values to them using `*p1 = 5` or `std::cin >> *p1`. Always call `delete p1` when done to avoid memory leaks. After deleting, a pointer becomes invalid (a dangling pointer) and dereferencing it leads to undefined behaviour. Use `nullptr` to indicate that a pointer doesn’t point to anything.",
+						projectLink:
+							"https://repl.it/@JuniLearning/CPPF9-Dynamic-Variables-Reference"
+					},
+					{
+						title: "CPPF9 Project 1: Assembly Line",
+						content:
+							"1. Create a basic Object class with variables for its name and weight (in pounds), a constructor using the BMI, and a `print()` function that prints the name, the weight of the object in pounds, and the weight of the object in kilograms (1 kg = 2.205 lbs). 2. Repeatedly ask the user for the necessary information to create a new Object and store that Object using a dynamic variable. 3. Print out the newly created Object and then free up the memory that was allocated for it in preparation for processing the next Object. 4. Bonus: Ask the user how many Objects they will be processing and then store that many Objects in an array. Once the information is entered, loop through the array and print out the information for each of the Objects. 5. When the student finishes the project, have them make a Recording Studio video explaining what the project does and how they programmed it. Finally, have them share their project.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF9-Assembly-Line?skipMigration=1"
+					},
+					{
+						title: "Introduction to Dynamic Arrays",
+						content:
+							"Static arrays are limited because their size is fixed at compile time. If we need more data than the array can hold, we must create a new array of a larger size and copy the data over. If we keep appending data past the array’s end without checking capacity, we could overwrite memory we don’t own. To create dynamic arrays: (1) declare a pointer to the array; (2) create the array with `new`; (3) use the pointer as the array; (4) if we run out of space, allocate a new (larger) array, copy over the elements and delete the old one; (5) remember to free memory with `delete` when done."
+					},
+					{
+						title: "Dynamic Arrays and Memory",
+						content:
+							"A dynamic array automatically resizes itself when it runs out of room. We’ll write our own `DynamicArray` class that creates a new array with more space when the old one runs out, copies old values to the new array and deletes the old one. Failing to call `delete` can cause memory leaks. When a class allocates memory, write a destructor (prefixed with `~`) that frees that memory. Destructors are called automatically when the object goes out of scope."
+					},
+					{
+						title: "CPPF9 Project 2: Dynamic Array Implementation",
+						content:
+							"Implement your own `DynamicArray` class. Include private members: `mysize` (number of elements), `maxSize` (capacity) and `int* myVals` (pointer to the array). Optionally define a constant `DEFAULT_SIZE` for initial capacity. Write: • A default constructor that sets `mysize` to 0, `maxSize` to a default size and `myVals` to a new array of that size. • A destructor that deletes `myVals` and sets `mysize` to 0. • `addVal(int val)`: check if there’s enough space; if not, create a new array with double the previous capacity, copy values over, swap pointers, delete the old array and then add the new value. Increment `mysize`. • `printVals()`: print out the values stored, iterating over `myVals` based on `mysize`. • `get(int index)`: return the value at a specific index. When finished, have the student record a video explaining and share the project.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF9-Dynamic-Array-Implementation?skipMigration=1"
+					},
+					{
+						title: "Introduction to Structs",
+						content:
+							"Explain that a struct is like a class but defaults to public members. Structs are useful for grouping small, related data items (e.g., a `node` struct with `int data` and `node* next`). They appear often in code because they’re concise. In the next project we’ll create a Grocery List using structs to combine item names and prices."
+					},
+					{
+						title: "CPPF9 Project 3: Grocery List",
+						content:
+							"We need to change the DynamicArray implementation to store Groceries instead of ints. Because groceries contain just a name and a price, create a simple struct in the DynamicArray.h file. Include a basic constructor and an all-members constructor to initialize its private variables. Modify the dynamic array to store this struct instead of int; update any functions that depend on the array’s data type. Desired functionality: printing the list and adding an item. To remove an item at an index, shift elements by copying into a new array and skipping the removed item (ensure the Grocery item being added is newly constructed to avoid pass-by-value errors). Create a basic menu that lets the user add, remove, print and quit. When finished, record a video explaining what the project does and how it was programmed, then share it.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF9-Grocery-List?skipMigration=1"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF10 Master Project: Matrix Fun",
+				curriculum: [
+					{
+						title: "CPPF10 Master Project: Matrix Fun",
+						content:
+							"We can call grids of numbers matrices. There’s a lot of operations we can do with matrices such as addition. It’s important to remember that two matrices need to have the same dimension for us to do matrix addition. Show the student what we’re trying to create and have them map out the process they would take to make this matrix addition possible. Create variables for the number of rows, columns, and for each of the matrices. Ask the user for the dimensions of the matrix and for the elements of the matrix. Add the matrices and print out the result in a grid layout. When your student finishes their project, have them make a Recording Studio Video where they explain what the project does and how they programmed it. Finally, have them share their project!",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF10-Matrix-Addition?skipMigration=1"
+					}
+				],
+				supplementalProjects: []
+			},
+			{
+				title: "CPPF11 Master Project: Profile Posts",
+				curriculum: [
+					{
+						title: "CPPF11 Master Project: Profile Posts",
+						content:
+							"Create a Profile class that stores posts that have a caption and a number of hearts on them. The user can then add posts to their profile, and print out the posts’ captions and the total number of hearts on all of the posts. The Profile class needs to store a changing amount of Post structs: we need to be able to add more Posts as necessary. Variables: numPosts, maxSize, myPosts. Functions include addPost(newPost), printPost(index), printPosts(), addHearts(index, numHearts) and a helper to validate indexes. Bonus extensions include adding more fields, duplicating posts, and summing hearts. When your student finishes their project, have them make a Recording Studio Video where they explain what the project does and how they programmed it. Finally, have them share their project!",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF11-Profile-Posts?skipMigration=1"
+					},
+					{
+						title: "Course recap",
+						content:
+							"We've learned a lot over these past few months! Can you recap what this course covered? Discuss with the student the next Juni course they will be starting."
+					}
+				],
+				supplementalProjects: []
+			}
+		]
+	}
 ];
 
 const normalizedCourses: CourseDefinition[] = rawCourses.map(course => {
@@ -1856,21 +2020,17 @@ const normalizedCourses: CourseDefinition[] = rawCourses.map(course => {
 		modules: course.modules.map(module => {
 			const moduleId = slugify(`${courseId}-${module.title}`);
 
-                        const mapItems = (
-                                items: RawCourseModuleItem[],
-                                prefix: string
-                        ): CourseModuleItem[] =>
-                                items.map(item => {
-                                        const normalizedItem = extractLinks(item);
-
-                                        return {
-                                                id: slugify(`${moduleId}-${prefix}-${item.title}`),
-                                                title: item.title,
-                                                content: normalizedItem.content,
-                                                projectLink: normalizedItem.projectLink,
-                                                solutionLink: normalizedItem.solutionLink
-                                        };
-                                });
+			const mapItems = (
+				items: RawCourseModuleItem[],
+				prefix: string
+			): CourseModuleItem[] =>
+				items.map(item => ({
+					id: slugify(`${moduleId}-${prefix}-${item.title}`),
+					title: item.title,
+					content: normalizeContent(item.content),
+					projectLink: item.projectLink,
+					solutionLink: item.solutionLink
+				}));
 
 			return {
 				id: moduleId,

@@ -1,9 +1,15 @@
 <script lang="ts" setup>
-import { storeToRefs } from "pinia";
 import type { CourseModule } from "@/stores/courses";
+import MarkdownIt from "markdown-it";
+import { storeToRefs } from "pinia";
 import { computed, ref, watch, watchEffect } from "vue";
-import { useCoursesStore } from "@/stores/courses";
 import { useAppStore } from "@/stores/app";
+import { useCoursesStore } from "@/stores/courses";
+
+const markdown = new MarkdownIt({
+	breaks: true,
+	linkify: true
+});
 
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
@@ -19,12 +25,16 @@ const selectedCourseId = ref("");
 const activeModuleId = ref<string | null>(null);
 const openItems = ref<Record<string, string | null>>({});
 
-watchEffect(() => {
-        const availableCourses = courseList.value;
+function renderMarkdown(content: string) {
+	return markdown.render(content);
+}
 
-        if (!selectedCourseId.value && availableCourses.length > 0) {
-                selectCourse(availableCourses[0].id);
-        }
+watchEffect(() => {
+	const availableCourses = courseList.value;
+
+	if (!selectedCourseId.value && availableCourses.length > 0) {
+		selectCourse(availableCourses[0].id);
+	}
 });
 
 watch(selectedCourseId, () => {
@@ -33,9 +43,9 @@ watch(selectedCourseId, () => {
 });
 
 const selectedCourse = computed(
-        () =>
-                courseList.value.find(course => course.id === selectedCourseId.value) ??
-                null
+	() =>
+		courseList.value.find(course => course.id === selectedCourseId.value) ??
+		null
 );
 
 function selectCourse(id: string) {
@@ -83,11 +93,11 @@ function hasSupplemental(module: CourseModule) {
 					v-model="selectedCourseId"
 					class="course-select"
 				>
-                                        <option
-                                                v-for="course in courseList"
-                                                :key="course.id"
-                                                :value="course.id"
-                                        >
+					<option
+						v-for="course in courseList"
+						:key="course.id"
+						:value="course.id"
+					>
 						{{ course.name }}
 					</option>
 				</select>
@@ -172,50 +182,70 @@ function hasSupplemental(module: CourseModule) {
 											"
 											class="item-content"
 										>
-                                                                                <div class="item-content-body">
-                                                                                        <pre v-if="item.content">{{ item.content }}</pre>
-                                                                                        <div
-                                                                                                v-if="
-                                                                                                        item.projectLink ||
-                                                                                                        (canViewSolutions &&
-                                                                                                                item.solutionLink)
-                                                                                                "
-                                                                                                class="item-links"
-                                                                                        >
-                                                                                                <p
-                                                                                                        v-if="item.projectLink"
-                                                                                                        class="item-link"
-                                                                                                >
-                                                                                                        <strong>Project:</strong>
-                                                                                                        <a
-                                                                                                                :href="item.projectLink"
-                                                                                                                rel="noreferrer"
-                                                                                                                target="_blank"
-                                                                                                        >
-                                                                                                                {{ item.projectLink }}
-                                                                                                        </a>
-                                                                                                </p>
-                                                                                                <p
-                                                                                                        v-if="
-                                                                                                                canViewSolutions &&
-                                                                                                                item.solutionLink
-                                                                                                        "
-                                                                                                        class="item-link"
-                                                                                                >
-                                                                                                        <strong>Solution:</strong>
-                                                                                                        <a
-                                                                                                                :href="item.solutionLink"
-                                                                                                                rel="noreferrer"
-                                                                                                                target="_blank"
-                                                                                                        >
-                                                                                                                {{ item.solutionLink }}
-                                                                                                        </a>
-                                                                                                </p>
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
-                                                                </transition>
-                                                        </li>
+											<div class="item-content-body">
+												<div
+													v-if="item.content"
+													class="item-content-markdown"
+													v-html="
+														renderMarkdown(
+															item.content
+														)
+													"
+												/>
+												<div
+													v-if="
+														item.projectLink ||
+														(canViewSolutions &&
+															item.solutionLink)
+													"
+													class="item-links"
+												>
+													<p
+														v-if="item.projectLink"
+														class="item-link"
+													>
+														<strong
+															>Project:</strong
+														>
+														<a
+															:href="
+																item.projectLink
+															"
+															rel="noreferrer"
+															target="_blank"
+														>
+															{{
+																item.projectLink
+															}}
+														</a>
+													</p>
+													<p
+														v-if="
+															canViewSolutions &&
+															item.solutionLink
+														"
+														class="item-link"
+													>
+														<strong
+															>Solution:</strong
+														>
+														<a
+															:href="
+																item.solutionLink
+															"
+															rel="noreferrer"
+															target="_blank"
+														>
+															{{
+																item.solutionLink
+															}}
+														</a>
+													</p>
+												</div>
+											</div>
+										</div>
+									</transition>
+								</li>
 							</ol>
 						</div>
 
@@ -275,54 +305,72 @@ function hasSupplemental(module: CourseModule) {
 													)
 												)
 											"
-                                                                                        class="item-content"
-                                                                                >
-                                                                                        <div class="item-content-body">
-                                                                                                <pre v-if="item.content">{{
-                                                                                                        item.content
-                                                                                                }}</pre>
-                                                                                                <div
-                                                                                                        v-if="
-                                                                                                                item.projectLink ||
-                                                                                                                (canViewSolutions &&
-                                                                                                                        item.solutionLink)
-                                                                                                        "
-                                                                                                        class="item-links"
-                                                                                                >
-                                                                                                        <p
-                                                                                                                v-if="item.projectLink"
-                                                                                                                class="item-link"
-                                                                                                        >
-                                                                                                                <strong>Project:</strong>
-                                                                                                                <a
-                                                                                                                        :href="item.projectLink"
-                                                                                                                        rel="noreferrer"
-                                                                                                                        target="_blank"
-                                                                                                                >
-                                                                                                                        {{ item.projectLink }}
-                                                                                                                </a>
-                                                                                                        </p>
-                                                                                                        <p
-                                                                                                                v-if="
-                                                                                                                        canViewSolutions &&
-                                                                                                                        item.solutionLink
-                                                                                                                "
-                                                                                                                class="item-link"
-                                                                                                        >
-                                                                                                                <strong>Solution:</strong>
-                                                                                                                <a
-                                                                                                                        :href="item.solutionLink"
-                                                                                                                        rel="noreferrer"
-                                                                                                                        target="_blank"
-                                                                                                                >
-                                                                                                                        {{ item.solutionLink }}
-                                                                                                                </a>
-                                                                                                        </p>
-                                                                                                </div>
-                                                                                        </div>
-                                                                                </div>
-                                                                        </transition>
-                                                                </li>
+											class="item-content"
+										>
+											<div class="item-content-body">
+												<div
+													v-if="item.content"
+													class="item-content-markdown"
+													v-html="
+														renderMarkdown(
+															item.content
+														)
+													"
+												/>
+												<div
+													v-if="
+														item.projectLink ||
+														(canViewSolutions &&
+															item.solutionLink)
+													"
+													class="item-links"
+												>
+													<p
+														v-if="item.projectLink"
+														class="item-link"
+													>
+														<strong
+															>Project:</strong
+														>
+														<a
+															:href="
+																item.projectLink
+															"
+															rel="noreferrer"
+															target="_blank"
+														>
+															{{
+																item.projectLink
+															}}
+														</a>
+													</p>
+													<p
+														v-if="
+															canViewSolutions &&
+															item.solutionLink
+														"
+														class="item-link"
+													>
+														<strong
+															>Solution:</strong
+														>
+														<a
+															:href="
+																item.solutionLink
+															"
+															rel="noreferrer"
+															target="_blank"
+														>
+															{{
+																item.solutionLink
+															}}
+														</a>
+													</p>
+												</div>
+											</div>
+										</div>
+									</transition>
+								</li>
 							</ol>
 						</div>
 					</div>
@@ -497,50 +545,71 @@ function hasSupplemental(module: CourseModule) {
 }
 
 .item-content {
-        padding: 0 1.1rem 1rem;
-        border-top: 1px solid rgba(15, 23, 42, 0.06);
+	padding: 0 1.1rem 1rem;
+	border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .item-content-body {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
 }
 
-.item-content pre {
-        margin: 0;
-        white-space: pre-wrap;
-        font-family:
-                "Inter",
+.item-content-markdown {
+	font-family:
+		"Inter",
 		"SF Pro Text",
 		-apple-system,
 		BlinkMacSystemFont,
 		"Segoe UI",
 		sans-serif;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: #1e293b;
+	font-size: 0.9rem;
+	line-height: 1.6;
+	color: #1e293b;
+}
+
+.item-content-markdown :is(p, ul, ol) {
+	margin: 0 0 0.75rem;
+}
+
+.item-content-markdown > :last-child {
+	margin-bottom: 0;
+}
+
+.item-content-markdown ul,
+.item-content-markdown ol {
+	padding-left: 1.2rem;
+}
+
+.item-content-markdown code {
+	font-family:
+		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+		monospace;
+	font-size: 0.85rem;
+	background: rgba(15, 23, 42, 0.08);
+	padding: 0.1rem 0.35rem;
+	border-radius: 0.35rem;
 }
 
 .item-links {
-        display: flex;
-        flex-direction: column;
-        gap: 0.35rem;
-        font-size: 0.9rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	font-size: 0.9rem;
 }
 
 .item-link {
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-        color: #1e293b;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	color: #1e293b;
 }
 
 .item-link a {
-        color: #2563eb;
-        text-decoration: underline;
-        word-break: break-all;
+	color: #2563eb;
+	text-decoration: underline;
+	word-break: break-all;
 }
 
 .empty-copy {
