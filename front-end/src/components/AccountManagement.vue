@@ -43,8 +43,7 @@ async function loginTutor() {
 	}
 }
 
-// form state
-const signupType = ref<"tutor" | "user">("tutor");
+// form state (new signups default to users)
 const name = ref("");
 const age = ref("");
 const state = ref("");
@@ -75,34 +74,22 @@ function resetData() {
 
 // on submit, dispatch to the right endpoint
 async function addSignup() {
+	error.value = "";
 	if (!passwordMatch.value) return;
 
 	try {
-		// fire the right endpoint with credentials turned on
-		const res =
-			signupType.value === "tutor"
-				? await api.post(
-						"/tutors",
-						{
-							name: name.value,
-							age: age.value,
-							state: state.value,
-							email: email.value,
-							password: password.value
-						},
-						{ withCredentials: true }
-					)
-				: await api.post(
-						"/users",
-						{
-							name: name.value,
-							age: age.value,
-							state: state.value,
-							email: email.value,
-							password: password.value
-						},
-						{ withCredentials: true }
-					);
+		// every self-serve signup creates a user account
+		const res = await api.post(
+			"/users",
+			{
+				name: name.value,
+				age: age.value,
+				state: state.value,
+				email: email.value,
+				password: password.value
+			},
+			{ withCredentials: true }
+		);
 
 		// immediately stash the newly-created user/tutor into Pinia
 		if (res.data.currentTutor) {
@@ -115,9 +102,7 @@ async function addSignup() {
 		changeSignupView(false);
 	} catch (err: unknown) {
 		const e = err as AxiosError<{ message?: string }>;
-		errorLogin.value = `Error: ${
-			e.response?.data?.message ?? e.message ?? "Unknown error"
-		}`;
+		error.value = `Error: ${e.response?.data?.message ?? e.message ?? "Unknown error"}`;
 	}
 }
 </script>
@@ -217,27 +202,6 @@ async function addSignup() {
 					<p>Please fill in this form to create a new account.</p>
 					<hr />
 
-					<!-- ─── User Type Selector ────────────────────────────────────────── -->
-					<div class="mb-3">
-						<label>
-							<input
-								v-model="signupType"
-								type="radio"
-								value="tutor"
-							/>
-							Tutor
-						</label>
-						&ensp;
-						<label>
-							<input
-								v-model="signupType"
-								type="radio"
-								value="user"
-							/>
-							User
-						</label>
-					</div>
-
 					<!-- ─── Common Fields ─────────────────────────────────────────────── -->
 					<label for="name"><b>Name</b></label>
 					<input
@@ -294,11 +258,7 @@ async function addSignup() {
 					/>
 
 					<button class="signup button" type="submit">
-						Sign Up as a
-						{{
-							signupType.charAt(0).toUpperCase() +
-							signupType.slice(1)
-						}}
+						Create Account
 					</button>
 
 					<p v-if="!passwordMatch" class="passwordMatchError">

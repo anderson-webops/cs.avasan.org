@@ -8,8 +8,8 @@ import {
 	getLoggedInUser,
 	updateUser
 } from "../controllers/users/userController.js";
-import { assignTutorToUser, deleteUsersUnderTutor, getUsersOfTutor } from "../controllers/users/userExtraController.js";
-import { validTutor, validUser } from "../middleware/auth.js";
+import { getUsersOfTutor, promoteUserToTutor, setUserTutors } from "../controllers/users/userExtraController.js";
+import { validAdmin, validTutor, validUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -28,17 +28,17 @@ router.put("/user/:userID", validUser, updateUser);
 // Update user info by the tutor
 router.put("/tutor/:userID", validTutor, updateUser);
 
-// Assign a tutor to a user
-router.put("/tutor/:userID/:tutorID", assignTutorToUser);
+// Update tutor assignments for a user (admin only)
+router.put("/:userID/tutors", validAdmin, setUserTutors);
+
+// Promote a user to tutor (admin only)
+router.post("/:userID/promote", validAdmin, promoteUserToTutor);
 
 // Delete the user by the user themselves
 router.delete("/user/:userID", validUser, deleteUser);
 
 // Delete the user by the tutor
 router.delete("/tutor/:userID", validTutor, deleteUser);
-
-// Delete users under a tutor
-router.delete("/under/:tutorID", deleteUsersUnderTutor);
 
 // Get logged in user
 router.get("/loggedin", validUser, getLoggedInUser);
