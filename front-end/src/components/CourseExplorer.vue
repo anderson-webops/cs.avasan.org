@@ -1,19 +1,24 @@
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
 import type { CourseModule } from "@/stores/courses";
 import { computed, ref, watch, watchEffect } from "vue";
 import { useCoursesStore } from "@/stores/courses";
 
 const coursesStore = useCoursesStore();
-const courses = coursesStore.courses;
+const { courses } = storeToRefs(coursesStore);
+
+const courseList = computed(() => courses.value ?? []);
 
 const selectedCourseId = ref("");
 const activeModuleId = ref<string | null>(null);
 const openItems = ref<Record<string, string | null>>({});
 
 watchEffect(() => {
-	if (!selectedCourseId.value && courses.value.length > 0) {
-		selectCourse(courses.value[0].id);
-	}
+        const availableCourses = courseList.value;
+
+        if (!selectedCourseId.value && availableCourses.length > 0) {
+                selectCourse(availableCourses[0].id);
+        }
 });
 
 watch(selectedCourseId, () => {
@@ -22,9 +27,9 @@ watch(selectedCourseId, () => {
 });
 
 const selectedCourse = computed(
-	() =>
-		courses.value.find(course => course.id === selectedCourseId.value) ??
-		null
+        () =>
+                courseList.value.find(course => course.id === selectedCourseId.value) ??
+                null
 );
 
 function selectCourse(id: string) {
@@ -72,11 +77,11 @@ function hasSupplemental(module: CourseModule) {
 					v-model="selectedCourseId"
 					class="course-select"
 				>
-					<option
-						v-for="course in courses"
-						:key="course.id"
-						:value="course.id"
-					>
+                                        <option
+                                                v-for="course in courseList"
+                                                :key="course.id"
+                                                :value="course.id"
+                                        >
 						{{ course.name }}
 					</option>
 				</select>
