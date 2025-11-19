@@ -86,6 +86,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/zelle': RouteRecordInfo<
+      '/zelle',
+      '/zelle',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/zoom': RouteRecordInfo<
       '/zoom',
       '/zoom',
@@ -157,6 +164,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/signup.vue': {
       routes:
         | '/signup'
+      views:
+        | never
+    }
+    'src/pages/zelle.vue': {
+      routes:
+        | '/zelle'
       views:
         | never
     }

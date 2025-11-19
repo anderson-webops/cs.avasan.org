@@ -32,9 +32,9 @@ const content = useContentStore();
 		<section aria-labelledby="payment-title" class="payment">
 			<h2 id="payment-title">How to pay</h2>
 			<p>
-				Venmo is the easiest way to submit payment before or after
-				class. Tap the button below to open my Venmo profile in a new
-				tab.
+				Venmo and Zelle are available to submit payment before or after
+				class. Tap the buttons below to see my Zelle contact or to open
+				my Venmo profile in a new tab.
 			</p>
 			<a
 				class="cta"
@@ -44,6 +44,7 @@ const content = useContentStore();
 			>
 				Open Venmo profile
 			</a>
+			<RouterLink class="cta" to="/zelle">Pay with Zelle</RouterLink>
 			<div class="note">
 				<p>
 					Prefer a different method? I can also accept CashApp, Apple
@@ -203,7 +204,7 @@ const content = useContentStore();
 		background-color 0.2s ease,
 		transform 0.2s ease;
 	border: 2px solid transparent;
-	width: fit-content;
+	width: 205px;
 	margin: 0 auto;
 }
 

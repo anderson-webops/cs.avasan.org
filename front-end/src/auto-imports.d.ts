@@ -149,6 +149,7 @@ declare global {
   const useContentStore: typeof import('./stores/content').useContentStore
   const useCountdown: typeof import('@vueuse/core').useCountdown
   const useCounter: typeof import('@vueuse/core').useCounter
+  const useCoursesStore: typeof import('./stores/courses').useCoursesStore
   const useCssModule: typeof import('vue').useCssModule
   const useCssVar: typeof import('@vueuse/core').useCssVar
   const useCssVars: typeof import('vue').useCssVars
@@ -326,6 +327,9 @@ declare global {
   export type { SubjectGroup, Highlight, FAQ } from './stores/content'
   import('./stores/content')
   // @ts-ignore
+  export type { CourseModuleItem, CourseModule, CourseDefinition } from './stores/courses'
+  import('./stores/courses')
+  // @ts-ignore
   export type { Quote } from './stores/quote'
   import('./stores/quote')
 }
@@ -478,6 +482,7 @@ declare module 'vue' {
     readonly useContentStore: UnwrapRef<typeof import('./stores/content')['useContentStore']>
     readonly useCountdown: UnwrapRef<typeof import('@vueuse/core')['useCountdown']>
     readonly useCounter: UnwrapRef<typeof import('@vueuse/core')['useCounter']>
+    readonly useCoursesStore: UnwrapRef<typeof import('./stores/courses')['useCoursesStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVar: UnwrapRef<typeof import('@vueuse/core')['useCssVar']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
