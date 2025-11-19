@@ -15,11 +15,9 @@ const { subjectGroups, highlights } = storeToRefs(content);
 				<p class="eyebrow">Classes with Jacob</p>
 				<h1>Build confidence in coding, STEM, and Spanish.</h1>
 				<p>
-					I specialize in teaching programming, engineering, and
-					language topics to learners of all ages—from grade school
-					through adulthood. Every session focuses on their individual
-					goals—whether that’s discovering new skills or strengthening
-					existing ones.
+					I specialize in teaching programming, engineering, and language topics to learners of all ages—from
+					grade school through adulthood. Every session focuses on their individual goals—whether that’s
+					discovering new skills or strengthening existing ones.
 				</p>
 			</div>
 			<img
@@ -30,12 +28,8 @@ const { subjectGroups, highlights } = storeToRefs(content);
 		</section>
 
 		<section aria-labelledby="cta-title" class="cta-group">
-			<RouterLink class="cta primary" to="/signup"
-				>Book a class</RouterLink
-			>
-			<RouterLink class="cta secondary" to="/payment"
-				>See tuition details</RouterLink
-			>
+			<RouterLink class="cta primary" to="/signup">Book a class</RouterLink>
+			<RouterLink class="cta secondary" to="/payment">See tuition details</RouterLink>
 		</section>
 
 		<section aria-labelledby="subjects-title" class="subjects">
@@ -45,11 +39,7 @@ const { subjectGroups, highlights } = storeToRefs(content);
 				projects that match your goals.
 			</p> -->
 			<div class="subject-grid">
-				<article
-					v-for="group in subjectGroups"
-					:key="group.title"
-					class="subject-card"
-				>
+				<article v-for="group in subjectGroups" :key="group.title" class="subject-card">
 					<h3>{{ group.title }}</h3>
 					<ul>
 						<li v-for="subject in group.subjects" :key="subject">
@@ -63,11 +53,7 @@ const { subjectGroups, highlights } = storeToRefs(content);
 		<section aria-labelledby="highlights-title" class="highlights">
 			<h2 id="highlights-title">What I offer</h2>
 			<div class="highlight-grid">
-				<article
-					v-for="highlight in highlights"
-					:key="highlight.title"
-					class="highlight-card"
-				>
+				<article v-for="highlight in highlights" :key="highlight.title" class="highlight-card">
 					<h3>{{ highlight.title }}</h3>
 					<p>{{ highlight.copy }}</p>
 				</article>
@@ -78,19 +64,12 @@ const { subjectGroups, highlights } = storeToRefs(content);
 			<div class="next-steps-card">
 				<h2 id="next-steps-title">Ready to get started?</h2>
 				<p>
-					Pick a time on my Calendly, tell me a bit about the learner,
-					and I’ll confirm within one business day. Returning students
-					can use the same link to book ongoing sessions.
+					Pick a time on my Calendly, tell me a bit about the learner, and I’ll confirm within one business
+					day. Returning students can use the same link to book ongoing sessions.
 				</p>
-				<RouterLink class="cta primary" to="/signup"
-					>Schedule on Calendly</RouterLink
-				>
+				<RouterLink class="cta primary" to="/signup">Schedule on Calendly</RouterLink>
 				<!--				href="mailto:jacob@jacobdanderson.net" -->
-				<a
-					class="cta secondary"
-					href="mailto:bascule-skaters0n@icloud.com"
-					>Email me a question</a
-				>
+				<a class="cta secondary" href="mailto:bascule-skaters0n@icloud.com">Email me a question</a>
 			</div>
 		</section>
 	</section>

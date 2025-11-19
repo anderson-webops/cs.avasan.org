@@ -34,8 +34,7 @@ export const useQuoteStore = defineStore("quote", () => {
 		if (import.meta.env.SSR) return;
 
 		const now = Date.now();
-		const withinTtl =
-			lastFetchedAt.value !== null && now - lastFetchedAt.value < TTL_MS;
+		const withinTtl = lastFetchedAt.value !== null && now - lastFetchedAt.value < TTL_MS;
 
 		if (!opts.force && withinTtl && hasQuote.value) return;
 
@@ -53,10 +52,7 @@ export const useQuoteStore = defineStore("quote", () => {
 				// Non-fatal: you might be unauthenticated for quotes; ignore
 			}
 
-			const tagParam =
-				opts.tags && opts.tags.length
-					? `tags=${encodeURIComponent(opts.tags.join(","))}`
-					: "";
+			const tagParam = opts.tags && opts.tags.length ? `tags=${encodeURIComponent(opts.tags.join(","))}` : "";
 			const limitParam = `limit=${opts.limit ?? 100}`;
 			const query = [tagParam, limitParam].filter(Boolean).join("&");
 
@@ -109,7 +105,5 @@ export const useQuoteStore = defineStore("quote", () => {
 });
 
 if (import.meta.hot) {
-	import.meta.hot.accept(
-		acceptHMRUpdate(useQuoteStore as any, import.meta.hot)
-	);
+	import.meta.hot.accept(acceptHMRUpdate(useQuoteStore as any, import.meta.hot));
 }
