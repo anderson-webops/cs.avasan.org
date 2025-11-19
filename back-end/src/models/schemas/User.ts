@@ -24,6 +24,10 @@ const userSchema: Schema<IUser> = new Schema(
 		age: { type: String },
 		state: { type: String },
 		password: { type: String, required: true },
+		courseAccess: {
+			type: [String],
+			default: []
+		},
 		editUsers: { type: Boolean, default: false, required: true }, // Added required: true
 		saveEdit: { type: String, default: "Edit", required: true }, // Added required: true
 		role: { type: String, default: "user" }

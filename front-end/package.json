@@ -94,11 +94,11 @@
 	"simple-git-hooks": {
 		"pre-commit": "npx lint-staged"
 	},
-	"lint-staged": {
-		"*.ts": [
-			""
-		]
-	},
+        "lint-staged": {
+                "*.{ts,js,vue}": [
+                        "eslint --fix"
+                ]
+        },
 	"browserslist": [
 		"> 1%",
 		"last 2 versions",

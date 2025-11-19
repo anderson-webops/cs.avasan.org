@@ -46,8 +46,25 @@ function slugify(value: string): string {
 		.replace(/-+$/, "");
 }
 
+const HIDDEN_ITEM_TITLES = new Set([
+	"session recap & assignment",
+	"recap & assignment review"
+]);
+
+function shouldHideItem(title: string) {
+	return HIDDEN_ITEM_TITLES.has(title.trim().toLowerCase());
+}
+
 function normalizeContent(content: string): string {
-	return content.replace(/\n{3,}/g, "\n\n").trim();
+	const paragraphs = content
+		.split(/\n{2,}/)
+		.map(part => part.trim())
+		.filter(Boolean)
+		.filter(part => !/instructor note/i.test(part));
+	return paragraphs
+		.join("\n\n")
+		.replace(/\n{3,}/g, "\n\n")
+		.trim();
 }
 
 const rawCourses: RawCourse[] = [
@@ -2500,13 +2517,15 @@ const normalizedCourses: CourseDefinition[] = rawCourses.map(course => {
 				items: RawCourseModuleItem[],
 				prefix: string
 			): CourseModuleItem[] =>
-				items.map(item => ({
-					id: slugify(`${moduleId}-${prefix}-${item.title}`),
-					title: item.title,
-					content: normalizeContent(item.content),
-					projectLink: item.projectLink,
-					solutionLink: item.solutionLink
-				}));
+				items
+					.filter(item => !shouldHideItem(item.title))
+					.map(item => ({
+						id: slugify(`${moduleId}-${prefix}-${item.title}`),
+						title: item.title,
+						content: normalizeContent(item.content),
+						projectLink: item.projectLink,
+						solutionLink: item.solutionLink
+					}));
 
 			return {
 				id: moduleId,

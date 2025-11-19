@@ -15,6 +15,10 @@ const tutorSchema: Schema<ITutor> = new Schema(
 		age: { type: String },
 		state: { type: String },
 		password: { type: String, required: true },
+		coursePermissions: {
+			type: [String],
+			default: []
+		},
 		usersOfTutorLength: { type: Number, default: 0 },
 		editTutors: { type: Boolean, default: false },
 		saveEdit: { type: String, default: "Edit" },

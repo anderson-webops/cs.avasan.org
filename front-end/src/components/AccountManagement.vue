@@ -13,6 +13,7 @@ const { loginBlock, signupBlock } = storeToRefs(app);
 
 const loginEmail = ref("");
 const loginPassword = ref("");
+const rememberMe = ref(false);
 const errorLogin = ref("");
 
 function changeLoginView(show: boolean) {
@@ -27,7 +28,8 @@ async function loginTutor() {
 			"/accounts/login",
 			{
 				email: loginEmail.value,
-				password: loginPassword.value
+				password: loginPassword.value,
+				remember: rememberMe.value
 			},
 			{ withCredentials: true }
 		);
@@ -35,6 +37,7 @@ async function loginTutor() {
 		if (data.currentUser) app.setCurrentUser(data.currentUser);
 		if (data.currentAdmin) app.setCurrentAdmin(data.currentAdmin);
 		changeLoginView(false);
+		rememberMe.value = false;
 	} catch (err: unknown) {
 		const e = err as AxiosError<{ message?: string }>;
 		errorLogin.value = `Login failed: ${
@@ -152,10 +155,9 @@ async function addSignup() {
 					/>
 
 					<button class="button" type="submit">Login</button>
-					<label>
-						<!--						checked="checked" -->
+					<label class="remember">
 						<input
-							:checked="true"
+							v-model="rememberMe"
 							name="remember"
 							type="checkbox"
 						/>

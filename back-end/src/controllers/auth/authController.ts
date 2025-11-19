@@ -12,14 +12,28 @@ import { User } from "../../models/schemas/User.js";
 // union of the three document types
 type Entity = IUser | ITutor | IAdmin;
 
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+
 // type‐guard: filters out `null` and tells TS that `u` is an Entity
 function isEntity(u: any): u is Entity {
 	return u != null && typeof u.comparePassword === "function";
 }
 
+function canMutate(session: CustomSession, entity: Entity) {
+	if (session.adminID) return true;
+	if (entity instanceof Admin) return session.adminID === entity.id;
+	if (entity instanceof Tutor) return session.tutorID === entity.id;
+	if (entity instanceof User) return session.userID === entity.id;
+	return false;
+}
+
 // LOGIN
 export const login: RequestHandler = async (req, res) => {
-	const { email, password } = req.body as { email?: string; password?: string };
+	const { email, password, remember } = req.body as {
+		email?: string;
+		password?: string;
+		remember?: boolean;
+	};
 	if (!email || !password) return res.sendStatus(400);
 
 	const e = email.trim().toLowerCase();
@@ -57,6 +71,9 @@ export const login: RequestHandler = async (req, res) => {
 
 	// sign‐in
 	session[sessionKey] = entity._id.toString();
+
+	const options = ((req as any).sessionOptions ??= {});
+	options.maxAge = remember ? THIRTY_DAYS_MS : undefined;
 	return res.json({ [responseKey]: entity });
 };
 
@@ -88,15 +105,61 @@ export const changeEmail: RequestHandler = async (req, res) => {
 
 	if (!newEmail) return res.status(400).json({ message: "New email is required." });
 
+	const session = req.session as CustomSession;
+	const conflictChecks = await Promise.all(
+		models.map(Model => Model.exists({ email: newEmail, _id: { $ne: ID } }))
+	);
+	if (conflictChecks.some(Boolean)) {
+		return res.status(403).json({ message: "Email already exists." });
+	}
+
 	for (const Model of models) {
 		const doc = await Model.findById(ID);
 		if (!doc) continue;
-		if (await Model.exists({ email: newEmail })) {
-			return res.status(403).json({ message: "Email already exists." });
+		if (!canMutate(session, doc as Entity)) {
+			return res.status(403).json({ message: "Not authorized to update this email." });
 		}
 		doc.email = newEmail;
 		await doc.save();
 		return res.json({ message: "Email updated successfully." });
+	}
+
+	return res.status(404).json({ message: "Entity not found." });
+};
+
+export const changePassword: RequestHandler = async (req, res) => {
+	const models = [User, Tutor, Admin] as Array<import("mongoose").Model<any>>;
+	const { ID } = req.params;
+	const { currentPassword, newPassword } = req.body as {
+		currentPassword?: string;
+		newPassword?: string;
+	};
+
+	if (!newPassword) return res.status(400).json({ message: "New password is required." });
+
+	const session = req.session as CustomSession;
+	for (const Model of models) {
+		const doc = await Model.findById(ID);
+		if (!doc) continue;
+
+		if (!canMutate(session, doc as Entity)) {
+			return res.status(403).json({ message: "Not authorized to update this password." });
+		}
+
+		const isAdminOverride = !!session.adminID;
+		if (!isAdminOverride) {
+			if (!currentPassword) {
+				return res.status(400).json({ message: "Current password is required." });
+			}
+			const matches = await (doc as Entity).comparePassword(currentPassword);
+			if (!matches) {
+				return res.status(403).json({ message: "Current password is incorrect." });
+			}
+		}
+
+		doc.password = newPassword;
+		await doc.save();
+		return res.json({ message: "Password updated successfully." });
 	}
 
 	return res.status(404).json({ message: "Entity not found." });

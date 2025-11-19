@@ -30,6 +30,44 @@ export const setUserTutors: RequestHandler = async (req, res) => {
 	res.json({ tutors: user.tutors });
 };
 
+export const setUserCourseAccess: RequestHandler = async (req, res) => {
+	const { userID } = req.params;
+	const { courseIDs } = req.body as { courseIDs?: string[] };
+	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });
+	if (!Array.isArray(courseIDs)) return res.status(400).json({ message: "courseIDs must be an array" });
+
+	const user = await User.findById(userID).populate("tutors", "_id");
+	if (!user) return res.sendStatus(404);
+
+	const uniqueCourses = [...new Set(courseIDs.map(id => id?.trim()).filter(Boolean))] as string[];
+
+	const actingTutor = req.currentTutor;
+	const actingAdmin = req.currentAdmin;
+
+	if (!actingAdmin) {
+		if (!actingTutor) {
+			return res.status(403).json({ message: "Tutor session required" });
+		}
+
+		const tutorOwnsUser = user.tutors.some(t => t.toString() === actingTutor._id.toString());
+		if (!tutorOwnsUser) {
+			return res
+				.status(403)
+				.json({ message: "You can only assign courses for your own students" });
+		}
+
+		const allowed = new Set(actingTutor.coursePermissions ?? []);
+		const invalidCourse = uniqueCourses.find(course => !allowed.has(course));
+		if (invalidCourse) {
+			return res.status(403).json({ message: `Course ${invalidCourse} is not enabled for this tutor` });
+		}
+	}
+
+	user.courseAccess = uniqueCourses;
+	await user.save();
+	res.json({ courseAccess: user.courseAccess });
+};
+
 export const promoteUserToTutor: RequestHandler = async (req, res) => {
 	const { userID } = req.params;
 	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });

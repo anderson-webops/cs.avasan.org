@@ -14,6 +14,7 @@ export interface Tutor {
 	age: number;
 	state: string;
 	usersOfTutorLength: number;
+	coursePermissions?: string[];
 	editTutors: boolean;
 	saveEdit: string;
 	[key: string]: Displayable;
@@ -25,7 +26,8 @@ export interface User {
 	email: string;
 	age: number;
 	state: string;
-	tutors?: string[];
+	tutors?: (string | Tutor)[];
+	courseAccess?: string[];
 	editUsers: boolean;
 	saveEdit: string;
 	[key: string]: Displayable;
