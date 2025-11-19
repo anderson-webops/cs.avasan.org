@@ -13,6 +13,8 @@
 		"back-end"
 	],
 	"scripts": {
+		"audit": "npm audit --workspaces",
+		"audit-fix": "npm audit fix --workspaces",
 		"build": "npm run -w front-end build && npm run -w back-end build",
 		"dev": "npm run -w front-end dev",
 		"server": "npm run -w back-end server",
@@ -26,16 +28,16 @@
 		"up": "taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "^6.0.0",
-		"@typescript-eslint/eslint-plugin": "^8.46.1",
-		"@typescript-eslint/parser": "^8.46.1",
-		"eslint": "^9.37.0",
+		"@antfu/eslint-config": "^6.2.0",
+		"@typescript-eslint/eslint-plugin": "^8.47.0",
+		"@typescript-eslint/parser": "^8.47.0",
+		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.4",
 		"eslint-plugin-vue": "^10.5.1",
-		"globals": "^16.4.0",
+		"globals": "^16.5.0",
 		"prettier": "^3.6.2",
-		"taze": "^19.7.0",
+		"taze": "^19.9.0",
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {}
