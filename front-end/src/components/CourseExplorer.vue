@@ -184,15 +184,6 @@ function hasSupplemental(module: CourseModule) {
 										>
 											<div class="item-content-body">
 												<div
-													v-if="item.content"
-													class="item-content-markdown"
-													v-html="
-														renderMarkdown(
-															item.content
-														)
-													"
-												/>
-												<div
 													v-if="
 														item.projectLink ||
 														(canViewSolutions &&
@@ -242,6 +233,15 @@ function hasSupplemental(module: CourseModule) {
 														</a>
 													</p>
 												</div>
+												<div
+													v-if="item.content"
+													class="item-content-markdown"
+													v-html="
+														renderMarkdown(
+															item.content
+														)
+													"
+												/>
 											</div>
 										</div>
 									</transition>
