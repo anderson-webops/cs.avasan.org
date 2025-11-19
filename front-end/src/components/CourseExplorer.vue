@@ -211,7 +211,8 @@ function hasSupplemental(module: CourseModule) {
 														v-if="
 															item.projectLink ||
 															(canViewSolutions &&
-																item.solutionLink)
+																item.solutionLink) ||
+															item.datasetLink
 														"
 														class="item-links"
 													>
@@ -255,6 +256,25 @@ function hasSupplemental(module: CourseModule) {
 															>
 																{{
 																	item.solutionLink
+																}}
+															</a>
+														</p>
+														<p
+															v-if="
+																item.datasetLink
+															"
+															class="item-link"
+														>
+															<i>Project:</i>
+															<a
+																:href="
+																	item.datasetLink
+																"
+																rel="noreferrer"
+																target="_blank"
+															>
+																{{
+																	item.datasetLink
 																}}
 															</a>
 														</p>

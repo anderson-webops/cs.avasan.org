@@ -115,7 +115,7 @@ function formatTutorCourses(tutorID: string) {
 }
 
 function activateCard(id: string) {
-	activeCard.value = id;
+	activeCard.value = activeCard.value === id ? null : id;
 }
 
 function isCardActive(id: string) {
@@ -302,6 +302,9 @@ async function demoteTutor(tutorID: string) {
 				</button>
 			</div>
 			<div v-if="tutorEditing[t._id]" class="course-editor">
+				<p class="helperText">
+					Select which courses this tutor can access.
+				</p>
 				<div class="checkbox-grid">
 					<label v-for="course in courseOptions" :key="course.id">
 						<input
@@ -462,9 +465,10 @@ div.tutorList {
 
 .card-actions {
 	display: flex;
+	flex-direction: column;
 	gap: 0.75rem;
-	justify-content: center;
-	flex-wrap: wrap;
+	margin: 0.5rem auto 1rem;
+	width: 90%;
 }
 
 .assignmentControls {
@@ -487,8 +491,25 @@ div.tutorList {
 	justify-content: center;
 }
 
-.currentAssignments {
-	margin: 0;
+.course-editor {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin: 0.5rem auto 1rem;
+	width: 90%;
+}
+
+.checkbox-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 0.5rem;
+}
+
+.checkbox-grid label {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-size: 0.9rem;
 }
 
 .status {

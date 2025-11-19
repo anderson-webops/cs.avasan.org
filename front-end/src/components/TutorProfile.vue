@@ -53,7 +53,7 @@ const usersHeader = computed(() =>
 const cardState = ref<string | null>(null);
 
 function activateCard(id: string) {
-	cardState.value = id;
+	cardState.value = cardState.value === id ? null : id;
 }
 
 function isCardActive(id: string) {
@@ -335,13 +335,13 @@ div.tutorList {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 	gap: 0.5rem;
-	margin-bottom: 0.75rem;
 }
 
 .checkbox-grid label {
 	display: flex;
 	align-items: center;
 	gap: 0.35rem;
+	font-size: 0.9rem;
 }
 
 .status {
