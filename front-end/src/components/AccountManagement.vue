@@ -63,7 +63,13 @@ function changeSignupView(show: boolean) {
 
 // reset inputs after submission
 function resetData() {
-	name.value = age.value = state.value = email.value = password.value = passwordRepeat.value = "";
+	name.value =
+		age.value =
+		state.value =
+		email.value =
+		password.value =
+		passwordRepeat.value =
+			"";
 	error.value = "";
 }
 
@@ -112,22 +118,47 @@ async function addSignup() {
 		<div :class="{ showLogin: loginBlock }" class="loginForm modal">
 			<!-- Modal Content -->
 			<form class="animate modal-content" @submit.prevent="loginTutor">
-				<span class="close" title="Close Modal" @click="changeLoginView(false)">&times;</span>
+				<span
+					class="close"
+					title="Close Modal"
+					@click="changeLoginView(false)"
+					>&times;</span
+				>
 
 				<div class="imgcontainer">
-					<img alt="Avatar" class="avatar" src="https://www.w3schools.com/howto/img_avatar2.png" />
+					<img
+						alt="Avatar"
+						class="avatar"
+						src="https://www.w3schools.com/howto/img_avatar2.png"
+					/>
 				</div>
 
 				<div class="container">
 					<label for="uname"><b>Email</b></label>
-					<input id="uname" v-model="loginEmail" placeholder="Enter Email" required type="email" />
+					<input
+						id="uname"
+						v-model="loginEmail"
+						placeholder="Enter Email"
+						required
+						type="email"
+					/>
 
 					<label for="psw1"><b>Password</b></label>
-					<input id="psw1" v-model="loginPassword" placeholder="Enter Password" required type="password" />
+					<input
+						id="psw1"
+						v-model="loginPassword"
+						placeholder="Enter Password"
+						required
+						type="password"
+					/>
 
 					<button class="button" type="submit">Login</button>
 					<label class="remember">
-						<input v-model="rememberMe" name="remember" type="checkbox" />
+						<input
+							v-model="rememberMe"
+							name="remember"
+							type="checkbox"
+						/>
 						Remember me
 					</label>
 					<span class="signup"
@@ -144,7 +175,13 @@ async function addSignup() {
 				</div>
 
 				<div class="container" style="background-color: #f1f1f1">
-					<button class="cancelbtn" type="button" @click="changeLoginView(false)">Cancel</button>
+					<button
+						class="cancelbtn"
+						type="button"
+						@click="changeLoginView(false)"
+					>
+						Cancel
+					</button>
 					<p v-if="errorLogin" class="error loginError">
 						{{ errorLogin }}
 					</p>
@@ -156,7 +193,9 @@ async function addSignup() {
 		<!-- ─── The Sign-Up Modal ──────────────────────────────────────────────── -->
 		<div :class="{ showSignup: signupBlock }" class="modal signupForm">
 			<form class="modal-content animate" @submit.prevent="addSignup">
-				<span class="close" @click="changeSignupView(false)">&times;</span>
+				<span class="close" @click="changeSignupView(false)"
+					>&times;</span
+				>
 
 				<div class="container">
 					<h1 class="mb-2">Sign Up</h1>
@@ -165,19 +204,49 @@ async function addSignup() {
 
 					<!-- ─── Common Fields ─────────────────────────────────────────────── -->
 					<label for="name"><b>Name</b></label>
-					<input id="name" v-model="name" placeholder="Enter Name" required type="text" />
+					<input
+						id="name"
+						v-model="name"
+						placeholder="Enter Name"
+						required
+						type="text"
+					/>
 
 					<label for="age"><b>Age</b></label>
-					<input id="age" v-model="age" placeholder="Enter Age" required type="text" />
+					<input
+						id="age"
+						v-model="age"
+						placeholder="Enter Age"
+						required
+						type="text"
+					/>
 
 					<label for="state"><b>State</b></label>
-					<input id="state" v-model="state" placeholder="Enter State" required type="text" />
+					<input
+						id="state"
+						v-model="state"
+						placeholder="Enter State"
+						required
+						type="text"
+					/>
 
 					<label for="email"><b>Email</b></label>
-					<input id="email" v-model="email" placeholder="Enter Email" required type="email" />
+					<input
+						id="email"
+						v-model="email"
+						placeholder="Enter Email"
+						required
+						type="email"
+					/>
 
 					<label for="psw2"><b>Password</b></label>
-					<input id="psw2" v-model="password" placeholder="Enter Password" required type="password" />
+					<input
+						id="psw2"
+						v-model="password"
+						placeholder="Enter Password"
+						required
+						type="password"
+					/>
 
 					<label for="psw-repeat"><b>Repeat Password</b></label>
 					<input
@@ -188,9 +257,13 @@ async function addSignup() {
 						type="password"
 					/>
 
-					<button class="signup button" type="submit">Create Account</button>
+					<button class="signup button" type="submit">
+						Create Account
+					</button>
 
-					<p v-if="!passwordMatch" class="passwordMatchError">Passwords do not match.</p>
+					<p v-if="!passwordMatch" class="passwordMatchError">
+						Passwords do not match.
+					</p>
 					<p v-if="error" class="error">
 						{{ error }}
 					</p>

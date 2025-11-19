@@ -16,7 +16,10 @@ function showSignupModal() {
 
 <template>
 	<main>
-		<TheHeader @login-click="showLoginModal" @signup-click="showSignupModal" />
+		<TheHeader
+			@login-click="showLoginModal"
+			@signup-click="showSignupModal"
+		/>
 
 		<!----------------------------
 		-   Login and Signup Forms   -

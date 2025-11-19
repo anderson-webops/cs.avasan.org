@@ -23,7 +23,11 @@ const activeProfileComponent = computed(() => {
 });
 
 const displayName = computed(
-	() => currentAdmin.value?.name || currentTutor.value?.name || currentUser.value?.name || ""
+	() =>
+		currentAdmin.value?.name ||
+		currentTutor.value?.name ||
+		currentUser.value?.name ||
+		""
 );
 
 const profileRole = computed(() => {
@@ -33,7 +37,9 @@ const profileRole = computed(() => {
 	return null;
 });
 
-const canBrowseCourses = computed(() => !!currentAdmin.value || currentTutor.value || currentUser.value);
+const canBrowseCourses = computed(
+	() => !!currentAdmin.value || currentTutor.value || currentUser.value
+);
 
 const profileTabs = computed<ProfileTab[]>(() => {
 	if (currentAdmin.value) return ["profile", "manage", "courses"];
@@ -49,13 +55,19 @@ watch(profileTabs, value => {
 
 const heroTitle = computed(() => {
 	if (profileRole.value === "Administrator") {
-		return displayName.value ? `Welcome back, ${displayName.value}.` : "Lead the learning community.";
+		return displayName.value
+			? `Welcome back, ${displayName.value}.`
+			: "Lead the learning community.";
 	}
 	if (profileRole.value === "Tutor") {
-		return displayName.value ? `Welcome back, ${displayName.value}.` : "Guide your learners with confidence.";
+		return displayName.value
+			? `Welcome back, ${displayName.value}.`
+			: "Guide your learners with confidence.";
 	}
 	if (profileRole.value === "Student") {
-		return displayName.value ? `Welcome back, ${displayName.value}.` : "Keep your learning on track.";
+		return displayName.value
+			? `Welcome back, ${displayName.value}.`
+			: "Keep your learning on track.";
 	}
 	return "All your profile details in one place.";
 });
@@ -73,7 +85,9 @@ const heroSubtitle = computed(() => {
 	}
 });
 
-const heroBadge = computed(() => (profileRole.value ? `Signed in as ${profileRole.value}` : "Profile hub"));
+const heroBadge = computed(() =>
+	profileRole.value ? `Signed in as ${profileRole.value}` : "Profile hub"
+);
 
 const hasProfile = computed(() => activeProfileComponent.value !== null);
 
@@ -105,7 +119,11 @@ function openAuthModal() {
 			</header>
 
 			<div v-if="hasProfile" class="profile-card">
-				<div v-if="profileTabs.length > 1" class="profile-tabs" role="tablist">
+				<div
+					v-if="profileTabs.length > 1"
+					class="profile-tabs"
+					role="tablist"
+				>
 					<button
 						v-for="tab in profileTabs"
 						:key="tab"
@@ -119,7 +137,11 @@ function openAuthModal() {
 					</button>
 				</div>
 
-				<component :is="activeProfileComponent" v-if="activeTab !== 'courses'" v-bind="profileComponentProps" />
+				<component
+					:is="activeProfileComponent"
+					v-if="activeTab !== 'courses'"
+					v-bind="profileComponentProps"
+				/>
 				<CourseExplorer v-else />
 			</div>
 
@@ -127,12 +149,20 @@ function openAuthModal() {
 				<div class="empty-card">
 					<h2>You're almost there</h2>
 					<p>
-						Log in to access your personalized profile, manage account details, and stay connected with your
-						tutor.
+						Log in to access your personalized profile, manage
+						account details, and stay connected with your tutor.
 					</p>
 					<div class="profile-actions">
-						<button class="action primary" type="button" @click="openAuthModal">Log in</button>
-						<RouterLink class="action secondary" to="/signup"> Create an account </RouterLink>
+						<button
+							class="action primary"
+							type="button"
+							@click="openAuthModal"
+						>
+							Log in
+						</button>
+						<RouterLink class="action secondary" to="/signup">
+							Create an account
+						</RouterLink>
 					</div>
 				</div>
 			</div>
@@ -146,7 +176,11 @@ function openAuthModal() {
 	min-height: calc(100vh - 6rem);
 	padding: clamp(3rem, 6vw, 6rem) 1.5rem 5rem;
 	background:
-		radial-gradient(circle at 0% -20%, rgba(125, 211, 252, 0.38), transparent 55%),
+		radial-gradient(
+			circle at 0% -20%,
+			rgba(125, 211, 252, 0.38),
+			transparent 55%
+		),
 		linear-gradient(130deg, #0f172a 0%, #1e3a8a 55%, #312e81 100%);
 	display: flex;
 	justify-content: center;
@@ -262,7 +296,12 @@ function openAuthModal() {
 	border: none;
 	height: 1px;
 	width: 100%;
-	background: linear-gradient(90deg, rgba(148, 163, 184, 0), rgba(148, 163, 184, 0.75), rgba(148, 163, 184, 0));
+	background: linear-gradient(
+		90deg,
+		rgba(148, 163, 184, 0),
+		rgba(148, 163, 184, 0.75),
+		rgba(148, 163, 184, 0)
+	);
 	margin: 2rem 0 1.5rem;
 }
 
@@ -272,7 +311,11 @@ function openAuthModal() {
 	padding: 1.5rem 1.75rem 1.85rem;
 	border-radius: 22px;
 	border: 1px solid rgba(148, 163, 184, 0.4);
-	background: linear-gradient(140deg, rgba(248, 250, 252, 0.96), rgba(255, 255, 255, 0.98));
+	background: linear-gradient(
+		140deg,
+		rgba(248, 250, 252, 0.96),
+		rgba(255, 255, 255, 0.98)
+	);
 	box-shadow: 0 25px 45px -35px rgba(15, 23, 42, 0.55);
 	outline: none;
 }

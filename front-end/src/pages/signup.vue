@@ -23,25 +23,37 @@ onMounted(() => {
 		<section class="intro">
 			<h1>Schedule a Class</h1>
 			<p>
-				Use Calendly to choose a time that works for you. Share a few notes about the learner and the topics
-				you’d like to cover so I can tailor the session in advance.
+				Use Calendly to choose a time that works for you. Share a few
+				notes about the learner and the topics you’d like to cover so I
+				can tailor the session in advance.
 			</p>
 			<br />
 			<ul>
-				<li>Sessions are 50 minutes with an optional 10-minute buffer.</li>
-				<li>Need a recurring spot? Book the first meeting and we’ll lock in the rest together.</li>
+				<li>
+					Sessions are 50 minutes with an optional 10-minute buffer.
+				</li>
+				<li>
+					Need a recurring spot? Book the first meeting and we’ll lock
+					in the rest together.
+				</li>
 				<li>
 					Prefer to coordinate by email? Reach me at
 					<!--					<a href="mailto:jacob@jacobdanderson.net" -->
 					<!--						>jacob@jacobdanderson.net</a -->
 					<!--					>. -->
-					<a href="mailto:bascule-skaters0n@icloud.com">bascule-skaters0n@icloud.com</a>.
+					<a href="mailto:bascule-skaters0n@icloud.com"
+						>bascule-skaters0n@icloud.com</a
+					>.
 				</li>
 			</ul>
 		</section>
 
 		<div class="calendly-container">
-			<div class="calendly-inline-widget" :data-url="`${calendlyUrl}?hide_gdpr_banner=1`" style="height: 900px" />
+			<div
+				class="calendly-inline-widget"
+				:data-url="`${calendlyUrl}?hide_gdpr_banner=1`"
+				style="height: 900px"
+			/>
 			<p class="calendly-fallback">
 				If the scheduler doesn’t load, use the direct Calendly link:
 				<a :href="calendlyUrl" rel="noopener" target="_blank">
@@ -50,14 +62,25 @@ onMounted(() => {
 			</p>
 		</div>
 
-		<section aria-labelledby="after-booking-title" class="after-booking d-grid">
+		<section
+			aria-labelledby="after-booking-title"
+			class="after-booking d-grid"
+		>
 			<h2 id="after-booking-title">After you book</h2>
 			<ol>
 				<li>I’ll send a welcome email within one business day.</li>
-				<li>Before our first meeting we’ll outline goals, tools, and any materials needed for class.</li>
-				<li>Payment is due only after class—see the tuition page for details.</li>
+				<li>
+					Before our first meeting we’ll outline goals, tools, and any
+					materials needed for class.
+				</li>
+				<li>
+					Payment is due only after class—see the tuition page for
+					details.
+				</li>
 			</ol>
-			<RouterLink class="cta" to="/payment">View tuition details</RouterLink>
+			<RouterLink class="cta" to="/payment"
+				>View tuition details</RouterLink
+			>
 		</section>
 	</section>
 </template>

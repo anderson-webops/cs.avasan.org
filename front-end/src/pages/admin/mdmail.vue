@@ -62,7 +62,9 @@ async function sendMail() {
 		}
 	} catch (e: any) {
 		sentOk.value = false;
-		resultText.value = e?.response?.data ? JSON.stringify(e.response.data, null, 2) : String(e);
+		resultText.value = e?.response?.data
+			? JSON.stringify(e.response.data, null, 2)
+			: String(e);
 	} finally {
 		sending.value = false;
 	}
@@ -75,7 +77,11 @@ async function sendMail() {
 
 		<label>
 			To
-			<input v-model="to" type="email" placeholder="recipient@example.com" />
+			<input
+				v-model="to"
+				type="email"
+				placeholder="recipient@example.com"
+			/>
 		</label>
 
 		<label>

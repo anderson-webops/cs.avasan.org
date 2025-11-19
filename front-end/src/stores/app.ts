@@ -63,7 +63,8 @@ export const useAppStore = defineStore("app", {
 	}),
 
 	getters: {
-		isLoggedIn: state => !!state.currentUser || !!state.currentTutor || !!state.currentAdmin,
+		isLoggedIn: state =>
+			!!state.currentUser || !!state.currentTutor || !!state.currentAdmin,
 
 		isAdmin: state => !!state.currentAdmin
 	},
@@ -181,7 +182,9 @@ export const useAppStore = defineStore("app", {
 
 		async refreshCurrentUser() {
 			try {
-				const { data } = await api.get<{ currentUser: User }>("/users/loggedin");
+				const { data } = await api.get<{ currentUser: User }>(
+					"/users/loggedin"
+				);
 				this.setCurrentUser(data.currentUser);
 			} catch {
 				this.setCurrentUser(null);
@@ -190,7 +193,9 @@ export const useAppStore = defineStore("app", {
 
 		async refreshCurrentTutor() {
 			try {
-				const { data } = await api.get<{ currentTutor: Tutor }>("/tutors/loggedin");
+				const { data } = await api.get<{ currentTutor: Tutor }>(
+					"/tutors/loggedin"
+				);
 				this.setCurrentTutor(data.currentTutor);
 			} catch {
 				this.setCurrentTutor(null);
@@ -199,7 +204,9 @@ export const useAppStore = defineStore("app", {
 
 		async refreshCurrentAdmin() {
 			try {
-				const { data } = await api.get<{ currentAdmin: Admin }>("/admins/loggedin");
+				const { data } = await api.get<{ currentAdmin: Admin }>(
+					"/admins/loggedin"
+				);
 				this.setCurrentAdmin(data.currentAdmin);
 			} catch {
 				this.setCurrentAdmin(null);

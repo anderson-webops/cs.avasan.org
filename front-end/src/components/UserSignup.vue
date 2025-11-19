@@ -6,7 +6,12 @@ import { api } from "@/api";
 import { useAppStore } from "@/stores/app";
 
 const app = useAppStore();
-const { tutors, currentUser, currentTutor, currentAdmin: admin } = storeToRefs(app);
+const {
+	tutors,
+	currentUser,
+	currentTutor,
+	currentAdmin: admin
+} = storeToRefs(app);
 
 const selectedTutor = ref<Tutor | null>(null);
 const showTutors = ref(false);
@@ -112,7 +117,12 @@ onMounted(() => {
 
 		<div id="signup">
 			<form id="signupForm" @submit.prevent="addUser">
-				<select v-if="tutors.length" id="tutorSelect" v-model="selectedTutor" required>
+				<select
+					v-if="tutors.length"
+					id="tutorSelect"
+					v-model="selectedTutor"
+					required
+				>
 					<option v-for="t in tutors" :key="t._id" :value="t">
 						{{ t.name }}
 					</option>
@@ -120,7 +130,9 @@ onMounted(() => {
 				<p v-else class="notutors">No Tutors are available</p>
 
 				<br />
-				<button id="infoSubmit" class="mt-3" type="submit">Submit</button>
+				<button id="infoSubmit" class="mt-3" type="submit">
+					Submit
+				</button>
 			</form>
 
 			<button v-if="tutors.length" @click="showTutors = !showTutors">
@@ -134,7 +146,12 @@ onMounted(() => {
 				<h3>Total Users : {{ numberOfUsers }}</h3>
 			</template>
 
-			<div v-for="t in tutors" v-show="showTutors" :key="t._id" class="tutorList mt-2">
+			<div
+				v-for="t in tutors"
+				v-show="showTutors"
+				:key="t._id"
+				class="tutorList mt-2"
+			>
 				<br />
 				<ul>
 					<template v-if="!t.editTutors">
@@ -164,25 +181,41 @@ onMounted(() => {
 						<li>
 							<label
 								>Name:&emsp;
-								<input v-model="t.name" class="editTutor" type="text" />
+								<input
+									v-model="t.name"
+									class="editTutor"
+									type="text"
+								/>
 							</label>
 						</li>
 						<li>
 							<label
 								>Email:&emsp;
-								<input v-model="t.email" class="editTutor" type="text" />
+								<input
+									v-model="t.email"
+									class="editTutor"
+									type="text"
+								/>
 							</label>
 						</li>
 						<li>
 							<label
 								>Age:&emsp;
-								<input v-model="t.age" class="editTutor" type="text" />
+								<input
+									v-model="t.age"
+									class="editTutor"
+									type="text"
+								/>
 							</label>
 						</li>
 						<li>
 							<label
 								>State:&emsp;
-								<input v-model="t.state" class="editTutor" type="text" />
+								<input
+									v-model="t.state"
+									class="editTutor"
+									type="text"
+								/>
 							</label>
 						</li>
 					</template>
@@ -190,13 +223,25 @@ onMounted(() => {
 				<br />
 
 				<!-- Admin or this tutor can remove/edit -->
-				<button v-if="admin || currentTutor?._id === t._id" @click="deleteTutor(t)">Remove</button>
-				<button v-if="admin || currentTutor?._id === t._id" @click="editTutor(t)">
+				<button
+					v-if="admin || currentTutor?._id === t._id"
+					@click="deleteTutor(t)"
+				>
+					Remove
+				</button>
+				<button
+					v-if="admin || currentTutor?._id === t._id"
+					@click="editTutor(t)"
+				>
 					{{ t.saveEdit }}
 				</button>
 
 				<!-- user select -->
-				<button v-if="currentUser" :class="{ colorSelect: currentUser?._id === t._id }" @click="selectTutor(t)">
+				<button
+					v-if="currentUser"
+					:class="{ colorSelect: currentUser?._id === t._id }"
+					@click="selectTutor(t)"
+				>
 					Select
 				</button>
 			</div>

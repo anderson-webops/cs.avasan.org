@@ -28,7 +28,11 @@ function activateCard() {
 const assignedTutorNames = computed(() => {
 	if (!currentUser.value?.tutors?.length) return [] as string[];
 	return currentUser.value.tutors
-		.map(t => (typeof t === "string" ? (tutors.value.find(tt => tt._id === t)?.name ?? null) : t.name))
+		.map(t =>
+			typeof t === "string"
+				? (tutors.value.find(tt => tt._id === t)?.name ?? null)
+				: t.name
+		)
 		.filter((name): name is string => !!name);
 });
 
@@ -47,30 +51,58 @@ const fields = [
 	<section class="Signup text-center">
 		<h2>Profile</h2>
 
-		<div v-if="currentUser" class="tutorList mt-2" :class="[{ active: cardActive }]" @click="activateCard">
+		<div
+			v-if="currentUser"
+			class="tutorList mt-2"
+			:class="[{ active: cardActive }]"
+			@click="activateCard"
+		>
 			<br />
-			<p v-if="!cardActive" class="card-hint">Click the card to manage your details.</p>
+			<p v-if="!cardActive" class="card-hint">
+				Click the card to manage your details.
+			</p>
 			<ul>
 				<li>
 					<h4>User</h4>
 				</li>
 
-				<ProfileFields :editing="editing" :entity="currentUser" :fields="fields" />
+				<ProfileFields
+					:editing="editing"
+					:entity="currentUser"
+					:fields="fields"
+				/>
 			</ul>
 			<br />
 			<p class="assignment">
 				<strong>Assigned tutor(s):</strong>
-				{{ assignedTutorNames.length ? assignedTutorNames.join(", ") : "No tutor assigned" }}
+				{{
+					assignedTutorNames.length
+						? assignedTutorNames.join(", ")
+						: "No tutor assigned"
+				}}
 			</p>
 
 			<div v-if="cardActive" class="card-actions">
-				<button class="btn-danger btn" @click.stop="deleteMe(currentUser!._id)">Delete</button>
-				<button class="btn-primary btn" @click.stop="editing ? save(currentUser) : toggle()">
+				<button
+					class="btn-danger btn"
+					@click.stop="deleteMe(currentUser!._id)"
+				>
+					Delete
+				</button>
+				<button
+					class="btn-primary btn"
+					@click.stop="editing ? save(currentUser) : toggle()"
+				>
 					{{ editing ? "Save" : "Edit" }}
 				</button>
 			</div>
 
-			<AccountSecurity v-if="cardActive" :email="currentUser.email" :entity-id="currentUser._id" role="user" />
+			<AccountSecurity
+				v-if="cardActive"
+				:email="currentUser.email"
+				:entity-id="currentUser._id"
+				role="user"
+			/>
 		</div>
 	</section>
 </template>

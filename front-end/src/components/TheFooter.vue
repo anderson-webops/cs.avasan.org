@@ -7,18 +7,28 @@
 				<h3>Connect</h3>
 				<ul>
 					<li>
-						<a href="mailto:bascule-skaters0n@icloud.com">Email me</a>
+						<a href="mailto:bascule-skaters0n@icloud.com"
+							>Email me</a
+						>
 						<!--						<a href="mailto:jacob@jacobdanderson.net" -->
 						<!--							>jacob@jacobdanderson.net</a -->
 						<!--						> -->
 					</li>
 					<li>
-						<a href="https://www.linkedin.com/in/jacoba1100254352/" rel="noreferrer" target="_blank">
+						<a
+							href="https://www.linkedin.com/in/jacoba1100254352/"
+							rel="noreferrer"
+							target="_blank"
+						>
 							LinkedIn
 						</a>
 					</li>
 					<li>
-						<a href="https://github.com/jacoba1100254352" rel="noreferrer" target="_blank">
+						<a
+							href="https://github.com/jacoba1100254352"
+							rel="noreferrer"
+							target="_blank"
+						>
 							GitHub repository
 						</a>
 					</li>
@@ -27,7 +37,10 @@
 
 			<section class="brand">
 				<h2>Classes with Jacob</h2>
-				<p>Personalized tutoring for coding, STEM, and Spanish. Serving students online across the U.S.</p>
+				<p>
+					Personalized tutoring for coding, STEM, and Spanish. Serving
+					students online across the U.S.
+				</p>
 			</section>
 
 			<section class="links">
@@ -37,7 +50,9 @@
 						<RouterLink to="/signup">Book a Class</RouterLink>
 					</li>
 					<li>
-						<RouterLink to="/payment">Tuition &amp; Payment</RouterLink>
+						<RouterLink to="/payment"
+							>Tuition &amp; Payment</RouterLink
+						>
 					</li>
 					<li>
 						<RouterLink to="/about">About Jacob</RouterLink>
@@ -46,7 +61,10 @@
 			</section>
 		</div>
 
-		<p class="copy">© {{ new Date().getFullYear() }} Jacob Anderson. All rights reserved.</p>
+		<p class="copy">
+			© {{ new Date().getFullYear() }} Jacob Anderson. All rights
+			reserved.
+		</p>
 	</footer>
 </template>
 

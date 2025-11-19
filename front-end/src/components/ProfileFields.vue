@@ -30,7 +30,12 @@ type Displayable = string | number | boolean | null | undefined;
 					:value="entity[f.key]"
 					class="editTutor"
 					type="text"
-					@input="onInput(f.key, ($event.target as HTMLInputElement).value)"
+					@input="
+						onInput(
+							f.key,
+							($event.target as HTMLInputElement).value
+						)
+					"
 					@click.stop
 				/>
 			</label>

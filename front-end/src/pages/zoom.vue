@@ -9,8 +9,9 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 		<header class="hero">
 			<h1>Join the Virtual Classroom</h1>
 			<p>
-				Sessions take place on Zoom. Use the button below to open the live classroom. Bookmark this page so you
-				can always reach the meeting quickly.
+				Sessions take place on Zoom. Use the button below to open the
+				live classroom. Bookmark this page so you can always reach the
+				meeting quickly.
 			</p>
 		</header>
 
@@ -18,10 +19,18 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 			<article class="zoom-card" aria-labelledby="zoom-card-title">
 				<h2 id="zoom-card-title">Zoom Meeting</h2>
 				<p>
-					Click the button to launch Zoom in a new tab. Make sure you are signed in to Zoom before class time
-					for the smoothest experience.
+					Click the button to launch Zoom in a new tab. Make sure you
+					are signed in to Zoom before class time for the smoothest
+					experience.
 				</p>
-				<a class="cta" :href="zoomMeetingUrl" rel="noopener" target="_blank"> Join on Zoom </a>
+				<a
+					class="cta"
+					:href="zoomMeetingUrl"
+					rel="noopener"
+					target="_blank"
+				>
+					Join on Zoom
+				</a>
 				<p class="fallback">
 					Zoom link (copy &amp; paste):
 					<a :href="zoomMeetingUrl" rel="noopener" target="_blank">

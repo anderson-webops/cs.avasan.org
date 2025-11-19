@@ -17,7 +17,11 @@ const success = ref("");
 const deleteMe = useDeleteAccount("tutor");
 
 /* editable (the tutor card itself) */
-const { editing: tutorEdit, toggle: toggleTutor, save: saveTutor } = useEditable("tutor");
+const {
+	editing: tutorEdit,
+	toggle: toggleTutor,
+	save: saveTutor
+} = useEditable("tutor");
 
 /* field list */
 const tutorFields = [
@@ -31,7 +35,9 @@ const tutorFields = [
 async function loadUsers() {
 	if (!currentTutor.value) return;
 	try {
-		const { data } = await api.get(`/users/oftutor/${currentTutor.value._id}`);
+		const { data } = await api.get(
+			`/users/oftutor/${currentTutor.value._id}`
+		);
 		app.setUsers(data);
 	} catch (e: any) {
 		error.value = e.message;
@@ -40,7 +46,9 @@ async function loadUsers() {
 
 onMounted(loadUsers);
 
-const usersHeader = computed(() => (currentTutor.value && users.value.length === 0 ? "No Users" : "Users"));
+const usersHeader = computed(() =>
+	currentTutor.value && users.value.length === 0 ? "No Users" : "Users"
+);
 
 const cardState = ref<string | null>(null);
 
@@ -62,7 +70,9 @@ const userCourseSelections = ref<Record<string, string[]>>({});
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
 
-const permittedCourseIds = computed(() => currentTutor.value?.coursePermissions ?? []);
+const permittedCourseIds = computed(
+	() => currentTutor.value?.coursePermissions ?? []
+);
 
 const permittedCourses = computed(() => {
 	const allowed = new Set(permittedCourseIds.value);
@@ -117,7 +127,8 @@ async function saveUserCourses(userID: string) {
 		await loadUsers();
 		userEditing.value = { ...userEditing.value, [userID]: false };
 	} catch (e: any) {
-		error.value = e.response?.data?.message ?? e.message ?? "Unable to save courses";
+		error.value =
+			e.response?.data?.message ?? e.message ?? "Unable to save courses";
 	}
 }
 </script>
@@ -134,11 +145,17 @@ async function saveUserCourses(userID: string) {
 			@click="activateCard('tutor')"
 		>
 			<br />
-			<p v-if="!isCardActive('tutor')" class="card-hint">Click your card to edit details or manage security.</p>
+			<p v-if="!isCardActive('tutor')" class="card-hint">
+				Click your card to edit details or manage security.
+			</p>
 			<ul>
 				<li><h4>Tutor</h4></li>
 
-				<ProfileFields :editing="tutorEdit" :entity="currentTutor" :fields="tutorFields" />
+				<ProfileFields
+					:editing="tutorEdit"
+					:entity="currentTutor"
+					:fields="tutorFields"
+				/>
 			</ul>
 			<br />
 			<p class="assignment">
@@ -151,8 +168,18 @@ async function saveUserCourses(userID: string) {
 			</p>
 
 			<div v-if="isCardActive('tutor')" class="card-actions">
-				<button class="btn-danger btn" @click.stop="deleteMe(currentTutor!._id)">Delete</button>
-				<button class="btn-primary btn" @click.stop="tutorEdit ? saveTutor(currentTutor) : toggleTutor()">
+				<button
+					class="btn-danger btn"
+					@click.stop="deleteMe(currentTutor!._id)"
+				>
+					Delete
+				</button>
+				<button
+					class="btn-primary btn"
+					@click.stop="
+						tutorEdit ? saveTutor(currentTutor) : toggleTutor()
+					"
+				>
 					{{ tutorEdit ? "Save" : "Edit" }}
 				</button>
 			</div>
@@ -180,36 +207,66 @@ async function saveUserCourses(userID: string) {
 			<ul>
 				<!-- Fields: name / email / age / state -->
 				<!-- Editing = false: read-only list -->
-				<ProfileFields :editing="false" :entity="u" :fields="tutorFields" />
+				<ProfileFields
+					:editing="false"
+					:entity="u"
+					:fields="tutorFields"
+				/>
 			</ul>
 			<p class="assignment">
 				<strong>Course access:</strong>
 				{{
 					(u.courseAccess?.length ?? 0)
-						? (u.courseAccess ?? []).map(id => courseLookup[id] ?? id).join(", ")
+						? (u.courseAccess ?? [])
+								.map(id => courseLookup[id] ?? id)
+								.join(", ")
 						: "No courses assigned"
 				}}
 			</p>
 
 			<div v-if="isCardActive(userCardId(u._id))" class="card-actions">
-				<button class="btn-secondary btn" type="button" @click.stop="toggleUserEdit(u._id)">
+				<button
+					class="btn-secondary btn"
+					type="button"
+					@click.stop="toggleUserEdit(u._id)"
+				>
 					{{ userEditing[u._id] ? "Close" : "Edit courses" }}
 				</button>
 			</div>
 
 			<div v-if="userEditing[u._id]" class="course-editor">
-				<p v-if="permittedCourses.length === 0" class="hint">Your admin hasn't enabled any courses yet.</p>
+				<p v-if="permittedCourses.length === 0" class="hint">
+					Your admin hasn't enabled any courses yet.
+				</p>
 				<div v-else class="checkbox-grid">
-					<label v-for="course in permittedCourses" :key="course.id" @click.stop>
+					<label
+						v-for="course in permittedCourses"
+						:key="course.id"
+						@click.stop
+					>
 						<input
-							:checked="userCourseSelections[u._id]?.includes(course.id)"
+							:checked="
+								userCourseSelections[u._id]?.includes(course.id)
+							"
 							type="checkbox"
-							@change.stop="onCourseToggle(u._id, course.id, ($event.target as HTMLInputElement).checked)"
+							@change.stop="
+								onCourseToggle(
+									u._id,
+									course.id,
+									($event.target as HTMLInputElement).checked
+								)
+							"
 						/>
 						{{ course.name }}
 					</label>
 				</div>
-				<button class="btn btn-primary" type="button" @click.stop="saveUserCourses(u._id)">Save courses</button>
+				<button
+					class="btn btn-primary"
+					type="button"
+					@click.stop="saveUserCourses(u._id)"
+				>
+					Save courses
+				</button>
 			</div>
 		</div>
 

@@ -19,7 +19,9 @@ const allCourses = computed(() => courses.value ?? []);
 const appStore = useAppStore();
 const { currentTutor, currentAdmin, currentUser } = storeToRefs(appStore);
 
-const canViewSolutions = computed(() => !!currentTutor.value || !!currentAdmin.value);
+const canViewSolutions = computed(
+	() => !!currentTutor.value || !!currentAdmin.value
+);
 
 const permittedCourseIds = computed(() => {
 	if (currentAdmin.value) return allCourses.value.map(course => course.id);
@@ -50,7 +52,10 @@ watchEffect(() => {
 		selectedCourseId.value = "";
 		return;
 	}
-	if (!selectedCourseId.value || !availableCourses.some(course => course.id === selectedCourseId.value)) {
+	if (
+		!selectedCourseId.value ||
+		!availableCourses.some(course => course.id === selectedCourseId.value)
+	) {
 		selectCourse(availableCourses[0].id);
 	}
 });
@@ -60,7 +65,11 @@ watch(selectedCourseId, () => {
 	openItems.value = {};
 });
 
-const selectedCourse = computed(() => courseList.value.find(course => course.id === selectedCourseId.value) ?? null);
+const selectedCourse = computed(
+	() =>
+		courseList.value.find(course => course.id === selectedCourseId.value) ??
+		null
+);
 
 function selectCourse(id: string) {
 	selectedCourseId.value = id;
@@ -70,7 +79,11 @@ function toggleModule(moduleId: string) {
 	activeModuleId.value = activeModuleId.value === moduleId ? null : moduleId;
 }
 
-function itemKey(moduleId: string, type: "curriculum" | "supplemental", itemId: string) {
+function itemKey(
+	moduleId: string,
+	type: "curriculum" | "supplemental",
+	itemId: string
+) {
 	return `${moduleId}:${type}:${itemId}`;
 }
 
@@ -95,10 +108,20 @@ function hasSupplemental(module: CourseModule) {
 	<section class="course-explorer">
 		<div v-if="hasCourseAccess" class="course-shell">
 			<div class="course-selector">
-				<label class="selector-label" for="course-select">Choose a course</label>
+				<label class="selector-label" for="course-select"
+					>Choose a course</label
+				>
 				<div class="selector-control">
-					<select id="course-select" v-model="selectedCourseId" class="course-select">
-						<option v-for="course in courseList" :key="course.id" :value="course.id">
+					<select
+						id="course-select"
+						v-model="selectedCourseId"
+						class="course-select"
+					>
+						<option
+							v-for="course in courseList"
+							:key="course.id"
+							:value="course.id"
+						>
 							{{ course.name }}
 						</option>
 					</select>
@@ -106,8 +129,16 @@ function hasSupplemental(module: CourseModule) {
 			</div>
 
 			<div v-if="selectedCourse" class="course-modules">
-				<div v-for="(module, index) in selectedCourse.modules" :key="module.id" class="module-card">
-					<button class="module-toggle" type="button" @click="toggleModule(module.id)">
+				<div
+					v-for="(module, index) in selectedCourse.modules"
+					:key="module.id"
+					class="module-card"
+				>
+					<button
+						class="module-toggle"
+						type="button"
+						@click="toggleModule(module.id)"
+					>
 						<span class="module-index">{{ index + 1 }}</span>
 						<span class="module-title">{{ module.title }}</span>
 						<span aria-hidden="true" class="module-icon">
@@ -116,20 +147,46 @@ function hasSupplemental(module: CourseModule) {
 					</button>
 
 					<transition name="accordion">
-						<div v-if="activeModuleId === module.id" class="module-body">
+						<div
+							v-if="activeModuleId === module.id"
+							class="module-body"
+						>
 							<div class="module-section">
 								<h3>Curriculum</h3>
 								<ol class="item-list">
-									<li v-for="item in module.curriculum" :key="item.id" class="item">
+									<li
+										v-for="item in module.curriculum"
+										:key="item.id"
+										class="item"
+									>
 										<button
 											class="item-toggle"
 											type="button"
-											@click="toggleItem(module.id, itemKey(module.id, 'curriculum', item.id))"
+											@click="
+												toggleItem(
+													module.id,
+													itemKey(
+														module.id,
+														'curriculum',
+														item.id
+													)
+												)
+											"
 										>
 											<span>{{ item.title }}</span>
-											<span class="item-icon" aria-hidden="true">
+											<span
+												class="item-icon"
+												aria-hidden="true"
+											>
 												{{
-													isItemOpen(module.id, itemKey(module.id, "curriculum", item.id))
+													isItemOpen(
+														module.id,
+														itemKey(
+															module.id,
+															"curriculum",
+															item.id
+														)
+													)
 														? "Hide"
 														: "View"
 												}}
@@ -137,56 +194,99 @@ function hasSupplemental(module: CourseModule) {
 										</button>
 										<transition name="accordion">
 											<div
-												v-if="isItemOpen(module.id, itemKey(module.id, 'curriculum', item.id))"
+												v-if="
+													isItemOpen(
+														module.id,
+														itemKey(
+															module.id,
+															'curriculum',
+															item.id
+														)
+													)
+												"
 												class="item-content"
 											>
 												<div class="item-content-body">
 													<div
 														v-if="
 															item.projectLink ||
-															(canViewSolutions && item.solutionLink) ||
+															(canViewSolutions &&
+																item.solutionLink) ||
 															item.datasetLink
 														"
 														class="item-links"
 													>
-														<p v-if="item.projectLink" class="item-link">
-															<strong>Project:</strong>
+														<p
+															v-if="
+																item.projectLink
+															"
+															class="item-link"
+														>
+															<strong
+																>Project:</strong
+															>
 															<a
-																:href="item.projectLink"
+																:href="
+																	item.projectLink
+																"
 																rel="noreferrer"
 																target="_blank"
 															>
-																{{ item.projectLink }}
+																{{
+																	item.projectLink
+																}}
 															</a>
 														</p>
 														<p
-															v-if="canViewSolutions && item.solutionLink"
+															v-if="
+																canViewSolutions &&
+																item.solutionLink
+															"
 															class="item-link"
 														>
-															<strong>Solution:</strong>
+															<strong
+																>Solution:</strong
+															>
 															<a
-																:href="item.solutionLink"
+																:href="
+																	item.solutionLink
+																"
 																rel="noreferrer"
 																target="_blank"
 															>
-																{{ item.solutionLink }}
+																{{
+																	item.solutionLink
+																}}
 															</a>
 														</p>
-														<p v-if="item.datasetLink" class="item-link">
+														<p
+															v-if="
+																item.datasetLink
+															"
+															class="item-link"
+														>
 															<i>Project:</i>
 															<a
-																:href="item.datasetLink"
+																:href="
+																	item.datasetLink
+																"
 																rel="noreferrer"
 																target="_blank"
 															>
-																{{ item.datasetLink }}
+																{{
+																	item.datasetLink
+																}}
 															</a>
 														</p>
 													</div>
 													<div
 														v-if="item.content"
 														class="item-content-markdown"
-														v-html="renderMarkdown(item.content)"
+														v-html="
+															renderMarkdown(
+																item.content
+															)
+														"
 													/>
 												</div>
 											</div>
@@ -195,7 +295,10 @@ function hasSupplemental(module: CourseModule) {
 								</ol>
 							</div>
 
-							<div v-if="hasSupplemental(module)" class="module-section">
+							<div
+								v-if="hasSupplemental(module)"
+								class="module-section"
+							>
 								<h3>Supplemental Projects</h3>
 								<ol class="item-list">
 									<li
@@ -209,16 +312,29 @@ function hasSupplemental(module: CourseModule) {
 											@click="
 												toggleItem(
 													module.id,
-													itemKey(module.id, 'supplemental', supplemental.id)
+													itemKey(
+														module.id,
+														'supplemental',
+														supplemental.id
+													)
 												)
 											"
 										>
-											<span>{{ supplemental.title }}</span>
-											<span class="item-icon" aria-hidden="true">
+											<span>{{
+												supplemental.title
+											}}</span>
+											<span
+												class="item-icon"
+												aria-hidden="true"
+											>
 												{{
 													isItemOpen(
 														module.id,
-														itemKey(module.id, "supplemental", supplemental.id)
+														itemKey(
+															module.id,
+															"supplemental",
+															supplemental.id
+														)
 													)
 														? "Hide"
 														: "View"
@@ -230,7 +346,11 @@ function hasSupplemental(module: CourseModule) {
 												v-if="
 													isItemOpen(
 														module.id,
-														itemKey(module.id, 'supplemental', supplemental.id)
+														itemKey(
+															module.id,
+															'supplemental',
+															supplemental.id
+														)
 													)
 												"
 												class="item-content"
@@ -239,38 +359,65 @@ function hasSupplemental(module: CourseModule) {
 													<div
 														v-if="
 															supplemental.projectLink ||
-															(canViewSolutions && supplemental.solutionLink)
+															(canViewSolutions &&
+																supplemental.solutionLink)
 														"
 														class="item-links"
 													>
-														<p v-if="supplemental.projectLink" class="item-link">
-															<strong>Project:</strong>
+														<p
+															v-if="
+																supplemental.projectLink
+															"
+															class="item-link"
+														>
+															<strong
+																>Project:</strong
+															>
 															<a
-																:href="supplemental.projectLink"
+																:href="
+																	supplemental.projectLink
+																"
 																rel="noreferrer"
 																target="_blank"
 															>
-																{{ supplemental.projectLink }}
+																{{
+																	supplemental.projectLink
+																}}
 															</a>
 														</p>
 														<p
-															v-if="canViewSolutions && supplemental.solutionLink"
+															v-if="
+																canViewSolutions &&
+																supplemental.solutionLink
+															"
 															class="item-link"
 														>
-															<strong>Solution:</strong>
+															<strong
+																>Solution:</strong
+															>
 															<a
-																:href="supplemental.solutionLink"
+																:href="
+																	supplemental.solutionLink
+																"
 																rel="noreferrer"
 																target="_blank"
 															>
-																{{ supplemental.solutionLink }}
+																{{
+																	supplemental.solutionLink
+																}}
 															</a>
 														</p>
 													</div>
 													<div
-														v-if="supplemental.content"
+														v-if="
+															supplemental.content
+														"
 														class="item-content-markdown"
-														v-html="renderMarkdown(supplemental.content)"
+														v-html="
+															renderMarkdown(
+																supplemental.content
+															)
+														"
 													/>
 												</div>
 											</div>
@@ -282,7 +429,9 @@ function hasSupplemental(module: CourseModule) {
 					</transition>
 				</div>
 			</div>
-			<p v-else class="course-empty">Select a course to view its modules.</p>
+			<p v-else class="course-empty">
+				Select a course to view its modules.
+			</p>
 		</div>
 		<div v-else class="course-empty">
 			<p>You don't have any courses assigned yet.</p>
@@ -497,7 +646,9 @@ function hasSupplemental(module: CourseModule) {
 }
 
 .item-content-markdown code {
-	font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+	font-family:
+		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+		monospace;
 	font-size: 0.85rem;
 	background: rgba(15, 23, 42, 0.08);
 	padding: 0.1rem 0.35rem;

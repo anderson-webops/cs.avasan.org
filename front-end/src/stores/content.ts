@@ -21,11 +21,24 @@ export const useContentStore = defineStore("content", () => {
 	const subjectGroups = ref<SubjectGroup[]>([
 		{
 			title: "Programming & Computer Science",
-			subjects: ["Python", "Scratch", "C++", "C", "Java", "Intro to AI and Machine Learning"]
+			subjects: [
+				"Python",
+				"Scratch",
+				"C++",
+				"C",
+				"Java",
+				"Intro to AI and Machine Learning"
+			]
 		},
 		{
 			title: "Web Technologies",
-			subjects: ["HTML", "CSS", "JavaScript", "TypeScript", "Responsive Design"]
+			subjects: [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"TypeScript",
+				"Responsive Design"
+			]
 		},
 		{
 			title: "STEM & Language",
@@ -57,7 +70,9 @@ export const useContentStore = defineStore("content", () => {
 	]);
 
 	// ----- Helpful derived data (optional) -----
-	const allSubjects = computed<string[]>(() => subjectGroups.value.flatMap(g => g.subjects));
+	const allSubjects = computed<string[]>(() =>
+		subjectGroups.value.flatMap(g => g.subjects)
+	);
 
 	const faqs = ref<FAQ[]>([
 		{
@@ -83,5 +98,7 @@ export const useContentStore = defineStore("content", () => {
 });
 
 if (import.meta.hot) {
-	import.meta.hot.accept(acceptHMRUpdate(useContentStore as any, import.meta.hot));
+	import.meta.hot.accept(
+		acceptHMRUpdate(useContentStore as any, import.meta.hot)
+	);
 }

@@ -10,8 +10,9 @@ const content = useContentStore();
 		<div class="intro">
 			<h1>Tuition &amp; Payment</h1>
 			<p>
-				Each class is a 50-minute 1:1 session for $40. I always leave an extra 10-minute buffer so we can wrap
-				up a project or finish debugging without rushing.
+				Each class is a 50-minute 1:1 session for $40. I always leave an
+				extra 10-minute buffer so we can wrap up a project or finish
+				debugging without rushing.
 			</p>
 			<div class="tuition-card">
 				<div class="rate">
@@ -21,7 +22,9 @@ const content = useContentStore();
 				<ul>
 					<li>Flexible recurring or one-time scheduling</li>
 					<li>Follow-up notes with key takeaways and next steps</li>
-					<li>Homework review or project feedback between sessions</li>
+					<li>
+						Homework review or project feedback between sessions
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -29,17 +32,24 @@ const content = useContentStore();
 		<section aria-labelledby="payment-title" class="payment">
 			<h2 id="payment-title">How to pay</h2>
 			<p>
-				Venmo and Zelle are available to submit payment before or after class. Tap the buttons below to see my
-				Zelle contact or to open my Venmo profile in a new tab.
+				Venmo and Zelle are available to submit payment before or after
+				class. Tap the buttons below to see my Zelle contact or to open
+				my Venmo profile in a new tab.
 			</p>
-			<a class="cta" href="https://www.venmo.com/u/jacoba1100254352-classes" rel="noreferrer" target="_blank">
+			<a
+				class="cta"
+				href="https://www.venmo.com/u/jacoba1100254352-classes"
+				rel="noreferrer"
+				target="_blank"
+			>
 				Open Venmo profile
 			</a>
 			<RouterLink class="cta" to="/zelle">Pay with Zelle</RouterLink>
 			<div class="note">
 				<p>
-					Prefer a different method? I can also accept CashApp, Apple Cash or mailed checks—just reach out and
-					we’ll set up what works best for your family.
+					Prefer a different method? I can also accept CashApp, Apple
+					Cash or mailed checks—just reach out and we’ll set up what
+					works best for your family.
 				</p>
 			</div>
 		</section>
@@ -47,7 +57,11 @@ const content = useContentStore();
 		<section aria-labelledby="faq-title" class="faq w-100">
 			<h2 id="faq-title">FAQ</h2>
 			<div id="faqAccordion" class="accordion">
-				<div v-for="(faq, i) in content.faqs" :key="i" class="accordion-item">
+				<div
+					v-for="(faq, i) in content.faqs"
+					:key="i"
+					class="accordion-item"
+				>
 					<h2 :id="`faq${i}-heading`" class="accordion-header">
 						<button
 							class="accordion-button collapsed"
@@ -77,9 +91,14 @@ const content = useContentStore();
 
 		<section aria-labelledby="schedule-title" class="schedule">
 			<h2 id="schedule-title">Ready to schedule?</h2>
-			<p>Book through Calendly or email me to coordinate a recurring spot that matches your schedule.</p>
+			<p>
+				Book through Calendly or email me to coordinate a recurring spot
+				that matches your schedule.
+			</p>
 			<RouterLink class="cta" to="/signup">Book a Class</RouterLink>
-			<a class="cta ghost" href="mailto:bascule-skaters0n@icloud.com">Email Jacob</a>
+			<a class="cta ghost" href="mailto:bascule-skaters0n@icloud.com"
+				>Email Jacob</a
+			>
 		</section>
 	</section>
 </template>

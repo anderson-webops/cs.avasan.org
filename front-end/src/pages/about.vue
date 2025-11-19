@@ -6,7 +6,13 @@ import { useQuoteStore } from "@/stores/quote";
 defineOptions({ name: "AboutPage" });
 
 const quote = useQuoteStore();
-const { text: quoteText, author: quoteAuthor, hasQuote, loading, error } = storeToRefs(quote);
+const {
+	text: quoteText,
+	author: quoteAuthor,
+	hasQuote,
+	loading,
+	error
+} = storeToRefs(quote);
 
 // Fetch once on client; cached for 5 minutes by the store
 onMounted(() => {
@@ -28,16 +34,20 @@ onMounted(() => {
 
 			<div class="copy">
 				<p>
-					I'm a lifelong learner and educator with a passion for helping students fall in love with
-					problem-solving. For the last several years I taught coding, math, and science through Juni
-					Learning, where I guided hundreds of students from their first "Hello World" program all the way to
+					I'm a lifelong learner and educator with a passion for
+					helping students fall in love with problem-solving. For the
+					last several years I taught coding, math, and science
+					through Juni Learning, where I guided hundreds of students
+					from their first "Hello World" program all the way to
 					launching complex capstone projects.
 				</p>
 				<br />
 				<p>
-					With Juni winding down, I'm excited to continue working directly with families and adult learners.
-					My goal is to keep the collaborative, project-driven environment you loved while offering even more
-					flexibility and personalized support.
+					With Juni winding down, I'm excited to continue working
+					directly with families and adult learners. My goal is to
+					keep the collaborative, project-driven environment you loved
+					while offering even more flexibility and personalized
+					support.
 				</p>
 			</div>
 		</section>
@@ -51,7 +61,8 @@ onMounted(() => {
 					<!--					</h3> -->
 					<p>
 						<strong>Curiosity First:</strong>
-						Concepts stick when students understand the "why" and can experiment freely.
+						Concepts stick when students understand the "why" and
+						can experiment freely.
 					</p>
 				</li>
 				<li>
@@ -60,7 +71,8 @@ onMounted(() => {
 					<!--					</h3> -->
 					<p>
 						<strong>Transparent Goals:</strong>
-						Every class ends with an achievable milestone or plan so you always know what's next.
+						Every class ends with an achievable milestone or plan so
+						you always know what's next.
 					</p>
 				</li>
 				<li>
@@ -69,8 +81,8 @@ onMounted(() => {
 					<!--					</h3> -->
 					<p>
 						<strong>Real-world Context:</strong>
-						We connect lessons to meaningful projects—apps, games, data explorations, or engineering
-						challenges.
+						We connect lessons to meaningful projects—apps, games,
+						data explorations, or engineering challenges.
 					</p>
 				</li>
 			</ul>
@@ -81,27 +93,44 @@ onMounted(() => {
 			<div class="experience-grid">
 				<article>
 					<h3>Juni Learning Instructor</h3>
-					<p>Led 1:1 and small-group classes in a variety of coding and STEM fields.</p>
+					<p>
+						Led 1:1 and small-group classes in a variety of coding
+						and STEM fields.
+					</p>
 				</article>
 				<article>
 					<h3>Curriculum Designer</h3>
-					<p>Developed modules on circuit fundamentals, python, and physics.</p>
+					<p>
+						Developed modules on circuit fundamentals, python, and
+						physics.
+					</p>
 				</article>
 				<article>
 					<h3>Multilingual Mentor</h3>
 					<p>
-						Fluent in Spanish and experienced working with bilingual families to support both academic and
-						conversational goals.
+						Fluent in Spanish and experienced working with bilingual
+						families to support both academic and conversational
+						goals.
 					</p>
 				</article>
 			</div>
 		</section>
 
 		<section aria-labelledby="cta-title" class="cta-group">
-			<a class="cta" href="https://www.linkedin.com/in/jacoba1100254352/" target="_blank" rel="noreferrer">
+			<a
+				class="cta"
+				href="https://www.linkedin.com/in/jacoba1100254352/"
+				target="_blank"
+				rel="noreferrer"
+			>
 				View my LinkedIn
 			</a>
-			<a class="cta ghost" href="https://www.jacobdanderson.net" target="_blank" rel="noreferrer">
+			<a
+				class="cta ghost"
+				href="https://www.jacobdanderson.net"
+				target="_blank"
+				rel="noreferrer"
+			>
 				Visit my portfolio site
 			</a>
 		</section>
@@ -112,7 +141,9 @@ onMounted(() => {
 				<cite>— {{ quoteAuthor }}</cite>
 			</div>
 			<div v-else-if="loading" class="quote-skeleton">Loading…</div>
-			<div v-else-if="error" class="quote-error">Couldn’t load a quote.</div>
+			<div v-else-if="error" class="quote-error">
+				Couldn’t load a quote.
+			</div>
 		</section>
 	</section>
 </template>
