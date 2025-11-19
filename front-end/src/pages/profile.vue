@@ -8,7 +8,7 @@ import TutorProfile from "@/components/TutorProfile.vue";
 import UserProfile from "@/components/UserProfile.vue";
 import { useAppStore } from "@/stores/app";
 
-type ProfileTab = "profile" | "courses";
+type ProfileTab = "profile" | "courses" | "manage";
 
 defineOptions({ name: "ProfilePage" });
 
@@ -38,15 +38,19 @@ const profileRole = computed(() => {
 });
 
 const canBrowseCourses = computed(
-	() => !currentAdmin.value && (currentTutor.value || currentUser.value)
+	() => !!currentAdmin.value || currentTutor.value || currentUser.value
 );
+
+const profileTabs = computed<ProfileTab[]>(() => {
+	if (currentAdmin.value) return ["profile", "manage", "courses"];
+	if (canBrowseCourses.value) return ["profile", "courses"];
+	return ["profile"];
+});
 
 const activeTab = ref<ProfileTab>("profile");
 
-watch(canBrowseCourses, value => {
-	if (!value && activeTab.value !== "profile") {
-		activeTab.value = "profile";
-	}
+watch(profileTabs, value => {
+	if (!value.includes(activeTab.value)) activeTab.value = value[0];
 });
 
 const heroTitle = computed(() => {
@@ -87,6 +91,19 @@ const heroBadge = computed(() =>
 
 const hasProfile = computed(() => activeProfileComponent.value !== null);
 
+const tabLabels: Record<ProfileTab, string> = {
+	profile: "Profile",
+	manage: "Manage profiles",
+	courses: "Course library"
+};
+
+const profileComponentProps = computed(() => {
+	if (currentAdmin.value) {
+		return { mode: activeTab.value === "manage" ? "manage" : "profile" };
+	}
+	return {};
+});
+
 function openAuthModal() {
 	app.setLoginBlock(true);
 }
@@ -103,35 +120,29 @@ function openAuthModal() {
 
 			<div v-if="hasProfile" class="profile-card">
 				<div
-					v-if="canBrowseCourses"
+					v-if="profileTabs.length > 1"
 					class="profile-tabs"
 					role="tablist"
 				>
 					<button
-						:aria-selected="activeTab === 'profile'"
+						v-for="tab in profileTabs"
+						:key="tab"
+						:aria-selected="activeTab === tab"
 						class="tab"
 						role="tab"
 						type="button"
-						@click="activeTab = 'profile'"
+						@click="activeTab = tab"
 					>
-						Profile
-					</button>
-					<button
-						:aria-selected="activeTab === 'courses'"
-						class="tab"
-						role="tab"
-						type="button"
-						@click="activeTab = 'courses'"
-					>
-						Course library
+						{{ tabLabels[tab] }}
 					</button>
 				</div>
 
 				<component
 					:is="activeProfileComponent"
-					v-if="activeTab === 'profile'"
+					v-if="activeTab !== 'courses'"
+					v-bind="profileComponentProps"
 				/>
-				<CourseExplorer v-else-if="canBrowseCourses" />
+				<CourseExplorer v-else />
 			</div>
 
 			<div v-else class="profile-empty">
