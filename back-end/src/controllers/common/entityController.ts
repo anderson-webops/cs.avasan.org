@@ -37,7 +37,10 @@ export function makeEntityController<T extends Document & { comparePassword?: (p
 	const getAll: RequestHandler = async (_req, res) => {
 		try {
 			let query = model.find();
-			if (populate) query = query.populate(populate);
+			if (populate) {
+				if (typeof populate === "string") query = query.populate(populate);
+				else query = query.populate(populate);
+			}
 			const list = await query.exec();
 			res.json(list);
 		}
@@ -52,7 +55,10 @@ export function makeEntityController<T extends Document & { comparePassword?: (p
 		const id = req.params[idParam];
 		try {
 			let query = model.findById(id);
-			if (populate) query = query.populate(populate);
+			if (populate) {
+				if (typeof populate === "string") query = query.populate(populate);
+				else query = query.populate(populate);
+			}
 			const doc = await query.exec();
 			if (!doc) return res.sendStatus(404);
 			Object.assign(doc, req.body);
