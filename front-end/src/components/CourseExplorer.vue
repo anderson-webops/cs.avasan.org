@@ -40,7 +40,8 @@ const hasCourseAccess = computed(() => courseList.value.length > 0);
 
 const selectedCourseId = ref("");
 const activeModuleId = ref<string | null>(null);
-const openItems = ref<Record<string, string | null>>({});
+// const openItems = ref<Record<string, string | null>>({});
+const openItems = ref<Record<string, Record<string, boolean>>>({});
 
 function renderMarkdown(content: string) {
 	return markdown.render(content);
@@ -88,15 +89,13 @@ function itemKey(
 }
 
 function toggleItem(moduleId: string, key: string) {
-	const current = openItems.value[moduleId] ?? null;
-	openItems.value = {
-		...openItems.value,
-		[moduleId]: current === key ? null : key
-	};
+	const mod = openItems.value[moduleId] ?? {};
+	const next = { ...mod, [key]: !mod[key] };
+	openItems.value = { ...openItems.value, [moduleId]: next };
 }
 
 function isItemOpen(moduleId: string, key: string) {
-	return openItems.value[moduleId] === key;
+	return !!openItems.value[moduleId]?.[key];
 }
 
 function hasSupplemental(module: CourseModule) {
