@@ -23,7 +23,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"argon2": "^0.44.0",
-		"body-parser": "^2.2.0",
+		"body-parser": "^2.2.1",
 		"cookie-session": "^2.1.1",
 		"dotenv": "^17.2.3",
 		"esbuild": "^0.27.0",
