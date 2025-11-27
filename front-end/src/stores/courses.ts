@@ -2654,12 +2654,29 @@ Assuming you have followed the Instructor Note at the beginning of this module, 
 					{
 						title: "Neurons and Activation Functions",
 						content:
-							"Introduce a neuron as a basic computational unit that takes multiple inputs and produces a single output. Explain that each neuron has weights (w1, w2, …) corresponding to each input and a bias term b. For two inputs x1 and x2, the neuron computes z = x1*w1 + x2*w2 + b and then passes z through an activation function f to get the final output y = f(z). Show or describe common activation functions such as sigmoid (outputs between 0 and 1) and ReLU (rectified linear unit). Work through a numeric example with x1 = 0, x2 = 1, w1 = 1, w2 = 2, b = 1, and a sigmoid activation, computing z and then f(z)."
+							"Another technique or tool we can use for classification is called a neural network.\n\n" +
+							"A neural network is built out of neurons. A neuron is a node in a graph that takes in a specific number of inputs then produces a single output by doing some math on the inputs.\n\n" +
+							"A neuron contains some number of predetermined weights. The number of weights in a neuron is equivalent to the number of inputs to that neuron. For instance, the neuron above would have two weights in it (`w1` and `w2`).\n\n" +
+							"Once the neuron takes an input, it calculates the output first multiplying each input by its corresponding weight: `x1\*w1` and `x2\*w2.`\n\n" +
+							"Then, the neuron adds together each of these products along with a bias value called *b*: `x1\*w1 + x2\*w2 + b`.\n\n" +
+							"Finally, the neuron passes the sum through a special function called an activation function f to turn the output into a nice predictable form. Show the student a picture of the sigmoid function. The sigmoid function, for example, always returns a value between 0 and 1. Some common activation functions are the sigmoid and the relu functions.\n\n" +
+							"The output of the activation function is the output of the neuron: `y = f(x1\*w1 + x2\*w2 + b)`.\n\n" +
+							"Walk the student through an example of an input to the above neuron:\n" +
+							"\tlet `x1 = 0`, `x2 = 1`, `w1 = 1`, `w2 = 2`, `b = 1`, `activation function = sigmoid`\n" +
+							"\t`x1\*w1 + x2\*w2 + b = (0)(1) + (1)(2) + 1 = 3`\n" +
+							"\t`f(3) = 0.953` (using a sigmoid calculator online)"
+						// content:
+						// 	"Introduce a neuron as a basic computational unit that takes multiple inputs and produces a single output. Explain that each neuron has weights (w1, w2, …) corresponding to each input and a bias term b. For two inputs x1 and x2, the neuron computes z = x1*w1 + x2*w2 + b and then passes z through an activation function f to get the final output y = f(z). Show or describe common activation functions such as sigmoid (outputs between 0 and 1) and ReLU (rectified linear unit). Work through a numeric example with x1 = 0, x2 = 1, w1 = 1, w2 = 2, b = 1, and a sigmoid activation, computing z and then f(z)."
 					},
 					{
 						title: "ML4 Project 1: Build a Neuron Class",
 						content:
-							"In Colab, implement a Neuron class that encapsulates the behavior of a single neuron. Decide on instance attributes such as a list or array of weights and an activation function passed in at initialization. Implement a run() method that takes input values (e.g., x1 and x2) plus a bias and computes the neuron’s output by multiplying inputs by their weights, summing with the bias, and applying the activation function. Write a standalone sigmoid function that takes a numeric input and returns 1 / (1 + exp(-x)). Create an instance of Neuron using chosen weights and sigmoid as the activation, then call run() with various inputs to confirm the output matches manual calculations. Conclude with a short explanation of how the class works and what surprised you about implementing activation functions as function arguments.",
+							"What instance attributes should the Neuron class have? The `Neuron` class needs the weights (`w1` and `w2`) and the activation function (You may have to explain to the student how to pass in a function as an argument).\n" +
+							"What parameters does the `run()` method need? It needs the two inputs (`x1` and `x2`) into the neuron and the bias.\n" +
+							"Outside the class, write a sigmoid function that takes in a single input and returns the output of the sigmoid function.\n" +
+							"Create an instance of `Neuron` and pass an input into it.",
+						// content:
+						// 	"In Colab, implement a Neuron class that encapsulates the behavior of a single neuron. Decide on instance attributes such as a list or array of weights and an activation function passed in at initialization. Implement a run() method that takes input values (e.g., x1 and x2) plus a bias and computes the neuron’s output by multiplying inputs by their weights, summing with the bias, and applying the activation function. Write a standalone sigmoid function that takes a numeric input and returns 1 / (1 + exp(-x)). Create an instance of Neuron using chosen weights and sigmoid as the activation, then call run() with various inputs to confirm the output matches manual calculations. Conclude with a short explanation of how the class works and what surprised you about implementing activation functions as function arguments.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/ML4-Neuron-Implementation?skipMigration=1"
 					},
