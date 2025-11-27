@@ -2671,7 +2671,7 @@ Assuming you have followed the Instructor Note at the beginning of this module, 
 					{
 						title: "ML4 Project 1: Build a Neuron Class",
 						content:
-							"What instance attributes should the Neuron class have? The `Neuron` class needs the weights (`w1` and `w2`) and the activation function (You may have to explain to the student how to pass in a function as an argument).\n" +
+							"What instance attributes should the Neuron class have? The `Neuron` class needs the weights (`w1` and `w2`) and the activation function (You may need to pass in a function as an argument).\n" +
 							"What parameters does the `run()` method need? It needs the two inputs (`x1` and `x2`) into the neuron and the bias.\n" +
 							"Outside the class, write a sigmoid function that takes in a single input and returns the output of the sigmoid function.\n" +
 							"Create an instance of `Neuron` and pass an input into it.",
