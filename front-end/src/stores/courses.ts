@@ -2153,44 +2153,44 @@ Finally, share the project!`
 					{
 						title: "Creating and Running a C++ Script",
 						content:
-							"Discuss and analyze a basic `Hello World!` C++ program."
+							'Use an online C++ editor such as repl.it to compile and run code. Create a C++11 file named Objects and Variables and run the starter line `std::cout << "Hello World!\\n"` to print to the console. Show how `std::endl` adds a newline, what happens if it is missing, and that each statement ends with a semicolon.'
 					},
 					{
 						title: "Primitive Types",
 						content:
-							"Discuss fundamental data types in C++: integers, floating-point numbers, booleans and characters. Show how to declare variables of each type and assign values. Explain arithmetic operations including modulus. Demonstrate printing values using `std::cout` and reading values with `std::cin`."
+							"Reference: https://repl.it/@JuniLearning/CPPF1-Primitive-Types-and-Strings-Reference?skipMigration=1 Explain fundamental data types: integers, floating point numbers, booleans and characters. Demonstrate declaring variables with and without initial values and initializing several of the same type on one line. Create an integer myAge, a double myRating for a movie rating, and show arithmetic operators including %. Illustrate mod with 10 / 3 = 3 and 10 % 3 = 1. Cast a double to an int when printing. Create a boolean isHot and a char myChar for the first letter of your last name."
 					},
 					{
 						title: "String",
 						content:
-							"Explain the `std::string` class. Demonstrate declaring strings, concatenating them, indexing characters, using `string.length()` and adding characters. Show how to modify and print strings."
+							"Explain the `std::string` type and add `#include <string>` to use it. Create `myString` with double quotes, print its first letter with indexing, and use `string.length()` to print its length. Concatenate two strings and print the result. Demonstrate `str.insert(i, otherStr)` and `str.insert(i, amt, char)` to insert strings or characters."
 					},
 					{
 						title: "Input and Output",
 						content:
-							'Introduce `iostream` and explain insertion (`<<`) and extraction (`>>`) operators. Demonstrate reading input from the user with `std::cin` and printing results with `std::cout`. Example: prompt the user for their name and greet them by printing "Nice to meet you, <name>".'
+							'Reference: https://repl.it/@JuniLearning/CPPF1-Input-and-Output-Reference?skipMigration=1 Explain streams for input and output. Use the insertion operator (`<<`) to print "Enter your name: " to the console. Create a string variable name, use the extraction operator (`>>`) to read the response, and print "Nice to meet you, ___!" with the input inserted. Include `#include <iostream>` at the top. Explain `cin` and `cout`, and note that `<<` and `>>` point to where information is sent.'
 					},
 					{
 						title: "Comments",
 						content:
-							"Teach single-line comments using `//` and multi-line comments using `/* … */`. Explain why comments are useful for documenting code."
+							"Add single-line comments with `//` to describe code. Use multi-line comments `/* ... */` to comment out sections of code and observe that commented code does not run."
 					},
 					{
 						title: "Compilation (Advanced Concept)",
 						content:
-							"Briefly explain what happens when a C++ program is compiled. Touch on namespaces (`std::`), the scope-resolution operator `::`, object files and linking."
+							"Explain that `std` stands for standard and `::` is the scope resolution operator that identifies where a function comes from. When you click Run, the compiler checks C++ rules, reports errors with line numbers, and then translates code into an object file."
 					},
 					{
 						title: "CPPF1 Project 1: Mad Libs",
 						content:
-							"Play a Mad Libs game from the solution to understand the goal. Then have them build their own Mad Libs: create several string variables and prompt the user to enter words (nouns, verbs, adjectives, etc.) via `std::cin`. After gathering inputs, concatenate the strings into a story using `std::cout`. Encourage creativity.",
+							"Demo the Mad Libs example, then build your own: create several string variables, prompt for inputs with `std::cin`, and use string concatenation or multiple insertion operators to print the final story. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF1-Mad-Libs-Solution"
 					},
 					{
 						title: "CPPF1 Project 2: Chatbot",
 						content:
-							'Create a simple chatbot that interacts with the user. Ask for the user\'s name and respond. Ask for a sentence, use `str.insert()` to insert "achoo" into the user\'s sentence, and have the bot "sneeze." Ask for a temperature in Fahrenheit and convert it to Celsius using floating-point arithmetic. Ask for an amount in dollars and convert it to another currency. Emphasize correct use of floats.',
+							"Create a chatbot: ask for a name and respond, ask for a sentence and use `str.insert()` to insert **achoo** to make the bot sneeze, convert Fahrenheit to Celsius with float values, and convert a dollar amount to another currency. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF1-Chatbot-Solution"
 					}
@@ -2203,34 +2203,36 @@ Finally, share the project!`
 					{
 						title: "For Loops",
 						content:
-							"Introduce the structure of a `for` loop: initialization, condition and increment. Practice writing loops to print numbers from 11 to 20, print even numbers from 2 to 10, print numbers from 10 down to 1, ask the user for a word and print its letters one by one, print the word backward, sum the numbers from 1 to 100 and calculate the factorial of 10. Discuss the `++` and `--` operators and compound assignment."
+							"Explain that a loop repeats code. Show the three parts of a `for` loop: initialization variable, termination condition and increment, separated by semicolons. Practice printing 0–10, 11–20, even numbers from 2 to 10, numbers from 10 to 1, letters of a word forward and backward, the sum of 1 to 100, and the factorial of 10. Discuss ++, --, and compound assignment (+=, -=, *=, /=)."
 					},
 					{
 						title: "While Loops",
 						content:
-							"Explain `while` loops and how they repeat until a condition becomes false. Practice converting the for-loop exercises into while-loop versions. Emphasize careful loop termination to avoid infinite loops."
+							"Show how a `while` loop repeats until a condition is no longer true. Print numbers 0–9 with `while (x < 10)` and incrementing inside the loop. Redo the for-loop exercises using while loops."
 					},
 					{
-						title: "CPPF2 Project 1: Loop Practice",
+						title: "CPPF2 Project 1: Number Games",
 						content:
-							"Ask the user for two numbers (a smaller and a larger). Print all the numbers between them. Then ask how many numbers the user wants to enter; read that many numbers and print their sum. Finally, compute and print the average (using a `double` for precision). Implement each part using both `for` and `while` loops. Finish by recording and sharing a video of the project."
+							"Use both `for` and `while` loops for each part: ask for a number and a larger number and print all numbers between them, ask how many numbers to enter and print their sum, then print the average using double division. Prepare a short presentation to share with friends or family.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF2-Number-Games?skipMigration=1"
 					},
 					{
 						title: "Conditionals and Logical Operators",
 						content:
-							"Introduce comparison operators (`==`, `!=`, `>`, `<`, `>=`, `<=`) and logical operators (`&&` for AND, `||` for OR). Show how to construct `if`, `else if` and `else` chains. Demonstrate simple decision-making based on user input."
+							"Introduce conditional statements with examples like `if (1+1 == 2)`. Explain comparison operators (==, !=, >, <, >=, <=) and logical operators `&&` (and) and `||` (or). Show `if`, `if-else`, and `if... else if... else` chains and how nested conditionals work."
 					},
 					{
 						title: "CPPF2 Project 2: Rock, Paper, Scissors",
 						content:
-							"Discuss how to implement Rock–Paper–Scissors using conditionals. Prompt both players for their choice, then use nested conditionals to determine the winner by comparing the choices.",
+							"Use conditionals to build Rock, Paper, Scissors. Check each player's choice with nested conditionals to determine the winner. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF2-Rock-Paper-Scissors-Solution"
 					},
 					{
 						title: "CPPF2 Project 3: FizzBuzz",
 						content:
-							'Print the numbers 1 through 50, but for multiples of 3 print "Fizz," for multiples of 5 print "Buzz," and for multiples of both 3 and 5 print "FizzBuzz." Emphasize using the modulo operator. Challenge: allow the user to input two numbers and print a customized FizzBuzz.',
+							'Print numbers 1 through 50. For multiples of 3 print "Fizz," for multiples of 5 print "Buzz," and for multiples of both print "FizzBuzz." Review the % operator with simple examples. Bonus: allow any two input numbers for a customizable FizzBuzz. Prepare a short presentation to share with friends or family.',
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF2-FizzBuzz-Solution"
 					}
@@ -2243,31 +2245,31 @@ Finally, share the project!`
 					{
 						title: "Basic Function Structure in C++",
 						content:
-							"Explain that a function is a reusable block of code that takes inputs (parameters) and returns a value. Show the syntax: return type, function name and parameters. Demonstrate defining functions outside `main` and calling them from `main`. Explain prototypes and how return types determine what a function returns."
+							"Explain that functions run specific code repeatedly without rewriting it. Show syntax with return type, name and parameters, for example `int add(int x, int y) { int r = x + y; return r; }`, and how to call it. Note that parameters take the values of arguments and do not need matching names. Demonstrate declaring a function before it is called, using return values, and when to use `void`."
 					},
 					{
 						title: "CPPF3 Project 1: Function Practice",
 						content:
-							"Write several functions: (1) a function that takes two integers and returns their average (use `double` for precision); (2) a function that takes an integer and returns `true` if it's even, `false` otherwise; (3) a function that takes three doubles and returns the smallest; (4) a function that takes an integer and returns its factorial; (5) a function that takes a base and exponent and returns the base raised to that power.",
+							"Write functions that: take two integers and return their precise average, check if an integer is even, return the smallest of three distinct doubles, return the factorial of an integer, and compute a positive integer base raised to a power.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF3-Function-Practice-Solution"
 					},
 					{
 						title: "Random Numbers",
 						content:
-							"Introduce `rand()` from `<cstdlib>` to generate random numbers. Show how to seed the random number generator using `srand(time(NULL))` for varied results. Explain using modulo to restrict random numbers to a range (e.g., `rand() % (max - min) + min`)."
+							"Use `rand()` to generate random numbers and seed with `srand(time(0))` so results change each run. `rand() % num` gives a value between 0 and num - 1. For a range like 15–75, use `rand() % (max - min + 1) + min`, and check odd/even with `rand() % 2`."
 					},
 					{
 						title: "CPPF3 Project 2: Probability Events and Random",
 						content:
-							'Write functions to simulate random events: (1) flip a coin and return "heads" or "tails"; (2) roll two dice and return the sum; (3) draw a card from a standard 52-card deck and return a string like "10 of Diamonds" or "King of Spades." Discuss how to use random numbers to choose card values and suits. Record and share a video.',
+							'Write functions that simulate probability events: flip a coin and return "heads" or "tails," roll two dice and return the sum, and draw a card returning "value of suit" such as "10 of Diamonds" or "King of Spades." Discuss suits and card values. Prepare a short presentation to share with friends or family.',
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF3-Probability-Events-Solution"
 					},
 					{
 						title: "CPPF3 Project 3: Number Guesser",
 						content:
-							"Create a game where the program picks a random number within a range specified by the user. Ask the user for the range bounds and for the number of guesses allowed. Implement separate functions for asking the range, generating the number, prompting guesses and giving feedback (higher/lower). End the game when the user guesses correctly or runs out of guesses. Record and share a video.",
+							"Create a game that picks a random number between a user-provided range and allows a set number of guesses. Break the program into functions for the range, random number, prompting guesses and giving higher/lower feedback. End when the number is guessed or guesses run out. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF3-Number-Guesser-Solution"
 					}
@@ -2278,33 +2280,43 @@ Finally, share the project!`
 				title: "CPPF4 Classes and Objects",
 				curriculum: [
 					{
-						title: "Introduction to Classes and Objects",
+						title: "Object Oriented Programming Basics",
 						content:
-							"Explain object-oriented programming and why classes are useful. Show how to define a class with private member variables and public member functions. Demonstrate creating objects, constructors and destructors."
+							"Explain object oriented programming using objects to hold data so code is extensible and reusable. Introduce classes as templates for creating objects, using examples like grouping properties of social media posts. Define an object as an instance of a class."
+					},
+					{
+						title: ".h Files and .cpp Files",
+						content:
+							'Reference: https://repl.it/@JuniLearning/CPPF4-Point-Class Create a new project with point.cpp and point.h. Place declarations in the .h header file and implementations in the .cpp source file. Use the scope resolution operator with Point:: before functions in the .cpp file, and `#include "CLASS_NAME.h"` in .cpp and main files. Add header guards with `#ifndef CLASS_H`, `#define CLASS_H`, and `#endif` to avoid multiple inclusions.'
 					},
 					{
 						title: "Public and Private Variables",
 						content:
-							"Discuss encapsulation and why member variables should be private. Show how to use getter and setter functions to access and modify private data."
+							"Describe encapsulation: keep sensitive data private and expose needed functions as public. Make variables like x and y coordinates private and keep functions public unless they should be hidden."
 					},
 					{
-						title: "More about Classes (getters, setters, printing, etc.)",
+						title: "Class Functions",
 						content:
-							"Expand on class features: default constructors, copy constructors, overloaded constructors, and how to print class objects by writing a `print()` method."
+							'Explain constructors, starting with a default constructor that sets values to 0 and an overloaded constructor that accepts x and y values. Add getters and setters for x and y. In main, use getters to print "The point\'s coordinate is (x, y)" to test access to private variables.'
 					},
 					{
-						title: "CPPF4 Project 1: Cat Class",
+						title: "CPPF4 Project 1: Person Class",
 						content:
-							"Create a `Cat` class with private attributes such as name, age and weight. Write appropriate constructors, getters and setters. Add a method `meow()` that prints a message. In `main`, instantiate several cats and call their methods.",
+							"Build a Person class with private variables such as name, age and height (in inches), plus any others you choose. Include at least two constructors (default and one with parameters), getters and setters, and a toString function that converts height from inches to feet + inches (for example, 66 to 5' 6\"). Consider a private helper for the height conversion. Prepare a short presentation to share with friends or family.",
 						solutionLink:
-							"https://repl.it/@JuniLearning/CPPF4-Cat-Class-Solution"
+							"https://repl.it/@JuniLearning/CPPF4-Person-Class?skipMigration=1"
 					},
 					{
-						title: "CPPF4 Project 2: Bookcase",
+						title: "The Base Member Initialization List (BMI)",
 						content:
-							"Design a `Book` class with attributes like title, author and page count. Then design a `Bookcase` class that stores multiple books. Implement methods to add books, remove books and list all books. Encourage using arrays or vectors. Record and share a video.",
+							"Reference: https://repl.it/@JuniLearning/CPPF4-Person-Class-with-BMI Explain how a base member initialization list quickly initializes private variables. Show the order matching declarations in the .h file and the syntax Class::Class(params) : var(value) {}. Update Person constructors to use BMI."
+					},
+					{
+						title: "CPPF4 Project 2: Cat Class",
+						content:
+							'Create a Cat class. Include a default constructor (name "cat," breed "unknown," age 0, color "unknown") and an overloaded constructor, both using BMI. Add changeAge, changeBreed, toString, meow, eat, and pet functions. Bonus: use "year" instead of "years" when the cat is one year old. Prepare a short presentation to share with friends or family.',
 						solutionLink:
-							"https://repl.it/@JuniLearning/CPPF4-Bookcase-Solution"
+							"https://repl.it/@JuniLearning/CPPF4-Cat-Class?skipMigration=1"
 					}
 				],
 				supplementalProjects: []
@@ -2314,18 +2326,26 @@ Finally, share the project!`
 				curriculum: [
 					{
 						title: "Memory and Pointers",
-						content: "",
+						content:
+							"Reference: https://repl.it/@JuniLearning/CPPF5-Pointers Explain that memory locations have unique addresses visible with & before a variable. Create an int variable, print its address, and create a pointer with `int*` pointing to that address. Show dereferencing with `*` to access or change the value, assigning one pointer to another, changing pointer targets, and setting a pointer to `nullptr` when it points to nothing.",
 						projectLink:
 							"https://repl.it/@JuniLearning/CPPF5-Pointers-Reference"
 					},
 					{
 						title: "CPPF5 Project 1: Pointers Introduction",
 						content:
-							"Project questions walk through pointer fundamentals, including dereferencing, copying pointers, and handling `nullptr`.",
+							"Answer conceptual questions about pointers: printing `*p1` vs. `p1`, changing `*p1`, copying pointers, dereferencing uninitialized or `nullptr` pointers, and why assignments like `*p1 = &val1` are incorrect.",
 						projectLink:
 							"https://repl.it/@JuniLearning/CPPF5-Pointers-Starter?skipMigration=1",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF5-Pointers?skipMigration=1"
+					},
+					{
+						title: "CPPF5 Project 2: Problems Using Pointers",
+						content:
+							"Write code that demonstrates common pointer issues and observe the errors: dangling pointers, dereferencing a `nullptr`, improper initialization (`int* p1, p2`), uninitialized pointers, assigning values directly to pointer variables, and data type mismatches. Prepare a short presentation to share with friends or family.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF5-Pointer-Error-Examples?skipMigration=1"
 					}
 				],
 				supplementalProjects: []
@@ -2336,31 +2356,33 @@ Finally, share the project!`
 					{
 						title: "References",
 						content:
-							"Explain that a reference is an alias for another variable. Create a reference using `&` after the type (e.g., `int& ref1 = intVal1`). Modifying the reference changes the original variable. References are often used for passing parameters to functions."
+							"Explain that a reference is an alias for another variable, created with & after the type (for example, `int& ref1 = intVal1`). Changing the reference changes the original, which is useful in function parameters."
 					},
 					{
 						title: "Parameter Passing",
 						content:
-							"Discuss three ways to pass parameters: by value, by reference and by const reference. • Pass by value copies the argument; modifications don't affect the original. • Pass by reference allows the function to modify the original value. • Pass by const reference allows the function to read the value without modifying it. Show examples where spacing around `&` doesn't matter (e.g., `int& ref` vs. `int &ref`)."
+							"Reference: https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Introduction Discuss passing by value (creates a local copy), by reference (modifies the original) and by const reference (efficient but unmodifiable). Show examples where spacing around & is flexible: int &param, int& param, int &param."
 					},
 					{
 						title: "CPPF6 Project 1: Parameter Passing Tracing",
 						content:
-							"Write comments predicting what will happen to parameters passed by value, reference and const reference, then run the program to test the predictions. Discuss why parameters passed by const reference cannot be changed inside the function.",
+							"Write comments predicting how values change when passed by value, reference and const reference, then call the functions to test. Explain why const references cannot be modified.",
+						projectLink:
+							"https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Starter?skipMigration=1",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Tracing?skipMigration=1"
 					},
 					{
 						title: "CPPF6 Project 2: Defanging a Website Address",
 						content:
-							'Write a program that replaces periods in a URL with `[.]` to "defang" the address. Create one function that defangs by editing the string directly (pass the string by reference) and another function that returns a defanged copy (pass by value). Use `str.replace()` to substitute each period.',
+							"Defang a URL by turning periods into `[.]`. Write one function that edits the string directly (pass by reference) and another that builds and returns a new defanged string (pass by value), possibly using `str.replace()`.",
 						solutionLink:
-							"https://repl.it/@JuniLearning/CPPF6-Defanging?skipMigration=1"
+							"https://repl.it/@JuniLearning/CPPF6-Defanging-a-Website-URL?skipMigration=1"
 					},
 					{
 						title: "CPPF6 Project 3: Chaos Monkeys",
 						content:
-							"Write functions that insert random uppercase characters into a string. Create three functions that each take a string and (a) pass by value, (b) pass by reference, and (c) pass by const reference; each function should insert characters differently. Use the string method `.insert(int index, int count, char newChar)` to add characters at random positions. Note: be careful when iterating over a changing string—if you call `.length()` each time, the loop might not terminate. Challenge the to explore other string-scrambling functions. After finishing, record and share a video.",
+							"Write functions that pass strings by value, by reference and by const reference, inserting random characters with `insert(int index, int quantity, char newChar)`. Avoid infinite loops when the string length changes inside a loop. Bonus: add more scrambling functions. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF6-Chaos-Monkeys?skipMigration=1"
 					}
@@ -2373,17 +2395,39 @@ Finally, share the project!`
 					{
 						title: "Array Basics",
 						content:
-							"Explain that arrays hold multiple values of the same type. Declare an array by specifying its type, name and size, e.g., `int arr[10]`. Ask to create an array `nums` with 10 ints. Show how to initialise arrays with an initializer list: `int arr[] = {1, 2, 3}`. Access elements by index (0-based) and modify them. Explain how `sizeof(array) / sizeof(array[0])` gives the number of rows or columns. Demonstrate iterating over an array with a loop and using pointers to traverse arrays, but caution against undefined behaviour when accessing memory out of bounds."
+							"Reference: https://repl.it/@JuniLearning/CPPF7-Array-Basics-Reference Explain that arrays store ordered values of the same type. Declare an array with type, name and size such as `int nums[10]`, or initialize with `int arr[] = {1,2,3}`. Access and change elements by index. Use sizeof(array) / sizeof(array[0]) to find length, loop to update and print elements, and note that printing an array name shows an address, so loop to print values."
+					},
+					{
+						title: "Arrays in Memory",
+						content:
+							"Reference: https://repl.it/@JuniLearning/CPPF7-Pointer-Arithmetic-Reference Explain that arrays are contiguous memory and act like pointers to the first element. Create a pointer to the first element with `int *p1 = arr1`. Show accessing elements with pointer arithmetic like `*(p1 + index)` and advancing pointers with `p++`, warning about undefined behaviour outside the array."
 					},
 					{
 						title: "CPPF7 Project 1: Array Practice",
 						content:
-							"1. Create and print an array containing the first 10 perfect squares. 2. Write a function that takes an array of ints and returns `true` if the first and last elements are the same. 3. Write a function that sums all elements in an array of ints. 4. Write a function that takes an array of strings and returns the total number of letters in all strings. Explain how arrays are passed to functions: either as `type arr[]` or as a pointer.",
+							"Create and print an array of the first 10 perfect squares. Write functions that check whether the first and last array elements match, sum the elements of an int array, and return the total letters across an array of strings. Explain passing arrays to functions as `type arr[]` or as pointers.",
+						projectLink:
+							"https://repl.it/@JuniLearning/CPPF7-Array-Practice-Starter?skipMigration=1",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF7-Array-Practice?skipMigration=1"
+					},
+					{
+						title: "CPPF7 Project 2: Bank Accounts",
+						content:
+							"Ask for the number of transactions in the past month, store withdrawals and deposits in an array with a loop, and write a function to calculate and print the final balance. Bonus: alert if the balance is low. Prepare a short presentation to share with friends or family.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF7-Bank-Accounts?skipMigration=1"
 					}
 				],
-				supplementalProjects: []
+				supplementalProjects: [
+					{
+						title: "CPPF7 Supplemental Project 1: Tic Tac Toe",
+						content:
+							"Use arrays and functions to build Tic Tac Toe. Plan the game steps, use an array to track moves, create a function to check all winning combinations, a function to print the board with dividers, and track players' moves while handling invalid choices. Prepare a short presentation to share with friends or family.",
+						solutionLink:
+							"https://repl.it/@JuniLearning/CPPF7-Tic-Tac-Toe?skipMigration=1"
+					}
+				]
 			},
 			{
 				title: "CPPF8 Two-Dimensional Arrays",
@@ -2391,24 +2435,24 @@ Finally, share the project!`
 					{
 						title: "Two-Dimensional Arrays",
 						content:
-							"Explain how to create a 2D array in C++ (an array of arrays). For example, `int arr[10][10];` allocates 10×10 integers. Show initializer lists for 2D arrays, e.g., `int arr[3][3] = { {1,2,3}, {4,5,6}, {7,8,9} };`. Teach how to compute the number of rows using `sizeof(array) / sizeof(array[0])` and the number of columns using `sizeof(array[0]) / sizeof(array[0][0])`. Demonstrate accessing `arr[i][j]` and printing all elements with nested loops. Discuss passing 2D arrays to functions and returning them using pointers (`int**`) or arrays."
+							"Reference: https://repl.it/@JuniLearning/CPPF8-Two-Dimensional-Arrays-Reference Create a 2D array such as `int arr[10][10];` and with initializer lists like `int arr[3][3] = {{1,2,3},{4,5,6},{7,8,9}};`. Calculate rows with sizeof(array) / sizeof(array[0]) and columns with sizeof(array[0]) / sizeof(array[0][0]). Access elements with arr[i][j] and print with nested loops."
 					},
 					{
 						title: "Using Two-Dimensional Arrays in Functions",
 						content:
-							"Explain that when passing a 2D array to a function, the array parameter should be written as `(int *arr, int row, int col)` so that the function can access the memory. Within functions, 2D arrays are continuous blocks of memory; to access element `(i, j)` in an `m-by-n` array, use `*((arr + i*n) + j)`. Show how to return a 2D array from a function using `int**` for a 2D array and `int*` for a 1D array. Demonstrate creating a basic array-generating function that returns an array with numbers 0 through `n`."
+							"Pass a 2D array into a function as `(int *arr, int row, int col)` and access elements in contiguous memory with `*((arr + i*n) + j)`. Show returning arrays from functions with `int**` for 2D arrays and `int*` for 1D arrays, such as a function returning numbers 0 through n."
 					},
 					{
 						title: "CPPF8 Project 1: Two-Dimensional Array Practice",
 						content:
-							"Solve the following problems using 2D arrays: • Write a method that takes in a 2D array of integers and returns the sum of all of the integers in the array. • Write a method that takes in a 2D array of integers and returns the minimum of all of the integers in the array. • Write a method that takes in an integer `n` and returns a 2D array of the `n × n` multiplication table. Then, print the array in grid format. • Write a method that takes in a 2D array of integers and returns a one-dimensional array of the averages of the integers in each row (averages returned as floats).",
+							"Write methods that: sum all integers in a 2D array, find the minimum integer, return an n x n multiplication table and print it in a grid, and return a 1D array of the averages of each row as floats.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF8-2D-Array-Practice?skipMigration=1"
 					},
 					{
 						title: "CPPF8 Project 2: Bank Balances",
 						content:
-							"Show what you are trying to create and ask what components might be needed. How can we use a 2D array? How might we store a customer and their recurring transactions to show their total balance? Work together on the `print()` function to print out a grid. How can we use nested `for` loops to do this? Once the `print()` method is complete, implement the necessary data structure to allow user interaction.Finally, share the project!",
+							"Use a 2D array to track customers and recurring transactions. Build a `print()` function with nested for loops to show a grid, then implement the data structure for user interaction. Prepare a short presentation to share with friends or family.",
 						projectLink:
 							"https://repl.it/@JuniLearning/CPPF8-Two-Dimensional-Arrays-Reference",
 						solutionLink:
@@ -2423,43 +2467,43 @@ Finally, share the project!`
 					{
 						title: "Dynamic Variables",
 						content:
-							"Pointers let us point to values that don't have variable names. Variables we define manually are called static variables. Variables created during runtime via pointers are called dynamic (or anonymous) variables. Use the `new` operator to allocate memory and create dynamic variables (e.g., `int* p1 = new int;`). Assign values to them using `*p1 = 5` or `std::cin >> *p1`. Always call `delete p1` when done to avoid memory leaks. After deleting, a pointer becomes invalid (a dangling pointer) and dereferencing it leads to undefined behaviour. Use `nullptr` to indicate that a pointer doesn't point to anything.",
+							"Reference: https://repl.it/@JuniLearning/CPPF9-Dynamic-Variables-Reference Explain static variables and dynamic (anonymous) variables created at runtime with `new`, such as `int *p1 = new int;`. Store values with `*p1 = 5` or `std::cin >> *p1`. Always delete dynamic memory with `delete p1` to avoid leaks, and note that dereferencing after delete is a dangling pointer. Use `nullptr` to indicate a pointer to nothing.",
 						projectLink:
 							"https://repl.it/@JuniLearning/CPPF9-Dynamic-Variables-Reference"
 					},
 					{
 						title: "CPPF9 Project 1: Assembly Line",
 						content:
-							"1. Create a basic Object class with variables for its name and weight (in pounds), a constructor using the BMI, and a `print()` function that prints the name, the weight of the object in pounds, and the weight of the object in kilograms (1 kg = 2.205 lbs). 2. Repeatedly ask the user for the necessary information to create a new Object and store that Object using a dynamic variable. 3. Print out the newly created Object and then free up the memory that was allocated for it in preparation for processing the next Object. 4. Bonus: Ask the user how many Objects they will be processing and then store that many Objects in an array. Once the information is entered, loop through the array and print out the information for each of the Objects. 5.Finally, have them share their project.",
+							"Create an Object class with name and weight (lbs), a BMI-based constructor, and a print function that outputs name, weight in pounds, and weight in kilograms (1 kg = 2.205 lbs). Repeatedly collect info to create a dynamic Object, print it, and free its memory before the next one. Bonus: ask how many Objects to process, store them in an array, then print each. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF9-Assembly-Line?skipMigration=1"
 					},
 					{
 						title: "Introduction to Dynamic Arrays",
 						content:
-							"Static arrays are limited because their size is fixed at compile time. If we need more data than the array can hold, we must create a new array of a larger size and copy the data over. If we keep appending data past the array's end without checking capacity, we could overwrite memory we don't own. To create dynamic arrays: (1) declare a pointer to the array; (2) create the array with `new`; (3) use the pointer as the array; (4) if we run out of space, allocate a new (larger) array, copy over the elements and delete the old one; (5) remember to free memory with `delete` when done."
+							"Static arrays have fixed size. To handle more data, declare a pointer, create the array with `new`, use the pointer like an array, and when out of space create a new array with double capacity, copy values over, delete the old array, and free memory with `delete` when done."
 					},
 					{
 						title: "Dynamic Arrays and Memory",
 						content:
-							"A dynamic array automatically resizes itself when it runs out of room. We'll write our own `DynamicArray` class that creates a new array with more space when the old one runs out, copies old values to the new array and deletes the old one. Failing to call `delete` can cause memory leaks. When a class allocates memory, write a destructor (prefixed with `~`) that frees that memory. Destructors are called automatically when the object goes out of scope."
+							"Explain dynamic arrays that resize when full by allocating new space, copying old values and deleting the old array. Not calling delete causes memory leaks. When a class allocates memory, include a destructor `~ClassName` to free it when the object goes out of scope."
 					},
 					{
 						title: "CPPF9 Project 2: Dynamic Array Implementation",
 						content:
-							"Implement your own `DynamicArray` class. Include private members: `mysize` (number of elements), `maxSize` (capacity) and `int* myVals` (pointer to the array). Optionally define a constant `DEFAULT_SIZE` for initial capacity. Write: • A default constructor that sets `mysize` to 0, `maxSize` to a default size and `myVals` to a new array of that size. • A destructor that deletes `myVals` and sets `mysize` to 0. • `addVal(int val)`: check if there's enough space; if not, create a new array with double the previous capacity, copy values over, swap pointers, delete the old array and then add the new value. Increment `mysize`. • `printVals()`: print out the values stored, iterating over `myVals` based on `mysize`. • `get(int index)`: return the value at a specific index.",
+							"Implement a DynamicArray class. Private members: `mysize`, `maxSize`, and `int* myVals` (optionally a DEFAULT_SIZE). Default constructor sets `mysize` to 0, `maxSize` to a default size and allocates `myVals`. Destructor deletes `myVals` and resets `mysize`. `addVal(int val)` checks capacity, doubles size when full by creating a new array, copying values, swapping pointers, deleting the old array, then adding the value and incrementing `mysize`. `printVals()` iterates over stored values, and `get(index)` returns the value at an index.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF9-Dynamic-Array-Implementation?skipMigration=1"
 					},
 					{
 						title: "Introduction to Structs",
 						content:
-							"Explain that a struct is like a class but defaults to public members. Structs are useful for grouping small, related data items (e.g., a `node` struct with `int data` and `node* next`). They appear often in code because they're concise. In the next project we'll create a Grocery List using structs to combine item names and prices."
+							"Reference: https://repl.it/@JuniLearning/Structs-Example Explain that a struct is similar to a class but members are public by default. Structs group small related data such as a grocery item with name and price."
 					},
 					{
 						title: "CPPF9 Project 3: Grocery List",
 						content:
-							"We need to change the DynamicArray implementation to store Groceries instead of ints. Because groceries contain just a name and a price, create a simple struct in the DynamicArray.h file. Include a basic constructor and an all-members constructor to initialize its private variables. Modify the dynamic array to store this struct instead of int; update any functions that depend on the array's data type. Desired functionality: printing the list and adding an item. To remove an item at an index, shift elements by copying into a new array and skipping the removed item (ensure the Grocery item being added is newly constructed to avoid pass-by-value errors). Create a basic menu that lets the user add, remove, print and quit.",
+							"Update the DynamicArray to store Groceries (name and price) using a struct defined in DynamicArray.h with basic and overloaded constructors. Change pointer types and functions to the new data type. Include functions to print and add items. For removeItem by index, copy values into a new dynamic array while skipping the removed item. Build a simple menu to add, remove, print and quit. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF9-Grocery-List?skipMigration=1"
 					}
@@ -2472,7 +2516,7 @@ Finally, share the project!`
 					{
 						title: "CPPF10 Master Project: Matrix Fun",
 						content:
-							"We can call grids of numbers matrices. There's a lot of operations we can do with matrices such as addition. It's important to remember that two matrices need to have the same dimension for us to do matrix addition. Show what we're trying to create and map out the process to make this matrix addition possible. Create variables for the number of rows, columns, and for each of the matrices. Ask the user for the dimensions of the matrix and for the elements of the matrix. Add the matrices and print out the result in a grid layout.Finally, share the project!",
+							"We can call grids of numbers matrices. Two matrices must have the same dimensions for addition. Map out the process: create variables for rows, columns and each matrix, ask for dimensions and elements, add the matrices and print the result in a grid. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF10-Matrix-Addition?skipMigration=1"
 					}
@@ -2485,14 +2529,14 @@ Finally, share the project!`
 					{
 						title: "CPPF11 Master Project: Profile Posts",
 						content:
-							"Create a Profile class that stores posts that have a caption and a number of hearts on them. The user can then add posts to their profile, and print out the posts' captions and the total number of hearts on all of the posts. The Profile class needs to store a changing amount of Post structs: we need to be able to add more Posts as necessary. Variables: numPosts, maxSize, myPosts. Functions include addPost(newPost), printPost(index), printPosts(), addHearts(index, numHearts) and a helper to validate indexes. Bonus extensions include adding more fields, duplicating posts, and summing hearts.Finally, share the project!",
+							"Create a Profile class that stores Post structs with a caption and heart count. Allow adding posts, printing a single post, printing all posts, and adding hearts. Track a changing number of posts with numPosts, maxSize and myPosts (a dynamic array of posts). Include a helper to validate indexes. Bonus: add more fields, sum hearts, edit or duplicate posts. Prepare a short presentation to share with friends or family.",
 						solutionLink:
 							"https://repl.it/@JuniLearning/CPPF11-Profile-Posts?skipMigration=1"
 					},
 					{
 						title: "Course recap",
 						content:
-							"We've learned a lot over these past few months! Can you recap what this course covered? Discuss what course to take next."
+							"Recap what this course covered and discuss which course to take next."
 					}
 				],
 				supplementalProjects: []
