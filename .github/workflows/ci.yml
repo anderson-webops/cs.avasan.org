@@ -21,7 +21,7 @@ jobs:
             - name: Pin npm version
               run: |
                   npm -v
-                  npm i -g npm@11.6.2
+                  npm i -g npm@11.7.0
                   npm -v
 
             - name: Install deps
@@ -43,7 +43,7 @@ jobs:
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.6.2
+                  npm i -g npm@11.7.0
                   npm -v
 
             - name: Install deps
@@ -74,7 +74,7 @@ jobs:
               run: |
                   # optional guard:
                   if [ $(node -v | cut -d. -f1 | sed 's/v//') -ge 20 ]; then
-                    npm i -g npm@11.6.2
+                    npm i -g npm@11.7.0
                   fi
                   npm -v
 
@@ -97,7 +97,7 @@ jobs:
 
             - name: Pin npm version
               run: |
-                  npm i -g npm@11.6.2
+                  npm i -g npm@11.7.0
                   npm -v
 
             - name: Install deps
