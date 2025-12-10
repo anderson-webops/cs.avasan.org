@@ -19,11 +19,16 @@ function isEntity(u: any): u is Entity {
 	return u != null && typeof u.comparePassword === "function";
 }
 
+function getEntityId(entity: Entity) {
+	return entity._id.toString();
+}
+
 function canMutate(session: CustomSession, entity: Entity) {
 	if (session.adminID) return true;
-	if (entity instanceof Admin) return session.adminID === entity.id;
-	if (entity instanceof Tutor) return session.tutorID === entity.id;
-	if (entity instanceof User) return session.userID === entity.id;
+	const entityId = getEntityId(entity);
+	if (entity instanceof Admin) return session.adminID === entityId;
+	if (entity instanceof Tutor) return session.tutorID === entityId;
+	if (entity instanceof User) return session.userID === entityId;
 	return false;
 }
 
@@ -90,7 +95,7 @@ export const checkEmail: RequestHandler = async (req, res) => {
 	const { id, email } = req.body as { id?: string; email?: string };
 	if (!email) return res.status(400).json({ message: "Email required" });
 	const [u, t, a] = await Promise.all([User.findOne({ email }), Tutor.findOne({ email }), Admin.findOne({ email })]);
-	const conflict = [u, t, a].some(x => x && x.id !== id);
+	const conflict = [u, t, a].some(x => x && x._id.toString() !== id);
 	res.status(conflict ? 403 : 200).json({
 		message: conflict ? "Already in use" : "Available"
 	});
