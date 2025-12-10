@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "1.0.0",
 	"private": true,
-	"packageManager": "npm@11.6.2",
+	"packageManager": "npm@11.7.0",
 	"description": "Monorepo for Classes project",
 	"author": "Jacob Anderson",
 	"license": "ISC",
@@ -28,16 +28,16 @@
 		"up": "taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "^6.2.0",
-		"@typescript-eslint/eslint-plugin": "^8.47.0",
-		"@typescript-eslint/parser": "^8.47.0",
+		"@antfu/eslint-config": "^6.6.1",
+		"@typescript-eslint/eslint-plugin": "^8.49.0",
+		"@typescript-eslint/parser": "^8.49.0",
 		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.4",
-		"eslint-plugin-vue": "^10.5.1",
+		"eslint-plugin-vue": "^10.6.2",
 		"globals": "^16.5.0",
-		"prettier": "^3.6.2",
-		"taze": "^19.9.0",
+		"prettier": "^3.7.4",
+		"taze": "^19.9.2",
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {}
