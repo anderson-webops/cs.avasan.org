@@ -917,9 +917,9 @@ Challenge: Can you add another sprite that moves around using the W-A-S-D keys?`
 					{
 						title: "GM2 Project 1: Square Inception",
 						projectLink:
-							"https://scratch.mit.edu/projects/304012026/",
+							"https://scratch.mit.edu/projects/306391834/",
 						solutionLink:
-							"https://scratch.mit.edu/projects/303954115/",
+							"https://scratch.mit.edu/projects/306394145/",
 						content: `
 1. Open the Jackson Pollock project from Scratch Level 1 and click "See Inside".
 2. Add another repeat loop around the existing loop to draw a series of squares inside each other.
@@ -930,9 +930,9 @@ Challenge: Can you add another sprite that moves around using the W-A-S-D keys?`
 					{
 						title: "GM2 Project 2: Pyramid",
 						projectLink:
-							"https://scratch.mit.edu/projects/304012956/",
+							"https://scratch.mit.edu/projects/307922307",
 						solutionLink:
-							"https://scratch.mit.edu/projects/303955461/",
+							"https://scratch.mit.edu/projects/307918456",
 						content: `
 1. Use nested loops and the Pen extension to draw a series of triangles that increase in size to form a pyramid shape.
 2. Encourage the student to adjust the angle and length parameters to perfect their pyramid.
@@ -944,9 +944,9 @@ Challenge: Can you add another sprite that moves around using the W-A-S-D keys?`
 					{
 						title: "GM2 Supplemental Project 1: Playing Baseball",
 						projectLink:
-							"https://scratch.mit.edu/projects/330302948/",
+							"https://scratch.mit.edu/projects/334075920",
 						solutionLink:
-							"https://scratch.mit.edu/projects/328314692/",
+							"https://scratch.mit.edu/projects/334073245/",
 						content: `
 1. Program a pitcher sprite to pitch the ball when the green flag is clicked.
 2. Program a batter sprite to swing the bat when the ball gets close.
@@ -957,9 +957,9 @@ Challenge: Can you add another sprite that moves around using the W-A-S-D keys?`
 					{
 						title: "GM2 Supplemental Project 2: Grid",
 						projectLink:
-							"https://scratch.mit.edu/projects/330303721/",
+							"https://scratch.mit.edu/projects/334073152/",
 						solutionLink:
-							"https://scratch.mit.edu/projects/328315826/",
+							"https://scratch.mit.edu/projects/334067890/",
 						content: `
 1. Use nested loops to draw a grid of squares on the stage.
 2. Ask the user for the number of rows and columns and draw the corresponding grid.
@@ -968,9 +968,9 @@ Challenge: Can you add another sprite that moves around using the W-A-S-D keys?`
 					{
 						title: "GM2 Supplemental Project 3: Rainbow Flower",
 						projectLink:
-							"https://scratch.mit.edu/projects/330304501/",
+							"https://scratch.mit.edu/projects/335808333/",
 						solutionLink:
-							"https://scratch.mit.edu/projects/328316339/",
+							"https://scratch.mit.edu/projects/335807180/",
 						content: `
 1. Use a repeat loop to create a spiral pattern.
 2. Within that loop, create a second loop that changes the pen color and draws petals.
