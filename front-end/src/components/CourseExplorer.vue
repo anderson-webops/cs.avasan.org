@@ -101,6 +101,10 @@ function isItemOpen(moduleId: string, key: string) {
 function hasSupplemental(module: CourseModule) {
 	return module.supplementalProjects.length > 0;
 }
+
+function isVideo(link: string) {
+	return /\.(?:mp4|webm|ogg)(?:\?|$)/i.test(link);
+}
 </script>
 
 <template>
@@ -287,6 +291,38 @@ function hasSupplemental(module: CourseModule) {
 															)
 														"
 													/>
+													<div
+														v-if="item.mediaLink"
+														class="item-media"
+													>
+														<video
+															v-if="
+																isVideo(
+																	item.mediaLink
+																)
+															"
+															controls
+															autoplay
+															loop
+															muted
+															playsinline
+															class="item-media-video"
+														>
+															<source
+																:src="
+																	item.mediaLink
+																"
+															/>
+														</video>
+														<img
+															v-else
+															:src="
+																item.mediaLink
+															"
+															alt="Project demo media"
+															class="item-media-image"
+														/>
+													</div>
 												</div>
 											</div>
 										</transition>
@@ -418,6 +454,40 @@ function hasSupplemental(module: CourseModule) {
 															)
 														"
 													/>
+													<div
+														v-if="
+															supplemental.mediaLink
+														"
+														class="item-media"
+													>
+														<video
+															v-if="
+																isVideo(
+																	supplemental.mediaLink
+																)
+															"
+															controls
+															autoplay
+															loop
+															muted
+															playsinline
+															class="item-media-video"
+														>
+															<source
+																:src="
+																	supplemental.mediaLink
+																"
+															/>
+														</video>
+														<img
+															v-else
+															:src="
+																supplemental.mediaLink
+															"
+															alt="Project demo media"
+															class="item-media-image"
+														/>
+													</div>
 												</div>
 											</div>
 										</transition>
@@ -673,6 +743,21 @@ function hasSupplemental(module: CourseModule) {
 	color: #2563eb;
 	text-decoration: underline;
 	word-break: break-all;
+}
+
+.item-media {
+	width: 100%;
+	max-width: 100%;
+}
+
+.item-media-video,
+.item-media-image {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	border-radius: 0.25rem;
+	background: #f8fafc;
 }
 
 .empty-copy {

@@ -13,7 +13,7 @@ const ALLOW_TO = (env.MDMAIL_ALLOW_TO || "").split(",").filter(Boolean);
 const MAX_MD_LEN = Number(env.MDMAIL_MAX_MD_LEN || 200_000);
 
 const MailSchema = z.object({
-	to: z.email(),
+	to: z.string().trim().min(1),
 	subject: z.string().trim().min(1).max(200),
 	md: z.string().min(1)
 });
@@ -26,7 +26,21 @@ router.post("/send", validAdmin, async (req, res) => {
 		}
 		const { to, subject, md } = parsed.data;
 
-		if (ALLOW_TO.length && !ALLOW_TO.includes(to))
+		const recipients = to
+			.split(",")
+			.map(addr => addr.trim())
+			.filter(Boolean);
+
+		if (recipients.length === 0) {
+			return res.status(400).json({ message: "At least one recipient is required" });
+		}
+
+		const invalid = recipients.filter(addr => !z.string().email().safeParse(addr).success);
+		if (invalid.length) {
+			return res.status(400).json({ message: "Invalid recipient(s)", invalid });
+		}
+
+		if (ALLOW_TO.length && !recipients.every(addr => ALLOW_TO.includes(addr)))
 			return res.status(403).json({ message: "Recipient not allowed" });
 		if (md.length > MAX_MD_LEN) return res.status(413).json({ message: "Markdown too large" });
 
@@ -69,7 +83,8 @@ router.post("/send", validAdmin, async (req, res) => {
 
 		const info = await transporter.sendMail({
 			from: FROM_ADDR,
-			to,
+			to: recipients[0],
+			cc: recipients.slice(1),
 			subject,
 			text: md,
 			html

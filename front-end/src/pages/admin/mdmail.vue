@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import DOMPurify from "dompurify";
 import { marked } from "marked";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { api } from "@/api";
 
 const to = ref("");
 const subject = ref("");
 const md = ref("");
 const sending = ref(false);
+const activeTab = ref<"compose" | "preview">("compose");
 
 // resultText is only used for error JSON or non-ok responses
 const resultText = ref("");
@@ -16,13 +17,19 @@ const resultText = ref("");
 const sentOk = ref(false);
 const previewTo = ref("");
 const previewSubject = ref("");
-const previewHtml = ref("");
+const sentPreviewHtml = ref("");
 
 // helper to render + sanitize MD -> HTML
 function renderPreview(markdown: string): string {
 	const raw = marked.parse(markdown);
 	if (typeof raw !== "string") return "";
 	return DOMPurify.sanitize(raw);
+}
+
+const livePreviewHtml = computed(() => renderPreview(md.value));
+
+function switchTab(tab: "compose" | "preview") {
+	activeTab.value = tab;
 }
 
 async function sendMail() {
@@ -45,7 +52,7 @@ async function sendMail() {
 			// build preview from what we just sent
 			previewTo.value = curTo;
 			previewSubject.value = curSubject;
-			previewHtml.value = renderPreview(curMd);
+			sentPreviewHtml.value = renderPreview(curMd);
 
 			// clear inputs
 			to.value = "";
@@ -75,12 +82,39 @@ async function sendMail() {
 	<section class="wrap">
 		<h2>Send Markdown Email (Admin)</h2>
 
+		<div class="tabs" role="tablist" aria-label="Email or preview">
+			<button
+				id="tab-compose"
+				role="tab"
+				:aria-selected="activeTab === 'compose'"
+				class="tab-btn"
+				:class="[{ active: activeTab === 'compose' }]"
+				type="button"
+				data-testid="tab-compose"
+				@click="switchTab('compose')"
+			>
+				Compose
+			</button>
+			<button
+				id="tab-preview"
+				role="tab"
+				:aria-selected="activeTab === 'preview'"
+				class="tab-btn"
+				:class="[{ active: activeTab === 'preview' }]"
+				type="button"
+				data-testid="tab-preview"
+				@click="switchTab('preview')"
+			>
+				Preview
+			</button>
+		</div>
+
 		<label>
 			To
 			<input
 				v-model="to"
-				type="email"
-				placeholder="recipient@example.com"
+				type="text"
+				placeholder="primary@example.com, cc1@example.com"
 			/>
 		</label>
 
@@ -89,8 +123,32 @@ async function sendMail() {
 			<input v-model="subject" type="text" placeholder="Subject" />
 		</label>
 
-		<label>Markdown</label>
-		<textarea v-model="md" placeholder="**Hello** _world_"></textarea>
+		<div v-if="activeTab === 'compose'" class="tab-panel">
+			<label>Markdown</label>
+			<textarea
+				v-model="md"
+				placeholder="**Hello** _world_"
+				data-testid="md-input"
+			></textarea>
+		</div>
+
+		<div
+			v-else
+			class="tab-panel preview-pane"
+			role="tabpanel"
+			aria-labelledby="tab-preview"
+			data-testid="live-preview"
+		>
+			<div class="preview-meta">
+				<div><strong>To:</strong> {{ to || "—" }}</div>
+				<div><strong>Subject:</strong> {{ subject || "—" }}</div>
+			</div>
+			<div
+				class="preview-body"
+				data-testid="live-preview-body"
+				v-html="livePreviewHtml"
+			/>
+		</div>
 
 		<button :disabled="sending" @click="sendMail">
 			{{ sending ? "Sending…" : "Send" }}
@@ -102,7 +160,7 @@ async function sendMail() {
 				<div><strong>To:</strong> {{ previewTo }}</div>
 				<div><strong>Subject:</strong> {{ previewSubject }}</div>
 			</div>
-			<div class="preview-body" v-html="previewHtml"></div>
+			<div class="preview-body" v-html="sentPreviewHtml"></div>
 		</div>
 
 		<!-- ERROR / RAW RESULT -->
@@ -116,6 +174,40 @@ async function sendMail() {
 	margin: 24px auto;
 	padding: 16px;
 }
+
+.tabs {
+	display: inline-flex;
+	gap: 8px;
+	margin: 8px 0 16px;
+}
+
+.tab-btn {
+	border: 1px solid #d6d6d6;
+	background: #f8fafc;
+	color: #0f172a;
+	padding: 8px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.tab-btn.active {
+	background: #2563eb;
+	color: white;
+	border-color: #2563eb;
+}
+
+.tab-panel {
+	margin-top: 8px;
+}
+
+.preview-pane {
+	border: 1px solid #e6e6e6;
+	border-radius: 8px;
+	padding: 12px;
+	background: #fff;
+}
+
 label {
 	display: block;
 	margin: 12px 0 6px;
