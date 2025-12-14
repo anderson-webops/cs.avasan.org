@@ -41,6 +41,7 @@ const courseNameMap = computed<Record<string, string>>(
 			{} as Record<string, string>
 		) ?? {}
 );
+const courseLabel = (id: string) => courseNameMap.value[id] ?? id;
 
 /* editable helper for the admin card */
 const {
@@ -563,7 +564,7 @@ function confirmDeleteAdmin() {
 					{{
 						(userCourseSelections[String(u._id)]?.length ?? 0)
 							? (userCourseSelections[String(u._id)] ?? [])
-									.map(id => courseNameMap.value?.[id] ?? id)
+									.map(id => courseLabel(id))
 									.join(", ")
 							: "No courses assigned"
 					}}

@@ -2,7 +2,6 @@
 import { ref, watch } from "vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
 
-type Displayable = string | number | boolean | null | undefined;
 type Role = "admin" | "tutor" | "user";
 
 interface Field {
@@ -12,7 +11,7 @@ interface Field {
 
 const props = defineProps<{
 	fields: Field[];
-	entity: Record<string, Displayable>;
+	entity: Record<string, any>;
 	editing: boolean;
 	showSecurity?: boolean;
 	role: Role;

@@ -6,19 +6,16 @@ interface Field {
 
 defineProps<{
 	fields: Field[];
-	entity: Record<string, Displayable>;
+	entity: Record<string, any>;
 	editing: boolean;
 }>();
 const emit = defineEmits<{
-	(e: "update", key: string, value: Displayable): void;
+	(e: "update", key: string, value: any): void;
 }>();
 
-function onInput(key: string, value: Displayable) {
+function onInput(key: string, value: any) {
 	emit("update", key, value);
 }
-
-/* use a more precise value type instead of any */
-type Displayable = string | number | boolean | null | undefined;
 </script>
 
 <template>
