@@ -52,7 +52,7 @@ describe("AccountManagement.vue login (happy path)", () => {
 		// Assert API call
 		expect(apiMod.api.post).toHaveBeenCalledWith(
 			"/accounts/login",
-			{ email: "user@example.com", password: "secret" },
+			{ email: "user@example.com", password: "secret", remember: false },
 			{ withCredentials: true }
 		);
 

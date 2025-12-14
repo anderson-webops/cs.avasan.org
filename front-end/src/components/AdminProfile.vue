@@ -561,8 +561,8 @@ function confirmDeleteAdmin() {
 				<p class="assignment">
 					<strong>Course access:</strong>
 					{{
-						(userCourseSelections[u._id]?.length ?? 0)
-							? (userCourseSelections[u._id] ?? [])
+						(userCourseSelections[String(u._id)]?.length ?? 0)
+							? (userCourseSelections[String(u._id)] ?? [])
 									.map(id => courseNameMap.value?.[id] ?? id)
 									.join(", ")
 							: "No courses assigned"
@@ -612,20 +612,20 @@ function confirmDeleteAdmin() {
 								v-for="course in courseOptions"
 								:key="course.id"
 								:class="{
-									disabled: !userAllowedCourses[u._id]?.has(
-										course.id
-									)
+									disabled: !userAllowedCourses[
+										String(u._id)
+									]?.has(course.id)
 								}"
 								@click.stop
 							>
 								<input
 									:checked="
-										userCourseSelections[u._id]?.includes(
-											course.id
-										)
+										userCourseSelections[
+											String(u._id)
+										]?.includes(course.id)
 									"
 									:disabled="
-										!userAllowedCourses[u._id]?.has(
+										!userAllowedCourses[String(u._id)]?.has(
 											course.id
 										)
 									"

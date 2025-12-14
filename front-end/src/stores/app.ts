@@ -2,7 +2,15 @@
 import { defineStore } from "pinia";
 import { api } from "@/api";
 
-type Displayable = string | number | boolean | null | undefined;
+type Displayable =
+	| string
+	| number
+	| boolean
+	| null
+	| undefined
+	| string[]
+	| Tutor[]
+	| (string | Tutor)[];
 
 /* ------------------------------------------------------------------ */
 /*  TypeScript interfaces                                             */

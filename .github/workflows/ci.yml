@@ -82,7 +82,11 @@ jobs:
               run: npm ci
 
             - name: Unit tests
-              run: npm run -w front-end test:unit
+              env:
+                  VITEST_WATCH: "false"
+              run: |
+                  ulimit -n 4096 || true
+                  npm run -w front-end test:unit
 
     test-e2e:
         runs-on: ubuntu-latest
