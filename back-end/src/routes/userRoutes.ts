@@ -1,4 +1,6 @@
 // src/routes/userRoutes.ts
+import type { Router } from "express";
+import type { RateLimitRequestHandler } from "express-rate-limit";
 import express from "express";
 import rateLimit from "express-rate-limit";
 import { logout as logoutUser } from "../controllers/auth/authController.js";
@@ -22,14 +24,14 @@ import {
 	validUser
 } from "../middleware/auth.js";
 
-const router = express.Router();
+const router: Router = express.Router();
 
 // Rate limiter for sensitive endpoints (e.g. 100 requests per 15 minutes)
-const userCourseAccessLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+const userCourseAccessLimiter: RateLimitRequestHandler = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 100, // limit each IP to 100 requests per windowMs
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false // Disable the `X-RateLimit-*` headers
 });
 
 // Create a user
