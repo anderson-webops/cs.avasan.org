@@ -12,7 +12,7 @@ import { User } from "../../models/schemas/User.js";
 // union of the three document types
 type Entity = IUser | ITutor | IAdmin;
 
-const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+const THIRTY_DAYS_MS: number = 30 * 24 * 60 * 60 * 1000;
 
 // type‐guard: filters out `null` and tells TS that `u` is an Entity
 function isEntity(u: any): u is Entity {
@@ -25,7 +25,7 @@ function getEntityId(entity: Entity) {
 
 function canMutate(session: CustomSession, entity: Entity) {
 	if (session.adminID) return true;
-	const entityId = getEntityId(entity);
+	const entityId: string = getEntityId(entity);
 	if (entity instanceof Admin) return session.adminID === entityId;
 	if (entity instanceof Tutor) return session.tutorID === entityId;
 	if (entity instanceof User) return session.userID === entityId;
@@ -142,7 +142,7 @@ export const changePassword: RequestHandler = async (req, res) => {
 
 	if (!newPassword) return res.status(400).json({ message: "New password is required." });
 
-	const session = req.session as CustomSession;
+	const session: CustomSession = req.session as CustomSession;
 	for (const Model of models) {
 		const doc = await Model.findById(ID);
 		if (!doc) continue;
@@ -151,7 +151,7 @@ export const changePassword: RequestHandler = async (req, res) => {
 			return res.status(403).json({ message: "Not authorized to update this password." });
 		}
 
-		const isAdminOverride = !!session.adminID;
+		const isAdminOverride: boolean = !!session.adminID;
 		if (!isAdminOverride) {
 			if (!currentPassword) {
 				return res.status(400).json({ message: "Current password is required." });

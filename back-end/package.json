@@ -37,7 +37,7 @@
 		"multer": "^2.0.2",
 		"nodemailer": "^7.0.11",
 		"readline-sync": "^1.4.10",
-		"zod": "^4.1.13"
+		"zod": "^4.2.0"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.0",
@@ -53,6 +53,6 @@
 		"ts-node": "^10.9.2",
 		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.49.0"
+		"typescript-eslint": "^8.50.0"
 	}
 }
