@@ -5,6 +5,7 @@ import { marked } from "marked";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 import { validAdmin } from "../middleware/auth.js";
+import { SessionNote } from "../models/schemas/SessionNote.js";
 
 const router = Router();
 
@@ -15,8 +16,25 @@ const MAX_MD_LEN = Number(env.MDMAIL_MAX_MD_LEN || 200_000);
 const MailSchema = z.object({
 	to: z.string().trim().min(1),
 	subject: z.string().trim().min(1).max(200),
-	md: z.string().min(1)
+	md: z.string().min(1),
+	recipientName: z.string().trim().min(1).optional(),
+	sessionDate: z.string().trim().optional()
 });
+
+function parseDateOnly(dateStr: string): Date | null {
+	// Accept ISO strings (from toISOString) or raw yyyy-mm-dd
+	const normalized = dateStr.includes("T") ? dateStr : `${dateStr}T00:00:00.000Z`;
+	const match = normalized.match(/^(\d{4})-(\d{2})-(\d{2})/);
+	if (!match) return null;
+	const [, yearStr, monthStr, dayStr] = match;
+	const year = Number(yearStr);
+	const month = Number(monthStr);
+	const day = Number(dayStr);
+	if (!year || !month || !day) return null;
+	// store at UTC noon to avoid TZ-related off-by-one when read in other zones
+	const dt = new Date(Date.UTC(year, month - 1, day, 12));
+	return Number.isNaN(dt.getTime()) ? null : dt;
+}
 
 router.post("/send", validAdmin, async (req, res) => {
 	try {
@@ -24,7 +42,7 @@ router.post("/send", validAdmin, async (req, res) => {
 		if (!parsed.success) {
 			return res.status(400).json({ message: "Invalid payload", issues: parsed.error.issues });
 		}
-		const { to, subject, md } = parsed.data;
+		const { to, subject, md, sessionDate: sessionDateStr, recipientName } = parsed.data;
 
 		const recipients = to
 			.split(",")
@@ -43,6 +61,15 @@ router.post("/send", validAdmin, async (req, res) => {
 		if (ALLOW_TO.length && !recipients.every(addr => ALLOW_TO.includes(addr)))
 			return res.status(403).json({ message: "Recipient not allowed" });
 		if (md.length > MAX_MD_LEN) return res.status(413).json({ message: "Markdown too large" });
+
+		// Parse session date when provided (used to persist notes)
+		let sessionDate: Date | null = null;
+		if (sessionDateStr) {
+			const d = parseDateOnly(sessionDateStr);
+			if (!d)
+				return res.status(400).json({ message: "Invalid sessionDate" });
+			sessionDate = d;
+		}
 
 		// Ensure we always pass a string to nodemailer
 		const html = await marked.parse(md);
@@ -89,6 +116,18 @@ router.post("/send", validAdmin, async (req, res) => {
 			text: md,
 			html
 		});
+
+		if (sessionDate && recipientName) {
+			await SessionNote.create({
+				studentName: recipientName,
+				primaryEmail: recipients[0],
+				ccEmails: recipients.slice(1),
+				subject,
+				sessionDate,
+				markdown: md,
+				html
+			});
+		}
 
 		return res.json({ ok: true, messageId: info.messageId });
 	}
