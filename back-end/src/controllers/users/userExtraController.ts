@@ -5,14 +5,22 @@ import { Tutor } from "../../models/schemas/Tutor.js";
 import { User } from "../../models/schemas/User.js";
 
 export const getUsersOfTutor: RequestHandler = async (req, res) => {
-	const { tutorID } = req.params;
+	const paramTutorID = req.params.tutorID;
+	const tutorID = Array.isArray(paramTutorID) ? paramTutorID[0] : paramTutorID;
+	if (typeof tutorID !== "string") {
+		return res.status(400).json({ message: "Invalid tutor ID" });
+	}
 	if (!Types.ObjectId.isValid(tutorID)) return res.status(400).json({ message: "Invalid tutor ID" });
 	const users = await User.find({ tutors: new Types.ObjectId(tutorID) });
 	res.json(users);
 };
 
 export const setUserTutors: RequestHandler = async (req, res) => {
-	const { userID } = req.params;
+	const paramUserID = req.params.userID;
+	const userID = Array.isArray(paramUserID) ? paramUserID[0] : paramUserID;
+	if (typeof userID !== "string") {
+		return res.status(400).json({ message: "Invalid user ID" });
+	}
 	const { tutorIDs } = req.body as { tutorIDs?: string[] };
 	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });
 	if (!Array.isArray(tutorIDs)) return res.status(400).json({ message: "tutorIDs must be an array" });
@@ -31,7 +39,11 @@ export const setUserTutors: RequestHandler = async (req, res) => {
 };
 
 export const setUserCourseAccess: RequestHandler = async (req, res) => {
-	const { userID } = req.params;
+	const paramUserID = req.params.userID;
+	const userID = Array.isArray(paramUserID) ? paramUserID[0] : paramUserID;
+	if (typeof userID !== "string") {
+		return res.status(400).json({ message: "Invalid user ID" });
+	}
 	const { courseIDs } = req.body as { courseIDs?: string[] };
 	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });
 	if (!Array.isArray(courseIDs)) return res.status(400).json({ message: "courseIDs must be an array" });
@@ -69,7 +81,11 @@ export const setUserCourseAccess: RequestHandler = async (req, res) => {
 };
 
 export const promoteUserToTutor: RequestHandler = async (req, res) => {
-	const { userID } = req.params;
+	const paramUserID = req.params.userID;
+	const userID = Array.isArray(paramUserID) ? paramUserID[0] : paramUserID;
+	if (typeof userID !== "string") {
+		return res.status(400).json({ message: "Invalid user ID" });
+	}
 	if (!Types.ObjectId.isValid(userID)) return res.status(400).json({ message: "Invalid user ID" });
 	const user = await User.findById(userID);
 	if (!user) return res.sendStatus(404);

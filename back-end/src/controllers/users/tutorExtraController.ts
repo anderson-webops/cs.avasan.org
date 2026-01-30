@@ -5,7 +5,11 @@ import { Tutor } from "../../models/schemas/Tutor.js";
 import { User } from "../../models/schemas/User.js";
 
 export const updateTutorCoursePermissions: RequestHandler = async (req, res) => {
-	const { tutorID } = req.params;
+	const paramTutorID = req.params.tutorID;
+	const tutorID = Array.isArray(paramTutorID) ? paramTutorID[0] : paramTutorID;
+	if (typeof tutorID !== "string") {
+		return res.status(400).json({ message: "Invalid tutor ID" });
+	}
 	const { courseIDs } = req.body as { courseIDs?: string[] };
 	if (!Types.ObjectId.isValid(tutorID)) return res.status(400).json({ message: "Invalid tutor ID" });
 	if (!Array.isArray(courseIDs)) return res.status(400).json({ message: "courseIDs must be an array" });
@@ -21,7 +25,11 @@ export const updateTutorCoursePermissions: RequestHandler = async (req, res) => 
 };
 
 export const demoteTutorToUser: RequestHandler = async (req, res) => {
-	const { tutorID } = req.params;
+	const paramTutorID = req.params.tutorID;
+	const tutorID = Array.isArray(paramTutorID) ? paramTutorID[0] : paramTutorID;
+	if (typeof tutorID !== "string") {
+		return res.status(400).json({ message: "Invalid tutor ID" });
+	}
 	if (!Types.ObjectId.isValid(tutorID)) return res.status(400).json({ message: "Invalid tutor ID" });
 
 	const tutor = await Tutor.findById(tutorID);
