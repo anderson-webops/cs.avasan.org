@@ -388,7 +388,7 @@ async function removeUser(userID: string) {
 	// eslint-disable-next-line no-alert
 	if (!window.confirm("Are you sure you want to Delete?")) return;
 	try {
-		await api.delete(`/users/user/${userID}`);
+		await api.delete(`/users/admin/${userID}`);
 		await app.fetchUsers();
 		success.value = "User removed.";
 	} catch (e: any) {

@@ -4,6 +4,20 @@ import { Types } from "mongoose";
 import { Tutor } from "../../models/schemas/Tutor.js";
 import { User } from "../../models/schemas/User.js";
 
+function getUserIDParam(req: { params: { userID?: string | string[] } }, res: any): string | null {
+	const paramUserID = req.params.userID;
+	const userID = Array.isArray(paramUserID) ? paramUserID[0] : paramUserID;
+	if (typeof userID !== "string") {
+		res.status(400).json({ message: "Invalid user ID" });
+		return null;
+	}
+	if (!Types.ObjectId.isValid(userID)) {
+		res.status(400).json({ message: "Invalid user ID" });
+		return null;
+	}
+	return userID;
+}
+
 export const getUsersOfTutor: RequestHandler = async (req, res) => {
 	const paramTutorID = req.params.tutorID;
 	const tutorID = Array.isArray(paramTutorID) ? paramTutorID[0] : paramTutorID;
@@ -108,4 +122,60 @@ export const promoteUserToTutor: RequestHandler = async (req, res) => {
 	await user.deleteOne();
 
 	res.status(201).json({ tutor });
+};
+
+export const deleteOwnUser: RequestHandler = async (req, res) => {
+	const userID = getUserIDParam(req, res);
+	if (!userID) return;
+
+	const actingUser = req.currentUser;
+	if (!actingUser) {
+		return res.status(403).json({ message: "User session required" });
+	}
+
+	if (actingUser._id.toString() !== userID) {
+		return res.status(403).json({ message: "You can only delete your own account" });
+	}
+
+	const user = await User.findById(userID);
+	if (!user) return res.sendStatus(404);
+
+	await user.deleteOne();
+	res.sendStatus(200);
+};
+
+export const deleteUserAsTutor: RequestHandler = async (req, res) => {
+	const userID = getUserIDParam(req, res);
+	if (!userID) return;
+
+	const actingTutor = req.currentTutor;
+	if (!actingTutor) {
+		return res.status(403).json({ message: "Tutor session required" });
+	}
+
+	const user = await User.findById(userID).populate("tutors", "_id");
+	if (!user) return res.sendStatus(404);
+
+	const tutorOwnsUser = user.tutors.some(t => t.toString() === actingTutor._id.toString());
+	if (!tutorOwnsUser) {
+		return res.status(403).json({ message: "You can only delete your own students" });
+	}
+
+	await user.deleteOne();
+	res.sendStatus(200);
+};
+
+export const deleteUserAsAdmin: RequestHandler = async (req, res) => {
+	const userID = getUserIDParam(req, res);
+	if (!userID) return;
+
+	if (!req.currentAdmin) {
+		return res.status(403).json({ message: "Admin session required" });
+	}
+
+	const user = await User.findById(userID);
+	if (!user) return res.sendStatus(404);
+
+	await user.deleteOne();
+	res.sendStatus(200);
 };

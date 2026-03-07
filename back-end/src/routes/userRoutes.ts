@@ -6,12 +6,14 @@ import rateLimit from "express-rate-limit";
 import { logout as logoutUser } from "../controllers/auth/authController.js";
 import {
 	createUser,
-	deleteUser,
 	getAllUsers,
 	getLoggedInUser,
 	updateUser
 } from "../controllers/users/userController.js";
 import {
+	deleteOwnUser,
+	deleteUserAsAdmin,
+	deleteUserAsTutor,
 	getUsersOfTutor,
 	promoteUserToTutor,
 	setUserCourseAccess,
@@ -59,10 +61,13 @@ router.post("/:userID/promote", validAdmin, promoteUserToTutor);
 router.put("/:userID/courses", userCourseAccessLimiter, validTutorOrAdminSession, setUserCourseAccess);
 
 // Delete the user by the user themselves
-router.delete("/user/:userID", validUser, deleteUser);
+router.delete("/user/:userID", validUser, deleteOwnUser);
 
 // Delete the user by the tutor
-router.delete("/tutor/:userID", validTutor, deleteUser);
+router.delete("/tutor/:userID", validTutor, deleteUserAsTutor);
+
+// Delete the user by the admin
+router.delete("/admin/:userID", validAdmin, deleteUserAsAdmin);
 
 // Get logged in user
 router.get("/loggedin", validUser, getLoggedInUser);
