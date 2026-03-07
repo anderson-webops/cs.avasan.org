@@ -9,6 +9,7 @@ import { javaLevel3Course } from "./java-level-3";
 import { javascriptLevel1Course } from "./javascript-level-1";
 import { javascriptLevel2Course } from "./javascript-level-2";
 import { machineLearningCourse } from "./machine-learning";
+import { physicsLevel2Course } from "./physics-level-2";
 import { pyGamesCourse } from "./pygames";
 import { pythonLevel1Course } from "./python-level-1";
 import { pythonLevel2Course } from "./python-level-2";
@@ -28,6 +29,7 @@ export const rawCourses: RawCourse[] = [
 	javaLevel2Course,
 	javaLevel3Course,
 	introToPhysicsCourse,
+	physicsLevel2Course,
 	introToSwiftAppDevelopmentCourse,
 	javascriptLevel1Course,
 	javascriptLevel2Course,
