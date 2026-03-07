@@ -12,7 +12,7 @@
 		"build": "tsc -p tsconfig.json",
 		"watch": "tsc -w",
 		"dev": "tsx watch -r dotenv/config src/server.ts",
-		"up": "taze major -I",
+		"up": "npm exec --yes -- taze major -I",
 		"lint": "eslint \"src/**/*.{js,ts}\"",
 		"lint-fix": "eslint \"src/**/*.{js,ts}\" --fix",
 		"create-admin": "node dist/create-admin-user.js",

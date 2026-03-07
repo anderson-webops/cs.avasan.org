@@ -25,7 +25,7 @@
 		"lint-fix": "npm run -w front-end lint-fix && npm run -w back-end lint-fix",
 		"typecheck": "npm run -w front-end typecheck && npm run -w back-end typecheck",
 		"clean": "sudo rm -rf node_modules dist package-lock.json **/node_modules **/dist **/package-lock.json",
-		"up": "taze major -I && npm run -w front-end up && npm run -w back-end up"
+		"up": "npm exec --yes -- taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^7.2.0",
