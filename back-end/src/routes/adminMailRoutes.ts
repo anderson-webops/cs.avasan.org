@@ -8,6 +8,7 @@ import { validAdmin } from "../middleware/auth.js";
 import { SessionNote } from "../models/schemas/SessionNote.js";
 
 const router = Router();
+const DATE_PREFIX_RE = /^(\d{4})-(\d{2})-(\d{2})/;
 
 const FROM_ADDR = env.MDMAIL_FROM || "no-reply@example.com";
 const ALLOW_TO = (env.MDMAIL_ALLOW_TO || "").split(",").filter(Boolean);
@@ -24,7 +25,7 @@ const MailSchema = z.object({
 function parseDateOnly(dateStr: string): Date | null {
 	// Accept ISO strings (from toISOString) or raw yyyy-mm-dd
 	const normalized = dateStr.includes("T") ? dateStr : `${dateStr}T00:00:00.000Z`;
-	const match = normalized.match(/^(\d{4})-(\d{2})-(\d{2})/);
+	const match = normalized.match(DATE_PREFIX_RE);
 	if (!match) return null;
 	const [, yearStr, monthStr, dayStr] = match;
 	const year = Number(yearStr);

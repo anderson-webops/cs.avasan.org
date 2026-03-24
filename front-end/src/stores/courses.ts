@@ -4,6 +4,14 @@ import { defineStore } from "pinia";
 import { computed } from "vue";
 import { rawCourses } from "./courses/index";
 
+const COMBINING_MARKS_RE = /[\u0300-\u036F]/g;
+const NON_ALPHANUMERIC_RE = /[^a-z0-9]+/g;
+const LEADING_HYPHENS_RE = /^-+/;
+const TRAILING_HYPHENS_RE = /-+$/;
+const PARAGRAPH_BREAK_RE = /\n{2,}/;
+const INSTRUCTOR_NOTE_RE = /instructor note/i;
+const EXCESS_BLANK_LINES_RE = /\n{3,}/g;
+
 export type {
 	CourseDefinition,
 	CourseModule,
@@ -14,10 +22,10 @@ function slugify(value: string): string {
 	return value
 		.toLowerCase()
 		.normalize("NFKD")
-		.replace(/[\u0300-\u036F]/g, "")
-		.replace(/[^a-z0-9]+/g, "-")
-		.replace(/^-+/, "")
-		.replace(/-+$/, "");
+		.replace(COMBINING_MARKS_RE, "")
+		.replace(NON_ALPHANUMERIC_RE, "-")
+		.replace(LEADING_HYPHENS_RE, "")
+		.replace(TRAILING_HYPHENS_RE, "");
 }
 
 const HIDDEN_ITEM_TITLES = new Set([
@@ -31,13 +39,13 @@ function shouldHideItem(title: string) {
 
 function normalizeContent(content: string): string {
 	const paragraphs = content
-		.split(/\n{2,}/)
+		.split(PARAGRAPH_BREAK_RE)
 		.map(part => part.trim())
 		.filter(Boolean)
-		.filter(part => !/instructor note/i.test(part));
+		.filter(part => !INSTRUCTOR_NOTE_RE.test(part));
 	return paragraphs
 		.join("\n\n")
-		.replace(/\n{3,}/g, "\n\n")
+		.replace(EXCESS_BLANK_LINES_RE, "\n\n")
 		.trim();
 }
 

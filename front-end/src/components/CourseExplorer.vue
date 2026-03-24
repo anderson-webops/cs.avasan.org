@@ -10,6 +10,7 @@ const markdown = new MarkdownIt({
 	breaks: true,
 	linkify: true
 });
+const VIDEO_FILE_RE = /\.(?:mp4|webm|ogg)(?:\?|$)/i;
 
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
@@ -103,7 +104,7 @@ function hasSupplemental(module: CourseModule) {
 }
 
 function isVideo(link: string) {
-	return /\.(?:mp4|webm|ogg)(?:\?|$)/i.test(link);
+	return VIDEO_FILE_RE.test(link);
 }
 </script>
 

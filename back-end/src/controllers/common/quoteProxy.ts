@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+const WHITESPACE_RE = /\s+/g;
+
 export const quoteProxy = Router().get("/", async (_req, res) => {
 	try {
 		const r = await fetch("https://favqs.com/api/qotd");
@@ -17,7 +19,7 @@ export const quoteProxy = Router().get("/", async (_req, res) => {
 				content: quote.body,
 				author: quote.author,
 				tags: quote.tags || [],
-				authorSlug: quote.author.replace(/\s+/g, "-").toLowerCase(),
+				authorSlug: quote.author.replace(WHITESPACE_RE, "-").toLowerCase(),
 				length: quote.body.length,
 				dateAdded: new Date().toISOString(),
 				dateModified: new Date().toISOString()
