@@ -47,7 +47,7 @@ useHead({
 		? [
 				{
 					defer: true,
-					src: "https://analytics.classes.jacobdanderson.net/script.js",
+					src: "https://analytics.jacobdanderson.net/script.js",
 					"data-website-id": "d9905a72-7109-4f71-bfbb-d5e0dcef964e"
 				}
 			]
