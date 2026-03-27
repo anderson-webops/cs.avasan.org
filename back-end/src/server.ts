@@ -19,9 +19,14 @@ import "dotenv/config";
 
 async function main() {
 	const app = express();
+	const internalDiagnosticsKey = env.INTERNAL_DIAGNOSTICS_KEY;
+	const loopbackAddresses = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
 
 	// health
-	app.get("/healthz", (_req, res) => res.json({ ok: true }));
+	app.get("/healthz", (_req, res) => {
+		res.set("Cache-Control", "no-store");
+		res.json({ ok: true });
+	});
 
 	const SESSION_SECRET = env.SESSION_SECRET;
 	if (!SESSION_SECRET) throw new Error("Missing SESSION_SECRET");
@@ -85,10 +90,39 @@ async function main() {
 	app.use("/quotes", quoteProxy);
 
 	// ready
-	app.get("/readyz", (_req, res) => {
-		const s = mongoose.connection.readyState; // 1=connected, 2=connecting
-		if (s === 1) return res.json({ ready: true });
-		return res.status(503).json({ ready: false, state: s });
+	app.get("/readyz", async (_req, res) => {
+		const connection = mongoose.connection;
+		const state = connection.readyState;
+		if (state !== 1 || !connection.db) {
+			return res.status(503).set("Cache-Control", "no-store").json({
+				ready: false,
+				components: {
+					db: { ok: false, state }
+				}
+			});
+		}
+
+		try {
+			await connection.db.admin().ping();
+			return res.set("Cache-Control", "no-store").json({
+				ready: true,
+				components: {
+					db: { ok: true, state }
+				}
+			});
+		}
+		catch (error) {
+			return res.status(503).set("Cache-Control", "no-store").json({
+				ready: false,
+				components: {
+					db: {
+						ok: false,
+						state,
+						error: error instanceof Error ? error.message : "db-ping-failed"
+					}
+				}
+			});
+		}
 	});
 
 	// cache-control for auth endpoints
@@ -124,11 +158,27 @@ async function main() {
 	console.log("Connected to MongoDB");
 	const c = mongoose.connection;
 	console.log(`Mongo connected: db=${c.db?.databaseName} host=${c.host} name=${c.name}`);
-	app.get("/_dbinfo", (_req, res) => {
-		res.json({
-			databaseName: c.db?.databaseName,
-			host: c.host,
-			name: c.name,
+	app.get("/_dbinfo", (req, res) => {
+		const forwardedFor = req.headers["x-forwarded-for"];
+		const forwardedIp = typeof forwardedFor === "string"
+			? forwardedFor.split(",")[0]?.trim()
+			: Array.isArray(forwardedFor)
+				? forwardedFor[0]?.trim()
+				: undefined;
+		const clientIp = forwardedIp || req.ip || req.socket.remoteAddress || "";
+		const isInternalRequest = env.NODE_ENV !== "production"
+			|| (internalDiagnosticsKey && req.get("x-internal-diagnostics-key") === internalDiagnosticsKey)
+			|| loopbackAddresses.has(clientIp);
+
+		if (!isInternalRequest) {
+			return res.status(403).set("Cache-Control", "no-store").json({ ok: false, error: "forbidden" });
+		}
+
+		res.set("Cache-Control", "no-store").json({
+			databaseName: c.db?.databaseName ?? null,
+			host: c.host || null,
+			name: c.name || null,
+			readyState: c.readyState,
 			usingVault: !!env.VAULT_ROLE_ID && !!env.VAULT_SECRET_ID
 		});
 	});
