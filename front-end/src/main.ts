@@ -12,6 +12,7 @@ import { ViteSSG } from "vite-ssg";
 import { routes } from "vue-router/auto-routes";
 import App from "./App.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useAppStore } from "./stores/app";
 // Assuming you have styles defined in these files
 // import "uno.css";
 // import "@unocss/reset/tailwind.css";
@@ -44,7 +45,6 @@ export const createApp = ViteSSG(
 		if (!import.meta.env.SSR) {
 			// Load Bootstrap’s JavaScript (includes Popper via bundler)
 			await import("bootstrap");
-			const { useAppStore } = await import("./stores/app");
 			const appStore = useAppStore();
 			await appStore.bootstrapSession(); // <- rehydrate Pinia from cookies
 		}

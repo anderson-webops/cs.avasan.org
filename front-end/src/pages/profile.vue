@@ -1,16 +1,24 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { computed, ref, watch } from "vue";
-import AdminProfile from "@/components/AdminProfile.vue";
-import CourseExplorer from "@/components/CourseExplorer.vue";
-
-import TutorProfile from "@/components/TutorProfile.vue";
-import UserProfile from "@/components/UserProfile.vue";
+import { computed, defineAsyncComponent, ref, watch } from "vue";
 import { useAppStore } from "@/stores/app";
 
 type ProfileTab = "profile" | "courses" | "manage";
 
 defineOptions({ name: "ProfilePage" });
+
+const AdminProfile = defineAsyncComponent(
+	() => import("@/components/AdminProfile.vue")
+);
+const CourseExplorer = defineAsyncComponent(
+	() => import("@/components/CourseExplorer.vue")
+);
+const TutorProfile = defineAsyncComponent(
+	() => import("@/components/TutorProfile.vue")
+);
+const UserProfile = defineAsyncComponent(
+	() => import("@/components/UserProfile.vue")
+);
 
 const app = useAppStore();
 const { currentAdmin, currentTutor, currentUser } = storeToRefs(app);
