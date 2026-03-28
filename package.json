@@ -27,6 +27,36 @@
 		"clean": "sudo rm -rf node_modules dist package-lock.json **/node_modules **/dist **/package-lock.json",
 		"up": "npm exec --yes -- taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
+	"overrides": {
+		"eslint-plugin-import": {
+			"minimatch": "^3.1.5"
+		},
+		"@vue/language-core": {
+			"minimatch": "^9.0.9"
+		},
+		"path-to-regexp": "8.4.0",
+		"serialize-javascript": "7.0.5",
+		"picomatch": "4.0.4",
+		"anymatch": {
+			"picomatch": "2.3.2"
+		},
+		"micromatch": {
+			"picomatch": "2.3.2"
+		},
+		"readdirp": {
+			"picomatch": "2.3.2"
+		},
+		"@rollup/plugin-babel": {
+			"@rollup/pluginutils": {
+				"picomatch": "2.3.2"
+			}
+		},
+		"@rollup/plugin-replace": {
+			"@rollup/pluginutils": {
+				"picomatch": "2.3.2"
+			}
+		}
+	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^7.7.3",
 		"@typescript-eslint/eslint-plugin": "^8.57.1",
