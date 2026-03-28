@@ -11,14 +11,13 @@ import LinkAttributes from "markdown-it-link-attributes";
 import Unocss from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import VueMacros from "unplugin-vue-macros/vite";
 import Markdown from "unplugin-vue-markdown/vite";
-import { VueRouterAutoImports } from "unplugin-vue-router";
-import VueRouter from "unplugin-vue-router/vite";
 import { defineConfig } from "vite";
 import VueDevTools from "vite-plugin-vue-devtools";
 import Layouts from "vite-plugin-vue-layouts-next";
 import generateSitemap from "vite-ssg-sitemap";
+import { VueRouterAutoImports } from "vue-router/unplugin";
+import VueRouter from "vue-router/vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -38,12 +37,8 @@ export default defineConfig(({ command }) => ({
 			watch: command === "serve" && !process.env.VITEST
 		}),
 
-		/* 2️⃣  VueMacros – this already injects @vitejs/plugin-vue */
-		VueMacros({
-			plugins: {
-				vue: Vue({ include: [/\.vue$/, /\.md$/] })
-			}
-		}),
+		/* 2️⃣  Vue */
+		Vue({ include: [/\.vue$/, /\.md$/] }),
 
 		/* 3️⃣  Layouts */
 		Layouts(),
