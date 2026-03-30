@@ -31,7 +31,7 @@ export default defineConfig(({ command }) => ({
 		/* 1️⃣  Router (must run before macros/layouts) */
 		VueRouter({
 			extensions: [".vue", ".md"],
-			dts: "src/typed-router.d.ts",
+			dts: "src/route-map.d.ts",
 			watch: command === "serve" && !process.env.VITEST
 		}),
 
