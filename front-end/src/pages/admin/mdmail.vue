@@ -25,7 +25,7 @@ const recipients: Recipient[] = [
 	{ name: "Recipient 6", emails: ["recipient-6@example.invalid"] },
 	{
 		name: "Test",
-		emails: ["jacobdanderson@gmail.com", "jacobdanderson@gmail.com"]
+		emails: ["classes@jacobdanderson.net", "classes@jacobdanderson.net"]
 	}
 	// { name: "Recipient 1 (Abigail)", emails: ["recipient-5@example.invalid"] }
 ];

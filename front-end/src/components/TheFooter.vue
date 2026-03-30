@@ -7,12 +7,7 @@
 				<h3>Connect</h3>
 				<ul>
 					<li>
-						<a href="mailto:bascule-skaters0n@icloud.com"
-							>Email me</a
-						>
-						<!--						<a href="mailto:jacob@jacobdanderson.net" -->
-						<!--							>jacob@jacobdanderson.net</a -->
-						<!--						> -->
+						<a href="mailto:classes@jacobdanderson.net">Email me</a>
 					</li>
 					<li>
 						<a

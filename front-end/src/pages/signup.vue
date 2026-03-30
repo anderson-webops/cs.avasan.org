@@ -38,11 +38,8 @@ onMounted(() => {
 				</li>
 				<li>
 					Prefer to coordinate by email? Reach me at
-					<!--					<a href="mailto:jacob@jacobdanderson.net" -->
-					<!--						>jacob@jacobdanderson.net</a -->
-					<!--					>. -->
-					<a href="mailto:bascule-skaters0n@icloud.com"
-						>bascule-skaters0n@icloud.com</a
+					<a href="mailto:classes@jacobdanderson.net"
+						>classes@jacobdanderson.net</a
 					>.
 				</li>
 			</ul>

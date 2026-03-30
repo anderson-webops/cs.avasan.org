@@ -85,10 +85,9 @@ const { subjectGroups, highlights } = storeToRefs(content);
 				<RouterLink class="cta primary" to="/signup"
 					>Schedule on Calendly</RouterLink
 				>
-				<!--				href="mailto:jacob@jacobdanderson.net" -->
 				<a
 					class="cta secondary"
-					href="mailto:bascule-skaters0n@icloud.com"
+					href="mailto:classes@jacobdanderson.net"
 					>Email me a question</a
 				>
 			</div>
