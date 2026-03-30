@@ -311,9 +311,13 @@ function parseDateIso(value: string): string | null {
 					aria-label="Pick session date"
 					@change="handleDateChange"
 				/>
-				<div class="subject-preview">
-					{{ subject || "Session Notes (MM/DD)" }}
-				</div>
+				<input
+					id="subject-input"
+					v-model="subject"
+					class="subject-preview"
+					placeholder="Session Notes (MM/DD)"
+					aria-label="Email subject"
+				/>
 			</div>
 			<!--			<p class="hint">Select a date to auto-fill the subject.</p> -->
 		</div>
