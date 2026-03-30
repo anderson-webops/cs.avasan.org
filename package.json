@@ -55,7 +55,8 @@
 			"@rollup/pluginutils": {
 				"picomatch": "2.3.2"
 			}
-		}
+		},
+		"vue-i18n": "^11.3.0"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^7.7.3",
