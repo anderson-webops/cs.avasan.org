@@ -9,8 +9,23 @@ import { SessionNote } from "../models/schemas/SessionNote.js";
 
 const router = Router();
 const DATE_PREFIX_RE = /^(\d{4})-(\d{2})-(\d{2})/;
+const DEFAULT_PRIMARY_FROM_ADDR = "classes@jacobdanderson.net";
+const DEFAULT_FALLBACK_FROM_ADDR = "jacobdanderson@gmail.com";
+const SENDER_HINTS = [
+	"from address",
+	"sender",
+	"sender verify failed"
+];
+const REJECTION_HINTS = [
+	"not authorized",
+	"rejected"
+] as const;
 
-const FROM_ADDR = env.MDMAIL_FROM || "no-reply@example.com";
+const PRIMARY_FROM_ADDR = env.MDMAIL_FROM_PRIMARY
+	|| env.MDMAIL_FROM
+	|| DEFAULT_PRIMARY_FROM_ADDR;
+const FALLBACK_FROM_ADDR = env.MDMAIL_FROM_FALLBACK
+	|| DEFAULT_FALLBACK_FROM_ADDR;
 const ALLOW_TO = (env.MDMAIL_ALLOW_TO || "").split(",").filter(Boolean);
 const MAX_MD_LEN = Number(env.MDMAIL_MAX_MD_LEN || 200_000);
 
@@ -35,6 +50,135 @@ function parseDateOnly(dateStr: string): Date | null {
 	// store at UTC noon to avoid TZ-related off-by-one when read in other zones
 	const dt = new Date(Date.UTC(year, month - 1, day, 12));
 	return Number.isNaN(dt.getTime()) ? null : dt;
+}
+
+function wrapEmailHtml(contentHtml: string): string {
+	return `<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="color-scheme" content="light only" />
+		<meta name="supported-color-schemes" content="light only" />
+	</head>
+	<body style="margin:0;padding:24px;background:#ffffff !important;color:#111827 !important;">
+		<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff !important;">
+			<tr>
+				<td align="center" style="background:#ffffff !important;">
+					<table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" style="width:680px;max-width:680px;background:#ffffff !important;color:#111827 !important;">
+						<tr>
+							<td style="padding:24px;background:#ffffff !important;color:#111827 !important;">
+								${contentHtml}
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>`;
+}
+
+type SendMailInfo = Awaited<
+	ReturnType<ReturnType<typeof nodemailer.createTransport>["sendMail"]>
+>;
+
+interface MailBase {
+	to: string;
+	cc: string[];
+	subject: string;
+	text: string;
+	html: string;
+}
+
+interface MailSendError {
+	message?: string;
+	response?: string;
+	responseCode?: number;
+}
+
+function getMailErrorText(err: unknown): string {
+	if (!err || typeof err !== "object") return "";
+
+	const { message, response } = err as MailSendError;
+	return [message, response]
+		.filter((value): value is string => typeof value === "string")
+		.join(" ")
+		.toLowerCase();
+}
+
+function summarizeMailError(err: unknown): string {
+	if (!err || typeof err !== "object") return String(err);
+
+	const { message, responseCode } = err as MailSendError;
+	if (typeof message === "string" && typeof responseCode === "number")
+		return `${responseCode} ${message}`;
+	if (typeof message === "string") return message;
+	return String(err);
+}
+
+function isSenderRejection(err: unknown): boolean {
+	if (!err || typeof err !== "object") return false;
+
+	const { responseCode } = err as MailSendError;
+	const errorText = getMailErrorText(err);
+	const hasSenderHint = SENDER_HINTS.some(hint => errorText.includes(hint));
+	const hasRejectionHint = REJECTION_HINTS.some(hint => errorText.includes(hint));
+	const hasSenderCode = responseCode === 550 || responseCode === 553;
+
+	return hasSenderHint && (hasSenderCode || hasRejectionHint);
+}
+
+async function sendWithOptionalFromFallback(
+	transporter: ReturnType<typeof nodemailer.createTransport>,
+	mailBase: MailBase
+): Promise<{ info: SendMailInfo; fromUsed: string; usedFallback: boolean }> {
+	try {
+		const info = await transporter.sendMail({
+			...mailBase,
+			from: PRIMARY_FROM_ADDR
+		});
+		console.info("admin-mail/send sent with primary From", {
+			from: PRIMARY_FROM_ADDR,
+			messageId: info.messageId
+		});
+		return { info, fromUsed: PRIMARY_FROM_ADDR, usedFallback: false };
+	}
+	catch (primaryErr) {
+		if (
+			!isSenderRejection(primaryErr)
+			|| FALLBACK_FROM_ADDR === PRIMARY_FROM_ADDR
+		) {
+			throw primaryErr;
+		}
+
+		console.warn(
+			"admin-mail/send primary From rejected, retrying with fallback From",
+			{
+				primaryFrom: PRIMARY_FROM_ADDR,
+				fallbackFrom: FALLBACK_FROM_ADDR,
+				error: summarizeMailError(primaryErr)
+			}
+		);
+
+		try {
+			const info = await transporter.sendMail({
+				...mailBase,
+				from: FALLBACK_FROM_ADDR
+			});
+			console.info("admin-mail/send sent with fallback From", {
+				primaryFrom: PRIMARY_FROM_ADDR,
+				from: FALLBACK_FROM_ADDR,
+				messageId: info.messageId
+			});
+			return { info, fromUsed: FALLBACK_FROM_ADDR, usedFallback: true };
+		}
+		catch (fallbackErr) {
+			throw new AggregateError(
+				[primaryErr, fallbackErr],
+				`Primary From rejected (${summarizeMailError(primaryErr)}); fallback From failed (${summarizeMailError(fallbackErr)})`
+			);
+		}
+	}
 }
 
 router.post("/send", validAdmin, async (req, res) => {
@@ -73,11 +217,12 @@ router.post("/send", validAdmin, async (req, res) => {
 		}
 
 		// Ensure we always pass a string to nodemailer
-		const html = await marked.parse(md);
-		if (typeof html !== "string") {
+		const contentHtml = await marked.parse(md);
+		if (typeof contentHtml !== "string") {
 			// noinspection ExceptionCaughtLocallyJS
 			throw new TypeError("HTML render did not return a string");
 		}
+		const html = wrapEmailHtml(contentHtml);
 
 		function readOptionalCA(p: string) {
 			try {
@@ -109,14 +254,18 @@ router.post("/send", validAdmin, async (req, res) => {
 			}
 		});
 
-		const info = await transporter.sendMail({
-			from: FROM_ADDR,
+		const mailBase = {
 			to: recipients[0],
 			cc: recipients.slice(1),
 			subject,
 			text: md,
 			html
-		});
+		};
+
+		const { info, fromUsed, usedFallback } = await sendWithOptionalFromFallback(
+			transporter,
+			mailBase
+		);
 
 		if (sessionDate && recipientName) {
 			await SessionNote.create({
@@ -130,6 +279,11 @@ router.post("/send", validAdmin, async (req, res) => {
 			});
 		}
 
+		console.info("admin-mail/send completed", {
+			fromUsed,
+			usedFallback,
+			messageId: info.messageId
+		});
 		return res.json({ ok: true, messageId: info.messageId });
 	}
 	catch (err: any) {
