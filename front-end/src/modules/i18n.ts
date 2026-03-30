@@ -2,8 +2,12 @@ import type { App } from "vue-demi";
 import type { Locale } from "vue-i18n";
 import type { UserModule } from "~/types";
 import { createI18n } from "vue-i18n";
+import { parse } from "yaml";
 
 const LOCALE_FILE_RE = /([\w-]*)\.yml$/;
+interface LocaleMessages {
+	[key: string]: LocaleMessages | string;
+}
 
 // Import i18n resources
 // https://vitejs.dev/guide/features.html#glob-import
@@ -14,12 +18,20 @@ const i18n = createI18n({
 	locale: "",
 	messages: {}
 });
+const localeFiles = import.meta.glob("../../locales/*.yml", {
+	import: "default",
+	query: "?raw"
+});
 
 const localesMap = Object.fromEntries(
-	Object.entries(import.meta.glob("../../locales/*.yml")).map(
-		([path, loadLocale]) => [path.match(LOCALE_FILE_RE)?.[1], loadLocale]
-	)
-) as Record<Locale, () => Promise<{ default: Record<string, string> }>>;
+	Object.entries(localeFiles).map(([path, loadLocale]) => [
+		path.match(LOCALE_FILE_RE)?.[1],
+		async () => {
+			const rawMessages = await loadLocale();
+			return parse(String(rawMessages)) as LocaleMessages;
+		}
+	])
+) as Record<Locale, () => Promise<LocaleMessages>>;
 
 export const availableLocales: string[] = Object.keys(localesMap);
 
@@ -41,7 +53,7 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
 
 	// If the language hasn't been loaded yet
 	const messages = await localesMap[lang]();
-	i18n.global.setLocaleMessage(lang, messages.default);
+	i18n.global.setLocaleMessage(lang, messages);
 	loadedLanguages.push(lang);
 	return setI18nLanguage(lang);
 }

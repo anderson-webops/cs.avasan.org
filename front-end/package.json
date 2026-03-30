@@ -45,11 +45,11 @@
 		"vue": "^3.5.30",
 		"vue-demi": "^0.14.10",
 		"vue-i18n": "^11.3.0",
-		"vue-router": "^5.0.4"
+		"vue-router": "^5.0.4",
+		"yaml": "^2.8.3"
 	},
 	"devDependencies": {
 		"@iconify-json/carbon": "^1.2.19",
-		"@intlify/unplugin-vue-i18n": "^11.1.1",
 		"@shikijs/markdown-it": "^4.0.2",
 		"@types/bootstrap": "^5.2.10",
 		"@types/leaflet": "^1.9.21",

@@ -36,3 +36,9 @@
 - The API expects secrets via environment variables: `SESSION_SECRET`, Mongo credentials (`MONGODB_URI` or Vault via `VAULT_ROLE_ID`/`VAULT_SECRET_ID`), and optional `CROSS_SITE` to adjust cookie policy. Load them through `.env` files excluded from version control.
 - `npm run server` already loads `dotenv/config` and will attempt Vault retrieval via `src/vaultClient.ts`; validate both code paths when changing auth or persistence.
 - Never commit real credentials or production endpoints. Scrub logs before sharing, and verify rate limiting when exposing new routes under `/admin-mail` or other sensitive prefixes.
+
+## Agent Workflow Notes
+- After modifying any `package.json`, run `npm install` from the repository root so `package-lock.json` remains synchronized.
+- Before committing dependency changes, verify that the lockfile matches the intended versions and that no new deprecation warnings were introduced.
+- Only commit and push after implementation, relevant validation, and lockfile synchronization are complete.
+- Before pushing, run `npm run lint` plus the tests or builds appropriate for the files you changed.

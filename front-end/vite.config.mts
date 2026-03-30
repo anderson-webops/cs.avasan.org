@@ -1,8 +1,6 @@
 // vite.config.ts
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import VueI18n from "@intlify/unplugin-vue-i18n/vite";
-
 import Shiki from "@shikijs/markdown-it";
 import { unheadVueComposablesImports } from "@unhead/vue";
 import Vue from "@vitejs/plugin-vue";
@@ -91,15 +89,7 @@ export default defineConfig(({ command }) => ({
 			}
 		}),
 
-		/* 7️⃣  i18n, fonts, devtools */
-		// https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
-		VueI18n({
-			runtimeOnly: true,
-			compositionOnly: true,
-			fullInstall: true,
-			include: [path.resolve(__dirname, "locales/**")]
-		}),
-
+		/* 7️⃣  Devtools */
 		// https://github.com/webfansplz/vite-plugin-vue-devtools
 		VueDevTools()
 	],
