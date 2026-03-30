@@ -1,6 +1,10 @@
+import type { SendMailOptions } from "nodemailer";
+import { Buffer } from "node:buffer";
+import { randomUUID } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { env } from "node:process";
 import { Router } from "express";
+import { ImapFlow } from "imapflow";
 import { marked } from "marked";
 import nodemailer from "nodemailer";
 import { z } from "zod";
@@ -17,6 +21,10 @@ const DEFAULT_PRIMARY_TRANSPORT_SERVERNAME = "mail.stridewithus.co";
 const DEFAULT_FALLBACK_TRANSPORT_HOST = "smtp.gmail.com";
 const DEFAULT_FALLBACK_TRANSPORT_PORT = 587;
 const DEFAULT_FALLBACK_TRANSPORT_SERVERNAME = "smtp.gmail.com";
+const DEFAULT_IMAP_APPEND_HOST = "mail.stridewithus.co";
+const DEFAULT_IMAP_APPEND_PORT = 993;
+const DEFAULT_IMAP_APPEND_USER = "jacob@jacobdanderson.net";
+const DEFAULT_IMAP_SENT_MAILBOX = "Sent Messages";
 const TRANSPORT_FAILURE_CODES = new Set([
 	"ECONNREFUSED",
 	"ETIMEDOUT",
@@ -98,6 +106,17 @@ const FALLBACK_TRANSPORT_PASS = env.SMTP_FALLBACK_PASS
 	|| env.SMTP_PASS;
 const FALLBACK_TRANSPORT_CA_FILE = env.SMTP_FALLBACK_CA_FILE
 	|| env.SMTP_CA_FILE;
+const IMAP_APPEND_HOST = env.IMAP_APPEND_HOST || DEFAULT_IMAP_APPEND_HOST;
+const IMAP_APPEND_PORT = Number(
+	env.IMAP_APPEND_PORT || DEFAULT_IMAP_APPEND_PORT
+);
+const IMAP_APPEND_SECURE = String(
+	env.IMAP_APPEND_SECURE || "true"
+).toLowerCase() !== "false";
+const IMAP_APPEND_USER = env.IMAP_APPEND_USER || DEFAULT_IMAP_APPEND_USER;
+const IMAP_APPEND_PASS = env.IMAP_APPEND_PASS || "";
+const IMAP_APPEND_SERVERNAME = env.IMAP_APPEND_SERVERNAME || IMAP_APPEND_HOST;
+const IMAP_SENT_MAILBOX = env.IMAP_SENT_MAILBOX || DEFAULT_IMAP_SENT_MAILBOX;
 const ALLOW_TO = (env.MDMAIL_ALLOW_TO || "").split(",").filter(Boolean);
 const MAX_MD_LEN = Number(env.MDMAIL_MAX_MD_LEN || 200_000);
 
@@ -155,6 +174,7 @@ type SendMailInfo = Awaited<
 >;
 
 interface MailBase {
+	date: Date;
 	to: string;
 	cc: string[];
 	subject: string;
@@ -177,6 +197,11 @@ interface MailSendResult {
 	info: SendMailInfo;
 	transportUsed: TransportKind;
 	usedSenderFallback: boolean;
+}
+
+interface ImapAppendResult {
+	appended: boolean;
+	mailbox: string;
 }
 
 function getMailErrorText(err: unknown): string {
@@ -208,6 +233,11 @@ function readOptionalCA(path: string) {
 	}
 	catch {}
 	return undefined;
+}
+
+function createMessageId(fromAddress: string): string {
+	const domain = fromAddress.split("@")[1] || "localhost";
+	return `<${randomUUID()}@${domain}>`;
 }
 
 function createPrimaryTransporter() {
@@ -253,6 +283,67 @@ function createFallbackTransporter() {
 			...(caBuf ? { ca: caBuf } : {})
 		}
 	});
+}
+
+async function generateRawMimeMessage(
+	message: SendMailOptions
+): Promise<Buffer> {
+	const rawTransporter = nodemailer.createTransport({
+		streamTransport: true,
+		buffer: true,
+		newline: "windows"
+	});
+	const rawInfo = await rawTransporter.sendMail(message);
+
+	if (!Buffer.isBuffer(rawInfo.message)) {
+		throw new TypeError("Raw MIME generation did not return a buffer");
+	}
+
+	return rawInfo.message;
+}
+
+async function appendSentMessage(
+	message: SendMailOptions
+): Promise<ImapAppendResult> {
+	if (!IMAP_APPEND_PASS) {
+		throw new Error("IMAP_APPEND_PASS is not configured");
+	}
+
+	const rawMessage = await generateRawMimeMessage(message);
+	const client = new ImapFlow({
+		host: IMAP_APPEND_HOST,
+		port: IMAP_APPEND_PORT,
+		secure: IMAP_APPEND_SECURE,
+		auth: {
+			user: IMAP_APPEND_USER,
+			pass: IMAP_APPEND_PASS
+		},
+		tls: {
+			servername: IMAP_APPEND_SERVERNAME
+		},
+		connectionTimeout: 15000,
+		socketTimeout: 15000
+	});
+
+	try {
+		await client.connect();
+		await client.append(
+			IMAP_SENT_MAILBOX,
+			rawMessage,
+			["\\Seen"],
+			message.date
+		);
+		return {
+			appended: true,
+			mailbox: IMAP_SENT_MAILBOX
+		};
+	}
+	finally {
+		try {
+			await client.logout();
+		}
+		catch {}
+	}
 }
 
 function isSenderRejection(err: unknown): boolean {
@@ -449,6 +540,7 @@ router.post("/send", validAdmin, async (req, res) => {
 		const html = wrapEmailHtml(contentHtml);
 
 		const mailBase = {
+			date: new Date(),
 			to: recipients[0],
 			cc: recipients.slice(1),
 			subject,
@@ -459,6 +551,30 @@ router.post("/send", validAdmin, async (req, res) => {
 		const { info, fromUsed, transportUsed, usedSenderFallback } = await sendWithFailover(
 			mailBase
 		);
+
+		try {
+			const messageId = info.messageId || createMessageId(fromUsed);
+			const appendResult = await appendSentMessage({
+				...mailBase,
+				from: fromUsed,
+				messageId
+			});
+			console.info("admin-mail/send appended copy to sent mailbox", {
+				transportUsed,
+				fromUsed,
+				mailbox: appendResult.mailbox,
+				messageId
+			});
+		}
+		catch (appendErr) {
+			console.warn("admin-mail/send IMAP append failed", {
+				transportUsed,
+				fromUsed,
+				mailbox: IMAP_SENT_MAILBOX,
+				messageId: info.messageId,
+				error: summarizeMailError(appendErr)
+			});
+		}
 
 		if (sessionDate && recipientName) {
 			await SessionNote.create({
