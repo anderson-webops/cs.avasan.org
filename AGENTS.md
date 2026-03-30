@@ -37,8 +37,11 @@
 - `npm run server` already loads `dotenv/config` and will attempt Vault retrieval via `src/vaultClient.ts`; validate both code paths when changing auth or persistence.
 - Never commit real credentials or production endpoints. Scrub logs before sharing, and verify rate limiting when exposing new routes under `/admin-mail` or other sensitive prefixes.
 
-## Agent Workflow Notes
-- After modifying any `package.json`, run `npm install` from the repository root so `package-lock.json` remains synchronized.
-- Before committing dependency changes, verify that the lockfile matches the intended versions and that no new deprecation warnings were introduced.
-- Only commit and push after implementation, relevant validation, and lockfile synchronization are complete.
-- Before pushing, run `npm run lint` plus the tests or builds appropriate for the files you changed.
+
+## Agent Delivery Workflow
+- If this repo uses a lockfile (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, Bun lockfile, or similar), keep it synchronized with dependency manifest changes before committing or pushing. Do not leave manifest and lockfile drift in the worktree or on `main`.
+- Do not leave completed work uncommitted. After each coherent, validated change set, create a commit and push it in the same session.
+- Use multiple commits and pushes when that keeps unrelated changes, partial validations, or follow-up fixes clearly separated. Prefer small, logically grouped commits over one mixed commit.
+- When a change is a meaningful milestone, create an annotated tag. Good candidates include deployable feature sets, notable dependency or security updates, schema or protocol changes, and other changes that are worth naming for rollback or reference.
+- When an update is materially user-facing or operationally significant, create a release tied to the relevant tag. Release notes should summarize scope, validation, rollout notes, and any migration or recovery steps.
+- Skip tags and releases for trivial doc-only edits and routine housekeeping unless there is a specific operational reason to publish them.

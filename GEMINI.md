@@ -1,10 +1,9 @@
 # Workspace Instructions
 
-## Dependency Management
-- Lockfile synchronization: always run `npm install` from the repository root after modifying any `package.json` so `package-lock.json` stays in sync.
-- Verification: before committing dependency changes, verify that the lockfile reflects the intended versions and that no new deprecation warnings were introduced.
-
-## Version Control Workflow
-- Atomic commits: only commit and push after the implementation, relevant validation, and lockfile synchronization are complete.
-- Verification before push: run the relevant project checks before pushing. At minimum, run `npm run lint` plus the tests or builds needed for the files you changed.
-- Commit style: keep commit messages concise and aligned with the repository’s existing history.
+## Lockfiles, Commits, Tags, And Releases
+- If this repo uses a lockfile (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, Bun lockfile, or similar), keep it synchronized with dependency manifest changes before committing or pushing. Do not leave manifest and lockfile drift in the worktree or on `main`.
+- Do not leave completed work uncommitted. After each coherent, validated change set, create a commit and push it in the same session.
+- Use multiple commits and pushes when that keeps unrelated changes, partial validations, or follow-up fixes clearly separated. Prefer small, logically grouped commits over one mixed commit.
+- When a change is a meaningful milestone, create an annotated tag. Good candidates include deployable feature sets, notable dependency or security updates, schema or protocol changes, and other changes that are worth naming for rollback or reference.
+- When an update is materially user-facing or operationally significant, create a release tied to the relevant tag. Release notes should summarize scope, validation, rollout notes, and any migration or recovery steps.
+- Skip tags and releases for trivial doc-only edits and routine housekeeping unless there is a specific operational reason to publish them.
