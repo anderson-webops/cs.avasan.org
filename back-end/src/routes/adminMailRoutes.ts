@@ -11,6 +11,42 @@ const router = Router();
 const DATE_PREFIX_RE = /^(\d{4})-(\d{2})-(\d{2})/;
 const DEFAULT_PRIMARY_FROM_ADDR = "classes@jacobdanderson.net";
 const DEFAULT_FALLBACK_FROM_ADDR = "jacobdanderson@gmail.com";
+const DEFAULT_PRIMARY_TRANSPORT_HOST = "127.0.0.1";
+const DEFAULT_PRIMARY_TRANSPORT_PORT = 25;
+const DEFAULT_PRIMARY_TRANSPORT_SERVERNAME = "mail.stridewithus.co";
+const DEFAULT_FALLBACK_TRANSPORT_HOST = "smtp.gmail.com";
+const DEFAULT_FALLBACK_TRANSPORT_PORT = 587;
+const DEFAULT_FALLBACK_TRANSPORT_SERVERNAME = "smtp.gmail.com";
+const TRANSPORT_FAILURE_CODES = new Set([
+	"ECONNREFUSED",
+	"ETIMEDOUT",
+	"EHOSTUNREACH",
+	"ECONNRESET",
+	"ESOCKET",
+	"ENOTFOUND",
+	"EPIPE"
+]);
+const TRANSPORT_FAILURE_HINTS = [
+	"connection refused",
+	"connect econnrefused",
+	"timeout",
+	"timed out",
+	"connection reset",
+	"ehostunreach",
+	"greeting never received",
+	"socket closed unexpectedly",
+	"service not available",
+	"service unavailable",
+	"local error in processing"
+] as const;
+const TRANSPORT_FAILURE_COMMANDS = new Set([
+	"CONN",
+	"EHLO",
+	"HELO",
+	"LHLO",
+	"STARTTLS",
+	"AUTH"
+]);
 const SENDER_HINTS = [
 	"from address",
 	"sender",
@@ -21,11 +57,47 @@ const REJECTION_HINTS = [
 	"rejected"
 ] as const;
 
-const PRIMARY_FROM_ADDR = env.MDMAIL_FROM_PRIMARY
+const PRIMARY_FROM_ADDR = env.MDMAIL_PRIMARY_FROM
+	|| env.MDMAIL_FROM_PRIMARY
 	|| env.MDMAIL_FROM
 	|| DEFAULT_PRIMARY_FROM_ADDR;
-const FALLBACK_FROM_ADDR = env.MDMAIL_FROM_FALLBACK
+const FALLBACK_FROM_ADDR = env.MDMAIL_FALLBACK_FROM
+	|| env.MDMAIL_FROM_FALLBACK
 	|| DEFAULT_FALLBACK_FROM_ADDR;
+const PRIMARY_TRANSPORT_HOST = env.SMTP_PRIMARY_HOST
+	|| env.SMTP_HOST
+	|| DEFAULT_PRIMARY_TRANSPORT_HOST;
+const PRIMARY_TRANSPORT_PORT = Number(
+	env.SMTP_PRIMARY_PORT
+	|| env.SMTP_PORT
+	|| DEFAULT_PRIMARY_TRANSPORT_PORT
+);
+const PRIMARY_TRANSPORT_SECURE = String(
+	env.SMTP_PRIMARY_SECURE
+	|| env.SMTP_SECURE
+	|| "false"
+).toLowerCase() === "true";
+const PRIMARY_TRANSPORT_SERVERNAME = env.SMTP_PRIMARY_SERVERNAME
+	|| env.SMTP_SERVERNAME
+	|| DEFAULT_PRIMARY_TRANSPORT_SERVERNAME;
+const PRIMARY_TRANSPORT_CA_FILE = env.SMTP_PRIMARY_CA_FILE
+	|| env.SMTP_CA_FILE;
+const FALLBACK_TRANSPORT_HOST = env.SMTP_FALLBACK_HOST
+	|| DEFAULT_FALLBACK_TRANSPORT_HOST;
+const FALLBACK_TRANSPORT_PORT = Number(
+	env.SMTP_FALLBACK_PORT || DEFAULT_FALLBACK_TRANSPORT_PORT
+);
+const FALLBACK_TRANSPORT_SECURE = String(
+	env.SMTP_FALLBACK_SECURE || "false"
+).toLowerCase() === "true";
+const FALLBACK_TRANSPORT_SERVERNAME = env.SMTP_FALLBACK_SERVERNAME
+	|| DEFAULT_FALLBACK_TRANSPORT_SERVERNAME;
+const FALLBACK_TRANSPORT_USER = env.SMTP_FALLBACK_USER
+	|| env.SMTP_USER;
+const FALLBACK_TRANSPORT_PASS = env.SMTP_FALLBACK_PASS
+	|| env.SMTP_PASS;
+const FALLBACK_TRANSPORT_CA_FILE = env.SMTP_FALLBACK_CA_FILE
+	|| env.SMTP_CA_FILE;
 const ALLOW_TO = (env.MDMAIL_ALLOW_TO || "").split(",").filter(Boolean);
 const MAX_MD_LEN = Number(env.MDMAIL_MAX_MD_LEN || 200_000);
 
@@ -90,10 +162,21 @@ interface MailBase {
 	html: string;
 }
 
+type TransportKind = "primary-local" | "fallback-gmail";
+
 interface MailSendError {
+	code?: string;
+	command?: string;
 	message?: string;
 	response?: string;
 	responseCode?: number;
+}
+
+interface MailSendResult {
+	fromUsed: string;
+	info: SendMailInfo;
+	transportUsed: TransportKind;
+	usedSenderFallback: boolean;
 }
 
 function getMailErrorText(err: unknown): string {
@@ -116,6 +199,62 @@ function summarizeMailError(err: unknown): string {
 	return String(err);
 }
 
+function readOptionalCA(path: string) {
+	try {
+		if (existsSync(path)) {
+			const st = statSync(path);
+			if (st.size > 0) return readFileSync(path);
+		}
+	}
+	catch {}
+	return undefined;
+}
+
+function createPrimaryTransporter() {
+	const caBuf = PRIMARY_TRANSPORT_CA_FILE
+		? readOptionalCA(PRIMARY_TRANSPORT_CA_FILE)
+		: undefined;
+
+	return nodemailer.createTransport({
+		host: PRIMARY_TRANSPORT_HOST,
+		port: PRIMARY_TRANSPORT_PORT,
+		secure: PRIMARY_TRANSPORT_SECURE,
+		connectionTimeout: 15000,
+		socketTimeout: 15000,
+		tls: {
+			servername: PRIMARY_TRANSPORT_SERVERNAME,
+			minVersion: "TLSv1.2",
+			...(caBuf ? { ca: caBuf } : {})
+		}
+	});
+}
+
+function createFallbackTransporter() {
+	const caBuf = FALLBACK_TRANSPORT_CA_FILE
+		? readOptionalCA(FALLBACK_TRANSPORT_CA_FILE)
+		: undefined;
+
+	return nodemailer.createTransport({
+		host: FALLBACK_TRANSPORT_HOST,
+		port: FALLBACK_TRANSPORT_PORT,
+		secure: FALLBACK_TRANSPORT_SECURE,
+		auth:
+			FALLBACK_TRANSPORT_USER && FALLBACK_TRANSPORT_PASS
+				? {
+						user: FALLBACK_TRANSPORT_USER,
+						pass: FALLBACK_TRANSPORT_PASS
+					}
+				: undefined,
+		connectionTimeout: 15000,
+		socketTimeout: 15000,
+		tls: {
+			servername: FALLBACK_TRANSPORT_SERVERNAME,
+			minVersion: "TLSv1.2",
+			...(caBuf ? { ca: caBuf } : {})
+		}
+	});
+}
+
 function isSenderRejection(err: unknown): boolean {
 	if (!err || typeof err !== "object") return false;
 
@@ -128,55 +267,140 @@ function isSenderRejection(err: unknown): boolean {
 	return hasSenderHint && (hasSenderCode || hasRejectionHint);
 }
 
-async function sendWithOptionalFromFallback(
-	transporter: ReturnType<typeof nodemailer.createTransport>,
+function isTransportFailure(err: unknown): boolean {
+	if (!err || typeof err !== "object" || isSenderRejection(err))
+		return false;
+
+	const { code, command, responseCode } = err as MailSendError;
+	const errorText = getMailErrorText(err);
+	if (typeof code === "string" && TRANSPORT_FAILURE_CODES.has(code.toUpperCase()))
+		return true;
+	if (
+		TRANSPORT_FAILURE_HINTS.some(hint => errorText.includes(hint))
+	)
+		return true;
+	if (
+		typeof responseCode === "number"
+		&& responseCode >= 400
+		&& responseCode < 600
+	) {
+		if (
+			typeof command === "string"
+			&& TRANSPORT_FAILURE_COMMANDS.has(command.toUpperCase())
+		) {
+			return true;
+		}
+		return (
+			errorText.includes("connection")
+			|| errorText.includes("socket")
+			|| errorText.includes("timeout")
+			|| errorText.includes("service unavailable")
+			|| errorText.includes("service not available")
+			|| errorText.includes("local error in processing")
+		);
+	}
+
+	return false;
+}
+
+async function sendWithFailover(
 	mailBase: MailBase
-): Promise<{ info: SendMailInfo; fromUsed: string; usedFallback: boolean }> {
+): Promise<MailSendResult> {
+	const primaryTransporter = createPrimaryTransporter();
 	try {
-		const info = await transporter.sendMail({
+		const info = await primaryTransporter.sendMail({
 			...mailBase,
 			from: PRIMARY_FROM_ADDR
 		});
-		console.info("admin-mail/send sent with primary From", {
+		console.info("admin-mail/send sent with primary transport", {
+			transport: "primary-local",
 			from: PRIMARY_FROM_ADDR,
 			messageId: info.messageId
 		});
-		return { info, fromUsed: PRIMARY_FROM_ADDR, usedFallback: false };
+		return {
+			info,
+			fromUsed: PRIMARY_FROM_ADDR,
+			transportUsed: "primary-local",
+			usedSenderFallback: false
+		};
 	}
 	catch (primaryErr) {
-		if (
-			!isSenderRejection(primaryErr)
-			|| FALLBACK_FROM_ADDR === PRIMARY_FROM_ADDR
-		) {
+		if (!isTransportFailure(primaryErr)) {
 			throw primaryErr;
 		}
-
 		console.warn(
-			"admin-mail/send primary From rejected, retrying with fallback From",
+			"admin-mail/send primary transport failed, retrying with fallback transport",
 			{
-				primaryFrom: PRIMARY_FROM_ADDR,
-				fallbackFrom: FALLBACK_FROM_ADDR,
+				transport: "primary-local",
+				fallbackTransport: "fallback-gmail",
+				from: PRIMARY_FROM_ADDR,
 				error: summarizeMailError(primaryErr)
 			}
 		);
 
+		const fallbackTransporter = createFallbackTransporter();
+
 		try {
-			const info = await transporter.sendMail({
+			const info = await fallbackTransporter.sendMail({
 				...mailBase,
-				from: FALLBACK_FROM_ADDR
+				from: PRIMARY_FROM_ADDR
 			});
-			console.info("admin-mail/send sent with fallback From", {
-				primaryFrom: PRIMARY_FROM_ADDR,
-				from: FALLBACK_FROM_ADDR,
+			console.info("admin-mail/send sent with fallback transport", {
+				transport: "fallback-gmail",
+				from: PRIMARY_FROM_ADDR,
 				messageId: info.messageId
 			});
-			return { info, fromUsed: FALLBACK_FROM_ADDR, usedFallback: true };
+			return {
+				info,
+				fromUsed: PRIMARY_FROM_ADDR,
+				transportUsed: "fallback-gmail",
+				usedSenderFallback: false
+			};
 		}
-		catch (fallbackErr) {
-			throw new AggregateError(
-				[primaryErr, fallbackErr],
-				`Primary From rejected (${summarizeMailError(primaryErr)}); fallback From failed (${summarizeMailError(fallbackErr)})`
+		catch (fallbackTransportErr) {
+			if (
+				!isSenderRejection(fallbackTransportErr)
+				|| FALLBACK_FROM_ADDR === PRIMARY_FROM_ADDR
+			) {
+				throw new AggregateError(
+					[primaryErr, fallbackTransportErr],
+					`Primary transport failed (${summarizeMailError(primaryErr)}); fallback transport failed (${summarizeMailError(fallbackTransportErr)})`
+				);
+			}
+
+			console.warn(
+				"admin-mail/send fallback transport rejected primary From, retrying with fallback From",
+				{
+					transport: "fallback-gmail",
+					primaryFrom: PRIMARY_FROM_ADDR,
+					fallbackFrom: FALLBACK_FROM_ADDR,
+					error: summarizeMailError(fallbackTransportErr)
+				}
 			);
+
+			try {
+				const info = await fallbackTransporter.sendMail({
+					...mailBase,
+					from: FALLBACK_FROM_ADDR
+				});
+				console.info("admin-mail/send sent with fallback transport and fallback From", {
+					transport: "fallback-gmail",
+					from: FALLBACK_FROM_ADDR,
+					messageId: info.messageId
+				});
+				return {
+					info,
+					fromUsed: FALLBACK_FROM_ADDR,
+					transportUsed: "fallback-gmail",
+					usedSenderFallback: true
+				};
+			}
+			catch (senderFallbackErr) {
+				throw new AggregateError(
+					[primaryErr, fallbackTransportErr, senderFallbackErr],
+					`Primary transport failed (${summarizeMailError(primaryErr)}); fallback transport rejected primary From (${summarizeMailError(fallbackTransportErr)}); fallback From failed (${summarizeMailError(senderFallbackErr)})`
+				);
+			}
 		}
 	}
 }
@@ -224,36 +448,6 @@ router.post("/send", validAdmin, async (req, res) => {
 		}
 		const html = wrapEmailHtml(contentHtml);
 
-		function readOptionalCA(p: string) {
-			try {
-				if (existsSync(p)) {
-					const st = statSync(p);
-					if (st.size > 0) return readFileSync(p);
-				}
-			}
-			catch {}
-			return undefined;
-		}
-
-		// replace your ca reading bits with:
-		const caPath = env.SMTP_CA_FILE; // new optional var
-		const caBuf = caPath ? readOptionalCA(caPath) : undefined;
-		// console.log("SMTP TLS CA path:", env.SMTP_CA_FILE || "/etc/ssl/local/mail-ca.pem", "exists:", !!caBuf, "len:", caBuf?.length ?? 0);
-
-		const transporter = nodemailer.createTransport({
-			host: env.SMTP_HOST,
-			port: Number(env.SMTP_PORT ?? 587),
-			secure: String(env.SMTP_SECURE || "").toLowerCase() === "true", // 465=true, 587=false
-			auth: env.SMTP_USER && env.SMTP_PASS ? { user: env.SMTP_USER, pass: env.SMTP_PASS } : undefined,
-			connectionTimeout: 15000,
-			socketTimeout: 15000,
-			tls: {
-				servername: env.SMTP_SERVERNAME || env.SMTP_HOST,
-				minVersion: "TLSv1.2",
-				...(caBuf ? { ca: caBuf } : {}) // only supply CA when you *really* need it
-			}
-		});
-
 		const mailBase = {
 			to: recipients[0],
 			cc: recipients.slice(1),
@@ -262,8 +456,7 @@ router.post("/send", validAdmin, async (req, res) => {
 			html
 		};
 
-		const { info, fromUsed, usedFallback } = await sendWithOptionalFromFallback(
-			transporter,
+		const { info, fromUsed, transportUsed, usedSenderFallback } = await sendWithFailover(
 			mailBase
 		);
 
@@ -280,8 +473,9 @@ router.post("/send", validAdmin, async (req, res) => {
 		}
 
 		console.info("admin-mail/send completed", {
+			transportUsed,
 			fromUsed,
-			usedFallback,
+			usedSenderFallback,
 			messageId: info.messageId
 		});
 		return res.json({ ok: true, messageId: info.messageId });
