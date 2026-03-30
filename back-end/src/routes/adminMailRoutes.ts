@@ -103,7 +103,7 @@ const MAX_MD_LEN = Number(env.MDMAIL_MAX_MD_LEN || 200_000);
 
 const MailSchema = z.object({
 	to: z.string().trim().min(1),
-	subject: z.string().trim().min(1).max(200),
+	subject: z.string().trim().min(1),
 	md: z.string().min(1),
 	recipientName: z.string().trim().min(1).optional(),
 	sessionDate: z.string().trim().optional()
