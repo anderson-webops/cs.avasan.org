@@ -1,24 +1,45 @@
 <script lang="ts" setup>
-import type { CourseModule } from "@/stores/courses";
+import type { CourseModule, CourseModuleItem } from "@/stores/courses";
 import MarkdownIt from "markdown-it";
 import { storeToRefs } from "pinia";
 import { computed, ref, watch, watchEffect } from "vue";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
+interface VisibleModule extends CourseModule {
+	position: number;
+	totalItemCount: number;
+	visibleItemCount: number;
+	isFiltered: boolean;
+}
+
+interface ResourceLink {
+	host: string;
+	kind: "project" | "solution" | "dataset";
+	label: string;
+	url: string;
+}
+
 const markdown = new MarkdownIt({
 	breaks: true,
 	linkify: true
 });
+
 const VIDEO_FILE_RE = /\.(?:mp4|webm|ogg)(?:\?|$)/i;
+const WHITESPACE_RE = /\s+/g;
+const WWW_PREFIX_RE = /^www\./;
 
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
 
-const allCourses = computed(() => courses.value ?? []);
-
 const appStore = useAppStore();
 const { currentTutor, currentAdmin, currentUser } = storeToRefs(appStore);
+
+const searchQuery = ref("");
+const selectedCourseId = ref("");
+const activeModuleId = ref("");
+
+const allCourses = computed(() => courses.value ?? []);
 
 const canViewSolutions = computed(
 	() => !!currentTutor.value || !!currentAdmin.value
@@ -39,14 +60,7 @@ const courseList = computed(() => {
 
 const hasCourseAccess = computed(() => courseList.value.length > 0);
 
-const selectedCourseId = ref("");
-const activeModuleId = ref<string | null>(null);
-// const openItems = ref<Record<string, string | null>>({});
-const openItems = ref<Record<string, Record<string, boolean>>>({});
-
-function renderMarkdown(content: string) {
-	return markdown.render(content);
-}
+const normalizedQuery = computed(() => normalizeSearch(searchQuery.value));
 
 watchEffect(() => {
 	const availableCourses = courseList.value;
@@ -54,17 +68,13 @@ watchEffect(() => {
 		selectedCourseId.value = "";
 		return;
 	}
+
 	if (
 		!selectedCourseId.value ||
 		!availableCourses.some(course => course.id === selectedCourseId.value)
 	) {
-		selectCourse(availableCourses[0].id);
+		selectedCourseId.value = availableCourses[0].id;
 	}
-});
-
-watch(selectedCourseId, () => {
-	activeModuleId.value = null;
-	openItems.value = {};
 });
 
 const selectedCourse = computed(
@@ -73,53 +83,247 @@ const selectedCourse = computed(
 		null
 );
 
+const courseStats = computed(() => {
+	const course = selectedCourse.value;
+	if (!course) return null;
+
+	const lessonCount = course.modules.reduce(
+		$total,
+		module => $total + module.curriculum.length
+	);
+	const supplementalCount = course.modules.reduce(
+		$total,
+		module => $total + module.supplementalProjects.length
+	);
+
+	return {
+		moduleCount: course.modules.length,
+		lessonCount,
+		supplementalCount
+	};
+});
+
+const visibleModules = computed<VisibleModule[]>(() => {
+	const course = selectedCourse.value;
+	if (!course) return [];
+
+	const query = normalizedQuery.value;
+
+	return course.modules
+		.map((module, index) => {
+			const totalItemCount =
+				module.curriculum.length + module.supplementalProjects.length;
+
+			if (!query) {
+				return {
+					...module,
+					position: index + 1,
+					totalItemCount,
+					visibleItemCount: totalItemCount,
+					isFiltered: false
+				};
+			}
+
+			const moduleMatches = matchesSearch(module.title, query);
+			const curriculum = moduleMatches
+				? module.curriculum
+				: module.curriculum.filter(item => itemMatches(item, query));
+			const supplementalProjects = moduleMatches
+				? module.supplementalProjects
+				: module.supplementalProjects.filter(item =>
+						itemMatches(item, query)
+					);
+
+			const visibleItemCount =
+				curriculum.length + supplementalProjects.length;
+
+			if (!moduleMatches && visibleItemCount === 0) return null;
+
+			return {
+				...module,
+				position: index + 1,
+				curriculum,
+				supplementalProjects,
+				totalItemCount,
+				visibleItemCount,
+				isFiltered: visibleItemCount < totalItemCount
+			};
+		})
+		.filter((module): module is VisibleModule => module !== null);
+});
+
+watch(
+	visibleModules,
+	modules => {
+		if (modules.length === 0) {
+			activeModuleId.value = "";
+			return;
+		}
+
+		if (!modules.some(module => module.id === activeModuleId.value)) {
+			activeModuleId.value = modules[0].id;
+		}
+	},
+	{ immediate: true }
+);
+
+const activeModule = computed(
+	() =>
+		visibleModules.value.find(
+			module => module.id === activeModuleId.value
+		) ?? null
+);
+
+const activeModuleJumpLinks = computed(() => {
+	const module = activeModule.value;
+	if (!module) return [];
+
+	return [
+		...module.curriculum.map((item, index) => ({
+			id: itemAnchorId(module.id, item.id),
+			label: `${index + 1}. ${item.title}`,
+			type: "lesson" as const
+		})),
+		...module.supplementalProjects.map((item, index) => ({
+			id: itemAnchorId(module.id, item.id),
+			label: `Project ${index + 1}: ${item.title}`,
+			type: "supplemental" as const
+		}))
+	];
+});
+
+const resultsCopy = computed(() => {
+	const moduleCount = visibleModules.value.length;
+	const itemCount = visibleModules.value.reduce(
+		$total,
+		module => $total + module.visibleItemCount
+	);
+
+	if (!normalizedQuery.value) {
+		return `${moduleCount} modules and ${itemCount} lesson blocks ready to read.`;
+	}
+
+	return `${moduleCount} matching modules and ${itemCount} visible lesson blocks for "${searchQuery.value.trim()}".`;
+});
+
+function normalizeSearch(value: string) {
+	return value.toLowerCase().replace(WHITESPACE_RE, " ").trim();
+}
+
+function matchesSearch(value: string, query: string) {
+	return normalizeSearch(value).includes(query);
+}
+
+function itemMatches(item: CourseModuleItem, query: string) {
+	return (
+		matchesSearch(item.title, query) || matchesSearch(item.content, query)
+	);
+}
+
+function renderMarkdown(content: string) {
+	return markdown.render(content);
+}
+
 function selectCourse(id: string) {
 	selectedCourseId.value = id;
 }
 
-function toggleModule(moduleId: string) {
-	activeModuleId.value = activeModuleId.value === moduleId ? null : moduleId;
+function selectModule(id: string) {
+	activeModuleId.value = id;
 }
 
-function itemKey(
-	moduleId: string,
-	type: "curriculum" | "supplemental",
-	itemId: string
-) {
-	return `${moduleId}:${type}:${itemId}`;
+function clearSearch() {
+	searchQuery.value = "";
 }
 
-function toggleItem(moduleId: string, key: string) {
-	const mod = openItems.value[moduleId] ?? {};
-	const next = { ...mod, [key]: !mod[key] };
-	openItems.value = { ...openItems.value, [moduleId]: next };
-}
-
-function isItemOpen(moduleId: string, key: string) {
-	return !!openItems.value[moduleId]?.[key];
-}
-
-function hasSupplemental(module: CourseModule) {
-	return module.supplementalProjects.length > 0;
+function itemAnchorId(moduleId: string, itemId: string) {
+	return `${moduleId}-${itemId}`;
 }
 
 function isVideo(link: string) {
 	return VIDEO_FILE_RE.test(link);
+}
+
+function linkHost(url: string) {
+	try {
+		return new URL(url).hostname.replace(WWW_PREFIX_RE, "");
+	} catch {
+		return url;
+	}
+}
+
+function resourceLinks(item: CourseModuleItem): ResourceLink[] {
+	const links: ResourceLink[] = [];
+
+	if (item.projectLink) {
+		links.push({
+			kind: "project",
+			label: "Open project",
+			url: item.projectLink,
+			host: linkHost(item.projectLink)
+		});
+	}
+
+	if (canViewSolutions.value && item.solutionLink) {
+		links.push({
+			kind: "solution",
+			label: "Open solution",
+			url: item.solutionLink,
+			host: linkHost(item.solutionLink)
+		});
+	}
+
+	if (item.datasetLink) {
+		links.push({
+			kind: "dataset",
+			label: "Open dataset",
+			url: item.datasetLink,
+			host: linkHost(item.datasetLink)
+		});
+	}
+
+	return links;
 }
 </script>
 
 <template>
 	<section class="course-explorer">
 		<div v-if="hasCourseAccess" class="course-shell">
-			<div class="course-selector">
-				<label class="selector-label" for="course-select"
-					>Choose a course</label
-				>
-				<div class="selector-control">
+			<header v-if="selectedCourse && courseStats" class="course-hero">
+				<div class="course-hero-copy">
+					<p class="course-eyebrow">Course material</p>
+					<h2>{{ selectedCourse.name }}</h2>
+					<p class="course-description">
+						Move through the syllabus from one calm reading space,
+						search the material quickly, and open project resources
+						without digging through nested accordions.
+					</p>
+				</div>
+
+				<dl class="course-stats">
+					<div class="stat">
+						<dt>Modules</dt>
+						<dd>{{ courseStats.moduleCount }}</dd>
+					</div>
+					<div class="stat">
+						<dt>Core lessons</dt>
+						<dd>{{ courseStats.lessonCount }}</dd>
+					</div>
+					<div class="stat">
+						<dt>Projects</dt>
+						<dd>{{ courseStats.supplementalCount }}</dd>
+					</div>
+				</dl>
+			</header>
+
+			<div class="course-toolbar">
+				<label class="control-block" for="course-select">
+					<span class="control-label">Course</span>
 					<select
 						id="course-select"
 						v-model="selectedCourseId"
 						class="course-select"
+						@change="selectCourse(selectedCourseId)"
 					>
 						<option
 							v-for="course in courseList"
@@ -129,380 +333,312 @@ function isVideo(link: string) {
 							{{ course.name }}
 						</option>
 					</select>
-				</div>
-			</div>
+				</label>
 
-			<div v-if="selectedCourse" class="course-modules">
-				<div
-					v-for="(module, index) in selectedCourse.modules"
-					:key="module.id"
-					class="module-card"
-				>
-					<button
-						class="module-toggle"
-						type="button"
-						@click="toggleModule(module.id)"
-					>
-						<span class="module-index">{{ index + 1 }}</span>
-						<span class="module-title">{{ module.title }}</span>
-						<span aria-hidden="true" class="module-icon">
-							{{ activeModuleId === module.id ? "−" : "+" }}
-						</span>
-					</button>
-
-					<transition name="accordion">
-						<div
-							v-if="activeModuleId === module.id"
-							class="module-body"
+				<label class="control-block search-block" for="course-search">
+					<span class="control-label">Search lessons</span>
+					<div class="search-shell">
+						<input
+							id="course-search"
+							v-model="searchQuery"
+							class="course-search"
+							name="course-search"
+							placeholder="Search module titles, lessons, or keywords"
+							type="search"
+						/>
+						<button
+							v-if="searchQuery"
+							class="clear-search"
+							type="button"
+							@click="clearSearch"
 						>
-							<div class="module-section">
-								<h3>Curriculum</h3>
-								<ol class="item-list">
-									<li
-										v-for="item in module.curriculum"
-										:key="item.id"
-										class="item"
-									>
-										<button
-											class="item-toggle"
-											type="button"
-											@click="
-												toggleItem(
-													module.id,
-													itemKey(
-														module.id,
-														'curriculum',
-														item.id
-													)
-												)
-											"
-										>
-											<span>{{ item.title }}</span>
-											<span
-												class="item-icon"
-												aria-hidden="true"
-											>
-												{{
-													isItemOpen(
-														module.id,
-														itemKey(
-															module.id,
-															"curriculum",
-															item.id
-														)
-													)
-														? "Hide"
-														: "View"
-												}}
-											</span>
-										</button>
-										<transition name="accordion">
-											<div
-												v-if="
-													isItemOpen(
-														module.id,
-														itemKey(
-															module.id,
-															'curriculum',
-															item.id
-														)
-													)
-												"
-												class="item-content"
-											>
-												<div class="item-content-body">
-													<div
-														v-if="
-															item.projectLink ||
-															(canViewSolutions &&
-																item.solutionLink) ||
-															item.datasetLink
-														"
-														class="item-links"
-													>
-														<p
-															v-if="
-																item.projectLink
-															"
-															class="item-link"
-														>
-															<strong
-																>Project:</strong
-															>
-															<a
-																:href="
-																	item.projectLink
-																"
-																rel="noreferrer"
-																target="_blank"
-															>
-																{{
-																	item.projectLink
-																}}
-															</a>
-														</p>
-														<p
-															v-if="
-																canViewSolutions &&
-																item.solutionLink
-															"
-															class="item-link"
-														>
-															<strong
-																>Solution:</strong
-															>
-															<a
-																:href="
-																	item.solutionLink
-																"
-																rel="noreferrer"
-																target="_blank"
-															>
-																{{
-																	item.solutionLink
-																}}
-															</a>
-														</p>
-														<p
-															v-if="
-																item.datasetLink
-															"
-															class="item-link"
-														>
-															<i>Project:</i>
-															<a
-																:href="
-																	item.datasetLink
-																"
-																rel="noreferrer"
-																target="_blank"
-															>
-																{{
-																	item.datasetLink
-																}}
-															</a>
-														</p>
-													</div>
-													<div
-														v-if="item.content"
-														class="item-content-markdown"
-														v-html="
-															renderMarkdown(
-																item.content
-															)
-														"
-													/>
-													<div
-														v-if="item.mediaLink"
-														class="item-media"
-													>
-														<video
-															v-if="
-																isVideo(
-																	item.mediaLink
-																)
-															"
-															controls
-															autoplay
-															loop
-															muted
-															playsinline
-															class="item-media-video"
-														>
-															<source
-																:src="
-																	item.mediaLink
-																"
-															/>
-														</video>
-														<img
-															v-else
-															:src="
-																item.mediaLink
-															"
-															alt="Project demo media"
-															class="item-media-image"
-														/>
-													</div>
-												</div>
-											</div>
-										</transition>
-									</li>
-								</ol>
-							</div>
+							Clear
+						</button>
+					</div>
+				</label>
 
-							<div
-								v-if="hasSupplemental(module)"
-								class="module-section"
-							>
-								<h3>Supplemental Projects</h3>
-								<ol class="item-list">
-									<li
-										v-for="supplemental in module.supplementalProjects"
-										:key="supplemental.id"
-										class="item"
-									>
-										<button
-											class="item-toggle"
-											type="button"
-											@click="
-												toggleItem(
-													module.id,
-													itemKey(
-														module.id,
-														'supplemental',
-														supplemental.id
-													)
-												)
-											"
-										>
-											<span>{{
-												supplemental.title
-											}}</span>
-											<span
-												class="item-icon"
-												aria-hidden="true"
-											>
-												{{
-													isItemOpen(
-														module.id,
-														itemKey(
-															module.id,
-															"supplemental",
-															supplemental.id
-														)
-													)
-														? "Hide"
-														: "View"
-												}}
-											</span>
-										</button>
-										<transition name="accordion">
-											<div
-												v-if="
-													isItemOpen(
-														module.id,
-														itemKey(
-															module.id,
-															'supplemental',
-															supplemental.id
-														)
-													)
-												"
-												class="item-content"
-											>
-												<div class="item-content-body">
-													<div
-														v-if="
-															supplemental.projectLink ||
-															(canViewSolutions &&
-																supplemental.solutionLink)
-														"
-														class="item-links"
-													>
-														<p
-															v-if="
-																supplemental.projectLink
-															"
-															class="item-link"
-														>
-															<strong
-																>Project:</strong
-															>
-															<a
-																:href="
-																	supplemental.projectLink
-																"
-																rel="noreferrer"
-																target="_blank"
-															>
-																{{
-																	supplemental.projectLink
-																}}
-															</a>
-														</p>
-														<p
-															v-if="
-																canViewSolutions &&
-																supplemental.solutionLink
-															"
-															class="item-link"
-														>
-															<strong
-																>Solution:</strong
-															>
-															<a
-																:href="
-																	supplemental.solutionLink
-																"
-																rel="noreferrer"
-																target="_blank"
-															>
-																{{
-																	supplemental.solutionLink
-																}}
-															</a>
-														</p>
-													</div>
-													<div
-														v-if="
-															supplemental.content
-														"
-														class="item-content-markdown"
-														v-html="
-															renderMarkdown(
-																supplemental.content
-															)
-														"
-													/>
-													<div
-														v-if="
-															supplemental.mediaLink
-														"
-														class="item-media"
-													>
-														<video
-															v-if="
-																isVideo(
-																	supplemental.mediaLink
-																)
-															"
-															controls
-															autoplay
-															loop
-															muted
-															playsinline
-															class="item-media-video"
-														>
-															<source
-																:src="
-																	supplemental.mediaLink
-																"
-															/>
-														</video>
-														<img
-															v-else
-															:src="
-																supplemental.mediaLink
-															"
-															alt="Project demo media"
-															class="item-media-image"
-														/>
-													</div>
-												</div>
-											</div>
-										</transition>
-									</li>
-								</ol>
-							</div>
+				<p class="results-copy">{{ resultsCopy }}</p>
+			</div>
+
+			<div v-if="selectedCourse" class="course-workspace">
+				<aside class="course-outline">
+					<div class="outline-header">
+						<p class="outline-eyebrow">Syllabus</p>
+						<h3>Choose a module</h3>
+						<p>
+							The right side shows the full reading view for the
+							selected module.
+						</p>
+					</div>
+
+					<div v-if="visibleModules.length > 0" class="outline-list">
+						<button
+							v-for="module in visibleModules"
+							:key="module.id"
+							:aria-current="
+								activeModule?.id === module.id
+									? 'true'
+									: undefined
+							"
+							class="outline-button"
+							type="button"
+							@click="selectModule(module.id)"
+						>
+							<span class="outline-position">
+								{{ module.position }}
+							</span>
+							<span class="outline-copy">
+								<strong>{{ module.title }}</strong>
+								<small>
+									{{ module.visibleItemCount }}
+									{{
+										module.visibleItemCount === 1
+											? "item"
+											: "items"
+									}}
+									<span v-if="module.isFiltered">
+										visible out of
+										{{ module.totalItemCount }}
+									</span>
+								</small>
+							</span>
+						</button>
+					</div>
+
+					<div v-else class="outline-empty">
+						<h4>No matches yet</h4>
+						<p>
+							Try a broader keyword or clear the search to return
+							to the full syllabus.
+						</p>
+						<button
+							type="button"
+							class="outline-reset"
+							@click="clearSearch"
+						>
+							Show all modules
+						</button>
+					</div>
+				</aside>
+
+				<div v-if="activeModule" class="course-reader">
+					<header class="reader-header">
+						<div class="reader-copy">
+							<p class="reader-eyebrow">
+								Module {{ activeModule.position }}
+							</p>
+							<h3>{{ activeModule.title }}</h3>
+							<p>
+								{{ activeModule.curriculum.length }}
+								core lessons and
+								{{ activeModule.supplementalProjects.length }}
+								supplemental projects in one reading view.
+							</p>
 						</div>
-					</transition>
+
+						<nav
+							v-if="activeModuleJumpLinks.length > 0"
+							aria-label="Jump to lesson"
+							class="reader-jump-links"
+						>
+							<a
+								v-for="link in activeModuleJumpLinks"
+								:key="link.id"
+								class="jump-link"
+								:class="[
+									link.type === 'supplemental'
+										? 'is-supplemental'
+										: ''
+								]"
+								:href="`#${link.id}`"
+							>
+								{{ link.label }}
+							</a>
+						</nav>
+					</header>
+
+					<section class="reader-section">
+						<div class="section-header">
+							<div>
+								<p class="section-eyebrow">Core path</p>
+								<h4>Curriculum</h4>
+							</div>
+							<span class="section-count">
+								{{ activeModule.curriculum.length }}
+							</span>
+						</div>
+
+						<ol class="lesson-list">
+							<li
+								v-for="(item, index) in activeModule.curriculum"
+								:id="itemAnchorId(activeModule.id, item.id)"
+								:key="item.id"
+								class="lesson-item"
+							>
+								<article class="lesson-card">
+									<header class="lesson-header">
+										<span class="lesson-index">
+											{{ index + 1 }}
+										</span>
+										<div class="lesson-title-group">
+											<p class="lesson-kicker">Lesson</p>
+											<h5>{{ item.title }}</h5>
+										</div>
+									</header>
+
+									<div
+										v-if="resourceLinks(item).length > 0"
+										class="resource-list"
+									>
+										<a
+											v-for="resource in resourceLinks(
+												item
+											)"
+											:key="`${item.id}-${resource.kind}`"
+											class="resource-link"
+											:class="[`is-${resource.kind}`]"
+											:href="resource.url"
+											rel="noreferrer"
+											target="_blank"
+										>
+											<span>{{ resource.label }}</span>
+											<small>{{ resource.host }}</small>
+										</a>
+									</div>
+
+									<div
+										v-if="item.content"
+										class="item-content-markdown"
+										v-html="renderMarkdown(item.content)"
+									/>
+
+									<div
+										v-if="item.mediaLink"
+										class="item-media"
+									>
+										<video
+											v-if="isVideo(item.mediaLink)"
+											class="item-media-video"
+											controls
+											muted
+											playsinline
+											preload="metadata"
+										>
+											<source :src="item.mediaLink" />
+										</video>
+										<img
+											v-else
+											:src="item.mediaLink"
+											alt="Project demo media"
+											class="item-media-image"
+										/>
+									</div>
+								</article>
+							</li>
+						</ol>
+					</section>
+
+					<section
+						v-if="activeModule.supplementalProjects.length > 0"
+						class="reader-section"
+					>
+						<div class="section-header">
+							<div>
+								<p class="section-eyebrow">Extra practice</p>
+								<h4>Supplemental Projects</h4>
+							</div>
+							<span class="section-count">
+								{{ activeModule.supplementalProjects.length }}
+							</span>
+						</div>
+
+						<ol class="lesson-list">
+							<li
+								v-for="(
+									item, index
+								) in activeModule.supplementalProjects"
+								:id="itemAnchorId(activeModule.id, item.id)"
+								:key="item.id"
+								class="lesson-item"
+							>
+								<article class="lesson-card is-supplemental">
+									<header class="lesson-header">
+										<span
+											class="lesson-index is-supplemental"
+										>
+											{{ index + 1 }}
+										</span>
+										<div class="lesson-title-group">
+											<p class="lesson-kicker">
+												Supplemental project
+											</p>
+											<h5>{{ item.title }}</h5>
+										</div>
+									</header>
+
+									<div
+										v-if="resourceLinks(item).length > 0"
+										class="resource-list"
+									>
+										<a
+											v-for="resource in resourceLinks(
+												item
+											)"
+											:key="`${item.id}-${resource.kind}`"
+											class="resource-link"
+											:class="[`is-${resource.kind}`]"
+											:href="resource.url"
+											rel="noreferrer"
+											target="_blank"
+										>
+											<span>{{ resource.label }}</span>
+											<small>{{ resource.host }}</small>
+										</a>
+									</div>
+
+									<div
+										v-if="item.content"
+										class="item-content-markdown"
+										v-html="renderMarkdown(item.content)"
+									/>
+
+									<div
+										v-if="item.mediaLink"
+										class="item-media"
+									>
+										<video
+											v-if="isVideo(item.mediaLink)"
+											class="item-media-video"
+											controls
+											muted
+											playsinline
+											preload="metadata"
+										>
+											<source :src="item.mediaLink" />
+										</video>
+										<img
+											v-else
+											:src="item.mediaLink"
+											alt="Project demo media"
+											class="item-media-image"
+										/>
+									</div>
+								</article>
+							</li>
+						</ol>
+					</section>
+				</div>
+
+				<div v-else class="reader-empty">
+					<h3>No module selected</h3>
+					<p>
+						Choose a module from the syllabus to open the lesson
+						reader.
+					</p>
 				</div>
 			</div>
-			<p v-else class="course-empty">
-				Select a course to view its modules.
-			</p>
 		</div>
+
 		<div v-else class="course-empty">
 			<p>You don't have any courses assigned yet.</p>
 			<p class="hint">Reach out to your tutor or admin to gain access.</p>
@@ -512,238 +648,565 @@ function isVideo(link: string) {
 
 <style scoped>
 .course-explorer {
+	--course-border: rgba(15, 23, 42, 0.08);
+	--course-border-strong: rgba(30, 41, 59, 0.12);
+	--course-text: #0f172a;
+	--course-text-soft: #475569;
+	--course-panel: #ffffff;
+	--course-panel-soft: #f8fafc;
+	--course-accent: #0f766e;
+	--course-accent-soft: rgba(15, 118, 110, 0.12);
+	--course-shadow: 0 24px 50px -34px rgba(15, 23, 42, 0.3);
 	display: flex;
 	flex-direction: column;
 	gap: clamp(1.5rem, 3vw, 2.5rem);
+	color: var(--course-text);
 }
 
 .course-shell {
 	display: flex;
 	flex-direction: column;
-	gap: clamp(1.5rem, 3vw, 2.5rem);
+	gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-.course-selector {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-}
-
-.selector-label {
-	font-weight: 600;
-	font-size: 1rem;
-	color: #0f172a;
-}
-
-.selector-control {
-	position: relative;
-	display: flex;
-	align-items: center;
-}
-
-.course-select {
-	width: 100%;
-	padding: 0.75rem 1rem;
-	border-radius: 12px;
-	border: 1px solid rgba(15, 23, 42, 0.12);
-	font-size: 1rem;
-	appearance: none;
-	background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
-	color: #0f172a;
-	font-weight: 500;
-	box-shadow: 0 12px 24px -18px rgba(15, 23, 42, 0.45);
-}
-
-.course-modules {
-	display: flex;
-	flex-direction: column;
-	gap: 1.25rem;
-}
-
-.module-card {
-	border: 1px solid rgba(15, 23, 42, 0.08);
-	border-radius: 18px;
-	background: rgba(248, 250, 252, 0.85);
-	box-shadow: 0 18px 40px -30px rgba(15, 23, 42, 0.55);
-	overflow: hidden;
-}
-
-.module-toggle {
-	width: 100%;
+.course-hero {
 	display: grid;
-	grid-template-columns: auto 1fr auto;
+	grid-template-columns: minmax(0, 1.6fr) minmax(16rem, 1fr);
+	gap: 1.25rem;
+	padding: clamp(1.25rem, 3vw, 2rem);
+	border-radius: 26px;
+	background:
+		radial-gradient(
+			circle at top right,
+			rgba(125, 211, 252, 0.28),
+			transparent 34%
+		),
+		linear-gradient(135deg, #f8fafc 0%, #ecfeff 45%, #ffffff 100%);
+	border: 1px solid rgba(15, 23, 42, 0.06);
+	box-shadow: var(--course-shadow);
+}
+
+.course-hero-copy {
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+}
+
+.course-eyebrow,
+.outline-eyebrow,
+.reader-eyebrow,
+.section-eyebrow,
+.lesson-kicker {
+	margin: 0;
+	font-size: 0.76rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--course-accent);
+}
+
+.course-hero h2,
+.reader-header h3,
+.section-header h4,
+.outline-header h3,
+.reader-empty h3 {
+	margin: 0;
+}
+
+.course-hero h2 {
+	font-size: clamp(1.75rem, 3vw, 2.4rem);
+	line-height: 1.08;
+}
+
+.course-description,
+.outline-header p,
+.reader-copy p,
+.reader-empty p,
+.results-copy {
+	margin: 0;
+	line-height: 1.7;
+	color: var(--course-text-soft);
+}
+
+.course-stats {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0.85rem;
+	margin: 0;
+}
+
+.stat {
+	padding: 1rem;
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.82);
+	border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.stat dt {
+	margin: 0;
+	font-size: 0.82rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #0f766e;
+}
+
+.stat dd {
+	margin: 0.45rem 0 0;
+	font-size: clamp(1.3rem, 3vw, 1.8rem);
+	font-weight: 700;
+	color: var(--course-text);
+}
+
+.course-toolbar {
+	display: grid;
+	grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+	gap: 1rem 1.25rem;
+	align-items: end;
+}
+
+.control-block {
+	display: flex;
+	flex-direction: column;
+	gap: 0.55rem;
+}
+
+.control-label {
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--course-text-soft);
+}
+
+.course-select,
+.course-search {
+	width: 100%;
+	border-radius: 16px;
+	border: 1px solid var(--course-border-strong);
+	background: var(--course-panel);
+	color: var(--course-text);
+	font-size: 1rem;
+	padding: 0.9rem 1rem;
+	box-shadow: 0 16px 32px -28px rgba(15, 23, 42, 0.45);
+}
+
+.search-block {
+	min-width: 0;
+}
+
+.search-shell {
+	display: flex;
 	align-items: center;
-	gap: 0.75rem;
-	padding: 1.1rem 1.4rem;
+	gap: 0.65rem;
+}
+
+.course-search {
+	min-width: 0;
+}
+
+.clear-search,
+.outline-reset {
 	border: none;
-	background: transparent;
-	color: #0f172a;
-	font-size: 1.05rem;
-	font-weight: 600;
-	cursor: pointer;
-	transition: background 0.2s ease;
-}
-
-.module-toggle:hover,
-.module-toggle:focus-visible {
-	background: rgba(15, 23, 42, 0.06);
-}
-
-.module-toggle:focus-visible {
-	outline: 2px solid #1d4ed8;
-	outline-offset: -2px;
-}
-
-.module-index {
-	width: 2.25rem;
-	height: 2.25rem;
 	border-radius: 999px;
+	padding: 0.75rem 1rem;
+	font-size: 0.9rem;
+	font-weight: 700;
+	background: rgba(15, 23, 42, 0.08);
+	color: var(--course-text);
+	white-space: nowrap;
+	transition:
+		background 0.2s ease,
+		transform 0.2s ease;
+}
+
+.clear-search:hover,
+.outline-reset:hover {
+	background: rgba(15, 23, 42, 0.12);
+	transform: translateY(-1px);
+}
+
+.course-select:focus-visible,
+.course-search:focus-visible,
+.clear-search:focus-visible,
+.outline-reset:focus-visible,
+.outline-button:focus-visible,
+.resource-link:focus-visible,
+.jump-link:focus-visible {
+	outline: 2px solid #0f766e;
+	outline-offset: 3px;
+}
+
+.results-copy {
+	grid-column: 1 / -1;
+	font-size: 0.95rem;
+}
+
+.course-workspace {
+	display: grid;
+	grid-template-columns: minmax(17rem, 21rem) minmax(0, 1fr);
+	gap: 1.5rem;
+	align-items: start;
+}
+
+.course-outline,
+.course-reader,
+.reader-empty {
+	border: 1px solid var(--course-border);
+	border-radius: 24px;
+	background: var(--course-panel);
+	box-shadow: var(--course-shadow);
+}
+
+.course-outline {
+	position: sticky;
+	top: 1rem;
+	padding: 1.1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background:
+		linear-gradient(180deg, rgba(248, 250, 252, 0.95), #ffffff),
+		var(--course-panel);
+}
+
+.outline-header {
+	display: flex;
+	flex-direction: column;
+	gap: 0.55rem;
+	padding: 0.35rem 0.25rem 0.1rem;
+}
+
+.outline-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.outline-button {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: 0.9rem;
+	align-items: start;
+	padding: 0.95rem 1rem;
+	border: 1px solid transparent;
+	border-radius: 18px;
+	background: transparent;
+	color: var(--course-text);
+	text-align: left;
+	transition:
+		background 0.2s ease,
+		border-color 0.2s ease,
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.outline-button:hover {
+	transform: translateY(-1px);
+	background: rgba(15, 118, 110, 0.06);
+}
+
+.outline-button[aria-current="true"] {
+	border-color: rgba(15, 118, 110, 0.16);
+	background: linear-gradient(
+		135deg,
+		rgba(15, 118, 110, 0.12),
+		rgba(14, 165, 233, 0.08)
+	);
+	box-shadow: 0 18px 34px -28px rgba(15, 118, 110, 0.45);
+}
+
+.outline-position,
+.lesson-index {
+	width: 2.5rem;
+	height: 2.5rem;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	background: rgba(59, 130, 246, 0.12);
-	color: #1d4ed8;
+	border-radius: 999px;
 	font-weight: 700;
+	font-size: 0.92rem;
+	background: rgba(15, 23, 42, 0.06);
+	color: var(--course-text);
+	flex-shrink: 0;
 }
 
-.module-title {
-	text-align: left;
+.outline-button[aria-current="true"] .outline-position,
+.lesson-index {
+	background: var(--course-accent-soft);
+	color: var(--course-accent);
 }
 
-.module-icon {
-	font-size: 1.5rem;
-	line-height: 1;
-}
-
-.module-body {
-	padding: 0 1.4rem 1.6rem;
+.outline-copy {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 0.25rem;
+	min-width: 0;
 }
 
-.module-section h3 {
-	margin: 0 0 0.75rem;
+.outline-copy strong {
+	font-size: 0.98rem;
+	line-height: 1.35;
+}
+
+.outline-copy small {
+	color: var(--course-text-soft);
+	line-height: 1.5;
+}
+
+.outline-empty,
+.reader-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.85rem;
+}
+
+.outline-empty {
+	padding: 0.45rem 0.25rem 0.25rem;
+}
+
+.outline-empty h4 {
+	margin: 0;
 	font-size: 1rem;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: #334155;
 }
 
-.item-list {
+.outline-empty p {
+	margin: 0;
+	line-height: 1.6;
+	color: var(--course-text-soft);
+}
+
+.course-reader,
+.reader-empty {
+	padding: clamp(1.2rem, 3vw, 1.9rem);
+}
+
+.course-reader {
+	display: flex;
+	flex-direction: column;
+	gap: 1.6rem;
+}
+
+.reader-header {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding-bottom: 1.35rem;
+	border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.reader-copy {
+	display: flex;
+	flex-direction: column;
+	gap: 0.55rem;
+}
+
+.reader-jump-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+}
+
+.jump-link,
+.resource-link {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.15rem;
+	padding: 0.7rem 0.85rem;
+	border-radius: 16px;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	background: rgba(248, 250, 252, 0.9);
+	text-decoration: none;
+	color: var(--course-text);
+	transition:
+		transform 0.2s ease,
+		border-color 0.2s ease,
+		background 0.2s ease;
+}
+
+.jump-link:hover,
+.resource-link:hover {
+	transform: translateY(-1px);
+	border-color: rgba(15, 118, 110, 0.22);
+	background: rgba(240, 253, 250, 0.95);
+}
+
+.jump-link {
+	max-width: min(100%, 20rem);
+	font-size: 0.85rem;
+	line-height: 1.45;
+}
+
+.jump-link.is-supplemental {
+	background: rgba(255, 247, 237, 0.85);
+}
+
+.reader-section {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.section-header {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.section-count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2.4rem;
+	height: 2.4rem;
+	padding: 0 0.8rem;
+	border-radius: 999px;
+	background: rgba(15, 23, 42, 0.06);
+	font-weight: 700;
+	color: var(--course-text);
+}
+
+.lesson-list {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 0.75rem;
-}
-
-.item {
-	border: 1px solid rgba(15, 23, 42, 0.08);
-	border-radius: 14px;
-	background: rgba(255, 255, 255, 0.92);
-	box-shadow: 0 12px 20px -20px rgba(15, 23, 42, 0.35);
-	overflow: hidden;
-}
-
-.item-toggle {
-	width: 100%;
-	border: none;
-	background: transparent;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	gap: 1rem;
-	padding: 0.9rem 1.1rem;
-	font-size: 0.95rem;
-	font-weight: 600;
-	color: #0f172a;
-	cursor: pointer;
 }
 
-.item-toggle:hover,
-.item-toggle:focus-visible {
-	background: rgba(59, 130, 246, 0.08);
-}
-
-.item-toggle:focus-visible {
-	outline: 2px solid #2563eb;
-	outline-offset: -2px;
-}
-
-.item-icon {
-	font-size: 0.85rem;
-	font-weight: 600;
-	color: #2563eb;
-}
-
-.item-content {
-	padding: 0 1.1rem 1rem;
-	border-top: 1px solid rgba(15, 23, 42, 0.06);
-}
-
-.item-content-body {
+.lesson-card {
 	display: flex;
 	flex-direction: column;
+	gap: 1rem;
+	padding: clamp(1rem, 2.5vw, 1.35rem);
+	border-radius: 22px;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.98),
+		rgba(248, 250, 252, 0.94)
+	);
+	box-shadow: 0 18px 34px -30px rgba(15, 23, 42, 0.34);
+}
+
+.lesson-card.is-supplemental {
+	background: linear-gradient(
+		180deg,
+		rgba(255, 251, 235, 0.88),
+		rgba(255, 255, 255, 0.96)
+	);
+}
+
+.lesson-header {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.9rem;
+}
+
+.lesson-index.is-supplemental {
+	background: rgba(245, 158, 11, 0.14);
+	color: #b45309;
+}
+
+.lesson-title-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	min-width: 0;
+}
+
+.lesson-title-group h5 {
+	margin: 0;
+	font-size: clamp(1.02rem, 2vw, 1.2rem);
+	line-height: 1.35;
+}
+
+.resource-list {
+	display: flex;
+	flex-wrap: wrap;
 	gap: 0.75rem;
+}
+
+.resource-link {
+	min-width: 10.5rem;
+}
+
+.resource-link small {
+	font-size: 0.78rem;
+	color: var(--course-text-soft);
+}
+
+.resource-link.is-project {
+	background: rgba(236, 253, 245, 0.92);
+}
+
+.resource-link.is-solution {
+	background: rgba(239, 246, 255, 0.94);
+}
+
+.resource-link.is-dataset {
+	background: rgba(255, 247, 237, 0.94);
 }
 
 .item-content-markdown {
-	font-family:
-		"Inter",
-		"SF Pro Text",
-		-apple-system,
-		BlinkMacSystemFont,
-		"Segoe UI",
-		sans-serif;
-	font-size: 0.9rem;
-	line-height: 1.6;
+	max-width: 74ch;
+	font-size: 1rem;
+	line-height: 1.8;
 	color: #1e293b;
 }
 
-.item-content-markdown :is(p, ul, ol) {
-	margin: 0 0 0.75rem;
+.item-content-markdown :deep(h1),
+.item-content-markdown :deep(h2),
+.item-content-markdown :deep(h3),
+.item-content-markdown :deep(h4) {
+	margin: 0 0 0.85rem;
+	line-height: 1.3;
+	color: #0f172a;
 }
 
-.item-content-markdown > :last-child {
-	margin-bottom: 0;
+.item-content-markdown :deep(p),
+.item-content-markdown :deep(ul),
+.item-content-markdown :deep(ol),
+.item-content-markdown :deep(blockquote) {
+	margin: 0 0 0.95rem;
 }
 
-.item-content-markdown ul,
-.item-content-markdown ol {
-	padding-left: 1.2rem;
+.item-content-markdown :deep(ul),
+.item-content-markdown :deep(ol) {
+	padding-left: 1.35rem;
 }
 
-.item-content-markdown code {
+.item-content-markdown :deep(a) {
+	color: #0f766e;
+	font-weight: 600;
+}
+
+.item-content-markdown :deep(code) {
 	font-family:
 		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono",
 		monospace;
-	font-size: 0.85rem;
+	font-size: 0.88rem;
 	background: rgba(15, 23, 42, 0.08);
-	padding: 0.1rem 0.35rem;
+	padding: 0.15rem 0.4rem;
 	border-radius: 0.35rem;
 }
 
-.item-links {
-	display: flex;
-	flex-direction: column;
-	gap: 0.35rem;
-	font-size: 0.9rem;
+.item-content-markdown :deep(pre) {
+	padding: 0.95rem 1rem;
+	border-radius: 16px;
+	background: #0f172a;
+	color: #e2e8f0;
+	overflow-x: auto;
 }
 
-.item-link {
-	margin: 0;
-	display: flex;
-	align-items: center;
-	gap: 0.35rem;
-	color: #1e293b;
-}
-
-.item-link a {
-	color: #2563eb;
-	text-decoration: underline;
-	word-break: break-all;
+.item-content-markdown :deep(pre code) {
+	padding: 0;
+	background: transparent;
+	color: inherit;
 }
 
 .item-media {
@@ -757,39 +1220,69 @@ function isVideo(link: string) {
 	width: 100%;
 	max-width: 100%;
 	height: auto;
-	border-radius: 0.25rem;
-	background: #f8fafc;
+	border-radius: 18px;
+	background: #e2e8f0;
 }
 
-.empty-copy {
-	margin: 0;
+.course-empty {
+	padding: 2rem;
+	border-radius: 24px;
+	background: linear-gradient(180deg, #f8fafc, #ffffff);
+	border: 1px solid var(--course-border);
 	text-align: center;
-	color: #475569;
+	box-shadow: var(--course-shadow);
+}
+
+.course-empty p {
+	margin: 0;
+}
+
+.course-empty .hint {
+	margin-top: 0.55rem;
+	color: var(--course-text-soft);
+}
+
+@media (max-width: 1080px) {
+	.course-workspace {
+		grid-template-columns: 1fr;
+	}
+
+	.course-outline {
+		position: static;
+	}
+}
+
+@media (max-width: 820px) {
+	.course-hero,
+	.course-toolbar {
+		grid-template-columns: 1fr;
+	}
+
+	.course-stats {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
 }
 
 @media (max-width: 640px) {
-	.module-toggle {
-		grid-template-columns: 1fr auto;
-		grid-template-rows: auto auto;
+	.course-stats {
+		grid-template-columns: 1fr;
 	}
 
-	.module-index {
-		display: none;
+	.search-shell,
+	.lesson-header,
+	.section-header {
+		flex-direction: column;
+		align-items: stretch;
 	}
 
-	.module-title {
-		grid-column: 1 / span 1;
+	.resource-link,
+	.jump-link {
+		width: 100%;
+		max-width: none;
 	}
-}
 
-.accordion-enter-active,
-.accordion-leave-active {
-	transition: all 0.18s ease;
-}
-
-.accordion-enter-from,
-.accordion-leave-to {
-	opacity: 0;
-	transform: translateY(-6px);
+	.outline-button {
+		grid-template-columns: auto minmax(0, 1fr);
+	}
 }
 </style>
