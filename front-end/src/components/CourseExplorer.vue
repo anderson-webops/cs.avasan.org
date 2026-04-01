@@ -665,6 +665,8 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 }
 
 .course-shell {
+	width: min(100%, 74rem);
+	align-self: center;
 	display: flex;
 	flex-direction: column;
 	gap: clamp(1rem, 2.2vw, 1.5rem);
@@ -681,9 +683,11 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 }
 
 .course-hero {
-	display: grid;
-	grid-template-columns: minmax(0, 1.8fr) minmax(20rem, auto);
-	gap: 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1rem 1.5rem;
 	padding: 0 0 1.5rem;
 	border-bottom: 1px solid rgba(148, 163, 184, 0.26);
 }
@@ -692,6 +696,8 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
+	flex: 1 1 34rem;
+	min-width: 0;
 }
 
 .course-eyebrow,
@@ -736,6 +742,8 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 }
 
 .course-stats {
+	width: min(100%, 22rem);
+	flex: 0 1 22rem;
 	display: grid;
 	grid-template-columns: repeat(3, minmax(7rem, 1fr));
 	gap: 0;
@@ -779,7 +787,7 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 
 .course-toolbar {
 	display: grid;
-	grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr) auto;
+	grid-template-columns: minmax(14rem, 17rem) minmax(0, 1fr);
 	gap: 1rem 1.25rem;
 	align-items: end;
 	padding: 1.1rem 1.15rem;
@@ -861,10 +869,10 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 }
 
 .results-copy {
-	max-width: 19rem;
+	grid-column: 1 / -1;
+	max-width: none;
 	font-size: 0.92rem;
-	text-align: right;
-	align-self: center;
+	text-align: left;
 }
 
 .course-workspace {
@@ -1308,11 +1316,7 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 
 	.course-stats {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-
-	.results-copy {
-		max-width: none;
-		text-align: left;
+		width: 100%;
 	}
 }
 
