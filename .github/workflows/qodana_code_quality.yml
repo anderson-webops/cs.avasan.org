@@ -16,4 +16,4 @@ jobs:
             - name: "Qodana Scan"
               uses: JetBrains/qodana-action@v2023.2
               env:
-                  QODANA_TOKEN: ${{ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1B+d2PrwWVaZbHpNcd++aAJoyToDj4xl5xve4zH5BwmZLUjae5eCSsObETl9K5TRWHuy+Bsi8PkTewnt4QcSOBP6KCfqkBoKamauuc6Z/O1qe6Fs3AG84BuYWFgLsTos+UXywIq/DiZxmLjXBluVpvonlrzURJFENvF6IDcukvF5DwI/nPPyJ7pQ+Z+KaYkjPINIzsPSb2ti4Zm5BHQkJJV9wjnMLwbr1NYZJRAfvkh1aaCNX+ccOFM2cNl9QkVfoE3USSmBpj1FBj22Zno2v0kx9vgHGxukBx6+w26GpuomgH+bnCCIU5IO2L+vQSgXE3wgMkx4jpGSrifPCwrOMg6vM9LnANQ8Uk8V21lDJ2uI+wgNHabixuxYCkdfh9HS0OEad5o9LgP72Xlgto0mYfXJSMreZePIqomT3W4XQToaZV2hlbUFX/KFITh7mdb1yLIqtU7lYNTU0Z35RqAi6VQUHTI+uJ0OWUg+3k3Wu4w6bt2jA+z3nqH3cDx5xCI2p2ucrnzljcJIPQ3uawXX6Mt4aygaoOEE/FjmJTZHx0mrX51O1uqSBUfaNjZk+0PmDaHMr0Hq55+x5DO24Xki8Z96es0GxWa5bW7OgXzWSqzuk7MBi3c3nS1Aue1Bq6ks+tsbSauohnUKeNk5xRHN3fCc8aaI3ZPXwm89DlpqRiw== qodana.cloud }}
+                  QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
