@@ -88,12 +88,12 @@ const courseStats = computed(() => {
 	if (!course) return null;
 
 	const lessonCount = course.modules.reduce(
-		$total,
-		module => $total + module.curriculum.length
+		(total, module) => total + module.curriculum.length,
+		0
 	);
 	const supplementalCount = course.modules.reduce(
-		$total,
-		module => $total + module.supplementalProjects.length
+		(total, module) => total + module.supplementalProjects.length,
+		0
 	);
 
 	return {
@@ -195,8 +195,8 @@ const activeModuleJumpLinks = computed(() => {
 const resultsCopy = computed(() => {
 	const moduleCount = visibleModules.value.length;
 	const itemCount = visibleModules.value.reduce(
-		$total,
-		module => $total + module.visibleItemCount
+		(total, module) => total + module.visibleItemCount,
+		0
 	);
 
 	if (!normalizedQuery.value) {

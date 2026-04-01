@@ -7,10 +7,10 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { setupLayouts } from "virtual:generated-layouts";
-import { ViteSSG } from "vite-ssg";
 
 import { routes } from "vue-router/auto-routes";
 import App from "./App.vue";
+import { ViteSSG } from "./ssg";
 import { useAppStore } from "./stores/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Assuming you have styles defined in these files
