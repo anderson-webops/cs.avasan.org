@@ -174,36 +174,24 @@ const activeModule = computed(
 		) ?? null
 );
 
-const activeModuleJumpLinks = computed(() => {
+const activeModuleProjectLinks = computed(() => {
 	const module = activeModule.value;
 	if (!module) return [];
 
-	return [
-		...module.curriculum.map((item, index) => ({
-			id: itemAnchorId(module.id, item.id),
-			label: `${index + 1}. ${item.title}`,
-			type: "lesson" as const
-		})),
-		...module.supplementalProjects.map((item, index) => ({
-			id: itemAnchorId(module.id, item.id),
-			label: `Project ${index + 1}: ${item.title}`,
-			type: "supplemental" as const
-		}))
-	];
+	return module.curriculum.map((item, index) => ({
+		id: itemAnchorId(module.id, item.id),
+		label: `${index + 1}. ${item.title}`
+	}));
 });
 
-const resultsCopy = computed(() => {
-	const moduleCount = visibleModules.value.length;
-	const itemCount = visibleModules.value.reduce(
-		(total, module) => total + module.visibleItemCount,
-		0
-	);
+const activeModuleSupplementalLinks = computed(() => {
+	const module = activeModule.value;
+	if (!module) return [];
 
-	if (!normalizedQuery.value) {
-		return `${moduleCount} modules and ${itemCount} lesson blocks ready to read.`;
-	}
-
-	return `${moduleCount} matching modules and ${itemCount} visible lesson blocks for "${searchQuery.value.trim()}".`;
+	return module.supplementalProjects.map((item, index) => ({
+		id: itemAnchorId(module.id, item.id),
+		label: `Project ${index + 1}: ${item.title}`
+	}));
 });
 
 function normalizeSearch(value: string) {
@@ -317,27 +305,23 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 			</header>
 
 			<div class="course-toolbar">
-				<div class="toolbar-primary">
-					<label class="control-block" for="course-select">
-						<span class="control-label">Course</span>
-						<select
-							id="course-select"
-							v-model="selectedCourseId"
-							class="course-select"
-							@change="selectCourse(selectedCourseId)"
+				<label class="control-block" for="course-select">
+					<span class="control-label">Course</span>
+					<select
+						id="course-select"
+						v-model="selectedCourseId"
+						class="course-select"
+						@change="selectCourse(selectedCourseId)"
+					>
+						<option
+							v-for="course in courseList"
+							:key="course.id"
+							:value="course.id"
 						>
-							<option
-								v-for="course in courseList"
-								:key="course.id"
-								:value="course.id"
-							>
-								{{ course.name }}
-							</option>
-						</select>
-					</label>
-
-					<p class="results-copy">{{ resultsCopy }}</p>
-				</div>
+							{{ course.name }}
+						</option>
+					</select>
+				</label>
 
 				<label class="control-block search-block" for="course-search">
 					<span class="control-label">Search lessons</span>
@@ -430,33 +414,57 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 								Module {{ activeModule.position }}
 							</p>
 							<h3>{{ activeModule.title }}</h3>
-							<p>
-								{{ activeModule.curriculum.length }}
-								core lessons and
-								{{ activeModule.supplementalProjects.length }}
-								supplemental projects in one reading view.
-							</p>
 						</div>
 
-						<nav
-							v-if="activeModuleJumpLinks.length > 0"
-							aria-label="Jump to lesson"
-							class="reader-jump-links"
+						<div
+							v-if="
+								activeModuleProjectLinks.length > 0 ||
+								activeModuleSupplementalLinks.length > 0
+							"
+							class="reader-link-groups"
 						>
-							<a
-								v-for="link in activeModuleJumpLinks"
-								:key="link.id"
-								class="jump-link"
-								:class="[
-									link.type === 'supplemental'
-										? 'is-supplemental'
-										: ''
-								]"
-								:href="`#${link.id}`"
+							<div
+								v-if="activeModuleProjectLinks.length > 0"
+								class="reader-link-group"
 							>
-								{{ link.label }}
-							</a>
-						</nav>
+								<h4 class="reader-link-heading">Projects:</h4>
+								<nav
+									aria-label="Jump to module project"
+									class="reader-jump-links"
+								>
+									<a
+										v-for="link in activeModuleProjectLinks"
+										:key="link.id"
+										class="jump-link"
+										:href="`#${link.id}`"
+									>
+										{{ link.label }}
+									</a>
+								</nav>
+							</div>
+
+							<div
+								v-if="activeModuleSupplementalLinks.length > 0"
+								class="reader-link-group"
+							>
+								<h4 class="reader-link-heading is-supplemental">
+									Supplemental Projects:
+								</h4>
+								<nav
+									aria-label="Jump to supplemental project"
+									class="reader-jump-links"
+								>
+									<a
+										v-for="link in activeModuleSupplementalLinks"
+										:key="link.id"
+										class="jump-link is-supplemental"
+										:href="`#${link.id}`"
+									>
+										{{ link.label }}
+									</a>
+								</nav>
+							</div>
+						</div>
 					</header>
 
 					<section class="reader-section">
@@ -747,8 +755,7 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 .course-description,
 .outline-header p,
 .reader-copy p,
-.reader-empty p,
-.results-copy {
+.reader-empty p {
 	margin: 0;
 	line-height: 1.7;
 	color: var(--course-text-soft);
@@ -809,18 +816,11 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	display: grid;
 	grid-template-columns: minmax(14rem, 17rem) minmax(0, 1fr);
 	gap: 1rem 1.25rem;
-	align-items: start;
+	align-items: end;
 	padding: 1.1rem 1.15rem;
 	border-radius: 24px;
 	background: rgba(255, 255, 255, 0.7);
 	border: 1px solid rgba(148, 163, 184, 0.18);
-}
-
-.toolbar-primary {
-	display: flex;
-	flex-direction: column;
-	gap: 0.65rem;
-	min-width: 0;
 }
 
 .control-block {
@@ -896,13 +896,6 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 .jump-link:focus-visible {
 	outline: 2px solid #0f766e;
 	outline-offset: 3px;
-}
-
-.results-copy {
-	max-width: none;
-	font-size: 0.92rem;
-	text-align: left;
-	padding-left: 0.05rem;
 }
 
 .course-workspace {
@@ -1084,6 +1077,29 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	display: flex;
 	flex-direction: column;
 	gap: 0.55rem;
+}
+
+.reader-link-groups {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.reader-link-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.55rem;
+}
+
+.reader-link-heading {
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1.35;
+	color: var(--course-text);
+}
+
+.reader-link-heading.is-supplemental {
+	color: #b45309;
 }
 
 .reader-jump-links {
