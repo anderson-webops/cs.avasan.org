@@ -317,23 +317,27 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 			</header>
 
 			<div class="course-toolbar">
-				<label class="control-block" for="course-select">
-					<span class="control-label">Course</span>
-					<select
-						id="course-select"
-						v-model="selectedCourseId"
-						class="course-select"
-						@change="selectCourse(selectedCourseId)"
-					>
-						<option
-							v-for="course in courseList"
-							:key="course.id"
-							:value="course.id"
+				<div class="toolbar-primary">
+					<label class="control-block" for="course-select">
+						<span class="control-label">Course</span>
+						<select
+							id="course-select"
+							v-model="selectedCourseId"
+							class="course-select"
+							@change="selectCourse(selectedCourseId)"
 						>
-							{{ course.name }}
-						</option>
-					</select>
-				</label>
+							<option
+								v-for="course in courseList"
+								:key="course.id"
+								:value="course.id"
+							>
+								{{ course.name }}
+							</option>
+						</select>
+					</label>
+
+					<p class="results-copy">{{ resultsCopy }}</p>
+				</div>
 
 				<label class="control-block search-block" for="course-search">
 					<span class="control-label">Search lessons</span>
@@ -356,8 +360,6 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 						</button>
 					</div>
 				</label>
-
-				<p class="results-copy">{{ resultsCopy }}</p>
 			</div>
 
 			<div v-if="selectedCourse" class="course-workspace">
@@ -806,15 +808,19 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	box-sizing: border-box;
 	display: grid;
 	grid-template-columns: minmax(14rem, 17rem) minmax(0, 1fr);
-	grid-template-areas:
-		"course search"
-		"results results";
 	gap: 1rem 1.25rem;
 	align-items: start;
 	padding: 1.1rem 1.15rem;
 	border-radius: 24px;
 	background: rgba(255, 255, 255, 0.7);
 	border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.toolbar-primary {
+	display: flex;
+	flex-direction: column;
+	gap: 0.65rem;
+	min-width: 0;
 }
 
 .control-block {
@@ -826,12 +832,8 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	justify-self: stretch;
 }
 
-.course-toolbar > .control-block:first-child {
-	grid-area: course;
-}
-
 .search-block {
-	grid-area: search;
+	align-self: stretch;
 }
 
 .control-label {
@@ -897,11 +899,10 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 }
 
 .results-copy {
-	grid-area: results;
 	max-width: none;
 	font-size: 0.92rem;
 	text-align: left;
-	justify-self: start;
+	padding-left: 0.05rem;
 }
 
 .course-workspace {
@@ -1347,10 +1348,7 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	}
 
 	.course-toolbar {
-		grid-template-areas:
-			"course"
-			"search"
-			"results";
+		gap: 0.9rem;
 	}
 
 	.course-stats {
