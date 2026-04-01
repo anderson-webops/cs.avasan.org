@@ -351,10 +351,12 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 					<div class="outline-header">
 						<p class="outline-eyebrow">Syllabus</p>
 						<h3>Choose a module</h3>
+						<!--
 						<p>
 							The right side shows the full reading view for the
 							selected module.
 						</p>
+						-->
 					</div>
 
 					<div v-if="visibleModules.length > 0" class="outline-list">
@@ -847,18 +849,33 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 .course-select,
 .course-search {
 	width: 100%;
+	min-height: 3.8rem;
 	border-radius: 16px;
 	border: 1px solid var(--course-border-strong);
 	background: var(--course-panel);
 	color: var(--course-text);
 	font-size: 1rem;
+	line-height: 1.35;
 	padding: 0.9rem 1rem;
 	box-shadow: 0 16px 32px -28px rgba(15, 23, 42, 0.45);
 }
 
+.course-select {
+	appearance: none;
+	padding-right: 3rem;
+	background-image:
+		linear-gradient(45deg, transparent 50%, #64748b 50%),
+		linear-gradient(135deg, #64748b 50%, transparent 50%);
+	background-position:
+		calc(100% - 1.4rem) calc(50% - 0.15rem),
+		calc(100% - 1rem) calc(50% - 0.15rem);
+	background-size: 0.45rem 0.45rem;
+	background-repeat: no-repeat;
+}
+
 .search-shell {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	gap: 0.65rem;
 }
 
