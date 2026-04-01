@@ -56,6 +56,7 @@ const profileTabs = computed<ProfileTab[]>(() => {
 });
 
 const activeTab = ref<ProfileTab>("profile");
+const isCourseTab = computed(() => activeTab.value === "courses");
 
 watch(profileTabs, value => {
 	if (!value.includes(activeTab.value)) activeTab.value = value[0];
@@ -118,18 +119,29 @@ function openAuthModal() {
 </script>
 
 <template>
-	<section class="profile-page">
-		<div class="profile-content">
-			<header class="profile-header">
+	<section class="profile-page" :class="{ 'is-course-layout': isCourseTab }">
+		<div
+			class="profile-content"
+			:class="{ 'is-course-layout': isCourseTab }"
+		>
+			<header
+				class="profile-header"
+				:class="{ 'is-course-layout': isCourseTab }"
+			>
 				<p class="profile-badge">{{ heroBadge }}</p>
 				<h1>{{ heroTitle }}</h1>
 				<p>{{ heroSubtitle }}</p>
 			</header>
 
-			<div v-if="hasProfile" class="profile-card">
+			<div
+				v-if="hasProfile"
+				class="profile-card"
+				:class="{ 'is-course-layout': isCourseTab }"
+			>
 				<div
 					v-if="profileTabs.length > 1"
 					class="profile-tabs"
+					:class="{ 'is-course-layout': isCourseTab }"
 					role="tablist"
 				>
 					<button
@@ -195,11 +207,20 @@ function openAuthModal() {
 	align-items: center;
 }
 
+.profile-page.is-course-layout {
+	align-items: flex-start;
+	padding-top: clamp(2.5rem, 4vw, 4.5rem);
+}
+
 .profile-content {
 	width: min(1080px, 100%);
 	display: flex;
 	flex-direction: column;
 	gap: clamp(1.75rem, 3vw, 3rem);
+}
+
+.profile-content.is-course-layout {
+	width: min(1480px, 100%);
 }
 
 .profile-header {
@@ -208,6 +229,19 @@ function openAuthModal() {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+}
+
+.profile-header.is-course-layout {
+	text-align: left;
+	max-width: 74rem;
+}
+
+.profile-header.is-course-layout .profile-badge {
+	align-self: flex-start;
+}
+
+.profile-header.is-course-layout p:last-child {
+	max-width: 52rem;
 }
 
 .profile-badge {
@@ -247,6 +281,15 @@ function openAuthModal() {
 	backdrop-filter: blur(16px);
 }
 
+.profile-card.is-course-layout {
+	padding: 1rem;
+	border-radius: 34px;
+	background: rgba(255, 255, 255, 0.14);
+	border-color: rgba(191, 219, 254, 0.24);
+	box-shadow: 0 55px 90px -55px rgba(15, 23, 42, 0.82);
+	backdrop-filter: blur(24px);
+}
+
 .profile-tabs {
 	display: inline-flex;
 	border-radius: 999px;
@@ -254,6 +297,22 @@ function openAuthModal() {
 	padding: 0.25rem;
 	margin: 0 auto clamp(1.5rem, 3vw, 2.25rem);
 	gap: 0.25rem;
+}
+
+.profile-tabs.is-course-layout {
+	margin: 0 0 1rem;
+	background: rgba(15, 23, 42, 0.2);
+	border: 1px solid rgba(226, 232, 240, 0.14);
+}
+
+.profile-tabs.is-course-layout .tab {
+	color: rgba(248, 250, 252, 0.92);
+}
+
+.profile-tabs.is-course-layout .tab[aria-selected="true"] {
+	background: rgba(248, 250, 252, 0.94);
+	color: #0f172a;
+	box-shadow: 0 12px 24px -16px rgba(15, 23, 42, 0.65);
 }
 
 .tab {
@@ -423,9 +482,25 @@ function openAuthModal() {
 		padding: 3.5rem 1.25rem 4rem;
 	}
 
+	.profile-page.is-course-layout {
+		padding: 2.75rem 1rem 3rem;
+	}
+
 	.profile-card,
 	.empty-card {
 		padding: clamp(1.5rem, 5vw, 2.5rem);
+	}
+
+	.profile-card.is-course-layout {
+		padding: 0.75rem;
+	}
+
+	.profile-header.is-course-layout {
+		text-align: center;
+	}
+
+	.profile-header.is-course-layout .profile-badge {
+		align-self: center;
 	}
 
 	.profile-card :deep(.tutorList) {
