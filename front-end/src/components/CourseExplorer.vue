@@ -658,10 +658,24 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	--course-accent-soft: rgba(15, 118, 110, 0.12);
 	--course-shadow: 0 24px 50px -34px rgba(15, 23, 42, 0.3);
 	width: 100%;
+	margin: 0;
 	display: flex;
 	flex-direction: column;
 	gap: clamp(1.1rem, 2.5vw, 1.75rem);
 	color: var(--course-text);
+}
+
+.course-explorer section {
+	margin: 0;
+}
+
+.course-explorer p,
+.course-explorer label,
+.course-explorer select,
+.course-explorer input,
+.course-explorer button {
+	font-family: inherit;
+	text-align: left;
 }
 
 .course-shell {
@@ -672,29 +686,26 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	display: flex;
 	flex-direction: column;
 	gap: clamp(1rem, 2.2vw, 1.5rem);
-	padding: clamp(1rem, 2vw, 1.65rem);
-	border-radius: 30px;
-	background: linear-gradient(
-		180deg,
-		rgba(248, 250, 252, 0.9),
-		rgba(255, 255, 255, 0.78)
-	);
-	border: 1px solid rgba(255, 255, 255, 0.45);
-	box-shadow: 0 40px 80px -54px rgba(15, 23, 42, 0.75);
-	backdrop-filter: blur(18px);
+	padding: 0;
 	overflow: hidden;
 }
 
 .course-hero {
 	width: 100%;
 	box-sizing: border-box;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-end;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: start;
 	gap: 1rem 1.5rem;
-	padding: 0 0 1.5rem;
-	border-bottom: 1px solid rgba(148, 163, 184, 0.26);
+	padding: clamp(1.4rem, 2.2vw, 1.9rem);
+	border-radius: 26px;
+	background: linear-gradient(
+		180deg,
+		rgba(248, 250, 252, 0.9),
+		rgba(255, 255, 255, 0.8)
+	);
+	border: 1px solid rgba(255, 255, 255, 0.45);
+	box-shadow: 0 28px 60px -44px rgba(15, 23, 42, 0.44);
 }
 
 .course-hero-copy {
@@ -749,7 +760,6 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 .course-stats {
 	width: min(100%, 22rem);
 	flex: 0 1 22rem;
-	margin-left: auto;
 	display: grid;
 	grid-template-columns: repeat(3, minmax(7rem, 1fr));
 	gap: 0;
@@ -796,8 +806,11 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	box-sizing: border-box;
 	display: grid;
 	grid-template-columns: minmax(14rem, 17rem) minmax(0, 1fr);
+	grid-template-areas:
+		"course search"
+		"results results";
 	gap: 1rem 1.25rem;
-	align-items: end;
+	align-items: start;
 	padding: 1.1rem 1.15rem;
 	border-radius: 24px;
 	background: rgba(255, 255, 255, 0.7);
@@ -808,6 +821,17 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	display: flex;
 	flex-direction: column;
 	gap: 0.55rem;
+	min-width: 0;
+	align-self: stretch;
+	justify-self: stretch;
+}
+
+.course-toolbar > .control-block:first-child {
+	grid-area: course;
+}
+
+.search-block {
+	grid-area: search;
 }
 
 .control-label {
@@ -828,10 +852,6 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	font-size: 1rem;
 	padding: 0.9rem 1rem;
 	box-shadow: 0 16px 32px -28px rgba(15, 23, 42, 0.45);
-}
-
-.search-block {
-	min-width: 0;
 }
 
 .search-shell {
@@ -877,10 +897,11 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 }
 
 .results-copy {
-	grid-column: 1 / -1;
+	grid-area: results;
 	max-width: none;
 	font-size: 0.92rem;
 	text-align: left;
+	justify-self: start;
 }
 
 .course-workspace {
@@ -1325,17 +1346,22 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 		grid-template-columns: 1fr;
 	}
 
+	.course-toolbar {
+		grid-template-areas:
+			"course"
+			"search"
+			"results";
+	}
+
 	.course-stats {
 		width: 100%;
-		margin-left: 0;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 }
 
 @media (max-width: 640px) {
 	.course-shell {
-		padding: 0.85rem;
-		border-radius: 24px;
+		overflow: visible;
 	}
 
 	.course-stats {
