@@ -1,9 +1,12 @@
 # Workspace Instructions
 
 ## Lockfiles, Commits, Tags, And Releases
-- If this repo uses a lockfile (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, Bun lockfile, or similar), keep it synchronized with dependency manifest changes before committing or pushing. Do not leave manifest and lockfile drift in the worktree or on `main`.
 - Do not leave completed work uncommitted. After each coherent, validated change set, create a commit and push it in the same session.
 - Use multiple commits and pushes when that keeps unrelated changes, partial validations, or follow-up fixes clearly separated. Prefer small, logically grouped commits over one mixed commit.
-- When a change is a meaningful milestone, create an annotated tag. Good candidates include deployable feature sets, notable dependency or security updates, schema or protocol changes, and other changes that are worth naming for rollback or reference.
-- When an update is materially user-facing or operationally significant, create a release tied to the relevant tag. Release notes should summarize scope, validation, rollout notes, and any migration or recovery steps.
-- Skip tags and releases for trivial doc-only edits and routine housekeeping unless there is a specific operational reason to publish them.
+- Keep both `package-lock.json` and `back-end/package-lock.json` synchronized before every commit or push.
+- Use lowercase annotated semver tags only. Do not invent ad-hoc labels such as `V1`, `torca-r07`, `pre-lfs-migration-*`, or similar one-off names.
+- This repo follows the stable `v2.x` line. Stay on `v2` for routine work; only cut `v3` for an intentional breaking application or API change.
+- Create an annotated tag when a deployable course-catalog, front-end UX, back-end API, health/deploy, performance, or security change is ready to ship.
+- Create a GitHub release when that tag represents a real site milestone for users, admins, or operators. Release notes should summarize scope, validation, rollout notes, and any migration or recovery steps.
+- If the existing tag or release history contains stale drafts, redundant entries, or ad-hoc labels, clean that history up instead of preserving clutter.
+- Skip tags and releases for trivial doc-only edits, formatting-only changes, or routine housekeeping unless they change deployment, operations, or a consumer-facing contract.
