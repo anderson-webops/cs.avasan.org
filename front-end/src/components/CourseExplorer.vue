@@ -4,11 +4,11 @@ import type {
 	CourseModule,
 	CourseModuleItem
 } from "@/stores/courses";
-import MarkdownIt from "markdown-it";
 import { storeToRefs } from "pinia";
 import { computed, ref, shallowRef, watch, watchEffect } from "vue";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
+import LazyMarkdownContent from "./LazyMarkdownContent.vue";
 
 interface VisibleModule extends CourseModule {
 	position: number;
@@ -23,11 +23,6 @@ interface ResourceLink {
 	label: string;
 	url: string;
 }
-
-const markdown = new MarkdownIt({
-	breaks: true,
-	linkify: true
-});
 
 const VIDEO_FILE_RE = /\.(?:mp4|webm|ogg)(?:\?|$)/i;
 const WHITESPACE_RE = /\s+/g;
@@ -240,10 +235,6 @@ function itemMatches(item: CourseModuleItem, query: string) {
 	return (
 		matchesSearch(item.title, query) || matchesSearch(item.content, query)
 	);
-}
-
-function renderMarkdown(content: string) {
-	return markdown.render(content);
 }
 
 function selectCourse(id: string) {
@@ -552,10 +543,9 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 										</a>
 									</div>
 
-									<div
+									<LazyMarkdownContent
 										v-if="item.content"
-										class="item-content-markdown"
-										v-html="renderMarkdown(item.content)"
+										:content="item.content"
 									/>
 
 									<div
@@ -642,10 +632,9 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 										</a>
 									</div>
 
-									<div
+									<LazyMarkdownContent
 										v-if="item.content"
-										class="item-content-markdown"
-										v-html="renderMarkdown(item.content)"
+										:content="item.content"
 									/>
 
 									<div
