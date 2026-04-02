@@ -21,21 +21,21 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						'Explore the basic structure of a SwiftUI app by looking at `import SwiftUI`, `struct ContentView: View`, and `var body: some View`. Create a `Text("Hello World")` view and customize it with styling such as font, color, padding, alignment, and multiline formatting.',
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod1Pro1#main.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod1Pro1/main.swift"
 				},
 				{
 					title: "Images",
 					content:
 						"Upload an image into the asset catalog, display it in SwiftUI, and compare `.aspectRatio(contentMode: .fit)` with `.fill`. Then place styled text on top of the image using `overlay` to create a simple title-screen layout.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod1Pro2#main.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod1Pro2/main.swift"
 				},
 				{
 					title: "New Page",
 					content:
 						"Create multiple files and navigate between them with `NavigationView` and `NavigationLink`. Build a simple menu where each piece of text opens a different destination page.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod1Pro3#main.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod1Pro3/main.swift"
 				}
 			],
 			supplementalProjects: []
@@ -48,14 +48,14 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Learn the difference between `ZStack`, `HStack`, and `VStack`, and use them to lay out text and images in different ways. Build an About Me page and choose the stack that best fits the information being shown.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod2Pro1#one.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod2Pro1/one.swift"
 				},
 				{
 					title: "Creating Views with Struct",
 					content:
 						"Use a custom struct as a reusable view template. Build a `CharacterView` that stores properties such as a name, image, source, and description, then reuse that structure to display more than one character cleanly.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod2Pro2#main.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod2Pro2/main.swift"
 				}
 			],
 			supplementalProjects: []
@@ -67,14 +67,15 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					title: "Art Gallery",
 					content:
 						"Create arrays to store related image names and captions, access them by index, and display one item at a time. Introduce `@State` and `@Binding` so a button can move through the gallery and loop back to the beginning after the last item.",
-					solutionLink: "https://replit.com/@JuniLearning/Mod3Pro1"
+					solutionLink:
+						"https://github.com/instruction-material/Swift/tree/main/Mod3Pro1"
 				},
 				{
 					title: "Swiping Art Gallery",
 					content:
 						"Build a scrollable gallery using a reusable artwork struct, a `ScrollView`, and a `Group` of repeated entries. Compare this approach with the button-based gallery and decide when scrolling is a better fit than switching one item at a time.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod3Pro2#ContentView.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod3Pro2/ContentView.swift"
 				}
 			],
 			supplementalProjects: []
@@ -87,21 +88,21 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Create rectangles, circles, and ellipses in SwiftUI, then customize them with modifiers such as `foregroundColor`, `frame`, and `offset`. Use those primitives to assemble a simple drawing.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod4Pro1#ContentView.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod4Pro1/ContentView.swift"
 				},
 				{
 					title: "Pie Chart",
 					content:
 						"Use `Path`, `CGPoint`, arcs, fills, strokes, and `closeSubpath()` to build custom shapes that go beyond the built-in shape types. Apply those tools to create a personal pie chart connected to a hobby or interest.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod4Pro2#ContentView.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod4Pro2/ContentView.swift"
 				},
 				{
 					title: "Create Your Own Monster",
 					content:
 						"Combine SwiftUI shapes and custom paths to design an original monster illustration with a layout and style of your choice.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod4Pro3#ContentView.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod4Pro3/ContentView.swift"
 				}
 			],
 			supplementalProjects: []
@@ -114,14 +115,14 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Create a landmark page that combines text, an image, and a map. Use `MapKit`, `MKCoordinateRegion`, latitude and longitude values, and a reusable `MapView` struct to show a meaningful location.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod5Pro1#ContentView.swift"
+						"https://github.com/instruction-material/Swift/blob/main/Mod5Pro1/ContentView.swift"
 				},
 				{
 					title: "Map Gallery",
 					content:
 						"Extend the earlier gallery ideas to maps by rotating through different landmark views. Reuse structs and changing coordinate values to create a gallery of locations.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Mod5Pro2?v=1"
+						"https://github.com/instruction-material/Swift/tree/main/Mod5Pro2"
 				}
 			],
 			supplementalProjects: []

@@ -31,9 +31,9 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Using Google Colab and the Kaggle customer segmentation dataset, build k-means clustering from scratch to group customers by annual income and spending score. First, have create a dedicated folder in Google Drive for their ML projects and upload the dataset there. In Colab, mount Google Drive using the Files sidebar, then read the CSV with pandas (for example, data = pd.read_csv('/content/drive/MyDrive/MachineLearning/Mall_Customers.csv')). Examine the columns and decide which to use for clustering (annual income and spending score). Create a scatterplot of income vs. spending score before clustering and ask how many clusters they see by eye. Initialize k (e.g., k = 5), construct a list or array of data points, and choose k random points as initial centroids. Set up data structures for centroids, old centroids, and an array holding each customer\'s cluster index. Implement a loop that repeats until centroids stop changing: compute distances from each point to each centroid using Euclidean distance, assign each point to the nearest centroid, copy current centroids to old centroids using deepcopy, and recompute each centroid by averaging all points in that cluster. After convergence, call draw_clustered_graph() from the starter code to plot the final clusters. Run the algorithm multiple times and observe that clusters may change slightly due to random initialization. Experiment with different k values and compare the resulting cluster structures. Wrap up by having the record a short video explaining the dataset, the goal of clustering, their findings, and any surprising patterns they noticed.",
 					projectLink:
-						"https://replit.com/@JuniLearning/ML1-Customer-Segmentation-Starter-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter-Updated",
 					solutionLink:
-						"https://replit.com/@JuniLearning/ML1-Customer-Segmentation-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Updated",
 					datasetLink:
 						"https://www.kaggle.com/vjchoudhary7/customer-segmentation-tutorial-in-python",
 					mediaLink:
@@ -44,9 +44,9 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Use k-means via scikit-learn to cluster Disney movies by year and inflation-adjusted revenue. In Colab, read in the Disney movie dataset from Kaggle, then extract the release year and inflation columns. Because the release date is stored as a string, build a new list or column containing just the year as an integer. Create a scatterplot of year vs. inflation-based revenue before clustering and discuss how hard it is to visually see separate groups. Set k to a few different values and use scikit-learn\'s k-means implementation: build a 2D feature matrix, call fit_predict() to get cluster assignments, and access cluster_centers_ for centroids. Call draw_clustered_graph() to plot the clustered scatterplot. Have experiment with multiple k values and compare how cluster shapes and boundaries change. End with a short explanation (via recording) of what the dataset contains, what they tried to discover, and anything surprising in how movies grouped by time and inflation.",
 					projectLink:
-						"https://replit.com/@JuniLearning/ML1-Disney-Movie-Clustering-Starter-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter-Updated",
 					solutionLink:
-						"https://replit.com/@JuniLearning/ML1-Disney-Movie-Clustering-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Updated",
 					datasetLink:
 						"https://www.kaggle.com/prateekmaj21/disney-movies",
 					mediaLink:
@@ -59,9 +59,9 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Using the provided starter code and the iris flower dataset, implement or apply k-means clustering to group flowers by petal length and petal width. Load the iris.csv file from the given URL into your notebook. Either use scikit-learn\'s k-means or write the algorithm from scratch (as in the customer segmentation project). Plot the raw (unclustered) data first, then plot the clustered data with different colors for each cluster. Compare how many clusters you see visually versus the k you choose in code and discuss how the clusters relate to the three iris species.",
 					projectLink:
-						"https://repl.it/@JuniLearning/ML1-Flower-Clustering-Starter?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Flower-Clustering-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/ML1-Flower-Clustering?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Flower-Clustering",
 					datasetLink:
 						"https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/639388c2cbc2120a14dcf466e85730eb8be498bb/iris.csv",
 					mediaLink:
@@ -97,7 +97,7 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Using the previous customer segmentation dataset and your clustering results, build a KNN classifier that predicts a customer\'s segment from annual income and spending score. In Colab, start from your saved segmentation work or reload the dataset and re-create the features and labels (cluster assignments). Decide on a value of k (for example, 3 or 5) and build feature vectors [income, spending score] for each customer. Split your data into training and testing sets. Implement KNN either manually (computing distances, finding nearest neighbors, and doing majority vote) or via scikit-learn\'s KNeighborsClassifier. Use the test set to compute accuracy and compare predictions to the original cluster labels. Create at least one new ‘fake\' customer feature vector and predict its segment, then check visually against your cluster plot. Record a short explanation of how you chose k, how well the classifier performed, and whether the classification of your new customer makes sense.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/ML2-KNN-Customer-Segmentation-Classification-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification-Updated",
 					datasetLink:
 						"https://www.kaggle.com/vjchoudhary7/customer-segmentation-tutorial-in-python",
 					mediaLink:
@@ -108,9 +108,9 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Build a KNN classifier to predict car ‘acceptability\' using the classic car evaluation dataset. In Colab, download the dataset and inspect its documentation to identify the target label (acceptability) and the features (buying, maintenance, doors, persons, luggage boot, safety). Notice that many features are categorical strings rather than numbers; design dictionaries mapping each category value to a numeric code and use pandas.replace() to encode them. Construct feature vectors from the encoded columns and labels from the acceptability column, whose possible values are {unacc, acc, good, vgood}. Split the data into training and testing sets with train_test_split(). Use scikit-learn\'s KNeighborsClassifier to train the model and compute accuracy on the test set. Create your own feature vector describing a hypothetical car and classify it; discuss whether the result seems reasonable. Finish by summarizing the dataset, your feature encoding choices, model accuracy, and any surprising results.",
 					projectLink:
-						"https://replit.com/@JuniLearning/ML2-KNN-Car-Classification-Starter?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/ML2-KNN-Car-Classification?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification",
 					datasetLink:
 						"https://sci2s.ugr.es/keel/dataset.php?cod=56#sub2",
 					mediaLink:
@@ -137,7 +137,7 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"In Colab, build a Naive Bayes classifier for the iris dataset. Load the CSV from the provided URL, then separate it into X (feature vectors) and y (labels). Use pandas.drop() to remove the species column when constructing X. Print the first few rows of X and y with head() to verify that the features and labels align (X[i] corresponds to y[i]). Split the data into training and testing sets. Use scikit-learn\'s MultinomialNB or another suitable Naive Bayes variant, call fit() on the training data, then call predict() on the test data and compute accuracy with accuracy_score(). Finally, create a few custom feature vectors and have the classifier predict their species, noting that these examples may not exist in the original dataset. Summarize the dataset, model accuracy, and any surprising classifications.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/ML3-Naive-Bayes-Iris-Flowers-Classification?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML3-Naive-Bayes-Iris-Flowers-Classification",
 					datasetLink:
 						"https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/639388c2cbc2120a14dcf466e85730eb8be498bb/iris.csv",
 					mediaLink:
@@ -189,7 +189,7 @@ export const machineLearningCourse: RawCourse = {
 					// content:
 					// 	"In Colab, implement a Neuron class that encapsulates the behavior of a single neuron. Decide on instance attributes such as a list or array of weights and an activation function passed in at initialization. Implement a run() method that takes input values (e.g., x1 and x2) plus a bias and computes the neuron\'s output by multiplying inputs by their weights, summing with the bias, and applying the activation function. Write a standalone sigmoid function that takes a numeric input and returns 1 / (1 + exp(-x)). Create an instance of Neuron using chosen weights and sigmoid as the activation, then call run() with various inputs to confirm the output matches manual calculations. Conclude with a short explanation of how the class works and what surprised you about implementing activation functions as function arguments.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/ML4-Neuron-Implementation?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Neuron-Implementation",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml4_project_1.mp4"
 				},
@@ -203,7 +203,7 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Using the Neuron class from the previous project, simulate a simple neural network with two inputs, one hidden layer with two neurons, and one output neuron. Initialize input values x1, x2, and a bias b. Create two Neuron objects to represent the hidden layer, each with its own weights and activation function (for example, sigmoid). Create a third Neuron object to represent the output layer, possibly using ReLU as the activation. Feed the input (x1, x2, b) into each hidden neuron, collect their outputs, then feed these outputs and the bias into the output neuron. Print intermediate results from each neuron so the flow of data through the network is easy to follow. Discuss how changing weights or activation functions changes the final output.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/ML4-Simple-Neural-Network?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Simple-Neural-Network",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml4_project_2.mp4"
 				},
@@ -246,9 +246,9 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"In Colab, open the starter code for simple linear regression. Plot the given x and y data as a scatterplot and ask whether the data appears to follow a roughly straight-line trend. Use scikit-learn\'s LinearRegression class to fit a model to the data. Show how to extract and print the slope, y-intercept, correlation (R^2 score), and use the model to predict y for a given x. Plot the line of best fit on top of the scatterplot to visually confirm that it matches the trend. Have describe whether the relationship is positive or negative and whether it appears strong, weak, or moderate based on both the graph and R^2 value. Encourage them to try predicting outputs for x values not in the original dataset and discuss whether the predictions seem reasonable.",
 					projectLink:
-						"https://repl.it/@JuniLearning/ML5-Simple-Linear-Regression-Starter?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Simple-Linear-Regression-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Linear-Regression-Updated",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml5_project_1.mp4"
 				},
@@ -262,9 +262,9 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Using the starter code in Colab, plot the given x and y data and discuss whether a straight line looks appropriate or whether the shape appears curved. First build a linear regression model and plot its line; evaluate how well it fits by examining residuals and the average error. Then build a polynomial regression model (for example, quadratic) using scikit-learn\'s PolynomialFeatures plus LinearRegression. Print the learned coefficients and intercept, and plot the resulting curve along with the data. Compare the fit quality and typical error of the linear versus polynomial models. For a chosen x value, compute predictions from both models and compare them to the actual y; discuss which model appears to capture the trend better.",
 					projectLink:
-						"https://replit.com/@JuniLearning/Simple-Polynomial-Regression-Starter-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Polynomial-Regression-Starter-Updated",
 					solutionLink:
-						"https://replit.com/@JuniLearning/Simple-Polynomial-Regression-Updated?skipMigration=1",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Polynomial-Regression-Updated",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml5_project_2.mp4"
 				},

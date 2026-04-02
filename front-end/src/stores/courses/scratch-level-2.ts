@@ -728,7 +728,7 @@ Finally, share the project!`
 				Koala Paddleboards (spelling and typing practice): https://www.abcya.com/games/spelling_practice
 				Advanced Typing Games
 				Typing Rocket: https://www.abcya.com/games/typing_rocket
-				Type Racer: https://replit.com/@JuniLearning/PS12-Type-Racer?v=1
+				Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer
 				`
 				}
 			],

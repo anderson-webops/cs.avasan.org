@@ -36,14 +36,14 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Ask the user for several words, store them in descriptive variables, and build a Mad Lib story by concatenating the inputs together.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ1-Mad-Lib?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Mad-Lib"
 				},
 				{
 					title: "AJ1 Project 2: Chatbot",
 					content:
 						"Create a simple chatbot that asks several questions, stores each response, and replies based on the answers.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ1-Chatbot?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Chatbot"
 				}
 			],
 			supplementalProjects: []
@@ -66,7 +66,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Write methods that double array values, sum even numbers, generate arrays of random doubles, and total the lengths of words in an array.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ2-Array-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Array-Practice"
 				},
 				{
 					title: "Two-Dimensional Arrays",
@@ -78,7 +78,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Create and fill square grids, find maximum values, generate random matrices, and search 2D arrays for a target value.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ2-Two-Dimensional-Array-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Two-Dimensional-Array-Practice"
 				},
 				{
 					title: "ArrayLists",
@@ -95,7 +95,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Write methods that filter even numbers, test whether two values sum to zero, remove the smallest value, and append a total sum to an `ArrayList`.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ2-ArrayList-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-ArrayList-Practice"
 				}
 			],
 			supplementalProjects: [
@@ -104,21 +104,21 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Store a set of test scores in an array, compute the average, and convert it into a letter grade.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ2-Test-Scores?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Test-Scores"
 				},
 				{
 					title: "AJ2 Supplemental Project 2: Matrix Addition",
 					content:
 						"Read in two matrices of matching dimensions, add them entry by entry, and print the result.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ2-Matrix-Addition?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Matrix-Addition"
 				},
 				{
 					title: "AJ2 Supplemental Project 3: Sandwich Orders",
 					content:
 						"Build an ingredient list with an `ArrayList`, collect a sandwich order, and convert it into an abbreviated string representation.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ2-Sandwich-Orders?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Sandwich-Orders"
 				}
 			]
 		},
@@ -150,7 +150,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Create a `Student` class with private fields, constructors, getters, setters, and a coherent `toString()` method.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ3-Student-Class?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Student-Class"
 				},
 				{
 					title: "Static Variables and Methods",
@@ -167,7 +167,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Create a `BakedGood` class and use it as a base for later work with inheritance, abstract classes, interfaces, and enums.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ3-Baked-Good?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Baked-Good"
 				},
 				{
 					title: "Abstract Classes and Methods",
@@ -210,14 +210,14 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Write recursive methods for exponents, factorials, digit sums, Fibonacci numbers, and palindrome checking.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ4-Recursion-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Recursion-Practice"
 				},
 				{
 					title: "AJ4 Project 2: Divisible by 7",
 					content:
 						"Use a recursive divisibility rule to determine whether a number is divisible by 7, breaking it into smaller subproblems each step.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ4-Divisible-by-7?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Divisible-by-7"
 				}
 			],
 			supplementalProjects: []
@@ -235,7 +235,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Write a method that searches an array for a target and returns its index or `-1` if it is not found.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/Linear-Search?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Linear-Search"
 				},
 				{
 					title: "Introduction to Big-O Analysis",
@@ -247,9 +247,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Determine the Big-O of several mathematical runtime expressions and connect those expressions to algorithm behavior.",
 					projectLink:
-						"https://repl.it/@JuniLearning/BigO-Practice-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-BigO-Practice-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/BigO-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-BigO-Practice"
 				}
 			],
 			supplementalProjects: []
@@ -267,14 +267,14 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement binary search iteratively using lower and upper bounds plus a loop that updates the midpoint after every comparison.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ6-Binary-Search-with-Iteration?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Iteration"
 				},
 				{
 					title: "AJ6 Project 2: Binary Search with Recursion",
 					content:
 						"Implement binary search recursively, either by passing bounds into each call or by splitting the array into subarrays.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ6-Binary-Search-with-Recursion?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Recursion"
 				},
 				{
 					title: "Binary Search Big-O Analysis",
@@ -286,7 +286,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use a binary-search-style approach on a numeric interval to approximate square roots to a chosen precision.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ6-Precision-Square-Root?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Precision-Square-Root"
 				}
 			],
 			supplementalProjects: []
@@ -304,7 +304,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement selection sort using two `ArrayList`s and test the algorithm on randomly generated values.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ7-Selection-Sort?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Selection-Sort"
 				},
 				{
 					title: "Selection Sort Big-O Analysis",
@@ -321,7 +321,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement insertion sort in-place on an array and compare how it behaves on sorted, reverse-sorted, and random input.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ7-Insertion-Sort?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Insertion-Sort"
 				},
 				{
 					title: "Insertion Sort Big-O Analysis",
@@ -335,7 +335,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Store book page counts in an `ArrayList` and use selection sort to organize them from biggest to smallest.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ7-Biggest-to-Smallest-Bookshelf?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Biggest-to-Smallest-Bookshelf"
 				}
 			]
 		},
@@ -352,7 +352,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement bubble sort with nested loops, test it on random data, and improve it by shrinking the inner loop range over time.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ8-Bubble-Sort"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Bubble-Sort"
 				},
 				{
 					title: "Bubble Sort Big-O Analysis",
@@ -364,9 +364,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Adapt bubble sort to work on `ArrayList<String>` values by using `compareTo()` to sort words alphabetically.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ8-Alphabetical-Order-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Alphabetical-Order-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ8-Alphabetical-Order?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Alphabetical-Order"
 				}
 			],
 			supplementalProjects: []
@@ -384,21 +384,21 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement the helper method that merges two sorted lists into one sorted result.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ9-Merge?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge"
 				},
 				{
 					title: "AJ9 Project 2: Split Method",
 					content:
 						"Practice recursively splitting an `ArrayList` until all sublists are size 1, building intuition for merge sort's divide-and-conquer structure.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ9-Split?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Split"
 				},
 				{
 					title: "AJ9 Project 3: Merge Sort",
 					content:
 						"Combine recursive splitting with the merge helper to implement full merge sort on a list of random numbers.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ9-Merge-Sort?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge-Sort"
 				},
 				{
 					title: "Merge Sort Big-O Analysis",
@@ -421,9 +421,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use nested classes to model a bakery, its workers, and its baked goods, then collect input and print the resulting bakery state.",
 					projectLink:
-						"https://replit.com/@JuniLearning/AJ10-Juni-Bakery-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Juni-Bakery-Starter",
 					solutionLink:
-						"https://replit.com/@JuniLearning/AJ10-Juni-Bakery?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Juni-Bakery"
 				},
 				{
 					title: "Generics",
@@ -435,7 +435,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Create a generic `Node`-style wrapper class, test it with several object types, and store those generic nodes inside an array.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/AJ10-Anything-Array?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Anything-Array"
 				},
 				{
 					title: "Exception Handling",
@@ -447,9 +447,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Handle file, input, null, and arithmetic exceptions, and create a custom `DivideByZeroException` for more precise error reporting.",
 					projectLink:
-						"https://replit.com/@JuniLearning/AJ10-Exception-Practice-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Exception-Practice-Starter",
 					solutionLink:
-						"https://replit.com/@JuniLearning/AJ10-Exception-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Exception-Practice"
 				}
 			],
 			supplementalProjects: []
@@ -472,9 +472,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement a singly linked list from starter code, write its inner `Node` class, and build out the methods defined in the interface.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ11-Linked-List-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Linked-List-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ11-Linked-List?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Linked-List"
 				},
 				{
 					title: "Doubly Linked Lists",
@@ -486,9 +486,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Extend the linked list implementation to support both next and previous links, a tail reference, and more efficient inserts and deletions.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ11-Doubly-Linked-List-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Doubly-Linked-List-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ11-Doubly-Linked-List?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Doubly-Linked-List"
 				}
 			],
 			supplementalProjects: []
@@ -506,9 +506,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement a stack with array storage, a top pointer, and checks for overflow and underflow.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ12-Stack-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Stack-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ12-Stack?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Stack"
 				},
 				{
 					title: "Queues",
@@ -520,9 +520,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement a queue using an array with wrapping indices so that the structure behaves like a circular buffer.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ12-Queue-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Queue-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ12-Queue?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Queue"
 				}
 			],
 			supplementalProjects: [
@@ -531,23 +531,23 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use a stack to determine whether parentheses, brackets, and braces are balanced and properly nested.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ12-Valid-Parentheses?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Valid-Parentheses"
 				},
 				{
 					title: "AJ12 Supplemental Project 2: Calculator with Stacks",
 					content:
 						"Build a stack-based calculator that treats operators as commands acting on the most recently entered numbers.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ12-Calculator-with-Stacks?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Calculator-with-Stacks"
 				},
 				{
 					title: "AJ12 Supplemental Project 3: Implementing a Deque",
 					content:
 						"Extend queue ideas into a double-ended queue implemented with a circular array.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ12-Deque-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Deque-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ12-Deque?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Deque"
 				}
 			]
 		},
@@ -564,14 +564,14 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Practice the Java `PriorityQueue` API, including adding, peeking, polling, removing, iterating, checking membership, and converting the queue into an array.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AM13-Priority-Queue"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Priority-Queue"
 				},
 				{
 					title: "AJ13 Project 1: Class Rank",
 					content:
 						"Create a `Student` class and a comparator that orders students by GPA, then use a priority queue to print students from highest GPA to lowest.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ13-Class-Rank?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Class-Rank"
 				},
 				{
 					title: "Maps",
@@ -582,14 +582,15 @@ export const javaLevel3Course: RawCourse = {
 					title: "Using a Java Map",
 					content:
 						"Practice the Java `Map` API with `HashMap` and `TreeMap`, including creation, insertion, lookup, removal, and iteration through keys and values.",
-					projectLink: "https://repl.it/@JuniLearning/AJ13-Maps"
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Maps"
 				},
 				{
 					title: "AJ13 Project 2: Letter Frequencies",
 					content:
 						"Read a sentence from the user, build a frequency map of its letters, print the map contents, and identify the most frequent character.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ13-Letter-Frequencies?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Letter-Frequencies"
 				}
 			],
 			supplementalProjects: []
@@ -617,9 +618,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Write the `Node` inner class, core BST instance variables, and basic methods such as insert and membership testing.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ14-BST-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ14-Basic-BST?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-Basic-BST"
 				},
 				{
 					title: "Depth First Search",
@@ -631,14 +632,14 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement preorder, inorder, and postorder traversals and use inorder traversal to define `toString()`.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ14-BST-Traversals?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST-Traversals"
 				},
 				{
 					title: "AJ14 Project 3: BST Clear and Remove",
 					content:
 						"Add recursive clear and remove operations to the BST, including removal cases for nodes with zero, one, or two children.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ14-BST?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST"
 				}
 			],
 			supplementalProjects: []
@@ -671,18 +672,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement a custom `HashMap` with linear probing, tombstones, rehashing, and the usual map operations.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ15-HashMap-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-HashMap-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ15-HashMap?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-HashMap"
 				},
 				{
 					title: "AJ15 Project 2: Juni Search Engine",
 					content:
 						"Use the custom `HashMap`, file reading, and string splitting to build a simple keyword search engine over a text corpus of URLs and tags.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ15-Search-Engine-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Search-Engine-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ15-Search-Engine?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Search-Engine"
 				}
 			],
 			supplementalProjects: []
@@ -705,9 +706,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement a graph with a `HashMap` of adjacency lists, add vertices and edges, and test the result through a `toString()` method and a simple main program.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ16-Simple-Graph-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Simple-Graph-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ16-Simple-Graph?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Simple-Graph"
 				},
 				{
 					title: "Dijkstra's Shortest Path Algorithm",
@@ -719,9 +720,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use a completed `Vertex` class, an adjacency matrix, and a priority queue to compute shortest paths and reconstruct the shortest path tree.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ16-Dijkstras-Shortest-Path-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Dijkstras-Shortest-Path-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ16-Dijkstras-Shortest-Path?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Dijkstras-Shortest-Path"
 				}
 			],
 			supplementalProjects: [
@@ -730,7 +731,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use graph traversal and vertex degree analysis to determine whether a graph has a Eulerian path, a Eulerian cycle, or neither.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ16-Eulerian-Mail-Circuit?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Eulerian-Mail-Circuit"
 				}
 			]
 		},
@@ -747,25 +748,25 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Create a weighted graph implementation that will support the street searcher project.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ17-Weighted-Graph-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Weighted-Graph-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ17-Weighted-Graph?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Weighted-Graph"
 				},
 				{
 					title: "AJ17 Project 2: Loading Data",
 					content:
 						"Read location data from files, store locations in a `HashMap`, and connect those locations in the weighted graph using location names as vertices.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ17-Loading-Data-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Loading-Data-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ17-Loading-Data?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Loading-Data"
 				},
 				{
 					title: "AJ17 Project 3: Finding Shortest Paths",
 					content:
 						"Complete the street searcher by running Dijkstra's algorithm on the loaded graph, printing the shortest path, and refining the user interface and error handling.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ17-Street-Searcher?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher"
 				},
 				{
 					title: "Course Recap",
@@ -783,9 +784,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use this check-in as a review of recursion, time complexity, and search algorithms. Focus on explaining how each algorithm works and why its runtime behaves the way it does.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-1-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-1?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1"
 				},
 				{
 					title: "Check-In #1: Recursion",
@@ -812,7 +813,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Compare the real-world speeds of linear search and binary search by timing many runs on a large array with millisecond timestamps.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-1-Additional-Practice-Project?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Additional-Practice-Project"
 				}
 			],
 			supplementalProjects: []
@@ -825,9 +826,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use this check-in to review the major sorting algorithms in the course and compare how they behave, how they are implemented, and how their runtimes differ.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-2-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-2?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2"
 				},
 				{
 					title: "Check-In #2: Selection Sort",
@@ -854,7 +855,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Time multiple sorting algorithms on arrays of different sizes and compare how their observed speeds change as the test scale increases.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-2-Additional-Practice-Project?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Additional-Practice-Project"
 				}
 			],
 			supplementalProjects: []
@@ -867,7 +868,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use this check-in to revisit sustainable programming ideas, linked lists, stacks, queues, priority queues, and maps through a mix of short explanations and code extensions.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-3?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3"
 				},
 				{
 					title: "Check-In #3: Sustainable Programming",
@@ -899,9 +900,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Take a queue of names, reverse it with a stack, then sort it alphabetically with a priority queue, printing the queue after each transformation.",
 					projectLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-3-Additional-Practice-Project-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Additional-Practice-Project-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-3-Additional-Practice-Project?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Additional-Practice-Project"
 				}
 			],
 			supplementalProjects: []
@@ -914,7 +915,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use this final check-in to review binary search trees, hash tables, and graphs, along with the main vocabulary and algorithm ideas from those topics.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-in-4-Solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4"
 				},
 				{
 					title: "Check-In #4: Binary Search Trees",
@@ -936,7 +937,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Extend a BST with a breadth-first search method that prints nodes level by level using a queue.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/AJ-Check-In-4-Additional-Practice-Project?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4-Additional-Practice-Project"
 				}
 			],
 			supplementalProjects: []

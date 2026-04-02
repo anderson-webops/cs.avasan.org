@@ -11,7 +11,7 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use this module as a low-pressure review of variables, strings, conditionals, and loops. Work through the prompts independently first, then revisit any ideas that need reinforcement.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS-Check-in-1?skipMigration=1"
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
 				},
 				{
 					title: "Check-In #1: Variables and Strings",
@@ -33,9 +33,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Ask the user for a row and column, then print a grid with `O` characters along that row and column and an `X` at the exact chosen coordinate.",
 					projectLink:
-						"https://repl.it/@JuniLearning/JS-Check-in-1-Additional-Project-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS-Check-in-1-Additional-Project?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter"
 				}
 			],
 			supplementalProjects: []
@@ -48,7 +48,7 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use this review to revisit math operators, randomness, methods, arrays, and two-dimensional arrays. Focus on explaining not just what the code does, but why each structure fits the problem.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS-Check-in-2?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1"
 				},
 				{
 					title: "Check-In #2: Mathematical Operators and Randomness",
@@ -75,7 +75,7 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Fill an integer array with random values and write a method called `countNumElementsAboveFive()` that returns how many entries are greater than 5.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS-Check-in-2-Additional-Project?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Practice-with-Arrays"
 				}
 			],
 			supplementalProjects: []
@@ -92,7 +92,8 @@ export const javaLevel1Course: RawCourse = {
 					title: "Primitive Types",
 					content:
 						"Learn the built-in Java types `int`, `double`, `char`, and `boolean`, and practice declaring variables, assigning values, printing them, and noticing Java syntax such as semicolons and single quotes for characters.",
-					solutionLink: "https://repl.it/@JuniLearning/JS1-Primitives"
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-Primitives"
 				},
 				{
 					title: "Strings",
@@ -109,14 +110,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Create a chatbot that asks at least five questions, stores the user's answers, and prints customized responses using string concatenation and input handling.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS1-Chatbot?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-Chatbot"
 				},
 				{
 					title: "JS1 Project 2: First Middle Last",
 					content:
 						"Ask the user for a word and print its first, middle, and last characters. As an optional extension, remove one of those characters using substring logic.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS1-First-Middle-Last?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-First-Middle-Last"
 				}
 			],
 			supplementalProjects: [
@@ -125,14 +126,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Ask the user for different parts of speech and print a completed Mad Lib story using their responses.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS1-Mad-Libs?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-Mad-Libs"
 				},
 				{
 					title: "JS1 Supplemental Project 2: Division Facts",
 					content:
 						"Ask the user for two numbers, then compute the quotient and remainder without using the `%` operator.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS1-Division-Facts?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-Division-Facts"
 				}
 			]
 		},
@@ -144,21 +145,21 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Learn how casting changes the type the computer uses for a value. Compare automatic casting with explicit casts, especially when mixing `int` and `double` values in arithmetic.",
 					projectLink:
-						"https://replit.com/@JuniLearning/JS1-Casting-Reference"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-Casting-Reference"
 				},
 				{
 					title: "Mathematical Operators",
 					content:
 						"Practice Java arithmetic with `+`, `-`, `*`, `/`, and `%`, and compare how order of operations and parentheses affect the result of expressions.",
 					projectLink:
-						"https://replit.com/@JuniLearning/JS2-Math-Operators-Reference#Main.java"
+						"https://github.com/instruction-material/Java-Level-1/blob/main/JS2-Math-Operators-Reference/Main.java"
 				},
 				{
 					title: "JS2 Project 1: Temperature Converter",
 					content:
 						"Read temperature input from the user, convert between Fahrenheit and Celsius, and use casting to produce more accurate results before rounding to whole numbers.",
 					solutionLink:
-						"https://replit.com/@JuniLearning/JS2-Temperature-Converter#src/main/java/Main.java"
+						"https://github.com/instruction-material/Java-Level-1/blob/main/JS2-Temperature-Converter/src/main/java/Main.java"
 				}
 			],
 			supplementalProjects: [
@@ -167,14 +168,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the graphics methods introduced in the optional BlueJ workflow to create a six-color rainbow.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS2-Rainbow?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS2-Rainbow"
 				},
 				{
 					title: "JS2 Supplemental Project 2: Snowman",
 					content:
 						"Use graphics methods to draw and customize a snowman with extra features such as a scarf, arms, or snowflakes.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS2-Snowman?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS2-Snowman"
 				},
 				{
 					title: "Setting Up an Applet (Optional)",
@@ -210,14 +211,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Create a text-based choose-your-own-adventure game using nested conditionals to handle multiple user choices and branching outcomes.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS3-Code-Your-Own-Adventure?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS3-Code-Your-Own-Adventure"
 				},
 				{
 					title: "JS3 Project 2: Color Mixer",
 					content:
 						"Ask the user for two primary colors, validate the input, and use conditional logic to determine the resulting mixed color or print an error if the input is invalid.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS3-Color-Mixer?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS3-Color-Mixer"
 				}
 			],
 			supplementalProjects: [
@@ -233,28 +234,28 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Check whether an elevator is above or below its weight limit and print how far over or under the limit it is.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS3-Elevator-Limits?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS3-Elevator-Limits"
 				},
 				{
 					title: "JS3 Supplemental Project 2: Weather Activities",
 					content:
 						"Ask the user about the weather and recommend an activity based on their answer.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS3-Weather-Activities?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS3-Weather-Activities"
 				},
 				{
 					title: "JS3 Supplemental Project 3: Too Chicken to Cross the Road",
 					content:
 						"Read booleans for the left and right sides of the road and use conditionals to tell Charlie the chicken whether it is safe to cross.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS3-Too-Chicken-to-Cross-the-Road?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS3-Too-Chicken-to-Cross-the-Road"
 				},
 				{
 					title: "JS3 Supplemental Project 4: Spreadsheet Width",
 					content:
 						"Format a word so it fits within a given spreadsheet cell width by either trimming or padding it, then print it between vertical bars.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS3-Spreadsheet-Width?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS3-Spreadsheet-Width"
 				}
 			]
 		},
@@ -276,14 +277,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Practice printing ranges of numbers, even numbers, countdowns, and the sum of 1 through 100 with both `for` loops and `while` loops.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS4-Loop-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS4-Loop-Practice"
 				},
 				{
 					title: "JS4 Project 2: Nested Loops",
 					content:
 						"Use nested loops to print multiplication tables and text patterns such as triangles of stars and diagonal marker patterns that combine loops with conditionals.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS4-Nested-Loops?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS4-Nested-Loops"
 				}
 			],
 			supplementalProjects: [
@@ -299,21 +300,21 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Ask the user for a letter and a size, then print a square made of that letter using both `for` loops and `while` loops.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS4-Letter-Square?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS4-Letter-Square"
 				},
 				{
 					title: "JS4 Supplemental Project 2: Checkout Calculator",
 					content:
 						"Keep asking the user for item prices until they enter 0, then print the total cost.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS4-Checkout-Calculator?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS4-Checkout-Calculator"
 				},
 				{
 					title: "JS4 Supplemental Project 3: Pyramid",
 					content:
 						"Use nested loops to print a slash-and-backslash pyramid pattern in the console.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS4-Pyramid?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS4-Pyramid"
 				}
 			]
 		},
@@ -330,14 +331,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Pick a random lowercase letter, ask the user to guess until they get it right, and count how many guesses it took.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS5-Letter-Guesser?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS5-Letter-Guesser"
 				},
 				{
 					title: "JS5 Project 2: Mathematical Challenges",
 					content:
 						"Complete several challenge problems, including FizzBuzz, listing all factors of a number, and reversing a string.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS5-Mathematical-Challenges?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS5-Mathematical-Challenges"
 				}
 			],
 			supplementalProjects: [
@@ -346,7 +347,7 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Create a number guessing game with a user-defined range, random target, feedback on each guess, and a final guess count.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS5-Random-Number-Guesser?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS5-Random-Number-Guesser"
 				}
 			]
 		},
@@ -363,7 +364,7 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Write methods that compute an average, test whether a number is even, find the smallest of three doubles, compute a factorial, and raise a base to a power.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS6-Methods-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS6-Methods-Practice"
 				}
 			],
 			supplementalProjects: [
@@ -379,28 +380,28 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Write `min()` and `max()` methods for three integers without using `Math.min()` or `Math.max()`.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS6-Min-and-Max?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS6-Min-and-Max"
 				},
 				{
 					title: "JS6 Supplemental Project 2: Caught Speeding",
 					content:
 						"Write a method that returns a ticket category based on driving speed and whether it is the driver's birthday.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS6-Caught-Speeding?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS6-Caught-Speeding"
 				},
 				{
 					title: "JS6 Supplemental Project 3: String Expander",
 					content:
 						"Write a method that repeats each character in a string a specified number of times.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS6-String-Expander?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS6-String-Expander"
 				},
 				{
 					title: "JS6 Supplemental Project 4: Palindrome Checker",
 					content:
 						"Write an `isPalindrome()` method that checks whether a string reads the same forward and backward.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS6-Palindrome-Checker?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS6-Palindrome-Checker"
 				}
 			]
 		},
@@ -417,14 +418,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Build arrays of perfect squares, write methods that inspect or transform arrays, test for values such as 0, create arrays of random doubles, and optionally reverse arrays or swap the smallest and largest values.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-Practice-with-Arrays?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Practice-with-Arrays"
 				},
 				{
 					title: "JS7 Project 2: Fortuneteller",
 					content:
 						"Store several fortunes in an array and print a random one each time the program runs.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-Fortuneteller?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Fortuneteller"
 				},
 				{
 					title: "ArrayLists",
@@ -436,14 +437,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Write methods that generate lists of random integers, filter even numbers, remove the smallest value, add a sum, edit multiples of 3, collect user-entered words, and insert `MIDDLE` into the center of a list.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-ArrayList-Practice?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-ArrayList-Practice"
 				},
 				{
 					title: "JS7 Project 4: High Score List",
 					content:
 						"Create a sorted high-score list that inserts each new score in the correct place from highest to lowest.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-High-Score-List?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-High-Score-List"
 				}
 			],
 			supplementalProjects: [
@@ -452,44 +453,44 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Ask the user for a lucky number, then check whether it appears in an array of random integers.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-Lucky-Array?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Lucky-Array"
 				},
 				{
 					title: "JS7 Supplemental Project 2: Arithmetic Sequence",
 					content:
 						"Write `generateArithSeq()` to return an array representing an arithmetic sequence from a starting value, term count, and common difference.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-Arithmetic-Sequence?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Practice-with-Arrays"
 				},
 				{
 					title: "JS7 Supplemental Project 3: String to Array",
 					content:
 						"Convert strings to arrays of characters, including a version that keeps every other character starting from the first.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-String-to-Array?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-String-to-Array"
 				},
 				{
 					title: "JS7 Supplemental Project 4: Too Much Reversing",
 					content:
 						"Reverse every string in an array and also reverse the order of the strings in the array itself.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-Too-Much-Reversing?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Too-Much-Reversing"
 				},
 				{
 					title: "JS7 Supplemental Project 5: Airline Management",
 					content:
 						"Use a boolean array to represent airplane seats, then write methods that reserve seats and detect when the flight is full.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-Airline-Management?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Airline-Management"
 				},
 				{
 					title: "JS7 Supplemental Project 6: Song Shuffler",
 					content:
 						"Shuffle a list of songs by randomly moving entries from an original list into a new shuffled list.",
 					projectLink:
-						"https://repl.it/@JuniLearning/JS7-Song-Shuffler-Starter?skipMigration=1",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Song-Shuffler-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS7-Song-Shuffler?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Song-Shuffler"
 				}
 			]
 		},
@@ -506,14 +507,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Write methods that sum all values in a grid, find the minimum value, generate an `N x N` multiplication table, and return row averages as doubles.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS8-Practice-with-2D-Arrays?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS8-Practice-with-2D-Arrays"
 				},
 				{
 					title: "JS8 Project 2: Grid Drawer",
 					content:
 						"Create a 10x10 grid that lets the user place `x` markers at chosen row and column positions until they enter `-1` to stop.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS8-Grid-Drawer?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS8-Grid-Drawer"
 				}
 			],
 			supplementalProjects: [
@@ -522,21 +523,21 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Ask the user for a size, fill a 2D array with perfect squares, and print the resulting square grid.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS8-Square-of-Squares?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS8-Square-of-Squares"
 				},
 				{
 					title: "JS8 Supplemental Project 2: 2D Array to String",
 					content:
 						"Write `arrToString()` to return a string representation of a 2D array using nested loops.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS8-2D-Array-to-String?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS8-2D-Array-to-String"
 				},
 				{
 					title: "JS8 Supplemental Project 3: Magic Square",
 					content:
 						"Write `isMagicSquare()` to check whether all rows, columns, and diagonals in a square grid have the same sum.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS8-Magic-Square?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS8-Magic-Square"
 				}
 			]
 		},
@@ -548,14 +549,14 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Plan and build a playable Battleship game using the core ideas from the course, including loops, conditionals, methods, arrays, and two-dimensional arrays. Think carefully about how to store ships, guesses, and hits, and keep the player guessing until all ships are sunk.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS9-Simple-Battleship?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS9-Simple-Battleship"
 				},
 				{
 					title: "JS9 Master Project: Advanced Battleship",
 					content:
 						"Extend the project into a configurable multiplayer Battleship game with custom board sizes, multiple ship types, setup validation, alternating turns, and win detection.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/JS9-Advanced-Battleship?skipMigration=1"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS9-Advanced-Battleship"
 				},
 				{
 					title: "Course Recap",

@@ -14,7 +14,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Primitive Types",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF1-Primitive-Types-and-Strings-Reference?skipMigration=1 Explain fundamental data types: integers, floating point numbers, booleans and characters. Demonstrate declaring variables with and without initial values and initializing several of the same type on one line. Create an integer myAge, a double myRating for a movie rating, and show arithmetic operators including %. Illustrate mod with 10 / 3 = 3 and 10 % 3 = 1. Cast a double to an int when printing. Create a boolean isHot and a char myChar for the first letter of your last name."
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Primitive-Types-and-Strings-Reference Explain fundamental data types: integers, floating point numbers, booleans and characters. Demonstrate declaring variables with and without initial values and initializing several of the same type on one line. Create an integer myAge, a double myRating for a movie rating, and show arithmetic operators including %. Illustrate mod with 10 / 3 = 3 and 10 % 3 = 1. Cast a double to an int when printing. Create a boolean isHot and a char myChar for the first letter of your last name."
 				},
 				{
 					title: "String",
@@ -24,7 +24,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Input and Output",
 					content:
-						'Reference: https://repl.it/@JuniLearning/CPPF1-Input-and-Output-Reference?skipMigration=1 Explain streams for input and output. Use the insertion operator (`<<`) to print "Enter your name: " to the console. Create a string variable name, use the extraction operator (`>>`) to read the response, and print "Nice to meet you, ___!" with the input inserted. Include `#include <iostream>` at the top. Explain `cin` and `cout`, and note that `<<` and `>>` point to where information is sent.'
+						'Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Input-and-Output-Reference Explain streams for input and output. Use the insertion operator (`<<`) to print "Enter your name: " to the console. Create a string variable name, use the extraction operator (`>>`) to read the response, and print "Nice to meet you, ___!" with the input inserted. Include `#include <iostream>` at the top. Explain `cin` and `cout`, and note that `<<` and `>>` point to where information is sent.'
 				},
 				{
 					title: "Comments",
@@ -41,14 +41,14 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Demo the Mad Libs example, then build your own: create several string variables, prompt for inputs with `std::cin`, and use string concatenation or multiple insertion operators to print the final story. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF1-Mad-Libs-Solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Mad-Libs"
 				},
 				{
 					title: "CPPF1 Project 2: Chatbot",
 					content:
 						"Create a chatbot: ask for a name and respond, ask for a sentence and use `str.insert()` to insert **achoo** to make the bot sneeze, convert Fahrenheit to Celsius with float values, and convert a dollar amount to another currency. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF1-Chatbot-Solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-ChatBot"
 				}
 			],
 			supplementalProjects: []
@@ -71,7 +71,7 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use both `for` and `while` loops for each part: ask for a number and a larger number and print all numbers between them, ask how many numbers to enter and print their sum, then print the average using double division. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF2-Number-Games?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Number-Games"
 				},
 				{
 					title: "Conditionals and Logical Operators",
@@ -83,14 +83,14 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use conditionals to build Rock, Paper, Scissors. Check each player's choice with nested conditionals to determine the winner. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF2-Rock-Paper-Scissors-Solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Rock-Paper-Scissors"
 				},
 				{
 					title: "CPPF2 Project 3: FizzBuzz",
 					content:
 						'Print numbers 1 through 50. For multiples of 3 print "Fizz," for multiples of 5 print "Buzz," and for multiples of both print "FizzBuzz." Review the % operator with simple examples. Bonus: allow any two input numbers for a customizable FizzBuzz. Prepare a short presentation to share with friends or family.',
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF2-FizzBuzz-Solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-FizzBuzz"
 				}
 			],
 			supplementalProjects: []
@@ -108,7 +108,7 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Write functions that: take two integers and return their precise average, check if an integer is even, return the smallest of three distinct doubles, return the factorial of an integer, and compute a positive integer base raised to a power.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF3-Function-Practice-Solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Function-Practice"
 				},
 				{
 					title: "Random Numbers",
@@ -120,14 +120,14 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						'Write functions that simulate probability events: flip a coin and return "heads" or "tails," roll two dice and return the sum, and draw a card returning "value of suit" such as "10 of Diamonds" or "King of Spades." Discuss suits and card values. Prepare a short presentation to share with friends or family.',
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF3-Probability-Events-Solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Probability-Functions"
 				},
 				{
 					title: "CPPF3 Project 3: Number Guesser",
 					content:
 						"Create a game that picks a random number between a user-provided range and allows a set number of guesses. Break the program into functions for the range, random number, prompting guesses and giving higher/lower feedback. End when the number is guessed or guesses run out. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF3-Number-Guesser-Solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Number-Guesser"
 				}
 			],
 			supplementalProjects: []
@@ -143,7 +143,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: ".h Files and .cpp Files",
 					content:
-						'Reference: https://repl.it/@JuniLearning/CPPF4-Point-Class Create a new project with point.cpp and point.h. Place declarations in the .h header file and implementations in the .cpp source file. Use the scope resolution operator with Point:: before functions in the .cpp file, and `#include "CLASS_NAME.h"` in .cpp and main files. Add header guards with `#ifndef CLASS_H`, `#define CLASS_H`, and `#endif` to avoid multiple inclusions.'
+						'Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Point-Class Create a new project with point.cpp and point.h. Place declarations in the .h header file and implementations in the .cpp source file. Use the scope resolution operator with Point:: before functions in the .cpp file, and `#include "CLASS_NAME.h"` in .cpp and main files. Add header guards with `#ifndef CLASS_H`, `#define CLASS_H`, and `#endif` to avoid multiple inclusions.'
 				},
 				{
 					title: "Public and Private Variables",
@@ -160,19 +160,19 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build a Person class with private variables such as name, age and height (in inches), plus any others you choose. Include at least two constructors (default and one with parameters), getters and setters, and a toString function that converts height from inches to feet + inches (for example, 66 to 5' 6\"). Consider a private helper for the height conversion. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF4-Person-Class?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Person-Class"
 				},
 				{
 					title: "The Base Member Initialization List (BMI)",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF4-Person-Class-with-BMI Explain how a base member initialization list quickly initializes private variables. Show the order matching declarations in the .h file and the syntax Class::Class(params) : var(value) {}. Update Person constructors to use BMI."
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Person-Class-with-BMI Explain how a base member initialization list quickly initializes private variables. Show the order matching declarations in the .h file and the syntax Class::Class(params) : var(value) {}. Update Person constructors to use BMI."
 				},
 				{
 					title: "CPPF4 Project 2: Cat Class",
 					content:
 						'Create a Cat class. Include a default constructor (name "cat," breed "unknown," age 0, color "unknown") and an overloaded constructor, both using BMI. Add changeAge, changeBreed, toString, meow, eat, and pet functions. Bonus: use "year" instead of "years" when the cat is one year old. Prepare a short presentation to share with friends or family.',
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF4-Cat-Class?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Cat-Class"
 				}
 			],
 			supplementalProjects: []
@@ -183,25 +183,25 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Memory and Pointers",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF5-Pointers Explain that memory locations have unique addresses visible with & before a variable. Create an int variable, print its address, and create a pointer with `int*` pointing to that address. Show dereferencing with `*` to access or change the value, assigning one pointer to another, changing pointer targets, and setting a pointer to `nullptr` when it points to nothing.",
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers Explain that memory locations have unique addresses visible with & before a variable. Create an int variable, print its address, and create a pointer with `int*` pointing to that address. Show dereferencing with `*` to access or change the value, assigning one pointer to another, changing pointer targets, and setting a pointer to `nullptr` when it points to nothing.",
 					projectLink:
-						"https://repl.it/@JuniLearning/CPPF5-Pointers-Reference"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers"
 				},
 				{
 					title: "CPPF5 Project 1: Pointers Introduction",
 					content:
 						"Answer conceptual questions about pointers: printing `*p1` vs. `p1`, changing `*p1`, copying pointers, dereferencing uninitialized or `nullptr` pointers, and why assignments like `*p1 = &val1` are incorrect.",
 					projectLink:
-						"https://repl.it/@JuniLearning/CPPF5-Pointers-Starter?skipMigration=1",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF-Pointers-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF5-Pointers?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers"
 				},
 				{
 					title: "CPPF5 Project 2: Problems Using Pointers",
 					content:
 						"Write code that demonstrates common pointer issues and observe the errors: dangling pointers, dereferencing a `nullptr`, improper initialization (`int* p1, p2`), uninitialized pointers, assigning values directly to pointer variables, and data type mismatches. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF5-Pointer-Error-Examples?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointer-Error-Examples"
 				}
 			],
 			supplementalProjects: []
@@ -217,30 +217,30 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Parameter Passing",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Introduction Discuss passing by value (creates a local copy), by reference (modifies the original) and by const reference (efficient but unmodifiable). Show examples where spacing around & is flexible: int &param, int& param, int &param."
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Parameter-Passing-Introduction Discuss passing by value (creates a local copy), by reference (modifies the original) and by const reference (efficient but unmodifiable). Show examples where spacing around & is flexible: int &param, int& param, int &param."
 				},
 				{
 					title: "CPPF6 Project 1: Parameter Passing Tracing",
 					content:
 						"Write comments predicting how values change when passed by value, reference and const reference, then call the functions to test. Explain why const references cannot be modified.",
 					projectLink:
-						"https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Starter?skipMigration=1",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Parameter-Passing-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF6-Parameter-Passing-Tracing?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Parameter-Passing"
 				},
 				{
 					title: "CPPF6 Project 2: Defanging a Website Address",
 					content:
 						"Defang a URL by turning periods into `[.]`. Write one function that edits the string directly (pass by reference) and another that builds and returns a new defanged string (pass by value), possibly using `str.replace()`.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF6-Defanging-a-Website-URL?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Defanging-a-Website-URL"
 				},
 				{
 					title: "CPPF6 Project 3: Chaos Monkeys",
 					content:
 						"Write functions that pass strings by value, by reference and by const reference, inserting random characters with `insert(int index, int quantity, char newChar)`. Avoid infinite loops when the string length changes inside a loop. Bonus: add more scrambling functions. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF6-Chaos-Monkeys?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Chaos-Monkeys"
 				}
 			],
 			supplementalProjects: []
@@ -251,28 +251,28 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Array Basics",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF7-Array-Basics-Reference Explain that arrays store ordered values of the same type. Declare an array with type, name and size such as `int nums[10]`, or initialize with `int arr[] = {1,2,3}`. Access and change elements by index. Use sizeof(array) / sizeof(array[0]) to find length, loop to update and print elements, and note that printing an array name shows an address, so loop to print values."
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Array-Basics-Reference Explain that arrays store ordered values of the same type. Declare an array with type, name and size such as `int nums[10]`, or initialize with `int arr[] = {1,2,3}`. Access and change elements by index. Use sizeof(array) / sizeof(array[0]) to find length, loop to update and print elements, and note that printing an array name shows an address, so loop to print values."
 				},
 				{
 					title: "Arrays in Memory",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF7-Pointer-Arithmetic-Reference Explain that arrays are contiguous memory and act like pointers to the first element. Create a pointer to the first element with `int *p1 = arr1`. Show accessing elements with pointer arithmetic like `*(p1 + index)` and advancing pointers with `p++`, warning about undefined behaviour outside the array."
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Pointer-Arithmetic-Reference Explain that arrays are contiguous memory and act like pointers to the first element. Create a pointer to the first element with `int *p1 = arr1`. Show accessing elements with pointer arithmetic like `*(p1 + index)` and advancing pointers with `p++`, warning about undefined behaviour outside the array."
 				},
 				{
 					title: "CPPF7 Project 1: Array Practice",
 					content:
 						"Create and print an array of the first 10 perfect squares. Write functions that check whether the first and last array elements match, sum the elements of an int array, and return the total letters across an array of strings. Explain passing arrays to functions as `type arr[]` or as pointers.",
 					projectLink:
-						"https://repl.it/@JuniLearning/CPPF7-Array-Practice-Starter?skipMigration=1",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Array-Practice-Starter",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF7-Array-Practice?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Array-Practice"
 				},
 				{
 					title: "CPPF7 Project 2: Bank Accounts",
 					content:
 						"Ask for the number of transactions in the past month, store withdrawals and deposits in an array with a loop, and write a function to calculate and print the final balance. Bonus: alert if the balance is low. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF7-Bank-Accounts?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Bank-Accounts"
 				}
 			],
 			supplementalProjects: [
@@ -281,7 +281,7 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use arrays and functions to build Tic Tac Toe. Plan the game steps, use an array to track moves, create a function to check all winning combinations, a function to print the board with dividers, and track players' moves while handling invalid choices. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF7-Tic-Tac-Toe?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Tic-Tac-Toe"
 				}
 			]
 		},
@@ -291,7 +291,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Two-Dimensional Arrays",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF8-Two-Dimensional-Arrays-Reference Create a 2D array such as `int arr[10][10];` and with initializer lists like `int arr[3][3] = {{1,2,3},{4,5,6},{7,8,9}};`. Calculate rows with sizeof(array) / sizeof(array[0]) and columns with sizeof(array[0]) / sizeof(array[0][0]). Access elements with arr[i][j] and print with nested loops."
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Two-Dimensional-Arrays-Reference Create a 2D array such as `int arr[10][10];` and with initializer lists like `int arr[3][3] = {{1,2,3},{4,5,6},{7,8,9}};`. Calculate rows with sizeof(array) / sizeof(array[0]) and columns with sizeof(array[0]) / sizeof(array[0][0]). Access elements with arr[i][j] and print with nested loops."
 				},
 				{
 					title: "Using Two-Dimensional Arrays in Functions",
@@ -303,16 +303,16 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Write methods that: sum all integers in a 2D array, find the minimum integer, return an n x n multiplication table and print it in a grid, and return a 1D array of the averages of each row as floats.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF8-2D-Array-Practice?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-2D-Array-Practice"
 				},
 				{
 					title: "CPPF8 Project 2: Bank Balances",
 					content:
 						"Use a 2D array to track customers and recurring transactions. Build a `print()` function with nested for loops to show a grid, then implement the data structure for user interaction. Prepare a short presentation to share with friends or family.",
 					projectLink:
-						"https://repl.it/@JuniLearning/CPPF8-Two-Dimensional-Arrays-Reference",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Two-Dimensional-Arrays-Reference",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF8-Bank-Transactions?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Bank-Transactions"
 				}
 			],
 			supplementalProjects: []
@@ -323,16 +323,16 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Dynamic Variables",
 					content:
-						"Reference: https://repl.it/@JuniLearning/CPPF9-Dynamic-Variables-Reference Explain static variables and dynamic (anonymous) variables created at runtime with `new`, such as `int *p1 = new int;`. Store values with `*p1 = 5` or `std::cin >> *p1`. Always delete dynamic memory with `delete p1` to avoid leaks, and note that dereferencing after delete is a dangling pointer. Use `nullptr` to indicate a pointer to nothing.",
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Variables-Reference Explain static variables and dynamic (anonymous) variables created at runtime with `new`, such as `int *p1 = new int;`. Store values with `*p1 = 5` or `std::cin >> *p1`. Always delete dynamic memory with `delete p1` to avoid leaks, and note that dereferencing after delete is a dangling pointer. Use `nullptr` to indicate a pointer to nothing.",
 					projectLink:
-						"https://repl.it/@JuniLearning/CPPF9-Dynamic-Variables-Reference"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Variables-Reference"
 				},
 				{
 					title: "CPPF9 Project 1: Assembly Line",
 					content:
 						"Create an Object class with name and weight (lbs), a BMI-based constructor, and a print function that outputs name, weight in pounds, and weight in kilograms (1 kg = 2.205 lbs). Repeatedly collect info to create a dynamic Object, print it, and free its memory before the next one. Bonus: ask how many Objects to process, store them in an array, then print each. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF9-Assembly-Line?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Assembly-Line"
 				},
 				{
 					title: "Introduction to Dynamic Arrays",
@@ -349,19 +349,19 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Implement a DynamicArray class. Private members: `mysize`, `maxSize`, and `int* myVals` (optionally a DEFAULT_SIZE). Default constructor sets `mysize` to 0, `maxSize` to a default size and allocates `myVals`. Destructor deletes `myVals` and resets `mysize`. `addVal(int val)` checks capacity, doubles size when full by creating a new array, copying values, swapping pointers, deleting the old array, then adding the value and incrementing `mysize`. `printVals()` iterates over stored values, and `get(index)` returns the value at an index.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF9-Dynamic-Array-Implementation?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Array-Implementation"
 				},
 				{
 					title: "Introduction to Structs",
 					content:
-						"Reference: https://repl.it/@JuniLearning/Structs-Example Explain that a struct is similar to a class but members are public by default. Structs group small related data such as a grocery item with name and price."
+						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPP_Structs-Example Explain that a struct is similar to a class but members are public by default. Structs group small related data such as a grocery item with name and price."
 				},
 				{
 					title: "CPPF9 Project 3: Grocery List",
 					content:
 						"Update the DynamicArray to store Groceries (name and price) using a struct defined in DynamicArray.h with basic and overloaded constructors. Change pointer types and functions to the new data type. Include functions to print and add items. For removeItem by index, copy values into a new dynamic array while skipping the removed item. Build a simple menu to add, remove, print and quit. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF9-Grocery-List?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Grocery-List"
 				}
 			],
 			supplementalProjects: []
@@ -374,7 +374,7 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"We can call grids of numbers matrices. Two matrices must have the same dimensions for addition. Map out the process: create variables for rows, columns and each matrix, ask for dimensions and elements, add the matrices and print the result in a grid. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF10-Matrix-Addition?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF10-Matrix-Addition"
 				}
 			],
 			supplementalProjects: []
@@ -387,7 +387,7 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Create a Profile class that stores Post structs with a caption and heart count. Allow adding posts, printing a single post, printing all posts, and adding hearts. Track a changing number of posts with numPosts, maxSize and myPosts (a dynamic array of posts). Include a helper to validate indexes. Bonus: add more fields, sum hearts, edit or duplicate posts. Prepare a short presentation to share with friends or family.",
 					solutionLink:
-						"https://repl.it/@JuniLearning/CPPF11-Profile-Posts?skipMigration=1"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF11-Profile-Posts"
 				},
 				{
 					title: "Course recap",
