@@ -1,8 +1,13 @@
-import type { CourseDefinition, CourseModuleItem } from "./courses/types";
+import type {
+	CourseDefinition,
+	CourseModuleItem,
+	CourseSummary,
+	RawCourse
+} from "./courses/types";
 import { defineStore } from "pinia";
 
 import { computed } from "vue";
-import { rawCourses } from "./courses/index";
+import { courseCatalog, loadRawCourse } from "./courses/index";
 
 const COMBINING_MARKS_RE = /[\u0300-\u036F]/g;
 const NON_ALPHANUMERIC_RE = /[^a-z0-9]+/g;
@@ -49,9 +54,7 @@ function normalizeContent(content: string): string {
 		.trim();
 }
 
-const normalizedCourses: CourseDefinition[] = rawCourses.map(course => {
-	const courseId = slugify(course.name);
-
+function normalizeCourse(course: RawCourse, courseId = slugify(course.name)) {
 	return {
 		id: courseId,
 		name: course.name,
@@ -84,18 +87,46 @@ const normalizedCourses: CourseDefinition[] = rawCourses.map(course => {
 				)
 			};
 		})
-	};
-});
+	} satisfies CourseDefinition;
+}
+
+const courseSummaries: CourseSummary[] = courseCatalog.map(({ id, name }) => ({
+	id,
+	name
+}));
+
+const normalizedCourseCache = new Map<string, CourseDefinition>();
 
 export const useCoursesStore = defineStore("courses", () => {
-	const courses = computed(() => normalizedCourses);
+	const courses = computed(() => courseSummaries);
 
 	function getCourseById(id: string) {
-		return courses.value.find(course => course.id === id) ?? null;
+		return normalizedCourseCache.get(id) ?? null;
+	}
+
+	async function loadCourseById(id: string) {
+		const cachedCourse = normalizedCourseCache.get(id);
+
+		if (cachedCourse) {
+			return cachedCourse;
+		}
+
+		const rawCourse = await loadRawCourse(id);
+
+		if (!rawCourse) {
+			return null;
+		}
+
+		const normalizedCourse = normalizeCourse(rawCourse, id);
+
+		normalizedCourseCache.set(id, normalizedCourse);
+
+		return normalizedCourse;
 	}
 
 	return {
 		courses,
-		getCourseById
+		getCourseById,
+		loadCourseById
 	};
 });

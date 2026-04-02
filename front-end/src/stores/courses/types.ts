@@ -18,6 +18,11 @@ export interface RawCourse {
 	modules: RawCourseModule[];
 }
 
+export interface CourseSummary {
+	id: string;
+	name: string;
+}
+
 export interface CourseModuleItem extends RawCourseModuleItem {
 	id: string;
 }
@@ -29,8 +34,6 @@ export interface CourseModule {
 	supplementalProjects: CourseModuleItem[];
 }
 
-export interface CourseDefinition {
-	id: string;
-	name: string;
+export interface CourseDefinition extends CourseSummary {
 	modules: CourseModule[];
 }

@@ -1,8 +1,12 @@
 <script lang="ts" setup>
-import type { CourseModule, CourseModuleItem } from "@/stores/courses";
+import type {
+	CourseDefinition,
+	CourseModule,
+	CourseModuleItem
+} from "@/stores/courses";
 import MarkdownIt from "markdown-it";
 import { storeToRefs } from "pinia";
-import { computed, ref, watch, watchEffect } from "vue";
+import { computed, ref, shallowRef, watch, watchEffect } from "vue";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
@@ -38,6 +42,9 @@ const { currentTutor, currentAdmin, currentUser } = storeToRefs(appStore);
 const searchQuery = ref("");
 const selectedCourseId = ref("");
 const activeModuleId = ref("");
+const selectedCourse = shallowRef<CourseDefinition | null>(null);
+const courseLoadError = ref("");
+const isCourseLoading = ref(false);
 
 const allCourses = computed(() => courses.value ?? []);
 
@@ -77,10 +84,37 @@ watchEffect(() => {
 	}
 });
 
-const selectedCourse = computed(
-	() =>
-		courseList.value.find(course => course.id === selectedCourseId.value) ??
-		null
+watch(
+	selectedCourseId,
+	async (courseId, _previousCourseId, onCleanup) => {
+		if (!courseId) {
+			selectedCourse.value = null;
+			courseLoadError.value = "";
+			isCourseLoading.value = false;
+			return;
+		}
+
+		let cancelled = false;
+		onCleanup(() => {
+			cancelled = true;
+		});
+
+		isCourseLoading.value = true;
+		courseLoadError.value = "";
+
+		const course = await coursesStore.loadCourseById(courseId);
+
+		if (cancelled) {
+			return;
+		}
+
+		selectedCourse.value = course;
+		courseLoadError.value = course
+			? ""
+			: "Unable to load this course right now.";
+		isCourseLoading.value = false;
+	},
+	{ immediate: true }
 );
 
 const courseStats = computed(() => {
@@ -648,6 +682,16 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 						reader.
 					</p>
 				</div>
+			</div>
+
+			<div v-else-if="isCourseLoading" class="reader-empty">
+				<h3>Loading course</h3>
+				<p>Preparing the selected syllabus and lesson materials.</p>
+			</div>
+
+			<div v-else-if="courseLoadError" class="reader-empty">
+				<h3>Unable to open this course</h3>
+				<p>{{ courseLoadError }}</p>
 			</div>
 		</div>
 
