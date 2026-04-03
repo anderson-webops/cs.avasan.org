@@ -705,8 +705,14 @@ function confirmDeleteAdmin() {
 									No tutor assigned yet
 								</p>
 							</div>
-							<div class="summary-block is-inline">
-								<p class="summary-label">Course access</p>
+							<details
+								class="summary-block is-inline is-collapsible"
+							>
+								<summary class="summary-toggle">
+									<span class="summary-label">
+										Course access
+									</span>
+								</summary>
 								<ul
 									v-if="
 										userCourseLabels(String(u._id)).length
@@ -725,7 +731,7 @@ function confirmDeleteAdmin() {
 								<p v-else class="summary-copy is-muted">
 									No course access yet
 								</p>
-							</div>
+							</details>
 						</div>
 
 						<div
@@ -1178,6 +1184,36 @@ function confirmDeleteAdmin() {
 	padding: 1rem 1.05rem;
 }
 
+.summary-block.is-collapsible {
+	padding: 0;
+}
+
+.summary-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem 1.05rem;
+	cursor: pointer;
+	list-style: none;
+}
+
+.summary-toggle::-webkit-details-marker {
+	display: none;
+}
+
+.summary-toggle::after {
+	content: "+";
+	color: #5f7a8e;
+	font-size: 1.1rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.summary-block.is-collapsible[open] .summary-toggle::after {
+	content: "−";
+}
+
 .summary-copy {
 	margin: 0.55rem 0 0;
 	line-height: 1.55;
@@ -1299,6 +1335,12 @@ function confirmDeleteAdmin() {
 	list-style: none;
 	margin: 0.7rem 0 0;
 	padding: 0;
+}
+
+.summary-block.is-collapsible .summary-list,
+.summary-block.is-collapsible .summary-copy {
+	margin-top: 0;
+	padding: 0 1.05rem 1rem;
 }
 
 .summary-list li {
