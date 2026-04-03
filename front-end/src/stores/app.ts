@@ -34,6 +34,7 @@ export interface User {
 	email: string;
 	age: number;
 	state: string;
+	recipientName?: string;
 	tutors?: (string | Tutor)[];
 	courseAccess?: string[];
 	editUsers: boolean;

@@ -257,6 +257,10 @@ function normalizeEmail(address: string): string {
 	return address.trim().toLowerCase();
 }
 
+function normalizeRecipientName(value: string): string {
+	return value.trim().toLowerCase();
+}
+
 async function findMatchedUsersByEmail(
 	recipients: string[]
 ): Promise<Map<string, MatchedUserAccount>> {
@@ -280,6 +284,45 @@ async function findMatchedUsersByEmail(
 			}
 		])
 	);
+}
+
+async function findMatchedUserByRecipientName(
+	recipientName?: string
+): Promise<MatchedUserAccount | null> {
+	if (!recipientName?.trim()) {
+		return null;
+	}
+
+	const normalizedRecipientName = normalizeRecipientName(recipientName);
+	const user = await User.findOne(
+		{
+			recipientNameKey: normalizedRecipientName
+		},
+		{ _id: 1, name: 1, email: 1, recipientName: 1 }
+	).lean();
+
+	if (!user) {
+		return null;
+	}
+
+	return {
+		_id: String(user._id),
+		name: user.name,
+		email: normalizeEmail(user.email)
+	};
+}
+
+function dedupeMatchedUsers(
+	users: Array<MatchedUserAccount | null>
+): MatchedUserAccount[] {
+	const deduped = new Map<string, MatchedUserAccount>();
+	for (const user of users) {
+		if (!user) {
+			continue;
+		}
+		deduped.set(user._id, user);
+	}
+	return [...deduped.values()];
 }
 
 async function trimSessionNotesForUser(userID: string): Promise<void> {
@@ -315,14 +358,21 @@ async function saveAssociatedRecords(
 	}
 ): Promise<SavedAssociationSummary> {
 	const matchesByEmail = await findMatchedUsersByEmail(args.recipients);
+	const recipientMappedUser = await findMatchedUserByRecipientName(
+		args.recipientName
+	);
 	const primaryRecipient = normalizeEmail(args.recipients[0] ?? "");
 	const primaryUser = matchesByEmail.get(primaryRecipient) ?? null;
+	const associatedPrimaryUser = recipientMappedUser ?? primaryUser;
 
 	let sessionNoteSavedFor: MatchedUserAccount | null = null;
-	if (args.sessionDate && primaryUser) {
+	if (args.sessionDate && associatedPrimaryUser) {
 		await SessionNote.create({
-			user: primaryUser._id,
-			studentName: primaryUser.name || args.recipientName || primaryUser.email,
+			user: associatedPrimaryUser._id,
+			studentName:
+				args.recipientName
+				|| associatedPrimaryUser.name
+				|| associatedPrimaryUser.email,
 			primaryEmail: primaryRecipient,
 			ccEmails: args.recipients.slice(1).map(normalizeEmail),
 			subject: args.subject,
@@ -330,14 +380,17 @@ async function saveAssociatedRecords(
 			markdown: args.markdown,
 			html: args.html
 		});
-		await trimSessionNotesForUser(primaryUser._id);
-		sessionNoteSavedFor = primaryUser;
+		await trimSessionNotesForUser(associatedPrimaryUser._id);
+		sessionNoteSavedFor = associatedPrimaryUser;
 	}
 
 	const internalEmailsSavedFor
 		= args.sessionDate
 			? []
-			: [...matchesByEmail.values()];
+			: dedupeMatchedUsers([
+					recipientMappedUser,
+					...matchesByEmail.values()
+				]);
 
 	if (internalEmailsSavedFor.length > 0) {
 		await InternalEmail.insertMany(

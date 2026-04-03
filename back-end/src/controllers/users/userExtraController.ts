@@ -20,6 +20,10 @@ function getUserIDParam(req: { params: { userID?: string | string[] } }, res: an
 	return userID;
 }
 
+function normalizeRecipientName(value: string): string {
+	return value.trim().toLowerCase();
+}
+
 export const getUsersOfTutor: RequestHandler = async (req, res) => {
 	const paramTutorID = req.params.tutorID;
 	const tutorID = Array.isArray(paramTutorID) ? paramTutorID[0] : paramTutorID;
@@ -52,6 +56,47 @@ export const setUserTutors: RequestHandler = async (req, res) => {
 	user.tutors = validTutorIds;
 	await user.save();
 	res.json({ tutors: user.tutors });
+};
+
+export const setUserRecipientAssociation: RequestHandler = async (req, res) => {
+	const userID = getUserIDParam(req, res);
+	if (!userID) return;
+
+	if (!req.currentAdmin) {
+		return res.status(403).json({ message: "Admin session required" });
+	}
+
+	const rawRecipientName = req.body?.recipientName;
+	const recipientName
+		= typeof rawRecipientName === "string" ? rawRecipientName.trim() : "";
+	const recipientNameKey = recipientName
+		? normalizeRecipientName(recipientName)
+		: undefined;
+
+	if (recipientNameKey) {
+		const existingUser = await User.findOne(
+			{
+				recipientNameKey,
+				_id: { $ne: userID }
+			},
+			{ _id: 1, name: 1 }
+		).lean();
+
+		if (existingUser) {
+			return res.status(409).json({
+				message: `Recipient name is already associated with ${existingUser.name}.`
+			});
+		}
+	}
+
+	const user = await User.findById(userID);
+	if (!user) return res.sendStatus(404);
+
+	user.recipientName = recipientName || undefined;
+	user.recipientNameKey = recipientNameKey;
+	await user.save();
+
+	res.json({ recipientName: user.recipientName ?? null });
 };
 
 export const setUserCourseAccess: RequestHandler = async (req, res) => {

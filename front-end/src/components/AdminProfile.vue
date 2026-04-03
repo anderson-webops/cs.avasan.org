@@ -19,6 +19,7 @@ const success = ref("");
 const deleteMe = useDeleteAccount("admin");
 const userAssignments = ref<Record<string, string[]>>({});
 const userEditing = ref<Record<string, boolean>>({});
+const userRecipientNames = ref<Record<string, string>>({});
 const tutorEditing = ref<Record<string, boolean>>({});
 const tutorCourseSelections = ref<Record<string, string[]>>({});
 const userCourseSelections = ref<Record<string, string[]>>({});
@@ -76,16 +77,19 @@ watch(
 		const assignments: Record<string, string[]> = {};
 		const editing: Record<string, boolean> = {};
 		const courses: Record<string, string[]> = {};
+		const recipientNames: Record<string, string> = {};
 		for (const user of value) {
 			assignments[user._id] = (user.tutors ?? []).map(t =>
 				typeof t === "string" ? t : t._id
 			);
 			editing[user._id] = false;
 			courses[user._id] = [...(user.courseAccess ?? [])];
+			recipientNames[user._id] = user.recipientName ?? "";
 		}
 		userAssignments.value = assignments;
 		userEditing.value = editing;
 		userCourseSelections.value = courses;
+		userRecipientNames.value = recipientNames;
 	},
 	{ immediate: true }
 );
@@ -170,6 +174,10 @@ function cancelUserEdit(userID: string) {
 			...userCourseSelections.value,
 			[userID]: [...(user.courseAccess ?? [])]
 		};
+		userRecipientNames.value = {
+			...userRecipientNames.value,
+			[userID]: user.recipientName ?? ""
+		};
 	}
 	userEditing.value = { ...userEditing.value, [userID]: false };
 	success.value = "";
@@ -234,6 +242,23 @@ async function saveAssignments(userID: string) {
 	} catch (e: any) {
 		error.value =
 			e.response?.data?.message ?? e.message ?? "Unable to update tutors";
+	}
+}
+
+async function saveRecipientAssociation(userID: string) {
+	try {
+		success.value = "";
+		error.value = "";
+		await api.put(`/users/${userID}/recipient`, {
+			recipientName: userRecipientNames.value[userID] ?? ""
+		});
+		await app.fetchUsers();
+		success.value = "Updated recipient association.";
+	} catch (e: any) {
+		error.value =
+			e.response?.data?.message ??
+			e.message ??
+			"Unable to update associated recipient";
 	}
 }
 
@@ -647,21 +672,29 @@ function confirmDeleteAdmin() {
 								<h4>{{ u.name }}</h4>
 								<p>{{ u.email }}</p>
 							</div>
-							<button
-								class="btn-secondary btn"
-								type="button"
-								@click="
-									userEditing[u._id]
-										? cancelUserEdit(u._id)
-										: startUserEdit(u._id)
-								"
-							>
-								{{
-									userEditing[u._id]
-										? "Close editor"
-										: "Edit assignments"
-								}}
-							</button>
+							<div class="directory-card-tools">
+								<p
+									v-if="u.recipientName"
+									class="recipient-association"
+								>
+									{{ u.recipientName }}
+								</p>
+								<button
+									class="btn-secondary btn"
+									type="button"
+									@click="
+										userEditing[u._id]
+											? cancelUserEdit(u._id)
+											: startUserEdit(u._id)
+									"
+								>
+									{{
+										userEditing[u._id]
+											? "Close editor"
+											: "Edit assignments"
+									}}
+								</button>
+							</div>
 						</div>
 
 						<div class="info-grid">
@@ -713,6 +746,27 @@ function confirmDeleteAdmin() {
 							v-if="userEditing[u._id]"
 							class="assignment-editor"
 						>
+							<div class="editor-block">
+								<label
+									class="editor-label"
+									:for="`recipient-name-${u._id}`"
+								>
+									Associated recipient
+								</label>
+								<input
+									:id="`recipient-name-${u._id}`"
+									v-model="userRecipientNames[String(u._id)]"
+									class="editor-input"
+									type="text"
+									placeholder="Match the recipient name used in Send Markdown Email"
+								/>
+								<p class="helper-text">
+									Use the same recipient label used in the
+									admin mail tool. Leave blank to remove the
+									association.
+								</p>
+							</div>
+
 							<div class="editor-block">
 								<label
 									class="editor-label"
@@ -784,6 +838,13 @@ function confirmDeleteAdmin() {
 							</div>
 
 							<div class="action-row">
+								<button
+									class="btn-primary btn"
+									type="button"
+									@click="saveRecipientAssociation(u._id)"
+								>
+									Save recipient
+								</button>
 								<button
 									class="btn-primary btn"
 									type="button"
@@ -1170,6 +1231,22 @@ function confirmDeleteAdmin() {
 	color: #5f7a8e;
 }
 
+.directory-card-tools {
+	display: grid;
+	justify-items: end;
+	align-content: start;
+	gap: 0.75rem;
+}
+
+.recipient-association {
+	margin: 0;
+	color: #7a8795;
+	font-size: 0.95rem;
+	font-weight: 600;
+	line-height: 1.4;
+	text-align: right;
+}
+
 .field-stack {
 	display: grid;
 	gap: 0.75rem;
@@ -1256,6 +1333,14 @@ function confirmDeleteAdmin() {
 	border: 1px solid rgba(148, 163, 184, 0.55);
 	border-radius: 16px;
 	padding: 0.75rem 0.85rem;
+	background: white;
+	color: #10263a;
+}
+
+.editor-input {
+	border: 1px solid rgba(148, 163, 184, 0.55);
+	border-radius: 16px;
+	padding: 0.8rem 0.9rem;
 	background: white;
 	color: #10263a;
 }

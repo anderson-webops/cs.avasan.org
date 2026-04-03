@@ -18,6 +18,7 @@ import {
 	getUsersOfTutor,
 	promoteUserToTutor,
 	setUserCourseAccess,
+	setUserRecipientAssociation,
 	setUserTutors
 } from "../controllers/users/userExtraController.js";
 import {
@@ -54,6 +55,9 @@ router.put("/tutor/:userID", validTutor, updateUser);
 
 // Update tutor assignments for a user (admin only)
 router.put("/:userID/tutors", validAdmin, setUserTutors);
+
+// Update recipient association for a user (admin only)
+router.put("/:userID/recipient", validAdmin, setUserRecipientAssociation);
 
 // Promote a user to tutor (admin only)
 router.post("/:userID/promote", validAdmin, promoteUserToTutor);

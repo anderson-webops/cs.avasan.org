@@ -7,6 +7,8 @@ export interface IUser extends IBaseUser {
 	state: string;
 	tutors: Types.ObjectId[];
 	courseAccess: string[];
+	recipientName?: string;
+	recipientNameKey?: string;
 	editUsers: boolean;
 	role: string; // e.g. "user"
 }
