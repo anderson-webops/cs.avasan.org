@@ -6,6 +6,7 @@ import AccountSecurity from "@/components/AccountSecurity.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
+import { ADMIN_RECIPIENT_NAMES } from "@/modules/adminRecipients";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
@@ -145,6 +146,14 @@ function tutorCourseLabels(tutorID: string) {
 function userCourseLabels(userID: string) {
 	const list = userCourseSelections.value[userID] ?? [];
 	return list.map(id => courseLabel(id));
+}
+
+function recipientOptionsForUser(userID: string) {
+	const currentValue = userRecipientNames.value[userID]?.trim();
+	if (!currentValue || ADMIN_RECIPIENT_NAMES.includes(currentValue)) {
+		return ADMIN_RECIPIENT_NAMES;
+	}
+	return [...ADMIN_RECIPIENT_NAMES, currentValue];
 }
 
 watch(
@@ -753,17 +762,28 @@ function confirmDeleteAdmin() {
 								>
 									Associated recipient
 								</label>
-								<input
+								<select
 									:id="`recipient-name-${u._id}`"
 									v-model="userRecipientNames[String(u._id)]"
-									class="editor-input"
-									type="text"
-									placeholder="Match the recipient name used in Send Markdown Email"
-								/>
+									class="editor-select is-single"
+								>
+									<option value="">
+										No associated recipient
+									</option>
+									<option
+										v-for="recipientName in recipientOptionsForUser(
+											String(u._id)
+										)"
+										:key="`${u._id}-${recipientName}`"
+										:value="recipientName"
+									>
+										{{ recipientName }}
+									</option>
+								</select>
 								<p class="helper-text">
-									Use the same recipient label used in the
-									admin mail tool. Leave blank to remove the
-									association.
+									Choose the same recipient label used in Send
+									Markdown Email. Pick the blank option to
+									remove the association.
 								</p>
 							</div>
 
@@ -1337,12 +1357,9 @@ function confirmDeleteAdmin() {
 	color: #10263a;
 }
 
-.editor-input {
-	border: 1px solid rgba(148, 163, 184, 0.55);
-	border-radius: 16px;
-	padding: 0.8rem 0.9rem;
-	background: white;
-	color: #10263a;
+.editor-select.is-single {
+	min-height: auto;
+	appearance: auto;
 }
 
 .checkbox-grid {

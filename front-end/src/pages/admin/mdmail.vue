@@ -3,14 +3,10 @@ import DOMPurify from "dompurify";
 import { marked } from "marked";
 import { computed, ref, watch } from "vue";
 import { api } from "@/api";
+import { ADMIN_RECIPIENTS } from "@/modules/adminRecipients";
 
 // allow single newlines to render as <br> and keep GitHub-flavored markdown
 marked.setOptions({ breaks: true, gfm: true });
-
-interface Recipient {
-	name: string;
-	emails: string[];
-}
 
 interface MatchedUserAccount {
 	_id: string;
@@ -26,20 +22,6 @@ interface SendAssociations {
 type DateInputEl = HTMLInputElement & { showPicker?: () => void };
 
 const CUSTOM_OPTION = "Custom";
-
-const recipients: Recipient[] = [
-	{ name: "Recipient 1", emails: ["recipient-1@example.invalid"] },
-	{ name: "Recipient 2", emails: ["recipient-2@example.invalid", "recipient-2@example.invalid"] },
-	{ name: "Recipient 3", emails: ["recipient-3@example.invalid"] },
-	{ name: "Recipient 4", emails: ["recipient-4@example.invalid"] },
-	{ name: "Recipient 5", emails: ["recipient-5@example.invalid"] },
-	{ name: "Recipient 6", emails: ["recipient-6@example.invalid"] },
-	{
-		name: "Test",
-		emails: ["classes@jacobdanderson.net", "classes@jacobdanderson.net"]
-	}
-	// { name: "Recipient 1 (Abigail)", emails: ["recipient-5@example.invalid"] }
-];
 
 const to = ref("");
 const subject = ref("");
@@ -70,8 +52,10 @@ function renderPreview(markdown: string): string {
 }
 
 const livePreviewHtml = computed(() => renderPreview(md.value));
-const selectedRecipient = computed<Recipient | undefined>(() =>
-	recipients.find(recipient => recipient.name === selectedRecipientName.value)
+const selectedRecipient = computed(() =>
+	ADMIN_RECIPIENTS.find(
+		recipient => recipient.name === selectedRecipientName.value
+	)
 );
 const isCustomRecipient = computed(
 	() => selectedRecipientName.value === CUSTOM_OPTION
@@ -90,7 +74,7 @@ watch(
 			to.value = "";
 			return;
 		}
-		const recip = recipients.find(r => r.name === name);
+		const recip = ADMIN_RECIPIENTS.find(r => r.name === name);
 		if (!recip) {
 			to.value = "";
 			return;
@@ -271,7 +255,7 @@ function parseDateIso(value: string): string | null {
 				<select id="recipient-select" v-model="selectedRecipientName">
 					<option disabled value="">Select a person</option>
 					<option
-						v-for="recipient in recipients"
+						v-for="recipient in ADMIN_RECIPIENTS"
 						:key="recipient.name"
 						:value="recipient.name"
 					>
