@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { primeCalendlyWidget } from "@/modules/calendly";
 import { useContentStore } from "@/stores/content";
 
 defineOptions({ name: "SupportUsPage" });
@@ -95,7 +96,15 @@ const content = useContentStore();
 				Book through Calendly or email me to coordinate a recurring spot
 				that matches your schedule.
 			</p>
-			<RouterLink class="cta" to="/signup">Book a Class</RouterLink>
+			<RouterLink
+				class="cta"
+				to="/signup"
+				@focus="primeCalendlyWidget"
+				@mouseenter="primeCalendlyWidget"
+				@touchstart.passive="primeCalendlyWidget"
+			>
+				Book a Class
+			</RouterLink>
 			<a class="cta ghost" href="mailto:classes@jacobdanderson.net"
 				>Email Jacob</a
 			>

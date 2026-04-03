@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
+import { primeCalendlyWidget } from "@/modules/calendly";
 import { useContentStore } from "@/stores/content";
 
 defineOptions({ name: "HomePage" });
@@ -30,7 +31,13 @@ const { subjectGroups, highlights } = storeToRefs(content);
 		</section>
 
 		<section aria-labelledby="cta-title" class="cta-group">
-			<RouterLink class="cta primary" to="/signup"
+			<RouterLink
+				class="cta primary"
+				to="/signup"
+				@focus="primeCalendlyWidget"
+				@mouseenter="primeCalendlyWidget"
+				@touchstart.passive="primeCalendlyWidget"
+			>
 				>Book a class</RouterLink
 			>
 			<RouterLink class="cta secondary" to="/payment"
@@ -82,7 +89,13 @@ const { subjectGroups, highlights } = storeToRefs(content);
 					and I’ll confirm within one business day. Returning students
 					can use the same link to book ongoing sessions.
 				</p>
-				<RouterLink class="cta primary" to="/signup"
+				<RouterLink
+					class="cta primary"
+					to="/signup"
+					@focus="primeCalendlyWidget"
+					@mouseenter="primeCalendlyWidget"
+					@touchstart.passive="primeCalendlyWidget"
+				>
 					>Schedule on Calendly</RouterLink
 				>
 				<a

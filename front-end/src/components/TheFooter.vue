@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { primeCalendlyWidget } from "@/modules/calendly";
+</script>
 
 <template>
 	<footer class="text-center">
@@ -42,7 +44,14 @@
 				<h3>Quick links</h3>
 				<ul>
 					<li>
-						<RouterLink to="/signup">Book a Class</RouterLink>
+						<RouterLink
+							to="/signup"
+							@focus="primeCalendlyWidget"
+							@mouseenter="primeCalendlyWidget"
+							@touchstart.passive="primeCalendlyWidget"
+						>
+							Book a Class
+						</RouterLink>
 					</li>
 					<li>
 						<RouterLink to="/payment"
