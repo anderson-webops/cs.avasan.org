@@ -99,6 +99,7 @@ const heroBadge = computed(() =>
 );
 
 const hasProfile = computed(() => activeProfileComponent.value !== null);
+const isWorkspaceLayout = computed(() => hasProfile.value);
 
 const tabLabels: Record<ProfileTab, string> = {
 	profile: "Profile",
@@ -119,14 +120,17 @@ function openAuthModal() {
 </script>
 
 <template>
-	<section class="profile-page" :class="{ 'is-course-layout': isCourseTab }">
+	<section
+		class="profile-page"
+		:class="{ 'is-workspace-layout': isWorkspaceLayout }"
+	>
 		<div
 			class="profile-content"
-			:class="{ 'is-course-layout': isCourseTab }"
+			:class="{ 'is-workspace-layout': isWorkspaceLayout }"
 		>
 			<header
 				class="profile-header"
-				:class="{ 'is-course-layout': isCourseTab }"
+				:class="{ 'is-workspace-layout': isWorkspaceLayout }"
 			>
 				<p class="profile-badge">{{ heroBadge }}</p>
 				<h1>{{ heroTitle }}</h1>
@@ -136,12 +140,15 @@ function openAuthModal() {
 			<div
 				v-if="hasProfile"
 				class="profile-card"
-				:class="{ 'is-course-layout': isCourseTab }"
+				:class="{
+					'is-workspace-layout': isWorkspaceLayout,
+					'is-course-layout': isCourseTab
+				}"
 			>
 				<div
 					v-if="profileTabs.length > 1"
 					class="profile-tabs"
-					:class="{ 'is-course-layout': isCourseTab }"
+					:class="{ 'is-workspace-layout': isWorkspaceLayout }"
 					role="tablist"
 				>
 					<button
@@ -207,7 +214,7 @@ function openAuthModal() {
 	align-items: center;
 }
 
-.profile-page.is-course-layout {
+.profile-page.is-workspace-layout {
 	align-items: flex-start;
 	padding-top: clamp(2.5rem, 4vw, 4.5rem);
 }
@@ -219,8 +226,8 @@ function openAuthModal() {
 	gap: clamp(1.75rem, 3vw, 3rem);
 }
 
-.profile-content.is-course-layout {
-	width: min(1480px, 100%);
+.profile-content.is-workspace-layout {
+	width: min(1420px, 100%);
 }
 
 .profile-header {
@@ -231,16 +238,16 @@ function openAuthModal() {
 	gap: 1rem;
 }
 
-.profile-header.is-course-layout {
+.profile-header.is-workspace-layout {
 	text-align: left;
 	max-width: 74rem;
 }
 
-.profile-header.is-course-layout .profile-badge {
+.profile-header.is-workspace-layout .profile-badge {
 	align-self: flex-start;
 }
 
-.profile-header.is-course-layout p:last-child {
+.profile-header.is-workspace-layout p:last-child {
 	max-width: 52rem;
 }
 
@@ -281,7 +288,7 @@ function openAuthModal() {
 	backdrop-filter: blur(16px);
 }
 
-.profile-card.is-course-layout {
+.profile-card.is-workspace-layout {
 	padding: 1rem;
 	border-radius: 34px;
 	background: rgba(255, 255, 255, 0.14);
@@ -299,17 +306,17 @@ function openAuthModal() {
 	gap: 0.25rem;
 }
 
-.profile-tabs.is-course-layout {
+.profile-tabs.is-workspace-layout {
 	margin: 0 0 1rem;
 	background: rgba(15, 23, 42, 0.2);
 	border: 1px solid rgba(226, 232, 240, 0.14);
 }
 
-.profile-tabs.is-course-layout .tab {
+.profile-tabs.is-workspace-layout .tab {
 	color: rgba(248, 250, 252, 0.92);
 }
 
-.profile-tabs.is-course-layout .tab[aria-selected="true"] {
+.profile-tabs.is-workspace-layout .tab[aria-selected="true"] {
 	background: rgba(248, 250, 252, 0.94);
 	color: #0f172a;
 	box-shadow: 0 12px 24px -16px rgba(15, 23, 42, 0.65);
@@ -482,7 +489,7 @@ function openAuthModal() {
 		padding: 3.5rem 1.25rem 4rem;
 	}
 
-	.profile-page.is-course-layout {
+	.profile-page.is-workspace-layout {
 		padding: 2.75rem 1rem 3rem;
 	}
 
@@ -491,15 +498,15 @@ function openAuthModal() {
 		padding: clamp(1.5rem, 5vw, 2.5rem);
 	}
 
-	.profile-card.is-course-layout {
+	.profile-card.is-workspace-layout {
 		padding: 0.75rem;
 	}
 
-	.profile-header.is-course-layout {
+	.profile-header.is-workspace-layout {
 		text-align: center;
 	}
 
-	.profile-header.is-course-layout .profile-badge {
+	.profile-header.is-workspace-layout .profile-badge {
 		align-self: center;
 	}
 

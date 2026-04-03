@@ -50,32 +50,13 @@ const usersHeader = computed(() =>
 	currentTutor.value && users.value.length === 0 ? "No Users" : "Users"
 );
 
-/* card open/close state */
-const cardState = ref<string | null>(null);
-
-function activateCard(id: string) {
-	// While editing the tutor, clicking the card should not toggle open/closed
-	if (id === "tutor" && tutorEdit.value) return;
-	cardState.value = cardState.value === id ? null : id;
-}
-
-function isCardActive(id: string) {
-	return cardState.value === id;
-}
-
-function userCardId(id: string) {
-	return `user-${id}`;
-}
-
 /* tutor edit flow */
 function onStartTutorEdit() {
 	if (!currentTutor.value) return;
-	if (cardState.value !== "tutor") cardState.value = "tutor";
 	toggleTutor();
 }
 
 function onCancelTutorEdit() {
-	// Just leave edit mode; card stays open
 	toggleTutor();
 }
 
@@ -106,6 +87,9 @@ const courseLookup = computed(() => {
 	for (const course of courses.value ?? []) map[course.id] = course.name;
 	return map;
 });
+
+const learnerCount = computed(() => users.value.length);
+const enabledCourseCount = computed(() => permittedCourses.value.length);
 
 watch(
 	users,
@@ -156,167 +140,215 @@ async function saveUserCourses(userID: string) {
 </script>
 
 <template>
-	<section class="Signup text-center">
-		<h2>Profile</h2>
+	<section class="profile-workspace">
+		<header class="workspace-header">
+			<div>
+				<p class="workspace-eyebrow">Tutor profile</p>
+				<h2>Teaching workspace</h2>
+				<p>
+					Keep your account ready, check which classes you can teach,
+					and manage learner course access from one organized view.
+				</p>
+			</div>
+			<div class="workspace-stats">
+				<div class="stat-pill">
+					<span>Enabled courses</span>
+					<strong>{{ enabledCourseCount }}</strong>
+				</div>
+				<div class="stat-pill">
+					<span>Learners</span>
+					<strong>{{ learnerCount }}</strong>
+				</div>
+			</div>
+		</header>
 
-		<!-- ───── Tutor card ───── -->
-		<div
-			v-if="currentTutor"
-			class="tutorList mt-2"
-			:class="[{ active: isCardActive('tutor') }]"
-			@click="activateCard('tutor')"
-		>
-			<br />
-
-			<!-- Top: courses enabled moved above name/email -->
-			<p class="assignment">
-				<strong>Courses enabled:</strong>
-				{{
-					permittedCourses.length
-						? permittedCourses.map(course => course.name).join(", ")
-						: "Waiting for admin access"
-				}}
-			</p>
-
-			<!-- Middle: either profile fields (read-only) OR AccountSecurity while editing -->
-			<div class="content-block">
-				<ul v-if="!tutorEdit">
-					<li><h4>Tutor</h4></li>
-					<ProfileFields
-						:editing="false"
-						:entity="currentTutor"
-						:fields="tutorFields"
-					/>
-				</ul>
-
-				<AccountSecurity
-					v-else
-					:email="currentTutor.email"
-					:entity-id="currentTutor._id"
-					role="tutor"
-					@click.stop
-				/>
+		<article v-if="currentTutor" class="workspace-sheet">
+			<div class="sheet-summary">
+				<div class="summary-block">
+					<p class="summary-label">Courses enabled</p>
+					<p class="summary-copy">
+						{{
+							permittedCourses.length
+								? permittedCourses
+										.map(course => course.name)
+										.join(", ")
+								: "Waiting for admin access"
+						}}
+					</p>
+				</div>
+				<div class="summary-block">
+					<p class="summary-label">Learner roster</p>
+					<p class="summary-copy">
+						{{ learnerCount }} learner{{
+							learnerCount === 1 ? "" : "s"
+						}}
+						currently assigned
+					</p>
+				</div>
 			</div>
 
-			<!-- Bottom actions:
-				 - Card open + NOT editing → only Edit button
-				 - Editing → Cancel / Save (Delete commented out) -->
-			<div v-if="isCardActive('tutor')" class="card-actions" @click.stop>
+			<div class="sheet-body">
+				<section class="sheet-panel">
+					<div class="panel-header">
+						<p class="panel-eyebrow">Tutor account</p>
+						<h3>Profile details</h3>
+					</div>
+					<ul class="field-stack">
+						<ProfileFields
+							:editing="false"
+							:entity="currentTutor"
+							:fields="tutorFields"
+						/>
+					</ul>
+				</section>
+
+				<section class="sheet-panel security-panel">
+					<div class="panel-header">
+						<p class="panel-eyebrow">Access</p>
+						<h3>
+							{{
+								tutorEdit
+									? "Security settings"
+									: "Password and login"
+							}}
+						</h3>
+					</div>
+					<p v-if="!tutorEdit" class="security-copy">
+						Open edit mode to update your password or email
+						credentials before the next class.
+					</p>
+					<AccountSecurity
+						v-else
+						:email="currentTutor.email"
+						:entity-id="currentTutor._id"
+						role="tutor"
+					/>
+				</section>
+			</div>
+
+			<div class="action-row">
 				<template v-if="!tutorEdit">
 					<button
 						class="btn-primary btn"
 						type="button"
-						@click.stop="onStartTutorEdit"
+						@click="onStartTutorEdit"
 					>
-						Edit
+						Manage account security
 					</button>
 				</template>
-
 				<template v-else>
-					<!--
-					<button
-					  class="btn-danger btn"
-					  type="button"
-					  @click.stop="deleteMe(currentTutor!._id)"
-					>
-					  Delete account
-					</button>
-					-->
 					<button
 						class="btn-secondary btn"
 						type="button"
-						@click.stop="onCancelTutorEdit"
+						@click="onCancelTutorEdit"
 					>
 						Cancel
 					</button>
 					<button
 						class="btn-primary btn"
 						type="button"
-						@click.stop="onSaveTutorEdit"
+						@click="onSaveTutorEdit"
 					>
 						Save
 					</button>
 				</template>
 			</div>
-		</div>
+		</article>
 
-		<!-- ───── Users under this tutor (read-only) ───── -->
-		<hr />
-		<h2>{{ usersHeader }}</h2>
-
-		<div
-			v-for="u in users"
-			:key="u._id"
-			class="tutorList mt-2"
-			:class="[{ active: isCardActive(userCardId(u._id)) }]"
-			@click="activateCard(userCardId(u._id))"
-		>
-			<br />
-			<ul>
-				<!-- Fields: name / email / age / state -->
-				<!-- Editing = false: read-only list -->
-				<ProfileFields
-					:editing="false"
-					:entity="u"
-					:fields="tutorFields"
-				/>
-			</ul>
-			<p class="assignment">
-				<strong>Course access:</strong>
-				{{
-					(u.courseAccess?.length ?? 0)
-						? (u.courseAccess ?? [])
-								.map(id => courseLookup[id] ?? id)
-								.join(", ")
-						: "No courses assigned"
-				}}
-			</p>
-
-			<div v-if="isCardActive(userCardId(u._id))" class="card-actions">
-				<button
-					class="btn-secondary btn"
-					type="button"
-					@click.stop="toggleUserEdit(u._id)"
-				>
-					{{ userEditing[u._id] ? "Close" : "Edit courses" }}
-				</button>
-			</div>
-
-			<div v-if="userEditing[u._id]" class="course-editor">
-				<p v-if="permittedCourses.length === 0" class="hint">
-					Your admin hasn't enabled any courses yet.
-				</p>
-				<div v-else class="checkbox-grid">
-					<label
-						v-for="course in permittedCourses"
-						:key="course.id"
-						@click.stop
-					>
-						<input
-							:checked="
-								userCourseSelections[u._id]?.includes(course.id)
-							"
-							type="checkbox"
-							@change.stop="
-								onCourseToggle(
-									u._id,
-									course.id,
-									($event.target as HTMLInputElement).checked
-								)
-							"
-						/>
-						{{ course.name }}
-					</label>
+		<section class="directory-section">
+			<div class="section-heading">
+				<div>
+					<p class="workspace-eyebrow">Learners</p>
+					<h3>{{ usersHeader }}</h3>
 				</div>
-				<button
-					class="btn btn-primary"
-					type="button"
-					@click.stop="saveUserCourses(u._id)"
-				>
-					Save courses
-				</button>
+				<p class="section-copy">
+					Update course access for each learner using only the classes
+					already enabled for your account.
+				</p>
 			</div>
-		</div>
+
+			<div class="directory-grid">
+				<article v-for="u in users" :key="u._id" class="directory-card">
+					<div class="directory-card-header">
+						<div>
+							<h4>{{ u.name }}</h4>
+							<p>{{ u.email }}</p>
+						</div>
+						<button
+							class="btn-secondary btn"
+							type="button"
+							@click="toggleUserEdit(u._id)"
+						>
+							{{
+								userEditing[u._id]
+									? "Close editor"
+									: "Edit courses"
+							}}
+						</button>
+					</div>
+
+					<ul class="field-stack is-compact">
+						<ProfileFields
+							:editing="false"
+							:entity="u"
+							:fields="tutorFields"
+						/>
+					</ul>
+
+					<div class="summary-block is-inline">
+						<p class="summary-label">Course access</p>
+						<p class="summary-copy">
+							{{
+								(u.courseAccess?.length ?? 0)
+									? (u.courseAccess ?? [])
+											.map(id => courseLookup[id] ?? id)
+											.join(", ")
+									: "No courses assigned"
+							}}
+						</p>
+					</div>
+
+					<div v-if="userEditing[u._id]" class="course-editor">
+						<p v-if="permittedCourses.length === 0" class="hint">
+							Your admin hasn't enabled any courses yet.
+						</p>
+						<div v-else class="checkbox-grid">
+							<label
+								v-for="course in permittedCourses"
+								:key="course.id"
+							>
+								<input
+									:checked="
+										userCourseSelections[u._id]?.includes(
+											course.id
+										)
+									"
+									type="checkbox"
+									@change="
+										onCourseToggle(
+											u._id,
+											course.id,
+											($event.target as HTMLInputElement)
+												.checked
+										)
+									"
+								/>
+								{{ course.name }}
+							</label>
+						</div>
+						<div class="action-row">
+							<button
+								class="btn-primary btn"
+								type="button"
+								@click="saveUserCourses(u._id)"
+							>
+								Save courses
+							</button>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
 
 		<p v-if="success" class="status">{{ success }}</p>
 		<p v-if="error" class="error">
@@ -326,73 +358,203 @@ async function saveUserCourses(userID: string) {
 </template>
 
 <style scoped>
-ul {
-	list-style-type: none;
+.profile-workspace {
+	display: grid;
+	gap: 1.6rem;
+}
+
+.workspace-header,
+.section-heading,
+.directory-card-header,
+.action-row {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 1rem;
 }
 
-ul p {
-	display: inline;
+.workspace-header {
+	align-items: flex-start;
 }
 
-div.tutorList,
-li {
-	align-self: center;
+.workspace-header h2,
+.section-heading h3 {
+	margin: 0.25rem 0 0;
+	font-size: clamp(1.9rem, 4vw, 2.35rem);
+	color: #10263a;
 }
 
-div.tutorList {
-	outline: black solid 1px;
-	padding-bottom: 1%;
-	width: 35%;
-	margin: auto;
-	cursor: pointer;
-	transition:
-		border-color 0.2s ease,
-		box-shadow 0.2s ease;
+.workspace-header p:last-child,
+.section-copy {
+	margin: 0.75rem 0 0;
+	max-width: 44rem;
+	line-height: 1.65;
+	color: #405467;
 }
 
-.tutorList.active {
-	border-color: #2563eb;
-	box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
+.workspace-eyebrow,
+.panel-eyebrow,
+.summary-label {
+	margin: 0;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #5f7a8e;
 }
 
-.assignment {
-	text-align: left;
-	width: 90%;
-	margin: 0.25rem auto;
-}
-
-.content-block {
-	margin: 0.75rem auto 0.5rem;
-	width: 90%;
-}
-
-.card-actions {
+.workspace-stats {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 0.85rem;
+}
+
+.stat-pill,
+.summary-block,
+.sheet-panel,
+.directory-card {
+	border-radius: 24px;
+	background: rgba(255, 255, 255, 0.88);
+	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.68);
+}
+
+.stat-pill {
+	min-width: 10rem;
+	padding: 0.95rem 1.1rem;
+	box-shadow:
+		inset 0 0 0 1px rgba(203, 213, 225, 0.7),
+		0 20px 30px -28px rgba(15, 23, 42, 0.55);
+}
+
+.stat-pill span {
+	display: block;
+	font-size: 0.74rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #5f7a8e;
+}
+
+.stat-pill strong {
+	display: block;
+	margin-top: 0.35rem;
+	font-size: 1.75rem;
+	line-height: 1;
+	color: #10263a;
+}
+
+.workspace-sheet,
+.directory-section {
+	display: grid;
+	gap: 1.25rem;
+	padding: 1.5rem;
+	border-radius: 30px;
+	background: linear-gradient(
+		180deg,
+		rgba(245, 249, 253, 0.98),
+		rgba(255, 255, 255, 0.96)
+	);
+	box-shadow: 0 30px 50px -42px rgba(15, 23, 42, 0.5);
+}
+
+.sheet-summary {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.summary-block,
+.sheet-panel,
+.directory-card {
+	padding: 1.2rem 1.25rem;
+}
+
+.summary-block.is-inline {
+	margin-top: 1rem;
+}
+
+.summary-copy {
+	margin: 0.55rem 0 0;
+	line-height: 1.55;
+	color: #12263a;
+}
+
+.sheet-body {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+	gap: 1rem;
+}
+
+.panel-header h3,
+.directory-card-header h4 {
+	margin: 0.25rem 0 0;
+	font-size: 1.25rem;
+	color: #10263a;
+}
+
+.directory-card-header h4 {
+	font-size: 1.1rem;
+}
+
+.directory-card-header p {
+	margin: 0.25rem 0 0;
+	color: #5f7a8e;
+}
+
+.field-stack {
+	display: grid;
 	gap: 0.75rem;
-	margin: 0.5rem auto 1rem;
-	width: 90%;
+	margin: 1rem 0 0;
+	padding: 0;
+}
+
+.field-stack.is-compact :deep(.field-row) {
+	padding: 0.75rem 0.9rem;
+}
+
+.security-panel {
+	display: grid;
+	align-content: start;
+	gap: 1rem;
+}
+
+.security-copy,
+.hint {
+	margin: 0.85rem 0 0;
+	line-height: 1.6;
+	color: #405467;
+}
+
+.directory-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1rem;
 }
 
 .course-editor {
+	display: grid;
+	gap: 0.85rem;
 	margin-top: 1rem;
-	border-top: 1px solid rgba(15, 23, 42, 0.15);
 	padding-top: 1rem;
+	border-top: 1px solid rgba(203, 213, 225, 0.8);
 }
 
 .checkbox-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+	gap: 0.65rem;
 }
 
 .checkbox-grid label {
 	display: flex;
+	gap: 0.45rem;
 	align-items: center;
-	gap: 0.35rem;
-	font-size: 0.9rem;
+	padding: 0.8rem 0.9rem;
+	border-radius: 16px;
+	background: rgba(248, 250, 252, 0.88);
+	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+	font-size: 0.93rem;
+	color: #12263a;
 }
 
 .status {
@@ -400,19 +562,27 @@ div.tutorList {
 	margin-top: 0.5rem;
 }
 
-.hint {
-	color: rgba(15, 23, 42, 0.7);
-	margin-bottom: 0.75rem;
-}
-
-@media (max-width: 960px) {
-	div.tutorList {
-		width: 50%;
-	}
-}
-
 .error {
 	color: red;
 	margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+	.sheet-summary,
+	.sheet-body {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 640px) {
+	.workspace-sheet,
+	.directory-section {
+		padding: 1.1rem;
+		border-radius: 24px;
+	}
+
+	.action-row {
+		flex-direction: column;
+	}
 }
 </style>

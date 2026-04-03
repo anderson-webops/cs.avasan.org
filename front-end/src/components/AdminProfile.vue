@@ -2,7 +2,7 @@
 import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
-import ProfileDetailsCard from "@/components/ProfileDetailsCard.vue";
+import AccountSecurity from "@/components/AccountSecurity.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
@@ -22,7 +22,6 @@ const userEditing = ref<Record<string, boolean>>({});
 const tutorEditing = ref<Record<string, boolean>>({});
 const tutorCourseSelections = ref<Record<string, string[]>>({});
 const userCourseSelections = ref<Record<string, string[]>>({});
-const activeCard = ref<string | null>(null);
 
 const viewMode = computed(() => props.mode ?? "profile");
 
@@ -42,6 +41,8 @@ const courseNameMap = computed<Record<string, string>>(
 		) ?? {}
 );
 const courseLabel = (id: string) => courseNameMap.value[id] ?? id;
+const tutorCount = computed(() => tutors.value.length);
+const userCount = computed(() => users.value.length);
 
 /* editable helper for the admin card */
 const {
@@ -139,24 +140,6 @@ watch(
 	{ immediate: true }
 );
 
-function activateCard(id: string) {
-	// Prevent collapsing the admin card while editing.
-	if (adminEdit.value && id === "admin") return;
-	if (id.startsWith("tutor-")) {
-		const tutorID = id.slice("tutor-".length);
-		if (tutorEditing.value[tutorID]) return; // keep open while editing
-	}
-	if (id.startsWith("user-")) {
-		const userID = id.slice("user-".length);
-		if (userEditing.value[userID]) return; // keep open while editing
-	}
-	activeCard.value = activeCard.value === id ? null : id;
-}
-
-function isCardActive(id: string) {
-	return activeCard.value === id;
-}
-
 function startUserEdit(userID: string) {
 	userEditing.value = { ...userEditing.value, [userID]: true };
 	success.value = "";
@@ -183,7 +166,6 @@ function cancelUserEdit(userID: string) {
 }
 
 function toggleTutorEdit(tutorID: string) {
-	if (!tutorEditing.value[tutorID]) activeCard.value = `tutor-${tutorID}`;
 	tutorEditing.value = {
 		...tutorEditing.value,
 		[tutorID]: !tutorEditing.value[tutorID]
@@ -275,18 +257,11 @@ async function demoteTutor(tutorID: string) {
 	}
 }
 
-function updateAdminDraft(key: string, value: any) {
-	if (!adminDraft.value) return;
-	adminDraft.value = { ...adminDraft.value, [key]: value };
-}
-
 function toggleAdminEdit() {
 	if (!adminDraft.value && currentAdmin.value) {
 		adminDraft.value = { ...currentAdmin.value };
 	}
 	toggleAdmin();
-	// Ensure card stays open when entering edit mode.
-	if (adminEdit.value) activeCard.value = "admin";
 }
 
 function cancelAdminEdit() {
@@ -406,481 +381,764 @@ function confirmDeleteAdmin() {
 </script>
 
 <template>
-	<section class="Signup text-center">
-		<h2>{{ viewMode === "profile" ? "Profile" : "Manage profiles" }}</h2>
-
-		<template v-if="viewMode === 'profile'">
-			<!-- ───── Admin card ───── -->
-			<div
-				v-if="currentAdmin"
-				class="tutorList mt-2"
-				:class="[{ active: isCardActive('admin') }]"
-				@click="activateCard('admin')"
-			>
-				<br />
-				<!--				<p v-if="!isCardActive('admin')" class="card-hint">
-					Click to edit admin details or security settings.
-				</p> -->
-				<ProfileDetailsCard
-					v-if="currentAdmin"
-					:editing="adminEdit"
-					:entity="
-						adminEdit && adminDraft ? adminDraft : currentAdmin
-					"
-					:entity-id="currentAdmin._id"
-					:fields="fields"
-					role="admin"
-					:show-security="isCardActive('admin')"
-					@update="updateAdminDraft"
-				/>
-				<br />
-
-				<div
-					v-if="adminEdit || isCardActive('admin')"
-					class="card-actions"
-				>
-					<button
-						v-if="adminEdit"
-						class="btn btn-secondary"
-						@click.stop="cancelAdminEdit"
-					>
-						Cancel
-					</button>
-					<button
-						class="btn-primary btn"
-						@click.stop="
-							adminEdit ? saveAdminProfile() : toggleAdminEdit()
-						"
-					>
-						{{ adminEdit ? "Save" : "Edit" }}
-					</button>
+	<section class="admin-workspace">
+		<header class="workspace-header">
+			<div>
+				<p class="workspace-eyebrow">
+					{{
+						viewMode === "profile"
+							? "Administrator profile"
+							: "Administration"
+					}}
+				</p>
+				<h2>
+					{{
+						viewMode === "profile"
+							? "Account and teaching access"
+							: "Manage profiles"
+					}}
+				</h2>
+				<p>
+					{{
+						viewMode === "profile"
+							? "Review your admin account, tune tutor course permissions, and shape each learner's access from one shared workspace."
+							: "Handle role changes and account removals with the same calm structure used across the new course workspace."
+					}}
+				</p>
+			</div>
+			<div class="workspace-stats">
+				<div class="stat-pill">
+					<span>Tutors</span>
+					<strong>{{ tutorCount }}</strong>
+				</div>
+				<div class="stat-pill">
+					<span>Users</span>
+					<strong>{{ userCount }}</strong>
 				</div>
 			</div>
+		</header>
 
-			<!-- ───── Tutors list (read-only) ───── -->
-			<hr />
-			<h2>{{ tutorsHeader }}</h2>
-			<div
-				v-for="t in tutors"
-				:key="t._id"
-				class="tutorList mt-2"
-				:class="[{ active: isCardActive(`tutor-${t._id}`) }]"
-				@click="activateCard(`tutor-${t._id}`)"
-			>
-				<br />
-				<ul>
-					<ProfileFields
-						:editing="false"
-						:entity="t"
-						:fields="fields"
-					/>
-				</ul>
-				<p class="assignment">
-					<strong>Course access:</strong>
-					{{ formatTutorCourses(t._id) }}
-				</p>
-				<div v-if="isCardActive(`tutor-${t._id}`)" class="card-actions">
-					<button
-						v-if="!tutorEditing[t._id]"
-						class="btn-secondary btn"
-						type="button"
-						@click.stop="toggleTutorEdit(t._id)"
-					>
-						Edit courses
-					</button>
-				</div>
-				<div v-if="tutorEditing[t._id]" class="course-editor">
-					<p class="helperText">
-						Select which courses this tutor can access.
-					</p>
-					<div class="checkbox-grid">
-						<label
-							v-for="course in courseOptions"
-							:key="course.id"
-							@click.stop
-						>
-							<input
-								:checked="
-									tutorCourseSelections[t._id]?.includes(
-										course.id
-									)
-								"
-								type="checkbox"
-								@change.stop="
-									onTutorCourseToggle(
-										t._id,
-										course.id,
-										($event.target as HTMLInputElement)
-											.checked
-									)
-								"
-							/>
-							{{ course.name }}
-						</label>
+		<p v-if="success" class="status-banner is-success">{{ success }}</p>
+		<p v-if="error" class="status-banner is-error">{{ error }}</p>
+
+		<template v-if="viewMode === 'profile'">
+			<article v-if="currentAdmin" class="workspace-sheet">
+				<div class="sheet-summary">
+					<div class="summary-block">
+						<p class="summary-label">Directory overview</p>
+						<p class="summary-copy">
+							{{ tutorCount }} tutor{{
+								tutorCount === 1 ? "" : "s"
+							}}
+							and {{ userCount }} learner{{
+								userCount === 1 ? "" : "s"
+							}}
+							are currently active in the workspace.
+						</p>
 					</div>
-					<div class="card-actions">
+					<div class="summary-block">
+						<p class="summary-label">Primary responsibility</p>
+						<p class="summary-copy">
+							Control who can teach which courses and which
+							students can open each curriculum.
+						</p>
+					</div>
+				</div>
+
+				<div class="sheet-body">
+					<section class="sheet-panel">
+						<div class="panel-header">
+							<p class="panel-eyebrow">Admin account</p>
+							<h3>Profile details</h3>
+						</div>
+						<ul class="field-stack">
+							<ProfileFields
+								:editing="false"
+								:entity="currentAdmin"
+								:fields="fields"
+							/>
+						</ul>
+					</section>
+
+					<section class="sheet-panel security-panel">
+						<div class="panel-header">
+							<p class="panel-eyebrow">Security</p>
+							<h3>
+								{{
+									adminEdit
+										? "Admin access settings"
+										: "Password and login"
+								}}
+							</h3>
+						</div>
+						<p v-if="!adminEdit" class="security-copy">
+							Open edit mode to update the password or email for
+							the primary admin account.
+						</p>
+						<AccountSecurity
+							v-else
+							:email="currentAdmin.email"
+							:entity-id="currentAdmin._id"
+							role="admin"
+						/>
+					</section>
+				</div>
+
+				<div class="action-row">
+					<template v-if="!adminEdit">
 						<button
-							class="btn btn-primary"
+							class="btn-primary btn"
 							type="button"
-							@click.stop="saveTutorCourses(t._id)"
+							@click="toggleAdminEdit"
 						>
-							Save courses
+							Manage account security
 						</button>
+					</template>
+					<template v-else>
 						<button
-							class="btn btn-secondary"
+							class="btn-secondary btn"
 							type="button"
-							@click.stop="cancelTutorEdit(t._id)"
+							@click="cancelAdminEdit"
 						>
 							Cancel
 						</button>
+						<button
+							class="btn-primary btn"
+							type="button"
+							@click="saveAdminProfile"
+						>
+							Save
+						</button>
+					</template>
+				</div>
+			</article>
+
+			<section class="directory-section">
+				<div class="section-heading">
+					<div>
+						<p class="workspace-eyebrow">Tutors</p>
+						<h3>{{ tutorsHeader }}</h3>
 					</div>
-				</div>
-			</div>
-
-			<!-- ───── Users list (read-only) ───── -->
-			<hr />
-			<h2>{{ usersHeader }}</h2>
-			<div
-				v-for="u in users"
-				:key="u._id"
-				class="tutorList mt-2"
-				:class="[{ active: isCardActive(`user-${u._id}`) }]"
-				@click="activateCard(`user-${u._id}`)"
-			>
-				<br />
-				<ul>
-					<ProfileFields
-						:editing="false"
-						:entity="u"
-						:fields="fields"
-					/>
-				</ul>
-				<p class="assignment">
-					<strong>Assigned tutors:</strong>
-					{{ formatAssignedTutors(u._id) }}
-				</p>
-				<p class="assignment">
-					<strong>Course access:</strong>
-					{{
-						(userCourseSelections[String(u._id)]?.length ?? 0)
-							? (userCourseSelections[String(u._id)] ?? [])
-									.map(id => courseLabel(id))
-									.join(", ")
-							: "No courses assigned"
-					}}
-				</p>
-				<div v-if="isCardActive(`user-${u._id}`)" class="card-actions">
-					<button
-						v-if="!userEditing[u._id]"
-						class="btn-secondary btn"
-						type="button"
-						@click.stop="startUserEdit(u._id)"
-					>
-						Edit assignments
-					</button>
+					<p class="section-copy">
+						Enable course permissions for each tutor so the student
+						assignment editor always reflects the right teaching
+						scope.
+					</p>
 				</div>
 
-				<div v-if="userEditing[u._id]" class="assignmentControls">
-					<!-- Tutor assignment select -->
-					<label
-						class="assignmentLabel"
-						:for="`tutor-select-${u._id}`"
-						@click.stop
+				<div class="directory-grid">
+					<article
+						v-for="t in tutors"
+						:key="t._id"
+						class="directory-card"
 					>
-						Assign Tutors
-					</label>
-					<select
-						:id="`tutor-select-${u._id}`"
-						:disabled="tutors.length === 0"
-						multiple
-						:value="userAssignments[u._id] ?? []"
-						@change.stop="onTutorSelectionChange(u._id, $event)"
-						@click.stop
-					>
-						<option v-for="t in tutors" :key="t._id" :value="t._id">
-							{{ t.name }}
-						</option>
-					</select>
-
-					<!-- Courses editor -->
-					<div class="course-editor">
-						<p class="helperText">
-							Enable courses available from the user's assigned
-							tutors.
-						</p>
-						<div class="checkbox-grid">
-							<label
-								v-for="course in courseOptions"
-								:key="course.id"
-								:class="{
-									disabled: !userAllowedCourses[
-										String(u._id)
-									]?.has(course.id)
-								}"
-								@click.stop
+						<div class="directory-card-header">
+							<div>
+								<h4>{{ t.name }}</h4>
+								<p>{{ t.email }}</p>
+							</div>
+							<button
+								class="btn-secondary btn"
+								type="button"
+								@click="toggleTutorEdit(t._id)"
 							>
-								<input
-									:checked="
-										userCourseSelections[
-											String(u._id)
-										]?.includes(course.id)
-									"
-									:disabled="
-										!userAllowedCourses[String(u._id)]?.has(
-											course.id
-										)
-									"
-									type="checkbox"
-									@change.stop="
-										onUserCourseToggle(
-											u._id,
-											course.id,
-											($event.target as HTMLInputElement)
-												.checked
-										)
-									"
-								/>
-								{{ course.name }}
-							</label>
+								{{
+									tutorEditing[t._id]
+										? "Close editor"
+										: "Edit courses"
+								}}
+							</button>
 						</div>
 
-						<!-- Unified actions -->
-						<div class="assignmentActions">
+						<div class="summary-block is-inline">
+							<p class="summary-label">Course access</p>
+							<p class="summary-copy">
+								{{ formatTutorCourses(t._id) }}
+							</p>
+						</div>
+
+						<div v-if="tutorEditing[t._id]" class="course-editor">
+							<p class="helper-text">
+								Select which courses this tutor can access.
+							</p>
+							<div class="checkbox-grid">
+								<label
+									v-for="course in courseOptions"
+									:key="course.id"
+								>
+									<input
+										:checked="
+											tutorCourseSelections[
+												t._id
+											]?.includes(course.id)
+										"
+										type="checkbox"
+										@change="
+											onTutorCourseToggle(
+												t._id,
+												course.id,
+												(
+													$event.target as HTMLInputElement
+												).checked
+											)
+										"
+									/>
+									{{ course.name }}
+								</label>
+							</div>
+							<div class="action-row">
+								<button
+									class="btn-primary btn"
+									type="button"
+									@click="saveTutorCourses(t._id)"
+								>
+									Save courses
+								</button>
+								<button
+									class="btn-secondary btn"
+									type="button"
+									@click="cancelTutorEdit(t._id)"
+								>
+									Cancel
+								</button>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section class="directory-section">
+				<div class="section-heading">
+					<div>
+						<p class="workspace-eyebrow">Learners</p>
+						<h3>{{ usersHeader }}</h3>
+					</div>
+					<p class="section-copy">
+						Assign tutors first, then grant courses only from that
+						learner's tutor set.
+					</p>
+				</div>
+
+				<div class="directory-grid">
+					<article
+						v-for="u in users"
+						:key="u._id"
+						class="directory-card"
+					>
+						<div class="directory-card-header">
+							<div>
+								<h4>{{ u.name }}</h4>
+								<p>{{ u.email }}</p>
+							</div>
 							<button
-								class="btn btn-primary"
+								class="btn-secondary btn"
 								type="button"
-								@click.stop="saveAssignments(u._id)"
+								@click="
+									userEditing[u._id]
+										? cancelUserEdit(u._id)
+										: startUserEdit(u._id)
+								"
 							>
-								Save Tutors
-							</button>
-							<button
-								class="btn btn-primary"
-								type="button"
-								@click.stop="saveUserCourses(u._id)"
-							>
-								Save Courses
-							</button>
-							<button
-								class="btn btn-secondary"
-								type="button"
-								@click.stop="cancelUserEdit(u._id)"
-							>
-								Cancel
+								{{
+									userEditing[u._id]
+										? "Close editor"
+										: "Edit assignments"
+								}}
 							</button>
 						</div>
-					</div>
+
+						<div class="info-grid">
+							<div class="summary-block is-inline">
+								<p class="summary-label">Assigned tutors</p>
+								<p class="summary-copy">
+									{{ formatAssignedTutors(u._id) }}
+								</p>
+							</div>
+							<div class="summary-block is-inline">
+								<p class="summary-label">Course access</p>
+								<p class="summary-copy">
+									{{
+										(userCourseSelections[String(u._id)]
+											?.length ?? 0)
+											? (
+													userCourseSelections[
+														String(u._id)
+													] ?? []
+												)
+													.map(id => courseLabel(id))
+													.join(", ")
+											: "No courses assigned"
+									}}
+								</p>
+							</div>
+						</div>
+
+						<div
+							v-if="userEditing[u._id]"
+							class="assignment-editor"
+						>
+							<div class="editor-block">
+								<label
+									class="editor-label"
+									:for="`tutor-select-${u._id}`"
+								>
+									Assign tutors
+								</label>
+								<select
+									:id="`tutor-select-${u._id}`"
+									class="editor-select"
+									:disabled="tutors.length === 0"
+									multiple
+									:value="userAssignments[u._id] ?? []"
+									@change="
+										onTutorSelectionChange(u._id, $event)
+									"
+								>
+									<option
+										v-for="t in tutors"
+										:key="t._id"
+										:value="t._id"
+									>
+										{{ t.name }}
+									</option>
+								</select>
+							</div>
+
+							<div class="editor-block">
+								<p class="editor-label">Allowed courses</p>
+								<p class="helper-text">
+									Enable courses available from the learner's
+									assigned tutors.
+								</p>
+								<div class="checkbox-grid">
+									<label
+										v-for="course in courseOptions"
+										:key="course.id"
+										:class="{
+											disabled: !userAllowedCourses[
+												String(u._id)
+											]?.has(course.id)
+										}"
+									>
+										<input
+											:checked="
+												userCourseSelections[
+													String(u._id)
+												]?.includes(course.id)
+											"
+											:disabled="
+												!userAllowedCourses[
+													String(u._id)
+												]?.has(course.id)
+											"
+											type="checkbox"
+											@change="
+												onUserCourseToggle(
+													u._id,
+													course.id,
+													(
+														$event.target as HTMLInputElement
+													).checked
+												)
+											"
+										/>
+										{{ course.name }}
+									</label>
+								</div>
+							</div>
+
+							<div class="action-row">
+								<button
+									class="btn-primary btn"
+									type="button"
+									@click="saveAssignments(u._id)"
+								>
+									Save tutors
+								</button>
+								<button
+									class="btn-primary btn"
+									type="button"
+									@click="saveUserCourses(u._id)"
+								>
+									Save courses
+								</button>
+								<button
+									class="btn-secondary btn"
+									type="button"
+									@click="cancelUserEdit(u._id)"
+								>
+									Cancel
+								</button>
+							</div>
+						</div>
+					</article>
 				</div>
-			</div>
+			</section>
 		</template>
 
 		<template v-else>
-			<div
-				v-if="currentAdmin"
-				class="tutorList mt-2"
-				:class="[{ active: isCardActive('admin-manage') }]"
-				@click="activateCard('admin-manage')"
-			>
-				<br />
-				<ul>
-					<ProfileFields
-						:editing="false"
-						:entity="currentAdmin"
-						:fields="fields"
-					/>
-				</ul>
-				<div v-if="isCardActive('admin-manage')" class="card-actions">
-					<button
-						class="btn btn-danger"
-						type="button"
-						@click.stop="confirmDeleteAdmin"
-					>
-						Delete admin account
-					</button>
+			<section class="directory-section">
+				<div class="section-heading">
+					<div>
+						<p class="workspace-eyebrow">Administrator</p>
+						<h3>Primary account</h3>
+					</div>
+					<p class="section-copy">
+						Account removal is destructive. Keep it isolated from
+						the role-management actions below.
+					</p>
 				</div>
-			</div>
 
-			<hr />
-			<h2>{{ tutorsHeader }}</h2>
-			<div
-				v-for="t in tutors"
-				:key="t._id"
-				class="tutorList mt-2"
-				:class="[{ active: isCardActive(`manage-tutor-${t._id}`) }]"
-				@click="activateCard(`manage-tutor-${t._id}`)"
-			>
-				<br />
-				<ul>
-					<ProfileFields
-						:editing="false"
-						:entity="t"
-						:fields="fields"
-					/>
-				</ul>
-				<div
-					v-if="isCardActive(`manage-tutor-${t._id}`)"
-					class="card-actions"
-				>
-					<button
-						class="btn btn-secondary"
-						type="button"
-						@click.stop="confirmDemote(t._id)"
-					>
-						Demote to user
-					</button>
-					<button
-						class="btn btn-danger"
-						type="button"
-						@click.stop="removeTutor(t._id)"
-					>
-						Delete tutor
-					</button>
-				</div>
-			</div>
+				<article v-if="currentAdmin" class="directory-card">
+					<div class="directory-card-header">
+						<div>
+							<h4>{{ currentAdmin.name }}</h4>
+							<p>{{ currentAdmin.email }}</p>
+						</div>
+					</div>
+					<div class="action-row">
+						<button
+							class="btn-danger btn"
+							type="button"
+							@click="confirmDeleteAdmin"
+						>
+							Delete admin account
+						</button>
+					</div>
+				</article>
+			</section>
 
-			<hr />
-			<h2>{{ usersHeader }}</h2>
-			<div
-				v-for="u in users"
-				:key="u._id"
-				class="tutorList mt-2"
-				:class="[{ active: isCardActive(`manage-user-${u._id}`) }]"
-				@click="activateCard(`manage-user-${u._id}`)"
-			>
-				<br />
-				<ul>
-					<ProfileFields
-						:editing="false"
-						:entity="u"
-						:fields="fields"
-					/>
-				</ul>
-				<div
-					v-if="isCardActive(`manage-user-${u._id}`)"
-					class="card-actions"
-				>
-					<button
-						class="btn btn-primary"
-						type="button"
-						@click.stop="promoteToTutor(u._id)"
-					>
-						Promote to tutor
-					</button>
-					<button
-						class="btn btn-danger"
-						type="button"
-						@click.stop="removeUser(u._id)"
-					>
-						Delete user
-					</button>
+			<section class="directory-section">
+				<div class="section-heading">
+					<div>
+						<p class="workspace-eyebrow">Tutors</p>
+						<h3>{{ tutorsHeader }}</h3>
+					</div>
+					<p class="section-copy">
+						Demote tutors back to users or fully remove accounts.
+					</p>
 				</div>
-			</div>
+
+				<div class="directory-grid">
+					<article
+						v-for="t in tutors"
+						:key="t._id"
+						class="directory-card"
+					>
+						<div class="directory-card-header">
+							<div>
+								<h4>{{ t.name }}</h4>
+								<p>{{ t.email }}</p>
+							</div>
+						</div>
+						<div class="action-row">
+							<button
+								class="btn-secondary btn"
+								type="button"
+								@click="confirmDemote(t._id)"
+							>
+								Demote to user
+							</button>
+							<button
+								class="btn-danger btn"
+								type="button"
+								@click="removeTutor(t._id)"
+							>
+								Delete tutor
+							</button>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section class="directory-section">
+				<div class="section-heading">
+					<div>
+						<p class="workspace-eyebrow">Users</p>
+						<h3>{{ usersHeader }}</h3>
+					</div>
+					<p class="section-copy">
+						Promote learners to tutors when needed, or remove unused
+						accounts.
+					</p>
+				</div>
+
+				<div class="directory-grid">
+					<article
+						v-for="u in users"
+						:key="u._id"
+						class="directory-card"
+					>
+						<div class="directory-card-header">
+							<div>
+								<h4>{{ u.name }}</h4>
+								<p>{{ u.email }}</p>
+							</div>
+						</div>
+						<div class="action-row">
+							<button
+								class="btn-primary btn"
+								type="button"
+								@click="promoteToTutor(u._id)"
+							>
+								Promote to tutor
+							</button>
+							<button
+								class="btn-danger btn"
+								type="button"
+								@click="removeUser(u._id)"
+							>
+								Delete user
+							</button>
+						</div>
+					</article>
+				</div>
+			</section>
 		</template>
-
-		<p v-if="success" class="status">{{ success }}</p>
-		<p v-if="error" class="error">
-			{{ error }}
-		</p>
 	</section>
 </template>
 
 <style scoped>
-ul {
-	list-style-type: none;
+.admin-workspace {
+	display: grid;
+	gap: 1.6rem;
+}
+
+.workspace-header,
+.section-heading,
+.directory-card-header,
+.action-row,
+.info-grid {
 	display: flex;
-	flex-flow: column;
-}
-
-ul p {
-	display: inline;
-}
-
-div.tutorList,
-li {
-	align-self: center;
-}
-
-.hidden {
-	display: none;
-}
-
-div.tutorList {
-	outline: black solid 1px;
-	padding-bottom: 1%;
-	width: 35%;
-	margin: auto;
-	cursor: pointer;
-	transition:
-		border-color 0.2s ease,
-		box-shadow 0.2s ease;
-}
-
-.tutorList.active {
-	border-color: #2563eb;
-	box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
-}
-
-@media only screen and (max-width: 960px) {
-	div.tutorList {
-		width: 50%;
-	}
-}
-
-.card-hint {
-	color: rgba(15, 23, 42, 0.7);
-	margin-bottom: 0.5rem;
-}
-
-.assignment {
-	margin: 0.5rem 0 1rem;
-}
-
-.card-actions {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	margin: 0.5rem auto 1rem;
-	width: 90%;
-}
-
-.assignmentControls {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	margin: 1rem auto 0;
-	width: 90%;
-}
-
-.assignmentControls select {
-	min-height: 6rem;
-	padding: 0.25rem;
-}
-
-.assignmentActions {
-	display: flex;
-	gap: 0.5rem;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-between;
+	gap: 1rem;
 }
 
-.course-editor {
+.workspace-header {
+	align-items: flex-start;
+}
+
+.workspace-header h2,
+.section-heading h3 {
+	margin: 0.25rem 0 0;
+	font-size: clamp(1.9rem, 4vw, 2.35rem);
+	color: #10263a;
+}
+
+.workspace-header p:last-child,
+.section-copy {
+	margin: 0.75rem 0 0;
+	max-width: 46rem;
+	line-height: 1.65;
+	color: #405467;
+}
+
+.workspace-eyebrow,
+.panel-eyebrow,
+.summary-label,
+.editor-label {
+	margin: 0;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #5f7a8e;
+}
+
+.workspace-stats {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 0.85rem;
+}
+
+.stat-pill,
+.summary-block,
+.sheet-panel,
+.directory-card,
+.status-banner {
+	border-radius: 24px;
+	background: rgba(255, 255, 255, 0.88);
+	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.68);
+}
+
+.stat-pill {
+	min-width: 10rem;
+	padding: 0.95rem 1.1rem;
+	box-shadow:
+		inset 0 0 0 1px rgba(203, 213, 225, 0.7),
+		0 20px 30px -28px rgba(15, 23, 42, 0.55);
+}
+
+.stat-pill span {
+	display: block;
+	font-size: 0.74rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #5f7a8e;
+}
+
+.stat-pill strong {
+	display: block;
+	margin-top: 0.35rem;
+	font-size: 1.75rem;
+	line-height: 1;
+	color: #10263a;
+}
+
+.status-banner {
+	padding: 0.95rem 1.1rem;
+	margin: 0;
+}
+
+.status-banner.is-success {
+	color: #166534;
+	background: rgba(240, 253, 244, 0.92);
+	box-shadow: inset 0 0 0 1px rgba(134, 239, 172, 0.8);
+}
+
+.status-banner.is-error {
+	color: #b91c1c;
+	background: rgba(254, 242, 242, 0.92);
+	box-shadow: inset 0 0 0 1px rgba(252, 165, 165, 0.82);
+}
+
+.workspace-sheet,
+.directory-section {
+	display: grid;
+	gap: 1.25rem;
+	padding: 1.5rem;
+	border-radius: 30px;
+	background: linear-gradient(
+		180deg,
+		rgba(245, 249, 253, 0.98),
+		rgba(255, 255, 255, 0.96)
+	);
+	box-shadow: 0 30px 50px -42px rgba(15, 23, 42, 0.5);
+}
+
+.sheet-summary {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.summary-block,
+.sheet-panel,
+.directory-card {
+	padding: 1.2rem 1.25rem;
+}
+
+.summary-block.is-inline {
+	padding: 1rem 1.05rem;
+}
+
+.summary-copy {
+	margin: 0.55rem 0 0;
+	line-height: 1.55;
+	color: #12263a;
+}
+
+.sheet-body {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+	gap: 1rem;
+}
+
+.panel-header h3,
+.directory-card-header h4 {
+	margin: 0.25rem 0 0;
+	font-size: 1.25rem;
+	color: #10263a;
+}
+
+.directory-card-header h4 {
+	font-size: 1.1rem;
+}
+
+.directory-card-header p {
+	margin: 0.25rem 0 0;
+	color: #5f7a8e;
+}
+
+.field-stack {
+	display: grid;
 	gap: 0.75rem;
-	margin: 0.5rem auto 1rem;
-	width: 90%;
+	margin: 1rem 0 0;
+	padding: 0;
+}
+
+.security-panel {
+	display: grid;
+	align-content: start;
+	gap: 1rem;
+}
+
+.security-copy,
+.helper-text,
+.section-copy {
+	line-height: 1.6;
+}
+
+.security-copy,
+.helper-text {
+	margin: 0.85rem 0 0;
+	color: #405467;
+}
+
+.directory-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1rem;
+}
+
+.info-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.85rem;
+	margin-top: 1rem;
+}
+
+.assignment-editor,
+.course-editor {
+	display: grid;
+	gap: 1rem;
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid rgba(203, 213, 225, 0.8);
+}
+
+.editor-block {
+	display: grid;
+	gap: 0.7rem;
+}
+
+.editor-select {
+	min-height: 7rem;
+	border: 1px solid rgba(148, 163, 184, 0.55);
+	border-radius: 16px;
+	padding: 0.75rem 0.85rem;
+	background: white;
+	color: #10263a;
 }
 
 .checkbox-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+	gap: 0.65rem;
 }
 
 .checkbox-grid label {
 	display: flex;
+	gap: 0.45rem;
 	align-items: center;
-	gap: 0.35rem;
-	font-size: 0.9rem;
+	padding: 0.8rem 0.9rem;
+	border-radius: 16px;
+	background: rgba(248, 250, 252, 0.88);
+	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+	font-size: 0.93rem;
+	color: #12263a;
 }
 
 .checkbox-grid label.disabled {
@@ -888,13 +1146,28 @@ div.tutorList {
 	cursor: not-allowed;
 }
 
-.status {
-	color: #15803d;
-	margin-top: 0.75rem;
-}
-
 .error {
 	color: red;
 	margin-top: 10px;
+}
+
+@media (max-width: 960px) {
+	.sheet-summary,
+	.sheet-body,
+	.info-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 640px) {
+	.workspace-sheet,
+	.directory-section {
+		padding: 1.1rem;
+		border-radius: 24px;
+	}
+
+	.action-row {
+		flex-direction: column;
+	}
 }
 </style>
