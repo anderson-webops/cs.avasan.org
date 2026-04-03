@@ -255,6 +255,16 @@ watch(
 	display: grid;
 	gap: 1rem;
 	width: 100%;
+	margin: 0;
+}
+
+.history-section p,
+.history-section label,
+.history-section button,
+.history-section input,
+.history-section select {
+	font-family: inherit;
+	text-align: left;
 }
 
 .section-heading {

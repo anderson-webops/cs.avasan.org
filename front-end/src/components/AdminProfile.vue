@@ -904,6 +904,16 @@ function confirmDeleteAdmin() {
 	display: grid;
 	gap: 1.1rem;
 	width: 100%;
+	margin: 0;
+}
+
+.admin-workspace p,
+.admin-workspace label,
+.admin-workspace button,
+.admin-workspace input,
+.admin-workspace select {
+	font-family: inherit;
+	text-align: left;
 }
 
 .admin-workspace section {

@@ -212,6 +212,16 @@ const fields = [
 	display: grid;
 	gap: 1.1rem;
 	width: 100%;
+	margin: 0;
+}
+
+.profile-workspace p,
+.profile-workspace label,
+.profile-workspace button,
+.profile-workspace input,
+.profile-workspace select {
+	font-family: inherit;
+	text-align: left;
 }
 
 .workspace-header {
