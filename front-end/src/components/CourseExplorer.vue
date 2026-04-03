@@ -5,7 +5,7 @@ import type {
 	CourseModuleItem
 } from "@/stores/courses";
 import { storeToRefs } from "pinia";
-import { computed, ref, shallowRef, watch, watchEffect } from "vue";
+import { computed, onMounted, ref, shallowRef, watch } from "vue";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
@@ -27,6 +27,9 @@ interface ResourceLink {
 const VIDEO_FILE_RE = /\.(?:mp4|webm|ogg)(?:\?|$)/i;
 const WHITESPACE_RE = /\s+/g;
 const WWW_PREFIX_RE = /^www\./;
+const COURSE_SELECTION_STORAGE_KEY = "classes:course-explorer:selected-course";
+const MODULE_SELECTION_STORAGE_KEY_PREFIX =
+	"classes:course-explorer:active-module:";
 
 const coursesStore = useCoursesStore();
 const { courses } = storeToRefs(coursesStore);
@@ -40,6 +43,8 @@ const activeModuleId = ref("");
 const selectedCourse = shallowRef<CourseDefinition | null>(null);
 const courseLoadError = ref("");
 const isCourseLoading = ref(false);
+const isStorageReady = ref(false);
+const hasRestoredStoredCourse = ref(false);
 
 const allCourses = computed(() => courses.value ?? []);
 
@@ -64,20 +69,42 @@ const hasCourseAccess = computed(() => courseList.value.length > 0);
 
 const normalizedQuery = computed(() => normalizeSearch(searchQuery.value));
 
-watchEffect(() => {
-	const availableCourses = courseList.value;
-	if (availableCourses.length === 0) {
-		selectedCourseId.value = "";
-		return;
-	}
+watch(
+	[courseList, isStorageReady],
+	([availableCourses, storageReady]) => {
+		if (availableCourses.length === 0) {
+			selectedCourseId.value = "";
+			return;
+		}
 
-	if (
-		!selectedCourseId.value ||
-		!availableCourses.some(course => course.id === selectedCourseId.value)
-	) {
-		selectedCourseId.value = availableCourses[0].id;
-	}
-});
+		if (storageReady && !hasRestoredStoredCourse.value) {
+			const storedCourseId = readStoredValue(
+				COURSE_SELECTION_STORAGE_KEY
+			);
+
+			if (
+				storedCourseId &&
+				availableCourses.some(course => course.id === storedCourseId)
+			) {
+				selectedCourseId.value = storedCourseId;
+				hasRestoredStoredCourse.value = true;
+				return;
+			}
+
+			hasRestoredStoredCourse.value = true;
+		}
+
+		if (
+			!selectedCourseId.value ||
+			!availableCourses.some(
+				course => course.id === selectedCourseId.value
+			)
+		) {
+			selectedCourseId.value = availableCourses[0].id;
+		}
+	},
+	{ immediate: true }
+);
 
 watch(
 	selectedCourseId,
@@ -182,16 +209,32 @@ const visibleModules = computed<VisibleModule[]>(() => {
 });
 
 watch(
-	visibleModules,
-	modules => {
-		if (modules.length === 0) {
+	[visibleModules, selectedCourseId, isStorageReady],
+	([modules, courseId, storageReady]) => {
+		if (modules.length === 0 || !courseId) {
 			activeModuleId.value = "";
 			return;
 		}
 
-		if (!modules.some(module => module.id === activeModuleId.value)) {
-			activeModuleId.value = modules[0].id;
+		if (modules.some(module => module.id === activeModuleId.value)) {
+			return;
 		}
+
+		if (storageReady) {
+			const storedModuleId = readStoredValue(
+				moduleSelectionStorageKey(courseId)
+			);
+
+			if (
+				storedModuleId &&
+				modules.some(module => module.id === storedModuleId)
+			) {
+				activeModuleId.value = storedModuleId;
+				return;
+			}
+		}
+
+		activeModuleId.value = modules[0].id;
 	},
 	{ immediate: true }
 );
@@ -296,6 +339,47 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	}
 
 	return links;
+}
+
+watch(selectedCourseId, value => {
+	if (!isStorageReady.value) return;
+	writeStoredValue(COURSE_SELECTION_STORAGE_KEY, value);
+});
+
+watch([activeModuleId, selectedCourseId], ([moduleId, courseId]) => {
+	if (!isStorageReady.value || !courseId) return;
+	writeStoredValue(moduleSelectionStorageKey(courseId), moduleId);
+});
+
+onMounted(() => {
+	isStorageReady.value = true;
+});
+
+function moduleSelectionStorageKey(courseId: string) {
+	return `${MODULE_SELECTION_STORAGE_KEY_PREFIX}${courseId}`;
+}
+
+function readStoredValue(key: string) {
+	if (typeof window === "undefined") return null;
+
+	try {
+		return window.localStorage.getItem(key);
+	} catch {
+		return null;
+	}
+}
+
+function writeStoredValue(key: string, value: string) {
+	if (typeof window === "undefined") return;
+
+	try {
+		if (value) {
+			window.localStorage.setItem(key, value);
+			return;
+		}
+
+		window.localStorage.removeItem(key);
+	} catch {}
 }
 </script>
 

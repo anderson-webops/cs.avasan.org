@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { computed, defineAsyncComponent, ref, watch } from "vue";
+import { computed, defineAsyncComponent, onMounted, ref, watch } from "vue";
 import { useAppStore } from "@/stores/app";
 
 type ProfileTab = "profile" | "courses" | "manage";
 
 defineOptions({ name: "ProfilePage" });
+
+const PROFILE_TAB_STORAGE_KEY = "classes:profile:active-tab";
 
 const AdminProfile = defineAsyncComponent(
 	() => import("@/components/AdminProfile.vue")
@@ -57,10 +59,28 @@ const profileTabs = computed<ProfileTab[]>(() => {
 
 const activeTab = ref<ProfileTab>("profile");
 const isCourseTab = computed(() => activeTab.value === "courses");
+const isStorageReady = ref(false);
+const hasRestoredStoredTab = ref(false);
+const hasProfile = computed(() => activeProfileComponent.value !== null);
+const isWorkspaceLayout = computed(() => hasProfile.value);
 
-watch(profileTabs, value => {
-	if (!value.includes(activeTab.value)) activeTab.value = value[0];
-});
+watch(
+	[profileTabs, hasProfile, isStorageReady],
+	([tabs, hasProfileValue, storageReady]) => {
+		if (storageReady && hasProfileValue && !hasRestoredStoredTab.value) {
+			const storedTab = readStoredProfileTab();
+
+			if (storedTab && tabs.includes(storedTab)) {
+				activeTab.value = storedTab;
+			}
+
+			hasRestoredStoredTab.value = true;
+		}
+
+		if (!tabs.includes(activeTab.value)) activeTab.value = tabs[0];
+	},
+	{ immediate: true }
+);
 
 const heroTitle = computed(() => {
 	if (profileRole.value === "Administrator") {
@@ -98,9 +118,6 @@ const heroBadge = computed(() =>
 	profileRole.value ? `Signed in as ${profileRole.value}` : "Profile hub"
 );
 
-const hasProfile = computed(() => activeProfileComponent.value !== null);
-const isWorkspaceLayout = computed(() => hasProfile.value);
-
 const tabLabels: Record<ProfileTab, string> = {
 	profile: "Profile",
 	manage: "Manage profiles",
@@ -116,6 +133,38 @@ const profileComponentProps = computed(() => {
 
 function openAuthModal() {
 	app.setLoginBlock(true);
+}
+
+watch(activeTab, value => {
+	if (!isStorageReady.value || !hasProfile.value) return;
+	writeStoredProfileTab(value);
+});
+
+onMounted(() => {
+	isStorageReady.value = true;
+});
+
+function readStoredProfileTab() {
+	if (typeof window === "undefined") return null;
+
+	try {
+		const value = window.localStorage.getItem(PROFILE_TAB_STORAGE_KEY);
+		return isProfileTab(value) ? value : null;
+	} catch {
+		return null;
+	}
+}
+
+function writeStoredProfileTab(value: ProfileTab) {
+	if (typeof window === "undefined") return;
+
+	try {
+		window.localStorage.setItem(PROFILE_TAB_STORAGE_KEY, value);
+	} catch {}
+}
+
+function isProfileTab(value: string | null): value is ProfileTab {
+	return value === "profile" || value === "courses" || value === "manage";
 }
 </script>
 
