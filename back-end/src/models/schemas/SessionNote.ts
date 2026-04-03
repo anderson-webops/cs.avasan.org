@@ -4,6 +4,12 @@ import mongoose, { Schema } from "mongoose";
 
 const sessionNoteSchema: Schema<ISessionNote> = new Schema(
 	{
+		user: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			default: undefined,
+			index: true
+		},
 		studentName: { type: String, required: true, trim: true },
 		primaryEmail: { type: String, required: true, lowercase: true, trim: true, index: true },
 		ccEmails: { type: [String], default: [] },
@@ -17,5 +23,6 @@ const sessionNoteSchema: Schema<ISessionNote> = new Schema(
 
 sessionNoteSchema.index({ studentName: 1, sessionDate: -1 });
 sessionNoteSchema.index({ primaryEmail: 1, sessionDate: -1 });
+sessionNoteSchema.index({ user: 1, sessionDate: -1, createdAt: -1 });
 
 export const SessionNote: Model<ISessionNote> = mongoose.model<ISessionNote>("SessionNote", sessionNoteSchema);

@@ -14,6 +14,7 @@ import {
 	deleteOwnUser,
 	deleteUserAsAdmin,
 	deleteUserAsTutor,
+	getLoggedInUserCommunications,
 	getUsersOfTutor,
 	promoteUserToTutor,
 	setUserCourseAccess,
@@ -68,6 +69,9 @@ router.delete("/tutor/:userID", validTutor, deleteUserAsTutor);
 
 // Delete the user by the admin
 router.delete("/admin/:userID", validAdmin, deleteUserAsAdmin);
+
+// Get logged in user
+router.get("/loggedin/communications", validUser, getLoggedInUserCommunications);
 
 // Get logged in user
 router.get("/loggedin", validUser, getLoggedInUser);

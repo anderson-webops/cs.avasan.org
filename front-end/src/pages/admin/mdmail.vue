@@ -12,6 +12,17 @@ interface Recipient {
 	emails: string[];
 }
 
+interface MatchedUserAccount {
+	_id: string;
+	name: string;
+	email: string;
+}
+
+interface SendAssociations {
+	sessionNoteSavedFor: MatchedUserAccount | null;
+	internalEmailsSavedFor: MatchedUserAccount[];
+}
+
 type DateInputEl = HTMLInputElement & { showPicker?: () => void };
 
 const CUSTOM_OPTION = "Custom";
@@ -42,6 +53,8 @@ const dateInput = ref<DateInputEl | null>(null);
 
 // resultText is only used for error JSON or non-ok responses
 const resultText = ref("");
+const saveSummary = ref<SendAssociations | null>(null);
+const lastSendWasSessionNote = ref(false);
 
 // success preview state
 const sentOk = ref(false);
@@ -147,11 +160,13 @@ async function sendMail() {
 	resultText.value = "";
 	sentOk.value = false;
 	sending.value = true;
+	saveSummary.value = null;
 
 	const curTo = to.value.trim();
 	const curSubject = subject.value.trim();
 	const curMd = md.value;
 	const sessionDateIso = parseDateIso(subjectDate.value);
+	const wasSessionNoteSend = !!sessionDateIso;
 	const payload = {
 		to: curTo,
 		subject: curSubject,
@@ -166,6 +181,8 @@ async function sendMail() {
 		});
 
 		if (data?.ok === true) {
+			saveSummary.value = data?.associations ?? null;
+			lastSendWasSessionNote.value = wasSessionNoteSend;
 			// build preview from what we just sent
 			previewTo.value = curTo;
 			previewSubject.value = curSubject;
@@ -189,6 +206,7 @@ async function sendMail() {
 		}
 	} catch (e: any) {
 		sentOk.value = false;
+		lastSendWasSessionNote.value = wasSessionNoteSend;
 		resultText.value = e?.response?.data
 			? JSON.stringify(e.response.data, null, 2)
 			: String(e);
@@ -370,6 +388,42 @@ function parseDateIso(value: string): string | null {
 				<div><strong>Subject:</strong> {{ previewSubject }}</div>
 			</div>
 			<div class="preview-body" v-html="sentPreviewHtml"></div>
+			<div v-if="saveSummary" class="association-summary">
+				<p class="association-title">Account storage</p>
+				<p
+					v-if="saveSummary.sessionNoteSavedFor"
+					class="association-copy"
+				>
+					Session note saved to
+					<strong>
+						{{ saveSummary.sessionNoteSavedFor.name }}
+					</strong>
+					({{ saveSummary.sessionNoteSavedFor.email }}).
+				</p>
+				<p v-else-if="lastSendWasSessionNote" class="association-copy">
+					No matching user account was found for the primary
+					recipient, so this session note was sent without being saved
+					to the learner history pane.
+				</p>
+				<p
+					v-if="saveSummary.internalEmailsSavedFor.length"
+					class="association-copy"
+				>
+					Internal email saved for
+					<strong>
+						{{
+							saveSummary.internalEmailsSavedFor
+								.map(user => user.name)
+								.join(", ")
+						}}
+					</strong>
+					.
+				</p>
+				<p v-else-if="!lastSendWasSessionNote" class="association-copy">
+					No matching user accounts were found in the recipient list,
+					so this email was sent without user-profile storage.
+				</p>
+			</div>
 		</div>
 
 		<!-- ERROR / RAW RESULT -->
@@ -593,6 +647,23 @@ textarea {
 	font-family:
 		ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
 		monospace;
+}
+.association-summary {
+	margin-top: 16px;
+	padding-top: 14px;
+	border-top: 1px solid #e5e7eb;
+	display: grid;
+	gap: 6px;
+}
+.association-title {
+	margin: 0;
+	font-weight: 700;
+	color: #0f172a;
+}
+.association-copy {
+	margin: 0;
+	color: #374151;
+	line-height: 1.55;
 }
 </style>
 

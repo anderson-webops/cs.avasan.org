@@ -9,7 +9,9 @@ import { marked } from "marked";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 import { validAdmin } from "../middleware/auth.js";
+import { InternalEmail } from "../models/schemas/InternalEmail.js";
 import { SessionNote } from "../models/schemas/SessionNote.js";
+import { User } from "../models/schemas/User.js";
 
 const router = Router();
 const DATE_PREFIX_RE = /^(\d{4})-(\d{2})-(\d{2})/;
@@ -199,6 +201,17 @@ interface MailSendResult {
 	usedSenderFallback: boolean;
 }
 
+interface MatchedUserAccount {
+	_id: string;
+	name: string;
+	email: string;
+}
+
+interface SavedAssociationSummary {
+	sessionNoteSavedFor: MatchedUserAccount | null;
+	internalEmailsSavedFor: MatchedUserAccount[];
+}
+
 interface ImapAppendResult {
 	appended: boolean;
 	mailbox: string;
@@ -238,6 +251,116 @@ function readOptionalCA(path: string) {
 function createMessageId(fromAddress: string): string {
 	const domain = fromAddress.split("@")[1] || "localhost";
 	return `<${randomUUID()}@${domain}>`;
+}
+
+function normalizeEmail(address: string): string {
+	return address.trim().toLowerCase();
+}
+
+async function findMatchedUsersByEmail(
+	recipients: string[]
+): Promise<Map<string, MatchedUserAccount>> {
+	const normalizedRecipients = [...new Set(recipients.map(normalizeEmail))];
+	if (normalizedRecipients.length === 0) {
+		return new Map();
+	}
+
+	const users = await User.find(
+		{ email: { $in: normalizedRecipients } },
+		{ _id: 1, name: 1, email: 1 }
+	).lean();
+
+	return new Map(
+		users.map(user => [
+			normalizeEmail(user.email),
+			{
+				_id: String(user._id),
+				name: user.name,
+				email: normalizeEmail(user.email)
+			}
+		])
+	);
+}
+
+async function trimSessionNotesForUser(userID: string): Promise<void> {
+	const notesToKeep = await SessionNote.find({ user: userID })
+		.sort({ sessionDate: -1, createdAt: -1, _id: -1 })
+		.limit(3)
+		.select("_id")
+		.lean();
+
+	const keepIDs = notesToKeep.map(note => note._id);
+	if (keepIDs.length === 0) {
+		return;
+	}
+
+	await SessionNote.deleteMany({
+		user: userID,
+		_id: { $nin: keepIDs }
+	});
+}
+
+async function saveAssociatedRecords(
+	args: {
+		recipients: string[];
+		recipientName?: string;
+		sessionDate: Date | null;
+		subject: string;
+		markdown: string;
+		html: string;
+		fromUsed: string;
+		transportUsed: TransportKind;
+		messageId: string | undefined;
+		sentAt: Date;
+	}
+): Promise<SavedAssociationSummary> {
+	const matchesByEmail = await findMatchedUsersByEmail(args.recipients);
+	const primaryRecipient = normalizeEmail(args.recipients[0] ?? "");
+	const primaryUser = matchesByEmail.get(primaryRecipient) ?? null;
+
+	let sessionNoteSavedFor: MatchedUserAccount | null = null;
+	if (args.sessionDate && primaryUser) {
+		await SessionNote.create({
+			user: primaryUser._id,
+			studentName: primaryUser.name || args.recipientName || primaryUser.email,
+			primaryEmail: primaryRecipient,
+			ccEmails: args.recipients.slice(1).map(normalizeEmail),
+			subject: args.subject,
+			sessionDate: args.sessionDate,
+			markdown: args.markdown,
+			html: args.html
+		});
+		await trimSessionNotesForUser(primaryUser._id);
+		sessionNoteSavedFor = primaryUser;
+	}
+
+	const internalEmailsSavedFor
+		= args.sessionDate
+			? []
+			: [...matchesByEmail.values()];
+
+	if (internalEmailsSavedFor.length > 0) {
+		await InternalEmail.insertMany(
+			internalEmailsSavedFor.map(user => ({
+				user: user._id,
+				matchedRecipientEmail: user.email,
+				primaryEmail: primaryRecipient,
+				ccEmails: args.recipients.slice(1).map(normalizeEmail),
+				fromAddress: normalizeEmail(args.fromUsed),
+				subject: args.subject,
+				markdown: args.markdown,
+				html: args.html,
+				messageId: args.messageId,
+				transportUsed: args.transportUsed,
+				sentAt: args.sentAt
+			}))
+		);
+	}
+
+	return {
+		sessionNoteSavedFor,
+		internalEmailsSavedFor
+	};
 }
 
 function createPrimaryTransporter() {
@@ -551,9 +674,9 @@ router.post("/send", validAdmin, async (req, res) => {
 		const { info, fromUsed, transportUsed, usedSenderFallback } = await sendWithFailover(
 			mailBase
 		);
+		const messageId = info.messageId || createMessageId(fromUsed);
 
 		try {
-			const messageId = info.messageId || createMessageId(fromUsed);
 			const appendResult = await appendSentMessage({
 				...mailBase,
 				from: fromUsed,
@@ -576,25 +699,34 @@ router.post("/send", validAdmin, async (req, res) => {
 			});
 		}
 
-		if (sessionDate && recipientName) {
-			await SessionNote.create({
-				studentName: recipientName,
-				primaryEmail: recipients[0],
-				ccEmails: recipients.slice(1),
-				subject,
-				sessionDate,
-				markdown: md,
-				html
-			});
-		}
+		const savedAssociations = await saveAssociatedRecords({
+			recipients,
+			recipientName,
+			sessionDate,
+			subject,
+			markdown: md,
+			html,
+			fromUsed,
+			transportUsed,
+			messageId,
+			sentAt: mailBase.date
+		});
 
 		console.info("admin-mail/send completed", {
 			transportUsed,
 			fromUsed,
 			usedSenderFallback,
-			messageId: info.messageId
+			messageId,
+			sessionNoteSavedFor: savedAssociations.sessionNoteSavedFor?.email ?? null,
+			internalEmailsSavedFor: savedAssociations.internalEmailsSavedFor.map(
+				user => user.email
+			)
 		});
-		return res.json({ ok: true, messageId: info.messageId });
+		return res.json({
+			ok: true,
+			messageId,
+			associations: savedAssociations
+		});
 	}
 	catch (err: any) {
 		console.error("admin-mail/send failed:", err);

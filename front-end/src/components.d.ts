@@ -25,6 +25,7 @@ declare module 'vue' {
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
     TutorProfile: typeof import('./components/TutorProfile.vue')['default']
+    UserCommunicationPanel: typeof import('./components/UserCommunicationPanel.vue')['default']
     UserProfile: typeof import('./components/UserProfile.vue')['default']
     UserSignup: typeof import('./components/UserSignup.vue')['default']
   }

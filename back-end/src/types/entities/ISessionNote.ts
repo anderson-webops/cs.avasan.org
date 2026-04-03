@@ -1,7 +1,8 @@
 // src/types/entities/ISessionNote.ts
-import type { Document } from "mongoose";
+import type { Document, Types } from "mongoose";
 
 export interface ISessionNote extends Document {
+	user?: Types.ObjectId;
 	studentName: string;
 	primaryEmail: string;
 	ccEmails: string[];

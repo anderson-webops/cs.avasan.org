@@ -1,6 +1,6 @@
-import { mount } from "@vue/test-utils";
+import { flushPromises, mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import CourseExplorer from "@/components/CourseExplorer.vue";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
@@ -10,7 +10,7 @@ describe("CourseExplorer.vue", () => {
 		setActivePinia(createPinia());
 	});
 
-	it("renders course stats for an assigned learner without throwing", () => {
+	it("renders course stats for an assigned learner without throwing", async () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);
 
@@ -34,8 +34,11 @@ describe("CourseExplorer.vue", () => {
 				plugins: [pinia]
 			}
 		});
+		await flushPromises();
 
-		expect(wrapper.text()).toContain("Course material");
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Course material");
+		});
 		expect(wrapper.text()).toContain(assignedCourse.name);
 		expect(wrapper.text()).toContain("Core lessons");
 		expect(wrapper.text()).toContain("Projects");

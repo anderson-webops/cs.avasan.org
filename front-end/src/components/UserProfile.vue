@@ -3,6 +3,7 @@ import { storeToRefs } from "pinia";
 import { computed } from "vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
+import UserCommunicationPanel from "@/components/UserCommunicationPanel.vue";
 // import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
 import { useAppStore } from "@/stores/app";
@@ -201,6 +202,8 @@ const fields = [
 				</template>
 			</div>
 		</article>
+
+		<UserCommunicationPanel v-if="currentUser" />
 	</section>
 </template>
 

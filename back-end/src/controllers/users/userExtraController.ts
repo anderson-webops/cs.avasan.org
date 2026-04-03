@@ -1,6 +1,8 @@
 // src/controllers/users/userExtraController.ts
 import type { RequestHandler } from "express";
 import { Types } from "mongoose";
+import { InternalEmail } from "../../models/schemas/InternalEmail.js";
+import { SessionNote } from "../../models/schemas/SessionNote.js";
 import { Tutor } from "../../models/schemas/Tutor.js";
 import { User } from "../../models/schemas/User.js";
 
@@ -178,4 +180,59 @@ export const deleteUserAsAdmin: RequestHandler = async (req, res) => {
 
 	await user.deleteOne();
 	res.sendStatus(200);
+};
+
+export const getLoggedInUserCommunications: RequestHandler = async (req, res) => {
+	const actingUser = req.currentUser;
+	if (!actingUser) {
+		return res.status(403).json({ message: "User session required" });
+	}
+
+	const normalizedEmail = actingUser.email.trim().toLowerCase();
+	const [sessionNotes, internalEmails] = await Promise.all([
+		SessionNote.find({
+			$or: [
+				{ user: actingUser._id },
+				{
+					user: { $exists: false },
+					primaryEmail: normalizedEmail
+				}
+			]
+		})
+			.sort({ sessionDate: -1, createdAt: -1 })
+			.limit(3)
+			.lean(),
+		InternalEmail.find({ user: actingUser._id })
+			.sort({ sentAt: -1, createdAt: -1 })
+			.limit(12)
+			.lean()
+	]);
+
+	return res.json({
+		sessionNotes: sessionNotes.map(note => ({
+			_id: String(note._id),
+			studentName: note.studentName,
+			primaryEmail: note.primaryEmail,
+			ccEmails: note.ccEmails ?? [],
+			subject: note.subject,
+			sessionDate: note.sessionDate,
+			markdown: note.markdown,
+			createdAt: note.createdAt,
+			updatedAt: note.updatedAt
+		})),
+		internalEmails: internalEmails.map(email => ({
+			_id: String(email._id),
+			matchedRecipientEmail: email.matchedRecipientEmail,
+			primaryEmail: email.primaryEmail,
+			ccEmails: email.ccEmails ?? [],
+			fromAddress: email.fromAddress,
+			subject: email.subject,
+			markdown: email.markdown,
+			messageId: email.messageId ?? null,
+			transportUsed: email.transportUsed,
+			sentAt: email.sentAt,
+			createdAt: email.createdAt,
+			updatedAt: email.updatedAt
+		}))
+	});
 };
