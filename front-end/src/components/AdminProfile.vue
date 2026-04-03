@@ -121,17 +121,26 @@ const tutorLookup = computed(() => {
 	return lookup;
 });
 
-function formatAssignedTutors(userID: string) {
+function assignedTutorNames(userID: string) {
 	const assigned = userAssignments.value[userID] ?? [];
-	if (assigned.length === 0) return "No tutor assigned yet";
-	return assigned.map(id => tutorLookup.value[id] ?? "Unknown").join(", ");
+	return assigned.map(id => tutorLookup.value[id] ?? "Unknown");
 }
 
-function formatTutorCourses(tutorID: string) {
+function assignedTutorLabel(userID: string) {
+	return assignedTutorNames(userID).length === 1
+		? "Assigned tutor"
+		: "Assigned tutors";
+}
+
+function tutorCourseLabels(tutorID: string) {
 	const list = tutorCourseSelections.value[tutorID] ?? [];
-	if (list.length === 0) return "No course access enabled";
 	const names = courseNameMap.value ?? {};
-	return list.map(id => names[id] ?? id).join(", ");
+	return list.map(id => names[id] ?? id);
+}
+
+function userCourseLabels(userID: string) {
+	const list = userCourseSelections.value[userID] ?? [];
+	return list.map(id => courseLabel(id));
 }
 
 watch(
@@ -553,8 +562,19 @@ function confirmDeleteAdmin() {
 
 						<div class="summary-block is-inline">
 							<p class="summary-label">Course access</p>
-							<p class="summary-copy">
-								{{ formatTutorCourses(t._id) }}
+							<ul
+								v-if="tutorCourseLabels(t._id).length"
+								class="summary-list"
+							>
+								<li
+									v-for="course in tutorCourseLabels(t._id)"
+									:key="`${t._id}-${course}`"
+								>
+									{{ course }}
+								</li>
+							</ul>
+							<p v-else class="summary-copy is-muted">
+								No course access enabled
 							</p>
 						</div>
 
@@ -614,10 +634,6 @@ function confirmDeleteAdmin() {
 						<p class="workspace-eyebrow">Learners</p>
 						<h3>{{ usersHeader }}</h3>
 					</div>
-					<p class="section-copy">
-						Assign tutors first, then grant courses only from that
-						learner’s tutor set.
-					</p>
 				</div>
 
 				<div class="directory-grid">
@@ -650,26 +666,45 @@ function confirmDeleteAdmin() {
 
 						<div class="info-grid">
 							<div class="summary-block is-inline">
-								<p class="summary-label">Assigned tutors</p>
-								<p class="summary-copy">
-									{{ formatAssignedTutors(u._id) }}
+								<p class="summary-label">
+									{{ assignedTutorLabel(u._id) }}
+								</p>
+								<ul
+									v-if="assignedTutorNames(u._id).length"
+									class="summary-list"
+								>
+									<li
+										v-for="tutorName in assignedTutorNames(
+											u._id
+										)"
+										:key="`${u._id}-${tutorName}`"
+									>
+										{{ tutorName }}
+									</li>
+								</ul>
+								<p v-else class="summary-copy is-muted">
+									No tutor assigned yet
 								</p>
 							</div>
 							<div class="summary-block is-inline">
 								<p class="summary-label">Course access</p>
-								<p class="summary-copy">
-									{{
-										(userCourseSelections[String(u._id)]
-											?.length ?? 0)
-											? (
-													userCourseSelections[
-														String(u._id)
-													] ?? []
-												)
-													.map(id => courseLabel(id))
-													.join(", ")
-											: "No course access yet"
-									}}
+								<ul
+									v-if="
+										userCourseLabels(String(u._id)).length
+									"
+									class="summary-list"
+								>
+									<li
+										v-for="course in userCourseLabels(
+											String(u._id)
+										)"
+										:key="`${u._id}-${course}`"
+									>
+										{{ course }}
+									</li>
+								</ul>
+								<p v-else class="summary-copy is-muted">
+									No course access yet
 								</p>
 							</div>
 						</div>
@@ -944,7 +979,6 @@ function confirmDeleteAdmin() {
 	min-width: 0;
 }
 
-.section-heading,
 .directory-card-header,
 .action-row {
 	display: flex;
@@ -955,7 +989,8 @@ function confirmDeleteAdmin() {
 
 .section-heading {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.9fr);
+	grid-template-columns: minmax(0, 1fr);
+	gap: 0.7rem;
 	align-items: flex-start;
 }
 
@@ -974,13 +1009,16 @@ function confirmDeleteAdmin() {
 	margin-top: 0.1rem;
 	font-size: clamp(1.8rem, 3vw, 2.35rem);
 	color: #10263a;
+	font-family: inherit;
+	font-weight: 700;
+	letter-spacing: -0.03em;
 }
 
 .workspace-header p:last-child,
 .section-copy {
 	margin: 0;
 	line-height: 1.65;
-	color: #405467;
+	color: #41566a;
 }
 
 .workspace-eyebrow,
@@ -1099,7 +1137,11 @@ function confirmDeleteAdmin() {
 .summary-copy {
 	margin: 0.55rem 0 0;
 	line-height: 1.55;
-	color: #12263a;
+	color: #41566a;
+}
+
+.summary-copy.is-muted {
+	color: #5c7387;
 }
 
 .sheet-body {
@@ -1114,6 +1156,9 @@ function confirmDeleteAdmin() {
 	margin: 0.25rem 0 0;
 	font-size: 1.25rem;
 	color: #10263a;
+	font-family: inherit;
+	font-weight: 700;
+	letter-spacing: -0.025em;
 }
 
 .directory-card-header h4 {
@@ -1153,7 +1198,7 @@ function confirmDeleteAdmin() {
 .security-copy,
 .helper-text {
 	margin: 0.85rem 0 0;
-	color: #405467;
+	color: #41566a;
 }
 
 .directory-grid {
@@ -1162,11 +1207,34 @@ function confirmDeleteAdmin() {
 	gap: 1rem;
 }
 
+.directory-card {
+	display: grid;
+	align-content: start;
+	gap: 0.95rem;
+}
+
 .info-grid {
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: minmax(0, 1fr);
 	gap: 0.85rem;
-	margin-top: 1rem;
+}
+
+.summary-list {
+	display: grid;
+	gap: 0;
+	list-style: none;
+	margin: 0.7rem 0 0;
+	padding: 0;
+}
+
+.summary-list li {
+	padding: 0.45rem 0;
+	line-height: 1.55;
+	color: #10263a;
+}
+
+.summary-list li + li {
+	border-top: 1px solid rgba(203, 213, 225, 0.62);
 }
 
 .assignment-editor,

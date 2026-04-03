@@ -269,7 +269,7 @@ watch(
 
 .section-heading {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(18rem, 28rem);
+	grid-template-columns: minmax(0, 1fr);
 	gap: 1rem 1.5rem;
 	align-items: start;
 	padding: clamp(1.25rem, 2vw, 1.6rem);
@@ -298,10 +298,10 @@ watch(
 .panel-heading h4,
 .record-summary h5 {
 	margin: 0;
-	font-family:
-		"Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino,
-		Georgia, serif;
 	color: #1c2d3e;
+	font-family: inherit;
+	font-weight: 700;
+	letter-spacing: -0.025em;
 }
 
 .section-heading h3 {

@@ -349,7 +349,7 @@ const fields = [
 
 .summary-copy {
 	margin: 0.55rem 0 0;
-	color: #12263a;
+	color: #41566a;
 	line-height: 1.55;
 }
 
@@ -368,6 +368,9 @@ const fields = [
 	margin: 0.25rem 0 0;
 	font-size: 1.25rem;
 	color: #10263a;
+	font-family: inherit;
+	font-weight: 700;
+	letter-spacing: -0.025em;
 }
 
 .field-stack {
@@ -392,7 +395,7 @@ const fields = [
 .security-copy {
 	margin: 0.85rem 0 0;
 	line-height: 1.6;
-	color: #405467;
+	color: #41566a;
 }
 
 .action-row {

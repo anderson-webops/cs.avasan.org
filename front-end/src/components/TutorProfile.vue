@@ -415,7 +415,8 @@ async function saveUserCourses(userID: string) {
 
 .section-heading {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.9fr);
+	grid-template-columns: minmax(0, 1fr);
+	gap: 0.7rem;
 	align-items: flex-start;
 }
 
@@ -434,13 +435,16 @@ async function saveUserCourses(userID: string) {
 	margin-top: 0.1rem;
 	font-size: clamp(1.8rem, 3vw, 2.35rem);
 	color: #10263a;
+	font-family: inherit;
+	font-weight: 700;
+	letter-spacing: -0.03em;
 }
 
 .workspace-header p:last-child,
 .section-copy {
 	margin: 0;
 	line-height: 1.65;
-	color: #405467;
+	color: #41566a;
 }
 
 .workspace-eyebrow,
@@ -540,7 +544,7 @@ async function saveUserCourses(userID: string) {
 .summary-copy {
 	margin: 0.55rem 0 0;
 	line-height: 1.55;
-	color: #12263a;
+	color: #41566a;
 }
 
 .sheet-body {
@@ -555,6 +559,9 @@ async function saveUserCourses(userID: string) {
 	margin: 0.25rem 0 0;
 	font-size: 1.25rem;
 	color: #10263a;
+	font-family: inherit;
+	font-weight: 700;
+	letter-spacing: -0.025em;
 }
 
 .directory-card-header h4 {
@@ -593,7 +600,7 @@ async function saveUserCourses(userID: string) {
 .hint {
 	margin: 0.85rem 0 0;
 	line-height: 1.6;
-	color: #405467;
+	color: #41566a;
 }
 
 .directory-grid {

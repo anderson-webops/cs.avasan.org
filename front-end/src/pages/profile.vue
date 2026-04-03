@@ -288,16 +288,19 @@ function isProfileTab(value: string | null): value is ProfileTab {
 }
 
 .profile-header.is-workspace-layout {
-	text-align: left;
-	max-width: 74rem;
+	text-align: center;
+	max-width: 70rem;
+	margin: 0 auto;
+	align-items: center;
 }
 
 .profile-header.is-workspace-layout .profile-badge {
-	align-self: flex-start;
+	align-self: center;
 }
 
 .profile-header.is-workspace-layout p:last-child {
 	max-width: 52rem;
+	margin-inline: auto;
 }
 
 .profile-badge {
