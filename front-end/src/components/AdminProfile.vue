@@ -240,37 +240,6 @@ function onTutorSelectionChange(userID: string, event: Event) {
 	};
 }
 
-async function saveAssignments(userID: string) {
-	try {
-		await api.put(`/users/${userID}/tutors`, {
-			tutorIDs: userAssignments.value[userID] ?? []
-		});
-		await Promise.all([app.fetchUsers(), app.fetchTutors()]);
-		success.value = "Saved tutor assignments.";
-		error.value = "";
-	} catch (e: any) {
-		error.value =
-			e.response?.data?.message ?? e.message ?? "Unable to update tutors";
-	}
-}
-
-async function saveRecipientAssociation(userID: string) {
-	try {
-		success.value = "";
-		error.value = "";
-		await api.put(`/users/${userID}/recipient`, {
-			recipientName: userRecipientNames.value[userID] ?? ""
-		});
-		await app.fetchUsers();
-		success.value = "Updated recipient association.";
-	} catch (e: any) {
-		error.value =
-			e.response?.data?.message ??
-			e.message ??
-			"Unable to update associated recipient";
-	}
-}
-
 async function saveTutorCourses(tutorID: string) {
 	try {
 		success.value = "";
@@ -349,7 +318,7 @@ function onUserCourseToggle(
 	};
 }
 
-async function saveUserCourses(userID: string) {
+async function saveUserEditorChanges(userID: string) {
 	try {
 		success.value = "";
 		error.value = "";
@@ -357,17 +326,25 @@ async function saveUserCourses(userID: string) {
 		const selection = (userCourseSelections.value[userID] ?? []).filter(
 			id => allowed.has(id)
 		);
+
+		await api.put(`/users/${userID}/recipient`, {
+			recipientName: userRecipientNames.value[userID] ?? ""
+		});
+		await api.put(`/users/${userID}/tutors`, {
+			tutorIDs: userAssignments.value[userID] ?? []
+		});
 		await api.put(`/users/${userID}/courses`, {
 			courseIDs: selection
 		});
-		success.value = "Updated user course access.";
-		await app.fetchUsers();
+
+		await Promise.all([app.fetchUsers(), app.fetchTutors()]);
 		userEditing.value = { ...userEditing.value, [userID]: false };
+		success.value = "Saved learner assignments.";
 	} catch (e: any) {
 		error.value =
 			e.response?.data?.message ??
 			e.message ??
-			"Unable to update courses";
+			"Unable to save learner assignments";
 	}
 }
 
@@ -676,34 +653,34 @@ function confirmDeleteAdmin() {
 						:key="u._id"
 						class="directory-card"
 					>
-						<div class="directory-card-header">
-							<div>
-								<h4>{{ u.name }}</h4>
+						<div class="directory-card-header is-user-card-header">
+							<div class="directory-card-identity">
+								<div class="directory-card-name-row">
+									<h4>{{ u.name }}</h4>
+									<p
+										v-if="u.recipientName"
+										class="recipient-association"
+									>
+										{{ u.recipientName }}
+									</p>
+								</div>
 								<p>{{ u.email }}</p>
 							</div>
-							<div class="directory-card-tools">
-								<p
-									v-if="u.recipientName"
-									class="recipient-association"
-								>
-									{{ u.recipientName }}
-								</p>
-								<button
-									class="btn-secondary btn"
-									type="button"
-									@click="
-										userEditing[u._id]
-											? cancelUserEdit(u._id)
-											: startUserEdit(u._id)
-									"
-								>
-									{{
-										userEditing[u._id]
-											? "Close editor"
-											: "Edit assignments"
-									}}
-								</button>
-							</div>
+							<button
+								class="btn-secondary btn"
+								type="button"
+								@click="
+									userEditing[u._id]
+										? cancelUserEdit(u._id)
+										: startUserEdit(u._id)
+								"
+							>
+								{{
+									userEditing[u._id]
+										? "Close editor"
+										: "Edit assignments"
+								}}
+							</button>
 						</div>
 
 						<div class="info-grid">
@@ -861,23 +838,9 @@ function confirmDeleteAdmin() {
 								<button
 									class="btn-primary btn"
 									type="button"
-									@click="saveRecipientAssociation(u._id)"
+									@click="saveUserEditorChanges(u._id)"
 								>
-									Save recipient
-								</button>
-								<button
-									class="btn-primary btn"
-									type="button"
-									@click="saveAssignments(u._id)"
-								>
-									Save tutors
-								</button>
-								<button
-									class="btn-primary btn"
-									type="button"
-									@click="saveUserCourses(u._id)"
-								>
-									Save courses
+									Save
 								</button>
 								<button
 									class="btn-secondary btn"
@@ -1251,11 +1214,24 @@ function confirmDeleteAdmin() {
 	color: #5f7a8e;
 }
 
-.directory-card-tools {
-	display: grid;
-	justify-items: end;
-	align-content: start;
-	gap: 0.75rem;
+.directory-card-header.is-user-card-header {
+	align-items: start;
+}
+
+.directory-card-identity {
+	min-width: 0;
+	flex: 1 1 18rem;
+}
+
+.directory-card-name-row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.directory-card-name-row h4 {
+	margin: 0;
 }
 
 .recipient-association {
@@ -1265,6 +1241,7 @@ function confirmDeleteAdmin() {
 	font-weight: 600;
 	line-height: 1.4;
 	text-align: right;
+	white-space: nowrap;
 }
 
 .field-stack {
