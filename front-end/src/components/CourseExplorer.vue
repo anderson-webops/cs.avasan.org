@@ -555,10 +555,11 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 										<video
 											v-if="isVideo(item.mediaLink)"
 											class="item-media-video"
-											controls
+											autoplay
+											loop
 											muted
 											playsinline
-											preload="metadata"
+											preload="auto"
 										>
 											<source :src="item.mediaLink" />
 										</video>
@@ -644,10 +645,11 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 										<video
 											v-if="isVideo(item.mediaLink)"
 											class="item-media-video"
-											controls
+											autoplay
+											loop
 											muted
 											playsinline
-											preload="metadata"
+											preload="auto"
 										>
 											<source :src="item.mediaLink" />
 										</video>
