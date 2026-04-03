@@ -1,5 +1,12 @@
 <script lang="ts" setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import {
+	computed,
+	nextTick,
+	onBeforeUnmount,
+	onMounted,
+	ref,
+	watch
+} from "vue";
 import {
 	CALENDLY_ASSET_ORIGIN,
 	CALENDLY_ORIGIN,
@@ -12,11 +19,19 @@ import {
 
 defineOptions({ name: "SignupPage" });
 
+const INLINE_CALENDLY_MIN_WIDTH = 860;
+
+const calendlyContainer = ref<HTMLDivElement | null>(null);
 const calendlyInlineWidget = ref<HTMLDivElement | null>(null);
 const calendlyState = ref<"loading" | "ready" | "error">("loading");
+const calendlyDisplayMode = ref<"inline" | "compact">("inline");
+const showInlineCalendly = computed(
+	() => calendlyDisplayMode.value === "inline"
+);
 
 let calendlyObserver: MutationObserver | null = null;
 let calendlyReadyTimeout: number | undefined;
+let calendlyResizeObserver: ResizeObserver | null = null;
 
 useHead({
 	link: [
@@ -91,29 +106,72 @@ function watchCalendlyIframe() {
 	});
 }
 
-onMounted(async () => {
-	warmCalendlyConnections();
-	await nextTick();
+function clearCalendlyReadyTimeout() {
+	if (calendlyReadyTimeout) {
+		window.clearTimeout(calendlyReadyTimeout);
+		calendlyReadyTimeout = undefined;
+	}
+}
+
+function resetCalendlyEmbed() {
+	calendlyObserver?.disconnect();
+	clearCalendlyReadyTimeout();
+	calendlyInlineWidget.value?.replaceChildren();
+}
+
+function updateCalendlyDisplayMode() {
+	const width = calendlyContainer.value?.clientWidth ?? window.innerWidth;
+	calendlyDisplayMode.value =
+		width >= INLINE_CALENDLY_MIN_WIDTH ? "inline" : "compact";
+}
+
+async function mountInlineCalendlyWidget() {
+	if (!calendlyInlineWidget.value) {
+		return;
+	}
+
+	calendlyState.value = "loading";
 	watchCalendlyIframe();
 
 	try {
-		if (!calendlyInlineWidget.value) {
-			return;
-		}
-
 		await mountCalendlyInlineWidget(calendlyInlineWidget.value);
 		watchCalendlyIframe();
 	} catch {
 		calendlyState.value = "error";
 	}
+}
+
+watch(calendlyDisplayMode, async mode => {
+	if (mode === "compact") {
+		resetCalendlyEmbed();
+		return;
+	}
+
+	await nextTick();
+	await mountInlineCalendlyWidget();
+});
+
+onMounted(async () => {
+	warmCalendlyConnections();
+	await nextTick();
+
+	updateCalendlyDisplayMode();
+
+	if (typeof ResizeObserver !== "undefined" && calendlyContainer.value) {
+		calendlyResizeObserver = new ResizeObserver(() => {
+			updateCalendlyDisplayMode();
+		});
+		calendlyResizeObserver.observe(calendlyContainer.value);
+	}
+
+	if (calendlyDisplayMode.value === "inline") {
+		await mountInlineCalendlyWidget();
+	}
 });
 
 onBeforeUnmount(() => {
-	calendlyObserver?.disconnect();
-
-	if (calendlyReadyTimeout) {
-		window.clearTimeout(calendlyReadyTimeout);
-	}
+	calendlyResizeObserver?.disconnect();
+	resetCalendlyEmbed();
 });
 </script>
 
@@ -144,8 +202,12 @@ onBeforeUnmount(() => {
 			</ul>
 		</section>
 
-		<div class="calendly-container">
-			<div class="calendly-stage" :class="`is-${calendlyState}`">
+		<div ref="calendlyContainer" class="calendly-container">
+			<div
+				v-if="showInlineCalendly"
+				class="calendly-stage"
+				:class="`is-${calendlyState}`"
+			>
 				<div
 					v-if="calendlyState !== 'ready'"
 					class="calendly-loading"
@@ -179,6 +241,24 @@ onBeforeUnmount(() => {
 					class="calendly-inline-widget"
 					:data-url="calendlyEmbedUrl"
 				/>
+			</div>
+			<div v-else class="calendly-compact">
+				<p class="calendly-loading-kicker">
+					Open the scheduler in a new tab
+				</p>
+				<p class="calendly-compact-copy">
+					The inline scheduler works best on wider viewports. On
+					narrower windows, opening Calendly directly gives you the
+					full booking experience without clipping.
+				</p>
+				<a
+					class="calendly-direct-link"
+					:href="calendlyUrl"
+					rel="noopener"
+					target="_blank"
+				>
+					Open Calendly
+				</a>
 			</div>
 			<p class="calendly-fallback">
 				If the scheduler is slow to appear, open Calendly directly:
@@ -271,13 +351,19 @@ onBeforeUnmount(() => {
 
 .calendly-stage {
 	position: relative;
-	min-height: 900px;
+	min-height: clamp(700px, 82vh, 860px);
 }
 
 .calendly-inline-widget {
 	box-sizing: border-box;
-	min-height: 900px;
+	min-height: clamp(700px, 82vh, 860px);
 	transition: opacity 0.25s ease;
+}
+
+.calendly-inline-widget:deep(iframe) {
+	width: 100%;
+	min-height: inherit;
+	border-radius: 20px;
 }
 
 .calendly-loading {
@@ -360,6 +446,34 @@ onBeforeUnmount(() => {
 
 .calendly-direct-link:hover {
 	background: #2d5c8a;
+}
+
+.calendly-compact {
+	display: grid;
+	justify-items: center;
+	gap: 1rem;
+	padding: clamp(2rem, 4vw, 3rem);
+	text-align: center;
+	border-radius: 22px;
+	background:
+		linear-gradient(
+			180deg,
+			rgba(250, 252, 255, 0.98),
+			rgba(244, 248, 252, 0.95)
+		),
+		radial-gradient(
+			circle at top left,
+			rgba(58, 110, 165, 0.12),
+			transparent 50%
+		);
+	box-shadow: inset 0 0 0 1px rgba(58, 110, 165, 0.1);
+}
+
+.calendly-compact-copy {
+	max-width: 40rem;
+	margin: 0;
+	line-height: 1.65;
+	color: #405467;
 }
 
 .calendly-stage.is-ready .calendly-inline-widget {
@@ -447,6 +561,11 @@ onBeforeUnmount(() => {
 
 	.calendly-container {
 		padding: 1rem;
+	}
+
+	.calendly-stage,
+	.calendly-inline-widget {
+		min-height: 640px;
 	}
 
 	.calendly-loading {

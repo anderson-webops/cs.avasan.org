@@ -140,7 +140,8 @@ export async function mountCalendlyInlineWidget(parentElement: HTMLElement) {
 
 	window.Calendly?.initInlineWidget?.({
 		url: calendlyEmbedUrl,
-		parentElement
+		parentElement,
+		resize: true
 	});
 }
 
