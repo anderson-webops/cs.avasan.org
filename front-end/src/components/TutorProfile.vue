@@ -47,7 +47,9 @@ async function loadUsers() {
 onMounted(loadUsers);
 
 const usersHeader = computed(() =>
-	currentTutor.value && users.value.length === 0 ? "No Users" : "Users"
+	currentTutor.value && users.value.length === 0
+		? "No Learners Yet"
+		: "Learners"
 );
 
 /* tutor edit flow */
@@ -172,7 +174,7 @@ async function saveUserCourses(userID: string) {
 								? permittedCourses
 										.map(course => course.name)
 										.join(", ")
-								: "Waiting for admin access"
+								: "Waiting for admin course access"
 						}}
 					</p>
 				</div>
@@ -262,7 +264,7 @@ async function saveUserCourses(userID: string) {
 					<h3>{{ usersHeader }}</h3>
 				</div>
 				<p class="section-copy">
-					Update course access for each learner using only the classes
+					Update course access for each learner using only the courses
 					already enabled for your account.
 				</p>
 			</div>
@@ -303,14 +305,14 @@ async function saveUserCourses(userID: string) {
 									? (u.courseAccess ?? [])
 											.map(id => courseLookup[id] ?? id)
 											.join(", ")
-									: "No courses assigned"
+									: "No course access yet"
 							}}
 						</p>
 					</div>
 
 					<div v-if="userEditing[u._id]" class="course-editor">
 						<p v-if="permittedCourses.length === 0" class="hint">
-							Your admin hasn't enabled any courses yet.
+							Your admin hasn’t enabled course access yet.
 						</p>
 						<div v-else class="checkbox-grid">
 							<label

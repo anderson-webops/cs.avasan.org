@@ -72,7 +72,7 @@ const assignedTutorNames = computed(() => {
 /* -------------------------------------------------- */
 const courseAccessText = computed(() => {
 	const user = currentUser.value;
-	if (!user?.courseAccess?.length) return "No courses assigned";
+	if (!user?.courseAccess?.length) return "No course access yet";
 	const names = courseNameMap.value ?? {};
 	return user.courseAccess.map(id => names[id] ?? id).join(", ");
 });
@@ -100,7 +100,7 @@ const fields = [
 				<h2>Account overview</h2>
 				<p>
 					Review tutor assignments, confirm course access, and keep
-					your login details up to date in one calm workspace.
+					your login details current in one calm workspace.
 				</p>
 			</div>
 			<div class="workspace-stats">
@@ -123,7 +123,7 @@ const fields = [
 						{{
 							assignedTutorNames.length
 								? assignedTutorNames.join(", ")
-								: "No tutors assigned"
+								: "No tutor assigned yet"
 						}}
 					</p>
 				</div>

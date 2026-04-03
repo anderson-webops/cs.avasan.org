@@ -34,62 +34,52 @@ onMounted(() => {
 
 			<div class="copy">
 				<p>
-					I'm a lifelong learner and educator with a passion for
-					helping students fall in love with problem-solving. For the
-					last several years I taught coding, math, and science
-					through Juni Learning, where I guided hundreds of students
-					from their first "Hello World" program all the way to
-					launching complex capstone projects.
+					I’m a lifelong learner and educator who loves helping
+					students discover how enjoyable problem-solving can be. Over
+					the past several years, I taught coding, math, and science
+					through Juni Learning, guiding hundreds of students from
+					their first “Hello, World!” program to ambitious capstone
+					projects.
 				</p>
-				<br />
 				<p>
-					With Juni winding down, I'm excited to continue working
-					directly with families and adult learners. My goal is to
-					keep the collaborative, project-driven environment you loved
-					while offering even more flexibility and personalized
-					support.
+					Today I work directly with families and adult learners,
+					keeping the same collaborative, project-driven approach
+					while offering more flexibility, clearer communication, and
+					personalized support.
 				</p>
 			</div>
 		</section>
 
 		<section aria-labelledby="philosophy-title" class="philosophy">
-			<h2>Teaching philosophy</h2>
+			<h2 id="philosophy-title">Teaching Philosophy</h2>
 			<ul>
 				<li>
-					<!--					<h3 class="w-100 text-center"> -->
-					<!--						<strong>Curiosity First</strong> -->
-					<!--					</h3> -->
 					<p>
 						<strong>Curiosity First:</strong>
-						Concepts stick when students understand the "why" and
-						can experiment freely.
+						Concepts stick when learners understand why they matter
+						and have room to experiment.
 					</p>
 				</li>
 				<li>
-					<!--					<h3 class="w-100 text-center"> -->
-					<!--						<strong>Transparent Goals</strong> -->
-					<!--					</h3> -->
 					<p>
 						<strong>Transparent Goals:</strong>
-						Every class ends with an achievable milestone or plan so
-						you always know what's next.
+						Every class ends with a clear milestone or next step, so
+						you always know what we are building toward.
 					</p>
 				</li>
 				<li>
-					<!--					<h3 class="w-100 text-center"> -->
-					<!--						<strong>Real-world Context</strong> -->
-					<!--					</h3> -->
 					<p>
 						<strong>Real-world Context:</strong>
 						We connect lessons to meaningful projects—apps, games,
-						data explorations, or engineering challenges.
+						data explorations, language practice, or engineering
+						challenges.
 					</p>
 				</li>
 			</ul>
 		</section>
 
 		<section aria-labelledby="experience-title" class="experience">
-			<h2 id="experience-title">Experience snapshot</h2>
+			<h2 id="experience-title">Experience Snapshot</h2>
 			<div class="experience-grid">
 				<article>
 					<h3>Juni Learning Instructor</h3>
@@ -101,7 +91,7 @@ onMounted(() => {
 				<article>
 					<h3>Curriculum Designer</h3>
 					<p>
-						Developed modules on circuit fundamentals, python, and
+						Developed modules on circuit fundamentals, Python, and
 						physics.
 					</p>
 				</article>
@@ -123,7 +113,7 @@ onMounted(() => {
 				target="_blank"
 				rel="noreferrer"
 			>
-				View my LinkedIn
+				View LinkedIn
 			</a>
 			<a
 				class="cta ghost"
@@ -131,19 +121,17 @@ onMounted(() => {
 				target="_blank"
 				rel="noreferrer"
 			>
-				Visit my portfolio site
+				Visit Portfolio
 			</a>
 		</section>
 
-		<section class="">
+		<section aria-label="Quote" class="quote-section">
 			<div v-if="hasQuote" class="quote">
 				<blockquote>“{{ quoteText }}”</blockquote>
 				<cite>— {{ quoteAuthor }}</cite>
 			</div>
 			<div v-else-if="loading" class="quote-skeleton">Loading…</div>
-			<div v-else-if="error" class="quote-error">
-				Couldn’t load a quote.
-			</div>
+			<div v-else-if="error" class="quote-error">Quote unavailable.</div>
 		</section>
 	</section>
 </template>
@@ -181,14 +169,12 @@ onMounted(() => {
 	grid-area: title;
 }
 
-/* Title sizing (moved out of .copy) */
 .page-title {
-	font-size: clamp(3rem, 3.5vw, 2.75rem);
+	font-size: clamp(2.4rem, 4vw, 3.2rem);
 	margin: 0 0 0.25rem 0;
 	text-align: center;
 }
 
-/* let the wrapper fill the grid cell */
 .image-wrapper {
 	grid-area: image;
 	align-self: stretch;
@@ -196,7 +182,6 @@ onMounted(() => {
 	display: flex;
 }
 
-/* Make the image fill its parent’s height and keep aspect ratio */
 .image-wrapper img {
 	width: 100%;
 	height: 100%;
@@ -211,20 +196,25 @@ onMounted(() => {
 		grid-template-columns: 1fr;
 		grid-template-areas:
 			"title"
-			"image";
+			"image"
+			"copy";
 		gap: 2rem;
 	}
 
-	/* Make the image a bit smaller than desktop and centered */
 	.image-wrapper {
 		max-width: 55%;
 		justify-self: center;
 	}
 
-	/* Optional: tighten title size slightly on very small devices */
 	.page-title {
 		font-size: clamp(1.8rem, 6vw, 2.2rem);
 	}
+}
+
+.copy {
+	grid-area: copy;
+	display: grid;
+	gap: 1.25rem;
 }
 
 .philosophy {
@@ -262,17 +252,15 @@ onMounted(() => {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
-
 	justify-content: space-around;
 	align-items: center;
-
 	width: 100%;
 	margin: 0.5rem 0 auto;
 	text-align: center;
 }
 
 .cta-group > * {
-	width: 40%;
+	min-width: 220px;
 }
 
 .cta {
@@ -341,7 +329,8 @@ section p {
 	text-align: left;
 }
 
-.quote {
+.quote,
+.quote-section {
 	text-align: right;
 	margin: 0 auto;
 }
@@ -352,12 +341,7 @@ section p {
 	}
 
 	.cta-group {
-		display: block;
-	}
-
-	.cta-group * {
-		margin: 1% 0;
-		width: 100%;
+		flex-direction: column;
 	}
 }
 </style>

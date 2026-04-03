@@ -127,12 +127,12 @@ onMounted(() => {
 						{{ t.name }}
 					</option>
 				</select>
-				<p v-else class="notutors">No Tutors are available</p>
+				<p v-else class="notutors">
+					No tutors are available right now.
+				</p>
 
 				<br />
-				<button id="infoSubmit" class="mt-3" type="submit">
-					Submit
-				</button>
+				<button id="infoSubmit" class="mt-3" type="submit">Save</button>
 			</form>
 
 			<button v-if="tutors.length" @click="showTutors = !showTutors">
@@ -143,7 +143,7 @@ onMounted(() => {
 
 			<template v-if="tutors.length">
 				<h3>Total Tutors: {{ tutors.length }}</h3>
-				<h3>Total Users : {{ numberOfUsers }}</h3>
+				<h3>Total Learners: {{ numberOfUsers }}</h3>
 			</template>
 
 			<div

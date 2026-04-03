@@ -106,11 +106,13 @@ watch(
 );
 
 const tutorsHeader = computed(() =>
-	currentAdmin.value && tutors.value.length === 0 ? "No Tutors" : "Tutors"
+	currentAdmin.value && tutors.value.length === 0 ? "No Tutors Yet" : "Tutors"
 );
 
 const usersHeader = computed(() =>
-	currentAdmin.value && users.value.length === 0 ? "No Users" : "Users"
+	currentAdmin.value && users.value.length === 0
+		? "No Learners Yet"
+		: "Learners"
 );
 
 const tutorLookup = computed(() => {
@@ -121,13 +123,13 @@ const tutorLookup = computed(() => {
 
 function formatAssignedTutors(userID: string) {
 	const assigned = userAssignments.value[userID] ?? [];
-	if (assigned.length === 0) return "No tutors assigned";
+	if (assigned.length === 0) return "No tutor assigned yet";
 	return assigned.map(id => tutorLookup.value[id] ?? "Unknown").join(", ");
 }
 
 function formatTutorCourses(tutorID: string) {
 	const list = tutorCourseSelections.value[tutorID] ?? [];
-	if (list.length === 0) return "No courses enabled";
+	if (list.length === 0) return "No course access enabled";
 	const names = courseNameMap.value ?? {};
 	return list.map(id => names[id] ?? id).join(", ");
 }
@@ -401,8 +403,8 @@ function confirmDeleteAdmin() {
 				<p>
 					{{
 						viewMode === "profile"
-							? "Review your admin account, tune tutor course permissions, and shape each learner's access from one shared workspace."
-							: "Handle role changes and account removals with the same calm structure used across the new course workspace."
+							? "Review your admin account, set tutor course permissions, and shape each learner’s access from one shared workspace."
+							: "Handle role changes and account removals from the same structured workspace used across the rest of the site."
 					}}
 				</p>
 			</div>
@@ -412,7 +414,7 @@ function confirmDeleteAdmin() {
 					<strong>{{ tutorCount }}</strong>
 				</div>
 				<div class="stat-pill">
-					<span>Users</span>
+					<span>Learners</span>
 					<strong>{{ userCount }}</strong>
 				</div>
 			</div>
@@ -520,9 +522,8 @@ function confirmDeleteAdmin() {
 						<h3>{{ tutorsHeader }}</h3>
 					</div>
 					<p class="section-copy">
-						Enable course permissions for each tutor so the student
-						assignment editor always reflects the right teaching
-						scope.
+						Enable course access for each tutor so learner
+						assignments always reflect the right teaching scope.
 					</p>
 				</div>
 
@@ -615,7 +616,7 @@ function confirmDeleteAdmin() {
 					</div>
 					<p class="section-copy">
 						Assign tutors first, then grant courses only from that
-						learner's tutor set.
+						learner’s tutor set.
 					</p>
 				</div>
 
@@ -667,7 +668,7 @@ function confirmDeleteAdmin() {
 												)
 													.map(id => courseLabel(id))
 													.join(", ")
-											: "No courses assigned"
+											: "No course access yet"
 									}}
 								</p>
 							</div>

@@ -88,7 +88,7 @@ function logoutUser() {
 									class="nav-link"
 									to="/admin/student-management"
 								>
-									Student Management
+									Learner Management
 								</router-link>
 							</li>
 							<li class="nav-item">
@@ -105,25 +105,28 @@ function logoutUser() {
 					<button
 						v-if="isLoggedIn"
 						class="btn-outline-danger btn"
+						type="button"
 						@click="logoutUser"
 					>
-						Logout
+						Log Out
 					</button>
 					<!-- Login button -->
 					<button
 						v-else
 						class="btn-outline-success btn"
+						type="button"
 						@click="emit('loginClick')"
 					>
-						Login
+						Log In
 					</button>
 					<!-- Signup button -->
 					<button
 						v-if="!isLoggedIn"
 						class="btn-outline-primary btn"
+						type="button"
 						@click="emit('signupClick')"
 					>
-						Signup
+						Sign Up
 					</button>
 				</div>
 			</div>

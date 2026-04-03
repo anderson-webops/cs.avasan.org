@@ -14,13 +14,15 @@ const { subjectGroups, highlights } = storeToRefs(content);
 		<section aria-labelledby="hero-title" class="hero">
 			<div class="hero-text">
 				<p class="eyebrow">Classes with Jacob</p>
-				<h1>Build confidence in coding, STEM, and Spanish.</h1>
+				<h1 id="hero-title">
+					Build Confidence in Coding, STEM, and Spanish.
+				</h1>
 				<p>
-					I specialize in teaching programming, engineering, and
-					language topics to learners of all ages—from grade school
-					through adulthood. Every session focuses on their individual
-					goals—whether that’s discovering new skills or strengthening
-					existing ones.
+					I teach programming, engineering, science, and language
+					topics to learners from grade school through adulthood. Each
+					session is built around the learner’s goals, whether that
+					means building a strong foundation, catching up, or
+					stretching into something new.
 				</p>
 			</div>
 			<img
@@ -38,19 +40,19 @@ const { subjectGroups, highlights } = storeToRefs(content);
 				@mouseenter="primeCalendlyWidget"
 				@touchstart.passive="primeCalendlyWidget"
 			>
-				>Book a class</RouterLink
+				Book a Class</RouterLink
 			>
 			<RouterLink class="cta secondary" to="/payment"
-				>See tuition details</RouterLink
+				>View Tuition Details</RouterLink
 			>
 		</section>
 
 		<section aria-labelledby="subjects-title" class="subjects">
-			<h2 id="subjects-title">What I teach</h2>
-			<!--			<p class="intro">
-				Learn coding, STEM, and languages your way—with lessons and
-				projects that match your goals.
-			</p> -->
+			<h2 id="subjects-title">What I Teach</h2>
+			<p class="intro">
+				Choose from coding, STEM, and language tracks designed around
+				the learner’s goals, pace, and preferred projects.
+			</p>
 			<div class="subject-grid">
 				<article
 					v-for="group in subjectGroups"
@@ -68,7 +70,7 @@ const { subjectGroups, highlights } = storeToRefs(content);
 		</section>
 
 		<section aria-labelledby="highlights-title" class="highlights">
-			<h2 id="highlights-title">What I offer</h2>
+			<h2 id="highlights-title">What I Offer</h2>
 			<div class="highlight-grid">
 				<article
 					v-for="highlight in highlights"
@@ -83,11 +85,12 @@ const { subjectGroups, highlights } = storeToRefs(content);
 
 		<section aria-labelledby="next-steps-title" class="next-steps">
 			<div class="next-steps-card">
-				<h2 id="next-steps-title">Ready to get started?</h2>
+				<h2 id="next-steps-title">Ready to Get Started?</h2>
 				<p>
-					Pick a time on my Calendly, tell me a bit about the learner,
-					and I’ll confirm within one business day. Returning students
-					can use the same link to book ongoing sessions.
+					Choose a time in Calendly, share a few notes about the
+					learner, and I’ll follow up within one business day.
+					Returning students can use the same link to keep a regular
+					rhythm.
 				</p>
 				<RouterLink
 					class="cta primary"
@@ -96,12 +99,12 @@ const { subjectGroups, highlights } = storeToRefs(content);
 					@mouseenter="primeCalendlyWidget"
 					@touchstart.passive="primeCalendlyWidget"
 				>
-					>Schedule on Calendly</RouterLink
+					Book on Calendly</RouterLink
 				>
 				<a
 					class="cta secondary"
 					href="mailto:classes@jacobdanderson.net"
-					>Email me a question</a
+					>Ask a Question</a
 				>
 			</div>
 		</section>
@@ -152,14 +155,14 @@ const { subjectGroups, highlights } = storeToRefs(content);
 
 .cta-group {
 	display: flex;
-	gap: 2rem;
-	justify-content: space-around;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
 	align-items: center;
 }
 
-.cta-group * {
-	width: 40%;
-	margin: 0 auto;
+.cta-group > * {
+	min-width: 220px;
 }
 
 .cta {
@@ -223,13 +226,13 @@ const { subjectGroups, highlights } = storeToRefs(content);
 	margin-bottom: 0.75rem;
 }
 
-/*.intro {
+.intro {
 	max-width: 720px;
 	margin: 0 auto 2.5rem;
 	font-size: 1.05rem;
 	line-height: 1.6;
 	color: #334155;
-}*/
+}
 
 .subject-grid {
 	display: grid;
@@ -328,10 +331,6 @@ const { subjectGroups, highlights } = storeToRefs(content);
 		padding: 1.5rem 1rem 3rem;
 	}
 
-	.Home > .hero + .cta-group {
-		margin-top: -15%; /* negative of the gap value */
-	}
-
 	.hero {
 		gap: 1.5rem;
 	}
@@ -341,12 +340,7 @@ const { subjectGroups, highlights } = storeToRefs(content);
 	}
 
 	.cta-group {
-		display: block;
-	}
-
-	.cta-group * {
-		margin: 1% 0;
-		width: 100%;
+		flex-direction: column;
 	}
 
 	.subject-card,

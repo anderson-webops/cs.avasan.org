@@ -123,20 +123,20 @@ onBeforeUnmount(() => {
 			<h1>Schedule a Class</h1>
 			<p>
 				Use Calendly to choose a time that works for you. Share a few
-				notes about the learner and the topics you’d like to cover so I
-				can tailor the session in advance.
+				notes about the learner and the topics you want to cover so I
+				can prepare before we meet.
 			</p>
-			<br />
 			<ul>
 				<li>
-					Sessions are 50 minutes with an optional 10-minute buffer.
+					Sessions are 50 minutes with a built-in buffer for wrap-up
+					questions.
 				</li>
 				<li>
-					Need a recurring spot? Book the first meeting and we’ll lock
-					in the rest together.
+					Need a recurring time? Book the first session and we can set
+					up the rest together.
 				</li>
 				<li>
-					Prefer to coordinate by email? Reach me at
+					Prefer email? Reach me at
 					<a href="mailto:classes@jacobdanderson.net"
 						>classes@jacobdanderson.net</a
 					>.
@@ -154,8 +154,8 @@ onBeforeUnmount(() => {
 					<p class="calendly-loading-kicker">
 						{{
 							calendlyState === "error"
-								? "Having trouble loading the scheduler"
-								: "Opening scheduler..."
+								? "Trouble loading the scheduler"
+								: "Opening scheduler…"
 						}}
 					</p>
 					<div class="calendly-loading-shell">
@@ -170,7 +170,7 @@ onBeforeUnmount(() => {
 						rel="noopener"
 						target="_blank"
 					>
-						Open Calendly directly
+						Open Calendly in a New Tab
 					</a>
 				</div>
 
@@ -181,8 +181,7 @@ onBeforeUnmount(() => {
 				/>
 			</div>
 			<p class="calendly-fallback">
-				If the scheduler is slow to appear, use the direct Calendly
-				link:
+				If the scheduler is slow to appear, open Calendly directly:
 				<a :href="calendlyUrl" rel="noopener" target="_blank">
 					{{ calendlyUrl }}
 				</a>
@@ -193,20 +192,23 @@ onBeforeUnmount(() => {
 			aria-labelledby="after-booking-title"
 			class="after-booking d-grid"
 		>
-			<h2 id="after-booking-title">After you book</h2>
+			<h2 id="after-booking-title">After You Book</h2>
 			<ol>
-				<li>I’ll send a welcome email within one business day.</li>
 				<li>
-					Before our first meeting we’ll outline goals, tools, and any
-					materials needed for class.
+					I’ll send a confirmation or follow-up within one business
+					day.
 				</li>
 				<li>
-					Payment is due only after class—see the tuition page for
+					Before our first meeting, we’ll outline goals, tools, and
+					any materials needed for class.
+				</li>
+				<li>
+					Payment is due only after class. The tuition page covers the
 					details.
 				</li>
 			</ol>
 			<RouterLink class="cta" to="/payment"
-				>View tuition details</RouterLink
+				>View Tuition Details</RouterLink
 			>
 		</section>
 	</section>
@@ -388,6 +390,7 @@ onBeforeUnmount(() => {
 
 .intro,
 .after-booking {
+	display: grid;
 	max-width: 720px;
 	margin: 0;
 	text-align: center;

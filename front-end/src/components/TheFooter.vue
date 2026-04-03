@@ -9,7 +9,9 @@ import { primeCalendlyWidget } from "@/modules/calendly";
 				<h3>Connect</h3>
 				<ul>
 					<li>
-						<a href="mailto:classes@jacobdanderson.net">Email me</a>
+						<a href="mailto:classes@jacobdanderson.net">
+							Email Jacob
+						</a>
 					</li>
 					<li>
 						<a
@@ -26,7 +28,7 @@ import { primeCalendlyWidget } from "@/modules/calendly";
 							rel="noreferrer"
 							target="_blank"
 						>
-							GitHub repository
+							GitHub
 						</a>
 					</li>
 				</ul>
@@ -35,8 +37,8 @@ import { primeCalendlyWidget } from "@/modules/calendly";
 			<section class="brand">
 				<h2>Classes with Jacob</h2>
 				<p>
-					Personalized tutoring for coding, STEM, and Spanish. Serving
-					students online across the U.S.
+					Online tutoring in coding, STEM, and Spanish for learners
+					across the U.S.
 				</p>
 			</section>
 
@@ -54,9 +56,7 @@ import { primeCalendlyWidget } from "@/modules/calendly";
 						</RouterLink>
 					</li>
 					<li>
-						<RouterLink to="/payment"
-							>Tuition &amp; Payment</RouterLink
-						>
+						<RouterLink to="/payment">View Tuition</RouterLink>
 					</li>
 					<li>
 						<RouterLink to="/about">About Jacob</RouterLink>

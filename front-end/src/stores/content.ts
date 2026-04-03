@@ -27,11 +27,11 @@ export const useContentStore = defineStore("content", () => {
 				"C++",
 				"C",
 				"Java",
-				"Intro to AI and Machine Learning"
+				"Intro to AI & Machine Learning"
 			]
 		},
 		{
-			title: "Web Technologies",
+			title: "Web Development",
 			subjects: [
 				"HTML",
 				"CSS",
@@ -48,24 +48,24 @@ export const useContentStore = defineStore("content", () => {
 
 	const highlights = ref<Highlight[]>([
 		{
-			title: "Experienced Instructor",
-			copy: "Former Juni Learning instructor now offering direct 1:1 sessions tailored to each learner's goals and pace."
+			title: "Experienced, Personalized Instruction",
+			copy: "Several years of one-on-one and small-group teaching experience, tailored to each learner’s pace, interests, and goals."
 		},
 		{
-			title: "Project-Based Learning",
-			copy: "Every class connects concepts to real-world challenges so students can apply their skills immediately."
+			title: "Project-Based Lessons",
+			copy: "Sessions turn new ideas into games, apps, data explorations, and other meaningful work students can revisit and share."
 		},
 		{
 			title: "Flexible Scheduling",
-			copy: "50-minute lessons with a 10-minute post-class time buffer to finish tough problems without feeling rushed."
+			copy: "Fifty-minute lessons include a built-in buffer, so a strong question or debugging session never has to stop abruptly."
 		},
 		{
-			title: "Flexible Payment",
-			copy: "Only pay for classes taught—missed or last-minute canceled sessions are not billed."
+			title: "Straightforward Billing",
+			copy: "Pay only for completed classes. Missed or canceled sessions are not billed."
 		},
 		{
 			title: "Satisfaction Guarantee",
-			copy: "If you're not satisfied after any class, get a full refund. Feedback is always welcome and encouraged."
+			copy: "If a class does not meet expectations, I will make it right. Feedback is always welcome and encouraged."
 		}
 	]);
 
@@ -77,15 +77,15 @@ export const useContentStore = defineStore("content", () => {
 	const faqs = ref<FAQ[]>([
 		{
 			question: "Can siblings or friends join the same session?",
-			answer: "Sadly this option is not available at this time as it is harder to ensure each learner gets the attention they deserve. I’m happy to work with multiple learners back-to-back, though!"
+			answer: "At the moment, sessions are one learner at a time so each student gets focused attention. If you have multiple learners, I’m happy to schedule back-to-back classes."
 		},
 		{
 			question: "What happens if we need to reschedule?",
-			answer: "Life happens! Just please let me know as soon as possible. No fees are charged whatsoever for cancellations."
+			answer: "Life happens. Just let me know as soon as you can, and we’ll find a new time. There are no cancellation fees."
 		},
 		{
 			question: "Do you offer progress updates?",
-			answer: "Yes. I provide quick session summaries highlighting wins, challenges, and recommended practice so parents and students can stay aligned between meetings."
+			answer: "Yes. I send short session notes with wins, challenges, and suggested next steps so families can stay aligned between meetings."
 		}
 	]);
 

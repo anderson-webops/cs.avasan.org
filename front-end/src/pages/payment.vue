@@ -11,31 +11,33 @@ const content = useContentStore();
 		<div class="intro">
 			<h1>Tuition &amp; Payment</h1>
 			<p>
-				Each class is a 50-minute 1:1 session for $40. I always leave an
-				extra 10-minute buffer so we can wrap up a project or finish
-				debugging without rushing.
+				Each session is a 50-minute one-on-one class for $40, with a
+				built-in 10-minute buffer so we can wrap up a project or solve
+				one last bug without rushing the ending.
 			</p>
 			<div class="tuition-card">
 				<div class="rate">
 					<span class="amount">$40</span>
-					<span class="details">per class • 50 minutes</span>
+					<span class="details">Per Session • 50 Minutes</span>
 				</div>
 				<ul>
 					<li>Flexible recurring or one-time scheduling</li>
-					<li>Follow-up notes with key takeaways and next steps</li>
 					<li>
-						Homework review or project feedback between sessions
+						Short follow-up notes with key takeaways and next steps
+					</li>
+					<li>
+						Light homework review or project feedback between
+						sessions
 					</li>
 				</ul>
 			</div>
 		</div>
 
 		<section aria-labelledby="payment-title" class="payment">
-			<h2 id="payment-title">How to pay</h2>
+			<h2 id="payment-title">How to Pay</h2>
 			<p>
-				Venmo and Zelle are available to submit payment before or after
-				class. Tap the buttons below to see my Zelle contact or to open
-				my Venmo profile in a new tab.
+				Venmo and Zelle both work well. Use the links below to open my
+				Venmo profile or view the Zelle email connected to classes.
 			</p>
 			<a
 				class="cta"
@@ -43,20 +45,20 @@ const content = useContentStore();
 				rel="noreferrer"
 				target="_blank"
 			>
-				Open Venmo profile
+				Open Venmo
 			</a>
 			<RouterLink class="cta" to="/zelle">Pay with Zelle</RouterLink>
 			<div class="note">
 				<p>
-					Prefer a different method? I can also accept CashApp, Apple
-					Cash or mailed checks—just reach out and we’ll set up what
-					works best for your family.
+					Prefer a different method? I can also accept Cash App, Apple
+					Cash, or mailed checks. Just reach out and we’ll find the
+					easiest option for your family.
 				</p>
 			</div>
 		</section>
 
 		<section aria-labelledby="faq-title" class="faq w-100">
-			<h2 id="faq-title">FAQ</h2>
+			<h2 id="faq-title">Common Questions</h2>
 			<div id="faqAccordion" class="accordion">
 				<div
 					v-for="(faq, i) in content.faqs"
@@ -91,10 +93,10 @@ const content = useContentStore();
 		</section>
 
 		<section aria-labelledby="schedule-title" class="schedule">
-			<h2 id="schedule-title">Ready to schedule?</h2>
+			<h2 id="schedule-title">Ready to Schedule?</h2>
 			<p>
-				Book through Calendly or email me to coordinate a recurring spot
-				that matches your schedule.
+				Book through Calendly or email me if you want help setting up a
+				recurring time that fits your schedule.
 			</p>
 			<RouterLink
 				class="cta"
@@ -103,7 +105,7 @@ const content = useContentStore();
 				@mouseenter="primeCalendlyWidget"
 				@touchstart.passive="primeCalendlyWidget"
 			>
-				Book a Class
+				Book on Calendly
 			</RouterLink>
 			<a class="cta ghost" href="mailto:classes@jacobdanderson.net"
 				>Email Jacob</a

@@ -9,20 +9,24 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 		<header class="hero">
 			<h1>Join the Virtual Classroom</h1>
 			<p>
-				Sessions take place on Zoom. Use the button below to open the
-				live classroom. Bookmark this page so you can always reach the
-				meeting quickly.
+				Sessions take place on Zoom. Use this page to open the classroom
+				quickly before each lesson, and bookmark it so it is always easy
+				to find.
 			</p>
 		</header>
 
 		<div class="card-grid">
 			<article class="zoom-card" aria-labelledby="zoom-card-title">
-				<h2 id="zoom-card-title">Zoom Meeting</h2>
+				<h2 id="zoom-card-title">Zoom Meeting Room</h2>
 				<p>
-					Click the button to launch Zoom in a new tab. Make sure you
-					are signed in to Zoom before class time for the smoothest
-					experience.
+					Click the button to launch Zoom in a new tab. Joining a few
+					minutes early usually makes the start of class smoother.
 				</p>
+				<ul class="prep-list">
+					<li>Open Zoom a few minutes before class time.</li>
+					<li>Check audio, video, and screen-sharing permissions.</li>
+					<li>Keep any code, notes, or homework nearby.</li>
+				</ul>
 				<a
 					class="cta"
 					:href="zoomMeetingUrl"
@@ -32,7 +36,7 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 					Join on Zoom
 				</a>
 				<p class="fallback">
-					Zoom link (copy &amp; paste):
+					Direct link:
 					<a :href="zoomMeetingUrl" rel="noopener" target="_blank">
 						{{ zoomMeetingUrl }}
 					</a>
@@ -96,6 +100,14 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 p {
 	margin: 0;
 	line-height: 1.6;
+}
+
+.prep-list {
+	margin: 0;
+	padding-left: 1.2rem;
+	display: grid;
+	gap: 0.5rem;
+	color: #2d3f55;
 }
 
 .cta {
