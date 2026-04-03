@@ -902,35 +902,73 @@ function confirmDeleteAdmin() {
 <style scoped>
 .admin-workspace {
 	display: grid;
-	gap: 1.6rem;
+	gap: 1.1rem;
+	width: 100%;
 }
 
-.workspace-header,
+.admin-workspace section {
+	margin: 0;
+}
+
+.workspace-header {
+	width: 100%;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: start;
+	gap: 1rem 1.5rem;
+	padding: clamp(1.35rem, 2.1vw, 1.8rem);
+	border-radius: 28px;
+	background: linear-gradient(
+		180deg,
+		rgba(248, 250, 252, 0.9),
+		rgba(255, 255, 255, 0.82)
+	);
+	border: 1px solid rgba(255, 255, 255, 0.48);
+	box-shadow: 0 28px 60px -44px rgba(15, 23, 42, 0.44);
+}
+
+.workspace-header > div:first-child {
+	display: grid;
+	gap: 0.75rem;
+	min-width: 0;
+}
+
 .section-heading,
 .directory-card-header,
-.action-row,
-.info-grid {
+.action-row {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	gap: 1rem;
 }
 
-.workspace-header {
+.section-heading {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.9fr);
 	align-items: flex-start;
 }
 
 .workspace-header h2,
 .section-heading h3 {
-	margin: 0.25rem 0 0;
-	font-size: clamp(1.9rem, 4vw, 2.35rem);
+	margin: 0;
+	color: #10263a;
+}
+
+.workspace-header h2 {
+	font-size: clamp(2rem, 4vw, 3rem);
+	line-height: 1.08;
+}
+
+.section-heading h3 {
+	margin-top: 0.1rem;
+	font-size: clamp(1.8rem, 3vw, 2.35rem);
 	color: #10263a;
 }
 
 .workspace-header p:last-child,
 .section-copy {
-	margin: 0.75rem 0 0;
-	max-width: 46rem;
+	margin: 0;
 	line-height: 1.65;
 	color: #405467;
 }
@@ -944,13 +982,19 @@ function confirmDeleteAdmin() {
 	font-weight: 700;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: #5f7a8e;
+	color: #0f766e;
 }
 
 .workspace-stats {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.85rem;
+	width: min(100%, 19rem);
+	display: grid;
+	grid-template-columns: repeat(2, minmax(7.5rem, 1fr));
+	gap: 0;
+	border-radius: 22px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.66);
+	border: 1px solid rgba(148, 163, 184, 0.22);
+	box-shadow: 0 24px 45px -38px rgba(15, 23, 42, 0.55);
 }
 
 .stat-pill,
@@ -964,11 +1008,16 @@ function confirmDeleteAdmin() {
 }
 
 .stat-pill {
-	min-width: 10rem;
-	padding: 0.95rem 1.1rem;
-	box-shadow:
-		inset 0 0 0 1px rgba(203, 213, 225, 0.7),
-		0 20px 30px -28px rgba(15, 23, 42, 0.55);
+	min-width: 0;
+	padding: 1rem 1.1rem;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	border-right: 1px solid rgba(203, 213, 225, 0.78);
+}
+
+.stat-pill:last-child {
+	border-right: none;
 }
 
 .stat-pill span {
@@ -1009,7 +1058,9 @@ function confirmDeleteAdmin() {
 .directory-section {
 	display: grid;
 	gap: 1.25rem;
-	padding: 1.5rem;
+	width: 100%;
+	margin: 0;
+	padding: clamp(1.2rem, 2vw, 1.5rem);
 	border-radius: 30px;
 	background: linear-gradient(
 		180deg,
@@ -1043,8 +1094,9 @@ function confirmDeleteAdmin() {
 
 .sheet-body {
 	display: grid;
-	grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 1rem;
+	align-items: stretch;
 }
 
 .panel-header h3,
@@ -1076,6 +1128,12 @@ function confirmDeleteAdmin() {
 	gap: 1rem;
 }
 
+.sheet-panel {
+	display: grid;
+	align-content: start;
+	gap: 1rem;
+}
+
 .security-copy,
 .helper-text,
 .section-copy {
@@ -1090,7 +1148,7 @@ function confirmDeleteAdmin() {
 
 .directory-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 	gap: 1rem;
 }
 
@@ -1153,10 +1211,16 @@ function confirmDeleteAdmin() {
 }
 
 @media (max-width: 960px) {
+	.workspace-header,
+	.section-heading,
 	.sheet-summary,
 	.sheet-body,
 	.info-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.workspace-stats {
+		width: 100%;
 	}
 }
 

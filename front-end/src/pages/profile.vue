@@ -265,7 +265,7 @@ function isProfileTab(value: string | null): value is ProfileTab {
 
 .profile-page.is-workspace-layout {
 	align-items: flex-start;
-	padding-top: clamp(2.5rem, 4vw, 4.5rem);
+	padding: clamp(2rem, 3vw, 3rem) 1rem 3rem;
 }
 
 .profile-content {
@@ -276,7 +276,7 @@ function isProfileTab(value: string | null): value is ProfileTab {
 }
 
 .profile-content.is-workspace-layout {
-	width: min(1420px, 100%);
+	width: min(1520px, 100%);
 }
 
 .profile-header {
@@ -338,7 +338,7 @@ function isProfileTab(value: string | null): value is ProfileTab {
 }
 
 .profile-card.is-workspace-layout {
-	padding: 1rem;
+	padding: 0.8rem;
 	border-radius: 34px;
 	background: rgba(255, 255, 255, 0.14);
 	border-color: rgba(191, 219, 254, 0.24);
@@ -539,7 +539,7 @@ function isProfileTab(value: string | null): value is ProfileTab {
 	}
 
 	.profile-page.is-workspace-layout {
-		padding: 2.75rem 1rem 3rem;
+		padding: 2.25rem 0.85rem 2.75rem;
 	}
 
 	.profile-card,
@@ -548,7 +548,7 @@ function isProfileTab(value: string | null): value is ProfileTab {
 	}
 
 	.profile-card.is-workspace-layout {
-		padding: 0.75rem;
+		padding: 0.7rem;
 	}
 
 	.profile-header.is-workspace-layout {
