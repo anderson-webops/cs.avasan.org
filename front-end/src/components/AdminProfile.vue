@@ -571,8 +571,12 @@ function confirmDeleteAdmin() {
 							</button>
 						</div>
 
-						<div class="summary-block is-inline">
-							<p class="summary-label">Course access</p>
+						<details class="summary-block is-inline is-collapsible">
+							<summary class="summary-toggle">
+								<span class="summary-label">
+									Course access
+								</span>
+							</summary>
 							<ul
 								v-if="tutorCourseLabels(t._id).length"
 								class="summary-list"
@@ -587,7 +591,7 @@ function confirmDeleteAdmin() {
 							<p v-else class="summary-copy is-muted">
 								No course access enabled
 							</p>
-						</div>
+						</details>
 
 						<div v-if="tutorEditing[t._id]" class="course-editor">
 							<p class="helper-text">
