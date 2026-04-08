@@ -28,6 +28,7 @@
 		"up": "npm exec --yes -- taze major -I && npm run -w front-end up && npm run -w back-end up"
 	},
 	"overrides": {
+		"defu": "6.1.6",
 		"eslint-plugin-import": {
 			"minimatch": "^3.1.5"
 		},
