@@ -4,133 +4,6 @@ export const pythonLevel1Course: RawCourse = {
 	name: "Python Level 1",
 	modules: [
 		{
-			title: "Check-In #1",
-			curriculum: [
-				{
-					title: "Check-In #1 Overview",
-					content:
-						"Use this check-in as a guided review of Turtle basics, loops, variables, random numbers, and conditionals. Try each prompt independently first, then revisit any topics that need more practice.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Check-in-1"
-				},
-				{
-					title: "Check-In #1: Basics with Turtle",
-					content:
-						"Review how to import Turtle, create a turtle, move forward, turn, change colors, use `goto()`, lift and lower the pen, and draw outlined and filled shapes at chosen coordinates."
-				},
-				{
-					title: "Check-In #1: Loops",
-					content:
-						"Explain what loops do, then use them to repeat movement, draw polygons such as a dodecagon, scale shapes to different sizes, and approximate circles with many short repeated turns."
-				},
-				{
-					title: "Check-In #1: Variables and Random Numbers",
-					content:
-						"Review variables as reusable names for values, store side lengths and random values, and use RGB variables to generate random turtle colors."
-				},
-				{
-					title: "Check-In #1: Conditionals",
-					content:
-						"Practice `if`, `elif`, and `else` by reacting to random numbers and turtle positions. Use coordinate checks with `and` and `or` to change color based on where the turtle is on the canvas."
-				},
-				{
-					title: "Check-In #1 Reflection",
-					content:
-						"Write or record a short reflection about favorite concepts, challenges, problem-solving strategies, and a moment of pride from the course so far.",
-					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated"
-				},
-				{
-					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Create a zigzagging line with about 30 turns and extend it by connecting the zigzag to one or more original shapes.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS-Check-in-1-Additional-Practice-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #2",
-			curriculum: [
-				{
-					title: "Check-In #2 Overview",
-					content:
-						"Use this review to revisit advanced loops, functions, and event listeners. Focus on explaining not just how the code works, but why each structure is useful."
-				},
-				{
-					title: "Check-In #2: Advanced Loops",
-					content:
-						"Use a changing `sideLength` variable inside loops, compare `for` loops and `while` loops, build nested loop drawings, and control when a value stops growing."
-				},
-				{
-					title: "Check-In #2: Functions",
-					content:
-						"Review function definitions, function calls, and parameters by creating reusable movement and drawing helpers such as `moveForward50()` and `drawSquare(sideLength)`."
-				},
-				{
-					title: "Check-In #2: Event Listeners",
-					content:
-						"Create a screen, connect keys to functions, and use keyboard input to move the turtle or draw shapes. Finish by enabling the screen to listen for those events."
-				},
-				{
-					title: "Check-In #2 Reflection",
-					content:
-						"Reflect on favorite ideas, obstacles, strategies for improving, and progress made since the beginning of the course.",
-					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated"
-				},
-				{
-					title: "Check-In #2: Additional Practice Project",
-					content:
-						"Build an event-driven drawing program where different keys move the turtle to random locations or draw layered diamonds, pyramids, and circles in changing colors.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Check-in-Two-Additional-Practice-ProjectUpdated"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #3",
-			curriculum: [
-				{
-					title: "Check-In #3 Overview",
-					content:
-						"Use this module to review nested loops, game mechanics, advanced conditionals, and lists. Treat it as a progress snapshot and a chance to strengthen weaker topics."
-				},
-				{
-					title: "Check-In #3: Nested Loops and Game Mechanics",
-					content:
-						"Review nested loops by drawing repeated shapes at random positions, then add screen updates and `while True` loops with counters or `break` conditions to simulate basic game behavior."
-				},
-				{
-					title: "Check-In #3: Advanced Conditionals",
-					content:
-						"Compare `elif` and `else`, then use ranges of random numbers to trigger different colors and outcomes."
-				},
-				{
-					title: "Check-In #3: Lists",
-					content:
-						"Create empty lists, add multiple turtles to a list, and loop through that list to give each turtle the same command."
-				},
-				{
-					title: "Check-In #3 Reflection",
-					content:
-						"Write or record a reflection about what has been most interesting, what still feels challenging, and how problem-solving has improved over time.",
-					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated"
-				},
-				{
-					title: "Check-In #3: Additional Practice Project",
-					content:
-						"Create a simple target game with a spinning turtle, a randomly placed goal, and a spacebar-controlled launch mechanic.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS-Check-in-2-Practice-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
 			title: "GrS1 Coordinates and Movement",
 			curriculum: [
 				{
@@ -341,6 +214,53 @@ export const pythonLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-1/tree/main/Conditionals-and-Booleans-Recap"
 				}
 			]
+		},
+		{
+			title: "Check-In #1",
+			curriculum: [
+				{
+					title: "Check-In #1 Overview",
+					content:
+						"Use this check-in as a guided review of Turtle basics, loops, variables, random numbers, and conditionals. Try each prompt independently first, then revisit any topics that need more practice.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Check-in-1"
+				},
+				{
+					title: "Check-In #1: Basics with Turtle",
+					content:
+						"Review how to import Turtle, create a turtle, move forward, turn, change colors, use `goto()`, lift and lower the pen, and draw outlined and filled shapes at chosen coordinates."
+				},
+				{
+					title: "Check-In #1: Loops",
+					content:
+						"Explain what loops do, then use them to repeat movement, draw polygons such as a dodecagon, scale shapes to different sizes, and approximate circles with many short repeated turns."
+				},
+				{
+					title: "Check-In #1: Variables and Random Numbers",
+					content:
+						"Review variables as reusable names for values, store side lengths and random values, and use RGB variables to generate random turtle colors."
+				},
+				{
+					title: "Check-In #1: Conditionals",
+					content:
+						"Practice `if`, `elif`, and `else` by reacting to random numbers and turtle positions. Use coordinate checks with `and` and `or` to change color based on where the turtle is on the canvas."
+				},
+				{
+					title: "Check-In #1 Reflection",
+					content:
+						"Write or record a short reflection about favorite concepts, challenges, problem-solving strategies, and a moment of pride from the course so far.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated"
+				},
+				{
+					title: "Check-In #1: Additional Practice Project",
+					content:
+						"Create a zigzagging line with about 30 turns and extend it by connecting the zigzag to one or more original shapes.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS-Check-in-1-Additional-Practice-Project"
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "GrS5 Loops with Variables",
@@ -575,6 +495,46 @@ export const pythonLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-1/tree/main/Event-Listener-Recap"
 				}
 			]
+		},
+		{
+			title: "Check-In #2",
+			curriculum: [
+				{
+					title: "Check-In #2 Overview",
+					content:
+						"Use this review to revisit advanced loops, functions, and event listeners. Focus on explaining not just how the code works, but why each structure is useful."
+				},
+				{
+					title: "Check-In #2: Advanced Loops",
+					content:
+						"Use a changing `sideLength` variable inside loops, compare `for` loops and `while` loops, build nested loop drawings, and control when a value stops growing."
+				},
+				{
+					title: "Check-In #2: Functions",
+					content:
+						"Review function definitions, function calls, and parameters by creating reusable movement and drawing helpers such as `moveForward50()` and `drawSquare(sideLength)`."
+				},
+				{
+					title: "Check-In #2: Event Listeners",
+					content:
+						"Create a screen, connect keys to functions, and use keyboard input to move the turtle or draw shapes. Finish by enabling the screen to listen for those events."
+				},
+				{
+					title: "Check-In #2 Reflection",
+					content:
+						"Reflect on favorite ideas, obstacles, strategies for improving, and progress made since the beginning of the course.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated"
+				},
+				{
+					title: "Check-In #2: Additional Practice Project",
+					content:
+						"Build an event-driven drawing program where different keys move the turtle to random locations or draw layered diamonds, pyramids, and circles in changing colors.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Check-in-Two-Additional-Practice-ProjectUpdated"
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "GrS9 Functions Part 2",
@@ -857,6 +817,46 @@ export const pythonLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-1/tree/main/Grs13-Dodgeball"
 				}
 			]
+		},
+		{
+			title: "Check-In #3",
+			curriculum: [
+				{
+					title: "Check-In #3 Overview",
+					content:
+						"Use this module to review nested loops, game mechanics, advanced conditionals, and lists. Treat it as a progress snapshot and a chance to strengthen weaker topics."
+				},
+				{
+					title: "Check-In #3: Nested Loops and Game Mechanics",
+					content:
+						"Review nested loops by drawing repeated shapes at random positions, then add screen updates and `while True` loops with counters or `break` conditions to simulate basic game behavior."
+				},
+				{
+					title: "Check-In #3: Advanced Conditionals",
+					content:
+						"Compare `elif` and `else`, then use ranges of random numbers to trigger different colors and outcomes."
+				},
+				{
+					title: "Check-In #3: Lists",
+					content:
+						"Create empty lists, add multiple turtles to a list, and loop through that list to give each turtle the same command."
+				},
+				{
+					title: "Check-In #3 Reflection",
+					content:
+						"Write or record a reflection about what has been most interesting, what still feels challenging, and how problem-solving has improved over time.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated"
+				},
+				{
+					title: "Check-In #3: Additional Practice Project",
+					content:
+						"Create a simple target game with a spinning turtle, a randomly placed goal, and a spacebar-controlled launch mechanic.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS-Check-in-2-Practice-Project"
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "GrS14 Space Eater",

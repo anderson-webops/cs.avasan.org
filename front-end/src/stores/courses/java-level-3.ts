@@ -292,6 +292,48 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
+			title: "Check-In #1",
+			curriculum: [
+				{
+					title: "Check-In #1 Overview",
+					content:
+						"Use this check-in as a review of recursion, time complexity, and search algorithms. Focus on explaining how each algorithm works and why its runtime behaves the way it does.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1"
+				},
+				{
+					title: "Check-In #1: Recursion",
+					content:
+						"Review recursive methods, base and recursive cases, the dangers of missing base cases, recursive string length, Pascal's triangle, and tracing recursive output."
+				},
+				{
+					title: "Check-In #1: Time Complexity",
+					content:
+						"Practice Big-O notation by simplifying expressions and reasoning about the best and worst cases of different methods."
+				},
+				{
+					title: "Check-In #1: Linear Search",
+					content:
+						"Explain when linear search is useful, complete an unfinished implementation, and describe its best and worst case runtime."
+				},
+				{
+					title: "Check-In #1: Binary Search",
+					content:
+						"Review both iterative and recursive binary search, finish incomplete implementations, and compare its runtime with linear search."
+				},
+				{
+					title: "Check-In #1: Additional Practice Project",
+					content:
+						"Compare the real-world speeds of linear search and binary search by timing many runs on a large array with millisecond timestamps.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Additional-Practice-Project"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "AJ7 Selection and Insertion Sort",
 			curriculum: [
 				{
@@ -404,6 +446,48 @@ export const javaLevel3Course: RawCourse = {
 					title: "Merge Sort Big-O Analysis",
 					content:
 						"Analyze merge sort as a `O(n log n)` algorithm, compare it with quadratic-time sorts, and discuss why recursion overhead means it is most useful on sufficiently large lists."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "Check-In #2",
+			curriculum: [
+				{
+					title: "Check-In #2 Overview",
+					content:
+						"Use this check-in to review the major sorting algorithms in the course and compare how they behave, how they are implemented, and how their runtimes differ.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2"
+				},
+				{
+					title: "Check-In #2: Selection Sort",
+					content:
+						"Describe selection sort, predict the state of an array after several passes, complete an implementation, and discuss runtime plus in-place versus out-of-place behavior."
+				},
+				{
+					title: "Check-In #2: Insertion Sort",
+					content:
+						"Review insertion sort, trace several passes on a given list, complete the algorithm, and compare it with selection sort."
+				},
+				{
+					title: "Check-In #2: Bubble Sort",
+					content:
+						"Explain bubble sort, complete an implementation, consider optimizations such as early cutoffs, and compare it with other quadratic-time sorts."
+				},
+				{
+					title: "Check-In #2: Merge Sort",
+					content:
+						"Merge sorted sublists by hand, finish an incomplete merge sort implementation, and explain why merge sort's time complexity differs from the other sorting algorithms."
+				},
+				{
+					title: "Check-In #2: Additional Practice Project",
+					content:
+						"Time multiple sorting algorithms on arrays of different sizes and compare how their observed speeds change as the test scale increases.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Additional-Practice-Project"
 				}
 			],
 			supplementalProjects: []
@@ -596,6 +680,53 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
+			title: "Check-In #3",
+			curriculum: [
+				{
+					title: "Check-In #3 Overview",
+					content:
+						"Use this check-in to revisit sustainable programming ideas, linked lists, stacks, queues, priority queues, and maps through a mix of short explanations and code extensions.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3"
+				},
+				{
+					title: "Check-In #3: Sustainable Programming",
+					content:
+						"Review nested classes, generics, and exception handling by building a nested `Riddle` class, a generic `Triple` class, and custom exception logic."
+				},
+				{
+					title: "Check-In #3: Linked Lists",
+					content:
+						"Compare singly and doubly linked lists, complete `Node` class structures, add methods such as `indexOf()` and `remove()`, and test those methods on real lists."
+				},
+				{
+					title: "Check-In #3: Stacks",
+					content:
+						"Review stack operations, LIFO behavior, and how stacks can process edit-style input such as backspaces in a stream of key presses."
+				},
+				{
+					title: "Check-In #3: Queues",
+					content:
+						"Review queue operations, FIFO behavior, the idea of a priority queue, and examples where queue-based processing is useful."
+				},
+				{
+					title: "Check-In #3: Maps",
+					content:
+						"Review map creation, iteration, membership checks, duplicate-key behavior, and practical use cases for key-value storage."
+				},
+				{
+					title: "Check-In #3: Additional Practice Project",
+					content:
+						"Take a queue of names, reverse it with a stack, then sort it alphabetically with a priority queue, printing the queue after each transformation.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Additional-Practice-Project-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Additional-Practice-Project"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "AJ14 Binary Search Trees",
 			curriculum: [
 				{
@@ -736,6 +867,41 @@ export const javaLevel3Course: RawCourse = {
 			]
 		},
 		{
+			title: "Check-In #4",
+			curriculum: [
+				{
+					title: "Check-In #4 Overview",
+					content:
+						"Use this final check-in to review binary search trees, hash tables, and graphs, along with the main vocabulary and algorithm ideas from those topics.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4"
+				},
+				{
+					title: "Check-In #4: Binary Search Trees",
+					content:
+						"Review BST ordering rules, traversal orders, insertion and deletion practice, and why BSTs are useful for ordered lookup structures."
+				},
+				{
+					title: "Check-In #4: Hash Tables",
+					content:
+						"Explain how hash tables work, compute load factors, compare collision-handling strategies, and identify when rehashing is necessary."
+				},
+				{
+					title: "Check-In #4: Graphs",
+					content:
+						"Define graphs and graph vocabulary, build adjacency lists and matrices, compare sparse versus dense representations, and describe Dijkstra's algorithm at a high level."
+				},
+				{
+					title: "Check-In #4: Additional Practice Project",
+					content:
+						"Extend a BST with a breadth-first search method that prints nodes level by level using a queue.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4-Additional-Practice-Project"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "AJ17 Master Project: Google Maps",
 			curriculum: [
 				{
@@ -772,172 +938,6 @@ export const javaLevel3Course: RawCourse = {
 					title: "Course Recap",
 					content:
 						"Review the major ideas from the course, including recursion, searching, sorting, OOP review, generics, exceptions, linked lists, stacks, queues, priority queues, maps, trees, hash tables, and graphs."
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-in #1",
-			curriculum: [
-				{
-					title: "Check-In #1 Overview",
-					content:
-						"Use this check-in as a review of recursion, time complexity, and search algorithms. Focus on explaining how each algorithm works and why its runtime behaves the way it does.",
-					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Starter",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1"
-				},
-				{
-					title: "Check-In #1: Recursion",
-					content:
-						"Review recursive methods, base and recursive cases, the dangers of missing base cases, recursive string length, Pascal's triangle, and tracing recursive output."
-				},
-				{
-					title: "Check-In #1: Time Complexity",
-					content:
-						"Practice Big-O notation by simplifying expressions and reasoning about the best and worst cases of different methods."
-				},
-				{
-					title: "Check-In #1: Linear Search",
-					content:
-						"Explain when linear search is useful, complete an unfinished implementation, and describe its best and worst case runtime."
-				},
-				{
-					title: "Check-In #1: Binary Search",
-					content:
-						"Review both iterative and recursive binary search, finish incomplete implementations, and compare its runtime with linear search."
-				},
-				{
-					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Compare the real-world speeds of linear search and binary search by timing many runs on a large array with millisecond timestamps.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Additional-Practice-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-in #2",
-			curriculum: [
-				{
-					title: "Check-In #2 Overview",
-					content:
-						"Use this check-in to review the major sorting algorithms in the course and compare how they behave, how they are implemented, and how their runtimes differ.",
-					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Starter",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2"
-				},
-				{
-					title: "Check-In #2: Selection Sort",
-					content:
-						"Describe selection sort, predict the state of an array after several passes, complete an implementation, and discuss runtime plus in-place versus out-of-place behavior."
-				},
-				{
-					title: "Check-In #2: Insertion Sort",
-					content:
-						"Review insertion sort, trace several passes on a given list, complete the algorithm, and compare it with selection sort."
-				},
-				{
-					title: "Check-In #2: Bubble Sort",
-					content:
-						"Explain bubble sort, complete an implementation, consider optimizations such as early cutoffs, and compare it with other quadratic-time sorts."
-				},
-				{
-					title: "Check-In #2: Merge Sort",
-					content:
-						"Merge sorted sublists by hand, finish an incomplete merge sort implementation, and explain why merge sort's time complexity differs from the other sorting algorithms."
-				},
-				{
-					title: "Check-In #2: Additional Practice Project",
-					content:
-						"Time multiple sorting algorithms on arrays of different sizes and compare how their observed speeds change as the test scale increases.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Additional-Practice-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-in #3",
-			curriculum: [
-				{
-					title: "Check-In #3 Overview",
-					content:
-						"Use this check-in to revisit sustainable programming ideas, linked lists, stacks, queues, priority queues, and maps through a mix of short explanations and code extensions.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3"
-				},
-				{
-					title: "Check-In #3: Sustainable Programming",
-					content:
-						"Review nested classes, generics, and exception handling by building a nested `Riddle` class, a generic `Triple` class, and custom exception logic."
-				},
-				{
-					title: "Check-In #3: Linked Lists",
-					content:
-						"Compare singly and doubly linked lists, complete `Node` class structures, add methods such as `indexOf()` and `remove()`, and test those methods on real lists."
-				},
-				{
-					title: "Check-In #3: Stacks",
-					content:
-						"Review stack operations, LIFO behavior, and how stacks can process edit-style input such as backspaces in a stream of key presses."
-				},
-				{
-					title: "Check-In #3: Queues",
-					content:
-						"Review queue operations, FIFO behavior, the idea of a priority queue, and examples where queue-based processing is useful."
-				},
-				{
-					title: "Check-In #3: Maps",
-					content:
-						"Review map creation, iteration, membership checks, duplicate-key behavior, and practical use cases for key-value storage."
-				},
-				{
-					title: "Check-In #3: Additional Practice Project",
-					content:
-						"Take a queue of names, reverse it with a stack, then sort it alphabetically with a priority queue, printing the queue after each transformation.",
-					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Additional-Practice-Project-Starter",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Additional-Practice-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-in #4",
-			curriculum: [
-				{
-					title: "Check-In #4 Overview",
-					content:
-						"Use this final check-in to review binary search trees, hash tables, and graphs, along with the main vocabulary and algorithm ideas from those topics.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4"
-				},
-				{
-					title: "Check-In #4: Binary Search Trees",
-					content:
-						"Review BST ordering rules, traversal orders, insertion and deletion practice, and why BSTs are useful for ordered lookup structures."
-				},
-				{
-					title: "Check-In #4: Hash Tables",
-					content:
-						"Explain how hash tables work, compute load factors, compare collision-handling strategies, and identify when rehashing is necessary."
-				},
-				{
-					title: "Check-In #4: Graphs",
-					content:
-						"Define graphs and graph vocabulary, build adjacency lists and matrices, compare sparse versus dense representations, and describe Dijkstra's algorithm at a high level."
-				},
-				{
-					title: "Check-In #4: Additional Practice Project",
-					content:
-						"Extend a BST with a breadth-first search method that prints nodes level by level using a queue.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4-Additional-Practice-Project"
 				}
 			],
 			supplementalProjects: []

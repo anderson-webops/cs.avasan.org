@@ -4,77 +4,6 @@ export const pythonLevel2Course: RawCourse = {
 	name: "Python Level 2",
 	modules: [
 		{
-			title: "Check-In #1",
-			curriculum: [
-				{
-					title: "Check-In #1 Overview",
-					content:
-						"Use this module as a low-pressure review of variables, loops, and conditionals. Work through the prompts independently first, then revisit any areas that need reinforcement.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS-Check-in-1"
-				},
-				{
-					title: "Check-In #1: Variables",
-					content:
-						"Review variables and basic string operations by storing values, printing them, converting between data types, gathering user input, measuring string length, indexing into strings, and printing combined output with clear spacing."
-				},
-				{
-					title: "Check-In #1: Loops",
-					content:
-						"Compare `for` loops and `while` loops, print number sequences with different ranges and steps, iterate through strings character by character, and use a `while True` loop with a stopping condition as an optional extension."
-				},
-				{
-					title: "Check-In #1: Conditionals",
-					content:
-						"Review `if`, `elif`, and `else` by checking guesses against target values, combining conditions with `and` and `or`, and rewriting part of the solution using a nested conditional."
-				},
-				{
-					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Create a letter shifter that moves characters forward or backward through the alphabet based on either the overall word length or the parity of each index.",
-					mediaLink:
-						"https://static.classes.jacobdanderson.net/ps3_caesar_cipher.gif"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #2",
-			curriculum: [
-				{
-					title: "Check-In #2 Overview",
-					content:
-						"Use this review module to revisit functions, lists, dictionaries, and sets. Focus on explaining why each data structure or function design is a good fit for the task."
-				},
-				{
-					title: "Check-In #2: Functions",
-					content:
-						"Review the difference between defining and calling functions, returning values, importing `random`, and using functions to build small simulations such as a lottery game."
-				},
-				{
-					title: "Check-In #2: Lists",
-					content:
-						"Practice building lists from scratch, adding and removing elements, printing formatted output, and generating lists of numbers such as ranges and even values."
-				},
-				{
-					title: "Check-In #2: Dictionaries",
-					content:
-						"Review how dictionaries store key-value pairs, how to look up values, add entries, iterate through keys and values, and generate dictionaries from computed data."
-				},
-				{
-					title: "Check-In #2: Sets",
-					content:
-						"Practice using sets for unique values, membership tests, intersections, unions, and deduplicating characters or words from input text."
-				},
-				{
-					title: "Check-In #2: Additional Practice Project",
-					content:
-						"Use sets to analyze unique letters or words in user-provided text and compare the number of unique items with the total number of items."
-				}
-			],
-			supplementalProjects: []
-		},
-		{
 			title: "PS1 Variables, Strings, and Input",
 			curriculum: [
 				{
@@ -430,6 +359,41 @@ export const pythonLevel2Course: RawCourse = {
 						"https://static.classes.jacobdanderson.net/ps4_debugging_conditionals.gif"
 				}
 			]
+		},
+		{
+			title: "Check-In #1",
+			curriculum: [
+				{
+					title: "Check-In #1 Overview",
+					content:
+						"Use this module as a low-pressure review of variables, loops, and conditionals. Work through the prompts independently first, then revisit any areas that need reinforcement.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS-Check-in-1"
+				},
+				{
+					title: "Check-In #1: Variables",
+					content:
+						"Review variables and basic string operations by storing values, printing them, converting between data types, gathering user input, measuring string length, indexing into strings, and printing combined output with clear spacing."
+				},
+				{
+					title: "Check-In #1: Loops",
+					content:
+						"Compare `for` loops and `while` loops, print number sequences with different ranges and steps, iterate through strings character by character, and use a `while True` loop with a stopping condition as an optional extension."
+				},
+				{
+					title: "Check-In #1: Conditionals",
+					content:
+						"Review `if`, `elif`, and `else` by checking guesses against target values, combining conditions with `and` and `or`, and rewriting part of the solution using a nested conditional."
+				},
+				{
+					title: "Check-In #1: Additional Practice Project",
+					content:
+						"Create a letter shifter that moves characters forward or backward through the alphabet based on either the overall word length or the parity of each index.",
+					mediaLink:
+						"https://static.classes.jacobdanderson.net/ps3_caesar_cipher.gif"
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "PS5 Functions",
@@ -819,6 +783,42 @@ export const pythonLevel2Course: RawCourse = {
 						"https://static.classes.jacobdanderson.net/ps9_debugging_sets.gif"
 				}
 			]
+		},
+		{
+			title: "Check-In #2",
+			curriculum: [
+				{
+					title: "Check-In #2 Overview",
+					content:
+						"Use this review module to revisit functions, lists, dictionaries, and sets. Focus on explaining why each data structure or function design is a good fit for the task."
+				},
+				{
+					title: "Check-In #2: Functions",
+					content:
+						"Review the difference between defining and calling functions, returning values, importing `random`, and using functions to build small simulations such as a lottery game."
+				},
+				{
+					title: "Check-In #2: Lists",
+					content:
+						"Practice building lists from scratch, adding and removing elements, printing formatted output, and generating lists of numbers such as ranges and even values."
+				},
+				{
+					title: "Check-In #2: Dictionaries",
+					content:
+						"Review how dictionaries store key-value pairs, how to look up values, add entries, iterate through keys and values, and generate dictionaries from computed data."
+				},
+				{
+					title: "Check-In #2: Sets",
+					content:
+						"Practice using sets for unique values, membership tests, intersections, unions, and deduplicating characters or words from input text."
+				},
+				{
+					title: "Check-In #2: Additional Practice Project",
+					content:
+						"Use sets to analyze unique letters or words in user-provided text and compare the number of unique items with the total number of items."
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "PS10 Todo List",

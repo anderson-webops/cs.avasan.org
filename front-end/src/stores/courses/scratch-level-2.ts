@@ -4,96 +4,6 @@ export const scratchLevel2Course: RawCourse = {
 	name: "Scratch Level 2",
 	modules: [
 		{
-			title: "Check-in #1",
-			curriculum: [
-				{
-					title: "Check-in #1: Nested Loops",
-					solutionLink: "https://scratch.mit.edu/projects/341945558/",
-					content: `Create a new blank project in Scratch, and name it "Check-in #1".
-Nested-1: What is a loop? What do we call it when we put a loop inside of another loop?
-Nested-2: Add a sprite to your project and have it play a sound when the spacebar is pressed. Put a repeat 3 around the sound block and then a repeat 2 around the whole thing. Before you run the code, can you figure out how many times the sprite will make the sound?
-Nested-3: When the green flag is clicked, draw a triangle. Turn 60 degrees and draw another triangle. Can you use a repeat to make a hexagon of triangles?
-Note: You can draw this shape using the annotation tool on the screen for clarity.
-Nested-4: Draw another, bigger hexagon around the first one. Can you do this by putting a loop around your existing code?`
-				},
-				{
-					title: "Check-in #1: Cloning",
-					solutionLink: "https://scratch.mit.edu/projects/341945558/",
-					content: `Cloning-1: How can we duplicate sprites and make the duplicates do different things?
-Cloning-2,3: Move your drawing code so that when the green flag is clicked, the parent sprite makes clones of itself every 2 seconds and the clones go to a random position and draw the hexagon shape.
-Cloning-4: Make sure to show the clones when they are created and then delete them when they\'re done. What should we do with the sprite that isn\'t doing anything?`
-				},
-				{
-					title: "Check-in #1: Complex Conditionals",
-					solutionLink: "https://scratch.mit.edu/projects/341945558/",
-					content: `Complex-1: What block would you use if you wanted to check if two things are true in the same if/then block?
-Complex-2: What about if you wanted to check if, given two things, at least one of them is true?
-Complex-3: What about if you wanted to check if a condition isn\'t true?
-Complex-ALL: Using complex conditionals, update your code so that the clones that are in the top right portion of the screen all have a blue pen color. (Hint: You may have to use coordinates!) Now, can you add code so that each of the four quadrants uses a different pen color?`
-				},
-				{
-					title: "Check-in #1: Additional Practice Project",
-					projectLink: "https://scratch.mit.edu/projects/386649746/",
-					solutionLink: "https://scratch.mit.edu/projects/386368696/",
-					content: `Use a variable to make the owl count from 1 to 50.
-Add a conditional so that if the spacebar or the up arrow is pressed, the owl says something instead of the number.
-Add a conditional so that if the mouse pointer is on the owl, it gets shy and doesn\'t say anything at all!`
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-in #2",
-			curriculum: [
-				{
-					title: "Check-in #2: Strings",
-					solutionLink: "https://scratch.mit.edu/projects/342645999/",
-					content: `Create a new blank project in Scratch, and name it "Check-in #2".
-Strings-1: What does the word “string” mean in Scratch?
-Strings-2: Add the Andie sprite to your project. When the 1 key is pressed, have him ask the user what their name is. Once the user responds, have him say “Hello [your name]” using one say block.
-Strings-3,4: Report to the user the first letter of their name and how many letters are in their name.`
-				},
-				{
-					title: "Check-in #2: Mathematical Operators and Randomness",
-					solutionLink: "https://scratch.mit.edu/projects/342645999/",
-					content: `Math-1: How can we perform operations on numbers in Scratch? Can you show me where these blocks are?
-Math-2: When the 2 key is pressed, make Andie say the result of adding together 5 and 6!
-Math-3,4: Create a random number between 1 and 20 and store it in a variable. If the number is less than 10, have Andie say “Wow, that\'s a small number!” otherwise, say “Whoa, that\'s a big number!”
-Math-5: What is the mod block? Use it to report to the user the remainder of dividing any two numbers you want!`
-				},
-				{
-					title: "Check-in #2: Lists",
-					solutionLink: "https://scratch.mit.edu/projects/342645999/",
-					content: `Lists-1: What do you use lists for in Scratch?
-Lists-2,3: Change the name of each of Andie's costumes to match the action that each costume is performing ("pass", "shoot", etc). Can you create a list called “actions” and add each of the names of Andie\'s different costumes to it when the 3 key is pressed?
-Lists-4: Make Andie say the second thing in the list.
-Lists-5: Tell the user what actions Andie can perform by looping through the list.
-Lists-6: Once you\'ve reported all of Andie\'s actions to the user, ask which action they would like to see and switch his costume to this action! If you haven\'t already, how do we make sure the list is cleared so we don\'t add duplicate items to the list when the 3 key is pressed?`
-				},
-				{
-					title: "Check-in #2: Functions",
-					solutionLink: "https://scratch.mit.edu/projects/342645999/",
-					content: `Functions-1: What are functions in Scratch? Where can we create our own blocks in scratch?
-Functions-2: Create a function called “Score!”, which changes Andie\'s costume, makes him say “Woohoo!” and play a clapping sound.
-Functions-3: Make Andie score when the spacebar is pressed.
-Functions-4: Create another function called “Find Multiples” that takes one number input and says the first 10 multiples of that number for one second each.
-Functions-5: When the spacebar is pressed, make Andie say the multiples of a random number from 1 to 10.`
-				},
-				{
-					title: "Check-in #2: Additional Practice Project",
-					projectLink: "https://scratch.mit.edu/projects/386649865/",
-					solutionLink: "https://scratch.mit.edu/projects/386376803/",
-					content: `Add one of the dancing sprites to the project and create a function that loops through all of their costumes.
-Add a number input that says how many seconds they should dance for in total. Can you use a division operator in the wait block to make sure they\'re dancing for the right number of seconds? Hint: Think about how long they should spend on each costume to add up to the right number of seconds.
-When the green flag is pressed, make your sprite dance for 3 seconds.
-When they\'re done dancing, ask the user to tell you their favorite dance move by the costume number. Get their top five favorites.
-Create a function that loops through this list of favorite dance moves.
-Make your sprite dance these moves forever!`
-				}
-			],
-			supplementalProjects: []
-		},
-		{
 			title: "GM1 Review: Events, Loops, Conditionals, & Broadcasting",
 			curriculum: [
 				{
@@ -379,6 +289,45 @@ Finally, share the project!`
 			]
 		},
 		{
+			title: "Check-in #1",
+			curriculum: [
+				{
+					title: "Check-in #1: Nested Loops",
+					solutionLink: "https://scratch.mit.edu/projects/341945558/",
+					content: `Create a new blank project in Scratch, and name it "Check-in #1".
+Nested-1: What is a loop? What do we call it when we put a loop inside of another loop?
+Nested-2: Add a sprite to your project and have it play a sound when the spacebar is pressed. Put a repeat 3 around the sound block and then a repeat 2 around the whole thing. Before you run the code, can you figure out how many times the sprite will make the sound?
+Nested-3: When the green flag is clicked, draw a triangle. Turn 60 degrees and draw another triangle. Can you use a repeat to make a hexagon of triangles?
+Note: You can draw this shape using the annotation tool on the screen for clarity.
+Nested-4: Draw another, bigger hexagon around the first one. Can you do this by putting a loop around your existing code?`
+				},
+				{
+					title: "Check-in #1: Cloning",
+					solutionLink: "https://scratch.mit.edu/projects/341945558/",
+					content: `Cloning-1: How can we duplicate sprites and make the duplicates do different things?
+Cloning-2,3: Move your drawing code so that when the green flag is clicked, the parent sprite makes clones of itself every 2 seconds and the clones go to a random position and draw the hexagon shape.
+Cloning-4: Make sure to show the clones when they are created and then delete them when they\'re done. What should we do with the sprite that isn\'t doing anything?`
+				},
+				{
+					title: "Check-in #1: Complex Conditionals",
+					solutionLink: "https://scratch.mit.edu/projects/341945558/",
+					content: `Complex-1: What block would you use if you wanted to check if two things are true in the same if/then block?
+Complex-2: What about if you wanted to check if, given two things, at least one of them is true?
+Complex-3: What about if you wanted to check if a condition isn\'t true?
+Complex-ALL: Using complex conditionals, update your code so that the clones that are in the top right portion of the screen all have a blue pen color. (Hint: You may have to use coordinates!) Now, can you add code so that each of the four quadrants uses a different pen color?`
+				},
+				{
+					title: "Check-in #1: Additional Practice Project",
+					projectLink: "https://scratch.mit.edu/projects/386649746/",
+					solutionLink: "https://scratch.mit.edu/projects/386368696/",
+					content: `Use a variable to make the owl count from 1 to 50.
+Add a conditional so that if the spacebar or the up arrow is pressed, the owl says something instead of the number.
+Add a conditional so that if the mouse pointer is on the owl, it gets shy and doesn\'t say anything at all!`
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "GM5 Strings",
 			curriculum: [
 				{
@@ -627,6 +576,57 @@ View CS Training's Code`
 5. You might also find it helpful to write functions for player wins, computer wins, and tie.`
 				}
 			]
+		},
+		{
+			title: "Check-in #2",
+			curriculum: [
+				{
+					title: "Check-in #2: Strings",
+					solutionLink: "https://scratch.mit.edu/projects/342645999/",
+					content: `Create a new blank project in Scratch, and name it "Check-in #2".
+Strings-1: What does the word “string” mean in Scratch?
+Strings-2: Add the Andie sprite to your project. When the 1 key is pressed, have him ask the user what their name is. Once the user responds, have him say “Hello [your name]” using one say block.
+Strings-3,4: Report to the user the first letter of their name and how many letters are in their name.`
+				},
+				{
+					title: "Check-in #2: Mathematical Operators and Randomness",
+					solutionLink: "https://scratch.mit.edu/projects/342645999/",
+					content: `Math-1: How can we perform operations on numbers in Scratch? Can you show me where these blocks are?
+Math-2: When the 2 key is pressed, make Andie say the result of adding together 5 and 6!
+Math-3,4: Create a random number between 1 and 20 and store it in a variable. If the number is less than 10, have Andie say “Wow, that\'s a small number!” otherwise, say “Whoa, that\'s a big number!”
+Math-5: What is the mod block? Use it to report to the user the remainder of dividing any two numbers you want!`
+				},
+				{
+					title: "Check-in #2: Lists",
+					solutionLink: "https://scratch.mit.edu/projects/342645999/",
+					content: `Lists-1: What do you use lists for in Scratch?
+Lists-2,3: Change the name of each of Andie's costumes to match the action that each costume is performing ("pass", "shoot", etc). Can you create a list called “actions” and add each of the names of Andie\'s different costumes to it when the 3 key is pressed?
+Lists-4: Make Andie say the second thing in the list.
+Lists-5: Tell the user what actions Andie can perform by looping through the list.
+Lists-6: Once you\'ve reported all of Andie\'s actions to the user, ask which action they would like to see and switch his costume to this action! If you haven\'t already, how do we make sure the list is cleared so we don\'t add duplicate items to the list when the 3 key is pressed?`
+				},
+				{
+					title: "Check-in #2: Functions",
+					solutionLink: "https://scratch.mit.edu/projects/342645999/",
+					content: `Functions-1: What are functions in Scratch? Where can we create our own blocks in scratch?
+Functions-2: Create a function called “Score!”, which changes Andie\'s costume, makes him say “Woohoo!” and play a clapping sound.
+Functions-3: Make Andie score when the spacebar is pressed.
+Functions-4: Create another function called “Find Multiples” that takes one number input and says the first 10 multiples of that number for one second each.
+Functions-5: When the spacebar is pressed, make Andie say the multiples of a random number from 1 to 10.`
+				},
+				{
+					title: "Check-in #2: Additional Practice Project",
+					projectLink: "https://scratch.mit.edu/projects/386649865/",
+					solutionLink: "https://scratch.mit.edu/projects/386376803/",
+					content: `Add one of the dancing sprites to the project and create a function that loops through all of their costumes.
+Add a number input that says how many seconds they should dance for in total. Can you use a division operator in the wait block to make sure they\'re dancing for the right number of seconds? Hint: Think about how long they should spend on each costume to add up to the right number of seconds.
+When the green flag is pressed, make your sprite dance for 3 seconds.
+When they\'re done dancing, ask the user to tell you their favorite dance move by the costume number. Get their top five favorites.
+Create a function that loops through this list of favorite dance moves.
+Make your sprite dance these moves forever!`
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "GM9 Fish Food",

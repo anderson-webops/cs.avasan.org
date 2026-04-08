@@ -223,62 +223,6 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: []
 		},
 		{
-			title: "Check-In #2: Gravity, Friction, Platforms",
-			curriculum: [
-				{
-					title: "Check-In #2: Gravity (Bigfoot Game)",
-					content:
-						"Gravity-setup: Start from the Bigfoot starter game (check_in_2_starter.py) and walk through the code so the understands how Bigfoot moves left and right with the arrow keys. Gravity-1: Ask what global variables and dynamic attributes are needed to add gravity (a global gravity and a yspeed attribute on Bigfoot; xspeed is optional). Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
-				},
-				{
-					title: "Check-In #2: Friction (Shuffleboard Game)",
-					content:
-						"Friction-setup: Use the Shuffleboard starter game. The goal is to tweak friction so the puck stops at the center of the bullseye. Friction-1: Create global variable(s) to represent friction. Friction-2: Modify update() so friction gradually reduces the puck's speed by multiplying its velocity by a friction factor each frame. Friction-3: Tweak the friction value (roughly around 0.967) so the puck slows and stops in the bullseye's center, discussing how changing this value affects motion."
-				},
-				{
-					title: "Check-In #2: Single Platforms",
-					content:
-						"Platforms-1: Ask how to represent a platform in code (e.g. a ZRect or actor) and how to add it to a game. Platforms-2: In the Bigfoot game, create a 200×20 platform in the middle of the screen and draw it. Platforms-3/4: Add collision logic so Bigfoot can jump onto and stand on the platform: check if his feet intersect the platform from above, snap his bottom to the platform top, and set his vertical speed to 0. Platforms-5: Make the platform move horizontally and bounce off walls by adding a dynamic xspeed attribute and reversing it at screen edges."
-				},
-				{
-					title: "Check-In #2: Many Platforms",
-					content:
-						"Many-1: Discuss how to store many platforms using a list. Many-setup: Make a copy of the Bigfoot game file for a version with multiple platforms. Many-2: Create a list of 10 platforms with random sizes, positions, and colors and store the color as a dynamic attribute. Many-3: Modify draw() to draw all platforms using their color attributes. Many-4: Update collision logic so Bigfoot can stand on any platform in the list, not just one."
-				},
-				{
-					title: "Check-In #2: Additional Practice Project",
-					content:
-						'Have modify one of their Bigfoot games so pressing the "f" key flips gravity upside down. When gravity is reversed, Bigfoot should fall upward without leaving the screen; adjust collision so he can stand against the top or bottom surfaces appropriately. Optionally, flip Bigfoot\'s sprite with bigfoot.angle = 180 when gravity is reversed and make moving platforms behave correctly with inverted gravity.',
-					solutionLink:
-						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/Check-in-2-Additional-Practice-Solution.py"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #3: System Control, Projectiles, Enemy AI",
-			curriculum: [
-				{
-					title: "Check-In #3: System Control",
-					content:
-						"System Control-setup: Start from the rocket-and-targets starter code (check_in_3_starter.py) where the rocket moves left and right with arrow keys. System Control-1/2: Add a start screen so the game only begins when the user presses Enter; before that, draw a start message and ignore normal game updates. System Control-3: Ask what tool is used to schedule events in the future (PyGame Zero's clock or timers). System Control-4/5: Use a scheduled event to move the targets to new random positions every 5 seconds. System Control-6: Add logic that can cancel or stop this repeating movement when needed (for example, after a win condition)."
-				},
-				{
-					title: "Check-In #3: Projectiles and Enemy AI",
-					content:
-						"Projectiles-1: When the space key is pressed, fire a laser from the spaceship. Move the laser upwards (or toward the target) and make the target disappear when hit. Initially, restrict to one laser at a time. Projectiles-2/3/4: Update the code to support multiple simultaneous lasers, typically by storing them in a list and iterating to move and draw them. Projectiles-5: Choose one target and make it exhibit simple AI: it should continuously move toward the spaceship while still relocating to a random position every few seconds and resetting properly when shot."
-				},
-				{
-					title: "Check-In #3: Additional Practice Project",
-					content:
-						"Extend the Shark Chase game by adding a crab enemy that patrols along the bottom of the ocean. The crab should move left and right following the diver's horizontal position. If the crab touches the diver while the diver is not hiding in seaweed, the game should end. Bonus: if the diver is hiding in seaweed, make the crab move away instead of toward the diver, and occasionally have the crab jump using the game clock to schedule jumps.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/Check-in-3-Solution.py"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
 			title: "PyG5 Physics",
 			curriculum: [
 				{
@@ -365,6 +309,39 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/PyG6-Falling-Jump.py",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/pyg_6_falling_jump.mp4"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "Check-In #2: Gravity, Friction, Platforms",
+			curriculum: [
+				{
+					title: "Check-In #2: Gravity (Bigfoot Game)",
+					content:
+						"Gravity-setup: Start from the Bigfoot starter game (check_in_2_starter.py) and walk through the code so the understands how Bigfoot moves left and right with the arrow keys. Gravity-1: Ask what global variables and dynamic attributes are needed to add gravity (a global gravity and a yspeed attribute on Bigfoot; xspeed is optional). Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
+				},
+				{
+					title: "Check-In #2: Friction (Shuffleboard Game)",
+					content:
+						"Friction-setup: Use the Shuffleboard starter game. The goal is to tweak friction so the puck stops at the center of the bullseye. Friction-1: Create global variable(s) to represent friction. Friction-2: Modify update() so friction gradually reduces the puck's speed by multiplying its velocity by a friction factor each frame. Friction-3: Tweak the friction value (roughly around 0.967) so the puck slows and stops in the bullseye's center, discussing how changing this value affects motion."
+				},
+				{
+					title: "Check-In #2: Single Platforms",
+					content:
+						"Platforms-1: Ask how to represent a platform in code (e.g. a ZRect or actor) and how to add it to a game. Platforms-2: In the Bigfoot game, create a 200×20 platform in the middle of the screen and draw it. Platforms-3/4: Add collision logic so Bigfoot can jump onto and stand on the platform: check if his feet intersect the platform from above, snap his bottom to the platform top, and set his vertical speed to 0. Platforms-5: Make the platform move horizontally and bounce off walls by adding a dynamic xspeed attribute and reversing it at screen edges."
+				},
+				{
+					title: "Check-In #2: Many Platforms",
+					content:
+						"Many-1: Discuss how to store many platforms using a list. Many-setup: Make a copy of the Bigfoot game file for a version with multiple platforms. Many-2: Create a list of 10 platforms with random sizes, positions, and colors and store the color as a dynamic attribute. Many-3: Modify draw() to draw all platforms using their color attributes. Many-4: Update collision logic so Bigfoot can stand on any platform in the list, not just one."
+				},
+				{
+					title: "Check-In #2: Additional Practice Project",
+					content:
+						'Have modify one of their Bigfoot games so pressing the "f" key flips gravity upside down. When gravity is reversed, Bigfoot should fall upward without leaving the screen; adjust collision so he can stand against the top or bottom surfaces appropriately. Optionally, flip Bigfoot\'s sprite with bigfoot.angle = 180 when gravity is reversed and make moving platforms behave correctly with inverted gravity.',
+					solutionLink:
+						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/Check-in-2-Additional-Practice-Solution.py"
 				}
 			],
 			supplementalProjects: []
@@ -474,6 +451,29 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/PyG9-Space-Battle.py",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/pyg_9_space_battle.mp4"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "Check-In #3: System Control, Projectiles, Enemy AI",
+			curriculum: [
+				{
+					title: "Check-In #3: System Control",
+					content:
+						"System Control-setup: Start from the rocket-and-targets starter code (check_in_3_starter.py) where the rocket moves left and right with arrow keys. System Control-1/2: Add a start screen so the game only begins when the user presses Enter; before that, draw a start message and ignore normal game updates. System Control-3: Ask what tool is used to schedule events in the future (PyGame Zero's clock or timers). System Control-4/5: Use a scheduled event to move the targets to new random positions every 5 seconds. System Control-6: Add logic that can cancel or stop this repeating movement when needed (for example, after a win condition)."
+				},
+				{
+					title: "Check-In #3: Projectiles and Enemy AI",
+					content:
+						"Projectiles-1: When the space key is pressed, fire a laser from the spaceship. Move the laser upwards (or toward the target) and make the target disappear when hit. Initially, restrict to one laser at a time. Projectiles-2/3/4: Update the code to support multiple simultaneous lasers, typically by storing them in a list and iterating to move and draw them. Projectiles-5: Choose one target and make it exhibit simple AI: it should continuously move toward the spaceship while still relocating to a random position every few seconds and resetting properly when shot."
+				},
+				{
+					title: "Check-In #3: Additional Practice Project",
+					content:
+						"Extend the Shark Chase game by adding a crab enemy that patrols along the bottom of the ocean. The crab should move left and right following the diver's horizontal position. If the crab touches the diver while the diver is not hiding in seaweed, the game should end. Bonus: if the diver is hiding in seaweed, make the crab move away instead of toward the diver, and occasionally have the crab jump using the game clock to schedule jumps.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/Check-in-3-Solution.py"
 				}
 			],
 			supplementalProjects: []

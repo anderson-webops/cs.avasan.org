@@ -237,6 +237,39 @@ export const pythonLevel3Course: RawCourse = {
 			]
 		},
 		{
+			title: "Check-In #1",
+			curriculum: [
+				{
+					title: "Check-In #1 Overview",
+					content:
+						"Use this module as a low-pressure review of recursion, stacks, and string processing. Work through each prompt independently first, then revisit any skill that still needs practice."
+				},
+				{
+					title: "Check-In #1: String Functions",
+					content:
+						"Practice slicing and splitting strings. Remove the first and last letters from a word, and extract the second word from a sentence with at least two words."
+				},
+				{
+					title: "Check-In #1: Recursion",
+					content:
+						"Explain what a recursive function is and identify its base case and recursive call. Then write recursive solutions for bowling-pin pyramids, Lucas numbers, and tracing the behavior of a provided recursive function."
+				},
+				{
+					title: "Check-In #1: Stacks",
+					content:
+						"Review stack behavior, create a stack of numbers, push and pop items, and use a stack-based solution to process keyboard input where `#` represents backspace."
+				},
+				{
+					title: "Check-In #1: Additional Practice Project",
+					content:
+						"Write one recursive function that prints the running sums of the first `n` elements of a list and another that prints the same sums in reverse order.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-1-Additional-Project"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "AM6 Introduction to Algorithms & Runtime Analysis",
 			curriculum: [
 				{
@@ -386,6 +419,49 @@ export const pythonLevel3Course: RawCourse = {
 					title: "Insertion Sort Big-O Analysis",
 					content:
 						"Analyze why the worst case for insertion sort occurs on a reversed list. Show that the total number of swaps forms the sum `1 + 2 + ... + (n - 1)`, giving `O(n^2)` time. Then compare this with the near-best case where the list is already almost sorted."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "Check-In #2",
+			curriculum: [
+				{
+					title: "Check-In #2 Overview",
+					content:
+						"Use this check-in to review algorithm analysis and core search and sorting topics. Focus on explaining the reasoning behind each answer, not just the final result."
+				},
+				{
+					title: "Check-In #2: Time Complexity",
+					content:
+						"Define Big-O analysis, simplify several runtime expressions, and identify best-case and worst-case behavior in sample functions."
+				},
+				{
+					title: "Check-In #2: Linear Search",
+					content:
+						"Explain how linear search works, when it can be used, fill in missing code for a linear search function, and identify its best and worst cases."
+				},
+				{
+					title: "Check-In #2: Binary Search",
+					content:
+						"Explain binary search, describe when it can be used, finish both iterative and recursive implementations, and identify its runtime behavior."
+				},
+				{
+					title: "Check-In #2: Selection Sort",
+					content:
+						"Describe selection sort, trace the result of a few passes on a sample list, complete an implementation, and explain its runtime."
+				},
+				{
+					title: "Check-In #2: Insertion Sort",
+					content:
+						"Describe insertion sort, trace several passes, complete an implementation, and compare its best and worst cases."
+				},
+				{
+					title: "Check-In #2: Additional Practice Project",
+					content:
+						"Reuse the sorting algorithms built earlier and compare their speed on random, sorted, and reversed lists of different sizes.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-2-Additional-Project"
 				}
 			],
 			supplementalProjects: []
@@ -578,6 +654,44 @@ export const pythonLevel3Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
+			title: "Check-In #3",
+			curriculum: [
+				{
+					title: "Check-In #3 Overview",
+					content:
+						"Use this final check-in to review advanced sorting and file input/output. Work through examples independently first, then revisit any weak spots."
+				},
+				{
+					title: "Check-In #3: Bubble Sort",
+					content:
+						"Explain bubble sort, trace the effect of a few passes, complete an implementation, and discuss simple efficiency improvements such as early cutoffs."
+				},
+				{
+					title: "Check-In #3: Merge Sort",
+					content:
+						"Explain merge sort, complete a `merge()` helper, and identify why merge sort uses recursion rather than repeated passes."
+				},
+				{
+					title: "Check-In #3: Quicksort",
+					content:
+						"Explain quicksort, complete a `partition()` helper, and compare its best and worst runtime behavior."
+				},
+				{
+					title: "Check-In #3: File Input/Output",
+					content:
+						"Write letters of an input word to a file, read them back, count letter frequencies in a dictionary, and explain the difference between `.read()` and `.readlines()`."
+				},
+				{
+					title: "Check-In #3: Additional Practice Project",
+					content:
+						"Read letters from a file into a list, sort them in ASCII order using one of the implemented sorting algorithms, and write the sorted results back to a file.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-3-Additional-Project"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "AM13 Master Project: Conway's Game of Life",
 			curriculum: [
 				{
@@ -672,120 +786,6 @@ export const pythonLevel3Course: RawCourse = {
 					title: "Course Recap",
 					content:
 						"Review the main ideas from the course: functions, lists, dictionaries, recursion, stacks, searching, sorting, Big-O notation, file input/output, simulations, and simple AI. Then discuss which next course best fits future goals and interests."
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #1",
-			curriculum: [
-				{
-					title: "Check-In #1 Overview",
-					content:
-						"Use this module as a low-pressure review of recursion, stacks, and string processing. Work through each prompt independently first, then revisit any skill that still needs practice."
-				},
-				{
-					title: "Check-In #1: String Functions",
-					content:
-						"Practice slicing and splitting strings. Remove the first and last letters from a word, and extract the second word from a sentence with at least two words."
-				},
-				{
-					title: "Check-In #1: Recursion",
-					content:
-						"Explain what a recursive function is and identify its base case and recursive call. Then write recursive solutions for bowling-pin pyramids, Lucas numbers, and tracing the behavior of a provided recursive function."
-				},
-				{
-					title: "Check-In #1: Stacks",
-					content:
-						"Review stack behavior, create a stack of numbers, push and pop items, and use a stack-based solution to process keyboard input where `#` represents backspace."
-				},
-				{
-					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Write one recursive function that prints the running sums of the first `n` elements of a list and another that prints the same sums in reverse order.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-1-Additional-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #2",
-			curriculum: [
-				{
-					title: "Check-In #2 Overview",
-					content:
-						"Use this check-in to review algorithm analysis and core search and sorting topics. Focus on explaining the reasoning behind each answer, not just the final result."
-				},
-				{
-					title: "Check-In #2: Time Complexity",
-					content:
-						"Define Big-O analysis, simplify several runtime expressions, and identify best-case and worst-case behavior in sample functions."
-				},
-				{
-					title: "Check-In #2: Linear Search",
-					content:
-						"Explain how linear search works, when it can be used, fill in missing code for a linear search function, and identify its best and worst cases."
-				},
-				{
-					title: "Check-In #2: Binary Search",
-					content:
-						"Explain binary search, describe when it can be used, finish both iterative and recursive implementations, and identify its runtime behavior."
-				},
-				{
-					title: "Check-In #2: Selection Sort",
-					content:
-						"Describe selection sort, trace the result of a few passes on a sample list, complete an implementation, and explain its runtime."
-				},
-				{
-					title: "Check-In #2: Insertion Sort",
-					content:
-						"Describe insertion sort, trace several passes, complete an implementation, and compare its best and worst cases."
-				},
-				{
-					title: "Check-In #2: Additional Practice Project",
-					content:
-						"Reuse the sorting algorithms built earlier and compare their speed on random, sorted, and reversed lists of different sizes.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-2-Additional-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #3",
-			curriculum: [
-				{
-					title: "Check-In #3 Overview",
-					content:
-						"Use this final check-in to review advanced sorting and file input/output. Work through examples independently first, then revisit any weak spots."
-				},
-				{
-					title: "Check-In #3: Bubble Sort",
-					content:
-						"Explain bubble sort, trace the effect of a few passes, complete an implementation, and discuss simple efficiency improvements such as early cutoffs."
-				},
-				{
-					title: "Check-In #3: Merge Sort",
-					content:
-						"Explain merge sort, complete a `merge()` helper, and identify why merge sort uses recursion rather than repeated passes."
-				},
-				{
-					title: "Check-In #3: Quicksort",
-					content:
-						"Explain quicksort, complete a `partition()` helper, and compare its best and worst runtime behavior."
-				},
-				{
-					title: "Check-In #3: File Input/Output",
-					content:
-						"Write letters of an input word to a file, read them back, count letter frequencies in a dictionary, and explain the difference between `.read()` and `.readlines()`."
-				},
-				{
-					title: "Check-In #3: Additional Practice Project",
-					content:
-						"Read letters from a file into a list, sort them in ASCII order using one of the implemented sorting algorithms, and write the sorted results back to a file.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-3-Additional-Project"
 				}
 			],
 			supplementalProjects: []

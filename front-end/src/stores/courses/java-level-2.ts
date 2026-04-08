@@ -4,83 +4,6 @@ export const javaLevel2Course: RawCourse = {
 	name: "Java Level 2",
 	modules: [
 		{
-			title: "Check-In #1",
-			curriculum: [
-				{
-					title: "Check-In #1 Overview",
-					content:
-						"Use this module as a low-pressure review of object-oriented programming basics in Java, including classes, constructors, instance methods, static members, and comparable objects.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1"
-				},
-				{
-					title: "Check-In #1: Classes and Objects",
-					content:
-						"Review the difference between a class and an object by creating a `Car` class with private instance variables, multiple constructors, and several `Car` instances in `main()`."
-				},
-				{
-					title: "Check-In #1: Class Methods",
-					content:
-						"Add getters, a `drive` method, a `toString` method, and a comparison method such as `sameMileage()` that takes another object and checks shared state."
-				},
-				{
-					title: "Check-In #1: Static Variables and Methods",
-					content:
-						"Use a static variable to track how many `Car` objects exist and a static getter method to return that class-wide count."
-				},
-				{
-					title: "Check-In #1: Comparable Objects",
-					content:
-						"Implement `Comparable` for the `Car` class, define `compareTo()`, sort an array of cars, and explain when `compareTo()` should return `-1`, `0`, or `1`."
-				},
-				{
-					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Create a comparable `Card` class with rank and suit, implement constructors and getters, write `toString()`, define `compareTo()`, and sort an array of randomly generated cards.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1-Additional-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #2",
-			curriculum: [
-				{
-					title: "Check-In #2 Overview",
-					content:
-						"Use this review to revisit inheritance, method overriding, threading, try-catch handling, and maps. This module combines reading existing class code with extending it in new directions.",
-					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/blob/main/JM-Check-in-2-Starter-Updated/Main.java",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/blob/main/JM-Check-in-2-Updated/Main.java"
-				},
-				{
-					title: "Check-In #2: Inheritance",
-					content:
-						"Read and analyze an `HourClock` class, then create a `RomanClock` subclass that extends the original behavior and overrides `displayTime()`."
-				},
-				{
-					title: "Check-In #2: Threading and Error Handling",
-					content:
-						"Add a thread to a clock so it updates itself over time, define `start()` and `run()`, use `sleep()` to delay updates, and explain how `try-catch` protects the program when thread-related exceptions occur."
-				},
-				{
-					title: "Check-In #2: Maps",
-					content:
-						"Create a map inside the `RomanClock` class, populate it with Roman numeral keys and decimal values, iterate through the entries, and conditionally insert missing values."
-				},
-				{
-					title: "Check-In #2: Additional Practice Project",
-					content:
-						"Create a `MinuteClock` subclass that tracks minutes as well as hours, overrides `displayTime()`, and updates both fields correctly in `tick()`.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2-Additional-Project"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
 			title: "JM1 Instance Variables, Constructors, and Methods",
 			curriculum: [
 				{
@@ -186,6 +109,46 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM3-Supplemental-Project-1-Basketball-Statistics"
 				}
 			]
+		},
+		{
+			title: "Check-In #1",
+			curriculum: [
+				{
+					title: "Check-In #1 Overview",
+					content:
+						"Use this module as a low-pressure review of object-oriented programming basics in Java, including classes, constructors, instance methods, static members, and comparable objects.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1"
+				},
+				{
+					title: "Check-In #1: Classes and Objects",
+					content:
+						"Review the difference between a class and an object by creating a `Car` class with private instance variables, multiple constructors, and several `Car` instances in `main()`."
+				},
+				{
+					title: "Check-In #1: Class Methods",
+					content:
+						"Add getters, a `drive` method, a `toString` method, and a comparison method such as `sameMileage()` that takes another object and checks shared state."
+				},
+				{
+					title: "Check-In #1: Static Variables and Methods",
+					content:
+						"Use a static variable to track how many `Car` objects exist and a static getter method to return that class-wide count."
+				},
+				{
+					title: "Check-In #1: Comparable Objects",
+					content:
+						"Implement `Comparable` for the `Car` class, define `compareTo()`, sort an array of cars, and explain when `compareTo()` should return `-1`, `0`, or `1`."
+				},
+				{
+					title: "Check-In #1: Additional Practice Project",
+					content:
+						"Create a comparable `Card` class with rank and suit, implement constructors and getters, write `toString()`, define `compareTo()`, and sort an array of randomly generated cards.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1-Additional-Project"
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "JM4 Subclasses & Inheritance",
@@ -313,6 +276,43 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Supplemental-Project-1-Barnyard-Orchestra"
 				}
 			]
+		},
+		{
+			title: "Check-In #2",
+			curriculum: [
+				{
+					title: "Check-In #2 Overview",
+					content:
+						"Use this review to revisit inheritance, method overriding, threading, try-catch handling, and maps. This module combines reading existing class code with extending it in new directions.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/blob/main/JM-Check-in-2-Starter-Updated/Main.java",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/blob/main/JM-Check-in-2-Updated/Main.java"
+				},
+				{
+					title: "Check-In #2: Inheritance",
+					content:
+						"Read and analyze an `HourClock` class, then create a `RomanClock` subclass that extends the original behavior and overrides `displayTime()`."
+				},
+				{
+					title: "Check-In #2: Threading and Error Handling",
+					content:
+						"Add a thread to a clock so it updates itself over time, define `start()` and `run()`, use `sleep()` to delay updates, and explain how `try-catch` protects the program when thread-related exceptions occur."
+				},
+				{
+					title: "Check-In #2: Maps",
+					content:
+						"Create a map inside the `RomanClock` class, populate it with Roman numeral keys and decimal values, iterate through the entries, and conditionally insert missing values."
+				},
+				{
+					title: "Check-In #2: Additional Practice Project",
+					content:
+						"Create a `MinuteClock` subclass that tracks minutes as well as hours, overrides `displayTime()`, and updates both fields correctly in `tick()`.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2-Additional-Project"
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "JM7 Bank Account",

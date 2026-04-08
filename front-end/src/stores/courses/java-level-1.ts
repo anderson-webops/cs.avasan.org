@@ -4,83 +4,6 @@ export const javaLevel1Course: RawCourse = {
 	name: "Java Level 1",
 	modules: [
 		{
-			title: "Check-In #1",
-			curriculum: [
-				{
-					title: "Check-In #1 Overview",
-					content:
-						"Use this module as a low-pressure review of variables, strings, conditionals, and loops. Work through the prompts independently first, then revisit any ideas that need reinforcement.",
-					solutionLink:
-						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
-				},
-				{
-					title: "Check-In #1: Variables and Strings",
-					content:
-						"Review primitive variable types such as `int`, `double`, and `boolean`, compare `System.out.print` with `System.out.println`, store and inspect strings, read user input, access characters with indexing, and measure string length."
-				},
-				{
-					title: "Check-In #1: Conditionals",
-					content:
-						"Practice `if`, `else if`, and nested conditionals by checking guessed animals and colors. Use `&&`, `||`, and branching logic to distinguish exact matches, partial matches, and incorrect guesses."
-				},
-				{
-					title: "Check-In #1: Loops",
-					content:
-						"Compare `for` loops and `while` loops, print number ranges in different directions and steps, and use nested loops to build a multiplication table while tracking how often the inner loop runs."
-				},
-				{
-					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Ask the user for a row and column, then print a grid with `O` characters along that row and column and an `X` at the exact chosen coordinate.",
-					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #2",
-			curriculum: [
-				{
-					title: "Check-In #2 Overview",
-					content:
-						"Use this review to revisit math operators, randomness, methods, arrays, and two-dimensional arrays. Focus on explaining not just what the code does, but why each structure fits the problem.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1"
-				},
-				{
-					title: "Check-In #2: Mathematical Operators and Randomness",
-					content:
-						"Generate random integers and random letters, review ASCII, and practice using Java expressions to control ranges and convert between numbers and characters."
-				},
-				{
-					title: "Check-In #2: Methods",
-					content:
-						"Define and call methods that take inputs and return results, including a sum method and a coin-flip simulation that uses random values and conditional logic."
-				},
-				{
-					title: "Check-In #2: Arrays",
-					content:
-						"Create empty and pre-populated arrays, access specific elements, and use loops to fill arrays, print them, and update every element."
-				},
-				{
-					title: "Check-In #2: Two-Dimensional Arrays",
-					content:
-						"Create and access a 2D array, inspect its row and column counts, set specific values, and use nested loops to print every element."
-				},
-				{
-					title: "Check-In #2: Additional Practice Project",
-					content:
-						"Fill an integer array with random values and write a method called `countNumElementsAboveFive()` that returns how many entries are greater than 5.",
-					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Practice-with-Arrays"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
 			title: "JS1 Variable Types & Input/Output",
 			curriculum: [
 				{
@@ -352,6 +275,43 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
+			title: "Check-In #1",
+			curriculum: [
+				{
+					title: "Check-In #1 Overview",
+					content:
+						"Use this module as a low-pressure review of variables, strings, conditionals, and loops. Work through the prompts independently first, then revisit any ideas that need reinforcement.",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
+				},
+				{
+					title: "Check-In #1: Variables and Strings",
+					content:
+						"Review primitive variable types such as `int`, `double`, and `boolean`, compare `System.out.print` with `System.out.println`, store and inspect strings, read user input, access characters with indexing, and measure string length."
+				},
+				{
+					title: "Check-In #1: Conditionals",
+					content:
+						"Practice `if`, `else if`, and nested conditionals by checking guessed animals and colors. Use `&&`, `||`, and branching logic to distinguish exact matches, partial matches, and incorrect guesses."
+				},
+				{
+					title: "Check-In #1: Loops",
+					content:
+						"Compare `for` loops and `while` loops, print number ranges in different directions and steps, and use nested loops to build a multiplication table while tracking how often the inner loop runs."
+				},
+				{
+					title: "Check-In #1: Additional Practice Project",
+					content:
+						"Ask the user for a row and column, then print a grid with `O` characters along that row and column and an `X` at the exact chosen coordinate.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "JS6 Methods",
 			curriculum: [
 				{
@@ -540,6 +500,46 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS8-Magic-Square"
 				}
 			]
+		},
+		{
+			title: "Check-In #2",
+			curriculum: [
+				{
+					title: "Check-In #2 Overview",
+					content:
+						"Use this review to revisit math operators, randomness, methods, arrays, and two-dimensional arrays. Focus on explaining not just what the code does, but why each structure fits the problem.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1"
+				},
+				{
+					title: "Check-In #2: Mathematical Operators and Randomness",
+					content:
+						"Generate random integers and random letters, review ASCII, and practice using Java expressions to control ranges and convert between numbers and characters."
+				},
+				{
+					title: "Check-In #2: Methods",
+					content:
+						"Define and call methods that take inputs and return results, including a sum method and a coin-flip simulation that uses random values and conditional logic."
+				},
+				{
+					title: "Check-In #2: Arrays",
+					content:
+						"Create empty and pre-populated arrays, access specific elements, and use loops to fill arrays, print them, and update every element."
+				},
+				{
+					title: "Check-In #2: Two-Dimensional Arrays",
+					content:
+						"Create and access a 2D array, inspect its row and column counts, set specific values, and use nested loops to print every element."
+				},
+				{
+					title: "Check-In #2: Additional Practice Project",
+					content:
+						"Fill an integer array with random values and write a method called `countNumElementsAboveFive()` that returns how many entries are greater than 5.",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Practice-with-Arrays"
+				}
+			],
+			supplementalProjects: []
 		},
 		{
 			title: "JS9 Master Project: Battleship",
