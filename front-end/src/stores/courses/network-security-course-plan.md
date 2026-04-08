@@ -1,5 +1,40 @@
 # Network Security Course Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `WebStorm` or `VS Code`, with `TypeScript` as the default
+language and a Linux shell available for network labs.
+
+Official links:
+
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [WebStorm installation guide](https://www.jetbrains.com/help/webstorm/installation-guide.html)
+- [VS Code Node.js tutorial](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial)
+
+macOS walkthrough:
+
+1. Install Node.js LTS.
+2. Install either WebStorm or VS Code.
+3. If using VS Code, add `ESLint`, `Prettier`, and the built-in TypeScript language support; add `Docker` and `Remote - SSH` if server labs are included.
+4. Create a course workspace with separate folders for `tcp-labs`, `http-security`, `logging`, and `capstone`.
+5. Verify that `node`, `npm`, and `npx tsc --version` work before beginning packet, proxy, or validation labs.
+
+Windows walkthrough:
+
+1. Install Node.js LTS.
+2. Install either WebStorm or VS Code.
+3. If using VS Code, add `ESLint`, `Prettier`, and optionally `Remote - WSL` if labs will run inside Linux.
+4. Prefer WSL2 for firewall, socket, or reverse-proxy modules that behave more naturally in Linux.
+5. Verify that terminals can run `node`, `npm`, and `npx tsc --version` before starting.
+
+Course-specific notes:
+
+- This course benefits from a Linux lab environment even though the main language is TS/JS.
+- No CMake setup is needed.
+- Include a setup check for local servers, ports, and logs before the first security module.
+
 ## Positioning
 
 This course should use JavaScript or TypeScript as the implementation language
@@ -136,4 +171,3 @@ matters.
 - Add OAuth and session security modules
 - Add WAF and CDN concepts
 - Add a cloud network security follow-up with VPC/security groups
-

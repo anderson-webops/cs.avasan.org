@@ -1,5 +1,41 @@
 # Assembly Course Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `CLion` or `VS Code`.
+
+Official links:
+
+- [CLion install guide](https://www.jetbrains.com/help/clion/installation-guide.html)
+- [CLion quick CMake tutorial](https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html)
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [VS Code C++ on macOS](https://code.visualstudio.com/docs/cpp/config-clang-mac)
+- [VS Code C++ with WSL](https://code.visualstudio.com/docs/cpp/config-wsl)
+
+macOS walkthrough:
+
+1. Install Apple command-line tools with `xcode-select --install`.
+2. Install CLion or VS Code.
+3. Install CMake if the project uses it. `brew install cmake` is the easiest path.
+4. If using VS Code, install `C/C++`, `CMake Tools`, and `CodeLLDB`.
+5. If the course uses NASM syntax, install `nasm` as well.
+6. Verify `clang --version`, `lldb --version`, and `cmake --version`.
+
+Windows walkthrough:
+
+1. Install CLion or VS Code.
+2. Install WSL2 plus Ubuntu for the cleanest Unix-like assembly workflow, or install a local compiler/debugger toolchain.
+3. If using VS Code, install `C/C++`, `CMake Tools`, and `CodeLLDB`.
+4. If the course uses NASM syntax, install `nasm` in WSL or on Windows.
+5. Verify assembler, debugger, and CMake commands from a terminal.
+
+Course-specific notes:
+
+- Use `lldb`, `objdump`/`llvm-objdump`, and `nm` early.
+- For Windows learners, WSL2 is the most productive path because the shell and toolchain match most assembly tutorials more closely.
+
 ## Recommended Architecture
 
 Use `x86-64 assembly` first.
@@ -120,4 +156,3 @@ An optional final module can compare key ideas with ARM64.
 - Add SIMD introduction
 - Add a reverse-engineering elective
 - Add linker and relocation deep dives
-

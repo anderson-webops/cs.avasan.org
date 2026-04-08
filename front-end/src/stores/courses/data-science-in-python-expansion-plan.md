@@ -1,5 +1,37 @@
 # Data Science in Python Expansion Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `PyCharm` or `VS Code`.
+
+Official links:
+
+- [PyCharm install guide](https://www.jetbrains.com/help/pycharm/installation-guide.html)
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code Python guide](https://code.visualstudio.com/docs/languages/python)
+- [Python downloads](https://www.python.org/downloads/?m=landing)
+
+macOS walkthrough:
+
+1. Install Python 3 from python.org.
+2. Install PyCharm or VS Code.
+3. If using VS Code, install `Python` and `Jupyter`.
+4. Create a virtual environment with `python3 -m venv .venv`.
+5. Install `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `streamlit`, and `altair`.
+
+Windows walkthrough:
+
+1. Install Python 3 from python.org and enable `Add Python to PATH`.
+2. Install PyCharm or VS Code.
+3. If using VS Code, install `Python` and `Jupyter`.
+4. Create a virtual environment with `py -m venv .venv`.
+5. Install `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `streamlit`, and `altair`.
+
+Course-specific notes:
+
+- This course should allow both notebook-first work and app-style dashboard work.
+- Add Google Colab as an optional backup path for students with weaker local machines.
+
 ## Positioning
 
 This course should sit between core Python and machine learning. It should
@@ -111,4 +143,3 @@ static notebook outputs.
 - Add spreadsheet interoperability
 - Add geospatial mapping with simple public datasets
 - Add a lightweight intro to experimentation and A/B testing
-

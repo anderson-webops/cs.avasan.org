@@ -1,5 +1,37 @@
 # C Systems Engineering Course Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `CLion` or `VS Code`.
+
+Official links:
+
+- [CLion install guide](https://www.jetbrains.com/help/clion/installation-guide.html)
+- [CLion quick CMake tutorial](https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html)
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code C++ on macOS](https://code.visualstudio.com/docs/cpp/config-clang-mac)
+- [VS Code C++ with WSL](https://code.visualstudio.com/docs/cpp/config-wsl)
+
+macOS walkthrough:
+
+1. Install Apple command-line tools with `xcode-select --install`.
+2. Install CLion or VS Code.
+3. Install CMake if the course projects use it.
+4. If using VS Code, install `C/C++`, `CMake Tools`, and `CodeLLDB`.
+5. Verify `clang --version`, `cmake --version`, and `lldb --version`.
+
+Windows walkthrough:
+
+1. Install CLion or VS Code.
+2. Install WSL2 and Ubuntu, or another C compiler/debugger toolchain.
+3. If using VS Code, install `C/C++`, `CMake Tools`, and `CodeLLDB`.
+4. Verify `gcc`/`clang`, `gdb`/`lldb`, and `cmake`.
+
+Course-specific notes:
+
+- This course should standardize on a simple CMake project layout once students move beyond single-file programs.
+- Prefer Clang or GCC plus sanitizers for debugging memory and integer issues.
+
 ## Positioning
 
 This course should extend the current C++ path by teaching systems concepts in
@@ -123,4 +155,3 @@ should focus on engineering fundamentals rather than only language syntax.
 - Add finite-state machines for protocol parsing
 - Add concurrency with POSIX threads
 - Add a small custom allocator lab
-

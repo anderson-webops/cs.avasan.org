@@ -1,5 +1,37 @@
 # Low Level Security Part 2 Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `CLion` or `VS Code`.
+
+Official links:
+
+- [CLion install guide](https://www.jetbrains.com/help/clion/installation-guide.html)
+- [CLion quick CMake tutorial](https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html)
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code C++ on macOS](https://code.visualstudio.com/docs/cpp/config-clang-mac)
+- [VS Code C++ with WSL](https://code.visualstudio.com/docs/cpp/config-wsl)
+
+macOS walkthrough:
+
+1. Install Apple command-line tools with `xcode-select --install`.
+2. Install CLion or VS Code.
+3. Install CMake.
+4. If using VS Code, install `C/C++`, `CMake Tools`, `CodeLLDB`, and `Hex Editor`.
+5. Verify `clang`, `lldb`, `cmake`, and `llvm-objdump` or `objdump`.
+
+Windows walkthrough:
+
+1. Install CLion or VS Code.
+2. Install WSL2 and Ubuntu for the cleanest low-level lab environment.
+3. Install `C/C++`, `CMake Tools`, `CodeLLDB`, and `Hex Editor` if using VS Code.
+4. Verify compiler, debugger, and disassembly tools from the Linux shell.
+
+Course-specific notes:
+
+- This course should assume a local lab-only environment.
+- Sanitizers and debugger setup should be part of day-one onboarding, not an optional appendix.
+
 ## Positioning
 
 This course should follow `Low Level Security` and focus on exploitability
@@ -102,4 +134,3 @@ confidence.
 - Add a small ARM64 comparison section
 - Add a module on kernel/user boundary concepts
 - Add one lab on sandboxing and process isolation
-

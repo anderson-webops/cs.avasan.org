@@ -1,5 +1,38 @@
 # Linux Systems Course Plan
 
+## Setup and Tooling
+
+Preferred IDE: `VS Code`. This course is terminal-first, so the editor matters
+less than having a real Linux environment.
+
+Official links:
+
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [VS Code WSL guide](https://code.visualstudio.com/docs/remote/wsl)
+
+macOS walkthrough:
+
+1. Install VS Code.
+2. Add the `code` command to PATH from the Command Palette.
+3. Plan to use either a Linux VM, a remote Linux machine over SSH, or a hosted Linux box for the real labs.
+4. Install useful extensions: `Remote - SSH`, `Docker` (optional), `YAML`, and `EditorConfig`.
+5. Keep Terminal open constantly and treat the editor as a companion, not the center of the course.
+
+Windows walkthrough:
+
+1. Install VS Code on the Windows side.
+2. Install WSL2 and an Ubuntu distribution.
+3. Install the `Remote - WSL` extension and open the course folders inside WSL.
+4. Add `Remote - SSH`, `YAML`, and `EditorConfig`; add `Docker` later if container modules are used.
+5. Verify that new terminals in VS Code are actually running inside Linux, not PowerShell, before starting the course.
+
+Course-specific notes:
+
+- The Linux environment is the real classroom for this course.
+- Students should learn both command-line use and how to edit configs safely from an editor.
+
 ## Positioning
 
 This course should teach Linux as an operating environment, an administration
@@ -120,4 +153,3 @@ operations.
 - Add SELinux/AppArmor as an advanced security unit
 - Add load balancing and reverse proxy patterns
 - Add a dedicated unit on SSH and remote operations
-

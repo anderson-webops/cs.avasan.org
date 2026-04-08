@@ -1,5 +1,39 @@
 # PyGames Expansion and Tooling Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `Mu` for the earliest weeks, then `VS Code` as the default
+long-term tool, with `PyCharm` as the advanced option.
+
+Official links:
+
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [PyCharm installation guide](https://www.jetbrains.com/help/pycharm/installation-guide.html)
+- [Python downloads](https://www.python.org/downloads/?m=landing)
+
+macOS walkthrough:
+
+1. Install Python 3.
+2. Install Mu for beginner-friendly weeks, or install VS Code / PyCharm if the student is ready for a fuller IDE.
+3. In VS Code, add `Python`, `Pylance`, and optionally `Error Lens`.
+4. Create a course folder with subfolders for `assets`, `images`, `sounds`, and `projects`.
+5. Install `pygame` into the course interpreter and verify a tiny window opens before starting the first real game project.
+
+Windows walkthrough:
+
+1. Install Python 3 and enable the PATH option.
+2. Install Mu, VS Code, or PyCharm depending on the learner track.
+3. In VS Code, add `Python`, `Pylance`, and optionally `Error Lens`.
+4. Open the course folder and verify the selected interpreter is the one where `pygame` is installed.
+5. Test image and sound loading early, since Windows path mistakes are a common source of student confusion.
+
+Course-specific notes:
+
+- No CMake setup is needed.
+- This course should include an early setup check for images, fonts, and audio assets, not just Python execution.
+
 ## Positioning
 
 PyGames should remain a project-rich course, but the setup and tooling story
@@ -82,4 +116,3 @@ That will make PyGames feel less isolated and more like a stepping stone.
 - Add controller input or mobile input experiments
 - Add sound design and polish lessons
 - Add packaging/exporting and portfolio presentation guidance
-

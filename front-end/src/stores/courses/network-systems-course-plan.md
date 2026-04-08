@@ -1,5 +1,38 @@
 # Network Systems Course Plan
 
+## Setup and Tooling
+
+Preferred IDE: `VS Code`. This course is command-line and lab oriented, so the
+main requirement is a real Linux environment plus good terminal access.
+
+Official links:
+
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [VS Code WSL guide](https://code.visualstudio.com/docs/remote/wsl)
+
+macOS walkthrough:
+
+1. Install VS Code.
+2. Add the `code` command to PATH from the Command Palette.
+3. Plan to run networking labs against a Linux VM, remote server, or Docker-based environment rather than only the local Mac shell.
+4. Install useful extensions: `Remote - SSH`, `Docker`, `YAML`, and `EditorConfig`.
+5. Install common networking tools with your package manager as needed, then verify you can run `ssh`, `curl`, `dig`, and `traceroute`.
+
+Windows walkthrough:
+
+1. Install VS Code on the Windows side.
+2. Install WSL2 and an Ubuntu distribution.
+3. Install the `Remote - WSL` extension and keep the course workspace inside the Linux filesystem.
+4. Add `Remote - SSH`, `Docker`, `YAML`, and `EditorConfig`.
+5. Verify that terminals are launching in Linux and not PowerShell before starting port, route, and firewall labs.
+
+Course-specific notes:
+
+- Use a real Linux shell for `ip`, `ss`, `ufw`, `tcpdump`, and routing exercises.
+- This course pairs naturally with a disposable VM or cloud instance so students can safely change firewall and network settings.
+
 ## Positioning
 
 This course should build on the Linux systems course and explain how systems
@@ -130,4 +163,3 @@ model.
 - Add BGP and internet routing as an advanced appendix
 - Add wireless networking and WPA/WPA2 basics
 - Add cloud networking patterns: security groups, load balancers, and VPCs
-

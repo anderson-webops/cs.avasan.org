@@ -1,5 +1,37 @@
 # Machine Learning Rework Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `PyCharm` or `VS Code`.
+
+Official links:
+
+- [PyCharm install guide](https://www.jetbrains.com/help/pycharm/installation-guide.html)
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code Python guide](https://code.visualstudio.com/docs/languages/python)
+- [Python downloads](https://www.python.org/downloads/?m=landing)
+
+macOS walkthrough:
+
+1. Install Python 3 from python.org.
+2. Install PyCharm or VS Code.
+3. If using VS Code, install `Python` and `Jupyter`.
+4. Create a virtual environment with `python3 -m venv .venv`.
+5. Install `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `jupyter`, and `seaborn`.
+
+Windows walkthrough:
+
+1. Install Python 3 from python.org and enable `Add Python to PATH`.
+2. Install PyCharm or VS Code.
+3. If using VS Code, install `Python` and `Jupyter`.
+4. Create a virtual environment with `py -m venv .venv`.
+5. Install `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `jupyter`, and `seaborn`.
+
+Course-specific notes:
+
+- Keep notebook support available, but also teach how to run the same code from `.py` modules.
+- If neural network modules remain, add TensorFlow or PyTorch only when those units begin, not during initial setup.
+
 ## Positioning
 
 The current `Machine Learning` course is a strong start, but it needs clearer
@@ -103,4 +135,3 @@ Create a small internal dataset list by difficulty:
 - Add feature engineering labs
 - Add ensemble methods after decision trees
 - Add a deployment or model-serving appendix
-

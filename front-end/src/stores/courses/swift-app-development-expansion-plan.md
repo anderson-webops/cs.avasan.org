@@ -1,5 +1,39 @@
 # Swift App Development Expansion Plan
 
+## Setup and Tooling
+
+Preferred IDE: `Xcode`. JetBrains and VS Code can support Swift syntax, but for
+real iOS app development, simulators, signing, and publishing, Xcode is the
+required primary tool.
+
+Official links:
+
+- [Xcode support and downloads](https://developer.apple.com/support/xcode/)
+- [Apple Developer Program enrollment](https://developer.apple.com/programs/enroll/)
+- [App Store Connect build upload guide](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds)
+- [VS Code download](https://code.visualstudio.com/Download)
+
+macOS walkthrough:
+
+1. Confirm the machine is running a macOS version supported by the target Xcode release.
+2. Install Xcode from the App Store or Apple’s developer downloads page.
+3. Open Xcode once so it can install extra components and simulators.
+4. Sign in with an Apple ID in Xcode and explain when a paid Apple Developer account is required.
+5. Create a starter SwiftUI app, run it on the simulator, and verify that signing, bundle identifiers, and scheme selection make sense before the real course begins.
+
+Windows walkthrough:
+
+1. Explain up front that native iOS app building and App Store publishing require macOS and Xcode.
+2. If a student is on Windows, use VS Code only for reading Swift syntax or notes, not as the main development environment.
+3. Plan to transition to a Mac before the practical build, simulator, signing, and publishing modules.
+4. Keep Apple account setup, bundle IDs, TestFlight, and App Store Connect as conceptual modules until a Mac is available.
+5. Avoid presenting Windows as a complete substitute, because it will create friction later in the course.
+
+Course-specific notes:
+
+- No CMake setup is needed.
+- This course should begin with machine requirements, Apple account requirements, storage needs, and the publishing pipeline before code structure.
+
 ## Positioning
 
 The current `Intro to Swift App Development` course is a good first taste of
@@ -220,4 +254,3 @@ should the course move into app structure, SwiftUI, and the Swift language.
 - Add SwiftData or Core Data as a follow-up
 - Add widgets, watchOS, or macOS as advanced electives
 - Add monetization and in-app purchase overview
-

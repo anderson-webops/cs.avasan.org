@@ -1,5 +1,41 @@
 # Python Core Curriculum Rework Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `PyCharm` or `VS Code`. PyCharm is ideal for students who want
+strong Python-specific guidance; VS Code is the lighter and more transferable
+option.
+
+Official links:
+
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [PyCharm installation guide](https://www.jetbrains.com/help/pycharm/installation-guide.html)
+- [VS Code Python guide](https://code.visualstudio.com/docs/languages/python)
+- [Python downloads](https://www.python.org/downloads/?m=landing)
+
+macOS walkthrough:
+
+1. Install Python 3.
+2. Install either PyCharm or VS Code.
+3. If using VS Code, add `Python`, `Pylance`, and `Jupyter` for later modules.
+4. Create a dedicated course folder for `python-1`, `python-2`, and `python-3` projects so files stay organized across the curriculum.
+5. Verify the interpreter, terminal, and run button all point to the same Python installation before starting.
+
+Windows walkthrough:
+
+1. Install Python 3 and enable the PATH option during setup.
+2. Install either PyCharm or VS Code.
+3. If using VS Code, add `Python`, `Pylance`, and `Jupyter`.
+4. Confirm that `python --version` works in a terminal and that the editor is using that interpreter.
+5. Teach students how to find their project folders in File Explorer early so file organization does not become a blocker.
+
+Course-specific notes:
+
+- No CMake setup is needed.
+- The course should include a dedicated early lesson on interpreters, terminals, file paths, and reading tracebacks, since setup confusion disproportionately affects beginners.
+
 ## Positioning
 
 The core Python sequence is the highest-priority curriculum line. It has to be
@@ -71,4 +107,3 @@ Why:
 - Add a typed-Python appendix with `dataclasses` and type hints
 - Add testing basics with `pytest`
 - Add Git and project-organization lessons for later Python students
-

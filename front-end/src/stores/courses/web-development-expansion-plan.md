@@ -1,5 +1,39 @@
 # Web Development Expansion Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `WebStorm` or `VS Code`. This course should normalize
+file-based local development rather than browser-only playgrounds.
+
+Official links:
+
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [WebStorm installation guide](https://www.jetbrains.com/help/webstorm/installation-guide.html)
+- [VS Code Node.js tutorial](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial)
+
+macOS walkthrough:
+
+1. Install Node.js LTS.
+2. Install either WebStorm or VS Code.
+3. If using VS Code, add `ESLint`, `Prettier`, `EditorConfig`, and optionally `GitLens`.
+4. Create a course workspace with folders for `html-css`, `javascript`, `full-stack`, and `deployment`.
+5. Verify that `node`, `npm`, and a simple local dev server work before moving into framework or hosting topics.
+
+Windows walkthrough:
+
+1. Install Node.js LTS.
+2. Install either WebStorm or VS Code.
+3. If using VS Code, add `ESLint`, `Prettier`, and `EditorConfig`; add `Remote - WSL` if Linux-based hosting labs are part of the course.
+4. Verify that terminals can run `node`, `npm`, and a local development server before starting.
+5. Teach file paths, terminals, and environment-variable basics early so deployment sections do not feel disconnected from the coding setup.
+
+Course-specific notes:
+
+- No CMake setup is needed.
+- Add an early module on browser devtools, Git, npm, and project folder structure so hosting and backend topics land on top of a stable workflow.
+
 ## Positioning
 
 The current JavaScript courses are strong for programming and browser work, but
@@ -138,4 +172,3 @@ This plan should explicitly cross-link with networking by teaching:
 - Add CI/CD with GitHub Actions
 - Add Postgres as a SQL companion track
 - Add S3-style object storage and CDN delivery
-

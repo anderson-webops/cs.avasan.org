@@ -1,5 +1,37 @@
 # AI Level 1 Expansion Plan
 
+## Setup and Tooling
+
+Preferred IDEs: `PyCharm` or `VS Code`.
+
+Official links:
+
+- [PyCharm install guide](https://www.jetbrains.com/help/pycharm/installation-guide.html)
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code Python guide](https://code.visualstudio.com/docs/languages/python)
+- [Python downloads](https://www.python.org/downloads/?m=landing)
+
+macOS walkthrough:
+
+1. Install Python 3 from python.org.
+2. Install PyCharm or VS Code.
+3. If using VS Code, install the `Python` and `Jupyter` extensions.
+4. Create a virtual environment with `python3 -m venv .venv`.
+5. Activate it and install starter packages such as `jupyter`, `matplotlib`, and `networkx`.
+
+Windows walkthrough:
+
+1. Install Python 3 from python.org and enable `Add Python to PATH`.
+2. Install PyCharm or VS Code.
+3. If using VS Code, install the `Python` and `Jupyter` extensions.
+4. Create a virtual environment with `py -m venv .venv`.
+5. Activate it and install `jupyter`, `matplotlib`, and `networkx`.
+
+Course-specific notes:
+
+- This course benefits from notebooks for search visualizations and small AI demos.
+- If projects become game-like, add `pygame-ce` later instead of at initial setup.
+
 ## Positioning
 
 AI Level 1 should be a bridge between core programming and model-centric
@@ -85,4 +117,3 @@ heavy math too early.
 - Add reinforcement-learning-flavored toy environments
 - Add a stronger bridge to decision trees and classification
 - Add project videos and walkthroughs for every unit
-

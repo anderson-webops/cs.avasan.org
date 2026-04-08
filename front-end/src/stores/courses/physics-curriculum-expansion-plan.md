@@ -1,5 +1,40 @@
 # Physics Curriculum Expansion Plan
 
+## Setup and Tooling
+
+Preferred IDE: `VS Code` or `PyCharm`, depending on whether the class uses more
+Python-based modeling. Much of the course can also use browser tools such as
+PhET, Desmos, and spreadsheets, so the coding environment should stay light.
+
+Official links:
+
+- [VS Code download](https://code.visualstudio.com/Download)
+- [VS Code on macOS](https://code.visualstudio.com/docs/setup/mac)
+- [VS Code on Windows](https://code.visualstudio.com/docs/setup/windows)
+- [PyCharm installation guide](https://www.jetbrains.com/help/pycharm/installation-guide.html)
+- [Python downloads](https://www.python.org/downloads/?m=landing)
+
+macOS walkthrough:
+
+1. Install Python 3.
+2. Install either VS Code or PyCharm.
+3. If using VS Code, add the `Python`, `Jupyter`, and `Pylance` extensions.
+4. Create a simple course folder for simulation notebooks, graphing scripts, and exported lab data.
+5. Keep browser access ready for Desmos and PhET, since many conceptual modules should stay interactive rather than code-heavy.
+
+Windows walkthrough:
+
+1. Install Python 3 and enable the PATH option during setup.
+2. Install either VS Code or PyCharm.
+3. If using VS Code, add `Python`, `Jupyter`, and `Pylance`.
+4. Verify that `python --version` works in a terminal before starting any simulation or graphing module.
+5. Keep Excel, Google Sheets, or another spreadsheet tool available for data tables and graph analysis.
+
+Course-specific notes:
+
+- No CMake setup is needed for this course.
+- The tooling should support graphing, simulations, and lab writeups more than large software projects.
+
 ## Positioning
 
 The current physics path should become more coherent as a two-stage sequence:
@@ -82,4 +117,3 @@ The current physics path should become more coherent as a two-stage sequence:
 - Add a separate astronomy/space physics elective
 - Add more design-build challenges tied to engineering
 - Add a lab notebook requirement with graphing and error analysis
-
