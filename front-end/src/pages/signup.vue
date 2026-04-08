@@ -2,6 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import {
 	SCHEDULER_ORIGIN,
+	legacyCalendlyUrl,
 	schedulerEmbedMessageSource,
 	schedulerEmbedResizeType,
 	schedulerEmbedUrl,
@@ -70,26 +71,27 @@ onBeforeUnmount(() => {
 		<section class="intro">
 			<h1>Schedule a Class</h1>
 			<p>
-				Use the scheduler below to choose a time that works for you. You
-				can reserve a single lesson or lock the same weekly time for a
-				short recurring run.
+				Choose a one-time or recurring 50-minute session below. Prefer
+				email? Reach me at
+				<a href="mailto:classes@jacobdanderson.net"
+					>classes@jacobdanderson.net</a
+				>.
 			</p>
-			<ul>
-				<li>
-					Sessions are 50 minutes with a built-in buffer for wrap-up
-					questions.
-				</li>
-				<li>
-					Recurring scheduling is supported directly in the booking
-					flow.
-				</li>
-				<li>
-					Prefer email? Reach me at
-					<a href="mailto:classes@jacobdanderson.net"
-						>classes@jacobdanderson.net</a
-					>.
-				</li>
-			</ul>
+			<div class="transition-banner" role="note">
+				<p>
+					Calendly is being phased out and will be retired on
+					April 30, 2026. If you prefer it, you can still use it until
+					then.
+				</p>
+				<a
+					class="transition-banner-link"
+					:href="legacyCalendlyUrl"
+					rel="noopener"
+					target="_blank"
+				>
+					Use Calendly Instead
+				</a>
+			</div>
 		</section>
 
 		<div class="scheduler-container">
@@ -121,7 +123,7 @@ onBeforeUnmount(() => {
 				:src="schedulerEmbedUrl"
 				title="Class scheduler"
 				:style="{ height: `${schedulerHeight}px` }"
-				loading="lazy"
+				loading="eager"
 				@load="markSchedulerLoaded"
 			/>
 
@@ -163,7 +165,7 @@ onBeforeUnmount(() => {
 .Signup {
 	display: flex;
 	flex-direction: column;
-	gap: 3rem;
+	gap: 2.5rem;
 	padding: 2.5rem 1.5rem 4rem;
 	color: #16202a;
 	align-items: center;
@@ -180,19 +182,6 @@ onBeforeUnmount(() => {
 	font-size: 1.05rem;
 }
 
-.intro ul {
-	list-style: none;
-	margin: 0;
-	gap: 0.75rem;
-	text-align: left;
-	color: #1f3d5a;
-	background: #f4f8fc;
-	border-radius: 20px;
-	padding: 1.5rem 1.75rem;
-	box-shadow: inset 0 0 0 1px #dbe9f8;
-	font-size: 1rem;
-}
-
 .intro a {
 	color: #3a6ea5;
 	font-weight: 600;
@@ -201,6 +190,46 @@ onBeforeUnmount(() => {
 
 .intro a:hover {
 	text-decoration: underline;
+}
+
+.transition-banner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.85rem 1rem;
+	padding: 0.95rem 1.1rem;
+	border-radius: 18px;
+	background: linear-gradient(135deg, #fff7e8, #fffdf7);
+	box-shadow: inset 0 0 0 1px rgba(201, 150, 51, 0.28);
+	text-align: left;
+}
+
+.transition-banner p {
+	margin: 0;
+	flex: 1 1 420px;
+	color: #6a4a13;
+	font-size: 0.98rem;
+	line-height: 1.5;
+}
+
+.transition-banner-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.75rem 1.15rem;
+	border-radius: 999px;
+	background: #fff;
+	color: #8f5b00;
+	font-weight: 700;
+	text-decoration: none;
+	box-shadow: inset 0 0 0 1px rgba(201, 150, 51, 0.35);
+	white-space: nowrap;
+}
+
+.transition-banner-link:hover {
+	background: #fff8eb;
+	text-decoration: none;
 }
 
 .scheduler-container {
@@ -330,10 +359,10 @@ onBeforeUnmount(() => {
 .intro,
 .after-booking {
 	display: grid;
-	max-width: 720px;
+	max-width: 960px;
 	margin: 0;
 	text-align: center;
-	gap: 1.25rem;
+	gap: 1rem;
 }
 
 .after-booking h2 {
@@ -382,6 +411,10 @@ onBeforeUnmount(() => {
 @media (max-width: 640px) {
 	.Signup {
 		padding: 2rem 1.25rem 3rem;
+	}
+
+	.transition-banner {
+		text-align: center;
 	}
 
 	.scheduler-container {
