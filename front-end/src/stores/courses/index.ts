@@ -131,6 +131,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			import("./machine-learning").then(
 				({ machineLearningCourse }) => machineLearningCourse
 			)
+	},
+	{
+		id: "low-level-security",
+		name: "Low Level Security",
+		load: () =>
+			import("./low-level-security").then(
+				({ lowLevelSecurityCourse }) => lowLevelSecurityCourse
+			)
 	}
 ];
 
