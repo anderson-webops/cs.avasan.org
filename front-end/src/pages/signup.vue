@@ -20,7 +20,7 @@ useHead({
 	link: [
 		{
 			rel: "dns-prefetch",
-			href: "//schedule.classes.jacobdanderson.net"
+			href: "//scheduler.classes.jacobdanderson.net"
 		},
 		{
 			rel: "preconnect",

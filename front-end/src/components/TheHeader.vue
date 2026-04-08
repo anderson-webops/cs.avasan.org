@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { primeCalendlyWidget } from "@/modules/calendly";
+import { warmSchedulerConnections } from "@/modules/scheduler";
 import { useAppStore } from "@/stores/app";
 
 const emit = defineEmits<{
@@ -55,9 +55,9 @@ function logoutUser() {
 							<router-link
 								class="nav-link"
 								to="/signup"
-								@focus="primeCalendlyWidget"
-								@mouseenter="primeCalendlyWidget"
-								@touchstart.passive="primeCalendlyWidget"
+								@focus="warmSchedulerConnections"
+								@mouseenter="warmSchedulerConnections"
+								@touchstart.passive="warmSchedulerConnections"
 							>
 								Book a Class
 							</router-link>

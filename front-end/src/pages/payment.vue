@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { primeCalendlyWidget } from "@/modules/calendly";
+import { warmSchedulerConnections } from "@/modules/scheduler";
 import { useContentStore } from "@/stores/content";
 
 defineOptions({ name: "SupportUsPage" });
@@ -95,17 +95,17 @@ const content = useContentStore();
 		<section aria-labelledby="schedule-title" class="schedule">
 			<h2 id="schedule-title">Ready to Schedule?</h2>
 			<p>
-				Book through Calendly or email me if you want help setting up a
-				recurring time that fits your schedule.
+				Book through the scheduler or email me if you want help setting
+				up a recurring time that fits your schedule.
 			</p>
 			<RouterLink
 				class="cta"
 				to="/signup"
-				@focus="primeCalendlyWidget"
-				@mouseenter="primeCalendlyWidget"
-				@touchstart.passive="primeCalendlyWidget"
+				@focus="warmSchedulerConnections"
+				@mouseenter="warmSchedulerConnections"
+				@touchstart.passive="warmSchedulerConnections"
 			>
-				Book on Calendly
+				Open Scheduler
 			</RouterLink>
 			<a class="cta ghost" href="mailto:classes@jacobdanderson.net"
 				>Email Jacob</a

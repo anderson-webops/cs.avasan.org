@@ -2,7 +2,7 @@
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the HTML results with vite-ssg
-import { CALENDLY_ASSET_ORIGIN, CALENDLY_ORIGIN } from "@/modules/calendly";
+import { SCHEDULER_ORIGIN } from "@/modules/scheduler";
 
 useHead({
 	title: "Classes",
@@ -41,20 +41,11 @@ useHead({
 		},
 		{
 			rel: "dns-prefetch",
-			href: "//calendly.com"
-		},
-		{
-			rel: "dns-prefetch",
-			href: "//assets.calendly.com"
+			href: "//scheduler.classes.jacobdanderson.net"
 		},
 		{
 			rel: "preconnect",
-			href: CALENDLY_ORIGIN
-		},
-		{
-			rel: "preconnect",
-			href: CALENDLY_ASSET_ORIGIN,
-			crossorigin: "anonymous"
+			href: SCHEDULER_ORIGIN
 		}
 		/*				{
           rel: 'icon',

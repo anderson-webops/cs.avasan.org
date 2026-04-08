@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { primeCalendlyWidget } from "@/modules/calendly";
+import { warmSchedulerConnections } from "@/modules/scheduler";
 import { useContentStore } from "@/stores/content";
 
 defineOptions({ name: "HomePage" });
@@ -36,9 +36,9 @@ const { subjectGroups, highlights } = storeToRefs(content);
 			<RouterLink
 				class="cta primary"
 				to="/signup"
-				@focus="primeCalendlyWidget"
-				@mouseenter="primeCalendlyWidget"
-				@touchstart.passive="primeCalendlyWidget"
+				@focus="warmSchedulerConnections"
+				@mouseenter="warmSchedulerConnections"
+				@touchstart.passive="warmSchedulerConnections"
 			>
 				Book a Class</RouterLink
 			>
@@ -87,19 +87,19 @@ const { subjectGroups, highlights } = storeToRefs(content);
 			<div class="next-steps-card">
 				<h2 id="next-steps-title">Ready to Get Started?</h2>
 				<p>
-					Choose a time in Calendly, share a few notes about the
+					Choose a time in the scheduler, share a few notes about the
 					learner, and I’ll follow up within one business day.
-					Returning students can use the same link to keep a regular
-					rhythm.
+					Returning students can use the same booking flow to keep a
+					regular rhythm.
 				</p>
 				<RouterLink
 					class="cta primary"
 					to="/signup"
-					@focus="primeCalendlyWidget"
-					@mouseenter="primeCalendlyWidget"
-					@touchstart.passive="primeCalendlyWidget"
+					@focus="warmSchedulerConnections"
+					@mouseenter="warmSchedulerConnections"
+					@touchstart.passive="warmSchedulerConnections"
 				>
-					Book on Calendly</RouterLink
+					Open Scheduler</RouterLink
 				>
 				<a
 					class="cta secondary"

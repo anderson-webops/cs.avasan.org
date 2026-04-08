@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { primeCalendlyWidget } from "@/modules/calendly";
+import { warmSchedulerConnections } from "@/modules/scheduler";
 </script>
 
 <template>
@@ -48,9 +48,9 @@ import { primeCalendlyWidget } from "@/modules/calendly";
 					<li>
 						<RouterLink
 							to="/signup"
-							@focus="primeCalendlyWidget"
-							@mouseenter="primeCalendlyWidget"
-							@touchstart.passive="primeCalendlyWidget"
+							@focus="warmSchedulerConnections"
+							@mouseenter="warmSchedulerConnections"
+							@touchstart.passive="warmSchedulerConnections"
 						>
 							Book a Class
 						</RouterLink>
