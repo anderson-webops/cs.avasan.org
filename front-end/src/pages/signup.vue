@@ -1,177 +1,67 @@
 <script lang="ts" setup>
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import {
-	computed,
-	nextTick,
-	onBeforeUnmount,
-	onMounted,
-	ref,
-	watch
-} from "vue";
-import {
-	CALENDLY_ASSET_ORIGIN,
-	CALENDLY_ORIGIN,
-	calendlyEmbedUrl,
-	calendlyScriptSrc,
-	calendlyUrl,
-	mountCalendlyInlineWidget,
-	warmCalendlyConnections
-} from "@/modules/calendly";
+	SCHEDULER_ORIGIN,
+	schedulerEmbedMessageSource,
+	schedulerEmbedResizeType,
+	schedulerEmbedUrl,
+	schedulerUrl
+} from "@/modules/scheduler";
 
 defineOptions({ name: "SignupPage" });
 
-const INLINE_CALENDLY_MIN_WIDTH = 860;
+const MIN_FRAME_HEIGHT = 860;
+const MAX_FRAME_HEIGHT = 2200;
 
-const calendlyContainer = ref<HTMLDivElement | null>(null);
-const calendlyInlineWidget = ref<HTMLDivElement | null>(null);
-const calendlyState = ref<"loading" | "ready" | "error">("loading");
-const calendlyDisplayMode = ref<"inline" | "compact">("inline");
-const showInlineCalendly = computed(
-	() => calendlyDisplayMode.value === "inline"
-);
-
-let calendlyObserver: MutationObserver | null = null;
-let calendlyReadyTimeout: number | undefined;
-let calendlyResizeObserver: ResizeObserver | null = null;
+const schedulerLoaded = ref(false);
+const schedulerHeight = ref(MIN_FRAME_HEIGHT);
 
 useHead({
 	link: [
 		{
 			rel: "dns-prefetch",
-			href: "//calendly.com"
-		},
-		{
-			rel: "dns-prefetch",
-			href: "//assets.calendly.com"
+			href: "//schedule.classes.jacobdanderson.net"
 		},
 		{
 			rel: "preconnect",
-			href: CALENDLY_ORIGIN
-		},
-		{
-			rel: "preconnect",
-			href: CALENDLY_ASSET_ORIGIN,
-			crossorigin: "anonymous"
-		},
-		{
-			rel: "preload",
-			href: calendlyScriptSrc,
-			as: "script",
-			crossorigin: "anonymous"
+			href: SCHEDULER_ORIGIN
 		}
 	]
 });
 
-function markCalendlyReady() {
-	if (calendlyState.value !== "error") {
-		calendlyState.value = "ready";
-	}
-}
-
-function attachCalendlyIframeWatcher() {
-	const iframe = calendlyInlineWidget.value?.querySelector("iframe");
-
-	if (!iframe) {
-		return false;
-	}
-
-	if (calendlyReadyTimeout) {
-		window.clearTimeout(calendlyReadyTimeout);
-	}
-
-	if (iframe.dataset.calendlyObserved === "true") {
-		return true;
-	}
-
-	iframe.dataset.calendlyObserved = "true";
-	iframe.addEventListener("load", markCalendlyReady, { once: true });
-	calendlyReadyTimeout = window.setTimeout(markCalendlyReady, 1800);
-	return true;
-}
-
-function watchCalendlyIframe() {
-	if (attachCalendlyIframeWatcher() || !calendlyInlineWidget.value) {
+function handleSchedulerMessage(event: MessageEvent) {
+	if (event.origin !== SCHEDULER_ORIGIN) {
 		return;
 	}
 
-	calendlyObserver?.disconnect();
-	calendlyObserver = new MutationObserver(() => {
-		if (attachCalendlyIframeWatcher()) {
-			calendlyObserver?.disconnect();
-		}
-	});
+	const payload = event.data;
 
-	calendlyObserver.observe(calendlyInlineWidget.value, {
-		childList: true,
-		subtree: true
-	});
-}
-
-function clearCalendlyReadyTimeout() {
-	if (calendlyReadyTimeout) {
-		window.clearTimeout(calendlyReadyTimeout);
-		calendlyReadyTimeout = undefined;
-	}
-}
-
-function resetCalendlyEmbed() {
-	calendlyObserver?.disconnect();
-	clearCalendlyReadyTimeout();
-	calendlyInlineWidget.value?.replaceChildren();
-}
-
-function updateCalendlyDisplayMode() {
-	const width = calendlyContainer.value?.clientWidth ?? window.innerWidth;
-	calendlyDisplayMode.value =
-		width >= INLINE_CALENDLY_MIN_WIDTH ? "inline" : "compact";
-}
-
-async function mountInlineCalendlyWidget() {
-	if (!calendlyInlineWidget.value) {
+	if (
+		typeof payload !== "object" ||
+		payload === null ||
+		payload.source !== schedulerEmbedMessageSource ||
+		payload.type !== schedulerEmbedResizeType ||
+		typeof payload.height !== "number"
+	) {
 		return;
 	}
 
-	calendlyState.value = "loading";
-	watchCalendlyIframe();
-
-	try {
-		await mountCalendlyInlineWidget(calendlyInlineWidget.value);
-		watchCalendlyIframe();
-	} catch {
-		calendlyState.value = "error";
-	}
+	schedulerHeight.value = Math.max(
+		MIN_FRAME_HEIGHT,
+		Math.min(MAX_FRAME_HEIGHT, Math.ceil(payload.height))
+	);
 }
 
-watch(calendlyDisplayMode, async mode => {
-	if (mode === "compact") {
-		resetCalendlyEmbed();
-		return;
-	}
+function markSchedulerLoaded() {
+	schedulerLoaded.value = true;
+}
 
-	await nextTick();
-	await mountInlineCalendlyWidget();
-});
-
-onMounted(async () => {
-	warmCalendlyConnections();
-	await nextTick();
-
-	updateCalendlyDisplayMode();
-
-	if (typeof ResizeObserver !== "undefined" && calendlyContainer.value) {
-		calendlyResizeObserver = new ResizeObserver(() => {
-			updateCalendlyDisplayMode();
-		});
-		calendlyResizeObserver.observe(calendlyContainer.value);
-	}
-
-	if (calendlyDisplayMode.value === "inline") {
-		await mountInlineCalendlyWidget();
-	}
+onMounted(() => {
+	window.addEventListener("message", handleSchedulerMessage);
 });
 
 onBeforeUnmount(() => {
-	calendlyResizeObserver?.disconnect();
-	resetCalendlyEmbed();
+	window.removeEventListener("message", handleSchedulerMessage);
 });
 </script>
 
@@ -180,9 +70,9 @@ onBeforeUnmount(() => {
 		<section class="intro">
 			<h1>Schedule a Class</h1>
 			<p>
-				Use Calendly to choose a time that works for you. Share a few
-				notes about the learner and the topics you want to cover so I
-				can prepare before we meet.
+				Use the scheduler below to choose a time that works for you. You
+				can reserve a single lesson or lock the same weekly time for a
+				short recurring run.
 			</p>
 			<ul>
 				<li>
@@ -190,8 +80,8 @@ onBeforeUnmount(() => {
 					questions.
 				</li>
 				<li>
-					Need a recurring time? Book the first session and we can set
-					up the rest together.
+					Recurring scheduling is supported directly in the booking
+					flow.
 				</li>
 				<li>
 					Prefer email? Reach me at
@@ -202,68 +92,43 @@ onBeforeUnmount(() => {
 			</ul>
 		</section>
 
-		<div ref="calendlyContainer" class="calendly-container">
+		<div class="scheduler-container">
 			<div
-				v-if="showInlineCalendly"
-				class="calendly-stage"
-				:class="`is-${calendlyState}`"
+				v-if="!schedulerLoaded"
+				class="scheduler-loading"
+				aria-live="polite"
 			>
-				<div
-					v-if="calendlyState !== 'ready'"
-					class="calendly-loading"
-					aria-live="polite"
-				>
-					<p class="calendly-loading-kicker">
-						{{
-							calendlyState === "error"
-								? "Trouble loading the scheduler"
-								: "Opening scheduler…"
-						}}
-					</p>
-					<div class="calendly-loading-shell">
-						<span class="shell-line is-short" />
-						<span class="shell-line" />
-						<span class="shell-line" />
-						<span class="shell-panel" />
-					</div>
-					<a
-						class="calendly-direct-link"
-						:href="calendlyUrl"
-						rel="noopener"
-						target="_blank"
-					>
-						Open Calendly in a New Tab
-					</a>
+				<p class="scheduler-loading-kicker">Opening scheduler…</p>
+				<div class="scheduler-loading-shell">
+					<span class="shell-line is-short" />
+					<span class="shell-line" />
+					<span class="shell-line" />
+					<span class="shell-panel" />
 				</div>
-
-				<div
-					ref="calendlyInlineWidget"
-					class="calendly-inline-widget"
-					:data-url="calendlyEmbedUrl"
-				/>
-			</div>
-			<div v-else class="calendly-compact">
-				<p class="calendly-loading-kicker">
-					Open the scheduler in a new tab
-				</p>
-				<p class="calendly-compact-copy">
-					The inline scheduler works best on wider viewports. On
-					narrower windows, opening Calendly directly gives you the
-					full booking experience without clipping.
-				</p>
 				<a
-					class="calendly-direct-link"
-					:href="calendlyUrl"
+					class="scheduler-direct-link"
+					:href="schedulerUrl"
 					rel="noopener"
 					target="_blank"
 				>
-					Open Calendly
+					Open Scheduler in a New Tab
 				</a>
 			</div>
-			<p class="calendly-fallback">
-				If the scheduler is slow to appear, open Calendly directly:
-				<a :href="calendlyUrl" rel="noopener" target="_blank">
-					{{ calendlyUrl }}
+
+			<iframe
+				class="scheduler-frame"
+				:class="{ 'is-loaded': schedulerLoaded }"
+				:src="schedulerEmbedUrl"
+				title="Class scheduler"
+				:style="{ height: `${schedulerHeight}px` }"
+				loading="lazy"
+				@load="markSchedulerLoaded"
+			/>
+
+			<p class="scheduler-fallback">
+				If the scheduler is slow to appear, open it directly:
+				<a :href="schedulerUrl" rel="noopener" target="_blank">
+					{{ schedulerUrl }}
 				</a>
 			</p>
 		</div>
@@ -338,37 +203,34 @@ onBeforeUnmount(() => {
 	text-decoration: underline;
 }
 
-.calendly-container {
+.scheduler-container {
+	position: relative;
 	background: white;
 	border-radius: 28px;
 	padding: 1.5rem;
 	box-shadow: 0 18px 40px rgba(16, 42, 66, 0.08);
 	max-width: 960px;
 	width: 100%;
-
-	overflow-x: auto;
+	overflow: hidden;
 }
 
-.calendly-stage {
-	position: relative;
-	min-height: clamp(700px, 82vh, 860px);
-}
-
-.calendly-inline-widget {
-	box-sizing: border-box;
-	min-height: clamp(700px, 82vh, 860px);
+.scheduler-frame {
+	display: block;
+	width: 100%;
+	border: 0;
+	border-radius: 22px;
+	background: white;
+	opacity: 0.2;
 	transition: opacity 0.25s ease;
 }
 
-.calendly-inline-widget:deep(iframe) {
-	width: 100%;
-	min-height: inherit;
-	border-radius: 20px;
+.scheduler-frame.is-loaded {
+	opacity: 1;
 }
 
-.calendly-loading {
+.scheduler-loading {
 	position: absolute;
-	inset: 0;
+	inset: 1.5rem;
 	z-index: 1;
 	display: grid;
 	align-content: center;
@@ -391,14 +253,14 @@ onBeforeUnmount(() => {
 	box-shadow: inset 0 0 0 1px rgba(58, 110, 165, 0.1);
 }
 
-.calendly-loading-kicker {
+.scheduler-loading-kicker {
 	margin: 0;
 	font-size: 1.05rem;
 	font-weight: 700;
 	color: #19314a;
 }
 
-.calendly-loading-shell {
+.scheduler-loading-shell {
 	display: grid;
 	gap: 0.9rem;
 	width: min(100%, 720px);
@@ -415,7 +277,7 @@ onBeforeUnmount(() => {
 		rgba(220, 232, 245, 0.9)
 	);
 	background-size: 220% 100%;
-	animation: calendly-shell-shimmer 1.5s linear infinite;
+	animation: scheduler-shell-shimmer 1.5s linear infinite;
 }
 
 .shell-line {
@@ -432,7 +294,7 @@ onBeforeUnmount(() => {
 	border-radius: 28px;
 }
 
-.calendly-direct-link {
+.scheduler-direct-link {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -444,61 +306,24 @@ onBeforeUnmount(() => {
 	text-decoration: none;
 }
 
-.calendly-direct-link:hover {
+.scheduler-direct-link:hover {
 	background: #2d5c8a;
 }
 
-.calendly-compact {
-	display: grid;
-	justify-items: center;
-	gap: 1rem;
-	padding: clamp(2rem, 4vw, 3rem);
-	text-align: center;
-	border-radius: 22px;
-	background:
-		linear-gradient(
-			180deg,
-			rgba(250, 252, 255, 0.98),
-			rgba(244, 248, 252, 0.95)
-		),
-		radial-gradient(
-			circle at top left,
-			rgba(58, 110, 165, 0.12),
-			transparent 50%
-		);
-	box-shadow: inset 0 0 0 1px rgba(58, 110, 165, 0.1);
-}
-
-.calendly-compact-copy {
-	max-width: 40rem;
-	margin: 0;
-	line-height: 1.65;
-	color: #405467;
-}
-
-.calendly-stage.is-ready .calendly-inline-widget {
-	opacity: 1;
-}
-
-.calendly-stage.is-loading .calendly-inline-widget,
-.calendly-stage.is-error .calendly-inline-widget {
-	opacity: 0.18;
-}
-
-.calendly-fallback {
+.scheduler-fallback {
 	margin-top: 1.25rem;
 	font-size: 0.95rem;
 	color: #2d3f55;
 	text-align: center;
 }
 
-.calendly-fallback a {
+.scheduler-fallback a {
 	color: #3a6ea5;
 	font-weight: 600;
 	text-decoration: none;
 }
 
-.calendly-fallback a:hover {
+.scheduler-fallback a:hover {
 	text-decoration: underline;
 }
 
@@ -544,7 +369,7 @@ onBeforeUnmount(() => {
 	transform: translateY(-2px);
 }
 
-@keyframes calendly-shell-shimmer {
+@keyframes scheduler-shell-shimmer {
 	0% {
 		background-position: 0% 50%;
 	}
@@ -559,16 +384,12 @@ onBeforeUnmount(() => {
 		padding: 2rem 1.25rem 3rem;
 	}
 
-	.calendly-container {
+	.scheduler-container {
 		padding: 1rem;
 	}
 
-	.calendly-stage,
-	.calendly-inline-widget {
-		min-height: 640px;
-	}
-
-	.calendly-loading {
+	.scheduler-loading {
+		inset: 1rem;
 		padding: 1.5rem;
 	}
 
