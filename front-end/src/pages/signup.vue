@@ -80,8 +80,15 @@ onBeforeUnmount(() => {
 			<div class="transition-banner" role="note">
 				<p>
 					Calendly is being phased out and will be retired on
-					April 30, 2026. If you prefer it, you can still use it until
-					then.
+					April 30, 2026. If you prefer it, you can still use
+					<a
+						:href="legacyCalendlyUrl"
+						rel="noopener"
+						target="_blank"
+					>
+						the Calendly link
+					</a>
+					until then.
 				</p>
 				<a
 					class="transition-banner-link"
@@ -157,6 +164,29 @@ onBeforeUnmount(() => {
 			<RouterLink class="cta" to="/payment"
 				>View Tuition Details</RouterLink
 			>
+		</section>
+
+		<section
+			aria-labelledby="legacy-booking-title"
+			class="legacy-booking-card"
+		>
+			<h2 id="legacy-booking-title">Still looking for the Calendly link?</h2>
+			<p>
+				You can still use
+				<a :href="legacyCalendlyUrl" rel="noopener" target="_blank">
+					{{ legacyCalendlyUrl }}
+				</a>
+				through April 30, 2026. It will be phased out at the end of the
+				month.
+			</p>
+			<a
+				class="transition-banner-link"
+				:href="legacyCalendlyUrl"
+				rel="noopener"
+				target="_blank"
+			>
+				Open Calendly
+			</a>
 		</section>
 	</section>
 </template>
@@ -363,6 +393,40 @@ onBeforeUnmount(() => {
 	margin: 0;
 	text-align: center;
 	gap: 1rem;
+}
+
+.legacy-booking-card {
+	display: grid;
+	gap: 0.9rem;
+	max-width: 960px;
+	width: 100%;
+	padding: 1.25rem 1.35rem;
+	border-radius: 22px;
+	background: linear-gradient(135deg, #fff8ec, #fffdf8);
+	box-shadow: inset 0 0 0 1px rgba(201, 150, 51, 0.24);
+	text-align: center;
+}
+
+.legacy-booking-card h2 {
+	margin: 0;
+	font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+	color: #6a4a13;
+}
+
+.legacy-booking-card p {
+	margin: 0;
+	color: #6a4a13;
+	line-height: 1.6;
+}
+
+.legacy-booking-card a:not(.transition-banner-link) {
+	color: #8f5b00;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.legacy-booking-card a:not(.transition-banner-link):hover {
+	text-decoration: underline;
 }
 
 .after-booking h2 {
