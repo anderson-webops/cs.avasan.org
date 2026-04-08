@@ -36,3 +36,12 @@
 - The API expects secrets via environment variables: `SESSION_SECRET`, Mongo credentials (`MONGODB_URI` or Vault via `VAULT_ROLE_ID`/`VAULT_SECRET_ID`), and optional `CROSS_SITE` to adjust cookie policy. Load them through `.env` files excluded from version control.
 - `npm run server` already loads `dotenv/config` and will attempt Vault retrieval via `src/vaultClient.ts`; validate both code paths when changing auth or persistence.
 - Never commit real credentials or production endpoints. Scrub logs before sharing, and verify rate limiting when exposing new routes under `/admin-mail` or other sensitive prefixes.
+
+## Downstream Sync Workflow
+- This repository is a curated downstream of `anderson-webops/classes.jacobdanderson.net`. Treat the downstream tree as authoritative for public student-facing content and design separation.
+- Keep `origin` pointed at `instruction-material/classes.jacobdanderson.net` and keep an `upstream` remote pointed at `anderson-webops/classes.jacobdanderson.net` for selective sync work.
+- Prefer selective imports of reusable material only: course catalog files under `front-end/src/stores/courses/`, generalized course-library UI, neutral docs, and other content that students or instructors can use directly.
+- Do not wholesale merge upstream backend, auth, payment, admin, personal contact, scheduling, or other implementation-specific operational content unless it is intentionally generalized first.
+- For a course-content-only sync, use this sequence: `git fetch upstream`, inspect candidate changes, port only the generalized material, validate the downstream site, then commit and push the content change.
+- If GitHub fork comparison still shows the downstream branch as behind after a selective sync, record upstream ancestry with `git merge -s ours --no-ff upstream/main -m "Record upstream main as merged"` so the downstream tree stays unchanged while upstream history becomes reachable.
+- Use the `-s ours` merge only as bookkeeping after the desired content has already been imported. It is not a substitute for reviewing and selectively syncing the actual material.
