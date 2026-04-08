@@ -9,7 +9,7 @@
 	"private": true,
 	"main": "dist/script.js",
 	"scripts": {
-		"build": "vite-ssg build",
+		"build": "vite-ssg build && node scripts/normalize-static-routes.mjs",
 		"dev": "vite --port 3333 --open",
 		"start": "vite --port 3333 --open --host",
 		"serve": "vite --port 3333 --open --host",
