@@ -98,6 +98,23 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "design-patterns-in-java",
+		name: "Design Patterns in Java",
+		load: () =>
+			import("./design-patterns-in-java").then(
+				({ designPatternsInJavaCourse }) => designPatternsInJavaCourse
+			)
+	},
+	{
+		id: "design-patterns-in-java-part-2",
+		name: "Design Patterns in Java Part 2: Refactoring",
+		load: () =>
+			import("./design-patterns-in-java-part-2").then(
+				({ designPatternsInJavaPart2Course }) =>
+					designPatternsInJavaPart2Course
+			)
+	},
+	{
 		id: "intro-to-chemistry",
 		name: "Intro to Chemistry",
 		load: () =>
