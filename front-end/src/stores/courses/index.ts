@@ -133,6 +133,15 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "web-development-foundations",
+		name: "Web Development Foundations",
+		load: () =>
+			import("./web-development-foundations").then(
+				({ webDevelopmentFoundationsCourse }) =>
+					webDevelopmentFoundationsCourse
+			)
+	},
+	{
 		id: "machine-learning",
 		name: "Machine Learning",
 		load: () =>
