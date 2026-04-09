@@ -1,9 +1,13 @@
 import type { RawCourse } from "./types";
 
-const JUNI_ROOT = "Juni/Low Level Security";
+const LOW_LEVEL_SECURITY_REPO = "https://github.com/instruction-material/Low-Level-Security/tree/main";
 
-function localLabPaths(labId: string) {
-	return `Starter code: \`${JUNI_ROOT}/${labId}/starter\`. Solution code: \`${JUNI_ROOT}/${labId}/solution\`.`;
+function starterRepoLink(labId: string) {
+	return `${LOW_LEVEL_SECURITY_REPO}/${labId}/starter`;
+}
+
+function solutionRepoLink(labId: string) {
+	return `${LOW_LEVEL_SECURITY_REPO}/${labId}/solution`;
 }
 
 export const lowLevelSecurityCourse: RawCourse = {
@@ -33,7 +37,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "LLS1 Project 1: Memory Map Inspector",
-					content: `Build a small console program that prints and compares the addresses of stack, heap, global, and static data, then records observations about layout and lifetime. Extend it by adding an array, a string, and a dynamically allocated buffer. Ask learners to write a short lab note about which values move between runs and which stay conceptually tied to storage duration. ${localLabPaths("LLS1-Memory-Map-Inspector")}`
+					content: `Build a small console program that prints and compares the addresses of stack, heap, global, and static data, then records observations about layout and lifetime. Extend it by adding an array, a string, and a dynamically allocated buffer. Ask learners to write a short lab note about which values move between runs and which stay conceptually tied to storage duration. The starter now includes a guided observation table, and the reference solution adds byte-distance reporting plus example interpretations.`,
+					projectLink: starterRepoLink("LLS1-Memory-Map-Inspector"),
+					solutionLink: solutionRepoLink("LLS1-Memory-Map-Inspector")
 				}
 			],
 			supplementalProjects: [
@@ -69,7 +75,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "LLS2 Project 2: Bounds-Checked Copy Lab",
-					content: `Implement a label-copy routine for a fixed-size destination buffer. The starter code should distinguish between successful copies and truncation, always leave the destination in a valid state, and print test cases for short, exact-fit, empty, and too-long inputs. Learners should explain why explicit status codes are more secure than silent truncation. ${localLabPaths("LLS2-Bounds-Checked-Copy")}`
+					content: `Implement a label-copy routine for a fixed-size destination buffer. The starter code should distinguish between successful copies and truncation, always leave the destination in a valid state, and print test cases for short, exact-fit, empty, too-long, and invalid inputs. Learners should explain why explicit status codes are more secure than silent truncation and use the byte dump to confirm terminator placement.`,
+					projectLink: starterRepoLink("LLS2-Bounds-Checked-Copy"),
+					solutionLink: solutionRepoLink("LLS2-Bounds-Checked-Copy")
 				}
 			],
 			supplementalProjects: [
@@ -100,7 +108,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "LLS3 Project 3: Length-Prefixed Parser",
-					content: `Write a parser for a tiny packet format where the first byte stores payload length and the second byte stores a command identifier. The secure solution should reject length mismatches, reject unknown commands, and reject non-printable payload bytes. Learners should then write a short table listing which malformed cases were caught. ${localLabPaths("LLS3-Length-Prefixed-Parser")}`
+					content: `Write a parser for a tiny packet format where the first byte stores payload length and the second byte stores a command identifier. The secure solution should reject length mismatches, oversized payloads, unknown commands, and non-printable payload bytes. Learners should then write a short table listing which malformed cases were caught and add at least one more rejection case of their own.`,
+					projectLink: starterRepoLink("LLS3-Length-Prefixed-Parser"),
+					solutionLink: solutionRepoLink("LLS3-Length-Prefixed-Parser")
 				}
 			],
 			supplementalProjects: [
@@ -134,7 +144,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "LLS4 Project 4: Ring Buffer Guards",
-					content: `Implement a tiny byte ring buffer with guarded push and pop operations. The secure solution should preserve invariants during wraparound and reject impossible requests without corrupting state. Learners should test partial fills, exact fills, over-capacity writes, and wraparound reads. ${localLabPaths("LLS4-Ring-Buffer-Guards")}`
+					content: `Implement a tiny byte ring buffer with guarded push and pop operations. The secure solution should preserve invariants during wraparound and reject impossible requests without corrupting state. Learners should test partial fills, exact fills, over-capacity writes, wraparound reads, and confirm that failed requests leave the logical contents untouched.`,
+					projectLink: starterRepoLink("LLS4-Ring-Buffer-Guards"),
+					solutionLink: solutionRepoLink("LLS4-Ring-Buffer-Guards")
 				}
 			],
 			supplementalProjects: [
@@ -165,7 +177,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "LLS5 Project 5: Mini Fuzzer Harness",
-					content: `Build a tiny mutation harness around the packet parser from earlier lessons. Start from a valid packet, flip random bytes, perturb the length field, and count how often the parser rejects malformed data cleanly. The goal is not to attack anything; it is to automate edge-case discovery for a local toy parser and then preserve interesting cases for regression testing. ${localLabPaths("LLS5-Mini-Fuzzer")}`
+					content: `Build a tiny mutation harness around the packet parser from earlier lessons. Start from a valid packet, flip random bytes, perturb the length field, and count how often the parser rejects malformed data cleanly. The goal is not to attack anything; it is to automate edge-case discovery for a local toy parser, group rejection reasons, and preserve interesting cases for regression testing.`,
+					projectLink: starterRepoLink("LLS5-Mini-Fuzzer"),
+					solutionLink: solutionRepoLink("LLS5-Mini-Fuzzer")
 				}
 			],
 			supplementalProjects: [
@@ -196,7 +210,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "LLS6 Capstone: Audit and Harden a Tiny System",
-					content: `Choose one or two of the earlier labs and perform a full pass: threat model, invariants, malformed input list, tool-assisted testing plan, patch list, and regression suite. The capstone deliverable is a short audit packet, not an exploit. Use the earlier project folders as raw material and require students to justify every change.`
+					content: `Use the capstone starter to audit a tiny packet-driven system that combines bounded label storage with command dispatch. Perform a full pass: threat model, invariants, malformed input list, tool-assisted testing plan, patch list, and regression suite. The capstone deliverable is a short audit packet, not an exploit, and every change should be justified against a specific broken assumption.`,
+					projectLink: starterRepoLink("LLS6-Capstone-Audit"),
+					solutionLink: solutionRepoLink("LLS6-Capstone-Audit")
 				}
 			],
 			supplementalProjects: [
