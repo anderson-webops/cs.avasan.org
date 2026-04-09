@@ -98,6 +98,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "intro-to-chemistry",
+		name: "Intro to Chemistry",
+		load: () =>
+			import("./intro-to-chemistry").then(
+				({ introToChemistryCourse }) => introToChemistryCourse
+			)
+	},
+	{
 		id: "intro-to-physics",
 		name: "Intro to Physics",
 		load: () =>
