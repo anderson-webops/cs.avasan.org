@@ -869,6 +869,11 @@ export const javascriptLevel2Course: RawCourse = {
 						"Plan and build a web app or game (example chatroom). Scope to about two weeks, pseudocode stages, and work independently with support."
 				},
 				{
+					title: "Handoff to Web Development Foundations",
+					content:
+						"`Web Development Foundations` should be the default follow-on course for students who complete JavaScript Level 2 successfully. Students should be reasonably comfortable with functions, conditionals, arrays, objects, events, APIs, and basic data modeling before starting it. The goal of that next course is not to reteach core syntax, but to move into file-based local projects, Git and GitHub, npm, dev servers, back-end basics, databases, and deployment. Students who are still shaky in the `JSM10` through `JSM13` range should review those units before making the jump."
+				},
+				{
 					title: "Course Recap",
 					content:
 						"Recap course concepts and discuss the next course."

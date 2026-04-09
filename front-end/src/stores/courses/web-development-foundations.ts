@@ -114,6 +114,15 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						`. This course should feel like the first place where all of those later directions become visible and where students see how front-end practice grows into publishing and operations work.`
 				},
 				{
+					title: "Entry Expectations from JavaScript Level 1 and 2",
+					content:
+						`Students entering this course should already be comfortable reading and writing small-to-medium JavaScript programs, working with HTML and CSS, manipulating the DOM, responding to events, and reasoning about APIs and basic data models. This course can briefly reinforce those ideas, but it should not spend most of its time reteaching them. The real transition is from ` +
+						"`browser-only projects`" +
+						` into ` +
+						"`file-based local development, Git, npm, dev servers, back-end services, databases, and deployment`" +
+						`. Strong JavaScript Level 2 students may move quickly through the early setup material, but they should still take it because workflow and environment habits are now part of the curriculum, not optional side topics.`
+				},
+				{
 					title: "What This Course Is Not",
 					content: `Clarify that the course is not only about memorizing frameworks or copying tutorial steps. It is about learning repeatable workflows, strong project boundaries, debugging discipline, and enough operational understanding that students can explain how a site is built, served, configured, and observed after launch.`
 				}

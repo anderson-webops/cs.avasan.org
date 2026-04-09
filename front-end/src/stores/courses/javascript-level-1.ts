@@ -982,6 +982,11 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 						"https://codepen.io/junilearning/pen/c8520963128a302c0e6aa6738965ae43"
 				},
 				{
+					title: "Recommended Next Course Path",
+					content:
+						"`JavaScript Level 2` should be the normal next step after this course. Students who finish JavaScript Level 1 comfortably should continue into deeper functions, arrays, objects, events, APIs, and data work in JavaScript Level 2 before moving into `Web Development Foundations`, which assumes stronger JavaScript fluency and shifts the emphasis from browser-only projects toward local project structure, Git, npm, servers, databases, and deployment."
+				},
+				{
 					title: "Course Recap",
 					content:
 						"Recap what this course covered and discuss next steps in learning."
