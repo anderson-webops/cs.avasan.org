@@ -16,6 +16,7 @@
 		"build": "npm run -w front-end build && npm run -w back-end build",
 		"dev": "npm run -w front-end dev",
 		"server": "npm run -w back-end server",
+		"server:once": "npm run -w back-end server:once",
 		"serve": "npm run -w front-end serve",
 		"lint-server": "npm run -w back-end lint-fix && npm run -w back-end server",
 		"lint-serve": "npm run -w front-end lint-fix && npm run -w front-end serve",
