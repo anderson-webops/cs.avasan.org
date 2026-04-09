@@ -7,6 +7,27 @@ on:
         branches: [main]
 
 jobs:
+    backend-install:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22.x
+                  cache: npm
+                  cache-dependency-path: back-end/package-lock.json
+
+            - name: Pin npm version
+              run: |
+                  npm -v
+                  npm i -g npm@11.7.0
+                  npm -v
+
+            - name: Install backend deps with backend lockfile
+              working-directory: back-end
+              run: npm ci
+
     lint:
         runs-on: ubuntu-latest
         steps:
