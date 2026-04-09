@@ -68,6 +68,12 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "assembly",
+		name: "Assembly",
+		load: () =>
+			import("./assembly").then(({ assemblyCourse }) => assemblyCourse)
+	},
+	{
 		id: "java-level-1",
 		name: "Java Level 1",
 		load: () =>
