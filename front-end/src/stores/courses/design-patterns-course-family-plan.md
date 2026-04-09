@@ -56,13 +56,28 @@ This family should connect naturally to:
 - `Java`, where interfaces and object modeling make classic patterns especially visible
 - `C++`, where ownership, lifetime, and compile-time structure add a systems angle
 
+## Current Implementation Status
+
+The Java-first track is already implemented in the live catalog as two courses:
+
+1. `Design Patterns in Java`
+2. `Design Patterns in Java Part 2: Refactoring`
+
+That means this family plan should now be treated as a coordination document for
+the remaining language tracks rather than as a proposal to build the Java track
+from scratch. The Java sequence currently owns:
+
+- the broad Refactoring.Guru design-pattern catalog in a Java-first form
+- the smell families and refactoring-technique groups from Refactoring.Guru
+- the main capstone arc that moves from smell diagnosis to justified pattern use
+
 ## Recommendation on Language Strategy
 
 Best overall recommendation:
 
-- Make `Java` the primary full design-patterns course
-- Add a `C++` companion course focused on patterns plus ownership and systems tradeoffs
-- Add a shorter `Python` patterns course or appendix focused on "Pythonic equivalents" rather than strict textbook reproduction
+- Keep `Java` as the primary completed design-patterns track
+- Use `C++` as the next companion course focused on patterns plus ownership and systems tradeoffs
+- Use `Python` as a shorter adaptation track focused on "Pythonic equivalents" rather than strict textbook reproduction
 
 Why:
 
@@ -140,6 +155,7 @@ Why:
 - extracting seams
 - replacing conditionals with polymorphism where justified
 - measuring whether the design actually improved
+- in the current catalog, this unit is already expanded into the dedicated Java Part 2 refactoring course
 
 ### Unit 8: Capstone
 
@@ -157,18 +173,23 @@ Why:
 
 ## Suggested Course Order
 
-If only one course is built first:
+Current implemented order:
 
 1. `Design Patterns in Java`
-2. `Design Patterns in C++`
-3. `Pythonic Design Patterns`
+2. `Design Patterns in Java Part 2: Refactoring`
 
-If the goal is a bundled sequence:
+Recommended next build order for the remaining family:
+
+1. `Design Patterns in C++`
+2. `Pythonic Design Patterns`
+
+If the long-term goal is a bundled sequence:
 
 1. short language-neutral intro module
-2. full Java course
-3. C++ follow-up
-4. Python adaptation/elective
+2. completed Java patterns course
+3. completed Java refactoring follow-up
+4. C++ follow-up
+5. Python adaptation/elective
 
 ## Example Shared Capstones
 

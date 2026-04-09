@@ -41,6 +41,18 @@ should teach patterns in a modern C++ way, not as direct ports of old Java
 examples. Ownership, value semantics, templates, and RAII materially change how
 some patterns should be written.
 
+The Java baseline is no longer hypothetical. The current catalog already has:
+
+1. `Design Patterns in Java`
+2. `Design Patterns in Java Part 2: Refactoring`
+
+So this C++ plan should be treated as the next language-specific build-out after
+that sequence. It should reuse the family spine and many of the same design
+problems, but it should not duplicate the full Java Part 2 smell-and-refactoring
+catalog one-for-one. Instead, it should translate the same architectural
+judgment into modern C++ constraints such as ownership, RAII, value semantics,
+resource safety, and compile-time versus runtime design choices.
+
 ## Audience and Prerequisites
 
 - Completed `C++ Level 1` and ideally the planned `C Systems Engineering` or similar low-level work
@@ -155,6 +167,7 @@ some patterns should be written.
 
 - The course should explicitly warn students not to import Java-style heap-heavy object graphs into C++ without reason.
 - Sanitizers and debuggers should be part of the workflow so design mistakes surface concretely.
+- Refactoring.Guru smell and refactoring ideas should still inform the labs, but the full catalog treatment already belongs to the Java Part 2 course; here they should appear as targeted diagnosis and cleanup work inside the C++ modules and capstone.
 
 ## Expansion Ideas
 

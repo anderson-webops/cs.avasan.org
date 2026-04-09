@@ -46,6 +46,16 @@ Best role for this course:
 - either a shorter elective after core Python
 - or a companion course that translates classic pattern ideas into Pythonic design
 
+The Java baseline is already implemented in the current catalog as:
+
+1. `Design Patterns in Java`
+2. `Design Patterns in Java Part 2: Refactoring`
+
+So this Python plan should now be treated as an adaptation track built on top of
+that existing sequence. It should borrow the same core design problems and the
+same "pattern only when justified" discipline, but it should avoid copying the
+Java object model or the full Java refactoring course structure verbatim.
+
 ## Audience and Prerequisites
 
 - Completed `Python Level 2` and ideally `Python Level 3`
@@ -160,6 +170,7 @@ Best role for this course:
   - when the full object-oriented pattern still helps
 
 - This course should explicitly teach restraint. Python students should come out better at architecture, not better at unnecessary boilerplate.
+- Refactoring.Guru smell and refactoring ideas should still shape the exercises, but they should be integrated lightly across the Python modules and capstone unless a future need clearly justifies a separate Python refactoring follow-up.
 
 ## Expansion Ideas
 
