@@ -38,6 +38,10 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			title: "LLS Part 2 Setup and Tooling",
 			curriculum: [
 				{
+					title: "Why Part 2 Uses LLS13 through LLS18",
+					content: `Keep the original course-outline numbering for Part 2. The source plan for this sequence defined the advanced local-lab IDs as LLS13 through LLS18, so the numbering jump is historical rather than a missing hidden module block in this catalog. There is no separate LLS7 through LLS12 sequence in the original Part 2 outline.`
+				},
+				{
 					title: "Day-One Tooling and Local-Lab Boundaries",
 					content:
 						`Assume a strictly local lab-only environment and make sanitizers, debugger setup, and disassembly tools part of the first session instead of an appendix. Students should verify ` +
