@@ -1,5 +1,9 @@
 # Workspace Instructions
 
+## Local Course Material Paths
+- Place local starter/solution packs and source course working folders under `/Users/jacobanderson/Documents/Work/Juni`, not under `/Users/jacobanderson/Work/Juni`.
+- Prefer the existing top-level course folder layout there, including names such as `Low Level Security`, `Intro to Swift App Development`, `Linux Systems`, and `Web Development Foundations`, unless the user asks for a different local structure.
+
 ## Lockfiles, Commits, Tags, And Releases
 - Do not leave completed work uncommitted. After each coherent, validated change set, create a commit and push it in the same session.
 - Use multiple commits and pushes when that keeps unrelated changes, partial validations, or follow-up fixes clearly separated. Prefer small, logically grouped commits over one mixed commit.

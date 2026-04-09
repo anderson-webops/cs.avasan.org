@@ -37,6 +37,10 @@
 - `npm run server` already loads `dotenv/config` and will attempt Vault retrieval via `src/vaultClient.ts`; validate both code paths when changing auth or persistence.
 - Never commit real credentials or production endpoints. Scrub logs before sharing, and verify rate limiting when exposing new routes under `/admin-mail` or other sensitive prefixes.
 
+## Local Course Material Paths
+- Place local starter/solution packs and source course working folders under `/Users/jacobanderson/Documents/Work/Juni`, not under `/Users/jacobanderson/Work/Juni`.
+- Use the top-level course folder layout already present in that directory (for example `Low Level Security`, `Intro to Swift App Development`, `Linux Systems`, and `Web Development Foundations`) unless the user explicitly requests a different local structure.
+
 
 ## Agent Delivery Workflow
 - Do not leave completed work uncommitted. After each coherent, validated change set, create a commit and push it in the same session.
