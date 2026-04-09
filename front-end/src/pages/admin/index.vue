@@ -2,12 +2,14 @@
 const adminTools = [
 	{
 		title: "Student Management",
-		description: "Review the shared student management spreadsheet and current roster workflows.",
+		description:
+			"Review the shared student management spreadsheet and current roster workflows.",
 		href: "/admin/student-management"
 	},
 	{
 		title: "Markdown Mail",
-		description: "Send session notes and internal admin messages with markdown formatting.",
+		description:
+			"Send session notes and internal admin messages with markdown formatting.",
 		href: "/admin/mdmail"
 	}
 ];
@@ -17,9 +19,7 @@ const adminTools = [
 	<section class="wrap">
 		<p class="eyebrow">Admin</p>
 		<h1>Admin Workspace</h1>
-		<p class="intro">
-			Choose an admin tool below.
-		</p>
+		<p class="intro">Choose an admin tool below.</p>
 
 		<nav class="tool-grid" aria-label="Admin tools">
 			<a
@@ -80,7 +80,10 @@ const adminTools = [
 	box-shadow: 0 8px 24px rgba(16, 42, 66, 0.08);
 	color: inherit;
 	text-decoration: none;
-	transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+	transition:
+		transform 0.18s ease,
+		box-shadow 0.18s ease,
+		border-color 0.18s ease;
 }
 
 .tool-card:hover {

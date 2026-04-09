@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
 
-const LOW_LEVEL_SECURITY_REPO = "https://github.com/instruction-material/Low-Level-Security/tree/main";
+const LOW_LEVEL_SECURITY_REPO =
+	"https://github.com/instruction-material/Low-Level-Security/tree/main";
 
 function starterRepoLink(labId: string) {
 	return `${LOW_LEVEL_SECURITY_REPO}/${labId}/starter`;
@@ -110,7 +111,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					title: "LLS3 Project 3: Length-Prefixed Parser",
 					content: `Write a parser for a tiny packet format where the first byte stores payload length and the second byte stores a command identifier. The secure solution should reject length mismatches, oversized payloads, unknown commands, and non-printable payload bytes. Learners should then write a short table listing which malformed cases were caught and add at least one more rejection case of their own.`,
 					projectLink: starterRepoLink("LLS3-Length-Prefixed-Parser"),
-					solutionLink: solutionRepoLink("LLS3-Length-Prefixed-Parser")
+					solutionLink: solutionRepoLink(
+						"LLS3-Length-Prefixed-Parser"
+					)
 				}
 			],
 			supplementalProjects: [

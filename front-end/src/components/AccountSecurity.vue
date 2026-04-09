@@ -98,7 +98,7 @@ async function updatePassword() {
 				/>
 			</div>
 			<button
-				class="btn btn-secondary"
+				class="btn-secondary btn"
 				type="button"
 				@click="updateEmail"
 			>
@@ -141,7 +141,7 @@ async function updatePassword() {
 				/>
 			</div>
 			<button
-				class="btn btn-primary"
+				class="btn-primary btn"
 				type="button"
 				@click="updatePassword"
 			>
