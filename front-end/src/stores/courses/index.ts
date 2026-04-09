@@ -156,6 +156,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			import("./low-level-security").then(
 				({ lowLevelSecurityCourse }) => lowLevelSecurityCourse
 			)
+	},
+	{
+		id: "low-level-security-part-2",
+		name: "Low Level Security Part 2",
+		load: () =>
+			import("./low-level-security-part-2").then(
+				({ lowLevelSecurityPart2Course }) => lowLevelSecurityPart2Course
+			)
 	}
 ];
 
