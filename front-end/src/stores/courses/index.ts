@@ -52,12 +52,40 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "data-science-in-python",
+		name: "Data Science in Python",
+		load: () =>
+			import("./data-science-in-python").then(
+				({ dataScienceInPythonCourse }) => dataScienceInPythonCourse
+			)
+	},
+	{
+		id: "ai-level-1",
+		name: "AI Level 1",
+		load: () =>
+			import("./ai-level-1").then(({ aiLevel1Course }) => aiLevel1Course)
+	},
+	{
 		id: "c-level-1",
 		name: "C++ Level 1",
 		load: () =>
 			import("./cpp-level-1").then(
 				({ cppLevel1Course }) => cppLevel1Course
 			)
+	},
+	{
+		id: "c-systems-engineering",
+		name: "C Systems Engineering",
+		load: () =>
+			import("./c-systems-engineering").then(
+				({ cSystemsEngineeringCourse }) => cSystemsEngineeringCourse
+			)
+	},
+	{
+		id: "assembly",
+		name: "Assembly",
+		load: () =>
+			import("./assembly").then(({ assemblyCourse }) => assemblyCourse)
 	},
 	{
 		id: "java-level-1",
@@ -81,6 +109,63 @@ export const courseCatalog: CourseCatalogEntry[] = [
 		load: () =>
 			import("./java-level-3").then(
 				({ javaLevel3Course }) => javaLevel3Course
+			)
+	},
+	{
+		id: "ap-computer-science-a",
+		name: "AP Computer Science A",
+		load: () =>
+			import("./ap-computer-science-a").then(
+				({ apComputerScienceACourse }) => apComputerScienceACourse
+			)
+	},
+	{
+		id: "usaco-bronze",
+		name: "USACO Bronze",
+		load: () =>
+			import("./usaco-bronze").then(
+				({ usacoBronzeCourse }) => usacoBronzeCourse
+			)
+	},
+	{
+		id: "usaco-silver",
+		name: "USACO Silver",
+		load: () =>
+			import("./usaco-silver").then(
+				({ usacoSilverCourse }) => usacoSilverCourse
+			)
+	},
+	{
+		id: "usaco-gold",
+		name: "USACO Gold",
+		load: () =>
+			import("./usaco-gold").then(
+				({ usacoGoldCourse }) => usacoGoldCourse
+			)
+	},
+	{
+		id: "design-patterns-in-java",
+		name: "Design Patterns in Java",
+		load: () =>
+			import("./design-patterns-in-java").then(
+				({ designPatternsInJavaCourse }) => designPatternsInJavaCourse
+			)
+	},
+	{
+		id: "design-patterns-in-java-part-2",
+		name: "Design Patterns in Java Part 2: Refactoring",
+		load: () =>
+			import("./design-patterns-in-java-part-2").then(
+				({ designPatternsInJavaPart2Course }) =>
+					designPatternsInJavaPart2Course
+			)
+	},
+	{
+		id: "intro-to-chemistry",
+		name: "Intro to Chemistry",
+		load: () =>
+			import("./intro-to-chemistry").then(
+				({ introToChemistryCourse }) => introToChemistryCourse
 			)
 	},
 	{
@@ -109,6 +194,30 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "linux-systems",
+		name: "Linux Systems",
+		load: () =>
+			import("./linux-systems").then(
+				({ linuxSystemsCourse }) => linuxSystemsCourse
+			)
+	},
+	{
+		id: "network-systems",
+		name: "Network Systems",
+		load: () =>
+			import("./network-systems").then(
+				({ networkSystemsCourse }) => networkSystemsCourse
+			)
+	},
+	{
+		id: "network-security",
+		name: "Network Security",
+		load: () =>
+			import("./network-security").then(
+				({ networkSecurityCourse }) => networkSecurityCourse
+			)
+	},
+	{
 		id: "javascript-level-1-javascript-superstar",
 		name: "JavaScript Level 1: JavaScript Superstar",
 		load: () =>
@@ -125,6 +234,15 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "web-development-foundations",
+		name: "Web Development Foundations",
+		load: () =>
+			import("./web-development-foundations").then(
+				({ webDevelopmentFoundationsCourse }) =>
+					webDevelopmentFoundationsCourse
+			)
+	},
+	{
 		id: "machine-learning",
 		name: "Machine Learning",
 		load: () =>
@@ -138,6 +256,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 		load: () =>
 			import("./low-level-security").then(
 				({ lowLevelSecurityCourse }) => lowLevelSecurityCourse
+			)
+	},
+	{
+		id: "low-level-security-part-2",
+		name: "Low Level Security Part 2",
+		load: () =>
+			import("./low-level-security-part-2").then(
+				({ lowLevelSecurityPart2Course }) => lowLevelSecurityPart2Course
 			)
 	}
 ];
