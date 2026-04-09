@@ -60,6 +60,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "c-systems-engineering",
+		name: "C Systems Engineering",
+		load: () =>
+			import("./c-systems-engineering").then(
+				({ cSystemsEngineeringCourse }) => cSystemsEngineeringCourse
+			)
+	},
+	{
 		id: "java-level-1",
 		name: "Java Level 1",
 		load: () =>
