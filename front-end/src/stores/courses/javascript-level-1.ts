@@ -51,11 +51,6 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/b04e9208251c84d123c97daf37972988",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/e0a4c125fb9fa7f0324934dc2fe9317f"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Note strengths and topics to review. Assign 30–60 minutes (finish practice projects, optional supplemental items) and have the learner share one project with friends or family."
 				}
 			],
 			supplementalProjects: []
@@ -96,11 +91,6 @@ export const javascriptLevel1Course: RawCourse = {
 					projectLink: "https://codepen.io/junilearning/pen/vYGWvaq",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/084c3032877fa7f9c828bba2c5798551"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Capture wins and review topics. Assign 30–60 minutes (finish practice work, supplemental projects, videos) and have the learner share one piece with friends or family."
 				}
 			],
 			supplementalProjects: []
@@ -148,11 +138,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/qBbPbPp",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/ce06ca273ecc8c28529261846833d4c1"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign 30–60 minutes (finish projects, supplemental work, tutorials). Have the learner share one project with friends or family and confirm they can access their homework."
 				}
 			],
 			supplementalProjects: [
@@ -186,11 +171,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 			title: "JSS2 Operators and Math",
 			curriculum: [
 				{
-					title: "Assignment Review",
-					content:
-						"Review prior homework and key concepts: variables, data types, let vs const."
-				},
-				{
 					title: "Introduction to Operators",
 					content:
 						"Explain +, -, *, / and the assignment operator = for changing values. Show compound assignment (+=, -=, *=, /=) and ++/--."
@@ -223,11 +203,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/PoZJNXb",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/c550ef1e284c55fa01964589bf19b21c"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign 30–60 minutes (finish projects, supplemental practice, tutorials) and have the learner share one project."
 				}
 			],
 			supplementalProjects: [
@@ -268,11 +243,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 			title: "JSS3 For and While Loops",
 			curriculum: [
 				{
-					title: "Assignment Review",
-					content:
-						"Review prior assignment and discuss operators and Math object."
-				},
-				{
 					title: "For Loops",
 					content:
 						"Explain loop structure (init, condition, update). Print sequences like 0–9, multiples of 3, and countdowns."
@@ -305,11 +275,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/xxZXEzP",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/56baa6b060aab0e3511c7c3608d53eaa"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign 30–60 minutes of follow-up practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -341,11 +306,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS4 Combining Loops and Variables",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Review differences between for and while loops and when to use each."
-				},
 				{
 					title: "Combining Loops and Variables",
 					content:
@@ -379,11 +339,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/jOWGVVB",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/1520f836e15f3d4e7f554b913a805b02"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign follow-up practice, supplemental work, and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -399,11 +354,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS5 Conditionals",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Discuss why to combine loops and variables and how ASCII helps with random letters."
-				},
 				{
 					title: "Introduction to Conditionals",
 					content:
@@ -447,10 +397,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/wvMrXdG",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/bf0a3506f98d1b247c3f259986a941bd"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign 30–60 minutes of practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -483,11 +429,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS6 Advanced Conditionals",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Review conditionals, template strings, and equality operators."
-				},
 				{
 					title: "Nested Conditionals",
 					content:
@@ -531,10 +472,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/NWxaJdX",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/b418881c3e60c8c7ac8fcbc3b7d74aa0"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -558,11 +495,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS7 Drawing in JavaScript",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Review && vs ||, truthy vs true, and why to prefer ===."
-				},
 				{
 					title: "Introduction to D3",
 					content:
@@ -596,10 +528,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/JjGORoK",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/6df064875eb631bc08eab5c342ef98f7"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -632,11 +560,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 			title: "JSS8 Nested Loops",
 			curriculum: [
 				{
-					title: "Assignment Review",
-					content:
-						"Review SVGs, D3 attributes, and why nested loops use j as the inner index."
-				},
-				{
 					title: "Nested Loops",
 					content:
 						"Explain loop within a loop for repeating steps; demonstrate nested for with i and j."
@@ -664,10 +587,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 					projectLink: "https://codepen.io/junilearning/pen/eYJegdP",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/e12716e0c3e1cbfc0405c9da2e245b8a"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -700,11 +619,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 			title: "JSS9 Introduction to HTML & CSS",
 			curriculum: [
 				{
-					title: "Assignment Review",
-					content:
-						"Review nested loops and why to use j in inner loops."
-				},
-				{
 					title: "Introduction to HTML",
 					content:
 						"Define HTML and tags; show nesting, parent/child. Practice h1, div, span, br, a, img in CodePen."
@@ -731,10 +645,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 						"https://codepen.io/junilearning/pen/eca1fa811c12940c388c331a07cb0dbb",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/4ae1264dcfd25856b2d4d893eb3b2ffa"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign 30–60 minutes of practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -757,11 +667,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS10 Animations in JavaScript",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Review HTML vs CSS, the DOM, and CSS selection methods."
-				},
 				{
 					title: "JSS10 Project 1: Car",
 					content: "Draw a car with D3 using rectangles and circles.",
@@ -800,10 +705,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 						"https://codepen.io/junilearning/pen/ff4f98a080f26536a286835de4b1b9a2",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/9d8630fbb5a9554618f11c649a95ab55"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice, supplemental work, and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -830,10 +731,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS11 More HTML & CSS",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content: "Review transitions, triggers, and durations."
-				},
 				{
 					title: "The Box Model",
 					content:
@@ -863,10 +760,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 						"https://codepen.io/junilearning/pen/b252c1398d97eda534482419d9103b87",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/65a70df75b1168154b07ed73a09e9aa3"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -889,11 +782,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS12 Basic Website Layout",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Review position properties and adding Google Fonts."
-				},
 				{
 					title: "Component Libraries",
 					content:
@@ -937,11 +825,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 						"Add another D3 piece to the art page and organize with sections and Materialize.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/68f7db60fabe38f5ff48cf4cfa631a4c"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign 30–60 minutes of practice, supplemental items, and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -959,11 +842,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS13 The Grid Layout",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Review why to use component libraries, material icons, and responsive wrappers."
-				},
 				{
 					title: "Introduction to CSS Grid",
 					content:
@@ -1001,10 +879,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 						"Add another D3 piece and organize art with CSS Grid or Materialize grid; add cards with descriptions in an alternating pattern.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/4735eaf3e168cfb944a3daad063e287c"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -1031,11 +905,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS14 Dynamic Websites with JavaScript",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Discuss grid usefulness and differences between Materialize grid and pure CSS Grid."
-				},
 				{
 					title: "Manipulating HTML with JavaScript",
 					content:
@@ -1077,11 +946,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 						"Add another D3 piece and some JavaScript effects; make a nav with dropdown and scroll spy to sections using Materialize docs.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/68807d2000d19574d4c80d354eea197f"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign 30–60 minutes of follow-up work and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -1108,11 +972,6 @@ Use let and const for numbers, strings, booleans, null and undefined. Assign val
 		{
 			title: "JSS15 Master Project",
 			curriculum: [
-				{
-					title: "Assignment Review",
-					content:
-						"Discuss dynamic websites and which elements need JavaScript vs static content."
-				},
 				{
 					title: "JSS15 Project 1: Master Project",
 					content:

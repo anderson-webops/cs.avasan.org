@@ -54,16 +54,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM2 Review: Functions & Lists",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review the key ideas from the previous session: variables, input, conditionals, and loops. Revisit any project code that still needs debugging or cleanup before moving on."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Reopen the previous assignment, test it, and fix any remaining issues. If everything works, explain the main parts of the solution out loud before continuing."
-				},
-				{
 					title: "Functions",
 					content:
 						"Review functions as reusable templates for computation. Define functions with `def`, pass values in through parameters, and send values back with `return`. Start with a simple example such as a function that squares its input, then extend the idea to functions with multiple parameters and more complex logic."
@@ -98,16 +88,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM3 Review: Dictionaries & Recap",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review functions and lists from the previous module. Revisit examples that return values, mutate lists, or iterate with loops if any of those patterns still feel uncertain."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run through the previous assignment, demonstrate working solutions, and correct any remaining bugs before starting new material."
-				},
-				{
 					title: "Dictionaries",
 					content:
 						'Introduce dictionaries as collections of key-value pairs. Create examples such as `prices = {"soap": 2, "apple": 1, "frozen_pizza": 5}` and use `dictionary[key]` to look up values. Check whether a key exists with `if key in dictionary`, iterate with `for key in dictionary`, and explore dictionaries whose keys and values use different data types. Practice building dictionaries of squares, factorials, and letter counts for a word.'
@@ -127,16 +107,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM4 Recursion Part 1",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review dictionaries and identify places where dictionary lookups, membership checks, and frequency counts were used."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Test and discuss the previous assignment before beginning recursion. Focus on explaining how the solution works, not just whether it runs."
-				},
 				{
 					title: "Introduction to Recursion",
 					content:
@@ -177,16 +147,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM5 Recursion Part 2",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review recursion by identifying the base case and recursive step in each previous project."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run the previous recursion projects and explain how each recursive call gets the solution closer to its base case."
-				},
 				{
 					title: "Substrings",
 					content:
@@ -273,16 +233,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM6 Introduction to Algorithms & Runtime Analysis",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review recursion and identify examples of recursive thinking from earlier projects."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Revisit the previous assignment and focus on explaining why the solution works, especially how repeated subproblems were handled."
-				},
-				{
 					title: "Introduction to Algorithms",
 					content:
 						"An algorithm is a step-by-step process for completing a task. Compare different ways to solve the same problem and discuss why some methods are more efficient than others. Searching for an element in a list is one common example that leads naturally into algorithm analysis."
@@ -321,16 +271,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM7 Binary Search",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review runtime analysis and linear search, including the meaning of Big-O notation and the difference between linear and logarithmic growth."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Check the previous assignment, verify that the search and analysis problems run correctly, and revisit any cases that were confusing."
-				},
 				{
 					title: "Binary Search Introduction",
 					content:
@@ -376,16 +316,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM8 Selection Sort & Insertion Sort",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review binary search, when it can be used, and why its runtime is `O(log n)`."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Test the previous search projects and confirm that both correctness and runtime reasoning are solid."
-				},
 				{
 					title: "Selection Sort Introduction",
 					content:
@@ -470,16 +400,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM9 Bubble Sort",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review selection sort and insertion sort, including how each algorithm works and how their runtimes compare."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run the sorting code from the previous session and revisit any edge cases or misunderstandings before adding another sorting algorithm."
-				},
-				{
 					title: "Bubble Sort Introduction",
 					content:
 						"Bubble sort repeatedly walks through a list, compares adjacent items, and swaps them when they are out of order. One full pass moves a large value toward the end of the list, and repeated passes eventually sort the entire list."
@@ -511,16 +431,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM10 Merge Sort",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review bubble sort and its quadratic runtime. Compare it with the previous sorting algorithms and identify common patterns among them."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run and explain the previous sorting code, including any optimizations that were added."
-				},
 				{
 					title: "Merge Sort Introduction",
 					content:
@@ -559,16 +469,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM11 Quicksort",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review merge sort, including the roles of splitting, merging, and recursion in its implementation."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the merge functions and the full merge sort implementation before moving on to another divide-and-conquer algorithm."
-				},
-				{
 					title: "Quicksort Introduction",
 					content:
 						"Quicksort chooses a pivot value, partitions the list into values less than, equal to, and greater than the pivot, then recursively sorts the outer partitions. It is another divide-and-conquer algorithm, but unlike merge sort it relies on partitioning rather than merging."
@@ -605,16 +505,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM12 File Input/Output",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review quicksort and compare its recursive structure to merge sort."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the quicksort implementation and any runtime comparison code before moving into file handling."
-				},
 				{
 					title: "Writing to a File",
 					content:
@@ -695,16 +585,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM13 Master Project: Conway's Game of Life",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review reading from and writing to files, along with the difference between `read()`, `readlines()`, and `strip()`."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the file I/O projects and verify that files are being read and written in the expected format."
-				},
-				{
 					title: "Introduction to Conway's Game of Life",
 					content:
 						"Conway's Game of Life is a cellular automaton played on a grid of live and dead cells. Each generation updates based on four rules about underpopulation, survival, overpopulation, and reproduction. The project combines grids, loops, conditionals, and file input into a larger simulation."
@@ -734,16 +614,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM14 Master Project: Tic Tac Toe AI",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review Conway's Game of Life and identify which parts of the program handled the grid, update rules, and repeated simulation steps."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the Conway projects and fix any remaining issues before starting the final AI project."
-				},
 				{
 					title: "Introduction to Artificial Intelligence",
 					content:
