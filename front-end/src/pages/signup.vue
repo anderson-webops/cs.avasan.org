@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import {
-	SCHEDULER_ORIGIN,
 	legacyCalendlyUrl,
+	SCHEDULER_ORIGIN,
 	schedulerEmbedMessageSource,
 	schedulerEmbedResizeType,
 	schedulerEmbedUrl,
@@ -79,13 +79,9 @@ onBeforeUnmount(() => {
 			</p>
 			<div class="transition-banner" role="note">
 				<p>
-					Calendly is being phased out and will be retired on
-					April 30, 2026. If you prefer it, you can still use
-					<a
-						:href="legacyCalendlyUrl"
-						rel="noopener"
-						target="_blank"
-					>
+					Calendly is being phased out and will be retired on April
+					20, 2026. If you prefer it, you can still use
+					<a :href="legacyCalendlyUrl" rel="noopener" target="_blank">
 						the Calendly link
 					</a>
 					until then.
@@ -170,13 +166,15 @@ onBeforeUnmount(() => {
 			aria-labelledby="legacy-booking-title"
 			class="legacy-booking-card"
 		>
-			<h2 id="legacy-booking-title">Still looking for the Calendly link?</h2>
+			<h2 id="legacy-booking-title">
+				Still looking for the Calendly link?
+			</h2>
 			<p>
 				You can still use
 				<a :href="legacyCalendlyUrl" rel="noopener" target="_blank">
 					{{ legacyCalendlyUrl }}
 				</a>
-				through April 30, 2026. It will be phased out at the end of the
+				through April 20, 2026. It will be phased out at the end of the
 				month.
 			</p>
 			<a
