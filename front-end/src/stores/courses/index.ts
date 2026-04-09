@@ -139,6 +139,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "network-security",
+		name: "Network Security",
+		load: () =>
+			import("./network-security").then(
+				({ networkSecurityCourse }) => networkSecurityCourse
+			)
+	},
+	{
 		id: "javascript-level-1-javascript-superstar",
 		name: "JavaScript Level 1: JavaScript Superstar",
 		load: () =>
