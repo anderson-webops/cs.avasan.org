@@ -7,6 +7,7 @@
 	"main": "dist/server.js",
 	"scripts": {
 		"server": "tsx watch -r dotenv/config src/server.ts",
+		"server:once": "tsx -r dotenv/config src/server.ts",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node dist/server.js",
 		"build": "tsc -p tsconfig.json",
