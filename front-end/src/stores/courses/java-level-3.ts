@@ -9,7 +9,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Introductions and Setup",
 					content:
-						"Get familiar with the learner portal, custom Java projects, and the structure of a Java program. This module works well as a review resource for variables, strings, input, and commenting before moving into more advanced topics."
+						"Get familiar with the Java workspace, custom Java projects, and the structure of a Java program. This module works well as a review resource for variables, strings, input, and commenting before moving into more advanced topics."
 				},
 				{
 					title: "Creating and Running a Java Program",

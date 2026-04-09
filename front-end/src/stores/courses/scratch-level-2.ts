@@ -9,8 +9,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Event listeners",
 					content: `What do you think an event listener is? An event listener is a way to make our sprite wait and listen until a certain event happens, and then it will react to that event in the way we tell it to.
-Can you remember any of the event listeners that you used to make the Hungry Hippo game? Click on the Events section. There were the when green flag clicked and when arrow key pressed blocks. Talk about how these blocks made the sprite do something in response to a certain event, whether it is the green flag being clicked or a certain key being pressed.
-View CS Training's Code`
+Can you remember any of the event listeners that you used to make the Hungry Hippo game? Click on the Events section. There were the when green flag clicked and when arrow key pressed blocks. Talk about how these blocks made the sprite do something in response to a certain event, whether it is the green flag being clicked or a certain key being pressed.`
 				},
 				{
 					title: "GM1 Project 1: Dragonfly Events",
@@ -23,16 +22,14 @@ View CS Training's Code`
 5. When 1 is pressed, make the dragonfly "pop" and then go to a random position.
 6. When 2 is pressed, make the dragonfly say something ("Buzzzz", for example).
 7. When 3 is pressed, make the background change.
-Challenge: can you add another sprite that is moves around using the WASD keys?
-View CS Training's Code`
+Challenge: can you add another sprite that is moves around using the WASD keys?`
 				},
 				{
 					title: "Loops",
 					content: `When have you heard the word "loop" before? What do you think loops are for in programming? Loops let us repeat code however many times we want!
 Discuss with the why loops might be helpful. For example, we don\'t have to copy our code a bunch of times, we can keep our code simpler, and some things would be impossible without loops (i.e. things that happen forever).
 Open a new Scratch project. Have click on the Control section and look at the repeat and forever blocks. Discuss what these might be used for. Point out that both of these blocks have a "mouth" where we can insert other code blocks to be repeated!
-Show the an example of repeating the move __ steps and turn ___ degrees blocks. Start with the repeat block and then try the forever block.
-View CS Training's Code`
+Show the an example of repeating the move __ steps and turn ___ degrees blocks. Start with the repeat block and then try the forever block.`
 				},
 				{
 					title: "GM1 Project 2: Drawing Mouse",
@@ -42,16 +39,14 @@ View CS Training's Code`
 2. Add an event listener so that when the 1 key is pressed, the mouse draws a square (using a loop) in a random location.
 3. Add a similar set of blocks so that the mouse draws a triangle.
 4. Add a similar set of blocks so that the mouse draws a circle.
-5. What other shapes can you create? Make some other sets of blocks that draw other shapes (e.g. an octagon, a star, etc.).
-View CS Training's Code`
+5. What other shapes can you create? Make some other sets of blocks that draw other shapes (e.g. an octagon, a star, etc.).`
 				},
 				{
 					title: "Conditionals",
 					content: `In programming, a lot of the time we only want something to happen if something else is true or has been done. A conditional statement is something that needs be met in order for something else to happen.
 Discuss with the about "conditionals" in real life, emphasizing the if/then aspect of such situations. Some examples include: If you eat your dinner, then you can have dessert. If you get your homework done, then you can play videogames. If it is cold outside, then you need to wear a jacket.
 In addition, usually when we are checking a condition, there is more than one thing that can happen as a response to that condition. This is when a if... then... else conditional statement might come into use!
-Open a new Scratch project. Take the time to introduce the to the various conditional blocks, in addition to asking for user input. Here are some rough projects you can use as guidance: if/then, if/then/else, user input.
-View CS Training's Code`
+Open a new Scratch project. Take the time to introduce the to the various conditional blocks, in addition to asking for user input. Here are some rough projects you can use as guidance: if/then, if/then/else, user input.`
 				},
 				{
 					title: "GM1 Project 3: Math Facts",
@@ -59,16 +54,14 @@ View CS Training's Code`
 					solutionLink: "https://scratch.mit.edu/projects/294539961/",
 					content: `1. When 1 is pressed, have Gobo ask a question like "What's 9-7?" Based on how the user answers, Gobo should change his costume, make a sound, and/or say something to indicate a correct or incorrect answer.
 2. When is 2 is pressed, have Gobo ask a question like "What's a number less than 0?" Based on how the user answers, Gobo should change his costume, make a sound, and/or say something to indicate a correct or incorrect answer.
-3. When 3 is pressed, have Gobo ask a harder math question that allows the user to keep answering until the answer is correct. Gobo should indicate each time whether the answer was correct or incorrect.
-View CS Training's Code`
+3. When 3 is pressed, have Gobo ask a harder math question that allows the user to keep answering until the answer is correct. Gobo should indicate each time whether the answer was correct or incorrect.`
 				},
 				{
 					title: "Variables",
 					content: `Variables are places that we store information that can change. Variables can store words, numbers, etc. Variables are helpful when we want to keep track of something like a score or time.
 Open a new Scratch project. Have click on the Variables section and show them how to make a variable and use the set __ to __ and change __ by __ blocks.
 Using a repeat block, make the cat say the numbers 1 to 10 (one by one). Here is a reference project.
-Ask to figure out how to make the cat count backward from 10 to 0, and then how to count backward from 100 to 0 by 10s.
-View CS Training's Code`
+Ask to figure out how to make the cat count backward from 10 to 0, and then how to count backward from 100 to 0 by 10s.`
 				},
 				{
 					title: "GM1 Project 4: Speed Click",
@@ -80,16 +73,14 @@ View CS Training's Code`
 3. Make a variable that keeps track of time.
 4. When the green flag is clicked, make the timer start from 10 and count down to 0.
 5. Before the timer starts, make the button say "Ready...", "Set...", and "Go!" for one second each.
-6. When time runs out, make the button hide. Remember, if we make it hide when the game is over, that means that we need to show it when the game starts.
-View CS Training's Code`
+6. When time runs out, make the button hide. Remember, if we make it hide when the game is over, that means that we need to show it when the game starts.`
 				},
 				{
 					title: "Message Broadcasting",
 					content: `Previously, we learned about how to use conditional statements to do something if something else happens. However, we haven't learned how to make this work across different sprites. For example, we might want a sprite to say something once another sprite is done moving. In these situations, we use message broadcasting.
 Open a new Scratch project. Have click on the Events section and and look at the broadcast __ when I receive __ blocks. Explain that broadcasting is a way that sprites can send each other messages to trigger/start certain parts of our code.
 and
-Using this project as a rough guide, show the how to make the ball start bouncing only after the cat is done talking.
-View CS Training's Code`
+Using this project as a rough guide, show the how to make the ball start bouncing only after the cat is done talking.`
 				},
 				{
 					title: "GM1 Project 5: Dance Off",
@@ -99,8 +90,7 @@ View CS Training's Code`
 1. When the green flag is clicked, make the ballerina glide to the middle of the stage and cycle twice through all of her costumes. When she's done, have her glide off to the right side of the stage.
 2. One by one, make each of the other dancers do the same thing. Can you add some clapping between each performer? We also need to be sure to make them start back on the left when the green flag is clicked!
 3. A dance party isn't very fun without music! Add some code to the backdrop so that it plays some dancing music forever. When Champ is done dancing, broadcast a message that stops the music.
-4. Can you make it so that the lights change, too? How about some clapping once everyone is done?
-View CS Training's Code`
+4. Can you make it so that the lights change, too? How about some clapping once everyone is done?`
 				},
 				{
 					title: "GM1 Project 6: Hedgehog Race",
@@ -108,8 +98,7 @@ View CS Training's Code`
 					solutionLink: "https://scratch.mit.edu/projects/305082197/",
 					content: `Play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?
 Create a comment in the project to write out the different steps of what we will need to code.
-Starter code is provided, but it is also fine to create a project from scratch with custom sprites, costumes, and backdrops.
-View CS Training's Code`
+Starter code is provided, but it is also fine to create a project from scratch with custom sprites, costumes, and backdrops.`
 				},
 				{
 					title: "GM1 Project 7: Asteroid Dodge",
@@ -128,8 +117,7 @@ Starter code is provided, but it is also fine to create a project from scratch w
 				{
 					title: "Nested loops",
 					content: `Review what a loop is (there should be familiarity with the repeat block in Scratch). What does the word "nested" mean? Think of Russian nesting dolls: nested means something placed inside another thing. Thus, nested loops are loops inside of other loops!
-Why might we want to use nested loops?
-View CS Training's Code`
+Why might we want to use nested loops?`
 				},
 				{
 					title: "GM2 Project 1: Square Inception",
@@ -140,8 +128,7 @@ View CS Training's Code`
 3. After the cat has drawn these three squares in the bottom right quadrant, have him turn 90 degrees and change his pen color by 25.
 4. Using nested loops, program the cat to draw the squares in the other three quadrants as well.
 5. Try to use a variable that stores the side length of the square to simplify your code even further.
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM2 Project 2: Pyramid",
@@ -191,8 +178,7 @@ Finally, share the project!`
 				{
 					title: "Complex conditionals",
 					content: `Review with the what a conditional is (they should have familiarity with the if __ then __ and if __ then __ else __ blocks in Scratch). Often, we don\'t decide to do something because of just one thing; sometimes we want something to happen when two or more things are true at the same time, or when either one thing or another thing are true!
-Open a new Scratch project. Using this project as a rough guide, introduce the and , or , and not blocks.
-View CS Training's Code`
+Open a new Scratch project. Using this project as a rough guide, introduce the and , or , and not blocks.`
 				},
 				{
 					title: "GM3 Project 1: Color Spotter",
@@ -204,8 +190,7 @@ View CS Training's Code`
 4. If the cat is touching all three colors, make him say "I'm touching all 3 colors!"
 5. If the cat is touching no colors, make him say "I'm touching no colors!"
 6. If the cat is touching any one of the colors, make him say "I'm touching a color!"
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM3 Project 2: Strength Tester",
@@ -252,8 +237,7 @@ Finally, share the project!`
 					title: "Cloning",
 					content: `Sometimes in our projects or games, we want to have one sprite that's duplicated many times, doing slightly different things. We can make clones or copies of this sprite in our code.
 Create a new Scratch project. Using this project as rough guide, introduce the create clone of myself, when I start as a clone , and delete this clone blocks.
-Most of the time we don\'t want to see the original sprite, since the clones are doing the things we actually want! Show how to “hide” the parent and “show” the clones.
-View CS Training's Code`
+Most of the time we don\'t want to see the original sprite, since the clones are doing the things we actually want! Show how to “hide” the parent and “show” the clones.`
 				},
 				{
 					title: "GM4 Project 1: Jackson Pollock Clones",
@@ -262,8 +246,7 @@ View CS Training's Code`
 					content: `1. Start by making the parent pencil create clones of itself continuously.
 2. When a clone is created, make it go to a random location, choose a random size and color, and then glide to another random location. Be sure to use the pen block that sets a color using a number, not the block that takes a color as an input. If the wrong block is used, only shades of blue will appear.
 Challenge: Make the brush strokes look more realistic with slightly varying angles, colors, and widths.
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM4 Project 2: Rainy Day",
@@ -334,8 +317,7 @@ Add a conditional so that if the mouse pointer is on the owl, it gets shy and do
 					title: "Strings",
 					content: `In programming, we work with different kinds of information, or data, that is stored inside of variables. Up until now, we\'ve mainly focused on numbers inside of variables. What kind of things have we done when working with numbers inside of variables? For example, we've kept track of a score and timer, we've added numbers together, and we've checked to see which of two numbers is bigger or smaller.
 Another kind of information that we use a lot when coding is words and letters, which we call strings. If the struggles with the terminology of string, you can have them visualize spelling words with letters from a can of Alphabet Soup. We could (with a lot of messiness) put a thread through a bunch of letters to string them together into a word!
-Create a new Scratch project. Using this project as a rough guide, introduce the join __ __, letter __ of __, and length of __ blocks. Make sure to explain that the length of a string in programming includes spaces and all other characters.
-View CS Training's Code`
+Create a new Scratch project. Using this project as a rough guide, introduce the join __ __, letter __ of __, and length of __ blocks. Make sure to explain that the length of a string in programming includes spaces and all other characters.`
 				},
 				{
 					title: "GM5 Project 1: Security Bot",
@@ -347,8 +329,7 @@ View CS Training's Code`
 3. Program the robot to ask for a 7-letter word and tell the user if they answered correctly.
 4. Program the robot to ask for a word that ends in "y" and tell the user if they answered correctly.
 Challenge: Program the robot to ask for a 6-letter word that starts with "a" and tell the user if they answered correctly.
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM5 Project 2: Spelling Bee",
@@ -392,8 +373,7 @@ Challenge: Try to accomplish step 3 using one "say" block with many "join" block
 				{
 					title: "Mathematical Operators",
 					content: `What are you learning in math class right now? Allude to how a computer could help with these topics. Computers get their name from the word compute , since they can compute the answer to math problems for us!
-Create a new Scratch project. Open the Operators section, and experiment with how different mathematical operations can be performed with these blocks.
-View CS Training's Code`
+Create a new Scratch project. Open the Operators section, and experiment with how different mathematical operations can be performed with these blocks.`
 				},
 				{
 					title: "GM6 Project 1: Calculator",
@@ -403,8 +383,7 @@ View CS Training's Code`
 2. Using conditionals, depending on what the user entered, have the calculator say the answer!
 Challenge: Add "remainder" as an operation option. For example, the remainder when 10 is divided by 3 is 1.
 Challenge #2: Add exponent (^) as operation option. For example, 2^3 = 8.
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM6 Project 2: FizzBuzz",
@@ -415,8 +394,7 @@ View CS Training's Code`
 3. If the number is a multiple of 5, instead of saying the number, make the butterfly say Buzz!
 4. If the number is a multiple of 3 and 5, instead of saying the number (or any other word), make the butterfly say Fizzbuzz!
 The first few numbers in the sequence are: 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz...
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				}
 			],
 			supplementalProjects: [
@@ -451,8 +429,7 @@ Challenge: Have Scratch also ask the user how many multiples the user wants to h
 					content: `Earlier, we learned about strings, which are a way to put single letters and symbols together and store them in variables. What if we wanted to store a whole bunch of different numbers or words together at once? We can store those kinds of things in another type of variable, called a list.
 In real life, what might you put into a list? For example: groceries, your favorite sports, places you've lived, the names of your family members.
 In programming, we put items into lists so that we can conveniently look through them in our programs!
-Create a new Scratch project. Using this project as a rough guide, show the how to create a list, add elements to a list, get the length of a list, and delete of all a list.
-View CS Training's Code`
+Create a new Scratch project. Using this project as a rough guide, show the how to create a list, add elements to a list, get the length of a list, and delete of all a list.`
 				},
 				{
 					title: "GM7 Project 1: Bucket List",
@@ -463,8 +440,7 @@ View CS Training's Code`
 2. Program the cat to repeat this five times, adding the user's response to the list each time.
 3. Now that the list is complete, have the cat loop through the list and repeat each bucket list item back to us.
 Challenge: Change the code so that instead of asking for five items, the cat will keep asking for new things to put on the list until the user types “stop."
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM7 Project 2: List Practice",
@@ -479,8 +455,7 @@ View CS Training's Code`
 Say every other number in the list
 Say every number in the list, multiplied by 10
 Say each number and then turn that many degrees to the right
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM7 Project 3: Music Memory",
@@ -528,8 +503,7 @@ Finally, share the project!`
 					content: `We're going to learn how to make our own custom blocks in Scratch! When we make a block, we make a special set of instructions that have a name and can take in some specific inputs. If we want the sprite to use the instructions, we just use that new block. This custom block we create is called a function.
 Using this project as a rough guide, show the the My Blocks section and guide them through creating and using an adding block like the one in the example. We can name the function with the label text, and choose what kind of information we can put into the function (e.g. numbers, words, conditions).
 It is particularly important the the understands the difference between defining a function (or custom block) with the given inputs, and using that function in our code with specific inputs.
-Making our own blocks can help us make our code look more organized. For example, in the Music Memory game, we could have divided our code up into functions to make it a bit easier to read! You may choose to work through editing the Music Memory game to simplify it with functions now or later, like in this project.
-View CS Training's Code`
+Making our own blocks can help us make our code look more organized. For example, in the Music Memory game, we could have divided our code up into functions to make it a bit easier to read! You may choose to work through editing the Music Memory game to simplify it with functions now or later, like in this project.`
 				},
 				{
 					title: "GM8 Project 1: My First Functions",
@@ -540,8 +514,7 @@ View CS Training's Code`
 3. Create a function that makes the cat jump (the input will be the height of the jump).
 4. Create a function that makes the cat teleport by making the cat spin in a circle, go to a random spot with a sound effect, and then spin again (no inputs).
 5. When the green flag is clicked, use these functions to make the cat jump 100 steps, speak 3 times, draw a square of size 100, teleport, and then draw another square.
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				},
 				{
 					title: "GM8 Project 2: Talent Show II",
@@ -550,8 +523,7 @@ View CS Training's Code`
 					content: `Our talented cat is at it again, ready to perform his many talents! Create functions for each of his talents, so that the user can have some input into his performance.
 1. Create functions for each of the cat's talents, such as playing a song with an inputted number of notes, or spinning in the air an inputted number of times. Create at least four talents of your choosing.
 2. When the green flag is clicked, make the cat start his talent show. He should ask the user which talent to perform, and then he should ask the user for the input that function needs.
-Finally, share the project!
-View CS Training's Code`
+Finally, share the project!`
 				}
 			],
 			supplementalProjects: [
@@ -695,25 +667,21 @@ Finally, share the project!`
 				},
 				{
 					title: "Master Project Presentation",
-					content: `Once it's complete, prepare a simple presentation about how the project was programmed and share the accomplishment with friends or family.
-				Another way to celebrate the project is by sharing it with friends or family.`
+					content: `Once it's complete, prepare a simple project summary about how the game was programmed, which lists and functions were used, and what design choices made it work.
+				Treat this as a short reflection on the finished project and the problem-solving involved in building it.`
 				},
 				{
 					title: "Course Recap",
 					content: `We've learned a lot over these past few months! Can you recap the different topics we learned in this course?
 				Help come up with a list of coding concepts they\'ve learned through Scratch. It might be helpful to look back at the module titles or code from previous projects they\'ve created.
 				If anything is missing, make sure the list includes conditionals, XY coordinates, variables, event listeners, loops, and functions.
-				Great job! Many of these concepts from Scratch will be used in Python as well. Let's take a closer look at the next course.
-				Discuss the next course: Python Level 1. In Python Level 1, we will learn our first programming language that requires us to fully type out our code instead of using blocks! However, we are going to use a lot of the same concepts we've already become comfortable with in Scratch.
-				View CS Training's Code`
+				Great job! Many of these concepts from Scratch will be used in Python as well. As a next step, preview Python Level 1 and note how the same logic skills will carry over once the code is typed out instead of assembled from blocks.`
 				},
 				{
 					title: "Optional Extra Practice: Typing Games",
 					content: `This optional section is for those transitioning from Scratch into Python Level 1.
-				The purpose is to prepare for block-based to text-based coding and to assess typing and computer literacy skills.
-				If someone is advanced, has strong typing skills, or is not taking a text based programming language as their next course, you may skip this activity at your discretion.
-				These typing games are optional and don\'t all need to be completed. Choose games that are interesting and move on once there has been 15-20 minutes of practice, or if already a strong typist.
-				Feel free to skip to the intermediate typing games if older than 6.
+				The purpose is to prepare for the shift from block-based to text-based coding and to strengthen typing and computer literacy skills.
+				These typing games are optional and do not all need to be completed. Choose games that feel useful, spend about 15 to 20 minutes practicing as needed, and move to the intermediate options if the beginner games feel too easy.
 				One of the biggest differences between Python and Scratch is that we\'ll need to type our code out rather than using blocks. Let\'s play a few games to practice typing as we prepare ourselves to write Python code.
 				Beginner Typing Games:
 				Practice with the Keyboard - Typing Letters

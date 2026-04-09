@@ -9,7 +9,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Introductions and Java Setup",
 					content:
-						"Get comfortable with the learner portal, the console, project instructions, and a custom reference project for reusable examples. Start by writing code inside `main()` and using the console to run and inspect output."
+						"Get comfortable with the Java workspace, the console, project instructions, and a reference project for reusable examples. Start by writing code inside `main()` and using the console to run and inspect output."
 				},
 				{
 					title: "Primitive Types",
@@ -306,7 +306,7 @@ export const javaLevel1Course: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project-Starter"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS-Check-in-1-Additional-Project"
 				}
 			],
 			supplementalProjects: []

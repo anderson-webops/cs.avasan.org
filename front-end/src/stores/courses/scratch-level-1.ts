@@ -629,9 +629,9 @@ Once there is an idea, discuss the plan for programming the game. Helpful questi
 				},
 				{
 					title: "Master Project Presentation",
-					content: `Once it's complete, prepare a simple presentation about how the project was programmed and share the accomplishment with friends or family.
+					content: `Once it's complete, prepare a simple project summary explaining how the game was programmed, which sprites and variables were used, and what problems were solved along the way.
 
-Another way to celebrate the project is by sharing it with friends or family.`
+Treat this as a short reflection on the design process and the finished result.`
 				},
 				{
 					title: "Course recap",
@@ -645,7 +645,7 @@ If any are missing, make sure the list includes conditionals, XY coordinates, va
 					title: "Optional Extra Practice – Typing Games",
 					content: `This optional section is for those transitioning from Scratch Level 1 into Python Level 1.
 
-The purpose of this section is to prepare for transitioning from block-based to text-based coding and to assess typing and computer literacy skills. If someone is advanced, has strong typing skills or is not taking a text-based programming language as their next course, you may skip this activity at your discretion. These typing games are optional and don\'t need to be all completed. Choose games that are interesting and move on once there has been 15-20 minutes of practice, or if the person is already a strong typist. Feel free to skip to the intermediate typing games if older than 6.
+The purpose of this section is to prepare for the shift from block-based to text-based coding and to strengthen typing and computer literacy skills. These typing games are optional and do not need to be completed in full. Choose games that feel useful, spend about 15 to 20 minutes practicing as needed, and move to the intermediate options if the beginner games feel too easy.
 
 One of the biggest differences between Python and Scratch is that we'll need to type our code out rather than using blocks. Let's play a few games to practice typing as we prepare ourselves to write Python code.
 

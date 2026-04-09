@@ -14,7 +14,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Actors",
 					content:
-						'Define WIDTH = 400 and HEIGHT = 300 (all caps) at the top of the file to set the window size. Explain that an object groups data and functions (like the turtle object: position, color, movement functions). Introduce the Actor object for players, enemies, and collectibles; it has x, y, and an image, plus methods like draw() and collision helpers. Create an alien actor with alien = Actor("alien"). Define def draw(): and inside call screen.clear() then alien.draw(). Add an update() function that moves the alien, e.g. alien.x += 5. Let the experiment with changing x and y, positive vs negative values, and different speeds.'
+						'Define WIDTH = 400 and HEIGHT = 300 (all caps) at the top of the file to set the window size. Explain that an object groups data and functions (like the turtle object: position, color, movement functions). Introduce the Actor object for players, enemies, and collectibles; it has x, y, and an image, plus methods like draw() and collision helpers. Create an alien actor with alien = Actor("alien"). Define def draw(): and inside call screen.clear() then alien.draw(). Add an update() function that moves the alien, e.g. alien.x += 5. Experiment with changing x and y, positive vs negative values, and different speeds.'
 				},
 				{
 					title: "Position Keywords",
@@ -195,12 +195,12 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check-In #1: Actors",
 					content:
-						'Actors-1: Have set up the PyGame window with width 500 and height 400. Actors-2/3: Ask them to define what an actor is and create alien = Actor("alien"). Actors-4: Place the alien so it starts in the bottom-right corner of the screen. Actors-5/6: Draw the alien on the screen using draw() and alien.draw(). Actors-7: Define and explain global variables by creating xspeed and yspeed. Actors-8/9: Use yspeed to move the alien upwards and make it bounce off the top edge using speed reversal.'
+						'Actors-1: Set up the PyGame window with width 500 and height 400. Actors-2/3: Define what an actor is and create alien = Actor("alien"). Actors-4: Place the alien so it starts in the bottom-right corner of the screen. Actors-5/6: Draw the alien on the screen using draw() and alien.draw(). Actors-7: Define and explain global variables by creating xspeed and yspeed. Actors-8/9: Use yspeed to move the alien upwards and make it bounce off the top edge using speed reversal.'
 				},
 				{
 					title: "Check-In #1: Event Listeners",
 					content:
-						"Event Listeners-1: Ask to define an event listener and name at least two types they have used (keyboard and mouse). Event Listeners-2/3: Make the alien change orientation or direction based on the arrow keys, and bounce it back on screen whenever it leaves the window. Event Listeners-4/5/6: When the left mouse button is clicked, move the alien to the clicked position using the mouse coordinates."
+						"Event Listeners-1: Define an event listener and name at least two types already used (keyboard and mouse). Event Listeners-2/3: Make the alien change orientation or direction based on the arrow keys, and bounce it back on screen whenever it leaves the window. Event Listeners-4/5/6: When the left mouse button is clicked, move the alien to the clicked position using the mouse coordinates."
 				},
 				{
 					title: "Check-In #1: ZRect and Dynamic Attributes",
@@ -233,7 +233,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG5 Project 1: Keep Up",
 					content:
-						"Build a click-based juggling game where the player keeps a ball in the air. Create a ball Actor with dynamic xspeed and yspeed and global variables GRAVITY and score. In draw(), clear the screen, draw the score text, and draw the ball. In update(), apply GRAVITY to yspeed, update the ball\'s x and y with xspeed and yspeed, and make it bounce off the floor and optionally the top. Add wall-bounce logic on the left and right edges, for example: if ball.right > WIDTH: ball.right = WIDTH; ball.xspeed = -ball.xspeed, and similarly for ball.left < 0. Implement on_mouse_down(pos) so that if ball.collidepoint(pos) is True, the ball\'s yspeed is set to -3, xspeed is set to a random value between -15 and 15, and score is incremented. Have tweak speeds and gravity so the game feels fair but challenging.",
+						"Build a click-based juggling game where the player keeps a ball in the air. Create a ball Actor with dynamic xspeed and yspeed and global variables GRAVITY and score. In draw(), clear the screen, draw the score text, and draw the ball. In update(), apply GRAVITY to yspeed, update the ball\'s x and y with xspeed and yspeed, and make it bounce off the floor and optionally the top. Add wall-bounce logic on the left and right edges, for example: if ball.right > WIDTH: ball.right = WIDTH; ball.xspeed = -ball.xspeed, and similarly for ball.left < 0. Implement on_mouse_down(pos) so that if ball.collidepoint(pos) is True, the ball\'s yspeed is set to -3, xspeed is set to a random value between -15 and 15, and score is incremented. Tweak speeds and gravity so the game feels fair but challenging.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/PyG5-Keep-Up.py",
 					mediaLink:
@@ -242,7 +242,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Friction",
 					content:
-						"Introduce friction as a force that slows moving objects when they are in contact with a surface. Create a ball Actor whose bottom touches the bottom of the screen with dynamic attributes xspeed and yspeed, setting xspeed = 10 and yspeed = 0. Define a global FRICTION = 0.95 and in update() multiply ball.xspeed and ball.yspeed by FRICTION each frame before updating position. Have observe that fast motion slows quickly while slow motion tapers off gently when multiplying by a value slightly less than 1. Experiment with different starting speeds and friction values, including cases where FRICTION is closer to 1 (gentle slowing), much lower (rapid stop), and greater than 1 (the ball speeds up instead of slowing down) and discuss which feels realistic for games."
+						"Introduce friction as a force that slows moving objects when they are in contact with a surface. Create a ball Actor whose bottom touches the bottom of the screen with dynamic attributes xspeed and yspeed, setting xspeed = 10 and yspeed = 0. Define a global FRICTION = 0.95 and in update() multiply ball.xspeed and ball.yspeed by FRICTION each frame before updating position. Observe that fast motion slows quickly while slow motion tapers off gently when multiplying by a value slightly less than 1. Experiment with different starting speeds and friction values, including cases where FRICTION is closer to 1 (gentle slowing), much lower (rapid stop), and greater than 1 (the ball speeds up instead of slowing down) and discuss which feels realistic for games."
 				},
 				{
 					title: "PyG5 Project 2: Golf",
@@ -276,7 +276,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Moving Platforms",
 					content:
-						"Teach how to make platforms move and bounce between limits. Shorten the floor platform to 200 pixels wide and give it a dynamic floor.xspeed = 2. In update(), move it with floor.x += floor.xspeed and observe that it disappears off the right side. Add dynamic bounds floor.leftlimit = 0 and floor.rightlimit = WIDTH and, in update(), bounce with if floor.right > floor.rightlimit: floor.right = floor.rightlimit; floor.xspeed = -floor.xspeed and a similar condition when floor.left < floor.leftlimit. Encourage to experiment with different limits so the platform stays only on the right side or in the center third of the screen. Add yspeed, toplimit, and bottomlimit attributes to support vertical and diagonal motion and bounce vertically in a similar way."
+						"Teach how to make platforms move and bounce between limits. Shorten the floor platform to 200 pixels wide and give it a dynamic floor.xspeed = 2. In update(), move it with floor.x += floor.xspeed and observe that it disappears off the right side. Add dynamic bounds floor.leftlimit = 0 and floor.rightlimit = WIDTH and, in update(), bounce with if floor.right > floor.rightlimit: floor.right = floor.rightlimit; floor.xspeed = -floor.xspeed and a similar condition when floor.left < floor.leftlimit. Experiment with different limits so the platform stays only on the right side or in the center third of the screen. Add yspeed, toplimit, and bottomlimit attributes to support vertical and diagonal motion and bounce vertically in a similar way."
 				},
 				{
 					title: "PyG6 Project 1: Stay on the Platform",
@@ -295,7 +295,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG6 Project 2: Platformer Game",
 					content:
-						'Design and build a full platformer level. With the , sketch a level layout (for example using https://aggie.io) including at least 8 platforms, at least 1 moving platform, a start position for the alien, and a diamond. Convert the drawing into a list of ZRects for platforms, then write draw() and run to verify platform positions. Add dynamic motion attributes to selected platforms and update() logic so they move and stay within their limits. Add an alien Actor that can walk and jump on platforms and resets to the start when it falls off the screen. Add a diamond Actor using the "diamond_s" image at the goal location. Create a global gameOver flag initially False and another variable to track whether the diamond has been collected. When the alien touches the diamond, set gameOver to True, hide the diamond, and display a "Game Over" or "You Win" text instead of the regular game view.',
+						'Design and build a full platformer level. Start by sketching a level layout (for example using https://aggie.io) including at least 8 platforms, at least 1 moving platform, a start position for the alien, and a diamond. Convert the drawing into a list of ZRects for platforms, then write draw() and run to verify platform positions. Add dynamic motion attributes to selected platforms and update() logic so they move and stay within their limits. Add an alien Actor that can walk and jump on platforms and resets to the start when it falls off the screen. Add a diamond Actor using the "diamond_s" image at the goal location. Create a global gameOver flag initially False and another variable to track whether the diamond has been collected. When the alien touches the diamond, set gameOver to True, hide the diamond, and display a "Game Over" or "You Win" text instead of the regular game view.',
 					solutionLink:
 						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/PyG6-Platformer-Game.py",
 					mediaLink:
@@ -304,7 +304,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG6 Project 3: Falling Jump",
 					content:
-						'Create an endless survival game with falling platforms. Start with an empty platforms list and a loop that creates 10 ZRects at random horizontal positions. For each platform, add dynamic attributes yspeed and color (an (r, g, b) tuple) and append it to platforms. Define draw() to draw all platforms. Add an alien Actor that moves left and right, is affected by gravity, and falls off-screen if unsupported. In update(), move each platform downward by its yspeed and when a platform goes below the bottom, send it back to the top with a new random position. Implement collision so that when the alien lands on a platform its yspeed becomes a negative value (a bounce). Create a global gameOver flag that, when True, stops motion and triggers a "Game Over" message in draw(). Encourage to tune bounce strength and platform speeds for a fair challenge.',
+						'Create an endless survival game with falling platforms. Start with an empty platforms list and a loop that creates 10 ZRects at random horizontal positions. For each platform, add dynamic attributes yspeed and color (an (r, g, b) tuple) and append it to platforms. Define draw() to draw all platforms. Add an alien Actor that moves left and right, is affected by gravity, and falls off-screen if unsupported. In update(), move each platform downward by its yspeed and when a platform goes below the bottom, send it back to the top with a new random position. Implement collision so that when the alien lands on a platform its yspeed becomes a negative value (a bounce). Create a global gameOver flag that, when True, stops motion and triggers a "Game Over" message in draw(). Tune bounce strength and platform speeds until the difficulty feels fair but challenging.',
 					solutionLink:
 						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/PyG6-Falling-Jump.py",
 					mediaLink:
@@ -339,7 +339,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check-In #2: Additional Practice Project",
 					content:
-						'Have modify one of their Bigfoot games so pressing the "f" key flips gravity upside down. When gravity is reversed, Bigfoot should fall upward without leaving the screen; adjust collision so he can stand against the top or bottom surfaces appropriately. Optionally, flip Bigfoot\'s sprite with bigfoot.angle = 180 when gravity is reversed and make moving platforms behave correctly with inverted gravity.',
+						'Modify one of the Bigfoot games so pressing the "f" key flips gravity upside down. When gravity is reversed, Bigfoot should fall upward without leaving the screen; adjust collision so he can stand against the top or bottom surfaces appropriately. Optionally, flip Bigfoot\'s sprite with bigfoot.angle = 180 when gravity is reversed and make moving platforms behave correctly with inverted gravity.',
 					solutionLink:
 						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/Check-in-2-Additional-Practice-Solution.py"
 				}
@@ -446,7 +446,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG9 Project 2: Space Battle",
 					content:
-						"Create a boss-style Space Battle where an alien ship with AI fires at the player. Show the final Space Battle solution and discuss how the alien acts and how the lasers are created and stored. Create an alien Actor with dynamic xspeed and health that moves horizontally and bounces off the walls, speeding up each time it changes direction. Create a list enemy_lasers to hold enemy projectiles. Define alien_shoot() to spawn a new laser from the alien and add it to enemy_lasers. To simulate random firing, schedule alien_shoot() at several different intervals (e.g., 1.0, 1.3, 0.6 seconds) so the shots do not line up predictably. Create a player rocket at the bottom of the screen with a health attribute and allow it to move left and right with the arrow keys. Create a list player_lasers and add a new laser on each space press. In update(), move all lasers, remove them when they go offscreen, and check collisions: player lasers hitting the alien reduce its health; enemy lasers hitting the player reduce the player\'s health. End the game when either health reaches zero and display a win or loss message. Encourage to think of this as a simple AI that reacts by shooting at semi-random times and moving in a pattern.",
+						"Create a boss-style Space Battle where an alien ship with AI fires at the player. Show the final Space Battle solution and discuss how the alien acts and how the lasers are created and stored. Create an alien Actor with dynamic xspeed and health that moves horizontally and bounces off the walls, speeding up each time it changes direction. Create a list enemy_lasers to hold enemy projectiles. Define alien_shoot() to spawn a new laser from the alien and add it to enemy_lasers. To simulate random firing, schedule alien_shoot() at several different intervals (e.g., 1.0, 1.3, 0.6 seconds) so the shots do not line up predictably. Create a player rocket at the bottom of the screen with a health attribute and allow it to move left and right with the arrow keys. Create a list player_lasers and add a new laser on each space press. In update(), move all lasers, remove them when they go offscreen, and check collisions: player lasers hitting the alien reduce its health; enemy lasers hitting the player reduce the player\'s health. End the game when either health reaches zero and display a win or loss message. Treat this as a simple AI that reacts by shooting at semi-random times and moving in a pattern.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Courses/blob/main/PyGames/PyG9-Space-Battle.py",
 					mediaLink:
@@ -514,28 +514,27 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Recap & Readiness Check",
 					content:
-						"Ask what was done to build Space Invaders and which parts were most enjoyable. At the start of this module, evaluate readiness to move on to Python Level 2 after finishing PyGame, keeping in mind that Juni courses are designed to flow continuously. If you are the instructor, follow the platform\'s process for updating the course when the learner is ready and reach out to support with any sequencing questions."
+						"Review what went into building Space Invaders and identify which parts of the course felt strongest and which parts still need reinforcement. Use that reflection to decide whether the student is ready to move on to Python Level 2 or should spend more time strengthening the PyGame fundamentals."
 				},
 				{
 					title: "PyG12 Project 1: Master Project",
 					content:
-						"Guide the scoping and building of an original Master Project that showcases everything learned. Start by discussing favorite games on phone or computer and brainstorming ideas that fit within the course\'s time frame. Once a concept is chosen, write out the steps needed to program the project, including actors, physics, projectiles, screens, levels, and any AI behaviors desired. Encourage implementing the project as independently as possible, using class time for planning and debugging rather than typing every line. Aim for a project that spans about two weeks of class, with significant progress made as homework between sessions. If a more complex project or multiple projects are desired, coordinate expectations and communicate with Juni HQ as needed.",
-					solutionLink: ""
+						"Scope and build an original Master Project that showcases everything learned. Start by discussing favorite games and brainstorming ideas that fit within the course time frame. Once a concept is chosen, write out the steps needed to program the project, including actors, physics, projectiles, screens, levels, and any AI behaviors desired. Aim to implement the project as independently as possible, using class time for planning, debugging, and architectural decisions rather than typing every line. A focused project that spans about two weeks of work is usually a better fit than an oversized idea that cannot be finished cleanly."
 				},
 				{
 					title: "Bonus Concepts for Assets",
 					content:
-						"If the wants to use images or sounds outside the provided asset bank, have them prototype with placeholder assets first and then, for homework, find or create the final images and sounds. Teach them how to resize images using free online tools so they match typical sprite sizes (for example, the standard alien is about 66 pixels wide by 92 pixels tall) and how to crop or normalize sounds. Encourage them to explore the PyGame Zero documentation for ideas such as more advanced input, music control, and simple particle effects that can make their Master Project feel more polished."
+						"If the project uses images or sounds outside the provided asset bank, prototype with placeholder assets first and then replace them with final files later. Resize images so they match practical sprite sizes, crop or normalize sounds when needed, and explore the PyGame Zero documentation for ideas such as more advanced input, music control, and simple particle effects that can make the Master Project feel more polished."
 				},
 				{
 					title: "Master Project Presentation",
 					content:
-						"Once the project is complete or reaches a solid milestone, have present their game to you and any available family members. Ask them to explain their game concept, how they structured their code, what problems they solved along the way, and which concepts from the course they used (actors, physics, projectiles, AI, game states, levels). Encourage them to think of this as a portfolio piece they could show future teachers or mentors."
+						"Once the project reaches a solid milestone, present the game and explain the concept, how the code is structured, what problems were solved along the way, and which course concepts were used (actors, physics, projectiles, AI, game states, and levels). Treat the result as a portfolio-quality project summary rather than as a casual show-and-tell."
 				},
 				{
 					title: "Course Recap & Next Course",
 					content:
-						"Wrap up by asking the to recap the main ideas from the entire PyGame course: actors, events, physics, platforms, projectiles, enemy AI, levels, and game states. Discuss Python Level 2 as the next step, explaining that they will continue building on their Python skills and move into more complex logic and program structures. If you are their instructor, proceed directly into Python Level 2 once the Master Project is done, and use the first few sessions there to connect new concepts back to the games they just built."
+						"Wrap up by recapping the main ideas from the entire PyGame course: actors, events, physics, platforms, projectiles, enemy AI, levels, and game states. Then discuss Python Level 2 as the typical next step, focusing on how the student will build on the Python skills and program structure habits developed while making games."
 				}
 			],
 			supplementalProjects: []

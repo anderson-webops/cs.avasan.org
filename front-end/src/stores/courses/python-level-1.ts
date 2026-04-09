@@ -248,7 +248,7 @@ export const pythonLevel1Course: RawCourse = {
 				{
 					title: "Check-In #1 Reflection",
 					content:
-						"Write or record a short reflection about favorite concepts, challenges, problem-solving strategies, and a moment of pride from the course so far.",
+						"Write a short reflection about favorite concepts, challenges, problem-solving strategies, and a moment of pride from the course so far.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/Reflection-Template-Updated"
 				},

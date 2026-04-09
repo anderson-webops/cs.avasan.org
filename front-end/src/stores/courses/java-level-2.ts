@@ -9,7 +9,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Introductions and Java Setup",
 					content:
-						"Get comfortable with the learner portal, the console, custom Java files, and the shift from procedural Java to object-oriented programming. Review the role of `main()` while starting to define additional classes in separate files."
+						"Get comfortable with the Java workspace, the console, custom Java files, and the shift from procedural Java to object-oriented programming. Review the role of `main()` while starting to define additional classes in separate files."
 				},
 				{
 					title: "Objects vs. Classes",

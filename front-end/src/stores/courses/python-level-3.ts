@@ -9,7 +9,7 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "Introductions & Setup",
 					content:
-						"Start with a short introduction and get comfortable with the coding environment. Open the learner portal, review how to move between modules and projects, and explore the code editor, instructions, and console tabs. This review module can be used flexibly: move through it in order or jump to the sections that need the most reinforcement."
+						"Start with a short introduction and get comfortable with the coding environment. Review how to move between modules and projects, explore the editor, instructions, and console, and use this review module flexibly by moving in order or jumping to the sections that need the most reinforcement."
 				},
 				{
 					title: "Variables, Strings, and Input",
