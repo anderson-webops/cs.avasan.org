@@ -52,6 +52,20 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "data-science-in-python",
+		name: "Data Science in Python",
+		load: () =>
+			import("./data-science-in-python").then(
+				({ dataScienceInPythonCourse }) => dataScienceInPythonCourse
+			)
+	},
+	{
+		id: "ai-level-1",
+		name: "AI Level 1",
+		load: () =>
+			import("./ai-level-1").then(({ aiLevel1Course }) => aiLevel1Course)
+	},
+	{
 		id: "c-level-1",
 		name: "C++ Level 1",
 		load: () =>
@@ -95,6 +109,38 @@ export const courseCatalog: CourseCatalogEntry[] = [
 		load: () =>
 			import("./java-level-3").then(
 				({ javaLevel3Course }) => javaLevel3Course
+			)
+	},
+	{
+		id: "ap-computer-science-a",
+		name: "AP Computer Science A",
+		load: () =>
+			import("./ap-computer-science-a").then(
+				({ apComputerScienceACourse }) => apComputerScienceACourse
+			)
+	},
+	{
+		id: "usaco-bronze",
+		name: "USACO Bronze",
+		load: () =>
+			import("./usaco-bronze").then(
+				({ usacoBronzeCourse }) => usacoBronzeCourse
+			)
+	},
+	{
+		id: "usaco-silver",
+		name: "USACO Silver",
+		load: () =>
+			import("./usaco-silver").then(
+				({ usacoSilverCourse }) => usacoSilverCourse
+			)
+	},
+	{
+		id: "usaco-gold",
+		name: "USACO Gold",
+		load: () =>
+			import("./usaco-gold").then(
+				({ usacoGoldCourse }) => usacoGoldCourse
 			)
 	},
 	{
