@@ -161,6 +161,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "design-patterns-in-cpp",
+		name: "Design Patterns in C++",
+		load: () =>
+			import("./design-patterns-in-cpp").then(
+				({ designPatternsInCppCourse }) => designPatternsInCppCourse
+			)
+	},
+	{
 		id: "pythonic-design-patterns",
 		name: "Pythonic Design Patterns",
 		load: () =>
