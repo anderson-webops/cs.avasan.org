@@ -161,6 +161,15 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "pythonic-design-patterns",
+		name: "Pythonic Design Patterns",
+		load: () =>
+			import("./pythonic-design-patterns").then(
+				({ pythonicDesignPatternsCourse }) =>
+					pythonicDesignPatternsCourse
+			)
+	},
+	{
 		id: "intro-to-chemistry",
 		name: "Intro to Chemistry",
 		load: () =>
