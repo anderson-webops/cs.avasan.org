@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
 const PYTHONIC_DESIGN_PATTERNS_REPO =
-	"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main";
+	"https://github.com/instruction-material/Python-Courses/tree/main/Pythonic%20Design%20Patterns";
 
 function starterRepoLink(projectId: string) {
 	return `${PYTHONIC_DESIGN_PATTERNS_REPO}/${projectId}/starter`;

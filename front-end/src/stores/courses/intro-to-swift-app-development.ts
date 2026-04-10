@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
 const SWIFT_APP_REPO_ROOT =
-	"https://github.com/instruction-material/Intro-to-Swift-App-Development/tree/main";
+	"https://github.com/instruction-material/Swift/tree/main";
 
 function starterRepoLink(projectId: string) {
 	return `${SWIFT_APP_REPO_ROOT}/${projectId}/starter`;
