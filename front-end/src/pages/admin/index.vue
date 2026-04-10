@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
+
 const adminTools = [
 	{
-		title: "Student Management",
+		title: "Learner Management",
 		description:
 			"Review the shared student management spreadsheet and current roster workflows.",
 		href: "/admin/student-management"
@@ -16,68 +18,40 @@ const adminTools = [
 </script>
 
 <template>
-	<section class="wrap">
-		<p class="eyebrow">Admin</p>
-		<h1>Admin Workspace</h1>
-		<p class="intro">Choose an admin tool below.</p>
-
+	<AdminWorkspaceShell
+		intro="Move between the main operator workflows without losing context. The shell and navigation stay consistent across admin pages so the workspace feels like one place instead of separate tools."
+		title="Admin Workspace"
+	>
 		<nav class="tool-grid" aria-label="Admin tools">
-			<a
+			<RouterLink
 				v-for="tool in adminTools"
 				:key="tool.href"
-				:href="tool.href"
+				:to="tool.href"
 				class="tool-card"
 			>
+				<p class="tool-label">Workspace</p>
 				<h2>{{ tool.title }}</h2>
 				<p>{{ tool.description }}</p>
-			</a>
+			</RouterLink>
 		</nav>
-	</section>
+	</AdminWorkspaceShell>
 </template>
 
 <style scoped>
-.wrap {
-	max-width: 960px;
-	margin: 32px auto;
-	padding: 20px;
-	display: grid;
-	gap: 16px;
-}
-
-.eyebrow {
-	margin: 0;
-	text-transform: uppercase;
-	letter-spacing: 0.16em;
-	font-size: 0.8rem;
-	font-weight: 700;
-	color: #4e6780;
-}
-
-.wrap h1,
-.wrap p {
-	margin: 0;
-}
-
-.intro {
-	color: #4f667c;
-	line-height: 1.6;
-}
-
 .tool-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-	gap: 16px;
-	margin-top: 8px;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1rem;
 }
 
 .tool-card {
 	display: grid;
-	gap: 10px;
-	padding: 20px;
-	border-radius: 16px;
-	border: 1px solid #d4dde7;
+	gap: 0.75rem;
+	padding: 1.35rem;
+	border-radius: 22px;
+	border: 1px solid #d9e2ec;
 	background: #fff;
-	box-shadow: 0 8px 24px rgba(16, 42, 66, 0.08);
+	box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
 	color: inherit;
 	text-decoration: none;
 	transition:
@@ -88,16 +62,26 @@ const adminTools = [
 
 .tool-card:hover {
 	transform: translateY(-2px);
-	border-color: #9fb7cf;
-	box-shadow: 0 12px 28px rgba(16, 42, 66, 0.12);
+	border-color: #93c5fd;
+	box-shadow: 0 20px 38px rgba(30, 41, 59, 0.12);
+}
+
+.tool-label {
+	margin: 0;
+	font-size: 0.75rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #2563eb;
 }
 
 .tool-card h2 {
 	margin: 0;
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 }
 
 .tool-card p {
+	margin: 0;
 	color: #53697f;
 	line-height: 1.6;
 }
@@ -106,7 +90,7 @@ const adminTools = [
 <route lang="json">
 {
 	"meta": {
-		"layout": false,
+		"layout": "default",
 		"requiresAdmin": true
 	}
 }

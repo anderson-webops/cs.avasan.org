@@ -3,6 +3,7 @@ import DOMPurify from "dompurify";
 import { marked } from "marked";
 import { computed, ref, watch } from "vue";
 import { api } from "@/api";
+import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
 import { ADMIN_RECIPIENTS } from "@/modules/adminRecipients";
 
 // allow single newlines to render as <br> and keep GitHub-flavored markdown
@@ -219,221 +220,331 @@ function parseDateIso(value: string): string | null {
 </script>
 
 <template>
-	<section class="wrap">
-		<h2>Send Markdown Email (Admin)</h2>
-
-		<div class="tabs" role="tablist" aria-label="Email or preview">
-			<button
-				id="tab-compose"
-				role="tab"
-				:aria-selected="activeTab === 'compose'"
-				class="tab-btn"
-				:class="[{ active: activeTab === 'compose' }]"
-				type="button"
-				data-testid="tab-compose"
-				@click="switchTab('compose')"
-			>
-				Compose
-			</button>
-			<button
-				id="tab-preview"
-				role="tab"
-				:aria-selected="activeTab === 'preview'"
-				class="tab-btn"
-				:class="[{ active: activeTab === 'preview' }]"
-				type="button"
-				data-testid="tab-preview"
-				@click="switchTab('preview')"
-			>
-				Preview
-			</button>
-		</div>
-
-		<div class="field">
-			<label class="field-label" for="recipient-select">Recipient</label>
-			<div class="recipient-row">
-				<select id="recipient-select" v-model="selectedRecipientName">
-					<option disabled value="">Select a person</option>
-					<option
-						v-for="recipient in ADMIN_RECIPIENTS"
-						:key="recipient.name"
-						:value="recipient.name"
+	<AdminWorkspaceShell
+		intro="Compose session notes and internal admin mail in one place, with a cleaner writing surface and a stable preview flow."
+		title="Session Notes and Admin Mail"
+	>
+		<section class="wrap">
+			<div class="mail-card">
+				<div class="mail-card__header">
+					<div>
+						<p class="mail-card__eyebrow">Composer</p>
+						<h2>Write once, send with context</h2>
+					</div>
+					<div
+						class="tabs"
+						role="tablist"
+						aria-label="Email or preview"
 					>
-						{{ recipient.name }}
-					</option>
-					<option :value="CUSTOM_OPTION">Custom</option>
-				</select>
-				<button
-					v-if="selectedRecipientName"
-					type="button"
-					class="ghost-btn"
-					@click="clearRecipient"
+						<button
+							id="tab-compose"
+							role="tab"
+							:aria-selected="activeTab === 'compose'"
+							class="tab-btn"
+							:class="[{ active: activeTab === 'compose' }]"
+							type="button"
+							data-testid="tab-compose"
+							@click="switchTab('compose')"
+						>
+							Compose
+						</button>
+						<button
+							id="tab-preview"
+							role="tab"
+							:aria-selected="activeTab === 'preview'"
+							class="tab-btn"
+							:class="[{ active: activeTab === 'preview' }]"
+							type="button"
+							data-testid="tab-preview"
+							@click="switchTab('preview')"
+						>
+							Preview
+						</button>
+					</div>
+				</div>
+
+				<div class="field-grid">
+					<div class="field">
+						<label class="field-label" for="recipient-select"
+							>Recipient</label
+						>
+						<div class="recipient-row">
+							<select
+								id="recipient-select"
+								v-model="selectedRecipientName"
+							>
+								<option disabled value="">
+									Select a person
+								</option>
+								<option
+									v-for="recipient in ADMIN_RECIPIENTS"
+									:key="recipient.name"
+									:value="recipient.name"
+								>
+									{{ recipient.name }}
+								</option>
+								<option :value="CUSTOM_OPTION">Custom</option>
+							</select>
+							<button
+								v-if="selectedRecipientName"
+								type="button"
+								class="ghost-btn"
+								@click="clearRecipient"
+							>
+								Clear
+							</button>
+						</div>
+						<div
+							v-if="!isCustomRecipient"
+							class="recipient-preview"
+						>
+							<div>
+								<strong>To:</strong> {{ primaryEmail || "—" }}
+							</div>
+							<div v-if="ccEmails.length">
+								<strong>CC:</strong> {{ ccEmails.join(", ") }}
+							</div>
+						</div>
+						<div v-else class="manual-recipient">
+							<label class="sub-label" for="custom-to"
+								>Enter recipient email(s)</label
+							>
+							<input
+								id="custom-to"
+								v-model="to"
+								type="text"
+								placeholder="primary@example.com, cc1@example.com"
+							/>
+							<p class="hint">
+								First email is the main recipient; any others
+								become CC.
+							</p>
+						</div>
+					</div>
+
+					<div class="field subject-group">
+						<label class="field-label" for="subject-date-input"
+							>Subject</label
+						>
+						<div class="subject-row">
+							<button
+								type="button"
+								class="picker-btn"
+								@click="openDatePicker"
+							>
+								{{
+									subjectDate
+										? "Change date"
+										: "Pick session date"
+								}}
+							</button>
+							<input
+								id="subject-date-input"
+								ref="dateInput"
+								v-model="subjectDate"
+								type="date"
+								class="sr-only"
+								aria-label="Pick session date"
+								@change="handleDateChange"
+							/>
+							<input
+								id="subject-input"
+								v-model="subject"
+								class="subject-preview"
+								placeholder="Session Notes (MM/DD)"
+								aria-label="Email subject"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<div v-if="activeTab === 'compose'" class="tab-panel">
+					<label>Markdown</label>
+					<textarea
+						v-model="md"
+						placeholder="**Hello** _world_"
+						data-testid="md-input"
+					></textarea>
+				</div>
+
+				<div
+					v-else
+					class="tab-panel preview-pane"
+					role="tabpanel"
+					aria-labelledby="tab-preview"
+					data-testid="live-preview"
 				>
-					Clear
-				</button>
-			</div>
-			<div v-if="!isCustomRecipient" class="recipient-preview">
-				<div><strong>To:</strong> {{ primaryEmail || "—" }}</div>
-				<div v-if="ccEmails.length">
-					<strong>CC:</strong> {{ ccEmails.join(", ") }}
+					<div class="preview-meta">
+						<div>
+							<strong>To:</strong> {{ liveRecipients.to || "—" }}
+						</div>
+						<div v-if="liveRecipients.cc.length">
+							<strong>CC:</strong>
+							{{ liveRecipients.cc.join(", ") }}
+						</div>
+						<div>
+							<strong>Subject:</strong> {{ subject || "—" }}
+						</div>
+					</div>
+					<div
+						class="preview-body"
+						data-testid="live-preview-body"
+						v-html="livePreviewHtml"
+					/>
+				</div>
+
+				<div class="mail-card__footer">
+					<p class="helper-copy">
+						Every send should be readable in preview first and clear
+						enough to store back into learner history when
+						applicable.
+					</p>
+					<button
+						class="send-btn"
+						:disabled="sending || !to || !subject || !md"
+						@click="sendMail"
+					>
+						{{ sending ? "Sending…" : "Send" }}
+					</button>
 				</div>
 			</div>
-			<div v-else class="manual-recipient">
-				<label class="sub-label" for="custom-to"
-					>Enter recipient email(s)</label
-				>
-				<input
-					id="custom-to"
-					v-model="to"
-					type="text"
-					placeholder="primary@example.com, cc1@example.com"
-				/>
-				<p class="hint">
-					First email is the main recipient; any others become CC.
-				</p>
-			</div>
-		</div>
 
-		<div class="field subject-group">
-			<label class="field-label" for="subject-date-input">Subject</label>
-			<div class="subject-row">
-				<button
-					type="button"
-					class="picker-btn"
-					@click="openDatePicker"
-				>
-					{{ subjectDate ? "Change date" : "Pick session date" }}
-				</button>
-				<input
-					id="subject-date-input"
-					ref="dateInput"
-					v-model="subjectDate"
-					type="date"
-					class="sr-only"
-					aria-label="Pick session date"
-					@change="handleDateChange"
-				/>
-				<input
-					id="subject-input"
-					v-model="subject"
-					class="subject-preview"
-					placeholder="Session Notes (MM/DD)"
-					aria-label="Email subject"
-				/>
-			</div>
-			<!--			<p class="hint">Select a date to auto-fill the subject.</p> -->
-		</div>
-
-		<div v-if="activeTab === 'compose'" class="tab-panel">
-			<label>Markdown</label>
-			<textarea
-				v-model="md"
-				placeholder="**Hello** _world_"
-				data-testid="md-input"
-			></textarea>
-		</div>
-
-		<div
-			v-else
-			class="tab-panel preview-pane"
-			role="tabpanel"
-			aria-labelledby="tab-preview"
-			data-testid="live-preview"
-		>
-			<div class="preview-meta">
-				<div><strong>To:</strong> {{ liveRecipients.to || "—" }}</div>
-				<div v-if="liveRecipients.cc.length">
-					<strong>CC:</strong> {{ liveRecipients.cc.join(", ") }}
+			<div v-if="sentOk" class="preview">
+				<div class="preview-meta">
+					<div><strong>To:</strong> {{ sentRecipients.to }}</div>
+					<div v-if="sentRecipients.cc.length">
+						<strong>CC:</strong> {{ sentRecipients.cc.join(", ") }}
+					</div>
+					<div><strong>Subject:</strong> {{ previewSubject }}</div>
 				</div>
-				<div><strong>Subject:</strong> {{ subject || "—" }}</div>
-			</div>
-			<div
-				class="preview-body"
-				data-testid="live-preview-body"
-				v-html="livePreviewHtml"
-			/>
-		</div>
-
-		<button
-			class="send-btn"
-			:disabled="sending || !to || !subject || !md"
-			@click="sendMail"
-		>
-			{{ sending ? "Sending…" : "Send" }}
-		</button>
-
-		<!-- SUCCESS PREVIEW -->
-		<div v-if="sentOk" class="preview">
-			<div class="preview-meta">
-				<div><strong>To:</strong> {{ sentRecipients.to }}</div>
-				<div v-if="sentRecipients.cc.length">
-					<strong>CC:</strong> {{ sentRecipients.cc.join(", ") }}
+				<div class="preview-body" v-html="sentPreviewHtml"></div>
+				<div v-if="saveSummary" class="association-summary">
+					<p class="association-title">Account storage</p>
+					<p
+						v-if="saveSummary.sessionNoteSavedFor"
+						class="association-copy"
+					>
+						Session note saved to
+						<strong>
+							{{ saveSummary.sessionNoteSavedFor.name }}
+						</strong>
+						({{ saveSummary.sessionNoteSavedFor.email }}).
+					</p>
+					<p
+						v-else-if="lastSendWasSessionNote"
+						class="association-copy"
+					>
+						No matching user account was found for the primary
+						recipient, so this session note was sent without being
+						saved to the learner history pane.
+					</p>
+					<p
+						v-if="saveSummary.internalEmailsSavedFor.length"
+						class="association-copy"
+					>
+						Internal email saved for
+						<strong>
+							{{
+								saveSummary.internalEmailsSavedFor
+									.map(user => user.name)
+									.join(", ")
+							}}
+						</strong>
+						.
+					</p>
+					<p
+						v-else-if="!lastSendWasSessionNote"
+						class="association-copy"
+					>
+						No matching user accounts were found in the recipient
+						list, so this email was sent without user-profile
+						storage.
+					</p>
 				</div>
-				<div><strong>Subject:</strong> {{ previewSubject }}</div>
 			</div>
-			<div class="preview-body" v-html="sentPreviewHtml"></div>
-			<div v-if="saveSummary" class="association-summary">
-				<p class="association-title">Account storage</p>
-				<p
-					v-if="saveSummary.sessionNoteSavedFor"
-					class="association-copy"
-				>
-					Session note saved to
-					<strong>
-						{{ saveSummary.sessionNoteSavedFor.name }}
-					</strong>
-					({{ saveSummary.sessionNoteSavedFor.email }}).
-				</p>
-				<p v-else-if="lastSendWasSessionNote" class="association-copy">
-					No matching user account was found for the primary
-					recipient, so this session note was sent without being saved
-					to the learner history pane.
-				</p>
-				<p
-					v-if="saveSummary.internalEmailsSavedFor.length"
-					class="association-copy"
-				>
-					Internal email saved for
-					<strong>
-						{{
-							saveSummary.internalEmailsSavedFor
-								.map(user => user.name)
-								.join(", ")
-						}}
-					</strong>
-					.
-				</p>
-				<p v-else-if="!lastSendWasSessionNote" class="association-copy">
-					No matching user accounts were found in the recipient list,
-					so this email was sent without user-profile storage.
-				</p>
-			</div>
-		</div>
 
-		<!-- ERROR / RAW RESULT -->
-		<pre v-else-if="resultText" class="result">{{ resultText }}</pre>
-	</section>
+			<pre v-else-if="resultText" class="result">{{ resultText }}</pre>
+		</section>
+	</AdminWorkspaceShell>
 </template>
 
 <style scoped>
 .wrap {
-	max-width: 900px;
-	margin: 24px auto;
-	padding: 16px;
+	max-width: 1000px;
+	margin: 0 auto;
+	display: grid;
+	gap: 1rem;
+}
+
+.mail-card {
+	display: grid;
+	gap: 1.1rem;
+	padding: 1.35rem;
+	border-radius: 24px;
+	border: 1px solid #d8e3ed;
+	background: linear-gradient(
+		180deg,
+		rgba(248, 250, 252, 0.96),
+		rgba(255, 255, 255, 1)
+	);
+	box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.5);
+}
+
+.mail-card__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.mail-card__eyebrow {
+	margin: 0 0 0.35rem;
+	font-size: 0.74rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #2563eb;
+}
+
+.mail-card__header h2 {
+	margin: 0;
+	font-size: 1.55rem;
+}
+
+.mail-card__footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.helper-copy {
+	margin: 0;
+	max-width: 42rem;
+	color: #526779;
+	line-height: 1.6;
+}
+
+.field-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 1rem;
 }
 
 .tabs {
 	display: inline-flex;
 	gap: 8px;
-	margin: 8px 0 16px;
+	margin: 0;
 }
 
 .tab-btn {
-	border: 1px solid #d6d6d6;
+	border: 1px solid #d6dce5;
 	background: #f8fafc;
 	color: #0f172a;
 	padding: 8px 12px;
-	border-radius: 6px;
+	border-radius: 999px;
 	cursor: pointer;
 	font-weight: 600;
 }
@@ -450,9 +561,9 @@ function parseDateIso(value: string): string | null {
 }
 
 .preview-pane {
-	border: 1px solid #e6e6e6;
-	border-radius: 8px;
-	padding: 12px;
+	border: 1px solid #e2e8f0;
+	border-radius: 18px;
+	padding: 1rem;
 	background: #fff;
 }
 
@@ -465,12 +576,16 @@ input,
 textarea,
 select {
 	width: 100%;
-	padding: 10px;
+	padding: 0.8rem 0.95rem;
 	box-sizing: border-box;
+	border: 1px solid #d6dee8;
+	border-radius: 14px;
+	background: #fff;
 }
 textarea {
 	height: 320px;
 	font-family: ui-monospace, Menlo, Consolas, monospace;
+	line-height: 1.55;
 }
 .recipient-row {
 	display: flex;
@@ -483,8 +598,8 @@ textarea {
 .recipient-preview {
 	background: #f8fafc;
 	border: 1px solid #e5e7eb;
-	border-radius: 8px;
-	padding: 8px 10px;
+	border-radius: 14px;
+	padding: 0.8rem 0.95rem;
 	margin-top: 8px;
 	color: #374151;
 }
@@ -512,53 +627,55 @@ textarea {
 	flex: 1;
 	min-width: 240px;
 	background: #f8fafc;
-	border: 1px solid #e5e7eb;
-	border-radius: 8px;
-	padding: 10px 12px;
+	border: 1px solid #d8e3ed;
+	border-radius: 14px;
+	padding: 0.8rem 0.95rem;
 	color: #0f172a;
 }
 .picker-btn,
 .ghost-btn {
-	padding: 10px 14px;
+	padding: 0.8rem 1rem;
 	margin-top: 0;
-	border-radius: 8px;
+	border-radius: 14px;
 	cursor: pointer;
 }
 .picker-btn {
-	background: #2563eb;
+	background: linear-gradient(135deg, #2563eb, #1d4ed8);
 	border: 1px solid #2563eb;
 	color: #fff;
 	font-weight: 700;
+	box-shadow: 0 12px 24px rgba(37, 99, 235, 0.18);
 }
 .ghost-btn {
 	background: transparent;
-	border: 1px solid #d1d5db;
+	border: 1px solid #d6dee8;
 	color: #111827;
 }
 .ghost-btn:hover {
 	background: #f3f4f6;
 }
 .send-btn {
-	margin-top: 16px;
-	padding: 10px 16px;
-	background: #2563eb;
+	padding: 0.85rem 1.25rem;
+	background: linear-gradient(135deg, #2563eb, #1d4ed8);
 	border: 1px solid #2563eb;
 	color: #fff;
-	border-radius: 8px;
+	border-radius: 999px;
 	font-weight: 700;
 	cursor: pointer;
+	box-shadow: 0 14px 28px rgba(37, 99, 235, 0.22);
 }
 .send-btn:disabled {
 	background: #9ca3af;
 	border-color: #9ca3af;
 	cursor: not-allowed;
+	box-shadow: none;
 }
 .result {
 	white-space: pre-wrap;
 	background: #f7f7f7;
 	border: 1px solid #ddd;
-	padding: 12px;
-	margin-top: 16px;
+	border-radius: 18px;
+	padding: 1rem;
 }
 .hint {
 	margin: 4px 0 0;
@@ -586,10 +703,9 @@ textarea {
 }
 .preview {
 	background: #fff;
-	border: 1px solid #e6e6e6;
-	border-radius: 8px;
-	padding: 16px;
-	margin-top: 16px;
+	border: 1px solid #d8e3ed;
+	border-radius: 22px;
+	padding: 1.1rem;
 }
 .preview-meta {
 	font-size: 0.95rem;
@@ -649,12 +765,45 @@ textarea {
 	color: #374151;
 	line-height: 1.55;
 }
+
+@media (max-width: 700px) {
+	.mail-card {
+		padding: 1rem;
+	}
+
+	.mail-card__header,
+	.mail-card__footer,
+	.subject-row,
+	.recipient-row {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.subject-preview {
+		min-width: 0;
+	}
+
+	.tabs,
+	.tab-btn,
+	.send-btn,
+	.picker-btn,
+	.ghost-btn {
+		width: 100%;
+	}
+}
+
+@media (min-width: 900px) {
+	.field-grid {
+		grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+		align-items: start;
+	}
+}
 </style>
 
 <route lang="json">
 {
 	"meta": {
-		"layout": false,
+		"layout": "default",
 		"requiresAdmin": true
 	}
 }
