@@ -64,7 +64,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 					content:
 						`This course follows ` +
 						"`Low Level Security Part 1`" +
-						` and uses tightly controlled toy programs to teach how a defensive engineer evaluates risk, not how to deploy offensive techniques. Require an explicit ethics statement at the start: local targets only, no public services, no real-world payloads, and every risky concept ends with a patch, mitigation summary, or regression case.`
+						` and uses tightly controlled toy programs to teach how a defensive engineer evaluates risk, not how to deploy offensive techniques. Require an explicit ethics statement at the start: local targets only, no public services, no real-world payloads, and every risky concept ends with a patch, mitigation summary, or regression case. If AI is used anywhere in the workflow, it must stay within that same defensive scope and every suggestion must be verified locally before it enters a report or patch discussion.`
 				},
 				{
 					title: "Core Outcomes for Part 2",
@@ -246,6 +246,10 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Communicate Clearly About Security-Relevant Bugs",
 					content: `Practice writing maintainable communication: summary, affected path, root cause, impact, mitigation context, fix summary, and regression proof. The target audience is another engineer or maintainer who needs enough information to act confidently without a wall of vague security language.`
+				},
+				{
+					title: "Use AI to Accelerate Triage, Not Replace Evidence",
+					content: `Teach AI as a narrow assistant for defensive work: summarize sanitizer output, propose regression cases, help structure disclosure notes, compare two patch options, or convert a long debugging session into a clearer maintainer-facing report. Students should also learn the limits: AI can hallucinate exploitability claims, miss the real root cause, or suggest unsafe follow-ups, so every claim must still be checked against the local toy binary, debugger output, sanitizer evidence, and the written lab boundary.`
 				},
 				{
 					title: "Patch Notes Should Close the Bug Class",

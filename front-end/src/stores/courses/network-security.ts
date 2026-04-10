@@ -502,7 +502,42 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Unit 12: Capstone",
+			title: "Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure",
+			curriculum: [
+				{
+					title: "Rules of Engagement and Safe Penetration-Test Scope",
+					content:
+						"Teach penetration testing as an authorized defensive activity with explicit scope, approval, timing, and stop conditions. Students should only test local labs, staging systems, or environments they own or have written permission to assess, and they should learn to define what counts as in-bounds before any probing begins."
+				},
+				{
+					title: "Build a Repeatable Defensive Test Plan",
+					content:
+						"Convert the threat model into a concrete local test plan: authentication checks, authorization bypass attempts, malformed requests, request tampering, body-size limits, rate-limit behavior, proxy exposure, and log visibility. The emphasis should be on repeatable evidence gathering and safe rollback, not on flashy one-off tricks."
+				},
+				{
+					title: "Use AI to Draft Checks, Payload Variants, and Review Notes",
+					content:
+						"Teach AI as a constrained assistant for defensive work: drafting test matrices, generating benign local payload variations, summarizing logs, suggesting follow-up checks, and helping write clearer triage or disclosure notes. Students should also learn the hard boundaries: never use AI as the final authority, never ask it to target unauthorized systems, never trust its security claims without local verification, and never let it replace a written scope or evidence trail."
+				},
+				{
+					title: "Ethics and Responsible Disclosure for Network Findings",
+					content:
+						"Teach responsible disclosure as part of the engineering workflow: reproduce privately, minimize impact, document the vulnerable path, include evidence and reproduction notes, propose practical mitigations, and communicate within the agreed reporting channel. The goal is to normalize calm, precise handoff to maintainers instead of vague or harmful reporting behavior."
+				}
+			],
+			supplementalProjects: [
+				securityNotebook(
+					"Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure",
+					"written scope, permitted checks, how AI was used, and what evidence supports the final report"
+				),
+				threatDrill(
+					"AI-Suggested Security Test List",
+					"Give students an AI-generated checklist and require them to remove anything out of scope, add missing safety guardrails, and explain what evidence would be needed before any item is considered complete."
+				)
+			]
+		},
+		{
+			title: "Unit 13: Capstone",
 			curriculum: [
 				{
 					title: "Design a Small Secure Network Service",
@@ -515,14 +550,14 @@ export const networkSecurityCourse: RawCourse = {
 						"Require validation, auth, authorization, rate limits, structured logs, and deployment notes as part of the same deliverable. Students should not treat security and monitoring as separate post-build tasks."
 				},
 				{
-					title: "Audit the Deployed Service",
+					title: "Audit the Service with an Authorized Test Playbook",
 					content:
-						"Run a post-build audit that checks binding scope, proxy behavior, TLS placement, failure handling, and abuse visibility. The audit should produce a short list of defended assumptions and unresolved risks."
+						"Run a post-build audit that checks binding scope, proxy behavior, TLS placement, failure handling, abuse visibility, and the local penetration-test cases defined in the course playbook. Students may use AI to help organize the checklist or summarize results, but every claim in the final audit must still be backed by direct local evidence."
 				},
 				{
-					title: "Write the Incident and Recovery Notes",
+					title: "Write the Incident, Disclosure, and Recovery Notes",
 					content:
-						"Finish with a brief incident-response document that explains how suspicious requests would be investigated, which logs would be consulted first, and what immediate containment steps the operator would take."
+						"Finish with a brief incident-response and disclosure packet that explains how suspicious requests would be investigated, which findings should stay private until fixed, which logs would be consulted first, and what immediate containment or recovery steps the operator would take."
 				}
 			],
 			supplementalProjects: [
@@ -537,7 +572,7 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "NSEC13 Expansion Ideas and Next Steps",
+			title: "NSEC14 Expansion Ideas and Next Steps",
 			curriculum: [
 				{
 					title: "DNS and Email Security Follow-Up",
