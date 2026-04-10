@@ -1,9 +1,9 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const DATA_SCIENCE_REPO
-	= "https://github.com/instruction-material/Data-Science/tree/main";
-const PYTHON_COURSES_DATA_SCIENCE_ARCHIVE
-	= "https://github.com/instruction-material/Python-Courses/tree/main/Data%20Science%20in%20Python";
+const DATA_SCIENCE_REPO =
+	"https://github.com/instruction-material/Data-Science/tree/main";
+const PYTHON_COURSES_DATA_SCIENCE_ARCHIVE =
+	"https://github.com/instruction-material/Python-Courses/tree/main/Data%20Science%20in%20Python";
 
 function repoLink(projectId: string) {
 	return `${DATA_SCIENCE_REPO}/${projectId}`;

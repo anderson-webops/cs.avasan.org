@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const LINUX_SYSTEMS_REPO
-	= "https://github.com/instruction-material/Linux-Systems/tree/main";
+const LINUX_SYSTEMS_REPO =
+	"https://github.com/instruction-material/Linux-Systems/tree/main";
 
 function starterRepoLink(labId: string) {
 	return `${LINUX_SYSTEMS_REPO}/${labId}/starter`;
@@ -57,16 +57,16 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Recommended Tooling on macOS",
 					content:
-						`Walk macOS learners through installing VS Code, enabling the `
-						+ "`code`"
-						+ ` command, and preparing to work against a Linux VM, a hosted Linux box, or a remote machine over SSH. Stress that the goal is not to make macOS pretend to be Linux, but to make it easy to reach a real Linux environment and edit configuration files safely.`
+						`Walk macOS learners through installing VS Code, enabling the ` +
+						"`code`" +
+						` command, and preparing to work against a Linux VM, a hosted Linux box, or a remote machine over SSH. Stress that the goal is not to make macOS pretend to be Linux, but to make it easy to reach a real Linux environment and edit configuration files safely.`
 				},
 				{
 					title: "Recommended Tooling on Windows with WSL2",
 					content:
-						`Show Windows learners how to install WSL2 with Ubuntu, connect through the `
-						+ "`Remote - WSL`"
-						+ ` extension, and confirm that new terminals are actually opening inside Linux rather than PowerShell. This early verification matters because the rest of the course assumes that package management, paths, permissions, and process tools are being exercised in Linux itself.`
+						`Show Windows learners how to install WSL2 with Ubuntu, connect through the ` +
+						"`Remote - WSL`" +
+						` extension, and confirm that new terminals are actually opening inside Linux rather than PowerShell. This early verification matters because the rest of the course assumes that package management, paths, permissions, and process tools are being exercised in Linux itself.`
 				},
 				{
 					title: "Course Outcomes and Daily Operating Habits",
@@ -99,16 +99,16 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Core Navigation and File Management Commands",
 					content:
-						`Practice `
-						+ "`pwd`, `ls`, `cd`, `mkdir`, `cp`, `mv`, `rm`, `cat`, `less`, `head`, and `tail`"
-						+ ` until students can move through a directory tree without guessing. Tie every command back to a practical question: Where am I, what files are here, what changed, and how do I inspect something without damaging it.`
+						`Practice ` +
+						"`pwd`, `ls`, `cd`, `mkdir`, `cp`, `mv`, `rm`, `cat`, `less`, `head`, and `tail`" +
+						` until students can move through a directory tree without guessing. Tie every command back to a practical question: Where am I, what files are here, what changed, and how do I inspect something without damaging it.`
 				},
 				{
 					title: "Filtering and Searching in the Shell",
 					content:
-						`Teach `
-						+ "`grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs`"
-						+ ` as a family of inspection tools rather than isolated commands. The key lesson is that Linux work scales when students can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around.`
+						`Teach ` +
+						"`grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs`" +
+						` as a family of inspection tools rather than isolated commands. The key lesson is that Linux work scales when students can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around.`
 				},
 				{
 					title: "Build Small Pipelines Before Writing Scripts",
@@ -122,9 +122,9 @@ export const linuxSystemsCourse: RawCourse = {
 				),
 				commandDrill(
 					"grep -R",
-					`Have students explain when recursive text search is safer than manually opening files one by one and when a faster tool such as `
-					+ "`rg`"
-					+ ` is the better default.`
+					`Have students explain when recursive text search is safer than manually opening files one by one and when a faster tool such as ` +
+						"`rg`" +
+						` is the better default.`
 				)
 			]
 		},
@@ -134,39 +134,39 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Read the Linux Filesystem as a Map of Intent",
 					content:
-						`Walk through `
-						+ "`/`, `/home`, `/root`, `/etc`, `/var`, `/usr`, `/opt`, `/tmp`, `/srv`, and `/dev`"
-						+ ` with the question "what belongs here and why." Students should leave this lesson understanding that path choice signals meaning: configuration in one place, durable application state in another, temporary scratch data somewhere else, and service-owned content somewhere else again.`
+						`Walk through ` +
+						"`/`, `/home`, `/root`, `/etc`, `/var`, `/usr`, `/opt`, `/tmp`, `/srv`, and `/dev`" +
+						` with the question "what belongs here and why." Students should leave this lesson understanding that path choice signals meaning: configuration in one place, durable application state in another, temporary scratch data somewhere else, and service-owned content somewhere else again.`
 				},
 				{
 					title: "Pseudo-Filesystems: /proc and /sys",
 					content:
-						`Explain that `
-						+ "`/proc`"
-						+ ` and `
-						+ "`/sys`"
-						+ ` are live views into kernel and system state rather than ordinary persisted files. Use them to inspect process details, memory, mounted filesystems, or device information so students start seeing Linux as a system they can question directly.`
+						`Explain that ` +
+						"`/proc`" +
+						` and ` +
+						"`/sys`" +
+						` are live views into kernel and system state rather than ordinary persisted files. Use them to inspect process details, memory, mounted filesystems, or device information so students start seeing Linux as a system they can question directly.`
 				},
 				{
 					title: "Choosing Between /var, /srv, and /opt",
 					content:
-						`Teach the judgment call behind application layout. Content that a service is serving often fits under `
-						+ "`/srv`"
-						+ `, mutable state belongs under `
-						+ "`/var`"
-						+ `, and self-contained optional software can live under `
-						+ "`/opt`"
-						+ `; students should be able to defend those choices instead of scattering files arbitrarily.`
+						`Teach the judgment call behind application layout. Content that a service is serving often fits under ` +
+						"`/srv`" +
+						`, mutable state belongs under ` +
+						"`/var`" +
+						`, and self-contained optional software can live under ` +
+						"`/opt`" +
+						`; students should be able to defend those choices instead of scattering files arbitrarily.`
 				},
 				projectItem(
 					"Project: Deploy a Static Site from /srv",
-					`Use the static-site lab to make the directory-purpose lesson concrete by placing a document root under `
-					+ "`/srv/linux-systems-site`"
-					+ `, copying in content, and pairing that path with an Nginx server block. Students should explain why `
-					+ "`/srv`"
-					+ ` is appropriate for served content and why `
-					+ "`/tmp`"
-					+ ` or a random home-directory path would be a weaker production choice.`,
+					`Use the static-site lab to make the directory-purpose lesson concrete by placing a document root under ` +
+						"`/srv/linux-systems-site`" +
+						`, copying in content, and pairing that path with an Nginx server block. Students should explain why ` +
+						"`/srv`" +
+						` is appropriate for served content and why ` +
+						"`/tmp`" +
+						` or a random home-directory path would be a weaker production choice.`,
 					"LS2-Static-Site-from-srv"
 				)
 			],
@@ -191,9 +191,9 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Ownership Changes with chmod, chown, chgrp, and umask",
 					content:
-						`Practice `
-						+ "`chmod`, `chown`, `chgrp`, and `umask`"
-						+ ` as daily administrative tools rather than obscure syntax. The learning goal is to understand default file creation behavior, shared-group workflows, and the difference between changing permissions on existing content versus controlling how new files are born.`
+						`Practice ` +
+						"`chmod`, `chown`, `chgrp`, and `umask`" +
+						` as daily administrative tools rather than obscure syntax. The learning goal is to understand default file creation behavior, shared-group workflows, and the difference between changing permissions on existing content versus controlling how new files are born.`
 				},
 				{
 					title: "sudo, Service Accounts, and Least Privilege",
@@ -202,9 +202,9 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Permission Debugging as a Systems Skill",
 					content:
-						`Use realistic failures such as `
-						+ "`Permission denied`"
-						+ ` during a deploy, an unreadable log file, or a web server that cannot open its content directory. Students should build the habit of checking user identity, group membership, file ownership, and mode bits before making random permission changes.`
+						`Use realistic failures such as ` +
+						"`Permission denied`" +
+						` during a deploy, an unreadable log file, or a web server that cannot open its content directory. Students should build the habit of checking user identity, group membership, file ownership, and mode bits before making random permission changes.`
 				}
 			],
 			supplementalProjects: [
@@ -224,15 +224,15 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Terminal Editing with nano, vim, sed, and tee",
 					content:
-						`Students do not need to become editor fanatics, but they do need to edit files confidently in a Linux environment. Teach `
-						+ "`nano`"
-						+ ` and `
-						+ "`vim`"
-						+ ` for interactive edits, then show how `
-						+ "`sed`"
-						+ ` and `
-						+ "`tee`"
-						+ ` help with controlled replacements, scripted updates, and privilege-bound writes.`
+						`Students do not need to become editor fanatics, but they do need to edit files confidently in a Linux environment. Teach ` +
+						"`nano`" +
+						` and ` +
+						"`vim`" +
+						` for interactive edits, then show how ` +
+						"`sed`" +
+						` and ` +
+						"`tee`" +
+						` help with controlled replacements, scripted updates, and privilege-bound writes.`
 				},
 				{
 					title: "Safe Configuration Editing Patterns",
@@ -254,13 +254,13 @@ export const linuxSystemsCourse: RawCourse = {
 				),
 				commandDrill(
 					"sudo tee",
-					`Use a small example to show why a redirect like `
-					+ "`> /etc/example.conf`"
-					+ ` can fail even when `
-					+ "`sudo`"
-					+ ` is present, and why piping into `
-					+ "`tee`"
-					+ ` changes that behavior.`
+					`Use a small example to show why a redirect like ` +
+						"`> /etc/example.conf`" +
+						` can fail even when ` +
+						"`sudo`" +
+						` is present, and why piping into ` +
+						"`tee`" +
+						` changes that behavior.`
 				)
 			]
 		},
@@ -270,27 +270,27 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspecting Processes with ps, top, and htop",
 					content:
-						`Teach process inspection as a story about what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Students should be able to move between snapshot tools like `
-						+ "`ps`"
-						+ ` and live views like `
-						+ "`top`"
-						+ ` or `
-						+ "`htop`"
-						+ ` depending on whether they are chasing a momentary bug or an active performance problem.`
+						`Teach process inspection as a story about what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Students should be able to move between snapshot tools like ` +
+						"`ps`" +
+						` and live views like ` +
+						"`top`" +
+						` or ` +
+						"`htop`" +
+						` depending on whether they are chasing a momentary bug or an active performance problem.`
 				},
 				{
 					title: "Signals, kill, pkill, and Process Shutdown",
 					content:
-						`Explain that `
-						+ "`kill`"
-						+ ` sends signals rather than magically destroying processes. Compare graceful termination to forceful termination and teach students to inspect why a process is stuck before escalating to stronger signals.`
+						`Explain that ` +
+						"`kill`" +
+						` sends signals rather than magically destroying processes. Compare graceful termination to forceful termination and teach students to inspect why a process is stuck before escalating to stronger signals.`
 				},
 				{
 					title: "Foreground Jobs, Background Jobs, nohup, and Shell Sessions",
 					content:
-						`Use a toy command to show how backgrounding works, what the jobs table tracks, and why `
-						+ "`nohup`"
-						+ ` changes the survival story when a terminal closes. This gives learners a bridge between ad hoc command-line operation and real service management.`
+						`Use a toy command to show how backgrounding works, what the jobs table tracks, and why ` +
+						"`nohup`" +
+						` changes the survival story when a terminal closes. This gives learners a bridge between ad hoc command-line operation and real service management.`
 				},
 				{
 					title: "Zombies, Orphans, and Process Ownership",
@@ -314,23 +314,23 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "What a Service Is and Why systemd Matters",
 					content:
-						`Frame services as named, supervised processes that should survive shell exits, expose status, and restart predictably when something goes wrong. `
-						+ "`systemd`"
-						+ ` matters because it gives Linux a common language for startup ordering, service lifecycle management, logging integration, and scheduled work.`
+						`Frame services as named, supervised processes that should survive shell exits, expose status, and restart predictably when something goes wrong. ` +
+						"`systemd`" +
+						` matters because it gives Linux a common language for startup ordering, service lifecycle management, logging integration, and scheduled work.`
 				},
 				{
 					title: "Reading Unit Files",
 					content:
-						`Walk through the structure of a unit file by identifying the role of `
-						+ "`[Unit]`, `[Service]`, and `[Install]`"
-						+ ` sections. Students should understand why working directory, executable path, environment variables, user identity, and restart policy all belong in the definition instead of being left to memory.`
+						`Walk through the structure of a unit file by identifying the role of ` +
+						"`[Unit]`, `[Service]`, and `[Install]`" +
+						` sections. Students should understand why working directory, executable path, environment variables, user identity, and restart policy all belong in the definition instead of being left to memory.`
 				},
 				{
 					title: "Daily Commands: status, start, stop, restart, reload, enable, disable",
 					content:
-						`Teach `
-						+ "`systemctl status/start/stop/restart/reload/enable/disable`"
-						+ ` as a minimal operator toolkit. The important distinction is not only what each verb does, but when reload is safer than restart, when enable affects future boots instead of the current session, and how to verify state after each action.`
+						`Teach ` +
+						"`systemctl status/start/stop/restart/reload/enable/disable`" +
+						` as a minimal operator toolkit. The important distinction is not only what each verb does, but when reload is safer than restart, when enable affects future boots instead of the current session, and how to verify state after each action.`
 				},
 				{
 					title: "Dependencies, Startup Ordering, and Environment Overrides",
@@ -338,9 +338,9 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				projectItem(
 					"Project: Create a systemd Service for a Toy App",
-					`Use the toy-service lab to package a simple long-running process under `
-					+ "`systemd`"
-					+ ` and then operate it with start, stop, restart, enable, and log inspection commands. The lab should make students justify each path, user, restart policy, and environment choice in the unit file rather than treating service files as boilerplate.`,
+					`Use the toy-service lab to package a simple long-running process under ` +
+						"`systemd`" +
+						` and then operate it with start, stop, restart, enable, and log inspection commands. The lab should make students justify each path, user, restart policy, and environment choice in the unit file rather than treating service files as boilerplate.`,
 					"LS5-Systemd-Toy-Service"
 				)
 			],
@@ -361,9 +361,9 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "journalctl as the First Stop for Service Debugging",
 					content:
-						`Teach `
-						+ "`journalctl`"
-						+ ` as the central way to read systemd-managed service output, boot logs, and recent failures. Students should learn how to scope logs by unit, boot, and time window so they can answer targeted questions instead of dumping enormous unfiltered output.`
+						`Teach ` +
+						"`journalctl`" +
+						` as the central way to read systemd-managed service output, boot logs, and recent failures. Students should learn how to scope logs by unit, boot, and time window so they can answer targeted questions instead of dumping enormous unfiltered output.`
 				},
 				{
 					title: "Application Logs vs System Logs",
@@ -395,9 +395,9 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "cron and Crontab Syntax",
 					content:
-						`Introduce `
-						+ "`cron`"
-						+ ` as the classic scheduling tool for repeatable command execution. Students should learn how to read the five timing fields, how to test a command manually before scheduling it, and why the command written into the crontab needs full paths and explicit assumptions.`
+						`Introduce ` +
+						"`cron`" +
+						` as the classic scheduling tool for repeatable command execution. Students should learn how to read the five timing fields, how to test a command manually before scheduling it, and why the command written into the crontab needs full paths and explicit assumptions.`
 				},
 				{
 					title: "Cron Environment Gotchas",
@@ -406,11 +406,11 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "systemd Timers vs cron",
 					content:
-						`Compare `
-						+ "`systemd`"
-						+ ` timers to `
-						+ "`cron`"
-						+ ` in terms of logging, service integration, missed-run behavior, and operational visibility. The aim is not to declare one winner forever, but to help students choose the right scheduling surface for the kind of system they are operating.`
+						`Compare ` +
+						"`systemd`" +
+						` timers to ` +
+						"`cron`" +
+						` in terms of logging, service integration, missed-run behavior, and operational visibility. The aim is not to declare one winner forever, but to help students choose the right scheduling surface for the kind of system they are operating.`
 				},
 				{
 					title: "Automating Cleanup and Backup Tasks",
@@ -418,11 +418,11 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				projectItem(
 					"Project: Write a Backup Script and Schedule It with cron and a Timer",
-					`Use the backup lab to build a small archive script, schedule it first with `
-					+ "`cron`"
-					+ ` and then with a `
-					+ "`systemd`"
-					+ ` timer, and compare the operational experience. Students should be able to explain what changed in observability, environment handling, and reliability when they moved between the two schedulers.`,
+					`Use the backup lab to build a small archive script, schedule it first with ` +
+						"`cron`" +
+						` and then with a ` +
+						"`systemd`" +
+						` timer, and compare the operational experience. Students should be able to explain what changed in observability, environment handling, and reliability when they moved between the two schedulers.`,
 					"LS6-Backup-Cron-and-Timer"
 				)
 			],
@@ -474,23 +474,23 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspect Interfaces and Routes with ip",
 					content:
-						`Teach `
-						+ "`ip`"
-						+ ` as the modern way to inspect addresses, interfaces, and routes. Students should be able to answer basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next.`
+						`Teach ` +
+						"`ip`" +
+						` as the modern way to inspect addresses, interfaces, and routes. Students should be able to answer basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next.`
 				},
 				{
 					title: "Listening Services and Sockets with ss",
 					content:
-						`Use `
-						+ "`ss`"
-						+ ` to connect network thinking back to process thinking. A student should be able to inspect which ports are listening, whether an expected service is actually bound, and whether a reverse proxy or app process is reachable on the port the rest of the configuration assumes.`
+						`Use ` +
+						"`ss`" +
+						` to connect network thinking back to process thinking. A student should be able to inspect which ports are listening, whether an expected service is actually bound, and whether a reverse proxy or app process is reachable on the port the rest of the configuration assumes.`
 				},
 				{
 					title: "Testing Connectivity with ping, curl, and dig",
 					content:
-						`Teach `
-						+ "`ping`, `curl`, and `dig`"
-						+ ` as distinct tools with distinct jobs: reachability, HTTP-level testing, and DNS inspection. The point is to avoid hand-wavy networking guesses and replace them with specific checks at the right layer.`
+						`Teach ` +
+						"`ping`, `curl`, and `dig`" +
+						` as distinct tools with distinct jobs: reachability, HTTP-level testing, and DNS inspection. The point is to avoid hand-wavy networking guesses and replace them with specific checks at the right layer.`
 				},
 				{
 					title: "Bridge to a Networking Course without Losing the Systems Lens",
@@ -514,9 +514,9 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Nginx Fundamentals",
 					content:
-						`Teach Nginx as both a static file server and a reverse proxy. Students should understand the role of a `
-						+ "`server`"
-						+ ` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service.`
+						`Teach Nginx as both a static file server and a reverse proxy. Students should understand the role of a ` +
+						"`server`" +
+						` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service.`
 				},
 				{
 					title: "Apache Fundamentals",
@@ -537,11 +537,11 @@ export const linuxSystemsCourse: RawCourse = {
 				),
 				projectItem(
 					"Project: Configure an Apache Virtual Host and Compare It to Nginx",
-					`Use the Apache lab to serve a parallel site and write a short compare-and-contrast note between Apache `
-					+ "`<VirtualHost>`"
-					+ ` configuration and Nginx `
-					+ "`server`"
-					+ ` blocks. The point is to make students comfortable operating more than one web server family without losing the underlying mental model.`,
+					`Use the Apache lab to serve a parallel site and write a short compare-and-contrast note between Apache ` +
+						"`<VirtualHost>`" +
+						` configuration and Nginx ` +
+						"`server`" +
+						` blocks. The point is to make students comfortable operating more than one web server family without losing the underlying mental model.`,
 					"LS4-Apache-Virtual-Host-Compare"
 				)
 			],

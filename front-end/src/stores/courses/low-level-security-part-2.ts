@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const LOW_LEVEL_SECURITY_REPO
-	= "https://github.com/instruction-material/Low-Level-Security/tree/main";
+const LOW_LEVEL_SECURITY_REPO =
+	"https://github.com/instruction-material/Low-Level-Security/tree/main";
 
 function starterRepoLink(labId: string) {
 	return `${LOW_LEVEL_SECURITY_REPO}/${labId}/starter`;
@@ -44,27 +44,27 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Day-One Tooling and Local-Lab Boundaries",
 					content:
-						`Assume a strictly local lab-only environment and make sanitizers, debugger setup, and disassembly tools part of the first session instead of an appendix. Students should verify `
-						+ "`clang`, `lldb`, `cmake`, and `llvm-objdump` or `objdump`"
-						+ ` early so later mitigation and exploitability discussions are grounded in observable local builds rather than abstract descriptions.`
+						`Assume a strictly local lab-only environment and make sanitizers, debugger setup, and disassembly tools part of the first session instead of an appendix. Students should verify ` +
+						"`clang`, `lldb`, `cmake`, and `llvm-objdump` or `objdump`" +
+						` early so later mitigation and exploitability discussions are grounded in observable local builds rather than abstract descriptions.`
 				},
 				{
 					title: "Preferred IDEs and Platform Setup",
 					content:
-						`Recommend `
-						+ "`CLion`"
-						+ ` or `
-						+ "`VS Code`"
-						+ ` with `
-						+ "`C/C++`, `CMake Tools`, `CodeLLDB`, and `Hex Editor`"
-						+ ` when VS Code is used. On macOS, students should install Xcode command-line tools and CMake; on Windows, WSL2 plus Ubuntu is the cleanest path so the labs stay close to the Linux-oriented debugging environment they will use most often.`
+						`Recommend ` +
+						"`CLion`" +
+						` or ` +
+						"`VS Code`" +
+						` with ` +
+						"`C/C++`, `CMake Tools`, `CodeLLDB`, and `Hex Editor`" +
+						` when VS Code is used. On macOS, students should install Xcode command-line tools and CMake; on Windows, WSL2 plus Ubuntu is the cleanest path so the labs stay close to the Linux-oriented debugging environment they will use most often.`
 				},
 				{
 					title: "Ethics Statement and Defensive Scope",
 					content:
-						`This course follows `
-						+ "`Low Level Security Part 1`"
-						+ ` and uses tightly controlled toy programs to teach how a defensive engineer evaluates risk, not how to deploy offensive techniques. Require an explicit ethics statement at the start: local targets only, no public services, no real-world payloads, and every risky concept ends with a patch, mitigation summary, or regression case.`
+						`This course follows ` +
+						"`Low Level Security Part 1`" +
+						` and uses tightly controlled toy programs to teach how a defensive engineer evaluates risk, not how to deploy offensive techniques. Require an explicit ethics statement at the start: local targets only, no public services, no real-world payloads, and every risky concept ends with a patch, mitigation summary, or regression case.`
 				},
 				{
 					title: "Core Outcomes for Part 2",

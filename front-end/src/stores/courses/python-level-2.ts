@@ -79,11 +79,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS2 For Loops and While Loops",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review variables, strings, and input, then retest any prior project code that still needs cleanup."
-				},
-				{
 					title: "For Loops",
 					content:
 						"Use `for i in range(...)` to repeat actions a fixed number of times, start from different values, count backward, and step by larger increments. Practice sequences such as 0 to 9, every third number, reverse counting, and perfect squares."
@@ -193,11 +188,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS3 ASCII and Ciphers",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review how `for` loops and `while` loops differ, and revisit any loop patterns that still need practice."
-				},
-				{
 					title: "ASCII and Ciphers",
 					content:
 						"Use `ord()` and `chr()` to move between characters and their ASCII codes, then apply that knowledge to build simple encoders and decoders. Review how ciphers transform messages into coded text."
@@ -263,11 +253,6 @@ export const pythonLevel2Course: RawCourse = {
 		{
 			title: "PS4 Conditionals",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review how ciphers encoded and decoded messages, then revisit `ord()` and `chr()` if needed."
-				},
 				{
 					title: "Conditionals",
 					content:
@@ -399,11 +384,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS5 Functions",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review conditionals and identify places where branching logic was required in recent projects."
-				},
-				{
 					title: "Functions",
 					content:
 						"Define functions as reusable blocks of code with a name, parameters, a body, and often a return value. Compare built-in functions such as `input()`, `print()`, and `str()` with user-defined functions."
@@ -485,11 +465,6 @@ export const pythonLevel2Course: RawCourse = {
 		{
 			title: "PS6 Lists and Music",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review what functions are, why they are useful, and where recent projects used return values and helper functions."
-				},
 				{
 					title: "Lists",
 					content:
@@ -588,11 +563,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS7 Dictionaries",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review lists and how they were used for data storage, looping, and music generation."
-				},
-				{
 					title: "Dictionaries",
 					content:
 						"Use dictionaries as key-value stores for fast lookups and clearer modeling than parallel lists. Practice accessing values, checking membership, iterating through keys, and storing different data types as keys and values."
@@ -678,11 +648,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS8 Ciphers and Music",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review what dictionaries are good for, including translation tables and other key-based lookups."
-				},
-				{
 					title: "PS8 Project 1: Morse Code",
 					content:
 						"Use a dictionary-based translation system to convert text into Morse code and then into a music-based version using short and long note durations.",
@@ -699,11 +664,6 @@ export const pythonLevel2Course: RawCourse = {
 		{
 			title: "PS9 Sets",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review how message translation worked in Morse code and how dictionaries made that translation process easier."
-				},
 				{
 					title: "Sets",
 					content:
@@ -824,11 +784,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS10 Todo List",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review what sets are useful for and how they supported larger game logic in the previous module."
-				},
-				{
 					title: "PS10 Project 1: Todo List",
 					content:
 						"Build an interactive todo list that lets the user add tasks, remove tasks, display the numbered list, and optionally prioritize tasks or reject invalid removals.",
@@ -874,11 +829,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS11 Bank Account",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review how the todo list combined lists, loops, indexing, and conditionals into a larger interactive program."
-				},
-				{
 					title: "PS11 Project 1: Bank Account",
 					content:
 						"Create a login-based bank account simulator with usernames, passwords, balances, deposits, withdrawals, password changes, and optional interest collection.",
@@ -914,11 +864,6 @@ export const pythonLevel2Course: RawCourse = {
 		{
 			title: "PS12 Type Racer",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review the pieces needed to build the bank account program, especially menu loops, dictionaries, and validation checks."
-				},
 				{
 					title: "Time Module",
 					content:
@@ -963,11 +908,6 @@ export const pythonLevel2Course: RawCourse = {
 			title: "PS13 Wordsmith",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review how the time module supported pausing and timing in Type Racer."
-				},
-				{
 					title: "PS13 Project 1: Wordsmith",
 					content:
 						"Use a provided word list to build a timed word game around seven random letters, validating guesses, preventing repeats, and scoring accepted words. Optional extensions can add a high score, new game loop, or guaranteed vowels.",
@@ -1007,11 +947,6 @@ export const pythonLevel2Course: RawCourse = {
 		{
 			title: "PS14 Blackjack",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review the major pieces of the Wordsmith game, including sets, word validation, repeated input, and scoring."
-				},
 				{
 					title: "PS14 Project 1: Simple Blackjack",
 					content:
@@ -1055,11 +990,6 @@ export const pythonLevel2Course: RawCourse = {
 		{
 			title: "PS15 Master Project",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review the structure of the Blackjack game and identify the concepts it combined from across the course."
-				},
 				{
 					title: "PS15 Project 1: Master Project",
 					content:

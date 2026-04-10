@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const ASSEMBLY_REPO
-	= "https://github.com/instruction-material/Assembly/tree/main";
+const ASSEMBLY_REPO =
+	"https://github.com/instruction-material/Assembly/tree/main";
 
 function starterRepoLink(projectId: string) {
 	return `${ASSEMBLY_REPO}/${projectId}/starter`;

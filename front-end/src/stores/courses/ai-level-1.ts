@@ -1,9 +1,9 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const AI_LEVEL_1_REPO
-	= "https://github.com/instruction-material/AI-Level-1/tree/main";
-const PYTHON_COURSES_AI_LEVEL_1_ARCHIVE
-	= "https://github.com/instruction-material/Python-Courses/tree/main/AI%20Level%201";
+const AI_LEVEL_1_REPO =
+	"https://github.com/instruction-material/AI-Level-1/tree/main";
+const PYTHON_COURSES_AI_LEVEL_1_ARCHIVE =
+	"https://github.com/instruction-material/Python-Courses/tree/main/AI%20Level%201";
 
 function repoLink(projectId: string) {
 	return `${AI_LEVEL_1_REPO}/${projectId}`;

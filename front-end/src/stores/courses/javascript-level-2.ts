@@ -36,11 +36,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/c9af625a0a84cbffef3dc7891aa804f9",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/702bf96c0927e96b0089cdc58df366d0"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Summarize strengths and next topics. Assign 30–60 minutes of practice and have the learner share one outcome with friends or family."
 				}
 			],
 			supplementalProjects: []
@@ -80,11 +75,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/a320051c74a1a5baa1358818c5bca5bc",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/ba366d22ab4a98e653a5b2bcb4affba8"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Capture wins and topics to review. Assign 30–60 minutes (finish practice work, optional supplements) and have the learner share one piece."
 				}
 			],
 			supplementalProjects: []
@@ -168,11 +158,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/81d62c84dfa32d88f17d0e012229bf0c",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/6014e92e4707defd82249fb10b43d70d"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign 30–60 minutes of practice and sharing; ensure access to all homework items."
 				}
 			],
 			supplementalProjects: []
@@ -218,11 +203,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/2813f8a526379aefbabc47ad2f65fcd3",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_rock_paper_scissors.gif"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign practice, supplemental options, and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -303,10 +283,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/1be13919321ab5708564a8a7ca928226",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/2ccb91adaa2536ecc746e938b9411171"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -355,11 +331,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/9355a832c485b33c747b6c600f2d13ae",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/1c3ffebb91e5c060c6b0ba4ae4df8275"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign practice, optional supplemental art, and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -441,10 +412,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/1dce247c86d866c1f33a6dce86511c71",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/54cadf32718bc4b635e9b82ea67a7a7f"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -513,10 +480,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/d0195323eaa77fa2a273961fa3df61c3",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/20f860c221cac7107010e0299f47b953"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -584,10 +547,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/8ccc67de1bc03e5f2c81f78a411adee1",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/f633db1559cc122a943d0a52bcf74ebc"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -645,10 +604,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/1e97468ca0197dcf6ca6d933e175b6fb",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/fb9156c7c34ad0319ba52c3c01b326c3"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: []
@@ -696,10 +651,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/6d5f8181e8ea59009eadd259e249c5c5",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/ac7242107973239507eebc571a767c5a"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: []
@@ -738,11 +689,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/35923b1d6dee01a5f3004d67836eca46",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/e72824bf10e7457a18774db2554f860e"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content:
-						"Assign practice, supplemental API exploration, and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -799,10 +745,6 @@ export const javascriptLevel2Course: RawCourse = {
 					projectLink: "https://dbdiagram.io/d",
 					solutionLink:
 						"https://dbdiagram.io/d/5facb8cf3a78976d7b7b8d44"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign SQL practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -863,10 +805,6 @@ export const javascriptLevel2Course: RawCourse = {
 					projectLink:
 						"https://codepen.io/junilearning/pen/f8f84204c272d2a6449cda485cbe7736",
 					solutionLink: "https://codepen.io/junilearning/pen/BavGpyN"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -891,10 +829,6 @@ export const javascriptLevel2Course: RawCourse = {
 					projectLink:
 						"https://codepen.io/junilearning/pen/6c0b3c5a207fc24b58c44a5f481922e3",
 					solutionLink: "https://codepen.io/junilearning/pen/GRPwwOg"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: [
@@ -922,10 +856,6 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/540c4d060641bb749cefde340d69acd6",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps10_us_capitals_quiz.gif"
-				},
-				{
-					title: "Session Recap & Assignment",
-					content: "Assign practice and sharing."
 				}
 			],
 			supplementalProjects: []
@@ -934,14 +864,14 @@ export const javascriptLevel2Course: RawCourse = {
 			title: "JSM15 Master Project",
 			curriculum: [
 				{
-					title: "Assignment Review",
-					content:
-						"Review prior assignment and discuss next-course options."
-				},
-				{
 					title: "JSM15 Project 1: Master Project",
 					content:
 						"Plan and build a web app or game (example chatroom). Scope to about two weeks, pseudocode stages, and work independently with support."
+				},
+				{
+					title: "Handoff to Web Development Foundations",
+					content:
+						"`Web Development Foundations` should be the default follow-on course for students who complete JavaScript Level 2 successfully. Students should be reasonably comfortable with functions, conditionals, arrays, objects, events, APIs, and basic data modeling before starting it. The goal of that next course is not to reteach core syntax, but to move into file-based local projects, Git and GitHub, npm, dev servers, back-end basics, databases, and deployment. Students who are still shaky in the `JSM10` through `JSM13` range should review those units before making the jump."
 				},
 				{
 					title: "Course Recap",

@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const WEB_DEVELOPMENT_REPO
-	= "https://github.com/instruction-material/Web-Development-Foundations/tree/main";
+const WEB_DEVELOPMENT_REPO =
+	"https://github.com/instruction-material/Web-Development-Foundations/tree/main";
 
 function starterRepoLink(projectId: string) {
 	return `${WEB_DEVELOPMENT_REPO}/${projectId}/starter`;
@@ -51,29 +51,29 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Preferred IDEs and Core Extensions",
 					content:
-						`Recommend `
-						+ "`WebStorm`"
-						+ ` or `
-						+ "`VS Code`"
-						+ ` and explain that the choice matters less than having strong support for project navigation, linting, formatting, Git, and integrated terminals. If students choose VS Code, make `
-						+ "`ESLint`, `Prettier`, and `EditorConfig`"
-						+ ` early defaults, with `
-						+ "`GitLens`"
-						+ ` or remote-development tools added only when they clarify the workflow rather than distract from it.`
+						`Recommend ` +
+						"`WebStorm`" +
+						` or ` +
+						"`VS Code`" +
+						` and explain that the choice matters less than having strong support for project navigation, linting, formatting, Git, and integrated terminals. If students choose VS Code, make ` +
+						"`ESLint`, `Prettier`, and `EditorConfig`" +
+						` early defaults, with ` +
+						"`GitLens`" +
+						` or remote-development tools added only when they clarify the workflow rather than distract from it.`
 				},
 				{
 					title: "macOS and Windows Walkthroughs",
 					content:
-						`On macOS, install Node.js LTS, the chosen editor, and verify that `
-						+ "`node`, `npm`, and a local dev server`"
-						+ ` all work before moving into frameworks or deployment. On Windows, do the same and teach path handling, terminals, and environment variables early so hosting and backend topics do not feel like a second course with different rules.`
+						`On macOS, install Node.js LTS, the chosen editor, and verify that ` +
+						"`node`, `npm`, and a local dev server`" +
+						` all work before moving into frameworks or deployment. On Windows, do the same and teach path handling, terminals, and environment variables early so hosting and backend topics do not feel like a second course with different rules.`
 				},
 				{
 					title: "Course Workspace and Folder Structure",
 					content:
-						`Create a workspace with folders for `
-						+ "`html-css`, `javascript`, `full-stack`, and `deployment`"
-						+ ` so the course can evolve from static front-end work to server-backed projects without losing organization. This structure also gives students a concrete sense that front-end code, server code, deployment notes, and operational files often belong in related but distinct places.`
+						`Create a workspace with folders for ` +
+						"`html-css`, `javascript`, `full-stack`, and `deployment`" +
+						` so the course can evolve from static front-end work to server-backed projects without losing organization. This structure also gives students a concrete sense that front-end code, server code, deployment notes, and operational files often belong in related but distinct places.`
 				},
 				{
 					title: "Early Module on Browser Devtools, Git, npm, and Project Structure",
@@ -87,11 +87,11 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				),
 				recurringDrill(
 					"Node and npm Verification",
-					`Ask students to run `
-					+ "`node --version`"
-					+ ` and `
-					+ "`npm --version`"
-					+ ` at the start of the course and again before the first full-stack project so they internalize toolchain verification instead of assuming the environment is stable.`
+					`Ask students to run ` +
+						"`node --version`" +
+						` and ` +
+						"`npm --version`" +
+						` at the start of the course and again before the first full-stack project so they internalize toolchain verification instead of assuming the environment is stable.`
 				)
 			]
 		},
@@ -109,18 +109,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Suggested Course Family and Placement",
 					content:
-						`Describe the broader family as `
-						+ "`JavaScript Level 1`, `JavaScript Level 2`, `Web Development Foundations`, `Full-Stack Web Apps`, and optionally `Deployment and Cloud Hosting`"
-						+ `. This course should feel like the first place where all of those later directions become visible and where students see how front-end practice grows into publishing and operations work.`
+						`Describe the broader family as ` +
+						"`JavaScript Level 1`, `JavaScript Level 2`, `Web Development Foundations`, `Full-Stack Web Apps`, and optionally `Deployment and Cloud Hosting`" +
+						`. This course should feel like the first place where all of those later directions become visible and where students see how front-end practice grows into publishing and operations work.`
 				},
 				{
 					title: "Entry Expectations from JavaScript Level 1 and 2",
 					content:
-						`Students entering this course should already be comfortable reading and writing small-to-medium JavaScript programs, working with HTML and CSS, manipulating the DOM, responding to events, and reasoning about APIs and basic data models. This course can briefly reinforce those ideas, but it should not spend most of its time reteaching them. The real transition is from `
-						+ "`browser-only projects`"
-						+ ` into `
-						+ "`file-based local development, Git, npm, dev servers, back-end services, databases, and deployment`"
-						+ `. Strong JavaScript Level 2 students may move quickly through the early setup material, but they should still take it because workflow and environment habits are now part of the curriculum, not optional side topics.`
+						`Students entering this course should already be comfortable reading and writing small-to-medium JavaScript programs, working with HTML and CSS, manipulating the DOM, responding to events, and reasoning about APIs and basic data models. This course can briefly reinforce those ideas, but it should not spend most of its time reteaching them. The real transition is from ` +
+						"`browser-only projects`" +
+						` into ` +
+						"`file-based local development, Git, npm, dev servers, back-end services, databases, and deployment`" +
+						`. Strong JavaScript Level 2 students may move quickly through the early setup material, but they should still take it because workflow and environment habits are now part of the curriculum, not optional side topics.`
 				},
 				{
 					title: "What This Course Is Not",
@@ -134,11 +134,11 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				),
 				recurringDrill(
 					"Project Lifecycle Map",
-					`Have students sketch the path from `
-					+ "`HTML/CSS/JS on disk`"
-					+ ` to `
-					+ "`published website with logs and a domain`"
-					+ ` so the course keeps a stack-wide mental model visible from the start.`
+					`Have students sketch the path from ` +
+						"`HTML/CSS/JS on disk`" +
+						` to ` +
+						"`published website with logs and a domain`" +
+						` so the course keeps a stack-wide mental model visible from the start.`
 				)
 			]
 		},
@@ -183,15 +183,15 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "npm and Package Management",
 					content:
-						`Introduce npm as the mechanism for package installation, scripts, and local tooling rather than as a magical prerequisite for frameworks. Students should understand what `
-						+ "`package.json`"
-						+ ` is for, why dependencies and devDependencies differ, and how scripts like `
-						+ "`dev`"
-						+ `, `
-						+ "`build`"
-						+ `, and `
-						+ "`start`"
-						+ ` capture repeatable project behavior.`
+						`Introduce npm as the mechanism for package installation, scripts, and local tooling rather than as a magical prerequisite for frameworks. Students should understand what ` +
+						"`package.json`" +
+						` is for, why dependencies and devDependencies differ, and how scripts like ` +
+						"`dev`" +
+						`, ` +
+						"`build`" +
+						`, and ` +
+						"`start`" +
+						` capture repeatable project behavior.`
 				},
 				{
 					title: "Modules, Bundlers, and Local Dev Servers at a Gentle Level",
@@ -462,9 +462,9 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Firewalls, Security Groups, and localhost vs LAN vs Public Deployment",
 					content:
-						`Teach the difference between `
-						+ "`localhost`"
-						+ `, a LAN-accessible service, and a public deployment, then connect that difference to firewalls and security groups. The important idea is that exposure level changes the security and operational assumptions of the app even when the code itself has not changed.`
+						`Teach the difference between ` +
+						"`localhost`" +
+						`, a LAN-accessible service, and a public deployment, then connect that difference to firewalls and security groups. The important idea is that exposure level changes the security and operational assumptions of the app even when the code itself has not changed.`
 				}
 			],
 			supplementalProjects: [

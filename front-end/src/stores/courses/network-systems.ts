@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const NETWORK_SYSTEMS_REPO
-	= "https://github.com/instruction-material/Network-Systems/tree/main";
+const NETWORK_SYSTEMS_REPO =
+	"https://github.com/instruction-material/Network-Systems/tree/main";
 
 function starterRepoLink(projectId: string) {
 	return `${NETWORK_SYSTEMS_REPO}/${projectId}/starter`;

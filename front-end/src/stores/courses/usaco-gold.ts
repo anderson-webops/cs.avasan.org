@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const USACO_GOLD_REPO
-	= "https://github.com/instruction-material/USACO-Gold/tree/main";
+const USACO_GOLD_REPO =
+	"https://github.com/instruction-material/USACO-Gold/tree/main";
 
 function repoLink(projectId: string) {
 	return `${USACO_GOLD_REPO}/${projectId}`;

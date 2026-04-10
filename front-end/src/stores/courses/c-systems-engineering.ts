@@ -1,7 +1,7 @@
 import type { RawCourse, RawCourseModuleItem } from "./types";
 
-const C_SYSTEMS_ENGINEERING_REPO
-	= "https://github.com/instruction-material/C-Systems-Engineering/tree/main";
+const C_SYSTEMS_ENGINEERING_REPO =
+	"https://github.com/instruction-material/C-Systems-Engineering/tree/main";
 
 function starterRepoLink(projectId: string) {
 	return `${C_SYSTEMS_ENGINEERING_REPO}/${projectId}/starter`;

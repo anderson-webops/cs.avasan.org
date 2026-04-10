@@ -74,6 +74,15 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "data-structures-and-algorithms-in-cpp",
+		name: "Data Structures and Algorithms in C++",
+		load: () =>
+			import("./data-structures-and-algorithms-in-cpp").then(
+				({ dataStructuresAndAlgorithmsInCppCourse }) =>
+					dataStructuresAndAlgorithmsInCppCourse
+			)
+	},
+	{
 		id: "c-systems-engineering",
 		name: "C Systems Engineering",
 		load: () =>
@@ -158,6 +167,23 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			import("./design-patterns-in-java-part-2").then(
 				({ designPatternsInJavaPart2Course }) =>
 					designPatternsInJavaPart2Course
+			)
+	},
+	{
+		id: "design-patterns-in-cpp",
+		name: "Design Patterns in C++",
+		load: () =>
+			import("./design-patterns-in-cpp").then(
+				({ designPatternsInCppCourse }) => designPatternsInCppCourse
+			)
+	},
+	{
+		id: "pythonic-design-patterns",
+		name: "Pythonic Design Patterns",
+		load: () =>
+			import("./pythonic-design-patterns").then(
+				({ pythonicDesignPatternsCourse }) =>
+					pythonicDesignPatternsCourse
 			)
 	},
 	{

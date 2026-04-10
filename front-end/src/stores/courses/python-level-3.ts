@@ -9,7 +9,7 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "Introductions & Setup",
 					content:
-						"Start with a short introduction and get comfortable with the coding environment. Open the learner portal, review how to move between modules and projects, and explore the code editor, instructions, and console tabs. This review module can be used flexibly: move through it in order or jump to the sections that need the most reinforcement."
+						"Start with a short introduction and get comfortable with the coding environment. Review how to move between modules and projects, explore the editor, instructions, and console, and use this review module flexibly by moving in order or jumping to the sections that need the most reinforcement."
 				},
 				{
 					title: "Variables, Strings, and Input",
@@ -54,16 +54,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM2 Review: Functions & Lists",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review the key ideas from the previous session: variables, input, conditionals, and loops. Revisit any project code that still needs debugging or cleanup before moving on."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Reopen the previous assignment, test it, and fix any remaining issues. If everything works, explain the main parts of the solution out loud before continuing."
-				},
-				{
 					title: "Functions",
 					content:
 						"Review functions as reusable templates for computation. Define functions with `def`, pass values in through parameters, and send values back with `return`. Start with a simple example such as a function that squares its input, then extend the idea to functions with multiple parameters and more complex logic."
@@ -98,16 +88,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM3 Review: Dictionaries & Recap",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review functions and lists from the previous module. Revisit examples that return values, mutate lists, or iterate with loops if any of those patterns still feel uncertain."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run through the previous assignment, demonstrate working solutions, and correct any remaining bugs before starting new material."
-				},
-				{
 					title: "Dictionaries",
 					content:
 						'Introduce dictionaries as collections of key-value pairs. Create examples such as `prices = {"soap": 2, "apple": 1, "frozen_pizza": 5}` and use `dictionary[key]` to look up values. Check whether a key exists with `if key in dictionary`, iterate with `for key in dictionary`, and explore dictionaries whose keys and values use different data types. Practice building dictionaries of squares, factorials, and letter counts for a word.'
@@ -127,16 +107,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM4 Recursion Part 1",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review dictionaries and identify places where dictionary lookups, membership checks, and frequency counts were used."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Test and discuss the previous assignment before beginning recursion. Focus on explaining how the solution works, not just whether it runs."
-				},
 				{
 					title: "Introduction to Recursion",
 					content:
@@ -177,16 +147,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM5 Recursion Part 2",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review recursion by identifying the base case and recursive step in each previous project."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run the previous recursion projects and explain how each recursive call gets the solution closer to its base case."
-				},
 				{
 					title: "Substrings",
 					content:
@@ -237,18 +197,41 @@ export const pythonLevel3Course: RawCourse = {
 			]
 		},
 		{
-			title: "AM6 Introduction to Algorithms & Runtime Analysis",
+			title: "Check-In #1",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
+					title: "Check-In #1 Overview",
 					content:
-						"Review recursion and identify examples of recursive thinking from earlier projects."
+						"Use this module as a low-pressure review of recursion, stacks, and string processing. Work through each prompt independently first, then revisit any skill that still needs practice."
 				},
 				{
-					title: "Assignment Review",
+					title: "Check-In #1: String Functions",
 					content:
-						"Revisit the previous assignment and focus on explaining why the solution works, especially how repeated subproblems were handled."
+						"Practice slicing and splitting strings. Remove the first and last letters from a word, and extract the second word from a sentence with at least two words."
 				},
+				{
+					title: "Check-In #1: Recursion",
+					content:
+						"Explain what a recursive function is and identify its base case and recursive call. Then write recursive solutions for bowling-pin pyramids, Lucas numbers, and tracing the behavior of a provided recursive function."
+				},
+				{
+					title: "Check-In #1: Stacks",
+					content:
+						"Review stack behavior, create a stack of numbers, push and pop items, and use a stack-based solution to process keyboard input where `#` represents backspace."
+				},
+				{
+					title: "Check-In #1: Additional Practice Project",
+					content:
+						"Write one recursive function that prints the running sums of the first `n` elements of a list and another that prints the same sums in reverse order.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-1-Additional-Project"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "AM6 Introduction to Algorithms & Runtime Analysis",
+			curriculum: [
 				{
 					title: "Introduction to Algorithms",
 					content:
@@ -288,16 +271,6 @@ export const pythonLevel3Course: RawCourse = {
 		{
 			title: "AM7 Binary Search",
 			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review runtime analysis and linear search, including the meaning of Big-O notation and the difference between linear and logarithmic growth."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Check the previous assignment, verify that the search and analysis problems run correctly, and revisit any cases that were confusing."
-				},
 				{
 					title: "Binary Search Introduction",
 					content:
@@ -344,16 +317,6 @@ export const pythonLevel3Course: RawCourse = {
 			title: "AM8 Selection Sort & Insertion Sort",
 			curriculum: [
 				{
-					title: "Recap From Last Session",
-					content:
-						"Review binary search, when it can be used, and why its runtime is `O(log n)`."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Test the previous search projects and confirm that both correctness and runtime reasoning are solid."
-				},
-				{
 					title: "Selection Sort Introduction",
 					content:
 						"Selection sort repeatedly finds the smallest item in the unsorted portion of a list and places it into the next position of the sorted portion. It is a straightforward first sorting algorithm and leads naturally into runtime analysis."
@@ -386,325 +349,6 @@ export const pythonLevel3Course: RawCourse = {
 					title: "Insertion Sort Big-O Analysis",
 					content:
 						"Analyze why the worst case for insertion sort occurs on a reversed list. Show that the total number of swaps forms the sum `1 + 2 + ... + (n - 1)`, giving `O(n^2)` time. Then compare this with the near-best case where the list is already almost sorted."
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "AM9 Bubble Sort",
-			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review selection sort and insertion sort, including how each algorithm works and how their runtimes compare."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run the sorting code from the previous session and revisit any edge cases or misunderstandings before adding another sorting algorithm."
-				},
-				{
-					title: "Bubble Sort Introduction",
-					content:
-						"Bubble sort repeatedly walks through a list, compares adjacent items, and swaps them when they are out of order. One full pass moves a large value toward the end of the list, and repeated passes eventually sort the entire list."
-				},
-				{
-					title: "AM9 Project 1: Bubble Sort",
-					content:
-						"Implement bubble sort by first coding a single pass, then extending it to repeat for enough passes to fully sort the list. Use a temporary variable when swapping values and test the result on randomly generated data.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Bubble-Sort"
-				},
-				{
-					title: "Bubble Sort Big-O Analysis",
-					content:
-						"Count the repeated adjacent comparisons and show why bubble sort is also `O(n^2)` in time. Then improve the algorithm by adding an early cutoff or reducing the comparison range once the largest values have already been moved into place."
-				},
-				{
-					title: "AM9 Project 2: Baseball Analytics",
-					content:
-						"Adapt a sorting algorithm to rank a list of players by different statistics such as batting average, home runs, or RBI. Store each player's data together and sort based on the chosen field, returning a leaderboard in the correct order.",
-					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics-Starter",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "AM10 Merge Sort",
-			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review bubble sort and its quadratic runtime. Compare it with the previous sorting algorithms and identify common patterns among them."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Run and explain the previous sorting code, including any optimizations that were added."
-				},
-				{
-					title: "Merge Sort Introduction",
-					content:
-						"Merge sort uses divide and conquer. Split a list into two halves, recursively sort each half, and then merge the two sorted halves back together. The key insight is that merging sorted lists is much faster than sorting from scratch."
-				},
-				{
-					title: "AM10 Project 1: Merge",
-					content:
-						"Write a `merge()` function that combines two already sorted lists into one larger sorted list. Build the result one element at a time by comparing the front items of the two input lists.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
-				},
-				{
-					title: "AM10 Project 2: Split",
-					content:
-						"Write a recursive function that repeatedly splits a list into halves until each piece has length 1 or less. This project isolates the recursive structure used by merge sort.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
-				},
-				{
-					title: "AM10 Project 3: Merge Sort",
-					content:
-						"Combine the splitting and merging processes into a full merge sort implementation. Then explore whether the same logic can be written in a more compact form without relying on separate helper functions.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
-				},
-				{
-					title: "Merge Sort Big-O Analysis",
-					content:
-						"Use a recursion tree to analyze merge sort. Each level of the tree does `O(n)` total merge work, and the height of the tree is `O(log n)`, giving an overall runtime of `O(n log n)`. Compare this growth to `O(n^2)` and discuss why merge sort is usually preferable on larger inputs."
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "AM11 Quicksort",
-			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review merge sort, including the roles of splitting, merging, and recursion in its implementation."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the merge functions and the full merge sort implementation before moving on to another divide-and-conquer algorithm."
-				},
-				{
-					title: "Quicksort Introduction",
-					content:
-						"Quicksort chooses a pivot value, partitions the list into values less than, equal to, and greater than the pivot, then recursively sorts the outer partitions. It is another divide-and-conquer algorithm, but unlike merge sort it relies on partitioning rather than merging."
-				},
-				{
-					title: "AM11 Project 1: Partition",
-					content:
-						"Write a helper function that takes a list and a pivot and returns the three partitions: less than the pivot, equal to the pivot, and greater than the pivot. This helper keeps the main quicksort function easier to read and test.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort"
-				},
-				{
-					title: "AM11 Project 2: Quicksort",
-					content:
-						"Write a quicksort function that partitions the input, recursively sorts the needed pieces, and concatenates the final result. Test the function on a variety of lists, including inputs with repeated values.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort"
-				},
-				{
-					title: "Quicksort Big-O Analysis",
-					content:
-						"Use a recursion tree to compare quicksort's best and worst cases. If the pivot splits the list evenly, quicksort runs in `O(n log n)`. If the pivot is consistently poor and produces highly unbalanced partitions, the runtime degrades to `O(n^2)`. Explore strategies such as random pivots or shuffling the list first to avoid bad cases more often."
-				},
-				{
-					title: "AM11 Project 3: Sorting Comparison",
-					content:
-						"Compare the runtime of several sorting algorithms on different kinds of input, such as random lists, sorted lists, or reversed lists. Use the results to reason about when one algorithm is a better fit than another.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Sorting-Comparison"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "AM12 File Input/Output",
-			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review quicksort and compare its recursive structure to merge sort."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the quicksort implementation and any runtime comparison code before moving into file handling."
-				},
-				{
-					title: "Writing to a File",
-					content:
-						'Use `open("filename.txt", "w+")` to create or open a file for writing, then use `f.write(...)` to store output in that file instead of only printing to the console. Practice writing multiple lines of text and generating output inside a loop.'
-				},
-				{
-					title: "AM12 Project 1: Crazy Name Tags Printer",
-					content:
-						"Ask for a name and write it to a file in several ways: one letter at a time, every other letter, and backward. As an extension, send each version to a separate file.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Crazy-Name-Tags-Printer"
-				},
-				{
-					title: "Reading From a File",
-					content:
-						"Compare `f.read()` and `f.readlines()`. Use `read()` when the full file should be handled as one string and `readlines()` when it is more convenient to work with a list of lines. Review how newline characters appear in file input and remove them with `strip()` when needed."
-				},
-				{
-					title: "AM12 Project 2: File IO and Dictionaries",
-					content:
-						"Read alternating lines from a file and store them in a dictionary where one line is the key and the next line is its value. This combines file input with dictionary construction.",
-					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries-Starter",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries"
-				},
-				{
-					title: "AM12 Project 3: Juni Latin with File IO",
-					content:
-						"Read sentences from an input text file, translate each word using a Juni Latin function, and write the translated results to an output file. As a challenge, preserve punctuation in its correct place while translating the words.",
-					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO-Starter",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO"
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "AM13 Master Project: Conway's Game of Life",
-			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review reading from and writing to files, along with the difference between `read()`, `readlines()`, and `strip()`."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the file I/O projects and verify that files are being read and written in the expected format."
-				},
-				{
-					title: "Introduction to Conway's Game of Life",
-					content:
-						"Conway's Game of Life is a cellular automaton played on a grid of live and dead cells. Each generation updates based on four rules about underpopulation, survival, overpopulation, and reproduction. The project combines grids, loops, conditionals, and file input into a larger simulation."
-				},
-				{
-					title: "AM13 Project 1: Conway's Game of Life",
-					content:
-						"Create a grid, load an initial pattern from a file, and print or display successive generations of the board. Implement the four update rules and pause briefly between generations so the simulation is easier to follow.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Conways-Game-of-Life"
-				},
-				{
-					title: "AM13 Project 2: Two-Player Conway's Game of Life",
-					content:
-						"Extend the original simulation into a two-player version. Store dead cells and two different player states in the grid, allow each player to place and remove cells between generations, and end the game when one player's cells are completely gone.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Two-Player-Conways"
-				},
-				{
-					title: "Master Project Presentation",
-					content:
-						"Once the project is working, prepare a short presentation explaining the grid representation, update rules, file input, and any additional features or strategies used in the implementation."
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "AM14 Master Project: Tic Tac Toe AI",
-			curriculum: [
-				{
-					title: "Recap From Last Session",
-					content:
-						"Review Conway's Game of Life and identify which parts of the program handled the grid, update rules, and repeated simulation steps."
-				},
-				{
-					title: "Assignment Review",
-					content:
-						"Retest the Conway projects and fix any remaining issues before starting the final AI project."
-				},
-				{
-					title: "Introduction to Artificial Intelligence",
-					content:
-						"Artificial intelligence can be described as making a computer act rationally for a specific task. In this module, the goal is to design a Tic Tac Toe program that chooses strong moves instead of playing randomly."
-				},
-				{
-					title: "AM14 Project 1: Tic Tac Toe UI",
-					content:
-						"Create a user interface for Tic Tac Toe. Represent the board with a list or a list of lists, print the board clearly, alternate turns between two players, and detect wins or ties. Start with a computer player that makes random legal moves.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-UI"
-				},
-				{
-					title: "AM14 Project 2: Tic Tac Toe AI",
-					content:
-						"Replace the random computer player with a rule-based AI. Prioritize immediate wins, blocks against an opponent's immediate win, center control, corners, and then sides. Test each candidate move on a copied board so the real game state is not changed during evaluation.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI"
-				},
-				{
-					title: "AM14 Project 3: Tic Tac Toe AI Test",
-					content:
-						"Run the AI against the random player many times and record wins, losses, and ties. Use the results to evaluate how well the strategy performs and where it can still improve.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-Test"
-				},
-				{
-					title: "AM14 Project 4: Advanced Tic Tac Toe AI",
-					content:
-						"Add support for fork creation and fork blocking. A fork is a move that creates two simultaneous winning threats. Update the AI strategy order to include immediate wins, blocks, forks, fork blocks, center, corners, and sides.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-with-Forks"
-				},
-				{
-					title: "Master Project Presentation",
-					content:
-						"Prepare a short explanation of how the board is represented, how the AI evaluates moves, and what testing was used to measure the strength of the strategy."
-				},
-				{
-					title: "Course Recap",
-					content:
-						"Review the main ideas from the course: functions, lists, dictionaries, recursion, stacks, searching, sorting, Big-O notation, file input/output, simulations, and simple AI. Then discuss which next course best fits future goals and interests."
-				}
-			],
-			supplementalProjects: []
-		},
-		{
-			title: "Check-In #1",
-			curriculum: [
-				{
-					title: "Check-In #1 Overview",
-					content:
-						"Use this module as a low-pressure review of recursion, stacks, and string processing. Work through each prompt independently first, then revisit any skill that still needs practice."
-				},
-				{
-					title: "Check-In #1: String Functions",
-					content:
-						"Practice slicing and splitting strings. Remove the first and last letters from a word, and extract the second word from a sentence with at least two words."
-				},
-				{
-					title: "Check-In #1: Recursion",
-					content:
-						"Explain what a recursive function is and identify its base case and recursive call. Then write recursive solutions for bowling-pin pyramids, Lucas numbers, and tracing the behavior of a provided recursive function."
-				},
-				{
-					title: "Check-In #1: Stacks",
-					content:
-						"Review stack behavior, create a stack of numbers, push and pop items, and use a stack-based solution to process keyboard input where `#` represents backspace."
-				},
-				{
-					title: "Check-In #1: Additional Practice Project",
-					content:
-						"Write one recursive function that prints the running sums of the first `n` elements of a list and another that prints the same sums in reverse order.",
-					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-1-Additional-Project"
 				}
 			],
 			supplementalProjects: []
@@ -753,6 +397,153 @@ export const pythonLevel3Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
+			title: "AM9 Bubble Sort",
+			curriculum: [
+				{
+					title: "Bubble Sort Introduction",
+					content:
+						"Bubble sort repeatedly walks through a list, compares adjacent items, and swaps them when they are out of order. One full pass moves a large value toward the end of the list, and repeated passes eventually sort the entire list."
+				},
+				{
+					title: "AM9 Project 1: Bubble Sort",
+					content:
+						"Implement bubble sort by first coding a single pass, then extending it to repeat for enough passes to fully sort the list. Use a temporary variable when swapping values and test the result on randomly generated data.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Bubble-Sort"
+				},
+				{
+					title: "Bubble Sort Big-O Analysis",
+					content:
+						"Count the repeated adjacent comparisons and show why bubble sort is also `O(n^2)` in time. Then improve the algorithm by adding an early cutoff or reducing the comparison range once the largest values have already been moved into place."
+				},
+				{
+					title: "AM9 Project 2: Baseball Analytics",
+					content:
+						"Adapt a sorting algorithm to rank a list of players by different statistics such as batting average, home runs, or RBI. Store each player's data together and sort based on the chosen field, returning a leaderboard in the correct order.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "AM10 Merge Sort",
+			curriculum: [
+				{
+					title: "Merge Sort Introduction",
+					content:
+						"Merge sort uses divide and conquer. Split a list into two halves, recursively sort each half, and then merge the two sorted halves back together. The key insight is that merging sorted lists is much faster than sorting from scratch."
+				},
+				{
+					title: "AM10 Project 1: Merge",
+					content:
+						"Write a `merge()` function that combines two already sorted lists into one larger sorted list. Build the result one element at a time by comparing the front items of the two input lists.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
+				},
+				{
+					title: "AM10 Project 2: Split",
+					content:
+						"Write a recursive function that repeatedly splits a list into halves until each piece has length 1 or less. This project isolates the recursive structure used by merge sort.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
+				},
+				{
+					title: "AM10 Project 3: Merge Sort",
+					content:
+						"Combine the splitting and merging processes into a full merge sort implementation. Then explore whether the same logic can be written in a more compact form without relying on separate helper functions.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM10-Merge-Sort"
+				},
+				{
+					title: "Merge Sort Big-O Analysis",
+					content:
+						"Use a recursion tree to analyze merge sort. Each level of the tree does `O(n)` total merge work, and the height of the tree is `O(log n)`, giving an overall runtime of `O(n log n)`. Compare this growth to `O(n^2)` and discuss why merge sort is usually preferable on larger inputs."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "AM11 Quicksort",
+			curriculum: [
+				{
+					title: "Quicksort Introduction",
+					content:
+						"Quicksort chooses a pivot value, partitions the list into values less than, equal to, and greater than the pivot, then recursively sorts the outer partitions. It is another divide-and-conquer algorithm, but unlike merge sort it relies on partitioning rather than merging."
+				},
+				{
+					title: "AM11 Project 1: Partition",
+					content:
+						"Write a helper function that takes a list and a pivot and returns the three partitions: less than the pivot, equal to the pivot, and greater than the pivot. This helper keeps the main quicksort function easier to read and test.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort"
+				},
+				{
+					title: "AM11 Project 2: Quicksort",
+					content:
+						"Write a quicksort function that partitions the input, recursively sorts the needed pieces, and concatenates the final result. Test the function on a variety of lists, including inputs with repeated values.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Quicksort"
+				},
+				{
+					title: "Quicksort Big-O Analysis",
+					content:
+						"Use a recursion tree to compare quicksort's best and worst cases. If the pivot splits the list evenly, quicksort runs in `O(n log n)`. If the pivot is consistently poor and produces highly unbalanced partitions, the runtime degrades to `O(n^2)`. Explore strategies such as random pivots or shuffling the list first to avoid bad cases more often."
+				},
+				{
+					title: "AM11 Project 3: Sorting Comparison",
+					content:
+						"Compare the runtime of several sorting algorithms on different kinds of input, such as random lists, sorted lists, or reversed lists. Use the results to reason about when one algorithm is a better fit than another.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM11-Sorting-Comparison"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "AM12 File Input/Output",
+			curriculum: [
+				{
+					title: "Writing to a File",
+					content:
+						'Use `open("filename.txt", "w+")` to create or open a file for writing, then use `f.write(...)` to store output in that file instead of only printing to the console. Practice writing multiple lines of text and generating output inside a loop.'
+				},
+				{
+					title: "AM12 Project 1: Crazy Name Tags Printer",
+					content:
+						"Ask for a name and write it to a file in several ways: one letter at a time, every other letter, and backward. As an extension, send each version to a separate file.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Crazy-Name-Tags-Printer"
+				},
+				{
+					title: "Reading From a File",
+					content:
+						"Compare `f.read()` and `f.readlines()`. Use `read()` when the full file should be handled as one string and `readlines()` when it is more convenient to work with a list of lines. Review how newline characters appear in file input and remove them with `strip()` when needed."
+				},
+				{
+					title: "AM12 Project 2: File IO and Dictionaries",
+					content:
+						"Read alternating lines from a file and store them in a dictionary where one line is the key and the next line is its value. This combines file input with dictionary construction.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries"
+				},
+				{
+					title: "AM12 Project 3: Juni Latin with File IO",
+					content:
+						"Read sentences from an input text file, translate each word using a Juni Latin function, and write the translated results to an output file. As a challenge, preserve punctuation in its correct place while translating the words.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "Check-In #3",
 			curriculum: [
 				{
@@ -786,6 +577,85 @@ export const pythonLevel3Course: RawCourse = {
 						"Read letters from a file into a list, sort them in ASCII order using one of the implemented sorting algorithms, and write the sorted results back to a file.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-3-Additional-Project"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "AM13 Master Project: Conway's Game of Life",
+			curriculum: [
+				{
+					title: "Introduction to Conway's Game of Life",
+					content:
+						"Conway's Game of Life is a cellular automaton played on a grid of live and dead cells. Each generation updates based on four rules about underpopulation, survival, overpopulation, and reproduction. The project combines grids, loops, conditionals, and file input into a larger simulation."
+				},
+				{
+					title: "AM13 Project 1: Conway's Game of Life",
+					content:
+						"Create a grid, load an initial pattern from a file, and print or display successive generations of the board. Implement the four update rules and pause briefly between generations so the simulation is easier to follow.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Conways-Game-of-Life"
+				},
+				{
+					title: "AM13 Project 2: Two-Player Conway's Game of Life",
+					content:
+						"Extend the original simulation into a two-player version. Store dead cells and two different player states in the grid, allow each player to place and remove cells between generations, and end the game when one player's cells are completely gone.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Two-Player-Conways"
+				},
+				{
+					title: "Master Project Presentation",
+					content:
+						"Once the project is working, prepare a short presentation explaining the grid representation, update rules, file input, and any additional features or strategies used in the implementation."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "AM14 Master Project: Tic Tac Toe AI",
+			curriculum: [
+				{
+					title: "Introduction to Artificial Intelligence",
+					content:
+						"Artificial intelligence can be described as making a computer act rationally for a specific task. In this module, the goal is to design a Tic Tac Toe program that chooses strong moves instead of playing randomly."
+				},
+				{
+					title: "AM14 Project 1: Tic Tac Toe UI",
+					content:
+						"Create a user interface for Tic Tac Toe. Represent the board with a list or a list of lists, print the board clearly, alternate turns between two players, and detect wins or ties. Start with a computer player that makes random legal moves.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-UI"
+				},
+				{
+					title: "AM14 Project 2: Tic Tac Toe AI",
+					content:
+						"Replace the random computer player with a rule-based AI. Prioritize immediate wins, blocks against an opponent's immediate win, center control, corners, and then sides. Test each candidate move on a copied board so the real game state is not changed during evaluation.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI"
+				},
+				{
+					title: "AM14 Project 3: Tic Tac Toe AI Test",
+					content:
+						"Run the AI against the random player many times and record wins, losses, and ties. Use the results to evaluate how well the strategy performs and where it can still improve.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-Test"
+				},
+				{
+					title: "AM14 Project 4: Advanced Tic Tac Toe AI",
+					content:
+						"Add support for fork creation and fork blocking. A fork is a move that creates two simultaneous winning threats. Update the AI strategy order to include immediate wins, blocks, forks, fork blocks, center, corners, and sides.",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM14-Tic-Tac-Toe-AI-with-Forks"
+				},
+				{
+					title: "Master Project Presentation",
+					content:
+						"Prepare a short explanation of how the board is represented, how the AI evaluates moves, and what testing was used to measure the strength of the strategy."
+				},
+				{
+					title: "Course Recap",
+					content:
+						"Review the main ideas from the course: functions, lists, dictionaries, recursion, stacks, searching, sorting, Big-O notation, file input/output, simulations, and simple AI. Then discuss which next course best fits future goals and interests."
 				}
 			],
 			supplementalProjects: []

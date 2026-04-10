@@ -9,7 +9,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Introductions and Setup",
 					content:
-						"Get familiar with the learner portal, custom Java projects, and the structure of a Java program. This module works well as a review resource for variables, strings, input, and commenting before moving into more advanced topics."
+						"Get familiar with the Java workspace, custom Java projects, and the structure of a Java program. This module works well as a review resource for variables, strings, input, and commenting before moving into more advanced topics."
 				},
 				{
 					title: "Creating and Running a Java Program",
@@ -292,7 +292,7 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
-			title: "AJ7 Selection and Insertion Sort",
+			title: "Check-In #1",
 			curriculum: [
 				{
 					title: "Check-In #1 Overview",
@@ -451,7 +451,7 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
-			title: "AJ10 Sustainable Programming",
+			title: "Check-In #2",
 			curriculum: [
 				{
 					title: "Check-In #2 Overview",
@@ -680,7 +680,7 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
-			title: "AJ14 Binary Search Trees",
+			title: "Check-In #3",
 			curriculum: [
 				{
 					title: "Check-In #3 Overview",
@@ -867,7 +867,7 @@ export const javaLevel3Course: RawCourse = {
 			]
 		},
 		{
-			title: "AJ17 Master Project: Google Maps",
+			title: "Check-In #4",
 			curriculum: [
 				{
 					title: "Check-In #4 Overview",
@@ -941,6 +941,6 @@ export const javaLevel3Course: RawCourse = {
 				}
 			],
 			supplementalProjects: []
-		},
+		}
 	]
 };
