@@ -46,6 +46,8 @@ sequenced around object-oriented programming.
 
 - Make the entry ramp smoother for beginners
 - Add more explicit debugging and problem-solving routines
+- Make classes and object-oriented thinking an explicit required part of the
+  sequence, not an optional aside
 - Rework where OOP appears
 - Strengthen the bridge from Python 2 into Python 3 and onward
 
@@ -61,9 +63,11 @@ sequenced around object-oriented programming.
 ### Python Level 2
 
 - keep collections, functions, problem solving, and projects
-- move OOP to the end of Python 2 or insert a short bridge between 2 and 3
-- place OOP before heavy algorithm work if the goal is stronger software-design
-  intuition
+- include a required classes unit before the course ends
+- teach how to design and instantiate classes, store object state, and write
+  methods that collaborate with lists and dictionaries
+- place OOP before heavy algorithm work so Python 3 can assume design fluency,
+  not just syntax fluency
 
 ### Python Level 3
 
@@ -72,21 +76,40 @@ sequenced around object-oriented programming.
 
 ## Recommended OOP Plan
 
-Best option:
+Required direction:
 
-- Add a `Python 2.5` bridge or late-`Python 2` unit focused on:
-  - classes
-  - instances
-  - attributes
-  - methods
-  - constructors
-  - simple inheritance
+- Add a late-`Python 2` unit or dedicated `Python 2.5` bridge focused on:
+  - class definitions and naming conventions
+  - instances and object identity
+  - attributes versus local variables
+  - instance methods and `self`
+  - constructors with `__init__`
+  - object state updates across multiple method calls
+  - composition
+  - simple inheritance where it clarifies reuse rather than adding ceremony
 
 Why:
 
 - It makes later algorithm and project work less abrupt
 - It reduces the jump into AI/ML or software-design-heavy electives
 - It keeps Python 3 from carrying too many first-time abstractions
+
+Minimum expectation before a student completes Python 2:
+
+- They should be able to read and write a small class from scratch
+- They should understand the difference between a function and a method
+- They should be able to create multiple objects and reason about each object's
+  state independently
+- They should be able to use classes inside a medium-sized project instead of
+  only writing top-level procedural code
+
+Python 3 should then build on classes rather than introducing them for the
+first time. That means larger projects in Python 3 should deliberately use:
+
+- interacting classes
+- composition
+- cleaner interfaces between modules
+- selected uses of inheritance only when it is actually the right fit
 
 ## Accessibility Improvements
 
@@ -98,8 +121,10 @@ Why:
 ## Example Project Additions
 
 - Python 1: password checker, mini quiz, story generator, menu-driven apps
-- Python 2: object-based pet simulator, inventory tracker, class roster manager
-- Python 3: pathfinding toy, scheduler, parser, data structure visualizer
+- Python 2: object-based pet simulator, inventory tracker, class roster manager,
+  turn-based battle simulator
+- Python 3: pathfinding toy, scheduler, parser, data structure visualizer,
+  multi-class simulation or management system
 
 ## Expansion Ideas
 
