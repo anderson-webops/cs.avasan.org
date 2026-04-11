@@ -97,9 +97,6 @@ function maybeWarmScheduler(link: NavLink) {
 			<div class="container-fluid site-nav__inner">
 				<router-link class="site-brand" to="/">
 					<span class="site-brand__title">Classes with Jacob</span>
-					<span class="site-brand__tagline">
-						Project-driven tutoring in coding, STEM, and Spanish
-					</span>
 				</router-link>
 				<button
 					aria-controls="siteNavbar"
@@ -231,11 +228,6 @@ function maybeWarmScheduler(link: NavLink) {
 	font-weight: 800;
 	letter-spacing: 0.01em;
 	color: #10253c;
-}
-
-.site-brand__tagline {
-	font-size: 0.82rem;
-	color: #587089;
 }
 
 .site-toggler {
@@ -399,10 +391,6 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 @media (max-width: 700px) {
-	.site-brand__tagline {
-		display: none;
-	}
-
 	.site-nav__link,
 	.site-nav__utility-link,
 	.site-nav__action {
