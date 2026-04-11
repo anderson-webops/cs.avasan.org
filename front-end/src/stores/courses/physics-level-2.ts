@@ -465,6 +465,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 10: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 10: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 10: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -502,6 +507,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 11: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 11: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 11: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -539,6 +549,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 12: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 12: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 12: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -576,6 +591,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 13: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 13: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 13: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -613,6 +633,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 14: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 14: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 14: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -650,6 +675,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 15: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 15: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 15: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -687,6 +717,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 16: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 16: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 16: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -724,6 +759,11 @@ export const physicsLevel2Course: RawCourse = {
 					title: "physics problem lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 17: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 17: physics problem lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 17: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		}

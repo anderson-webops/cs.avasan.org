@@ -40,9 +40,18 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM1-Supplemental-Project-1-Employee"
 				},
 				{
-					title: "Instance Variables, Constructors, and Methods: Fluency Drill",
+					title: "Project 2 File IO and Maps",
 					content:
-						"Repeat the core ideas from JM1 Instance Variables, Constructors, and Methods on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM1 Instance Variables, Constructors, and Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Project-2-File-IO-and-Maps"
+				},
+				{
+					title: "Reading from a File",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM1 Instance Variables, Constructors, and Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Reading-from-a-File"
 				}
 			]
 		},
@@ -89,9 +98,18 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM2-Supplemental-Project-2-Boba"
 				},
 				{
-					title: "Overloaded Constructors & Comparison Methods: Fluency Drill",
+					title: "Supplemental Project Bank Account",
 					content:
-						"Repeat the core ideas from JM2 Overloaded Constructors & Comparison Methods on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM2 Overloaded Constructors & Comparison Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Supplemental-Project-Bank-Account"
+				},
+				{
+					title: "Master Project Example Quiz Game",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM2 Overloaded Constructors & Comparison Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/Master-Project-Example-Quiz-Game"
 				}
 			]
 		},
@@ -138,9 +156,20 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM3-Supplemental-Project-1-Basketball-Statistics"
 				},
 				{
-					title: "Static Variables & Methods: Fluency Drill",
+					title: "Maze Runner",
 					content:
-						"Repeat the core ideas from JM3 Static Variables & Methods on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM3 Static Variables & Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner"
+				},
+				{
+					title: "Static Variables & Methods supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM3 Static Variables & Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X01-jm3-static-variables-methods-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X01-jm3-static-variables-methods-supplemental-3/solution"
 				}
 			]
 		},
@@ -193,9 +222,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1"
 				},
 				{
-					title: "Check In #1: Fluency Drill",
+					title: "Check In #1 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #1 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X02-check-in-1-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X02-check-in-1-supplemental-2/solution"
+				},
+				{
+					title: "Check In #1 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X03-check-in-1-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X03-check-in-1-supplemental-3/solution"
 				}
 			]
 		},
@@ -253,6 +295,15 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Lesson-and-DanceLesson-Class",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Lesson-and-DanceLesson-Class"
+				},
+				{
+					title: "Subclasses & Inheritance supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM4 Subclasses & Inheritance. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X04-jm4-subclasses-inheritance-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X04-jm4-subclasses-inheritance-supplemental-3/solution"
 				}
 			]
 		},
@@ -301,9 +352,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM5-Supplemental-Project-1-Lending-Library"
 				},
 				{
-					title: "Maps: Fluency Drill",
+					title: "Maps supplemental 2",
 					content:
-						"Repeat the core ideas from JM5 Maps on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM5 Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X05-jm5-maps-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X05-jm5-maps-supplemental-2/solution"
+				},
+				{
+					title: "Maps supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM5 Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X06-jm5-maps-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X06-jm5-maps-supplemental-3/solution"
 				}
 			]
 		},
@@ -350,9 +414,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Supplemental-Project-1-Barnyard-Orchestra"
 				},
 				{
-					title: "Threading & Error Handling: Fluency Drill",
+					title: "Threading & Error Handling supplemental 2",
 					content:
-						"Repeat the core ideas from JM6 Threading & Error Handling on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM6 Threading & Error Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X07-jm6-threading-error-handling-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X07-jm6-threading-error-handling-supplemental-2/solution"
+				},
+				{
+					title: "Threading & Error Handling supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM6 Threading & Error Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X08-jm6-threading-error-handling-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X08-jm6-threading-error-handling-supplemental-3/solution"
 				}
 			]
 		},
@@ -404,9 +481,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2-Updated"
 				},
 				{
-					title: "Check In #2: Fluency Drill",
+					title: "Check In #2 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #2 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X09-check-in-2-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X09-check-in-2-supplemental-2/solution"
+				},
+				{
+					title: "Check In #2 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X10-check-in-2-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X10-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -449,9 +539,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM7-Calculator/src/main/java"
 				},
 				{
-					title: "Bank Account: Fluency Drill",
+					title: "Bank Account supplemental 2",
 					content:
-						"Repeat the core ideas from JM7 Bank Account on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM7 Bank Account. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X11-jm7-bank-account-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X11-jm7-bank-account-supplemental-2/solution"
+				},
+				{
+					title: "Bank Account supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM7 Bank Account. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X12-jm7-bank-account-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X12-jm7-bank-account-supplemental-3/solution"
 				}
 			]
 		},
@@ -502,9 +605,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Supplemental-Project-Bank-Account/src/main/java"
 				},
 				{
-					title: "File I/O: Fluency Drill",
+					title: "File I/O supplemental 2",
 					content:
-						"Repeat the core ideas from JM8 File I/O on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM8 File I/O. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X13-jm8-file-i-o-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X13-jm8-file-i-o-supplemental-2/solution"
+				},
+				{
+					title: "File I/O supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM8 File I/O. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X14-jm8-file-i-o-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X14-jm8-file-i-o-supplemental-3/solution"
 				}
 			]
 		},
@@ -551,9 +667,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3"
 				},
 				{
-					title: "Maze Runner: Fluency Drill",
+					title: "Maze Runner supplemental 2",
 					content:
-						"Repeat the core ideas from JM9 Maze Runner on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JM9 Maze Runner. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X15-jm9-maze-runner-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X15-jm9-maze-runner-supplemental-2/solution"
+				},
+				{
+					title: "Maze Runner supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM9 Maze Runner. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X16-jm9-maze-runner-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X16-jm9-maze-runner-supplemental-3/solution"
 				}
 			]
 		},
@@ -597,9 +726,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM7-Calculator"
 				},
 				{
-					title: "JM10 Master Project: Fluency Drill",
+					title: "Master Project supplemental 2",
 					content:
-						"Repeat the core ideas from JM10 Master Project on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to JM10 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X17-jm10-master-project-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X17-jm10-master-project-supplemental-2/solution"
+				},
+				{
+					title: "Master Project supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JM10 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X18-jm10-master-project-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X18-jm10-master-project-supplemental-3/solution"
 				}
 			]
 		},
@@ -728,9 +870,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Master-Project-Example-Quiz-Game"
 				},
 				{
-					title: "JM Master Project Example Quiz Game: Open Practice",
+					title: "Applied Studio 14: JM Master Project Example Quiz Game supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: JM Master Project Example Quiz Game. Keep the scope tight, but require one meaningful design or reasoning decision. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: JM Master Project Example Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X19-applied-studio-14-jm-master-project-example-quiz/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X19-applied-studio-14-jm-master-project-example-quiz/solution"
+				},
+				{
+					title: "Applied Studio 14: JM Master Project Example Quiz Game supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: JM Master Project Example Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X20-applied-studio-14-jm-master-project-example-quiz/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X20-applied-studio-14-jm-master-project-example-quiz/solution"
 				}
 			]
 		},
@@ -769,9 +924,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Maze-Runner-Project-Solution"
 				},
 				{
-					title: "JM Maze Runner Project: Open Practice",
+					title: "Applied Studio 15: JM Maze Runner Project supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: JM Maze Runner Project. Keep the scope tight, but require one meaningful design or reasoning decision. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: JM Maze Runner Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X21-applied-studio-15-jm-maze-runner-project-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X21-applied-studio-15-jm-maze-runner-project-supplem/solution"
+				},
+				{
+					title: "Applied Studio 15: JM Maze Runner Project supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: JM Maze Runner Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X22-applied-studio-15-jm-maze-runner-project-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X22-applied-studio-15-jm-maze-runner-project-supplem/solution"
 				}
 			]
 		},
@@ -810,9 +978,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2"
 				},
 				{
-					title: "JM Check in 2: Open Practice",
+					title: "Applied Studio 16: JM Check in 2 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: JM Check in 2. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: JM Check in 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X23-applied-studio-16-jm-check-in-2-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X23-applied-studio-16-jm-check-in-2-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 16: JM Check in 2 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: JM Check in 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X24-applied-studio-16-jm-check-in-2-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X24-applied-studio-16-jm-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -851,9 +1032,22 @@ export const javaLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2-Starter"
 				},
 				{
-					title: "JM Check in 2: Open Practice",
+					title: "Applied Studio 17: JM Check in 2 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: JM Check in 2. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: JM Check in 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X25-applied-studio-17-jm-check-in-2-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X25-applied-studio-17-jm-check-in-2-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 17: JM Check in 2 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: JM Check in 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X26-applied-studio-17-jm-check-in-2-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2X26-applied-studio-17-jm-check-in-2-supplemental-3/solution"
 				}
 			]
 		}

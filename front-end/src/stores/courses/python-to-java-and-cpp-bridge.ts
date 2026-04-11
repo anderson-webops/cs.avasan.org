@@ -47,9 +47,20 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/solution"
 				},
 				{
-					title: "Positioning and Workflow Translation: Fluency Drill",
+					title: "src",
 					content:
-						"Repeat the core ideas from PTJ0 Positioning and Workflow Translation on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PTJ0 Positioning and Workflow Translation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/src"
+				},
+				{
+					title: "Positioning and Workflow Translation supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PTJ0 Positioning and Workflow Translation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX01-ptj0-positioning-and-workflow-translation-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX01-ptj0-positioning-and-workflow-translation-supple/solution"
 				}
 			]
 		},
@@ -97,9 +108,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ2-Function-Port-Pack/solution"
 				},
 				{
-					title: "Functions, Parameters, and Return Types: Fluency Drill",
+					title: "Functions, Parameters, and Return Types supplemental 2",
 					content:
-						"Repeat the core ideas from PTJ1 Functions, Parameters, and Return Types on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PTJ1 Functions, Parameters, and Return Types. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX02-ptj1-functions-parameters-and-return-types-suppl/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX02-ptj1-functions-parameters-and-return-types-suppl/solution"
+				},
+				{
+					title: "Functions, Parameters, and Return Types supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PTJ1 Functions, Parameters, and Return Types. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX03-ptj1-functions-parameters-and-return-types-suppl/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX03-ptj1-functions-parameters-and-return-types-suppl/solution"
 				}
 			]
 		},
@@ -147,9 +171,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ3-Text-and-Collection-Port-Lab/solution"
 				},
 				{
-					title: "Collections, Strings, and Indexing: Fluency Drill",
+					title: "Collections, Strings, and Indexing supplemental 2",
 					content:
-						"Repeat the core ideas from PTJ2 Collections, Strings, and Indexing on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PTJ2 Collections, Strings, and Indexing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX04-ptj2-collections-strings-and-indexing-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX04-ptj2-collections-strings-and-indexing-supplement/solution"
+				},
+				{
+					title: "Collections, Strings, and Indexing supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PTJ2 Collections, Strings, and Indexing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX05-ptj2-collections-strings-and-indexing-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX05-ptj2-collections-strings-and-indexing-supplement/solution"
 				}
 			]
 		},
@@ -197,9 +234,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ4-Shared-Class-Port/solution"
 				},
 				{
-					title: "Classes and Objects across Languages: Fluency Drill",
+					title: "Classes and Objects across Languages supplemental 2",
 					content:
-						"Repeat the core ideas from PTJ3 Classes and Objects across Languages on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PTJ3 Classes and Objects across Languages. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX06-ptj3-classes-and-objects-across-languages-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX06-ptj3-classes-and-objects-across-languages-supple/solution"
+				},
+				{
+					title: "Classes and Objects across Languages supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PTJ3 Classes and Objects across Languages. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX07-ptj3-classes-and-objects-across-languages-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX07-ptj3-classes-and-objects-across-languages-supple/solution"
 				}
 			]
 		},
@@ -247,9 +297,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ5-Python-to-Java-Quiz-Game/solution"
 				},
 				{
-					title: "Java Specific Adaptation: Fluency Drill",
+					title: "Java Specific Adaptation supplemental 2",
 					content:
-						"Repeat the core ideas from PTJ4 Java-Specific Adaptation on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PTJ4 Java-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX08-ptj4-java-specific-adaptation-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX08-ptj4-java-specific-adaptation-supplemental-2/solution"
+				},
+				{
+					title: "Java Specific Adaptation supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PTJ4 Java-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX09-ptj4-java-specific-adaptation-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX09-ptj4-java-specific-adaptation-supplemental-3/solution"
 				}
 			]
 		},
@@ -297,9 +360,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/solution"
 				},
 				{
-					title: "C++ Specific Adaptation: Fluency Drill",
+					title: "C++ Specific Adaptation supplemental 2",
 					content:
-						"Repeat the core ideas from PTJ5 C++-Specific Adaptation on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PTJ5 C++-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX10-ptj5-c-specific-adaptation-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX10-ptj5-c-specific-adaptation-supplemental-2/solution"
+				},
+				{
+					title: "C++ Specific Adaptation supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PTJ5 C++-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX11-ptj5-c-specific-adaptation-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX11-ptj5-c-specific-adaptation-supplemental-3/solution"
 				}
 			]
 		},
@@ -342,9 +418,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX01-language-bridge-lab-11/solution"
 				},
 				{
-					title: "language bridge lab 11: Open Practice",
+					title: "Applied Studio 7: language bridge lab 11 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 7: language bridge lab 11. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 7: language bridge lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX12-applied-studio-7-language-bridge-lab-11-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX12-applied-studio-7-language-bridge-lab-11-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 7: language bridge lab 11 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 7: language bridge lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX13-applied-studio-7-language-bridge-lab-11-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX13-applied-studio-7-language-bridge-lab-11-suppleme/solution"
 				}
 			]
 		},
@@ -387,9 +476,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX02-language-bridge-lab-12/solution"
 				},
 				{
-					title: "language bridge lab 12: Open Practice",
+					title: "Applied Studio 8: language bridge lab 12 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 8: language bridge lab 12. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: language bridge lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX14-applied-studio-8-language-bridge-lab-12-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX14-applied-studio-8-language-bridge-lab-12-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 8: language bridge lab 12 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: language bridge lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX15-applied-studio-8-language-bridge-lab-12-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX15-applied-studio-8-language-bridge-lab-12-suppleme/solution"
 				}
 			]
 		},
@@ -432,9 +534,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX03-language-bridge-lab-13/solution"
 				},
 				{
-					title: "language bridge lab 13: Open Practice",
+					title: "Applied Studio 9: language bridge lab 13 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 9: language bridge lab 13. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: language bridge lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX16-applied-studio-9-language-bridge-lab-13-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX16-applied-studio-9-language-bridge-lab-13-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 9: language bridge lab 13 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: language bridge lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX17-applied-studio-9-language-bridge-lab-13-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX17-applied-studio-9-language-bridge-lab-13-suppleme/solution"
 				}
 			]
 		},
@@ -477,9 +592,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX04-language-bridge-lab-14/solution"
 				},
 				{
-					title: "language bridge lab 14: Open Practice",
+					title: "Applied Studio 10: language bridge lab 14 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 10: language bridge lab 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: language bridge lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX18-applied-studio-10-language-bridge-lab-14-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX18-applied-studio-10-language-bridge-lab-14-supplem/solution"
+				},
+				{
+					title: "Applied Studio 10: language bridge lab 14 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: language bridge lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX19-applied-studio-10-language-bridge-lab-14-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX19-applied-studio-10-language-bridge-lab-14-supplem/solution"
 				}
 			]
 		},
@@ -522,9 +650,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX05-language-bridge-lab-15/solution"
 				},
 				{
-					title: "language bridge lab 15: Open Practice",
+					title: "Applied Studio 11: language bridge lab 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: language bridge lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: language bridge lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX20-applied-studio-11-language-bridge-lab-15-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX20-applied-studio-11-language-bridge-lab-15-supplem/solution"
+				},
+				{
+					title: "Applied Studio 11: language bridge lab 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: language bridge lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX21-applied-studio-11-language-bridge-lab-15-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX21-applied-studio-11-language-bridge-lab-15-supplem/solution"
 				}
 			]
 		},
@@ -567,9 +708,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX06-language-bridge-lab-16/solution"
 				},
 				{
-					title: "language bridge lab 16: Open Practice",
+					title: "Applied Studio 12: language bridge lab 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: language bridge lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: language bridge lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX22-applied-studio-12-language-bridge-lab-16-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX22-applied-studio-12-language-bridge-lab-16-supplem/solution"
+				},
+				{
+					title: "Applied Studio 12: language bridge lab 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: language bridge lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX23-applied-studio-12-language-bridge-lab-16-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX23-applied-studio-12-language-bridge-lab-16-supplem/solution"
 				}
 			]
 		},
@@ -612,9 +766,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX07-language-bridge-lab-17/solution"
 				},
 				{
-					title: "language bridge lab 17: Open Practice",
+					title: "Applied Studio 13: language bridge lab 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: language bridge lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: language bridge lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX24-applied-studio-13-language-bridge-lab-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX24-applied-studio-13-language-bridge-lab-17-supplem/solution"
+				},
+				{
+					title: "Applied Studio 13: language bridge lab 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: language bridge lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX25-applied-studio-13-language-bridge-lab-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX25-applied-studio-13-language-bridge-lab-17-supplem/solution"
 				}
 			]
 		},
@@ -653,9 +820,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/graphics"
 				},
 				{
-					title: "graphics: Open Practice",
+					title: "Applied Studio 14: graphics supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: graphics. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: graphics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX26-applied-studio-14-graphics-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX26-applied-studio-14-graphics-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 14: graphics supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: graphics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX27-applied-studio-14-graphics-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX27-applied-studio-14-graphics-supplemental-3/solution"
 				}
 			]
 		},
@@ -694,9 +874,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP_practice"
 				},
 				{
-					title: "CPP practice: Open Practice",
+					title: "Applied Studio 15: CPP practice supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: CPP practice. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: CPP practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX28-applied-studio-15-cpp-practice-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX28-applied-studio-15-cpp-practice-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 15: CPP practice supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: CPP practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX29-applied-studio-15-cpp-practice-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX29-applied-studio-15-cpp-practice-supplemental-3/solution"
 				}
 			]
 		},
@@ -739,9 +932,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/solution"
 				},
 				{
-					title: "J1X01 java foundations build 12: Open Practice",
+					title: "Applied Studio 16: J1X01 java foundations build 12 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: J1X01 java foundations build 12. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: J1X01 java foundations build 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX30-applied-studio-16-j1x01-java-foundations-build-1/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX30-applied-studio-16-j1x01-java-foundations-build-1/solution"
+				},
+				{
+					title: "Applied Studio 16: J1X01 java foundations build 12 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: J1X01 java foundations build 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX31-applied-studio-16-j1x01-java-foundations-build-1/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX31-applied-studio-16-j1x01-java-foundations-build-1/solution"
 				}
 			]
 		},
@@ -784,9 +990,22 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/solution"
 				},
 				{
-					title: "c foundations build 13: Open Practice",
+					title: "Applied Studio 17: c foundations build 13 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: c foundations build 13. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: c foundations build 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX32-applied-studio-17-c-foundations-build-13-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-1/tree/main/BRGX32-applied-studio-17-c-foundations-build-13-supplem/solution"
+				},
+				{
+					title: "Applied Studio 17: c foundations build 13 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: c foundations build 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX33-applied-studio-17-c-foundations-build-13-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/BRGX33-applied-studio-17-c-foundations-build-13-supplem/solution"
 				}
 			]
 		}

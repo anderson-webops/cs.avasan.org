@@ -43,9 +43,18 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS1-Variables-Reference"
 				},
 				{
-					title: "APCS0 Setup, Positioning, and Exam Workflow: Fluency Drill",
+					title: "Array Reference",
 					content:
-						"Repeat the core ideas from APCS0 Setup, Positioning, and Exam Workflow on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to APCS0 Setup, Positioning, and Exam Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Array-Reference"
+				},
+				{
+					title: "Farm Class",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to APCS0 Setup, Positioning, and Exam Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Farm-Class"
 				}
 			]
 		},
@@ -107,9 +116,11 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS1-Rounding-It-Off"
 				},
 				{
-					title: "APCS Log: Variables, Strings, and Expressions",
+					title: "FortuneTeller Class",
 					content:
-						"Keep a brief AP-style study log for variables, strings, and expressions that records one code trace, one free-response-style explanation, and one note about how expression evaluation changes the value of each variable over time. The goal is to practice reasoning in the same form the exam expects."
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: Variables, Strings, and Expressions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-FortuneTeller-Class"
 				}
 			]
 		},
@@ -237,9 +248,11 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS4-While-Loop-and-Nested-Loop-Practice"
 				},
 				{
-					title: "APCS Log: Loops, Tracing, and Algorithmic Thinking",
+					title: "Future Date Unfinished Supplemental",
 					content:
-						"Keep a brief AP-style study log for loops, tracing, and algorithmic thinking that records one code trace, one free-response-style explanation, and one note about which loop boundary or update step is easiest to get wrong under exam pressure. The goal is to practice reasoning in the same form the exam expects."
+						"Use the linked starter and solution for a supplemental project tied to Unit 3: Loops, Tracing, and Algorithmic Thinking. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Future-Date-Unfinished-Supplemental"
 				}
 			]
 		},
@@ -427,9 +440,11 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS8-Many-Shapes"
 				},
 				{
-					title: "APCS Log: Inheritance and Polymorphism",
+					title: "Matrix Arithmetic",
 					content:
-						"Keep a brief AP-style study log for inheritance and polymorphism that records one code trace, one free-response-style explanation, and one note about which method call depends on the reference type and which depends on the actual object type. The goal is to practice reasoning in the same form the exam expects."
+						"Use the linked starter and solution for a supplemental project tied to Unit 6: Inheritance and Polymorphism. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Matrix-Arithmetic"
 				}
 			]
 		},
@@ -558,9 +573,11 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS10-Multiple-Choice-Reference"
 				},
 				{
-					title: "APCS Log: AP Exam Practice and Strategy",
+					title: "Random Mad Lib",
 					content:
-						"Keep a brief AP-style study log for ap exam practice and strategy that records one code trace, one free-response-style explanation, and one note about which question types still consume too much time and why. The goal is to practice reasoning in the same form the exam expects."
+						"Use the linked starter and solution for a supplemental project tied to Unit 8: AP Exam Practice and Strategy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Random-Mad-Lib"
 				}
 			]
 		},
@@ -758,9 +775,18 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-1-Additional-Practice-Project"
 				},
 				{
-					title: "APCS Check in 1 Additional Practice Project: Open Practice",
+					title: "String to Letters",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: APCS Check in 1 Additional Practice Project. Keep the scope tight, but require one meaningful design or reasoning decision. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: APCS Check in 1 Additional Practice Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-String-to-Letters"
+				},
+				{
+					title: "ArrayList Reference",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: APCS Check in 1 Additional Practice Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-ArrayList-Reference"
 				}
 			]
 		},
@@ -799,9 +825,18 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-2"
 				},
 				{
-					title: "APCS Check in 2: Open Practice",
+					title: "FortuneTeller Class",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: APCS Check in 2. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: APCS Check in 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-FortuneTeller-Class"
+				},
+				{
+					title: "Free Response Practice",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: APCS Check in 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-Free-Response-Practice"
 				}
 			]
 		},
@@ -840,9 +875,18 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3"
 				},
 				{
-					title: "APCS Check in 3: Open Practice",
+					title: "Multiple Choice Reference",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: APCS Check in 3. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: APCS Check in 3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-Multiple-Choice-Reference"
+				},
+				{
+					title: "ChatBot",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: APCS Check in 3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS12-ChatBot"
 				}
 			]
 		},
@@ -881,9 +925,18 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3-Additional-Practice-Project"
 				},
 				{
-					title: "APCS Check in 3 Additional Practice Project: Open Practice",
+					title: "Deck Class",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: APCS Check in 3 Additional Practice Project. Keep the scope tight, but require one meaningful design or reasoning decision. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: APCS Check in 3 Additional Practice Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS12-Deck-Class"
+				},
+				{
+					title: "Minimum and Maximum",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: APCS Check in 3 Additional Practice Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS12-Minimum-and-Maximum"
 				}
 			]
 		},
@@ -922,9 +975,18 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-4"
 				},
 				{
-					title: "APCS Check in 4: Open Practice",
+					title: "Suit Deck and Hand",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: APCS Check in 4. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: APCS Check in 4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS12-Suit-Deck-and-Hand"
+				},
+				{
+					title: "Suit Deck and Hand",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: APCS Check in 4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS12-Suit-Deck-and-Hand-Starter"
 				}
 			]
 		},
@@ -963,9 +1025,18 @@ export const apComputerScienceACourse: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS1-Strings-and-Printing-Reference"
 				},
 				{
-					title: "Strings and Printing Reference: Open Practice",
+					title: "Runtime Analysis",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: Strings and Printing Reference. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Strings and Printing Reference. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS13-Runtime-Analysis-Starter"
+				},
+				{
+					title: "Recursion Practice",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Strings and Printing Reference. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS15-Recursion-Practice"
 				}
 			]
 		}

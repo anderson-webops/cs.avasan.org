@@ -401,6 +401,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 8: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 8: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 8: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -438,6 +443,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 9: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 9: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 9: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -475,6 +485,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 10: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 10: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 10: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -512,6 +527,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 11: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 11: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 11: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -549,6 +569,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 12: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 12: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 12: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -586,6 +611,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 13: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 13: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 13: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -623,6 +653,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 14: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 14: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 14: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -660,6 +695,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 15: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 15: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 15: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -697,6 +737,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 16: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 16: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 16: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -734,6 +779,11 @@ export const introToPhysicsCourse: RawCourse = {
 					title: "physics lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 17: physics lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 17: physics lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 17: physics lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		}

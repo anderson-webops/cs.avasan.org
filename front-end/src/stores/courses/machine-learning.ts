@@ -43,9 +43,18 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification"
 				},
 				{
-					title: "ML0 Setup, Tooling, and Data Workflow: Fluency Drill",
+					title: "Simple Polynomial Regression",
 					content:
-						"Repeat the core ideas from ML0 Setup, Tooling, and Data Workflow on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML0 Setup, Tooling, and Data Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Polynomial-Regression"
+				},
+				{
+					title: "Simple Polynomial Regression",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML0 Setup, Tooling, and Data Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Polynomial-Regression-Starter"
 				}
 			]
 		},
@@ -114,9 +123,18 @@ export const machineLearningCourse: RawCourse = {
 						"https://static.classes.jacobdanderson.net/ml1_supplemental_project_1.mp4"
 				},
 				{
-					title: "K Means Clustering: Fluency Drill",
+					title: "Simple Polynomial Regression",
 					content:
-						"Repeat the core ideas from ML1 K-Means Clustering on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML1 K-Means Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Polynomial-Regression-Updated"
+				},
+				{
+					title: "Weather Image Classifier",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML1 K-Means Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML7-Weather-Image-Classifier"
 				}
 			]
 		},
@@ -181,9 +199,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification-Updated"
 				},
 				{
-					title: "K Nearest Neighbors: Fluency Drill",
+					title: "K Nearest Neighbors supplemental 2",
 					content:
-						"Repeat the core ideas from ML2 K-Nearest Neighbors on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML2 K-Nearest Neighbors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX01-ml2-k-nearest-neighbors-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX01-ml2-k-nearest-neighbors-supplemental-2/solution"
+				},
+				{
+					title: "K Nearest Neighbors supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML2 K-Nearest Neighbors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX02-ml2-k-nearest-neighbors-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX02-ml2-k-nearest-neighbors-supplemental-3/solution"
 				}
 			]
 		},
@@ -236,9 +267,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML3-Naive-Bayes-Iris-Flowers-Classification"
 				},
 				{
-					title: "Naive Bayes: Fluency Drill",
+					title: "Naive Bayes supplemental 2",
 					content:
-						"Repeat the core ideas from ML3 Naive Bayes on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML3 Naive Bayes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX03-ml3-naive-bayes-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX03-ml3-naive-bayes-supplemental-2/solution"
+				},
+				{
+					title: "Naive Bayes supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML3 Naive Bayes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX04-ml3-naive-bayes-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX04-ml3-naive-bayes-supplemental-3/solution"
 				}
 			]
 		},
@@ -282,9 +326,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Diabetes-Diagnosis-With-Neural-Networks"
 				},
 				{
-					title: "ML3.5 Decision Trees and Interpretable Models: Fluency Drill",
+					title: "ML3.5 Decision Trees and Interpretable Models supplemental 2",
 					content:
-						"Repeat the core ideas from ML3.5 Decision Trees and Interpretable Models on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML3.5 Decision Trees and Interpretable Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX05-ml3-5-decision-trees-and-interpretable-models-su/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX05-ml3-5-decision-trees-and-interpretable-models-su/solution"
+				},
+				{
+					title: "ML3.5 Decision Trees and Interpretable Models supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML3.5 Decision Trees and Interpretable Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX06-ml3-5-decision-trees-and-interpretable-models-su/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX06-ml3-5-decision-trees-and-interpretable-models-su/solution"
 				}
 			]
 		},
@@ -353,9 +410,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Neuron-Implementation"
 				},
 				{
-					title: "Neural Networks: Fluency Drill",
+					title: "Neural Networks supplemental 2",
 					content:
-						"Repeat the core ideas from ML4 Neural Networks on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML4 Neural Networks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX07-ml4-neural-networks-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX07-ml4-neural-networks-supplemental-2/solution"
+				},
+				{
+					title: "Neural Networks supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML4 Neural Networks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX08-ml4-neural-networks-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX08-ml4-neural-networks-supplemental-3/solution"
 				}
 			]
 		},
@@ -422,9 +492,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Linear-Regression-Updated"
 				},
 				{
-					title: "Introduction to Regression: Fluency Drill",
+					title: "Introduction to Regression supplemental 2",
 					content:
-						"Repeat the core ideas from ML5 Introduction to Regression on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML5 Introduction to Regression. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX09-ml5-introduction-to-regression-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX09-ml5-introduction-to-regression-supplemental-2/solution"
+				},
+				{
+					title: "Introduction to Regression supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML5 Introduction to Regression. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX10-ml5-introduction-to-regression-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX10-ml5-introduction-to-regression-supplemental-3/solution"
 				}
 			]
 		},
@@ -467,9 +550,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML6-Predicting-House-Prices"
 				},
 				{
-					title: "Regression with Neural Networks: Fluency Drill",
+					title: "Regression with Neural Networks supplemental 2",
 					content:
-						"Repeat the core ideas from ML6 Regression with Neural Networks on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML6 Regression with Neural Networks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX11-ml6-regression-with-neural-networks-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX11-ml6-regression-with-neural-networks-supplemental/solution"
+				},
+				{
+					title: "Regression with Neural Networks supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML6 Regression with Neural Networks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX12-ml6-regression-with-neural-networks-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX12-ml6-regression-with-neural-networks-supplemental/solution"
 				}
 			]
 		},
@@ -516,9 +612,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://colab.research.google.com/drive/1YvuhSoBOXsV7Iip3Xu5AGgQC4LmJWbnL?usp=sharing"
 				},
 				{
-					title: "Image Classifier: Fluency Drill",
+					title: "Image Classifier supplemental 2",
 					content:
-						"Repeat the core ideas from ML7 Image Classifier on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to ML7 Image Classifier. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX13-ml7-image-classifier-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX13-ml7-image-classifier-supplemental-2/solution"
+				},
+				{
+					title: "Image Classifier supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML7 Image Classifier. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX14-ml7-image-classifier-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX14-ml7-image-classifier-supplemental-3/solution"
 				}
 			]
 		},
@@ -562,9 +671,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression"
 				},
 				{
-					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy: Fluency Drill",
+					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy supplemental 2",
 					content:
-						"Repeat the core ideas from ML7.5 Model Evaluation, Comparison, and Dataset Strategy on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning."
+						"Use the linked starter and solution for a supplemental project tied to ML7.5 Model Evaluation, Comparison, and Dataset Strategy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX15-ml7-5-model-evaluation-comparison-and-dataset-st/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX15-ml7-5-model-evaluation-comparison-and-dataset-st/solution"
+				},
+				{
+					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML7.5 Model Evaluation, Comparison, and Dataset Strategy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX16-ml7-5-model-evaluation-comparison-and-dataset-st/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX16-ml7-5-model-evaluation-comparison-and-dataset-st/solution"
 				}
 			]
 		},
@@ -613,9 +735,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML8-Master-Project"
 				},
 				{
-					title: "Master Project: Fluency Drill",
+					title: "Master Project supplemental 2",
 					content:
-						"Repeat the core ideas from ML8 Master Project on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to ML8 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX17-ml8-master-project-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX17-ml8-master-project-supplemental-2/solution"
+				},
+				{
+					title: "Master Project supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to ML8 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX18-ml8-master-project-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX18-ml8-master-project-supplemental-3/solution"
 				}
 			]
 		},
@@ -654,9 +789,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
-					title: "Customer Segmentation: Open Practice",
+					title: "Applied Studio 12: Customer Segmentation supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: Customer Segmentation. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: Customer Segmentation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX19-applied-studio-12-customer-segmentation-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX19-applied-studio-12-customer-segmentation-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 12: Customer Segmentation supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: Customer Segmentation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX20-applied-studio-12-customer-segmentation-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX20-applied-studio-12-customer-segmentation-suppleme/solution"
 				}
 			]
 		},
@@ -695,9 +843,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Interview-Starter"
 				},
 				{
-					title: "Customer Segmentation Interview: Open Practice",
+					title: "Applied Studio 13: Customer Segmentation Interview supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: Customer Segmentation Interview. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Customer Segmentation Interview. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX21-applied-studio-13-customer-segmentation-intervie/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX21-applied-studio-13-customer-segmentation-intervie/solution"
+				},
+				{
+					title: "Applied Studio 13: Customer Segmentation Interview supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Customer Segmentation Interview. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX22-applied-studio-13-customer-segmentation-intervie/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX22-applied-studio-13-customer-segmentation-intervie/solution"
 				}
 			]
 		},
@@ -736,9 +897,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter"
 				},
 				{
-					title: "Customer Segmentation: Open Practice",
+					title: "Applied Studio 14: Customer Segmentation supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: Customer Segmentation. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Customer Segmentation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX23-applied-studio-14-customer-segmentation-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX23-applied-studio-14-customer-segmentation-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 14: Customer Segmentation supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Customer Segmentation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX24-applied-studio-14-customer-segmentation-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX24-applied-studio-14-customer-segmentation-suppleme/solution"
 				}
 			]
 		},
@@ -777,9 +951,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{
-					title: "Disney Movie Clustering: Open Practice",
+					title: "Applied Studio 15: Disney Movie Clustering supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: Disney Movie Clustering. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Disney Movie Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX25-applied-studio-15-disney-movie-clustering-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX25-applied-studio-15-disney-movie-clustering-supple/solution"
+				},
+				{
+					title: "Applied Studio 15: Disney Movie Clustering supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Disney Movie Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX26-applied-studio-15-disney-movie-clustering-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX26-applied-studio-15-disney-movie-clustering-supple/solution"
 				}
 			]
 		},
@@ -818,9 +1005,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter"
 				},
 				{
-					title: "Disney Movie Clustering: Open Practice",
+					title: "Applied Studio 16: Disney Movie Clustering supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: Disney Movie Clustering. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Disney Movie Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX27-applied-studio-16-disney-movie-clustering-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX27-applied-studio-16-disney-movie-clustering-supple/solution"
+				},
+				{
+					title: "Applied Studio 16: Disney Movie Clustering supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Disney Movie Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX28-applied-studio-16-disney-movie-clustering-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX28-applied-studio-16-disney-movie-clustering-supple/solution"
 				}
 			]
 		},
@@ -859,9 +1059,22 @@ export const machineLearningCourse: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification-Updated"
 				},
 				{
-					title: "KNN Car Classification: Open Practice",
+					title: "Applied Studio 17: KNN Car Classification supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: KNN Car Classification. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: KNN Car Classification. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX29-applied-studio-17-knn-car-classification-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX29-applied-studio-17-knn-car-classification-supplem/solution"
+				},
+				{
+					title: "Applied Studio 17: KNN Car Classification supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: KNN Car Classification. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX30-applied-studio-17-knn-car-classification-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/MLX30-applied-studio-17-knn-car-classification-supplem/solution"
 				}
 			]
 		}

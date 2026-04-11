@@ -62,9 +62,22 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/9023ac5a2ab1213c64d59d7b864aef8d"
 				},
 				{
-					title: "Check In #1: Fluency Drill",
+					title: "Check In #1 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #1 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX01-check-in-1-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX01-check-in-1-supplemental-2/solution"
+				},
+				{
+					title: "Check In #1 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX02-check-in-1-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX02-check-in-1-supplemental-3/solution"
 				}
 			]
 		},
@@ -115,9 +128,22 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/ce3da888e3e72bcaff1251f225b2f6fa"
 				},
 				{
-					title: "Check In #2: Fluency Drill",
+					title: "Check In #2 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #2 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX03-check-in-2-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX03-check-in-2-supplemental-2/solution"
+				},
+				{
+					title: "Check In #2 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX04-check-in-2-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX04-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -379,9 +405,22 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/eb1d816cbecce4d20944284fc085ae36"
 				},
 				{
-					title: "Combining Loops and Variables: Fluency Drill",
+					title: "Combining Loops and Variables supplemental 2",
 					content:
-						"Repeat the core ideas from JSS4 Combining Loops and Variables on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSS4 Combining Loops and Variables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX05-jss4-combining-loops-and-variables-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX05-jss4-combining-loops-and-variables-supplemental-/solution"
+				},
+				{
+					title: "Combining Loops and Variables supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS4 Combining Loops and Variables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX06-jss4-combining-loops-and-variables-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX06-jss4-combining-loops-and-variables-supplemental-/solution"
 				}
 			]
 		},
@@ -524,6 +563,15 @@ export const javascriptLevel1Course: RawCourse = {
 					projectLink: "https://codepen.io/junilearning/pen/mdVGXLE",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/67b0c29a104afde9cce553de6cacf882"
+				},
+				{
+					title: "Advanced Conditionals supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS6 Advanced Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX07-jss6-advanced-conditionals-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX07-jss6-advanced-conditionals-supplemental-3/solution"
 				}
 			]
 		},
@@ -698,6 +746,15 @@ export const javascriptLevel1Course: RawCourse = {
 						"Work through https://flexboxfroggy.com/ to learn flexbox. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink: "https://flexboxfroggy.com/",
 					solutionLink: "https://flexboxfroggy.com/"
+				},
+				{
+					title: "Introduction to HTML & CSS supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS9 Introduction to HTML & CSS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX08-jss9-introduction-to-html-css-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX08-jss9-introduction-to-html-css-supplemental-3/solution"
 				}
 			]
 		},
@@ -763,6 +820,15 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/36846ad022b36b072833ace22a9edbef",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/b858a6f5c9b50333229dd36700cc4ac0"
+				},
+				{
+					title: "Animations in JavaScript supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS10 Animations in JavaScript. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX09-jss10-animations-in-javascript-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX09-jss10-animations-in-javascript-supplemental-3/solution"
 				}
 			]
 		},
@@ -811,9 +877,22 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/3efe23650b01fd4f978f3f827cc1691e"
 				},
 				{
-					title: "JSS11 Supplemental Project 2: W3 CSS Tutorial",
+					title: "More HTML & CSS supplemental 2",
 					content:
-						"Optional deeper CSS practice at https://www.w3schools.com/css/. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to JSS11 More HTML & CSS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX10-jss11-more-html-css-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX10-jss11-more-html-css-supplemental-2/solution"
+				},
+				{
+					title: "More HTML & CSS supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS11 More HTML & CSS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX11-jss11-more-html-css-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX11-jss11-more-html-css-supplemental-3/solution"
 				}
 			]
 		},
@@ -878,9 +957,22 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/0bbd6c8223876a9fa514f42411e3f37d"
 				},
 				{
-					title: "Basic Website Layout: Fluency Drill",
+					title: "Basic Website Layout supplemental 2",
 					content:
-						"Repeat the core ideas from JSS12 Basic Website Layout on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSS12 Basic Website Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX12-jss12-basic-website-layout-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX12-jss12-basic-website-layout-supplemental-2/solution"
+				},
+				{
+					title: "Basic Website Layout supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS12 Basic Website Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX13-jss12-basic-website-layout-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX13-jss12-basic-website-layout-supplemental-3/solution"
 				}
 			]
 		},
@@ -947,6 +1039,15 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/8a2437122b9c7eb4159c9cacccdedae8",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/45dabf41b44570f312ef9334db333f97"
+				},
+				{
+					title: "The Grid Layout supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS13 The Grid Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX14-jss13-the-grid-layout-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX14-jss13-the-grid-layout-supplemental-3/solution"
 				}
 			]
 		},
@@ -1018,6 +1119,15 @@ export const javascriptLevel1Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/bba3ef0f2520577fb92d3fc6cc546335",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/1d2df4b333d28c9a00f17d0fa4f37978"
+				},
+				{
+					title: "Dynamic Websites with JavaScript supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSS14 Dynamic Websites with JavaScript. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX15-jss14-dynamic-websites-with-javascript-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSSX15-jss14-dynamic-websites-with-javascript-supplemen/solution"
 				}
 			]
 		},

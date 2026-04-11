@@ -93,6 +93,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Review: Events, Loops, Conditionals, & Broadcasting: Fluency Drill",
 					content:
 						"Repeat the core ideas from GM1 Review: Events, Loops, Conditionals, & Broadcasting on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Review: Events, Loops, Conditionals, & Broadcasting: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM1 Review: Events, Loops, Conditionals, & Broadcasting. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -190,6 +195,11 @@ export const scratchLevel2Course: RawCourse = {
 						"Use the left and right arrow keys to help the butterfly escape the hungry frog!\n1. When the green flag is pressed, make the butterfly go to (-60, 0) and the frog go to (-170, 0).\n2. Next, the frog should say “I'm hungry”, “Ooh, a butterfly!”, and “I'm coming to get you!” for two seconds each.\n3. After the frog broadcasts, it should start moving a random number of steps from 0 to 3 for the rest of the game. To make the game harder, you can increase the number of steps!\n4. Let's help the butterfly escape! When it receives that the game has started, use the “wait until” block to make it move forward 5 steps when the user alternates between clicking the left and right key.\n5. You might be able to cheat and hold down both keys, so think about how you could use complex conditionals to fix this!\n6. If the butterfly is touching the frog, make it stop the other scripts, broadcast that you lost the game, and then hide (that means we need to show it at the beginning).\n7. If the butterfly touches the dark purple tree on the other side of the screen, make it broadcast that you won the game and glide off the screen.\n8. When the frog receives these win and lose broadcasts, make it stop the other scripts and respond accordingly to its meal!",
 					projectLink: "https://scratch.mit.edu/projects/335798048",
 					solutionLink: "https://scratch.mit.edu/projects/335794365"
+				},
+				{
+					title: "Complex Conditionals: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM3 Complex Conditionals. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -233,6 +243,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Cloning: Fluency Drill",
 					content:
 						"Repeat the core ideas from GM4 Cloning on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Cloning: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM4 Cloning. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -276,6 +291,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Check in #1: Fluency Drill",
 					content:
 						"Repeat the core ideas from Check-in #1 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Check in #1: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Check-in #1. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -321,6 +341,11 @@ export const scratchLevel2Course: RawCourse = {
 						'Build a spelling test for yourself to practice your spelling!\n1. The starter code already has a secret word picked out and saved in the Secret Word variable for you.\n2. Add the Text to Speech extension and speak the secret word to the user.\n3. Ask the user to enter each letter of the word one by one. If the letter is correct, speak "Correct!" Otherwise end the game. (Hint: think about how to repeat through the word letter by letter.)\n4. If the user has spelled the entire word correctly, speak "You spelled [secret word] correctly! Great work!"',
 					projectLink: "https://scratch.mit.edu/projects/338829500",
 					solutionLink: "https://scratch.mit.edu/projects/338832976"
+				},
+				{
+					title: "Strings: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM5 Strings. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -366,6 +391,11 @@ export const scratchLevel2Course: RawCourse = {
 						"Help Dotty graph the absolute value function!\n1. When the green flag is clicked, make Dotty go to the center of the screen and ask what x coordinate she should go to.\n2. First, change her x-coordinate to the user's answer, then change her y-coordinate to the absolute value of the answer (hint: this is a mathematical operator).\n3. Make her say what her new coordinates are and then leave a stamp with the pen tool.\n4. Repeat this code 10 times so that we graph 10 points of the function.\n5. Next, make Dotty go to (-180,180), put the pen down, and then repeatedly increase the x position by 1 and update the y position to be the absolute value of the x position.",
 					projectLink: "https://scratch.mit.edu/projects/341759115",
 					solutionLink: "https://scratch.mit.edu/projects/338501835/"
+				},
+				{
+					title: "Mathematical Operators: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM6 Mathematical Operators. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -413,6 +443,11 @@ export const scratchLevel2Course: RawCourse = {
 						"Welcome to the Wheel of Fortune! In this game, the user has a certain number of guesses to guess every letter of the secret word.\n1. Construct a word bank using a list, from which the computer will choose a random word of at the beginning of each game.\n2. Once the secret word is decided, add all the letters of the word to a new list and count the total number of unique letters in the word. Use this variable to keep track of the total number of letters the user needs to guess correctly. As you are adding the letters, make sure you don't add the same letter twice.\n3. Ask the user to guess a letter. If they guess a letter that is in the secret word (and they have not already guessed this letter), add this letter to the guess list and and update the variable you are using to keep track of how many correct guesses the user has made.\n4. Allow the user a certain number of guesses to win the game (for example, the length of the word, plus 5).\n5. The user wins the game if they have correctly guessed all of the letters in the word, and they lose if they run out of guesses!",
 					projectLink: "https://scratch.mit.edu/projects/340691786",
 					solutionLink: "https://scratch.mit.edu/projects/342643080"
+				},
+				{
+					title: "Lists: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM7 Lists. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -458,6 +493,11 @@ export const scratchLevel2Course: RawCourse = {
 						"Let's play rock, paper, scissors!\n1. Take a look at the final project and then look at the code provided for you. All of the pink function blocks are the functions you need to write!\n2. The “get computer answer” function should randomly pick rock, paper, or scissors and store it in a variable. Try using a list to do this!\n3. The “get player answer” function will ask the player for rock, paper, or scissors and store it in a variable. If the user inputs something else, make sure to keep asking until they input either rock, paper, or scissors.\n4. The “find winner” function needs to look at the two different answers and determines the winner. Remember, rock beats scissors, scissors beat paper, and paper beats rock!\n5. You might also find it helpful to write functions for player wins, computer wins, and tie.",
 					projectLink: "https://scratch.mit.edu/projects/339972570/",
 					solutionLink: "https://scratch.mit.edu/projects/339731727/"
+				},
+				{
+					title: "Functions: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM8 Functions. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -507,6 +547,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Check in #2: Fluency Drill",
 					content:
 						"Repeat the core ideas from Check-in #2 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Check in #2: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Check-in #2. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -548,6 +593,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Fish Food: Fluency Drill",
 					content:
 						"Repeat the core ideas from GM9 Fish Food on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Fish Food: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM9 Fish Food. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -589,6 +639,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Treasure Cave: Fluency Drill",
 					content:
 						"Repeat the core ideas from GM10 Treasure Cave on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Treasure Cave: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM10 Treasure Cave. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -626,6 +681,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "GM11 Master Project: Fluency Drill",
 					content:
 						"Repeat the core ideas from GM11 Master Project on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+				},
+				{
+					title: "GM11 Master Project: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GM11 Master Project. Keep the scope small, but require one meaningful design or reasoning choice. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
 				}
 			]
 		},
@@ -663,6 +723,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Scratch systems studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 14: Scratch systems studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 14: Scratch systems studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 14: Scratch systems studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -700,6 +765,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Scratch systems studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 15: Scratch systems studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 15: Scratch systems studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 15: Scratch systems studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -737,6 +807,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Scratch systems studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 16: Scratch systems studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 16: Scratch systems studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 16: Scratch systems studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -774,6 +849,11 @@ export const scratchLevel2Course: RawCourse = {
 					title: "Scratch systems studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 17: Scratch systems studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 17: Scratch systems studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 17: Scratch systems studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		}

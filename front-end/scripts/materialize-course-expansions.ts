@@ -51,7 +51,7 @@ const INSTRUCTION_MATERIAL_ROOT =
 	"/Users/jacobanderson/Documents/Work/Instruction-Material";
 const TARGET_MODULE_COUNT = 17;
 const TARGET_CURRICULUM_ITEMS = 4;
-const TARGET_SUPPLEMENTAL_ITEMS = 2;
+const TARGET_SUPPLEMENTAL_ITEMS = 3;
 
 const HIDDEN_ITEM_TITLES = new Set([
 	"session recap & assignment",
@@ -70,10 +70,11 @@ const DEDICATED_SOLUTION_SEGMENT_RE =
 	/(?:^|\/)solution(?:\/|$)|(?:^|[-_])solution(?:[-_]|$)/i;
 const SENTENCE_END_RE = /[.!?]$/;
 const TRAILING_SLASH_RE = /\/$/;
-const TRAILING_URL_PUNCTUATION_RE = /[),.;:]+$/;
+const TRAILING_URL_PUNCTUATION_RE = /[,.;:]+$/;
 const GITHUB_BLOB_SEGMENT_RE = /\/blob\//i;
 const FIRST_WHITESPACE_RE = /\s/;
 const CHECK_IN_PREFIX_RE = /^check-?in\s*#?\d*:?\s*/i;
+const DUPLICATE_COLON_TITLE_RE = /^(.+): \1$/;
 const PROJECT_ADDITION_SENTENCE =
 	"Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.";
 const GENERAL_ADDITION_SENTENCE =
@@ -488,6 +489,11 @@ function normalizeContent(content: string) {
 		.trim();
 }
 
+function dedupeRepeatedTitle(title: string) {
+	const duplicateMatch = title.match(DUPLICATE_COLON_TITLE_RE);
+	return duplicateMatch?.[1] ?? title;
+}
+
 function expandSlightly(title: string, content: string) {
 	let normalizedContent = content
 		.replace(` ${PROJECT_ADDITION_SENTENCE}`, "")
@@ -515,7 +521,7 @@ function normalizeItem(item: RawCourseModuleItem): RawCourseModuleItem {
 	const normalizedSolutionLink = canonicalizeResourceUrl(item.solutionLink);
 
 	return {
-		title: item.title.trim(),
+		title: dedupeRepeatedTitle(item.title.trim()),
 		content: expandSlightly(
 			item.title,
 			normalizeContent(extractedLink?.content ?? item.content)
@@ -596,6 +602,26 @@ function buildSupplementalSupportItem(
 		}
 	];
 	return variants[(index - 1) % variants.length];
+}
+
+function buildLinkedSupplementalProjectItem(
+	moduleTitle: string,
+	focus: string,
+	index: number,
+	resource: ResourceEntry
+): RawCourseModuleItem {
+	const resourceLabel = humanizeResourceLabel(resource.label);
+	const title =
+		resourceLabel && slugify(resourceLabel) !== slugify(focus)
+			? `${focus}: ${resourceLabel}`
+			: `${focus}: Supplemental Project ${index}`;
+
+	return {
+		title,
+		content: `Use the linked starter and solution for a supplemental project tied to ${moduleTitle}. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.`,
+		projectLink: resource.projectLink,
+		solutionLink: resource.solutionLink
+	};
 }
 
 function humanizeResourceLabel(label: string) {
@@ -1662,6 +1688,10 @@ async function main() {
 					{
 						title: `${focus}: Open Practice`,
 						content: `Create a compact variant inspired by ${moduleTitle}. Keep the scope tight, but require one meaningful design or reasoning decision.`
+					},
+					{
+						title: `${focus}: Integration Drill`,
+						content: `Rebuild one part of ${moduleTitle} under a slightly different constraint so students practice transfer instead of repeating the exact same steps.`
 					}
 				]
 			};
@@ -1692,15 +1722,82 @@ async function main() {
 				);
 			}
 
+			if (config.codeBacked) {
+				for (
+					let supplementalIndex = 0;
+					supplementalIndex < module.supplementalProjects.length;
+					supplementalIndex++
+				) {
+					const supplementalProject =
+						module.supplementalProjects[supplementalIndex];
+
+					if (
+						supplementalProject.projectLink ||
+						supplementalProject.solutionLink
+					) {
+						continue;
+					}
+
+					const supplementalResource = await allocateResource(
+						entry.id,
+						`${module.title} supplemental ${supplementalIndex + 1}`,
+						moduleIndex + supplementalIndex + 1
+					);
+
+					if (!supplementalResource) {
+						continue;
+					}
+
+					const focus = nextFocusLabel(
+						module.title,
+						supplementalResource,
+						config
+					);
+					module.supplementalProjects[supplementalIndex] =
+						buildLinkedSupplementalProjectItem(
+							module.title,
+							focus,
+							supplementalIndex + 1,
+							supplementalResource
+						);
+				}
+			}
+
 			while (
 				module.supplementalProjects.length < TARGET_SUPPLEMENTAL_ITEMS
 			) {
 				const focus = nextFocusLabel(module.title, resource, config);
+				const supplementalIndex =
+					module.supplementalProjects.length + 1;
+				if (config.codeBacked) {
+					const supplementalResource = await allocateResource(
+						entry.id,
+						`${module.title} supplemental ${supplementalIndex}`,
+						moduleIndex + supplementalIndex
+					);
+
+					if (supplementalResource) {
+						module.supplementalProjects.push(
+							buildLinkedSupplementalProjectItem(
+								module.title,
+								nextFocusLabel(
+									module.title,
+									supplementalResource,
+									config
+								),
+								supplementalIndex,
+								supplementalResource
+							)
+						);
+						continue;
+					}
+				}
+
 				module.supplementalProjects.push(
 					buildSupplementalSupportItem(
 						module.title,
 						focus,
-						module.supplementalProjects.length + 1
+						supplementalIndex
 					)
 				);
 			}

@@ -43,9 +43,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/music"
 				},
 				{
-					title: "PyG0 Setup, Editors, and Asset Workflow: Fluency Drill",
+					title: "Setup, Editors, and Asset Workflow supplemental 2",
 					content:
-						"Repeat the core ideas from PyG0 Setup, Editors, and Asset Workflow on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX01-pyg0-setup-editors-and-asset-workflow-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX01-pyg0-setup-editors-and-asset-workflow-supplement/solution"
+				},
+				{
+					title: "Setup, Editors, and Asset Workflow supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX02-pyg0-setup-editors-and-asset-workflow-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX02-pyg0-setup-editors-and-asset-workflow-supplement/solution"
 				}
 			]
 		},
@@ -117,9 +130,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Object Oriented Programming: Actors: Fluency Drill",
+					title: "Object Oriented Programming: Actors supplemental 2",
 					content:
-						"Repeat the core ideas from PyG1 Object-Oriented Programming: Actors on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX03-pyg1-object-oriented-programming-actors-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX03-pyg1-object-oriented-programming-actors-suppleme/solution"
+				},
+				{
+					title: "Object Oriented Programming: Actors supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX04-pyg1-object-oriented-programming-actors-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX04-pyg1-object-oriented-programming-actors-suppleme/solution"
 				}
 			]
 		},
@@ -181,9 +207,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Event Handling: Fluency Drill",
+					title: "Event Handling supplemental 2",
 					content:
-						"Repeat the core ideas from PyG2 Event Handling on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG2 Event Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX05-pyg2-event-handling-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX05-pyg2-event-handling-supplemental-2/solution"
+				},
+				{
+					title: "Event Handling supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG2 Event Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX06-pyg2-event-handling-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX06-pyg2-event-handling-supplemental-3/solution"
 				}
 			]
 		},
@@ -246,9 +285,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Object Oriented Programming: Advanced Actors: Fluency Drill",
+					title: "Object Oriented Programming: Advanced Actors supplemental 2",
 					content:
-						"Repeat the core ideas from PyG3 Object-Oriented Programming: Advanced Actors on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG3 Object-Oriented Programming: Advanced Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX07-pyg3-object-oriented-programming-advanced-actors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX07-pyg3-object-oriented-programming-advanced-actors/solution"
+				},
+				{
+					title: "Object Oriented Programming: Advanced Actors supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG3 Object-Oriented Programming: Advanced Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX08-pyg3-object-oriented-programming-advanced-actors/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX08-pyg3-object-oriented-programming-advanced-actors/solution"
 				}
 			]
 		},
@@ -305,9 +357,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Managing Multiple Objects: Collectibles: Fluency Drill",
+					title: "Managing Multiple Objects: Collectibles supplemental 2",
 					content:
-						"Repeat the core ideas from PyG4 Managing Multiple Objects: Collectibles on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX09-pyg4-managing-multiple-objects-collectibles-supp/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX09-pyg4-managing-multiple-objects-collectibles-supp/solution"
+				},
+				{
+					title: "Managing Multiple Objects: Collectibles supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX10-pyg4-managing-multiple-objects-collectibles-supp/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX10-pyg4-managing-multiple-objects-collectibles-supp/solution"
 				}
 			]
 		},
@@ -355,9 +420,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Check In #1: Actors, Events, ZRects, Collectibles: Fluency Drill",
+					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #1: Actors, Events, ZRects, Collectibles on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX11-check-in-1-actors-events-zrects-collectibles-sup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX11-check-in-1-actors-events-zrects-collectibles-sup/solution"
+				},
+				{
+					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX12-check-in-1-actors-events-zrects-collectibles-sup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX12-check-in-1-actors-events-zrects-collectibles-sup/solution"
 				}
 			]
 		},
@@ -419,9 +497,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Physics: Fluency Drill",
+					title: "Physics supplemental 2",
 					content:
-						"Repeat the core ideas from PyG5 Physics on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG5 Physics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX13-pyg5-physics-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX13-pyg5-physics-supplemental-2/solution"
+				},
+				{
+					title: "Physics supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG5 Physics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX14-pyg5-physics-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX14-pyg5-physics-supplemental-3/solution"
 				}
 			]
 		},
@@ -488,9 +579,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Managing Multiple Objects: Obstacles and Surfaces: Fluency Drill",
+					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 2",
 					content:
-						"Repeat the core ideas from PyG6 Managing Multiple Objects: Obstacles and Surfaces on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX15-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX15-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
+				},
+				{
+					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX16-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX16-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
 				}
 			]
 		},
@@ -538,9 +642,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Check In #2: Gravity, Friction, Platforms: Fluency Drill",
+					title: "Check In #2: Gravity, Friction, Platforms supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #2: Gravity, Friction, Platforms on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX17-check-in-2-gravity-friction-platforms-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX17-check-in-2-gravity-friction-platforms-supplement/solution"
+				},
+				{
+					title: "Check In #2: Gravity, Friction, Platforms supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX18-check-in-2-gravity-friction-platforms-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX18-check-in-2-gravity-friction-platforms-supplement/solution"
 				}
 			]
 		},
@@ -610,9 +727,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Levels and System Control: Fluency Drill",
+					title: "Levels and System Control supplemental 2",
 					content:
-						"Repeat the core ideas from PyG7 Levels and System Control on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG7 Levels and System Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX19-pyg7-levels-and-system-control-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX19-pyg7-levels-and-system-control-supplemental-2/solution"
+				},
+				{
+					title: "Levels and System Control supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG7 Levels and System Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX20-pyg7-levels-and-system-control-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX20-pyg7-levels-and-system-control-supplemental-3/solution"
 				}
 			]
 		},
@@ -663,9 +793,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Game Elements: Projectiles: Fluency Drill",
+					title: "Game Elements: Projectiles supplemental 2",
 					content:
-						"Repeat the core ideas from PyG8 Game Elements: Projectiles on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG8 Game Elements: Projectiles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX21-pyg8-game-elements-projectiles-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX21-pyg8-game-elements-projectiles-supplemental-2/solution"
+				},
+				{
+					title: "Game Elements: Projectiles supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG8 Game Elements: Projectiles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX22-pyg8-game-elements-projectiles-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX22-pyg8-game-elements-projectiles-supplemental-3/solution"
 				}
 			]
 		},
@@ -716,9 +859,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Game Elements: Enemy AI: Fluency Drill",
+					title: "Game Elements: Enemy AI supplemental 2",
 					content:
-						"Repeat the core ideas from PyG9 Game Elements: Enemy AI on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG9 Game Elements: Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX23-pyg9-game-elements-enemy-ai-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX23-pyg9-game-elements-enemy-ai-supplemental-2/solution"
+				},
+				{
+					title: "Game Elements: Enemy AI supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG9 Game Elements: Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX24-pyg9-game-elements-enemy-ai-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX24-pyg9-game-elements-enemy-ai-supplemental-3/solution"
 				}
 			]
 		},
@@ -761,9 +917,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Check In #3: System Control, Projectiles, Enemy AI: Fluency Drill",
+					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #3: System Control, Projectiles, Enemy AI on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX25-check-in-3-system-control-projectiles-enemy-ai-s/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX25-check-in-3-system-control-projectiles-enemy-ai-s/solution"
+				},
+				{
+					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX26-check-in-3-system-control-projectiles-enemy-ai-s/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX26-check-in-3-system-control-projectiles-enemy-ai-s/solution"
 				}
 			]
 		},
@@ -808,9 +977,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Ninja Versus Alien: Fluency Drill",
+					title: "Ninja Versus Alien supplemental 2",
 					content:
-						"Repeat the core ideas from PyG10 Ninja Versus Alien on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG10 Ninja Versus Alien. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX27-pyg10-ninja-versus-alien-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX27-pyg10-ninja-versus-alien-supplemental-2/solution"
+				},
+				{
+					title: "Ninja Versus Alien supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG10 Ninja Versus Alien. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX28-pyg10-ninja-versus-alien-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX28-pyg10-ninja-versus-alien-supplemental-3/solution"
 				}
 			]
 		},
@@ -855,9 +1037,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Space Invaders: Fluency Drill",
+					title: "Space Invaders supplemental 2",
 					content:
-						"Repeat the core ideas from PyG11 Space Invaders on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to PyG11 Space Invaders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX29-pyg11-space-invaders-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX29-pyg11-space-invaders-supplemental-2/solution"
+				},
+				{
+					title: "Space Invaders supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG11 Space Invaders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX30-pyg11-space-invaders-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX30-pyg11-space-invaders-supplemental-3/solution"
 				}
 			]
 		},
@@ -911,9 +1106,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/sounds"
 				},
 				{
-					title: "PyG12 Master Project: Fluency Drill",
+					title: "Master Project supplemental 2",
 					content:
-						"Repeat the core ideas from PyG12 Master Project on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to PyG12 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX31-pyg12-master-project-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX31-pyg12-master-project-supplemental-2/solution"
+				},
+				{
+					title: "Master Project supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to PyG12 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX32-pyg12-master-project-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX32-pyg12-master-project-supplemental-3/solution"
 				}
 			]
 		},
@@ -952,9 +1160,22 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/images"
 				},
 				{
-					title: "images: Open Practice",
+					title: "Applied Studio 17: images supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: images. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: images. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX33-applied-studio-17-images-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX33-applied-studio-17-images-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 17: images supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: images. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX34-applied-studio-17-images-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/PyGames/tree/main/PGX34-applied-studio-17-images-supplemental-3/solution"
 				}
 			]
 		}

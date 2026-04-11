@@ -73,9 +73,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Primitive-Types-and-Strings-Reference"
 				},
 				{
-					title: "Variables, Types, and Input/Output: Fluency Drill",
+					title: "Variables, Types, and Input/Output supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF1 Variables, Types, and Input/Output on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF1 Variables, Types, and Input/Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-cppf1-variables-types-and-input-output-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-cppf1-variables-types-and-input-output-supplemen/solution"
+				},
+				{
+					title: "Variables, Types, and Input/Output supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF1 Variables, Types, and Input/Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX02-cppf1-variables-types-and-input-output-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX02-cppf1-variables-types-and-input-output-supplemen/solution"
 				}
 			]
 		},
@@ -136,9 +149,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Number-Games"
 				},
 				{
-					title: "Loops and Conditionals: Fluency Drill",
+					title: "Loops and Conditionals supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF2 Loops and Conditionals on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF2 Loops and Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX03-cppf2-loops-and-conditionals-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX03-cppf2-loops-and-conditionals-supplemental-2/solution"
+				},
+				{
+					title: "Loops and Conditionals supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF2 Loops and Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX04-cppf2-loops-and-conditionals-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX04-cppf2-loops-and-conditionals-supplemental-3/solution"
 				}
 			]
 		},
@@ -194,9 +220,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Function-Practice"
 				},
 				{
-					title: "Functions: Fluency Drill",
+					title: "Functions supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF3 Functions on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF3 Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX05-cppf3-functions-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX05-cppf3-functions-supplemental-2/solution"
+				},
+				{
+					title: "Functions supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF3 Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX06-cppf3-functions-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX06-cppf3-functions-supplemental-3/solution"
 				}
 			]
 		},
@@ -260,9 +299,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Point-Class"
 				},
 				{
-					title: "Classes and Objects: Fluency Drill",
+					title: "Classes and Objects supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF4 Classes and Objects on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF4 Classes and Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX07-cppf4-classes-and-objects-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX07-cppf4-classes-and-objects-supplemental-2/solution"
+				},
+				{
+					title: "Classes and Objects supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF4 Classes and Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX08-cppf4-classes-and-objects-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX08-cppf4-classes-and-objects-supplemental-3/solution"
 				}
 			]
 		},
@@ -309,9 +361,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers"
 				},
 				{
-					title: "Pointers: Fluency Drill",
+					title: "Pointers supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF5 Pointers on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF5 Pointers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX09-cppf5-pointers-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX09-cppf5-pointers-supplemental-2/solution"
+				},
+				{
+					title: "Pointers supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF5 Pointers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX10-cppf5-pointers-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX10-cppf5-pointers-supplemental-3/solution"
 				}
 			]
 		},
@@ -367,9 +432,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Parameter-Passing-Introduction"
 				},
 				{
-					title: "References and Parameter Passing: Fluency Drill",
+					title: "References and Parameter Passing supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF6 References and Parameter Passing on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF6 References and Parameter Passing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX11-cppf6-references-and-parameter-passing-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX11-cppf6-references-and-parameter-passing-supplemen/solution"
+				},
+				{
+					title: "References and Parameter Passing supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF6 References and Parameter Passing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX12-cppf6-references-and-parameter-passing-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX12-cppf6-references-and-parameter-passing-supplemen/solution"
 				}
 			]
 		},
@@ -420,9 +498,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Tic-Tac-Toe"
 				},
 				{
-					title: "Arrays: Fluency Drill",
+					title: "Arrays supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF7 Arrays on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF7 Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX13-cppf7-arrays-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX13-cppf7-arrays-supplemental-2/solution"
+				},
+				{
+					title: "Arrays supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF7 Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX14-cppf7-arrays-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX14-cppf7-arrays-supplemental-3/solution"
 				}
 			]
 		},
@@ -469,9 +560,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Two-Dimensional-Arrays-Reference"
 				},
 				{
-					title: "Two Dimensional Arrays: Fluency Drill",
+					title: "Two Dimensional Arrays supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF8 Two-Dimensional Arrays on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF8 Two-Dimensional Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX15-cppf8-two-dimensional-arrays-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX15-cppf8-two-dimensional-arrays-supplemental-2/solution"
+				},
+				{
+					title: "Two Dimensional Arrays supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF8 Two-Dimensional Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX16-cppf8-two-dimensional-arrays-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX16-cppf8-two-dimensional-arrays-supplemental-3/solution"
 				}
 			]
 		},
@@ -539,9 +643,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Variables-Reference"
 				},
 				{
-					title: "Dynamic Arrays and Memory: Fluency Drill",
+					title: "Dynamic Arrays and Memory supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF9 Dynamic Arrays and Memory on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to CPPF9 Dynamic Arrays and Memory. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX17-cppf9-dynamic-arrays-and-memory-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX17-cppf9-dynamic-arrays-and-memory-supplemental-2/solution"
+				},
+				{
+					title: "Dynamic Arrays and Memory supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF9 Dynamic Arrays and Memory. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX18-cppf9-dynamic-arrays-and-memory-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX18-cppf9-dynamic-arrays-and-memory-supplemental-3/solution"
 				}
 			]
 		},
@@ -584,9 +701,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF10-Matrix-Addition"
 				},
 				{
-					title: "Master Project: Matrix Fun: Fluency Drill",
+					title: "Master Project: Matrix Fun supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF10 Master Project: Matrix Fun on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to CPPF10 Master Project: Matrix Fun. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX19-cppf10-master-project-matrix-fun-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX19-cppf10-master-project-matrix-fun-supplemental-2/solution"
+				},
+				{
+					title: "Master Project: Matrix Fun supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF10 Master Project: Matrix Fun. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX20-cppf10-master-project-matrix-fun-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX20-cppf10-master-project-matrix-fun-supplemental-3/solution"
 				}
 			]
 		},
@@ -629,9 +759,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF11-Profile-Posts"
 				},
 				{
-					title: "Master Project: Profile Posts: Fluency Drill",
+					title: "Master Project: Profile Posts supplemental 2",
 					content:
-						"Repeat the core ideas from CPPF11 Master Project: Profile Posts on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to CPPF11 Master Project: Profile Posts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX21-cppf11-master-project-profile-posts-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX21-cppf11-master-project-profile-posts-supplemental/solution"
+				},
+				{
+					title: "Master Project: Profile Posts supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to CPPF11 Master Project: Profile Posts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX22-cppf11-master-project-profile-posts-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX22-cppf11-master-project-profile-posts-supplemental/solution"
 				}
 			]
 		},
@@ -762,9 +905,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX02-c-foundations-build-14/solution"
 				},
 				{
-					title: "c foundations build 14: Open Practice",
+					title: "Applied Studio 13: c foundations build 14 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: c foundations build 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: c foundations build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX23-applied-studio-13-c-foundations-build-14-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX23-applied-studio-13-c-foundations-build-14-supplem/solution"
+				},
+				{
+					title: "Applied Studio 13: c foundations build 14 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: c foundations build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX24-applied-studio-13-c-foundations-build-14-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX24-applied-studio-13-c-foundations-build-14-supplem/solution"
 				}
 			]
 		},
@@ -807,9 +963,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX03-c-foundations-build-15/solution"
 				},
 				{
-					title: "c foundations build 15: Open Practice",
+					title: "Applied Studio 14: c foundations build 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: c foundations build 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: c foundations build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX25-applied-studio-14-c-foundations-build-15-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX25-applied-studio-14-c-foundations-build-15-supplem/solution"
+				},
+				{
+					title: "Applied Studio 14: c foundations build 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: c foundations build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX26-applied-studio-14-c-foundations-build-15-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX26-applied-studio-14-c-foundations-build-15-supplem/solution"
 				}
 			]
 		},
@@ -852,9 +1021,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX04-c-foundations-build-16/solution"
 				},
 				{
-					title: "c foundations build 16: Open Practice",
+					title: "Applied Studio 15: c foundations build 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: c foundations build 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: c foundations build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX27-applied-studio-15-c-foundations-build-16-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX27-applied-studio-15-c-foundations-build-16-supplem/solution"
+				},
+				{
+					title: "Applied Studio 15: c foundations build 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: c foundations build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX28-applied-studio-15-c-foundations-build-16-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX28-applied-studio-15-c-foundations-build-16-supplem/solution"
 				}
 			]
 		},
@@ -897,9 +1079,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX05-c-foundations-build-17/solution"
 				},
 				{
-					title: "c foundations build 17: Open Practice",
+					title: "Applied Studio 16: c foundations build 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: c foundations build 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: c foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX29-applied-studio-16-c-foundations-build-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX29-applied-studio-16-c-foundations-build-17-supplem/solution"
+				},
+				{
+					title: "Applied Studio 16: c foundations build 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: c foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX30-applied-studio-16-c-foundations-build-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX30-applied-studio-16-c-foundations-build-17-supplem/solution"
 				}
 			]
 		},
@@ -942,9 +1137,22 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-17/solution"
 				},
 				{
-					title: "C++ foundations build 17: Open Practice",
+					title: "Applied Studio 17: C++ foundations build 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: C++ foundations build 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: C++ foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX31-applied-studio-17-c-foundations-build-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX31-applied-studio-17-c-foundations-build-17-supplem/solution"
+				},
+				{
+					title: "Applied Studio 17: C++ foundations build 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: C++ foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX32-applied-studio-17-c-foundations-build-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX32-applied-studio-17-c-foundations-build-17-supplem/solution"
 				}
 			]
 		}

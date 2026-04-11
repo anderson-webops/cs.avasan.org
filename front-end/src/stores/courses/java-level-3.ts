@@ -61,9 +61,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Mad-Lib"
 				},
 				{
-					title: "Review: Variables, Strings, and Input: Fluency Drill",
+					title: "Review: Variables, Strings, and Input supplemental 2",
 					content:
-						"Repeat the core ideas from AJ1 Review: Variables, Strings, and Input on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X01-aj1-review-variables-strings-and-input-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X01-aj1-review-variables-strings-and-input-supplemen/solution"
+				},
+				{
+					title: "Review: Variables, Strings, and Input supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X02-aj1-review-variables-strings-and-input-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X02-aj1-review-variables-strings-and-input-supplemen/solution"
 				}
 			]
 		},
@@ -231,9 +244,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Student-Class"
 				},
 				{
-					title: "Review: Objects and Classes: Fluency Drill",
+					title: "Review: Objects and Classes supplemental 2",
 					content:
-						"Repeat the core ideas from AJ3 Review: Objects and Classes on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ3 Review: Objects and Classes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X03-aj3-review-objects-and-classes-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X03-aj3-review-objects-and-classes-supplemental-2/solution"
+				},
+				{
+					title: "Review: Objects and Classes supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ3 Review: Objects and Classes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X04-aj3-review-objects-and-classes-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X04-aj3-review-objects-and-classes-supplemental-3/solution"
 				}
 			]
 		},
@@ -285,9 +311,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Recursion-Practice"
 				},
 				{
-					title: "Recursion: Fluency Drill",
+					title: "Recursion supplemental 2",
 					content:
-						"Repeat the core ideas from AJ4 Recursion on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ4 Recursion. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X05-aj4-recursion-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X05-aj4-recursion-supplemental-2/solution"
+				},
+				{
+					title: "Recursion supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ4 Recursion. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X06-aj4-recursion-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X06-aj4-recursion-supplemental-3/solution"
 				}
 			]
 		},
@@ -334,9 +373,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Linear-Search"
 				},
 				{
-					title: "Linear Search and Big O Notation: Fluency Drill",
+					title: "Linear Search and Big O Notation supplemental 2",
 					content:
-						"Repeat the core ideas from AJ5 Linear Search and Big-O Notation on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X07-aj5-linear-search-and-big-o-notation-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X07-aj5-linear-search-and-big-o-notation-supplementa/solution"
+				},
+				{
+					title: "Linear Search and Big O Notation supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X08-aj5-linear-search-and-big-o-notation-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X08-aj5-linear-search-and-big-o-notation-supplementa/solution"
 				}
 			]
 		},
@@ -392,9 +444,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Iteration"
 				},
 				{
-					title: "Binary Search: Fluency Drill",
+					title: "Binary Search supplemental 2",
 					content:
-						"Repeat the core ideas from AJ6 Binary Search on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ6 Binary Search. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X09-aj6-binary-search-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X09-aj6-binary-search-supplemental-2/solution"
+				},
+				{
+					title: "Binary Search supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ6 Binary Search. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X10-aj6-binary-search-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X10-aj6-binary-search-supplemental-3/solution"
 				}
 			]
 		},
@@ -451,9 +516,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1"
 				},
 				{
-					title: "Check In #1: Fluency Drill",
+					title: "Check In #1 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #1 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X11-check-in-1-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X11-check-in-1-supplemental-2/solution"
+				},
+				{
+					title: "Check In #1 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X12-check-in-1-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X12-check-in-1-supplemental-3/solution"
 				}
 			]
 		},
@@ -510,9 +588,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Biggest-to-Smallest-Bookshelf"
 				},
 				{
-					title: "Selection and Insertion Sort: Fluency Drill",
+					title: "Selection and Insertion Sort supplemental 2",
 					content:
-						"Repeat the core ideas from AJ7 Selection and Insertion Sort on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ7 Selection and Insertion Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X13-aj7-selection-and-insertion-sort-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X13-aj7-selection-and-insertion-sort-supplemental-2/solution"
+				},
+				{
+					title: "Selection and Insertion Sort supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ7 Selection and Insertion Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X14-aj7-selection-and-insertion-sort-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X14-aj7-selection-and-insertion-sort-supplemental-3/solution"
 				}
 			]
 		},
@@ -559,9 +650,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Bubble-Sort"
 				},
 				{
-					title: "Bubble Sort: Fluency Drill",
+					title: "Bubble Sort supplemental 2",
 					content:
-						"Repeat the core ideas from AJ8 Bubble Sort on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ8 Bubble Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X15-aj8-bubble-sort-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X15-aj8-bubble-sort-supplemental-2/solution"
+				},
+				{
+					title: "Bubble Sort supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ8 Bubble Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X16-aj8-bubble-sort-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X16-aj8-bubble-sort-supplemental-3/solution"
 				}
 			]
 		},
@@ -617,9 +721,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge"
 				},
 				{
-					title: "Merge Sort: Fluency Drill",
+					title: "Merge Sort supplemental 2",
 					content:
-						"Repeat the core ideas from AJ9 Merge Sort on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ9 Merge Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X17-aj9-merge-sort-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X17-aj9-merge-sort-supplemental-2/solution"
+				},
+				{
+					title: "Merge Sort supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ9 Merge Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X18-aj9-merge-sort-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X18-aj9-merge-sort-supplemental-3/solution"
 				}
 			]
 		},
@@ -676,9 +793,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2"
 				},
 				{
-					title: "Check In #2: Fluency Drill",
+					title: "Check In #2 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #2 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X19-check-in-2-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X19-check-in-2-supplemental-2/solution"
+				},
+				{
+					title: "Check In #2 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X20-check-in-2-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X20-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -739,9 +869,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Juni-Bakery"
 				},
 				{
-					title: "Sustainable Programming: Fluency Drill",
+					title: "Sustainable Programming supplemental 2",
 					content:
-						"Repeat the core ideas from AJ10 Sustainable Programming on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ10 Sustainable Programming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X21-aj10-sustainable-programming-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X21-aj10-sustainable-programming-supplemental-2/solution"
+				},
+				{
+					title: "Sustainable Programming supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ10 Sustainable Programming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X22-aj10-sustainable-programming-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X22-aj10-sustainable-programming-supplemental-3/solution"
 				}
 			]
 		},
@@ -793,9 +936,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Linked-List"
 				},
 				{
-					title: "Linked Lists: Fluency Drill",
+					title: "Linked Lists supplemental 2",
 					content:
-						"Repeat the core ideas from AJ11 Linked Lists on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ11 Linked Lists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X23-aj11-linked-lists-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X23-aj11-linked-lists-supplemental-2/solution"
+				},
+				{
+					title: "Linked Lists supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ11 Linked Lists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X24-aj11-linked-lists-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X24-aj11-linked-lists-supplemental-3/solution"
 				}
 			]
 		},
@@ -916,9 +1072,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Priority-Queue"
 				},
 				{
-					title: "Priority Queues and Maps: Fluency Drill",
+					title: "Priority Queues and Maps supplemental 2",
 					content:
-						"Repeat the core ideas from AJ13 Priority Queues and Maps on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ13 Priority Queues and Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X25-aj13-priority-queues-and-maps-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X25-aj13-priority-queues-and-maps-supplemental-2/solution"
+				},
+				{
+					title: "Priority Queues and Maps supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ13 Priority Queues and Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X26-aj13-priority-queues-and-maps-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X26-aj13-priority-queues-and-maps-supplemental-3/solution"
 				}
 			]
 		},
@@ -976,9 +1145,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3"
 				},
 				{
-					title: "Check In #3: Fluency Drill",
+					title: "Check In #3 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #3 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X27-check-in-3-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X27-check-in-3-supplemental-2/solution"
+				},
+				{
+					title: "Check In #3 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X28-check-in-3-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X28-check-in-3-supplemental-3/solution"
 				}
 			]
 		},
@@ -1044,9 +1226,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-Basic-BST"
 				},
 				{
-					title: "Binary Search Trees: Fluency Drill",
+					title: "Binary Search Trees supplemental 2",
 					content:
-						"Repeat the core ideas from AJ14 Binary Search Trees on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ14 Binary Search Trees. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X29-aj14-binary-search-trees-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X29-aj14-binary-search-trees-supplemental-2/solution"
+				},
+				{
+					title: "Binary Search Trees supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ14 Binary Search Trees. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X30-aj14-binary-search-trees-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X30-aj14-binary-search-trees-supplemental-3/solution"
 				}
 			]
 		},
@@ -1103,9 +1298,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-HashMap"
 				},
 				{
-					title: "Hash Tables: Fluency Drill",
+					title: "Hash Tables supplemental 2",
 					content:
-						"Repeat the core ideas from AJ15 Hash Tables on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ15 Hash Tables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X31-aj15-hash-tables-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X31-aj15-hash-tables-supplemental-2/solution"
+				},
+				{
+					title: "Hash Tables supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ15 Hash Tables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X32-aj15-hash-tables-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X32-aj15-hash-tables-supplemental-3/solution"
 				}
 			]
 		},
@@ -1157,9 +1365,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Eulerian-Mail-Circuit"
 				},
 				{
-					title: "Graphs: Fluency Drill",
+					title: "Graphs supplemental 2",
 					content:
-						"Repeat the core ideas from AJ16 Graphs on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to AJ16 Graphs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X33-aj16-graphs-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X33-aj16-graphs-supplemental-2/solution"
+				},
+				{
+					title: "Graphs supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ16 Graphs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X34-aj16-graphs-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X34-aj16-graphs-supplemental-3/solution"
 				}
 			]
 		},
@@ -1207,9 +1428,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4"
 				},
 				{
-					title: "Check In #4: Fluency Drill",
+					title: "Check In #4 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #4 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X35-check-in-4-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X35-check-in-4-supplemental-2/solution"
+				},
+				{
+					title: "Check In #4 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X36-check-in-4-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X36-check-in-4-supplemental-3/solution"
 				}
 			]
 		},
@@ -1265,9 +1499,22 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Weighted-Graph"
 				},
 				{
-					title: "Master Project: Google Maps: Fluency Drill",
+					title: "Master Project: Google Maps supplemental 2",
 					content:
-						"Repeat the core ideas from AJ17 Master Project: Google Maps on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to AJ17 Master Project: Google Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X37-aj17-master-project-google-maps-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X37-aj17-master-project-google-maps-supplemental-2/solution"
+				},
+				{
+					title: "Master Project: Google Maps supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to AJ17 Master Project: Google Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X38-aj17-master-project-google-maps-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X38-aj17-master-project-google-maps-supplemental-3/solution"
 				}
 			]
 		},

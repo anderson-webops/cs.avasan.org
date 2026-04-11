@@ -47,9 +47,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS1-Personal-Lab-VM/solution"
 				},
 				{
-					title: "Command of the Day Drill: uname -a",
+					title: "Setup and Tooling supplemental 2",
 					content:
-						"Start the lesson with uname -a and ask students to explain what it does before they run it. Ask students to identify which parts of the output describe the kernel and which parts describe the machine they are logged into."
+						"Use the linked starter and solution for a supplemental project tied to LS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-ls0-setup-and-tooling-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-ls0-setup-and-tooling-supplemental-2/solution"
+				},
+				{
+					title: "Setup and Tooling supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to LS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-ls0-setup-and-tooling-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-ls0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -97,9 +110,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-1-shell-foundations/solution"
 				},
 				{
-					title: "Command of the Day Drill: grep -R",
+					title: "Unit 1: Shell Foundations supplemental 2",
 					content:
-						"Start the lesson with grep -R and ask students to explain what it does before they run it. Have students explain when recursive text search is safer than manually opening files one by one and when a faster tool such as `rg` is the better default."
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: Shell Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-unit-1-shell-foundations-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-unit-1-shell-foundations-supplemental-2/solution"
+				},
+				{
+					title: "Unit 1: Shell Foundations supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: Shell Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-unit-1-shell-foundations-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-unit-1-shell-foundations-supplemental-3/solution"
 				}
 			]
 		},
@@ -142,9 +168,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS2-Static-Site-from-srv/solution"
 				},
 				{
-					title: "Command of the Day Drill: find /srv -maxdepth 2",
+					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 2",
 					content:
-						"Start the lesson with find /srv -maxdepth 2 and ask students to explain what it does before they run it. Ask students to inspect what a server-oriented directory tree looks like and to compare it to how files are arranged under their own home directory."
+						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
+				},
+				{
+					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
 				}
 			]
 		},
@@ -192,9 +231,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-3-users-groups-and-permissions/solution"
 				},
 				{
-					title: "Command of the Day Drill: ls -l",
+					title: "Unit 3: Users, Groups, and Permissions supplemental 2",
 					content:
-						"Start the lesson with ls -l and ask students to explain what it does before they run it. Ask students to decode owner, group, and mode bits from real files and then predict which users can modify or serve the content safely."
+						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-3-users-groups-and-permissions-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-3-users-groups-and-permissions-supplemental/solution"
+				},
+				{
+					title: "Unit 3: Users, Groups, and Permissions supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-3-users-groups-and-permissions-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-3-users-groups-and-permissions-supplemental/solution"
 				}
 			]
 		},
@@ -242,9 +294,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-4-editing-and-configuration/solution"
 				},
 				{
-					title: "Command of the Day Drill: sudo tee",
+					title: "Unit 4: Editing and Configuration supplemental 2",
 					content:
-						"Start the lesson with sudo tee and ask students to explain what it does before they run it. Use a small example to show why a redirect like `> /etc/example.conf` can fail even when `sudo` is present, and why piping into `tee` changes that behavior."
+						"Use the linked starter and solution for a supplemental project tied to Unit 4: Editing and Configuration. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-4-editing-and-configuration-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-4-editing-and-configuration-supplemental-2/solution"
+				},
+				{
+					title: "Unit 4: Editing and Configuration supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 4: Editing and Configuration. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-4-editing-and-configuration-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-4-editing-and-configuration-supplemental-3/solution"
 				}
 			]
 		},
@@ -292,9 +357,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-5-processes-and-job-control/solution"
 				},
 				{
-					title: "Command of the Day Drill: ps aux | grep",
+					title: "Unit 5: Processes and Job Control supplemental 2",
 					content:
-						"Start the lesson with ps aux | grep and ask students to explain what it does before they run it. Ask students to explain why a filtered process search can accidentally match its own search command and what safer patterns they can use instead."
+						"Use the linked starter and solution for a supplemental project tied to Unit 5: Processes and Job Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-5-processes-and-job-control-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-5-processes-and-job-control-supplemental-2/solution"
+				},
+				{
+					title: "Unit 5: Processes and Job Control supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 5: Processes and Job Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-5-processes-and-job-control-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-5-processes-and-job-control-supplemental-3/solution"
 				}
 			]
 		},
@@ -342,9 +420,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS5-Systemd-Toy-Service/solution"
 				},
 				{
-					title: "Command of the Day Drill: systemctl status",
+					title: "Unit 6: Services and systemd supplemental 2",
 					content:
-						"Start the lesson with systemctl status and ask students to explain what it does before they run it. Have students point to the active state, recent log lines, and executable path for a service so they build the habit of reading status output before editing anything."
+						"Use the linked starter and solution for a supplemental project tied to Unit 6: Services and systemd. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX13-unit-6-services-and-systemd-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX13-unit-6-services-and-systemd-supplemental-2/solution"
+				},
+				{
+					title: "Unit 6: Services and systemd supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 6: Services and systemd. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX14-unit-6-services-and-systemd-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX14-unit-6-services-and-systemd-supplemental-3/solution"
 				}
 			]
 		},
@@ -392,9 +483,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-7-logging-and-observability/solution"
 				},
 				{
-					title: "Command of the Day Drill: journalctl -u",
+					title: "Unit 7: Logging and Observability supplemental 2",
 					content:
-						"Start the lesson with journalctl -u and ask students to explain what it does before they run it. Ask students to read only the logs for one unit and summarize the last failure in one sentence rather than scrolling aimlessly through unrelated messages."
+						"Use the linked starter and solution for a supplemental project tied to Unit 7: Logging and Observability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX15-unit-7-logging-and-observability-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX15-unit-7-logging-and-observability-supplemental-2/solution"
+				},
+				{
+					title: "Unit 7: Logging and Observability supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 7: Logging and Observability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX16-unit-7-logging-and-observability-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX16-unit-7-logging-and-observability-supplemental-3/solution"
 				}
 			]
 		},
@@ -442,9 +546,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS6-Backup-Cron-and-Timer/solution"
 				},
 				{
-					title: "Command of the Day Drill: crontab -l",
+					title: "Unit 8: Scheduling and Automation supplemental 2",
 					content:
-						"Start the lesson with crontab -l and ask students to explain what it does before they run it. Ask students to read an installed crontab and identify which jobs rely on absolute paths and which ones are likely to fail because they depend on an interactive shell environment."
+						"Use the linked starter and solution for a supplemental project tied to Unit 8: Scheduling and Automation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX17-unit-8-scheduling-and-automation-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX17-unit-8-scheduling-and-automation-supplemental-2/solution"
+				},
+				{
+					title: "Unit 8: Scheduling and Automation supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 8: Scheduling and Automation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX18-unit-8-scheduling-and-automation-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX18-unit-8-scheduling-and-automation-supplemental-3/solution"
 				}
 			]
 		},
@@ -492,9 +609,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-9-package-management-and-software-layout/solution"
 				},
 				{
-					title: "Command of the Day Drill: which and command -v",
+					title: "Unit 9: Package Management and Software Layout supplemental 2",
 					content:
-						"Start the lesson with which and command -v and ask students to explain what it does before they run it. Use both commands to inspect where an executable comes from and to start a conversation about whether that path is managed by the package system, a language runtime, or a manual install."
+						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX19-unit-9-package-management-and-software-layout-su/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX19-unit-9-package-management-and-software-layout-su/solution"
+				},
+				{
+					title: "Unit 9: Package Management and Software Layout supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX20-unit-9-package-management-and-software-layout-su/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX20-unit-9-package-management-and-software-layout-su/solution"
 				}
 			]
 		},
@@ -542,9 +672,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-10-networking-from-a-systems-view/solution"
 				},
 				{
-					title: "Command of the Day Drill: ss -tulpn",
+					title: "Unit 10: Networking from a Systems View supplemental 2",
 					content:
-						"Start the lesson with ss -tulpn and ask students to explain what it does before they run it. Ask students to identify which process owns a listening port and to compare that result to the service definition or reverse-proxy config they expected to be active."
+						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX21-unit-10-networking-from-a-systems-view-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX21-unit-10-networking-from-a-systems-view-supplemen/solution"
+				},
+				{
+					title: "Unit 10: Networking from a Systems View supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX22-unit-10-networking-from-a-systems-view-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX22-unit-10-networking-from-a-systems-view-supplemen/solution"
 				}
 			]
 		},
@@ -601,9 +744,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS3-Nginx-Reverse-Proxy-App/solution"
 				},
 				{
-					title: "Command of the Day Drill: curl -I",
+					title: "Unit 11: Web Servers supplemental 2",
 					content:
-						"Start the lesson with curl -I and ask students to explain what it does before they run it. Use a response-header check to confirm which layer is answering a request and to compare static-file behavior to reverse-proxied behavior without opening a browser first."
+						"Use the linked starter and solution for a supplemental project tied to Unit 11: Web Servers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX23-unit-11-web-servers-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX23-unit-11-web-servers-supplemental-2/solution"
+				},
+				{
+					title: "Unit 11: Web Servers supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 11: Web Servers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX24-unit-11-web-servers-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX24-unit-11-web-servers-supplemental-3/solution"
 				}
 			]
 		},
@@ -651,9 +807,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-12-storage-backups-and-reliability/solution"
 				},
 				{
-					title: "Command of the Day Drill: df -h and du -sh",
+					title: "Unit 12: Storage, Backups, and Reliability supplemental 2",
 					content:
-						"Start the lesson with df -h and du -sh and ask students to explain what it does before they run it. Ask students to explain the difference between overall filesystem capacity and directory-specific usage so they stop treating every space issue as the same kind of problem."
+						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX25-unit-12-storage-backups-and-reliability-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX25-unit-12-storage-backups-and-reliability-suppleme/solution"
+				},
+				{
+					title: "Unit 12: Storage, Backups, and Reliability supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX26-unit-12-storage-backups-and-reliability-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX26-unit-12-storage-backups-and-reliability-suppleme/solution"
 				}
 			]
 		},
@@ -696,9 +865,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-linux-systems-lab-14/solution"
 				},
 				{
-					title: "linux systems lab 14: Open Practice",
+					title: "Applied Studio 14: linux systems lab 14 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: linux systems lab 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX27-applied-studio-14-linux-systems-lab-14-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX27-applied-studio-14-linux-systems-lab-14-supplemen/solution"
+				},
+				{
+					title: "Applied Studio 14: linux systems lab 14 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX28-applied-studio-14-linux-systems-lab-14-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX28-applied-studio-14-linux-systems-lab-14-supplemen/solution"
 				}
 			]
 		},
@@ -741,9 +923,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-linux-systems-lab-15/solution"
 				},
 				{
-					title: "linux systems lab 15: Open Practice",
+					title: "Applied Studio 15: linux systems lab 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: linux systems lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX29-applied-studio-15-linux-systems-lab-15-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX29-applied-studio-15-linux-systems-lab-15-supplemen/solution"
+				},
+				{
+					title: "Applied Studio 15: linux systems lab 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX30-applied-studio-15-linux-systems-lab-15-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX30-applied-studio-15-linux-systems-lab-15-supplemen/solution"
 				}
 			]
 		},
@@ -786,9 +981,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-linux-systems-lab-16/solution"
 				},
 				{
-					title: "linux systems lab 16: Open Practice",
+					title: "Applied Studio 16: linux systems lab 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: linux systems lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX31-applied-studio-16-linux-systems-lab-16-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX31-applied-studio-16-linux-systems-lab-16-supplemen/solution"
+				},
+				{
+					title: "Applied Studio 16: linux systems lab 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX32-applied-studio-16-linux-systems-lab-16-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX32-applied-studio-16-linux-systems-lab-16-supplemen/solution"
 				}
 			]
 		},
@@ -831,9 +1039,22 @@ export const linuxSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-linux-systems-lab-17/solution"
 				},
 				{
-					title: "linux systems lab 17: Open Practice",
+					title: "Applied Studio 17: linux systems lab 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: linux systems lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX33-applied-studio-17-linux-systems-lab-17-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX33-applied-studio-17-linux-systems-lab-17-supplemen/solution"
+				},
+				{
+					title: "Applied Studio 17: linux systems lab 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX34-applied-studio-17-linux-systems-lab-17-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX34-applied-studio-17-linux-systems-lab-17-supplemen/solution"
 				}
 			]
 		}

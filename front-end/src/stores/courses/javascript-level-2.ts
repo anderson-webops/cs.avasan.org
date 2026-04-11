@@ -47,9 +47,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/bbb5cce14f0a1bc5c5c4b5582da67750"
 				},
 				{
-					title: "Check In #1: Fluency Drill",
+					title: "Check In #1 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #1 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-check-in-1-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-check-in-1-supplemental-2/solution"
+				},
+				{
+					title: "Check In #1 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX02-check-in-1-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX02-check-in-1-supplemental-3/solution"
 				}
 			]
 		},
@@ -99,9 +112,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/7b72b5cd25d5372e9097f68de4b66db6"
 				},
 				{
-					title: "Check In #2: Fluency Drill",
+					title: "Check In #2 supplemental 2",
 					content:
-						"Repeat the core ideas from Check-In #2 on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX03-check-in-2-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX03-check-in-2-supplemental-2/solution"
+				},
+				{
+					title: "Check In #2 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX04-check-in-2-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX04-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -197,9 +223,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/5e36bb6a04a440e18fb502b1cd635628"
 				},
 				{
-					title: "Fundamentals Review: Fluency Drill",
+					title: "Fundamentals Review supplemental 2",
 					content:
-						"Repeat the core ideas from JSM1 Fundamentals Review on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM1 Fundamentals Review. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX05-jsm1-fundamentals-review-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX05-jsm1-fundamentals-review-supplemental-2/solution"
+				},
+				{
+					title: "Fundamentals Review supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM1 Fundamentals Review. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX06-jsm1-fundamentals-review-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX06-jsm1-fundamentals-review-supplemental-3/solution"
 				}
 			]
 		},
@@ -337,9 +376,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/a85d4be8f2f94812a0357dae2a1d1e00"
 				},
 				{
-					title: "Complex Conditionals: Fluency Drill",
+					title: "Complex Conditionals supplemental 2",
 					content:
-						"Repeat the core ideas from JSM3 Complex Conditionals on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM3 Complex Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX07-jsm3-complex-conditionals-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX07-jsm3-complex-conditionals-supplemental-2/solution"
+				},
+				{
+					title: "Complex Conditionals supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM3 Complex Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX08-jsm3-complex-conditionals-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX08-jsm3-complex-conditionals-supplemental-3/solution"
 				}
 			]
 		},
@@ -397,6 +449,15 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/aa96160a1e7c1d1bdac74cfe5e6a9333",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/1d48af84b840e8d7a72fd02e82de9f28"
+				},
+				{
+					title: "Canvas supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM4 Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX09-jsm4-canvas-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX09-jsm4-canvas-supplemental-3/solution"
 				}
 			]
 		},
@@ -478,6 +539,15 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/e3ae971ad6fd35c3c0829208cb049099",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/f163e56c8fa75a482877d789d08fc784"
+				},
+				{
+					title: "Arrays and Iterators supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM5 Arrays and Iterators. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX10-jsm5-arrays-and-iterators-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX10-jsm5-arrays-and-iterators-supplemental-3/solution"
 				}
 			]
 		},
@@ -546,6 +616,15 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/7ac4e84b6d1ce34caa732bc0945c6255",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/abdb1b2dadb02ac244d8cf862bd9b321"
+				},
+				{
+					title: "Objects and Properties supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM6 Objects and Properties. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX11-jsm6-objects-and-properties-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX11-jsm6-objects-and-properties-supplemental-3/solution"
 				}
 			]
 		},
@@ -613,6 +692,15 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/9c003b58d7ca7770e49f9243dbecb00f",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/8f44f06f31939f0a56050f4718f0b608"
+				},
+				{
+					title: "Helper Functions and Event Listeners supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM7 Helper Functions and Event Listeners. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX12-jsm7-helper-functions-and-event-listeners-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX12-jsm7-helper-functions-and-event-listeners-supple/solution"
 				}
 			]
 		},
@@ -663,9 +751,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/2cc6ea883fc971206d81c61a3f93582e"
 				},
 				{
-					title: "Collisions and Controls: Fluency Drill",
+					title: "Collisions and Controls supplemental 2",
 					content:
-						"Repeat the core ideas from JSM8 Collisions and Controls on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM8 Collisions and Controls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX13-jsm8-collisions-and-controls-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX13-jsm8-collisions-and-controls-supplemental-2/solution"
+				},
+				{
+					title: "Collisions and Controls supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM8 Collisions and Controls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX14-jsm8-collisions-and-controls-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX14-jsm8-collisions-and-controls-supplemental-3/solution"
 				}
 			]
 		},
@@ -725,9 +826,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/643e3bf98d5a641557276dbc1f269a02"
 				},
 				{
-					title: "Games in the Canvas: Fluency Drill",
+					title: "Games in the Canvas supplemental 2",
 					content:
-						"Repeat the core ideas from JSM9 Games in the Canvas on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM9 Games in the Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX15-jsm9-games-in-the-canvas-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX15-jsm9-games-in-the-canvas-supplemental-2/solution"
+				},
+				{
+					title: "Games in the Canvas supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM9 Games in the Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX16-jsm9-games-in-the-canvas-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX16-jsm9-games-in-the-canvas-supplemental-3/solution"
 				}
 			]
 		},
@@ -778,9 +892,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/d07e0093689c1e654fc59de47093b043"
 				},
 				{
-					title: "APIs and Requests: Fluency Drill",
+					title: "APIs and Requests supplemental 2",
 					content:
-						"Repeat the core ideas from JSM10 APIs and Requests on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM10 APIs and Requests. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX17-jsm10-apis-and-requests-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX17-jsm10-apis-and-requests-supplemental-2/solution"
+				},
+				{
+					title: "APIs and Requests supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM10 APIs and Requests. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX18-jsm10-apis-and-requests-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX18-jsm10-apis-and-requests-supplemental-3/solution"
 				}
 			]
 		},
@@ -902,9 +1029,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/bc74a6591ecf2d986cd8fd83eb46e427"
 				},
 				{
-					title: "NoSQL and CRUD: Fluency Drill",
+					title: "NoSQL and CRUD supplemental 2",
 					content:
-						"Repeat the core ideas from JSM12 NoSQL and CRUD on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM12 NoSQL and CRUD. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX19-jsm12-nosql-and-crud-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX19-jsm12-nosql-and-crud-supplemental-2/solution"
+				},
+				{
+					title: "NoSQL and CRUD supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM12 NoSQL and CRUD. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX20-jsm12-nosql-and-crud-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX20-jsm12-nosql-and-crud-supplemental-3/solution"
 				}
 			]
 		},
@@ -946,9 +1086,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/c3fb5542e72c66ad7264b94a8be3c4c0"
 				},
 				{
-					title: "Message Board: Fluency Drill",
+					title: "Message Board supplemental 2",
 					content:
-						"Repeat the core ideas from JSM13 Message Board on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM13 Message Board. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX21-jsm13-message-board-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX21-jsm13-message-board-supplemental-2/solution"
+				},
+				{
+					title: "Message Board supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM13 Message Board. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX22-jsm13-message-board-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX22-jsm13-message-board-supplemental-3/solution"
 				}
 			]
 		},
@@ -993,9 +1146,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://codepen.io/junilearning/pen/540c4d060641bb749cefde340d69acd6"
 				},
 				{
-					title: "Quiz Game: Fluency Drill",
+					title: "Quiz Game supplemental 2",
 					content:
-						"Repeat the core ideas from JSM14 Quiz Game on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to JSM14 Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX23-jsm14-quiz-game-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX23-jsm14-quiz-game-supplemental-2/solution"
+				},
+				{
+					title: "Quiz Game supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM14 Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX24-jsm14-quiz-game-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX24-jsm14-quiz-game-supplemental-3/solution"
 				}
 			]
 		},
@@ -1043,9 +1209,22 @@ export const javascriptLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-jsm15-master-project/solution"
 				},
 				{
-					title: "JSM15 Master Project: Fluency Drill",
+					title: "Master Project supplemental 2",
 					content:
-						"Repeat the core ideas from JSM15 Master Project on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to JSM15 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX25-jsm15-master-project-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX25-jsm15-master-project-supplemental-2/solution"
+				},
+				{
+					title: "Master Project supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to JSM15 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX26-jsm15-master-project-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX26-jsm15-master-project-supplemental-3/solution"
 				}
 			]
 		}

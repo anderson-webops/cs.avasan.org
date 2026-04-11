@@ -57,14 +57,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX04-dpj1-what-patterns-are-and-what-they-are-not/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "What Patterns Are and What They Are Not supplemental 2",
 					content:
-						"Students often think learning patterns means memorizing names rather than diagnosing forces and tradeoffs. They also commonly assume more abstraction automatically means better design. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ1 What Patterns Are and What They Are Not. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX01-dpj1-what-patterns-are-and-what-they-are-not-sup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX01-dpj1-what-patterns-are-and-what-they-are-not-sup/solution"
 				},
 				{
-					title: "Extension Project: Pattern Spotting Journal",
+					title: "What Patterns Are and What They Are Not supplemental 3",
 					content:
-						"Inspect a small Java codebase and note where creation, structure, or behavior problems are recurring. Write down which pattern families might help and which parts should remain simple. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPJ1 What Patterns Are and What They Are Not. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX02-dpj1-what-patterns-are-and-what-they-are-not-sup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX02-dpj1-what-patterns-are-and-what-they-are-not-sup/solution"
 				}
 			]
 		},
@@ -122,14 +130,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX05-dpj2-java-design-foundations/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Java Design Foundations supplemental 2",
 					content:
-						"Students often mistake 'interface per class' for clean design. They may also keep responsibilities tangled because the program still compiles and runs. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ2 Java Design Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX03-dpj2-java-design-foundations-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX03-dpj2-java-design-foundations-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Package Sketch for a Medium App",
+					title: "Java Design Foundations supplemental 3",
 					content:
-						"Take a text RPG, order system, or drawing tool and sketch packages for domain logic, adapters, UI, and infrastructure. Explain which packages should know about which others. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPJ2 Java Design Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX04-dpj2-java-design-foundations-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX04-dpj2-java-design-foundations-supplemental-3/solution"
 				}
 			]
 		},
@@ -187,14 +203,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX06-dpj3-creational-patterns-i/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Creational Patterns I supplemental 2",
 					content:
-						"Students often wrap every constructor in a factory even when no creation variability exists. They also commonly misuse Builder when a value object with a small constructor would be clearer."
+						"Use the linked starter and solution for a supplemental project tied to DPJ3 Creational Patterns I. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX05-dpj3-creational-patterns-i-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX05-dpj3-creational-patterns-i-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Themed UI or Game Content Family",
+					title: "Creational Patterns I supplemental 3",
 					content:
-						"Design a small product family system with interchangeable themes or factions. Use Factory Method or Abstract Factory deliberately and document why Builder was or was not needed. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPJ3 Creational Patterns I. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX06-dpj3-creational-patterns-i-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX06-dpj3-creational-patterns-i-supplemental-3/solution"
 				}
 			]
 		},
@@ -252,14 +276,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX07-dpj4-creational-patterns-ii-and-boundary-pattern/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Creational Patterns II and Boundary Patterns supplemental 2",
 					content:
-						"Students often confuse Facade with Adapter because both sit at boundaries. They may also treat Prototype as mere copying rather than a design response to creation friction. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ4 Creational Patterns II and Boundary Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX07-dpj4-creational-patterns-ii-and-boundary-pattern-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX07-dpj4-creational-patterns-ii-and-boundary-pattern-2/solution"
 				},
 				{
-					title: "Extension Project: Legacy Integration Layer",
+					title: "Creational Patterns II and Boundary Patterns supplemental 3",
 					content:
-						"Design a small Java wrapper around an awkward library or old interface. Use Adapter and optionally Facade, then explain why no Singleton was introduced. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPJ4 Creational Patterns II and Boundary Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX08-dpj4-creational-patterns-ii-and-boundary-pattern/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX08-dpj4-creational-patterns-ii-and-boundary-pattern/solution"
 				}
 			]
 		},
@@ -317,14 +349,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX08-dpj5-structural-patterns-in-depth/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Structural Patterns in Depth supplemental 2",
 					content:
-						"Students often describe Decorator and Proxy as the same because both wrap objects. They may also use Composite where a plain collection plus helper methods would be simpler. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ5 Structural Patterns in Depth. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX09-dpj5-structural-patterns-in-depth-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX09-dpj5-structural-patterns-in-depth-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Mini Drawing Toolkit",
+					title: "Structural Patterns in Depth supplemental 3",
 					content:
-						"Design shapes and groups with Composite, add rendering variations with Bridge or Decorator, and discuss whether Proxy or Flyweight would help if the object count grew large. Document which structural patterns genuinely earned their place."
+						"Use the linked starter and solution for a supplemental project tied to DPJ5 Structural Patterns in Depth. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX10-dpj5-structural-patterns-in-depth-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX10-dpj5-structural-patterns-in-depth-supplemental-3/solution"
 				}
 			]
 		},
@@ -382,14 +422,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX09-dpj6-behavioral-patterns-i/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Behavioral Patterns I supplemental 2",
 					content:
-						"Students often use Strategy and State as synonyms because both involve delegation. They also commonly force Template Method into places where higher-order composition would be cleaner. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ6 Behavioral Patterns I. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX11-dpj6-behavioral-patterns-i-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX11-dpj6-behavioral-patterns-i-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Turn-Based Combat Rules",
+					title: "Behavioral Patterns I supplemental 3",
 					content:
-						"Model attacks or movement as Strategy, status or stance changes as State, and turn resolution as a Template Method only if a stable algorithm skeleton truly exists. Include an Iterator if combat logs or action queues need structured traversal."
+						"Use the linked starter and solution for a supplemental project tied to DPJ6 Behavioral Patterns I. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX12-dpj6-behavioral-patterns-i-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX12-dpj6-behavioral-patterns-i-supplemental-3/solution"
 				}
 			]
 		},
@@ -447,14 +495,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX10-dpj7-behavioral-patterns-ii/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Behavioral Patterns II supplemental 2",
 					content:
-						"Students often force Observer into one-shot command flows or misuse Mediator as a god object. They may also reach for Visitor without a stable object hierarchy or without multiple operations to justify it."
+						"Use the linked starter and solution for a supplemental project tied to DPJ7 Behavioral Patterns II. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX13-dpj7-behavioral-patterns-ii-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX13-dpj7-behavioral-patterns-ii-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Editor Action System",
+					title: "Behavioral Patterns II supplemental 3",
 					content:
-						"Design a small editor with Observer-driven UI updates, Command-based actions, Memento-backed undo snapshots, and optional Chain or Mediator coordination. Explain why Visitor is or is not useful in the final design."
+						"Use the linked starter and solution for a supplemental project tied to DPJ7 Behavioral Patterns II. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX14-dpj7-behavioral-patterns-ii-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX14-dpj7-behavioral-patterns-ii-supplemental-3/solution"
 				}
 			]
 		},
@@ -512,14 +568,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX11-dpj8-modern-extensions-and-architecture-level-pa/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Modern Extensions and Architecture Level Patterns supplemental 2",
 					content:
-						"Students often turn service layers into dumping grounds for unrelated logic. They may also think pub-sub is simply Observer with different names instead of a broader decoupling style. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ8 Modern Extensions and Architecture-Level Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX15-dpj8-modern-extensions-and-architecture-level-pa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX15-dpj8-modern-extensions-and-architecture-level-pa/solution"
 				},
 				{
-					title: "Extension Project: Mini Plugin-Ready App",
+					title: "Modern Extensions and Architecture Level Patterns supplemental 3",
 					content:
-						"Sketch a package layout for an app that supports plugins, events, repositories, and injected services. Name which classic patterns reappear inside the larger architecture. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPJ8 Modern Extensions and Architecture-Level Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX16-dpj8-modern-extensions-and-architecture-level-pa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX16-dpj8-modern-extensions-and-architecture-level-pa/solution"
 				}
 			]
 		},
@@ -577,14 +641,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX12-dpj9-pattern-selection-and-refactoring-judgment/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Pattern Selection and Refactoring Judgment supplemental 2",
 					content:
-						"Students often assume every smell must be solved immediately with a named pattern. They may also confuse 'future flexibility' with speculative generality. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ9 Pattern Selection and Refactoring Judgment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX17-dpj9-pattern-selection-and-refactoring-judgment-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX17-dpj9-pattern-selection-and-refactoring-judgment-/solution"
 				},
 				{
-					title: "Extension Project: Pattern or Simplicity Debate",
+					title: "Pattern Selection and Refactoring Judgment supplemental 3",
 					content:
-						"Choose a small feature and prepare two designs: one plain and one pattern-heavy. Defend which one is better today and under what future pressure the answer would change. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPJ9 Pattern Selection and Refactoring Judgment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX18-dpj9-pattern-selection-and-refactoring-judgment-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX18-dpj9-pattern-selection-and-refactoring-judgment-/solution"
 				}
 			]
 		},
@@ -642,14 +714,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX13-dpj10-capstone-refactor/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Capstone Refactor supplemental 2",
 					content:
-						"Students often add extra abstractions during capstones because the architecture finally feels exciting. They may also skip documenting why some ugly-but-stable code was left alone. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPJ10 Capstone Refactor. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX19-dpj10-capstone-refactor-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX19-dpj10-capstone-refactor-supplemental-2/solution"
 				},
 				{
-					title: "Capstone Option: Text RPG, Drawing App, or Notification Service",
+					title: "Capstone Refactor supplemental 3",
 					content:
-						"Refactor one medium application with a small justified set of patterns and a clear package story. Include a final note describing the design pressures that remain for a future iteration."
+						"Use the linked starter and solution for a supplemental project tied to DPJ10 Capstone Refactor. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX20-dpj10-capstone-refactor-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX20-dpj10-capstone-refactor-supplemental-3/solution"
 				}
 			]
 		},
@@ -688,9 +768,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Starter"
 				},
 				{
-					title: "AJ Check In 3: Open Practice",
+					title: "Applied Studio 11: AJ Check In 3 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: AJ Check In 3. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: AJ Check In 3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX21-applied-studio-11-aj-check-in-3-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX21-applied-studio-11-aj-check-in-3-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 11: AJ Check In 3 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: AJ Check In 3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX22-applied-studio-11-aj-check-in-3-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX22-applied-studio-11-aj-check-in-3-supplemental-3/solution"
 				}
 			]
 		},
@@ -729,9 +822,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4-Starter"
 				},
 				{
-					title: "AJ Check in 4: Open Practice",
+					title: "Applied Studio 12: AJ Check in 4 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: AJ Check in 4. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: AJ Check in 4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX23-applied-studio-12-aj-check-in-4-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX23-applied-studio-12-aj-check-in-4-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 12: AJ Check in 4 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: AJ Check in 4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX24-applied-studio-12-aj-check-in-4-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX24-applied-studio-12-aj-check-in-4-supplemental-3/solution"
 				}
 			]
 		},
@@ -770,9 +876,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Flower-Class"
 				},
 				{
-					title: "Flower Class: Open Practice",
+					title: "Applied Studio 13: Flower Class supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: Flower Class. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Flower Class. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX25-applied-studio-13-flower-class-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX25-applied-studio-13-flower-class-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 13: Flower Class supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Flower Class. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX26-applied-studio-13-flower-class-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX26-applied-studio-13-flower-class-supplemental-3/solution"
 				}
 			]
 		},
@@ -811,9 +930,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Sum-of-the-First-N"
 				},
 				{
-					title: "Sum of the First N: Open Practice",
+					title: "Applied Studio 14: Sum of the First N supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: Sum of the First N. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Sum of the First N. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX27-applied-studio-14-sum-of-the-first-n-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX27-applied-studio-14-sum-of-the-first-n-supplementa/solution"
+				},
+				{
+					title: "Applied Studio 14: Sum of the First N supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Sum of the First N. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX28-applied-studio-14-sum-of-the-first-n-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX28-applied-studio-14-sum-of-the-first-n-supplementa/solution"
 				}
 			]
 		},
@@ -856,9 +988,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX01-pattern-implementation-lab-15/solution"
 				},
 				{
-					title: "pattern implementation lab 15: Open Practice",
+					title: "Applied Studio 15: pattern implementation lab 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: pattern implementation lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: pattern implementation lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX29-applied-studio-15-pattern-implementation-lab-15-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX29-applied-studio-15-pattern-implementation-lab-15-/solution"
+				},
+				{
+					title: "Applied Studio 15: pattern implementation lab 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: pattern implementation lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX30-applied-studio-15-pattern-implementation-lab-15-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX30-applied-studio-15-pattern-implementation-lab-15-/solution"
 				}
 			]
 		},
@@ -901,9 +1046,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX02-pattern-implementation-lab-16/solution"
 				},
 				{
-					title: "pattern implementation lab 16: Open Practice",
+					title: "Applied Studio 16: pattern implementation lab 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: pattern implementation lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: pattern implementation lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX31-applied-studio-16-pattern-implementation-lab-16-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX31-applied-studio-16-pattern-implementation-lab-16-/solution"
+				},
+				{
+					title: "Applied Studio 16: pattern implementation lab 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: pattern implementation lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX32-applied-studio-16-pattern-implementation-lab-16-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX32-applied-studio-16-pattern-implementation-lab-16-/solution"
 				}
 			]
 		},
@@ -946,9 +1104,22 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX03-pattern-implementation-lab-17/solution"
 				},
 				{
-					title: "pattern implementation lab 17: Open Practice",
+					title: "Applied Studio 17: pattern implementation lab 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: pattern implementation lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: pattern implementation lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX33-applied-studio-17-pattern-implementation-lab-17-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX33-applied-studio-17-pattern-implementation-lab-17-/solution"
+				},
+				{
+					title: "Applied Studio 17: pattern implementation lab 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: pattern implementation lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX34-applied-studio-17-pattern-implementation-lab-17-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJX34-applied-studio-17-pattern-implementation-lab-17-/solution"
 				}
 			]
 		}

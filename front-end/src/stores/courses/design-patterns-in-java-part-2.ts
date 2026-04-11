@@ -57,14 +57,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX08-dpr1-code-smells-and-safe-refactoring-workflow/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Code Smells and Safe Refactoring Workflow supplemental 2",
 					content:
-						"Students often think smell diagnosis is subjective enough that any fix is acceptable. They may also confuse refactoring with feature work or with whole-program rewrites. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPR1 Code Smells and Safe Refactoring Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX01-dpr1-code-smells-and-safe-refactoring-workflow-s/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX01-dpr1-code-smells-and-safe-refactoring-workflow-s/solution"
 				},
 				{
-					title: "Extension Project: Smell Inventory on a Small Java App",
+					title: "Code Smells and Safe Refactoring Workflow supplemental 3",
 					content:
-						"Audit a small codebase and rank the top smells by how much they block change. Write the first three refactoring steps you would take and why. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPR1 Code Smells and Safe Refactoring Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX02-dpr1-code-smells-and-safe-refactoring-workflow-s/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX02-dpr1-code-smells-and-safe-refactoring-workflow-s/solution"
 				}
 			]
 		},
@@ -122,14 +130,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX09-dpr2-composing-methods/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Composing Methods supplemental 2",
 					content:
-						"Students often jump straight from Long Method to a full pattern refactor. They may also keep poor temporary-variable structure because the method is shorter after extraction. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPR2 Composing Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX03-dpr2-composing-methods-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX03-dpr2-composing-methods-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Report Generator Cleanup",
+					title: "Composing Methods supplemental 3",
 					content:
-						"Refactor a verbose report-building method using the full composing-method toolkit. Note which steps improved naming, duplication, or temporary-variable confusion. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPR2 Composing Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX04-dpr2-composing-methods-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX04-dpr2-composing-methods-supplemental-3/solution"
 				}
 			]
 		},
@@ -187,14 +203,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX10-dpr3-moving-features-between-objects/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Moving Features Between Objects supplemental 2",
 					content:
-						"Students often extract a class without moving the right behavior with it. They may also retain a middle-man API because removing it feels risky even when it adds no value. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPR3 Moving Features Between Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX05-dpr3-moving-features-between-objects-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX05-dpr3-moving-features-between-objects-supplementa/solution"
 				},
 				{
-					title: "Extension Project: Order System Responsibility Audit",
+					title: "Moving Features Between Objects supplemental 3",
 					content:
-						"Audit a Java order or notification system for Feature Envy and Large Class issues. Plan which methods or fields move, which helper becomes a new class, and which delegates should disappear."
+						"Use the linked starter and solution for a supplemental project tied to DPR3 Moving Features Between Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX06-dpr3-moving-features-between-objects-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX06-dpr3-moving-features-between-objects-supplementa/solution"
 				}
 			]
 		},
@@ -252,14 +276,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX11-dpr4-organizing-data/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Organizing Data supplemental 2",
 					content:
-						"Students often create new classes without moving behavior or constraints into them. They may also over-bidirectionalize associations even when a one-way reference would be cleaner. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPR4 Organizing Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX07-dpr4-organizing-data-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX07-dpr4-organizing-data-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Type Code to Behavior Refactor",
+					title: "Organizing Data supplemental 3",
 					content:
-						"Start from a Java model full of status codes or category strings. Refactor it through better data organization and explain whether the end state calls for Class, Subclasses, or State or Strategy."
+						"Use the linked starter and solution for a supplemental project tied to DPR4 Organizing Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX08-dpr4-organizing-data-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX08-dpr4-organizing-data-supplemental-3/solution"
 				}
 			]
 		},
@@ -317,14 +349,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX12-dpr5-simplifying-conditional-expressions/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Simplifying Conditional Expressions supplemental 2",
 					content:
-						"Students often jump to inheritance too early because Replace Conditional with Polymorphism sounds more advanced. They may also keep nested branches that should be guard clauses because the existing indentation feels familiar."
+						"Use the linked starter and solution for a supplemental project tied to DPR5 Simplifying Conditional Expressions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX09-dpr5-simplifying-conditional-expressions-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX09-dpr5-simplifying-conditional-expressions-supplem/solution"
 				},
 				{
-					title: "Extension Project: Workflow Branch Cleanup",
+					title: "Simplifying Conditional Expressions supplemental 3",
 					content:
-						"Refactor a workflow or eligibility checker in several small conditional-expression steps. Stop once the design is clear, even if no new pattern is needed. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPR5 Simplifying Conditional Expressions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX10-dpr5-simplifying-conditional-expressions-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX10-dpr5-simplifying-conditional-expressions-supplem/solution"
 				}
 			]
 		},
@@ -382,14 +422,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX13-dpr6-simplifying-method-calls/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Simplifying Method Calls supplemental 2",
 					content:
-						"Students often keep poor method names because changing them feels cosmetic. They may also replace every error code with exceptions even when a simple existence test would be cleaner. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPR6 Simplifying Method Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX11-dpr6-simplifying-method-calls-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX11-dpr6-simplifying-method-calls-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Public API Cleanup Pass",
+					title: "Simplifying Method Calls supplemental 3",
 					content:
-						"Choose one small public Java API and simplify how clients call it. Document which method-call refactors made the code read more truthfully. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPR6 Simplifying Method Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX12-dpr6-simplifying-method-calls-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX12-dpr6-simplifying-method-calls-supplemental-3/solution"
 				}
 			]
 		},
@@ -447,14 +495,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX14-dpr7-dealing-with-generalization/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Dealing with Generalization supplemental 2",
 					content:
-						"Students often protect bad hierarchies because they feel 'object-oriented.' They may also over-extract abstractions before duplicated behavior has stabilized enough to justify them. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPR7 Dealing with Generalization. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX13-dpr7-dealing-with-generalization-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX13-dpr7-dealing-with-generalization-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Hierarchy Surgery Review",
+					title: "Dealing with Generalization supplemental 3",
 					content:
-						"Audit an inheritance-heavy Java model and plan which refactorings repair it best. Defend any move toward delegation, interfaces, or hierarchy collapse with concrete change pressure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPR7 Dealing with Generalization. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX14-dpr7-dealing-with-generalization-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX14-dpr7-dealing-with-generalization-supplemental-3/solution"
 				}
 			]
 		},
@@ -512,14 +568,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX15-dpr8-refactoring-toward-patterns/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Refactoring Toward Patterns supplemental 2",
 					content:
-						"Students often treat patterns as sudden swaps rather than the outcome of several smaller improvements. They may also believe the most named pattern-heavy design is automatically the best endpoint."
+						"Use the linked starter and solution for a supplemental project tied to DPR8 Refactoring Toward Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX15-dpr8-refactoring-toward-patterns-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX15-dpr8-refactoring-toward-patterns-supplemental-2/solution"
 				},
 				{
-					title: "Extension Project: Pattern Arrival Map",
+					title: "Refactoring Toward Patterns supplemental 3",
 					content:
-						"Pick a Java smell and diagram the smallest safe chain of refactorings that could lead to a suitable pattern. Include at least one alternate path that ends in simpler code instead. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPR8 Refactoring Toward Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX16-dpr8-refactoring-toward-patterns-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX16-dpr8-refactoring-toward-patterns-supplemental-3/solution"
 				}
 			]
 		},
@@ -577,14 +641,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX16-dpr9-testability-di-and-refactoring-with-confide/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Testability, DI, and Refactoring with Confidence supplemental 2",
 					content:
-						"Students often wait for perfect test coverage before making any improvement at all. They may also keep hidden globals and static calls that make later refactors harder than necessary. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to DPR9 Testability, DI, and Refactoring with Confidence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX17-dpr9-testability-di-and-refactoring-with-confide/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX17-dpr9-testability-di-and-refactoring-with-confide/solution"
 				},
 				{
-					title: "Extension Project: Refactorability Hardening Pass",
+					title: "Testability, DI, and Refactoring with Confidence supplemental 3",
 					content:
-						"Take one tightly coupled Java component and improve its seams before attempting deeper architectural change. Explain how the added seam changes what future refactors become possible. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to DPR9 Testability, DI, and Refactoring with Confidence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX18-dpr9-testability-di-and-refactoring-with-confide/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX18-dpr9-testability-di-and-refactoring-with-confide/solution"
 				}
 			]
 		},
@@ -642,14 +714,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX17-dpr10-capstone-refactoring-studio/solution"
 				},
 				{
-					title: "Misconception Watchlist",
+					title: "Capstone Refactoring Studio supplemental 2",
 					content:
-						"Students often grade success by how many abstractions were introduced instead of how much smell pressure was actually removed. They may also forget to document the improvements that came from small refactors rather than from headline patterns."
+						"Use the linked starter and solution for a supplemental project tied to DPR10 Capstone Refactoring Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX19-dpr10-capstone-refactoring-studio-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX19-dpr10-capstone-refactoring-studio-supplemental-2/solution"
 				},
 				{
-					title: "Capstone Option: Rescue a Policy Engine, RPG Core, or Notification App",
+					title: "Capstone Refactoring Studio supplemental 3",
 					content:
-						"Take one medium Java application from brittle to defensible using the full smell and refactoring toolkit. Include a final walkthrough of the smell inventory, the refactor sequence, and the patterns that genuinely survived into the final design."
+						"Use the linked starter and solution for a supplemental project tied to DPR10 Capstone Refactoring Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX20-dpr10-capstone-refactoring-studio-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX20-dpr10-capstone-refactoring-studio-supplemental-3/solution"
 				}
 			]
 		},
@@ -692,9 +772,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX01-refactoring-clinic-11/solution"
 				},
 				{
-					title: "refactoring clinic 11: Open Practice",
+					title: "Applied Studio 11: refactoring clinic 11 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: refactoring clinic 11. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: refactoring clinic 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX21-applied-studio-11-refactoring-clinic-11-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX21-applied-studio-11-refactoring-clinic-11-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 11: refactoring clinic 11 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: refactoring clinic 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX22-applied-studio-11-refactoring-clinic-11-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX22-applied-studio-11-refactoring-clinic-11-suppleme/solution"
 				}
 			]
 		},
@@ -737,9 +830,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX02-refactoring-clinic-12/solution"
 				},
 				{
-					title: "refactoring clinic 12: Open Practice",
+					title: "Applied Studio 12: refactoring clinic 12 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: refactoring clinic 12. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: refactoring clinic 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX23-applied-studio-12-refactoring-clinic-12-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX23-applied-studio-12-refactoring-clinic-12-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 12: refactoring clinic 12 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: refactoring clinic 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX24-applied-studio-12-refactoring-clinic-12-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX24-applied-studio-12-refactoring-clinic-12-suppleme/solution"
 				}
 			]
 		},
@@ -782,9 +888,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX03-refactoring-clinic-13/solution"
 				},
 				{
-					title: "refactoring clinic 13: Open Practice",
+					title: "Applied Studio 13: refactoring clinic 13 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: refactoring clinic 13. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: refactoring clinic 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX25-applied-studio-13-refactoring-clinic-13-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX25-applied-studio-13-refactoring-clinic-13-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 13: refactoring clinic 13 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: refactoring clinic 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX26-applied-studio-13-refactoring-clinic-13-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX26-applied-studio-13-refactoring-clinic-13-suppleme/solution"
 				}
 			]
 		},
@@ -827,9 +946,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX04-refactoring-clinic-14/solution"
 				},
 				{
-					title: "refactoring clinic 14: Open Practice",
+					title: "Applied Studio 14: refactoring clinic 14 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: refactoring clinic 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: refactoring clinic 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX27-applied-studio-14-refactoring-clinic-14-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX27-applied-studio-14-refactoring-clinic-14-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 14: refactoring clinic 14 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: refactoring clinic 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX28-applied-studio-14-refactoring-clinic-14-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX28-applied-studio-14-refactoring-clinic-14-suppleme/solution"
 				}
 			]
 		},
@@ -872,9 +1004,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX05-refactoring-clinic-15/solution"
 				},
 				{
-					title: "refactoring clinic 15: Open Practice",
+					title: "Applied Studio 15: refactoring clinic 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: refactoring clinic 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: refactoring clinic 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX29-applied-studio-15-refactoring-clinic-15-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX29-applied-studio-15-refactoring-clinic-15-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 15: refactoring clinic 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: refactoring clinic 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX30-applied-studio-15-refactoring-clinic-15-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX30-applied-studio-15-refactoring-clinic-15-suppleme/solution"
 				}
 			]
 		},
@@ -917,9 +1062,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX06-refactoring-clinic-16/solution"
 				},
 				{
-					title: "refactoring clinic 16: Open Practice",
+					title: "Applied Studio 16: refactoring clinic 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: refactoring clinic 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: refactoring clinic 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX31-applied-studio-16-refactoring-clinic-16-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX31-applied-studio-16-refactoring-clinic-16-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 16: refactoring clinic 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: refactoring clinic 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX32-applied-studio-16-refactoring-clinic-16-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX32-applied-studio-16-refactoring-clinic-16-suppleme/solution"
 				}
 			]
 		},
@@ -962,9 +1120,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX07-refactoring-clinic-17/solution"
 				},
 				{
-					title: "refactoring clinic 17: Open Practice",
+					title: "Applied Studio 17: refactoring clinic 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: refactoring clinic 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: refactoring clinic 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX33-applied-studio-17-refactoring-clinic-17-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX33-applied-studio-17-refactoring-clinic-17-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 17: refactoring clinic 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: refactoring clinic 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX34-applied-studio-17-refactoring-clinic-17-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPRX34-applied-studio-17-refactoring-clinic-17-suppleme/solution"
 				}
 			]
 		}

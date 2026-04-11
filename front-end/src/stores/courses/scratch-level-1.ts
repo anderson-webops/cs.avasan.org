@@ -41,6 +41,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Starting in Scratch: Fluency Drill",
 					content:
 						"Repeat the core ideas from GS1 Starting in Scratch on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Starting in Scratch: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS1 Starting in Scratch. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -86,6 +91,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Event Listeners: Fluency Drill",
 					content:
 						"Repeat the core ideas from GS2 Event Listeners on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Event Listeners: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS2 Event Listeners. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -131,6 +141,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Pen with Event Listeners: Fluency Drill",
 					content:
 						"Repeat the core ideas from GS3 Pen with Event Listeners on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Pen with Event Listeners: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS3 Pen with Event Listeners. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -176,6 +191,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Loops: Fluency Drill",
 					content:
 						"Repeat the core ideas from GS4 Loops on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Loops: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS4 Loops. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -223,6 +243,11 @@ export const scratchLevel1Course: RawCourse = {
 						"1. When the green flag is clicked, make the basketball go to Gobo and move forever.\n2. When Pico has the ball, use conditionals to pass it back to Gobo.\n3. When Gobo has the ball, pass it to Pico.\nChallenge: Add more sprites to the game and have the ball pass between them.",
 					projectLink: "https://scratch.mit.edu/projects/326211768/",
 					solutionLink: "https://scratch.mit.edu/projects/326211724/"
+				},
+				{
+					title: "Basic Conditionals: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS5 Basic Conditionals. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -270,6 +295,11 @@ export const scratchLevel1Course: RawCourse = {
 						'1. When the green flag is clicked, make the baby fish continuously go to the mouse pointer.\n2. If the baby fish is touching the mom fish, make it say "I found her"; otherwise say "Take me to my mom".\n3. Make the mom fish glide around the screen randomly.',
 					projectLink: "https://scratch.mit.edu/projects/332468797/",
 					solutionLink: "https://scratch.mit.edu/projects/332464646/"
+				},
+				{
+					title: "Advanced Conditionals: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS6 Advanced Conditionals. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -317,6 +347,11 @@ export const scratchLevel1Course: RawCourse = {
 						'1. Ask the user for their name and call them "Captain".\n2. Ask which planet (Mars, Jupiter or Saturn) they want to explore.\n3. Use conditionals to set the scene for the chosen planet.\n4. Ask additional questions (e.g., "Do you want to collect rocks or search for life?") and branch the story based on the answers.\n5. Use variables to track discoveries or points.',
 					projectLink: "https://scratch.mit.edu/projects/330321409/",
 					solutionLink: "https://scratch.mit.edu/projects/330316808/"
+				},
+				{
+					title: "User Input: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS7 User Input. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -364,6 +399,11 @@ export const scratchLevel1Course: RawCourse = {
 						"1. Using the Pen extension, draw a picture by moving the sprite to various X and Y coordinates.\n2. Allow the user to enter coordinates to draw their own shapes.\n3. Encourage drawing initials or simple pictures.",
 					projectLink: "https://scratch.mit.edu/projects/330291711/",
 					solutionLink: "https://scratch.mit.edu/projects/330288612/"
+				},
+				{
+					title: "X & Y Coordinates: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS8 X & Y Coordinates. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -461,6 +501,11 @@ export const scratchLevel1Course: RawCourse = {
 						"Pick a partner for Dani to play with, and they will bounce around the screen together!\n\n1. When the green flag is clicked, set up the Start button in the correct position and have Dani explain the instructions.\n2. When the Start button is clicked, set up the sprites in the correct positions.\n3. Program each sprite so that if it is chosen (i.e., clicked on), it bounces around the room with Dani! If it is not chosen, it should also react appropriately.",
 					projectLink: "https://scratch.mit.edu/projects/330302209/",
 					solutionLink: "https://scratch.mit.edu/projects/328312475/"
+				},
+				{
+					title: "Message Broadcasting: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS10 Message Broadcasting. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -502,6 +547,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Hedgehog Race: Fluency Drill",
 					content:
 						"Repeat the core ideas from GS11 Hedgehog Race on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Hedgehog Race: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS11 Hedgehog Race. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -543,6 +593,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Asteroid Dodge: Fluency Drill",
 					content:
 						"Repeat the core ideas from GS12 Asteroid Dodge on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Asteroid Dodge: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS12 Asteroid Dodge. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -580,6 +635,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "GS13 Master Project: Fluency Drill",
 					content:
 						"Repeat the core ideas from GS13 Master Project on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+				},
+				{
+					title: "GS13 Master Project: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by GS13 Master Project. Keep the scope small, but require one meaningful design or reasoning choice. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
 				}
 			]
 		},
@@ -617,6 +677,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Scratch studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 14: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 14: Scratch studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 14: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -654,6 +719,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Scratch studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 15: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 15: Scratch studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 15: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -691,6 +761,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Scratch studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 16: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 16: Scratch studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 16: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -728,6 +803,11 @@ export const scratchLevel1Course: RawCourse = {
 					title: "Scratch studio: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 17: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 17: Scratch studio: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 17: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		}

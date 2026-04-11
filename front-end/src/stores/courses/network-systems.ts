@@ -47,9 +47,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-ns0-setup-and-tooling/solution"
 				},
 				{
-					title: "Tool Drill: ssh",
+					title: "Setup and Tooling supplemental 2",
 					content:
-						"Start the lesson by running ssh and asking students what evidence it should provide and what it cannot prove on its own. Ask students what a successful SSH connection proves about network reachability, authentication, and listening services, and what it still does not prove about every other port on the host."
+						"Use the linked starter and solution for a supplemental project tied to NS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-ns0-setup-and-tooling-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-ns0-setup-and-tooling-supplemental-2/solution"
+				},
+				{
+					title: "Setup and Tooling supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to NS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-ns0-setup-and-tooling-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-ns0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -97,9 +110,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-1-the-network-stack-in-plain-english/solution"
 				},
 				{
-					title: "Failure Signature Drill: Local App Works but Remote Client Cannot Reach It",
+					title: "Unit 1: The Network Stack in Plain English supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Ask students which layer they would inspect first: application process, listening socket, host firewall, route, or name resolution, and require them to justify that ordering."
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: The Network Stack in Plain English. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-unit-1-the-network-stack-in-plain-english-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-unit-1-the-network-stack-in-plain-english-supple/solution"
+				},
+				{
+					title: "Unit 1: The Network Stack in Plain English supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: The Network Stack in Plain English. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-unit-1-the-network-stack-in-plain-english-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-unit-1-the-network-stack-in-plain-english-supple/solution"
 				}
 			]
 		},
@@ -147,9 +173,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming/solution"
 				},
 				{
-					title: "Failure Signature Drill: Wrong Address Family",
+					title: "Unit 2: Addresses and Naming supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Ask students what changes when a client prefers IPv6 but the service only works over IPv4, and how they would prove which family is failing."
+						"Use the linked starter and solution for a supplemental project tied to Unit 2: Addresses and Naming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-2-addresses-and-naming-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-2-addresses-and-naming-supplemental-2/solution"
+				},
+				{
+					title: "Unit 2: Addresses and Naming supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 2: Addresses and Naming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming-supplemental-3/solution"
 				}
 			]
 		},
@@ -197,9 +236,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg/solution"
 				},
 				{
-					title: "Failure Signature Drill: Service Works on the LAN but Not from Outside",
+					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Require students to separate likely causes into router edge problems, host firewall problems, and service-listening problems before they run any commands."
+						"Use the linked starter and solution for a supplemental project tied to Unit 3: Switches, Routers, NAT, and the Internet Edge. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg-2/solution"
+				},
+				{
+					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 3: Switches, Routers, NAT, and the Internet Edge. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-3-switches-routers-nat-and-the-internet-edg/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-3-switches-routers-nat-and-the-internet-edg/solution"
 				}
 			]
 		},
@@ -242,9 +294,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS1-Listening-Services-Map/solution"
 				},
 				{
-					title: "Tool Drill: ss -tulpn",
+					title: "Unit 4: Ports and Listening Services supplemental 2",
 					content:
-						"Start the lesson by running ss -tulpn and asking students what evidence it should provide and what it cannot prove on its own. Ask students which lines represent listeners, which represent active connections, and what extra evidence they still need before claiming a service is reachable from another machine."
+						"Use the linked starter and solution for a supplemental project tied to Unit 4: Ports and Listening Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-4-ports-and-listening-services-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-4-ports-and-listening-services-supplemental/solution"
+				},
+				{
+					title: "Unit 4: Ports and Listening Services supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 4: Ports and Listening Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-unit-4-ports-and-listening-services-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-unit-4-ports-and-listening-services-supplemental/solution"
 				}
 			]
 		},
@@ -287,9 +352,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS4-IPv4-vs-IPv6-Resolution-Comparison/solution"
 				},
 				{
-					title: "Failure Signature Drill: Bad DNS versus Good DNS but Bad Service",
+					title: "Unit 5: DNS and Name Resolution supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Give students one case where a hostname fails to resolve and one where it resolves cleanly but the service still times out, and require them to distinguish the layers immediately."
+						"Use the linked starter and solution for a supplemental project tied to Unit 5: DNS and Name Resolution. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX11-unit-5-dns-and-name-resolution-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX11-unit-5-dns-and-name-resolution-supplemental-2/solution"
+				},
+				{
+					title: "Unit 5: DNS and Name Resolution supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 5: DNS and Name Resolution. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX12-unit-5-dns-and-name-resolution-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX12-unit-5-dns-and-name-resolution-supplemental-3/solution"
 				}
 			]
 		},
@@ -332,9 +410,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS2-Local-vs-Remote-Reachability-Diagnosis/solution"
 				},
 				{
-					title: "Failure Signature Drill: Timeout, Refusal, Reset",
+					title: "Unit 6: Core Diagnostics supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Present three short command outputs and require students to classify each one and name the next best confirming command."
+						"Use the linked starter and solution for a supplemental project tied to Unit 6: Core Diagnostics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX13-unit-6-core-diagnostics-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX13-unit-6-core-diagnostics-supplemental-2/solution"
+				},
+				{
+					title: "Unit 6: Core Diagnostics supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 6: Core Diagnostics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX14-unit-6-core-diagnostics-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX14-unit-6-core-diagnostics-supplemental-3/solution"
 				}
 			]
 		},
@@ -377,9 +468,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS6-Router-NAT-Topology-Lab/solution"
 				},
 				{
-					title: "Tool Drill: ip route",
+					title: "Unit 7: Linux Interface and Route Management supplemental 2",
 					content:
-						"Start the lesson by running ip route and asking students what evidence it should provide and what it cannot prove on its own. Ask students which route a host will choose for one destination inside the local subnet and one destination on the public internet before they test either path."
+						"Use the linked starter and solution for a supplemental project tied to Unit 7: Linux Interface and Route Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX15-unit-7-linux-interface-and-route-management-supp/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX15-unit-7-linux-interface-and-route-management-supp/solution"
+				},
+				{
+					title: "Unit 7: Linux Interface and Route Management supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 7: Linux Interface and Route Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX16-unit-7-linux-interface-and-route-management-supp/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX16-unit-7-linux-interface-and-route-management-supp/solution"
 				}
 			]
 		},
@@ -427,9 +531,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-8-ipv6-in-practice/solution"
 				},
 				{
-					title: "Failure Signature Drill: IPv4 Works but IPv6 Fails",
+					title: "Unit 8: IPv6 in Practice supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Ask students whether they would inspect resolution order, interface addressing, service binding, or firewall policy first, and require them to justify the first branch in that diagnostic tree."
+						"Use the linked starter and solution for a supplemental project tied to Unit 8: IPv6 in Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX17-unit-8-ipv6-in-practice-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX17-unit-8-ipv6-in-practice-supplemental-2/solution"
+				},
+				{
+					title: "Unit 8: IPv6 in Practice supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 8: IPv6 in Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX18-unit-8-ipv6-in-practice-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX18-unit-8-ipv6-in-practice-supplemental-3/solution"
 				}
 			]
 		},
@@ -472,9 +589,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS3-UFW-Web-Server-Policy/solution"
 				},
 				{
-					title: "Tool Drill: ufw status numbered",
+					title: "Unit 9: Firewalls and Host Policy supplemental 2",
 					content:
-						"Start the lesson by running ufw status numbered and asking students what evidence it should provide and what it cannot prove on its own. Ask students which rules govern SSH access, which rules govern the public service, and what test they would run from a second host to verify both."
+						"Use the linked starter and solution for a supplemental project tied to Unit 9: Firewalls and Host Policy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX19-unit-9-firewalls-and-host-policy-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX19-unit-9-firewalls-and-host-policy-supplemental-2/solution"
+				},
+				{
+					title: "Unit 9: Firewalls and Host Policy supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 9: Firewalls and Host Policy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX20-unit-9-firewalls-and-host-policy-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX20-unit-9-firewalls-and-host-policy-supplemental-3/solution"
 				}
 			]
 		},
@@ -517,9 +647,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS5-Tcpdump-HTTP-Capture/solution"
 				},
 				{
-					title: "Tool Drill: tcpdump -nn",
+					title: "Unit 10: Packet Capture and Deep Inspection supplemental 2",
 					content:
-						"Start the lesson by running tcpdump -nn and asking students what evidence it should provide and what it cannot prove on its own. Ask students why disabling name resolution helps when the point of the capture is raw packet evidence rather than convenience output."
+						"Use the linked starter and solution for a supplemental project tied to Unit 10: Packet Capture and Deep Inspection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX21-unit-10-packet-capture-and-deep-inspection-suppl/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX21-unit-10-packet-capture-and-deep-inspection-suppl/solution"
+				},
+				{
+					title: "Unit 10: Packet Capture and Deep Inspection supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 10: Packet Capture and Deep Inspection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX22-unit-10-packet-capture-and-deep-inspection-suppl/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX22-unit-10-packet-capture-and-deep-inspection-suppl/solution"
 				}
 			]
 		},
@@ -567,9 +710,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-11-common-application-protocols/solution"
 				},
 				{
-					title: "Failure Signature Drill: HTTP Works but HTTPS Fails",
+					title: "Unit 11: Common Application Protocols supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Ask students whether they would inspect certificate handling, reverse proxy config, host firewall policy, or DNS first, and require them to name the quickest differentiating test."
+						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX23-unit-11-common-application-protocols-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX23-unit-11-common-application-protocols-supplementa/solution"
+				},
+				{
+					title: "Unit 11: Common Application Protocols supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX24-unit-11-common-application-protocols-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX24-unit-11-common-application-protocols-supplementa/solution"
 				}
 			]
 		},
@@ -612,9 +768,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS6-Router-NAT-Topology-Lab/solution"
 				},
 				{
-					title: "Failure Signature Drill: Open Service, Wrong Layer Exposed",
+					title: "Unit 12: Secure Exposure of Services supplemental 2",
 					content:
-						"Start the lesson with one short failure case and ask students to classify it before they change anything. Present a case where the app is reachable but an internal admin surface is also exposed, and ask students how the exposure happened and which layer should fix it first."
+						"Use the linked starter and solution for a supplemental project tied to Unit 12: Secure Exposure of Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX25-unit-12-secure-exposure-of-services-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX25-unit-12-secure-exposure-of-services-supplemental/solution"
+				},
+				{
+					title: "Unit 12: Secure Exposure of Services supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Unit 12: Secure Exposure of Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX26-unit-12-secure-exposure-of-services-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX26-unit-12-secure-exposure-of-services-supplemental/solution"
 				}
 			]
 		},
@@ -662,9 +831,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-ns13-expansion-ideas-and-next-steps/solution"
 				},
 				{
-					title: "Tool Drill: mtr",
+					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Start the lesson by running mtr and asking students what evidence it should provide and what it cannot prove on its own. Use it as a bridge into more advanced routing discussion by asking what repeated path instability or latency variation might suggest before anyone jumps to a single-layer explanation."
+						"Use the linked starter and solution for a supplemental project tied to NS13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX27-ns13-expansion-ideas-and-next-steps-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX27-ns13-expansion-ideas-and-next-steps-supplemental/solution"
+				},
+				{
+					title: "Expansion Ideas and Next Steps supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to NS13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX28-ns13-expansion-ideas-and-next-steps-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX28-ns13-expansion-ideas-and-next-steps-supplemental/solution"
 				}
 			]
 		},
@@ -707,9 +889,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-network-systems-lab-15/solution"
 				},
 				{
-					title: "network systems lab 15: Open Practice",
+					title: "Applied Studio 15: network systems lab 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: network systems lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: network systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX29-applied-studio-15-network-systems-lab-15-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX29-applied-studio-15-network-systems-lab-15-supplem/solution"
+				},
+				{
+					title: "Applied Studio 15: network systems lab 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: network systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX30-applied-studio-15-network-systems-lab-15-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX30-applied-studio-15-network-systems-lab-15-supplem/solution"
 				}
 			]
 		},
@@ -752,9 +947,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-network-systems-lab-16/solution"
 				},
 				{
-					title: "network systems lab 16: Open Practice",
+					title: "Applied Studio 16: network systems lab 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: network systems lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX31-applied-studio-16-network-systems-lab-16-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX31-applied-studio-16-network-systems-lab-16-supplem/solution"
+				},
+				{
+					title: "Applied Studio 16: network systems lab 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX32-applied-studio-16-network-systems-lab-16-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX32-applied-studio-16-network-systems-lab-16-supplem/solution"
 				}
 			]
 		},
@@ -797,9 +1005,22 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-network-systems-lab-17/solution"
 				},
 				{
-					title: "network systems lab 17: Open Practice",
+					title: "Applied Studio 17: network systems lab 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: network systems lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX33-applied-studio-17-network-systems-lab-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX33-applied-studio-17-network-systems-lab-17-supplem/solution"
+				},
+				{
+					title: "Applied Studio 17: network systems lab 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX34-applied-studio-17-network-systems-lab-17-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Network-Systems/tree/main/NSX34-applied-studio-17-network-systems-lab-17-supplem/solution"
 				}
 			]
 		}

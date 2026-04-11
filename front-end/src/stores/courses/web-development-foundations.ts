@@ -52,9 +52,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX05-wdf0-setup-and-tooling/solution"
 				},
 				{
-					title: "Recurring Drill: Node and npm Verification",
+					title: "Setup and Tooling supplemental 2",
 					content:
-						"Ask students to run `node --version` and `npm --version` at the start of the course and again before the first full-stack project so they internalize toolchain verification instead of assuming the environment is stable."
+						"Use the linked starter and solution for a supplemental project tied to WDF0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX01-wdf0-setup-and-tooling-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX01-wdf0-setup-and-tooling-supplemental-2/solution"
+				},
+				{
+					title: "Setup and Tooling supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX02-wdf0-setup-and-tooling-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX02-wdf0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -107,9 +120,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX06-wdf1-positioning-goals-and-suggested-course-fami/solution"
 				},
 				{
-					title: "Recurring Drill: Project Lifecycle Map",
+					title: "Positioning, Goals, and Suggested Course Family supplemental 2",
 					content:
-						"Have students sketch the path from `HTML/CSS/JS on disk` to `published website with logs and a domain` so the course keeps a stack-wide mental model visible from the start. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Use the linked starter and solution for a supplemental project tied to WDF1 Positioning, Goals, and Suggested Course Family. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX03-wdf1-positioning-goals-and-suggested-course-fami/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX03-wdf1-positioning-goals-and-suggested-course-fami/solution"
+				},
+				{
+					title: "Positioning, Goals, and Suggested Course Family supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF1 Positioning, Goals, and Suggested Course Family. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX04-wdf1-positioning-goals-and-suggested-course-fami/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX04-wdf1-positioning-goals-and-suggested-course-fami/solution"
 				}
 			]
 		},
@@ -157,9 +183,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX07-wdf2-stage-1-strengthen-the-existing-javascript-/solution"
 				},
 				{
-					title: "Recurring Drill: Devtools Bug Hunt",
+					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 2",
 					content:
-						"Start lessons with a short browser-side bug and require students to use console, Elements, or Network tools to explain the failure before they edit the code. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX05-wdf2-stage-1-strengthen-the-existing-javascript-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX05-wdf2-stage-1-strengthen-the-existing-javascript-/solution"
+				},
+				{
+					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX06-wdf2-stage-1-strengthen-the-existing-javascript-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX06-wdf2-stage-1-strengthen-the-existing-javascript-/solution"
 				}
 			]
 		},
@@ -207,9 +246,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF1-Portfolio-Custom-Domain/solution"
 				},
 				{
-					title: "Workflow Notebook: Web Development Foundations",
+					title: "Stage 2: Web Development Foundations supplemental 2",
 					content:
-						"Keep a running notebook for web development foundations that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on package scripts, local dev servers, environment variables, and input validation so students build habits that carry from local work into real hosting and operations."
+						"Use the linked starter and solution for a supplemental project tied to WDF3 Stage 2: Web Development Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX07-wdf3-stage-2-web-development-foundations-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX07-wdf3-stage-2-web-development-foundations-supplem/solution"
+				},
+				{
+					title: "Stage 2: Web Development Foundations supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF3 Stage 2: Web Development Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX08-wdf3-stage-2-web-development-foundations-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX08-wdf3-stage-2-web-development-foundations-supplem/solution"
 				}
 			]
 		},
@@ -257,9 +309,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF4-Realtime-Chat-App/solution"
 				},
 				{
-					title: "Workflow Notebook: Front-End Applications",
+					title: "Stage 3: Front End Applications supplemental 2",
 					content:
-						"Keep a running notebook for front-end applications that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on routing decisions, state boundaries, async loading states, and accessibility fixes so students build habits that carry from local work into real hosting and operations."
+						"Use the linked starter and solution for a supplemental project tied to WDF4 Stage 3: Front-End Applications. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX09-wdf4-stage-3-front-end-applications-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX09-wdf4-stage-3-front-end-applications-supplemental/solution"
+				},
+				{
+					title: "Stage 3: Front End Applications supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF4 Stage 3: Front-End Applications. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX10-wdf4-stage-3-front-end-applications-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX10-wdf4-stage-3-front-end-applications-supplemental/solution"
 				}
 			]
 		},
@@ -307,9 +372,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF3-Booking-Contact-App/solution"
 				},
 				{
-					title: "Workflow Notebook: Back-End Basics",
+					title: "Stage 4: Back End Basics supplemental 2",
 					content:
-						"Keep a running notebook for back-end basics that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on route design, validation failures, environment variables, and auth terminology so students build habits that carry from local work into real hosting and operations."
+						"Use the linked starter and solution for a supplemental project tied to WDF5 Stage 4: Back-End Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX11-wdf5-stage-4-back-end-basics-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX11-wdf5-stage-4-back-end-basics-supplemental-2/solution"
+				},
+				{
+					title: "Stage 4: Back End Basics supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF5 Stage 4: Back-End Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX12-wdf5-stage-4-back-end-basics-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX12-wdf5-stage-4-back-end-basics-supplemental-3/solution"
 				}
 			]
 		},
@@ -357,9 +435,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF2-Notes-App-with-MongoDB/solution"
 				},
 				{
-					title: "Workflow Notebook: Databases and Data Models",
+					title: "Stage 5: Databases and Data Models supplemental 2",
 					content:
-						"Keep a running notebook for databases and data models that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on schemas, CRUD flows, query behavior, and SQL-vs-NoSQL reasoning so students build habits that carry from local work into real hosting and operations."
+						"Use the linked starter and solution for a supplemental project tied to WDF6 Stage 5: Databases and Data Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX13-wdf6-stage-5-databases-and-data-models-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX13-wdf6-stage-5-databases-and-data-models-supplemen/solution"
+				},
+				{
+					title: "Stage 5: Databases and Data Models supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF6 Stage 5: Databases and Data Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX14-wdf6-stage-5-databases-and-data-models-supplemen/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX14-wdf6-stage-5-databases-and-data-models-supplemen/solution"
 				}
 			]
 		},
@@ -407,9 +498,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF5-Separate-Deployment-Lab/solution"
 				},
 				{
-					title: "Workflow Notebook: Hosting and Deployment",
+					title: "Stage 6: Hosting and Deployment supplemental 2",
 					content:
-						"Keep a running notebook for hosting and deployment that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on domains, DNS, environment configuration, reverse proxies, and post-deploy verification so students build habits that carry from local work into real hosting and operations."
+						"Use the linked starter and solution for a supplemental project tied to WDF7 Stage 6: Hosting and Deployment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX15-wdf7-stage-6-hosting-and-deployment-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX15-wdf7-stage-6-hosting-and-deployment-supplemental/solution"
+				},
+				{
+					title: "Stage 6: Hosting and Deployment supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF7 Stage 6: Hosting and Deployment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX16-wdf7-stage-6-hosting-and-deployment-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX16-wdf7-stage-6-hosting-and-deployment-supplemental/solution"
 				}
 			]
 		},
@@ -457,9 +561,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX08-wdf8-hosting-and-operations-topics-to-add/solution"
 				},
 				{
-					title: "Recurring Drill: Hosting Decision Review",
+					title: "Hosting and Operations Topics to Add supplemental 2",
 					content:
-						"Present a project and require students to justify where the front end, API, and database should live, what environment variables each side needs, and which logs they would check first after launch."
+						"Use the linked starter and solution for a supplemental project tied to WDF8 Hosting and Operations Topics to Add. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX17-wdf8-hosting-and-operations-topics-to-add-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX17-wdf8-hosting-and-operations-topics-to-add-supple/solution"
+				},
+				{
+					title: "Hosting and Operations Topics to Add supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF8 Hosting and Operations Topics to Add. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX18-wdf8-hosting-and-operations-topics-to-add-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX18-wdf8-hosting-and-operations-topics-to-add-supple/solution"
 				}
 			]
 		},
@@ -523,9 +640,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF1-Portfolio-Custom-Domain/solution"
 				},
 				{
-					title: "Recurring Drill: Project Decomposition",
+					title: "Good Practical Projects supplemental 2",
 					content:
-						"For each project, ask students to separate the work into front end, back end, data, hosting, environment variables, and post-launch verification so they stop seeing projects as one undifferentiated block of code."
+						"Use the linked starter and solution for a supplemental project tied to WDF9 Good Practical Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX19-wdf9-good-practical-projects-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX19-wdf9-good-practical-projects-supplemental-2/solution"
+				},
+				{
+					title: "Good Practical Projects supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF9 Good Practical Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX20-wdf9-good-practical-projects-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX20-wdf9-good-practical-projects-supplemental-3/solution"
 				}
 			]
 		},
@@ -573,9 +703,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX09-wdf10-suggested-advanced-strand/solution"
 				},
 				{
-					title: "Recurring Drill: Production Incident Sketch",
+					title: "Suggested Advanced Strand supplemental 2",
 					content:
-						"Give students a simple outage scenario and ask them to identify which logs, dashboards, or configuration files they would inspect first and why. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to WDF10 Suggested Advanced Strand. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX21-wdf10-suggested-advanced-strand-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX21-wdf10-suggested-advanced-strand-supplemental-2/solution"
+				},
+				{
+					title: "Suggested Advanced Strand supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF10 Suggested Advanced Strand. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX22-wdf10-suggested-advanced-strand-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX22-wdf10-suggested-advanced-strand-supplemental-3/solution"
 				}
 			]
 		},
@@ -623,9 +766,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX10-wdf11-integration-with-network-topics/solution"
 				},
 				{
-					title: "Recurring Drill: Network Path Review",
+					title: "Integration with Network Topics supplemental 2",
 					content:
-						"Ask students to trace one request from browser to domain, DNS, hosting platform, reverse proxy or app server, and back again so networking stops being abstract background knowledge. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to WDF11 Integration with Network Topics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX23-wdf11-integration-with-network-topics-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX23-wdf11-integration-with-network-topics-supplement/solution"
+				},
+				{
+					title: "Integration with Network Topics supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF11 Integration with Network Topics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX24-wdf11-integration-with-network-topics-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX24-wdf11-integration-with-network-topics-supplement/solution"
 				}
 			]
 		},
@@ -673,9 +829,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX11-wdf12-expansion-ideas-and-next-steps/solution"
 				},
 				{
-					title: "Recurring Drill: Choose the Next Specialization",
+					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Have students explain whether they want to deepen in front-end applications, full-stack apps, deployment and hosting, databases, or operations next, and require them to justify that choice using what they learned in this course."
+						"Use the linked starter and solution for a supplemental project tied to WDF12 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX25-wdf12-expansion-ideas-and-next-steps-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX25-wdf12-expansion-ideas-and-next-steps-supplementa/solution"
+				},
+				{
+					title: "Expansion Ideas and Next Steps supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to WDF12 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX26-wdf12-expansion-ideas-and-next-steps-supplementa/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX26-wdf12-expansion-ideas-and-next-steps-supplementa/solution"
 				}
 			]
 		},
@@ -718,9 +887,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX01-full-stack-web-lab-14/solution"
 				},
 				{
-					title: "full stack web lab 14: Open Practice",
+					title: "Applied Studio 14: full stack web lab 14 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: full stack web lab 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: full stack web lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX27-applied-studio-14-full-stack-web-lab-14-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX27-applied-studio-14-full-stack-web-lab-14-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 14: full stack web lab 14 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: full stack web lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX28-applied-studio-14-full-stack-web-lab-14-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX28-applied-studio-14-full-stack-web-lab-14-suppleme/solution"
 				}
 			]
 		},
@@ -763,9 +945,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX02-full-stack-web-lab-15/solution"
 				},
 				{
-					title: "full stack web lab 15: Open Practice",
+					title: "Applied Studio 15: full stack web lab 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: full stack web lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: full stack web lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX29-applied-studio-15-full-stack-web-lab-15-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX29-applied-studio-15-full-stack-web-lab-15-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 15: full stack web lab 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: full stack web lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX30-applied-studio-15-full-stack-web-lab-15-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX30-applied-studio-15-full-stack-web-lab-15-suppleme/solution"
 				}
 			]
 		},
@@ -808,9 +1003,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX03-full-stack-web-lab-16/solution"
 				},
 				{
-					title: "full stack web lab 16: Open Practice",
+					title: "Applied Studio 16: full stack web lab 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: full stack web lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: full stack web lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX31-applied-studio-16-full-stack-web-lab-16-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX31-applied-studio-16-full-stack-web-lab-16-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 16: full stack web lab 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: full stack web lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX32-applied-studio-16-full-stack-web-lab-16-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX32-applied-studio-16-full-stack-web-lab-16-suppleme/solution"
 				}
 			]
 		},
@@ -853,9 +1061,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX04-full-stack-web-lab-17/solution"
 				},
 				{
-					title: "full stack web lab 17: Open Practice",
+					title: "Applied Studio 17: full stack web lab 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: full stack web lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: full stack web lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX33-applied-studio-17-full-stack-web-lab-17-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX33-applied-studio-17-full-stack-web-lab-17-suppleme/solution"
+				},
+				{
+					title: "Applied Studio 17: full stack web lab 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: full stack web lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX34-applied-studio-17-full-stack-web-lab-17-suppleme/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDFX34-applied-studio-17-full-stack-web-lab-17-suppleme/solution"
 				}
 			]
 		}

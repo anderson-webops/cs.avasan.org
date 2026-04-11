@@ -43,9 +43,18 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-MooTube"
 				},
 				{
-					title: "USG0 Setup and Gold Mindset: Fluency Drill",
+					title: "Why Did the Cow Cross the Road III",
 					content:
-						"Repeat the core ideas from USG0 Setup and Gold Mindset on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to USG0 Setup and Gold Mindset. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG24-Why-Did-the-Cow-Cross-the-Road-III"
+				},
+				{
+					title: "Snow Boots",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to USG0 Setup and Gold Mindset. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG27-Snow-Boots"
 				}
 			]
 		},
@@ -165,9 +174,11 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG30-Fine-Dining"
 				},
 				{
-					title: "Gold Log: Shortest Paths and Weighted Graphs",
+					title: "Why Did the Cow Cross the Road II",
 					content:
-						"Keep a compact Gold-level log for shortest paths and weighted graphs that records the core recurrence or invariant, one discarded approach, and one note about what the distances actually mean in the original story of the problem. Gold progress depends on being able to explain the structure of a solution, not just implement it."
+						"Use the linked starter and solution for a supplemental project tied to Unit 2: Shortest Paths and Weighted Graphs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG31-Why-Did-the-Cow-Cross-the-Road-II"
 				}
 			]
 		},
@@ -280,9 +291,11 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG26-Out-of-Sorts"
 				},
 				{
-					title: "Gold Log: Fenwick Trees, Ordering, and Range Structure",
+					title: "Circular Barn",
 					content:
-						"Keep a compact Gold-level log for fenwick trees, ordering, and range structure that records the core recurrence or invariant, one discarded approach, and one note about which query or update pattern justified the heavier data structure. Gold progress depends on being able to explain the structure of a solution, not just implement it."
+						"Use the linked starter and solution for a supplemental project tied to Unit 4: Fenwick Trees, Ordering, and Range Structure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG37-Circular-Barn"
 				}
 			]
 		},
@@ -450,9 +463,11 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG29-Cowpatibility"
 				},
 				{
-					title: "Gold Log: Gold Capstone Sets",
+					title: "Bovine Genomics",
 					content:
-						"Keep a compact Gold-level log for gold capstone sets that records the core recurrence or invariant, one discarded approach, and one note about which algorithm family the student can now recognize quickly and which still takes too long to identify. Gold progress depends on being able to explain the structure of a solution, not just implement it."
+						"Use the linked starter and solution for a supplemental project tied to Unit 7: Gold Capstone Sets. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG38-Bovine-Genomics"
 				}
 			]
 		},
@@ -560,9 +575,18 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice"
 				},
 				{
-					title: "Dynamic Programming Practice: Open Practice",
+					title: "Cow Checklist",
 					content:
-						"Create a compact variant inspired by Applied Studio 10: Dynamic Programming Practice. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: Dynamic Programming Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG4-Cow-Checklist"
+				},
+				{
+					title: "Marathon",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: Dynamic Programming Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG5-Marathon"
 				}
 			]
 		},
@@ -601,9 +625,18 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors"
 				},
 				{
-					title: "Hoof Paper Scissors: Open Practice",
+					title: "248",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: Hoof Paper Scissors. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG6-248"
+				},
+				{
+					title: "Treasure Chest",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG7-Treasure-Chest"
 				}
 			]
 		},
@@ -642,9 +675,18 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
-					title: "Why Did the Cow Cross the Road: Open Practice",
+					title: "Bookshelf",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: Why Did the Cow Cross the Road. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: Why Did the Cow Cross the Road. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG8-Bookshelf"
+				},
+				{
+					title: "Dijkstras Algorithm II",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: Why Did the Cow Cross the Road. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm-II"
 				}
 			]
 		},
@@ -683,9 +725,22 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing"
 				},
 				{
-					title: "Cow Routing: Open Practice",
+					title: "Applied Studio 13: Cow Routing supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: Cow Routing. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Cow Routing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX01-applied-studio-13-cow-routing-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX01-applied-studio-13-cow-routing-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 13: Cow Routing supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Cow Routing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX02-applied-studio-13-cow-routing-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX02-applied-studio-13-cow-routing-supplemental-3/solution"
 				}
 			]
 		},
@@ -724,9 +779,22 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II"
 				},
 				{
-					title: "MST II: Open Practice",
+					title: "Applied Studio 14: MST II supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: MST II. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: MST II. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX03-applied-studio-14-mst-ii-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX03-applied-studio-14-mst-ii-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 14: MST II supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: MST II. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX04-applied-studio-14-mst-ii-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX04-applied-studio-14-mst-ii-supplemental-3/solution"
 				}
 			]
 		},
@@ -765,9 +833,22 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields"
 				},
 				{
-					title: "Watering the Fields: Open Practice",
+					title: "Applied Studio 15: Watering the Fields supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: Watering the Fields. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Watering the Fields. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX05-applied-studio-15-watering-the-fields-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX05-applied-studio-15-watering-the-fields-supplement/solution"
+				},
+				{
+					title: "Applied Studio 15: Watering the Fields supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Watering the Fields. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX06-applied-studio-15-watering-the-fields-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX06-applied-studio-15-watering-the-fields-supplement/solution"
 				}
 			]
 		},
@@ -806,9 +887,22 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles"
 				},
 				{
-					title: "I Would Walk 500 Miles: Open Practice",
+					title: "Applied Studio 16: I Would Walk 500 Miles supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: I Would Walk 500 Miles. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: I Would Walk 500 Miles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX07-applied-studio-16-i-would-walk-500-miles-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX07-applied-studio-16-i-would-walk-500-miles-supplem/solution"
+				},
+				{
+					title: "Applied Studio 16: I Would Walk 500 Miles supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: I Would Walk 500 Miles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX08-applied-studio-16-i-would-walk-500-miles-supplem/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX08-applied-studio-16-i-would-walk-500-miles-supplem/solution"
 				}
 			]
 		},
@@ -847,9 +941,22 @@ export const usacoGoldCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show"
 				},
 				{
-					title: "Talent Show: Open Practice",
+					title: "Applied Studio 17: Talent Show supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: Talent Show. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Talent Show. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX09-applied-studio-17-talent-show-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX09-applied-studio-17-talent-show-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 17: Talent Show supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Talent Show. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX10-applied-studio-17-talent-show-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX10-applied-studio-17-talent-show-supplemental-3/solution"
 				}
 			]
 		}

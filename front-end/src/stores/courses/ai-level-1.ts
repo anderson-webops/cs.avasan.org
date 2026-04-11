@@ -57,9 +57,11 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-Deck-of-Cards"
 				},
 				{
-					title: "Search Notebook: Setup and Tooling",
+					title: "The Marble Game AI(COPY)",
 					content:
-						"Keep a running search notebook for setup and tooling that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about how states, actions, and goals will be documented across the entire course. The habit should be to justify the algorithm, not just the answer."
+						"Use the linked starter and solution for a supplemental project tied to FAI0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI(COPY)"
 				}
 			]
 		},
@@ -121,9 +123,13 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI3-Airports-Problem"
 				},
 				{
-					title: "Search Notebook: AI Landscape and State Representation",
+					title: "Unit 1: AI Landscape and State Representation supplemental 4",
 					content:
-						"Keep a running search notebook for ai landscape and state representation that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about which details belong in a state and which details are irrelevant noise. The habit should be to justify the algorithm, not just the answer."
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: AI Landscape and State Representation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-unit-1-ai-landscape-and-state-representation-sup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-unit-1-ai-landscape-and-state-representation-sup/solution"
 				}
 			]
 		},
@@ -181,9 +187,13 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Queues"
 				},
 				{
-					title: "Search Notebook: Stacks, Queues, and Traversal Intuition",
+					title: "Unit 2: Stacks, Queues, and Traversal Intuition supplemental 4",
 					content:
-						"Keep a running search notebook for stacks, queues, and traversal intuition that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about how frontier order changes what the algorithm discovers first. The habit should be to justify the algorithm, not just the answer."
+						"Use the linked starter and solution for a supplemental project tied to Unit 2: Stacks, Queues, and Traversal Intuition. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-unit-2-stacks-queues-and-traversal-intuition-sup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-unit-2-stacks-queues-and-traversal-intuition-sup/solution"
 				}
 			]
 		},
@@ -374,9 +384,13 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-Juni-Book"
 				},
 				{
-					title: "Search Notebook: Rule-Based Systems and Puzzle Framing",
+					title: "Unit 5: Rule Based Systems and Puzzle Framing supplemental 4",
 					content:
-						"Keep a running search notebook for rule-based systems and puzzle framing that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about which parts of the task can be encoded directly and which require search or scoring. The habit should be to justify the algorithm, not just the answer."
+						"Use the linked starter and solution for a supplemental project tied to Unit 5: Rule-Based Systems and Puzzle Framing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-unit-5-rule-based-systems-and-puzzle-framing-sup/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-unit-5-rule-based-systems-and-puzzle-framing-sup/solution"
 				}
 			]
 		},
@@ -489,9 +503,13 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Water-Jug-Riddle"
 				},
 				{
-					title: "Search Notebook: Features, Evaluation, and Responsible AI",
+					title: "Unit 7: Features, Evaluation, and Responsible AI supplemental 3",
 					content:
-						"Keep a running search notebook for features, evaluation, and responsible ai that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about what the system is optimizing for and which failure cases would still matter to a real user. The habit should be to justify the algorithm, not just the answer."
+						"Use the linked starter and solution for a supplemental project tied to Unit 7: Features, Evaluation, and Responsible AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-unit-7-features-evaluation-and-responsible-ai-su/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-unit-7-features-evaluation-and-responsible-ai-su/solution"
 				}
 			]
 		},
@@ -672,9 +690,22 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/solution"
 				},
 				{
-					title: "ai search lab 13: Open Practice",
+					title: "Applied Studio 11: ai search lab 13 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: ai search lab 13. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: ai search lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-applied-studio-11-ai-search-lab-13-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-applied-studio-11-ai-search-lab-13-supplemental-/solution"
+				},
+				{
+					title: "Applied Studio 11: ai search lab 13 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: ai search lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX06-applied-studio-11-ai-search-lab-13-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX06-applied-studio-11-ai-search-lab-13-supplemental-/solution"
 				}
 			]
 		},
@@ -717,9 +748,22 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/solution"
 				},
 				{
-					title: "ai search lab 14: Open Practice",
+					title: "Applied Studio 12: ai search lab 14 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: ai search lab 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: ai search lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX07-applied-studio-12-ai-search-lab-14-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX07-applied-studio-12-ai-search-lab-14-supplemental-/solution"
+				},
+				{
+					title: "Applied Studio 12: ai search lab 14 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: ai search lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX08-applied-studio-12-ai-search-lab-14-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX08-applied-studio-12-ai-search-lab-14-supplemental-/solution"
 				}
 			]
 		},
@@ -762,9 +806,22 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/solution"
 				},
 				{
-					title: "ai search lab 15: Open Practice",
+					title: "Applied Studio 13: ai search lab 15 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: ai search lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: ai search lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX09-applied-studio-13-ai-search-lab-15-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX09-applied-studio-13-ai-search-lab-15-supplemental-/solution"
+				},
+				{
+					title: "Applied Studio 13: ai search lab 15 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: ai search lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX10-applied-studio-13-ai-search-lab-15-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX10-applied-studio-13-ai-search-lab-15-supplemental-/solution"
 				}
 			]
 		},
@@ -807,9 +864,22 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/solution"
 				},
 				{
-					title: "ai search lab 16: Open Practice",
+					title: "Applied Studio 14: ai search lab 16 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: ai search lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: ai search lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX11-applied-studio-14-ai-search-lab-16-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX11-applied-studio-14-ai-search-lab-16-supplemental-/solution"
+				},
+				{
+					title: "Applied Studio 14: ai search lab 16 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: ai search lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX12-applied-studio-14-ai-search-lab-16-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX12-applied-studio-14-ai-search-lab-16-supplemental-/solution"
 				}
 			]
 		},
@@ -852,9 +922,22 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/solution"
 				},
 				{
-					title: "ai search lab 17: Open Practice",
+					title: "Applied Studio 15: ai search lab 17 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: ai search lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: ai search lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX13-applied-studio-15-ai-search-lab-17-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX13-applied-studio-15-ai-search-lab-17-supplemental-/solution"
+				},
+				{
+					title: "Applied Studio 15: ai search lab 17 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: ai search lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX14-applied-studio-15-ai-search-lab-17-supplemental-/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX14-applied-studio-15-ai-search-lab-17-supplemental-/solution"
 				}
 			]
 		},
@@ -893,9 +976,22 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-TicTacToe-AI-1"
 				},
 				{
-					title: "Unbeatable TicTacToe AI 1: Open Practice",
+					title: "Applied Studio 16: Unbeatable TicTacToe AI 1 supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: Unbeatable TicTacToe AI 1. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Unbeatable TicTacToe AI 1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX15-applied-studio-16-unbeatable-tictactoe-ai-1-supp/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX15-applied-studio-16-unbeatable-tictactoe-ai-1-supp/solution"
+				},
+				{
+					title: "Applied Studio 16: Unbeatable TicTacToe AI 1 supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Unbeatable TicTacToe AI 1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX16-applied-studio-16-unbeatable-tictactoe-ai-1-supp/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX16-applied-studio-16-unbeatable-tictactoe-ai-1-supp/solution"
 				}
 			]
 		},
@@ -934,9 +1030,22 @@ export const aiLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI(COPY)"
 				},
 				{
-					title: "The Marble Game AI(COPY): Open Practice",
+					title: "Applied Studio 17: The Marble Game AI(COPY) supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: The Marble Game AI(COPY). Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: The Marble Game AI(COPY). Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX17-applied-studio-17-the-marble-game-ai-copy-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX17-applied-studio-17-the-marble-game-ai-copy-supple/solution"
+				},
+				{
+					title: "Applied Studio 17: The Marble Game AI(COPY) supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: The Marble Game AI(COPY). Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX18-applied-studio-17-the-marble-game-ai-copy-supple/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX18-applied-studio-17-the-marble-game-ai-copy-supple/solution"
 				}
 			]
 		}

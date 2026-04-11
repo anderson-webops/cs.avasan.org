@@ -406,6 +406,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 8: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 8: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 8: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -443,6 +448,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 9: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 9: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 9: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -480,6 +490,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 10: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 10: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 10: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -517,6 +532,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 11: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 11: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 11: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -554,6 +574,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 12: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 12: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 12: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -591,6 +616,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 13: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 13: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 13: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -628,6 +658,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 14: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 14: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 14: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -665,6 +700,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 15: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 15: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 15: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -702,6 +742,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 16: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 16: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 16: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		},
@@ -739,6 +784,11 @@ export const introToChemistryCourse: RawCourse = {
 					title: "chemistry lab: Open Practice",
 					content:
 						"Create a compact variant inspired by Applied Studio 17: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Applied Studio 17: chemistry lab: Open-Ended Variant",
+					content:
+						"Create an original variation inspired by Applied Studio 17: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				}
 			]
 		}

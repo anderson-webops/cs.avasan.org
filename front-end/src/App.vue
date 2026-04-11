@@ -3,12 +3,19 @@
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the HTML results with vite-ssg
 import { SCHEDULER_ORIGIN } from "@/modules/scheduler";
+
 const siteUrl = "https://classes.jacobdanderson.net";
 const siteDescription =
 	"Private instruction with Jacob Anderson for coding, STEM, and Spanish learners, including one-on-one classes, course pathways, and flexible scheduling.";
 const route = useRoute();
-const noindexMatchers = [/^\/admin(?:\/|$)/, /^\/profile(?:\/|$)/, /^\/api(?:\/|$)/];
-const canonicalUrl = computed(() => new URL(route.path || "/", `${siteUrl}/`).toString());
+const noindexMatchers = [
+	/^\/admin(?:\/|$)/,
+	/^\/profile(?:\/|$)/,
+	/^\/api(?:\/|$)/
+];
+const canonicalUrl = computed(() =>
+	new URL(route.path || "/", `${siteUrl}/`).toString()
+);
 const robotsContent = computed(() =>
 	noindexMatchers.some(matcher => matcher.test(route.path))
 		? "noindex,nofollow"
@@ -18,16 +25,16 @@ const structuredData = computed(() => [
 	{
 		"@context": "https://schema.org",
 		"@type": "EducationalOrganization",
-		"description": siteDescription,
-		"name": "Classes with Jacob",
-		"url": siteUrl
+		description: siteDescription,
+		name: "Classes with Jacob",
+		url: siteUrl
 	},
 	{
 		"@context": "https://schema.org",
 		"@type": "WebSite",
-		"description": siteDescription,
-		"name": "Classes with Jacob",
-		"url": siteUrl
+		description: siteDescription,
+		name: "Classes with Jacob",
+		url: siteUrl
 	}
 ]);
 
@@ -117,7 +124,8 @@ useHead(() => ({
 					{
 						defer: true,
 						src: "https://analytics.jacobdanderson.net/script.js",
-						"data-website-id": "d9905a72-7109-4f71-bfbb-d5e0dcef964e"
+						"data-website-id":
+							"d9905a72-7109-4f71-bfbb-d5e0dcef964e"
 					}
 				]
 			: []),

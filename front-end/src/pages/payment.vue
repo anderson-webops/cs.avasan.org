@@ -25,13 +25,13 @@ useHead(() => ({
 			children: JSON.stringify({
 				"@context": "https://schema.org",
 				"@type": "FAQPage",
-				"mainEntity": content.faqs.map((faq) => ({
+				mainEntity: content.faqs.map(faq => ({
 					"@type": "Question",
-					"acceptedAnswer": {
+					acceptedAnswer: {
 						"@type": "Answer",
-						"text": faq.answer
+						text: faq.answer
 					},
-					"name": faq.question
+					name: faq.question
 				}))
 			}),
 			key: "tuition-faq-jsonld",

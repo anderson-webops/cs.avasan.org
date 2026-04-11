@@ -43,9 +43,18 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II"
 				},
 				{
-					title: "USS0 Setup and Silver Transition: Fluency Drill",
+					title: "Why Did the Cow Cross the Road III",
 					content:
-						"Repeat the core ideas from USS0 Setup and Silver Transition on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to USS0 Setup and Silver Transition. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US26-Why-Did-the-Cow-Cross-the-Road-III"
+				},
+				{
+					title: "Paired Up",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to USS0 Setup and Silver Transition. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US27-Paired-Up"
 				}
 			]
 		},
@@ -103,9 +112,11 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-HashMaps"
 				},
 				{
-					title: "Silver Log: Data Structures and Problem Modeling",
+					title: "Bovine Genomics",
 					content:
-						"Keep a short contest log for data structures and problem modeling that records one structural idea, one failed approach, and one note about which data structure made the intended algorithm possible. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early."
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: Data Structures and Problem Modeling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US28-Bovine-Genomics"
 				}
 			]
 		},
@@ -280,9 +291,11 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US33-Just-Green-Enough"
 				},
 				{
-					title: "Silver Log: Prefix Sums, Ranges, and Counting",
+					title: "Dance Mooves",
 					content:
-						"Keep a short contest log for prefix sums, ranges, and counting that records one structural idea, one failed approach, and one note about how the transformed representation made repeated work cheaper or clearer. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early."
+						"Use the linked starter and solution for a supplemental project tied to Unit 4: Prefix Sums, Ranges, and Counting. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34_Dance-Mooves"
 				}
 			]
 		},
@@ -388,9 +401,11 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Wormhole-Sort"
 				},
 				{
-					title: "Silver Log: Silver Capstone Sets",
+					title: "Stuck in a Rut Silver",
 					content:
-						"Keep a short contest log for silver capstone sets that records one structural idea, one failed approach, and one note about which problem family still needs the most work before Gold-level study begins. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early."
+						"Use the linked starter and solution for a supplemental project tied to Unit 6: Silver Capstone Sets. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US35-Stuck-in-a-Rut-Silver"
 				}
 			]
 		},
@@ -498,9 +513,18 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking"
 				},
 				{
-					title: "US Berry Picking: Open Practice",
+					title: "Subset Equality",
 					content:
-						"Create a compact variant inspired by Applied Studio 9: US Berry Picking. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: US Berry Picking. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US37-Subset-Equality"
+				},
+				{
+					title: "Closest Cow Wins",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: US Berry Picking. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US39-Closest-Cow-Wins"
 				}
 			]
 		},
@@ -539,9 +563,18 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib"
 				},
 				{
-					title: "Superprime Rib: Open Practice",
+					title: "Custom Classes with HashSets and HashMaps",
 					content:
-						"Create a compact variant inspired by Applied Studio 10: Superprime Rib. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: Superprime Rib. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Custom-Classes-with-HashSets-and-HashMaps"
+				},
+				{
+					title: "DFS",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: Superprime Rib. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-DFS"
 				}
 			]
 		},
@@ -580,9 +613,18 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle"
 				},
 				{
-					title: "The Castle: Open Practice",
+					title: "Stacks",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: The Castle. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: The Castle. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Stacks"
+				},
+				{
+					title: "BFS",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: The Castle. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-BFS"
 				}
 			]
 		},
@@ -621,9 +663,18 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence"
 				},
 				{
-					title: "Sorting a Three Valued Sequence: Open Practice",
+					title: "Queues",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: Sorting a Three Valued Sequence. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: Sorting a Three Valued Sequence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Queues"
+				},
+				{
+					title: "Arithmetic Progressions",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: Sorting a Three Valued Sequence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US8-Arithmetic-Progressions"
 				}
 			]
 		},
@@ -662,9 +713,20 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins"
 				},
 				{
-					title: "Healthy Holsteins: Open Practice",
+					title: "Number Triangles",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: Healthy Holsteins. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Healthy Holsteins. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US9-Number-Triangles"
+				},
+				{
+					title: "Applied Studio 13: Healthy Holsteins supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Healthy Holsteins. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX01-applied-studio-13-healthy-holsteins-supplemental/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX01-applied-studio-13-healthy-holsteins-supplemental/solution"
 				}
 			]
 		},
@@ -703,9 +765,22 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes"
 				},
 				{
-					title: "Hamming Codes: Open Practice",
+					title: "Applied Studio 14: Hamming Codes supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: Hamming Codes. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Hamming Codes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX02-applied-studio-14-hamming-codes-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX02-applied-studio-14-hamming-codes-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 14: Hamming Codes supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Hamming Codes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX03-applied-studio-14-hamming-codes-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX03-applied-studio-14-hamming-codes-supplemental-3/solution"
 				}
 			]
 		},
@@ -744,9 +819,22 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues"
 				},
 				{
-					title: "Priority Queues: Open Practice",
+					title: "Applied Studio 15: Priority Queues supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: Priority Queues. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Priority Queues. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX04-applied-studio-15-priority-queues-supplemental-2/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX04-applied-studio-15-priority-queues-supplemental-2/solution"
+				},
+				{
+					title: "Applied Studio 15: Priority Queues supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Priority Queues. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX05-applied-studio-15-priority-queues-supplemental-3/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX05-applied-studio-15-priority-queues-supplemental-3/solution"
 				}
 			]
 		},
@@ -785,9 +873,22 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors"
 				},
 				{
-					title: "Hoof Paper Scissors: Open Practice",
+					title: "Applied Studio 16: Hoof Paper Scissors supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: Hoof Paper Scissors. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX06-applied-studio-16-hoof-paper-scissors-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX06-applied-studio-16-hoof-paper-scissors-supplement/solution"
+				},
+				{
+					title: "Applied Studio 16: Hoof Paper Scissors supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX07-applied-studio-16-hoof-paper-scissors-supplement/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX07-applied-studio-16-hoof-paper-scissors-supplement/solution"
 				}
 			]
 		},
@@ -826,9 +927,22 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
-					title: "Why Did the Cow Cross the Road: Open Practice",
+					title: "Applied Studio 17: Why Did the Cow Cross the Road supplemental 2",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: Why Did the Cow Cross the Road. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Why Did the Cow Cross the Road. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX08-applied-studio-17-why-did-the-cow-cross-the-road/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX08-applied-studio-17-why-did-the-cow-cross-the-road/solution"
+				},
+				{
+					title: "Applied Studio 17: Why Did the Cow Cross the Road supplemental 3",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Why Did the Cow Cross the Road. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX09-applied-studio-17-why-did-the-cow-cross-the-road/starter",
+					solutionLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/USX09-applied-studio-17-why-did-the-cow-cross-the-road/solution"
 				}
 			]
 		}

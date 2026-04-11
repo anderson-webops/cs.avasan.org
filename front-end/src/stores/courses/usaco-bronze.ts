@@ -43,9 +43,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java"
 				},
 				{
-					title: "USB0 Setup and Contest Workflow: Fluency Drill",
+					title: "UB 23 Why Did the Cow Cross the Road II Java",
 					content:
-						"Repeat the core ideas from USB0 Setup and Contest Workflow on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to USB0 Setup and Contest Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-23-Why-Did-the-Cow-Cross-the-Road-II-Java"
+				},
+				{
+					title: "UB 24 Why Did the Cow Cross the Road III Java",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to USB0 Setup and Contest Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-24-Why-Did-the-Cow-Cross-the-Road-III-Java"
 				}
 			]
 		},
@@ -103,9 +112,11 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations"
 				},
 				{
-					title: "Bronze Log: Simulation and Careful Translation",
+					title: "Square Pasture Java",
 					content:
-						"Keep a short contest log for simulation and careful translation that records one wrong assumption, one edge case that broke an early idea, and one note about which state update or rule ordering choice most affected correctness. Bronze-level progress comes from disciplined debugging as much as from knowing a trick."
+						"Use the linked starter and solution for a supplemental project tied to Unit 1: Simulation and Careful Translation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture-Java"
 				}
 			]
 		},
@@ -218,9 +229,11 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB54-Acowdemia"
 				},
 				{
-					title: "Bronze Log: Counting, Sorting, and Ranking",
+					title: "Transformations Java",
 					content:
-						"Keep a short contest log for counting, sorting, and ranking that records one wrong assumption, one edge case that broke an early idea, and one note about which sorting or counting step turned a messy problem into a clean one. Bronze-level progress comes from disciplined debugging as much as from knowing a trick."
+						"Use the linked starter and solution for a supplemental project tied to Unit 3: Counting, Sorting, and Ranking. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations-Java"
 				}
 			]
 		},
@@ -333,9 +346,11 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB55-Just-Stalling"
 				},
 				{
-					title: "Bronze Log: Contest Sets and Tier Transition",
+					title: "Mixing Milk Java",
 					content:
-						"Keep a short contest log for contest sets and tier transition that records one wrong assumption, one edge case that broke an early idea, and one note about which Bronze habit is most important to preserve when moving to Silver. Bronze-level progress comes from disciplined debugging as much as from knowing a trick."
+						"Use the linked starter and solution for a supplemental project tied to Unit 5: Contest Sets and Tier Transition. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk-Java"
 				}
 			]
 		},
@@ -448,9 +463,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
 				},
 				{
-					title: "UB 12 Barn Repair Java: Open Practice",
+					title: "Combination Lock",
 					content:
-						"Create a compact variant inspired by Applied Studio 8: UB 12 Barn Repair Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: UB 12 Barn Repair Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB13-Combination-Lock"
+				},
+				{
+					title: "Prime Cryptarithm",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: UB 12 Barn Repair Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB14-Prime-Cryptarithm"
 				}
 			]
 		},
@@ -489,9 +513,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
 				},
 				{
-					title: "UB 13 Combination Lock Java: Open Practice",
+					title: "Ski Course Design",
 					content:
-						"Create a compact variant inspired by Applied Studio 9: UB 13 Combination Lock Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: UB 13 Combination Lock Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB15-Ski-Course-Design"
+				},
+				{
+					title: "Block Game",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: UB 13 Combination Lock Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB17-Block-Game"
 				}
 			]
 		},
@@ -530,9 +563,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
 				},
 				{
-					title: "UB 14 Prime Cryptarithm Java: Open Practice",
+					title: "The Cow Signal",
 					content:
-						"Create a compact variant inspired by Applied Studio 10: UB 14 Prime Cryptarithm Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: UB 14 Prime Cryptarithm Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB18-The-Cow-Signal"
+				},
+				{
+					title: "Dont Be Last",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: UB 14 Prime Cryptarithm Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB19-Dont-Be-Last"
 				}
 			]
 		},
@@ -571,9 +613,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
 				},
 				{
-					title: "UB 15 Ski Course Design Java: Open Practice",
+					title: "Your Ride Is Here Java",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: UB 15 Ski Course Design Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: UB 15 Ski Course Design Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here-Java"
+				},
+				{
+					title: "Cow Tipping",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: UB 15 Ski Course Design Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB21-Cow-Tipping"
 				}
 			]
 		},
@@ -612,9 +663,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
 				},
 				{
-					title: "UB 16 Wormholes Java: Open Practice",
+					title: "Why Did the Cow Cross the Road",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: UB 16 Wormholes Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: UB 16 Wormholes Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB22-Why-Did-the-Cow-Cross-the-Road"
+				},
+				{
+					title: "Why Did the Cow Cross the Road II",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: UB 16 Wormholes Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB23-Why-Did-the-Cow-Cross-the-Road-II"
 				}
 			]
 		},
@@ -653,9 +713,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
 				},
 				{
-					title: "UB 17 Block Game Java: Open Practice",
+					title: "Why Did the Cow Cross the Road III",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: UB 17 Block Game Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: UB 17 Block Game Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB24-Why-Did-the-Cow-Cross-the-Road-III"
+				},
+				{
+					title: "The Lost Cow Java",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: UB 17 Block Game Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow-Java"
 				}
 			]
 		},
@@ -694,9 +763,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
 				},
 				{
-					title: "UB 18 The Cow Signal Java: Open Practice",
+					title: "Bovine Genomics",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: UB 18 The Cow Signal Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: UB 18 The Cow Signal Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics"
+				},
+				{
+					title: "Bovine Genomics Java",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: UB 18 The Cow Signal Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics-Java"
 				}
 			]
 		},
@@ -735,9 +813,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
 				},
 				{
-					title: "UB 19 Dont Be Last Java: Open Practice",
+					title: "Modern Art",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: UB 19 Dont Be Last Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: UB 19 Dont Be Last Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art"
+				},
+				{
+					title: "Modern Art Java",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: UB 19 Dont Be Last Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art-Java"
 				}
 			]
 		},
@@ -776,9 +863,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
 				},
 				{
-					title: "UB 20 Hoof Paper Scissors Java: Open Practice",
+					title: "Fence Painting",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: UB 20 Hoof Paper Scissors Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: UB 20 Hoof Paper Scissors Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting"
+				},
+				{
+					title: "Fence Painting Java",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: UB 20 Hoof Paper Scissors Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting-Java"
 				}
 			]
 		},
@@ -817,9 +913,18 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
 				},
 				{
-					title: "UB 21 Cow Tipping Java: Open Practice",
+					title: "Speeding Ticket Java",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: UB 21 Cow Tipping Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: UB 21 Cow Tipping Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket-Java"
+				},
+				{
+					title: "Friday the Thirteenth",
+					content:
+						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: UB 21 Cow Tipping Java. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB3-Friday-the-Thirteenth"
 				}
 			]
 		}
