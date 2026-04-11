@@ -203,7 +203,11 @@ function maybeWarmScheduler(link: NavLink) {
 	position: sticky;
 	top: 0;
 	z-index: 1030;
-	padding: 0.85rem 1rem 0;
+	width: 100%;
+	background: rgba(248, 250, 252, 0.88);
+	border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+	box-shadow: 0 10px 28px -24px rgba(15, 23, 42, 0.35);
+	backdrop-filter: blur(16px);
 }
 
 .site-nav {
@@ -214,15 +218,6 @@ function maybeWarmScheduler(link: NavLink) {
 	max-width: 1280px;
 	margin: 0 auto;
 	padding: 0.85rem 1rem;
-	border-radius: 24px;
-	border: 1px solid rgba(148, 163, 184, 0.18);
-	background: linear-gradient(
-		145deg,
-		rgba(255, 255, 255, 0.95),
-		rgba(241, 245, 249, 0.9)
-	);
-	box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
-	backdrop-filter: blur(16px);
 }
 
 .site-brand {
@@ -253,7 +248,7 @@ function maybeWarmScheduler(link: NavLink) {
 	align-items: center;
 	gap: 1.25rem;
 	width: 100%;
-	margin-top: 1rem;
+	margin-top: 0.8rem;
 }
 
 .site-nav__links,
@@ -397,11 +392,13 @@ function maybeWarmScheduler(link: NavLink) {
 	}
 }
 
-@media (max-width: 700px) {
-	.site-header {
-		padding-inline: 0.7rem;
+@media (min-width: 1200px) {
+	.site-nav__content {
+		margin-top: 0;
 	}
+}
 
+@media (max-width: 700px) {
 	.site-brand__tagline {
 		display: none;
 	}

@@ -10,6 +10,15 @@ import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
 
+const props = withDefaults(
+	defineProps<{
+		publicCatalog?: boolean;
+	}>(),
+	{
+		publicCatalog: false
+	}
+);
+
 interface VisibleModule extends CourseModule {
 	position: number;
 	totalItemCount: number;
@@ -63,12 +72,38 @@ const permittedCourseIds = computed(() => {
 });
 
 const courseList = computed(() => {
+	if (props.publicCatalog) return allCourses.value;
 	if (currentAdmin.value) return allCourses.value;
 	const allowed = new Set(permittedCourseIds.value);
 	return allCourses.value.filter(course => allowed.has(course.id));
 });
 
-const hasCourseAccess = computed(() => courseList.value.length > 0);
+const hasCourseAccess = computed(() => {
+	if (props.publicCatalog) return courseList.value.length > 0;
+	return courseList.value.length > 0;
+});
+
+const courseEyebrow = computed(() =>
+	props.publicCatalog ? "Course library" : "Course material"
+);
+
+const courseDescription = computed(() =>
+	props.publicCatalog
+		? "Browse the catalog, open the full syllabus for each course, and jump directly into the linked project materials."
+		: "Move through the syllabus from one calm reading space, search the material quickly, and open project resources without digging through nested accordions."
+);
+
+const emptyTitle = computed(() =>
+	props.publicCatalog
+		? "No courses are available right now."
+		: "You don't have any courses assigned yet."
+);
+
+const emptyHint = computed(() =>
+	props.publicCatalog
+		? "Check back soon for updates to the course library."
+		: "Reach out to your tutor or admin to gain access."
+);
 
 const normalizedQuery = computed(() => normalizeSearch(searchQuery.value));
 
@@ -433,12 +468,10 @@ function writeStoredValue(key: string, value: string) {
 		<div v-if="hasCourseAccess" class="course-shell">
 			<header v-if="selectedCourse && courseStats" class="course-hero">
 				<div class="course-hero-copy">
-					<p class="course-eyebrow">Course material</p>
+					<p class="course-eyebrow">{{ courseEyebrow }}</p>
 					<h2>{{ selectedCourse.name }}</h2>
 					<p class="course-description">
-						Move through the syllabus from one calm reading space,
-						search the material quickly, and open project resources
-						without digging through nested accordions.
+						{{ courseDescription }}
 					</p>
 				</div>
 
@@ -824,8 +857,8 @@ function writeStoredValue(key: string, value: string) {
 		</div>
 
 		<div v-else class="course-empty">
-			<p>You don't have any courses assigned yet.</p>
-			<p class="hint">Reach out to your tutor or admin to gain access.</p>
+			<p>{{ emptyTitle }}</p>
+			<p class="hint">{{ emptyHint }}</p>
 		</div>
 	</section>
 </template>
