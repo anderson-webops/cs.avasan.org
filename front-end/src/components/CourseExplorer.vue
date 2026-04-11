@@ -27,6 +27,9 @@ interface ResourceLink {
 const VIDEO_FILE_RE = /\.(?:mp4|webm|ogg)(?:\?|$)/i;
 const WHITESPACE_RE = /\s+/g;
 const WWW_PREFIX_RE = /^www\./;
+const REFERENCE_TITLE_RE = /reference/i;
+const STARTER_RE = /starter/i;
+const CAPSTONE_TITLE_RE = /capstone|master project/i;
 const COURSE_SELECTION_STORAGE_KEY = "classes:course-explorer:selected-course";
 const MODULE_SELECTION_STORAGE_KEY_PREFIX =
 	"classes:course-explorer:active-module:";
@@ -308,33 +311,75 @@ function linkHost(url: string) {
 	}
 }
 
+function projectLabel(item: CourseModuleItem, url: string) {
+	const normalizedTitle = item.title.toLowerCase();
+	const normalizedUrl = url.toLowerCase();
+
+	if (REFERENCE_TITLE_RE.test(normalizedTitle)) {
+		return "Reference";
+	}
+
+	if (STARTER_RE.test(normalizedTitle) || STARTER_RE.test(normalizedUrl)) {
+		return "Starter project";
+	}
+
+	if (CAPSTONE_TITLE_RE.test(normalizedTitle)) {
+		return "Capstone repo";
+	}
+
+	if (normalizedUrl.includes("scratch.mit.edu")) {
+		return "Scratch project";
+	}
+
+	if (normalizedUrl.includes("github.com")) {
+		return "Project repo";
+	}
+
+	return "Project link";
+}
+
+function solutionLabel(url: string) {
+	if (url.toLowerCase().includes("scratch.mit.edu")) {
+		return "Scratch solution";
+	}
+
+	if (url.toLowerCase().includes("github.com")) {
+		return "Solution repo";
+	}
+
+	return "Solution link";
+}
+
 function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	const links: ResourceLink[] = [];
+	const projectUrl = item.projectLink?.trim();
+	const solutionUrl = item.solutionLink?.trim();
+	const datasetUrl = item.datasetLink?.trim();
 
-	if (item.projectLink) {
+	if (projectUrl) {
 		links.push({
 			kind: "project",
-			label: "Open project",
-			url: item.projectLink,
-			host: linkHost(item.projectLink)
+			label: projectLabel(item, projectUrl),
+			url: projectUrl,
+			host: linkHost(projectUrl)
 		});
 	}
 
-	if (canViewSolutions.value && item.solutionLink) {
+	if (canViewSolutions.value && solutionUrl && solutionUrl !== projectUrl) {
 		links.push({
 			kind: "solution",
-			label: "Open solution",
-			url: item.solutionLink,
-			host: linkHost(item.solutionLink)
+			label: solutionLabel(solutionUrl),
+			url: solutionUrl,
+			host: linkHost(solutionUrl)
 		});
 	}
 
-	if (item.datasetLink) {
+	if (datasetUrl) {
 		links.push({
 			kind: "dataset",
-			label: "Open dataset",
-			url: item.datasetLink,
-			host: linkHost(item.datasetLink)
+			label: "Dataset",
+			url: datasetUrl,
+			host: linkHost(datasetUrl)
 		});
 	}
 
@@ -622,8 +667,12 @@ function writeStoredValue(key: string, value: string) {
 											rel="noreferrer"
 											target="_blank"
 										>
-											<span>{{ resource.label }}</span>
-											<small>{{ resource.host }}</small>
+											<span class="resource-link-label">
+												{{ resource.label }}
+											</span>
+											<small class="resource-link-host">
+												{{ resource.host }}
+											</small>
 										</a>
 									</div>
 
@@ -712,8 +761,12 @@ function writeStoredValue(key: string, value: string) {
 											rel="noreferrer"
 											target="_blank"
 										>
-											<span>{{ resource.label }}</span>
-											<small>{{ resource.host }}</small>
+											<span class="resource-link-label">
+												{{ resource.label }}
+											</span>
+											<small class="resource-link-host">
+												{{ resource.host }}
+											</small>
 										</a>
 									</div>
 
@@ -1247,13 +1300,9 @@ function writeStoredValue(key: string, value: string) {
 .jump-link,
 .resource-link {
 	display: inline-flex;
-	flex-direction: row;
 	align-items: center;
-	gap: 0.5rem;
 	padding: 0.6rem 0.85rem;
-	border-radius: 999px;
 	border: 1px solid rgba(15, 23, 42, 0.08);
-	background: rgba(248, 250, 252, 0.9);
 	text-decoration: none;
 	color: var(--course-text);
 	transition:
@@ -1266,12 +1315,19 @@ function writeStoredValue(key: string, value: string) {
 .resource-link:hover {
 	transform: translateY(-1px);
 	border-color: rgba(15, 118, 110, 0.22);
-	background: rgba(240, 253, 250, 0.95);
 }
 
 .jump-link {
+	flex-direction: row;
+	gap: 0.5rem;
+	border-radius: 999px;
+	background: rgba(248, 250, 252, 0.9);
 	font-size: 0.85rem;
 	line-height: 1.45;
+}
+
+.jump-link:hover {
+	background: rgba(240, 253, 250, 0.95);
 }
 
 .jump-link.is-supplemental {
@@ -1366,12 +1422,30 @@ function writeStoredValue(key: string, value: string) {
 
 .resource-link {
 	min-width: 0;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.15rem;
+	padding: 0.8rem 0.95rem;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.94);
+	box-shadow: 0 16px 30px -28px rgba(15, 23, 42, 0.42);
 }
 
-.resource-link small {
+.resource-link:hover {
+	background: rgba(240, 253, 250, 0.96);
+}
+
+.resource-link-label {
+	font-size: 0.92rem;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.resource-link-host {
 	font-size: 0.78rem;
 	color: var(--course-text-soft);
-	white-space: nowrap;
+	line-height: 1.35;
+	word-break: break-word;
 }
 
 .resource-link.is-project {
