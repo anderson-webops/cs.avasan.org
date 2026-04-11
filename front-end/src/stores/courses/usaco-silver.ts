@@ -1,30 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const USACO_SILVER_REPO =
-	"https://github.com/instruction-material/USACO-Silver/tree/main";
-
-function repoLink(projectId: string) {
-	return `${USACO_SILVER_REPO}/${projectId}`;
-}
-
-function problemItem(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: repoLink(projectId)
-	};
-}
-
-function contestLog(unitTitle: string, focus: string): RawCourseModuleItem {
-	return {
-		title: `Silver Log: ${unitTitle}`,
-		content: `Keep a short contest log for ${unitTitle.toLowerCase()} that records one structural idea, one failed approach, and one note about ${focus}. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early.`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const usacoSilverCourse: RawCourse = {
 	name: "USACO Silver",
@@ -51,13 +25,28 @@ export const usacoSilverCourse: RawCourse = {
 					title: "Catalog the Core Silver Patterns",
 					content:
 						"Keep a running list of the patterns that repeatedly appear: graph traversal, sorted sweeps, range accumulation, simulation with structure, and search over answer space. Students should actively build a mental index of problem types."
+				},
+				{
+					title: "USS0 Setup and Silver Transition: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II"
 				}
 			],
 			supplementalProjects: [
-				contestLog(
-					"Setup and Silver Transition",
-					"which Bronze habit still helps and which old instinct now causes wasted effort"
-				)
+				{
+					title: "Silver Log: Setup and Silver Transition",
+					content:
+						"Keep a short contest log for setup and silver transition that records one structural idea, one failed approach, and one note about which Bronze habit still helps and which old instinct now causes wasted effort. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II"
+				},
+				{
+					title: "USS0 Setup and Silver Transition: Fluency Drill",
+					content:
+						"Repeat the core ideas from USS0 Setup and Silver Transition on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -76,34 +65,48 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Separate Storage from Strategy",
 					content:
-						"Train students to distinguish the data structure from the algorithm using it. A HashSet does not solve the problem by itself; it enables a class of faster reasoning."
+						"Train students to distinguish the data structure from the algorithm using it. A HashSet does not solve the problem by itself; it enables a class of faster reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Trace with Structure",
 					content:
-						"Continue written tracing, but now with collections, maps, and richer state. Silver errors often come from losing track of what a structure is supposed to contain at each stage."
+						"Continue written tracing, but now with collections, maps, and richer state. Silver errors often come from losing track of what a structure is supposed to contain at each stage. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 1: Data Structures and Problem Modeling: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-BankAccount-Classes"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Exam and BankAccount Classes",
-					"Use a structured warmup to keep class design and data modeling fluent before heavier graph and range problems dominate.",
-					"US4-Exam-and-BankAccount-Classes"
-				),
-				problemItem(
-					"Problem: HashSets",
-					"Practice membership and deduplication logic in a contest setting where the structure choice matters directly.",
-					"US5-HashSets"
-				),
-				problemItem(
-					"Problem: HashMaps",
-					"Use keyed storage and frequency-style reasoning to reinforce when a map is the cleanest expression of the problem.",
-					"US5-HashMaps"
-				),
-				contestLog(
-					"Data Structures and Problem Modeling",
-					"which data structure made the intended algorithm possible"
-				)
+				{
+					title: "Problem: Exam and BankAccount Classes",
+					content:
+						"Use a structured warmup to keep class design and data modeling fluent before heavier graph and range problems dominate. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-BankAccount-Classes"
+				},
+				{
+					title: "Problem: HashSets",
+					content:
+						"Practice membership and deduplication logic in a contest setting where the structure choice matters directly. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-HashSets"
+				},
+				{
+					title: "Problem: HashMaps",
+					content:
+						"Use keyed storage and frequency-style reasoning to reinforce when a map is the cleanest expression of the problem. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-HashMaps"
+				},
+				{
+					title: "Silver Log: Data Structures and Problem Modeling",
+					content:
+						"Keep a short contest log for data structures and problem modeling that records one structural idea, one failed approach, and one note about which data structure made the intended algorithm possible. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early."
+				}
 			]
 		},
 		{
@@ -117,35 +120,48 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "DFS for Exhaustive Structure",
 					content:
-						"Use DFS for component finding, recursive exploration, and bounded search over connected structures. Students should understand what DFS proves and what it does not."
+						"Use DFS for component finding, recursive exploration, and bounded search over connected structures. Students should understand what DFS proves and what it does not. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "BFS for Layers and Minimum-Step Reasoning",
 					content:
-						"Use BFS when step count matters or when the frontier naturally expands in layers. The key lesson is to link the algorithm to the guarantee it offers."
+						"Use BFS when step count matters or when the frontier naturally expands in layers. The key lesson is to link the algorithm to the guarantee it offers. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Graph Construction from Non-Graph Statements",
 					content:
-						"Practice rewriting problem statements into nodes and edges even when the original prompt talks about videos, containers, or rooms rather than explicit graph vocabulary."
+						"Practice rewriting problem statements into nodes and edges even when the original prompt talks about videos, containers, or rooms rather than explicit graph vocabulary. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 2: DFS, BFS, and Graph Traversal: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Mothers Milk",
-					"Use state-space exploration to practice traversal on a generated graph instead of a fixed one.",
-					"US6-Mothers-Milk"
-				),
-				problemItem(
-					"Problem: MooTube",
-					"Treat relationships and thresholds as graph structure so that traversal answers a query cleanly.",
-					"US7-MooTube"
-				),
-				problemItem(
-					"Problem: Dance Mooves",
-					"Use repeated transitions and component reasoning to rehearse graph thinking in a problem that does not announce itself as graph theory at first glance.",
-					"US34-Dance-Mooves"
-				)
+				{
+					title: "Problem: Mothers Milk",
+					content:
+						"Use state-space exploration to practice traversal on a generated graph instead of a fixed one. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk"
+				},
+				{
+					title: "Problem: MooTube",
+					content:
+						"Treat relationships and thresholds as graph structure so that traversal answers a query cleanly. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-MooTube"
+				},
+				{
+					title: "Problem: Dance Mooves",
+					content:
+						"Use repeated transitions and component reasoning to rehearse graph thinking in a problem that does not announce itself as graph theory at first glance. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves"
+				}
 			]
 		},
 		{
@@ -169,30 +185,45 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Compare Candidate Approaches Honestly",
 					content:
-						"Have students compare brute force, sorted scans, and binary search options so they can justify why a more structured approach is necessary."
+						"Have students compare brute force, sorted scans, and binary search options so they can justify why a more structured approach is necessary. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 3: Sorting, Searching, and Binary Search: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Prime Palindromes",
-					"Use a search-heavy numeric problem to practice pruning and candidate generation with strong test discipline.",
-					"US10-Prime-Palindromes"
-				),
-				problemItem(
-					"Problem: Ordered Fractions",
-					"Use ordering and careful generation of candidates to practice sorted reasoning in a mathematically flavored setting.",
-					"US14-Ordered-Fractions"
-				),
-				problemItem(
-					"Problem: Loan Repayment",
-					"Use binary search over the answer space to practice monotonic reasoning and careful predicate design.",
-					"US-Loan-Repayment"
-				),
-				problemItem(
-					"Problem: Searching for Soulmates",
-					"Use a later Silver search-style problem to compare direct transformation ideas with cleaner search reasoning.",
-					"US40-Searching-For-Soulmates"
-				)
+				{
+					title: "Problem: Prime Palindromes",
+					content:
+						"Use a search-heavy numeric problem to practice pruning and candidate generation with strong test discipline. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes"
+				},
+				{
+					title: "Problem: Ordered Fractions",
+					content:
+						"Use ordering and careful generation of candidates to practice sorted reasoning in a mathematically flavored setting. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US14-Ordered-Fractions"
+				},
+				{
+					title: "Problem: Loan Repayment",
+					content:
+						"Use binary search over the answer space to practice monotonic reasoning and careful predicate design. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Loan-Repayment"
+				},
+				{
+					title: "Problem: Searching for Soulmates",
+					content:
+						"Use a later Silver search-style problem to compare direct transformation ideas with cleaner search reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US40-Searching-For-Soulmates"
+				}
 			]
 		},
 		{
@@ -206,7 +237,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Count Indirectly when Direct Counting Is Awkward",
 					content:
-						"Show how partial sums, difference reasoning, and transformed arrays can make a messy direct count suddenly simple. Silver problems often reward this change in perspective."
+						"Show how partial sums, difference reasoning, and transformed arrays can make a messy direct count suddenly simple. Silver problems often reward this change in perspective. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Build Small Examples First",
@@ -217,28 +248,42 @@ export const usacoSilverCourse: RawCourse = {
 					title: "Keep the Interpretation Visible",
 					content:
 						"Students should be able to explain what each prefix value means in plain language, not just compute it mechanically. This protects them from writing correct-looking but meaningless code."
+				},
+				{
+					title: "Unit 4: Prefix Sums, Ranges, and Counting: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Counting Haybales",
-					"Use sorted positions and repeated range queries to practice structural counting instead of repeated scanning.",
-					"US18-Counting-Haybales"
-				),
-				problemItem(
-					"Problem: Prefix Sums",
-					"Treat a direct prefix-sum exercise as a template for broader Silver range reasoning.",
-					"US22-Prefix-Sums"
-				),
-				problemItem(
-					"Problem: Just Green Enough",
-					"Use a more layered counting problem to test whether students can keep transformed values aligned with the real goal.",
-					"US33-Just-Green-Enough"
-				),
-				contestLog(
-					"Prefix Sums, Ranges, and Counting",
-					"how the transformed representation made repeated work cheaper or clearer"
-				)
+				{
+					title: "Problem: Counting Haybales",
+					content:
+						"Use sorted positions and repeated range queries to practice structural counting instead of repeated scanning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales"
+				},
+				{
+					title: "Problem: Prefix Sums",
+					content:
+						"Treat a direct prefix-sum exercise as a template for broader Silver range reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Prefix-Sums"
+				},
+				{
+					title: "Problem: Just Green Enough",
+					content:
+						"Use a more layered counting problem to test whether students can keep transformed values aligned with the real goal. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US33-Just-Green-Enough"
+				},
+				{
+					title: "Silver Log: Prefix Sums, Ranges, and Counting",
+					content:
+						"Keep a short contest log for prefix sums, ranges, and counting that records one structural idea, one failed approach, and one note about how the transformed representation made repeated work cheaper or clearer. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early."
+				}
 			]
 		},
 		{
@@ -262,25 +307,38 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Compare Greedy to Search or DP Alternatives",
 					content:
-						"Have students ask whether a greedy plan is truly safe or whether the problem is hinting at a different family altogether. This question becomes even more important on the path to Gold."
+						"Have students ask whether a greedy plan is truly safe or whether the problem is hinting at a different family altogether. This question becomes even more important on the path to Gold. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 5: Greedy and Structured Simulation: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Cow Dance Show",
-					"Use scheduling and ordered simulation to practice reasoning about feasibility and bottlenecks.",
-					"US21-Cow-Dance-Show"
-				),
-				problemItem(
-					"Problem: Secret Cow Code",
-					"Use structured reasoning and repeated transformations to avoid naive simulation of a much larger process.",
-					"US23-Secret-Cow-Code"
-				),
-				problemItem(
-					"Problem: Rental Service",
-					"Compare multiple ways to allocate resources and justify the order in which choices should be considered.",
-					"US34-Rental-Service"
-				)
+				{
+					title: "Problem: Cow Dance Show",
+					content:
+						"Use scheduling and ordered simulation to practice reasoning about feasibility and bottlenecks. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show"
+				},
+				{
+					title: "Problem: Secret Cow Code",
+					content:
+						"Use structured reasoning and repeated transformations to avoid naive simulation of a much larger process. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US23-Secret-Cow-Code"
+				},
+				{
+					title: "Problem: Rental Service",
+					content:
+						"Compare multiple ways to allocate resources and justify the order in which choices should be considered. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Rental-Service"
+				}
 			]
 		},
 		{
@@ -289,7 +347,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Mix Patterns Deliberately",
 					content:
-						"Practice short sets that combine graph reasoning, sorting, simulation, and counting so students stop expecting the problem category to be obvious from the first sentence."
+						"Practice short sets that combine graph reasoning, sorting, simulation, and counting so students stop expecting the problem category to be obvious from the first sentence. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Write Cleaner Contest Explanations",
@@ -305,23 +363,35 @@ export const usacoSilverCourse: RawCourse = {
 					title: "Prepare for USACO Gold",
 					content:
 						"Close by positioning Gold as the tier where dynamic programming, shortest paths, MSTs, and more formal optimization ideas become normal. Students should move on only once Silver patterns feel recognizable rather than mysterious."
+				},
+				{
+					title: "Unit 6: Silver Capstone Sets: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Redistributing Gifts",
-					"Use a more layered relationship problem to test whether graph and constraint reasoning are becoming automatic.",
-					"US38-Redistributing-Gifts"
-				),
-				problemItem(
-					"Problem: Wormhole Sort",
-					"Use a Silver capstone that mixes structural reasoning, search thinking, and strong implementation discipline.",
-					"US-Wormhole-Sort"
-				),
-				contestLog(
-					"Silver Capstone Sets",
-					"which problem family still needs the most work before Gold-level study begins"
-				)
+				{
+					title: "Problem: Redistributing Gifts",
+					content:
+						"Use a more layered relationship problem to test whether graph and constraint reasoning are becoming automatic. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts"
+				},
+				{
+					title: "Problem: Wormhole Sort",
+					content:
+						"Use a Silver capstone that mixes structural reasoning, search thinking, and strong implementation discipline. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Wormhole-Sort"
+				},
+				{
+					title: "Silver Log: Silver Capstone Sets",
+					content:
+						"Keep a short contest log for silver capstone sets that records one structural idea, one failed approach, and one note about which problem family still needs the most work before Gold-level study begins. Silver progress comes from recognizing patterns quickly and abandoning weak ideas early."
+				}
 			]
 		},
 		{
@@ -346,36 +416,420 @@ export const usacoSilverCourse: RawCourse = {
 					title: "Support Labs and Late Silver Bank",
 					content:
 						"Support and late-Silver folders include `US5 Custom Classes with HashSets and HashMaps`, `US6 DFS`, `US6 Stacks`, `US7 BFS`, `US7 Queues`, `US23 Secret Cow Code`, `US34 Rental Service`, `US37 Subset Equality`, `US38 Redistributing Gifts`, `US39 Closest Cow Wins`, and `US-Wormhole-Sort`."
+				},
+				{
+					title: "Unit 7: Optional Silver Problem Bank: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Problem Bank: Full Silver Repo",
 					content:
-						"Browse the full Silver repo bank when the public spine is not enough practice and you want the larger contest-library view.",
+						"Browse the full Silver repo bank when the public spine is not enough practice and you want the larger contest-library view. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main"
 				},
-				problemItem(
-					"Problem: Floodfill",
-					"Use a direct flood-fill and component-style problem to reinforce traversal fundamentals in a contest setting.",
-					"US12-Floodfill"
-				),
-				problemItem(
-					"Problem: Cities and States",
-					"Use hashed counting and pair reasoning to strengthen map-based Silver problem modeling.",
-					"US19-Cities-and-States"
-				),
-				problemItem(
-					"Problem: Moocast",
-					"Use reachability and graph construction in a problem where the hidden structure matters more than the story text.",
-					"US20-Moocast"
-				),
-				problemItem(
-					"Problem: Rectangular Pasture",
-					"Use geometric counting and structure-aware iteration as a stronger late-Silver challenge.",
-					"US36-Rectangular-Pasture"
-				)
+				{
+					title: "Problem: Floodfill",
+					content:
+						"Use a direct flood-fill and component-style problem to reinforce traversal fundamentals in a contest setting. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US12-Floodfill"
+				},
+				{
+					title: "Problem: Cities and States",
+					content:
+						"Use hashed counting and pair reasoning to strengthen map-based Silver problem modeling. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US19-Cities-and-States"
+				},
+				{
+					title: "Problem: Moocast",
+					content:
+						"Use reachability and graph construction in a problem where the hidden structure matters more than the story text. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US20-Moocast"
+				},
+				{
+					title: "Problem: Rectangular Pasture",
+					content:
+						"Use geometric counting and structure-aware iteration as a stronger late-Silver challenge. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US36-Rectangular-Pasture"
+				}
+			]
+		},
+		{
+			title: "Applied Studio 9: US Berry Picking",
+			curriculum: [
+				{
+					title: "US Berry Picking: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 9: US Berry Picking, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "US Berry Picking: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 9: US Berry Picking, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "US Berry Picking: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 9: US Berry Picking. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking"
+				},
+				{
+					title: "US Berry Picking: Review and Reflection",
+					content:
+						"Close Applied Studio 9: US Berry Picking by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "US Berry Picking: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 9: US Berry Picking with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking"
+				},
+				{
+					title: "US Berry Picking: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 9: US Berry Picking. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 10: Superprime Rib",
+			curriculum: [
+				{
+					title: "Superprime Rib: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 10: Superprime Rib, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Superprime Rib: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 10: Superprime Rib, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Superprime Rib: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 10: Superprime Rib. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib"
+				},
+				{
+					title: "Superprime Rib: Review and Reflection",
+					content:
+						"Close Applied Studio 10: Superprime Rib by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Superprime Rib: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 10: Superprime Rib with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib"
+				},
+				{
+					title: "Superprime Rib: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 10: Superprime Rib. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 11: The Castle",
+			curriculum: [
+				{
+					title: "The Castle: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 11: The Castle, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "The Castle: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 11: The Castle, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "The Castle: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 11: The Castle. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle"
+				},
+				{
+					title: "The Castle: Review and Reflection",
+					content:
+						"Close Applied Studio 11: The Castle by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "The Castle: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 11: The Castle with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle"
+				},
+				{
+					title: "The Castle: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 11: The Castle. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 12: Sorting a Three Valued Sequence",
+			curriculum: [
+				{
+					title: "Sorting a Three Valued Sequence: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 12: Sorting a Three Valued Sequence, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Sorting a Three Valued Sequence: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 12: Sorting a Three Valued Sequence, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Sorting a Three Valued Sequence: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 12: Sorting a Three Valued Sequence. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence"
+				},
+				{
+					title: "Sorting a Three Valued Sequence: Review and Reflection",
+					content:
+						"Close Applied Studio 12: Sorting a Three Valued Sequence by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Sorting a Three Valued Sequence: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 12: Sorting a Three Valued Sequence with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence"
+				},
+				{
+					title: "Sorting a Three Valued Sequence: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 12: Sorting a Three Valued Sequence. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 13: Healthy Holsteins",
+			curriculum: [
+				{
+					title: "Healthy Holsteins: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 13: Healthy Holsteins, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Healthy Holsteins: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 13: Healthy Holsteins, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Healthy Holsteins: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 13: Healthy Holsteins. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins"
+				},
+				{
+					title: "Healthy Holsteins: Review and Reflection",
+					content:
+						"Close Applied Studio 13: Healthy Holsteins by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Healthy Holsteins: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 13: Healthy Holsteins with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins"
+				},
+				{
+					title: "Healthy Holsteins: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 13: Healthy Holsteins. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: Hamming Codes",
+			curriculum: [
+				{
+					title: "Hamming Codes: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: Hamming Codes, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Hamming Codes: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: Hamming Codes, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Hamming Codes: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: Hamming Codes. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes"
+				},
+				{
+					title: "Hamming Codes: Review and Reflection",
+					content:
+						"Close Applied Studio 14: Hamming Codes by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Hamming Codes: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: Hamming Codes with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes"
+				},
+				{
+					title: "Hamming Codes: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: Hamming Codes. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: Priority Queues",
+			curriculum: [
+				{
+					title: "Priority Queues: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: Priority Queues, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Priority Queues: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: Priority Queues, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Priority Queues: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: Priority Queues. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues"
+				},
+				{
+					title: "Priority Queues: Review and Reflection",
+					content:
+						"Close Applied Studio 15: Priority Queues by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Priority Queues: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: Priority Queues with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues"
+				},
+				{
+					title: "Priority Queues: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: Priority Queues. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: Hoof Paper Scissors",
+			curriculum: [
+				{
+					title: "Hoof Paper Scissors: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: Hoof Paper Scissors, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Hoof Paper Scissors: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: Hoof Paper Scissors, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Hoof Paper Scissors: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: Hoof Paper Scissors. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors"
+				},
+				{
+					title: "Hoof Paper Scissors: Review and Reflection",
+					content:
+						"Close Applied Studio 16: Hoof Paper Scissors by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Hoof Paper Scissors: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: Hoof Paper Scissors with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors"
+				},
+				{
+					title: "Hoof Paper Scissors: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: Hoof Paper Scissors. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: Why Did the Cow Cross the Road",
+			curriculum: [
+				{
+					title: "Why Did the Cow Cross the Road: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: Why Did the Cow Cross the Road, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: Why Did the Cow Cross the Road, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: Why Did the Cow Cross the Road. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road"
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Review and Reflection",
+					content:
+						"Close Applied Studio 17: Why Did the Cow Cross the Road by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Why Did the Cow Cross the Road: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: Why Did the Cow Cross the Road with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road"
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: Why Did the Cow Cross the Road. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]

@@ -1,52 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const C_SYSTEMS_ENGINEERING_REPO =
-	"https://github.com/instruction-material/C-Systems-Engineering/tree/main";
-
-function starterRepoLink(projectId: string) {
-	return `${C_SYSTEMS_ENGINEERING_REPO}/${projectId}/starter`;
-}
-
-function solutionRepoLink(projectId: string) {
-	return `${C_SYSTEMS_ENGINEERING_REPO}/${projectId}/solution`;
-}
-
-function projectItem(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: starterRepoLink(projectId),
-		solutionLink: solutionRepoLink(projectId)
-	};
-}
-
-function engineeringNotebook(
-	unitTitle: string,
-	focus: string
-): RawCourseModuleItem {
-	return {
-		title: `Engineering Notebook: ${unitTitle}`,
-		content: `Keep a short engineering notebook for ${unitTitle.toLowerCase()} that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on ${focus} so students build the habit of explaining systems behavior instead of only trusting output.`
-	};
-}
-
-function toolDrill(commandName: string, prompt: string): RawCourseModuleItem {
-	return {
-		title: `Tool Drill: ${commandName}`,
-		content: `Start the lesson by running ${commandName} and asking students to predict what useful evidence it should provide. ${prompt}`
-	};
-}
-
-function byteView(title: string, prompt: string): RawCourseModuleItem {
-	return {
-		title: `Printed Byte View: ${title}`,
-		content: `Stop after the main exercise and print the relevant bytes or bit groups before moving on. ${prompt}`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const cSystemsEngineeringCourse: RawCourse = {
 	name: "C Systems Engineering",
@@ -73,17 +25,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					title: "Core Outcomes and Daily Working Habits",
 					content:
 						"Set the expectation that students will read binary and hexadecimal representations, use bitwise operators confidently, reason about layout and lifetime, and build small systems-style tools in C. Every unit should pair the abstract idea with a printed byte or memory view plus a short written explanation of why the code works."
+				},
+				{
+					title: "CSE0 Setup and Tooling: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/solution"
 				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Setup and Tooling",
-					"toolchain identity, compiler/debugger verification, and the difference between editing and building"
-				),
-				toolDrill(
-					"clang --version",
-					"Ask students which part of the output identifies the compiler family and why that matters when comparing warnings, sanitizers, or generated binaries."
-				)
+				{
+					title: "Engineering Notebook: Setup and Tooling",
+					content:
+						"Keep a short engineering notebook for setup and tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on toolchain identity, compiler/debugger verification, and the difference between editing and building so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/solution"
+				},
+				{
+					title: "Tool Drill: clang --version",
+					content:
+						"Start the lesson by running clang --version and asking students to predict what useful evidence it should provide. Ask students which part of the output identifies the compiler family and why that matters when comparing warnings, sanitizers, or generated binaries."
+				}
 			]
 		},
 		{
@@ -108,17 +75,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					title: "Why This Course Uses Small Utilities Instead of Giant Apps",
 					content:
 						"Reinforce that the course is about engineering fundamentals: bytes, layout, parsing, invariants, and observability. Small CLI tools are a better classroom than oversized UI-heavy apps because each byte and each assumption can be inspected directly."
+				},
+				{
+					title: "Unit 1: Why C for Systems Work: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/solution"
 				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Why C for Systems Work",
-					"source-to-binary boundaries, declarations vs definitions, and what the runtime model exposes"
-				),
-				toolDrill(
-					"nm",
-					"Use a tiny compiled example so students can see that functions and globals become named symbols rather than magical language objects."
-				)
+				{
+					title: "Engineering Notebook: Why C for Systems Work",
+					content:
+						"Keep a short engineering notebook for why c for systems work that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on source-to-binary boundaries, declarations vs definitions, and what the runtime model exposes so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/solution"
+				},
+				{
+					title: "Tool Drill: nm",
+					content:
+						"Start the lesson by running nm and asking students to predict what useful evidence it should provide. Use a tiny compiled example so students can see that functions and globals become named symbols rather than magical language objects."
+				}
 			]
 		},
 		{
@@ -139,21 +121,31 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Show that the same 16 bits can name one unsigned value and one signed value, then connect that idea to two's complement and the meaning of the top bit. Students should be able to explain signedness as an interpretation rule rather than as a different kind of memory."
 				},
-				projectItem(
-					"Project: Hex and Binary Inspector",
-					"Use the inspector lab to print one value in decimal, hex, and grouped binary, then compare its signed and unsigned 16-bit interpretations. The project should make two's complement visible and should force students to talk about nibbles and bytes explicitly instead of hand-waving about 'the number.'",
-					"CSE1-Hex-and-Binary-Inspector"
-				)
+				{
+					title: "Project: Hex and Binary Inspector",
+					content:
+						"Use the inspector lab to print one value in decimal, hex, and grouped binary, then compare its signed and unsigned 16-bit interpretations. The project should make two's complement visible and should force students to talk about nibbles and bytes explicitly instead of hand-waving about 'the number.'",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE1-Hex-and-Binary-Inspector/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE1-Hex-and-Binary-Inspector/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Binary, Hex, and Number Representation",
-					"signedness, top-bit meaning, and how grouped bits map cleanly to hex digits"
-				),
-				byteView(
-					"One Value, Three Views",
-					"Print the same value in decimal, hex, and binary and ask students to mark which bit groups become which hex digits."
-				)
+				{
+					title: "Engineering Notebook: Binary, Hex, and Number Representation",
+					content:
+						"Keep a short engineering notebook for binary, hex, and number representation that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on signedness, top-bit meaning, and how grouped bits map cleanly to hex digits so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE1-Hex-and-Binary-Inspector/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE1-Hex-and-Binary-Inspector/solution"
+				},
+				{
+					title: "Printed Byte View: One Value, Three Views",
+					content:
+						"Stop after the main exercise and print the relevant bytes or bit groups before moving on. Print the same value in decimal, hex, and binary and ask students to mark which bit groups become which hex digits."
+				}
 			]
 		},
 		{
@@ -174,26 +166,40 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Give XOR special attention because it shows up in parity, toggling, checksums, and simple reversible transforms. Students should explain in plain language why `x ^ k ^ k` returns the original byte instead of treating XOR as a magic classroom trick."
 				},
-				projectItem(
-					"Project: Bitflag Configuration Parser",
-					"Use the bitflag parser to unpack a compact configuration byte into readable feature toggles and a small mode field. The key lesson is that one byte can carry multiple meanings safely when the masks and shifts are explicit.",
-					"CSE2-Bitflag-Configuration-Parser"
-				),
-				projectItem(
-					"Project: XOR Encoder Decoder",
-					"Use the XOR lab to compare the original bytes, encoded bytes, and decoded bytes for the same message. Require students to explain why the transform is reversible and what XOR is really doing to each bit.",
-					"CSE3-XOR-Encoder-Decoder"
-				)
+				{
+					title: "Project: Bitflag Configuration Parser",
+					content:
+						"Use the bitflag parser to unpack a compact configuration byte into readable feature toggles and a small mode field. The key lesson is that one byte can carry multiple meanings safely when the masks and shifts are explicit.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE2-Bitflag-Configuration-Parser/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE2-Bitflag-Configuration-Parser/solution"
+				},
+				{
+					title: "Project: XOR Encoder Decoder",
+					content:
+						"Use the XOR lab to compare the original bytes, encoded bytes, and decoded bytes for the same message. Require students to explain why the transform is reversible and what XOR is really doing to each bit.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE3-XOR-Encoder-Decoder/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE3-XOR-Encoder-Decoder/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Bitwise Operations",
-					"mask design, packed fields, and why each operator changes the bits the way it does"
-				),
-				byteView(
-					"Flag Byte Breakdown",
-					"Print one packed byte and have students label which bit or bit range controls each named feature."
-				)
+				{
+					title: "Engineering Notebook: Bitwise Operations",
+					content:
+						"Keep a short engineering notebook for bitwise operations that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on mask design, packed fields, and why each operator changes the bits the way it does so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE2-Bitflag-Configuration-Parser/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE2-Bitflag-Configuration-Parser/solution"
+				},
+				{
+					title: "Printed Byte View: Flag Byte Breakdown",
+					content:
+						"Stop after the main exercise and print the relevant bytes or bit groups before moving on. Print one packed byte and have students label which bit or bit range controls each named feature."
+				}
 			]
 		},
 		{
@@ -214,21 +220,31 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Teach struct layout with `sizeof`, `offsetof`, and printed addresses so students can see where padding appears and why alignment exists. The course should avoid treating struct size as mysterious compiler behavior when it can be measured directly."
 				},
-				projectItem(
-					"Project: Memory Visualizer for Arrays and Structs",
-					"Use the memory visualizer to print stack, heap, and static addresses alongside member offsets in a small struct. Students should identify likely padding and explain why adjacent array elements move by one element size rather than one byte.",
-					"CSE4-Memory-Visualizer"
-				)
+				{
+					title: "Project: Memory Visualizer for Arrays and Structs",
+					content:
+						"Use the memory visualizer to print stack, heap, and static addresses alongside member offsets in a small struct. Students should identify likely padding and explain why adjacent array elements move by one element size rather than one byte.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE4-Memory-Visualizer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE4-Memory-Visualizer/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Memory and Layout",
-					"storage duration, member offsets, and why alignment changes total struct size"
-				),
-				byteView(
-					"Struct Layout Check",
-					"Have students mark the probable padding bytes between fields after printing the offsets and total size."
-				)
+				{
+					title: "Engineering Notebook: Memory and Layout",
+					content:
+						"Keep a short engineering notebook for memory and layout that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on storage duration, member offsets, and why alignment changes total struct size so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE4-Memory-Visualizer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE4-Memory-Visualizer/solution"
+				},
+				{
+					title: "Printed Byte View: Struct Layout Check",
+					content:
+						"Stop after the main exercise and print the relevant bytes or bit groups before moving on. Have students mark the probable padding bytes between fields after printing the offsets and total size."
+				}
 			]
 		},
 		{
@@ -249,21 +265,31 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Model fixed-buffer copy rules that preserve space for the terminator and then inspect the actual bytes after the copy. This makes the difference between 'I think it copied safely' and 'I can prove what is in memory' much more concrete."
 				},
-				projectItem(
-					"Project: Byte Buffer Workbench",
-					"Use the byte-buffer lab to compare a safe fixed-size text copy with a raw packet buffer that contains non-text bytes and an embedded zero. The project should force students to justify why `strlen` is valid for one buffer and a bad assumption for the other.",
-					"CSE5-Byte-Buffer-Workbench"
-				)
+				{
+					title: "Project: Byte Buffer Workbench",
+					content:
+						"Use the byte-buffer lab to compare a safe fixed-size text copy with a raw packet buffer that contains non-text bytes and an embedded zero. The project should force students to justify why `strlen` is valid for one buffer and a bad assumption for the other.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE5-Byte-Buffer-Workbench/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE5-Byte-Buffer-Workbench/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Strings and Byte Buffers",
-					"terminators, capacity checks, and why byte dumps tell a truer story than text output alone"
-				),
-				byteView(
-					"String vs Packet Buffer",
-					"Print both buffers byte by byte and ask students where the first `0x00` matters and where it does not."
-				)
+				{
+					title: "Engineering Notebook: Strings and Byte Buffers",
+					content:
+						"Keep a short engineering notebook for strings and byte buffers that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on terminators, capacity checks, and why byte dumps tell a truer story than text output alone so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE5-Byte-Buffer-Workbench/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE5-Byte-Buffer-Workbench/solution"
+				},
+				{
+					title: "Printed Byte View: String vs Packet Buffer",
+					content:
+						"Stop after the main exercise and print the relevant bytes or bit groups before moving on. Print both buffers byte by byte and ask students where the first `0x00` matters and where it does not."
+				}
 			]
 		},
 		{
@@ -284,26 +310,40 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Teach validation as part of parsing, not as an optional afterthought. Students should reject bad magic values, mismatched checksums, or truncated records before they start treating bytes as trustworthy data."
 				},
-				projectItem(
-					"Project: Packet Serializer Deserializer",
-					"Use the packet lab to write a compact record into an explicit little-endian byte format, then validate and parse it back into readable fields. The lesson is that stable on-the-wire or on-disk formats come from explicit serialization, not from dumping a struct blindly.",
-					"CSE6-Packet-Serializer-Deserializer"
-				),
-				projectItem(
-					"Project: Fixed Size Log File Reader",
-					"Use the log-reader lab to generate a small binary log file, read each fixed-size record through `FILE *`, and validate its checksum before printing a summary. This makes binary parsing, validation, and repeated record handling visible in one place.",
-					"CSE8-Fixed-Size-Log-File-Reader"
-				)
+				{
+					title: "Project: Packet Serializer Deserializer",
+					content:
+						"Use the packet lab to write a compact record into an explicit little-endian byte format, then validate and parse it back into readable fields. The lesson is that stable on-the-wire or on-disk formats come from explicit serialization, not from dumping a struct blindly.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE6-Packet-Serializer-Deserializer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE6-Packet-Serializer-Deserializer/solution"
+				},
+				{
+					title: "Project: Fixed Size Log File Reader",
+					content:
+						"Use the log-reader lab to generate a small binary log file, read each fixed-size record through `FILE *`, and validate its checksum before printing a summary. This makes binary parsing, validation, and repeated record handling visible in one place.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE8-Fixed-Size-Log-File-Reader/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE8-Fixed-Size-Log-File-Reader/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Files, Streams, and Parsing",
-					"record boundaries, validation order, and why bad input must be rejected before decoding proceeds"
-				),
-				toolDrill(
-					"hexdump -C",
-					"Use a small sample file so students can connect the printed bytes in the file directly to the fields their parser extracts."
-				)
+				{
+					title: "Engineering Notebook: Files, Streams, and Parsing",
+					content:
+						"Keep a short engineering notebook for files, streams, and parsing that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on record boundaries, validation order, and why bad input must be rejected before decoding proceeds so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE6-Packet-Serializer-Deserializer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE6-Packet-Serializer-Deserializer/solution"
+				},
+				{
+					title: "Tool Drill: hexdump -C",
+					content:
+						"Start the lesson by running hexdump -C and asking students to predict what useful evidence it should provide. Use a small sample file so students can connect the printed bytes in the file directly to the fields their parser extracts."
+				}
 			]
 		},
 		{
@@ -324,21 +364,31 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use small examples to show how heap bugs usually come from broken lifetime rules rather than from the allocator itself being mysterious. Students should be able to describe the failure in terms of ownership and cleanup instead of only saying the program crashed."
 				},
-				projectItem(
-					"Project: Dynamic Ring Buffer",
-					"Use the ring-buffer lab to make heap ownership concrete with allocation, resize logic, queue state, and cleanup. The project should force students to keep head, count, capacity, and final `free` responsibilities straight.",
-					"CSE7-Dynamic-Ring-Buffer"
-				)
+				{
+					title: "Project: Dynamic Ring Buffer",
+					content:
+						"Use the ring-buffer lab to make heap ownership concrete with allocation, resize logic, queue state, and cleanup. The project should force students to keep head, count, capacity, and final `free` responsibilities straight.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Dynamic Memory and Lifetime",
-					"allocation ownership, resize rules, and what cleanup path makes the data structure safe to destroy"
-				),
-				toolDrill(
-					"lldb",
-					"Pause a small heap-using program and inspect the pointer values so students connect lifetime bugs to real addresses instead of abstract warnings."
-				)
+				{
+					title: "Engineering Notebook: Dynamic Memory and Lifetime",
+					content:
+						"Keep a short engineering notebook for dynamic memory and lifetime that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on allocation ownership, resize rules, and what cleanup path makes the data structure safe to destroy so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/solution"
+				},
+				{
+					title: "Tool Drill: lldb",
+					content:
+						"Start the lesson by running lldb and asking students to predict what useful evidence it should provide. Pause a small heap-using program and inspect the pointer values so students connect lifetime bugs to real addresses instead of abstract warnings."
+				}
 			]
 		},
 		{
@@ -363,17 +413,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					title: "Design Exercise: Command Handler Table",
 					content:
 						"Have students sketch a command table for a toy parser and explain which inputs map to which handlers. The exercise should make indirect control flow feel understandable before students encounter it in larger programs."
+				},
+				{
+					title: "Unit 8: Function Pointers and Dispatch: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/solution"
 				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Function Pointers and Dispatch",
-					"which values select which handlers and why a dispatch table can be clearer than a giant if-else chain"
-				),
-				byteView(
-					"Command Byte to Handler",
-					"Use one compact command field and ask students to describe how the parser will turn that value into a handler decision."
-				)
+				{
+					title: "Engineering Notebook: Function Pointers and Dispatch",
+					content:
+						"Keep a short engineering notebook for function pointers and dispatch that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which values select which handlers and why a dispatch table can be clearer than a giant if-else chain so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/solution"
+				},
+				{
+					title: "Printed Byte View: Command Byte to Handler",
+					content:
+						"Stop after the main exercise and print the relevant bytes or bit groups before moving on. Use one compact command field and ask students to describe how the parser will turn that value into a handler decision."
+				}
 			]
 		},
 		{
@@ -394,21 +459,31 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Teach students to name invariants such as valid count ranges, non-null storage after initialization, or head and tail relationships. This helps them debug the structure by reasoning about what must stay true, not only by staring at code."
 				},
-				projectItem(
-					"Project Pass: Extend the Dynamic Ring Buffer",
-					"Return to the ring-buffer lab and use it as the main data-structure case study for invariants, queue order, and resizing behavior. Students should treat the structure as a maintained system with rules, not as a one-off container that 'seems to work.'",
-					"CSE7-Dynamic-Ring-Buffer"
-				)
+				{
+					title: "Project Pass: Extend the Dynamic Ring Buffer",
+					content:
+						"Return to the ring-buffer lab and use it as the main data-structure case study for invariants, queue order, and resizing behavior. Students should treat the structure as a maintained system with rules, not as a one-off container that 'seems to work.'",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Data Structures in C",
-					"container choice, invariants, and what evidence shows the structure is preserving logical order"
-				),
-				toolDrill(
-					"watch",
-					"Use repeated output from a small structure test so students can observe count, head, or capacity changes over time instead of after the fact."
-				)
+				{
+					title: "Engineering Notebook: Data Structures in C",
+					content:
+						"Keep a short engineering notebook for data structures in c that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on container choice, invariants, and what evidence shows the structure is preserving logical order so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/solution"
+				},
+				{
+					title: "Tool Drill: watch",
+					content:
+						"Start the lesson by running watch and asking students to predict what useful evidence it should provide. Use repeated output from a small structure test so students can observe count, head, or capacity changes over time instead of after the fact."
+				}
 			]
 		},
 		{
@@ -433,17 +508,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					title: "Numeric Error and Approximation",
 					content:
 						"Introduce the idea that some transforms are exact and some are approximations, especially when integer division or fixed-point rounding is involved. The important skill is to state the approximation clearly and bound the expected error."
+				},
+				{
+					title: "Unit 10: Engineering Math in Code: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/solution"
 				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Engineering Math in Code",
-					"scaling choices, overflow checks, and why the chosen units make the transform safer to reason about"
-				),
-				byteView(
-					"Scaled Integer Transform",
-					"Print one scaled integer before and after a conversion and ask students where truncation or rounding could appear."
-				)
+				{
+					title: "Engineering Notebook: Engineering Math in Code",
+					content:
+						"Keep a short engineering notebook for engineering math in code that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on scaling choices, overflow checks, and why the chosen units make the transform safer to reason about so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/solution"
+				},
+				{
+					title: "Printed Byte View: Scaled Integer Transform",
+					content:
+						"Stop after the main exercise and print the relevant bytes or bit groups before moving on. Print one scaled integer before and after a conversion and ask students where truncation or rounding could appear."
+				}
 			]
 		},
 		{
@@ -468,17 +558,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					title: "Tooling Pass on a Real Utility",
 					content:
 						"Use one of the earlier projects to inspect warnings, run under the debugger, and compare the file bytes or symbols against the source expectations. This keeps the tooling lesson grounded in code students already know rather than in synthetic debugging puzzles."
+				},
+				{
+					title: "Unit 11: Systems Tooling: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/solution"
 				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Systems Tooling",
-					"which tool produced the most useful evidence for a given bug or observation and why"
-				),
-				toolDrill(
-					"llvm-objdump -t",
-					"Run it on one of the built labs so students can connect source names to symbol-table evidence in the compiled output."
-				)
+				{
+					title: "Engineering Notebook: Systems Tooling",
+					content:
+						"Keep a short engineering notebook for systems tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which tool produced the most useful evidence for a given bug or observation and why so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/solution"
+				},
+				{
+					title: "Tool Drill: llvm-objdump -t",
+					content:
+						"Start the lesson by running llvm-objdump -t and asking students to predict what useful evidence it should provide. Run it on one of the built labs so students can connect source names to symbol-table evidence in the compiled output."
+				}
 			]
 		},
 		{
@@ -499,21 +604,211 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Students should produce normalized output with stable formatting, explicit derived fields, and clear handling of invalid input. The capstone should feel like a utility another engineer could actually use or extend rather than like a classroom printout."
 				},
-				projectItem(
-					"Project: Capstone Telemetry Transform CLI",
-					"Use the capstone CLI to read structured telemetry input, validate ranges, apply fixed-point transforms, and write normalized output. This project should tie together representation, parsing, validation, numeric care, and low-level engineering habits in one small but defensible utility.",
-					"CSE9-Capstone-Telemetry-Transform-CLI"
-				)
+				{
+					title: "Project: Capstone Telemetry Transform CLI",
+					content:
+						"Use the capstone CLI to read structured telemetry input, validate ranges, apply fixed-point transforms, and write normalized output. This project should tie together representation, parsing, validation, numeric care, and low-level engineering habits in one small but defensible utility.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE9-Capstone-Telemetry-Transform-CLI/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE9-Capstone-Telemetry-Transform-CLI/solution"
+				}
 			],
 			supplementalProjects: [
-				engineeringNotebook(
-					"Capstone Engineering Utility",
-					"input validation order, derived-field logic, and why the final output format is trustworthy"
-				),
-				byteView(
-					"Capstone Input and Output",
-					"Pick one sample row and explain how each field changes from input form to output form, including any scaling, masking, or validation rule."
-				)
+				{
+					title: "Engineering Notebook: Capstone Engineering Utility",
+					content:
+						"Keep a short engineering notebook for capstone engineering utility that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on input validation order, derived-field logic, and why the final output format is trustworthy so students build the habit of explaining systems behavior instead of only trusting output.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE9-Capstone-Telemetry-Transform-CLI/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE9-Capstone-Telemetry-Transform-CLI/solution"
+				},
+				{
+					title: "Printed Byte View: Capstone Input and Output",
+					content:
+						"Stop after the main exercise and print the relevant bytes or bit groups before moving on. Pick one sample row and explain how each field changes from input form to output form, including any scaling, masking, or validation rule."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: systems build 14",
+			curriculum: [
+				{
+					title: "systems build 14: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: systems build 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "systems build 14: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: systems build 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "systems build 14: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: systems build 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/solution"
+				},
+				{
+					title: "systems build 14: Review and Reflection",
+					content:
+						"Close Applied Studio 14: systems build 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "systems build 14: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: systems build 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/solution"
+				},
+				{
+					title: "systems build 14: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: systems build 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: systems build 15",
+			curriculum: [
+				{
+					title: "systems build 15: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: systems build 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "systems build 15: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: systems build 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "systems build 15: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: systems build 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/solution"
+				},
+				{
+					title: "systems build 15: Review and Reflection",
+					content:
+						"Close Applied Studio 15: systems build 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "systems build 15: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: systems build 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/solution"
+				},
+				{
+					title: "systems build 15: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: systems build 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: systems build 16",
+			curriculum: [
+				{
+					title: "systems build 16: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: systems build 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "systems build 16: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: systems build 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "systems build 16: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: systems build 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/solution"
+				},
+				{
+					title: "systems build 16: Review and Reflection",
+					content:
+						"Close Applied Studio 16: systems build 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "systems build 16: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: systems build 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/solution"
+				},
+				{
+					title: "systems build 16: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: systems build 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: systems build 17",
+			curriculum: [
+				{
+					title: "systems build 17: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: systems build 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "systems build 17: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: systems build 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "systems build 17: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: systems build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/solution"
+				},
+				{
+					title: "systems build 17: Review and Reflection",
+					content:
+						"Close Applied Studio 17: systems build 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "systems build 17: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: systems build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/starter",
+					solutionLink:
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/solution"
+				},
+				{
+					title: "systems build 17: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: systems build 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]

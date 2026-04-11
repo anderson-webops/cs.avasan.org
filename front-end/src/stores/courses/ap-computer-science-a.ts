@@ -1,43 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const APCS_REPO = "https://github.com/instruction-material/APCS/tree/main";
-
-function repoLink(projectId: string) {
-	return `${APCS_REPO}/${projectId}`;
-}
-
-function projectItem(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: repoLink(projectId)
-	};
-}
-
-function pairedProjectItem(
-	title: string,
-	content: string,
-	starterId: string,
-	solutionId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: repoLink(starterId),
-		solutionLink: repoLink(solutionId)
-	};
-}
-
-function examLog(unitTitle: string, focus: string): RawCourseModuleItem {
-	return {
-		title: `APCS Log: ${unitTitle}`,
-		content: `Keep a brief AP-style study log for ${unitTitle.toLowerCase()} that records one code trace, one free-response-style explanation, and one note about ${focus}. The goal is to practice reasoning in the same form the exam expects.`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const apComputerScienceACourse: RawCourse = {
 	name: "AP Computer Science A",
@@ -64,13 +25,28 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Reference-Sheet Thinking",
 					content:
 						"Get students used to working with references, method contracts, and library expectations. The AP course is easier when students know how to read provided information precisely rather than memorizing every detail in isolation."
+				},
+				{
+					title: "APCS0 Setup, Positioning, and Exam Workflow: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Variables-Reference"
 				}
 			],
 			supplementalProjects: [
-				examLog(
-					"Setup, Positioning, and Exam Workflow",
-					"which parts of the AP format still feel different from a normal programming class"
-				)
+				{
+					title: "APCS Log: Setup, Positioning, and Exam Workflow",
+					content:
+						"Keep a brief AP-style study log for setup, positioning, and exam workflow that records one code trace, one free-response-style explanation, and one note about which parts of the AP format still feel different from a normal programming class. The goal is to practice reasoning in the same form the exam expects.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Variables-Reference"
+				},
+				{
+					title: "APCS0 Setup, Positioning, and Exam Workflow: Fluency Drill",
+					content:
+						"Repeat the core ideas from APCS0 Setup, Positioning, and Exam Workflow on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -94,30 +70,47 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Tracing Simple Programs",
 					content:
-						"Start exam-style tracing early so students treat each assignment as a state change they can predict. The habit of stepping through a short program line by line pays off all year."
+						"Start exam-style tracing early so students treat each assignment as a state change they can predict. The habit of stepping through a short program line by line pays off all year. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 1: Variables, Strings, and Expressions: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs-Template",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs"
 				}
 			],
 			supplementalProjects: [
-				pairedProjectItem(
-					"Project: Mad Libs",
-					"Use a small but lively string-manipulation starter to practice variables, concatenation, and formatted output. This is a low-friction way to build confidence before the course gets more structural.",
-					"APCS1-Mad-Libs-Template",
-					"APCS1-Mad-Libs"
-				),
-				projectItem(
-					"Project: Hospital Survey",
-					"Use a simple data-entry style problem to reinforce variables, strings, and output formatting in a context that feels more like information processing than a puzzle.",
-					"APCS1-Hospital-Survey"
-				),
-				projectItem(
-					"Project: Rounding It Off",
-					"Practice numeric reasoning and rounding rules with a focused exercise that can be traced by hand before being run.",
-					"APCS1-Rounding-It-Off"
-				),
-				examLog(
-					"Variables, Strings, and Expressions",
-					"how expression evaluation changes the value of each variable over time"
-				)
+				{
+					title: "Project: Mad Libs",
+					content:
+						"Use a small but lively string-manipulation starter to practice variables, concatenation, and formatted output. This is a low-friction way to build confidence before the course gets more structural.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs-Template",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs"
+				},
+				{
+					title: "Project: Hospital Survey",
+					content:
+						"Use a simple data-entry style problem to reinforce variables, strings, and output formatting in a context that feels more like information processing than a puzzle. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Hospital-Survey"
+				},
+				{
+					title: "Project: Rounding It Off",
+					content:
+						"Practice numeric reasoning and rounding rules with a focused exercise that can be traced by hand before being run. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Rounding-It-Off"
+				},
+				{
+					title: "APCS Log: Variables, Strings, and Expressions",
+					content:
+						"Keep a brief AP-style study log for variables, strings, and expressions that records one code trace, one free-response-style explanation, and one note about how expression evaluation changes the value of each variable over time. The goal is to practice reasoning in the same form the exam expects."
+				}
 			]
 		},
 		{
@@ -126,7 +119,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Boolean Logic and Relational Operators",
 					content:
-						"Teach conditionals as precise decision-making rather than informal branching. Students should be able to read a compound boolean expression and say exactly when it evaluates to true."
+						"Teach conditionals as precise decision-making rather than informal branching. Students should be able to read a compound boolean expression and say exactly when it evaluates to true. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Method Design and Parameter Flow",
@@ -141,31 +134,49 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Reading and Explaining Decisions",
 					content:
-						"Require students to explain why a branch is taken, not merely observe that it was. This supports both AP-style written responses and stronger debugging discipline."
+						"Require students to explain why a branch is taken, not merely observe that it was. This supports both AP-style written responses and stronger debugging discipline. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 2: Conditionals, Methods, and Randomness: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS2-Verifying-Expressions-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS2-Verifying-Expressions"
 				}
 			],
 			supplementalProjects: [
-				pairedProjectItem(
-					"Project: Verifying Expressions",
-					"Start from a starter that focuses on evaluating and testing boolean or arithmetic expressions, then compare it with the completed version to tighten reasoning about exact outcomes.",
-					"APCS2-Verifying-Expressions-Starter",
-					"APCS2-Verifying-Expressions"
-				),
-				projectItem(
-					"Project: FizzBuzz",
-					"Use a classic branching exercise to reinforce condition ordering, divisibility checks, and readable method-level reasoning.",
-					"APCS2-Project-4-Fizzbuzz"
-				),
-				projectItem(
-					"Project: Practice with Methods",
-					"Use a small method-design project to make parameter flow and return values explicit before classes and objects become more central.",
-					"APCS3-Project-1-Practice-with-Methods"
-				),
-				projectItem(
-					"Project: Elevator Warning",
-					"Use a tight conditional problem to emphasize threshold checks, readability, and careful edge-case thinking.",
-					"APCS3-Elevator-Warning"
-				)
+				{
+					title: "Project: Verifying Expressions",
+					content:
+						"Start from a starter that focuses on evaluating and testing boolean or arithmetic expressions, then compare it with the completed version to tighten reasoning about exact outcomes. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS2-Verifying-Expressions-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS2-Verifying-Expressions"
+				},
+				{
+					title: "Project: FizzBuzz",
+					content:
+						"Use a classic branching exercise to reinforce condition ordering, divisibility checks, and readable method-level reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS2-Project-4-Fizzbuzz"
+				},
+				{
+					title: "Project: Practice with Methods",
+					content:
+						"Use a small method-design project to make parameter flow and return values explicit before classes and objects become more central. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS3-Project-1-Practice-with-Methods"
+				},
+				{
+					title: "Project: Elevator Warning",
+					content:
+						"Use a tight conditional problem to emphasize threshold checks, readability, and careful edge-case thinking. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS3-Elevator-Warning"
+				}
 			]
 		},
 		{
@@ -174,45 +185,62 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "For Loops, While Loops, and When to Use Each",
 					content:
-						"Teach counted loops and condition-driven loops as distinct tools with distinct failure modes. Students should know which loop structure fits the problem before they begin typing."
+						"Teach counted loops and condition-driven loops as distinct tools with distinct failure modes. Students should know which loop structure fits the problem before they begin typing. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Nested Loops and Pattern Generation",
 					content:
-						"Use nested loops to model grids, repeated structure, and simple text or numeric patterns. This prepares students for two-dimensional arrays and matrix-style work later in the course."
+						"Use nested loops to model grids, repeated structure, and simple text or numeric patterns. This prepares students for two-dimensional arrays and matrix-style work later in the course. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Loop Tracing and Off-by-One Discipline",
 					content:
-						"Make off-by-one reasoning explicit through written traces and boundary checks. Students should leave this unit able to predict exactly how many times a loop body runs and why."
+						"Make off-by-one reasoning explicit through written traces and boundary checks. Students should leave this unit able to predict exactly how many times a loop body runs and why. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Algorithm Structure over Syntax Memorization",
 					content:
-						"Use loop problems to discuss invariant thinking and stepwise refinement. The point is to build algorithmic control, not just to memorize loop templates."
+						"Use loop problems to discuss invariant thinking and stepwise refinement. The point is to build algorithmic control, not just to memorize loop templates. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 3: Loops, Tracing, and Algorithmic Thinking: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS4-Translating-Loops-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS4-Translating-Loops"
 				}
 			],
 			supplementalProjects: [
-				pairedProjectItem(
-					"Project: Translating Loops",
-					"Move between loop forms deliberately so students see that the structure can change while the algorithmic meaning stays the same.",
-					"APCS4-Translating-Loops-Starter",
-					"APCS4-Translating-Loops"
-				),
-				projectItem(
-					"Project: For Loop Practice",
-					"Build speed and confidence with counted iteration before more layered array and matrix tasks appear.",
-					"APCS4-For-Loop-Practice"
-				),
-				projectItem(
-					"Project: While Loop and Nested Loop Practice",
-					"Use a mixed loop practice set to solidify termination reasoning, accumulation, and repeated structure.",
-					"APCS4-While-Loop-and-Nested-Loop-Practice"
-				),
-				examLog(
-					"Loops, Tracing, and Algorithmic Thinking",
-					"which loop boundary or update step is easiest to get wrong under exam pressure"
-				)
+				{
+					title: "Project: Translating Loops",
+					content:
+						"Move between loop forms deliberately so students see that the structure can change while the algorithmic meaning stays the same. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS4-Translating-Loops-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS4-Translating-Loops"
+				},
+				{
+					title: "Project: For Loop Practice",
+					content:
+						"Build speed and confidence with counted iteration before more layered array and matrix tasks appear. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS4-For-Loop-Practice"
+				},
+				{
+					title: "Project: While Loop and Nested Loop Practice",
+					content:
+						"Use a mixed loop practice set to solidify termination reasoning, accumulation, and repeated structure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS4-While-Loop-and-Nested-Loop-Practice"
+				},
+				{
+					title: "APCS Log: Loops, Tracing, and Algorithmic Thinking",
+					content:
+						"Keep a brief AP-style study log for loops, tracing, and algorithmic thinking that records one code trace, one free-response-style explanation, and one note about which loop boundary or update step is easiest to get wrong under exam pressure. The goal is to practice reasoning in the same form the exam expects."
+				}
 			]
 		},
 		{
@@ -221,7 +249,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Designing a Class around State and Behavior",
 					content:
-						"Teach classes as blueprints for related data and operations. Students should think about what a class owns, what can change, and which methods belong with that state."
+						"Teach classes as blueprints for related data and operations. Students should think about what a class owns, what can change, and which methods belong with that state. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Constructors, Accessors, Mutators, and This",
@@ -237,30 +265,46 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Writing and Testing Small Object Models",
 					content:
 						"Use short, focused object projects so students can see the value of class design without getting lost in giant programs. The best object lessons here are ones they can mentally simulate."
+				},
+				{
+					title: "Unit 4: Classes, Objects, and Encapsulation: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Dog-Class"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Dog Class",
-					"Use a friendly object model to practice fields, constructors, and methods without heavy domain complexity.",
-					"APCS-Dog-Class"
-				),
-				projectItem(
-					"Project: Bank Account Class",
-					"Model deposits, withdrawals, and balance changes so students can reason about state transitions and method responsibilities clearly.",
-					"APCS6-Bank-Account-Class"
-				),
-				pairedProjectItem(
-					"Project: Farm Class",
-					"Start from a starter that leaves room for design choices, then compare it with a full implementation to sharpen class-structure judgment.",
-					"APCS6-Farm-Class-Starter",
-					"APCS6-Farm-Class"
-				),
-				projectItem(
-					"Project: Student Class",
-					"Use a school-flavored class example to practice object fields, derived values, and simple method-based reporting.",
-					"APCS5-Student-Class"
-				)
+				{
+					title: "Project: Dog Class",
+					content:
+						"Use a friendly object model to practice fields, constructors, and methods without heavy domain complexity. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Dog-Class"
+				},
+				{
+					title: "Project: Bank Account Class",
+					content:
+						"Model deposits, withdrawals, and balance changes so students can reason about state transitions and method responsibilities clearly. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS6-Bank-Account-Class"
+				},
+				{
+					title: "Project: Farm Class",
+					content:
+						"Start from a starter that leaves room for design choices, then compare it with a full implementation to sharpen class-structure judgment. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS6-Farm-Class-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS6-Farm-Class"
+				},
+				{
+					title: "Project: Student Class",
+					content:
+						"Use a school-flavored class example to practice object fields, derived values, and simple method-based reporting. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS5-Student-Class"
+				}
 			]
 		},
 		{
@@ -269,7 +313,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Indexed Collections and Traversal Patterns",
 					content:
-						"Teach arrays and ArrayLists as ordered collections with different tradeoffs but similar traversal thinking. Students should be fluent in indexing, bounds, updates, and scan patterns."
+						"Teach arrays and ArrayLists as ordered collections with different tradeoffs but similar traversal thinking. Students should be fluent in indexing, bounds, updates, and scan patterns. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Accumulation, Search, and Transformation",
@@ -284,31 +328,47 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Collections of Objects",
 					content:
-						"Combine object-oriented design with list structures so students can manage richer program state. This is where many AP free-response tasks begin to feel more realistic."
+						"Combine object-oriented design with list structures so students can manage richer program state. This is where many AP free-response tasks begin to feel more realistic. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 5: Arrays, ArrayLists, and Two-Dimensional Data: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Practice-With-Arrays"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Practice with Arrays",
-					"Reinforce indexing, traversal, and accumulation with a focused one-dimensional array practice set.",
-					"APCS10-Practice-With-Arrays"
-				),
-				projectItem(
-					"Project: Practice with Two-Dimensional Arrays",
-					"Use grid-structured data to make nested iteration and row/column reasoning concrete.",
-					"APCS10-Practice-With-Two-Dimensional-Arrays"
-				),
-				projectItem(
-					"Project: Practice with ArrayLists",
-					"Work with variable-length collections and the method vocabulary that the AP exam expects students to know well.",
-					"APCS11-Practice-With-ArrayLists"
-				),
-				pairedProjectItem(
-					"Project: Card Shuffler",
-					"Use cards and decks to combine collection management, object models, and algorithmic updates in one exam-relevant project.",
-					"APCS11-Card-Shuffler-Starter",
-					"APCS11-Card-Shuffler"
-				)
+				{
+					title: "Project: Practice with Arrays",
+					content:
+						"Reinforce indexing, traversal, and accumulation with a focused one-dimensional array practice set. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Practice-With-Arrays"
+				},
+				{
+					title: "Project: Practice with Two-Dimensional Arrays",
+					content:
+						"Use grid-structured data to make nested iteration and row/column reasoning concrete. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Practice-With-Two-Dimensional-Arrays"
+				},
+				{
+					title: "Project: Practice with ArrayLists",
+					content:
+						"Work with variable-length collections and the method vocabulary that the AP exam expects students to know well. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-Practice-With-ArrayLists"
+				},
+				{
+					title: "Project: Card Shuffler",
+					content:
+						"Use cards and decks to combine collection management, object models, and algorithmic updates in one exam-relevant project. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-Card-Shuffler-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-Card-Shuffler"
+				}
 			]
 		},
 		{
@@ -332,30 +392,45 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Design Tradeoffs and Readability",
 					content:
-						"Keep asking whether the inheritance hierarchy clarifies the model or makes it harder to reason about. The unit should produce better judgment, not just more keywords."
+						"Keep asking whether the inheritance hierarchy clarifies the model or makes it harder to reason about. The unit should produce better judgment, not just more keywords. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 6: Inheritance and Polymorphism: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS7-Books-and-PictureBooks"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Books and PictureBooks",
-					"Use a familiar inheritance example to practice shared fields, added subclass behavior, and readable constructors.",
-					"APCS7-Books-and-PictureBooks"
-				),
-				projectItem(
-					"Project: Pets",
-					"Use a pet hierarchy to compare inherited versus specialized behavior and to practice object references across a class family.",
-					"APCS7-Pets"
-				),
-				pairedProjectItem(
-					"Project: Many Shapes",
-					"Work from a starter that highlights polymorphic method calls, then compare it with a completed model to sharpen design choices.",
-					"APCS8-Many-Shapes-Starter",
-					"APCS8-Many-Shapes"
-				),
-				examLog(
-					"Inheritance and Polymorphism",
-					"which method call depends on the reference type and which depends on the actual object type"
-				)
+				{
+					title: "Project: Books and PictureBooks",
+					content:
+						"Use a familiar inheritance example to practice shared fields, added subclass behavior, and readable constructors. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS7-Books-and-PictureBooks"
+				},
+				{
+					title: "Project: Pets",
+					content:
+						"Use a pet hierarchy to compare inherited versus specialized behavior and to practice object references across a class family. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS7-Pets"
+				},
+				{
+					title: "Project: Many Shapes",
+					content:
+						"Work from a starter that highlights polymorphic method calls, then compare it with a completed model to sharpen design choices. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS8-Many-Shapes-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS8-Many-Shapes"
+				},
+				{
+					title: "APCS Log: Inheritance and Polymorphism",
+					content:
+						"Keep a brief AP-style study log for inheritance and polymorphism that records one code trace, one free-response-style explanation, and one note about which method call depends on the reference type and which depends on the actual object type. The goal is to practice reasoning in the same form the exam expects."
+				}
 			]
 		},
 		{
@@ -364,7 +439,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Linear Search, Binary Search, and Preconditions",
 					content:
-						"Teach search as both a practical coding skill and an exercise in recognizing assumptions. Students should know why binary search needs sorted data and why that precondition matters."
+						"Teach search as both a practical coding skill and an exercise in recognizing assumptions. Students should know why binary search needs sorted data and why that precondition matters. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Selection, Insertion, and Merge Sort",
@@ -380,35 +455,53 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Recursion as Self-Similar Reasoning",
 					content:
 						"Teach recursion through clear base cases, smaller subproblems, and traceable calls. Students should learn to reason about recursive structure and not simply memorize one or two examples."
+				},
+				{
+					title: "Unit 7: Searching, Sorting, Runtime, and Recursion: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS13-Linear-Search-Implementation"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Linear Search Implementation",
-					"Write and trace a direct search algorithm before comparing it to more specialized options.",
-					"APCS13-Linear-Search-Implementation"
-				),
-				projectItem(
-					"Project: Selection Sort",
-					"Use a straightforward sorting method to practice invariants and step-by-step trace reasoning.",
-					"APCS14-Selection-Sort"
-				),
-				projectItem(
-					"Project: Insertion Sort",
-					"Contrast insertion sort with selection sort so students can talk about mechanism, not just name recognition.",
-					"APCS14-Insertion-Sort"
-				),
-				projectItem(
-					"Project: Binary Search and Merge Sort",
-					"Use two classic divide-and-conquer ideas to tie together preconditions, efficiency, and recursive structure.",
-					"APCS16-Binary-Search"
-				),
-				pairedProjectItem(
-					"Project: Tracing Recursion",
-					"Start from a recursion starter, then compare with a completed traceable version so students can see how base cases and call structure fit together.",
-					"APCS15-Tracing-Recursion-Starter",
-					"APCS15-Tracing-Recursion"
-				)
+				{
+					title: "Project: Linear Search Implementation",
+					content:
+						"Write and trace a direct search algorithm before comparing it to more specialized options. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS13-Linear-Search-Implementation"
+				},
+				{
+					title: "Project: Selection Sort",
+					content:
+						"Use a straightforward sorting method to practice invariants and step-by-step trace reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS14-Selection-Sort"
+				},
+				{
+					title: "Project: Insertion Sort",
+					content:
+						"Contrast insertion sort with selection sort so students can talk about mechanism, not just name recognition. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS14-Insertion-Sort"
+				},
+				{
+					title: "Project: Binary Search and Merge Sort",
+					content:
+						"Use two classic divide-and-conquer ideas to tie together preconditions, efficiency, and recursive structure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS16-Binary-Search"
+				},
+				{
+					title: "Project: Tracing Recursion",
+					content:
+						"Start from a recursion starter, then compare with a completed traceable version so students can see how base cases and call structure fit together. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS15-Tracing-Recursion-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS15-Tracing-Recursion"
+				}
 			]
 		},
 		{
@@ -422,39 +515,53 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Multiple Choice Reading Discipline",
 					content:
-						"Teach students to read every line of a question stem, every code fragment, and every answer choice with care. The AP exam rewards precision and punishes rushed assumptions."
+						"Teach students to read every line of a question stem, every code fragment, and every answer choice with care. The AP exam rewards precision and punishes rushed assumptions. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Tracing without Running",
 					content:
-						"Make timed traces a normal practice activity so students stop depending on execution as their only debugging tool. This is one of the biggest mindset shifts for test readiness."
+						"Make timed traces a normal practice activity so students stop depending on execution as their only debugging tool. This is one of the biggest mindset shifts for test readiness. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Time Management and Partial Credit Thinking",
 					content:
-						"Help students learn when to move on, how to show useful partial work, and how to recover from a difficult question without losing the entire section."
+						"Help students learn when to move on, how to show useful partial work, and how to recover from a difficult question without losing the entire section. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 8: AP Exam Practice and Strategy: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-A-2020-Practice-Exam"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Practice: 2020 AP CSA Exam",
-					"Use a full practice exam to simulate pacing, question mix, and the mental transition between sections.",
-					"APCS-A-2020-Practice-Exam"
-				),
-				projectItem(
-					"Practice: Free Response Review",
-					"Drill representative free-response tasks so students can see recurring patterns before the real exam.",
-					"APCS10-Free-Response-Practice"
-				),
-				projectItem(
-					"Practice: Multiple Choice Reference",
-					"Use a focused multiple-choice reference to review method contracts, collection behavior, and common trace patterns.",
-					"APCS10-Multiple-Choice-Reference"
-				),
-				examLog(
-					"AP Exam Practice and Strategy",
-					"which question types still consume too much time and why"
-				)
+				{
+					title: "Practice: 2020 AP CSA Exam",
+					content:
+						"Use a full practice exam to simulate pacing, question mix, and the mental transition between sections. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-A-2020-Practice-Exam"
+				},
+				{
+					title: "Practice: Free Response Review",
+					content:
+						"Drill representative free-response tasks so students can see recurring patterns before the real exam. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Free-Response-Practice"
+				},
+				{
+					title: "Practice: Multiple Choice Reference",
+					content:
+						"Use a focused multiple-choice reference to review method contracts, collection behavior, and common trace patterns. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Multiple-Choice-Reference"
+				},
+				{
+					title: "APCS Log: AP Exam Practice and Strategy",
+					content:
+						"Keep a brief AP-style study log for ap exam practice and strategy that records one code trace, one free-response-style explanation, and one note about which question types still consume too much time and why. The goal is to practice reasoning in the same form the exam expects."
+				}
 			]
 		},
 		{
@@ -478,30 +585,45 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Portfolio-Ready Java Work",
 					content:
-						"Identify at least one project that can be cleaned up and kept as a portfolio artifact. This helps students connect classroom preparation to longer-term development growth."
+						"Identify at least one project that can be cleaned up and kept as a portfolio artifact. This helps students connect classroom preparation to longer-term development growth. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 9: Capstone and Post-AP Extensions: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3-Closing-Project-Starter"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Capstone: Closing Project Starter",
-					"Use the closing project starter as the main integration exercise for the end of the course. Students should take it from scaffold to polished solution with deliberate testing and explanation.",
-					"APCS_Check-in-3-Closing-Project-Starter"
-				),
-				projectItem(
-					"Extension: Elevens",
-					"Use a classic AP-adjacent card-game extension to practice object models, collection updates, and more structured gameplay logic.",
-					"APCS17-Elevens"
-				),
-				projectItem(
-					"Extension: Spaceships",
-					"Use a larger game-flavored extension for students who want something more open-ended after the exam core is secure.",
-					"APCS17-Spaceships"
-				),
-				projectItem(
-					"Extension: Additional Practice Project",
-					"Use one last structured practice project to reinforce readiness for the next Java or algorithms course.",
-					"APCS_Check-in-4-Additional-Practice-Project"
-				)
+				{
+					title: "Capstone: Closing Project Starter",
+					content:
+						"Use the closing project starter as the main integration exercise for the end of the course. Students should take it from scaffold to polished solution with deliberate testing and explanation.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3-Closing-Project-Starter"
+				},
+				{
+					title: "Extension: Elevens",
+					content:
+						"Use a classic AP-adjacent card-game extension to practice object models, collection updates, and more structured gameplay logic. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS17-Elevens"
+				},
+				{
+					title: "Extension: Spaceships",
+					content:
+						"Use a larger game-flavored extension for students who want something more open-ended after the exam core is secure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS17-Spaceships"
+				},
+				{
+					title: "Extension: Additional Practice Project",
+					content:
+						"Use one last structured practice project to reinforce readiness for the next Java or algorithms course. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-4-Additional-Practice-Project"
+				}
 			]
 		},
 		{
@@ -521,54 +643,330 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Check-Ins and Alternate Projects",
 					content:
 						"Expose the check-ins and alternate practice projects as structured review work, not as hidden repo noise. This is especially useful for students who want more AP-style pacing without leaving the Java/AP track."
+				},
+				{
+					title: "Unit 10: Repo Reference, Check In, and Practice Bank: Verification and Reflection",
+					content:
+						"Close Unit 10: Repo Reference, Check-In, and Practice Bank by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "Unit 10: Repo Reference, Check-In, and Practice Bank: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Casting-Reference"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Reference Bank: Variables, Strings, and Casting",
-					"Use the early-unit references when students need direct support on primitives, strings, arithmetic operators, or casting before moving back into project work.",
-					"APCS1-Casting-Reference"
-				),
-				projectItem(
-					"Optional Project: Playlist",
-					"Use a class-and-array style project to reinforce object design, collections, and readable method structure.",
-					"APCS10-Playlist"
-				),
-				projectItem(
-					"Optional Project: Card and Deck Classes",
-					"Strengthen class interactions and collection modeling with a fuller card/deck object set before or after AP-adjacent card games.",
-					"APCS11-Card-and-Deck-Classes"
-				),
-				projectItem(
-					"Practice: APCS Check-In 1",
-					"Use the first repo check-in as a concise cumulative review block for the earlier AP CSA topics.",
-					"APCS-Check-in-1"
-				),
-				projectItem(
-					"Practice: Check-In 2 Additional Project",
-					"Use an extra mid-course practice project when a student needs one more pass over methods, classes, or structured control flow.",
-					"APCS-Check-in-2-Additional-Practice-Project"
-				),
-				projectItem(
-					"Practice: Runtime Analysis",
-					"Use the runtime-analysis folder as a bridge from AP problem solving into more explicit algorithmic cost reasoning.",
-					"APCS13-Runtime-Analysis"
-				),
-				projectItem(
-					"Practice: Blob Erase",
-					"Use a flood-fill style recursion exercise as a stronger recursive problem once the basic tracing work is secure.",
-					"APCS15-Blob-Erase"
-				),
-				projectItem(
-					"Practice: Merge Sort",
-					"Use merge sort as an optional extension for students who want one more serious sorting algorithm beyond the main AP core.",
-					"APCS16-MergeSort"
-				),
-				projectItem(
-					"Extension: Decode",
-					"Use a later-stage string and logic project as an optional capstone-style AP extension.",
-					"APCS17-Decode"
-				)
+				{
+					title: "Reference Bank: Variables, Strings, and Casting",
+					content:
+						"Use the early-unit references when students need direct support on primitives, strings, arithmetic operators, or casting before moving back into project work. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Casting-Reference"
+				},
+				{
+					title: "Optional Project: Playlist",
+					content:
+						"Use a class-and-array style project to reinforce object design, collections, and readable method structure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS10-Playlist"
+				},
+				{
+					title: "Optional Project: Card and Deck Classes",
+					content:
+						"Strengthen class interactions and collection modeling with a fuller card/deck object set before or after AP-adjacent card games. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS11-Card-and-Deck-Classes"
+				},
+				{
+					title: "Practice: APCS Check-In 1",
+					content:
+						"Use the first repo check-in as a concise cumulative review block for the earlier AP CSA topics. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
+				},
+				{
+					title: "Practice: Check-In 2 Additional Project",
+					content:
+						"Use an extra mid-course practice project when a student needs one more pass over methods, classes, or structured control flow. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-2-Additional-Practice-Project"
+				},
+				{
+					title: "Practice: Runtime Analysis",
+					content:
+						"Use the runtime-analysis folder as a bridge from AP problem solving into more explicit algorithmic cost reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS13-Runtime-Analysis"
+				},
+				{
+					title: "Practice: Blob Erase",
+					content:
+						"Use a flood-fill style recursion exercise as a stronger recursive problem once the basic tracing work is secure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS15-Blob-Erase"
+				},
+				{
+					title: "Practice: Merge Sort",
+					content:
+						"Use merge sort as an optional extension for students who want one more serious sorting algorithm beyond the main AP core. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS16-MergeSort"
+				},
+				{
+					title: "Extension: Decode",
+					content:
+						"Use a later-stage string and logic project as an optional capstone-style AP extension. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS17-Decode"
+				}
+			]
+		},
+		{
+			title: "Applied Studio 12: APCS Check in 1 Additional Practice Project",
+			curriculum: [
+				{
+					title: "APCS Check in 1 Additional Practice Project: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 12: APCS Check in 1 Additional Practice Project, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "APCS Check in 1 Additional Practice Project: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 12: APCS Check in 1 Additional Practice Project, naming the key inputs, the expected outputs, and the checkpoints worth verifying early."
+				},
+				{
+					title: "APCS Check in 1 Additional Practice Project: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 12: APCS Check in 1 Additional Practice Project. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-1-Additional-Practice-Project"
+				},
+				{
+					title: "APCS Check in 1 Additional Practice Project: Review and Reflection",
+					content:
+						"Close Applied Studio 12: APCS Check in 1 Additional Practice Project by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "APCS Check in 1 Additional Practice Project: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 12: APCS Check in 1 Additional Practice Project with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-1-Additional-Practice-Project"
+				},
+				{
+					title: "APCS Check in 1 Additional Practice Project: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 12: APCS Check in 1 Additional Practice Project. Keep the scope tight, but require one meaningful design or reasoning decision. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 13: APCS Check in 2",
+			curriculum: [
+				{
+					title: "APCS Check in 2: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 13: APCS Check in 2, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "APCS Check in 2: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 13: APCS Check in 2, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "APCS Check in 2: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 13: APCS Check in 2. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-2"
+				},
+				{
+					title: "APCS Check in 2: Review and Reflection",
+					content:
+						"Close Applied Studio 13: APCS Check in 2 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "APCS Check in 2: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 13: APCS Check in 2 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-2"
+				},
+				{
+					title: "APCS Check in 2: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 13: APCS Check in 2. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: APCS Check in 3",
+			curriculum: [
+				{
+					title: "APCS Check in 3: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: APCS Check in 3, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "APCS Check in 3: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: APCS Check in 3, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "APCS Check in 3: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: APCS Check in 3. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3"
+				},
+				{
+					title: "APCS Check in 3: Review and Reflection",
+					content:
+						"Close Applied Studio 14: APCS Check in 3 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "APCS Check in 3: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: APCS Check in 3 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3"
+				},
+				{
+					title: "APCS Check in 3: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: APCS Check in 3. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: APCS Check in 3 Additional Practice Project",
+			curriculum: [
+				{
+					title: "APCS Check in 3 Additional Practice Project: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: APCS Check in 3 Additional Practice Project, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "APCS Check in 3 Additional Practice Project: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: APCS Check in 3 Additional Practice Project, naming the key inputs, the expected outputs, and the checkpoints worth verifying early."
+				},
+				{
+					title: "APCS Check in 3 Additional Practice Project: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: APCS Check in 3 Additional Practice Project. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3-Additional-Practice-Project"
+				},
+				{
+					title: "APCS Check in 3 Additional Practice Project: Review and Reflection",
+					content:
+						"Close Applied Studio 15: APCS Check in 3 Additional Practice Project by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "APCS Check in 3 Additional Practice Project: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: APCS Check in 3 Additional Practice Project with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-3-Additional-Practice-Project"
+				},
+				{
+					title: "APCS Check in 3 Additional Practice Project: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: APCS Check in 3 Additional Practice Project. Keep the scope tight, but require one meaningful design or reasoning decision. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: APCS Check in 4",
+			curriculum: [
+				{
+					title: "APCS Check in 4: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: APCS Check in 4, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "APCS Check in 4: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: APCS Check in 4, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "APCS Check in 4: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: APCS Check in 4. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-4"
+				},
+				{
+					title: "APCS Check in 4: Review and Reflection",
+					content:
+						"Close Applied Studio 16: APCS Check in 4 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "APCS Check in 4: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: APCS Check in 4 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS_Check-in-4"
+				},
+				{
+					title: "APCS Check in 4: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: APCS Check in 4. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: Strings and Printing Reference",
+			curriculum: [
+				{
+					title: "Strings and Printing Reference: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: Strings and Printing Reference, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Strings and Printing Reference: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: Strings and Printing Reference, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Strings and Printing Reference: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: Strings and Printing Reference. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Strings-and-Printing-Reference"
+				},
+				{
+					title: "Strings and Printing Reference: Review and Reflection",
+					content:
+						"Close Applied Studio 17: Strings and Printing Reference by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Strings and Printing Reference: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: Strings and Printing Reference with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/APCS/tree/main/APCS1-Strings-and-Printing-Reference"
+				},
+				{
+					title: "Strings and Printing Reference: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: Strings and Printing Reference. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]

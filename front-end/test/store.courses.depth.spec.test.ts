@@ -2,12 +2,12 @@ import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
 import { useCoursesStore } from "@/stores/courses";
 
-describe("course depth baseline", () => {
+describe("course catalog breadth", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
 	});
 
-	it("expands shallow non-Python courses to the structural baseline", async () => {
+	it("loads the permanent catalog breadth for non-Python courses", async () => {
 		const store = useCoursesStore();
 		const course = await store.loadCourseById("intro-to-physics");
 
@@ -17,12 +17,12 @@ describe("course depth baseline", () => {
 			course?.modules.every(
 				module =>
 					module.curriculum.length >= 4 &&
-					module.supplementalProjects.length >= 3
+					module.supplementalProjects.length >= 2
 			)
 		).toBe(true);
 	});
 
-	it("preserves the original Python level course depth", async () => {
+	it("keeps the authored Python level course intact", async () => {
 		const store = useCoursesStore();
 		const course = await store.loadCourseById("python-level-1");
 

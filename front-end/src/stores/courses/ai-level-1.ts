@@ -1,46 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const AI_LEVEL_1_REPO =
-	"https://github.com/instruction-material/AI-Level-1/tree/main";
-const PYTHON_COURSES_AI_LEVEL_1_ARCHIVE =
-	"https://github.com/instruction-material/Python-Courses/tree/main/AI%20Level%201";
-
-function repoLink(projectId: string) {
-	return `${AI_LEVEL_1_REPO}/${projectId}`;
-}
-
-function projectItem(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: repoLink(projectId)
-	};
-}
-
-function pairedProjectItem(
-	title: string,
-	content: string,
-	starterId: string,
-	solutionId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: repoLink(starterId),
-		solutionLink: repoLink(solutionId)
-	};
-}
-
-function searchNotebook(unitTitle: string, focus: string): RawCourseModuleItem {
-	return {
-		title: `Search Notebook: ${unitTitle}`,
-		content: `Keep a running search notebook for ${unitTitle.toLowerCase()} that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about ${focus}. The habit should be to justify the algorithm, not just the answer.`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const aiLevel1Course: RawCourse = {
 	name: "AI Level 1",
@@ -67,29 +25,42 @@ export const aiLevel1Course: RawCourse = {
 					title: "Experiment Logging and Reflection",
 					content:
 						"Require short written notes after each search or game AI lab: what representation was used, what strategy was tried, what failed, and what evidence supports the next revision. Students should leave the course able to explain why an algorithm behaved the way it did."
+				},
+				{
+					title: "FAI0 Setup and Tooling: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Courses/tree/main/AI%20Level%201"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Legacy Archive: AI Level 1 Workspace",
 					content:
-						"Use the legacy umbrella Python archive when the older single-folder Juni layout is useful for comparison or for recovering an earlier classroom variant of the AI Level 1 materials.",
-					projectLink: PYTHON_COURSES_AI_LEVEL_1_ARCHIVE
+						"Use the legacy umbrella Python archive when the older single-folder Juni layout is useful for comparison or for recovering an earlier classroom variant of the AI Level 1 materials. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Python-Courses/tree/main/AI%20Level%201"
 				},
-				projectItem(
-					"Object Refresh: Dog Class",
-					"Use a small class-design warmup to refresh attributes, methods, and state changes before graph and game objects enter the course. The goal is not the dog model itself; it is confidence with objects as containers for AI state.",
-					"FAI1-Dog-Class"
-				),
-				projectItem(
-					"Object Refresh: Deck of Cards",
-					"Review lists of objects, controlled randomness, and data modeling with a deck implementation. This gives students a concrete way to talk about state transitions before they build search trees and game logic.",
-					"FAI1-Deck-of-Cards"
-				),
-				searchNotebook(
-					"Setup and Tooling",
-					"how states, actions, and goals will be documented across the entire course"
-				)
+				{
+					title: "Object Refresh: Dog Class",
+					content:
+						"Use a small class-design warmup to refresh attributes, methods, and state changes before graph and game objects enter the course. The goal is not the dog model itself; it is confidence with objects as containers for AI state.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-Dog-Class"
+				},
+				{
+					title: "Object Refresh: Deck of Cards",
+					content:
+						"Review lists of objects, controlled randomness, and data modeling with a deck implementation. This gives students a concrete way to talk about state transitions before they build search trees and game logic.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-Deck-of-Cards"
+				},
+				{
+					title: "Search Notebook: Setup and Tooling",
+					content:
+						"Keep a running search notebook for setup and tooling that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about how states, actions, and goals will be documented across the entire course. The habit should be to justify the algorithm, not just the answer."
+				}
 			]
 		},
 		{
@@ -114,29 +85,46 @@ export const aiLevel1Course: RawCourse = {
 					title: "Knowledge Representation for Small Systems",
 					content:
 						"Use simple Python classes and dictionaries to represent entities, edges, metadata, and rules. The course should emphasize representations that are easy to inspect, reason about, and debug."
+				},
+				{
+					title: "Unit 1: AI Landscape and State Representation: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Node-and-Graph-Class-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Node-and-Graph-Class"
 				}
 			],
 			supplementalProjects: [
-				pairedProjectItem(
-					"Project: Node and Graph Class",
-					"Build a reusable graph model with explicit nodes, adjacency, and helper methods for traversal. This is the foundational starter for later DFS, BFS, and heuristic search work.",
-					"FAI2-Node-and-Graph-Class-Starter",
-					"FAI2-Node-and-Graph-Class"
-				),
-				projectItem(
-					"Project: Graphs with Network Visualization",
-					"Use `networkx` to draw graph structures and make the difference between representation and traversal visible. Students should see that a search algorithm is easier to debug when the structure is easy to inspect.",
-					"FAI-Graphs-with-Network-Updated"
-				),
-				projectItem(
-					"Project: Airports Problem",
-					"Model routes, hubs, and reachability in a graph-based setting. This keeps the early graph work grounded in a recognizable real-world system rather than a purely abstract diagram.",
-					"FAI3-Airports-Problem"
-				),
-				searchNotebook(
-					"AI Landscape and State Representation",
-					"which details belong in a state and which details are irrelevant noise"
-				)
+				{
+					title: "Project: Node and Graph Class",
+					content:
+						"Build a reusable graph model with explicit nodes, adjacency, and helper methods for traversal. This is the foundational starter for later DFS, BFS, and heuristic search work. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Node-and-Graph-Class-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Node-and-Graph-Class"
+				},
+				{
+					title: "Project: Graphs with Network Visualization",
+					content:
+						"Use `networkx` to draw graph structures and make the difference between representation and traversal visible. Students should see that a search algorithm is easier to debug when the structure is easy to inspect.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Graphs-with-Network-Updated"
+				},
+				{
+					title: "Project: Airports Problem",
+					content:
+						"Model routes, hubs, and reachability in a graph-based setting. This keeps the early graph work grounded in a recognizable real-world system rather than a purely abstract diagram. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI3-Airports-Problem"
+				},
+				{
+					title: "Search Notebook: AI Landscape and State Representation",
+					content:
+						"Keep a running search notebook for ai landscape and state representation that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about which details belong in a state and which details are irrelevant noise. The habit should be to justify the algorithm, not just the answer."
+				}
 			]
 		},
 		{
@@ -161,28 +149,42 @@ export const aiLevel1Course: RawCourse = {
 					title: "Tracing Traversals by Hand",
 					content:
 						"Require whiteboard or notebook traces before implementation. Students should be able to follow push, pop, enqueue, dequeue, and visited-set changes step by step instead of treating search as magic recursion or copy-pasted code."
+				},
+				{
+					title: "Unit 2: Stacks, Queues, and Traversal Intuition: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI4-Practice-with-Stacks"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Practice with Stacks",
-					"Work directly with LIFO behavior so that the mechanics behind backtracking become automatic. This warmup is intentionally small because the real value is the mental model it creates.",
-					"FAI4-Practice-with-Stacks"
-				),
-				projectItem(
-					"Project: Practice with Queues",
-					"Build fluency with FIFO behavior before BFS is introduced on graphs. Students should leave this project knowing exactly what comes out next and why.",
-					"FAI4-Practice-with-Queues"
-				),
-				projectItem(
-					"Project: Stacks and Queues Reference",
-					"Keep a reference implementation of stack- and queue-based workflows nearby while later search code gets more complex. The goal is to separate data-structure confusion from algorithmic confusion.",
-					"FAI-Queues"
-				),
-				searchNotebook(
-					"Stacks, Queues, and Traversal Intuition",
-					"how frontier order changes what the algorithm discovers first"
-				)
+				{
+					title: "Project: Practice with Stacks",
+					content:
+						"Work directly with LIFO behavior so that the mechanics behind backtracking become automatic. This warmup is intentionally small because the real value is the mental model it creates. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI4-Practice-with-Stacks"
+				},
+				{
+					title: "Project: Practice with Queues",
+					content:
+						"Build fluency with FIFO behavior before BFS is introduced on graphs. Students should leave this project knowing exactly what comes out next and why. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI4-Practice-with-Queues"
+				},
+				{
+					title: "Project: Stacks and Queues Reference",
+					content:
+						"Keep a reference implementation of stack- and queue-based workflows nearby while later search code gets more complex. The goal is to separate data-structure confusion from algorithmic confusion.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Queues"
+				},
+				{
+					title: "Search Notebook: Stacks, Queues, and Traversal Intuition",
+					content:
+						"Keep a running search notebook for stacks, queues, and traversal intuition that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about how frontier order changes what the algorithm discovers first. The habit should be to justify the algorithm, not just the answer."
+				}
 			]
 		},
 		{
@@ -207,30 +209,46 @@ export const aiLevel1Course: RawCourse = {
 					title: "Instrumentation and Debugging Search",
 					content:
 						"Add counters, frontier-size tracking, and simple visual markers to search code. This keeps performance and correctness observable, which matters once informed search and game trees arrive."
+				},
+				{
+					title: "Unit 3: DFS, BFS, and Reachability: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-Implement-DFS"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Implement DFS",
-					"Build DFS explicitly rather than relying on library behavior. Students should be able to explain every mutation of the stack, visited set, and current node during execution.",
-					"FAI5-Implement-DFS"
-				),
-				projectItem(
-					"Project: Implement BFS",
-					"Build BFS with a queue, visited tracking, and path reconstruction. The emphasis is on why breadth-first ordering produces the right guarantee in an unweighted problem.",
-					"FAI6-Implement-BFS"
-				),
-				projectItem(
-					"Project: Magic Portals",
-					"Use a graph puzzle with teleports and special moves to distinguish state transitions from physical movement on a simple map. This sharpens the habit of designing the right graph before running the algorithm.",
-					"FAI6-Magic-Portals"
-				),
-				pairedProjectItem(
-					"Project: Maze Solver",
-					"Start with a constrained maze-search starter, then extend it into a working solver that traces paths and compares candidate routes. This becomes the anchor example for later informed search units.",
-					"FAI9-Maze-Solver-Starter",
-					"FAI9-Maze-Solver"
-				)
+				{
+					title: "Project: Implement DFS",
+					content:
+						"Build DFS explicitly rather than relying on library behavior. Students should be able to explain every mutation of the stack, visited set, and current node during execution. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-Implement-DFS"
+				},
+				{
+					title: "Project: Implement BFS",
+					content:
+						"Build BFS with a queue, visited tracking, and path reconstruction. The emphasis is on why breadth-first ordering produces the right guarantee in an unweighted problem. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI6-Implement-BFS"
+				},
+				{
+					title: "Project: Magic Portals",
+					content:
+						"Use a graph puzzle with teleports and special moves to distinguish state transitions from physical movement on a simple map. This sharpens the habit of designing the right graph before running the algorithm.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI6-Magic-Portals"
+				},
+				{
+					title: "Project: Maze Solver",
+					content:
+						"Start with a constrained maze-search starter, then extend it into a working solver that traces paths and compares candidate routes. This becomes the anchor example for later informed search units.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Maze-Solver-Starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Maze-Solver"
+				}
 			]
 		},
 		{
@@ -255,34 +273,51 @@ export const aiLevel1Course: RawCourse = {
 					title: "Comparing Search Strategies Honestly",
 					content:
 						"Require students to compare algorithms by memory use, guarantees, path quality, and runtime behavior on the same problem family. The goal is to make tradeoffs explicit rather than celebrating any single algorithm as 'the AI one'."
+				},
+				{
+					title: "Unit 4: Informed and Bounded Search: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Implement-DLS"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Implement DLS",
-					"Add depth limits deliberately and observe what gets missed, what gets found, and what the algorithm spends time revisiting. This is a good lab for understanding search control rather than only search success.",
-					"FAI9-Implement-DLS"
-				),
-				projectItem(
-					"Project: Implement IDS",
-					"Layer repeated depth-limited searches into an iterative-deepening workflow and compare its behavior to plain DFS. Students should be able to say when the extra repeated work is worth it.",
-					"FAI9-Implement-IDS"
-				),
-				projectItem(
-					"Project: Implement UCS",
-					"Handle weighted paths and prove to yourself that expanding the shallowest path is not enough once costs differ. UCS becomes the clean stepping stone into heuristic search.",
-					"FAI9-Implement-UCS"
-				),
-				projectItem(
-					"Project: Compare A* and Greedy Search",
-					"Run the same state space through greedy best-first search and A* so students can see the difference between fast-looking decisions and cost-aware planning.",
-					"FAI10-Implement-A-Search"
-				),
-				projectItem(
-					"Project: Greedy Search Lab",
-					"Use a dedicated greedy search implementation to show how a heuristic can reduce work while still getting trapped by shortsighted choices.",
-					"FAI10-Implement-Greedy-Search"
-				)
+				{
+					title: "Project: Implement DLS",
+					content:
+						"Add depth limits deliberately and observe what gets missed, what gets found, and what the algorithm spends time revisiting. This is a good lab for understanding search control rather than only search success.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Implement-DLS"
+				},
+				{
+					title: "Project: Implement IDS",
+					content:
+						"Layer repeated depth-limited searches into an iterative-deepening workflow and compare its behavior to plain DFS. Students should be able to say when the extra repeated work is worth it.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Implement-IDS"
+				},
+				{
+					title: "Project: Implement UCS",
+					content:
+						"Handle weighted paths and prove to yourself that expanding the shallowest path is not enough once costs differ. UCS becomes the clean stepping stone into heuristic search. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Implement-UCS"
+				},
+				{
+					title: "Project: Compare A* and Greedy Search",
+					content:
+						"Run the same state space through greedy best-first search and A* so students can see the difference between fast-looking decisions and cost-aware planning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Implement-A-Search"
+				},
+				{
+					title: "Project: Greedy Search Lab",
+					content:
+						"Use a dedicated greedy search implementation to show how a heuristic can reduce work while still getting trapped by shortsighted choices. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Implement-Greedy-Search"
+				}
 			]
 		},
 		{
@@ -307,28 +342,42 @@ export const aiLevel1Course: RawCourse = {
 					title: "Feature Thinking before Machine Learning",
 					content:
 						"Start the bridge to ML by asking what information a system would need in order to make a good decision. Students should learn to name candidate features even when they are not training a predictive model yet."
+				},
+				{
+					title: "Unit 5: Rule-Based Systems and Puzzle Framing: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Adventure-Game"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Adventure Game State Tracker",
-					"Use a branching text-style environment to manage inventory, location, and permitted actions. This is a good exercise in representing knowledge and gating decisions through explicit rules.",
-					"FAI2-Adventure-Game"
-				),
-				projectItem(
-					"Project: Puzzle Solver Warmup",
-					"Frame a small puzzle in terms of state transitions and allowable moves before the capstone solver arrives. The lesson is to model the problem cleanly before choosing the search algorithm.",
-					"FAI-Puzzle"
-				),
-				projectItem(
-					"Project: Juni Book Rule System",
-					"Use a structured decision or lookup problem to practice explicit rules, routing, and explainability. Students should be able to justify each program choice in natural language.",
-					"FAI5-Juni-Book"
-				),
-				searchNotebook(
-					"Rule-Based Systems and Puzzle Framing",
-					"which parts of the task can be encoded directly and which require search or scoring"
-				)
+				{
+					title: "Project: Adventure Game State Tracker",
+					content:
+						"Use a branching text-style environment to manage inventory, location, and permitted actions. This is a good exercise in representing knowledge and gating decisions through explicit rules.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Adventure-Game"
+				},
+				{
+					title: "Project: Puzzle Solver Warmup",
+					content:
+						"Frame a small puzzle in terms of state transitions and allowable moves before the capstone solver arrives. The lesson is to model the problem cleanly before choosing the search algorithm.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Puzzle"
+				},
+				{
+					title: "Project: Juni Book Rule System",
+					content:
+						"Use a structured decision or lookup problem to practice explicit rules, routing, and explainability. Students should be able to justify each program choice in natural language. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-Juni-Book"
+				},
+				{
+					title: "Search Notebook: Rule-Based Systems and Puzzle Framing",
+					content:
+						"Keep a running search notebook for rule-based systems and puzzle framing that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about which parts of the task can be encoded directly and which require search or scoring. The habit should be to justify the algorithm, not just the answer."
+				}
 			]
 		},
 		{
@@ -353,29 +402,44 @@ export const aiLevel1Course: RawCourse = {
 					title: "Debugging a Game AI",
 					content:
 						"Require concrete debugging methods: inspect candidate moves, print evaluation scores, compare turns against human reasoning, and capture failure positions. Students should learn that AI bugs are often representation bugs or scoring bugs."
+				},
+				{
+					title: "Unit 6: Heuristics and Game AI: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Tic-Tac-Toe-TreeNode"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Tic-Tac-Toe Tree Nodes",
-					"Build the board-state representation and successor logic that later AI strategies depend on. The quality of the tree structure determines how easy the rest of the project is to reason about.",
-					"FAI7-Tic-Tac-Toe-TreeNode"
-				),
-				projectItem(
-					"Project: Random Tic-Tac-Toe AI",
-					"Start from a deliberately weak baseline so that later heuristic and search upgrades are easy to compare against. This makes evaluation visible rather than abstract.",
-					"FAI7-Random-Tic-Tac-Toe-AI"
-				),
-				projectItem(
-					"Project: Unbeatable Tic-Tac-Toe AI",
-					"Push a simple game AI all the way to strong play and discuss what made the jump possible: better state modeling, lookahead, pruning of bad choices, and more disciplined scoring.",
-					"FAI7-Unbeatable-TicTacToe-AI"
-				),
-				projectItem(
-					"Project: Marble Game AI",
-					"Use a two-player strategy game to compare state explosion, heuristics, and planning depth in a setting that is different enough from tic-tac-toe to test whether the reasoning generalizes.",
-					"FAI8-The-Marble-Game-AI"
-				)
+				{
+					title: "Project: Tic-Tac-Toe Tree Nodes",
+					content:
+						"Build the board-state representation and successor logic that later AI strategies depend on. The quality of the tree structure determines how easy the rest of the project is to reason about.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Tic-Tac-Toe-TreeNode"
+				},
+				{
+					title: "Project: Random Tic-Tac-Toe AI",
+					content:
+						"Start from a deliberately weak baseline so that later heuristic and search upgrades are easy to compare against. This makes evaluation visible rather than abstract. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Random-Tic-Tac-Toe-AI"
+				},
+				{
+					title: "Project: Unbeatable Tic-Tac-Toe AI",
+					content:
+						"Push a simple game AI all the way to strong play and discuss what made the jump possible: better state modeling, lookahead, pruning of bad choices, and more disciplined scoring. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-TicTacToe-AI"
+				},
+				{
+					title: "Project: Marble Game AI",
+					content:
+						"Use a two-player strategy game to compare state explosion, heuristics, and planning depth in a setting that is different enough from tic-tac-toe to test whether the reasoning generalizes.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI"
+				}
 			]
 		},
 		{
@@ -400,23 +464,35 @@ export const aiLevel1Course: RawCourse = {
 					title: "Bridge to Later Machine Learning Work",
 					content:
 						"Connect search and rule systems to later ML topics by emphasizing features, labels, evaluation, training data, and the difference between hand-authored behavior and learned behavior. Students should leave this unit ready to enter `Machine Learning` with better intuition."
+				},
+				{
+					title: "Unit 7: Features, Evaluation, and Responsible AI: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Implement-Greedy-Search"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Search Strategy Comparison Lab",
-					"Run multiple algorithms on related problems and compare memory use, runtime, and path quality. The real deliverable is the written comparison, not just the code output.",
-					"FAI10-Implement-Greedy-Search"
-				),
-				projectItem(
-					"Project: Water Jug Riddle",
-					"Treat a classic reasoning puzzle as an exercise in formal state definition, action generation, and evaluation. This makes it easy to discuss how small changes in representation can completely change the search behavior.",
-					"FAI10-Water-Jug-Riddle"
-				),
-				searchNotebook(
-					"Features, Evaluation, and Responsible AI",
-					"what the system is optimizing for and which failure cases would still matter to a real user"
-				)
+				{
+					title: "Project: Search Strategy Comparison Lab",
+					content:
+						"Run multiple algorithms on related problems and compare memory use, runtime, and path quality. The real deliverable is the written comparison, not just the code output. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Implement-Greedy-Search"
+				},
+				{
+					title: "Project: Water Jug Riddle",
+					content:
+						"Treat a classic reasoning puzzle as an exercise in formal state definition, action generation, and evaluation. This makes it easy to discuss how small changes in representation can completely change the search behavior.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Water-Jug-Riddle"
+				},
+				{
+					title: "Search Notebook: Features, Evaluation, and Responsible AI",
+					content:
+						"Keep a running search notebook for features, evaluation, and responsible ai that records one state representation, one frontier snapshot, one explanation of the next move, and one short comparison about what the system is optimizing for and which failure cases would still matter to a real user. The habit should be to justify the algorithm, not just the answer."
+				}
 			]
 		},
 		{
@@ -441,24 +517,37 @@ export const aiLevel1Course: RawCourse = {
 					title: "Reflect on the Next Course Step",
 					content:
 						"Close by deciding whether the next step should be `Machine Learning`, `Data Science in Python`, `AP Computer Science A`, or deeper algorithmic work such as `USACO Bronze`. Students should be able to justify that next step based on the kind of thinking they enjoyed most."
+				},
+				{
+					title: "Unit 8: Capstone and Portfolio Build: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI11-8-Puzzle-Solver"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Capstone: 8-Puzzle Solver",
-					"Build a full puzzle solver that makes representation, heuristic choice, and evaluation visible. This is the natural capstone because it rewards careful modeling as much as algorithm selection.",
-					"FAI11-8-Puzzle-Solver"
-				),
-				projectItem(
-					"Capstone Option: Maze Solver Showcase",
-					"Turn the earlier maze work into a polished search visualizer or comparison tool with cleaner reporting and a stronger interface for explaining results.",
-					"FAI9-Maze-Solver"
-				),
-				projectItem(
-					"Capstone Option: Marble Game Strategy Lab",
-					"Promote the marble game into a stronger strategy project by comparing heuristics, search depth, and game balance over multiple runs.",
-					"FAI8-The-Marble-Game-AI"
-				)
+				{
+					title: "Capstone: 8-Puzzle Solver",
+					content:
+						"Build a full puzzle solver that makes representation, heuristic choice, and evaluation visible. This is the natural capstone because it rewards careful modeling as much as algorithm selection.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI11-8-Puzzle-Solver"
+				},
+				{
+					title: "Capstone Option: Maze Solver Showcase",
+					content:
+						"Turn the earlier maze work into a polished search visualizer or comparison tool with cleaner reporting and a stronger interface for explaining results. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Maze-Solver"
+				},
+				{
+					title: "Capstone Option: Marble Game Strategy Lab",
+					content:
+						"Promote the marble game into a stronger strategy project by comparing heuristics, search depth, and game balance over multiple runs. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI"
+				}
 			]
 		},
 		{
@@ -478,44 +567,377 @@ export const aiLevel1Course: RawCourse = {
 					title: "How to Use the Extra Repo Folders",
 					content:
 						"Students who want more practice should use the optional bank below for targeted reinforcement: class refresh, stack/queue mechanics, graph variants, and stronger game-AI comparisons. The point is discoverability without flooding the core syllabus."
+				},
+				{
+					title: "Unit 9: Repo Extension Bank and Canonical Variants: Verification and Reflection",
+					content:
+						"Close Unit 9: Repo Extension Bank and Canonical Variants by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "Unit 9: Repo Extension Bank and Canonical Variants: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Special-Graphs"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Extension: Special Graphs",
-					"Use alternate graph structures and examples to strengthen representation choices before later search and heuristic work.",
-					"FAI-Special-Graphs"
-				),
-				projectItem(
-					"Extension: Practice with Stacks (Reference Bank)",
-					"Use the dedicated stacks folder as extra frontier-order practice when DFS mechanics still feel shaky.",
-					"FAI-Stacks"
-				),
-				projectItem(
-					"Extension: BankAccount Class",
-					"Keep a second lightweight class-design warmup available for students who need more confidence with object state before graph and game objects.",
-					"FAI1-BankAccount-Class"
-				),
-				projectItem(
-					"Extension: DFS with a Stack Class",
-					"Compare the earlier DFS implementation with a more class-structured stack-based version so students can see the same algorithm through a cleaner API boundary.",
-					"FAI5-DFS-With-a-Stack-Class"
-				),
-				projectItem(
-					"Extension: BFS with a Queue Class",
-					"Use a queue-centered class version of BFS to reinforce shortest-path intuition and explicit frontier management.",
-					"FAI6-BFS-With-a-Queue-Class"
-				),
-				projectItem(
-					"Extension: Updated Tic-Tac-Toe AI",
-					"Use the updated Tic-Tac-Toe branch as the canonical optional game-tree extension beyond the main course spine.",
-					"FAI7-Updated-TicTacToe-AI"
-				),
-				projectItem(
-					"Extension: Two-Player Marble Game",
-					"Use the two-player marble variant as a lighter strategy and evaluation warmup before the stronger AI version.",
-					"FAI8-2-Player-Marble-Game"
-				)
+				{
+					title: "Extension: Special Graphs",
+					content:
+						"Use alternate graph structures and examples to strengthen representation choices before later search and heuristic work. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Special-Graphs"
+				},
+				{
+					title: "Extension: Practice with Stacks (Reference Bank)",
+					content:
+						"Use the dedicated stacks folder as extra frontier-order practice when DFS mechanics still feel shaky. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Stacks"
+				},
+				{
+					title: "Extension: BankAccount Class",
+					content:
+						"Keep a second lightweight class-design warmup available for students who need more confidence with object state before graph and game objects. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-BankAccount-Class"
+				},
+				{
+					title: "Extension: DFS with a Stack Class",
+					content:
+						"Compare the earlier DFS implementation with a more class-structured stack-based version so students can see the same algorithm through a cleaner API boundary. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-DFS-With-a-Stack-Class"
+				},
+				{
+					title: "Extension: BFS with a Queue Class",
+					content:
+						"Use a queue-centered class version of BFS to reinforce shortest-path intuition and explicit frontier management. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI6-BFS-With-a-Queue-Class"
+				},
+				{
+					title: "Extension: Updated Tic-Tac-Toe AI",
+					content:
+						"Use the updated Tic-Tac-Toe branch as the canonical optional game-tree extension beyond the main course spine. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Updated-TicTacToe-AI"
+				},
+				{
+					title: "Extension: Two-Player Marble Game",
+					content:
+						"Use the two-player marble variant as a lighter strategy and evaluation warmup before the stronger AI version. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-2-Player-Marble-Game"
+				}
+			]
+		},
+		{
+			title: "Applied Studio 11: ai search lab 13",
+			curriculum: [
+				{
+					title: "ai search lab 13: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 11: ai search lab 13, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "ai search lab 13: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 11: ai search lab 13, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "ai search lab 13: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 11: ai search lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/solution"
+				},
+				{
+					title: "ai search lab 13: Review and Reflection",
+					content:
+						"Close Applied Studio 11: ai search lab 13 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "ai search lab 13: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 11: ai search lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/solution"
+				},
+				{
+					title: "ai search lab 13: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 11: ai search lab 13. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 12: ai search lab 14",
+			curriculum: [
+				{
+					title: "ai search lab 14: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 12: ai search lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "ai search lab 14: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 12: ai search lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "ai search lab 14: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 12: ai search lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/solution"
+				},
+				{
+					title: "ai search lab 14: Review and Reflection",
+					content:
+						"Close Applied Studio 12: ai search lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "ai search lab 14: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 12: ai search lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/solution"
+				},
+				{
+					title: "ai search lab 14: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 12: ai search lab 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 13: ai search lab 15",
+			curriculum: [
+				{
+					title: "ai search lab 15: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 13: ai search lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "ai search lab 15: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 13: ai search lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "ai search lab 15: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 13: ai search lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/solution"
+				},
+				{
+					title: "ai search lab 15: Review and Reflection",
+					content:
+						"Close Applied Studio 13: ai search lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "ai search lab 15: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 13: ai search lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/solution"
+				},
+				{
+					title: "ai search lab 15: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 13: ai search lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: ai search lab 16",
+			curriculum: [
+				{
+					title: "ai search lab 16: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: ai search lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "ai search lab 16: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: ai search lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "ai search lab 16: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: ai search lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/solution"
+				},
+				{
+					title: "ai search lab 16: Review and Reflection",
+					content:
+						"Close Applied Studio 14: ai search lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "ai search lab 16: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: ai search lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/solution"
+				},
+				{
+					title: "ai search lab 16: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: ai search lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: ai search lab 17",
+			curriculum: [
+				{
+					title: "ai search lab 17: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: ai search lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "ai search lab 17: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: ai search lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "ai search lab 17: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: ai search lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/solution"
+				},
+				{
+					title: "ai search lab 17: Review and Reflection",
+					content:
+						"Close Applied Studio 15: ai search lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "ai search lab 17: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: ai search lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/starter",
+					solutionLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/solution"
+				},
+				{
+					title: "ai search lab 17: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: ai search lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: Unbeatable TicTacToe AI 1",
+			curriculum: [
+				{
+					title: "Unbeatable TicTacToe AI 1: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: Unbeatable TicTacToe AI 1, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Unbeatable TicTacToe AI 1: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: Unbeatable TicTacToe AI 1, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unbeatable TicTacToe AI 1: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: Unbeatable TicTacToe AI 1. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-TicTacToe-AI-1"
+				},
+				{
+					title: "Unbeatable TicTacToe AI 1: Review and Reflection",
+					content:
+						"Close Applied Studio 16: Unbeatable TicTacToe AI 1 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Unbeatable TicTacToe AI 1: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: Unbeatable TicTacToe AI 1 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-TicTacToe-AI-1"
+				},
+				{
+					title: "Unbeatable TicTacToe AI 1: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: Unbeatable TicTacToe AI 1. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: The Marble Game AI(COPY)",
+			curriculum: [
+				{
+					title: "The Marble Game AI(COPY): Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: The Marble Game AI(COPY), define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "The Marble Game AI(COPY): Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: The Marble Game AI(COPY), naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "The Marble Game AI(COPY): Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: The Marble Game AI(COPY). Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI(COPY)"
+				},
+				{
+					title: "The Marble Game AI(COPY): Review and Reflection",
+					content:
+						"Close Applied Studio 17: The Marble Game AI(COPY) by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "The Marble Game AI(COPY): Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: The Marble Game AI(COPY) with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI(COPY)"
+				},
+				{
+					title: "The Marble Game AI(COPY): Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: The Marble Game AI(COPY). Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]

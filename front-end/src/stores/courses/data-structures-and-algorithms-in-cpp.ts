@@ -1,45 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const DATA_STRUCTURES_CPP_REPO =
-	"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main";
-
-function starterRepoLink(projectId: string) {
-	return `${DATA_STRUCTURES_CPP_REPO}/${projectId}/starter`;
-}
-
-function solutionRepoLink(projectId: string) {
-	return `${DATA_STRUCTURES_CPP_REPO}/${projectId}/solution`;
-}
-
-function projectItem(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: starterRepoLink(projectId),
-		solutionLink: solutionRepoLink(projectId)
-	};
-}
-
-function complexityCheckpoint(
-	title: string,
-	focus: string
-): RawCourseModuleItem {
-	return {
-		title: `Complexity Checkpoint: ${title}`,
-		content: `Pause after ${title.toLowerCase()} and record the key operation count story, the dominant data movement pattern, and one plain-language explanation of why ${focus}.`
-	};
-}
-
-function debuggingDrill(title: string, prompt: string): RawCourseModuleItem {
-	return {
-		title: `Debugging Drill: ${title}`,
-		content: `Require students to inspect a failing edge case before changing code. ${prompt}`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 	name: "Data Structures and Algorithms in C++",
@@ -66,17 +25,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 					title: "Working Habits for the Sequence",
 					content:
 						"Students should get used to tracing data by hand, printing intermediate structure states, and explaining asymptotic behavior in plain language. Every unit should end with at least one debugging pass that checks the shape of the structure, not just final output."
+				},
+				{
+					title: "DSCPP0 Setup and Positioning: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX08-dscpp0-setup-and-positioning/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX08-dscpp0-setup-and-positioning/solution"
 				}
 			],
 			supplementalProjects: [
-				complexityCheckpoint(
-					"Setup and Positioning",
-					"the cost of debugging late is much higher once recursion and ownership bugs enter the picture"
-				),
-				debuggingDrill(
-					"Build and Run Sanity Check",
-					"Have students intentionally break one include or function signature, then explain the compiler feedback before fixing it."
-				)
+				{
+					title: "Complexity Checkpoint: Setup and Positioning",
+					content:
+						"Pause after setup and positioning and record the key operation count story, the dominant data movement pattern, and one plain-language explanation of why the cost of debugging late is much higher once recursion and ownership bugs enter the picture.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX08-dscpp0-setup-and-positioning/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX08-dscpp0-setup-and-positioning/solution"
+				},
+				{
+					title: "Debugging Drill: Build and Run Sanity Check",
+					content:
+						"Require students to inspect a failing edge case before changing code. Have students intentionally break one include or function signature, then explain the compiler feedback before fixing it."
+				}
 			]
 		},
 		{
@@ -96,18 +70,37 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 					title: "Command-Style Program Structure",
 					content:
 						"Model programs that interpret an action, update state, and print a clear result. This becomes a useful pattern later when tree and graph labs expose many small operations through a driver."
+				},
+				{
+					title: "Interfaces, Records, and a Task Manager CLI: Verification and Reflection",
+					content:
+						"Close DSCPP1 Interfaces, Records, and a Task Manager CLI by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "DSCPP1 Interfaces, Records, and a Task Manager CLI: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP1-Task-Manager-CLI/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP1-Task-Manager-CLI/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Task Manager CLI",
-					"Build a file-ready task manager that stores dated tasks, filters by date, removes tasks safely, and prints consistent views of the current schedule. The lab is intentionally small so students can focus on clean data handling and interface boundaries.",
-					"DSCPP1-Task-Manager-CLI"
-				),
-				debuggingDrill(
-					"Task Removal Cases",
-					"Test removing the first task, the last task, a missing task, and two tasks with the same date so students do not accidentally only solve the happy path."
-				)
+				{
+					title: "Project: Task Manager CLI",
+					content:
+						"Build a file-ready task manager that stores dated tasks, filters by date, removes tasks safely, and prints consistent views of the current schedule. The lab is intentionally small so students can focus on clean data handling and interface boundaries.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP1-Task-Manager-CLI/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP1-Task-Manager-CLI/solution"
+				},
+				{
+					title: "Debugging Drill: Task Removal Cases",
+					content:
+						"Require students to inspect a failing edge case before changing code. Test removing the first task, the last task, a missing task, and two tasks with the same date so students do not accidentally only solve the happy path."
+				}
 			]
 		},
 		{
@@ -127,18 +120,37 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 					title: "Path Reconstruction",
 					content:
 						"Do not stop at distance values. Students should record parent relationships and reconstruct the actual route so they understand the difference between knowing a cost and knowing the path that produced it."
+				},
+				{
+					title: "Graphs and Shortest Paths: Verification and Reflection",
+					content:
+						"Close DSCPP2 Graphs and Shortest Paths by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "DSCPP2 Graphs and Shortest Paths: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP2-Graph-Navigation/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP2-Graph-Navigation/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Graph Navigation",
-					"Read a weighted road-style network, compute the shortest path between two nodes, and reconstruct the route from start to goal. The project is directly aligned with the graph-navigation lab style from the source course, but rewritten for cleaner student-facing starter and solution code.",
-					"DSCPP2-Graph-Navigation"
-				),
-				complexityCheckpoint(
-					"Graphs and Shortest Paths",
-					"the difference between scanning every node each step and using a more structured frontier matters once graphs grow"
-				)
+				{
+					title: "Project: Graph Navigation",
+					content:
+						"Read a weighted road-style network, compute the shortest path between two nodes, and reconstruct the route from start to goal. The project is directly aligned with the graph-navigation lab style from the source course, but rewritten for cleaner student-facing starter and solution code.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP2-Graph-Navigation/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP2-Graph-Navigation/solution"
+				},
+				{
+					title: "Complexity Checkpoint: Graphs and Shortest Paths",
+					content:
+						"Pause after graphs and shortest paths and record the key operation count story, the dominant data movement pattern, and one plain-language explanation of why the difference between scanning every node each step and using a more structured frontier matters once graphs grow."
+				}
 			]
 		},
 		{
@@ -157,19 +169,38 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "State Windows and Markov-Style Generation",
 					content:
-						"Introduce an n-gram or state-window model where the next output token depends on the recent history. The data-structure lesson matters more than the novelty of generated text."
+						"Introduce an n-gram or state-window model where the next output token depends on the recent history. The data-structure lesson matters more than the novelty of generated text. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "STL Containers and State Based Text Generation: Verification and Reflection",
+					content:
+						"Close DSCPP3 STL Containers and State-Based Text Generation by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "DSCPP3 STL Containers and State-Based Text Generation: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP3-Markov-Text-Generator/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP3-Markov-Text-Generator/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Markov Text Generator",
-					"Build a small text generator that tokenizes an input string, records unique vocabulary, and uses a deque-backed state window with a map to produce sample output. This adapts the container-heavy source lab into a more readable course project.",
-					"DSCPP3-Markov-Text-Generator"
-				),
-				debuggingDrill(
-					"Token Cleanup",
-					"Compare raw tokens and cleaned tokens side by side so students can spot when punctuation handling quietly changes the model."
-				)
+				{
+					title: "Project: Markov Text Generator",
+					content:
+						"Build a small text generator that tokenizes an input string, records unique vocabulary, and uses a deque-backed state window with a map to produce sample output. This adapts the container-heavy source lab into a more readable course project.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP3-Markov-Text-Generator/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP3-Markov-Text-Generator/solution"
+				},
+				{
+					title: "Debugging Drill: Token Cleanup",
+					content:
+						"Require students to inspect a failing edge case before changing code. Compare raw tokens and cleaned tokens side by side so students can spot when punctuation handling quietly changes the model."
+				}
 			]
 		},
 		{
@@ -189,18 +220,37 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 					title: "Path Construction and Rollback",
 					content:
 						"Make path handling explicit: add a coordinate when the recursion advances, remove it when a branch fails, and keep the successful path intact. This becomes an important mental model for recursive data-structure work later."
+				},
+				{
+					title: "Recursion and Backtracking in 3D Mazes: Verification and Reflection",
+					content:
+						"Close DSCPP4 Recursion and Backtracking in 3D Mazes by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "DSCPP4 Recursion and Backtracking in 3D Mazes: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP4-Recursive-Maze-Pathfinder/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP4-Recursive-Maze-Pathfinder/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Recursive Maze Pathfinder",
-					"Import a 5x5x5 maze, validate the data, and recursively search for a path from the entrance to the exit without cycles. This keeps the original maze-lab spirit but removes the grading harness clutter from the student-facing version.",
-					"DSCPP4-Recursive-Maze-Pathfinder"
-				),
-				debuggingDrill(
-					"Backtracking Trace",
-					"Have students print when a coordinate is entered and when it is removed from the path so the recursion tree becomes visible instead of magical."
-				)
+				{
+					title: "Project: Recursive Maze Pathfinder",
+					content:
+						"Import a 5x5x5 maze, validate the data, and recursively search for a path from the entrance to the exit without cycles. This keeps the original maze-lab spirit but removes the grading harness clutter from the student-facing version.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP4-Recursive-Maze-Pathfinder/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP4-Recursive-Maze-Pathfinder/solution"
+				},
+				{
+					title: "Debugging Drill: Backtracking Trace",
+					content:
+						"Require students to inspect a failing edge case before changing code. Have students print when a coordinate is entered and when it is removed from the path so the recursion tree becomes visible instead of magical."
+				}
 			]
 		},
 		{
@@ -219,19 +269,38 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursive Boundaries and Base Cases",
 					content:
-						"Make students prove where the recursion stops and why the subranges shrink. Quicksort bugs often come from boundary confusion rather than from misunderstanding the big idea."
+						"Make students prove where the recursion stops and why the subranges shrink. Quicksort bugs often come from boundary confusion rather than from misunderstanding the big idea. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Quicksort and Partitioning: Verification and Reflection",
+					content:
+						"Close DSCPP5 Quicksort and Partitioning by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "DSCPP5 Quicksort and Partitioning: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP5-Quicksort-Toolkit/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP5-Quicksort-Toolkit/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Quicksort Toolkit",
-					"Build the buffer management, median-of-three selection, partition logic, and recursive quicksort flow needed to sort an integer sequence cleanly. The project mirrors the source quicksort lab but uses a cleaner starter/solution layout.",
-					"DSCPP5-Quicksort-Toolkit"
-				),
-				complexityCheckpoint(
-					"Quicksort and Partitioning",
-					"the pivot story determines whether the recursive splits stay healthy or collapse toward worst-case behavior"
-				)
+				{
+					title: "Project: Quicksort Toolkit",
+					content:
+						"Build the buffer management, median-of-three selection, partition logic, and recursive quicksort flow needed to sort an integer sequence cleanly. The project mirrors the source quicksort lab but uses a cleaner starter/solution layout.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP5-Quicksort-Toolkit/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP5-Quicksort-Toolkit/solution"
+				},
+				{
+					title: "Complexity Checkpoint: Quicksort and Partitioning",
+					content:
+						"Pause after quicksort and partitioning and record the key operation count story, the dominant data movement pattern, and one plain-language explanation of why the pivot story determines whether the recursive splits stay healthy or collapse toward worst-case behavior."
+				}
 			]
 		},
 		{
@@ -251,18 +320,37 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 					title: "Index Access and Structural Tradeoffs",
 					content:
 						"Use index-based access mainly as a teaching contrast: linked lists are good at local insertion patterns and poor at random access. Students should connect that tradeoff to later tree and array conversations."
+				},
+				{
+					title: "Templates and Linked Structures: Verification and Reflection",
+					content:
+						"Close DSCPP6 Templates and Linked Structures by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "DSCPP6 Templates and Linked Structures: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP6-Template-Linked-List/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP6-Template-Linked-List/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Template Linked List",
-					"Implement a templated singly linked list with insert, remove, clear, indexed access, and string rendering helpers. This is the structural bridge into the tree labs and keeps the pointer discipline visible.",
-					"DSCPP6-Template-Linked-List"
-				),
-				debuggingDrill(
-					"Head and Middle Removals",
-					"Trace the node links before and after removing the head, a middle value, and a missing value so students can verify pointer rewiring instead of hoping it worked."
-				)
+				{
+					title: "Project: Template Linked List",
+					content:
+						"Implement a templated singly linked list with insert, remove, clear, indexed access, and string rendering helpers. This is the structural bridge into the tree labs and keeps the pointer discipline visible.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP6-Template-Linked-List/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP6-Template-Linked-List/solution"
+				},
+				{
+					title: "Debugging Drill: Head and Middle Removals",
+					content:
+						"Require students to inspect a failing edge case before changing code. Trace the node links before and after removing the head, a middle value, and a missing value so students can verify pointer rewiring instead of hoping it worked."
+				}
 			]
 		},
 		{
@@ -282,18 +370,37 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 					title: "Removal with Predecessors",
 					content:
 						"Removal should be taught carefully because it combines structure cases with invariant preservation. Students should explicitly reason through leaf removal, one-child replacement, and two-child replacement using the in-order predecessor."
+				},
+				{
+					title: "Binary Search Trees: Verification and Reflection",
+					content:
+						"Close DSCPP7 Binary Search Trees by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "DSCPP7 Binary Search Trees: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP7-Binary-Search-Tree/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP7-Binary-Search-Tree/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Binary Search Tree",
-					"Implement BST insertion, duplicate rejection, level-order debugging output, and removal using the in-order predecessor convention. This follows the structure of the source BST lab while cleaning up the student-facing project surface.",
-					"DSCPP7-Binary-Search-Tree"
-				),
-				complexityCheckpoint(
-					"Binary Search Trees",
-					"tree shape determines whether the structure behaves like a helpful logarithmic search tool or degrades toward linked-list behavior"
-				)
+				{
+					title: "Project: Binary Search Tree",
+					content:
+						"Implement BST insertion, duplicate rejection, level-order debugging output, and removal using the in-order predecessor convention. This follows the structure of the source BST lab while cleaning up the student-facing project surface.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP7-Binary-Search-Tree/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP7-Binary-Search-Tree/solution"
+				},
+				{
+					title: "Complexity Checkpoint: Binary Search Trees",
+					content:
+						"Pause after binary search trees and record the key operation count story, the dominant data movement pattern, and one plain-language explanation of why tree shape determines whether the structure behaves like a helpful logarithmic search tool or degrades toward linked-list behavior."
+				}
 			]
 		},
 		{
@@ -307,24 +414,43 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Heights and Balance Factors",
 					content:
-						"Teach height maintenance and balance factors as structural evidence. Students should know how to compute imbalance, not just memorize the names of the rotation cases."
+						"Teach height maintenance and balance factors as structural evidence. Students should know how to compute imbalance, not just memorize the names of the rotation cases. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Single and Double Rotations",
 					content:
 						"Make left-left, right-right, left-right, and right-left cases concrete with tiny examples. Rotations should be presented as local rewiring that preserves in-order structure while reducing height problems."
+				},
+				{
+					title: "AVL Trees and Rebalancing: Verification and Reflection",
+					content:
+						"Close DSCPP8 AVL Trees and Rebalancing by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "DSCPP8 AVL Trees and Rebalancing: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP8-AVL-Tree/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP8-AVL-Tree/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: AVL Tree",
-					"Extend the BST ideas into a self-balancing AVL tree with height tracking, rotations, and removal that preserves both BST ordering and balance constraints. This is the natural sequel to the source AVL lab.",
-					"DSCPP8-AVL-Tree"
-				),
-				debuggingDrill(
-					"Rotation Cases",
-					"Build tiny insertion sequences that force each rotation family so students can verify the tree shape after every rebalance."
-				)
+				{
+					title: "Project: AVL Tree",
+					content:
+						"Extend the BST ideas into a self-balancing AVL tree with height tracking, rotations, and removal that preserves both BST ordering and balance constraints. This is the natural sequel to the source AVL lab.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP8-AVL-Tree/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP8-AVL-Tree/solution"
+				},
+				{
+					title: "Debugging Drill: Rotation Cases",
+					content:
+						"Require students to inspect a failing edge case before changing code. Build tiny insertion sequences that force each rotation family so students can verify the tree shape after every rebalance."
+				}
 			]
 		},
 		{
@@ -344,18 +470,352 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 					title: "Interpreting Results Without Overclaiming",
 					content:
 						"Students should learn to talk cautiously about benchmarks: sample size, workload shape, randomness, and implementation detail all matter. Good benchmarking language is part of engineering maturity."
+				},
+				{
+					title: "Benchmarking and Data Structure Tradeoffs: Verification and Reflection",
+					content:
+						"Close DSCPP9 Benchmarking and Data-Structure Tradeoffs by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "DSCPP9 Benchmarking and Data-Structure Tradeoffs: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP9-Performance-Benchmarks/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP9-Performance-Benchmarks/solution"
 				}
 			],
 			supplementalProjects: [
-				projectItem(
-					"Project: Performance Benchmarks",
-					"Benchmark standard containers and custom linked or tree structures on a controlled insertion workload, then explain the timing differences in terms of structure, lookup behavior, and balancing. This is the reflective capstone to the whole sequence.",
-					"DSCPP9-Performance-Benchmarks"
-				),
-				complexityCheckpoint(
-					"Benchmarking and Data-Structure Tradeoffs",
-					"students should be able to reconcile the measured results with the theoretical lookup and insertion stories from earlier modules"
-				)
+				{
+					title: "Project: Performance Benchmarks",
+					content:
+						"Benchmark standard containers and custom linked or tree structures on a controlled insertion workload, then explain the timing differences in terms of structure, lookup behavior, and balancing. This is the reflective capstone to the whole sequence.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP9-Performance-Benchmarks/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP9-Performance-Benchmarks/solution"
+				},
+				{
+					title: "Complexity Checkpoint: Benchmarking and Data-Structure Tradeoffs",
+					content:
+						"Pause after benchmarking and data-structure tradeoffs and record the key operation count story, the dominant data movement pattern, and one plain-language explanation of why students should be able to reconcile the measured results with the theoretical lookup and insertion stories from earlier modules."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 11: c algorithm lab 11",
+			curriculum: [
+				{
+					title: "c algorithm lab 11: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 11: c algorithm lab 11, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "c algorithm lab 11: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 11: c algorithm lab 11, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "c algorithm lab 11: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 11: c algorithm lab 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX01-c-algorithm-lab-11/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX01-c-algorithm-lab-11/solution"
+				},
+				{
+					title: "c algorithm lab 11: Review and Reflection",
+					content:
+						"Close Applied Studio 11: c algorithm lab 11 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "c algorithm lab 11: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 11: c algorithm lab 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX01-c-algorithm-lab-11/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX01-c-algorithm-lab-11/solution"
+				},
+				{
+					title: "c algorithm lab 11: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 11: c algorithm lab 11. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 12: c algorithm lab 12",
+			curriculum: [
+				{
+					title: "c algorithm lab 12: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 12: c algorithm lab 12, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "c algorithm lab 12: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 12: c algorithm lab 12, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "c algorithm lab 12: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 12: c algorithm lab 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX02-c-algorithm-lab-12/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX02-c-algorithm-lab-12/solution"
+				},
+				{
+					title: "c algorithm lab 12: Review and Reflection",
+					content:
+						"Close Applied Studio 12: c algorithm lab 12 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "c algorithm lab 12: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 12: c algorithm lab 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX02-c-algorithm-lab-12/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX02-c-algorithm-lab-12/solution"
+				},
+				{
+					title: "c algorithm lab 12: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 12: c algorithm lab 12. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 13: c algorithm lab 13",
+			curriculum: [
+				{
+					title: "c algorithm lab 13: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 13: c algorithm lab 13, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "c algorithm lab 13: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 13: c algorithm lab 13, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "c algorithm lab 13: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 13: c algorithm lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX03-c-algorithm-lab-13/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX03-c-algorithm-lab-13/solution"
+				},
+				{
+					title: "c algorithm lab 13: Review and Reflection",
+					content:
+						"Close Applied Studio 13: c algorithm lab 13 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "c algorithm lab 13: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 13: c algorithm lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX03-c-algorithm-lab-13/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX03-c-algorithm-lab-13/solution"
+				},
+				{
+					title: "c algorithm lab 13: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 13: c algorithm lab 13. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: c algorithm lab 14",
+			curriculum: [
+				{
+					title: "c algorithm lab 14: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: c algorithm lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "c algorithm lab 14: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: c algorithm lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "c algorithm lab 14: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: c algorithm lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX04-c-algorithm-lab-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX04-c-algorithm-lab-14/solution"
+				},
+				{
+					title: "c algorithm lab 14: Review and Reflection",
+					content:
+						"Close Applied Studio 14: c algorithm lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "c algorithm lab 14: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: c algorithm lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX04-c-algorithm-lab-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX04-c-algorithm-lab-14/solution"
+				},
+				{
+					title: "c algorithm lab 14: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: c algorithm lab 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: c algorithm lab 15",
+			curriculum: [
+				{
+					title: "c algorithm lab 15: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: c algorithm lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "c algorithm lab 15: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: c algorithm lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "c algorithm lab 15: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: c algorithm lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX05-c-algorithm-lab-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX05-c-algorithm-lab-15/solution"
+				},
+				{
+					title: "c algorithm lab 15: Review and Reflection",
+					content:
+						"Close Applied Studio 15: c algorithm lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "c algorithm lab 15: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: c algorithm lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX05-c-algorithm-lab-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX05-c-algorithm-lab-15/solution"
+				},
+				{
+					title: "c algorithm lab 15: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: c algorithm lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: c algorithm lab 16",
+			curriculum: [
+				{
+					title: "c algorithm lab 16: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: c algorithm lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "c algorithm lab 16: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: c algorithm lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "c algorithm lab 16: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: c algorithm lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX06-c-algorithm-lab-16/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX06-c-algorithm-lab-16/solution"
+				},
+				{
+					title: "c algorithm lab 16: Review and Reflection",
+					content:
+						"Close Applied Studio 16: c algorithm lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "c algorithm lab 16: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: c algorithm lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX06-c-algorithm-lab-16/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX06-c-algorithm-lab-16/solution"
+				},
+				{
+					title: "c algorithm lab 16: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: c algorithm lab 16. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: c algorithm lab 17",
+			curriculum: [
+				{
+					title: "c algorithm lab 17: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: c algorithm lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "c algorithm lab 17: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: c algorithm lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "c algorithm lab 17: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: c algorithm lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX07-c-algorithm-lab-17/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX07-c-algorithm-lab-17/solution"
+				},
+				{
+					title: "c algorithm lab 17: Review and Reflection",
+					content:
+						"Close Applied Studio 17: c algorithm lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "c algorithm lab 17: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: c algorithm lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX07-c-algorithm-lab-17/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSAX07-c-algorithm-lab-17/solution"
+				},
+				{
+					title: "c algorithm lab 17: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: c algorithm lab 17. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]

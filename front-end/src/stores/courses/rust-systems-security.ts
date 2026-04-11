@@ -1,35 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const RUST_SYSTEMS_SECURITY_REPO =
-	"https://github.com/instruction-material/Rust-Systems-Security/tree/main";
-
-function starterRepoLink(projectId: string) {
-	return `${RUST_SYSTEMS_SECURITY_REPO}/${projectId}/starter`;
-}
-
-function solutionRepoLink(projectId: string) {
-	return `${RUST_SYSTEMS_SECURITY_REPO}/${projectId}/solution`;
-}
-
-function pairedProject(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: starterRepoLink(projectId),
-		solutionLink: solutionRepoLink(projectId)
-	};
-}
-
-function auditNote(unitTitle: string, focus: string): RawCourseModuleItem {
-	return {
-		title: `Rust Audit Log: ${unitTitle}`,
-		content: `Keep a short comparative audit log for ${unitTitle.toLowerCase()} that records one C/C++ bug pattern, one Rust compiler or type-system intervention, and one note about ${focus}.`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const rustSystemsSecurityCourse: RawCourse = {
 	name: "Rust Systems Security",
@@ -51,18 +20,37 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					title: "Compiler Guidance as an Engineering Tool",
 					content:
 						"Students should see the compiler as a collaborator that narrows unsafe states early. The goal is not blind obedience to borrow-checker rules; it is understanding the engineering reason those rules exist."
+				},
+				{
+					title: "Tooling, Cargo, and Why Rust Exists: Verification and Reflection",
+					content:
+						"Close RSS0 Tooling, Cargo, and Why Rust Exists by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "RSS0 Tooling, Cargo, and Why Rust Exists: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: First Cargo Audit CLI",
-					"Set up a small Cargo-based CLI and use it to compare a clean Rust workspace with a fragile manual C/C++ build loop.",
-					"RSS1-Ownership-and-Moves"
-				),
-				auditNote(
-					"Tooling, Cargo, and Why Rust Exists",
-					"why Rust's workflow tries to catch correctness problems before execution"
-				)
+				{
+					title: "Project: First Cargo Audit CLI",
+					content:
+						"Set up a small Cargo-based CLI and use it to compare a clean Rust workspace with a fragile manual C/C++ build loop. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
+				},
+				{
+					title: "Rust Audit Log: Tooling, Cargo, and Why Rust Exists",
+					content:
+						"Keep a short comparative audit log for tooling, cargo, and why rust exists that records one C/C++ bug pattern, one Rust compiler or type-system intervention, and one note about why Rust's workflow tries to catch correctness problems before execution."
+				}
 			]
 		},
 		{
@@ -81,15 +69,38 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Drop Timing and Scope",
 					content:
-						"Explain how values are cleaned up when they leave scope and why that makes resource lifetime more explicit than in manual-memory designs."
+						"Explain how values are cleaned up when they leave scope and why that makes resource lifetime more explicit than in manual-memory designs. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Ownership, Moves, and Memory Responsibility: Verification and Reflection",
+					content:
+						"Close RSS1 Ownership, Moves, and Memory Responsibility by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "RSS1 Ownership, Moves, and Memory Responsibility: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Ownership and Move Tracer",
-					"Build a small CLI that moves strings, vectors, and structs through helper functions so students can see when ownership transfers and when values must be cloned.",
-					"RSS1-Ownership-and-Moves"
-				)
+				{
+					title: "Project: Ownership and Move Tracer",
+					content:
+						"Build a small CLI that moves strings, vectors, and structs through helper functions so students can see when ownership transfers and when values must be cloned. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
+				},
+				{
+					title: "Ownership, Moves, and Memory Responsibility: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS1 Ownership, Moves, and Memory Responsibility on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -103,20 +114,43 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Lifetime Reasoning without Mysticism",
 					content:
-						"Introduce lifetime thinking through scope relationships first and explicit annotations second. The goal is practical reasoning about which reference can safely outlive which value."
+						"Introduce lifetime thinking through scope relationships first and explicit annotations second. The goal is practical reasoning about which reference can safely outlive which value. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Why Borrow Checking Matters for Security",
 					content:
-						"Make the security angle explicit: a compiler that rejects dangling references or conflicting mutable access is removing a meaningful class of memory safety hazards before runtime."
+						"Make the security angle explicit: a compiler that rejects dangling references or conflicting mutable access is removing a meaningful class of memory safety hazards before runtime. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Borrowing, Aliasing, and Lifetimes: Verification and Reflection",
+					content:
+						"Close RSS2 Borrowing, Aliasing, and Lifetimes by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "RSS2 Borrowing, Aliasing, and Lifetimes: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Borrowing and Aliasing Lab",
-					"Refactor a small parser or buffer-manipulation exercise until it satisfies Rust's borrowing model without cloning away the real ownership story.",
-					"RSS2-Borrowing-and-Aliasing"
-				)
+				{
+					title: "Project: Borrowing and Aliasing Lab",
+					content:
+						"Refactor a small parser or buffer-manipulation exercise until it satisfies Rust's borrowing model without cloning away the real ownership story. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/solution"
+				},
+				{
+					title: "Borrowing, Aliasing, and Lifetimes: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS2 Borrowing, Aliasing, and Lifetimes on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -130,20 +164,43 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Result, Match, and the Question-Mark Operator",
 					content:
-						"Teach `Result` as a typed alternative to error-code conventions. Pattern matching and `?` should feel like a disciplined error-propagation style, not just new syntax."
+						"Teach `Result` as a typed alternative to error-code conventions. Pattern matching and `?` should feel like a disciplined error-propagation style, not just new syntax. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Error Handling and Security Posture",
 					content:
-						"Connect Rust's typed failure paths to safer parsing and validation. A system is easier to secure when failure states are explicit and hard to ignore."
+						"Connect Rust's typed failure paths to safer parsing and validation. A system is easier to secure when failure states are explicit and hard to ignore. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Option, Result, and Typed Error Paths: Verification and Reflection",
+					content:
+						"Close RSS3 Option, Result, and Typed Error Paths by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "RSS3 Option, Result, and Typed Error Paths: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Option and Result Audit Tool",
-					"Build a small input-validation or config-parsing tool that uses `Option`, `Result`, and `?` instead of ad hoc null checks or integer status flags.",
-					"RSS3-Option-and-Result"
-				)
+				{
+					title: "Project: Option and Result Audit Tool",
+					content:
+						"Build a small input-validation or config-parsing tool that uses `Option`, `Result`, and `?` instead of ad hoc null checks or integer status flags. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/solution"
+				},
+				{
+					title: "Option, Result, and Typed Error Paths: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS3 Option, Result, and Typed Error Paths on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -162,15 +219,38 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Parser-Facing Safety",
 					content:
-						"Use small parser examples so bounds safety feels like a real systems concern rather than a toy rule."
+						"Use small parser examples so bounds safety feels like a real systems concern rather than a toy rule. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Strings, Slices, Collections, and Bounds Safety: Verification and Reflection",
+					content:
+						"Close RSS4 Strings, Slices, Collections, and Bounds Safety by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "RSS4 Strings, Slices, Collections, and Bounds Safety: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Slice and Bounds Workbench",
-					"Implement a byte-buffer or log-slice utility that compares safe slicing patterns with the kinds of off-by-one and unchecked indexing bugs students already know from low-level work.",
-					"RSS4-Slices-Strings-and-Bounds"
-				)
+				{
+					title: "Project: Slice and Bounds Workbench",
+					content:
+						"Implement a byte-buffer or log-slice utility that compares safe slicing patterns with the kinds of off-by-one and unchecked indexing bugs students already know from low-level work. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/solution"
+				},
+				{
+					title: "Strings, Slices, Collections, and Bounds Safety: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS4 Strings, Slices, Collections, and Bounds Safety on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -184,20 +264,43 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Enums and Impossible States",
 					content:
-						"Compare tagged enums and pattern matching to ad hoc integer codes, booleans, or loosely coordinated fields. Rust shines when a type can make impossible states unrepresentable."
+						"Compare tagged enums and pattern matching to ad hoc integer codes, booleans, or loosely coordinated fields. Rust shines when a type can make impossible states unrepresentable. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Pattern Matching as Validation",
 					content:
-						"Teach `match` not just as syntax, but as a way to force complete reasoning across every state the program can inhabit."
+						"Teach `match` not just as syntax, but as a way to force complete reasoning across every state the program can inhabit. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Structs, Enums, and Safer State Models: Verification and Reflection",
+					content:
+						"Close RSS5 Structs, Enums, and Safer State Models by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "RSS5 Structs, Enums, and Safer State Models: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: State Machine Refactor",
-					"Refactor a fragile status-code workflow into structs and enums so the compiler helps enforce legal transitions.",
-					"RSS5-Structs-Enums-and-State-Machines"
-				)
+				{
+					title: "Project: State Machine Refactor",
+					content:
+						"Refactor a fragile status-code workflow into structs and enums so the compiler helps enforce legal transitions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/solution"
+				},
+				{
+					title: "Structs, Enums, and Safer State Models: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS5 Structs, Enums, and Safer State Models on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -211,20 +314,43 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Iterator Safety vs. Invalidation Risk",
 					content:
-						"Use iterators and collection transforms to explain why Rust makes it harder to mutate collections in unsafe ways while traversing them."
+						"Use iterators and collection transforms to explain why Rust makes it harder to mutate collections in unsafe ways while traversing them. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Secure API Boundaries",
 					content:
-						"Good trait and iterator design can reduce misuse by forcing callers into safer shapes. This matters for security-sensitive code because APIs are part of the attack surface."
+						"Good trait and iterator design can reduce misuse by forcing callers into safer shapes. This matters for security-sensitive code because APIs are part of the attack surface. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Traits, Iterators, and API Contracts: Verification and Reflection",
+					content:
+						"Close RSS6 Traits, Iterators, and API Contracts by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "RSS6 Traits, Iterators, and API Contracts: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Trait-Based Validation Pipeline",
-					"Build a multi-step validation pipeline with traits and iterator-based transforms so the student can compare clean contracts with ad hoc callback spaghetti.",
-					"RSS6-Traits-and-API-Contracts"
-				)
+				{
+					title: "Project: Trait-Based Validation Pipeline",
+					content:
+						"Build a multi-step validation pipeline with traits and iterator-based transforms so the student can compare clean contracts with ad hoc callback spaghetti. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/solution"
+				},
+				{
+					title: "Traits, Iterators, and API Contracts: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS6 Traits, Iterators, and API Contracts on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -233,25 +359,48 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "File I/O and Parser Discipline",
 					content:
-						"Teach parsing as a systems task where small unchecked assumptions cause real bugs. Use Rust's file APIs and typed error model to build safer parse-and-validate workflows."
+						"Teach parsing as a systems task where small unchecked assumptions cause real bugs. Use Rust's file APIs and typed error model to build safer parse-and-validate workflows. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Input Validation and Trust Boundaries",
 					content:
-						"Make untrusted input a first-class theme. Students should identify where the CLI receives external data and what validation or normalization happens before it is trusted."
+						"Make untrusted input a first-class theme. Students should identify where the CLI receives external data and what validation or normalization happens before it is trusted. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Security Logging and Failure Visibility",
 					content:
-						"Show how structured errors and explicit validation failures make later debugging and auditing easier."
+						"Show how structured errors and explicit validation failures make later debugging and auditing easier. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Files, Parsers, and Secure CLI Design: Verification and Reflection",
+					content:
+						"Close RSS7 Files, Parsers, and Secure CLI Design by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+				},
+				{
+					title: "RSS7 Files, Parsers, and Secure CLI Design: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Secure CLI Audit Tool",
-					"Build a small CLI that parses a log or config file, validates each record, and reports trustworthy failures instead of crashing or silently accepting malformed input.",
-					"RSS11-Secure-CLI-Audit-Tool"
-				)
+				{
+					title: "Project: Secure CLI Audit Tool",
+					content:
+						"Build a small CLI that parses a log or config file, validates each record, and reports trustworthy failures instead of crashing or silently accepting malformed input. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/solution"
+				},
+				{
+					title: "Files, Parsers, and Secure CLI Design: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS7 Files, Parsers, and Secure CLI Design on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -265,20 +414,43 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Data Races vs. Logic Races",
 					content:
-						"Be honest about the boundary: Rust removes many memory-safety race problems, but it does not eliminate higher-level logic races or bad protocol design."
+						"Be honest about the boundary: Rust removes many memory-safety race problems, but it does not eliminate higher-level logic races or bad protocol design. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Choosing Channels or Shared Structures",
 					content:
-						"Compare message-passing and shared-state approaches so students can reason about design tradeoffs instead of applying concurrency tools blindly."
+						"Compare message-passing and shared-state approaches so students can reason about design tradeoffs instead of applying concurrency tools blindly. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Concurrency and Race Reduction: Verification and Reflection",
+					content:
+						"Close RSS8 Concurrency and Race Reduction by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "RSS8 Concurrency and Race Reduction: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Threads and Channels Monitor",
-					"Build a small concurrent monitor that compares message passing with shared mutable state and highlights how Rust narrows unsafe race patterns.",
-					"RSS9-Concurrency-with-Threads-and-Channels"
-				)
+				{
+					title: "Project: Threads and Channels Monitor",
+					content:
+						"Build a small concurrent monitor that compares message passing with shared mutable state and highlights how Rust narrows unsafe race patterns. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/solution"
+				},
+				{
+					title: "Concurrency and Race Reduction: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS8 Concurrency and Race Reduction on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -292,20 +464,43 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "FFI as a Real-World Boundary",
 					content:
-						"Use FFI examples to show where Rust still depends on external correctness and where unsafety can re-enter the system through other languages or libraries."
+						"Use FFI examples to show where Rust still depends on external correctness and where unsafety can re-enter the system through other languages or libraries. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Auditing Unsafe Blocks",
 					content:
-						"Require comments and reasoning around every unsafe block so students treat each one as an audit target."
+						"Require comments and reasoning around every unsafe block so students treat each one as an audit target. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unsafe, FFI, and Trusted Boundaries: Verification and Reflection",
+					content:
+						"Close RSS9 Unsafe, FFI, and Trusted Boundaries by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "RSS9 Unsafe, FFI, and Trusted Boundaries: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Unsafe and FFI Boundary Review",
-					"Wrap a tiny unsafe or FFI-facing boundary with documented invariants so the student practices narrowing and auditing trust assumptions.",
-					"RSS10-Unsafe-and-FFI-Boundaries"
-				)
+				{
+					title: "Project: Unsafe and FFI Boundary Review",
+					content:
+						"Wrap a tiny unsafe or FFI-facing boundary with documented invariants so the student practices narrowing and auditing trust assumptions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/solution"
+				},
+				{
+					title: "Unsafe, FFI, and Trusted Boundaries: Fluency Drill",
+					content:
+						"Repeat the core ideas from RSS9 Unsafe, FFI, and Trusted Boundaries on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -325,18 +520,307 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					title: "Prepare for Systems, Security, or Compiler Follow-On Work",
 					content:
 						"Close by positioning the course as a launch point for deeper systems, networking, low-level security, or language tooling work where the student now has a sharper mental model of safe systems design."
+				},
+				{
+					title: "Capstone: Harden a Legacy Tool: Verification and Reflection",
+					content:
+						"Close RSS10 Capstone: Harden a Legacy Tool by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+				},
+				{
+					title: "RSS10 Capstone: Harden a Legacy Tool: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/solution"
 				}
 			],
 			supplementalProjects: [
-				pairedProject(
-					"Project: Harden a Legacy Tool",
-					"Complete a larger audit-and-port capstone where the student documents the old bug classes, the Rust redesign, the remaining risks, and the final testing evidence.",
-					"RSS12-Capstone-Harden-a-Legacy-Tool"
-				),
-				auditNote(
-					"Capstone: Harden a Legacy Tool",
-					"which bug classes Rust removed, and which still required design or validation discipline"
-				)
+				{
+					title: "Project: Harden a Legacy Tool",
+					content:
+						"Complete a larger audit-and-port capstone where the student documents the old bug classes, the Rust redesign, the remaining risks, and the final testing evidence. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/solution"
+				},
+				{
+					title: "Rust Audit Log: Capstone: Harden a Legacy Tool",
+					content:
+						"Keep a short comparative audit log for capstone: harden a legacy tool that records one C/C++ bug pattern, one Rust compiler or type-system intervention, and one note about which bug classes Rust removed, and which still required design or validation discipline."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 12: offensive security lab 10",
+			curriculum: [
+				{
+					title: "offensive security lab 10: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 12: offensive security lab 10, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "offensive security lab 10: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 12: offensive security lab 10, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "offensive security lab 10: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 12: offensive security lab 10. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X01-offensive-security-lab-10/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X01-offensive-security-lab-10/solution"
+				},
+				{
+					title: "offensive security lab 10: Review and Reflection",
+					content:
+						"Close Applied Studio 12: offensive security lab 10 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "offensive security lab 10: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 12: offensive security lab 10 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X01-offensive-security-lab-10/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X01-offensive-security-lab-10/solution"
+				},
+				{
+					title: "offensive security lab 10: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 12: offensive security lab 10. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 13: offensive security lab 11",
+			curriculum: [
+				{
+					title: "offensive security lab 11: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 13: offensive security lab 11, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "offensive security lab 11: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 13: offensive security lab 11, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "offensive security lab 11: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 13: offensive security lab 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X02-offensive-security-lab-11/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X02-offensive-security-lab-11/solution"
+				},
+				{
+					title: "offensive security lab 11: Review and Reflection",
+					content:
+						"Close Applied Studio 13: offensive security lab 11 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "offensive security lab 11: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 13: offensive security lab 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X02-offensive-security-lab-11/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X02-offensive-security-lab-11/solution"
+				},
+				{
+					title: "offensive security lab 11: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 13: offensive security lab 11. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: offensive security lab 12",
+			curriculum: [
+				{
+					title: "offensive security lab 12: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: offensive security lab 12, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "offensive security lab 12: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: offensive security lab 12, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "offensive security lab 12: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: offensive security lab 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X03-offensive-security-lab-12/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X03-offensive-security-lab-12/solution"
+				},
+				{
+					title: "offensive security lab 12: Review and Reflection",
+					content:
+						"Close Applied Studio 14: offensive security lab 12 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "offensive security lab 12: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: offensive security lab 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X03-offensive-security-lab-12/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X03-offensive-security-lab-12/solution"
+				},
+				{
+					title: "offensive security lab 12: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: offensive security lab 12. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: offensive security lab 13",
+			curriculum: [
+				{
+					title: "offensive security lab 13: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: offensive security lab 13, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "offensive security lab 13: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: offensive security lab 13, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "offensive security lab 13: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: offensive security lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X04-offensive-security-lab-13/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X04-offensive-security-lab-13/solution"
+				},
+				{
+					title: "offensive security lab 13: Review and Reflection",
+					content:
+						"Close Applied Studio 15: offensive security lab 13 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "offensive security lab 13: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: offensive security lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X04-offensive-security-lab-13/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X04-offensive-security-lab-13/solution"
+				},
+				{
+					title: "offensive security lab 13: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: offensive security lab 13. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: offensive security lab 14",
+			curriculum: [
+				{
+					title: "offensive security lab 14: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: offensive security lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "offensive security lab 14: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: offensive security lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "offensive security lab 14: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: offensive security lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X05-offensive-security-lab-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X05-offensive-security-lab-14/solution"
+				},
+				{
+					title: "offensive security lab 14: Review and Reflection",
+					content:
+						"Close Applied Studio 16: offensive security lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "offensive security lab 14: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: offensive security lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X05-offensive-security-lab-14/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X05-offensive-security-lab-14/solution"
+				},
+				{
+					title: "offensive security lab 14: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: offensive security lab 14. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: offensive security lab 15",
+			curriculum: [
+				{
+					title: "offensive security lab 15: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: offensive security lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "offensive security lab 15: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: offensive security lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "offensive security lab 15: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: offensive security lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X06-offensive-security-lab-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X06-offensive-security-lab-15/solution"
+				},
+				{
+					title: "offensive security lab 15: Review and Reflection",
+					content:
+						"Close Applied Studio 17: offensive security lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "offensive security lab 15: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: offensive security lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X06-offensive-security-lab-15/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X06-offensive-security-lab-15/solution"
+				},
+				{
+					title: "offensive security lab 15: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: offensive security lab 15. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]

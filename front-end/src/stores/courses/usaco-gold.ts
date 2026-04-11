@@ -1,30 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const USACO_GOLD_REPO =
-	"https://github.com/instruction-material/USACO-Gold/tree/main";
-
-function repoLink(projectId: string) {
-	return `${USACO_GOLD_REPO}/${projectId}`;
-}
-
-function problemItem(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: repoLink(projectId)
-	};
-}
-
-function contestLog(unitTitle: string, focus: string): RawCourseModuleItem {
-	return {
-		title: `Gold Log: ${unitTitle}`,
-		content: `Keep a compact Gold-level log for ${unitTitle.toLowerCase()} that records the core recurrence or invariant, one discarded approach, and one note about ${focus}. Gold progress depends on being able to explain the structure of a solution, not just implement it.`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const usacoGoldCourse: RawCourse = {
 	name: "USACO Gold",
@@ -50,14 +24,29 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Read Constraints as Design Signals",
 					content:
-						"Teach students to use input limits to narrow the candidate solution family quickly. At Gold level, the constraints often tell you more than the story paragraph does."
+						"Teach students to use input limits to narrow the candidate solution family quickly. At Gold level, the constraints often tell you more than the story paragraph does. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "USG0 Setup and Gold Mindset: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-MooTube"
 				}
 			],
 			supplementalProjects: [
-				contestLog(
-					"Setup and Gold Mindset",
-					"which constraint or invariant most clearly signals the right solution family"
-				)
+				{
+					title: "Gold Log: Setup and Gold Mindset",
+					content:
+						"Keep a compact Gold-level log for setup and gold mindset that records the core recurrence or invariant, one discarded approach, and one note about which constraint or invariant most clearly signals the right solution family. Gold progress depends on being able to explain the structure of a solution, not just implement it.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-MooTube"
+				},
+				{
+					title: "USG0 Setup and Gold Mindset: Fluency Drill",
+					content:
+						"Repeat the core ideas from USG0 Setup and Gold Mindset on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -76,35 +65,50 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Space and Time Tradeoffs",
 					content:
-						"Teach when a DP can be compressed, when it cannot, and how to reason about whether a recurrence is actually feasible under the given limits."
+						"Teach when a DP can be compressed, when it cannot, and how to reason about whether a recurrence is actually feasible under the given limits. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Recognize DP in the Wild",
 					content:
-						"Have students compare several problem statements that look unrelated on the surface but collapse into the same state-transition mindset once the structure is exposed."
+						"Have students compare several problem statements that look unrelated on the surface but collapse into the same state-transition mindset once the structure is exposed. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 1: Dynamic Programming Foundations: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Dynamic Programming with Fibonacci",
-					"Use a simple recurrence to make the DP mindset explicit before harder state spaces are introduced.",
-					"UG1-Dynamic-Programming-with-Fibonacci"
-				),
-				problemItem(
-					"Problem: 0-1 Knapsack",
-					"Use a classic optimization recurrence to practice state design, choices, and table updates.",
-					"UG2-0-1-Knapsack"
-				),
-				problemItem(
-					"Problem: Teamwork",
-					"Use grouped decisions and transition design to move beyond the most basic DP templates.",
-					"UG3-Teamwork"
-				),
-				problemItem(
-					"Problem: Fruit Feast",
-					"Use a state-space DP problem to test whether students can manage reachable states and transitions without losing clarity.",
-					"UG40-Fruit-Feast"
-				)
+				{
+					title: "Problem: Dynamic Programming with Fibonacci",
+					content:
+						"Use a simple recurrence to make the DP mindset explicit before harder state spaces are introduced. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci"
+				},
+				{
+					title: "Problem: 0-1 Knapsack",
+					content:
+						"Use a classic optimization recurrence to practice state design, choices, and table updates. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-0-1-Knapsack"
+				},
+				{
+					title: "Problem: Teamwork",
+					content:
+						"Use grouped decisions and transition design to move beyond the most basic DP templates. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG3-Teamwork"
+				},
+				{
+					title: "Problem: Fruit Feast",
+					content:
+						"Use a state-space DP problem to test whether students can manage reachable states and transitions without losing clarity. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG40-Fruit-Feast"
+				}
 			]
 		},
 		{
@@ -118,7 +122,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Dijkstra's Algorithm and Relaxation",
 					content:
-						"Teach Dijkstra as repeated relaxation over the currently cheapest frontier. Students should understand the role of the priority queue and why nonnegative weights matter."
+						"Teach Dijkstra as repeated relaxation over the currently cheapest frontier. Students should understand the role of the priority queue and why nonnegative weights matter. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Use Distance Information Strategically",
@@ -128,29 +132,43 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Be Explicit about Complexity",
 					content:
-						"Students should practice saying how many nodes, edges, and priority-queue operations the approach entails. Gold graph work demands a clearer sense of cost."
+						"Students should practice saying how many nodes, edges, and priority-queue operations the approach entails. Gold graph work demands a clearer sense of cost. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 2: Shortest Paths and Weighted Graphs: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Dijkstra's Algorithm",
-					"Use a direct shortest-path implementation to make priority-queue relaxation fully concrete.",
-					"UG9-Dijkstras-Algorithm"
-				),
-				problemItem(
-					"Problem: Shortcut",
-					"Use shortest-path information inside a second optimization question so students see distance arrays as tools, not endpoints.",
-					"UG11-Shortcut"
-				),
-				problemItem(
-					"Problem: Fine Dining",
-					"Use a more layered graph task to test whether students can adapt shortest-path ideas to a richer condition set.",
-					"UG30-Fine-Dining"
-				),
-				contestLog(
-					"Shortest Paths and Weighted Graphs",
-					"what the distances actually mean in the original story of the problem"
-				)
+				{
+					title: "Problem: Dijkstra's Algorithm",
+					content:
+						"Use a direct shortest-path implementation to make priority-queue relaxation fully concrete. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm"
+				},
+				{
+					title: "Problem: Shortcut",
+					content:
+						"Use shortest-path information inside a second optimization question so students see distance arrays as tools, not endpoints. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG11-Shortcut"
+				},
+				{
+					title: "Problem: Fine Dining",
+					content:
+						"Use a more layered graph task to test whether students can adapt shortest-path ideas to a richer condition set. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG30-Fine-Dining"
+				},
+				{
+					title: "Gold Log: Shortest Paths and Weighted Graphs",
+					content:
+						"Keep a compact Gold-level log for shortest paths and weighted graphs that records the core recurrence or invariant, one discarded approach, and one note about what the distances actually mean in the original story of the problem. Gold progress depends on being able to explain the structure of a solution, not just implement it."
+				}
 			]
 		},
 		{
@@ -159,40 +177,53 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Minimum Spanning Tree Intuition",
 					content:
-						"Teach MSTs as the cheapest way to connect everything under the given edge structure. Students should understand the objective clearly before they memorize Kruskal or Prim."
+						"Teach MSTs as the cheapest way to connect everything under the given edge structure. Students should understand the objective clearly before they memorize Kruskal or Prim. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Disjoint Set Union as a Connectivity Tool",
 					content:
-						"Use DSU to support fast connectivity checks while edges are considered in sorted order. Students should understand the role of union-find in the larger algorithmic plan."
+						"Use DSU to support fast connectivity checks while edges are considered in sorted order. Students should understand the role of union-find in the larger algorithmic plan. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Edge Ordering and Greedy Validity",
 					content:
-						"Require students to explain why the chosen next edge is safe. This is an important place to practice small proof sketches for greedy algorithms."
+						"Require students to explain why the chosen next edge is safe. This is an important place to practice small proof sketches for greedy algorithms. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Connectivity Problems beyond the Template",
 					content:
-						"Compare direct MST tasks with problems that use connectivity ideas in disguised forms. Gold students should build a wider pattern library than a single named algorithm."
+						"Compare direct MST tasks with problems that use connectivity ideas in disguised forms. Gold students should build a wider pattern library than a single named algorithm. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 3: MSTs, DSU, and Connectivity Optimization: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: MST",
-					"Use a direct MST implementation to practice sorted edges, cycle avoidance, and connection cost reasoning.",
-					"UG14-MST"
-				),
-				problemItem(
-					"Problem: Disjoint Sets and Kruskal's",
-					"Use a dedicated DSU and Kruskal exercise to make the structure and proof idea explicit.",
-					"UG19-Disjoint-Sets-and-Kruskals"
-				),
-				problemItem(
-					"Problem: Moocast",
-					"Use a connectivity optimization problem that turns graph reachability and distance structure into a stronger Gold-style challenge.",
-					"UG17-Moocast"
-				)
+				{
+					title: "Problem: MST",
+					content:
+						"Use a direct MST implementation to practice sorted edges, cycle avoidance, and connection cost reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST"
+				},
+				{
+					title: "Problem: Disjoint Sets and Kruskal's",
+					content:
+						"Use a dedicated DSU and Kruskal exercise to make the structure and proof idea explicit. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG19-Disjoint-Sets-and-Kruskals"
+				},
+				{
+					title: "Problem: Moocast",
+					content:
+						"Use a connectivity optimization problem that turns graph reachability and distance structure into a stronger Gold-style challenge. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG17-Moocast"
+				}
 			]
 		},
 		{
@@ -206,39 +237,53 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Fenwick Tree Mechanics",
 					content:
-						"Make the Fenwick tree implementation meaningful by explaining what each node aggregates and why the lowbit jumps work. Students should not treat the structure as a magic snippet."
+						"Make the Fenwick tree implementation meaningful by explaining what each node aggregates and why the lowbit jumps work. Students should not treat the structure as a magic snippet. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Ordering Problems with Hidden Statistics",
 					content:
-						"Use sorted order, inversion-like thinking, and relative positions to solve problems that are really about where elements sit with respect to one another."
+						"Use sorted order, inversion-like thinking, and relative positions to solve problems that are really about where elements sit with respect to one another. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Choose the Smallest Structure that Works",
 					content:
-						"Compare direct arrays, prefix sums, Fenwick trees, and sorting passes so students learn when a heavier data structure is necessary and when it is just extra complexity."
+						"Compare direct arrays, prefix sums, Fenwick trees, and sorting passes so students learn when a heavier data structure is necessary and when it is just extra complexity. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 4: Fenwick Trees, Ordering, and Range Structure: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Binary Indexed Tree / Fenwick Tree",
-					"Use a direct Fenwick implementation lab to connect the data structure to concrete prefix-query behavior.",
-					"UG22-Binary-Indexed-Tree-Fenwick-Tree"
-				),
-				problemItem(
-					"Problem: Balanced Photo",
-					"Use relative ordering and imbalance counts to practice range-style reasoning around positions.",
-					"UG23-Balanced-Photo"
-				),
-				problemItem(
-					"Problem: Out of Sorts",
-					"Use ordering and movement analysis to show how a simple-looking sorting story hides richer structure.",
-					"UG26-Out-of-Sorts"
-				),
-				contestLog(
-					"Fenwick Trees, Ordering, and Range Structure",
-					"which query or update pattern justified the heavier data structure"
-				)
+				{
+					title: "Problem: Binary Indexed Tree / Fenwick Tree",
+					content:
+						"Use a direct Fenwick implementation lab to connect the data structure to concrete prefix-query behavior. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree"
+				},
+				{
+					title: "Problem: Balanced Photo",
+					content:
+						"Use relative ordering and imbalance counts to practice range-style reasoning around positions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG23-Balanced-Photo"
+				},
+				{
+					title: "Problem: Out of Sorts",
+					content:
+						"Use ordering and movement analysis to show how a simple-looking sorting story hides richer structure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG26-Out-of-Sorts"
+				},
+				{
+					title: "Gold Log: Fenwick Trees, Ordering, and Range Structure",
+					content:
+						"Keep a compact Gold-level log for fenwick trees, ordering, and range structure that records the core recurrence or invariant, one discarded approach, and one note about which query or update pattern justified the heavier data structure. Gold progress depends on being able to explain the structure of a solution, not just implement it."
+				}
 			]
 		},
 		{
@@ -252,35 +297,48 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Combine Structure with Optimization",
 					content:
-						"Use problems where the graph is only part of the story and a second objective or geometric constraint changes how the solution must be built."
+						"Use problems where the graph is only part of the story and a second objective or geometric constraint changes how the solution must be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Keep Spatial Reasoning Precise",
 					content:
-						"Whether the task involves geometry, movement, or mirrored structures, students should keep diagrams and coordinate reasoning explicit instead of relying on intuition alone."
+						"Whether the task involves geometry, movement, or mirrored structures, students should keep diagrams and coordinate reasoning explicit instead of relying on intuition alone. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Know When the Model Is the Real Challenge",
 					content:
-						"Make it clear that some Gold problems are hard not because the algorithm is exotic, but because finding the right representation takes real thought."
+						"Make it clear that some Gold problems are hard not because the algorithm is exotic, but because finding the right representation takes real thought. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 5: Advanced Graph Modeling and Geometry-Flavored Problems: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Lasers and Mirrors",
-					"Use a spatially flavored graph problem to practice turning geometry into a graph you can actually search.",
-					"UG33-Lasers-and-Mirrors"
-				),
-				problemItem(
-					"Problem: Lights Out",
-					"Use geometric structure and path reasoning to test whether students can keep multiple interpretations of distance and position aligned.",
-					"UG35-Lights-Out"
-				),
-				problemItem(
-					"Problem: Circular Barn Revisited",
-					"Use a more involved structural problem to push representation and optimization thinking together.",
-					"UG36-Circular-Barn-Revisited"
-				)
+				{
+					title: "Problem: Lasers and Mirrors",
+					content:
+						"Use a spatially flavored graph problem to practice turning geometry into a graph you can actually search. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors"
+				},
+				{
+					title: "Problem: Lights Out",
+					content:
+						"Use geometric structure and path reasoning to test whether students can keep multiple interpretations of distance and position aligned. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG35-Lights-Out"
+				},
+				{
+					title: "Problem: Circular Barn Revisited",
+					content:
+						"Use a more involved structural problem to push representation and optimization thinking together. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG36-Circular-Barn-Revisited"
+				}
 			]
 		},
 		{
@@ -289,45 +347,60 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "DP beyond the First Table",
 					content:
-						"Show students that Gold DP may involve richer transitions, combinatorial counts, or less obvious state compressions. The key is still the same: define the right subproblem first."
+						"Show students that Gold DP may involve richer transitions, combinatorial counts, or less obvious state compressions. The key is still the same: define the right subproblem first. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Count Carefully, Mod Carefully",
 					content:
-						"When combinatorics enters the picture, students should be precise about what is being counted, what constraints remain, and how modular arithmetic interacts with the recurrence."
+						"When combinatorics enters the picture, students should be precise about what is being counted, what constraints remain, and how modular arithmetic interacts with the recurrence. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Blend Math Insight with Algorithm Design",
 					content:
-						"Use these problems to show that mathematical structure and algorithmic structure often reinforce each other. A clean count or recurrence can completely change what looks feasible."
+						"Use these problems to show that mathematical structure and algorithmic structure often reinforce each other. A clean count or recurrence can completely change what looks feasible. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Explain the Transition in Words",
 					content:
-						"Students should be able to explain every DP transition or combinatorial term in a sentence. If they cannot, the implementation is probably ahead of the understanding."
+						"Students should be able to explain every DP transition or combinatorial term in a sentence. If they cannot, the implementation is probably ahead of the understanding. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 6: Advanced DP and Combinatorics: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Cow Poetry",
-					"Use combinatorial counting and dynamic programming together in a problem where explanation matters as much as implementation.",
-					"UG28-Cow-Poetry"
-				),
-				problemItem(
-					"Problem: Stamp Painting",
-					"Use a counting DP problem to practice recurrence design under modular arithmetic constraints.",
-					"UG32-Stamp-Painting"
-				),
-				problemItem(
-					"Problem: Time is Mooney",
-					"Use a richer optimization problem that blends repeated transitions and scoring over time.",
-					"UG-Time-is-Mooney"
-				),
-				problemItem(
-					"Problem: Milk Visits",
-					"Use a stronger capstone-style problem to test whether multiple Gold ideas can be held together in one coherent solution.",
-					"UG-Milk-Visits"
-				)
+				{
+					title: "Problem: Cow Poetry",
+					content:
+						"Use combinatorial counting and dynamic programming together in a problem where explanation matters as much as implementation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry"
+				},
+				{
+					title: "Problem: Stamp Painting",
+					content:
+						"Use a counting DP problem to practice recurrence design under modular arithmetic constraints. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG32-Stamp-Painting"
+				},
+				{
+					title: "Problem: Time is Mooney",
+					content:
+						"Use a richer optimization problem that blends repeated transitions and scoring over time. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Time-is-Mooney"
+				},
+				{
+					title: "Problem: Milk Visits",
+					content:
+						"Use a stronger capstone-style problem to test whether multiple Gold ideas can be held together in one coherent solution. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-Milk-Visits"
+				}
 			]
 		},
 		{
@@ -346,29 +419,41 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Identify Personal Strengths and Gaps",
 					content:
-						"Use the capstone sets to diagnose which Gold families are strongest and which still need targeted work. That diagnosis matters more than the number of problems completed."
+						"Use the capstone sets to diagnose which Gold families are strongest and which still need targeted work. That diagnosis matters more than the number of problems completed. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Prepare for Independent Gold and Beyond",
 					content:
 						"Close by positioning the student for continued Gold training, open contest prep, or deeper systems and algorithms coursework. The course should leave them with a stronger internal map of advanced problem types."
+				},
+				{
+					title: "Unit 7: Gold Capstone Sets: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Radio Contact",
-					"Use a capstone-style state problem that blends movement and optimization in a way that rewards careful representation.",
-					"UG34-Radio-Contact"
-				),
-				problemItem(
-					"Problem: Cowpatibility",
-					"Use a richer counting or combinatorial problem as one more test of explanation and implementation discipline.",
-					"UG29-Cowpatibility"
-				),
-				contestLog(
-					"Gold Capstone Sets",
-					"which algorithm family the student can now recognize quickly and which still takes too long to identify"
-				)
+				{
+					title: "Problem: Radio Contact",
+					content:
+						"Use a capstone-style state problem that blends movement and optimization in a way that rewards careful representation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact"
+				},
+				{
+					title: "Problem: Cowpatibility",
+					content:
+						"Use a richer counting or combinatorial problem as one more test of explanation and implementation discipline. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG29-Cowpatibility"
+				},
+				{
+					title: "Gold Log: Gold Capstone Sets",
+					content:
+						"Keep a compact Gold-level log for gold capstone sets that records the core recurrence or invariant, one discarded approach, and one note about which algorithm family the student can now recognize quickly and which still takes too long to identify. Gold progress depends on being able to explain the structure of a solution, not just implement it."
+				}
 			]
 		},
 		{
@@ -393,36 +478,379 @@ export const usacoGoldCourse: RawCourse = {
 					title: "Late Gold Counting and Structure Bank",
 					content:
 						"Additional late-Gold folders include `UG25 Sleepy Cow Sorting`, `UG27 Snow Boots`, `UG28 Cow Poetry`, `UG29 Cowpatibility`, `UG32 Stamp Painting`, `UG36 Circular Barn Revisited`, `UG37 Circular Barn`, `UG38 Bovine Genomics`, `UG-Milk-Visits`, and `UG-Time-is-Mooney`."
+				},
+				{
+					title: "Unit 8: Optional Gold Problem Bank: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Problem Bank: Full Gold Repo",
 					content:
-						"Browse the full Gold repo library when the core sequence is not enough and you want the wider advanced-problem inventory.",
+						"Browse the full Gold repo library when the core sequence is not enough and you want the wider advanced-problem inventory. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main"
 				},
-				problemItem(
-					"Problem: Roadblock",
-					"Use shortest-path sensitivity analysis to deepen the student's understanding of weighted-graph optimization.",
-					"UG10-Roadblock"
-				),
-				problemItem(
-					"Problem: Superbull",
-					"Use an MST-style optimization problem as a stronger extension of connectivity and edge-choice reasoning.",
-					"UG15-Superbull"
-				),
-				problemItem(
-					"Problem: Fenced In",
-					"Use a richer connectivity and cost-optimization problem to strengthen MST and graph-structure judgment.",
-					"UG20-Fenced-In"
-				),
-				problemItem(
-					"Problem: Sleepy Cow Sorting",
-					"Use a strong ordering and invariants problem to test whether the student can reason about progress without brute force.",
-					"UG25-Sleepy-Cow-Sorting"
-				)
+				{
+					title: "Problem: Roadblock",
+					content:
+						"Use shortest-path sensitivity analysis to deepen the student's understanding of weighted-graph optimization. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG10-Roadblock"
+				},
+				{
+					title: "Problem: Superbull",
+					content:
+						"Use an MST-style optimization problem as a stronger extension of connectivity and edge-choice reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG15-Superbull"
+				},
+				{
+					title: "Problem: Fenced In",
+					content:
+						"Use a richer connectivity and cost-optimization problem to strengthen MST and graph-structure judgment. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG20-Fenced-In"
+				},
+				{
+					title: "Problem: Sleepy Cow Sorting",
+					content:
+						"Use a strong ordering and invariants problem to test whether the student can reason about progress without brute force. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG25-Sleepy-Cow-Sorting"
+				}
+			]
+		},
+		{
+			title: "Applied Studio 10: Dynamic Programming Practice",
+			curriculum: [
+				{
+					title: "Dynamic Programming Practice: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 10: Dynamic Programming Practice, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Dynamic Programming Practice: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 10: Dynamic Programming Practice, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Dynamic Programming Practice: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 10: Dynamic Programming Practice. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice"
+				},
+				{
+					title: "Dynamic Programming Practice: Review and Reflection",
+					content:
+						"Close Applied Studio 10: Dynamic Programming Practice by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Dynamic Programming Practice: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 10: Dynamic Programming Practice with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice"
+				},
+				{
+					title: "Dynamic Programming Practice: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 10: Dynamic Programming Practice. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 11: Hoof Paper Scissors",
+			curriculum: [
+				{
+					title: "Hoof Paper Scissors: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 11: Hoof Paper Scissors, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Hoof Paper Scissors: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 11: Hoof Paper Scissors, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Hoof Paper Scissors: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 11: Hoof Paper Scissors. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors"
+				},
+				{
+					title: "Hoof Paper Scissors: Review and Reflection",
+					content:
+						"Close Applied Studio 11: Hoof Paper Scissors by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Hoof Paper Scissors: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 11: Hoof Paper Scissors with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors"
+				},
+				{
+					title: "Hoof Paper Scissors: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 11: Hoof Paper Scissors. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 12: Why Did the Cow Cross the Road",
+			curriculum: [
+				{
+					title: "Why Did the Cow Cross the Road: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 12: Why Did the Cow Cross the Road, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 12: Why Did the Cow Cross the Road, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 12: Why Did the Cow Cross the Road. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road"
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Review and Reflection",
+					content:
+						"Close Applied Studio 12: Why Did the Cow Cross the Road by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Why Did the Cow Cross the Road: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 12: Why Did the Cow Cross the Road with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road"
+				},
+				{
+					title: "Why Did the Cow Cross the Road: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 12: Why Did the Cow Cross the Road. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 13: Cow Routing",
+			curriculum: [
+				{
+					title: "Cow Routing: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 13: Cow Routing, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Cow Routing: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 13: Cow Routing, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Cow Routing: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 13: Cow Routing. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing"
+				},
+				{
+					title: "Cow Routing: Review and Reflection",
+					content:
+						"Close Applied Studio 13: Cow Routing by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Cow Routing: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 13: Cow Routing with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing"
+				},
+				{
+					title: "Cow Routing: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 13: Cow Routing. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: MST II",
+			curriculum: [
+				{
+					title: "MST II: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: MST II, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "MST II: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: MST II, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "MST II: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: MST II. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II"
+				},
+				{
+					title: "MST II: Review and Reflection",
+					content:
+						"Close Applied Studio 14: MST II by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "MST II: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: MST II with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II"
+				},
+				{
+					title: "MST II: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: MST II. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: Watering the Fields",
+			curriculum: [
+				{
+					title: "Watering the Fields: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: Watering the Fields, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "Watering the Fields: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: Watering the Fields, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Watering the Fields: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: Watering the Fields. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields"
+				},
+				{
+					title: "Watering the Fields: Review and Reflection",
+					content:
+						"Close Applied Studio 15: Watering the Fields by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Watering the Fields: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: Watering the Fields with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields"
+				},
+				{
+					title: "Watering the Fields: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: Watering the Fields. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: I Would Walk 500 Miles",
+			curriculum: [
+				{
+					title: "I Would Walk 500 Miles: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: I Would Walk 500 Miles, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "I Would Walk 500 Miles: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: I Would Walk 500 Miles, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "I Would Walk 500 Miles: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: I Would Walk 500 Miles. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles"
+				},
+				{
+					title: "I Would Walk 500 Miles: Review and Reflection",
+					content:
+						"Close Applied Studio 16: I Would Walk 500 Miles by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "I Would Walk 500 Miles: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: I Would Walk 500 Miles with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles"
+				},
+				{
+					title: "I Would Walk 500 Miles: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: I Would Walk 500 Miles. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: Talent Show",
+			curriculum: [
+				{
+					title: "Talent Show: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: Talent Show, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Talent Show: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: Talent Show, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Talent Show: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: Talent Show. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show"
+				},
+				{
+					title: "Talent Show: Review and Reflection",
+					content:
+						"Close Applied Studio 17: Talent Show by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Talent Show: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: Talent Show with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show"
+				},
+				{
+					title: "Talent Show: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: Talent Show. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]

@@ -1,30 +1,4 @@
-import type { RawCourse, RawCourseModuleItem } from "./types";
-
-const USACO_BRONZE_REPO =
-	"https://github.com/instruction-material/USACO-Bronze/tree/main";
-
-function repoLink(projectId: string) {
-	return `${USACO_BRONZE_REPO}/${projectId}`;
-}
-
-function problemItem(
-	title: string,
-	content: string,
-	projectId: string
-): RawCourseModuleItem {
-	return {
-		title,
-		content,
-		projectLink: repoLink(projectId)
-	};
-}
-
-function contestLog(unitTitle: string, focus: string): RawCourseModuleItem {
-	return {
-		title: `Bronze Log: ${unitTitle}`,
-		content: `Keep a short contest log for ${unitTitle.toLowerCase()} that records one wrong assumption, one edge case that broke an early idea, and one note about ${focus}. Bronze-level progress comes from disciplined debugging as much as from knowing a trick.`
-	};
-}
+import type { RawCourse } from "./types";
 
 export const usacoBronzeCourse: RawCourse = {
 	name: "USACO Bronze",
@@ -51,13 +25,28 @@ export const usacoBronzeCourse: RawCourse = {
 					title: "Language Strategy",
 					content:
 						"Let students work in the language that supports their current growth best, but keep problem-solving habits language-agnostic. Python is often enough for Bronze, while Java versions in the repo are useful for students preparing for later tiers."
+				},
+				{
+					title: "USB0 Setup and Contest Workflow: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java"
 				}
 			],
 			supplementalProjects: [
-				contestLog(
-					"Setup and Contest Workflow",
-					"which part of the problem statement is easiest to misread under time pressure"
-				)
+				{
+					title: "Bronze Log: Setup and Contest Workflow",
+					content:
+						"Keep a short contest log for setup and contest workflow that records one wrong assumption, one edge case that broke an early idea, and one note about which part of the problem statement is easiest to misread under time pressure. Bronze-level progress comes from disciplined debugging as much as from knowing a trick.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java"
+				},
+				{
+					title: "USB0 Setup and Contest Workflow: Fluency Drill",
+					content:
+						"Repeat the core ideas from USB0 Setup and Contest Workflow on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		},
 		{
@@ -76,34 +65,48 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Make Small Custom Tests",
 					content:
-						"Use intentionally tiny cases to catch off-by-one mistakes and state-update errors. Students should leave this unit knowing that small tests are the fastest path to correctness."
+						"Use intentionally tiny cases to catch off-by-one mistakes and state-update errors. Students should leave this unit knowing that small tests are the fastest path to correctness. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Use Tables and Traces",
 					content:
-						"Encourage tables of values, timeline traces, and manual updates. Bronze-level debugging becomes much easier when the evolving state is visible on paper."
+						"Encourage tables of values, timeline traces, and manual updates. Bronze-level debugging becomes much easier when the evolving state is visible on paper. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 1: Simulation and Careful Translation: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Square Pasture",
-					"Use geometric bounds and direct translation to practice reading a short statement carefully and converting it into a compact calculation.",
-					"UB1-Square-Pasture"
-				),
-				problemItem(
-					"Problem: Your Ride Is Here",
-					"Use a classic warmup to reinforce modular arithmetic, string processing, and exact interpretation of a quirky problem statement.",
-					"UB2-Your-Ride-Is-Here"
-				),
-				problemItem(
-					"Problem: Transformations",
-					"Practice rule-driven simulation by applying a fixed set of transformations and checking results systematically.",
-					"UB10-Transformations"
-				),
-				contestLog(
-					"Simulation and Careful Translation",
-					"which state update or rule ordering choice most affected correctness"
-				)
+				{
+					title: "Problem: Square Pasture",
+					content:
+						"Use geometric bounds and direct translation to practice reading a short statement carefully and converting it into a compact calculation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture"
+				},
+				{
+					title: "Problem: Your Ride Is Here",
+					content:
+						"Use a classic warmup to reinforce modular arithmetic, string processing, and exact interpretation of a quirky problem statement. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here"
+				},
+				{
+					title: "Problem: Transformations",
+					content:
+						"Practice rule-driven simulation by applying a fixed set of transformations and checking results systematically. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations"
+				},
+				{
+					title: "Bronze Log: Simulation and Careful Translation",
+					content:
+						"Keep a short contest log for simulation and careful translation that records one wrong assumption, one edge case that broke an early idea, and one note about which state update or rule ordering choice most affected correctness. Bronze-level progress comes from disciplined debugging as much as from knowing a trick."
+				}
 			]
 		},
 		{
@@ -127,25 +130,38 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Sorted Input as a Strategic Advantage",
 					content:
-						"Teach students to sort when it clarifies the structure of the task. Bronze solutions often become dramatically simpler once the data is in a useful order."
+						"Teach students to sort when it clarifies the structure of the task. Bronze solutions often become dramatically simpler once the data is in a useful order. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 2: Intervals, Arrays, and Greedy Warmups: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Milking Cows",
-					"Use interval merging and longest-gap reasoning to practice scanning sorted ranges carefully.",
-					"UB6-Milking-Cows"
-				),
-				problemItem(
-					"Problem: Barn Repair",
-					"Use a clean greedy idea to decide where not to cover space, which is a great Bronze introduction to minimizing wasted coverage.",
-					"UB12-Barn-Repair"
-				),
-				problemItem(
-					"Problem: Speeding Ticket",
-					"Practice range comparisons and piecewise simulation while keeping the data model simple enough to debug quickly.",
-					"UB29-Speeding-Ticket"
-				)
+				{
+					title: "Problem: Milking Cows",
+					content:
+						"Use interval merging and longest-gap reasoning to practice scanning sorted ranges carefully. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows"
+				},
+				{
+					title: "Problem: Barn Repair",
+					content:
+						"Use a clean greedy idea to decide where not to cover space, which is a great Bronze introduction to minimizing wasted coverage. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB12-Barn-Repair"
+				},
+				{
+					title: "Problem: Speeding Ticket",
+					content:
+						"Practice range comparisons and piecewise simulation while keeping the data model simple enough to debug quickly. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket"
+				}
 			]
 		},
 		{
@@ -159,39 +175,53 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Look for the Key Ordering",
 					content:
-						"Emphasize that sorting often reveals the decisive pattern in a Bronze problem. Once data is ordered, the main logic may shrink to a single pass or a compact window scan."
+						"Emphasize that sorting often reveals the decisive pattern in a Bronze problem. Once data is ordered, the main logic may shrink to a single pass or a compact window scan. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Explain the Metric Being Optimized",
 					content:
-						"Require students to state exactly what quantity is being maximized, minimized, or counted. This helps prevent the common mistake of solving a nearby but different problem."
+						"Require students to state exactly what quantity is being maximized, minimized, or counted. This helps prevent the common mistake of solving a nearby but different problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Compare Similar Solutions",
 					content:
-						"Have students compare two plausible but different approaches and identify why one is safer, simpler, or more general. This builds real contest judgment."
+						"Have students compare two plausible but different approaches and identify why one is safer, simpler, or more general. This builds real contest judgment. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 3: Counting, Sorting, and Ranking: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Diamond Collector",
-					"Use sorting and window-style reasoning to capture a best group under a constraint.",
-					"UB37-Diamond-Collector"
-				),
-				problemItem(
-					"Problem: Promotion Counting",
-					"Practice tier-by-tier counting and careful propagation of totals through a simple structure.",
-					"UB31-Promotion-Counting"
-				),
-				problemItem(
-					"Problem: Acowdemia",
-					"Use ranking and threshold logic to reinforce the habit of naming the exact score or count the problem asks for.",
-					"UB54-Acowdemia"
-				),
-				contestLog(
-					"Counting, Sorting, and Ranking",
-					"which sorting or counting step turned a messy problem into a clean one"
-				)
+				{
+					title: "Problem: Diamond Collector",
+					content:
+						"Use sorting and window-style reasoning to capture a best group under a constraint. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector"
+				},
+				{
+					title: "Problem: Promotion Counting",
+					content:
+						"Practice tier-by-tier counting and careful propagation of totals through a simple structure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB31-Promotion-Counting"
+				},
+				{
+					title: "Problem: Acowdemia",
+					content:
+						"Use ranking and threshold logic to reinforce the habit of naming the exact score or count the problem asks for. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB54-Acowdemia"
+				},
+				{
+					title: "Bronze Log: Counting, Sorting, and Ranking",
+					content:
+						"Keep a short contest log for counting, sorting, and ranking that records one wrong assumption, one edge case that broke an early idea, and one note about which sorting or counting step turned a messy problem into a clean one. Bronze-level progress comes from disciplined debugging as much as from knowing a trick."
+				}
 			]
 		},
 		{
@@ -205,35 +235,48 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Track Structure Explicitly",
 					content:
-						"Encourage tables, parent relationships, or step histories when the problem involves movement, ancestry, or repeated transitions. Explicit structure prevents guessing."
+						"Encourage tables, parent relationships, or step histories when the problem involves movement, ancestry, or repeated transitions. Explicit structure prevents guessing. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Separate Representation from Process",
 					content:
-						"Teach students to decide what data structure best represents the problem before choosing the algorithmic loop that uses it. This is the first step toward Silver-level thinking."
+						"Teach students to decide what data structure best represents the problem before choosing the algorithmic loop that uses it. This is the first step toward Silver-level thinking. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
 					title: "Stay Grounded in Bronze Simplicity",
 					content:
-						"Even when a problem hints at graphs or search, Bronze solutions are usually still modest. Students should avoid overengineering the problem beyond what the constraints require."
+						"Even when a problem hints at graphs or search, Bronze solutions are usually still modest. Students should avoid overengineering the problem beyond what the constraints require. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "Unit 4: Search-Flavored Bronze Problems: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: The Lost Cow",
-					"Use path simulation to model repeated movement and distance accumulation carefully.",
-					"UB25-The-Lost-Cow"
-				),
-				problemItem(
-					"Problem: Wormholes",
-					"Treat pairings and repeated movement as a structured search exercise with a clear, bounded state space.",
-					"UB16-Wormholes"
-				),
-				problemItem(
-					"Problem: Family Tree",
-					"Use parent and ancestor reasoning to practice a light graph-style relationship problem without leaving Bronze territory.",
-					"UB51-Family-Tree"
-				)
+				{
+					title: "Problem: The Lost Cow",
+					content:
+						"Use path simulation to model repeated movement and distance accumulation carefully. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow"
+				},
+				{
+					title: "Problem: Wormholes",
+					content:
+						"Treat pairings and repeated movement as a structured search exercise with a clear, bounded state space. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB16-Wormholes"
+				},
+				{
+					title: "Problem: Family Tree",
+					content:
+						"Use parent and ancestor reasoning to practice a light graph-style relationship problem without leaving Bronze territory. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB51-Family-Tree"
+				}
 			]
 		},
 		{
@@ -258,28 +301,42 @@ export const usacoBronzeCourse: RawCourse = {
 					title: "Prepare for USACO Silver",
 					content:
 						"Close by identifying the habits that carry forward: stronger use of sorting, cleaner state models, comfort with custom tests, and willingness to justify an approach before coding. Students should move to `USACO Silver` only once these habits are stable."
+				},
+				{
+					title: "Unit 5: Contest Sets and Tier Transition: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order"
 				}
 			],
 			supplementalProjects: [
-				problemItem(
-					"Problem: Milking Order",
-					"Use ordering constraints and careful placement to rehearse the kind of structured reasoning that starts to appear near the top of Bronze.",
-					"UB50-Milking-Order"
-				),
-				problemItem(
-					"Problem: Feeding the Cows",
-					"Use a late-Bronze constraint problem to test whether students can still keep the solution simple under a more layered prompt.",
-					"UB63-Feeding-the-Cows"
-				),
-				problemItem(
-					"Problem: Just Stalling",
-					"Use a counting-and-ordering problem as a final check that students can combine sorting with a careful interpretation of what is being counted.",
-					"UB55-Just-Stalling"
-				),
-				contestLog(
-					"Contest Sets and Tier Transition",
-					"which Bronze habit is most important to preserve when moving to Silver"
-				)
+				{
+					title: "Problem: Milking Order",
+					content:
+						"Use ordering constraints and careful placement to rehearse the kind of structured reasoning that starts to appear near the top of Bronze. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order"
+				},
+				{
+					title: "Problem: Feeding the Cows",
+					content:
+						"Use a late-Bronze constraint problem to test whether students can still keep the solution simple under a more layered prompt. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB63-Feeding-the-Cows"
+				},
+				{
+					title: "Problem: Just Stalling",
+					content:
+						"Use a counting-and-ordering problem as a final check that students can combine sorting with a careful interpretation of what is being counted. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB55-Just-Stalling"
+				},
+				{
+					title: "Bronze Log: Contest Sets and Tier Transition",
+					content:
+						"Keep a short contest log for contest sets and tier transition that records one wrong assumption, one edge case that broke an early idea, and one note about which Bronze habit is most important to preserve when moving to Silver. Bronze-level progress comes from disciplined debugging as much as from knowing a trick."
+				}
 			]
 		},
 		{
@@ -309,36 +366,461 @@ export const usacoBronzeCourse: RawCourse = {
 					title: "Language Variants",
 					content:
 						"The repo also contains parallel `-Java` versions for many Bronze problems. Treat the plain folder as the canonical public problem entry and the `-Java` mirror as an alternate language path rather than as a duplicate lesson."
+				},
+				{
+					title: "Unit 6: Optional Bronze Problem Bank: Core Project",
+					content:
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Problem Bank: Full Bronze Repo",
 					content:
-						"Browse the full Bronze repo bank, including the Python-side canonical problems and their parallel Java mirrors, when the curated course spine is not enough practice.",
+						"Browse the full Bronze repo bank, including the Python-side canonical problems and their parallel Java mirrors, when the curated course spine is not enough practice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main"
 				},
-				problemItem(
-					"Problem: Mixing Milk",
-					"Use repeated pour operations to rehearse careful simulation and container-state updates.",
-					"UB11-Mixing-Milk"
-				),
-				problemItem(
-					"Problem: Hoof, Paper, Scissors",
-					"Use case-based counting and matchup reasoning to strengthen simple game-logic analysis.",
-					"UB20-Hoof-Paper-Scissors"
-				),
-				problemItem(
-					"Problem: Circular Barn",
-					"Use a stronger late-Bronze simulation and counting problem to test whether state modeling stays clean under more layered movement.",
-					"UB35-Circular-Barn"
-				),
-				problemItem(
-					"Problem: Cow College",
-					"Use a late Bronze optimization prompt to practice sorting, revenue reasoning, and clear objective definition.",
-					"UB62-Cow-College"
-				)
+				{
+					title: "Problem: Mixing Milk",
+					content:
+						"Use repeated pour operations to rehearse careful simulation and container-state updates. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk"
+				},
+				{
+					title: "Problem: Hoof, Paper, Scissors",
+					content:
+						"Use case-based counting and matchup reasoning to strengthen simple game-logic analysis. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB20-Hoof-Paper-Scissors"
+				},
+				{
+					title: "Problem: Circular Barn",
+					content:
+						"Use a stronger late-Bronze simulation and counting problem to test whether state modeling stays clean under more layered movement. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB35-Circular-Barn"
+				},
+				{
+					title: "Problem: Cow College",
+					content:
+						"Use a late Bronze optimization prompt to practice sorting, revenue reasoning, and clear objective definition. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB62-Cow-College"
+				}
+			]
+		},
+		{
+			title: "Applied Studio 8: UB 12 Barn Repair Java",
+			curriculum: [
+				{
+					title: "UB 12 Barn Repair Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 8: UB 12 Barn Repair Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 12 Barn Repair Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 8: UB 12 Barn Repair Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 12 Barn Repair Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 8: UB 12 Barn Repair Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
+				},
+				{
+					title: "UB 12 Barn Repair Java: Review and Reflection",
+					content:
+						"Close Applied Studio 8: UB 12 Barn Repair Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 12 Barn Repair Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 8: UB 12 Barn Repair Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
+				},
+				{
+					title: "UB 12 Barn Repair Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 8: UB 12 Barn Repair Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 9: UB 13 Combination Lock Java",
+			curriculum: [
+				{
+					title: "UB 13 Combination Lock Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 9: UB 13 Combination Lock Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 13 Combination Lock Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 9: UB 13 Combination Lock Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 13 Combination Lock Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 9: UB 13 Combination Lock Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
+				},
+				{
+					title: "UB 13 Combination Lock Java: Review and Reflection",
+					content:
+						"Close Applied Studio 9: UB 13 Combination Lock Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 13 Combination Lock Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 9: UB 13 Combination Lock Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
+				},
+				{
+					title: "UB 13 Combination Lock Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 9: UB 13 Combination Lock Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 10: UB 14 Prime Cryptarithm Java",
+			curriculum: [
+				{
+					title: "UB 14 Prime Cryptarithm Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 10: UB 14 Prime Cryptarithm Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 14 Prime Cryptarithm Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 10: UB 14 Prime Cryptarithm Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 14 Prime Cryptarithm Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 10: UB 14 Prime Cryptarithm Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
+				},
+				{
+					title: "UB 14 Prime Cryptarithm Java: Review and Reflection",
+					content:
+						"Close Applied Studio 10: UB 14 Prime Cryptarithm Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 14 Prime Cryptarithm Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 10: UB 14 Prime Cryptarithm Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
+				},
+				{
+					title: "UB 14 Prime Cryptarithm Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 10: UB 14 Prime Cryptarithm Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 11: UB 15 Ski Course Design Java",
+			curriculum: [
+				{
+					title: "UB 15 Ski Course Design Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 11: UB 15 Ski Course Design Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 15 Ski Course Design Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 11: UB 15 Ski Course Design Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 15 Ski Course Design Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 11: UB 15 Ski Course Design Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
+				},
+				{
+					title: "UB 15 Ski Course Design Java: Review and Reflection",
+					content:
+						"Close Applied Studio 11: UB 15 Ski Course Design Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 15 Ski Course Design Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 11: UB 15 Ski Course Design Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
+				},
+				{
+					title: "UB 15 Ski Course Design Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 11: UB 15 Ski Course Design Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 12: UB 16 Wormholes Java",
+			curriculum: [
+				{
+					title: "UB 16 Wormholes Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 12: UB 16 Wormholes Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 16 Wormholes Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 12: UB 16 Wormholes Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 16 Wormholes Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 12: UB 16 Wormholes Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
+				},
+				{
+					title: "UB 16 Wormholes Java: Review and Reflection",
+					content:
+						"Close Applied Studio 12: UB 16 Wormholes Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 16 Wormholes Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 12: UB 16 Wormholes Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
+				},
+				{
+					title: "UB 16 Wormholes Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 12: UB 16 Wormholes Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 13: UB 17 Block Game Java",
+			curriculum: [
+				{
+					title: "UB 17 Block Game Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 13: UB 17 Block Game Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 17 Block Game Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 13: UB 17 Block Game Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 17 Block Game Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 13: UB 17 Block Game Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
+				},
+				{
+					title: "UB 17 Block Game Java: Review and Reflection",
+					content:
+						"Close Applied Studio 13: UB 17 Block Game Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 17 Block Game Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 13: UB 17 Block Game Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
+				},
+				{
+					title: "UB 17 Block Game Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 13: UB 17 Block Game Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 14: UB 18 The Cow Signal Java",
+			curriculum: [
+				{
+					title: "UB 18 The Cow Signal Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 14: UB 18 The Cow Signal Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 18 The Cow Signal Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 14: UB 18 The Cow Signal Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 18 The Cow Signal Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 14: UB 18 The Cow Signal Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
+				},
+				{
+					title: "UB 18 The Cow Signal Java: Review and Reflection",
+					content:
+						"Close Applied Studio 14: UB 18 The Cow Signal Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 18 The Cow Signal Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 14: UB 18 The Cow Signal Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
+				},
+				{
+					title: "UB 18 The Cow Signal Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 14: UB 18 The Cow Signal Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 15: UB 19 Dont Be Last Java",
+			curriculum: [
+				{
+					title: "UB 19 Dont Be Last Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 15: UB 19 Dont Be Last Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 19 Dont Be Last Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 15: UB 19 Dont Be Last Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 19 Dont Be Last Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 15: UB 19 Dont Be Last Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
+				},
+				{
+					title: "UB 19 Dont Be Last Java: Review and Reflection",
+					content:
+						"Close Applied Studio 15: UB 19 Dont Be Last Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 19 Dont Be Last Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 15: UB 19 Dont Be Last Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
+				},
+				{
+					title: "UB 19 Dont Be Last Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 15: UB 19 Dont Be Last Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 16: UB 20 Hoof Paper Scissors Java",
+			curriculum: [
+				{
+					title: "UB 20 Hoof Paper Scissors Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 16: UB 20 Hoof Paper Scissors Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 20 Hoof Paper Scissors Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 16: UB 20 Hoof Paper Scissors Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 20 Hoof Paper Scissors Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 16: UB 20 Hoof Paper Scissors Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
+				},
+				{
+					title: "UB 20 Hoof Paper Scissors Java: Review and Reflection",
+					content:
+						"Close Applied Studio 16: UB 20 Hoof Paper Scissors Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 20 Hoof Paper Scissors Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 16: UB 20 Hoof Paper Scissors Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
+				},
+				{
+					title: "UB 20 Hoof Paper Scissors Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 16: UB 20 Hoof Paper Scissors Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			]
+		},
+		{
+			title: "Applied Studio 17: UB 21 Cow Tipping Java",
+			curriculum: [
+				{
+					title: "UB 21 Cow Tipping Java: Core Concepts",
+					content:
+						"Introduce the main goal of Applied Studio 17: UB 21 Cow Tipping Java, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+				},
+				{
+					title: "UB 21 Cow Tipping Java: Guided Example",
+					content:
+						"Walk through one representative example for Applied Studio 17: UB 21 Cow Tipping Java, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				},
+				{
+					title: "UB 21 Cow Tipping Java: Core Project",
+					content:
+						"Build the central artifact for Applied Studio 17: UB 21 Cow Tipping Java. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
+				},
+				{
+					title: "UB 21 Cow Tipping Java: Review and Reflection",
+					content:
+						"Close Applied Studio 17: UB 21 Cow Tipping Java by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "UB 21 Cow Tipping Java: Extension Challenge",
+					content:
+						"Extend the core build from Applied Studio 17: UB 21 Cow Tipping Java with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
+				},
+				{
+					title: "UB 21 Cow Tipping Java: Open Practice",
+					content:
+						"Create a compact variant inspired by Applied Studio 17: UB 21 Cow Tipping Java. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+				}
 			]
 		}
 	]
