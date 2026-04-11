@@ -1,0 +1,49 @@
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+Disallow: /api
+Disallow: /admin
+Disallow: /profile
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api
+Disallow: /admin
+Disallow: /profile
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api
+Disallow: /admin
+Disallow: /profile
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api
+Disallow: /admin
+Disallow: /profile
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api
+Disallow: /admin
+Disallow: /profile
+
+User-agent: Claude-User
+Allow: /
+Disallow: /api
+Disallow: /admin
+Disallow: /profile
+
+User-agent: *
+Allow: /
+Disallow: /api
+Disallow: /admin
+Disallow: /profile
+
+Sitemap: https://classes.jacobdanderson.net/sitemap.xml

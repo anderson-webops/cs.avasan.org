@@ -4,6 +4,41 @@ import { useContentStore } from "@/stores/content";
 
 defineOptions({ name: "SupportUsPage" });
 const content = useContentStore();
+
+useHead(() => ({
+	title: "Tuition & Payment",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Tuition, payment methods, and common scheduling questions for private classes with Jacob Anderson."
+		}
+	],
+	link: [
+		{
+			rel: "canonical",
+			href: "https://classes.jacobdanderson.net/payment"
+		}
+	],
+	script: [
+		{
+			children: JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				"mainEntity": content.faqs.map((faq) => ({
+					"@type": "Question",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": faq.answer
+					},
+					"name": faq.question
+				}))
+			}),
+			key: "tuition-faq-jsonld",
+			type: "application/ld+json"
+		}
+	]
+}));
 </script>
 
 <template>

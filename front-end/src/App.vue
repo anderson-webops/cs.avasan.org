@@ -3,17 +3,76 @@
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the HTML results with vite-ssg
 import { SCHEDULER_ORIGIN } from "@/modules/scheduler";
+const siteUrl = "https://classes.jacobdanderson.net";
+const siteDescription =
+	"Private instruction with Jacob Anderson for coding, STEM, and Spanish learners, including one-on-one classes, course pathways, and flexible scheduling.";
+const route = useRoute();
+const noindexMatchers = [/^\/admin(?:\/|$)/, /^\/profile(?:\/|$)/, /^\/api(?:\/|$)/];
+const canonicalUrl = computed(() => new URL(route.path || "/", `${siteUrl}/`).toString());
+const robotsContent = computed(() =>
+	noindexMatchers.some(matcher => matcher.test(route.path))
+		? "noindex,nofollow"
+		: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+);
+const structuredData = computed(() => [
+	{
+		"@context": "https://schema.org",
+		"@type": "EducationalOrganization",
+		"description": siteDescription,
+		"name": "Classes with Jacob",
+		"url": siteUrl
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"description": siteDescription,
+		"name": "Classes with Jacob",
+		"url": siteUrl
+	}
+]);
 
-useHead({
+useHead(() => ({
 	title: "Classes",
 	meta: [
 		{
-			name: "Classes",
-			content: ""
+			name: "description",
+			content: siteDescription
+		},
+		{
+			property: "og:title",
+			content: "Classes with Jacob"
+		},
+		{
+			property: "og:description",
+			content: siteDescription
+		},
+		{
+			property: "og:type",
+			content: "website"
+		},
+		{
+			property: "og:url",
+			content: canonicalUrl.value
+		},
+		{
+			name: "twitter:card",
+			content: "summary"
+		},
+		{
+			name: "twitter:title",
+			content: "Classes with Jacob"
+		},
+		{
+			name: "twitter:description",
+			content: siteDescription
+		},
+		{
+			name: "robots",
+			content: robotsContent.value
 		},
 		{
 			name: "theme-color",
-			content: () => (isDark.value ? "#00aba9" : "#ffffff")
+			content: isDark.value ? "#00aba9" : "#ffffff"
 		}
 	],
 	link: [
@@ -46,23 +105,29 @@ useHead({
 		{
 			rel: "preconnect",
 			href: SCHEDULER_ORIGIN
+		},
+		{
+			rel: "canonical",
+			href: canonicalUrl.value
 		}
-		/*				{
-          rel: 'icon',
-          type: 'image/svg+xml',
-          href: () => preferredDark.value ? '/favicon-dark.svg': '/favicon.svg',
-        }, */
 	],
-	script: import.meta.env.PROD
-		? [
-				{
-					defer: true,
-					src: "https://analytics.jacobdanderson.net/script.js",
-					"data-website-id": "d9905a72-7109-4f71-bfbb-d5e0dcef964e"
-				}
-			]
-		: []
-});
+	script: [
+		...(import.meta.env.PROD
+			? [
+					{
+						defer: true,
+						src: "https://analytics.jacobdanderson.net/script.js",
+						"data-website-id": "d9905a72-7109-4f71-bfbb-d5e0dcef964e"
+					}
+				]
+			: []),
+		...structuredData.value.map((entry, index) => ({
+			children: JSON.stringify(entry),
+			key: `ld-json-${index}`,
+			type: "application/ld+json"
+		}))
+	]
+}));
 </script>
 
 <template>
