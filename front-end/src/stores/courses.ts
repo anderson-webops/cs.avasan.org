@@ -7,6 +7,7 @@ import type {
 import { defineStore } from "pinia";
 
 import { computed } from "vue";
+import { applyCourseDepthBaseline } from "./course-depth";
 import { courseCatalog, loadRawCourse } from "./courses/index";
 
 const COMBINING_MARKS_RE = /[\u0300-\u036F]/g;
@@ -333,7 +334,9 @@ export const useCoursesStore = defineStore("courses", () => {
 			return null;
 		}
 
-		const normalizedCourse = normalizeCourse(rawCourse, id);
+		const normalizedCourse = applyCourseDepthBaseline(
+			normalizeCourse(rawCourse, id)
+		);
 
 		normalizedCourseCache.set(id, normalizedCourse);
 

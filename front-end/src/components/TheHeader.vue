@@ -109,7 +109,10 @@ function maybeWarmScheduler(link: NavLink) {
 				>
 					<span class="navbar-toggler-icon" />
 				</button>
-				<div id="siteNavbar" class="collapse navbar-collapse site-nav__panel">
+				<div
+					id="siteNavbar"
+					class="collapse navbar-collapse site-nav__panel"
+				>
 					<div class="site-nav__content">
 						<ul class="site-nav__links">
 							<li v-for="link in primaryLinks" :key="link.to">

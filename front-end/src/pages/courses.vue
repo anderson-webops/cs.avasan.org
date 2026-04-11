@@ -1,31 +1,103 @@
 <script lang="ts" setup>
-import { defineAsyncComponent } from "vue";
+import { storeToRefs } from "pinia";
+import { computed, defineAsyncComponent } from "vue";
 import { warmSchedulerConnections } from "@/modules/scheduler";
+import { useAppStore } from "@/stores/app";
 
 defineOptions({ name: "CoursesPage" });
 
 const CourseExplorer = defineAsyncComponent(
 	() => import("@/components/CourseExplorer.vue")
 );
+
+const app = useAppStore();
+const { currentAdmin, currentTutor, currentUser, isLoggedIn } =
+	storeToRefs(app);
+
+const hasAssignedCourseAccess = computed(() => {
+	if (currentAdmin.value) return true;
+	if (currentTutor.value) {
+		return (currentTutor.value.coursePermissions?.length ?? 0) > 0;
+	}
+	if (currentUser.value) {
+		return (currentUser.value.courseAccess?.length ?? 0) > 0;
+	}
+	return false;
+});
+
+const heroEyebrow = computed(() =>
+	!isLoggedIn.value ? "Course access" : "Assigned courses"
+);
+
+const heroTitle = computed(() => {
+	if (!isLoggedIn.value) return "Log in to view your assigned courses.";
+	if (hasAssignedCourseAccess.value)
+		return "Open the courses assigned to you.";
+	return "Your account is active, but no courses are assigned yet.";
+});
+
+const heroCopy = computed(() => {
+	if (!isLoggedIn.value) {
+		return "Course materials are only visible after login. Sign in to open your assigned course library, or create an account if you do not have one yet.";
+	}
+
+	if (hasAssignedCourseAccess.value) {
+		return "Browse only the courses attached to your account. Tutor and administrator accounts can also review the course sets they are authorized to manage.";
+	}
+
+	return "If you already have an account but do not see any courses yet, email classes@jacobdanderson.net and request course access. Access should only be granted by a tutor or administrator.";
+});
+
+function openLogin() {
+	app.setLoginBlock(true);
+}
+
+function openSignup() {
+	app.setSignupBlock(true);
+}
 </script>
 
 <template>
 	<section class="courses-page">
 		<header class="courses-hero">
 			<div class="courses-copy">
-				<p class="courses-eyebrow">Course library</p>
-				<h1>Browse the full course catalog.</h1>
+				<p class="courses-eyebrow">{{ heroEyebrow }}</p>
+				<h1>{{ heroTitle }}</h1>
 				<p>
-					Explore the syllabus for each track, review the lesson arc,
-					and open the linked project repositories before signing up.
-					Once you're enrolled, your assigned courses will also appear
-					in your profile workspace.
+					{{ heroCopy }}
 				</p>
 			</div>
 
 			<div class="courses-actions">
-				<RouterLink
+				<button
+					v-if="!isLoggedIn"
+					class="courses-action courses-action--secondary"
+					type="button"
+					@click="openLogin"
+				>
+					Log in
+				</button>
+				<button
+					v-if="!isLoggedIn"
 					class="courses-action courses-action--primary"
+					type="button"
+					@click="openSignup"
+				>
+					Sign up
+				</button>
+				<RouterLink
+					v-else-if="!hasAssignedCourseAccess"
+					class="courses-action courses-action--secondary"
+					to="/profile"
+				>
+					Go to Profile
+				</RouterLink>
+				<RouterLink
+					class="courses-action courses-action--secondary"
+					:class="{
+						'courses-action--primary':
+							isLoggedIn && !hasAssignedCourseAccess
+					}"
 					to="/signup"
 					@focus="warmSchedulerConnections"
 					@mouseenter="warmSchedulerConnections"
@@ -33,16 +105,35 @@ const CourseExplorer = defineAsyncComponent(
 				>
 					Book a Class
 				</RouterLink>
-				<RouterLink
-					class="courses-action courses-action--secondary"
-					to="/payment"
-				>
-					View Tuition
-				</RouterLink>
 			</div>
 		</header>
 
-		<CourseExplorer public-catalog />
+		<section v-if="!isLoggedIn" class="courses-gate" role="status">
+			<h2>Course materials are locked until you log in.</h2>
+			<p>
+				Sign in to view your assigned courses. If you are new here, sign
+				up first and your tutor or an administrator can enable access
+				after enrollment.
+			</p>
+		</section>
+
+		<section
+			v-else-if="!hasAssignedCourseAccess"
+			class="courses-gate"
+			role="status"
+		>
+			<h2>No courses are assigned to this account yet.</h2>
+			<p>
+				Email
+				<a href="mailto:classes@jacobdanderson.net">
+					classes@jacobdanderson.net
+				</a>
+				to request access. Course visibility should only be assigned by
+				a tutor or administrator.
+			</p>
+		</section>
+
+		<CourseExplorer v-else />
 	</section>
 </template>
 
@@ -115,6 +206,43 @@ const CourseExplorer = defineAsyncComponent(
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.75rem;
+}
+
+.courses-gate {
+	padding: clamp(1.5rem, 2.8vw, 2.2rem);
+	border-radius: 28px;
+	border: 1px solid rgba(148, 163, 184, 0.18);
+	background:
+		radial-gradient(
+			circle at top right,
+			rgba(37, 99, 235, 0.09),
+			transparent 28%
+		),
+		linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.98),
+			rgba(248, 250, 252, 0.93)
+		);
+	box-shadow: 0 24px 48px -40px rgba(15, 23, 42, 0.3);
+}
+
+.courses-gate h2 {
+	margin: 0 0 0.75rem;
+	font-size: clamp(1.35rem, 2vw, 1.75rem);
+	color: #0f172a;
+}
+
+.courses-gate p {
+	margin: 0;
+	max-width: 52rem;
+	line-height: 1.7;
+	color: #475569;
+}
+
+.courses-gate a {
+	color: #1d4ed8;
+	font-weight: 700;
+	text-decoration: none;
 }
 
 .courses-action {

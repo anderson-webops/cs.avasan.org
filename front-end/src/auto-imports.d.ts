@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const applyCourseDepthBaseline: typeof import('./stores/course-depth').applyCourseDepthBaseline
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
   const computed: typeof import('vue').computed
@@ -16,6 +17,7 @@ declare global {
   const computedWithControl: typeof import('@vueuse/core').computedWithControl
   const controlledComputed: typeof import('@vueuse/core').controlledComputed
   const controlledRef: typeof import('@vueuse/core').controlledRef
+  const courseResourceInventory: typeof import('./stores/course-resource-inventory').courseResourceInventory
   const createApp: typeof import('vue').createApp
   const createEventHook: typeof import('@vueuse/core').createEventHook
   const createGlobalState: typeof import('@vueuse/core').createGlobalState
@@ -331,6 +333,9 @@ declare global {
   export type { SubjectGroup, Highlight, FAQ } from './stores/content'
   import('./stores/content')
   // @ts-ignore
+  export type { CourseResourceInventoryEntry } from './stores/course-resource-inventory'
+  import('./stores/course-resource-inventory')
+  // @ts-ignore
   export type { CourseDefinition, CourseModule, CourseModuleItem } from './stores/courses'
   import('./stores/courses')
   // @ts-ignore
@@ -344,6 +349,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly applyCourseDepthBaseline: UnwrapRef<typeof import('./stores/course-depth')['applyCourseDepthBaseline']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -353,6 +359,7 @@ declare module 'vue' {
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
+    readonly courseResourceInventory: UnwrapRef<typeof import('./stores/course-resource-inventory')['courseResourceInventory']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
