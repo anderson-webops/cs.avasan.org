@@ -109,7 +109,7 @@ function maybeWarmScheduler(link: NavLink) {
 				>
 					<span class="navbar-toggler-icon" />
 				</button>
-				<div id="siteNavbar" class="collapse navbar-collapse">
+				<div id="siteNavbar" class="collapse navbar-collapse site-nav__panel">
 					<div class="site-nav__content">
 						<ul class="site-nav__links">
 							<li v-for="link in primaryLinks" :key="link.to">
@@ -206,6 +206,11 @@ function maybeWarmScheduler(link: NavLink) {
 	padding: 0;
 }
 
+.site-nav__panel {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
 .site-nav__inner {
 	max-width: 1280px;
 	margin: 0 auto;
@@ -224,6 +229,7 @@ function maybeWarmScheduler(link: NavLink) {
 .site-brand {
 	display: grid;
 	gap: 0.18rem;
+	flex: 0 0 auto;
 	text-decoration: none;
 }
 
@@ -242,9 +248,10 @@ function maybeWarmScheduler(link: NavLink) {
 .site-nav__content {
 	display: flex;
 	align-items: center;
-	gap: 1.25rem;
+	justify-content: space-between;
+	gap: clamp(1rem, 2vw, 2.25rem);
 	width: 100%;
-	margin-top: 1rem;
+	min-width: 0;
 }
 
 .site-nav__links,
@@ -259,17 +266,19 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 .site-nav__links {
-	flex: 1 1 auto;
+	flex: 1 1 0;
+	justify-content: center;
+	min-width: 0;
 }
 
 .site-nav__aside {
 	display: flex;
-	flex: 0 0 auto;
+	flex: 1 1 0;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: flex-end;
 	gap: 0.85rem;
-	margin-left: auto;
+	min-width: 0;
 }
 
 .site-nav__link,
@@ -300,8 +309,8 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 .site-nav__utility-link {
-	padding: 0.55rem 0.8rem;
-	font-size: 0.9rem;
+	padding: 0.64rem 0.82rem;
+	font-size: 0.98rem;
 	color: #50677c;
 }
 
@@ -311,6 +320,7 @@ function maybeWarmScheduler(link: NavLink) {
 	align-items: center;
 	justify-content: flex-end;
 	gap: 0.65rem;
+	flex-shrink: 0;
 }
 
 .site-nav__badge {
@@ -376,10 +386,11 @@ function maybeWarmScheduler(link: NavLink) {
 	.site-nav__content {
 		flex-direction: column;
 		align-items: stretch;
+		margin-top: 0.9rem;
 	}
 
 	.site-nav__aside {
-		margin-left: 0;
+		flex: 0 0 auto;
 		justify-content: flex-start;
 	}
 
