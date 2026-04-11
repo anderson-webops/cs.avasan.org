@@ -12,6 +12,11 @@ export const javaLevel1Course: RawCourse = {
 						"Get comfortable with the Java workspace, the console, project instructions, and a reference project for reusable examples. Start by writing code inside `main()` and using the console to run and inspect output."
 				},
 				{
+					title: "Optional Python-to-Java Bridge",
+					content:
+						"Students arriving from the Python sequence should use the `Python to Java and C++ Bridge` course or its equivalent addendum before or alongside the first Java module. The point is to translate typed variables, method signatures, `Scanner`, and compiler feedback into familiar concepts rather than treating Java as a fresh start."
+				},
+				{
 					title: "Primitive Types",
 					content:
 						"Learn the built-in Java types `int`, `double`, `char`, and `boolean`, and practice declaring variables, assigning values, printing them, and noticing Java syntax such as semicolons and single quotes for characters.",

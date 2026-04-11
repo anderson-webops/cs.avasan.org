@@ -460,6 +460,63 @@ export const aiLevel1Course: RawCourse = {
 					"FAI8-The-Marble-Game-AI"
 				)
 			]
+		},
+		{
+			title: "Unit 9: Repo Extension Bank and Canonical Variants",
+			curriculum: [
+				{
+					title: "Optional Reinforcement versus Archive Material",
+					content:
+						"Treat the extra `AI-Level-1` repo folders as a structured extension bank, not as missing core lessons. The public course keeps one canonical Tic-Tac-Toe and Marble Game path visible while still exposing worthwhile extra graph, stack, and class-based practice."
+				},
+				{
+					title: "Canonical Variants for Game AI",
+					content:
+						"Use `FAI7-Updated-TicTacToe-AI` as the main optional advanced Tic-Tac-Toe follow-up and keep `FAI7-Unbeatable-TicTacToe-AI-1` as an archive duplicate rather than a separate public requirement. Do the same for the marble-game branch by using the clean playable variant and hiding the `COPY` folder."
+				},
+				{
+					title: "How to Use the Extra Repo Folders",
+					content:
+						"Students who want more practice should use the optional bank below for targeted reinforcement: class refresh, stack/queue mechanics, graph variants, and stronger game-AI comparisons. The point is discoverability without flooding the core syllabus."
+				}
+			],
+			supplementalProjects: [
+				projectItem(
+					"Extension: Special Graphs",
+					"Use alternate graph structures and examples to strengthen representation choices before later search and heuristic work.",
+					"FAI-Special-Graphs"
+				),
+				projectItem(
+					"Extension: Practice with Stacks (Reference Bank)",
+					"Use the dedicated stacks folder as extra frontier-order practice when DFS mechanics still feel shaky.",
+					"FAI-Stacks"
+				),
+				projectItem(
+					"Extension: BankAccount Class",
+					"Keep a second lightweight class-design warmup available for students who need more confidence with object state before graph and game objects.",
+					"FAI1-BankAccount-Class"
+				),
+				projectItem(
+					"Extension: DFS with a Stack Class",
+					"Compare the earlier DFS implementation with a more class-structured stack-based version so students can see the same algorithm through a cleaner API boundary.",
+					"FAI5-DFS-With-a-Stack-Class"
+				),
+				projectItem(
+					"Extension: BFS with a Queue Class",
+					"Use a queue-centered class version of BFS to reinforce shortest-path intuition and explicit frontier management.",
+					"FAI6-BFS-With-a-Queue-Class"
+				),
+				projectItem(
+					"Extension: Updated Tic-Tac-Toe AI",
+					"Use the updated Tic-Tac-Toe branch as the canonical optional game-tree extension beyond the main course spine.",
+					"FAI7-Updated-TicTacToe-AI"
+				),
+				projectItem(
+					"Extension: Two-Player Marble Game",
+					"Use the two-player marble variant as a lighter strategy and evaluation warmup before the stronger AI version.",
+					"FAI8-2-Player-Marble-Game"
+				)
+			]
 		}
 	]
 };

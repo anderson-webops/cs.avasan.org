@@ -4,6 +4,32 @@ export const pyGamesCourse: RawCourse = {
 	name: "PyGames",
 	modules: [
 		{
+			title: "PyG0 Setup, Editors, and Asset Workflow",
+			curriculum: [
+				{
+					title: "Mu, VS Code, and PyCharm",
+					content:
+						"Compare the three main editor paths directly. Start younger or newer students in `Mu` when setup friction matters most, move most students to `VS Code` for better debugging and file management, and keep `PyCharm` as the advanced Python-specific option once the student is comfortable with a fuller IDE."
+				},
+				{
+					title: "Asset Folder Layout",
+					content:
+						"Standardize the project layout early with `images`, `sounds`, `music`, and per-project files. The course should treat asset management as part of game engineering rather than a side issue students only debug after the game logic is written."
+				},
+				{
+					title: "Early Debugging Habits",
+					content:
+						"Teach students to rerun quickly, read tracebacks, and check asset paths, image names, and event handlers early. Most PyGame frustration comes from input, timing, or asset-loading mistakes that become easy to diagnose once the student builds the habit."
+				},
+				{
+					title: "From One File to Organized Games",
+					content:
+						"Frame the course as a progression from tiny one-file experiments into larger games with cleaner helper functions, clear state variables, and reusable subsystems. Students should know from the beginning that code organization matters as projects grow."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "PyG1 Object-Oriented Programming: Actors",
 			curriculum: [
 				{
@@ -534,7 +560,12 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Course Recap & Next Course",
 					content:
-						"Wrap up by recapping the main ideas from the entire PyGame course: actors, events, physics, platforms, projectiles, enemy AI, levels, and game states. Then discuss Python Level 2 as the typical next step, focusing on how the student will build on the Python skills and program structure habits developed while making games."
+						"Wrap up by recapping the main ideas from the entire PyGame course: actors, events, physics, platforms, projectiles, enemy AI, levels, and game states. Then connect those habits directly to Python Level 2: lists of actors, dictionaries for state, helper functions for logic separation, and classes for larger projects all transfer cleanly into the next Python course."
+				},
+				{
+					title: "Bridge to Larger Python Projects",
+					content:
+						"Make the transition explicit from game-specific code to broader Python engineering. Students should leave knowing how to break a large project into helpers, how to move from one-file scripts toward more organized structures, and why the PyGames course is a stepping stone rather than a side branch."
 				}
 			],
 			supplementalProjects: []

@@ -370,6 +370,60 @@ export const usacoGoldCourse: RawCourse = {
 					"which algorithm family the student can now recognize quickly and which still takes too long to identify"
 				)
 			]
+		},
+		{
+			title: "Unit 8: Optional Gold Problem Bank",
+			curriculum: [
+				{
+					title: "Why Gold Needs a Bigger Library",
+					content:
+						"The `USACO-Gold` repo is broader than the main course by design. Gold students benefit from a larger technique-indexed library because pattern recognition at this level depends on seeing many structurally similar problems."
+				},
+				{
+					title: "Advanced DP and Optimization Bank",
+					content:
+						"Optional DP-heavy and optimization folders include `UG1 Dynamic Programming Practice`, `UG1 Hoof Paper Scissors`, `UG2 Talent Show`, `UG4 Cow Checklist`, `UG5 Marathon`, `UG6 248`, `UG7 Treasure Chest`, and `UG8 Bookshelf`."
+				},
+				{
+					title: "Graph, MST, and Shortest-Path Extensions",
+					content:
+						"Optional graph-heavy extensions include `UG10 Roadblock`, `UG12/UG24/UG31 Why Did the Cow Cross the Road`, `UG13 Cow Routing`, `UG14 MST II`, `UG15 Superbull`, `UG16 Watering the Fields`, `UG18 I Would Walk 500 Miles`, `UG20 Fenced In`, `UG21 MooTube`, and `UG9 Dijkstra's Algorithm II`."
+				},
+				{
+					title: "Late Gold Counting and Structure Bank",
+					content:
+						"Additional late-Gold folders include `UG25 Sleepy Cow Sorting`, `UG27 Snow Boots`, `UG28 Cow Poetry`, `UG29 Cowpatibility`, `UG32 Stamp Painting`, `UG36 Circular Barn Revisited`, `UG37 Circular Barn`, `UG38 Bovine Genomics`, `UG-Milk-Visits`, and `UG-Time-is-Mooney`."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Problem Bank: Full Gold Repo",
+					content:
+						"Browse the full Gold repo library when the core sequence is not enough and you want the wider advanced-problem inventory.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Gold/tree/main"
+				},
+				problemItem(
+					"Problem: Roadblock",
+					"Use shortest-path sensitivity analysis to deepen the student's understanding of weighted-graph optimization.",
+					"UG10-Roadblock"
+				),
+				problemItem(
+					"Problem: Superbull",
+					"Use an MST-style optimization problem as a stronger extension of connectivity and edge-choice reasoning.",
+					"UG15-Superbull"
+				),
+				problemItem(
+					"Problem: Fenced In",
+					"Use a richer connectivity and cost-optimization problem to strengthen MST and graph-structure judgment.",
+					"UG20-Fenced-In"
+				),
+				problemItem(
+					"Problem: Sleepy Cow Sorting",
+					"Use a strong ordering and invariants problem to test whether the student can reason about progress without brute force.",
+					"UG25-Sleepy-Cow-Sorting"
+				)
+			]
 		}
 	]
 };

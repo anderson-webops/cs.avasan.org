@@ -323,6 +323,60 @@ export const usacoSilverCourse: RawCourse = {
 					"which problem family still needs the most work before Gold-level study begins"
 				)
 			]
+		},
+		{
+			title: "Unit 7: Optional Silver Problem Bank",
+			curriculum: [
+				{
+					title: "Why the Repo Is Larger than the Main Course",
+					content:
+						"The `USACO-Silver` repo is intentionally broader than the required course spine. Use it as an optional canonical library grouped by technique families once the core Silver modules are stable."
+				},
+				{
+					title: "Classical Training and Search Problems",
+					content:
+						"Important classical and structure-building problems in the repo include `US8 Arithmetic Progressions`, `US9 Number Triangles`, `US11 Superprime Rib`, `US12 Floodfill`, `US13 The Castle`, `US15 Sorting a Three-Valued Sequence`, `US16 Healthy Holsteins`, and `US17 Hamming Codes`."
+				},
+				{
+					title: "Graph, Reachability, and Simulation Extensions",
+					content:
+						"Graph and structured simulation extensions include `US19 Cities and States`, `US20 Moocast`, `US21 Priority Queues`, `US22 Hoof Paper Scissors`, `US24/US25/US26 Why Did the Cow Cross the Road`, `US27 Paired Up`, `US28 Bovine Genomics`, `US35 Stuck in a Rut`, and `US36 Rectangular Pasture`."
+				},
+				{
+					title: "Support Labs and Late Silver Bank",
+					content:
+						"Support and late-Silver folders include `US5 Custom Classes with HashSets and HashMaps`, `US6 DFS`, `US6 Stacks`, `US7 BFS`, `US7 Queues`, `US23 Secret Cow Code`, `US34 Rental Service`, `US37 Subset Equality`, `US38 Redistributing Gifts`, `US39 Closest Cow Wins`, and `US-Wormhole-Sort`."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Problem Bank: Full Silver Repo",
+					content:
+						"Browse the full Silver repo bank when the public spine is not enough practice and you want the larger contest-library view.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Silver/tree/main"
+				},
+				problemItem(
+					"Problem: Floodfill",
+					"Use a direct flood-fill and component-style problem to reinforce traversal fundamentals in a contest setting.",
+					"US12-Floodfill"
+				),
+				problemItem(
+					"Problem: Cities and States",
+					"Use hashed counting and pair reasoning to strengthen map-based Silver problem modeling.",
+					"US19-Cities-and-States"
+				),
+				problemItem(
+					"Problem: Moocast",
+					"Use reachability and graph construction in a problem where the hidden structure matters more than the story text.",
+					"US20-Moocast"
+				),
+				problemItem(
+					"Problem: Rectangular Pasture",
+					"Use geometric counting and structure-aware iteration as a stronger late-Silver challenge.",
+					"US36-Rectangular-Pasture"
+				)
+			]
 		}
 	]
 };

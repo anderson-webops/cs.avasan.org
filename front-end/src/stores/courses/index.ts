@@ -66,6 +66,15 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			import("./ai-level-1").then(({ aiLevel1Course }) => aiLevel1Course)
 	},
 	{
+		id: "python-to-java-and-cpp-bridge",
+		name: "Python to Java and C++ Bridge",
+		load: () =>
+			import("./python-to-java-and-cpp-bridge").then(
+				({ pythonToJavaAndCppBridgeCourse }) =>
+					pythonToJavaAndCppBridgeCourse
+			)
+	},
+	{
 		id: "c-level-1",
 		name: "C++ Level 1",
 		load: () =>
@@ -241,6 +250,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 		load: () =>
 			import("./network-security").then(
 				({ networkSecurityCourse }) => networkSecurityCourse
+			)
+	},
+	{
+		id: "rust-systems-security",
+		name: "Rust Systems Security",
+		load: () =>
+			import("./rust-systems-security").then(
+				({ rustSystemsSecurityCourse }) => rustSystemsSecurityCourse
 			)
 	},
 	{

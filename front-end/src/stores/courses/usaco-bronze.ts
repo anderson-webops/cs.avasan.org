@@ -281,6 +281,65 @@ export const usacoBronzeCourse: RawCourse = {
 					"which Bronze habit is most important to preserve when moving to Silver"
 				)
 			]
+		},
+		{
+			title: "Unit 6: Optional Bronze Problem Bank",
+			curriculum: [
+				{
+					title: "How to Read the Repo Bank",
+					content:
+						"Treat the extra `USACO-Bronze` repo folders as an optional canonical problem bank rather than as hidden missing lessons. The public course keeps a curated spine, while the repo holds a broader set of classical and modern Bronze problems for extra practice."
+				},
+				{
+					title: "Classical Bronze Bank",
+					content:
+						"Classical training problems in the repo include `UB3 Friday the Thirteenth`, `UB4 Broken Necklace`, `UB5 Greedy Gift Givers`, `UB7 Name That Number`, `UB8 Palindromic Squares`, `UB9 Dual Palindromes`, `UB11 Mixing Milk`, `UB13 Combination Lock`, `UB14 Prime Cryptarithm`, and `UB15 Ski Course Design`."
+				},
+				{
+					title: "Simulation, Arrays, and Grid Practice",
+					content:
+						"Mid-course optional problems include `UB17 Block Game`, `UB18 The Cow Signal`, `UB19 Don't Be Last`, `UB20 Hoof Paper Scissors`, `UB21 Cow Tipping`, `UB22/UB23/UB24 Why Did the Cow Cross the Road`, `UB26 Bovine Genomics`, `UB27 Modern Art`, and `UB28 Fence Painting`."
+				},
+				{
+					title: "Late Bronze and Modern Contest Bank",
+					content:
+						"Later optional repo practice includes `UB30 Contaminated Milk`, `UB32 Angry Cows`, `UB33 Mowing the Field`, `UB34 Milk Pails`, `UB35 Circular Barn`, `UB36 Load Balancing`, `UB38 Bull in a China Shop`, `UB39 Field Reduction`, `UB40/UB43 Blocked Billboard`, `UB41 The Bovine Shuffle`, `UB42 Milk Measurement`, `UB44 Lifeguards`, `UB45 Out of Place`, `UB46 Teleportation`, `UB47 Hoofball`, `UB48 Taming the Herd`, `UB49 Team Tic-Tac-Toe`, `UB52 Do You Know Your ABCs`, `UB53 Daisy Chains`, `UB56 Photoshoot`, `UB57 Photoshoot 2`, `UB58 Air Cownditioning`, `UB59 Non-Transitive Dice`, `UB60 Rotate and Shift`, `UB61 FEB`, and `UB62 Cow College`."
+				},
+				{
+					title: "Language Variants",
+					content:
+						"The repo also contains parallel `-Java` versions for many Bronze problems. Treat the plain folder as the canonical public problem entry and the `-Java` mirror as an alternate language path rather than as a duplicate lesson."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Problem Bank: Full Bronze Repo",
+					content:
+						"Browse the full Bronze repo bank, including the Python-side canonical problems and their parallel Java mirrors, when the curated course spine is not enough practice.",
+					projectLink:
+						"https://github.com/instruction-material/USACO-Bronze/tree/main"
+				},
+				problemItem(
+					"Problem: Mixing Milk",
+					"Use repeated pour operations to rehearse careful simulation and container-state updates.",
+					"UB11-Mixing-Milk"
+				),
+				problemItem(
+					"Problem: Hoof, Paper, Scissors",
+					"Use case-based counting and matchup reasoning to strengthen simple game-logic analysis.",
+					"UB20-Hoof-Paper-Scissors"
+				),
+				problemItem(
+					"Problem: Circular Barn",
+					"Use a stronger late-Bronze simulation and counting problem to test whether state modeling stays clean under more layered movement.",
+					"UB35-Circular-Barn"
+				),
+				problemItem(
+					"Problem: Cow College",
+					"Use a late Bronze optimization prompt to practice sorting, revenue reasoning, and clear objective definition.",
+					"UB62-Cow-College"
+				)
+			]
 		}
 	]
 };

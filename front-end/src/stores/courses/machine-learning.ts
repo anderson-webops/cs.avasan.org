@@ -4,6 +4,32 @@ export const machineLearningCourse: RawCourse = {
 	name: "Machine Learning",
 	modules: [
 		{
+			title: "ML0 Setup, Tooling, and Data Workflow",
+			curriculum: [
+				{
+					title: "Preferred Tools and Environment",
+					content:
+						"Standardize the course around `Google Colab` for the main workflow, with `VS Code` or `PyCharm` as the local follow-on environment when students are ready to move beyond notebooks. Set up Python, pandas, NumPy, matplotlib, seaborn, scikit-learn, and notebook support before the first real model so environment issues do not derail the conceptual lessons."
+				},
+				{
+					title: "Notebook Cells vs. Reusable Python Modules",
+					content:
+						"Teach students to keep notebooks for quick exploration while still organizing reusable helpers, cleaning steps, and plotting logic into functions they can move into `.py` files later. This keeps the course from feeling like one long sequence of disconnected notebook cells."
+				},
+				{
+					title: "Data Cleaning and Visualization First",
+					content:
+						"Before any model is trained, students should inspect columns, missing values, scales, and class balance. Basic plotting and train/test thinking should be treated as part of the baseline workflow, not as optional polish after the algorithm appears."
+				},
+				{
+					title: "Model Comparison as the Course Habit",
+					content:
+						"Set the expectation that students will compare at least two approaches on most serious datasets. The course should build the instinct that one model run is only a starting point, not the end of the reasoning."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "ML1 K-Means Clustering",
 			curriculum: [
 				{
@@ -148,13 +174,37 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Use Naive Bayes to classify emails as spam or not spam with a realistic text dataset. In Colab, load the spam mails dataset from Kaggle and drop irrelevant columns such as messageid and label columns that aren\'t needed for modeling. Remove duplicate rows. Write a preprocessing function that removes punctuation, lowercases the text, and filters out common stopwords like ‘the\', ‘is\', and ‘and\' to avoid over-emphasizing them. Use scikit-learn\'s CountVectorizer with your custom preprocessing function to turn each email into a bag-of-words feature vector. Build a list of labels corresponding to whether each email is spam or ham. Split the data into training and testing sets (e.g., 80% training, 20% testing), train a Naive Bayes classifier (such as MultinomialNB), and evaluate its accuracy on the test set. Discuss training time, any misclassifications, and why Naive Bayes is a good baseline for text classification. Wrap up with a short explanation of the dataset content, what you were trying to detect, your model\'s accuracy, and any surprising results.",
 					projectLink:
-						"https://colab.research.google.com/drive/1nV9spL17iCWHZMhJMzdWwjJ_Td6ZarIY",
-					solutionLink:
-						"https://colab.research.google.com/drive/1cwE9wp5LQ74Va3OtGnCoAjhCXkeYGPQy",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML3-Email-Spam-Classification",
 					datasetLink:
 						"https://www.kaggle.com/venky73/spam-mails-dataset",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml3_project_2.mp4"
+				}
+			],
+			supplementalProjects: []
+		},
+		{
+			title: "ML3.5 Decision Trees and Interpretable Models",
+			curriculum: [
+				{
+					title: "Decision Trees as Split-Based Reasoning",
+					content:
+						"Introduce decision trees as a supervised model that repeatedly asks the most informative question available at each split. Students should connect this to interpretable rule-based classification, not just to another library call."
+				},
+				{
+					title: "Entropy, Gini, and Overfitting at an Intuitive Level",
+					content:
+						"Keep the math light but honest: a good split reduces uncertainty, and a tree that grows without restraint can memorize noise. This is the best place in the course to make bias-variance tradeoffs visible through a model students can still inspect."
+				},
+				{
+					title: "Tree Models as a Bridge between Rules and Learned Models",
+					content:
+						"Use trees to connect early rule-based intuition with later statistical models. A tree is often easier to explain than a neural net, which makes it useful for comparison and for student confidence."
+				},
+				{
+					title: "Decision Tree Lab",
+					content:
+						"Build a decision tree classifier on a familiar dataset such as Iris, Titanic, or customer churn, visualize the main splits, and compare how the model changes when the maximum depth is constrained."
 				}
 			],
 			supplementalProjects: []
@@ -273,9 +323,7 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"In Colab, use WHO life expectancy data to build and compare regression models. Upload the dataset to Google Drive, create a Colab notebook, and mount Drive. Read the CSV into pandas, identify multiple features (such as health, economic, and demographic variables) as inputs, and life expectancy as the target output. Split data into training and testing sets. Build a linear regression model using scikit-learn and measure its performance with the model\'s score on the test data. Then build a polynomial regression model (for example by expanding some features or using polynomial transformations) and evaluate its score as well. Compare which model fits the data better and discuss whether extra complexity is justified. Summarize which factors seem most correlated with life expectancy and which model gave more reliable predictions.",
 					projectLink:
-						"https://colab.research.google.com/drive/1BAz3vBA8UefNbI5ejqjlEaKtJshEK3Bc",
-					solutionLink:
-						"https://colab.research.google.com/drive/1v08pPhtCoA6J8IdqT1c7SXemnA3exlcd#scrollTo=7BRzG9FlRD_L",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Predicting-Life-Expectancy",
 					datasetLink:
 						"https://www.kaggle.com/kumarajarshi/life-expectancy-who",
 					mediaLink:
@@ -302,9 +350,7 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"In Colab, build a neural network regression model for the Boston housing dataset using keras. Create a new notebook, then load the dataset from keras and split it into training and testing sets. Use StandardScaler or a similar tool to normalize input features (so they have similar scales), which helps the network train more effectively. Design a neural network with one or more dense hidden layers suitable for regression, using an appropriate activation (such as ReLU) in hidden layers and a linear activation in the output layer. Compile the model with a loss function appropriate for regression (such as MSE) and a suitable optimizer. Train the model on the training data and record the mean absolute error over epochs; plot MAE vs. epoch to show how error decreases as training progresses. Evaluate the model on the test set, printing mean squared error to gauge performance. Finally, plot predicted vs. actual house prices for the test set on a scatterplot with the line y = x for reference; points close to this line indicate accurate predictions. Summarize how normalization, network architecture, and training epochs influence accuracy and overfitting.",
 					projectLink:
-						"https://colab.research.google.com/drive/1yuCcN855nKnL_25zYHiN8QORMhIy2zLm",
-					solutionLink:
-						"https://colab.research.google.com/drive/1bQ4JWcP0K0_lMEVks-cQ10HOMXAawvXX",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML6-Predicting-House-Prices",
 					datasetLink:
 						"https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html",
 					mediaLink:
@@ -343,6 +389,32 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: []
 		},
 		{
+			title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy",
+			curriculum: [
+				{
+					title: "Classification Metrics beyond Accuracy",
+					content:
+						"Teach accuracy, precision, recall, F1, and the confusion matrix as different lenses on model quality. Students should understand why a single percentage can hide the wrong failure mode, especially on imbalanced data."
+				},
+				{
+					title: "Regression Metrics and Residual Thinking",
+					content:
+						"Make residuals, MAE, MSE, and `R^2` part of the recurring regression workflow. Students should be able to explain what a bad prediction looks like on the graph and in the summary metrics."
+				},
+				{
+					title: "Dataset Choice by Difficulty and Model Fit",
+					content:
+						"Build a small internal dataset bank by difficulty: tiny synthetic demos for concept explanation, medium structured datasets for classification and regression, and broader capstone candidates for comparison projects."
+				},
+				{
+					title: "Compare at Least Two Models per Serious Project",
+					content:
+						"Require a short comparison note whenever two plausible models can be tried on the same problem. This is the habit that turns the course from a sequence of demos into real machine-learning thinking."
+				}
+			],
+			supplementalProjects: []
+		},
+		{
 			title: "ML8 Master Project",
 			curriculum: [
 				{
@@ -354,6 +426,13 @@ export const machineLearningCourse: RawCourse = {
 					title: "Master Project Implementation",
 					content:
 						"Once the topic and dataset are chosen, scope the project. Identify the input features, target labels or regression outputs, and evaluation metrics. Decide which two algorithms to compare: for classification, perhaps Naive Bayes vs. a neural network; for regression, maybe linear/polynomial regression vs. a neural network. Set up a new Colab notebook, upload or connect to the dataset, and perform standard steps: data cleaning, feature engineering, train–test split, model training, evaluation, and comparison. Encourage writing clear code cells and explanatory text cells documenting the process. Aim for a project that spans about two weeks, with substantial implementation and debugging done independently while you provide guidance and code reviews."
+				},
+				{
+					title: "ML8 Project 1: Master Project Workspace",
+					content:
+						"Use the canonical capstone workspace in the repo as the starting structure for the final project. The student should compare at least two models, justify the evaluation metric, and leave the notebook organized enough to share as a portfolio artifact.",
+					projectLink:
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML8-Master-Project"
 				},
 				{
 					title: "Master Project Examples",

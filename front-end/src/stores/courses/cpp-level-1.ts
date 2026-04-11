@@ -12,6 +12,11 @@ export const cppLevel1Course: RawCourse = {
 						'Use an online C++ editor such as repl.it to compile and run code. Create a C++11 file named Objects and Variables and run the starter line `std::cout << "Hello World!\\n"` to print to the console. Show how `std::endl` adds a newline, what happens if it is missing, and that each statement ends with a semicolon.'
 				},
 				{
+					title: "Optional Python-to-C++ Bridge",
+					content:
+						"Students coming from the Python track should use the `Python to Java and C++ Bridge` course or similar addendum so typed variables, compilation, braces, and `cout`/`cin` feel like a translation exercise before the main C++ sequence accelerates."
+				},
+				{
 					title: "Primitive Types",
 					content:
 						"Reference: https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Primitive-Types-and-Strings-Reference Explain fundamental data types: integers, floating point numbers, booleans and characters. Demonstrate declaring variables with and without initial values and initializing several of the same type on one line. Create an integer myAge, a double myRating for a movie rating, and show arithmetic operators including %. Illustrate mod with 10 / 3 = 3 and 10 % 3 = 1. Cast a double to an int when printing. Create a boolean isHot and a char myChar for the first letter of your last name."
@@ -396,6 +401,70 @@ export const cppLevel1Course: RawCourse = {
 				}
 			],
 			supplementalProjects: []
+		},
+		{
+			title: "CPPF12 Optional Reinforcement and Repo Library",
+			curriculum: [
+				{
+					title: "What Stays Core vs. Optional",
+					content:
+						"Keep the public spine focused on the main C++ learning arc while exposing the remaining repo material as reinforcement. The missing folders are mostly drills, references, or alternate practice projects rather than hidden required units."
+				},
+				{
+					title: "Pointers, Loops, and Matrix Reinforcement",
+					content:
+						"Use the optional folders below when a student needs one more pass over loop structure, pointer comfort, or matrix-style class design before moving to harder systems work."
+				},
+				{
+					title: "Archive Boundary",
+					content:
+						"Treat `CPP_practice` as a loose archive bank rather than as a canonical public module. Students should rely on the curated extensions below before digging into that scratch-style folder."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Extension: For Loop Practice",
+					content:
+						"Use a focused counted-loop drill when the main loop module needs extra repetition without adding new concepts.",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-For-Loop-Practice"
+				},
+				{
+					title: "Extension: While Loop Practice",
+					content:
+						"Use a condition-driven loop drill to reinforce termination reasoning and update logic.",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-While-Loop-Practice"
+				},
+				{
+					title: "Reference: rand() and Randomness",
+					content:
+						"Keep the randomness reference available when students need a clearer explanation of pseudo-random generation and simple simulation setup.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-rand-Reference"
+				},
+				{
+					title: "Extension: Pointer Practice",
+					content:
+						"Use a lighter pointer drill before the student commits to the more complex dynamic-memory projects.",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointer-Practice"
+				},
+				{
+					title: "Extension: Alternate Assembly Line Project",
+					content:
+						"Use the earlier assembly-line variant as an extra dynamic-memory and object-handling lab before the later dynamic-array work.",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Project-2-Assembly-Line"
+				},
+				{
+					title: "Extension: Matrix Class Practice",
+					content:
+						"Use the matrix-class folder as a richer follow-on to the matrix-addition capstone when a student is ready to model grid operations more formally.",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF10-Matrix-Fun-with-Matrix-Class"
+				}
+			]
 		}
 	]
 };

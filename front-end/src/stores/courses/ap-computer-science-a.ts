@@ -503,6 +503,73 @@ export const apComputerScienceACourse: RawCourse = {
 					"APCS_Check-in-4-Additional-Practice-Project"
 				)
 			]
+		},
+		{
+			title: "Unit 10: Repo Reference, Check-In, and Practice Bank",
+			curriculum: [
+				{
+					title: "APCS Repo Taxonomy",
+					content:
+						"Treat the `APCS` repo as four intentionally different banks: required course projects, optional reinforcement labs, AP-style references and practice, and check-ins or alternate projects. This keeps the course readable while making the broader repo inventory discoverable."
+				},
+				{
+					title: "Reference Folders Stay Optional",
+					content:
+						"Keep the numerous `Reference`, `Multiple-Choice`, and `Free-Response` folders as targeted support material instead of forcing them into the main weekly spine. Students should use them when a topic needs reinforcement or exam-style review."
+				},
+				{
+					title: "Check-Ins and Alternate Projects",
+					content:
+						"Expose the check-ins and alternate practice projects as structured review work, not as hidden repo noise. This is especially useful for students who want more AP-style pacing without leaving the Java/AP track."
+				}
+			],
+			supplementalProjects: [
+				projectItem(
+					"Reference Bank: Variables, Strings, and Casting",
+					"Use the early-unit references when students need direct support on primitives, strings, arithmetic operators, or casting before moving back into project work.",
+					"APCS1-Casting-Reference"
+				),
+				projectItem(
+					"Optional Project: Playlist",
+					"Use a class-and-array style project to reinforce object design, collections, and readable method structure.",
+					"APCS10-Playlist"
+				),
+				projectItem(
+					"Optional Project: Card and Deck Classes",
+					"Strengthen class interactions and collection modeling with a fuller card/deck object set before or after AP-adjacent card games.",
+					"APCS11-Card-and-Deck-Classes"
+				),
+				projectItem(
+					"Practice: APCS Check-In 1",
+					"Use the first repo check-in as a concise cumulative review block for the earlier AP CSA topics.",
+					"APCS-Check-in-1"
+				),
+				projectItem(
+					"Practice: Check-In 2 Additional Project",
+					"Use an extra mid-course practice project when a student needs one more pass over methods, classes, or structured control flow.",
+					"APCS-Check-in-2-Additional-Practice-Project"
+				),
+				projectItem(
+					"Practice: Runtime Analysis",
+					"Use the runtime-analysis folder as a bridge from AP problem solving into more explicit algorithmic cost reasoning.",
+					"APCS13-Runtime-Analysis"
+				),
+				projectItem(
+					"Practice: Blob Erase",
+					"Use a flood-fill style recursion exercise as a stronger recursive problem once the basic tracing work is secure.",
+					"APCS15-Blob-Erase"
+				),
+				projectItem(
+					"Practice: Merge Sort",
+					"Use merge sort as an optional extension for students who want one more serious sorting algorithm beyond the main AP core.",
+					"APCS16-MergeSort"
+				),
+				projectItem(
+					"Extension: Decode",
+					"Use a later-stage string and logic project as an optional capstone-style AP extension.",
+					"APCS17-Decode"
+				)
+			]
 		}
 	]
 };

@@ -958,6 +958,37 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					].join(" ")
 				}
 			)
+		},
+		{
+			title: "SADX Enrichment and Legacy Archive Boundaries",
+			curriculum: [
+				{
+					title: "Canonical Swift Repo Structure",
+					content:
+						"Treat the `SAD1` through `SAD7` projects as the canonical active course path. The older `Mod1Pro*` through `Mod5Pro*` folders remain in the repo as archive material rather than as a second competing sequence."
+				},
+				{
+					title: "Legacy Means Reference, Not Core Scope",
+					content:
+						"Keep the `legacy/` materials and the older `Mod*` folders available only when an instructor needs to recover an older demo or compare historical scaffolds. They should not re-enter the main public course flow."
+				},
+				{
+					title: "Shapes Studio as Intentional Enrichment",
+					content:
+						"Expose `SADX-SwiftUI-Shapes-Studio` as optional enrichment because it still reinforces useful SwiftUI drawing and layout ideas, but it sits outside the main shipping-app spine."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Extension: SwiftUI Shapes Studio",
+					content:
+						"Use the shapes-focused enrichment pack for extra practice with paths, custom drawing, and SwiftUI composition after the main course flow is stable.",
+					projectLink:
+						"https://github.com/instruction-material/Swift/tree/main/SADX-SwiftUI-Shapes-Studio/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Swift/tree/main/SADX-SwiftUI-Shapes-Studio/solution"
+				}
+			]
 		}
 	]
 };

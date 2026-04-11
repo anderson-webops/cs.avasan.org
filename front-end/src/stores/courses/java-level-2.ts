@@ -432,6 +432,84 @@ export const javaLevel2Course: RawCourse = {
 				}
 			],
 			supplementalProjects: []
+		},
+		{
+			title: "JM11 Repo Extension and Reference Library",
+			curriculum: [
+				{
+					title: "How to Use the Extra Java Level 2 Folders",
+					content:
+						"Treat the additional `Java-Level-2` folders as a deliberate extension bank for file I/O, exception handling, data-structure examples, and alternate console projects. They reinforce the main course rather than replacing it."
+				},
+				{
+					title: "Reference and Solution Boundaries",
+					content:
+						"Starter-only or solution-only folders stay support-oriented. The public course surfaces the most useful ones below while still keeping the main Java 2 progression readable."
+				},
+				{
+					title: "When to Reach for the Extension Bank",
+					content:
+						"Use these extensions when a student needs more structured practice with maps, file handling, console project design, or threading previews before moving on to higher-level Java work."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Extension: stdin/stdout Practice",
+					content:
+						"Use a focused console-I/O exercise when students need more confidence with Java input/output mechanics in isolation.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-stdinstdout"
+				},
+				{
+					title: "Extension: Java File I/O",
+					content:
+						"Use the dedicated file-I/O folder when the student needs one more direct pass over reading, writing, and file handling before the larger JM8 work.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Java-File-IO"
+				},
+				{
+					title: "Reference: HashMaps Examples",
+					content:
+						"Keep a smaller maps example bank available when the main dealership or file-I/O projects feel too large for the immediate practice need.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Java-HashMaps-Examples"
+				},
+				{
+					title: "Extension: Dog Class Test",
+					content:
+						"Use the dog-class test harness as a lightweight object-model review before students move into the later multi-class projects.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM1-Dog-Class-Test"
+				},
+				{
+					title: "Extension: Tic Tac Toe Console",
+					content:
+						"Use a compact console game to reinforce control flow, object organization, and user interaction without the complexity of the maze branch.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM10_TicTacToeConsole"
+				},
+				{
+					title: "Preview: Threading Example",
+					content:
+						"Keep the threading example visible as a preview for students who are ready to see how timed or concurrent behavior starts to appear in Java.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Threading-Example"
+				},
+				{
+					title: "Reference: Try-Catch Example",
+					content:
+						"Use a smaller exception-handling example when students need a cleaner reference than the larger try-catch projects.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Try-Catch-Example"
+				},
+				{
+					title: "Extension: Password Management System",
+					content:
+						"Use a stronger practical console project to reinforce classes, file handling, and guarded user interaction in one place.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Password-Management-System"
+				}
+			]
 		}
 	]
 };

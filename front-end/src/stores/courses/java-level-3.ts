@@ -941,6 +941,84 @@ export const javaLevel3Course: RawCourse = {
 				}
 			],
 			supplementalProjects: []
+		},
+		{
+			title: "AJ18 Repo Extension, Starter, and Capstone Library",
+			curriculum: [
+				{
+					title: "Classify the Extra Java Level 3 Folders",
+					content:
+						"Treat the remaining `Java-Level-3` folders as a mix of starter scaffolds, reference implementations, and optional advanced labs. The public course should surface the useful ones without forcing every starter and check-in into the core path."
+				},
+				{
+					title: "Data-Structures Reinforcement without Clutter",
+					content:
+						"Use the extra linked-list, stack, queue, hash-table, and graph folders when a student needs more depth on one structure family after the main module is already complete."
+				},
+				{
+					title: "Capstone Support Material",
+					content:
+						"Keep the `AJ17` starters and side folders visible as capstone support, not as hidden repo drift. Students who want to push the Google Maps branch further should be able to find the supporting scaffolds quickly."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Extension: Exceptions Reference Lab",
+					content:
+						"Use the standalone exceptions folder when the student needs a cleaner error-handling example than the larger bakery or data-structures projects.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Exceptions"
+				},
+				{
+					title: "Extension: Nested Classes",
+					content:
+						"Use nested classes as an optional design extension for students who want a stronger sense of how helper types can live inside larger structures.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Nested-Classes"
+				},
+				{
+					title: "Reference: Node Class",
+					content:
+						"Keep the node-class reference visible because it supports the linked-list, tree, and graph sections that arrive later in the course.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Node-Class"
+				},
+				{
+					title: "Extension: Separate Chaining Hash Table",
+					content:
+						"Use the separate-chaining implementation when students want one more explicit collision-handling model beyond the main hash-map work.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Separate-Chaining-Hash-Table"
+				},
+				{
+					title: "Reference: Open Addressing Hash Tables",
+					content:
+						"Keep the open-addressing reference alongside separate chaining so students can compare the main collision strategies directly.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Open-Addressing-Reference"
+				},
+				{
+					title: "Extension: Google Maps Showcase",
+					content:
+						"Use the repo's Google Maps branch as a stronger capstone framing example once the weighted-graph and street-searcher work is complete.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Google-Maps"
+				},
+				{
+					title: "Starter: Street Searcher",
+					content:
+						"Expose the starter variant so students can re-enter the capstone path from a scaffold instead of only from the finished solution.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher-Starter"
+				},
+				{
+					title: "Starter: Master Project",
+					content:
+						"Use the final master-project starter when a student wants an additional capstone scaffold beyond the main public sequence.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Master-Project-Starter"
+				}
+			]
 		}
 	]
 };
