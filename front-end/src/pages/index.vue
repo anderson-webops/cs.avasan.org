@@ -6,7 +6,54 @@ import { useContentStore } from "@/stores/content";
 defineOptions({ name: "HomePage" });
 
 const content = useContentStore();
-const { subjectGroups, highlights } = storeToRefs(content);
+const siteUrl = "https://classes.jacobdanderson.net";
+const { faqs, highlights, subjectGroups } = storeToRefs(content);
+const faqStructuredData = computed(() => ({
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.value.map((faq) => ({
+		"@type": "Question",
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: faq.answer
+		},
+		name: faq.question
+	}))
+}));
+const courseStructuredData = computed(() =>
+	subjectGroups.value.map((group) => ({
+		"@context": "https://schema.org",
+		"@type": "Course",
+		description: `Private instruction covering ${group.subjects.join(", ")}.`,
+		name: `${group.title} tutoring with Jacob Anderson`,
+		provider: {
+			"@type": "Person",
+			name: "Jacob Anderson",
+			url: siteUrl
+		}
+	}))
+);
+
+useHead(() => ({
+	link: [
+		{
+			href: `${siteUrl}/`,
+			rel: "canonical"
+		}
+	],
+	script: [
+		{
+			innerHTML: JSON.stringify(faqStructuredData.value),
+			key: "classes-home-faq-jsonld",
+			type: "application/ld+json"
+		},
+		...courseStructuredData.value.map((entry, index) => ({
+			innerHTML: JSON.stringify(entry),
+			key: `classes-home-course-${index}`,
+			type: "application/ld+json"
+		}))
+	]
+}) as any);
 </script>
 
 <template>
