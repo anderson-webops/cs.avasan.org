@@ -22,7 +22,7 @@ useHead(() => ({
 	],
 	script: [
 		{
-			children: JSON.stringify({
+			innerHTML: JSON.stringify({
 				"@context": "https://schema.org",
 				"@type": "FAQPage",
 				mainEntity: content.faqs.map(faq => ({
@@ -38,7 +38,7 @@ useHead(() => ({
 			type: "application/ld+json"
 		}
 	]
-}));
+}) as any);
 </script>
 
 <template>

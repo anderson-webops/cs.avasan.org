@@ -19,7 +19,6 @@ declare module 'vue' {
     LazyMarkdownContent: typeof import('./components/LazyMarkdownContent.vue')['default']
     ProfileDetailsCard: typeof import('./components/ProfileDetailsCard.vue')['default']
     ProfileFields: typeof import('./components/ProfileFields.vue')['default']
-    README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheFooter: typeof import('./components/TheFooter.vue')['default']

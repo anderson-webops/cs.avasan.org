@@ -104,9 +104,9 @@ export function ViteSSG(
 
 		const context: ViteSSGContext<true> = {
 			app,
-			head,
+			head: head as ViteSSGContext<true>["head"],
 			isClient: !import.meta.env.SSR,
-			router,
+			router: router as ViteSSGContext<true>["router"],
 			routes: routerOptions.routes,
 			onSSRAppRendered,
 			triggerOnSSRAppRendered,

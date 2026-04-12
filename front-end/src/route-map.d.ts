@@ -192,7 +192,7 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/README.md': {
+    'src/pages/README.vue': {
       routes:
         | '/README'
       views:
