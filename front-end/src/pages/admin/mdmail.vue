@@ -20,6 +20,30 @@ interface SendAssociations {
 	internalEmailsSavedFor: MatchedUserAccount[];
 }
 
+interface SessionNoteRecord {
+	_id: string;
+	studentName: string;
+	primaryEmail: string;
+	ccEmails: string[];
+	subject: string;
+	sessionDate: string;
+	markdown: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
+interface RecentSessionNotesResponse {
+	matchedUser: MatchedUserAccount | null;
+	sessionNotes: SessionNoteRecord[];
+}
+
+interface SendMailResponse {
+	ok: boolean;
+	messageId?: string;
+	associations?: SendAssociations;
+	recentSessionNotes?: SessionNoteRecord[];
+}
+
 type DateInputEl = HTMLInputElement & { showPicker?: () => void };
 
 const CUSTOM_OPTION = "Custom";
@@ -38,6 +62,11 @@ const dateInput = ref<DateInputEl | null>(null);
 const resultText = ref("");
 const saveSummary = ref<SendAssociations | null>(null);
 const lastSendWasSessionNote = ref(false);
+const recentSessionNotes = ref<SessionNoteRecord[]>([]);
+const recentNotesOwner = ref<MatchedUserAccount | null>(null);
+const recentNotesLoading = ref(false);
+const recentNotesError = ref("");
+let recentNotesRequestToken = 0;
 
 // success preview state
 const sentOk = ref(false);
@@ -67,6 +96,14 @@ const ccEmails = computed(() =>
 );
 const liveRecipients = computed(() => parseRecipients(to.value));
 const sentRecipients = computed(() => parseRecipients(previewTo.value));
+const hasSelectedRecipient = computed(
+	() => !!selectedRecipientName.value && !isCustomRecipient.value
+);
+const recentNotesHeading = computed(() =>
+	selectedRecipientName.value
+		? `Recent session notes for ${selectedRecipientName.value}`
+		: "Recent session notes"
+);
 
 watch(
 	() => selectedRecipientName.value,
@@ -86,6 +123,19 @@ watch(
 	{ immediate: true }
 );
 
+watch(
+	() => selectedRecipientName.value,
+	async name => {
+		if (!name || name === CUSTOM_OPTION) {
+			resetRecentSessionNotes();
+			return;
+		}
+
+		await loadRecentSessionNotes();
+	},
+	{ immediate: true }
+);
+
 watch(subjectDate, value => {
 	if (!value) {
 		subject.value = "";
@@ -100,6 +150,13 @@ function switchTab(tab: "compose" | "preview") {
 
 function clearRecipient() {
 	selectedRecipientName.value = "";
+}
+
+function resetRecentSessionNotes() {
+	recentSessionNotes.value = [];
+	recentNotesOwner.value = null;
+	recentNotesLoading.value = false;
+	recentNotesError.value = "";
 }
 
 function openDatePicker() {
@@ -141,6 +198,86 @@ function formatSessionSubject(value: string) {
 	return `Session Notes (${month}/${day})`;
 }
 
+const sessionDateFormatter = new Intl.DateTimeFormat("en-US", {
+	month: "short",
+	day: "numeric",
+	year: "numeric"
+});
+
+const sessionTimestampFormatter = new Intl.DateTimeFormat("en-US", {
+	month: "short",
+	day: "numeric",
+	year: "numeric",
+	hour: "numeric",
+	minute: "2-digit"
+});
+
+function formatSessionDate(value: string) {
+	const parsed = new Date(value);
+	if (Number.isNaN(parsed.getTime())) return value;
+	return sessionDateFormatter.format(parsed);
+}
+
+function formatTimestamp(value: string) {
+	const parsed = new Date(value);
+	if (Number.isNaN(parsed.getTime())) return value;
+	return sessionTimestampFormatter.format(parsed);
+}
+
+function noteRecencyLabel(index: number) {
+	if (index === 0) return "Most recent";
+	if (index === 1) return "2nd most recent";
+	return "3rd most recent";
+}
+
+async function loadRecentSessionNotes() {
+	const recipientName = selectedRecipientName.value;
+	const resolvedPrimaryEmail = primaryEmail.value;
+
+	if (
+		!recipientName
+		|| recipientName === CUSTOM_OPTION
+		|| !resolvedPrimaryEmail
+	) {
+		resetRecentSessionNotes();
+		return;
+	}
+
+	const requestToken = ++recentNotesRequestToken;
+	recentNotesLoading.value = true;
+	recentNotesError.value = "";
+
+	try {
+		const { data } = await api.get<RecentSessionNotesResponse>(
+			"/admin-mail/session-notes/recent",
+			{
+				params: {
+					recipientName,
+					primaryEmail: resolvedPrimaryEmail
+				},
+				withCredentials: true
+			}
+		);
+
+		if (requestToken !== recentNotesRequestToken) return;
+
+		recentSessionNotes.value = data.sessionNotes ?? [];
+		recentNotesOwner.value = data.matchedUser ?? null;
+	} catch (error: any) {
+		if (requestToken !== recentNotesRequestToken) return;
+
+		resetRecentSessionNotes();
+		recentNotesError.value =
+			error?.response?.data?.message
+			?? error?.message
+			?? "Unable to load recent session notes.";
+	} finally {
+		if (requestToken === recentNotesRequestToken) {
+			recentNotesLoading.value = false;
+		}
+	}
+}
+
 async function sendMail() {
 	resultText.value = "";
 	sentOk.value = false;
@@ -152,6 +289,8 @@ async function sendMail() {
 	const curMd = md.value;
 	const sessionDateIso = parseDateIso(subjectDate.value);
 	const wasSessionNoteSend = !!sessionDateIso;
+	const keptRecipientSelection = selectedRecipientName.value;
+	const usedCustomRecipient = isCustomRecipient.value;
 	const payload = {
 		to: curTo,
 		subject: curSubject,
@@ -161,9 +300,13 @@ async function sendMail() {
 	};
 
 	try {
-		const { data } = await api.post("/admin-mail/send", payload, {
-			withCredentials: true
-		});
+		const { data } = await api.post<SendMailResponse>(
+			"/admin-mail/send",
+			payload,
+			{
+				withCredentials: true
+			}
+		);
 
 		if (data?.ok === true) {
 			saveSummary.value = data?.associations ?? null;
@@ -173,9 +316,22 @@ async function sendMail() {
 			previewSubject.value = curSubject;
 			sentPreviewHtml.value = renderPreview(curMd);
 
-			// clear inputs
-			selectedRecipientName.value = "";
-			to.value = "";
+			if (wasSessionNoteSend) {
+				recentSessionNotes.value = data.recentSessionNotes ?? [];
+				recentNotesOwner.value =
+					data.associations?.sessionNoteSavedFor
+					?? recentNotesOwner.value;
+				recentNotesError.value = "";
+				recentNotesLoading.value = false;
+			}
+
+			// clear inputs while preserving the selected persona path
+			if (usedCustomRecipient) {
+				selectedRecipientName.value = "";
+				to.value = "";
+			} else {
+				selectedRecipientName.value = keptRecipientSelection;
+			}
 			subjectDate.value = "";
 			subject.value = "";
 			md.value = "";
@@ -409,6 +565,65 @@ function parseDateIso(value: string): string | null {
 				</div>
 			</div>
 
+			<section
+				v-if="hasSelectedRecipient"
+				class="history-card"
+				aria-live="polite"
+			>
+				<div class="history-card__header">
+					<div>
+						<p class="mail-card__eyebrow">Recent notes</p>
+						<h3>{{ recentNotesHeading }}</h3>
+					</div>
+					<p v-if="recentNotesOwner" class="history-card__meta">
+						Stored on {{ recentNotesOwner.email }}
+					</p>
+				</div>
+
+				<p v-if="recentNotesLoading" class="history-card__empty">
+					Loading recent session notes…
+				</p>
+				<p v-else-if="recentNotesError" class="history-card__empty">
+					{{ recentNotesError }}
+				</p>
+				<p
+					v-else-if="recentSessionNotes.length === 0"
+					class="history-card__empty"
+				>
+					No saved session notes were found for this recipient yet.
+				</p>
+				<div v-else class="history-card__list">
+					<article
+						v-for="(note, index) in recentSessionNotes"
+						:key="note._id"
+						class="history-note"
+					>
+						<div class="history-note__header">
+							<div>
+								<p class="history-note__eyebrow">
+									{{ formatSessionDate(note.sessionDate) }}
+								</p>
+								<h4>{{ note.subject }}</h4>
+							</div>
+							<span class="history-note__badge">
+								{{ noteRecencyLabel(index) }}
+							</span>
+						</div>
+						<p class="history-note__meta">
+							Sent to {{ note.primaryEmail }}
+							<template v-if="note.ccEmails.length">
+								· CC {{ note.ccEmails.join(", ") }}
+							</template>
+							· saved {{ formatTimestamp(note.createdAt) }}
+						</p>
+						<div
+							class="history-note__body"
+							v-html="renderPreview(note.markdown)"
+						/>
+					</article>
+				</div>
+			</section>
+
 			<div v-if="sentOk" class="preview">
 				<div class="preview-meta">
 					<div><strong>To:</strong> {{ sentRecipients.to }}</div>
@@ -488,6 +703,99 @@ function parseDateIso(value: string): string | null {
 		rgba(255, 255, 255, 1)
 	);
 	box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.5);
+}
+
+.history-card {
+	display: grid;
+	gap: 1rem;
+	padding: 1.25rem 1.35rem;
+	border-radius: 24px;
+	border: 1px solid #d8e3ed;
+	background: #fff;
+	box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.45);
+}
+
+.history-card__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.history-card__header h3 {
+	margin: 0;
+	font-size: 1.3rem;
+}
+
+.history-card__meta,
+.history-card__empty {
+	margin: 0;
+	color: #526779;
+	line-height: 1.6;
+}
+
+.history-card__list {
+	display: grid;
+	gap: 0.9rem;
+}
+
+.history-note {
+	display: grid;
+	gap: 0.75rem;
+	padding: 1rem 1.05rem;
+	border-radius: 18px;
+	border: 1px solid #e2e8f0;
+	background: linear-gradient(
+		180deg,
+		rgba(248, 250, 252, 0.95),
+		rgba(255, 255, 255, 1)
+	);
+}
+
+.history-note__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.history-note__header h4 {
+	margin: 0;
+	font-size: 1.05rem;
+}
+
+.history-note__eyebrow {
+	margin: 0 0 0.2rem;
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #2563eb;
+}
+
+.history-note__badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.35rem 0.7rem;
+	border-radius: 999px;
+	background: #e0ebff;
+	color: #1d4ed8;
+	font-size: 0.82rem;
+	font-weight: 700;
+}
+
+.history-note__meta {
+	margin: 0;
+	color: #526779;
+	font-size: 0.92rem;
+	line-height: 1.5;
+}
+
+.history-note__body {
+	padding-top: 0.15rem;
+	color: #0f172a;
 }
 
 .mail-card__header {

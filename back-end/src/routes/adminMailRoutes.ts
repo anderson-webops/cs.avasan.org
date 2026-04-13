@@ -212,6 +212,18 @@ interface SavedAssociationSummary {
 	internalEmailsSavedFor: MatchedUserAccount[];
 }
 
+interface RecentSessionNoteRecord {
+	_id: string;
+	studentName: string;
+	primaryEmail: string;
+	ccEmails: string[];
+	subject: string;
+	sessionDate: Date;
+	markdown: string;
+	createdAt: Date;
+	updatedAt: Date;
+}
+
 interface ImapAppendResult {
 	appended: boolean;
 	mailbox: string;
@@ -343,6 +355,95 @@ async function trimSessionNotesForUser(userID: string): Promise<void> {
 	});
 }
 
+async function trimSessionNotesForPrimaryEmail(
+	primaryEmail: string
+): Promise<void> {
+	const normalizedPrimaryEmail = normalizeEmail(primaryEmail);
+	if (!normalizedPrimaryEmail) {
+		return;
+	}
+
+	const notesToKeep = await SessionNote.find({
+		user: { $exists: false },
+		primaryEmail: normalizedPrimaryEmail
+	})
+		.sort({ sessionDate: -1, createdAt: -1, _id: -1 })
+		.limit(3)
+		.select("_id")
+		.lean();
+
+	const keepIDs = notesToKeep.map(note => note._id);
+	if (keepIDs.length === 0) {
+		return;
+	}
+
+	await SessionNote.deleteMany({
+		user: { $exists: false },
+		primaryEmail: normalizedPrimaryEmail,
+		_id: { $nin: keepIDs }
+	});
+}
+
+function serializeSessionNote(
+	note: {
+		_id: unknown;
+		studentName: string;
+		primaryEmail: string;
+		ccEmails?: string[];
+		subject: string;
+		sessionDate: Date;
+		markdown: string;
+		createdAt: Date;
+		updatedAt: Date;
+	}
+): RecentSessionNoteRecord {
+	return {
+		_id: String(note._id),
+		studentName: note.studentName,
+		primaryEmail: note.primaryEmail,
+		ccEmails: note.ccEmails ?? [],
+		subject: note.subject,
+		sessionDate: note.sessionDate,
+		markdown: note.markdown,
+		createdAt: note.createdAt,
+		updatedAt: note.updatedAt
+	};
+}
+
+async function getRecentSessionNotesForTarget(args: {
+	associatedUser: MatchedUserAccount | null;
+	primaryEmail: string;
+}): Promise<RecentSessionNoteRecord[]> {
+	const normalizedPrimaryEmail = normalizeEmail(args.primaryEmail);
+	const query = args.associatedUser
+		? {
+				$or: [
+					{ user: args.associatedUser._id },
+					{
+						user: { $exists: false },
+						primaryEmail: normalizedPrimaryEmail
+					}
+				]
+			}
+		: normalizedPrimaryEmail
+			? {
+					user: { $exists: false },
+					primaryEmail: normalizedPrimaryEmail
+				}
+			: null;
+
+	if (!query) {
+		return [];
+	}
+
+	const sessionNotes = await SessionNote.find(query)
+		.sort({ sessionDate: -1, createdAt: -1, _id: -1 })
+		.limit(3)
+		.lean();
+
+	return sessionNotes.map(serializeSessionNote);
+}
+
 async function saveAssociatedRecords(
 	args: {
 		recipients: string[];
@@ -383,6 +484,18 @@ async function saveAssociatedRecords(
 		await trimSessionNotesForUser(associatedPrimaryUser._id);
 		sessionNoteSavedFor = associatedPrimaryUser;
 	}
+	else if (args.sessionDate) {
+		await SessionNote.create({
+			studentName: args.recipientName || primaryRecipient,
+			primaryEmail: primaryRecipient,
+			ccEmails: args.recipients.slice(1).map(normalizeEmail),
+			subject: args.subject,
+			sessionDate: args.sessionDate,
+			markdown: args.markdown,
+			html: args.html
+		});
+		await trimSessionNotesForPrimaryEmail(primaryRecipient);
+	}
 
 	const internalEmailsSavedFor
 		= args.sessionDate
@@ -415,6 +528,55 @@ async function saveAssociatedRecords(
 		internalEmailsSavedFor
 	};
 }
+
+router.get("/session-notes/recent", validAdmin, async (req, res) => {
+	const parsed = z
+		.object({
+			recipientName: z.string().trim().min(1).optional(),
+			primaryEmail: z.string().trim().email().optional()
+		})
+		.refine(
+			data => Boolean(data.recipientName || data.primaryEmail),
+			{ message: "recipientName or primaryEmail is required" }
+		)
+		.safeParse({
+			recipientName:
+				typeof req.query.recipientName === "string"
+					? req.query.recipientName
+					: undefined,
+			primaryEmail:
+				typeof req.query.primaryEmail === "string"
+					? req.query.primaryEmail
+					: undefined
+		});
+
+	if (!parsed.success) {
+		return res.status(400).json({
+			message: "Invalid session note lookup",
+			issues: parsed.error.issues
+		});
+	}
+
+	const primaryEmail = normalizeEmail(parsed.data.primaryEmail ?? "");
+	const recipientMappedUser = await findMatchedUserByRecipientName(
+		parsed.data.recipientName
+	);
+	const primaryUser = primaryEmail
+		? (
+				await findMatchedUsersByEmail([primaryEmail])
+			).get(primaryEmail) ?? null
+		: null;
+	const associatedUser = recipientMappedUser ?? primaryUser;
+	const sessionNotes = await getRecentSessionNotesForTarget({
+		associatedUser,
+		primaryEmail
+	});
+
+	return res.json({
+		matchedUser: associatedUser,
+		sessionNotes
+	});
+});
 
 function createPrimaryTransporter() {
 	const caBuf = PRIMARY_TRANSPORT_CA_FILE
@@ -764,6 +926,13 @@ router.post("/send", validAdmin, async (req, res) => {
 			messageId,
 			sentAt: mailBase.date
 		});
+		const primaryRecipient = normalizeEmail(recipients[0] ?? "");
+		const recentSessionNotes = sessionDate
+			? await getRecentSessionNotesForTarget({
+					associatedUser: savedAssociations.sessionNoteSavedFor,
+					primaryEmail: primaryRecipient
+				})
+			: [];
 
 		console.info("admin-mail/send completed", {
 			transportUsed,
@@ -778,7 +947,8 @@ router.post("/send", validAdmin, async (req, res) => {
 		return res.json({
 			ok: true,
 			messageId,
-			associations: savedAssociations
+			associations: savedAssociations,
+			recentSessionNotes
 		});
 	}
 	catch (err: any) {
