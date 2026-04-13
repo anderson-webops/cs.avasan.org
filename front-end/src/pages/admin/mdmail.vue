@@ -565,7 +565,7 @@ function parseDateIso(value: string): string | null {
 				</div>
 			</div>
 
-			<section
+			<div
 				v-if="hasSelectedRecipient"
 				class="history-card"
 				aria-live="polite"
@@ -622,7 +622,7 @@ function parseDateIso(value: string): string | null {
 						/>
 					</article>
 				</div>
-			</section>
+			</div>
 
 			<div v-if="sentOk" class="preview">
 				<div class="preview-meta">
