@@ -31,9 +31,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-ns0-setup-and-tooling/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-ns0-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-ns0-setup-and-tooling/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-ns0-setup-and-tooling/solution"
 				}
 			],
 			supplementalProjects: [
@@ -42,27 +42,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Keep a short operations notebook for setup and tooling that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on remote access method, Linux lab environment, and the first verified command set so students learn to explain network state from observation rather than from guesses.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-ns0-setup-and-tooling/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-ns0-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-ns0-setup-and-tooling/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-ns0-setup-and-tooling/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to NS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-ns0-setup-and-tooling-supplemental-2/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-ns0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-ns0-setup-and-tooling-supplemental-2/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-ns0-setup-and-tooling-supplemental-2/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to NS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-ns0-setup-and-tooling-supplemental-3/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-ns0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-ns0-setup-and-tooling-supplemental-3/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-ns0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -94,9 +94,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-1-the-network-stack-in-plain-english/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-1-the-network-stack-in-plain-english/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-1-the-network-stack-in-plain-english/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-1-the-network-stack-in-plain-english/solution"
 				}
 			],
 			supplementalProjects: [
@@ -105,27 +105,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Keep a short operations notebook for the network stack in plain english that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on the path from one client request to one server response so students learn to explain network state from observation rather than from guesses.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-1-the-network-stack-in-plain-english/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-1-the-network-stack-in-plain-english/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-1-the-network-stack-in-plain-english/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-1-the-network-stack-in-plain-english/solution"
 				},
 				{
 					title: "Unit 1: The Network Stack in Plain English supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: The Network Stack in Plain English. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-unit-1-the-network-stack-in-plain-english-supple/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-unit-1-the-network-stack-in-plain-english-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-unit-1-the-network-stack-in-plain-english-supple/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-unit-1-the-network-stack-in-plain-english-supple/solution"
 				},
 				{
 					title: "Unit 1: The Network Stack in Plain English supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: The Network Stack in Plain English. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-unit-1-the-network-stack-in-plain-english-supple/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-unit-1-the-network-stack-in-plain-english-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX04-unit-1-the-network-stack-in-plain-english-supple/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-unit-1-the-network-stack-in-plain-english-supple/solution"
 				}
 			]
 		},
@@ -157,9 +157,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming/solution"
 				}
 			],
 			supplementalProjects: [
@@ -168,27 +168,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Keep a short operations notebook for addresses and naming that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on how one hostname, one interface, and one observed IP address relate without meaning the same thing so students learn to explain network state from observation rather than from guesses.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming/solution"
 				},
 				{
 					title: "Unit 2: Addresses and Naming supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Addresses and Naming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-2-addresses-and-naming-supplemental-2/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-2-addresses-and-naming-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX05-unit-2-addresses-and-naming-supplemental-2/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-2-addresses-and-naming-supplemental-2/solution"
 				},
 				{
 					title: "Unit 2: Addresses and Naming supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Addresses and Naming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming-supplemental-3/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX06-unit-2-addresses-and-naming-supplemental-3/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming-supplemental-3/solution"
 				}
 			]
 		},
@@ -220,9 +220,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edg/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edg/solution"
 				}
 			],
 			supplementalProjects: [
@@ -231,27 +231,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Keep a short operations notebook for switches, routers, nat, and the internet edge that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on default gateways, local-subnet boundaries, and which hop is doing translation so students learn to explain network state from observation rather than from guesses.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edg/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edg/solution"
 				},
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Switches, Routers, NAT, and the Internet Edge. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg-2/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edg-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX07-unit-3-switches-routers-nat-and-the-internet-edg-2/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edg-2/solution"
 				},
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Switches, Routers, NAT, and the Internet Edge. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-3-switches-routers-nat-and-the-internet-edg/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-3-switches-routers-nat-and-the-internet-edg/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-3-switches-routers-nat-and-the-internet-edg/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-3-switches-routers-nat-and-the-internet-edg/solution"
 				}
 			]
 		},
@@ -298,18 +298,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Ports and Listening Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-4-ports-and-listening-services-supplemental/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-4-ports-and-listening-services-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-4-ports-and-listening-services-supplemental/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-4-ports-and-listening-services-supplemental/solution"
 				},
 				{
 					title: "Unit 4: Ports and Listening Services supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Ports and Listening Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-unit-4-ports-and-listening-services-supplemental/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-unit-4-ports-and-listening-services-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-unit-4-ports-and-listening-services-supplemental/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-unit-4-ports-and-listening-services-supplemental/solution"
 				}
 			]
 		},
@@ -356,18 +356,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: DNS and Name Resolution. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX11-unit-5-dns-and-name-resolution-supplemental-2/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-11-unit-5-dns-and-name-resolution-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX11-unit-5-dns-and-name-resolution-supplemental-2/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-11-unit-5-dns-and-name-resolution-supplemental-2/solution"
 				},
 				{
 					title: "Unit 5: DNS and Name Resolution supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: DNS and Name Resolution. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX12-unit-5-dns-and-name-resolution-supplemental-3/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-12-unit-5-dns-and-name-resolution-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX12-unit-5-dns-and-name-resolution-supplemental-3/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-12-unit-5-dns-and-name-resolution-supplemental-3/solution"
 				}
 			]
 		},
@@ -414,18 +414,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Core Diagnostics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX13-unit-6-core-diagnostics-supplemental-2/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-13-unit-6-core-diagnostics-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX13-unit-6-core-diagnostics-supplemental-2/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-13-unit-6-core-diagnostics-supplemental-2/solution"
 				},
 				{
 					title: "Unit 6: Core Diagnostics supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Core Diagnostics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX14-unit-6-core-diagnostics-supplemental-3/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-14-unit-6-core-diagnostics-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX14-unit-6-core-diagnostics-supplemental-3/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-14-unit-6-core-diagnostics-supplemental-3/solution"
 				}
 			]
 		},
@@ -472,18 +472,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Linux Interface and Route Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX15-unit-7-linux-interface-and-route-management-supp/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-15-unit-7-linux-interface-and-route-management-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX15-unit-7-linux-interface-and-route-management-supp/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-15-unit-7-linux-interface-and-route-management-supp/solution"
 				},
 				{
 					title: "Unit 7: Linux Interface and Route Management supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Linux Interface and Route Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX16-unit-7-linux-interface-and-route-management-supp/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-16-unit-7-linux-interface-and-route-management-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX16-unit-7-linux-interface-and-route-management-supp/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-16-unit-7-linux-interface-and-route-management-supp/solution"
 				}
 			]
 		},
@@ -515,9 +515,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-8-ipv6-in-practice/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-8-ipv6-in-practice/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/solution"
 				}
 			],
 			supplementalProjects: [
@@ -526,27 +526,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Keep a short operations notebook for ipv6 in practice that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on address family selection, scope behavior, and which rule sets apply to which traffic so students learn to explain network state from observation rather than from guesses.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-8-ipv6-in-practice/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX08-unit-8-ipv6-in-practice/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/solution"
 				},
 				{
 					title: "Unit 8: IPv6 in Practice supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: IPv6 in Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX17-unit-8-ipv6-in-practice-supplemental-2/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-17-unit-8-ipv6-in-practice-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX17-unit-8-ipv6-in-practice-supplemental-2/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-17-unit-8-ipv6-in-practice-supplemental-2/solution"
 				},
 				{
 					title: "Unit 8: IPv6 in Practice supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: IPv6 in Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX18-unit-8-ipv6-in-practice-supplemental-3/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-18-unit-8-ipv6-in-practice-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX18-unit-8-ipv6-in-practice-supplemental-3/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-18-unit-8-ipv6-in-practice-supplemental-3/solution"
 				}
 			]
 		},
@@ -593,18 +593,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Firewalls and Host Policy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX19-unit-9-firewalls-and-host-policy-supplemental-2/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-19-unit-9-firewalls-and-host-policy-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX19-unit-9-firewalls-and-host-policy-supplemental-2/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-19-unit-9-firewalls-and-host-policy-supplemental-2/solution"
 				},
 				{
 					title: "Unit 9: Firewalls and Host Policy supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Firewalls and Host Policy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX20-unit-9-firewalls-and-host-policy-supplemental-3/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-20-unit-9-firewalls-and-host-policy-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX20-unit-9-firewalls-and-host-policy-supplemental-3/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-20-unit-9-firewalls-and-host-policy-supplemental-3/solution"
 				}
 			]
 		},
@@ -651,18 +651,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Packet Capture and Deep Inspection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX21-unit-10-packet-capture-and-deep-inspection-suppl/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-21-unit-10-packet-capture-and-deep-inspection-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX21-unit-10-packet-capture-and-deep-inspection-suppl/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-21-unit-10-packet-capture-and-deep-inspection-suppl/solution"
 				},
 				{
 					title: "Unit 10: Packet Capture and Deep Inspection supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Packet Capture and Deep Inspection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX22-unit-10-packet-capture-and-deep-inspection-suppl/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-22-unit-10-packet-capture-and-deep-inspection-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX22-unit-10-packet-capture-and-deep-inspection-suppl/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-22-unit-10-packet-capture-and-deep-inspection-suppl/solution"
 				}
 			]
 		},
@@ -694,9 +694,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-11-common-application-protocols/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-11-common-application-protocols/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-11-common-application-protocols/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-11-common-application-protocols/solution"
 				}
 			],
 			supplementalProjects: [
@@ -705,27 +705,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Keep a short operations notebook for common application protocols that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which parts of the exchange were visible at the transport layer and which parts moved behind TLS so students learn to explain network state from observation rather than from guesses.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-11-common-application-protocols/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-11-common-application-protocols/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX09-unit-11-common-application-protocols/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-11-common-application-protocols/solution"
 				},
 				{
 					title: "Unit 11: Common Application Protocols supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX23-unit-11-common-application-protocols-supplementa/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX23-unit-11-common-application-protocols-supplementa/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplementa/solution"
 				},
 				{
 					title: "Unit 11: Common Application Protocols supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX24-unit-11-common-application-protocols-supplementa/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX24-unit-11-common-application-protocols-supplementa/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplementa/solution"
 				}
 			]
 		},
@@ -772,18 +772,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Secure Exposure of Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX25-unit-12-secure-exposure-of-services-supplemental/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-25-unit-12-secure-exposure-of-services-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX25-unit-12-secure-exposure-of-services-supplemental/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-25-unit-12-secure-exposure-of-services-supplemental/solution"
 				},
 				{
 					title: "Unit 12: Secure Exposure of Services supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Secure Exposure of Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX26-unit-12-secure-exposure-of-services-supplemental/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-26-unit-12-secure-exposure-of-services-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX26-unit-12-secure-exposure-of-services-supplemental/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-26-unit-12-secure-exposure-of-services-supplemental/solution"
 				}
 			]
 		},
@@ -815,9 +815,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-ns13-expansion-ideas-and-next-steps/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-ns13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-ns13-expansion-ideas-and-next-steps/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-ns13-expansion-ideas-and-next-steps/solution"
 				}
 			],
 			supplementalProjects: [
@@ -826,27 +826,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Keep a short operations notebook for expansion ideas and next steps that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which advanced networking path fits the student's goals and why so students learn to explain network state from observation rather than from guesses.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-ns13-expansion-ideas-and-next-steps/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-ns13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX10-ns13-expansion-ideas-and-next-steps/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-ns13-expansion-ideas-and-next-steps/solution"
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to NS13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX27-ns13-expansion-ideas-and-next-steps-supplemental/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-27-ns13-expansion-ideas-and-next-steps-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX27-ns13-expansion-ideas-and-next-steps-supplemental/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-27-ns13-expansion-ideas-and-next-steps-supplemental/solution"
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to NS13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX28-ns13-expansion-ideas-and-next-steps-supplemental/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-28-ns13-expansion-ideas-and-next-steps-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX28-ns13-expansion-ideas-and-next-steps-supplemental/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-28-ns13-expansion-ideas-and-next-steps-supplemental/solution"
 				}
 			]
 		},
@@ -868,9 +868,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: network systems lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-network-systems-lab-15/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-network-systems-lab-15/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/solution"
 				},
 				{
 					title: "network systems lab 15: Review and Reflection",
@@ -884,27 +884,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: network systems lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-network-systems-lab-15/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX01-network-systems-lab-15/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/solution"
 				},
 				{
 					title: "Applied Studio 15: network systems lab 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: network systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX29-applied-studio-15-network-systems-lab-15-supplem/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-29-applied-studio-15-network-systems-lab-15-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX29-applied-studio-15-network-systems-lab-15-supplem/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-29-applied-studio-15-network-systems-lab-15-supplem/solution"
 				},
 				{
 					title: "Applied Studio 15: network systems lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: network systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX30-applied-studio-15-network-systems-lab-15-supplem/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-30-applied-studio-15-network-systems-lab-15-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX30-applied-studio-15-network-systems-lab-15-supplem/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-30-applied-studio-15-network-systems-lab-15-supplem/solution"
 				}
 			]
 		},
@@ -926,9 +926,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: network systems lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-network-systems-lab-16/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-network-systems-lab-16/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/solution"
 				},
 				{
 					title: "network systems lab 16: Review and Reflection",
@@ -942,27 +942,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: network systems lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-network-systems-lab-16/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX02-network-systems-lab-16/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/solution"
 				},
 				{
 					title: "Applied Studio 16: network systems lab 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX31-applied-studio-16-network-systems-lab-16-supplem/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-31-applied-studio-16-network-systems-lab-16-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX31-applied-studio-16-network-systems-lab-16-supplem/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-31-applied-studio-16-network-systems-lab-16-supplem/solution"
 				},
 				{
 					title: "Applied Studio 16: network systems lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX32-applied-studio-16-network-systems-lab-16-supplem/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-32-applied-studio-16-network-systems-lab-16-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX32-applied-studio-16-network-systems-lab-16-supplem/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-32-applied-studio-16-network-systems-lab-16-supplem/solution"
 				}
 			]
 		},
@@ -984,9 +984,9 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: network systems lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-network-systems-lab-17/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-network-systems-lab-17/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/solution"
 				},
 				{
 					title: "network systems lab 17: Review and Reflection",
@@ -1000,27 +1000,27 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: network systems lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-network-systems-lab-17/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX03-network-systems-lab-17/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/solution"
 				},
 				{
 					title: "Applied Studio 17: network systems lab 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX33-applied-studio-17-network-systems-lab-17-supplem/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-33-applied-studio-17-network-systems-lab-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX33-applied-studio-17-network-systems-lab-17-supplem/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-33-applied-studio-17-network-systems-lab-17-supplem/solution"
 				},
 				{
 					title: "Applied Studio 17: network systems lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX34-applied-studio-17-network-systems-lab-17-supplem/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-34-applied-studio-17-network-systems-lab-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NSX34-applied-studio-17-network-systems-lab-17-supplem/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-34-applied-studio-17-network-systems-lab-17-supplem/solution"
 				}
 			]
 		}

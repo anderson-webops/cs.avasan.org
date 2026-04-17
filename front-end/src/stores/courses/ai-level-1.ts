@@ -127,9 +127,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: AI Landscape and State Representation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-unit-1-ai-landscape-and-state-representation-sup/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-unit-1-ai-landscape-and-state-representation-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-unit-1-ai-landscape-and-state-representation-sup/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-unit-1-ai-landscape-and-state-representation-sup/solution"
 				}
 			]
 		},
@@ -191,9 +191,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Stacks, Queues, and Traversal Intuition. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-unit-2-stacks-queues-and-traversal-intuition-sup/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-unit-2-stacks-queues-and-traversal-intuition-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-unit-2-stacks-queues-and-traversal-intuition-sup/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-unit-2-stacks-queues-and-traversal-intuition-sup/solution"
 				}
 			]
 		},
@@ -388,9 +388,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: Rule-Based Systems and Puzzle Framing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-unit-5-rule-based-systems-and-puzzle-framing-sup/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-unit-5-rule-based-systems-and-puzzle-framing-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-unit-5-rule-based-systems-and-puzzle-framing-sup/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-unit-5-rule-based-systems-and-puzzle-framing-sup/solution"
 				}
 			]
 		},
@@ -507,9 +507,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Features, Evaluation, and Responsible AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-unit-7-features-evaluation-and-responsible-ai-su/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-unit-7-features-evaluation-and-responsible-ai-su/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-su/solution"
 				}
 			]
 		},
@@ -669,9 +669,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 11: ai search lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-ai-search-lab-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-ai-search-lab-13/solution"
 				},
 				{
 					title: "ai search lab 13: Review and Reflection",
@@ -685,27 +685,27 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 11: ai search lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-ai-search-lab-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX01-ai-search-lab-13/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-ai-search-lab-13/solution"
 				},
 				{
 					title: "Applied Studio 11: ai search lab 13 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: ai search lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-applied-studio-11-ai-search-lab-13-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-applied-studio-11-ai-search-lab-13-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-applied-studio-11-ai-search-lab-13-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-applied-studio-11-ai-search-lab-13-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 11: ai search lab 13 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: ai search lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX06-applied-studio-11-ai-search-lab-13-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-06-applied-studio-11-ai-search-lab-13-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX06-applied-studio-11-ai-search-lab-13-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-06-applied-studio-11-ai-search-lab-13-supplemental-/solution"
 				}
 			]
 		},
@@ -727,9 +727,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 12: ai search lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-ai-search-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-ai-search-lab-14/solution"
 				},
 				{
 					title: "ai search lab 14: Review and Reflection",
@@ -743,27 +743,27 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 12: ai search lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-ai-search-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX02-ai-search-lab-14/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-ai-search-lab-14/solution"
 				},
 				{
 					title: "Applied Studio 12: ai search lab 14 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: ai search lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX07-applied-studio-12-ai-search-lab-14-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-07-applied-studio-12-ai-search-lab-14-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX07-applied-studio-12-ai-search-lab-14-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-07-applied-studio-12-ai-search-lab-14-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 12: ai search lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: ai search lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX08-applied-studio-12-ai-search-lab-14-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-08-applied-studio-12-ai-search-lab-14-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX08-applied-studio-12-ai-search-lab-14-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-08-applied-studio-12-ai-search-lab-14-supplemental-/solution"
 				}
 			]
 		},
@@ -785,9 +785,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 13: ai search lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-ai-search-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-ai-search-lab-15/solution"
 				},
 				{
 					title: "ai search lab 15: Review and Reflection",
@@ -801,27 +801,27 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 13: ai search lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-ai-search-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX03-ai-search-lab-15/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-ai-search-lab-15/solution"
 				},
 				{
 					title: "Applied Studio 13: ai search lab 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: ai search lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX09-applied-studio-13-ai-search-lab-15-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-09-applied-studio-13-ai-search-lab-15-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX09-applied-studio-13-ai-search-lab-15-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-09-applied-studio-13-ai-search-lab-15-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 13: ai search lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: ai search lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX10-applied-studio-13-ai-search-lab-15-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-10-applied-studio-13-ai-search-lab-15-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX10-applied-studio-13-ai-search-lab-15-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-10-applied-studio-13-ai-search-lab-15-supplemental-/solution"
 				}
 			]
 		},
@@ -843,9 +843,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: ai search lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-ai-search-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-ai-search-lab-16/solution"
 				},
 				{
 					title: "ai search lab 16: Review and Reflection",
@@ -859,27 +859,27 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: ai search lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-ai-search-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX04-ai-search-lab-16/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-ai-search-lab-16/solution"
 				},
 				{
 					title: "Applied Studio 14: ai search lab 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: ai search lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX11-applied-studio-14-ai-search-lab-16-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-11-applied-studio-14-ai-search-lab-16-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX11-applied-studio-14-ai-search-lab-16-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-11-applied-studio-14-ai-search-lab-16-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 14: ai search lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: ai search lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX12-applied-studio-14-ai-search-lab-16-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-12-applied-studio-14-ai-search-lab-16-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX12-applied-studio-14-ai-search-lab-16-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-12-applied-studio-14-ai-search-lab-16-supplemental-/solution"
 				}
 			]
 		},
@@ -901,9 +901,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: ai search lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-ai-search-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-ai-search-lab-17/solution"
 				},
 				{
 					title: "ai search lab 17: Review and Reflection",
@@ -917,27 +917,27 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: ai search lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-ai-search-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX05-ai-search-lab-17/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-ai-search-lab-17/solution"
 				},
 				{
 					title: "Applied Studio 15: ai search lab 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: ai search lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX13-applied-studio-15-ai-search-lab-17-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-13-applied-studio-15-ai-search-lab-17-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX13-applied-studio-15-ai-search-lab-17-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-13-applied-studio-15-ai-search-lab-17-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 15: ai search lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: ai search lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX14-applied-studio-15-ai-search-lab-17-supplemental-/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-14-applied-studio-15-ai-search-lab-17-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX14-applied-studio-15-ai-search-lab-17-supplemental-/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-14-applied-studio-15-ai-search-lab-17-supplemental-/solution"
 				}
 			]
 		},
@@ -980,18 +980,18 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Unbeatable TicTacToe AI 1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX15-applied-studio-16-unbeatable-tictactoe-ai-1-supp/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-15-applied-studio-16-unbeatable-tictactoe-ai-1-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX15-applied-studio-16-unbeatable-tictactoe-ai-1-supp/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-15-applied-studio-16-unbeatable-tictactoe-ai-1-supp/solution"
 				},
 				{
 					title: "Applied Studio 16: Unbeatable TicTacToe AI 1 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Unbeatable TicTacToe AI 1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX16-applied-studio-16-unbeatable-tictactoe-ai-1-supp/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-16-applied-studio-16-unbeatable-tictactoe-ai-1-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX16-applied-studio-16-unbeatable-tictactoe-ai-1-supp/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-16-applied-studio-16-unbeatable-tictactoe-ai-1-supp/solution"
 				}
 			]
 		},
@@ -1034,18 +1034,18 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: The Marble Game AI(COPY). Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX17-applied-studio-17-the-marble-game-ai-copy-supple/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-17-applied-studio-17-the-marble-game-ai-copy-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX17-applied-studio-17-the-marble-game-ai-copy-supple/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-17-applied-studio-17-the-marble-game-ai-copy-supple/solution"
 				},
 				{
 					title: "Applied Studio 17: The Marble Game AI(COPY) supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: The Marble Game AI(COPY). Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX18-applied-studio-17-the-marble-game-ai-copy-supple/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-18-applied-studio-17-the-marble-game-ai-copy-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AIX18-applied-studio-17-the-marble-game-ai-copy-supple/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-18-applied-studio-17-the-marble-game-ai-copy-supple/solution"
 				}
 			]
 		}

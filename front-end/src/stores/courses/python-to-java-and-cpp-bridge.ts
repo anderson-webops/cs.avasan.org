@@ -58,9 +58,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ0 Positioning and Workflow Translation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX01-ptj0-positioning-and-workflow-translation-supple/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-ptj0-positioning-and-workflow-translation-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX01-ptj0-positioning-and-workflow-translation-supple/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-ptj0-positioning-and-workflow-translation-supple/solution"
 				}
 			]
 		},
@@ -112,18 +112,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ1 Functions, Parameters, and Return Types. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX02-ptj1-functions-parameters-and-return-types-suppl/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-ptj1-functions-parameters-and-return-types-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX02-ptj1-functions-parameters-and-return-types-suppl/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-ptj1-functions-parameters-and-return-types-suppl/solution"
 				},
 				{
 					title: "Functions, Parameters, and Return Types supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ1 Functions, Parameters, and Return Types. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX03-ptj1-functions-parameters-and-return-types-suppl/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-ptj1-functions-parameters-and-return-types-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX03-ptj1-functions-parameters-and-return-types-suppl/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-ptj1-functions-parameters-and-return-types-suppl/solution"
 				}
 			]
 		},
@@ -175,18 +175,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ2 Collections, Strings, and Indexing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX04-ptj2-collections-strings-and-indexing-supplement/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX04-ptj2-collections-strings-and-indexing-supplement/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplement/solution"
 				},
 				{
 					title: "Collections, Strings, and Indexing supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ2 Collections, Strings, and Indexing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX05-ptj2-collections-strings-and-indexing-supplement/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX05-ptj2-collections-strings-and-indexing-supplement/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplement/solution"
 				}
 			]
 		},
@@ -238,18 +238,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ3 Classes and Objects across Languages. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX06-ptj3-classes-and-objects-across-languages-supple/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-ptj3-classes-and-objects-across-languages-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX06-ptj3-classes-and-objects-across-languages-supple/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-ptj3-classes-and-objects-across-languages-supple/solution"
 				},
 				{
 					title: "Classes and Objects across Languages supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ3 Classes and Objects across Languages. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX07-ptj3-classes-and-objects-across-languages-supple/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-ptj3-classes-and-objects-across-languages-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX07-ptj3-classes-and-objects-across-languages-supple/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-ptj3-classes-and-objects-across-languages-supple/solution"
 				}
 			]
 		},
@@ -301,18 +301,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ4 Java-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX08-ptj4-java-specific-adaptation-supplemental-2/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-08-ptj4-java-specific-adaptation-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX08-ptj4-java-specific-adaptation-supplemental-2/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-08-ptj4-java-specific-adaptation-supplemental-2/solution"
 				},
 				{
 					title: "Java Specific Adaptation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ4 Java-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX09-ptj4-java-specific-adaptation-supplemental-3/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-09-ptj4-java-specific-adaptation-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX09-ptj4-java-specific-adaptation-supplemental-3/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-09-ptj4-java-specific-adaptation-supplemental-3/solution"
 				}
 			]
 		},
@@ -364,18 +364,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ5 C++-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX10-ptj5-c-specific-adaptation-supplemental-2/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-c-specific-adaptation-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX10-ptj5-c-specific-adaptation-supplemental-2/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-c-specific-adaptation-supplemental-2/solution"
 				},
 				{
 					title: "C++ Specific Adaptation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ5 C++-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX11-ptj5-c-specific-adaptation-supplemental-3/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-c-specific-adaptation-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX11-ptj5-c-specific-adaptation-supplemental-3/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-c-specific-adaptation-supplemental-3/solution"
 				}
 			]
 		},
@@ -397,9 +397,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 7: language bridge lab 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX01-language-bridge-lab-11/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX01-language-bridge-lab-11/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/solution"
 				},
 				{
 					title: "language bridge lab 11: Review and Reflection",
@@ -413,27 +413,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 7: language bridge lab 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX01-language-bridge-lab-11/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX01-language-bridge-lab-11/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/solution"
 				},
 				{
 					title: "Applied Studio 7: language bridge lab 11 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 7: language bridge lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX12-applied-studio-7-language-bridge-lab-11-suppleme/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-12-applied-studio-7-language-bridge-lab-11-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX12-applied-studio-7-language-bridge-lab-11-suppleme/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-12-applied-studio-7-language-bridge-lab-11-suppleme/solution"
 				},
 				{
 					title: "Applied Studio 7: language bridge lab 11 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 7: language bridge lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX13-applied-studio-7-language-bridge-lab-11-suppleme/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-13-applied-studio-7-language-bridge-lab-11-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX13-applied-studio-7-language-bridge-lab-11-suppleme/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-13-applied-studio-7-language-bridge-lab-11-suppleme/solution"
 				}
 			]
 		},
@@ -455,9 +455,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 8: language bridge lab 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX02-language-bridge-lab-12/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX02-language-bridge-lab-12/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/solution"
 				},
 				{
 					title: "language bridge lab 12: Review and Reflection",
@@ -471,27 +471,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 8: language bridge lab 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX02-language-bridge-lab-12/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX02-language-bridge-lab-12/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/solution"
 				},
 				{
 					title: "Applied Studio 8: language bridge lab 12 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: language bridge lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX14-applied-studio-8-language-bridge-lab-12-suppleme/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-14-applied-studio-8-language-bridge-lab-12-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX14-applied-studio-8-language-bridge-lab-12-suppleme/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-14-applied-studio-8-language-bridge-lab-12-suppleme/solution"
 				},
 				{
 					title: "Applied Studio 8: language bridge lab 12 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: language bridge lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX15-applied-studio-8-language-bridge-lab-12-suppleme/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-15-applied-studio-8-language-bridge-lab-12-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX15-applied-studio-8-language-bridge-lab-12-suppleme/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-15-applied-studio-8-language-bridge-lab-12-suppleme/solution"
 				}
 			]
 		},
@@ -513,9 +513,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 9: language bridge lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX03-language-bridge-lab-13/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX03-language-bridge-lab-13/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/solution"
 				},
 				{
 					title: "language bridge lab 13: Review and Reflection",
@@ -529,27 +529,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 9: language bridge lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX03-language-bridge-lab-13/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX03-language-bridge-lab-13/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/solution"
 				},
 				{
 					title: "Applied Studio 9: language bridge lab 13 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: language bridge lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX16-applied-studio-9-language-bridge-lab-13-suppleme/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-16-applied-studio-9-language-bridge-lab-13-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX16-applied-studio-9-language-bridge-lab-13-suppleme/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-16-applied-studio-9-language-bridge-lab-13-suppleme/solution"
 				},
 				{
 					title: "Applied Studio 9: language bridge lab 13 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: language bridge lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX17-applied-studio-9-language-bridge-lab-13-suppleme/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-17-applied-studio-9-language-bridge-lab-13-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX17-applied-studio-9-language-bridge-lab-13-suppleme/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-17-applied-studio-9-language-bridge-lab-13-suppleme/solution"
 				}
 			]
 		},
@@ -571,9 +571,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 10: language bridge lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX04-language-bridge-lab-14/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX04-language-bridge-lab-14/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/solution"
 				},
 				{
 					title: "language bridge lab 14: Review and Reflection",
@@ -587,27 +587,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 10: language bridge lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX04-language-bridge-lab-14/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX04-language-bridge-lab-14/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/solution"
 				},
 				{
 					title: "Applied Studio 10: language bridge lab 14 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: language bridge lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX18-applied-studio-10-language-bridge-lab-14-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-18-applied-studio-10-language-bridge-lab-14-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX18-applied-studio-10-language-bridge-lab-14-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-18-applied-studio-10-language-bridge-lab-14-supplem/solution"
 				},
 				{
 					title: "Applied Studio 10: language bridge lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: language bridge lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX19-applied-studio-10-language-bridge-lab-14-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-19-applied-studio-10-language-bridge-lab-14-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX19-applied-studio-10-language-bridge-lab-14-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-19-applied-studio-10-language-bridge-lab-14-supplem/solution"
 				}
 			]
 		},
@@ -629,9 +629,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 11: language bridge lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX05-language-bridge-lab-15/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX05-language-bridge-lab-15/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/solution"
 				},
 				{
 					title: "language bridge lab 15: Review and Reflection",
@@ -645,27 +645,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 11: language bridge lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX05-language-bridge-lab-15/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX05-language-bridge-lab-15/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/solution"
 				},
 				{
 					title: "Applied Studio 11: language bridge lab 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: language bridge lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX20-applied-studio-11-language-bridge-lab-15-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-20-applied-studio-11-language-bridge-lab-15-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX20-applied-studio-11-language-bridge-lab-15-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-20-applied-studio-11-language-bridge-lab-15-supplem/solution"
 				},
 				{
 					title: "Applied Studio 11: language bridge lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: language bridge lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX21-applied-studio-11-language-bridge-lab-15-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-21-applied-studio-11-language-bridge-lab-15-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX21-applied-studio-11-language-bridge-lab-15-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-21-applied-studio-11-language-bridge-lab-15-supplem/solution"
 				}
 			]
 		},
@@ -687,9 +687,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 12: language bridge lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX06-language-bridge-lab-16/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX06-language-bridge-lab-16/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/solution"
 				},
 				{
 					title: "language bridge lab 16: Review and Reflection",
@@ -703,27 +703,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 12: language bridge lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX06-language-bridge-lab-16/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX06-language-bridge-lab-16/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/solution"
 				},
 				{
 					title: "Applied Studio 12: language bridge lab 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: language bridge lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX22-applied-studio-12-language-bridge-lab-16-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-22-applied-studio-12-language-bridge-lab-16-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX22-applied-studio-12-language-bridge-lab-16-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-22-applied-studio-12-language-bridge-lab-16-supplem/solution"
 				},
 				{
 					title: "Applied Studio 12: language bridge lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: language bridge lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX23-applied-studio-12-language-bridge-lab-16-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-23-applied-studio-12-language-bridge-lab-16-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX23-applied-studio-12-language-bridge-lab-16-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-23-applied-studio-12-language-bridge-lab-16-supplem/solution"
 				}
 			]
 		},
@@ -745,9 +745,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 13: language bridge lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX07-language-bridge-lab-17/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX07-language-bridge-lab-17/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/solution"
 				},
 				{
 					title: "language bridge lab 17: Review and Reflection",
@@ -761,27 +761,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 13: language bridge lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX07-language-bridge-lab-17/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX07-language-bridge-lab-17/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/solution"
 				},
 				{
 					title: "Applied Studio 13: language bridge lab 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: language bridge lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX24-applied-studio-13-language-bridge-lab-17-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-24-applied-studio-13-language-bridge-lab-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX24-applied-studio-13-language-bridge-lab-17-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-24-applied-studio-13-language-bridge-lab-17-supplem/solution"
 				},
 				{
 					title: "Applied Studio 13: language bridge lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: language bridge lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX25-applied-studio-13-language-bridge-lab-17-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-25-applied-studio-13-language-bridge-lab-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX25-applied-studio-13-language-bridge-lab-17-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-25-applied-studio-13-language-bridge-lab-17-supplem/solution"
 				}
 			]
 		},
@@ -824,18 +824,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: graphics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX26-applied-studio-14-graphics-supplemental-2/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-26-applied-studio-14-graphics-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX26-applied-studio-14-graphics-supplemental-2/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-26-applied-studio-14-graphics-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: graphics supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: graphics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX27-applied-studio-14-graphics-supplemental-3/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-27-applied-studio-14-graphics-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX27-applied-studio-14-graphics-supplemental-3/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-27-applied-studio-14-graphics-supplemental-3/solution"
 				}
 			]
 		},
@@ -878,18 +878,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: CPP practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX28-applied-studio-15-cpp-practice-supplemental-2/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-28-applied-studio-15-cpp-practice-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX28-applied-studio-15-cpp-practice-supplemental-2/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-28-applied-studio-15-cpp-practice-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: CPP practice supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: CPP practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX29-applied-studio-15-cpp-practice-supplemental-3/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-29-applied-studio-15-cpp-practice-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX29-applied-studio-15-cpp-practice-supplemental-3/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-29-applied-studio-15-cpp-practice-supplemental-3/solution"
 				}
 			]
 		},
@@ -911,9 +911,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: J1X01 java foundations build 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/solution"
 				},
 				{
 					title: "J1X01 java foundations build 12: Review and Reflection",
@@ -927,27 +927,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: J1X01 java foundations build 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/solution"
 				},
 				{
 					title: "Applied Studio 16: J1X01 java foundations build 12 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: J1X01 java foundations build 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX30-applied-studio-16-j1x01-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-30-applied-studio-16-j1x01-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX30-applied-studio-16-j1x01-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-30-applied-studio-16-j1x01-java-foundations-build-1/solution"
 				},
 				{
 					title: "Applied Studio 16: J1X01 java foundations build 12 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: J1X01 java foundations build 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX31-applied-studio-16-j1x01-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-31-applied-studio-16-j1x01-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX31-applied-studio-16-j1x01-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-31-applied-studio-16-j1x01-java-foundations-build-1/solution"
 				}
 			]
 		},
@@ -969,9 +969,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: c foundations build 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-c-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-c-foundations-build-13/solution"
 				},
 				{
 					title: "c foundations build 13: Review and Reflection",
@@ -985,27 +985,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: c foundations build 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-c-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-c-foundations-build-13/solution"
 				},
 				{
 					title: "Applied Studio 17: c foundations build 13 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: c foundations build 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX32-applied-studio-17-c-foundations-build-13-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-32-applied-studio-17-c-foundations-build-13-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX32-applied-studio-17-c-foundations-build-13-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-32-applied-studio-17-c-foundations-build-13-supplem/solution"
 				},
 				{
 					title: "Applied Studio 17: c foundations build 13 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: c foundations build 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX33-applied-studio-17-c-foundations-build-13-supplem/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-33-applied-studio-17-c-foundations-build-13-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRGX33-applied-studio-17-c-foundations-build-13-supplem/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-33-applied-studio-17-c-foundations-build-13-supplem/solution"
 				}
 			]
 		}

@@ -724,9 +724,9 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Healthy Holsteins. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX01-applied-studio-13-healthy-holsteins-supplemental/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-01-applied-studio-13-healthy-holsteins-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX01-applied-studio-13-healthy-holsteins-supplemental/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-01-applied-studio-13-healthy-holsteins-supplemental/solution"
 				}
 			]
 		},
@@ -769,18 +769,18 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Hamming Codes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX02-applied-studio-14-hamming-codes-supplemental-2/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-02-applied-studio-14-hamming-codes-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX02-applied-studio-14-hamming-codes-supplemental-2/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-02-applied-studio-14-hamming-codes-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: Hamming Codes supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Hamming Codes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX03-applied-studio-14-hamming-codes-supplemental-3/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-03-applied-studio-14-hamming-codes-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX03-applied-studio-14-hamming-codes-supplemental-3/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-03-applied-studio-14-hamming-codes-supplemental-3/solution"
 				}
 			]
 		},
@@ -823,18 +823,18 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Priority Queues. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX04-applied-studio-15-priority-queues-supplemental-2/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-04-applied-studio-15-priority-queues-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX04-applied-studio-15-priority-queues-supplemental-2/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-04-applied-studio-15-priority-queues-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: Priority Queues supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Priority Queues. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX05-applied-studio-15-priority-queues-supplemental-3/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-05-applied-studio-15-priority-queues-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX05-applied-studio-15-priority-queues-supplemental-3/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-05-applied-studio-15-priority-queues-supplemental-3/solution"
 				}
 			]
 		},
@@ -877,18 +877,18 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX06-applied-studio-16-hoof-paper-scissors-supplement/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX06-applied-studio-16-hoof-paper-scissors-supplement/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplement/solution"
 				},
 				{
 					title: "Applied Studio 16: Hoof Paper Scissors supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX07-applied-studio-16-hoof-paper-scissors-supplement/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-07-applied-studio-16-hoof-paper-scissors-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX07-applied-studio-16-hoof-paper-scissors-supplement/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-07-applied-studio-16-hoof-paper-scissors-supplement/solution"
 				}
 			]
 		},
@@ -931,18 +931,18 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Why Did the Cow Cross the Road. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX08-applied-studio-17-why-did-the-cow-cross-the-road/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-08-applied-studio-17-why-did-the-cow-cross-the-road/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX08-applied-studio-17-why-did-the-cow-cross-the-road/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-08-applied-studio-17-why-did-the-cow-cross-the-road/solution"
 				},
 				{
 					title: "Applied Studio 17: Why Did the Cow Cross the Road supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Why Did the Cow Cross the Road. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX09-applied-studio-17-why-did-the-cow-cross-the-road/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-09-applied-studio-17-why-did-the-cow-cross-the-road/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/USX09-applied-studio-17-why-did-the-cow-cross-the-road/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-09-applied-studio-17-why-did-the-cow-cross-the-road/solution"
 				}
 			]
 		}

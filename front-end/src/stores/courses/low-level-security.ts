@@ -51,18 +51,18 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS1 Memory Layout and Security Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX01-lls1-memory-layout-and-security-tooling-suppleme/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-lls1-memory-layout-and-security-tooling-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX01-lls1-memory-layout-and-security-tooling-suppleme/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-lls1-memory-layout-and-security-tooling-suppleme/solution"
 				},
 				{
 					title: "Memory Layout and Security Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS1 Memory Layout and Security Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX02-lls1-memory-layout-and-security-tooling-suppleme/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-lls1-memory-layout-and-security-tooling-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX02-lls1-memory-layout-and-security-tooling-suppleme/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-lls1-memory-layout-and-security-tooling-suppleme/solution"
 				}
 			]
 		},
@@ -114,18 +114,18 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS2 Bounds, Arrays, and Safer Copy Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX03-lls2-bounds-arrays-and-safer-copy-patterns-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-lls2-bounds-arrays-and-safer-copy-patterns-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX03-lls2-bounds-arrays-and-safer-copy-patterns-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-lls2-bounds-arrays-and-safer-copy-patterns-suppl/solution"
 				},
 				{
 					title: "Bounds, Arrays, and Safer Copy Patterns supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS2 Bounds, Arrays, and Safer Copy Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX04-lls2-bounds-arrays-and-safer-copy-patterns-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-lls2-bounds-arrays-and-safer-copy-patterns-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX04-lls2-bounds-arrays-and-safer-copy-patterns-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-lls2-bounds-arrays-and-safer-copy-patterns-suppl/solution"
 				}
 			]
 		},
@@ -177,18 +177,18 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS3 Defensive Parsers and Binary Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX05-lls3-defensive-parsers-and-binary-input-suppleme/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-lls3-defensive-parsers-and-binary-input-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX05-lls3-defensive-parsers-and-binary-input-suppleme/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-lls3-defensive-parsers-and-binary-input-suppleme/solution"
 				},
 				{
 					title: "Defensive Parsers and Binary Input supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS3 Defensive Parsers and Binary Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX06-lls3-defensive-parsers-and-binary-input-suppleme/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-lls3-defensive-parsers-and-binary-input-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX06-lls3-defensive-parsers-and-binary-input-suppleme/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-lls3-defensive-parsers-and-binary-input-suppleme/solution"
 				}
 			]
 		},
@@ -240,18 +240,18 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS4 Integer Safety, State, and Defensive Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX07-lls4-integer-safety-state-and-defensive-data-str/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-lls4-integer-safety-state-and-defensive-data-str/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX07-lls4-integer-safety-state-and-defensive-data-str/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-lls4-integer-safety-state-and-defensive-data-str/solution"
 				},
 				{
 					title: "Integer Safety, State, and Defensive Data Structures supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS4 Integer Safety, State, and Defensive Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX08-lls4-integer-safety-state-and-defensive-data-str/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-lls4-integer-safety-state-and-defensive-data-str/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX08-lls4-integer-safety-state-and-defensive-data-str/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-lls4-integer-safety-state-and-defensive-data-str/solution"
 				}
 			]
 		},
@@ -303,18 +303,18 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS5 Bug Hunting with Sanitizers and Fuzzing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX09-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX09-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/solution"
 				},
 				{
 					title: "Bug Hunting with Sanitizers and Fuzzing supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS5 Bug Hunting with Sanitizers and Fuzzing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX10-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX10-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-lls5-bug-hunting-with-sanitizers-and-fuzzing-sup/solution"
 				}
 			]
 		},
@@ -366,18 +366,18 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS6 Patching, Review, and Responsible Research. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX11-lls6-patching-review-and-responsible-research-su/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-lls6-patching-review-and-responsible-research-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX11-lls6-patching-review-and-responsible-research-su/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-lls6-patching-review-and-responsible-research-su/solution"
 				},
 				{
 					title: "Patching, Review, and Responsible Research supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LLS6 Patching, Review, and Responsible Research. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX12-lls6-patching-review-and-responsible-research-su/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-12-lls6-patching-review-and-responsible-research-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX12-lls6-patching-review-and-responsible-research-su/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-12-lls6-patching-review-and-responsible-research-su/solution"
 				}
 			]
 		},
@@ -399,9 +399,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 7: offensive security lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X07-offensive-security-lab-16/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-07-offensive-security-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X07-offensive-security-lab-16/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-07-offensive-security-lab-16/solution"
 				},
 				{
 					title: "offensive security lab 16: Review and Reflection",
@@ -415,27 +415,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 7: offensive security lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X07-offensive-security-lab-16/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-07-offensive-security-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X07-offensive-security-lab-16/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-07-offensive-security-lab-16/solution"
 				},
 				{
 					title: "Applied Studio 7: offensive security lab 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 7: offensive security lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX13-applied-studio-7-offensive-security-lab-16-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-13-applied-studio-7-offensive-security-lab-16-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX13-applied-studio-7-offensive-security-lab-16-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-13-applied-studio-7-offensive-security-lab-16-suppl/solution"
 				},
 				{
 					title: "Applied Studio 7: offensive security lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 7: offensive security lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX14-applied-studio-7-offensive-security-lab-16-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-14-applied-studio-7-offensive-security-lab-16-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX14-applied-studio-7-offensive-security-lab-16-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-14-applied-studio-7-offensive-security-lab-16-suppl/solution"
 				}
 			]
 		},
@@ -457,9 +457,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 8: offensive security lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X08-offensive-security-lab-17/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-08-offensive-security-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X08-offensive-security-lab-17/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-08-offensive-security-lab-17/solution"
 				},
 				{
 					title: "offensive security lab 17: Review and Reflection",
@@ -473,27 +473,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 8: offensive security lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X08-offensive-security-lab-17/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-08-offensive-security-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X08-offensive-security-lab-17/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-08-offensive-security-lab-17/solution"
 				},
 				{
 					title: "Applied Studio 8: offensive security lab 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: offensive security lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX15-applied-studio-8-offensive-security-lab-17-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-15-applied-studio-8-offensive-security-lab-17-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX15-applied-studio-8-offensive-security-lab-17-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-15-applied-studio-8-offensive-security-lab-17-suppl/solution"
 				},
 				{
 					title: "Applied Studio 8: offensive security lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 8: offensive security lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX16-applied-studio-8-offensive-security-lab-17-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-16-applied-studio-8-offensive-security-lab-17-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX16-applied-studio-8-offensive-security-lab-17-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-16-applied-studio-8-offensive-security-lab-17-suppl/solution"
 				}
 			]
 		},
@@ -515,9 +515,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 9: lls part 2 setup and tooling. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X09-lls-part-2-setup-and-tooling/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-09-lls-part-2-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X09-lls-part-2-setup-and-tooling/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-09-lls-part-2-setup-and-tooling/solution"
 				},
 				{
 					title: "lls part 2 setup and tooling: Review and Reflection",
@@ -531,27 +531,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 9: lls part 2 setup and tooling with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X09-lls-part-2-setup-and-tooling/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-09-lls-part-2-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X09-lls-part-2-setup-and-tooling/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-09-lls-part-2-setup-and-tooling/solution"
 				},
 				{
 					title: "Applied Studio 9: lls part 2 setup and tooling supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: lls part 2 setup and tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX17-applied-studio-9-lls-part-2-setup-and-tooling-su/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-17-applied-studio-9-lls-part-2-setup-and-tooling-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX17-applied-studio-9-lls-part-2-setup-and-tooling-su/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-17-applied-studio-9-lls-part-2-setup-and-tooling-su/solution"
 				},
 				{
 					title: "Applied Studio 9: lls part 2 setup and tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 9: lls part 2 setup and tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX18-applied-studio-9-lls-part-2-setup-and-tooling-su/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-18-applied-studio-9-lls-part-2-setup-and-tooling-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX18-applied-studio-9-lls-part-2-setup-and-tooling-su/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-18-applied-studio-9-lls-part-2-setup-and-tooling-su/solution"
 				}
 			]
 		},
@@ -573,9 +573,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 10: module 4 information disclosure and memory obser. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X10-module-4-information-disclosure-and-memory-obser/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-10-module-4-information-disclosure-and-memory-obser/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X10-module-4-information-disclosure-and-memory-obser/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-10-module-4-information-disclosure-and-memory-obser/solution"
 				},
 				{
 					title: "module 4 information disclosure and memory obser: Review and Reflection",
@@ -589,27 +589,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 10: module 4 information disclosure and memory obser with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X10-module-4-information-disclosure-and-memory-obser/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-10-module-4-information-disclosure-and-memory-obser/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X10-module-4-information-disclosure-and-memory-obser/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-10-module-4-information-disclosure-and-memory-obser/solution"
 				},
 				{
 					title: "Applied Studio 10: module 4 information disclosure and memory obser supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: module 4 information disclosure and memory obser. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX19-applied-studio-10-module-4-information-disclosur/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-19-applied-studio-10-module-4-information-disclosur/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX19-applied-studio-10-module-4-information-disclosur/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-19-applied-studio-10-module-4-information-disclosur/solution"
 				},
 				{
 					title: "Applied Studio 10: module 4 information disclosure and memory obser supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: module 4 information disclosure and memory obser. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX20-applied-studio-10-module-4-information-disclosur/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-20-applied-studio-10-module-4-information-disclosur/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX20-applied-studio-10-module-4-information-disclosur/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-20-applied-studio-10-module-4-information-disclosur/solution"
 				}
 			]
 		},
@@ -631,9 +631,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 11: module 6 control flow thinking for defenders. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X11-module-6-control-flow-thinking-for-defenders/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-11-module-6-control-flow-thinking-for-defenders/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X11-module-6-control-flow-thinking-for-defenders/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-11-module-6-control-flow-thinking-for-defenders/solution"
 				},
 				{
 					title: "module 6 control flow thinking for defenders: Review and Reflection",
@@ -647,27 +647,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 11: module 6 control flow thinking for defenders with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X11-module-6-control-flow-thinking-for-defenders/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-11-module-6-control-flow-thinking-for-defenders/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2X11-module-6-control-flow-thinking-for-defenders/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-11-module-6-control-flow-thinking-for-defenders/solution"
 				},
 				{
 					title: "Applied Studio 11: module 6 control flow thinking for defenders supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: module 6 control flow thinking for defenders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX21-applied-studio-11-module-6-control-flow-thinking/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-21-applied-studio-11-module-6-control-flow-thinking/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX21-applied-studio-11-module-6-control-flow-thinking/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-21-applied-studio-11-module-6-control-flow-thinking/solution"
 				},
 				{
 					title: "Applied Studio 11: module 6 control flow thinking for defenders supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: module 6 control flow thinking for defenders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX22-applied-studio-11-module-6-control-flow-thinking/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-22-applied-studio-11-module-6-control-flow-thinking/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX22-applied-studio-11-module-6-control-flow-thinking/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-22-applied-studio-11-module-6-control-flow-thinking/solution"
 				}
 			]
 		},
@@ -689,9 +689,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 12: low level security lab 7. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX01-low-level-security-lab-7/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-low-level-security-lab-7/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX01-low-level-security-lab-7/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-low-level-security-lab-7/solution"
 				},
 				{
 					title: "low level security lab 7: Review and Reflection",
@@ -705,27 +705,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 12: low level security lab 7 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX01-low-level-security-lab-7/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-low-level-security-lab-7/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX01-low-level-security-lab-7/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-low-level-security-lab-7/solution"
 				},
 				{
 					title: "Applied Studio 12: low level security lab 7 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: low level security lab 7. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX23-applied-studio-12-low-level-security-lab-7-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-23-applied-studio-12-low-level-security-lab-7-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX23-applied-studio-12-low-level-security-lab-7-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-23-applied-studio-12-low-level-security-lab-7-suppl/solution"
 				},
 				{
 					title: "Applied Studio 12: low level security lab 7 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: low level security lab 7. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX24-applied-studio-12-low-level-security-lab-7-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-24-applied-studio-12-low-level-security-lab-7-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX24-applied-studio-12-low-level-security-lab-7-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-24-applied-studio-12-low-level-security-lab-7-suppl/solution"
 				}
 			]
 		},
@@ -747,9 +747,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 13: low level security lab 8. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX02-low-level-security-lab-8/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-low-level-security-lab-8/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX02-low-level-security-lab-8/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-low-level-security-lab-8/solution"
 				},
 				{
 					title: "low level security lab 8: Review and Reflection",
@@ -763,27 +763,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 13: low level security lab 8 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX02-low-level-security-lab-8/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-low-level-security-lab-8/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX02-low-level-security-lab-8/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-low-level-security-lab-8/solution"
 				},
 				{
 					title: "Applied Studio 13: low level security lab 8 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: low level security lab 8. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX25-applied-studio-13-low-level-security-lab-8-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-25-applied-studio-13-low-level-security-lab-8-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX25-applied-studio-13-low-level-security-lab-8-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-25-applied-studio-13-low-level-security-lab-8-suppl/solution"
 				},
 				{
 					title: "Applied Studio 13: low level security lab 8 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: low level security lab 8. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX26-applied-studio-13-low-level-security-lab-8-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-26-applied-studio-13-low-level-security-lab-8-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX26-applied-studio-13-low-level-security-lab-8-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-26-applied-studio-13-low-level-security-lab-8-suppl/solution"
 				}
 			]
 		},
@@ -805,9 +805,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: low level security lab 9. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX03-low-level-security-lab-9/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-low-level-security-lab-9/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX03-low-level-security-lab-9/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-low-level-security-lab-9/solution"
 				},
 				{
 					title: "low level security lab 9: Review and Reflection",
@@ -821,27 +821,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: low level security lab 9 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX03-low-level-security-lab-9/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-low-level-security-lab-9/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX03-low-level-security-lab-9/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-low-level-security-lab-9/solution"
 				},
 				{
 					title: "Applied Studio 14: low level security lab 9 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: low level security lab 9. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX27-applied-studio-14-low-level-security-lab-9-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-27-applied-studio-14-low-level-security-lab-9-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX27-applied-studio-14-low-level-security-lab-9-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-27-applied-studio-14-low-level-security-lab-9-suppl/solution"
 				},
 				{
 					title: "Applied Studio 14: low level security lab 9 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: low level security lab 9. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX28-applied-studio-14-low-level-security-lab-9-suppl/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-28-applied-studio-14-low-level-security-lab-9-suppl/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX28-applied-studio-14-low-level-security-lab-9-suppl/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-28-applied-studio-14-low-level-security-lab-9-suppl/solution"
 				}
 			]
 		},
@@ -863,9 +863,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: low level security lab 10. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX04-low-level-security-lab-10/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-low-level-security-lab-10/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX04-low-level-security-lab-10/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-low-level-security-lab-10/solution"
 				},
 				{
 					title: "low level security lab 10: Review and Reflection",
@@ -879,27 +879,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: low level security lab 10 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX04-low-level-security-lab-10/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-low-level-security-lab-10/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX04-low-level-security-lab-10/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-low-level-security-lab-10/solution"
 				},
 				{
 					title: "Applied Studio 15: low level security lab 10 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: low level security lab 10. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX29-applied-studio-15-low-level-security-lab-10-supp/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-29-applied-studio-15-low-level-security-lab-10-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX29-applied-studio-15-low-level-security-lab-10-supp/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-29-applied-studio-15-low-level-security-lab-10-supp/solution"
 				},
 				{
 					title: "Applied Studio 15: low level security lab 10 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: low level security lab 10. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX30-applied-studio-15-low-level-security-lab-10-supp/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-30-applied-studio-15-low-level-security-lab-10-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX30-applied-studio-15-low-level-security-lab-10-supp/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-30-applied-studio-15-low-level-security-lab-10-supp/solution"
 				}
 			]
 		},
@@ -921,9 +921,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: low level security lab 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX05-low-level-security-lab-11/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-low-level-security-lab-11/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX05-low-level-security-lab-11/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-low-level-security-lab-11/solution"
 				},
 				{
 					title: "low level security lab 11: Review and Reflection",
@@ -937,27 +937,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: low level security lab 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX05-low-level-security-lab-11/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-low-level-security-lab-11/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX05-low-level-security-lab-11/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-low-level-security-lab-11/solution"
 				},
 				{
 					title: "Applied Studio 16: low level security lab 11 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: low level security lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX31-applied-studio-16-low-level-security-lab-11-supp/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-31-applied-studio-16-low-level-security-lab-11-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX31-applied-studio-16-low-level-security-lab-11-supp/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-31-applied-studio-16-low-level-security-lab-11-supp/solution"
 				},
 				{
 					title: "Applied Studio 16: low level security lab 11 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: low level security lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX32-applied-studio-16-low-level-security-lab-11-supp/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-32-applied-studio-16-low-level-security-lab-11-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX32-applied-studio-16-low-level-security-lab-11-supp/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-32-applied-studio-16-low-level-security-lab-11-supp/solution"
 				}
 			]
 		},
@@ -979,9 +979,9 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: low level security lab 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX06-low-level-security-lab-12/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-low-level-security-lab-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX06-low-level-security-lab-12/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-low-level-security-lab-12/solution"
 				},
 				{
 					title: "low level security lab 12: Review and Reflection",
@@ -995,27 +995,27 @@ export const lowLevelSecurityCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: low level security lab 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX06-low-level-security-lab-12/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-low-level-security-lab-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX06-low-level-security-lab-12/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-low-level-security-lab-12/solution"
 				},
 				{
 					title: "Applied Studio 17: low level security lab 12 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: low level security lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX33-applied-studio-17-low-level-security-lab-12-supp/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-33-applied-studio-17-low-level-security-lab-12-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX33-applied-studio-17-low-level-security-lab-12-supp/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-33-applied-studio-17-low-level-security-lab-12-supp/solution"
 				},
 				{
 					title: "Applied Studio 17: low level security lab 12 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: low level security lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX34-applied-studio-17-low-level-security-lab-12-supp/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-34-applied-studio-17-low-level-security-lab-12-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLSX34-applied-studio-17-low-level-security-lab-12-supp/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-34-applied-studio-17-low-level-security-lab-12-supp/solution"
 				}
 			]
 		}

@@ -729,18 +729,18 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Cow Routing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX01-applied-studio-13-cow-routing-supplemental-2/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-01-applied-studio-13-cow-routing-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX01-applied-studio-13-cow-routing-supplemental-2/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-01-applied-studio-13-cow-routing-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 13: Cow Routing supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Cow Routing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX02-applied-studio-13-cow-routing-supplemental-3/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-02-applied-studio-13-cow-routing-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX02-applied-studio-13-cow-routing-supplemental-3/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-02-applied-studio-13-cow-routing-supplemental-3/solution"
 				}
 			]
 		},
@@ -783,18 +783,18 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: MST II. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX03-applied-studio-14-mst-ii-supplemental-2/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-03-applied-studio-14-mst-ii-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX03-applied-studio-14-mst-ii-supplemental-2/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-03-applied-studio-14-mst-ii-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: MST II supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: MST II. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX04-applied-studio-14-mst-ii-supplemental-3/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-04-applied-studio-14-mst-ii-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX04-applied-studio-14-mst-ii-supplemental-3/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-04-applied-studio-14-mst-ii-supplemental-3/solution"
 				}
 			]
 		},
@@ -837,18 +837,18 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Watering the Fields. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX05-applied-studio-15-watering-the-fields-supplement/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX05-applied-studio-15-watering-the-fields-supplement/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplement/solution"
 				},
 				{
 					title: "Applied Studio 15: Watering the Fields supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Watering the Fields. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX06-applied-studio-15-watering-the-fields-supplement/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX06-applied-studio-15-watering-the-fields-supplement/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplement/solution"
 				}
 			]
 		},
@@ -891,18 +891,18 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: I Would Walk 500 Miles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX07-applied-studio-16-i-would-walk-500-miles-supplem/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-07-applied-studio-16-i-would-walk-500-miles-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX07-applied-studio-16-i-would-walk-500-miles-supplem/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-07-applied-studio-16-i-would-walk-500-miles-supplem/solution"
 				},
 				{
 					title: "Applied Studio 16: I Would Walk 500 Miles supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: I Would Walk 500 Miles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX08-applied-studio-16-i-would-walk-500-miles-supplem/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-08-applied-studio-16-i-would-walk-500-miles-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX08-applied-studio-16-i-would-walk-500-miles-supplem/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-08-applied-studio-16-i-would-walk-500-miles-supplem/solution"
 				}
 			]
 		},
@@ -945,18 +945,18 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Talent Show. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX09-applied-studio-17-talent-show-supplemental-2/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-09-applied-studio-17-talent-show-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX09-applied-studio-17-talent-show-supplemental-2/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-09-applied-studio-17-talent-show-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: Talent Show supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Talent Show. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX10-applied-studio-17-talent-show-supplemental-3/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-10-applied-studio-17-talent-show-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UGX10-applied-studio-17-talent-show-supplemental-3/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-10-applied-studio-17-talent-show-supplemental-3/solution"
 				}
 			]
 		}

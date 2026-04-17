@@ -47,18 +47,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX01-pyg0-setup-editors-and-asset-workflow-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX01-pyg0-setup-editors-and-asset-workflow-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplement/solution"
 				},
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX02-pyg0-setup-editors-and-asset-workflow-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX02-pyg0-setup-editors-and-asset-workflow-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplement/solution"
 				}
 			]
 		},
@@ -134,18 +134,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX03-pyg1-object-oriented-programming-actors-suppleme/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX03-pyg1-object-oriented-programming-actors-suppleme/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-suppleme/solution"
 				},
 				{
 					title: "Object Oriented Programming: Actors supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX04-pyg1-object-oriented-programming-actors-suppleme/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX04-pyg1-object-oriented-programming-actors-suppleme/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-suppleme/solution"
 				}
 			]
 		},
@@ -211,18 +211,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG2 Event Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX05-pyg2-event-handling-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-05-pyg2-event-handling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX05-pyg2-event-handling-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-05-pyg2-event-handling-supplemental-2/solution"
 				},
 				{
 					title: "Event Handling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG2 Event Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX06-pyg2-event-handling-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-06-pyg2-event-handling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX06-pyg2-event-handling-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-06-pyg2-event-handling-supplemental-3/solution"
 				}
 			]
 		},
@@ -289,18 +289,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG3 Object-Oriented Programming: Advanced Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX07-pyg3-object-oriented-programming-advanced-actors/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-07-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX07-pyg3-object-oriented-programming-advanced-actors/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-07-pyg3-object-oriented-programming-advanced-actors/solution"
 				},
 				{
 					title: "Object Oriented Programming: Advanced Actors supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG3 Object-Oriented Programming: Advanced Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX08-pyg3-object-oriented-programming-advanced-actors/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-08-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX08-pyg3-object-oriented-programming-advanced-actors/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-08-pyg3-object-oriented-programming-advanced-actors/solution"
 				}
 			]
 		},
@@ -361,18 +361,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX09-pyg4-managing-multiple-objects-collectibles-supp/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX09-pyg4-managing-multiple-objects-collectibles-supp/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supp/solution"
 				},
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX10-pyg4-managing-multiple-objects-collectibles-supp/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX10-pyg4-managing-multiple-objects-collectibles-supp/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supp/solution"
 				}
 			]
 		},
@@ -424,18 +424,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX11-check-in-1-actors-events-zrects-collectibles-sup/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX11-check-in-1-actors-events-zrects-collectibles-sup/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-sup/solution"
 				},
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX12-check-in-1-actors-events-zrects-collectibles-sup/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX12-check-in-1-actors-events-zrects-collectibles-sup/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-sup/solution"
 				}
 			]
 		},
@@ -501,18 +501,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG5 Physics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX13-pyg5-physics-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-13-pyg5-physics-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX13-pyg5-physics-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-13-pyg5-physics-supplemental-2/solution"
 				},
 				{
 					title: "Physics supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG5 Physics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX14-pyg5-physics-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-14-pyg5-physics-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX14-pyg5-physics-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-14-pyg5-physics-supplemental-3/solution"
 				}
 			]
 		},
@@ -583,18 +583,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX15-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX15-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
 				},
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX16-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX16-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
 				}
 			]
 		},
@@ -646,18 +646,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX17-check-in-2-gravity-friction-platforms-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX17-check-in-2-gravity-friction-platforms-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplement/solution"
 				},
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX18-check-in-2-gravity-friction-platforms-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX18-check-in-2-gravity-friction-platforms-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplement/solution"
 				}
 			]
 		},
@@ -731,18 +731,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG7 Levels and System Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX19-pyg7-levels-and-system-control-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-19-pyg7-levels-and-system-control-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX19-pyg7-levels-and-system-control-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-19-pyg7-levels-and-system-control-supplemental-2/solution"
 				},
 				{
 					title: "Levels and System Control supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG7 Levels and System Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX20-pyg7-levels-and-system-control-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-20-pyg7-levels-and-system-control-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX20-pyg7-levels-and-system-control-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-20-pyg7-levels-and-system-control-supplemental-3/solution"
 				}
 			]
 		},
@@ -797,18 +797,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG8 Game Elements: Projectiles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX21-pyg8-game-elements-projectiles-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-21-pyg8-game-elements-projectiles-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX21-pyg8-game-elements-projectiles-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-21-pyg8-game-elements-projectiles-supplemental-2/solution"
 				},
 				{
 					title: "Game Elements: Projectiles supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG8 Game Elements: Projectiles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX22-pyg8-game-elements-projectiles-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-22-pyg8-game-elements-projectiles-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX22-pyg8-game-elements-projectiles-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-22-pyg8-game-elements-projectiles-supplemental-3/solution"
 				}
 			]
 		},
@@ -863,18 +863,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG9 Game Elements: Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX23-pyg9-game-elements-enemy-ai-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-23-pyg9-game-elements-enemy-ai-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX23-pyg9-game-elements-enemy-ai-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-23-pyg9-game-elements-enemy-ai-supplemental-2/solution"
 				},
 				{
 					title: "Game Elements: Enemy AI supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG9 Game Elements: Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX24-pyg9-game-elements-enemy-ai-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-24-pyg9-game-elements-enemy-ai-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX24-pyg9-game-elements-enemy-ai-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-24-pyg9-game-elements-enemy-ai-supplemental-3/solution"
 				}
 			]
 		},
@@ -921,18 +921,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX25-check-in-3-system-control-projectiles-enemy-ai-s/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-s/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX25-check-in-3-system-control-projectiles-enemy-ai-s/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-s/solution"
 				},
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX26-check-in-3-system-control-projectiles-enemy-ai-s/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-s/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX26-check-in-3-system-control-projectiles-enemy-ai-s/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-s/solution"
 				}
 			]
 		},
@@ -981,18 +981,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG10 Ninja Versus Alien. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX27-pyg10-ninja-versus-alien-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-27-pyg10-ninja-versus-alien-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX27-pyg10-ninja-versus-alien-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-27-pyg10-ninja-versus-alien-supplemental-2/solution"
 				},
 				{
 					title: "Ninja Versus Alien supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG10 Ninja Versus Alien. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX28-pyg10-ninja-versus-alien-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-28-pyg10-ninja-versus-alien-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX28-pyg10-ninja-versus-alien-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-28-pyg10-ninja-versus-alien-supplemental-3/solution"
 				}
 			]
 		},
@@ -1041,18 +1041,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG11 Space Invaders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX29-pyg11-space-invaders-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-29-pyg11-space-invaders-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX29-pyg11-space-invaders-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-29-pyg11-space-invaders-supplemental-2/solution"
 				},
 				{
 					title: "Space Invaders supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG11 Space Invaders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX30-pyg11-space-invaders-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-30-pyg11-space-invaders-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX30-pyg11-space-invaders-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-30-pyg11-space-invaders-supplemental-3/solution"
 				}
 			]
 		},
@@ -1110,18 +1110,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG12 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX31-pyg12-master-project-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-31-pyg12-master-project-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX31-pyg12-master-project-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-31-pyg12-master-project-supplemental-2/solution"
 				},
 				{
 					title: "Master Project supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG12 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX32-pyg12-master-project-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-32-pyg12-master-project-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX32-pyg12-master-project-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-32-pyg12-master-project-supplemental-3/solution"
 				}
 			]
 		},
@@ -1164,18 +1164,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: images. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX33-applied-studio-17-images-supplemental-2/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX33-applied-studio-17-images-supplemental-2/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: images supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: images. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX34-applied-studio-17-images-supplemental-3/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-34-applied-studio-17-images-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PGX34-applied-studio-17-images-supplemental-3/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-34-applied-studio-17-images-supplemental-3/solution"
 				}
 			]
 		}

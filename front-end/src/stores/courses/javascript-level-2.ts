@@ -51,18 +51,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-check-in-1-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-check-in-1-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-check-in-1-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-check-in-1-supplemental-2/solution"
 				},
 				{
 					title: "Check In #1 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX02-check-in-1-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-02-check-in-1-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX02-check-in-1-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-02-check-in-1-supplemental-3/solution"
 				}
 			]
 		},
@@ -116,18 +116,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX03-check-in-2-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-03-check-in-2-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX03-check-in-2-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-03-check-in-2-supplemental-2/solution"
 				},
 				{
 					title: "Check In #2 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX04-check-in-2-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-04-check-in-2-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX04-check-in-2-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-04-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -227,18 +227,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM1 Fundamentals Review. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX05-jsm1-fundamentals-review-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-05-jsm1-fundamentals-review-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX05-jsm1-fundamentals-review-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-05-jsm1-fundamentals-review-supplemental-2/solution"
 				},
 				{
 					title: "Fundamentals Review supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM1 Fundamentals Review. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX06-jsm1-fundamentals-review-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-06-jsm1-fundamentals-review-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX06-jsm1-fundamentals-review-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-06-jsm1-fundamentals-review-supplemental-3/solution"
 				}
 			]
 		},
@@ -380,18 +380,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM3 Complex Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX07-jsm3-complex-conditionals-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-07-jsm3-complex-conditionals-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX07-jsm3-complex-conditionals-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-07-jsm3-complex-conditionals-supplemental-2/solution"
 				},
 				{
 					title: "Complex Conditionals supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM3 Complex Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX08-jsm3-complex-conditionals-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-08-jsm3-complex-conditionals-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX08-jsm3-complex-conditionals-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-08-jsm3-complex-conditionals-supplemental-3/solution"
 				}
 			]
 		},
@@ -455,9 +455,9 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM4 Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX09-jsm4-canvas-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-09-jsm4-canvas-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX09-jsm4-canvas-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-09-jsm4-canvas-supplemental-3/solution"
 				}
 			]
 		},
@@ -545,9 +545,9 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM5 Arrays and Iterators. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX10-jsm5-arrays-and-iterators-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-10-jsm5-arrays-and-iterators-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX10-jsm5-arrays-and-iterators-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-10-jsm5-arrays-and-iterators-supplemental-3/solution"
 				}
 			]
 		},
@@ -622,9 +622,9 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM6 Objects and Properties. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX11-jsm6-objects-and-properties-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-11-jsm6-objects-and-properties-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX11-jsm6-objects-and-properties-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-11-jsm6-objects-and-properties-supplemental-3/solution"
 				}
 			]
 		},
@@ -698,9 +698,9 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM7 Helper Functions and Event Listeners. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX12-jsm7-helper-functions-and-event-listeners-supple/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supple/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX12-jsm7-helper-functions-and-event-listeners-supple/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supple/solution"
 				}
 			]
 		},
@@ -755,18 +755,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM8 Collisions and Controls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX13-jsm8-collisions-and-controls-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-13-jsm8-collisions-and-controls-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX13-jsm8-collisions-and-controls-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-13-jsm8-collisions-and-controls-supplemental-2/solution"
 				},
 				{
 					title: "Collisions and Controls supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM8 Collisions and Controls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX14-jsm8-collisions-and-controls-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-14-jsm8-collisions-and-controls-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX14-jsm8-collisions-and-controls-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-14-jsm8-collisions-and-controls-supplemental-3/solution"
 				}
 			]
 		},
@@ -830,18 +830,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM9 Games in the Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX15-jsm9-games-in-the-canvas-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-15-jsm9-games-in-the-canvas-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX15-jsm9-games-in-the-canvas-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-15-jsm9-games-in-the-canvas-supplemental-2/solution"
 				},
 				{
 					title: "Games in the Canvas supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM9 Games in the Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX16-jsm9-games-in-the-canvas-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-16-jsm9-games-in-the-canvas-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX16-jsm9-games-in-the-canvas-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-16-jsm9-games-in-the-canvas-supplemental-3/solution"
 				}
 			]
 		},
@@ -896,18 +896,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM10 APIs and Requests. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX17-jsm10-apis-and-requests-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-17-jsm10-apis-and-requests-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX17-jsm10-apis-and-requests-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-17-jsm10-apis-and-requests-supplemental-2/solution"
 				},
 				{
 					title: "APIs and Requests supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM10 APIs and Requests. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX18-jsm10-apis-and-requests-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-18-jsm10-apis-and-requests-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX18-jsm10-apis-and-requests-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-18-jsm10-apis-and-requests-supplemental-3/solution"
 				}
 			]
 		},
@@ -1033,18 +1033,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM12 NoSQL and CRUD. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX19-jsm12-nosql-and-crud-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-19-jsm12-nosql-and-crud-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX19-jsm12-nosql-and-crud-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-19-jsm12-nosql-and-crud-supplemental-2/solution"
 				},
 				{
 					title: "NoSQL and CRUD supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM12 NoSQL and CRUD. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX20-jsm12-nosql-and-crud-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-20-jsm12-nosql-and-crud-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX20-jsm12-nosql-and-crud-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-20-jsm12-nosql-and-crud-supplemental-3/solution"
 				}
 			]
 		},
@@ -1090,18 +1090,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM13 Message Board. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX21-jsm13-message-board-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-21-jsm13-message-board-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX21-jsm13-message-board-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-21-jsm13-message-board-supplemental-2/solution"
 				},
 				{
 					title: "Message Board supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM13 Message Board. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX22-jsm13-message-board-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-22-jsm13-message-board-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX22-jsm13-message-board-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-22-jsm13-message-board-supplemental-3/solution"
 				}
 			]
 		},
@@ -1150,18 +1150,18 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM14 Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX23-jsm14-quiz-game-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-23-jsm14-quiz-game-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX23-jsm14-quiz-game-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-23-jsm14-quiz-game-supplemental-2/solution"
 				},
 				{
 					title: "Quiz Game supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM14 Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX24-jsm14-quiz-game-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-24-jsm14-quiz-game-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX24-jsm14-quiz-game-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-24-jsm14-quiz-game-supplemental-3/solution"
 				}
 			]
 		},
@@ -1193,9 +1193,9 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-jsm15-master-project/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-jsm15-master-project/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-jsm15-master-project/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-jsm15-master-project/solution"
 				}
 			],
 			supplementalProjects: [
@@ -1204,27 +1204,27 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Extend the work from JSM15 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-jsm15-master-project/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-jsm15-master-project/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX01-jsm15-master-project/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-jsm15-master-project/solution"
 				},
 				{
 					title: "Master Project supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM15 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX25-jsm15-master-project-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-25-jsm15-master-project-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX25-jsm15-master-project-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-25-jsm15-master-project-supplemental-2/solution"
 				},
 				{
 					title: "Master Project supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM15 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX26-jsm15-master-project-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-26-jsm15-master-project-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSMX26-jsm15-master-project-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-26-jsm15-master-project-supplemental-3/solution"
 				}
 			]
 		}

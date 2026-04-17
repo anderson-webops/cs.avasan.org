@@ -76,9 +76,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS1 Variable Types & Input/Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-js1-variable-types-input-output-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-js1-variable-types-input-output-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-js1-variable-types-input-output-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-js1-variable-types-input-output-supplemental-3/solution"
 				}
 			]
 		},
@@ -138,9 +138,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS2 Casting and Operators. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X02-js2-casting-and-operators-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-js2-casting-and-operators-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X02-js2-casting-and-operators-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-js2-casting-and-operators-supplemental-3/solution"
 				},
 				{
 					title: "Basic Shapes (Optional)",
@@ -356,18 +356,18 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS5 Practice with Loops & Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X03-js5-practice-with-loops-conditionals-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X03-js5-practice-with-loops-conditionals-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplementa/solution"
 				},
 				{
 					title: "Practice with Loops & Conditionals supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS5 Practice with Loops & Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X04-js5-practice-with-loops-conditionals-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X04-js5-practice-with-loops-conditionals-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplementa/solution"
 				}
 			]
 		},
@@ -419,18 +419,18 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X05-check-in-1-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-check-in-1-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X05-check-in-1-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-check-in-1-supplemental-2/solution"
 				},
 				{
 					title: "Check In #1 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X06-check-in-1-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-check-in-1-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X06-check-in-1-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-check-in-1-supplemental-3/solution"
 				}
 			]
 		},
@@ -732,18 +732,18 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X07-check-in-2-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-07-check-in-2-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X07-check-in-2-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-07-check-in-2-supplemental-2/solution"
 				},
 				{
 					title: "Check In #2 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X08-check-in-2-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-08-check-in-2-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X08-check-in-2-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-08-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -794,18 +794,18 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS9 Master Project: Battleship. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X09-js9-master-project-battleship-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-09-js9-master-project-battleship-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X09-js9-master-project-battleship-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-09-js9-master-project-battleship-supplemental-2/solution"
 				},
 				{
 					title: "Master Project: Battleship supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS9 Master Project: Battleship. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X10-js9-master-project-battleship-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-10-js9-master-project-battleship-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X10-js9-master-project-battleship-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-10-js9-master-project-battleship-supplemental-3/solution"
 				}
 			]
 		},
@@ -827,9 +827,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 12: J1X02 java foundations build 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X02-java-foundations-build-13/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X02-java-foundations-build-13/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/solution"
 				},
 				{
 					title: "J1X02 java foundations build 13: Review and Reflection",
@@ -843,27 +843,27 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 12: J1X02 java foundations build 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X02-java-foundations-build-13/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X02-java-foundations-build-13/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/solution"
 				},
 				{
 					title: "Applied Studio 12: J1X02 java foundations build 13 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: J1X02 java foundations build 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X11-applied-studio-12-j1x02-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-11-applied-studio-12-j1x02-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X11-applied-studio-12-j1x02-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-11-applied-studio-12-j1x02-java-foundations-build-1/solution"
 				},
 				{
 					title: "Applied Studio 12: J1X02 java foundations build 13 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: J1X02 java foundations build 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X12-applied-studio-12-j1x02-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-12-applied-studio-12-j1x02-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X12-applied-studio-12-j1x02-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-12-applied-studio-12-j1x02-java-foundations-build-1/solution"
 				}
 			]
 		},
@@ -885,9 +885,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 13: J1X03 java foundations build 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X03-java-foundations-build-14/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X03-java-foundations-build-14/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/solution"
 				},
 				{
 					title: "J1X03 java foundations build 14: Review and Reflection",
@@ -901,27 +901,27 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 13: J1X03 java foundations build 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X03-java-foundations-build-14/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X03-java-foundations-build-14/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/solution"
 				},
 				{
 					title: "Applied Studio 13: J1X03 java foundations build 14 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: J1X03 java foundations build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X13-applied-studio-13-j1x03-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-13-applied-studio-13-j1x03-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X13-applied-studio-13-j1x03-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-13-applied-studio-13-j1x03-java-foundations-build-1/solution"
 				},
 				{
 					title: "Applied Studio 13: J1X03 java foundations build 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: J1X03 java foundations build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X14-applied-studio-13-j1x03-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-14-applied-studio-13-j1x03-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X14-applied-studio-13-j1x03-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-14-applied-studio-13-j1x03-java-foundations-build-1/solution"
 				}
 			]
 		},
@@ -943,9 +943,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: J1X04 java foundations build 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X04-java-foundations-build-15/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X04-java-foundations-build-15/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/solution"
 				},
 				{
 					title: "J1X04 java foundations build 15: Review and Reflection",
@@ -959,27 +959,27 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: J1X04 java foundations build 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X04-java-foundations-build-15/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X04-java-foundations-build-15/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/solution"
 				},
 				{
 					title: "Applied Studio 14: J1X04 java foundations build 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: J1X04 java foundations build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X15-applied-studio-14-j1x04-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-15-applied-studio-14-j1x04-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X15-applied-studio-14-j1x04-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-15-applied-studio-14-j1x04-java-foundations-build-1/solution"
 				},
 				{
 					title: "Applied Studio 14: J1X04 java foundations build 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: J1X04 java foundations build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X16-applied-studio-14-j1x04-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-16-applied-studio-14-j1x04-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X16-applied-studio-14-j1x04-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-16-applied-studio-14-j1x04-java-foundations-build-1/solution"
 				}
 			]
 		},
@@ -1001,9 +1001,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: J1X05 java foundations build 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X05-java-foundations-build-16/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X05-java-foundations-build-16/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/solution"
 				},
 				{
 					title: "J1X05 java foundations build 16: Review and Reflection",
@@ -1017,27 +1017,27 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: J1X05 java foundations build 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X05-java-foundations-build-16/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X05-java-foundations-build-16/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/solution"
 				},
 				{
 					title: "Applied Studio 15: J1X05 java foundations build 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: J1X05 java foundations build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X17-applied-studio-15-j1x05-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-17-applied-studio-15-j1x05-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X17-applied-studio-15-j1x05-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-17-applied-studio-15-j1x05-java-foundations-build-1/solution"
 				},
 				{
 					title: "Applied Studio 15: J1X05 java foundations build 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: J1X05 java foundations build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X18-applied-studio-15-j1x05-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-18-applied-studio-15-j1x05-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X18-applied-studio-15-j1x05-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-18-applied-studio-15-j1x05-java-foundations-build-1/solution"
 				}
 			]
 		},
@@ -1059,9 +1059,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: J1X06 java foundations build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X06-java-foundations-build-17/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X06-java-foundations-build-17/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/solution"
 				},
 				{
 					title: "J1X06 java foundations build 17: Review and Reflection",
@@ -1075,27 +1075,27 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: J1X06 java foundations build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X06-java-foundations-build-17/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X06-java-foundations-build-17/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/solution"
 				},
 				{
 					title: "Applied Studio 16: J1X06 java foundations build 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: J1X06 java foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X19-applied-studio-16-j1x06-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-19-applied-studio-16-j1x06-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X19-applied-studio-16-j1x06-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-19-applied-studio-16-j1x06-java-foundations-build-1/solution"
 				},
 				{
 					title: "Applied Studio 16: J1X06 java foundations build 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: J1X06 java foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X20-applied-studio-16-j1x06-java-foundations-build-1/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-20-applied-studio-16-j1x06-java-foundations-build-1/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X20-applied-studio-16-j1x06-java-foundations-build-1/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-20-applied-studio-16-j1x06-java-foundations-build-1/solution"
 				}
 			]
 		},
@@ -1138,18 +1138,18 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Temperature Converter. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X21-applied-studio-17-temperature-converter-suppleme/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-21-applied-studio-17-temperature-converter-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X21-applied-studio-17-temperature-converter-suppleme/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-21-applied-studio-17-temperature-converter-suppleme/solution"
 				},
 				{
 					title: "Applied Studio 17: Temperature Converter supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Temperature Converter. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X22-applied-studio-17-temperature-converter-suppleme/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-22-applied-studio-17-temperature-converter-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X22-applied-studio-17-temperature-converter-suppleme/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-22-applied-studio-17-temperature-converter-suppleme/solution"
 				}
 			]
 		}

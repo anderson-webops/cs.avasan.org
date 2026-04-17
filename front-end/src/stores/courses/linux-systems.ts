@@ -51,18 +51,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-ls0-setup-and-tooling-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-ls0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-ls0-setup-and-tooling-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-ls0-setup-and-tooling-supplemental-2/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to LS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-ls0-setup-and-tooling-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-ls0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-ls0-setup-and-tooling-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-ls0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -94,9 +94,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-1-shell-foundations/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-1-shell-foundations/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-1-shell-foundations/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-1-shell-foundations/solution"
 				}
 			],
 			supplementalProjects: [
@@ -105,27 +105,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for shell foundations that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on working-directory mistakes, quoting issues, and broken pipelines so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-1-shell-foundations/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-1-shell-foundations/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-1-shell-foundations/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-1-shell-foundations/solution"
 				},
 				{
 					title: "Unit 1: Shell Foundations supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Shell Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-unit-1-shell-foundations-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-unit-1-shell-foundations-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-unit-1-shell-foundations-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-unit-1-shell-foundations-supplemental-2/solution"
 				},
 				{
 					title: "Unit 1: Shell Foundations supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Shell Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-unit-1-shell-foundations-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-unit-1-shell-foundations-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-unit-1-shell-foundations-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-unit-1-shell-foundations-supplemental-3/solution"
 				}
 			]
 		},
@@ -172,18 +172,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX05-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
 				},
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
 				}
 			]
 		},
@@ -215,9 +215,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-3-users-groups-and-permissions/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-3-users-groups-and-permissions/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-3-users-groups-and-permissions/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-3-users-groups-and-permissions/solution"
 				}
 			],
 			supplementalProjects: [
@@ -226,27 +226,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for users, groups, and permissions that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on permission denied errors, incorrect owners, and over-broad chmod use so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-3-users-groups-and-permissions/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-3-users-groups-and-permissions/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX06-unit-3-users-groups-and-permissions/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-3-users-groups-and-permissions/solution"
 				},
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-3-users-groups-and-permissions-supplemental/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-3-users-groups-and-permissions-supplemental/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental/solution"
 				},
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-3-users-groups-and-permissions-supplemental/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-3-users-groups-and-permissions-supplemental/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental/solution"
 				}
 			]
 		},
@@ -278,9 +278,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-4-editing-and-configuration/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-4-editing-and-configuration/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-4-editing-and-configuration/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-4-editing-and-configuration/solution"
 				}
 			],
 			supplementalProjects: [
@@ -289,27 +289,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for editing and configuration that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on syntax mistakes, partial edits, missing backups, and forgotten validation steps so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-4-editing-and-configuration/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-4-editing-and-configuration/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX07-unit-4-editing-and-configuration/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-4-editing-and-configuration/solution"
 				},
 				{
 					title: "Unit 4: Editing and Configuration supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Editing and Configuration. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-4-editing-and-configuration-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-4-editing-and-configuration-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-4-editing-and-configuration-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-4-editing-and-configuration-supplemental-2/solution"
 				},
 				{
 					title: "Unit 4: Editing and Configuration supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Editing and Configuration. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-4-editing-and-configuration-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-4-editing-and-configuration-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-4-editing-and-configuration-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-4-editing-and-configuration-supplemental-3/solution"
 				}
 			]
 		},
@@ -341,9 +341,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-5-processes-and-job-control/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-5-processes-and-job-control/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-5-processes-and-job-control/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-5-processes-and-job-control/solution"
 				}
 			],
 			supplementalProjects: [
@@ -352,27 +352,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for processes and job control that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on stuck jobs, wrong PIDs, signal misuse, and shell-session surprises so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-5-processes-and-job-control/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-5-processes-and-job-control/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX08-unit-5-processes-and-job-control/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-5-processes-and-job-control/solution"
 				},
 				{
 					title: "Unit 5: Processes and Job Control supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: Processes and Job Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-5-processes-and-job-control-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-5-processes-and-job-control-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-5-processes-and-job-control-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-5-processes-and-job-control-supplemental-2/solution"
 				},
 				{
 					title: "Unit 5: Processes and Job Control supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: Processes and Job Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-5-processes-and-job-control-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-5-processes-and-job-control-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-5-processes-and-job-control-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-5-processes-and-job-control-supplemental-3/solution"
 				}
 			]
 		},
@@ -424,18 +424,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Services and systemd. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX13-unit-6-services-and-systemd-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-13-unit-6-services-and-systemd-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX13-unit-6-services-and-systemd-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-13-unit-6-services-and-systemd-supplemental-2/solution"
 				},
 				{
 					title: "Unit 6: Services and systemd supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Services and systemd. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX14-unit-6-services-and-systemd-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-14-unit-6-services-and-systemd-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX14-unit-6-services-and-systemd-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-14-unit-6-services-and-systemd-supplemental-3/solution"
 				}
 			]
 		},
@@ -467,9 +467,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-7-logging-and-observability/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-7-logging-and-observability/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-7-logging-and-observability/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-7-logging-and-observability/solution"
 				}
 			],
 			supplementalProjects: [
@@ -478,27 +478,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for logging and observability that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on log scoping, noisy output, missing files, and crash-timeline reconstruction so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-7-logging-and-observability/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-7-logging-and-observability/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX09-unit-7-logging-and-observability/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-7-logging-and-observability/solution"
 				},
 				{
 					title: "Unit 7: Logging and Observability supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Logging and Observability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX15-unit-7-logging-and-observability-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-15-unit-7-logging-and-observability-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX15-unit-7-logging-and-observability-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-15-unit-7-logging-and-observability-supplemental-2/solution"
 				},
 				{
 					title: "Unit 7: Logging and Observability supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Logging and Observability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX16-unit-7-logging-and-observability-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-16-unit-7-logging-and-observability-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX16-unit-7-logging-and-observability-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-16-unit-7-logging-and-observability-supplemental-3/solution"
 				}
 			]
 		},
@@ -550,18 +550,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Scheduling and Automation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX17-unit-8-scheduling-and-automation-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-17-unit-8-scheduling-and-automation-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX17-unit-8-scheduling-and-automation-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-17-unit-8-scheduling-and-automation-supplemental-2/solution"
 				},
 				{
 					title: "Unit 8: Scheduling and Automation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Scheduling and Automation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX18-unit-8-scheduling-and-automation-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-18-unit-8-scheduling-and-automation-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX18-unit-8-scheduling-and-automation-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-18-unit-8-scheduling-and-automation-supplemental-3/solution"
 				}
 			]
 		},
@@ -593,9 +593,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-9-package-management-and-software-layout/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-9-package-management-and-software-layout/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-9-package-management-and-software-layout/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-9-package-management-and-software-layout/solution"
 				}
 			],
 			supplementalProjects: [
@@ -604,27 +604,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for package management and software layout that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on missing commands, package-version confusion, and untracked manual installs so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-9-package-management-and-software-layout/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-9-package-management-and-software-layout/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX10-unit-9-package-management-and-software-layout/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-9-package-management-and-software-layout/solution"
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX19-unit-9-package-management-and-software-layout-su/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX19-unit-9-package-management-and-software-layout-su/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-su/solution"
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX20-unit-9-package-management-and-software-layout-su/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX20-unit-9-package-management-and-software-layout-su/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-su/solution"
 				}
 			]
 		},
@@ -656,9 +656,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-10-networking-from-a-systems-view/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-10-networking-from-a-systems-view/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-10-networking-from-a-systems-view/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-10-networking-from-a-systems-view/solution"
 				}
 			],
 			supplementalProjects: [
@@ -667,27 +667,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for networking from a systems view that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on wrong bind addresses, DNS mismatches, missing routes, and dead ports so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-10-networking-from-a-systems-view/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-10-networking-from-a-systems-view/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX11-unit-10-networking-from-a-systems-view/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-10-networking-from-a-systems-view/solution"
 				},
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX21-unit-10-networking-from-a-systems-view-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX21-unit-10-networking-from-a-systems-view-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemen/solution"
 				},
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX22-unit-10-networking-from-a-systems-view-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX22-unit-10-networking-from-a-systems-view-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemen/solution"
 				}
 			]
 		},
@@ -748,18 +748,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Web Servers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX23-unit-11-web-servers-supplemental-2/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-23-unit-11-web-servers-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX23-unit-11-web-servers-supplemental-2/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-23-unit-11-web-servers-supplemental-2/solution"
 				},
 				{
 					title: "Unit 11: Web Servers supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Web Servers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX24-unit-11-web-servers-supplemental-3/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-24-unit-11-web-servers-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX24-unit-11-web-servers-supplemental-3/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-24-unit-11-web-servers-supplemental-3/solution"
 				}
 			]
 		},
@@ -791,9 +791,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-12-storage-backups-and-reliability/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-12-storage-backups-and-reliability/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-12-storage-backups-and-reliability/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-12-storage-backups-and-reliability/solution"
 				}
 			],
 			supplementalProjects: [
@@ -802,27 +802,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for storage, backups, and reliability that records the command you ran, what output you expected, what actually happened, and how you corrected the issue. Focus this notebook on full disks, bad mounts, failed backups, and rollback after broken config changes so students build the habit of turning one-off mistakes into reusable operating knowledge.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-12-storage-backups-and-reliability/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-12-storage-backups-and-reliability/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX12-unit-12-storage-backups-and-reliability/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-12-storage-backups-and-reliability/solution"
 				},
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX25-unit-12-storage-backups-and-reliability-suppleme/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX25-unit-12-storage-backups-and-reliability-suppleme/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-suppleme/solution"
 				},
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX26-unit-12-storage-backups-and-reliability-suppleme/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-suppleme/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX26-unit-12-storage-backups-and-reliability-suppleme/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-suppleme/solution"
 				}
 			]
 		},
@@ -844,9 +844,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: linux systems lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-linux-systems-lab-14/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-linux-systems-lab-14/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/solution"
 				},
 				{
 					title: "linux systems lab 14: Review and Reflection",
@@ -860,27 +860,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: linux systems lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-linux-systems-lab-14/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX01-linux-systems-lab-14/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/solution"
 				},
 				{
 					title: "Applied Studio 14: linux systems lab 14 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX27-applied-studio-14-linux-systems-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX27-applied-studio-14-linux-systems-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 14: linux systems lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX28-applied-studio-14-linux-systems-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX28-applied-studio-14-linux-systems-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemen/solution"
 				}
 			]
 		},
@@ -902,9 +902,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: linux systems lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-linux-systems-lab-15/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-linux-systems-lab-15/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/solution"
 				},
 				{
 					title: "linux systems lab 15: Review and Reflection",
@@ -918,27 +918,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: linux systems lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-linux-systems-lab-15/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX02-linux-systems-lab-15/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/solution"
 				},
 				{
 					title: "Applied Studio 15: linux systems lab 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX29-applied-studio-15-linux-systems-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX29-applied-studio-15-linux-systems-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 15: linux systems lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX30-applied-studio-15-linux-systems-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX30-applied-studio-15-linux-systems-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemen/solution"
 				}
 			]
 		},
@@ -960,9 +960,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: linux systems lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-linux-systems-lab-16/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-linux-systems-lab-16/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/solution"
 				},
 				{
 					title: "linux systems lab 16: Review and Reflection",
@@ -976,27 +976,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: linux systems lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-linux-systems-lab-16/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX03-linux-systems-lab-16/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/solution"
 				},
 				{
 					title: "Applied Studio 16: linux systems lab 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX31-applied-studio-16-linux-systems-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX31-applied-studio-16-linux-systems-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 16: linux systems lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX32-applied-studio-16-linux-systems-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX32-applied-studio-16-linux-systems-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemen/solution"
 				}
 			]
 		},
@@ -1018,9 +1018,9 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: linux systems lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-linux-systems-lab-17/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-linux-systems-lab-17/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/solution"
 				},
 				{
 					title: "linux systems lab 17: Review and Reflection",
@@ -1034,27 +1034,27 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: linux systems lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-linux-systems-lab-17/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX04-linux-systems-lab-17/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/solution"
 				},
 				{
 					title: "Applied Studio 17: linux systems lab 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX33-applied-studio-17-linux-systems-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX33-applied-studio-17-linux-systems-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 17: linux systems lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX34-applied-studio-17-linux-systems-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LSX34-applied-studio-17-linux-systems-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemen/solution"
 				}
 			]
 		}

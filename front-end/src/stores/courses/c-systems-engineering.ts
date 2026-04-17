@@ -31,9 +31,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-cse0-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-cse0-setup-and-tooling/solution"
 				}
 			],
 			supplementalProjects: [
@@ -42,27 +42,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Keep a short engineering notebook for setup and tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on toolchain identity, compiler/debugger verification, and the difference between editing and building so students build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-cse0-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-cse0-setup-and-tooling/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-cse0-setup-and-tooling/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CSE0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-cse0-setup-and-tooling-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-cse0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-cse0-setup-and-tooling-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-cse0-setup-and-tooling-supplemental-2/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CSE0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-cse0-setup-and-tooling-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-cse0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-cse0-setup-and-tooling-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-cse0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -94,9 +94,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-1-why-c-for-systems-work/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-1-why-c-for-systems-work/solution"
 				}
 			],
 			supplementalProjects: [
@@ -105,27 +105,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Keep a short engineering notebook for why c for systems work that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on source-to-binary boundaries, declarations vs definitions, and what the runtime model exposes so students build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-1-why-c-for-systems-work/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-1-why-c-for-systems-work/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-1-why-c-for-systems-work/solution"
 				},
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Why C for Systems Work. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-unit-1-why-c-for-systems-work-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-unit-1-why-c-for-systems-work-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-unit-1-why-c-for-systems-work-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-unit-1-why-c-for-systems-work-supplemental-2/solution"
 				},
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Why C for Systems Work. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-unit-1-why-c-for-systems-work-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-unit-1-why-c-for-systems-work-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-unit-1-why-c-for-systems-work-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-unit-1-why-c-for-systems-work-supplemental-3/solution"
 				}
 			]
 		},
@@ -172,18 +172,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Binary, Hex, and Number Representation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-unit-2-binary-hex-and-number-representation-supp/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-unit-2-binary-hex-and-number-representation-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX05-unit-2-binary-hex-and-number-representation-supp/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-unit-2-binary-hex-and-number-representation-supp/solution"
 				},
 				{
 					title: "Unit 2: Binary, Hex, and Number Representation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Binary, Hex, and Number Representation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-2-binary-hex-and-number-representation-supp/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-2-binary-hex-and-number-representation-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX06-unit-2-binary-hex-and-number-representation-supp/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-2-binary-hex-and-number-representation-supp/solution"
 				}
 			]
 		},
@@ -239,18 +239,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Bitwise Operations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-3-bitwise-operations-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-3-bitwise-operations-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-3-bitwise-operations-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-3-bitwise-operations-supplemental-2/solution"
 				},
 				{
 					title: "Unit 3: Bitwise Operations supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Bitwise Operations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-3-bitwise-operations-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-3-bitwise-operations-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-3-bitwise-operations-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-3-bitwise-operations-supplemental-3/solution"
 				}
 			]
 		},
@@ -297,18 +297,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Memory and Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-4-memory-and-layout-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-4-memory-and-layout-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-4-memory-and-layout-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-4-memory-and-layout-supplemental-2/solution"
 				},
 				{
 					title: "Unit 4: Memory and Layout supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Memory and Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX10-unit-4-memory-and-layout-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-10-unit-4-memory-and-layout-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX10-unit-4-memory-and-layout-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-10-unit-4-memory-and-layout-supplemental-3/solution"
 				}
 			]
 		},
@@ -355,18 +355,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: Strings and Byte Buffers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX11-unit-5-strings-and-byte-buffers-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-11-unit-5-strings-and-byte-buffers-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX11-unit-5-strings-and-byte-buffers-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-11-unit-5-strings-and-byte-buffers-supplemental-2/solution"
 				},
 				{
 					title: "Unit 5: Strings and Byte Buffers supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: Strings and Byte Buffers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX12-unit-5-strings-and-byte-buffers-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-12-unit-5-strings-and-byte-buffers-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX12-unit-5-strings-and-byte-buffers-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-12-unit-5-strings-and-byte-buffers-supplemental-3/solution"
 				}
 			]
 		},
@@ -422,18 +422,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Files, Streams, and Parsing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX13-unit-6-files-streams-and-parsing-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-13-unit-6-files-streams-and-parsing-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX13-unit-6-files-streams-and-parsing-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-13-unit-6-files-streams-and-parsing-supplemental-2/solution"
 				},
 				{
 					title: "Unit 6: Files, Streams, and Parsing supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Files, Streams, and Parsing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX14-unit-6-files-streams-and-parsing-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-14-unit-6-files-streams-and-parsing-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX14-unit-6-files-streams-and-parsing-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-14-unit-6-files-streams-and-parsing-supplemental-3/solution"
 				}
 			]
 		},
@@ -480,18 +480,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Dynamic Memory and Lifetime. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX15-unit-7-dynamic-memory-and-lifetime-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-15-unit-7-dynamic-memory-and-lifetime-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX15-unit-7-dynamic-memory-and-lifetime-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-15-unit-7-dynamic-memory-and-lifetime-supplemental-/solution"
 				},
 				{
 					title: "Unit 7: Dynamic Memory and Lifetime supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Dynamic Memory and Lifetime. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX16-unit-7-dynamic-memory-and-lifetime-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-16-unit-7-dynamic-memory-and-lifetime-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX16-unit-7-dynamic-memory-and-lifetime-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-16-unit-7-dynamic-memory-and-lifetime-supplemental-/solution"
 				}
 			]
 		},
@@ -523,9 +523,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-8-function-pointers-and-dispatch/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-8-function-pointers-and-dispatch/solution"
 				}
 			],
 			supplementalProjects: [
@@ -534,27 +534,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Keep a short engineering notebook for function pointers and dispatch that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which values select which handlers and why a dispatch table can be clearer than a giant if-else chain so students build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-8-function-pointers-and-dispatch/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX07-unit-8-function-pointers-and-dispatch/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-8-function-pointers-and-dispatch/solution"
 				},
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Function Pointers and Dispatch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX17-unit-8-function-pointers-and-dispatch-supplement/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX17-unit-8-function-pointers-and-dispatch-supplement/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplement/solution"
 				},
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Function Pointers and Dispatch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX18-unit-8-function-pointers-and-dispatch-supplement/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplement/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX18-unit-8-function-pointers-and-dispatch-supplement/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplement/solution"
 				}
 			]
 		},
@@ -601,18 +601,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Data Structures in C. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX19-unit-9-data-structures-in-c-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-19-unit-9-data-structures-in-c-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX19-unit-9-data-structures-in-c-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-19-unit-9-data-structures-in-c-supplemental-2/solution"
 				},
 				{
 					title: "Unit 9: Data Structures in C supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Data Structures in C. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX20-unit-9-data-structures-in-c-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-20-unit-9-data-structures-in-c-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX20-unit-9-data-structures-in-c-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-20-unit-9-data-structures-in-c-supplemental-3/solution"
 				}
 			]
 		},
@@ -644,9 +644,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-10-engineering-math-in-code/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-10-engineering-math-in-code/solution"
 				}
 			],
 			supplementalProjects: [
@@ -655,27 +655,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Keep a short engineering notebook for engineering math in code that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on scaling choices, overflow checks, and why the chosen units make the transform safer to reason about so students build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-10-engineering-math-in-code/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX08-unit-10-engineering-math-in-code/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-10-engineering-math-in-code/solution"
 				},
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Engineering Math in Code. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX21-unit-10-engineering-math-in-code-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-21-unit-10-engineering-math-in-code-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX21-unit-10-engineering-math-in-code-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-21-unit-10-engineering-math-in-code-supplemental-2/solution"
 				},
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Engineering Math in Code. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX22-unit-10-engineering-math-in-code-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-22-unit-10-engineering-math-in-code-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX22-unit-10-engineering-math-in-code-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-22-unit-10-engineering-math-in-code-supplemental-3/solution"
 				}
 			]
 		},
@@ -707,9 +707,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-11-systems-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-11-systems-tooling/solution"
 				}
 			],
 			supplementalProjects: [
@@ -718,27 +718,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Keep a short engineering notebook for systems tooling that records the byte view, memory view, compiler or runtime evidence, and one plain-language explanation of why the code worked or failed. Focus especially on which tool produced the most useful evidence for a given bug or observation and why so students build the habit of explaining systems behavior instead of only trusting output.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-11-systems-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX09-unit-11-systems-tooling/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-11-systems-tooling/solution"
 				},
 				{
 					title: "Unit 11: Systems Tooling supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Systems Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX23-unit-11-systems-tooling-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-23-unit-11-systems-tooling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX23-unit-11-systems-tooling-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-23-unit-11-systems-tooling-supplemental-2/solution"
 				},
 				{
 					title: "Unit 11: Systems Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Systems Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX24-unit-11-systems-tooling-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-24-unit-11-systems-tooling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX24-unit-11-systems-tooling-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-24-unit-11-systems-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -785,18 +785,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Capstone Engineering Utility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX25-unit-12-capstone-engineering-utility-supplementa/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX25-unit-12-capstone-engineering-utility-supplementa/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplementa/solution"
 				},
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Capstone Engineering Utility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX26-unit-12-capstone-engineering-utility-supplementa/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX26-unit-12-capstone-engineering-utility-supplementa/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplementa/solution"
 				}
 			]
 		},
@@ -818,9 +818,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: systems build 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/solution"
 				},
 				{
 					title: "systems build 14: Review and Reflection",
@@ -834,27 +834,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: systems build 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX01-systems-build-14/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/solution"
 				},
 				{
 					title: "Applied Studio 14: systems build 14 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: systems build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX27-applied-studio-14-systems-build-14-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX27-applied-studio-14-systems-build-14-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 14: systems build 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: systems build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX28-applied-studio-14-systems-build-14-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-28-applied-studio-14-systems-build-14-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX28-applied-studio-14-systems-build-14-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-28-applied-studio-14-systems-build-14-supplemental-/solution"
 				}
 			]
 		},
@@ -876,9 +876,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: systems build 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/solution"
 				},
 				{
 					title: "systems build 15: Review and Reflection",
@@ -892,27 +892,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: systems build 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX02-systems-build-15/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/solution"
 				},
 				{
 					title: "Applied Studio 15: systems build 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: systems build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX29-applied-studio-15-systems-build-15-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX29-applied-studio-15-systems-build-15-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 15: systems build 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: systems build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX30-applied-studio-15-systems-build-15-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-30-applied-studio-15-systems-build-15-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX30-applied-studio-15-systems-build-15-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-30-applied-studio-15-systems-build-15-supplemental-/solution"
 				}
 			]
 		},
@@ -934,9 +934,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: systems build 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/solution"
 				},
 				{
 					title: "systems build 16: Review and Reflection",
@@ -950,27 +950,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: systems build 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX03-systems-build-16/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/solution"
 				},
 				{
 					title: "Applied Studio 16: systems build 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: systems build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX31-applied-studio-16-systems-build-16-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX31-applied-studio-16-systems-build-16-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 16: systems build 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: systems build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX32-applied-studio-16-systems-build-16-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-32-applied-studio-16-systems-build-16-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX32-applied-studio-16-systems-build-16-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-32-applied-studio-16-systems-build-16-supplemental-/solution"
 				}
 			]
 		},
@@ -992,9 +992,9 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: systems build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/solution"
 				},
 				{
 					title: "systems build 17: Review and Reflection",
@@ -1008,27 +1008,27 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: systems build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX04-systems-build-17/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/solution"
 				},
 				{
 					title: "Applied Studio 17: systems build 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: systems build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX33-applied-studio-17-systems-build-17-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX33-applied-studio-17-systems-build-17-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-/solution"
 				},
 				{
 					title: "Applied Studio 17: systems build 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: systems build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX34-applied-studio-17-systems-build-17-supplemental-/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-34-applied-studio-17-systems-build-17-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSEX34-applied-studio-17-systems-build-17-supplemental-/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-34-applied-studio-17-systems-build-17-supplemental-/solution"
 				}
 			]
 		}

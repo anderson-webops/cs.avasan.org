@@ -31,9 +31,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX04-asm0-setup-and-tooling/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-asm0-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX04-asm0-setup-and-tooling/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-asm0-setup-and-tooling/solution"
 				}
 			],
 			supplementalProjects: [
@@ -42,27 +42,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for setup and tooling that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on toolchain identity, architecture choice, and why x86-64 is the starting point for the course so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX04-asm0-setup-and-tooling/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-asm0-setup-and-tooling/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX04-asm0-setup-and-tooling/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-asm0-setup-and-tooling/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ASM0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX01-asm0-setup-and-tooling-supplemental-2/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-asm0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX01-asm0-setup-and-tooling-supplemental-2/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-asm0-setup-and-tooling-supplemental-2/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ASM0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX02-asm0-setup-and-tooling-supplemental-3/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-asm0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX02-asm0-setup-and-tooling-supplemental-3/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-asm0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -94,9 +94,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX05-unit-1-machine-model-and-toolchain/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-1-machine-model-and-toolchain/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX05-unit-1-machine-model-and-toolchain/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-1-machine-model-and-toolchain/solution"
 				}
 			],
 			supplementalProjects: [
@@ -105,27 +105,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for machine model and toolchain that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on source-to-object boundaries, symbol names, and how the disassembler reveals structure so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX05-unit-1-machine-model-and-toolchain/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-1-machine-model-and-toolchain/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX05-unit-1-machine-model-and-toolchain/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-1-machine-model-and-toolchain/solution"
 				},
 				{
 					title: "Unit 1: Machine Model and Toolchain supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Machine Model and Toolchain. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX03-unit-1-machine-model-and-toolchain-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX03-unit-1-machine-model-and-toolchain-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-/solution"
 				},
 				{
 					title: "Unit 1: Machine Model and Toolchain supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Machine Model and Toolchain. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX04-unit-1-machine-model-and-toolchain-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX04-unit-1-machine-model-and-toolchain-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-/solution"
 				}
 			]
 		},
@@ -172,18 +172,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Registers and Data Movement. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX05-unit-2-registers-and-data-movement-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX05-unit-2-registers-and-data-movement-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-/solution"
 				},
 				{
 					title: "Unit 2: Registers and Data Movement supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Registers and Data Movement. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX06-unit-2-registers-and-data-movement-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX06-unit-2-registers-and-data-movement-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-/solution"
 				}
 			]
 		},
@@ -215,9 +215,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX06-unit-3-arithmetic-and-logic/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-3-arithmetic-and-logic/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX06-unit-3-arithmetic-and-logic/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-3-arithmetic-and-logic/solution"
 				}
 			],
 			supplementalProjects: [
@@ -226,27 +226,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for arithmetic and logic that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on flag changes, implicit register use, and the difference between value changes and status changes so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX06-unit-3-arithmetic-and-logic/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-3-arithmetic-and-logic/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX06-unit-3-arithmetic-and-logic/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-3-arithmetic-and-logic/solution"
 				},
 				{
 					title: "Unit 3: Arithmetic and Logic supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Arithmetic and Logic. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX07-unit-3-arithmetic-and-logic-supplemental-2/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-3-arithmetic-and-logic-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX07-unit-3-arithmetic-and-logic-supplemental-2/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-3-arithmetic-and-logic-supplemental-2/solution"
 				},
 				{
 					title: "Unit 3: Arithmetic and Logic supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Arithmetic and Logic. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX08-unit-3-arithmetic-and-logic-supplemental-3/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-3-arithmetic-and-logic-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX08-unit-3-arithmetic-and-logic-supplemental-3/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-3-arithmetic-and-logic-supplemental-3/solution"
 				}
 			]
 		},
@@ -293,18 +293,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Branching and Loops. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX09-unit-4-branching-and-loops-supplemental-2/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-4-branching-and-loops-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX09-unit-4-branching-and-loops-supplemental-2/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-4-branching-and-loops-supplemental-2/solution"
 				},
 				{
 					title: "Unit 4: Branching and Loops supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Branching and Loops. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX10-unit-4-branching-and-loops-supplemental-3/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-4-branching-and-loops-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX10-unit-4-branching-and-loops-supplemental-3/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-4-branching-and-loops-supplemental-3/solution"
 				}
 			]
 		},
@@ -336,9 +336,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX07-unit-5-the-stack-and-function-calls/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-5-the-stack-and-function-calls/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX07-unit-5-the-stack-and-function-calls/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-5-the-stack-and-function-calls/solution"
 				}
 			],
 			supplementalProjects: [
@@ -347,27 +347,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for the stack and function calls that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on return addresses, saved registers, and why the stack pointer moves when a function prepares for another call so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX07-unit-5-the-stack-and-function-calls/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-5-the-stack-and-function-calls/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX07-unit-5-the-stack-and-function-calls/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-5-the-stack-and-function-calls/solution"
 				},
 				{
 					title: "Unit 5: The Stack and Function Calls supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: The Stack and Function Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX11-unit-5-the-stack-and-function-calls-supplemental/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX11-unit-5-the-stack-and-function-calls-supplemental/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental/solution"
 				},
 				{
 					title: "Unit 5: The Stack and Function Calls supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: The Stack and Function Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX12-unit-5-the-stack-and-function-calls-supplemental/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX12-unit-5-the-stack-and-function-calls-supplemental/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental/solution"
 				}
 			]
 		},
@@ -414,18 +414,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Calling Conventions and ABI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX13-unit-6-calling-conventions-and-abi-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX13-unit-6-calling-conventions-and-abi-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-/solution"
 				},
 				{
 					title: "Unit 6: Calling Conventions and ABI supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Calling Conventions and ABI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX14-unit-6-calling-conventions-and-abi-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX14-unit-6-calling-conventions-and-abi-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-/solution"
 				}
 			]
 		},
@@ -472,18 +472,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Memory Addressing and Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX15-unit-7-memory-addressing-and-data-structures-sup/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX15-unit-7-memory-addressing-and-data-structures-sup/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-sup/solution"
 				},
 				{
 					title: "Unit 7: Memory Addressing and Data Structures supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Memory Addressing and Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX16-unit-7-memory-addressing-and-data-structures-sup/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-sup/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX16-unit-7-memory-addressing-and-data-structures-sup/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-sup/solution"
 				}
 			]
 		},
@@ -530,18 +530,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: System Calls and Runtime Interaction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX17-unit-8-system-calls-and-runtime-interaction-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX17-unit-8-system-calls-and-runtime-interaction-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supp/solution"
 				},
 				{
 					title: "Unit 8: System Calls and Runtime Interaction supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: System Calls and Runtime Interaction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX18-unit-8-system-calls-and-runtime-interaction-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX18-unit-8-system-calls-and-runtime-interaction-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supp/solution"
 				}
 			]
 		},
@@ -573,9 +573,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX08-unit-9-reading-compiler-output/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-9-reading-compiler-output/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX08-unit-9-reading-compiler-output/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-9-reading-compiler-output/solution"
 				}
 			],
 			supplementalProjects: [
@@ -584,27 +584,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for reading compiler output that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on source-to-instruction mapping, optimization differences, and what evidence proves two versions still implement the same logic so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX08-unit-9-reading-compiler-output/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-9-reading-compiler-output/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX08-unit-9-reading-compiler-output/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-9-reading-compiler-output/solution"
 				},
 				{
 					title: "Unit 9: Reading Compiler Output supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Reading Compiler Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX19-unit-9-reading-compiler-output-supplemental-2/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-19-unit-9-reading-compiler-output-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX19-unit-9-reading-compiler-output-supplemental-2/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-19-unit-9-reading-compiler-output-supplemental-2/solution"
 				},
 				{
 					title: "Unit 9: Reading Compiler Output supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Reading Compiler Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX20-unit-9-reading-compiler-output-supplemental-3/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-20-unit-9-reading-compiler-output-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX20-unit-9-reading-compiler-output-supplemental-3/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-20-unit-9-reading-compiler-output-supplemental-3/solution"
 				}
 			]
 		},
@@ -636,9 +636,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX09-unit-10-debugging-at-instruction-level/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-10-debugging-at-instruction-level/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX09-unit-10-debugging-at-instruction-level/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-10-debugging-at-instruction-level/solution"
 				}
 			],
 			supplementalProjects: [
@@ -647,27 +647,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for debugging at instruction level that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on where execution stopped, which machine state changed next, and what the next branch decision depends on so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX09-unit-10-debugging-at-instruction-level/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-10-debugging-at-instruction-level/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX09-unit-10-debugging-at-instruction-level/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-10-debugging-at-instruction-level/solution"
 				},
 				{
 					title: "Unit 10: Debugging at Instruction Level supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Debugging at Instruction Level. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX21-unit-10-debugging-at-instruction-level-supplemen/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX21-unit-10-debugging-at-instruction-level-supplemen/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemen/solution"
 				},
 				{
 					title: "Unit 10: Debugging at Instruction Level supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Debugging at Instruction Level. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX22-unit-10-debugging-at-instruction-level-supplemen/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX22-unit-10-debugging-at-instruction-level-supplemen/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemen/solution"
 				}
 			]
 		},
@@ -699,9 +699,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX10-unit-11-performance-and-code-shape/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-11-performance-and-code-shape/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX10-unit-11-performance-and-code-shape/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-11-performance-and-code-shape/solution"
 				}
 			],
 			supplementalProjects: [
@@ -710,27 +710,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for performance and code shape that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on branch frequency, memory-access patterns, and which cost assumptions came from evidence versus guesswork so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX10-unit-11-performance-and-code-shape/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-11-performance-and-code-shape/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX10-unit-11-performance-and-code-shape/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-11-performance-and-code-shape/solution"
 				},
 				{
 					title: "Unit 11: Performance and Code Shape supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Performance and Code Shape. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX23-unit-11-performance-and-code-shape-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX23-unit-11-performance-and-code-shape-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-/solution"
 				},
 				{
 					title: "Unit 11: Performance and Code Shape supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Performance and Code Shape. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX24-unit-11-performance-and-code-shape-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX24-unit-11-performance-and-code-shape-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-/solution"
 				}
 			]
 		},
@@ -777,18 +777,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Security and Reliability Visibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX25-unit-12-security-and-reliability-visibility-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX25-unit-12-security-and-reliability-visibility-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supp/solution"
 				},
 				{
 					title: "Unit 12: Security and Reliability Visibility supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Security and Reliability Visibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX26-unit-12-security-and-reliability-visibility-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supp/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX26-unit-12-security-and-reliability-visibility-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supp/solution"
 				}
 			]
 		},
@@ -820,9 +820,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX11-asm13-expansion-ideas-and-next-steps/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-asm13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX11-asm13-expansion-ideas-and-next-steps/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-asm13-expansion-ideas-and-next-steps/solution"
 				}
 			],
 			supplementalProjects: [
@@ -831,27 +831,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Keep a short worksheet for expansion ideas and next steps that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on which next specialization builds most naturally on the student’s current strengths and why so students learn to narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX11-asm13-expansion-ideas-and-next-steps/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-asm13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX11-asm13-expansion-ideas-and-next-steps/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-asm13-expansion-ideas-and-next-steps/solution"
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ASM13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX27-asm13-expansion-ideas-and-next-steps-supplementa/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX27-asm13-expansion-ideas-and-next-steps-supplementa/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplementa/solution"
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ASM13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX28-asm13-expansion-ideas-and-next-steps-supplementa/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX28-asm13-expansion-ideas-and-next-steps-supplementa/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplementa/solution"
 				}
 			]
 		},
@@ -873,9 +873,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: assembly lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX01-assembly-lab-15/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-assembly-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX01-assembly-lab-15/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-assembly-lab-15/solution"
 				},
 				{
 					title: "assembly lab 15: Review and Reflection",
@@ -889,27 +889,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: assembly lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX01-assembly-lab-15/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-assembly-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX01-assembly-lab-15/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-assembly-lab-15/solution"
 				},
 				{
 					title: "Applied Studio 15: assembly lab 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: assembly lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX29-applied-studio-15-assembly-lab-15-supplemental-2/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-29-applied-studio-15-assembly-lab-15-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX29-applied-studio-15-assembly-lab-15-supplemental-2/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-29-applied-studio-15-assembly-lab-15-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: assembly lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: assembly lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX30-applied-studio-15-assembly-lab-15-supplemental-3/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-30-applied-studio-15-assembly-lab-15-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX30-applied-studio-15-assembly-lab-15-supplemental-3/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-30-applied-studio-15-assembly-lab-15-supplemental-3/solution"
 				}
 			]
 		},
@@ -931,9 +931,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: assembly lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX02-assembly-lab-16/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-assembly-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX02-assembly-lab-16/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-assembly-lab-16/solution"
 				},
 				{
 					title: "assembly lab 16: Review and Reflection",
@@ -947,27 +947,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: assembly lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX02-assembly-lab-16/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-assembly-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX02-assembly-lab-16/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-assembly-lab-16/solution"
 				},
 				{
 					title: "Applied Studio 16: assembly lab 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: assembly lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX31-applied-studio-16-assembly-lab-16-supplemental-2/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-31-applied-studio-16-assembly-lab-16-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX31-applied-studio-16-assembly-lab-16-supplemental-2/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-31-applied-studio-16-assembly-lab-16-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 16: assembly lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: assembly lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX32-applied-studio-16-assembly-lab-16-supplemental-3/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-32-applied-studio-16-assembly-lab-16-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX32-applied-studio-16-assembly-lab-16-supplemental-3/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-32-applied-studio-16-assembly-lab-16-supplemental-3/solution"
 				}
 			]
 		},
@@ -989,9 +989,9 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: assembly lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX03-assembly-lab-17/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-assembly-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX03-assembly-lab-17/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-assembly-lab-17/solution"
 				},
 				{
 					title: "assembly lab 17: Review and Reflection",
@@ -1005,27 +1005,27 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: assembly lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX03-assembly-lab-17/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-assembly-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX03-assembly-lab-17/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-assembly-lab-17/solution"
 				},
 				{
 					title: "Applied Studio 17: assembly lab 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: assembly lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX33-applied-studio-17-assembly-lab-17-supplemental-2/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-33-applied-studio-17-assembly-lab-17-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX33-applied-studio-17-assembly-lab-17-supplemental-2/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-33-applied-studio-17-assembly-lab-17-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: assembly lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: assembly lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX34-applied-studio-17-assembly-lab-17-supplemental-3/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-34-applied-studio-17-assembly-lab-17-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASMX34-applied-studio-17-assembly-lab-17-supplemental-3/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-34-applied-studio-17-assembly-lab-17-supplemental-3/solution"
 				}
 			]
 		}

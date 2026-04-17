@@ -65,18 +65,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X01-aj1-review-variables-strings-and-input-supplemen/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X01-aj1-review-variables-strings-and-input-supplemen/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemen/solution"
 				},
 				{
 					title: "Review: Variables, Strings, and Input supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X02-aj1-review-variables-strings-and-input-supplemen/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X02-aj1-review-variables-strings-and-input-supplemen/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemen/solution"
 				}
 			]
 		},
@@ -248,18 +248,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ3 Review: Objects and Classes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X03-aj3-review-objects-and-classes-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-03-aj3-review-objects-and-classes-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X03-aj3-review-objects-and-classes-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-03-aj3-review-objects-and-classes-supplemental-2/solution"
 				},
 				{
 					title: "Review: Objects and Classes supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ3 Review: Objects and Classes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X04-aj3-review-objects-and-classes-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-04-aj3-review-objects-and-classes-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X04-aj3-review-objects-and-classes-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-04-aj3-review-objects-and-classes-supplemental-3/solution"
 				}
 			]
 		},
@@ -315,18 +315,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ4 Recursion. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X05-aj4-recursion-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-05-aj4-recursion-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X05-aj4-recursion-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-05-aj4-recursion-supplemental-2/solution"
 				},
 				{
 					title: "Recursion supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ4 Recursion. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X06-aj4-recursion-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-06-aj4-recursion-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X06-aj4-recursion-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-06-aj4-recursion-supplemental-3/solution"
 				}
 			]
 		},
@@ -377,18 +377,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X07-aj5-linear-search-and-big-o-notation-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X07-aj5-linear-search-and-big-o-notation-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplementa/solution"
 				},
 				{
 					title: "Linear Search and Big O Notation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X08-aj5-linear-search-and-big-o-notation-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplementa/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X08-aj5-linear-search-and-big-o-notation-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplementa/solution"
 				}
 			]
 		},
@@ -448,18 +448,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ6 Binary Search. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X09-aj6-binary-search-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-09-aj6-binary-search-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X09-aj6-binary-search-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-09-aj6-binary-search-supplemental-2/solution"
 				},
 				{
 					title: "Binary Search supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ6 Binary Search. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X10-aj6-binary-search-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-10-aj6-binary-search-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X10-aj6-binary-search-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-10-aj6-binary-search-supplemental-3/solution"
 				}
 			]
 		},
@@ -520,18 +520,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X11-check-in-1-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-11-check-in-1-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X11-check-in-1-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-11-check-in-1-supplemental-2/solution"
 				},
 				{
 					title: "Check In #1 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X12-check-in-1-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-12-check-in-1-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X12-check-in-1-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-12-check-in-1-supplemental-3/solution"
 				}
 			]
 		},
@@ -592,18 +592,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ7 Selection and Insertion Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X13-aj7-selection-and-insertion-sort-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-13-aj7-selection-and-insertion-sort-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X13-aj7-selection-and-insertion-sort-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-13-aj7-selection-and-insertion-sort-supplemental-2/solution"
 				},
 				{
 					title: "Selection and Insertion Sort supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ7 Selection and Insertion Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X14-aj7-selection-and-insertion-sort-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-14-aj7-selection-and-insertion-sort-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X14-aj7-selection-and-insertion-sort-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-14-aj7-selection-and-insertion-sort-supplemental-3/solution"
 				}
 			]
 		},
@@ -654,18 +654,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ8 Bubble Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X15-aj8-bubble-sort-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-15-aj8-bubble-sort-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X15-aj8-bubble-sort-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-15-aj8-bubble-sort-supplemental-2/solution"
 				},
 				{
 					title: "Bubble Sort supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ8 Bubble Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X16-aj8-bubble-sort-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-16-aj8-bubble-sort-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X16-aj8-bubble-sort-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-16-aj8-bubble-sort-supplemental-3/solution"
 				}
 			]
 		},
@@ -725,18 +725,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ9 Merge Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X17-aj9-merge-sort-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-17-aj9-merge-sort-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X17-aj9-merge-sort-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-17-aj9-merge-sort-supplemental-2/solution"
 				},
 				{
 					title: "Merge Sort supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ9 Merge Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X18-aj9-merge-sort-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-18-aj9-merge-sort-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X18-aj9-merge-sort-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-18-aj9-merge-sort-supplemental-3/solution"
 				}
 			]
 		},
@@ -797,18 +797,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X19-check-in-2-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-19-check-in-2-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X19-check-in-2-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-19-check-in-2-supplemental-2/solution"
 				},
 				{
 					title: "Check In #2 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X20-check-in-2-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-20-check-in-2-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X20-check-in-2-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-20-check-in-2-supplemental-3/solution"
 				}
 			]
 		},
@@ -873,18 +873,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ10 Sustainable Programming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X21-aj10-sustainable-programming-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-21-aj10-sustainable-programming-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X21-aj10-sustainable-programming-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-21-aj10-sustainable-programming-supplemental-2/solution"
 				},
 				{
 					title: "Sustainable Programming supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ10 Sustainable Programming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X22-aj10-sustainable-programming-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-22-aj10-sustainable-programming-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X22-aj10-sustainable-programming-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-22-aj10-sustainable-programming-supplemental-3/solution"
 				}
 			]
 		},
@@ -940,18 +940,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ11 Linked Lists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X23-aj11-linked-lists-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-23-aj11-linked-lists-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X23-aj11-linked-lists-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-23-aj11-linked-lists-supplemental-2/solution"
 				},
 				{
 					title: "Linked Lists supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ11 Linked Lists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X24-aj11-linked-lists-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-24-aj11-linked-lists-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X24-aj11-linked-lists-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-24-aj11-linked-lists-supplemental-3/solution"
 				}
 			]
 		},
@@ -1076,18 +1076,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ13 Priority Queues and Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X25-aj13-priority-queues-and-maps-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-25-aj13-priority-queues-and-maps-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X25-aj13-priority-queues-and-maps-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-25-aj13-priority-queues-and-maps-supplemental-2/solution"
 				},
 				{
 					title: "Priority Queues and Maps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ13 Priority Queues and Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X26-aj13-priority-queues-and-maps-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-26-aj13-priority-queues-and-maps-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X26-aj13-priority-queues-and-maps-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-26-aj13-priority-queues-and-maps-supplemental-3/solution"
 				}
 			]
 		},
@@ -1149,18 +1149,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X27-check-in-3-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-27-check-in-3-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X27-check-in-3-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-27-check-in-3-supplemental-2/solution"
 				},
 				{
 					title: "Check In #3 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X28-check-in-3-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-28-check-in-3-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X28-check-in-3-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-28-check-in-3-supplemental-3/solution"
 				}
 			]
 		},
@@ -1230,18 +1230,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ14 Binary Search Trees. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X29-aj14-binary-search-trees-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-29-aj14-binary-search-trees-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X29-aj14-binary-search-trees-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-29-aj14-binary-search-trees-supplemental-2/solution"
 				},
 				{
 					title: "Binary Search Trees supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ14 Binary Search Trees. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X30-aj14-binary-search-trees-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-30-aj14-binary-search-trees-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X30-aj14-binary-search-trees-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-30-aj14-binary-search-trees-supplemental-3/solution"
 				}
 			]
 		},
@@ -1302,18 +1302,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ15 Hash Tables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X31-aj15-hash-tables-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-31-aj15-hash-tables-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X31-aj15-hash-tables-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-31-aj15-hash-tables-supplemental-2/solution"
 				},
 				{
 					title: "Hash Tables supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ15 Hash Tables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X32-aj15-hash-tables-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-32-aj15-hash-tables-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X32-aj15-hash-tables-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-32-aj15-hash-tables-supplemental-3/solution"
 				}
 			]
 		},
@@ -1369,18 +1369,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ16 Graphs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X33-aj16-graphs-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-33-aj16-graphs-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X33-aj16-graphs-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-33-aj16-graphs-supplemental-2/solution"
 				},
 				{
 					title: "Graphs supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ16 Graphs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X34-aj16-graphs-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-34-aj16-graphs-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X34-aj16-graphs-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-34-aj16-graphs-supplemental-3/solution"
 				}
 			]
 		},
@@ -1432,18 +1432,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X35-check-in-4-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-35-check-in-4-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X35-check-in-4-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-35-check-in-4-supplemental-2/solution"
 				},
 				{
 					title: "Check In #4 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X36-check-in-4-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-36-check-in-4-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X36-check-in-4-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-36-check-in-4-supplemental-3/solution"
 				}
 			]
 		},
@@ -1503,18 +1503,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ17 Master Project: Google Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X37-aj17-master-project-google-maps-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-37-aj17-master-project-google-maps-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X37-aj17-master-project-google-maps-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-37-aj17-master-project-google-maps-supplemental-2/solution"
 				},
 				{
 					title: "Master Project: Google Maps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ17 Master Project: Google Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X38-aj17-master-project-google-maps-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-38-aj17-master-project-google-maps-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3X38-aj17-master-project-google-maps-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-38-aj17-master-project-google-maps-supplemental-3/solution"
 				}
 			]
 		},

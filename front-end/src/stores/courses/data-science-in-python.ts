@@ -47,18 +47,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DSP0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX01-dsp0-setup-and-tooling-supplemental-2/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-dsp0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX01-dsp0-setup-and-tooling-supplemental-2/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-dsp0-setup-and-tooling-supplemental-2/solution"
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DSP0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX02-dsp0-setup-and-tooling-supplemental-3/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-dsp0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX02-dsp0-setup-and-tooling-supplemental-3/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-dsp0-setup-and-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -90,9 +90,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX08-module-1-what-data-science-is/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX08-module-1-what-data-science-is/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/solution"
 				}
 			],
 			supplementalProjects: [
@@ -101,27 +101,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Keep a compact analysis log for what data science is that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about why the chosen question is worth answering with data in the first place. Students should practice making their reasoning inspectable.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX08-module-1-what-data-science-is/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX08-module-1-what-data-science-is/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/solution"
 				},
 				{
 					title: "Module 1: What Data Science Is supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 1: What Data Science Is. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX03-module-1-what-data-science-is-supplemental-2/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-module-1-what-data-science-is-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX03-module-1-what-data-science-is-supplemental-2/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-module-1-what-data-science-is-supplemental-2/solution"
 				},
 				{
 					title: "Module 1: What Data Science Is supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 1: What Data Science Is. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX04-module-1-what-data-science-is-supplemental-3/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-module-1-what-data-science-is-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX04-module-1-what-data-science-is-supplemental-3/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-module-1-what-data-science-is-supplemental-3/solution"
 				}
 			]
 		},
@@ -153,9 +153,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX09-module-2-notebook-workflow-and-reproducibility/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX09-module-2-notebook-workflow-and-reproducibility/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/solution"
 				}
 			],
 			supplementalProjects: [
@@ -164,27 +164,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Keep a compact analysis log for notebook workflow and reproducibility that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which parts of the analysis are exploratory and which should be preserved as stable steps. Students should practice making their reasoning inspectable.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX09-module-2-notebook-workflow-and-reproducibility/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX09-module-2-notebook-workflow-and-reproducibility/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/solution"
 				},
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 2: Notebook Workflow and Reproducibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX05-module-2-notebook-workflow-and-reproducibility-s/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-s/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX05-module-2-notebook-workflow-and-reproducibility-s/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-s/solution"
 				},
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 2: Notebook Workflow and Reproducibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX06-module-2-notebook-workflow-and-reproducibility-s/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-s/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX06-module-2-notebook-workflow-and-reproducibility-s/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-s/solution"
 				}
 			]
 		},
@@ -216,9 +216,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX10-module-3-pandas-foundations/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX10-module-3-pandas-foundations/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/solution"
 				}
 			],
 			supplementalProjects: [
@@ -227,27 +227,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Keep a compact analysis log for pandas foundations that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which transformations are merely helpful and which ones materially change the meaning of the dataset. Students should practice making their reasoning inspectable.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX10-module-3-pandas-foundations/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX10-module-3-pandas-foundations/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/solution"
 				},
 				{
 					title: "Module 3: pandas Foundations supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 3: pandas Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX07-module-3-pandas-foundations-supplemental-2/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-module-3-pandas-foundations-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX07-module-3-pandas-foundations-supplemental-2/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-module-3-pandas-foundations-supplemental-2/solution"
 				},
 				{
 					title: "Module 3: pandas Foundations supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 3: pandas Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX08-module-3-pandas-foundations-supplemental-3/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-3-pandas-foundations-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX08-module-3-pandas-foundations-supplemental-3/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-3-pandas-foundations-supplemental-3/solution"
 				}
 			]
 		},
@@ -279,9 +279,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX11-module-4-cleaning-and-validation/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX11-module-4-cleaning-and-validation/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/solution"
 				}
 			],
 			supplementalProjects: [
@@ -290,27 +290,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Keep a compact analysis log for cleaning and validation that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which cleaning decision had the biggest effect on the final answer. Students should practice making their reasoning inspectable.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX11-module-4-cleaning-and-validation/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX11-module-4-cleaning-and-validation/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/solution"
 				},
 				{
 					title: "Module 4: Cleaning and Validation supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 4: Cleaning and Validation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX09-module-4-cleaning-and-validation-supplemental-2/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-4-cleaning-and-validation-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX09-module-4-cleaning-and-validation-supplemental-2/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-4-cleaning-and-validation-supplemental-2/solution"
 				},
 				{
 					title: "Module 4: Cleaning and Validation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 4: Cleaning and Validation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX10-module-4-cleaning-and-validation-supplemental-3/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-4-cleaning-and-validation-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX10-module-4-cleaning-and-validation-supplemental-3/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-4-cleaning-and-validation-supplemental-3/solution"
 				}
 			]
 		},
@@ -369,9 +369,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 5: Visualization and Statistics in Context. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX11-module-5-visualization-and-statistics-in-context/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX11-module-5-visualization-and-statistics-in-context/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context/solution"
 				}
 			]
 		},
@@ -403,9 +403,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX12-module-6-storytelling-with-data/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX12-module-6-storytelling-with-data/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/solution"
 				}
 			],
 			supplementalProjects: [
@@ -414,27 +414,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Keep a compact analysis log for storytelling with data that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which part of the story is genuinely supported and which part is still only a hypothesis. Students should practice making their reasoning inspectable.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX12-module-6-storytelling-with-data/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX12-module-6-storytelling-with-data/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/solution"
 				},
 				{
 					title: "Module 6: Storytelling with Data supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 6: Storytelling with Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX12-module-6-storytelling-with-data-supplemental-2/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX12-module-6-storytelling-with-data-supplemental-2/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data-supplemental-2/solution"
 				},
 				{
 					title: "Module 6: Storytelling with Data supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 6: Storytelling with Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX13-module-6-storytelling-with-data-supplemental-3/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-6-storytelling-with-data-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX13-module-6-storytelling-with-data-supplemental-3/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-6-storytelling-with-data-supplemental-3/solution"
 				}
 			]
 		},
@@ -466,9 +466,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX13-module-7-dashboards-with-altair-and-streamlit/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX13-module-7-dashboards-with-altair-and-streamlit/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/solution"
 				}
 			],
 			supplementalProjects: [
@@ -477,27 +477,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Keep a compact analysis log for dashboards with altair and streamlit that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which interactions actually help the user answer the question faster. Students should practice making their reasoning inspectable.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX13-module-7-dashboards-with-altair-and-streamlit/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX13-module-7-dashboards-with-altair-and-streamlit/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/solution"
 				},
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 7: Dashboards with Altair and Streamlit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX14-module-7-dashboards-with-altair-and-streamlit-su/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX14-module-7-dashboards-with-altair-and-streamlit-su/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-su/solution"
 				},
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 7: Dashboards with Altair and Streamlit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX15-module-7-dashboards-with-altair-and-streamlit-su/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-su/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX15-module-7-dashboards-with-altair-and-streamlit-su/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-su/solution"
 				}
 			]
 		},
@@ -545,18 +545,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 8: Domain Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX16-module-8-domain-projects-supplemental-2/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-16-module-8-domain-projects-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX16-module-8-domain-projects-supplemental-2/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-16-module-8-domain-projects-supplemental-2/solution"
 				},
 				{
 					title: "Module 8: Domain Projects supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 8: Domain Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX17-module-8-domain-projects-supplemental-3/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-17-module-8-domain-projects-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX17-module-8-domain-projects-supplemental-3/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-17-module-8-domain-projects-supplemental-3/solution"
 				}
 			]
 		},
@@ -588,9 +588,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX14-module-9-data-science-capstone/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX14-module-9-data-science-capstone/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/solution"
 				}
 			],
 			supplementalProjects: [
@@ -599,27 +599,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Keep a compact analysis log for data science capstone that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about what claim the project ultimately makes and what evidence best supports it. Students should practice making their reasoning inspectable.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX14-module-9-data-science-capstone/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX14-module-9-data-science-capstone/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/solution"
 				},
 				{
 					title: "Module 9: Data Science Capstone supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 9: Data Science Capstone. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX18-module-9-data-science-capstone-supplemental-2/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-18-module-9-data-science-capstone-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX18-module-9-data-science-capstone-supplemental-2/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-18-module-9-data-science-capstone-supplemental-2/solution"
 				},
 				{
 					title: "Module 9: Data Science Capstone supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 9: Data Science Capstone. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX19-module-9-data-science-capstone-supplemental-3/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-19-module-9-data-science-capstone-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX19-module-9-data-science-capstone-supplemental-3/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-19-module-9-data-science-capstone-supplemental-3/solution"
 				}
 			]
 		},
@@ -641,9 +641,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 11: data analysis lab 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX01-data-analysis-lab-11/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX01-data-analysis-lab-11/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/solution"
 				},
 				{
 					title: "data analysis lab 11: Review and Reflection",
@@ -657,27 +657,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 11: data analysis lab 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX01-data-analysis-lab-11/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX01-data-analysis-lab-11/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/solution"
 				},
 				{
 					title: "Applied Studio 11: data analysis lab 11 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: data analysis lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX20-applied-studio-11-data-analysis-lab-11-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX20-applied-studio-11-data-analysis-lab-11-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 11: data analysis lab 11 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: data analysis lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX21-applied-studio-11-data-analysis-lab-11-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX21-applied-studio-11-data-analysis-lab-11-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemen/solution"
 				}
 			]
 		},
@@ -699,9 +699,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 12: data analysis lab 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX02-data-analysis-lab-12/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX02-data-analysis-lab-12/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/solution"
 				},
 				{
 					title: "data analysis lab 12: Review and Reflection",
@@ -715,27 +715,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 12: data analysis lab 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX02-data-analysis-lab-12/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX02-data-analysis-lab-12/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/solution"
 				},
 				{
 					title: "Applied Studio 12: data analysis lab 12 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: data analysis lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX22-applied-studio-12-data-analysis-lab-12-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX22-applied-studio-12-data-analysis-lab-12-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 12: data analysis lab 12 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: data analysis lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX23-applied-studio-12-data-analysis-lab-12-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX23-applied-studio-12-data-analysis-lab-12-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemen/solution"
 				}
 			]
 		},
@@ -757,9 +757,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 13: data analysis lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX03-data-analysis-lab-13/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX03-data-analysis-lab-13/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/solution"
 				},
 				{
 					title: "data analysis lab 13: Review and Reflection",
@@ -773,27 +773,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 13: data analysis lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX03-data-analysis-lab-13/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX03-data-analysis-lab-13/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/solution"
 				},
 				{
 					title: "Applied Studio 13: data analysis lab 13 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: data analysis lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX24-applied-studio-13-data-analysis-lab-13-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX24-applied-studio-13-data-analysis-lab-13-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 13: data analysis lab 13 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: data analysis lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX25-applied-studio-13-data-analysis-lab-13-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX25-applied-studio-13-data-analysis-lab-13-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemen/solution"
 				}
 			]
 		},
@@ -815,9 +815,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: data analysis lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX04-data-analysis-lab-14/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX04-data-analysis-lab-14/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/solution"
 				},
 				{
 					title: "data analysis lab 14: Review and Reflection",
@@ -831,27 +831,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: data analysis lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX04-data-analysis-lab-14/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX04-data-analysis-lab-14/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/solution"
 				},
 				{
 					title: "Applied Studio 14: data analysis lab 14 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: data analysis lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX26-applied-studio-14-data-analysis-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX26-applied-studio-14-data-analysis-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 14: data analysis lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: data analysis lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX27-applied-studio-14-data-analysis-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX27-applied-studio-14-data-analysis-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemen/solution"
 				}
 			]
 		},
@@ -873,9 +873,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: data analysis lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX05-data-analysis-lab-15/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX05-data-analysis-lab-15/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/solution"
 				},
 				{
 					title: "data analysis lab 15: Review and Reflection",
@@ -889,27 +889,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: data analysis lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX05-data-analysis-lab-15/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX05-data-analysis-lab-15/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/solution"
 				},
 				{
 					title: "Applied Studio 15: data analysis lab 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: data analysis lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX28-applied-studio-15-data-analysis-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX28-applied-studio-15-data-analysis-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 15: data analysis lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: data analysis lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX29-applied-studio-15-data-analysis-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX29-applied-studio-15-data-analysis-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemen/solution"
 				}
 			]
 		},
@@ -931,9 +931,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: data analysis lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX06-data-analysis-lab-16/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX06-data-analysis-lab-16/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/solution"
 				},
 				{
 					title: "data analysis lab 16: Review and Reflection",
@@ -947,27 +947,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: data analysis lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX06-data-analysis-lab-16/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX06-data-analysis-lab-16/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/solution"
 				},
 				{
 					title: "Applied Studio 16: data analysis lab 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: data analysis lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX30-applied-studio-16-data-analysis-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX30-applied-studio-16-data-analysis-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 16: data analysis lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: data analysis lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX31-applied-studio-16-data-analysis-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX31-applied-studio-16-data-analysis-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemen/solution"
 				}
 			]
 		},
@@ -989,9 +989,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: data analysis lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX07-data-analysis-lab-17/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX07-data-analysis-lab-17/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/solution"
 				},
 				{
 					title: "data analysis lab 17: Review and Reflection",
@@ -1005,27 +1005,27 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: data analysis lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX07-data-analysis-lab-17/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX07-data-analysis-lab-17/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/solution"
 				},
 				{
 					title: "Applied Studio 17: data analysis lab 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: data analysis lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX32-applied-studio-17-data-analysis-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX32-applied-studio-17-data-analysis-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemen/solution"
 				},
 				{
 					title: "Applied Studio 17: data analysis lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: data analysis lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX33-applied-studio-17-data-analysis-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemen/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSPX33-applied-studio-17-data-analysis-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemen/solution"
 				}
 			]
 		}
