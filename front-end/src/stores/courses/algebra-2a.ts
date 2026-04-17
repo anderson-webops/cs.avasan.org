@@ -364,10 +364,10 @@ Higher-degree polynomial graphs still respond predictably to shifts, reflections
 
 - Reflect \`f(x) = x^5 - 2x^2 + 3\` across the y-axis:
   - \`g(x) = -x^5 - 2x^2 + 3\`
-- Scale \`f(x) = 2x^4 - 3x + 3\` horizontally by \`1/2\`:
-  - \`g(x) = (1/8)x^4 - (3/2)x + 3\`
 - Scale \`f(x) = 5x^4 - 3x^2 + 2\` vertically by \`3\`:
   - \`g(x) = 15x^4 - 9x^2 + 6\`
+- Shift \`f(x) = x^4 + 2x - 1\` right \`1\`, down \`3\`, and reflect across the y-axis:
+  - \`g(x) = (-x - 1)^4 + 2(-x - 1) - 4\`
 
 **Location-principle example**
 
@@ -592,14 +592,14 @@ Factor first, then cancel common factors, then multiply or divide.
 - \`(6x^3 - 12x)/(3x^2) = 2(x^2 - 2)/x\`
 - \`(x^2 + 4x + 3)/(x^2 - 3x - 18) = (x + 1)/(x - 6)\`
 - \`(x^3 + 5x^2 - 14x)/(x^2 - 3x + 2) = x(x + 7)/(x - 1)\`
-- \`[(x - 2)(x + 2)] / (4a^2 - 1) divide-by (a - 2)/(2a - 1)\` simplifies to \`(a + 2)/(2a + 1)\`
+- \`(a^2 - 4)/(4a^2 - 1)\` divided by \`(a - 2)/(2a - 1)\` simplifies to \`(a + 2)/(2a + 1)\`
 
 **Representative products and quotients**
 
 - \`z/(z^2 - 16) * (z^2 - z - 12)/(z^2 - 4z) = (z + 3)/(z^2 - 16)\`
 - \`(2x + 6)/(x^2 - 16) * (x - 4)/(x + 3) = 2/(x + 4)\`
-- \`(y^2 + 2y - 8)/15 divide-by (y - 2)/(5y) = y(y + 4)/3\`
-- \`(x^2 - 10x + 25)/(x^2 - 16) divide-by (x^2 - 3x - 10)/(3x - 12) = 3(x - 5)/[(x + 4)(x + 2)]\`
+- \`(y^2 + 2y - 8)/15\` divided by \`(y - 2)/(5y)\` simplifies to \`y(y + 4)/3\`
+- \`(x^2 - 10x + 25)/(x^2 - 16)\` divided by \`(x^2 - 3x - 10)/(3x - 12)\` simplifies to \`3(x - 5)/[(x + 4)(x + 2)]\`
 
 **Application**
 
@@ -622,8 +622,8 @@ For addition and subtraction, find a least common denominator first. For equatio
 
 - \`(x + 1)/6 = (x - 1)/9\` -> \`x = -5\`
 - \`(x - 3)/(x + 3) = (x + 2)/(x - 1)\` -> \`x = -1/3\`
-- \`(x - 4)/(x + 2) + (x - 4)/(7x - 42) = 1\` -> \`x = 36/7\`
-- \`5x/(x - 4) = 5x + 1\` -> \`x = -5/4\`
+- \`1/x + 1/2 = 3/4\` -> \`x = 4\`
+- \`1 - 3/(x + 1) = 1/4\` -> \`x = 3\`
 
 **Mixture model**
 
@@ -645,8 +645,8 @@ to get \`x = 2\`.
 				`
 Even roots and odd roots behave differently.
 
-- \`sqrt(x)\`, \`root4(x)\`, and other even-root functions require a nonnegative radicand
-- \`cuberoot(x)\` and other odd-root functions accept all real inputs
+- \`sqrt(x)\`, \`x^(1/4)\`, and other even-root functions require a nonnegative radicand
+- \`x^(1/3)\`, \`x^(1/5)\`, and other odd-root functions accept all real inputs
 
 **Domain and range examples**
 
@@ -654,11 +654,11 @@ Even roots and odd roots behave differently.
 - \`y = -2sqrt(10 - 2x)\` -> domain \`x <= 5\`, range \`y <= 0\`
 - \`y = 4 + sqrt(x - 3)\` -> domain \`x >= 3\`, range \`y >= 4\`
 - \`y = sqrt(x + 3) - 5\` -> domain \`x >= -3\`, range \`y >= -5\`
-- \`y = root7(x)\` -> domain all real numbers, range all real numbers
+- \`y = x^(1/7)\` -> domain all real numbers, range all real numbers
 
 **Comparison fact**
 
-\`cuberoot(x)\` and \`root5(x)\` have the same domain and range, but the \`5\`th-root graph grows more slowly for large positive \`x\`.
+\`x^(1/3)\` and \`x^(1/5)\` have the same domain and range, but the \`1/5\` power grows more slowly for large positive \`x\`.
 				`.trim(),
 				media.radicalFunctions
 			),
@@ -674,7 +674,7 @@ Isolate the radical, square or raise both sides carefully, and always check for 
 - \`sqrt(x) + 1 = -sqrt(x)\` -> no solution
 - \`3sqrt(x - 4) = sqrt(x)\` -> \`x = 9/2\`
 - \`sqrt(x + 1) = sqrt(2x) - 1\` -> \`x = 8\`
-- \`2root4(x + 2) = 4root4(x - 3)\` -> \`x = 14/3\`
+- \`2sqrt(x + 2) = 4sqrt(x - 3)\` -> \`x = 14/3\`
 - \`x^(1/3) = x^(1/5)\` -> \`x = -1, 0, 1\`
 
 The last step matters: many radical equations create extra algebraic answers that do not satisfy the original domain restrictions.
@@ -712,7 +712,7 @@ A piecewise function changes its rule depending on the input interval.
 				media.piecewiseFunctions
 			),
 			createLesson(
-				"Piecewise Models, Continuity, and Inverses",
+				"Piecewise Models and Continuity",
 				`
 Piecewise functions show up naturally in pricing and pay-rate problems.
 
