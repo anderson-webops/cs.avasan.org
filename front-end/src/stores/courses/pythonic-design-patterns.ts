@@ -928,7 +928,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: Customized. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Courses/tree/main/Customized"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-Customized-Archive"
 				},
 				{
 					title: "Customized: Review and Reflection",
@@ -942,7 +942,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: Customized with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Courses/tree/main/Customized"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-Customized-Archive"
 				},
 				{
 					title: "Applied Studio 16: Customized supplemental 2",

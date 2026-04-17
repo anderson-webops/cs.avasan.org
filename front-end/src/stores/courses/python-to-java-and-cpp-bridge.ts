@@ -857,7 +857,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: CPP practice. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/CPP_practice"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP_practice"
 				},
 				{
 					title: "CPP practice: Review and Reflection",
@@ -871,7 +871,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: CPP practice with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/CPP_practice"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP_practice"
 				},
 				{
 					title: "Applied Studio 15: CPP practice supplemental 2",
@@ -911,9 +911,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: J1X01 java foundations build 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/J1X01-java-foundations-build-12/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/J1X01-java-foundations-build-12/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/solution"
 				},
 				{
 					title: "J1X01 java foundations build 12: Review and Reflection",
@@ -927,9 +927,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: J1X01 java foundations build 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/J1X01-java-foundations-build-12/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/J1X01-java-foundations-build-12/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1X01-java-foundations-build-12/solution"
 				},
 				{
 					title: "Applied Studio 16: J1X01 java foundations build 12 supplemental 2",
@@ -969,9 +969,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: c foundations build 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/CPPX01-c-foundations-build-13/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/CPPX01-c-foundations-build-13/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/solution"
 				},
 				{
 					title: "c foundations build 13: Review and Reflection",
@@ -985,9 +985,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: c foundations build 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/CPPX01-c-foundations-build-13/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/CPPX01-c-foundations-build-13/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-13/solution"
 				},
 				{
 					title: "Applied Studio 17: c foundations build 13 supplemental 2",
