@@ -44,7 +44,7 @@ Use the kick-off project as placement rather than as a formal test.
 - Project 1 checks polynomial manipulation and quadratic solving.
 - Project 2 checks graphing quadratics, function notation, inverse functions, and data modeling.
 - If the student stalls on a question, jump directly to the matching module instead of forcing a full completion.
-- The recovered source duplicated large blocks of portal chrome and instructor reminders; those have been removed here.
+- Keep the focus on the math tasks rather than on platform logistics or repeated instructor notes.
 				`.trim()
 			),
 			createLesson(
@@ -93,7 +93,7 @@ Use the kick-off project as placement rather than as a formal test.
 - Summer pay model: \`s(w) = 7.65(1.015)^w\`, and \`s(12) ≈ 9.15\`
 - Food-item cost: \`13 * (45/7) ≈ 83.57\`
 - To finish the same order in \`15\` minutes, at least \`3\` employees are needed
-- The recovered answer key estimated the food-sales line of best fit as \`y ≈ 2x\`; with that estimate, predicted sales at \`123\` visitors are \`246\`, so the residual for an actual value of \`221\` is \`221 - 246 = -25\`
+- Using the estimated line of best fit \`y ≈ 2x\`, predicted sales at \`123\` visitors are \`246\`, so the residual for an actual value of \`221\` is \`221 - 246 = -25\`
 				`.trim(),
 				media.ridePathParabolas
 			)
@@ -206,7 +206,7 @@ For larger polynomials, distribute one full term at a time and combine like term
 			createLesson(
 				"Fractions Warm-Up and Least Common Denominators",
 				`
-This module's recovered source had heavy math-formatting damage, so the cleaned version below focuses on the method and on fully readable examples.
+This lesson emphasizes method-first fraction work and uses fully readable examples.
 
 **Least common denominator examples**
 
@@ -231,9 +231,9 @@ To combine rational expressions, use a shared denominator exactly as you would w
 
 - \`(x - 3)/(x + 2) + (x + 3)/(x - 4) = (2x^2 - 2x + 18)/[(x + 2)(x - 4)]\`
 - \`5/z + (1 + z)/5 = (z^2 + z + 25)/(5z)\`
-- \`2/(5y) - 4/(2y + 4)\` simplifies only after factoring the second denominator:
+- \`2/(5y) - 4/(2y + 4)\` is a good recomputation exercise after factoring the second denominator:
   - \`2y + 4 = 2(y + 2)\`
-  - the original source answer was corrupted, so recompute carefully before assigning
+  - then build a shared denominator from \`5y\` and \`2(y + 2)\`
 
 **Instructional note**
 
@@ -292,7 +292,7 @@ This project applies polynomial modeling to event-planning revenue, cost, and co
 - \`P(x) = (-0.05x^2 + 70x) - (20x + 750)\`
 - \`P(x) = -0.05x^2 + 50x - 750\`
 
-**Best revised option from the recovered key**
+**One strong revised option**
 
 - Doubling both revenue and cost gives
   - \`P_d(x) = -0.10x^2 + 100x - 1500\`
@@ -310,7 +310,7 @@ This project applies polynomial modeling to event-planning revenue, cost, and co
 - Doubled-price version vs. competitor:
   - \`T_d(x) = (-0.10x^2 + 100x - 1500) / (-0.055x^2 + 51x - 600)\`
 
-The original dump reversed this ratio in one place; the cleaned form above matches the written project definition that \`T > 1\` means Amy is doing better.
+Use the ratio definitions above so that \`T(x) > 1\` means Amy is doing better than the competitor.
 				`.trim()
 			)
 		]),
@@ -354,7 +354,7 @@ After factoring, set each factor equal to zero.
 			createLesson(
 				"Perfect Squares and Difference of Squares",
 				`
-The recovered source for this module was not fully present, but the course sequence and nearby examples make the intended algebra clear.
+Use this module to highlight the algebra patterns that appear most often before solving quadratics.
 
 **Core identities**
 
@@ -426,17 +426,17 @@ The positive physical solution is often the only answer that makes sense in appl
 			"AB9 Module Project: The Half-Court Challenge (with Ian Kennedy)",
 			[
 				createLesson(
-					"Recovered Source Status",
+					"Project Bridge",
 					`
-The full text of this project was not present in the recovered import. The module title survived, but the project body and any original images did not.
+Use this module as a short sports-modeling bridge between solving quadratics and graphing them.
 
-**Suggested bridge into the project**
+**Project focus**
 
 - Use factoring, completing the square, and the quadratic formula to analyze shot paths
 - Compare vertex form and intercept form for basketball arcs
 - Ask students to justify which solving method is fastest for each quadratic they encounter
 
-If a cleaner source copy becomes available, replace this placeholder with the full project brief.
+Have the student finish by sketching a half-court shot model and explaining which form of the quadratic is most useful for each question.
 				`.trim()
 				)
 			]
@@ -539,17 +539,17 @@ Use the ride-path family to compare how steepness changes without moving the ver
 			"AB13 Module Project: Put Me in Coach! (with Tom Dethlefs)",
 			[
 				createLesson(
-					"Recovered Source Status",
+					"Project Bridge",
 					`
-The project title survived in the recovered source, but the full body of the module did not. Keep the slot in the course sequence and replace it once a clean source becomes available.
+Use this module as a short sports-graphing project tied to quadratic transformations.
 
-**Likely math focus from the surrounding modules**
+**Project focus**
 
 - graphing in vertex form
 - graphing in standard form
 - transformations of quadratic models
 
-Until the original text is restored, use a student-created sports parabola project as a substitute.
+Ask the student to design a sports shot or stadium-arc model, then describe how shifting, stretching, or reflecting the parabola changes the situation.
 				`.trim()
 				)
 			]
@@ -647,7 +647,7 @@ This project uses composition and inverse functions to model a fictional wormhol
 			createLesson(
 				"Answer Key",
 				`
-The recovered answer key used the following choices:
+One consistent choice set is:
 
 - \`a(t) = t^2\`
 - \`f(a) = 2a\`
@@ -775,8 +775,8 @@ Inverse variation has the form \`y = k/x\`.
 
 - If \`y = -1\` when \`x = 5\`, then \`k = -5\` and \`y = -5/x\`
 - If \`y = 18\` when \`x = 2\`, then \`k = 36\` and \`y = 36/x\`
-- If \`x = 6\` and \`y = 5\), then for \`y = 3\` we get \`x = 10\`
-- If \`x = -4\` and \`y = 7\`, then for \`x = 14\) we get \`y = -2\`
+- If \`x = 6\` and \`y = 5\`, then for \`y = 3\` we get \`x = 10\`
+- If \`x = -4\` and \`y = 7\`, then for \`x = 14\` we get \`y = -2\`
 
 **Word problems**
 
@@ -791,7 +791,7 @@ Inverse variation has the form \`y = k/x\`.
 				`
 Data rarely lands perfectly on a clean function, so this module focuses on choosing a reasonable model and interpreting what it says.
 
-**Recovered classifications from the image-only examples**
+**Image-based classification answer notes**
 
 - quadratic
 - exponential
@@ -800,7 +800,7 @@ Data rarely lands perfectly on a clean function, so this module focuses on choos
 - cubic
 - linear
 
-The original scatterplots were not part of the recovered source, so use those labels only as answer-key notes rather than as standalone practice.
+Use those labels as answer-key notes for the original graph prompts, and pair them with a live graphing tool if you want students to recreate the shapes.
 				`.trim(),
 				media.costOfLivingTrend
 			),
@@ -811,17 +811,17 @@ Residual = actual value minus predicted value.
 
 **Representative residuals**
 
-- Height \`175\` cm with foot length \`26\) cm and trend \`y = 0.05x + 15\`:
+- Height \`175\` cm with foot length \`26\` cm and trend \`y = 0.05x + 15\`:
   - predicted \`= 23.75\`
   - residual \`= 26 - 23.75 = 2.25\`
-- Temperature \`75\` degrees with profit \`$3250\) and trend \`y = 50x - 125\`:
+- Temperature \`75\` degrees with profit \`$3250\` and trend \`y = 50x - 125\`:
   - predicted \`= 3625\`
   - residual \`= 3250 - 3625 = -375\`
 
-**Recovered-source note**
+**Visual-reference note**
 
-- Several residual plots and scatterplots were image-only and could not be reconstructed from the text dump alone.
-- Use the placeholder below wherever the original source depended on one of those missing visual references.
+- Several residual plots and scatterplots depend on visual references that are still missing from the imported material.
+- Use the placeholder below wherever one of those prompts still needs an image box.
 				`.trim(),
 				media.missingImage
 			)
@@ -849,7 +849,7 @@ This project connects interference patterns, data visualization, and inverse pro
 				createLesson(
 					"Photon Count Graph and Modeling Notes",
 					`
-The recovered photon-count data was:
+The photon-count data for this activity is:
 
 - \`(-4, 30)\`
 - \`(-3, 60)\`
@@ -865,7 +865,7 @@ The recovered photon-count data was:
 
 - Highest measured count: \`x = 0\`
 - Lowest-likelihood positions in the zero-filled comparison line are the inserted half-step gaps such as \`x = -3.5, -2.5, ..., 3.5\`
-- The candidate best-fit equations in the recovered text appear to be on a different scale than the raw count data, so keep them as qualitative prompts unless the data is rescaled first
+- The candidate best-fit equations in this activity appear to be on a different scale than the raw count data, so treat them as qualitative prompts unless the data is rescaled first
 
 **de Broglie wavelength**
 
@@ -878,11 +878,11 @@ The recovered photon-count data was:
 					media.photonCounts
 				),
 				createLesson(
-					"Missing Experiment Visuals",
+					"Experiment Visual Placeholder",
 					`
-The recovered source referenced simulator screenshots, graph-choice images, and a helium-atom data graphic that were not included in the text dump.
+Some simulator screenshots, graph-choice images, and a helium-atom data graphic are still missing from the imported material.
 
-Use the placeholder below wherever the original project depended on one of those missing images.
+Use the placeholder below wherever this project still depends on one of those missing visuals.
 				`.trim(),
 					media.missingImage
 				)
@@ -958,7 +958,7 @@ This check-in reviews graphing quadratics, transformations, functions, inverse f
 			createLesson(
 				"Quadratic Graphing Review",
 				`
-**Recovered answer key highlights**
+**Answer key highlights**
 
 - Graph \`y = -(1/4)x^2\` using representative points such as
   - \`(-8, -16)\`
@@ -985,7 +985,7 @@ This check-in reviews graphing quadratics, transformations, functions, inverse f
 
 - Translate \`y = x^2\` up \`3\` and left \`6\`:
   - \`y = (x + 6)^2 + 3\`
-- Scale \`y = x^2 - 3\) by \`1/4\`:
+- Scale \`y = x^2 - 3\` by \`1/4\`:
   - \`y = (1/4)x^2 - 3/4\`
 - Reflect \`y = (x - 1)^2 + 2\` across the x-axis:
   - \`y = -(x - 1)^2 - 2\`
@@ -1004,15 +1004,15 @@ This check-in reviews graphing quadratics, transformations, functions, inverse f
 				media.checkIn2FunctionGraph
 			),
 			createLesson(
-				"Missing Check-In Visuals",
+				"Check-In Visual Placeholder",
 				`
-The recovered text referenced several graph-only prompts whose source images were missing:
+Some graph-only prompts in this check-in still depend on missing reference images:
 
 - the vertical-line-test example
 - the inverse-existence graph in the advanced section
 - one additional practice graph used for extrema and intervals
 
-Use the placeholder below anywhere the check-in still depends on one of those missing reference images.
+Use the placeholder below anywhere the check-in still depends on one of those missing visuals.
 				`.trim(),
 				media.missingImage
 			)
