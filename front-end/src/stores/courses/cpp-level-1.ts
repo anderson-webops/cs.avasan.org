@@ -1116,9 +1116,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: C++ foundations build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX05-c-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX05-c-foundations-build-17/solution"
 				},
 				{
 					title: "C++ foundations build 17: Review and Reflection",
@@ -1132,9 +1132,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: C++ foundations build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX05-c-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX01-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPX05-c-foundations-build-17/solution"
 				},
 				{
 					title: "Applied Studio 17: C++ foundations build 17 supplemental 2",
