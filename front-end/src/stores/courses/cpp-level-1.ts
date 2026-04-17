@@ -884,9 +884,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 13: c foundations build 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-c-foundations-build-14/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-c-foundations-build-14/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/solution"
 				},
 				{
 					title: "c foundations build 14: Review and Reflection",
@@ -900,27 +900,27 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 13: c foundations build 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-c-foundations-build-14/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-c-foundations-build-14/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/solution"
 				},
 				{
 					title: "Applied Studio 13: c foundations build 14 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: c foundations build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-23-applied-studio-13-c-foundations-build-14-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-23-applied-studio-13-c-foundations-build-14-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-23-applied-studio-13-c-foundations-build-14-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-23-applied-studio-13-c-foundations-build-14-supplem/solution"
 				},
 				{
 					title: "Applied Studio 13: c foundations build 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: c foundations build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-24-applied-studio-13-c-foundations-build-14-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-24-applied-studio-13-c-foundations-build-14-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-24-applied-studio-13-c-foundations-build-14-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-24-applied-studio-13-c-foundations-build-14-supplem/solution"
 				}
 			]
 		},
@@ -942,9 +942,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: c foundations build 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-03-c-foundations-build-15/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-03-c-foundations-build-15/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/solution"
 				},
 				{
 					title: "c foundations build 15: Review and Reflection",
@@ -958,27 +958,27 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: c foundations build 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-03-c-foundations-build-15/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-03-c-foundations-build-15/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/solution"
 				},
 				{
 					title: "Applied Studio 14: c foundations build 15 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: c foundations build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-25-applied-studio-14-c-foundations-build-15-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-25-applied-studio-14-c-foundations-build-15-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-25-applied-studio-14-c-foundations-build-15-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-25-applied-studio-14-c-foundations-build-15-supplem/solution"
 				},
 				{
 					title: "Applied Studio 14: c foundations build 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: c foundations build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-26-applied-studio-14-c-foundations-build-15-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-26-applied-studio-14-c-foundations-build-15-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-26-applied-studio-14-c-foundations-build-15-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-26-applied-studio-14-c-foundations-build-15-supplem/solution"
 				}
 			]
 		},
@@ -1000,9 +1000,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: c foundations build 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-04-c-foundations-build-16/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-04-c-foundations-build-16/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/solution"
 				},
 				{
 					title: "c foundations build 16: Review and Reflection",
@@ -1016,27 +1016,27 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: c foundations build 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-04-c-foundations-build-16/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-04-c-foundations-build-16/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/solution"
 				},
 				{
 					title: "Applied Studio 15: c foundations build 16 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: c foundations build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-27-applied-studio-15-c-foundations-build-16-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-27-applied-studio-15-c-foundations-build-16-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-27-applied-studio-15-c-foundations-build-16-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-27-applied-studio-15-c-foundations-build-16-supplem/solution"
 				},
 				{
 					title: "Applied Studio 15: c foundations build 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: c foundations build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-28-applied-studio-15-c-foundations-build-16-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-28-applied-studio-15-c-foundations-build-16-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-28-applied-studio-15-c-foundations-build-16-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-28-applied-studio-15-c-foundations-build-16-supplem/solution"
 				}
 			]
 		},
@@ -1058,9 +1058,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: c foundations build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
 				},
 				{
 					title: "c foundations build 17: Review and Reflection",
@@ -1074,27 +1074,27 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: c foundations build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
 				},
 				{
 					title: "Applied Studio 16: c foundations build 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: c foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-29-applied-studio-16-c-foundations-build-17-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-29-applied-studio-16-c-foundations-build-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-29-applied-studio-16-c-foundations-build-17-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-29-applied-studio-16-c-foundations-build-17-supplem/solution"
 				},
 				{
 					title: "Applied Studio 16: c foundations build 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: c foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-30-applied-studio-16-c-foundations-build-17-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-30-applied-studio-16-c-foundations-build-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-30-applied-studio-16-c-foundations-build-17-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-30-applied-studio-16-c-foundations-build-17-supplem/solution"
 				}
 			]
 		},
@@ -1116,9 +1116,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: C++ foundations build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
 				},
 				{
 					title: "C++ foundations build 17: Review and Reflection",
@@ -1132,27 +1132,27 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: C++ foundations build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
 				},
 				{
 					title: "Applied Studio 17: C++ foundations build 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: C++ foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-31-applied-studio-17-c-foundations-build-17-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-31-applied-studio-17-c-foundations-build-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-31-applied-studio-17-c-foundations-build-17-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-31-applied-studio-17-c-foundations-build-17-supplem/solution"
 				},
 				{
 					title: "Applied Studio 17: C++ foundations build 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: C++ foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-32-applied-studio-17-c-foundations-build-17-supplem/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-32-applied-studio-17-c-foundations-build-17-supplem/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-32-applied-studio-17-c-foundations-build-17-supplem/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-32-applied-studio-17-c-foundations-build-17-supplem/solution"
 				}
 			]
 		}
