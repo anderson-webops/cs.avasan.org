@@ -6,6 +6,9 @@
 	"keywords": [],
 	"license": "ISC",
 	"type": "module",
+	"engines": {
+		"node": ">=22 <23"
+	},
 	"private": true,
 	"main": "dist/script.js",
 	"scripts": {
