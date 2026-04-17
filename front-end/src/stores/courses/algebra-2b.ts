@@ -175,9 +175,8 @@ Representative recovered applications:
 - \`1800 = 300e^(0.18t)\` -> \`ln(6) = 0.18t\`
 - \`2.3 = 0.7(1.1)^t\` -> \`t = log_1.1(2.3 / 0.7)\`
 
-Several original graph-reading prompts survived only as captions. When a specific screenshot still cannot be reconstructed from the text, use the placeholder below.
-				`.trim(),
-				media.missingImage
+Several original graph-reading prompts survived only as captions. When a specific screenshot still cannot be reconstructed from the text, fall back to the course placeholder asset instead of leaving the prompt blank.
+				`.trim()
 			)
 		]),
 		createModule("ALB3 Arithmetic Sequences", [
@@ -324,7 +323,7 @@ The replacement graphic summarizes dimension rules, row-by-column multiplication
 				media.matrixWorkflow
 			),
 			createLesson(
-				"Inverses and Solving Small Systems",
+				"Inverses and Matrix Division",
 				`
 For a \`2 x 2\` matrix
 \`A = [[a, b], [c, d]]\`,
@@ -345,7 +344,7 @@ Example:
 - If \`A = [[4, 7], [2, 6]]\` and \`B = [[3, 0], [1, 2]]\`, then
   \`A / B = A * B^(-1) = [[1/6, 3.5], [-1/3, 3]]\`
 
-This is enough machinery for the cleaned review items in Check-in #1, even though the recovered source lost several of the original matrix screenshots.
+This covers the matrix-inverse and quotient work that survived into the cleaned Check-in #1 set, even though several of the original screenshots were missing.
 				`.trim()
 			)
 		]),
@@ -559,7 +558,7 @@ The generated unit-circle graphic replaces the original diagram links, triangle 
 				media.unitCircleTrig
 			),
 			createLesson(
-				"Trig Identities and Solving Triangles",
+				"Trig Identities and Function Values",
 				`
 Useful identities from the recovered course:
 
@@ -665,9 +664,9 @@ For \`y = a tan(bx) + d\`:
 - \`2cos(pi x) + 7\` -> amplitude \`2\`, period \`2\`, midline \`y = 7\`
 - \`-3cos(2x) + 1.5\` -> amplitude \`3\`, period \`pi\`, midline \`y = 1.5\`
 
-Several original transformation prompts were image-only. Use the placeholder below whenever the exact graph cannot be recovered from the text alone.
+The generated trig-graph reference covers the standard parent graphs. If a particular transformation prompt still depends on a missing screenshot, use the course placeholder asset only for that specific prompt.
 				`.trim(),
-				media.missingImage
+				media.trigGraphs
 			)
 		]),
 		createModule("Check-in #2", [
