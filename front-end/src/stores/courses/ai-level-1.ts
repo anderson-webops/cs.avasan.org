@@ -31,7 +31,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Courses/tree/main/AI%20Level%201"
+						"https://github.com/instruction-material/AI-Level-1/tree/main"
 				}
 			],
 			supplementalProjects: [
@@ -40,7 +40,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the legacy umbrella Python archive when the older single-folder Juni layout is useful for comparison or for recovering an earlier classroom variant of the AI Level 1 materials. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Courses/tree/main/AI%20Level%201"
+						"https://github.com/instruction-material/AI-Level-1/tree/main"
 				},
 				{
 					title: "Object Refresh: Dog Class",

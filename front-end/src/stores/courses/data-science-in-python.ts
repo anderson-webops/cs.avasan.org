@@ -31,7 +31,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Courses/tree/main/Data%20Science%20in%20Python"
+						"https://github.com/instruction-material/Data-Science/tree/main"
 				}
 			],
 			supplementalProjects: [
@@ -40,7 +40,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the older umbrella Python archive when you need the original single-folder Juni layout or want to compare the current course structure with the legacy material organization. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Courses/tree/main/Data%20Science%20in%20Python"
+						"https://github.com/instruction-material/Data-Science/tree/main"
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
