@@ -196,10 +196,10 @@ When multiplication or division is attached to a variable, use the inverse opera
 - \`28 = 7y\` -> \`4\`
 - \`22 = 5y - 3y\` -> \`11\`
 - \`2x + 8x = 90\` -> \`9\`
-- \`5/y = 6\` -> \`30\`
-- \`4 = 11/x\` -> \`44\`
-- \`21 = 3/y\` -> \`63\`
-- \`6/z + z/3 = 21\` -> \`42\`
+- \`y / 5 = 6\` -> \`30\`
+- \`x / 11 = 4\` -> \`44\`
+- \`y / 3 = 21\` -> \`63\`
+- \`z / 6 + z / 3 = 21\` -> \`42\`
 
 **Word problems**
 
@@ -224,7 +224,7 @@ If a variable is raised to a power, use the matching root. If a root is applied 
 - \`z^5 = 1024\` -> \`4\`
 - \`sqrt(z) = 1\` -> \`1\`
 - \`cube_root(y) = 7\` -> \`343\`
-- \`63 = z^2\` -> \`+-3sqrt(7)\`
+- \`z^2 = 63\` -> \`plus or minus 3sqrt(7)\`
 
 **Word problems**
 
@@ -327,7 +327,7 @@ Addition and subtraction keep the inequality direction the same. Multiplying or 
 - \`x^2 > 144\` -> \`x > 12\` or \`x < -12\`
 - \`2y + 3 > 11\` -> \`y > 4\`
 - \`-5y + 7 >= 2\` -> \`y <= 1\`
-- \`(3/2)y - 6 <= 9\` -> \`y >= -10\`
+- \`-(3/2)y - 6 <= 9\` -> \`y >= -10\`
 - \`3z >= 12a\` -> \`z >= 4a\`
 - \`4c - 3b > 2z + 8\` -> \`z < 2c - (3/2)b - 4\`
 
@@ -358,7 +358,7 @@ Model a marketing campaign with algebraic expressions, equations, and inequaliti
 				`.trim()
 			),
 			createLesson(
-				"Facilitation Notes Without the Portal Fluff",
+				"Open-Ended Guidance",
 				`
 This project is intentionally open ended. The key deliverables are:
 
@@ -373,7 +373,7 @@ Students should explain why their chosen swag is likely to perform well, not jus
 		]),
 		createModule("Check-in #1", [
 			createLesson(
-				"Rebuilt Review Set",
+				"Review Set",
 				`
 The original source dump listed this check-in but did not preserve the full question set cleanly. This rebuilt review keeps the same skill focus from AA1 through AA5 without the repeated portal chrome.
 
@@ -413,7 +413,7 @@ Tie every slope computation back to a real rate such as deliveries per week, hei
 			"AA7 Module Project: Community Data Analysis (with Davin Lee)",
 			[
 				createLesson(
-					"Project Reconstruction",
+					"Project Brief",
 					`
 The original project body was not preserved in the source dump, but the module title and surrounding units make the goal clear: use community data to reason about rate of change.
 
@@ -512,7 +512,7 @@ The original project clearly depended on at least one chart that was not include
 					media.missingImage
 				),
 				createLesson(
-					"Answer Hints Preserved from the Source",
+					"Answer Notes",
 					`
 The source dump still preserved several answer-key notes:
 
@@ -522,13 +522,13 @@ The source dump still preserved several answer-key notes:
   - \`50 cm\` storm -> \`13.36\`
   - \`100 cm\` storm -> \`15\`
   - \`150 cm\` storm -> \`5.83\`
-- One recommended closure window was \`3\` to \`5\` days\`, because the \`50 cm\` and \`150 cm\` curves crossed below \`40%\` after about day \`4\`.
+- One recommended closure window was between \`3\` and \`5\` days, because the \`50 cm\` and \`150 cm\` curves crossed below \`40%\` after about day \`4\`.
 - Qualitative explanation: over time, snow packs down and becomes denser, making slabs less likely to shear off.
 				`.trim()
 				)
 			]
 		),
-		createModule("Check-In #2", [
+		createModule("Check-in #2", [
 			createLesson(
 				"Graphing Linear Equations: Coordinate Plane Review",
 				`
@@ -741,9 +741,8 @@ Add or subtract equations so one variable disappears. If needed, multiply one or
 **Selected answers**
 
 - Potency mixture:
-  - \`x + y = 2\`
-  - \`0.3x + 0.02y = 0.16\`
-  - preserved worked answer in the source: approximately \`x = 0.143\`, \`y = 1.857\`
+  - corrected system: \`x + y = 2\` and \`0.30x + 0.02y = 0.16\`
+  - corrected solution: \`x = 3/7\` and \`y = 11/7\`
 - Movie tickets:
   - \`c + a = 315\`
   - \`3c + 7a = 1981\`
