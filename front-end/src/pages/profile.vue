@@ -578,10 +578,6 @@ function isProfileTab(value: string | null): value is ProfileTab {
 }
 </style>
 
-<route lang="json">
-{
-	"meta": {
-		"layout": "default"
-	}
-}
-</route>
+<route lang="yaml">
+  meta:
+    layout: default</route>

@@ -87,11 +87,7 @@ const adminTools = [
 }
 </style>
 
-<route lang="json">
-{
-	"meta": {
-		"layout": "default",
-		"requiresAdmin": true
-	}
-}
-</route>
+<route lang="yaml">
+  meta:
+    layout: default
+    requiresAdmin: true</route>

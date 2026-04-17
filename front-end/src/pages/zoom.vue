@@ -164,10 +164,6 @@ p {
 }
 </style>
 
-<route lang="json">
-{
-	"meta": {
-		"layout": "default"
-	}
-}
-</route>
+<route lang="yaml">
+  meta:
+    layout: default</route>
