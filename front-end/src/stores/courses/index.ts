@@ -74,6 +74,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "algebra-1b",
+		name: "Algebra 1B",
+		load: () =>
+			import("./algebra-1b").then(
+				({ algebra1BCourse }) => algebra1BCourse
+			)
+	},
+	{
 		id: "python-to-java-and-cpp-bridge",
 		name: "Python to Java and C++ Bridge",
 		load: () =>
