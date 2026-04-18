@@ -172,18 +172,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-2/solution"
 				},
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpos/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpos/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-3/solution"
 				}
 			]
 		},
@@ -613,18 +613,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-su/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-su/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-supplemental-2/solution"
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-su/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-su/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-supplemental-3/solution"
 				}
 			]
 		},

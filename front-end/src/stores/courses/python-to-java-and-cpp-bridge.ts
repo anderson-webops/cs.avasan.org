@@ -364,18 +364,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ5 C++-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-c-specific-adaptation-supplemental-2/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-cpp-specific-adaptation-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-c-specific-adaptation-supplemental-2/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-cpp-specific-adaptation-supplemental-2/solution"
 				},
 				{
 					title: "C++ Specific Adaptation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ5 C++-Specific Adaptation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-c-specific-adaptation-supplemental-3/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-cpp-specific-adaptation-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-c-specific-adaptation-supplemental-3/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-cpp-specific-adaptation-supplemental-3/solution"
 				}
 			]
 		},
@@ -969,9 +969,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: c foundations build 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-c-foundations-build-13/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-cpp-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-c-foundations-build-13/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-cpp-foundations-build-13/solution"
 				},
 				{
 					title: "c foundations build 13: Review and Reflection",
@@ -985,9 +985,9 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: c foundations build 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-c-foundations-build-13/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-cpp-foundations-build-13/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-c-foundations-build-13/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-01-cpp-foundations-build-13/solution"
 				},
 				{
 					title: "Applied Studio 17: c foundations build 13 supplemental 2",

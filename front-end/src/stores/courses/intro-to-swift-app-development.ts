@@ -1226,18 +1226,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SADX Enrichment and Legacy Archive Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-40-sadx-enrichment-and-legacy-archive-boundaries-su/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-40-sadx-enrichment-and-legacy-archive-boundaries-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-40-sadx-enrichment-and-legacy-archive-boundaries-su/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-40-sadx-enrichment-and-legacy-archive-boundaries-supplemental-2/solution"
 				},
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SADX Enrichment and Legacy Archive Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-41-sadx-enrichment-and-legacy-archive-boundaries-su/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-41-sadx-enrichment-and-legacy-archive-boundaries-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-41-sadx-enrichment-and-legacy-archive-boundaries-su/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-41-sadx-enrichment-and-legacy-archive-boundaries-supplemental-3/solution"
 				}
 			]
 		}

@@ -507,9 +507,9 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Features, Evaluation, and Responsible AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-su/starter",
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-su/solution"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-supplemental-3/solution"
 				}
 			]
 		},

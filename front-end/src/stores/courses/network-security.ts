@@ -366,18 +366,18 @@ export const networkSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: Input Validation on the Network Boundary. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-unit-5-input-validation-on-the-network-boundary-/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-unit-5-input-validation-on-the-network-boundary-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-unit-5-input-validation-on-the-network-boundary-/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-unit-5-input-validation-on-the-network-boundary-supplemental-2/solution"
 				},
 				{
 					title: "Unit 5: Input Validation on the Network Boundary supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: Input Validation on the Network Boundary. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-12-unit-5-input-validation-on-the-network-boundary-/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-12-unit-5-input-validation-on-the-network-boundary-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-12-unit-5-input-validation-on-the-network-boundary-/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-12-unit-5-input-validation-on-the-network-boundary-supplemental-3/solution"
 				}
 			]
 		},
@@ -787,9 +787,9 @@ export const networkSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assist/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assist/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure/solution"
 				}
 			],
 			supplementalProjects: [
@@ -798,27 +798,27 @@ export const networkSecurityCourse: RawCourse = {
 					content:
 						"Keep a running security notebook for authorized penetration testing, ai-assisted workflow, and disclosure that records one packet or service diagram, the commands or traces inspected, the trust boundary being discussed, and one concise conclusion about written scope, permitted checks, how AI was used, and what evidence supports the final report. The habit should be evidence first, assumptions second.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assist/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assist/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure/solution"
 				},
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-25-unit-12-authorized-penetration-testing-ai-assist/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-25-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-25-unit-12-authorized-penetration-testing-ai-assist/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-25-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-2/solution"
 				},
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-26-unit-12-authorized-penetration-testing-ai-assist/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-26-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-26-unit-12-authorized-penetration-testing-ai-assist/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-26-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-3/solution"
 				}
 			]
 		},

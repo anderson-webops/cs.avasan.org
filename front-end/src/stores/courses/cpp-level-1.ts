@@ -77,18 +77,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF1 Variables, Types, and Input/Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-cppf1-variables-types-and-input-output-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Variables-Types-and-Input-and-Output-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-cppf1-variables-types-and-input-output-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Variables-Types-and-Input-and-Output-Supplemental-2/solution"
 				},
 				{
 					title: "Variables, Types, and Input/Output supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF1 Variables, Types, and Input/Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-cppf1-variables-types-and-input-output-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Variables-Types-and-Input-and-Output-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-cppf1-variables-types-and-input-output-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Variables-Types-and-Input-and-Output-Supplemental-3/solution"
 				}
 			]
 		},
@@ -153,18 +153,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF2 Loops and Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-03-cppf2-loops-and-conditionals-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Loops-and-Conditionals-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-03-cppf2-loops-and-conditionals-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Loops-and-Conditionals-Supplemental-2/solution"
 				},
 				{
 					title: "Loops and Conditionals supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF2 Loops and Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-04-cppf2-loops-and-conditionals-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Loops-and-Conditionals-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-04-cppf2-loops-and-conditionals-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Loops-and-Conditionals-Supplemental-3/solution"
 				}
 			]
 		},
@@ -224,18 +224,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF3 Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-cppf3-functions-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Functions-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-05-cppf3-functions-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Functions-Supplemental-2/solution"
 				},
 				{
 					title: "Functions supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF3 Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-06-cppf3-functions-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Functions-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-06-cppf3-functions-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Functions-Supplemental-3/solution"
 				}
 			]
 		},
@@ -303,18 +303,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF4 Classes and Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-07-cppf4-classes-and-objects-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Classes-and-Objects-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-07-cppf4-classes-and-objects-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Classes-and-Objects-Supplemental-2/solution"
 				},
 				{
 					title: "Classes and Objects supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF4 Classes and Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-08-cppf4-classes-and-objects-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Classes-and-Objects-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-08-cppf4-classes-and-objects-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Classes-and-Objects-Supplemental-3/solution"
 				}
 			]
 		},
@@ -365,18 +365,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF5 Pointers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-09-cppf5-pointers-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-09-cppf5-pointers-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers-Supplemental-2/solution"
 				},
 				{
 					title: "Pointers supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF5 Pointers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-10-cppf5-pointers-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-10-cppf5-pointers-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers-Supplemental-3/solution"
 				}
 			]
 		},
@@ -436,18 +436,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF6 References and Parameter Passing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-11-cppf6-references-and-parameter-passing-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-References-and-Parameter-Passing-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-11-cppf6-references-and-parameter-passing-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-References-and-Parameter-Passing-Supplemental-2/solution"
 				},
 				{
 					title: "References and Parameter Passing supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF6 References and Parameter Passing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-12-cppf6-references-and-parameter-passing-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-References-and-Parameter-Passing-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-12-cppf6-references-and-parameter-passing-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-References-and-Parameter-Passing-Supplemental-3/solution"
 				}
 			]
 		},
@@ -502,18 +502,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF7 Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-13-cppf7-arrays-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Arrays-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-13-cppf7-arrays-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Arrays-Supplemental-2/solution"
 				},
 				{
 					title: "Arrays supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF7 Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-14-cppf7-arrays-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Arrays-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-14-cppf7-arrays-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Arrays-Supplemental-3/solution"
 				}
 			]
 		},
@@ -564,18 +564,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF8 Two-Dimensional Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-15-cppf8-two-dimensional-arrays-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Two-Dimensional-Arrays-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-15-cppf8-two-dimensional-arrays-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Two-Dimensional-Arrays-Supplemental-2/solution"
 				},
 				{
 					title: "Two Dimensional Arrays supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF8 Two-Dimensional Arrays. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-16-cppf8-two-dimensional-arrays-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Two-Dimensional-Arrays-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-16-cppf8-two-dimensional-arrays-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Two-Dimensional-Arrays-Supplemental-3/solution"
 				}
 			]
 		},
@@ -647,18 +647,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF9 Dynamic Arrays and Memory. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-17-cppf9-dynamic-arrays-and-memory-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Arrays-and-Memory-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-17-cppf9-dynamic-arrays-and-memory-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Arrays-and-Memory-Supplemental-2/solution"
 				},
 				{
 					title: "Dynamic Arrays and Memory supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF9 Dynamic Arrays and Memory. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-18-cppf9-dynamic-arrays-and-memory-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Arrays-and-Memory-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-18-cppf9-dynamic-arrays-and-memory-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF9-Dynamic-Arrays-and-Memory-Supplemental-3/solution"
 				}
 			]
 		},
@@ -705,18 +705,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF10 Master Project: Matrix Fun. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-19-cppf10-master-project-matrix-fun-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF10-Master-Project-Matrix-Fun-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-19-cppf10-master-project-matrix-fun-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF10-Master-Project-Matrix-Fun-Supplemental-2/solution"
 				},
 				{
 					title: "Master Project: Matrix Fun supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF10 Master Project: Matrix Fun. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-20-cppf10-master-project-matrix-fun-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF10-Master-Project-Matrix-Fun-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-20-cppf10-master-project-matrix-fun-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF10-Master-Project-Matrix-Fun-Supplemental-3/solution"
 				}
 			]
 		},
@@ -763,18 +763,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF11 Master Project: Profile Posts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-21-cppf11-master-project-profile-posts-supplemental-2/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF11-Master-Project-Profile-Posts-Supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-21-cppf11-master-project-profile-posts-supplemental-2/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF11-Master-Project-Profile-Posts-Supplemental-2/solution"
 				},
 				{
 					title: "Master Project: Profile Posts supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF11 Master Project: Profile Posts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-22-cppf11-master-project-profile-posts-supplemental-3/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF11-Master-Project-Profile-Posts-Supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-22-cppf11-master-project-profile-posts-supplemental-3/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF11-Master-Project-Profile-Posts-Supplemental-3/solution"
 				}
 			]
 		},
@@ -884,9 +884,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 13: c foundations build 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-cpp-foundations-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-cpp-foundations-build-14/solution"
 				},
 				{
 					title: "c foundations build 14: Review and Reflection",
@@ -900,9 +900,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 13: c foundations build 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-cpp-foundations-build-14/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-c-foundations-build-14/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-02-cpp-foundations-build-14/solution"
 				},
 				{
 					title: "Applied Studio 13: c foundations build 14 supplemental 2",
@@ -942,9 +942,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: c foundations build 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-cpp-foundations-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-cpp-foundations-build-15/solution"
 				},
 				{
 					title: "c foundations build 15: Review and Reflection",
@@ -958,9 +958,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: c foundations build 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-cpp-foundations-build-15/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-c-foundations-build-15/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-03-cpp-foundations-build-15/solution"
 				},
 				{
 					title: "Applied Studio 14: c foundations build 15 supplemental 2",
@@ -1000,9 +1000,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: c foundations build 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-cpp-foundations-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-cpp-foundations-build-16/solution"
 				},
 				{
 					title: "c foundations build 16: Review and Reflection",
@@ -1016,9 +1016,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: c foundations build 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-cpp-foundations-build-16/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-c-foundations-build-16/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-04-cpp-foundations-build-16/solution"
 				},
 				{
 					title: "Applied Studio 15: c foundations build 16 supplemental 2",
@@ -1058,9 +1058,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: c foundations build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/solution"
 				},
 				{
 					title: "c foundations build 17: Review and Reflection",
@@ -1074,9 +1074,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: c foundations build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/solution"
 				},
 				{
 					title: "Applied Studio 16: c foundations build 17 supplemental 2",
@@ -1116,9 +1116,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: C++ foundations build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/solution"
 				},
 				{
 					title: "C++ foundations build 17: Review and Reflection",
@@ -1132,27 +1132,27 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: C++ foundations build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-c-foundations-build-17/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-05-cpp-foundations-build-17/solution"
 				},
 				{
 					title: "Applied Studio 17: C++ foundations build 17 supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: C++ foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-31-applied-studio-17-c-foundations-build-17-supplemental-2/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-31-applied-studio-17-cpp-foundations-build-17-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-31-applied-studio-17-c-foundations-build-17-supplemental-2/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-31-applied-studio-17-cpp-foundations-build-17-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: C++ foundations build 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: C++ foundations build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-32-applied-studio-17-c-foundations-build-17-supplemental-3/starter",
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-32-applied-studio-17-cpp-foundations-build-17-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-32-applied-studio-17-c-foundations-build-17-supplemental-3/solution"
+						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CPP-32-applied-studio-17-cpp-foundations-build-17-supplemental-3/solution"
 				}
 			]
 		}

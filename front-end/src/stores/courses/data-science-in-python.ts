@@ -173,18 +173,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 2: Notebook Workflow and Reproducibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-s/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-s/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-supplemental-2/solution"
 				},
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 2: Notebook Workflow and Reproducibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-s/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-s/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-supplemental-3/solution"
 				}
 			]
 		},
@@ -369,9 +369,9 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 5: Visualization and Statistics in Context. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context-supplemental-3/solution"
 				}
 			]
 		},
@@ -486,18 +486,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 7: Dashboards with Altair and Streamlit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-su/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-su/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-supplemental-2/solution"
 				},
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Module 7: Dashboards with Altair and Streamlit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-su/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-su/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-supplemental-3/solution"
 				}
 			]
 		},

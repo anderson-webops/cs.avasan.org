@@ -167,9 +167,9 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JM3 Static Variables & Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-01-jm3-static-variables-methods-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-01-jm3-static-variables-and-methods-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-01-jm3-static-variables-methods-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-01-jm3-static-variables-and-methods-supplemental-3/solution"
 				}
 			]
 		},
@@ -301,9 +301,9 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JM4 Subclasses & Inheritance. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-04-jm4-subclasses-inheritance-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-04-jm4-subclasses-and-inheritance-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-04-jm4-subclasses-inheritance-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-04-jm4-subclasses-and-inheritance-supplemental-3/solution"
 				}
 			]
 		},
@@ -418,18 +418,18 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JM6 Threading & Error Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-07-jm6-threading-error-handling-supplemental-2/starter",
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-07-jm6-threading-and-error-handling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-07-jm6-threading-error-handling-supplemental-2/solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-07-jm6-threading-and-error-handling-supplemental-2/solution"
 				},
 				{
 					title: "Threading & Error Handling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JM6 Threading & Error Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-08-jm6-threading-error-handling-supplemental-3/starter",
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-08-jm6-threading-and-error-handling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-08-jm6-threading-error-handling-supplemental-3/solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-08-jm6-threading-and-error-handling-supplemental-3/solution"
 				}
 			]
 		},
@@ -874,18 +874,18 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: JM Master Project Example Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz/starter",
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz-game-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz/solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz-game-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: JM Master Project Example Quiz Game supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: JM Master Project Example Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-20-applied-studio-14-jm-master-project-example-quiz/starter",
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-20-applied-studio-14-jm-master-project-example-quiz-game-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-20-applied-studio-14-jm-master-project-example-quiz/solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-20-applied-studio-14-jm-master-project-example-quiz-game-supplemental-3/solution"
 				}
 			]
 		},

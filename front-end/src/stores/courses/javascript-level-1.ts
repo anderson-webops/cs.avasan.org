@@ -752,9 +752,9 @@ export const javascriptLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSS9 Introduction to HTML & CSS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-08-jss9-introduction-to-html-css-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-08-jss9-introduction-to-html-and-css-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-08-jss9-introduction-to-html-css-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-08-jss9-introduction-to-html-and-css-supplemental-3/solution"
 				}
 			]
 		},
@@ -881,18 +881,18 @@ export const javascriptLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSS11 More HTML & CSS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-10-jss11-more-html-css-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-10-jss11-more-html-and-css-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-10-jss11-more-html-css-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-10-jss11-more-html-and-css-supplemental-2/solution"
 				},
 				{
 					title: "More HTML & CSS supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSS11 More HTML & CSS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-11-jss11-more-html-css-supplemental-3/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-11-jss11-more-html-and-css-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-11-jss11-more-html-css-supplemental-3/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-11-jss11-more-html-and-css-supplemental-3/solution"
 				}
 			]
 		},
@@ -1125,9 +1125,9 @@ export const javascriptLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSS14 Dynamic Websites with JavaScript. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-2/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-2/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-3/solution"
 				}
 			]
 		},
