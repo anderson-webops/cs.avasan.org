@@ -54,9 +54,9 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD1 Apple Developer Ecosystem Overview. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-01-sad1-apple-developer-ecosystem-overview-suppleme/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-01-sad1-apple-developer-ecosystem-overview-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-01-sad1-apple-developer-ecosystem-overview-suppleme/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-01-sad1-apple-developer-ecosystem-overview-supplemental-3/solution"
 				}
 			]
 		},
@@ -104,18 +104,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD2 Mac Setup and Project Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-02-sad2-mac-setup-and-project-tooling-supplemental-/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-02-sad2-mac-setup-and-project-tooling-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-02-sad2-mac-setup-and-project-tooling-supplemental-/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-02-sad2-mac-setup-and-project-tooling-supplemental-2/solution"
 				},
 				{
 					title: "Mac Setup and Project Tooling supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD2 Mac Setup and Project Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-03-sad2-mac-setup-and-project-tooling-supplemental-/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-03-sad2-mac-setup-and-project-tooling-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-03-sad2-mac-setup-and-project-tooling-supplemental-/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-03-sad2-mac-setup-and-project-tooling-supplemental-3/solution"
 				}
 			]
 		},
@@ -163,18 +163,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD3 Certificates, Signing, and Bundle IDs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-04-sad3-certificates-signing-and-bundle-ids-supplem/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-04-sad3-certificates-signing-and-bundle-ids-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-04-sad3-certificates-signing-and-bundle-ids-supplem/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-04-sad3-certificates-signing-and-bundle-ids-supplemental-2/solution"
 				},
 				{
 					title: "Certificates, Signing, and Bundle IDs supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD3 Certificates, Signing, and Bundle IDs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-05-sad3-certificates-signing-and-bundle-ids-supplem/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-05-sad3-certificates-signing-and-bundle-ids-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-05-sad3-certificates-signing-and-bundle-ids-supplem/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-05-sad3-certificates-signing-and-bundle-ids-supplemental-3/solution"
 				}
 			]
 		},
@@ -281,18 +281,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD5 App Store Connect and TestFlight Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-08-sad5-app-store-connect-and-testflight-workflow-s/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-08-sad5-app-store-connect-and-testflight-workflow-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-08-sad5-app-store-connect-and-testflight-workflow-s/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-08-sad5-app-store-connect-and-testflight-workflow-supplemental-2/solution"
 				},
 				{
 					title: "App Store Connect and TestFlight Workflow supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD5 App Store Connect and TestFlight Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-09-sad5-app-store-connect-and-testflight-workflow-s/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-09-sad5-app-store-connect-and-testflight-workflow-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-09-sad5-app-store-connect-and-testflight-workflow-s/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-09-sad5-app-store-connect-and-testflight-workflow-supplemental-3/solution"
 				}
 			]
 		},
@@ -750,18 +750,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD13 Lists, Forms, and CRUD Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-24-sad13-lists-forms-and-crud-patterns-supplemental/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-24-sad13-lists-forms-and-crud-patterns-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-24-sad13-lists-forms-and-crud-patterns-supplemental/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-24-sad13-lists-forms-and-crud-patterns-supplemental-2/solution"
 				},
 				{
 					title: "Lists, Forms, and CRUD Patterns supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD13 Lists, Forms, and CRUD Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-25-sad13-lists-forms-and-crud-patterns-supplemental/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-25-sad13-lists-forms-and-crud-patterns-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-25-sad13-lists-forms-and-crud-patterns-supplemental/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-25-sad13-lists-forms-and-crud-patterns-supplemental-3/solution"
 				}
 			]
 		},
@@ -1046,18 +1046,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD18 App Design and Accessibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-34-sad18-app-design-and-accessibility-supplemental-/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-34-sad18-app-design-and-accessibility-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-34-sad18-app-design-and-accessibility-supplemental-/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-34-sad18-app-design-and-accessibility-supplemental-2/solution"
 				},
 				{
 					title: "App Design and Accessibility supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD18 App Design and Accessibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-35-sad18-app-design-and-accessibility-supplemental-/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-35-sad18-app-design-and-accessibility-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-35-sad18-app-design-and-accessibility-supplemental-/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-35-sad18-app-design-and-accessibility-supplemental-3/solution"
 				}
 			]
 		},
@@ -1105,18 +1105,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD19 Final Publishing Walkthrough. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-36-sad19-final-publishing-walkthrough-supplemental-/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-36-sad19-final-publishing-walkthrough-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-36-sad19-final-publishing-walkthrough-supplemental-/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-36-sad19-final-publishing-walkthrough-supplemental-2/solution"
 				},
 				{
 					title: "Final Publishing Walkthrough supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD19 Final Publishing Walkthrough. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-37-sad19-final-publishing-walkthrough-supplemental-/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-37-sad19-final-publishing-walkthrough-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-37-sad19-final-publishing-walkthrough-supplemental-/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-37-sad19-final-publishing-walkthrough-supplemental-3/solution"
 				}
 			]
 		},

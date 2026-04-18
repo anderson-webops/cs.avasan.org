@@ -104,9 +104,9 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-fami/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-family/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-fami/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-family/solution"
 				}
 			],
 			supplementalProjects: [
@@ -115,27 +115,27 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for positioning and goals that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on how each new topic connects back to publishing, hosting, or operations so students build habits that carry from local work into real hosting and operations.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-fami/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-family/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-fami/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-family/solution"
 				},
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF1 Positioning, Goals, and Suggested Course Family. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-wdf1-positioning-goals-and-suggested-course-fami/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-wdf1-positioning-goals-and-suggested-course-family-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-wdf1-positioning-goals-and-suggested-course-fami/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-wdf1-positioning-goals-and-suggested-course-family-supplemental-2/solution"
 				},
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF1 Positioning, Goals, and Suggested Course Family. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-wdf1-positioning-goals-and-suggested-course-fami/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-wdf1-positioning-goals-and-suggested-course-family-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-wdf1-positioning-goals-and-suggested-course-fami/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-wdf1-positioning-goals-and-suggested-course-family-supplemental-3/solution"
 				}
 			]
 		},
@@ -167,9 +167,9 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/solution"
 				}
 			],
 			supplementalProjects: [
@@ -178,27 +178,27 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Keep a running notebook for strengthen the existing javascript courses that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on Git checkpoints, local project organization, and devtools usage so students build habits that carry from local work into real hosting and operations.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/solution"
 				},
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf2-stage-1-strengthen-the-existing-javascript-/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf2-stage-1-strengthen-the-existing-javascript-/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-2/solution"
 				},
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf2-stage-1-strengthen-the-existing-javascript-/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf2-stage-1-strengthen-the-existing-javascript-/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-3/solution"
 				}
 			]
 		},
@@ -250,18 +250,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF3 Stage 2: Web Development Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf3-stage-2-web-development-foundations-supplem/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf3-stage-2-web-development-foundations-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf3-stage-2-web-development-foundations-supplem/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf3-stage-2-web-development-foundations-supplemental-2/solution"
 				},
 				{
 					title: "Stage 2: Web Development Foundations supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF3 Stage 2: Web Development Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf3-stage-2-web-development-foundations-supplem/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf3-stage-2-web-development-foundations-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf3-stage-2-web-development-foundations-supplem/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf3-stage-2-web-development-foundations-supplemental-3/solution"
 				}
 			]
 		},
@@ -313,18 +313,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF4 Stage 3: Front-End Applications. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf4-stage-3-front-end-applications-supplemental/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf4-stage-3-front-end-applications-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf4-stage-3-front-end-applications-supplemental/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf4-stage-3-front-end-applications-supplemental-2/solution"
 				},
 				{
 					title: "Stage 3: Front End Applications supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF4 Stage 3: Front-End Applications. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf4-stage-3-front-end-applications-supplemental/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf4-stage-3-front-end-applications-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf4-stage-3-front-end-applications-supplemental/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf4-stage-3-front-end-applications-supplemental-3/solution"
 				}
 			]
 		},
@@ -502,18 +502,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF7 Stage 6: Hosting and Deployment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-15-wdf7-stage-6-hosting-and-deployment-supplemental/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-15-wdf7-stage-6-hosting-and-deployment-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-15-wdf7-stage-6-hosting-and-deployment-supplemental/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-15-wdf7-stage-6-hosting-and-deployment-supplemental-2/solution"
 				},
 				{
 					title: "Stage 6: Hosting and Deployment supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF7 Stage 6: Hosting and Deployment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-16-wdf7-stage-6-hosting-and-deployment-supplemental/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-16-wdf7-stage-6-hosting-and-deployment-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-16-wdf7-stage-6-hosting-and-deployment-supplemental/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-16-wdf7-stage-6-hosting-and-deployment-supplemental-3/solution"
 				}
 			]
 		},
@@ -565,18 +565,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF8 Hosting and Operations Topics to Add. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-17-wdf8-hosting-and-operations-topics-to-add-supple/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-17-wdf8-hosting-and-operations-topics-to-add-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-17-wdf8-hosting-and-operations-topics-to-add-supple/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-17-wdf8-hosting-and-operations-topics-to-add-supplemental-2/solution"
 				},
 				{
 					title: "Hosting and Operations Topics to Add supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF8 Hosting and Operations Topics to Add. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-18-wdf8-hosting-and-operations-topics-to-add-supple/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-18-wdf8-hosting-and-operations-topics-to-add-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-18-wdf8-hosting-and-operations-topics-to-add-supple/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-18-wdf8-hosting-and-operations-topics-to-add-supplemental-3/solution"
 				}
 			]
 		},
@@ -891,18 +891,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: full stack web lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: full stack web lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: full stack web lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-28-applied-studio-14-full-stack-web-lab-14-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-28-applied-studio-14-full-stack-web-lab-14-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-28-applied-studio-14-full-stack-web-lab-14-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-28-applied-studio-14-full-stack-web-lab-14-supplemental-3/solution"
 				}
 			]
 		},
@@ -949,18 +949,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: full stack web lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: full stack web lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: full stack web lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-30-applied-studio-15-full-stack-web-lab-15-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-30-applied-studio-15-full-stack-web-lab-15-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-30-applied-studio-15-full-stack-web-lab-15-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-30-applied-studio-15-full-stack-web-lab-15-supplemental-3/solution"
 				}
 			]
 		},
@@ -1007,18 +1007,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: full stack web lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 16: full stack web lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: full stack web lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-32-applied-studio-16-full-stack-web-lab-16-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-32-applied-studio-16-full-stack-web-lab-16-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-32-applied-studio-16-full-stack-web-lab-16-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-32-applied-studio-16-full-stack-web-lab-16-supplemental-3/solution"
 				}
 			]
 		},
@@ -1065,18 +1065,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: full stack web lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: full stack web lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: full stack web lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-34-applied-studio-17-full-stack-web-lab-17-suppleme/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-34-applied-studio-17-full-stack-web-lab-17-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-34-applied-studio-17-full-stack-web-lab-17-suppleme/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-34-applied-studio-17-full-stack-web-lab-17-supplemental-3/solution"
 				}
 			]
 		}

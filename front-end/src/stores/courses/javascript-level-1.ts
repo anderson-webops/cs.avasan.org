@@ -409,18 +409,18 @@ export const javascriptLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSS4 Combining Loops and Variables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-05-jss4-combining-loops-and-variables-supplemental-/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-05-jss4-combining-loops-and-variables-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-05-jss4-combining-loops-and-variables-supplemental-/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-05-jss4-combining-loops-and-variables-supplemental-2/solution"
 				},
 				{
 					title: "Combining Loops and Variables supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSS4 Combining Loops and Variables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-06-jss4-combining-loops-and-variables-supplemental-/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-06-jss4-combining-loops-and-variables-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-06-jss4-combining-loops-and-variables-supplemental-/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-06-jss4-combining-loops-and-variables-supplemental-3/solution"
 				}
 			]
 		},

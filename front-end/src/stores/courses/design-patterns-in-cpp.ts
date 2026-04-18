@@ -114,18 +114,18 @@ export const designPatternsInCppCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPC1 Why Patterns Look Different in Modern C++. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-dpc1-why-patterns-look-different-in-modern-c-sup/starter",
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-dpc1-why-patterns-look-different-in-modern-c-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-dpc1-why-patterns-look-different-in-modern-c-sup/solution"
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-dpc1-why-patterns-look-different-in-modern-c-supplemental-2/solution"
 				},
 				{
 					title: "Why Patterns Look Different in Modern C++ supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPC1 Why Patterns Look Different in Modern C++. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-dpc1-why-patterns-look-different-in-modern-c-sup/starter",
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-dpc1-why-patterns-look-different-in-modern-c-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-dpc1-why-patterns-look-different-in-modern-c-sup/solution"
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-dpc1-why-patterns-look-different-in-modern-c-supplemental-3/solution"
 				}
 			]
 		},

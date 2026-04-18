@@ -698,9 +698,9 @@ export const javascriptLevel2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSM7 Helper Functions and Event Listeners. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supple/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supple/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supplemental-3/solution"
 				}
 			]
 		},

@@ -41,13 +41,13 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Mad-Lib"
 				},
 				{
-					title: "AJ1 Project 2: Chatbot",
+					title: "AJ1 Project 2: Chat Bot",
 					content:
 						"Create a simple chatbot that asks several questions, stores each response, and replies based on the answers. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Chatbot",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Chat-Bot",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Chatbot"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Chat-Bot"
 				}
 			],
 			supplementalProjects: [
@@ -1392,7 +1392,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use this final check-in to review binary search trees, hash tables, and graphs, along with the main vocabulary and algorithm ideas from those topics. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4"
 				},
 				{
 					title: "Check-In #4: Binary Search Trees",
@@ -1425,7 +1425,7 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Extend the work from Check-In #4 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4"
 				},
 				{
 					title: "Check In #4 supplemental 2",

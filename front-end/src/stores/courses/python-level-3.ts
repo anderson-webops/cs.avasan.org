@@ -224,7 +224,7 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Write one recursive function that prints the running sums of the first `n` elements of a list and another that prints the same sums in reverse order.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-1-Additional-Project"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-1-Additional-Project"
 				}
 			],
 			supplementalProjects: []
@@ -576,7 +576,7 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Read letters from a file into a list, sort them in ASCII order using one of the implemented sorting algorithms, and write the sorted results back to a file.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-in-3-Additional-Project"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-3-Additional-Project"
 				}
 			],
 			supplementalProjects: []

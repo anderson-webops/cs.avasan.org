@@ -287,18 +287,18 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP4 Factory and Builder in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-07-pdp4-factory-and-builder-in-python-supplemental-/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-07-pdp4-factory-and-builder-in-python-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-07-pdp4-factory-and-builder-in-python-supplemental-/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-07-pdp4-factory-and-builder-in-python-supplemental-2/solution"
 				},
 				{
 					title: "Factory and Builder in Python supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP4 Factory and Builder in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-08-pdp4-factory-and-builder-in-python-supplemental-/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-08-pdp4-factory-and-builder-in-python-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-08-pdp4-factory-and-builder-in-python-supplemental-/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-08-pdp4-factory-and-builder-in-python-supplemental-3/solution"
 				}
 			]
 		},
@@ -350,18 +350,18 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP5 Observer, Events, and Callbacks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-09-pdp5-observer-events-and-callbacks-supplemental-/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-09-pdp5-observer-events-and-callbacks-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-09-pdp5-observer-events-and-callbacks-supplemental-/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-09-pdp5-observer-events-and-callbacks-supplemental-2/solution"
 				},
 				{
 					title: "Observer, Events, and Callbacks supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP5 Observer, Events, and Callbacks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-10-pdp5-observer-events-and-callbacks-supplemental-/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-10-pdp5-observer-events-and-callbacks-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-10-pdp5-observer-events-and-callbacks-supplemental-/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-10-pdp5-observer-events-and-callbacks-supplemental-3/solution"
 				}
 			]
 		},
@@ -539,18 +539,18 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP8 Adapter and Integration Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-15-pdp8-adapter-and-integration-boundaries-suppleme/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-15-pdp8-adapter-and-integration-boundaries-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-15-pdp8-adapter-and-integration-boundaries-suppleme/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-15-pdp8-adapter-and-integration-boundaries-supplemental-2/solution"
 				},
 				{
 					title: "Adapter and Integration Boundaries supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP8 Adapter and Integration Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-16-pdp8-adapter-and-integration-boundaries-suppleme/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-16-pdp8-adapter-and-integration-boundaries-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-16-pdp8-adapter-and-integration-boundaries-suppleme/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-16-pdp8-adapter-and-integration-boundaries-supplemental-3/solution"
 				}
 			]
 		},
@@ -787,18 +787,18 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP12 Capstone Pythonic Refactor Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-23-pdp12-capstone-pythonic-refactor-studio-suppleme/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-23-pdp12-capstone-pythonic-refactor-studio-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-23-pdp12-capstone-pythonic-refactor-studio-suppleme/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-23-pdp12-capstone-pythonic-refactor-studio-supplemental-2/solution"
 				},
 				{
 					title: "Capstone Pythonic Refactor Studio supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP12 Capstone Pythonic Refactor Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-suppleme/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-suppleme/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-supplemental-3/solution"
 				}
 			]
 		},
@@ -1003,18 +1003,18 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Data Science in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-31-applied-studio-17-data-science-in-python-supplem/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-31-applied-studio-17-data-science-in-python-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-31-applied-studio-17-data-science-in-python-supplem/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-31-applied-studio-17-data-science-in-python-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: Data Science in Python supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Data Science in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-32-applied-studio-17-data-science-in-python-supplem/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-32-applied-studio-17-data-science-in-python-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-32-applied-studio-17-data-science-in-python-supplem/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-32-applied-studio-17-data-science-in-python-supplemental-3/solution"
 				}
 			]
 		}

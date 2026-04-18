@@ -235,18 +235,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental-2/solution"
 				},
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental-3/solution"
 				}
 			]
 		},
@@ -811,18 +811,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-suppleme/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-suppleme/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-supplemental-2/solution"
 				},
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-suppleme/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-suppleme/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-supplemental-3/solution"
 				}
 			]
 		},

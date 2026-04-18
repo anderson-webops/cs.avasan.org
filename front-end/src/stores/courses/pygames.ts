@@ -134,18 +134,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-suppleme/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-suppleme/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-supplemental-2/solution"
 				},
 				{
 					title: "Object Oriented Programming: Actors supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-suppleme/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-suppleme/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-supplemental-3/solution"
 				}
 			]
 		},
@@ -361,18 +361,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supp/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supp/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supplemental-2/solution"
 				},
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supp/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supp/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supplemental-3/solution"
 				}
 			]
 		},
@@ -424,18 +424,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-sup/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-sup/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-supplemental-2/solution"
 				},
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-sup/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-sup/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-supplemental-3/solution"
 				}
 			]
 		},

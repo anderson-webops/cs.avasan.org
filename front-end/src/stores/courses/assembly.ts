@@ -114,18 +114,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Machine Model and Toolchain. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-2/solution"
 				},
 				{
 					title: "Unit 1: Machine Model and Toolchain supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 1: Machine Model and Toolchain. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-3/solution"
 				}
 			]
 		},
@@ -172,18 +172,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Registers and Data Movement. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-2/solution"
 				},
 				{
 					title: "Unit 2: Registers and Data Movement supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 2: Registers and Data Movement. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-3/solution"
 				}
 			]
 		},
@@ -356,18 +356,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: The Stack and Function Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental-2/solution"
 				},
 				{
 					title: "Unit 5: The Stack and Function Calls supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 5: The Stack and Function Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental-3/solution"
 				}
 			]
 		},
@@ -414,18 +414,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Calling Conventions and ABI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-2/solution"
 				},
 				{
 					title: "Unit 6: Calling Conventions and ABI supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 6: Calling Conventions and ABI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-3/solution"
 				}
 			]
 		},
@@ -472,18 +472,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Memory Addressing and Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-sup/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-sup/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-supplemental-2/solution"
 				},
 				{
 					title: "Unit 7: Memory Addressing and Data Structures supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Memory Addressing and Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-sup/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-sup/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-supplemental-3/solution"
 				}
 			]
 		},
@@ -530,18 +530,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: System Calls and Runtime Interaction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supplemental-2/solution"
 				},
 				{
 					title: "Unit 8: System Calls and Runtime Interaction supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: System Calls and Runtime Interaction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supplemental-3/solution"
 				}
 			]
 		},
@@ -719,18 +719,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Performance and Code Shape. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-2/solution"
 				},
 				{
 					title: "Unit 11: Performance and Code Shape supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Performance and Code Shape. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-3/solution"
 				}
 			]
 		},
@@ -777,18 +777,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Security and Reliability Visibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supplemental-2/solution"
 				},
 				{
 					title: "Unit 12: Security and Reliability Visibility supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Security and Reliability Visibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supp/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supp/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supplemental-3/solution"
 				}
 			]
 		},

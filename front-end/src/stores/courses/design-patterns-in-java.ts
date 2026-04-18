@@ -61,18 +61,18 @@ export const designPatternsInJavaCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPJ1 What Patterns Are and What They Are Not. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-dpj1-what-patterns-are-and-what-they-are-not-sup/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-dpj1-what-patterns-are-and-what-they-are-not-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-dpj1-what-patterns-are-and-what-they-are-not-sup/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-dpj1-what-patterns-are-and-what-they-are-not-supplemental-2/solution"
 				},
 				{
 					title: "What Patterns Are and What They Are Not supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPJ1 What Patterns Are and What They Are Not. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-dpj1-what-patterns-are-and-what-they-are-not-sup/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-dpj1-what-patterns-are-and-what-they-are-not-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-dpj1-what-patterns-are-and-what-they-are-not-sup/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-dpj1-what-patterns-are-and-what-they-are-not-supplemental-3/solution"
 				}
 			]
 		},
@@ -805,7 +805,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 12: AJ Check in 4. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4-Starter"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4-Starter"
 				},
 				{
 					title: "AJ Check in 4: Review and Reflection",
@@ -819,7 +819,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 12: AJ Check in 4 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-in-4-Starter"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4-Starter"
 				},
 				{
 					title: "Applied Studio 12: AJ Check in 4 supplemental 2",
