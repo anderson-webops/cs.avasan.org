@@ -656,18 +656,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Debugging at Instruction Level. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemen/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemen/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemental-2/solution"
 				},
 				{
 					title: "Unit 10: Debugging at Instruction Level supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Debugging at Instruction Level. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemen/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemen/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemental-3/solution"
 				}
 			]
 		},
@@ -840,18 +840,18 @@ export const assemblyCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ASM13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplementa/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplementa/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplemental-2/solution"
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ASM13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplementa/starter",
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplementa/solution"
+						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplemental-3/solution"
 				}
 			]
 		},

@@ -61,7 +61,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to FAI0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI(COPY)"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI-Copy"
 				}
 			]
 		},
@@ -422,7 +422,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Tic-Tac-Toe-TreeNode"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Tic-Tac-Toe-Tree-Node"
 				}
 			],
 			supplementalProjects: [
@@ -431,7 +431,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the board-state representation and successor logic that later AI strategies depend on. The quality of the tree structure determines how easy the rest of the project is to reason about.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Tic-Tac-Toe-TreeNode"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Tic-Tac-Toe-Tree-Node"
 				},
 				{
 					title: "Project: Random Tic-Tac-Toe AI",
@@ -445,7 +445,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Push a simple game AI all the way to strong play and discuss what made the jump possible: better state modeling, lookahead, pruning of bad choices, and more disciplined scoring. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-TicTacToe-AI"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-Tic-Tac-Toe-AI"
 				},
 				{
 					title: "Project: Marble Game AI",
@@ -579,7 +579,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Canonical Variants for Game AI",
 					content:
-						"Use `FAI7-Updated-TicTacToe-AI` as the main optional advanced Tic-Tac-Toe follow-up and keep `FAI7-Unbeatable-TicTacToe-AI-1` as an archive duplicate rather than a separate public requirement. Do the same for the marble-game branch by using the clean playable variant and hiding the `COPY` folder."
+						"Use `FAI7-Updated-Tic-Tac-Toe-AI` as the main optional advanced Tic-Tac-Toe follow-up and keep `FAI7-Unbeatable-Tic-Tac-Toe-AI-1` as an archive duplicate rather than a separate public requirement. Do the same for the marble-game branch by using the clean playable variant and hiding the `COPY` folder."
 				},
 				{
 					title: "How to Use the Extra Repo Folders",
@@ -619,7 +619,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Keep a second lightweight class-design warmup available for students who need more confidence with object state before graph and game objects. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-BankAccount-Class"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI1-Bank-Account-Class"
 				},
 				{
 					title: "Extension: DFS with a Stack Class",
@@ -640,7 +640,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Use the updated Tic-Tac-Toe branch as the canonical optional game-tree extension beyond the main course spine. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Updated-TicTacToe-AI"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Updated-Tic-Tac-Toe-AI"
 				},
 				{
 					title: "Extension: Two-Player Marble Game",
@@ -959,7 +959,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 16: Unbeatable TicTacToe AI 1. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-TicTacToe-AI-1"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-Tic-Tac-Toe-AI-1"
 				},
 				{
 					title: "Unbeatable TicTacToe AI 1: Review and Reflection",
@@ -973,7 +973,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 16: Unbeatable TicTacToe AI 1 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-TicTacToe-AI-1"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-Tic-Tac-Toe-AI-1"
 				},
 				{
 					title: "Applied Studio 16: Unbeatable TicTacToe AI 1 supplemental 2",
@@ -1013,7 +1013,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 17: The Marble Game AI(COPY). Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI(COPY)"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI-Copy"
 				},
 				{
 					title: "The Marble Game AI(COPY): Review and Reflection",
@@ -1027,7 +1027,7 @@ export const aiLevel1Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 17: The Marble Game AI(COPY) with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI(COPY)"
+						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI-Copy"
 				},
 				{
 					title: "Applied Studio 17: The Marble Game AI(COPY) supplemental 2",

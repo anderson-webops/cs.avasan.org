@@ -90,7 +90,7 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use the additional practice project after the check-in when the student needs one more pass through divisibility checks, ordering conditionals, and loop tracing.",
 					projectLink: repo(
-						"APCS_Check-in-1-Additional-Practice-Project"
+						"APCS-Check-in-1-Additional-Practice-Project"
 					),
 					mediaLink: media("ps4_fizzbuzz.gif")
 				},
@@ -342,7 +342,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Use the GitHub-backed prompt bank for the full Check-In #2 review instead of the original Replit link.",
-					projectLink: repo("APCS_Check-in-2")
+					projectLink: repo("APCS-Check-in-2")
 				}
 			],
 			supplementalProjects: [
@@ -491,7 +491,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Book and PictureBook Class",
 					content:
 						"Use Book and PictureBook Class as the main APCS7 build because it maps directly to the source module and keeps the inheritance tree readable.",
-					projectLink: repo("APCS7-Books-and-PictureBooks"),
+					projectLink: repo("APCS7-Books-and-Picture-Books"),
 					mediaLink: media(
 						"apcs7-project-4-book-and-picturebook-class.mp4"
 					)
@@ -581,7 +581,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Use the GitHub-backed prompt bank for the main Check-In #3 review sequence.",
-					projectLink: repo("APCS_Check-in-3")
+					projectLink: repo("APCS-Check-in-3")
 				}
 			],
 			supplementalProjects: [
@@ -590,14 +590,14 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use the letter-shifter project to reinforce inheritance, overriding, and character-level string manipulation after the check-in.",
 					projectLink: repo(
-						"APCS_Check-in-3-Additional-Practice-Project"
+						"APCS-Check-in-3-Additional-Practice-Project"
 					)
 				},
 				{
 					title: "ArrayList Reference",
 					content:
 						"Use the ArrayList reference pack when the check-in shows mutation or traversal gaps.",
-					projectLink: repo("APCS11-ArrayList-Reference")
+					projectLink: repo("APCS11-Array-List-Reference")
 				},
 				{
 					title: "Multiple Choice Reference",
@@ -728,7 +728,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Practice With ArrayLists",
 					content:
 						"Use the ArrayList practice project as the main APCS11 implementation checkpoint for counting, filtering, mutation, and removal logic.",
-					projectLink: repo("APCS11-Practice-With-ArrayLists"),
+					projectLink: repo("APCS11-Practice-With-Array-Lists"),
 					mediaLink: media(
 						"apcs11-project-1-practice-with-arraylists.mp4"
 					)
@@ -737,7 +737,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "ArrayList Reference Pack",
 					content:
 						"Keep the ArrayList reference build close for method review and quick syntax reinforcement.",
-					projectLink: repo("APCS11-ArrayList-Reference")
+					projectLink: repo("APCS11-Array-List-Reference")
 				}
 			],
 			supplementalProjects: [
@@ -745,7 +745,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Fortune Teller",
 					content:
 						"Use FortuneTeller to combine ArrayLists, random selection, and controlled mutation of collection state.",
-					projectLink: repo("APCS11-FortuneTeller-Class"),
+					projectLink: repo("APCS11-Fortune-Teller-Class"),
 					mediaLink: media("apcs11-project-2-fortune-teller.mp4")
 				},
 				{
@@ -787,7 +787,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Use the GitHub-backed prompt bank for the full Check-In #4 review sequence.",
-					projectLink: repo("APCS_Check-in-4")
+					projectLink: repo("APCS-Check-in-4")
 				}
 			],
 			supplementalProjects: [
@@ -796,7 +796,7 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use inversion counting after the check-in when the student needs one more applied problem tying together sorting and runtime ideas.",
 					projectLink: repo(
-						"APCS_Check-in-4-Additional-Practice-Project"
+						"APCS-Check-in-4-Additional-Practice-Project"
 					)
 				},
 				{
@@ -992,7 +992,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Merge Step Visual",
 					content:
 						"Use the merge visual together with the repo merge-sort project so students can separate the recursive split from the actual merge operation.",
-					projectLink: repo("APCS16-MergeSort"),
+					projectLink: repo("APCS16-Merge-Sort"),
 					mediaLink: media("am_10_merge.mp4")
 				}
 			],
@@ -1001,7 +1001,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Merge Sort",
 					content:
 						"Use the merge-sort build for the full divide-and-conquer implementation after students understand the merge step itself.",
-					projectLink: repo("APCS16-MergeSort"),
+					projectLink: repo("APCS16-Merge-Sort"),
 					mediaLink: media("apcs16-project-2-merge-sort.mp4")
 				}
 			]

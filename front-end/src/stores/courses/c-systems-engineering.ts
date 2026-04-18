@@ -543,18 +543,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Function Pointers and Dispatch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplement/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplement/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplemental-2/solution"
 				},
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Function Pointers and Dispatch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplement/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplement/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplemental-3/solution"
 				}
 			]
 		},
@@ -785,18 +785,18 @@ export const cSystemsEngineeringCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Capstone Engineering Utility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplementa/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplementa/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplemental-2/solution"
 				},
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 12: Capstone Engineering Utility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplementa/starter",
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplementa/solution"
+						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplemental-3/solution"
 				}
 			]
 		},

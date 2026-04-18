@@ -714,18 +714,18 @@ export const networkSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplementa/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplementa/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplemental-2/solution"
 				},
 				{
 					title: "Unit 11: Common Application Protocols supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplementa/starter",
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplementa/solution"
+						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplemental-3/solution"
 				}
 			]
 		},

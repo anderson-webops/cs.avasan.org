@@ -86,7 +86,7 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-BankAccount-Classes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes"
 				}
 			],
 			supplementalProjects: [
@@ -95,21 +95,21 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use a structured warmup to keep class design and data modeling fluent before heavier graph and range problems dominate. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-BankAccount-Classes"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes"
 				},
 				{
 					title: "Problem: HashSets",
 					content:
 						"Practice membership and deduplication logic in a contest setting where the structure choice matters directly. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-HashSets"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Sets"
 				},
 				{
 					title: "Problem: HashMaps",
 					content:
 						"Use keyed storage and frequency-style reasoning to reinforce when a map is the cleanest expression of the problem. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-HashMaps"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Hash-Maps"
 				},
 				{
 					title: "Bovine Genomics",
@@ -164,7 +164,7 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Treat relationships and thresholds as graph structure so that traversal answers a query cleanly. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-MooTube"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Moo-Tube"
 				},
 				{
 					title: "Problem: Dance Mooves",
@@ -295,7 +295,7 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 4: Prefix Sums, Ranges, and Counting. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US34_Dance-Mooves"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves"
 				}
 			]
 		},
@@ -567,7 +567,7 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: Superprime Rib. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Custom-Classes-with-HashSets-and-HashMaps"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Custom-Classes-with-Hash-Sets-and-Hash-Maps"
 				},
 				{
 					title: "DFS",
@@ -877,18 +877,18 @@ export const usacoSilverCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplement/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplement/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 16: Hoof Paper Scissors supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Hoof Paper Scissors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-07-applied-studio-16-hoof-paper-scissors-supplement/starter",
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-07-applied-studio-16-hoof-paper-scissors-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Silver/tree/main/US-07-applied-studio-16-hoof-paper-scissors-supplement/solution"
+						"https://github.com/instruction-material/USACO-Silver/tree/main/US-07-applied-studio-16-hoof-paper-scissors-supplemental-3/solution"
 				}
 			]
 		},

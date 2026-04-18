@@ -666,18 +666,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: data analysis lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 11: data analysis lab 11 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: data analysis lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemental-3/solution"
 				}
 			]
 		},
@@ -724,18 +724,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: data analysis lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 12: data analysis lab 12 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: data analysis lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemental-3/solution"
 				}
 			]
 		},
@@ -782,18 +782,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: data analysis lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 13: data analysis lab 13 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: data analysis lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemental-3/solution"
 				}
 			]
 		},
@@ -840,18 +840,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: data analysis lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: data analysis lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: data analysis lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemental-3/solution"
 				}
 			]
 		},
@@ -898,18 +898,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: data analysis lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: data analysis lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: data analysis lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemental-3/solution"
 				}
 			]
 		},
@@ -956,18 +956,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: data analysis lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 16: data analysis lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: data analysis lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemental-3/solution"
 				}
 			]
 		},
@@ -1014,18 +1014,18 @@ export const dataScienceInPythonCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: data analysis lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: data analysis lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: data analysis lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemental-3/solution"
 				}
 			]
 		}

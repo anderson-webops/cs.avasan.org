@@ -439,18 +439,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF6 Stage 5: Databases and Data Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-13-wdf6-stage-5-databases-and-data-models-supplemen/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-13-wdf6-stage-5-databases-and-data-models-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-13-wdf6-stage-5-databases-and-data-models-supplemen/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-13-wdf6-stage-5-databases-and-data-models-supplemental-2/solution"
 				},
 				{
 					title: "Stage 5: Databases and Data Models supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF6 Stage 5: Databases and Data Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-14-wdf6-stage-5-databases-and-data-models-supplemen/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-14-wdf6-stage-5-databases-and-data-models-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-14-wdf6-stage-5-databases-and-data-models-supplemen/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-14-wdf6-stage-5-databases-and-data-models-supplemental-3/solution"
 				}
 			]
 		},
@@ -770,18 +770,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF11 Integration with Network Topics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-23-wdf11-integration-with-network-topics-supplement/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-23-wdf11-integration-with-network-topics-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-23-wdf11-integration-with-network-topics-supplement/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-23-wdf11-integration-with-network-topics-supplemental-2/solution"
 				},
 				{
 					title: "Integration with Network Topics supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF11 Integration with Network Topics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-24-wdf11-integration-with-network-topics-supplement/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-24-wdf11-integration-with-network-topics-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-24-wdf11-integration-with-network-topics-supplement/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-24-wdf11-integration-with-network-topics-supplemental-3/solution"
 				}
 			]
 		},
@@ -833,18 +833,18 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF12 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-25-wdf12-expansion-ideas-and-next-steps-supplementa/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-25-wdf12-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-25-wdf12-expansion-ideas-and-next-steps-supplementa/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-25-wdf12-expansion-ideas-and-next-steps-supplemental-2/solution"
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to WDF12 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-26-wdf12-expansion-ideas-and-next-steps-supplementa/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-26-wdf12-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-26-wdf12-expansion-ideas-and-next-steps-supplementa/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-26-wdf12-expansion-ideas-and-next-steps-supplemental-3/solution"
 				}
 			]
 		},

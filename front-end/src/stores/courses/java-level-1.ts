@@ -356,18 +356,18 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS5 Practice with Loops & Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplemental-2/solution"
 				},
 				{
 					title: "Practice with Loops & Conditionals supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JS5 Practice with Loops & Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplemental-3/solution"
 				}
 			]
 		},
@@ -546,9 +546,9 @@ export const javaLevel1Course: RawCourse = {
 					content:
 						"Write methods that generate lists of random integers, filter even numbers, remove the smallest value, add a sum, edit multiples of 3, collect user-entered words, and insert `MIDDLE` into the center of a list.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-ArrayList-Practice",
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Array-List-Practice",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-ArrayList-Practice"
+						"https://github.com/instruction-material/Java-Level-1/tree/main/JS7-Array-List-Practice"
 				},
 				{
 					title: "JS7 Project 4: High Score List",

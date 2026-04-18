@@ -492,18 +492,18 @@ export const networkSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Firewalls, Proxies, and Exposure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-15-unit-7-firewalls-proxies-and-exposure-supplement/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-15-unit-7-firewalls-proxies-and-exposure-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-15-unit-7-firewalls-proxies-and-exposure-supplement/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-15-unit-7-firewalls-proxies-and-exposure-supplemental-2/solution"
 				},
 				{
 					title: "Unit 7: Firewalls, Proxies, and Exposure supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 7: Firewalls, Proxies, and Exposure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-16-unit-7-firewalls-proxies-and-exposure-supplement/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-16-unit-7-firewalls-proxies-and-exposure-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-16-unit-7-firewalls-proxies-and-exposure-supplement/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-16-unit-7-firewalls-proxies-and-exposure-supplemental-3/solution"
 				}
 			]
 		},
@@ -555,18 +555,18 @@ export const networkSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Secure Node/TypeScript Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-17-unit-8-secure-node-typescript-services-supplemen/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-17-unit-8-secure-node-typescript-services-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-17-unit-8-secure-node-typescript-services-supplemen/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-17-unit-8-secure-node-typescript-services-supplemental-2/solution"
 				},
 				{
 					title: "Unit 8: Secure Node/TypeScript Services supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 8: Secure Node/TypeScript Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-18-unit-8-secure-node-typescript-services-supplemen/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-18-unit-8-secure-node-typescript-services-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-18-unit-8-secure-node-typescript-services-supplemen/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-18-unit-8-secure-node-typescript-services-supplemental-3/solution"
 				}
 			]
 		},
@@ -618,18 +618,18 @@ export const networkSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Defensive Network Tooling in TS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-19-unit-9-defensive-network-tooling-in-ts-supplemen/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-19-unit-9-defensive-network-tooling-in-ts-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-19-unit-9-defensive-network-tooling-in-ts-supplemen/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-19-unit-9-defensive-network-tooling-in-ts-supplemental-2/solution"
 				},
 				{
 					title: "Unit 9: Defensive Network Tooling in TS supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 9: Defensive Network Tooling in TS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-20-unit-9-defensive-network-tooling-in-ts-supplemen/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-20-unit-9-defensive-network-tooling-in-ts-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-20-unit-9-defensive-network-tooling-in-ts-supplemen/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-20-unit-9-defensive-network-tooling-in-ts-supplemental-3/solution"
 				}
 			]
 		},
@@ -933,18 +933,18 @@ export const networkSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to NSEC14 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-29-nsec14-expansion-ideas-and-next-steps-supplement/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-29-nsec14-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-29-nsec14-expansion-ideas-and-next-steps-supplement/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-29-nsec14-expansion-ideas-and-next-steps-supplemental-2/solution"
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to NSEC14 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-30-nsec14-expansion-ideas-and-next-steps-supplement/starter",
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-30-nsec14-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-30-nsec14-expansion-ideas-and-next-steps-supplement/solution"
+						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-30-nsec14-expansion-ideas-and-next-steps-supplemental-3/solution"
 				}
 			]
 		},

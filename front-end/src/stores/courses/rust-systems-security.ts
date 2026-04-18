@@ -51,18 +51,18 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS0 Tooling, Cargo, and Why Rust Exists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemen/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemen/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/solution"
 				},
 				{
 					title: "Tooling, Cargo, and Why Rust Exists supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS0 Tooling, Cargo, and Why Rust Exists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-02-rss0-tooling-cargo-and-why-rust-exists-supplemen/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-02-rss0-tooling-cargo-and-why-rust-exists-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-02-rss0-tooling-cargo-and-why-rust-exists-supplemen/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-02-rss0-tooling-cargo-and-why-rust-exists-supplemental-3/solution"
 				}
 			]
 		},
@@ -177,18 +177,18 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS2 Borrowing, Aliasing, and Lifetimes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/solution"
 				},
 				{
 					title: "Borrowing, Aliasing, and Lifetimes supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS2 Borrowing, Aliasing, and Lifetimes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rss2-borrowing-aliasing-and-lifetimes-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rss2-borrowing-aliasing-and-lifetimes-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rss2-borrowing-aliasing-and-lifetimes-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rss2-borrowing-aliasing-and-lifetimes-supplemental-3/solution"
 				}
 			]
 		},
@@ -618,18 +618,18 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS9 Unsafe, FFI, and Trusted Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemen/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemen/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/solution"
 				},
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS9 Unsafe, FFI, and Trusted Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-20-rss9-unsafe-ffi-and-trusted-boundaries-supplemen/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-20-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-20-rss9-unsafe-ffi-and-trusted-boundaries-supplemen/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-20-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-3/solution"
 				}
 			]
 		},

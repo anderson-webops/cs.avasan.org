@@ -31,7 +31,7 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-MooTube"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube"
 				}
 			],
 			supplementalProjects: [
@@ -40,7 +40,7 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Keep a compact Gold-level log for setup and gold mindset that records the core recurrence or invariant, one discarded approach, and one note about which constraint or invariant most clearly signals the right solution family. Gold progress depends on being able to explain the structure of a solution, not just implement it.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-MooTube"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube"
 				},
 				{
 					title: "Why Did the Cow Cross the Road III",
@@ -837,18 +837,18 @@ export const usacoGoldCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Watering the Fields. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplement/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplement/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: Watering the Fields supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: Watering the Fields. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplement/starter",
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplement/solution"
+						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplemental-3/solution"
 				}
 			]
 		},

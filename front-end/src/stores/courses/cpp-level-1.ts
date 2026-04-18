@@ -59,9 +59,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Create a chatbot: ask for a name and respond, ask for a sentence and use `str.insert()` to insert **achoo** to make the bot sneeze, convert Fahrenheit to Celsius with float values, and convert a dollar amount to another currency. Write a short explanation of the program design, inputs, and test results.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-ChatBot",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Chat-Bot",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-ChatBot"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Chat-Bot"
 				}
 			],
 			supplementalProjects: [
@@ -77,18 +77,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF1 Variables, Types, and Input/Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-cppf1-variables-types-and-input-output-supplemen/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-cppf1-variables-types-and-input-output-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-cppf1-variables-types-and-input-output-supplemen/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-01-cppf1-variables-types-and-input-output-supplemental-2/solution"
 				},
 				{
 					title: "Variables, Types, and Input/Output supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF1 Variables, Types, and Input/Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-cppf1-variables-types-and-input-output-supplemen/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-cppf1-variables-types-and-input-output-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-cppf1-variables-types-and-input-output-supplemen/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-02-cppf1-variables-types-and-input-output-supplemental-3/solution"
 				}
 			]
 		},
@@ -133,9 +133,9 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						'Print numbers 1 through 50. For multiples of 3 print "Fizz," for multiples of 5 print "Buzz," and for multiples of both print "FizzBuzz." Review the % operator with simple examples. Bonus: allow any two input numbers for a customizable FizzBuzz. Write a short explanation of the program design, inputs, and test results.',
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-FizzBuzz",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Fizz-Buzz",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-FizzBuzz"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-Fizz-Buzz"
 				}
 			],
 			supplementalProjects: [
@@ -333,7 +333,7 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Answer conceptual questions about pointers: printing `*p1` vs. `p1`, changing `*p1`, copying pointers, dereferencing uninitialized or `nullptr` pointers, and why assignments like `*p1 = &val1` are incorrect.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF-Pointers-Starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers-Starter",
 					solutionLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Pointers"
 				},
@@ -436,18 +436,18 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF6 References and Parameter Passing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-11-cppf6-references-and-parameter-passing-supplemen/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-11-cppf6-references-and-parameter-passing-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-11-cppf6-references-and-parameter-passing-supplemen/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-11-cppf6-references-and-parameter-passing-supplemental-2/solution"
 				},
 				{
 					title: "References and Parameter Passing supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to CPPF6 References and Parameter Passing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-12-cppf6-references-and-parameter-passing-supplemen/starter",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-12-cppf6-references-and-parameter-passing-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-12-cppf6-references-and-parameter-passing-supplemen/solution"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-12-cppf6-references-and-parameter-passing-supplemental-3/solution"
 				}
 			]
 		},
@@ -622,7 +622,7 @@ export const cppLevel1Course: RawCourse = {
 					content:
 						"Explain that a struct is similar to a class but members are public by default. Structs group small related data such as a grocery item with name and price. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP_Structs-Example"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-Structs-Example"
 				},
 				{
 					title: "CPPF9 Project 3: Grocery List",
@@ -794,7 +794,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Archive Boundary",
 					content:
-						"Treat `CPP_practice` as a loose archive bank rather than as a canonical public module. Students should rely on the curated extensions below before digging into that scratch-style folder."
+						"Treat `CPP-Practice` as a loose archive bank rather than as a canonical public module. Students should rely on the curated extensions below before digging into that scratch-style folder."
 				},
 				{
 					title: "Optional Reinforcement and Repo Library: Verification and Reflection",

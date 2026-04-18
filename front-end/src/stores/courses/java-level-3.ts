@@ -65,18 +65,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemen/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemen/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemental-2/solution"
 				},
 				{
 					title: "Review: Variables, Strings, and Input supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemen/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemen/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemental-3/solution"
 				}
 			]
 		},
@@ -131,9 +131,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Write methods that filter even numbers, test whether two values sum to zero, remove the smallest value, and append a total sum to an `ArrayList`. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-ArrayList-Practice",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Array-List-Practice",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-ArrayList-Practice"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Array-List-Practice"
 				}
 			],
 			supplementalProjects: [
@@ -357,9 +357,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Determine the Big-O of several mathematical runtime expressions and connect those expressions to algorithm behavior. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-BigO-Practice-Starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Big-O-Practice-Starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-BigO-Practice"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Big-O-Practice"
 				}
 			],
 			supplementalProjects: [
@@ -377,18 +377,18 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplemental-2/solution"
 				},
 				{
 					title: "Linear Search and Big O Notation supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplemental-3/solution"
 				}
 			]
 		},
@@ -1273,9 +1273,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Implement a custom `HashMap` with linear probing, tombstones, rehashing, and the usual map operations. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-HashMap-Starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map-Starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-HashMap"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map"
 				},
 				{
 					title: "AJ15 Project 2: Juni Search Engine",
@@ -1293,9 +1293,9 @@ export const javaLevel3Course: RawCourse = {
 					content:
 						"Extend the work from AJ15 Hash Tables with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-HashMap-Starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map-Starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-HashMap"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map"
 				},
 				{
 					title: "Hash Tables supplemental 2",

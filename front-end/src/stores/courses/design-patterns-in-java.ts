@@ -934,18 +934,18 @@ export const designPatternsInJavaCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Sum of the First N. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-27-applied-studio-14-sum-of-the-first-n-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-27-applied-studio-14-sum-of-the-first-n-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-27-applied-studio-14-sum-of-the-first-n-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-27-applied-studio-14-sum-of-the-first-n-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: Sum of the First N supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: Sum of the First N. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-28-applied-studio-14-sum-of-the-first-n-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-28-applied-studio-14-sum-of-the-first-n-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-28-applied-studio-14-sum-of-the-first-n-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-28-applied-studio-14-sum-of-the-first-n-supplemental-3/solution"
 				}
 			]
 		},

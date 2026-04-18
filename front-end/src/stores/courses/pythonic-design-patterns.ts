@@ -724,18 +724,18 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP11 Refactoring Python Code Smells. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-21-pdp11-refactoring-python-code-smells-supplementa/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-21-pdp11-refactoring-python-code-smells-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-21-pdp11-refactoring-python-code-smells-supplementa/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-21-pdp11-refactoring-python-code-smells-supplemental-2/solution"
 				},
 				{
 					title: "Refactoring Python Code Smells supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP11 Refactoring Python Code Smells. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-22-pdp11-refactoring-python-code-smells-supplementa/starter",
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-22-pdp11-refactoring-python-code-smells-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-22-pdp11-refactoring-python-code-smells-supplementa/solution"
+						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-22-pdp11-refactoring-python-code-smells-supplemental-3/solution"
 				}
 			]
 		},

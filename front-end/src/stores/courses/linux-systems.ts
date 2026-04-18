@@ -676,18 +676,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemental-2/solution"
 				},
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemental-3/solution"
 				}
 			]
 		},
@@ -869,18 +869,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 14: linux systems lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemental-3/solution"
 				}
 			]
 		},
@@ -927,18 +927,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: linux systems lab 15 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemental-3/solution"
 				}
 			]
 		},
@@ -985,18 +985,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 16: linux systems lab 16 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemental-3/solution"
 				}
 			]
 		},
@@ -1043,18 +1043,18 @@ export const linuxSystemsCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: linux systems lab 17 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemen/starter",
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemen/solution"
+						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemental-3/solution"
 				}
 			]
 		}

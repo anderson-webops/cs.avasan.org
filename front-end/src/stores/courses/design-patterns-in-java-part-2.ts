@@ -207,18 +207,18 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPR3 Moving Features Between Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplemental-2/solution"
 				},
 				{
 					title: "Moving Features Between Objects supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPR3 Moving Features Between Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-dpr3-moving-features-between-objects-supplementa/starter",
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-dpr3-moving-features-between-objects-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-dpr3-moving-features-between-objects-supplementa/solution"
+						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-dpr3-moving-features-between-objects-supplemental-3/solution"
 				}
 			]
 		},

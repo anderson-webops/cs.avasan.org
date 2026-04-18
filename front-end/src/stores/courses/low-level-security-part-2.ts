@@ -883,18 +883,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: rust systems lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-29-applied-studio-15-rust-systems-lab-12-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-29-applied-studio-15-rust-systems-lab-12-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-29-applied-studio-15-rust-systems-lab-12-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-29-applied-studio-15-rust-systems-lab-12-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 15: rust systems lab 12 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: rust systems lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-30-applied-studio-15-rust-systems-lab-12-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-30-applied-studio-15-rust-systems-lab-12-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-30-applied-studio-15-rust-systems-lab-12-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-30-applied-studio-15-rust-systems-lab-12-supplemental-3/solution"
 				}
 			]
 		},
@@ -941,18 +941,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: rust systems lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-31-applied-studio-16-rust-systems-lab-13-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-31-applied-studio-16-rust-systems-lab-13-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-31-applied-studio-16-rust-systems-lab-13-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-31-applied-studio-16-rust-systems-lab-13-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 16: rust systems lab 13 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: rust systems lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-32-applied-studio-16-rust-systems-lab-13-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-32-applied-studio-16-rust-systems-lab-13-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-32-applied-studio-16-rust-systems-lab-13-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-32-applied-studio-16-rust-systems-lab-13-supplemental-3/solution"
 				}
 			]
 		},
@@ -999,18 +999,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: rust systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-33-applied-studio-17-rust-systems-lab-14-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-33-applied-studio-17-rust-systems-lab-14-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-33-applied-studio-17-rust-systems-lab-14-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-33-applied-studio-17-rust-systems-lab-14-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 17: rust systems lab 14 supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: rust systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-34-applied-studio-17-rust-systems-lab-14-supplement/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-34-applied-studio-17-rust-systems-lab-14-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-34-applied-studio-17-rust-systems-lab-14-supplement/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-34-applied-studio-17-rust-systems-lab-14-supplemental-3/solution"
 				}
 			]
 		}

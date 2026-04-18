@@ -303,18 +303,18 @@ export const designPatternsInCppCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPC4 Strategy and Policy-Based Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc4-strategy-and-policy-based-design-supplement/starter",
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc4-strategy-and-policy-based-design-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc4-strategy-and-policy-based-design-supplement/solution"
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc4-strategy-and-policy-based-design-supplemental-2/solution"
 				},
 				{
 					title: "Strategy and Policy Based Design supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPC4 Strategy and Policy-Based Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-10-dpc4-strategy-and-policy-based-design-supplement/starter",
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-10-dpc4-strategy-and-policy-based-design-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-10-dpc4-strategy-and-policy-based-design-supplement/solution"
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-10-dpc4-strategy-and-policy-based-design-supplemental-3/solution"
 				}
 			]
 		},
@@ -681,18 +681,18 @@ export const designPatternsInCppCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPC10 Patterns for Resource Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-21-dpc10-patterns-for-resource-management-supplemen/starter",
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-21-dpc10-patterns-for-resource-management-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-21-dpc10-patterns-for-resource-management-supplemen/solution"
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-21-dpc10-patterns-for-resource-management-supplemental-2/solution"
 				},
 				{
 					title: "Patterns for Resource Management supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to DPC10 Patterns for Resource Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-22-dpc10-patterns-for-resource-management-supplemen/starter",
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-22-dpc10-patterns-for-resource-management-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-22-dpc10-patterns-for-resource-management-supplemen/solution"
+						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-22-dpc10-patterns-for-resource-management-supplemental-3/solution"
 				}
 			]
 		},

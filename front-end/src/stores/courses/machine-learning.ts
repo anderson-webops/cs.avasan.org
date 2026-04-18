@@ -449,7 +449,7 @@ export const machineLearningCourse: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Linear-Regression-Updated",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-Simple-Linear-Regression-Updated",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml5_project_1.mp4"
 				},
@@ -463,9 +463,9 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Using the starter code in Colab, plot the given x and y data and discuss whether a straight line looks appropriate or whether the shape appears curved. First build a linear regression model and plot its line; evaluate how well it fits by examining residuals and the average error. Then build a polynomial regression model (for example, quadratic) using scikit-learn's PolynomialFeatures plus LinearRegression. Print the learned coefficients and intercept, and plot the resulting curve along with the data. Compare the fit quality and typical error of the linear versus polynomial models. For a chosen x value, compute predictions from both models and compare them to the actual y; discuss which model appears to capture the trend better.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Polynomial-Regression-Starter-Updated",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-Simple-Polynomial-Regression-Starter-Updated",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Polynomial-Regression-Updated",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-Simple-Polynomial-Regression-Updated",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml5_project_2.mp4"
 				},
@@ -489,7 +489,7 @@ export const machineLearningCourse: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML_Simple-Linear-Regression-Updated"
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-Simple-Linear-Regression-Updated"
 				},
 				{
 					title: "Introduction to Regression supplemental 2",

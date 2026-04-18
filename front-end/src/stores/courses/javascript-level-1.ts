@@ -1125,9 +1125,9 @@ export const javascriptLevel1Course: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to JSS14 Dynamic Websites with JavaScript. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemen/starter",
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemen/solution"
+						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-2/solution"
 				}
 			]
 		},

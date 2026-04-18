@@ -222,18 +222,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD4 Running on Simulator and Device. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-06-sad4-running-on-simulator-and-device-supplementa/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-06-sad4-running-on-simulator-and-device-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-06-sad4-running-on-simulator-and-device-supplementa/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-06-sad4-running-on-simulator-and-device-supplemental-2/solution"
 				},
 				{
 					title: "Running on Simulator and Device supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD4 Running on Simulator and Device. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-07-sad4-running-on-simulator-and-device-supplementa/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-07-sad4-running-on-simulator-and-device-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-07-sad4-running-on-simulator-and-device-supplementa/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-07-sad4-running-on-simulator-and-device-supplemental-3/solution"
 				}
 			]
 		},
@@ -692,18 +692,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD12 Navigation and Multi-Screen Apps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-22-sad12-navigation-and-multi-screen-apps-supplemen/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-22-sad12-navigation-and-multi-screen-apps-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-22-sad12-navigation-and-multi-screen-apps-supplemen/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-22-sad12-navigation-and-multi-screen-apps-supplemental-2/solution"
 				},
 				{
 					title: "Navigation and Multi Screen Apps supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD12 Navigation and Multi-Screen Apps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-23-sad12-navigation-and-multi-screen-apps-supplemen/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-23-sad12-navigation-and-multi-screen-apps-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-23-sad12-navigation-and-multi-screen-apps-supplemen/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-23-sad12-navigation-and-multi-screen-apps-supplemental-3/solution"
 				}
 			]
 		},
@@ -812,18 +812,18 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD14 Media, Maps, and Device Features. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-26-sad14-media-maps-and-device-features-supplementa/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-26-sad14-media-maps-and-device-features-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-26-sad14-media-maps-and-device-features-supplementa/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-26-sad14-media-maps-and-device-features-supplemental-2/solution"
 				},
 				{
 					title: "Media, Maps, and Device Features supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to SAD14 Media, Maps, and Device Features. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-27-sad14-media-maps-and-device-features-supplementa/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-27-sad14-media-maps-and-device-features-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-27-sad14-media-maps-and-device-features-supplementa/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-27-sad14-media-maps-and-device-features-supplemental-3/solution"
 				}
 			]
 		},
@@ -1206,9 +1206,9 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-SwiftUI-Shapes-Studio/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-Swift-UI-Shapes-Studio/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-SwiftUI-Shapes-Studio/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-Swift-UI-Shapes-Studio/solution"
 				}
 			],
 			supplementalProjects: [
@@ -1217,9 +1217,9 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 					content:
 						"Use the shapes-focused enrichment pack for extra practice with paths, custom drawing, and SwiftUI composition after the main course flow is stable. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-SwiftUI-Shapes-Studio/starter",
+						"https://github.com/instruction-material/Swift/tree/main/SAD-Swift-UI-Shapes-Studio/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Swift/tree/main/SAD-SwiftUI-Shapes-Studio/solution"
+						"https://github.com/instruction-material/Swift/tree/main/SAD-Swift-UI-Shapes-Studio/solution"
 				},
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries supplemental 2",

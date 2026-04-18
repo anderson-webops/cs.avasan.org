@@ -263,9 +263,9 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Extend a previous `Book` class by creating a `PictureBook` subclass with an illustrator field, custom comparison methods, and an overridden `toString()` method. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Book-and-PictureBook-Class",
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Book-and-Picture-Book-Class",
 					solutionLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Book-and-PictureBook-Class"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Book-and-Picture-Book-Class"
 				},
 				{
 					title: "JM4 Project 3: Vehicle Inheritance",
@@ -796,7 +796,7 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Keep a smaller maps example bank available when the main dealership or file-I/O projects feel too large for the immediate practice need. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Java-HashMaps-Examples"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Java-Hash-Maps-Examples"
 				},
 				{
 					title: "Extension: Dog Class Test",
@@ -810,7 +810,7 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Use a compact console game to reinforce control flow, object organization, and user interaction without the complexity of the maze branch. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM10_TicTacToeConsole"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM10-Tic-Tac-Toe-Console"
 				},
 				{
 					title: "Preview: Threading Example",
@@ -831,7 +831,7 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Use a stronger practical console project to reinforce classes, file handling, and guarded user interaction in one place. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Password-Management-System"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Password-Management-System"
 				}
 			]
 		},
@@ -853,7 +853,7 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 14: JM Master Project Example Quiz Game. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Master-Project-Example-Quiz-Game"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Review and Reflection",
@@ -867,7 +867,7 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 14: JM Master Project Example Quiz Game with one extra requirement, stricter input handling, or a more realistic variation of the same task. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Master-Project-Example-Quiz-Game"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
 				{
 					title: "Applied Studio 14: JM Master Project Example Quiz Game supplemental 2",
@@ -907,7 +907,7 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: JM Maze Runner Project. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Maze-Runner-Project-Solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Maze-Runner-Project-Solution"
 				},
 				{
 					title: "JM Maze Runner Project: Review and Reflection",
@@ -921,7 +921,7 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: JM Maze Runner Project with one extra requirement, stricter input handling, or a more realistic variation of the same task. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Java-Level-2/tree/main/JM_Maze-Runner-Project-Solution"
+						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Maze-Runner-Project-Solution"
 				},
 				{
 					title: "Applied Studio 15: JM Maze Runner Project supplemental 2",

@@ -175,18 +175,18 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ2 Collections, Strings, and Indexing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplement/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplement/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplemental-2/solution"
 				},
 				{
 					title: "Collections, Strings, and Indexing supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PTJ2 Collections, Strings, and Indexing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplement/starter",
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplement/solution"
+						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplemental-3/solution"
 				}
 			]
 		},
@@ -857,7 +857,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: CPP practice. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP_practice"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-Practice"
 				},
 				{
 					title: "CPP practice: Review and Reflection",
@@ -871,7 +871,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: CPP practice with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP_practice"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPP-Practice"
 				},
 				{
 					title: "Applied Studio 15: CPP practice supplemental 2",

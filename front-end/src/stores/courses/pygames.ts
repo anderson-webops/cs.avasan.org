@@ -47,18 +47,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplemental-2/solution"
 				},
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplemental-3/solution"
 				}
 			]
 		},
@@ -646,18 +646,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplemental-2/solution"
 				},
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplement/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplement/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplemental-3/solution"
 				}
 			]
 		},
