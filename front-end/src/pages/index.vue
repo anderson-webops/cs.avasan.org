@@ -63,20 +63,21 @@ useHead(
 	<section class="Home">
 		<section aria-labelledby="hero-title" class="hero">
 			<div class="hero-text">
-				<p class="eyebrow">Private online classes</p>
+				<p class="eyebrow">Best for active coursework and projects</p>
 				<h1 id="hero-title">
-					One-on-one classes in coding, STEM, and Spanish.
+					One-on-one help for coding projects, STEM coursework, and
+					Spanish study.
 				</h1>
 				<p>
-					Jacob Anderson has taught hundreds of students through Juni
-					Learning and private instruction. Sessions stay focused on
-					real assignments, working projects, and clear next steps
-					instead of generic lecture.
+					Former Juni Learning instructor Jacob Anderson works best
+					with students who already have an assignment, bug, lab, or
+					course pathway in front of them. Sessions stay anchored to
+					the actual work blocking progress.
 				</p>
 				<ul class="hero-proof">
 					<li>Hundreds of students taught</li>
-					<li>Focused 1:1 online sessions</li>
-					<li>Short follow-up notes after class</li>
+					<li>Assignment and project help</li>
+					<li>Short written follow-up notes</li>
 				</ul>
 			</div>
 			<img
@@ -86,7 +87,7 @@ useHead(
 			/>
 		</section>
 
-		<section aria-labelledby="cta-title" class="cta-group">
+		<section aria-label="Primary actions" class="cta-group">
 			<RouterLink
 				class="cta primary"
 				to="/signup"
@@ -104,9 +105,9 @@ useHead(
 		<section aria-labelledby="subjects-title" class="subjects">
 			<h2 id="subjects-title">What I Teach</h2>
 			<p class="intro">
-				Core tracks are listed below. If a student is between levels or
-				needs help with an active project, sessions can be shaped around
-				that work.
+				Most students come for coding and technical coursework. Math,
+				physics, and Spanish support are also available when there is a
+				clear course goal or assignment.
 			</p>
 			<div class="subject-grid">
 				<article
@@ -125,7 +126,7 @@ useHead(
 		</section>
 
 		<section aria-labelledby="highlights-title" class="highlights">
-			<h2 id="highlights-title">Why Families Stay</h2>
+			<h2 id="highlights-title">How Sessions Are Used</h2>
 			<div class="highlight-grid">
 				<article
 					v-for="highlight in highlights"
@@ -143,8 +144,8 @@ useHead(
 				<h2 id="next-steps-title">Book a Time That Fits</h2>
 				<p>
 					Use the scheduler for one-time or recurring classes. Add a
-					short note about the learner, current assignment, or project
-					so class can start in the right place.
+					short note about the assignment, project, or skill gap so
+					the session starts in the right place.
 				</p>
 				<RouterLink
 					class="cta primary"

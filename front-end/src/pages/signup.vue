@@ -70,8 +70,8 @@ onBeforeUnmount(() => {
 		<section class="intro">
 			<h1>Schedule a Class</h1>
 			<p>
-				Choose a one-time or recurring 50-minute session below. Prefer
-				email? Reach me at
+				Use the scheduler below to book a one-time or recurring
+				50-minute class. Prefer email? Reach me at
 				<a href="mailto:classes@jacobdanderson.net"
 					>classes@jacobdanderson.net</a
 				>.
@@ -91,14 +91,6 @@ onBeforeUnmount(() => {
 					<span class="shell-line" />
 					<span class="shell-panel" />
 				</div>
-				<a
-					class="scheduler-direct-link"
-					:href="schedulerUrl"
-					rel="noopener"
-					target="_blank"
-				>
-					Open Scheduler in a New Tab
-				</a>
 			</div>
 
 			<iframe
@@ -112,9 +104,9 @@ onBeforeUnmount(() => {
 			/>
 
 			<p class="scheduler-fallback">
-				If the scheduler is slow to appear, open it directly:
+				Trouble loading the scheduler?
 				<a :href="schedulerUrl" rel="noopener" target="_blank">
-					{{ schedulerUrl }}
+					Open it in a new tab.
 				</a>
 			</p>
 		</div>
@@ -123,18 +115,12 @@ onBeforeUnmount(() => {
 			aria-labelledby="after-booking-title"
 			class="after-booking d-grid"
 		>
-			<h2 id="after-booking-title">After You Book</h2>
-			<ol>
-				<li>You will receive the booking details by email.</li>
-				<li>
-					For a first session, send any assignment, project link, or
-					goal ahead of time if you have it.
-				</li>
-				<li>
-					Payment happens after class. The tuition page covers the
-					options.
-				</li>
-			</ol>
+			<h2 id="after-booking-title">Before the First Class</h2>
+			<p>
+				You will receive the booking details by email. If you already
+				have an assignment, repo link, screenshot, or project goal, send
+				it ahead of time so class can start in the right place.
+			</p>
 			<RouterLink class="cta" to="/payment"
 				>View Tuition Details</RouterLink
 			>
@@ -264,22 +250,6 @@ onBeforeUnmount(() => {
 	border-radius: 28px;
 }
 
-.scheduler-direct-link {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.85rem 1.35rem;
-	border-radius: 999px;
-	background: #3a6ea5;
-	color: white;
-	font-weight: 600;
-	text-decoration: none;
-}
-
-.scheduler-direct-link:hover {
-	background: #2d5c8a;
-}
-
 .scheduler-fallback {
 	margin-top: 1.25rem;
 	font-size: 0.95rem;
@@ -308,14 +278,6 @@ onBeforeUnmount(() => {
 
 .after-booking h2 {
 	font-size: clamp(1.8rem, 3vw, 2.3rem);
-}
-
-.after-booking ol {
-	margin: 0;
-	padding-left: 1.25rem;
-	text-align: left;
-	line-height: 1.6;
-	color: #2d3f55;
 }
 
 .cta {

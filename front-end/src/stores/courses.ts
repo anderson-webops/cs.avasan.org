@@ -187,11 +187,7 @@ function compactContent(content: string): string {
 		return summary.join(" ");
 	}
 
-	const fallback =
-		sentences.find(sentence => sentence.trim()) ??
-		normalized.replace(NEWLINE_RE, " ");
-
-	return ensureSentence(fallback.replace(WHITESPACE_RE, " ").trim());
+	return "";
 }
 
 function trimUrl(url: string) {

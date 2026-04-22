@@ -47,20 +47,20 @@ export const useContentStore = defineStore("content", () => {
 
 	const highlights = ref<Highlight[]>([
 		{
-			title: "Direct 1:1 Support",
-			copy: "Each session is built around one learner, so pace, difficulty, and examples can change as soon as the student gets stuck or pulls ahead."
+			title: "Bring the Assignment",
+			copy: "Many sessions start with homework, a lab, a bug, or a repo link so class time goes straight to the work that matters."
 		},
 		{
-			title: "Real Project Work",
-			copy: "Class time can go toward current assignments, debugging, portfolio projects, or a longer course path with concrete deliverables."
+			title: "Use a Course Path When Needed",
+			copy: "If there is no active assignment, sessions can follow a structured course with linked projects and supplemental practice."
 		},
 		{
-			title: "Clear Follow-Through",
-			copy: "Students leave with short notes, next steps, and the links or materials used in class instead of vague homework reminders."
+			title: "Leave With Written Next Steps",
+			copy: "After class, students get short notes that record what was solved, what still needs work, and what to do next."
 		},
 		{
-			title: "Simple Scheduling",
-			copy: "Book one-time or recurring sessions, and pay after completed classes."
+			title: "Simple Booking and Payment",
+			copy: "Book one-time or recurring sessions and pay after completed classes."
 		}
 	]);
 
@@ -70,21 +70,24 @@ export const useContentStore = defineStore("content", () => {
 
 	const faqs = ref<FAQ[]>([
 		{
+			question: "Who are sessions best for?",
+			answer: "They work best for students who already have active coursework, a project, a bug to fix, or a clear skill goal."
+		},
+		{
+			question: "What should we send before the first class?",
+			answer: "Any assignment prompt, repo link, screenshot, or short note about the current goal helps class start faster."
+		},
+		{
+			question: "Do sessions follow schoolwork or a course track?",
+			answer: "Either. We can work directly from current coursework or use a structured course path when a student needs longer-term progression."
+		},
+		{
 			question: "Are sessions one-on-one?",
-			answer: "Yes. Classes are one learner at a time so pacing, examples, and feedback can stay focused."
+			answer: "Yes. One learner works directly with me for the full session."
 		},
 		{
-			question: "What happens if we need to reschedule?",
+			question: "What if we need to reschedule?",
 			answer: "Email as soon as you can and we can move the session to another time."
-		},
-		{
-			question: "Do you send follow-up notes?",
-			answer: "Yes. After class I send short notes with what we covered, what still needs work, and the next step."
-		},
-		{
-			question:
-				"Can you help with school assignments or outside projects?",
-			answer: "Yes. Many sessions focus on current coursework, debugging, project feedback, or preparing for the next class or check-in."
 		}
 	]);
 

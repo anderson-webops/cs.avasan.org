@@ -84,13 +84,13 @@ const hasCourseAccess = computed(() => {
 });
 
 const courseEyebrow = computed(() =>
-	props.publicCatalog ? "Course library" : "Course material"
+	props.publicCatalog ? "Course library" : "Assigned courses"
 );
 
 const courseDescription = computed(() =>
 	props.publicCatalog
-		? "Browse the catalog and open the linked project materials for each course."
-		: "Search your assigned courses and jump directly to module links and lesson summaries."
+		? "Browse courses and open their project links."
+		: "Search assigned courses and open module summaries and project links."
 );
 
 const emptyTitle = computed(() =>
@@ -102,7 +102,7 @@ const emptyTitle = computed(() =>
 const emptyHint = computed(() =>
 	props.publicCatalog
 		? "Check back soon for updates to the course library."
-		: "Reach out to your tutor or admin to gain access."
+		: "Email if access should already be enabled."
 );
 
 const normalizedQuery = computed(() => normalizeSearch(searchQuery.value));
@@ -844,7 +844,7 @@ function writeStoredValue(key: string, value: string) {
 
 			<div v-else-if="isCourseLoading" class="reader-empty">
 				<h3>Loading course</h3>
-				<p>Preparing the selected syllabus and lesson materials.</p>
+				<p>Opening the selected course.</p>
 			</div>
 
 			<div v-else-if="courseLoadError" class="reader-empty">

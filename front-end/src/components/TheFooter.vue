@@ -36,7 +36,6 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 
 			<section class="brand">
 				<h2>Classes with Jacob</h2>
-				<p>Private online classes with Jacob Anderson.</p>
 			</section>
 
 			<section class="links">

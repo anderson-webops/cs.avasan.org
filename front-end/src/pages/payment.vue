@@ -77,7 +77,7 @@ useHead(
 			<div class="note">
 				<p>
 					Need Cash App, Apple Cash, or a mailed check instead? Email
-					me.
+					classes@jacobdanderson.net.
 				</p>
 			</div>
 		</section>

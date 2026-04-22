@@ -8,25 +8,16 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 	<section class="ZoomClassroom">
 		<header class="hero">
 			<h1>Join the Virtual Classroom</h1>
-			<p>
-				Sessions take place on Zoom. Use this page to open the classroom
-				quickly before each lesson, and bookmark it so it is always easy
-				to find.
-			</p>
+			<p>Use this page to join the class Zoom room.</p>
 		</header>
 
 		<div class="card-grid">
 			<article class="zoom-card" aria-labelledby="zoom-card-title">
 				<h2 id="zoom-card-title">Zoom Meeting Room</h2>
 				<p>
-					Click the button to launch Zoom in a new tab. Joining a few
-					minutes early usually makes the start of class smoother.
+					Open the room in a new tab. Join a few minutes early if you
+					need to test audio.
 				</p>
-				<ul class="prep-list">
-					<li>Open Zoom a few minutes before class time.</li>
-					<li>Check audio, video, and screen-sharing permissions.</li>
-					<li>Keep any code, notes, or homework nearby.</li>
-				</ul>
 				<a
 					class="cta"
 					:href="zoomMeetingUrl"
@@ -102,14 +93,6 @@ p {
 	line-height: 1.6;
 }
 
-.prep-list {
-	margin: 0;
-	padding-left: 1.2rem;
-	display: grid;
-	gap: 0.5rem;
-	color: #2d3f55;
-}
-
 .cta {
 	justify-self: center;
 	display: inline-flex;
@@ -165,5 +148,6 @@ p {
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: default</route>
+meta:
+    layout: default
+</route>

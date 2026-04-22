@@ -36,14 +36,14 @@ const heroTitle = computed(() => {
 
 const heroCopy = computed(() => {
 	if (!isLoggedIn.value) {
-		return "Students, tutors, and admins only see the course sets attached to their account.";
+		return "Only the courses assigned to your account appear here.";
 	}
 
 	if (hasAssignedCourseAccess.value) {
-		return "Search your assigned courses, review module summaries, and open the linked project materials.";
+		return "Search your assigned courses and open module summaries and project links.";
 	}
 
-	return "Course access is granted by a tutor or administrator.";
+	return "Course access is usually added after enrollment or account setup.";
 });
 
 function openLogin() {
@@ -107,10 +107,10 @@ function openSignup() {
 		</header>
 
 		<section v-if="!isLoggedIn" class="courses-gate" role="status">
-			<h2>Sign in to open your course library.</h2>
+			<h2>New here?</h2>
 			<p>
-				If you are new here, create an account first. Assigned courses
-				will appear after enrollment.
+				Create an account first, then assigned courses can be added
+				after enrollment.
 			</p>
 		</section>
 
@@ -125,7 +125,7 @@ function openSignup() {
 				<a href="mailto:classes@jacobdanderson.net">
 					classes@jacobdanderson.net
 				</a>
-				if you think this account should already have course access.
+				if access should already be enabled.
 			</p>
 		</section>
 

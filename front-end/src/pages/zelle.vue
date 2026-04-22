@@ -6,11 +6,7 @@ defineOptions({ name: "ZellePaymentPage" });
 	<section class="zelle-page">
 		<header class="hero">
 			<h1>Pay with Zelle</h1>
-			<p>
-				Use the email below in your bank’s Zelle flow. If you want to
-				double-check before sending, email me and I’ll confirm the
-				details.
-			</p>
+			<p>Use the email below in your bank’s Zelle flow.</p>
 		</header>
 
 		<div class="zelle-card">
@@ -22,21 +18,14 @@ defineOptions({ name: "ZellePaymentPage" });
 			/>
 
 			<div class="zelle-copy">
-				<p class="eyebrow">Zelle Contact</p>
+				<p class="eyebrow">Zelle Email</p>
 				<p class="zelle-email">classes@jacobdanderson.net</p>
-				<p class="zelle-note">
-					If your bank app asks for the recipient email, use the
-					classes address shown above.
-				</p>
 			</div>
 
 			<div class="actions">
 				<RouterLink class="cta" to="/payment">
 					Back to Tuition &amp; Payment
 				</RouterLink>
-				<a class="cta ghost" href="mailto:classes@jacobdanderson.net">
-					Email Jacob
-				</a>
 			</div>
 		</div>
 	</section>
@@ -69,8 +58,7 @@ defineOptions({ name: "ZellePaymentPage" });
 	font-size: clamp(2rem, 3.8vw, 2.8rem);
 }
 
-.hero p,
-.zelle-note {
+.hero p {
 	margin: 0;
 	line-height: 1.6;
 	color: #2d3f55;
@@ -176,5 +164,6 @@ defineOptions({ name: "ZellePaymentPage" });
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: default</route>
+meta:
+    layout: default
+</route>

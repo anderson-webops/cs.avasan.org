@@ -17,93 +17,85 @@ defineOptions({ name: "AboutPage" });
 			<div class="copy">
 				<p>
 					I taught hundreds of students through Juni Learning before
-					moving into direct private instruction. Most of my work is
-					one-on-one: helping students learn new technical material,
-					debug assignments, and build projects they can explain
-					clearly.
+					moving into direct private instruction. Most students come
+					to me with an assignment, bug, lab, or project that needs
+					focused one-on-one help.
 				</p>
 				<p>
-					I teach coding, computer science, math, physics, and Spanish
-					online. The goal is not just to finish the next task, but to
-					leave each session with clearer thinking and a concrete next
-					step.
+					That means sessions are built around the work in front of
+					the learner: debugging code, finishing coursework, reviewing
+					reasoning, or moving through a structured course path when
+					there is no active class assignment.
 				</p>
 			</div>
 		</section>
 
+		<section aria-labelledby="fit-title" class="fit">
+			<h2 id="fit-title">Best Fit</h2>
+			<div class="fit-grid">
+				<article>
+					<h3>Active Coursework</h3>
+					<p>
+						A strong fit for students who need help finishing an
+						assignment, understanding a module, or preparing for the
+						next check-in.
+					</p>
+				</article>
+				<article>
+					<h3>Debugging and Project Work</h3>
+					<p>
+						Useful for students building apps, games, labs, or other
+						project work and needing direct feedback while the work
+						is still in progress.
+					</p>
+				</article>
+				<article>
+					<h3>Structured Course Progression</h3>
+					<p>
+						A good fit when a student needs a defined path with
+						linked projects and supplemental practice instead of
+						improvised enrichment.
+					</p>
+				</article>
+			</div>
+		</section>
+
 		<section aria-labelledby="approach-title" class="approach">
-			<h2 id="approach-title">How I Teach</h2>
+			<h2 id="approach-title">How Sessions Run</h2>
 			<ul>
 				<li>
 					<p>
-						<strong>Start with the real problem:</strong>
+						<strong>Start with the exact problem:</strong>
 						We work from the assignment, bug, or project in front of
 						the student instead of drifting into generic lecture.
 					</p>
 				</li>
 				<li>
 					<p>
-						<strong>Make the logic visible:</strong>
-						Students explain their choices, test cases, and edge
-						cases out loud so understanding is easy to check.
+						<strong>Make the reasoning visible:</strong>
+						Students explain choices, test cases, and edge cases out
+						loud so understanding is easy to check.
 					</p>
 				</li>
 				<li>
 					<p>
 						<strong>Leave with a next step:</strong>
-						Every session ends with a clear finish line: what was
-						solved, what still needs work, and what to do next.
+						Each session ends with what was solved, what still needs
+						work, and what to do next.
 					</p>
 				</li>
 			</ul>
 		</section>
 
-		<section aria-labelledby="fit-title" class="fit">
-			<h2 id="fit-title">Who This Works Best For</h2>
-			<div class="fit-grid">
-				<article>
-					<h3>Students With Active Coursework</h3>
-					<p>
-						A strong fit for students who need help finishing
-						assignments, understanding class material, or preparing
-						for the next module.
-					</p>
-				</article>
-				<article>
-					<h3>Project-Based Learners</h3>
-					<p>
-						Useful for students building apps, games, labs, or
-						portfolio work and needing direct feedback while the
-						work is in progress.
-					</p>
-				</article>
-				<article>
-					<h3>Adults Rebuilding Fundamentals</h3>
-					<p>
-						Also a good fit for adult learners returning to
-						programming, math, or Spanish with a specific goal and a
-						need for clear explanations.
-					</p>
-				</article>
-			</div>
-		</section>
-
-		<section aria-labelledby="cta-title" class="cta-group">
+		<section aria-label="About page actions" class="cta-group">
+			<RouterLink class="cta" to="/signup">Book a Class</RouterLink>
 			<a
-				class="cta"
+				class="cta ghost"
 				href="https://www.linkedin.com/in/jacoba1100254352/"
 				target="_blank"
 				rel="noreferrer"
 			>
 				View LinkedIn
-			</a>
-			<a
-				class="cta ghost"
-				href="https://www.jacobdanderson.net"
-				target="_blank"
-				rel="noreferrer"
-			>
-				Visit Portfolio
 			</a>
 		</section>
 	</section>
