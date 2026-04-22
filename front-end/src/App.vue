@@ -6,7 +6,7 @@ import { SCHEDULER_ORIGIN } from "@/modules/scheduler";
 
 const siteUrl = "https://classes.jacobdanderson.net";
 const siteDescription =
-	"Private instruction with Jacob Anderson for coding, STEM, and Spanish learners, including one-on-one classes, course pathways, and flexible scheduling.";
+	"One-on-one online classes with Jacob Anderson for coding, STEM, and Spanish, focused on projects, clear explanations, and steady progress.";
 const route = useRoute();
 const noindexMatchers = [
 	/^\/admin(?:\/|$)/,

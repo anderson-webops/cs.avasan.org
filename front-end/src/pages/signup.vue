@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import {
-	legacyCalendlyUrl,
 	SCHEDULER_ORIGIN,
 	schedulerEmbedMessageSource,
 	schedulerEmbedResizeType,
@@ -77,24 +76,6 @@ onBeforeUnmount(() => {
 					>classes@jacobdanderson.net</a
 				>.
 			</p>
-			<div class="transition-banner" role="note">
-				<p>
-					Calendly is being phased out and will be retired on April
-					20, 2026. If you prefer it, you can still use
-					<a :href="legacyCalendlyUrl" rel="noopener" target="_blank">
-						the Calendly link
-					</a>
-					until then.
-				</p>
-				<a
-					class="transition-banner-link"
-					:href="legacyCalendlyUrl"
-					rel="noopener"
-					target="_blank"
-				>
-					Use Calendly Instead
-				</a>
-			</div>
 		</section>
 
 		<div class="scheduler-container">
@@ -144,47 +125,19 @@ onBeforeUnmount(() => {
 		>
 			<h2 id="after-booking-title">After You Book</h2>
 			<ol>
+				<li>You will receive the booking details by email.</li>
 				<li>
-					I’ll send a confirmation or follow-up within one business
-					day.
+					For a first session, send any assignment, project link, or
+					goal ahead of time if you have it.
 				</li>
 				<li>
-					Before our first meeting, we’ll outline goals, tools, and
-					any materials needed for class.
-				</li>
-				<li>
-					Payment is due only after class. The tuition page covers the
-					details.
+					Payment happens after class. The tuition page covers the
+					options.
 				</li>
 			</ol>
 			<RouterLink class="cta" to="/payment"
 				>View Tuition Details</RouterLink
 			>
-		</section>
-
-		<section
-			aria-labelledby="legacy-booking-title"
-			class="legacy-booking-card"
-		>
-			<h2 id="legacy-booking-title">
-				Still looking for the Calendly link?
-			</h2>
-			<p>
-				You can still use
-				<a :href="legacyCalendlyUrl" rel="noopener" target="_blank">
-					{{ legacyCalendlyUrl }}
-				</a>
-				through April 20, 2026. It will be phased out at the end of the
-				month.
-			</p>
-			<a
-				class="transition-banner-link"
-				:href="legacyCalendlyUrl"
-				rel="noopener"
-				target="_blank"
-			>
-				Open Calendly
-			</a>
 		</section>
 	</section>
 </template>
@@ -218,46 +171,6 @@ onBeforeUnmount(() => {
 
 .intro a:hover {
 	text-decoration: underline;
-}
-
-.transition-banner {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: space-between;
-	gap: 0.85rem 1rem;
-	padding: 0.95rem 1.1rem;
-	border-radius: 18px;
-	background: linear-gradient(135deg, #fff7e8, #fffdf7);
-	box-shadow: inset 0 0 0 1px rgba(201, 150, 51, 0.28);
-	text-align: left;
-}
-
-.transition-banner p {
-	margin: 0;
-	flex: 1 1 420px;
-	color: #6a4a13;
-	font-size: 0.98rem;
-	line-height: 1.5;
-}
-
-.transition-banner-link {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.75rem 1.15rem;
-	border-radius: 999px;
-	background: #fff;
-	color: #8f5b00;
-	font-weight: 700;
-	text-decoration: none;
-	box-shadow: inset 0 0 0 1px rgba(201, 150, 51, 0.35);
-	white-space: nowrap;
-}
-
-.transition-banner-link:hover {
-	background: #fff8eb;
-	text-decoration: none;
 }
 
 .scheduler-container {
@@ -393,40 +306,6 @@ onBeforeUnmount(() => {
 	gap: 1rem;
 }
 
-.legacy-booking-card {
-	display: grid;
-	gap: 0.9rem;
-	max-width: 960px;
-	width: 100%;
-	padding: 1.25rem 1.35rem;
-	border-radius: 22px;
-	background: linear-gradient(135deg, #fff8ec, #fffdf8);
-	box-shadow: inset 0 0 0 1px rgba(201, 150, 51, 0.24);
-	text-align: center;
-}
-
-.legacy-booking-card h2 {
-	margin: 0;
-	font-size: clamp(1.4rem, 2.6vw, 1.8rem);
-	color: #6a4a13;
-}
-
-.legacy-booking-card p {
-	margin: 0;
-	color: #6a4a13;
-	line-height: 1.6;
-}
-
-.legacy-booking-card a:not(.transition-banner-link) {
-	color: #8f5b00;
-	font-weight: 700;
-	text-decoration: none;
-}
-
-.legacy-booking-card a:not(.transition-banner-link):hover {
-	text-decoration: underline;
-}
-
 .after-booking h2 {
 	font-size: clamp(1.8rem, 3vw, 2.3rem);
 }
@@ -475,10 +354,6 @@ onBeforeUnmount(() => {
 		padding: 2rem 1.25rem 3rem;
 	}
 
-	.transition-banner {
-		text-align: center;
-	}
-
 	.scheduler-container {
 		padding: 1rem;
 	}
@@ -499,5 +374,6 @@ onBeforeUnmount(() => {
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: default</route>
+meta:
+    layout: default
+</route>

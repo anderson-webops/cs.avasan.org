@@ -36,10 +36,7 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 
 			<section class="brand">
 				<h2>Classes with Jacob</h2>
-				<p>
-					Online tutoring in coding, STEM, and Spanish for learners
-					across the U.S.
-				</p>
+				<p>Private online classes with Jacob Anderson.</p>
 			</section>
 
 			<section class="links">
@@ -65,10 +62,7 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 			</section>
 		</div>
 
-		<p class="copy">
-			© {{ new Date().getFullYear() }} Jacob Anderson. All rights
-			reserved.
-		</p>
+		<p class="copy">© {{ new Date().getFullYear() }} Jacob Anderson.</p>
 	</footer>
 </template>
 

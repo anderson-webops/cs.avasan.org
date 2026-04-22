@@ -89,8 +89,8 @@ const courseEyebrow = computed(() =>
 
 const courseDescription = computed(() =>
 	props.publicCatalog
-		? "Browse the catalog, open the full syllabus for each course, and jump directly into the linked project materials."
-		: "Move through the syllabus from one calm reading space, search the material quickly, and open project resources without digging through nested accordions."
+		? "Browse the catalog and open the linked project materials for each course."
+		: "Search your assigned courses and jump directly to module links and lesson summaries."
 );
 
 const emptyTitle = computed(() =>
@@ -838,10 +838,7 @@ function writeStoredValue(key: string, value: string) {
 
 				<div v-else class="reader-empty">
 					<h3>No module selected</h3>
-					<p>
-						Choose a module from the syllabus to open the lesson
-						reader.
-					</p>
+					<p>Choose a module to open its lesson summaries.</p>
 				</div>
 			</div>
 

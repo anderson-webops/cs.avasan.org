@@ -25,27 +25,25 @@ const hasAssignedCourseAccess = computed(() => {
 	return false;
 });
 
-const heroEyebrow = computed(() =>
-	!isLoggedIn.value ? "Course access" : "Assigned courses"
-);
+const heroEyebrow = computed(() => "Course library");
 
 const heroTitle = computed(() => {
-	if (!isLoggedIn.value) return "Log in to view your assigned courses.";
+	if (!isLoggedIn.value) return "Log in to open your assigned courses.";
 	if (hasAssignedCourseAccess.value)
 		return "Open the courses assigned to you.";
-	return "Your account is active, but no courses are assigned yet.";
+	return "No courses are assigned to this account yet.";
 });
 
 const heroCopy = computed(() => {
 	if (!isLoggedIn.value) {
-		return "Course materials are only visible after login. Sign in to open your assigned course library, or create an account if you do not have one yet.";
+		return "Students, tutors, and admins only see the course sets attached to their account.";
 	}
 
 	if (hasAssignedCourseAccess.value) {
-		return "Browse only the courses attached to your account. Tutor and administrator accounts can also review the course sets they are authorized to manage.";
+		return "Search your assigned courses, review module summaries, and open the linked project materials.";
 	}
 
-	return "If you already have an account but do not see any courses yet, email classes@jacobdanderson.net and request course access. Access should only be granted by a tutor or administrator.";
+	return "Course access is granted by a tutor or administrator.";
 });
 
 function openLogin() {
@@ -109,11 +107,10 @@ function openSignup() {
 		</header>
 
 		<section v-if="!isLoggedIn" class="courses-gate" role="status">
-			<h2>Course materials are locked until you log in.</h2>
+			<h2>Sign in to open your course library.</h2>
 			<p>
-				Sign in to view your assigned courses. If you are new here, sign
-				up first and your tutor or an administrator can enable access
-				after enrollment.
+				If you are new here, create an account first. Assigned courses
+				will appear after enrollment.
 			</p>
 		</section>
 
@@ -128,8 +125,7 @@ function openSignup() {
 				<a href="mailto:classes@jacobdanderson.net">
 					classes@jacobdanderson.net
 				</a>
-				to request access. Course visibility should only be assigned by
-				a tutor or administrator.
+				if you think this account should already have course access.
 			</p>
 		</section>
 

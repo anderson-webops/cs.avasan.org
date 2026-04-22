@@ -1,29 +1,11 @@
 <script lang="ts" setup>
-import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
-import { useQuoteStore } from "@/stores/quote";
-
 defineOptions({ name: "AboutPage" });
-
-const quote = useQuoteStore();
-const {
-	text: quoteText,
-	author: quoteAuthor,
-	hasQuote,
-	loading,
-	error
-} = storeToRefs(quote);
-
-// Fetch once on client; cached for 5 minutes by the store
-onMounted(() => {
-	quote.fetchQuote({ tags: ["success"], limit: 100 });
-});
 </script>
 
 <template>
 	<section class="About">
 		<section aria-labelledby="intro-title" class="intro">
-			<h1 class="page-title">Meet Jacob</h1>
+			<h1 id="intro-title" class="page-title">About Jacob</h1>
 
 			<div class="image-wrapper">
 				<img
@@ -34,73 +16,73 @@ onMounted(() => {
 
 			<div class="copy">
 				<p>
-					I’m a lifelong learner and educator who loves helping
-					students discover how enjoyable problem-solving can be. Over
-					the past several years, I taught coding, math, and science
-					through Juni Learning, guiding hundreds of students from
-					their first “Hello, World!” program to ambitious capstone
-					projects.
+					I taught hundreds of students through Juni Learning before
+					moving into direct private instruction. Most of my work is
+					one-on-one: helping students learn new technical material,
+					debug assignments, and build projects they can explain
+					clearly.
 				</p>
 				<p>
-					Today I work directly with families and adult learners,
-					keeping the same collaborative, project-driven approach
-					while offering more flexibility, clearer communication, and
-					personalized support.
+					I teach coding, computer science, math, physics, and Spanish
+					online. The goal is not just to finish the next task, but to
+					leave each session with clearer thinking and a concrete next
+					step.
 				</p>
 			</div>
 		</section>
 
-		<section aria-labelledby="philosophy-title" class="philosophy">
-			<h2 id="philosophy-title">Teaching Philosophy</h2>
+		<section aria-labelledby="approach-title" class="approach">
+			<h2 id="approach-title">How I Teach</h2>
 			<ul>
 				<li>
 					<p>
-						<strong>Curiosity First:</strong>
-						Concepts stick when learners understand why they matter
-						and have room to experiment.
+						<strong>Start with the real problem:</strong>
+						We work from the assignment, bug, or project in front of
+						the student instead of drifting into generic lecture.
 					</p>
 				</li>
 				<li>
 					<p>
-						<strong>Transparent Goals:</strong>
-						Every class ends with a clear milestone or next step, so
-						you always know what we are building toward.
+						<strong>Make the logic visible:</strong>
+						Students explain their choices, test cases, and edge
+						cases out loud so understanding is easy to check.
 					</p>
 				</li>
 				<li>
 					<p>
-						<strong>Real-world Context:</strong>
-						We connect lessons to meaningful projects—apps, games,
-						data explorations, language practice, or engineering
-						challenges.
+						<strong>Leave with a next step:</strong>
+						Every session ends with a clear finish line: what was
+						solved, what still needs work, and what to do next.
 					</p>
 				</li>
 			</ul>
 		</section>
 
-		<section aria-labelledby="experience-title" class="experience">
-			<h2 id="experience-title">Experience Snapshot</h2>
-			<div class="experience-grid">
+		<section aria-labelledby="fit-title" class="fit">
+			<h2 id="fit-title">Who This Works Best For</h2>
+			<div class="fit-grid">
 				<article>
-					<h3>Juni Learning Instructor</h3>
+					<h3>Students With Active Coursework</h3>
 					<p>
-						Led 1:1 and small-group classes in a variety of coding
-						and STEM fields.
+						A strong fit for students who need help finishing
+						assignments, understanding class material, or preparing
+						for the next module.
 					</p>
 				</article>
 				<article>
-					<h3>Curriculum Designer</h3>
+					<h3>Project-Based Learners</h3>
 					<p>
-						Developed modules on circuit fundamentals, Python, and
-						physics.
+						Useful for students building apps, games, labs, or
+						portfolio work and needing direct feedback while the
+						work is in progress.
 					</p>
 				</article>
 				<article>
-					<h3>Multilingual Mentor</h3>
+					<h3>Adults Rebuilding Fundamentals</h3>
 					<p>
-						Fluent in Spanish and experienced working with bilingual
-						families to support both academic and conversational
-						goals.
+						Also a good fit for adult learners returning to
+						programming, math, or Spanish with a specific goal and a
+						need for clear explanations.
 					</p>
 				</article>
 			</div>
@@ -123,15 +105,6 @@ onMounted(() => {
 			>
 				Visit Portfolio
 			</a>
-		</section>
-
-		<section aria-label="Quote" class="quote-section">
-			<div v-if="hasQuote" class="quote">
-				<blockquote>“{{ quoteText }}”</blockquote>
-				<cite>— {{ quoteAuthor }}</cite>
-			</div>
-			<div v-else-if="loading" class="quote-skeleton">Loading…</div>
-			<div v-else-if="error" class="quote-error">Quote unavailable.</div>
 		</section>
 	</section>
 </template>
@@ -157,19 +130,14 @@ onMounted(() => {
 	display: grid;
 	gap: 2.5rem;
 	align-items: center;
-
 	grid-template-columns: auto 25%;
 	grid-template-areas:
 		"title title"
 		"copy image";
 }
 
-/* Assign areas */
 .page-title {
 	grid-area: title;
-}
-
-.page-title {
 	font-size: clamp(2.4rem, 4vw, 3.2rem);
 	margin: 0 0 0.25rem 0;
 	text-align: center;
@@ -190,7 +158,6 @@ onMounted(() => {
 	box-shadow: 0 20px 45px rgba(13, 38, 63, 0.18);
 }
 
-/* ===== Tablet stack: Title → Image → Text ===== */
 @media (max-width: 960px) {
 	.intro {
 		grid-template-columns: 1fr;
@@ -217,20 +184,22 @@ onMounted(() => {
 	gap: 1.25rem;
 }
 
-.philosophy {
+.approach,
+.fit {
 	display: grid;
+	gap: 1.25rem;
 }
 
 .copy p,
-.philosophy p,
-.experience-grid p {
+.approach p,
+.fit-grid p {
 	margin: 0;
 	line-height: 1.6;
 	color: #2d3f55;
 	font-size: 1.05rem;
 }
 
-.philosophy ul {
+.approach ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -238,14 +207,34 @@ onMounted(() => {
 	gap: 1rem;
 }
 
-.quote,
-.philosophy li {
+.approach li {
 	background: #f4f8fc;
 	border-radius: 16px;
 	padding: 1rem 1.25rem;
 	box-shadow: inset 0 0 0 1px #dbe9f8;
 	line-height: 1.6;
 	color: #1f3d5a;
+}
+
+.fit-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 1.25rem;
+}
+
+.fit-grid article {
+	background: white;
+	border-radius: 20px;
+	padding: 1.4rem;
+	box-shadow: 0 14px 32px rgba(16, 42, 66, 0.08);
+	display: grid;
+	gap: 0.75rem;
+}
+
+.fit-grid h3,
+.approach h2,
+.fit h2 {
+	margin: 0;
 }
 
 .cta-group {
@@ -280,72 +269,21 @@ onMounted(() => {
 
 .cta:hover {
 	background-color: #2d5c8a;
-	transform: translateY(-1px);
+	transform: translateY(-2px);
 }
 
 .cta.ghost {
-	background-color: transparent;
+	background-color: white;
 	color: #3a6ea5;
-	border: 2px solid #3a6ea5;
+	box-shadow: inset 0 0 0 2px #3a6ea5;
 }
 
 .cta.ghost:hover {
 	background-color: #e9f2fb;
 }
-
-h2 {
-	font-size: clamp(1.8rem, 3vw, 2.4rem);
-	margin-bottom: 2rem;
-	text-align: center;
-}
-
-.experience-grid {
-	display: grid;
-	gap: 1.5rem;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-.experience-grid article {
-	background: white;
-	border-radius: 20px;
-	padding: 1.75rem;
-	box-shadow: 0 14px 30px rgba(18, 64, 112, 0.08);
-}
-
-h3 {
-	margin-bottom: 0.75rem;
-	font-size: 1.2rem;
-	color: #1f3d5a;
-	text-align: center;
-}
-
-.experience-grid p {
-	margin: 0;
-	color: #2d3f55;
-	line-height: 1.6;
-}
-
-section p {
-	text-align: left;
-}
-
-.quote,
-.quote-section {
-	text-align: right;
-	margin: 0 auto;
-}
-
-@media (max-width: 640px) {
-	.About {
-		padding: 2rem 1.25rem 3rem;
-	}
-
-	.cta-group {
-		flex-direction: column;
-	}
-}
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: default</route>
+meta:
+    layout: default
+</route>

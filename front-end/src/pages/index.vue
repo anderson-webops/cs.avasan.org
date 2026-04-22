@@ -11,7 +11,7 @@ const { faqs, highlights, subjectGroups } = storeToRefs(content);
 const faqStructuredData = computed(() => ({
 	"@context": "https://schema.org",
 	"@type": "FAQPage",
-	mainEntity: faqs.value.map((faq) => ({
+	mainEntity: faqs.value.map(faq => ({
 		"@type": "Question",
 		acceptedAnswer: {
 			"@type": "Answer",
@@ -21,7 +21,7 @@ const faqStructuredData = computed(() => ({
 	}))
 }));
 const courseStructuredData = computed(() =>
-	subjectGroups.value.map((group) => ({
+	subjectGroups.value.map(group => ({
 		"@context": "https://schema.org",
 		"@type": "Course",
 		description: `Private instruction covering ${group.subjects.join(", ")}.`,
@@ -34,43 +34,50 @@ const courseStructuredData = computed(() =>
 	}))
 );
 
-useHead(() => ({
-	link: [
-		{
-			href: `${siteUrl}/`,
-			rel: "canonical"
-		}
-	],
-	script: [
-		{
-			innerHTML: JSON.stringify(faqStructuredData.value),
-			key: "classes-home-faq-jsonld",
-			type: "application/ld+json"
-		},
-		...courseStructuredData.value.map((entry, index) => ({
-			innerHTML: JSON.stringify(entry),
-			key: `classes-home-course-${index}`,
-			type: "application/ld+json"
-		}))
-	]
-}) as any);
+useHead(
+	() =>
+		({
+			link: [
+				{
+					href: `${siteUrl}/`,
+					rel: "canonical"
+				}
+			],
+			script: [
+				{
+					innerHTML: JSON.stringify(faqStructuredData.value),
+					key: "classes-home-faq-jsonld",
+					type: "application/ld+json"
+				},
+				...courseStructuredData.value.map((entry, index) => ({
+					innerHTML: JSON.stringify(entry),
+					key: `classes-home-course-${index}`,
+					type: "application/ld+json"
+				}))
+			]
+		}) as any
+);
 </script>
 
 <template>
 	<section class="Home">
 		<section aria-labelledby="hero-title" class="hero">
 			<div class="hero-text">
-				<p class="eyebrow">Classes with Jacob</p>
+				<p class="eyebrow">Private online classes</p>
 				<h1 id="hero-title">
-					Build Confidence in Coding, STEM, and Spanish.
+					One-on-one classes in coding, STEM, and Spanish.
 				</h1>
 				<p>
-					I teach programming, engineering, science, and language
-					topics to learners from grade school through adulthood. Each
-					session is built around the learner’s goals, whether that
-					means building a strong foundation, catching up, or
-					stretching into something new.
+					Jacob Anderson has taught hundreds of students through Juni
+					Learning and private instruction. Sessions stay focused on
+					real assignments, working projects, and clear next steps
+					instead of generic lecture.
 				</p>
+				<ul class="hero-proof">
+					<li>Hundreds of students taught</li>
+					<li>Focused 1:1 online sessions</li>
+					<li>Short follow-up notes after class</li>
+				</ul>
 			</div>
 			<img
 				alt="Student and tutor collaborating on a laptop"
@@ -97,8 +104,9 @@ useHead(() => ({
 		<section aria-labelledby="subjects-title" class="subjects">
 			<h2 id="subjects-title">What I Teach</h2>
 			<p class="intro">
-				Choose from coding, STEM, and language tracks designed around
-				the learner’s goals, pace, and preferred projects.
+				Core tracks are listed below. If a student is between levels or
+				needs help with an active project, sessions can be shaped around
+				that work.
 			</p>
 			<div class="subject-grid">
 				<article
@@ -117,7 +125,7 @@ useHead(() => ({
 		</section>
 
 		<section aria-labelledby="highlights-title" class="highlights">
-			<h2 id="highlights-title">What I Offer</h2>
+			<h2 id="highlights-title">Why Families Stay</h2>
 			<div class="highlight-grid">
 				<article
 					v-for="highlight in highlights"
@@ -132,12 +140,11 @@ useHead(() => ({
 
 		<section aria-labelledby="next-steps-title" class="next-steps">
 			<div class="next-steps-card">
-				<h2 id="next-steps-title">Ready to Get Started?</h2>
+				<h2 id="next-steps-title">Book a Time That Fits</h2>
 				<p>
-					Choose a time in the scheduler, share a few notes about the
-					learner, and I’ll follow up within one business day.
-					Returning students can use the same booking flow to keep a
-					regular rhythm.
+					Use the scheduler for one-time or recurring classes. Add a
+					short note about the learner, current assignment, or project
+					so class can start in the right place.
 				</p>
 				<RouterLink
 					class="cta primary"
@@ -190,6 +197,25 @@ useHead(() => ({
 	font-size: 1.05rem;
 	line-height: 1.6;
 	margin: 0;
+}
+
+.hero-proof {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+.hero-proof li {
+	padding: 0.5rem 0.85rem;
+	border-radius: 999px;
+	background: #f4f8fc;
+	color: #1f3d5a;
+	font-size: 0.95rem;
+	font-weight: 600;
+	box-shadow: inset 0 0 0 1px #dbe9f8;
 }
 
 .eyebrow {
@@ -402,5 +428,6 @@ useHead(() => ({
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: default</route>
+meta:
+    layout: default
+</route>

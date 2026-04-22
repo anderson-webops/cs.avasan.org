@@ -17,7 +17,6 @@ export interface FAQ {
 }
 
 export const useContentStore = defineStore("content", () => {
-	// ----- Static content moved from HomePage.vue -----
 	const subjectGroups = ref<SubjectGroup[]>([
 		{
 			title: "Programming & Computer Science",
@@ -48,44 +47,44 @@ export const useContentStore = defineStore("content", () => {
 
 	const highlights = ref<Highlight[]>([
 		{
-			title: "Experienced, Personalized Instruction",
-			copy: "Several years of one-on-one and small-group teaching experience, tailored to each learner’s pace, interests, and goals."
+			title: "Direct 1:1 Support",
+			copy: "Each session is built around one learner, so pace, difficulty, and examples can change as soon as the student gets stuck or pulls ahead."
 		},
 		{
-			title: "Project-Based Lessons",
-			copy: "Sessions turn new ideas into games, apps, data explorations, and other meaningful work students can revisit and share."
+			title: "Real Project Work",
+			copy: "Class time can go toward current assignments, debugging, portfolio projects, or a longer course path with concrete deliverables."
 		},
 		{
-			title: "Flexible Scheduling",
-			copy: "Fifty-minute lessons include a built-in buffer, so a strong question or debugging session never has to stop abruptly."
+			title: "Clear Follow-Through",
+			copy: "Students leave with short notes, next steps, and the links or materials used in class instead of vague homework reminders."
 		},
 		{
-			title: "Straightforward Billing",
-			copy: "Pay only for completed classes. Missed or canceled sessions are not billed."
-		},
-		{
-			title: "Satisfaction Guarantee",
-			copy: "If a class does not meet expectations, I will make it right. Feedback is always welcome and encouraged."
+			title: "Simple Scheduling",
+			copy: "Book one-time or recurring sessions, and pay after completed classes."
 		}
 	]);
 
-	// ----- Helpful derived data (optional) -----
 	const allSubjects = computed<string[]>(() =>
 		subjectGroups.value.flatMap(g => g.subjects)
 	);
 
 	const faqs = ref<FAQ[]>([
 		{
-			question: "Can siblings or friends join the same session?",
-			answer: "At the moment, sessions are one learner at a time so each student gets focused attention. If you have multiple learners, I’m happy to schedule back-to-back classes."
+			question: "Are sessions one-on-one?",
+			answer: "Yes. Classes are one learner at a time so pacing, examples, and feedback can stay focused."
 		},
 		{
 			question: "What happens if we need to reschedule?",
-			answer: "Life happens. Just let me know as soon as you can, and we’ll find a new time. There are no cancellation fees."
+			answer: "Email as soon as you can and we can move the session to another time."
 		},
 		{
-			question: "Do you offer progress updates?",
-			answer: "Yes. I send short session notes with wins, challenges, and suggested next steps so families can stay aligned between meetings."
+			question: "Do you send follow-up notes?",
+			answer: "Yes. After class I send short notes with what we covered, what still needs work, and the next step."
+		},
+		{
+			question:
+				"Can you help with school assignments or outside projects?",
+			answer: "Yes. Many sessions focus on current coursework, debugging, project feedback, or preparing for the next class or check-in."
 		}
 	]);
 

@@ -14,6 +14,8 @@ const NON_ALPHANUMERIC_RE = /[^a-z0-9]+/g;
 const LEADING_HYPHENS_RE = /^-+/;
 const TRAILING_HYPHENS_RE = /-+$/;
 const PARAGRAPH_BREAK_RE = /\n{2,}/;
+const NEWLINE_RE = /\n+/g;
+const WHITESPACE_RE = /\s+/g;
 const INSTRUCTOR_NOTE_RE = /instructor note/i;
 const EXCESS_BLANK_LINES_RE = /\n{3,}/g;
 const PROJECT_TITLE_RE =
@@ -21,17 +23,60 @@ const PROJECT_TITLE_RE =
 const MERGE_INTO_PREVIOUS_TITLE_RE = /^course recap$/i;
 const PRESENTATION_TITLE_RE = /presentation$/i;
 const SENTENCE_END_RE = /[.!?]$/;
+const SENTENCE_SPLIT_RE = /(?<=[.!?])\s+/;
 const TRAILING_SLASH_RE = /\/$/;
 const TRAILING_URL_PUNCTUATION_RE = /[),.;:]+$/;
 const GITHUB_BLOB_SEGMENT_RE = /\/blob\//i;
 const DEDICATED_SOLUTION_SEGMENT_RE =
 	/(?:^|\/)solution(?:\/|$)|(?:^|[-_])solution(?:[-_]|$)/i;
-const LESSON_SETUP_RE =
-	/\b(?:setup|toolchain|environment|ide|scanner|input|output|compilation|project anatomy|tooling|xcode|cargo|git|npm)\b/i;
-const LESSON_FOUNDATION_RE =
-	/\b(?:variables?|strings?|comments?|conditionals?|loops?|functions?|methods?|arrays?|arraylists?|lists?|dictionaries|sets?|classes?|objects?|inheritance|polymorphism|pointers?|search|sort|recursion|graph|stack|queue|physics|chemistry|security|ownership|borrowing)\b/i;
 const REFERENCE_LEAD_LABEL_RE = /reference|repo|starter/i;
 const FIRST_WHITESPACE_RE = /\s/;
+const MAX_SUMMARY_SENTENCES = 2;
+const MAX_SUMMARY_LENGTH = 240;
+const BOILERPLATE_SENTENCE_FILTERS = [
+	/^Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on\.?$/i,
+	/^Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version\.?$/i,
+	/^Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft\.?$/i,
+	/^Use this module build as the main implementation checkpoint\.?$/i,
+	/^Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward\.?$/i,
+	/^Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done\.?$/i,
+	/^Keep the scope small, but require one meaningful design or reasoning choice\.?$/i,
+	/^Keep the scope tight, but require one meaningful design or reasoning decision\.?$/i,
+	/^The habit should be evidence first, assumptions second\.?$/i,
+	/^Have them diagnose a broken attempt, repair it, and explain why the fix works\.?$/i,
+	/^End with one quick environment check so students can tell the toolchain is working before the next lesson builds on it\.?$/i,
+	/^Close with one concrete example and one quick debugging check so the idea stays attached to code or data rather than isolated vocabulary\.?$/i,
+	/^Anchor the lesson in one concrete example and one quick check for understanding before moving on\.?$/i
+];
+const BOILERPLATE_SENTENCE_REWRITES: Array<{
+	pattern: RegExp;
+	replace: (...matches: string[]) => string;
+}> = [
+	{
+		pattern:
+			/^Use the linked starter and solution for a supplemental project tied to (.+?)\.?$/i,
+		replace: (_whole, topic) =>
+			`Supplemental practice for ${topic} using the linked starter.`
+	},
+	{
+		pattern:
+			/^Extend the work from (.+?) with a tighter constraint, one extra feature, or a slightly more realistic input case\.?$/i,
+		replace: (_whole, topic) =>
+			`Extend ${topic} with one tighter constraint or extra feature.`
+	},
+	{
+		pattern:
+			/^Repeat the core ideas from (.+?) on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning\.?$/i,
+		replace: (_whole, topic) =>
+			`Practice ${topic} again on a smaller problem.`
+	},
+	{
+		pattern:
+			/^Close (.+?) by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass\.?$/i,
+		replace: (_whole, topic) =>
+			`Review ${topic}, compare approaches, and record one improvement for the next pass.`
+	}
+];
 
 export type {
 	CourseDefinition,
@@ -68,6 +113,85 @@ function normalizeContent(content: string): string {
 		.join("\n\n")
 		.replace(EXCESS_BLANK_LINES_RE, "\n\n")
 		.trim();
+}
+
+function ensureSentence(text: string) {
+	return SENTENCE_END_RE.test(text) ? text : `${text}.`;
+}
+
+function rewriteBoilerplateSentence(sentence: string) {
+	const normalizedSentence = sentence.replace(WHITESPACE_RE, " ").trim();
+
+	if (!normalizedSentence) {
+		return "";
+	}
+
+	if (
+		BOILERPLATE_SENTENCE_FILTERS.some(pattern =>
+			pattern.test(normalizedSentence)
+		)
+	) {
+		return "";
+	}
+
+	for (const { pattern, replace } of BOILERPLATE_SENTENCE_REWRITES) {
+		const match = normalizedSentence.match(pattern);
+
+		if (match) {
+			return ensureSentence(replace(...match));
+		}
+	}
+
+	return ensureSentence(normalizedSentence);
+}
+
+function compactContent(content: string): string {
+	const normalized = normalizeContent(content);
+
+	if (!normalized) {
+		return "";
+	}
+
+	const sentences = normalized
+		.replace(NEWLINE_RE, " ")
+		.split(SENTENCE_SPLIT_RE)
+		.map(sentence => sentence.trim())
+		.filter(Boolean);
+	const summary: string[] = [];
+
+	for (const sentence of sentences) {
+		const rewritten = rewriteBoilerplateSentence(sentence);
+
+		if (!rewritten) {
+			continue;
+		}
+
+		if (summary.at(-1)?.toLowerCase() === rewritten.toLowerCase()) {
+			continue;
+		}
+
+		const candidate = [...summary, rewritten].join(" ");
+
+		if (
+			summary.length > 0 &&
+			(summary.length >= MAX_SUMMARY_SENTENCES ||
+				candidate.length > MAX_SUMMARY_LENGTH)
+		) {
+			break;
+		}
+
+		summary.push(rewritten);
+	}
+
+	if (summary.length > 0) {
+		return summary.join(" ");
+	}
+
+	const fallback =
+		sentences.find(sentence => sentence.trim()) ??
+		normalized.replace(NEWLINE_RE, " ");
+
+	return ensureSentence(fallback.replace(WHITESPACE_RE, " ").trim());
 }
 
 function trimUrl(url: string) {
@@ -174,32 +298,6 @@ function extractLeadingResourceLink(title: string, content: string) {
 	};
 }
 
-function expandSlightly(title: string, content: string) {
-	if (!content || content.length >= 185 || content.includes("\n\n")) {
-		return content;
-	}
-
-	let addition = "";
-
-	if (PROJECT_TITLE_RE.test(title)) {
-		addition =
-			"Have students run at least one custom case, explain the main design choice, and note one revision they made after the first working draft.";
-	} else if (LESSON_SETUP_RE.test(title)) {
-		addition =
-			"End with one quick environment check so students can tell the toolchain is working before the next lesson builds on it.";
-	} else if (LESSON_FOUNDATION_RE.test(title)) {
-		addition =
-			"Close with one concrete example and one quick debugging check so the idea stays attached to code or data rather than isolated vocabulary.";
-	} else {
-		addition =
-			"Anchor the lesson in one concrete example and one quick check for understanding before moving on.";
-	}
-
-	return SENTENCE_END_RE.test(content)
-		? `${content} ${addition}`
-		: `${content}. ${addition}`;
-}
-
 function mergeAdjacentSupportItems(items: Array<Omit<CourseModuleItem, "id">>) {
 	return items.reduce<Array<Omit<CourseModuleItem, "id">>>(
 		(mergedItems, item) => {
@@ -211,7 +309,7 @@ function mergeAdjacentSupportItems(items: Array<Omit<CourseModuleItem, "id">>) {
 					(PRESENTATION_TITLE_RE.test(item.title) &&
 						PROJECT_TITLE_RE.test(previousItem.title)))
 			) {
-				previousItem.content = normalizeContent(
+				previousItem.content = compactContent(
 					`${previousItem.content}\n\n${item.content}`
 				);
 				return mergedItems;
@@ -249,10 +347,7 @@ function normalizeCourse(course: RawCourse, courseId = slugify(course.name)) {
 								const normalizedContent = normalizeContent(
 									extractedLink?.content ?? item.content
 								);
-								return expandSlightly(
-									item.title,
-									normalizedContent
-								);
+								return compactContent(normalizedContent);
 							})(),
 							projectLink: (() => {
 								const explicitProjectLink =

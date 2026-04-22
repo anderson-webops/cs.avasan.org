@@ -5,75 +5,66 @@ import { useContentStore } from "@/stores/content";
 defineOptions({ name: "SupportUsPage" });
 const content = useContentStore();
 
-useHead(() => ({
-	title: "Tuition & Payment",
-	meta: [
-		{
-			name: "description",
-			content:
-				"Tuition, payment methods, and common scheduling questions for private classes with Jacob Anderson."
-		}
-	],
-	link: [
-		{
-			rel: "canonical",
-			href: "https://classes.jacobdanderson.net/payment"
-		}
-	],
-	script: [
-		{
-			innerHTML: JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "FAQPage",
-				mainEntity: content.faqs.map(faq => ({
-					"@type": "Question",
-					acceptedAnswer: {
-						"@type": "Answer",
-						text: faq.answer
-					},
-					name: faq.question
-				}))
-			}),
-			key: "tuition-faq-jsonld",
-			type: "application/ld+json"
-		}
-	]
-}) as any);
+useHead(
+	() =>
+		({
+			title: "Tuition & Payment",
+			meta: [
+				{
+					name: "description",
+					content:
+						"Tuition, payment methods, and common scheduling questions for private classes with Jacob Anderson."
+				}
+			],
+			link: [
+				{
+					rel: "canonical",
+					href: "https://classes.jacobdanderson.net/payment"
+				}
+			],
+			script: [
+				{
+					innerHTML: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "FAQPage",
+						mainEntity: content.faqs.map(faq => ({
+							"@type": "Question",
+							acceptedAnswer: {
+								"@type": "Answer",
+								text: faq.answer
+							},
+							name: faq.question
+						}))
+					}),
+					key: "tuition-faq-jsonld",
+					type: "application/ld+json"
+				}
+			]
+		}) as any
+);
 </script>
 
 <template>
 	<section class="Payment">
 		<div class="intro">
 			<h1>Tuition &amp; Payment</h1>
-			<p>
-				Each session is a 50-minute one-on-one class for $40, with a
-				built-in 10-minute buffer so we can wrap up a project or solve
-				one last bug without rushing the ending.
-			</p>
+			<p>Private one-on-one sessions are $40 for 50 minutes.</p>
 			<div class="tuition-card">
 				<div class="rate">
 					<span class="amount">$40</span>
 					<span class="details">Per Session • 50 Minutes</span>
 				</div>
 				<ul>
-					<li>Flexible recurring or one-time scheduling</li>
-					<li>
-						Short follow-up notes with key takeaways and next steps
-					</li>
-					<li>
-						Light homework review or project feedback between
-						sessions
-					</li>
+					<li>One learner at a time</li>
+					<li>Book one-time or recurring sessions</li>
+					<li>Pay after completed classes</li>
 				</ul>
 			</div>
 		</div>
 
 		<section aria-labelledby="payment-title" class="payment">
 			<h2 id="payment-title">How to Pay</h2>
-			<p>
-				Venmo and Zelle both work well. Use the links below to open my
-				Venmo profile or view the Zelle email connected to classes.
-			</p>
+			<p>Use Venmo or Zelle for most payments.</p>
 			<a
 				class="cta"
 				href="https://www.venmo.com/u/jacoba1100254352-classes"
@@ -85,9 +76,8 @@ useHead(() => ({
 			<RouterLink class="cta" to="/zelle">Pay with Zelle</RouterLink>
 			<div class="note">
 				<p>
-					Prefer a different method? I can also accept Cash App, Apple
-					Cash, or mailed checks. Just reach out and we’ll find the
-					easiest option for your family.
+					Need Cash App, Apple Cash, or a mailed check instead? Email
+					me.
 				</p>
 			</div>
 		</section>
@@ -130,8 +120,8 @@ useHead(() => ({
 		<section aria-labelledby="schedule-title" class="schedule">
 			<h2 id="schedule-title">Ready to Schedule?</h2>
 			<p>
-				Book through the scheduler or email me if you want help setting
-				up a recurring time that fits your schedule.
+				Use the scheduler to book a time, or email if you need help
+				choosing a recurring slot.
 			</p>
 			<RouterLink
 				class="cta"
@@ -315,5 +305,6 @@ useHead(() => ({
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: default</route>
+meta:
+    layout: default
+</route>
