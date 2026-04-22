@@ -60,60 +60,76 @@ useHead(
 </script>
 
 <template>
-	<section class="Home">
-		<section aria-labelledby="hero-title" class="hero">
+	<section class="page-shell page-shell--wide home-page">
+		<section aria-labelledby="hero-title" class="page-hero home-hero">
 			<div class="hero-text">
-				<p class="eyebrow">Best for active coursework and projects</p>
-				<h1 id="hero-title">
+				<p class="page-eyebrow">
+					Best for active coursework and projects
+				</p>
+				<h1 id="hero-title" class="page-title">
 					One-on-one help for coding projects, STEM coursework, and
 					Spanish study.
 				</h1>
-				<p>
+				<p class="page-copy">
 					Former Juni Learning instructor Jacob Anderson works best
 					with students who already have an assignment, bug, lab, or
 					course pathway in front of them. Sessions stay anchored to
 					the actual work blocking progress.
 				</p>
 				<ul class="hero-proof">
-					<li>Hundreds of students taught</li>
-					<li>Assignment and project help</li>
-					<li>Short written follow-up notes</li>
+					<li class="site-chip">Hundreds of students taught</li>
+					<li class="site-chip">Assignment and project help</li>
+					<li class="site-chip">Short written follow-up notes</li>
 				</ul>
 			</div>
-			<img
-				alt="Student and tutor collaborating on a laptop"
-				class="hero-image"
-				src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1200&q=80"
-			/>
+			<figure class="media-frame home-hero__media">
+				<img
+					alt="Student and tutor collaborating on a laptop"
+					class="hero-image"
+					fetchpriority="high"
+					height="900"
+					loading="eager"
+					src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1200&q=80"
+					width="1200"
+				/>
+			</figure>
 		</section>
 
-		<section aria-label="Primary actions" class="cta-group">
+		<section
+			aria-label="Primary actions"
+			class="site-action-row home-actions"
+		>
 			<RouterLink
-				class="cta primary"
+				class="site-button site-button--primary"
 				to="/signup"
 				@focus="warmSchedulerConnections"
 				@mouseenter="warmSchedulerConnections"
 				@touchstart.passive="warmSchedulerConnections"
 			>
-				Book a Class</RouterLink
+				Book a Class
+			</RouterLink>
+			<RouterLink
+				class="site-button site-button--secondary"
+				to="/payment"
 			>
-			<RouterLink class="cta secondary" to="/payment"
-				>View Tuition Details</RouterLink
-			>
+				View Tuition Details
+			</RouterLink>
 		</section>
 
-		<section aria-labelledby="subjects-title" class="subjects">
-			<h2 id="subjects-title">What I Teach</h2>
-			<p class="intro">
-				Most students come for coding and technical coursework. Math,
-				physics, and Spanish support are also available when there is a
-				clear course goal or assignment.
-			</p>
+		<section aria-labelledby="subjects-title" class="home-section">
+			<div class="section-heading">
+				<h2 id="subjects-title" class="section-title">What I Teach</h2>
+				<p class="section-intro">
+					Most students come for coding and technical coursework.
+					Math, physics, and Spanish support are also available when
+					there is a clear course goal or assignment.
+				</p>
+			</div>
 			<div class="subject-grid">
 				<article
 					v-for="group in subjectGroups"
 					:key="group.title"
-					class="subject-card"
+					class="site-surface site-surface--soft subject-card"
 				>
 					<h3>{{ group.title }}</h3>
 					<ul>
@@ -125,13 +141,17 @@ useHead(
 			</div>
 		</section>
 
-		<section aria-labelledby="highlights-title" class="highlights">
-			<h2 id="highlights-title">How Sessions Are Used</h2>
+		<section aria-labelledby="highlights-title" class="home-section">
+			<div class="section-heading">
+				<h2 id="highlights-title" class="section-title">
+					How Sessions Are Used
+				</h2>
+			</div>
 			<div class="highlight-grid">
 				<article
 					v-for="highlight in highlights"
 					:key="highlight.title"
-					class="highlight-card"
+					class="site-surface site-surface--soft highlight-card"
 				>
 					<h3>{{ highlight.title }}</h3>
 					<p>{{ highlight.copy }}</p>
@@ -139,65 +159,52 @@ useHead(
 			</div>
 		</section>
 
-		<section aria-labelledby="next-steps-title" class="next-steps">
-			<div class="next-steps-card">
-				<h2 id="next-steps-title">Book a Time That Fits</h2>
-				<p>
+		<section aria-labelledby="next-steps-title" class="home-section">
+			<div class="site-surface next-steps-card">
+				<h2 id="next-steps-title" class="section-title">
+					Book a Time That Fits
+				</h2>
+				<p class="section-intro">
 					Use the scheduler for one-time or recurring classes. Add a
 					short note about the assignment, project, or skill gap so
 					the session starts in the right place.
 				</p>
-				<RouterLink
-					class="cta primary"
-					to="/signup"
-					@focus="warmSchedulerConnections"
-					@mouseenter="warmSchedulerConnections"
-					@touchstart.passive="warmSchedulerConnections"
-				>
-					Open Scheduler</RouterLink
-				>
-				<a
-					class="cta secondary"
-					href="mailto:classes@jacobdanderson.net"
-					>Ask a Question</a
-				>
+				<div class="site-action-row">
+					<RouterLink
+						class="site-button site-button--primary"
+						to="/signup"
+						@focus="warmSchedulerConnections"
+						@mouseenter="warmSchedulerConnections"
+						@touchstart.passive="warmSchedulerConnections"
+					>
+						Open Scheduler
+					</RouterLink>
+					<a
+						class="site-button site-button--secondary"
+						href="mailto:classes@jacobdanderson.net"
+					>
+						Ask a Question
+					</a>
+				</div>
 			</div>
 		</section>
 	</section>
 </template>
 
 <style scoped>
-.Home {
-	display: flex;
-	flex-direction: column;
-	gap: 4rem;
-	padding: 2.5rem 1.5rem 4rem;
-	color: #16202a;
+.home-page {
+	gap: clamp(2.5rem, 6vw, 4.75rem);
 }
 
-.hero {
-	display: grid;
-	gap: 2rem;
+.home-hero {
+	grid-template-columns: minmax(0, 1.02fr) minmax(18rem, 0.95fr);
 	align-items: center;
-	grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 }
 
 .hero-text {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-}
-
-.hero-text h1 {
-	font-size: clamp(2.25rem, 4vw, 3rem);
-	line-height: 1.1;
-	font-weight: 700;
-}
-
-.hero-text p {
-	font-size: 1.05rem;
-	line-height: 1.6;
-	margin: 0;
+	display: grid;
+	gap: 1.25rem;
+	max-width: 38rem;
 }
 
 .hero-proof {
@@ -206,126 +213,52 @@ useHead(
 	margin: 0;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.75rem;
+	gap: 0.7rem;
 }
 
-.hero-proof li {
-	padding: 0.5rem 0.85rem;
-	border-radius: 999px;
-	background: #f4f8fc;
-	color: #1f3d5a;
-	font-size: 0.95rem;
-	font-weight: 600;
-	box-shadow: inset 0 0 0 1px #dbe9f8;
+.home-actions {
+	justify-content: flex-start;
 }
 
-.eyebrow {
-	text-transform: uppercase;
-	letter-spacing: 0.2em;
-	font-size: 0.85rem;
-	color: #3a6ea5;
-	font-weight: 600;
-}
-
-.cta-group {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	justify-content: center;
-	align-items: center;
-}
-
-.cta-group > * {
-	min-width: 220px;
-}
-
-.cta {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.85rem 1.5rem;
-	border-radius: 999px;
-	font-weight: 600;
-	text-decoration: none;
-	transition:
-		transform 0.2s ease,
-		box-shadow 0.2s ease;
-	border: 2px solid transparent;
-}
-
-.cta.primary {
-	background-color: #3a6ea5;
-	color: white;
-}
-
-.cta.primary:hover {
-	background-color: #2d5c8a;
-	transform: translateY(-2px);
-}
-
-.cta.secondary {
-	background-color: white;
-	border-color: #3a6ea5;
-	color: #3a6ea5;
-}
-
-.cta.secondary:hover {
-	background-color: #e9f2fb;
-	transform: translateY(-2px);
+.home-hero__media {
+	aspect-ratio: 5 / 4;
 }
 
 .hero-image {
 	width: 100%;
-	max-height: 420px;
+	height: 100%;
 	object-fit: cover;
-	border-radius: 24px;
-	box-shadow: 0 18px 40px rgba(14, 33, 58, 0.18);
 }
 
-.hero,
-.cta-group,
-.subjects,
-.highlights,
-.next-steps {
-	max-width: 1100px;
-	width: 100%;
-	margin: 0 auto;
-	text-align: center;
-}
-
-.subjects h2,
-.highlights h2,
-.next-steps h2 {
-	font-size: clamp(1.8rem, 3vw, 2.4rem);
-	margin-bottom: 0.75rem;
-}
-
-.intro {
-	max-width: 720px;
-	margin: 0 auto 2.5rem;
-	font-size: 1.05rem;
-	line-height: 1.6;
-	color: #334155;
-}
-
-.subject-grid {
+.home-section {
 	display: grid;
-	gap: 1.5rem;
+	gap: 1.35rem;
+}
+
+.section-heading {
+	display: grid;
+	gap: 0.8rem;
+	max-width: 44rem;
+}
+
+.subject-grid,
+.highlight-grid {
+	display: grid;
+	gap: 1rem 1.2rem;
 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.subject-card {
-	padding: 1.75rem;
-	background: white;
-	border-radius: 20px;
-	box-shadow: 0 10px 30px rgba(16, 42, 66, 0.08);
-	text-align: left;
+.subject-card,
+.highlight-card {
+	padding: 1.35rem 1.4rem;
+	display: grid;
+	gap: 0.75rem;
+	align-content: start;
 }
 
-.subject-card h3 {
-	margin-bottom: 0.75rem;
-	font-size: 1.2rem;
-	color: #1f3d5a;
+.subject-card h3,
+.highlight-card h3 {
+	font-size: 1.12rem;
 }
 
 .subject-card ul {
@@ -333,97 +266,35 @@ useHead(
 	padding: 0;
 	margin: 0;
 	display: grid;
-	gap: 0.4rem;
-	color: #334155;
+	gap: 0.55rem;
 }
 
-.highlight-grid {
-	display: grid;
-	gap: 1.5rem;
-	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.highlight-card {
-	padding: 1.75rem;
-	border-radius: 20px;
-	background: linear-gradient(145deg, #e7f2ff, #f7fbff);
-	box-shadow: 0 14px 30px rgba(18, 64, 112, 0.08);
-}
-
-.highlight-card h3 {
-	margin-bottom: 0.75rem;
-	font-size: 1.2rem;
-	color: #1f3d5a;
-}
-
+.subject-card li,
 .highlight-card p {
-	margin: 0;
-	color: #2d3f55;
-	line-height: 1.6;
-	text-align: left;
-}
-
-.next-steps {
-	text-align: center;
+	color: var(--color-ink-soft);
+	line-height: 1.65;
 }
 
 .next-steps-card {
-	margin: 0 auto;
-	max-width: 720px;
-	padding: 2.5rem;
-	background: #0f1f2f;
-	color: white;
-	border-radius: 24px;
+	max-width: 52rem;
+	padding: clamp(1.5rem, 3vw, 2.2rem);
 	display: grid;
-	gap: 1.5rem;
-	box-shadow: 0 24px 50px rgba(10, 25, 40, 0.25);
+	gap: 1rem 1.25rem;
 }
 
-.next-steps-card p {
-	margin: 0;
-	font-size: 1.05rem;
-	line-height: 1.6;
-	color: #e6edf5;
+@media (max-width: 900px) {
+	.home-hero {
+		grid-template-columns: 1fr;
+	}
+
+	.hero-text {
+		max-width: none;
+	}
 }
 
-.next-steps-card .cta.secondary {
-	background-color: transparent;
-	color: white;
-	border-color: rgba(255, 255, 255, 0.6);
-}
-
-.next-steps-card .cta.secondary:hover {
-	background-color: rgba(255, 255, 255, 0.12);
-}
-
-@media (max-width: 600px) {
-	.eyebrow {
-		text-align: center;
-	}
-
-	.Home {
-		padding: 1.5rem 1rem 3rem;
-	}
-
-	.hero {
-		gap: 1.5rem;
-	}
-
-	.hero-image {
-		display: none;
-	}
-
-	.cta-group {
-		flex-direction: column;
-	}
-
-	.subject-card,
-	.highlight-card {
-		padding: 1.5rem;
-	}
-
-	.next-steps-card {
-		padding: 2rem 1.5rem;
+@media (max-width: 640px) {
+	.home-hero__media {
+		aspect-ratio: 4 / 3;
 	}
 }
 </style>

@@ -66,19 +66,23 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<section class="Signup">
+	<section class="page-shell signup-page">
 		<section class="intro">
-			<h1>Schedule a Class</h1>
-			<p>
+			<p class="page-eyebrow">Schedule a Class</p>
+			<h1 class="page-title">
+				Book a Time &amp; Send the Context That Matters
+			</h1>
+			<p class="page-copy">
 				Use the scheduler below to book a one-time or recurring
 				50-minute class. Prefer email? Reach me at
-				<a href="mailto:classes@jacobdanderson.net"
-					>classes@jacobdanderson.net</a
-				>.
+				<a class="text-link" href="mailto:classes@jacobdanderson.net">
+					classes@jacobdanderson.net
+				</a>
+				.
 			</p>
 		</section>
 
-		<div class="scheduler-container">
+		<div class="scheduler-container site-surface">
 			<div
 				v-if="!schedulerLoaded"
 				class="scheduler-loading"
@@ -105,7 +109,12 @@ onBeforeUnmount(() => {
 
 			<p class="scheduler-fallback">
 				Trouble loading the scheduler?
-				<a :href="schedulerUrl" rel="noopener" target="_blank">
+				<a
+					class="text-link"
+					:href="schedulerUrl"
+					rel="noopener"
+					target="_blank"
+				>
 					Open it in a new tab.
 				</a>
 			</p>
@@ -113,60 +122,39 @@ onBeforeUnmount(() => {
 
 		<section
 			aria-labelledby="after-booking-title"
-			class="after-booking d-grid"
+			class="after-booking site-surface site-surface--soft"
 		>
-			<h2 id="after-booking-title">Before the First Class</h2>
-			<p>
+			<h2 id="after-booking-title" class="section-title">
+				Before the First Class
+			</h2>
+			<p class="section-intro">
 				You will receive the booking details by email. If you already
 				have an assignment, repo link, screenshot, or project goal, send
 				it ahead of time so class can start in the right place.
 			</p>
-			<RouterLink class="cta" to="/payment"
-				>View Tuition Details</RouterLink
+			<RouterLink
+				class="site-button site-button--secondary"
+				to="/payment"
 			>
+				View Tuition Details
+			</RouterLink>
 		</section>
 	</section>
 </template>
 
 <style scoped>
-.Signup {
-	display: flex;
-	flex-direction: column;
-	gap: 2.5rem;
-	padding: 2.5rem 1.5rem 4rem;
-	color: #16202a;
-	align-items: center;
+.signup-page {
+	gap: clamp(2rem, 5vw, 3.25rem);
 }
 
-.intro h1 {
-	font-size: clamp(2rem, 3.5vw, 2.75rem);
-}
-
-.intro p {
-	margin: 0;
-	line-height: 1.6;
-	color: #2d3f55;
-	font-size: 1.05rem;
-}
-
-.intro a {
-	color: #3a6ea5;
-	font-weight: 600;
-	text-decoration: none;
-}
-
-.intro a:hover {
-	text-decoration: underline;
+.intro {
+	display: grid;
+	gap: 1rem;
 }
 
 .scheduler-container {
 	position: relative;
-	background: white;
-	border-radius: 28px;
 	padding: 1.5rem;
-	box-shadow: 0 18px 40px rgba(16, 42, 66, 0.08);
-	max-width: 960px;
-	width: 100%;
 	overflow: hidden;
 }
 
@@ -174,7 +162,7 @@ onBeforeUnmount(() => {
 	display: block;
 	width: 100%;
 	border: 0;
-	border-radius: 22px;
+	border-radius: 18px;
 	background: white;
 	opacity: 0.2;
 	transition: opacity 0.25s ease;
@@ -205,7 +193,7 @@ onBeforeUnmount(() => {
 			rgba(58, 110, 165, 0.12),
 			transparent 50%
 		);
-	border-radius: 20px;
+	border-radius: 18px;
 	box-shadow: inset 0 0 0 1px rgba(58, 110, 165, 0.1);
 }
 
@@ -225,7 +213,7 @@ onBeforeUnmount(() => {
 .shell-line,
 .shell-panel {
 	display: block;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	background: linear-gradient(
 		90deg,
 		rgba(220, 232, 245, 0.9),
@@ -247,58 +235,20 @@ onBeforeUnmount(() => {
 
 .shell-panel {
 	height: 560px;
-	border-radius: 28px;
+	border-radius: 22px;
 }
 
 .scheduler-fallback {
 	margin-top: 1.25rem;
 	font-size: 0.95rem;
-	color: #2d3f55;
+	color: var(--color-ink-soft);
 	text-align: center;
 }
 
-.scheduler-fallback a {
-	color: #3a6ea5;
-	font-weight: 600;
-	text-decoration: none;
-}
-
-.scheduler-fallback a:hover {
-	text-decoration: underline;
-}
-
-.intro,
 .after-booking {
 	display: grid;
-	max-width: 960px;
-	margin: 0;
-	text-align: center;
 	gap: 1rem;
-}
-
-.after-booking h2 {
-	font-size: clamp(1.8rem, 3vw, 2.3rem);
-}
-
-.cta {
-	justify-self: center;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.85rem 1.5rem;
-	border-radius: 999px;
-	font-weight: 600;
-	text-decoration: none;
-	background-color: #3a6ea5;
-	color: white;
-	transition:
-		background-color 0.2s ease,
-		transform 0.2s ease;
-}
-
-.cta:hover {
-	background-color: #2d5c8a;
-	transform: translateY(-2px);
+	padding: clamp(1.4rem, 3vw, 1.9rem);
 }
 
 @keyframes scheduler-shell-shimmer {
@@ -312,10 +262,6 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 640px) {
-	.Signup {
-		padding: 2rem 1.25rem 3rem;
-	}
-
 	.scheduler-container {
 		padding: 1rem;
 	}

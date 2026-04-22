@@ -3,9 +3,18 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 </script>
 
 <template>
-	<footer class="text-center">
-		<div class="content w-100">
-			<section class="contact">
+	<footer class="site-footer">
+		<div class="site-shell site-shell--wide site-footer__inner">
+			<section class="site-footer__brand">
+				<p class="site-footer__eyebrow">Private Online Tutoring</p>
+				<h2>Classes with Jacob</h2>
+				<p class="site-footer__summary">
+					One-on-one support for active coursework, projects, and
+					structured course paths.
+				</p>
+			</section>
+
+			<section class="site-footer__group">
 				<h3>Connect</h3>
 				<ul>
 					<li>
@@ -34,12 +43,8 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 				</ul>
 			</section>
 
-			<section class="brand">
-				<h2>Classes with Jacob</h2>
-			</section>
-
-			<section class="links">
-				<h3>Quick links</h3>
+			<section class="site-footer__group">
+				<h3>Use the Site</h3>
 				<ul>
 					<li>
 						<RouterLink
@@ -61,87 +66,63 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 			</section>
 		</div>
 
-		<p class="copy">© {{ new Date().getFullYear() }} Jacob Anderson.</p>
+		<div class="site-shell site-shell--wide site-footer__bottom">
+			<p>© {{ new Date().getFullYear() }} Jacob Anderson.</p>
+		</div>
 	</footer>
 </template>
 
 <style scoped>
-footer {
-	background: #0f1f2f;
-	color: #e6edf5;
-	padding: 3rem 1.5rem 2rem;
+.site-footer {
 	margin-top: 4rem;
-	/* Ensure nothing weird wraps alongside */
-	display: block;
+	padding: 3.5rem 0 1.75rem;
+	background: #0f1c2a;
+	color: #e6edf5;
 }
 
-.content {
+.site-footer__inner {
 	display: grid;
-	/* 3 perfectly equal columns */
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 0.9fr));
 	gap: 2rem 2.5rem;
-	align-items: center;
-	justify-items: center;
-	align-content: space-around;
-
-	margin: 0 auto 2rem;
+	align-items: start;
 }
 
-/* Make sure each section can’t force the column wider */
-.content > section {
+.site-footer__eyebrow {
+	margin: 0 0 0.75rem;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #9ec3f4;
+}
+
+.site-footer__brand,
+.site-footer__group {
 	min-width: 0;
+	display: grid;
+	gap: 0.9rem;
+	text-align: left;
 }
 
-/* Copyright: own line, never next to columns */
-.copy {
-	display: block;
-	clear: both; /* belts-and-braces if some global floats exist */
+.site-footer__brand h2 {
+	font-size: clamp(1.9rem, 3vw, 2.4rem);
+	color: #f6fbff;
+}
+
+.site-footer__summary {
 	margin: 0;
-	color: #8fa6c1;
-	font-size: 0.9rem;
+	max-width: 28rem;
+	color: #b8cadd;
+	line-height: 1.7;
 }
 
-/* Tablet or smaller: 2 columns */
-@media (max-width: 960px) {
-	.content {
-		grid-template-columns: 1fr;
-	}
-
-	.content > .contact {
-		order: 2;
-	}
-	.content > .brand {
-		order: 1;
-	}
-	.content > .links {
-		order: 3;
-	}
+.site-footer__group h3 {
+	margin: 0;
+	font-size: 1.05rem;
+	color: #f6fbff;
 }
 
-/* On larger screens let this take up more space */
-@media (min-width: 960px) {
-	.brand {
-		width: 100%;
-	}
-}
-
-/* Typography and links (unchanged) */
-.brand h2 {
-	margin: 0 0 0.75rem 0;
-	font-size: 1.6rem;
-}
-.brand p {
-	margin: auto;
-	line-height: 1.6;
-	color: #c8d8eb;
-}
-
-.links h3,
-.contact h3 {
-	font-size: 1.1rem;
-}
-.links ul,
-.contact ul {
+.site-footer__group ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -149,14 +130,36 @@ footer {
 	gap: 0.75rem;
 }
 
-.links a,
-.contact a {
+.site-footer__group a {
 	color: #9ec3f4;
-	text-decoration: none;
 	font-weight: 600;
+	text-decoration: none;
 }
-.links a:hover,
-.contact a:hover {
+
+.site-footer__group a:hover {
 	text-decoration: underline;
+}
+
+.site-footer__bottom {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid rgba(184, 202, 221, 0.16);
+}
+
+.site-footer__bottom p {
+	margin: 0;
+	color: #8fa6c1;
+	font-size: 0.9rem;
+	text-align: left;
+}
+
+@media (max-width: 960px) {
+	.site-footer__inner {
+		grid-template-columns: 1fr;
+	}
+
+	.site-footer__brand h2 {
+		font-size: clamp(1.6rem, 8vw, 2rem);
+	}
 }
 </style>

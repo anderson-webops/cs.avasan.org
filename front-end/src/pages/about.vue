@@ -3,37 +3,43 @@ defineOptions({ name: "AboutPage" });
 </script>
 
 <template>
-	<section class="About">
-		<section aria-labelledby="intro-title" class="intro">
-			<h1 id="intro-title" class="page-title">About Jacob</h1>
-
-			<div class="image-wrapper">
-				<img
-					alt="Jacob Anderson"
-					src="https://jacobdanderson.s3.us-east-1.amazonaws.com/images/Jacob_Anderson.jpg"
-				/>
-			</div>
-
+	<section class="page-shell page-shell--wide about-page">
+		<section aria-labelledby="intro-title" class="page-hero about-intro">
 			<div class="copy">
-				<p>
+				<p class="page-eyebrow">About Jacob</p>
+				<h1 id="intro-title" class="page-title">
+					Focused Help for the Work in Front of the Student
+				</h1>
+				<p class="page-copy">
 					I taught hundreds of students through Juni Learning before
 					moving into direct private instruction. Most students come
 					to me with an assignment, bug, lab, or project that needs
 					focused one-on-one help.
 				</p>
-				<p>
+				<p class="page-copy">
 					That means sessions are built around the work in front of
 					the learner: debugging code, finishing coursework, reviewing
 					reasoning, or moving through a structured course path when
 					there is no active class assignment.
 				</p>
 			</div>
+			<figure class="image-wrapper media-frame">
+				<img
+					alt="Jacob Anderson"
+					height="1200"
+					loading="lazy"
+					src="https://jacobdanderson.s3.us-east-1.amazonaws.com/images/Jacob_Anderson.jpg"
+					width="960"
+				/>
+			</figure>
 		</section>
 
-		<section aria-labelledby="fit-title" class="fit">
-			<h2 id="fit-title">Best Fit</h2>
+		<section aria-labelledby="fit-title" class="about-section">
+			<div class="section-heading">
+				<h2 id="fit-title" class="section-title">Best Fit</h2>
+			</div>
 			<div class="fit-grid">
-				<article>
+				<article class="site-surface site-surface--soft">
 					<h3>Active Coursework</h3>
 					<p>
 						A strong fit for students who need help finishing an
@@ -41,7 +47,7 @@ defineOptions({ name: "AboutPage" });
 						next check-in.
 					</p>
 				</article>
-				<article>
+				<article class="site-surface site-surface--soft">
 					<h3>Debugging and Project Work</h3>
 					<p>
 						Useful for students building apps, games, labs, or other
@@ -49,7 +55,7 @@ defineOptions({ name: "AboutPage" });
 						is still in progress.
 					</p>
 				</article>
-				<article>
+				<article class="site-surface site-surface--soft">
 					<h3>Structured Course Progression</h3>
 					<p>
 						A good fit when a student needs a defined path with
@@ -60,24 +66,28 @@ defineOptions({ name: "AboutPage" });
 			</div>
 		</section>
 
-		<section aria-labelledby="approach-title" class="approach">
-			<h2 id="approach-title">How Sessions Run</h2>
+		<section aria-labelledby="approach-title" class="about-section">
+			<div class="section-heading">
+				<h2 id="approach-title" class="section-title">
+					How Sessions Run
+				</h2>
+			</div>
 			<ul>
-				<li>
+				<li class="site-surface site-surface--soft">
 					<p>
 						<strong>Start with the exact problem:</strong>
 						We work from the assignment, bug, or project in front of
 						the student instead of drifting into generic lecture.
 					</p>
 				</li>
-				<li>
+				<li class="site-surface site-surface--soft">
 					<p>
 						<strong>Make the reasoning visible:</strong>
 						Students explain choices, test cases, and edge cases out
 						loud so understanding is easy to check.
 					</p>
 				</li>
-				<li>
+				<li class="site-surface site-surface--soft">
 					<p>
 						<strong>Leave with a next step:</strong>
 						Each session ends with what was solved, what still needs
@@ -87,10 +97,12 @@ defineOptions({ name: "AboutPage" });
 			</ul>
 		</section>
 
-		<section aria-label="About page actions" class="cta-group">
-			<RouterLink class="cta" to="/signup">Book a Class</RouterLink>
+		<section aria-label="About page actions" class="site-action-row">
+			<RouterLink class="site-button site-button--primary" to="/signup">
+				Book a Class
+			</RouterLink>
 			<a
-				class="cta ghost"
+				class="site-button site-button--secondary"
 				href="https://www.linkedin.com/in/jacoba1100254352/"
 				target="_blank"
 				rel="noreferrer"
@@ -102,96 +114,42 @@ defineOptions({ name: "AboutPage" });
 </template>
 
 <style scoped>
-.About {
-	padding: 2.5rem 1.5rem 4rem;
-	display: flex;
-	flex-direction: column;
-	gap: 3rem;
-	color: #16202a;
+.about-page {
+	gap: clamp(2.25rem, 5vw, 4rem);
+}
+
+.about-intro {
+	grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.8fr);
 	align-items: center;
-}
-
-.About > * {
-	max-width: 1200px;
-	margin: 1% auto;
-	width: 100%;
-}
-
-.intro {
-	margin: 0 auto 1%;
-	display: grid;
-	gap: 2.5rem;
-	align-items: center;
-	grid-template-columns: auto 25%;
-	grid-template-areas:
-		"title title"
-		"copy image";
-}
-
-.page-title {
-	grid-area: title;
-	font-size: clamp(2.4rem, 4vw, 3.2rem);
-	margin: 0 0 0.25rem 0;
-	text-align: center;
 }
 
 .image-wrapper {
-	grid-area: image;
-	align-self: stretch;
-	width: 100%;
-	display: flex;
+	aspect-ratio: 4 / 5;
 }
 
 .image-wrapper img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	border-radius: 28px;
-	box-shadow: 0 20px 45px rgba(13, 38, 63, 0.18);
-}
-
-@media (max-width: 960px) {
-	.intro {
-		grid-template-columns: 1fr;
-		grid-template-areas:
-			"title"
-			"image"
-			"copy";
-		gap: 2rem;
-	}
-
-	.image-wrapper {
-		max-width: 55%;
-		justify-self: center;
-	}
-
-	.page-title {
-		font-size: clamp(1.8rem, 6vw, 2.2rem);
-	}
 }
 
 .copy {
-	grid-area: copy;
 	display: grid;
 	gap: 1.25rem;
 }
 
-.approach,
-.fit {
+.about-section {
 	display: grid;
 	gap: 1.25rem;
 }
 
-.copy p,
-.approach p,
-.fit-grid p {
-	margin: 0;
-	line-height: 1.6;
-	color: #2d3f55;
-	font-size: 1.05rem;
+.section-heading {
+	display: grid;
+	gap: 0.8rem;
+	max-width: 42rem;
 }
 
-.approach ul {
+.about-section ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -199,13 +157,8 @@ defineOptions({ name: "AboutPage" });
 	gap: 1rem;
 }
 
-.approach li {
-	background: #f4f8fc;
-	border-radius: 16px;
+.about-section li {
 	padding: 1rem 1.25rem;
-	box-shadow: inset 0 0 0 1px #dbe9f8;
-	line-height: 1.6;
-	color: #1f3d5a;
 }
 
 .fit-grid {
@@ -215,63 +168,25 @@ defineOptions({ name: "AboutPage" });
 }
 
 .fit-grid article {
-	background: white;
-	border-radius: 20px;
 	padding: 1.4rem;
-	box-shadow: 0 14px 32px rgba(16, 42, 66, 0.08);
 	display: grid;
 	gap: 0.75rem;
 }
 
-.fit-grid h3,
-.approach h2,
-.fit h2 {
-	margin: 0;
+.fit-grid p,
+.about-section li p {
+	color: var(--color-ink-soft);
+	line-height: 1.65;
 }
 
-.cta-group {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	justify-content: space-around;
-	align-items: center;
-	width: 100%;
-	margin: 0.5rem 0 auto;
-	text-align: center;
-}
+@media (max-width: 920px) {
+	.about-intro {
+		grid-template-columns: 1fr;
+	}
 
-.cta-group > * {
-	min-width: 220px;
-}
-
-.cta {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.75rem 1.4rem;
-	border-radius: 999px;
-	font-weight: 600;
-	text-decoration: none;
-	background-color: #3a6ea5;
-	color: white;
-	transition:
-		background-color 0.2s ease,
-		transform 0.2s ease;
-}
-
-.cta:hover {
-	background-color: #2d5c8a;
-	transform: translateY(-2px);
-}
-
-.cta.ghost {
-	background-color: white;
-	color: #3a6ea5;
-	box-shadow: inset 0 0 0 2px #3a6ea5;
-}
-
-.cta.ghost:hover {
-	background-color: #e9f2fb;
+	.image-wrapper {
+		max-width: 26rem;
+	}
 }
 </style>
 

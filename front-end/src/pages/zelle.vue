@@ -3,18 +3,25 @@ defineOptions({ name: "ZellePaymentPage" });
 </script>
 
 <template>
-	<section class="zelle-page">
+	<section class="page-shell page-shell--narrow zelle-page">
 		<header class="hero">
-			<h1>Pay with Zelle</h1>
-			<p>Use the email below in your bank’s Zelle flow.</p>
+			<p class="page-eyebrow">Pay with Zelle</p>
+			<h1 class="page-title">
+				Use the Class Payment Email in Your Bank’s Zelle Flow
+			</h1>
+			<p class="page-copy">
+				Use the email below in your bank’s Zelle flow.
+			</p>
 		</header>
 
-		<div class="zelle-card">
+		<div class="zelle-card site-surface">
 			<img
 				alt="Zelle payment email for Classes with Jacob"
 				class="zelle-image"
+				height="1278"
+				loading="lazy"
 				src="../assets/Images/Zelle_Email.jpeg"
-				width="300"
+				width="1050"
 			/>
 
 			<div class="zelle-copy">
@@ -23,7 +30,10 @@ defineOptions({ name: "ZellePaymentPage" });
 			</div>
 
 			<div class="actions">
-				<RouterLink class="cta" to="/payment">
+				<RouterLink
+					class="site-button site-button--secondary"
+					to="/payment"
+				>
 					Back to Tuition &amp; Payment
 				</RouterLink>
 			</div>
@@ -33,35 +43,14 @@ defineOptions({ name: "ZellePaymentPage" });
 
 <style scoped>
 .zelle-page {
-	padding: 2.5rem 1.5rem 4rem;
 	display: flex;
 	flex-direction: column;
 	gap: 2.5rem;
-	align-items: center;
-	color: #16202a;
-}
-
-.hero,
-.zelle-card {
-	width: 100%;
-	max-width: 760px;
 }
 
 .hero {
 	display: grid;
 	gap: 1rem;
-	text-align: center;
-}
-
-.hero h1 {
-	margin: 0;
-	font-size: clamp(2rem, 3.8vw, 2.8rem);
-}
-
-.hero p {
-	margin: 0;
-	line-height: 1.6;
-	color: #2d3f55;
 }
 
 .zelle-card {
@@ -69,18 +58,14 @@ defineOptions({ name: "ZellePaymentPage" });
 	gap: 1.5rem;
 	justify-items: center;
 	padding: 2rem;
-	border-radius: 28px;
-	background: white;
-	box-shadow: 0 18px 40px rgba(16, 42, 66, 0.08);
 	text-align: center;
 }
 
 .zelle-image {
-	max-width: min(100%, 320px);
+	max-width: min(100%, 19rem);
 	height: auto;
-	display: block;
-	border-radius: 24px;
-	box-shadow: 0 12px 28px rgba(13, 38, 63, 0.12);
+	border-radius: 18px;
+	box-shadow: 0 16px 36px -28px rgba(13, 38, 63, 0.45);
 }
 
 .zelle-copy {
@@ -94,14 +79,14 @@ defineOptions({ name: "ZellePaymentPage" });
 	letter-spacing: 0.18em;
 	font-size: 0.8rem;
 	font-weight: 700;
-	color: #3a6ea5;
+	color: var(--color-accent);
 }
 
 .zelle-email {
 	margin: 0;
 	font-size: clamp(1.25rem, 3vw, 1.7rem);
 	font-weight: 700;
-	color: #10263a;
+	color: var(--color-ink);
 	word-break: break-word;
 }
 
@@ -112,42 +97,7 @@ defineOptions({ name: "ZellePaymentPage" });
 	gap: 1rem;
 }
 
-.cta {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.85rem 1.5rem;
-	border-radius: 999px;
-	font-weight: 600;
-	text-decoration: none;
-	background-color: #3a6ea5;
-	color: white;
-	transition:
-		background-color 0.2s ease,
-		transform 0.2s ease;
-	border: 2px solid transparent;
-}
-
-.cta:hover {
-	background-color: #2d5c8a;
-	transform: translateY(-2px);
-}
-
-.cta.ghost {
-	background-color: white;
-	border-color: #3a6ea5;
-	color: #3a6ea5;
-}
-
-.cta.ghost:hover {
-	background-color: #e9f2fb;
-}
-
 @media (max-width: 640px) {
-	.zelle-page {
-		padding: 2rem 1.25rem 3rem;
-	}
-
 	.zelle-card {
 		padding: 1.5rem;
 	}

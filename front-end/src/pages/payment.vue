@@ -45,10 +45,15 @@ useHead(
 </script>
 
 <template>
-	<section class="Payment">
-		<div class="intro">
-			<h1>Tuition &amp; Payment</h1>
-			<p>Private one-on-one sessions are $40 for 50 minutes.</p>
+	<section class="page-shell payment-page">
+		<div class="payment-hero">
+			<p class="page-eyebrow">Tuition &amp; Payment</p>
+			<h1 class="page-title">
+				Straightforward Pricing for Private Classes
+			</h1>
+			<p class="page-copy">
+				Private one-on-one sessions are $40 for 50 minutes.
+			</p>
 			<div class="tuition-card">
 				<div class="rate">
 					<span class="amount">$40</span>
@@ -62,28 +67,44 @@ useHead(
 			</div>
 		</div>
 
-		<section aria-labelledby="payment-title" class="payment">
-			<h2 id="payment-title">How to Pay</h2>
-			<p>Use Venmo or Zelle for most payments.</p>
-			<a
-				class="cta"
-				href="https://www.venmo.com/u/jacoba1100254352-classes"
-				rel="noreferrer"
-				target="_blank"
-			>
-				Open Venmo
-			</a>
-			<RouterLink class="cta" to="/zelle">Pay with Zelle</RouterLink>
+		<section
+			aria-labelledby="payment-title"
+			class="payment-section site-surface site-surface--soft"
+		>
+			<h2 id="payment-title" class="section-title">How to Pay</h2>
+			<p class="section-intro">Use Venmo or Zelle for most payments.</p>
+			<div class="site-action-row">
+				<a
+					class="site-button site-button--primary"
+					href="https://www.venmo.com/u/jacoba1100254352-classes"
+					rel="noreferrer"
+					target="_blank"
+				>
+					Open Venmo
+				</a>
+				<RouterLink
+					class="site-button site-button--secondary"
+					to="/zelle"
+				>
+					Pay with Zelle
+				</RouterLink>
+			</div>
 			<div class="note">
 				<p>
 					Need Cash App, Apple Cash, or a mailed check instead? Email
-					classes@jacobdanderson.net.
+					<a
+						class="text-link"
+						href="mailto:classes@jacobdanderson.net"
+					>
+						classes@jacobdanderson.net
+					</a>
+					.
 				</p>
 			</div>
 		</section>
 
-		<section aria-labelledby="faq-title" class="faq w-100">
-			<h2 id="faq-title">Common Questions</h2>
+		<section aria-labelledby="faq-title" class="faq-section">
+			<h2 id="faq-title" class="section-title">Common Questions</h2>
 			<div id="faqAccordion" class="accordion">
 				<div
 					v-for="(faq, i) in content.faqs"
@@ -117,66 +138,57 @@ useHead(
 			</div>
 		</section>
 
-		<section aria-labelledby="schedule-title" class="schedule">
-			<h2 id="schedule-title">Ready to Schedule?</h2>
-			<p>
+		<section
+			aria-labelledby="schedule-title"
+			class="schedule-section site-surface"
+		>
+			<h2 id="schedule-title" class="section-title">
+				Ready to Schedule?
+			</h2>
+			<p class="section-intro">
 				Use the scheduler to book a time, or email if you need help
 				choosing a recurring slot.
 			</p>
-			<RouterLink
-				class="cta"
-				to="/signup"
-				@focus="warmSchedulerConnections"
-				@mouseenter="warmSchedulerConnections"
-				@touchstart.passive="warmSchedulerConnections"
-			>
-				Open Scheduler
-			</RouterLink>
-			<a class="cta ghost" href="mailto:classes@jacobdanderson.net"
-				>Email Jacob</a
-			>
+			<div class="site-action-row">
+				<RouterLink
+					class="site-button site-button--primary"
+					to="/signup"
+					@focus="warmSchedulerConnections"
+					@mouseenter="warmSchedulerConnections"
+					@touchstart.passive="warmSchedulerConnections"
+				>
+					Open Scheduler
+				</RouterLink>
+				<a
+					class="site-button site-button--secondary"
+					href="mailto:classes@jacobdanderson.net"
+				>
+					Email Jacob
+				</a>
+			</div>
 		</section>
 	</section>
 </template>
 
 <style scoped>
-.Payment {
-	display: flex;
-	flex-direction: column;
-	gap: 3rem;
-	padding: 2.5rem 1.5rem 4rem;
-	color: #16202a;
-	align-items: center;
+.payment-page {
+	gap: clamp(2rem, 5vw, 3.5rem);
 }
 
-.intro {
-	max-width: 900px;
-	text-align: center;
+.payment-hero {
 	display: grid;
 	gap: 1.5rem;
 }
 
-.intro h1 {
-	font-size: clamp(2rem, 3.5vw, 2.75rem);
-}
-
-.intro p {
-	margin: 0 auto;
-	line-height: 1.6;
-	font-size: 1.05rem;
-	color: #2d3f55;
-}
-
 .tuition-card {
-	margin: 0 auto;
 	padding: 2rem;
-	border-radius: 24px;
+	border-radius: 22px;
 	background: linear-gradient(135deg, #1f3d5a, #3a6ea5);
 	color: white;
 	display: grid;
 	gap: 1.25rem;
-	max-width: 520px;
-	box-shadow: 0 24px 50px rgba(13, 38, 63, 0.25);
+	max-width: 32rem;
+	box-shadow: 0 24px 50px -26px rgba(13, 38, 63, 0.42);
 }
 
 .rate {
@@ -207,97 +219,53 @@ useHead(
 	font-size: 1rem;
 }
 
-.payment,
-.faq,
-.schedule {
-	max-width: 900px;
-	margin: 0 auto;
-	text-align: center;
+.payment-section,
+.schedule-section {
+	display: grid;
+	gap: 1rem;
+	padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.faq-section {
 	display: grid;
 	gap: 1.25rem;
 }
 
-.payment p,
-.faq p,
-.schedule p {
-	margin: 0;
-	line-height: 1.6;
-	color: #2d3f55;
-	font-size: 1.05rem;
-}
-
-.cta {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.85rem 1.5rem;
-	border-radius: 999px;
-	font-weight: 600;
-	text-decoration: none;
-	background-color: #3a6ea5;
-	color: white;
-	transition:
-		background-color 0.2s ease,
-		transform 0.2s ease;
-	border: 2px solid transparent;
-	width: 205px;
-	margin: 0 auto;
-}
-
-.cta:hover {
-	background-color: #2d5c8a;
-	transform: translateY(-2px);
-}
-
-.cta.ghost {
-	background-color: white;
-	border-color: #3a6ea5;
-	color: #3a6ea5;
-}
-
-.cta.ghost:hover {
-	background-color: #e9f2fb;
-}
-
 .note {
-	background: #f4f8fc;
+	padding: 1rem 1.1rem;
 	border-radius: 16px;
-	padding: 1.5rem;
-	box-shadow: inset 0 0 0 1px #dbe9f8;
+	background: rgba(31, 92, 145, 0.06);
+	border: 1px solid rgba(31, 92, 145, 0.1);
 }
 
-.faq {
+.faq-section {
 	text-align: left;
 }
 
-.faq h2 {
-	text-align: center;
+.accordion-item {
+	border-radius: 16px;
+	border: 1px solid var(--color-border);
+	overflow: hidden;
+	margin-bottom: 0.85rem;
+	background: rgba(255, 255, 255, 0.82);
 }
 
-.faq article {
-	background: white;
-	border-radius: 20px;
-	padding: 1.75rem;
-	box-shadow: 0 14px 30px rgba(18, 64, 112, 0.08);
-	display: grid;
-	gap: 0.75rem;
+.accordion-button {
+	font-weight: 700;
 }
 
-.faq h3 {
-	margin: 0;
-	font-size: 1.2rem;
-	color: #1f3d5a;
+.accordion-button:not(.collapsed) {
+	color: var(--color-ink);
+	background: rgba(31, 92, 145, 0.08);
+	box-shadow: none;
 }
 
-.schedule {
-	gap: 1rem;
+.accordion-body {
+	color: var(--color-ink-soft);
+	line-height: 1.7;
 }
 
 @media (max-width: 600px) {
-	.Payment {
-		padding: 2rem 1.25rem 3rem;
-	}
-
 	.tuition-card {
 		padding: 1.75rem 1.5rem;
 	}

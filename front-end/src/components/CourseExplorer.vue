@@ -734,6 +734,7 @@ function writeStoredValue(key: string, value: string) {
 											:src="item.mediaLink"
 											alt="Project demo media"
 											class="item-media-image"
+											loading="lazy"
 										/>
 									</div>
 								</article>
@@ -828,6 +829,7 @@ function writeStoredValue(key: string, value: string) {
 											:src="item.mediaLink"
 											alt="Project demo media"
 											class="item-media-image"
+											loading="lazy"
 										/>
 									</div>
 								</article>
@@ -870,7 +872,7 @@ function writeStoredValue(key: string, value: string) {
 	--course-panel-soft: #f8fafc;
 	--course-accent: #0f766e;
 	--course-accent-soft: rgba(15, 118, 110, 0.12);
-	--course-shadow: 0 24px 50px -34px rgba(15, 23, 42, 0.3);
+	--course-shadow: 0 20px 42px -32px rgba(15, 23, 42, 0.24);
 	width: 100%;
 	margin: 0;
 	display: flex;
@@ -912,14 +914,14 @@ function writeStoredValue(key: string, value: string) {
 	align-items: start;
 	gap: 1rem 1.5rem;
 	padding: clamp(1.4rem, 2.2vw, 1.9rem);
-	border-radius: 26px;
+	border-radius: 22px;
 	background: linear-gradient(
 		180deg,
 		rgba(248, 250, 252, 0.9),
 		rgba(255, 255, 255, 0.8)
 	);
-	border: 1px solid rgba(255, 255, 255, 0.45);
-	box-shadow: 0 28px 60px -44px rgba(15, 23, 42, 0.44);
+	border: 1px solid rgba(148, 163, 184, 0.18);
+	box-shadow: 0 22px 44px -36px rgba(15, 23, 42, 0.24);
 }
 
 .course-hero-copy {
@@ -977,11 +979,11 @@ function writeStoredValue(key: string, value: string) {
 	grid-template-columns: repeat(3, minmax(7rem, 1fr));
 	gap: 0;
 	margin: 0;
-	border-radius: 22px;
+	border-radius: 18px;
 	overflow: hidden;
 	background: rgba(255, 255, 255, 0.66);
 	border: 1px solid rgba(148, 163, 184, 0.22);
-	box-shadow: 0 24px 45px -38px rgba(15, 23, 42, 0.55);
+	box-shadow: 0 18px 32px -28px rgba(15, 23, 42, 0.18);
 }
 
 .stat {
@@ -1022,8 +1024,8 @@ function writeStoredValue(key: string, value: string) {
 	gap: 1rem 1.25rem;
 	align-items: end;
 	padding: 1.1rem 1.15rem;
-	border-radius: 24px;
-	background: rgba(255, 255, 255, 0.7);
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.72);
 	border: 1px solid rgba(148, 163, 184, 0.18);
 }
 
@@ -1052,14 +1054,14 @@ function writeStoredValue(key: string, value: string) {
 .course-search {
 	width: 100%;
 	min-height: 3.8rem;
-	border-radius: 16px;
+	border-radius: 14px;
 	border: 1px solid var(--course-border-strong);
 	background: var(--course-panel);
 	color: var(--course-text);
 	font-size: 1rem;
 	line-height: 1.35;
 	padding: 0.9rem 1rem;
-	box-shadow: 0 16px 32px -28px rgba(15, 23, 42, 0.45);
+	box-shadow: 0 12px 24px -22px rgba(15, 23, 42, 0.16);
 }
 
 .course-select {
@@ -1088,7 +1090,7 @@ function writeStoredValue(key: string, value: string) {
 .clear-search,
 .outline-reset {
 	border: none;
-	border-radius: 999px;
+	border-radius: 14px;
 	padding: 0.75rem 1rem;
 	font-size: 0.9rem;
 	font-weight: 700;
@@ -1113,7 +1115,7 @@ function writeStoredValue(key: string, value: string) {
 .outline-button:focus-visible,
 .resource-link:focus-visible,
 .jump-link:focus-visible {
-	outline: 2px solid #0f766e;
+	outline: 2px solid var(--focus-ring-color);
 	outline-offset: 3px;
 }
 
@@ -1126,9 +1128,9 @@ function writeStoredValue(key: string, value: string) {
 	align-items: stretch;
 	min-height: min(72vh, 68rem);
 	border: 1px solid rgba(148, 163, 184, 0.2);
-	border-radius: 30px;
+	border-radius: 24px;
 	background: rgba(255, 255, 255, 0.92);
-	box-shadow: 0 34px 70px -50px rgba(15, 23, 42, 0.58);
+	box-shadow: 0 28px 56px -44px rgba(15, 23, 42, 0.28);
 	overflow: hidden;
 }
 
@@ -1181,7 +1183,7 @@ function writeStoredValue(key: string, value: string) {
 	align-items: start;
 	padding: 0.9rem 0.95rem;
 	border: 1px solid transparent;
-	border-radius: 18px;
+	border-radius: 14px;
 	background: transparent;
 	color: var(--course-text);
 	text-align: left;
@@ -1204,7 +1206,7 @@ function writeStoredValue(key: string, value: string) {
 		rgba(15, 118, 110, 0.09),
 		rgba(14, 165, 233, 0.06)
 	);
-	box-shadow: 0 18px 34px -30px rgba(15, 118, 110, 0.32);
+	box-shadow: 0 16px 28px -24px rgba(15, 118, 110, 0.22);
 }
 
 .outline-position,
@@ -1214,7 +1216,7 @@ function writeStoredValue(key: string, value: string) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 999px;
+	border-radius: 14px;
 	font-weight: 700;
 	font-size: 0.92rem;
 	background: rgba(15, 23, 42, 0.06);
@@ -1350,7 +1352,7 @@ function writeStoredValue(key: string, value: string) {
 .jump-link {
 	flex-direction: row;
 	gap: 0.5rem;
-	border-radius: 999px;
+	border-radius: 14px;
 	background: rgba(248, 250, 252, 0.9);
 	font-size: 0.85rem;
 	line-height: 1.45;
@@ -1384,7 +1386,7 @@ function writeStoredValue(key: string, value: string) {
 	min-width: 2.4rem;
 	height: 2.4rem;
 	padding: 0 0.8rem;
-	border-radius: 999px;
+	border-radius: 14px;
 	background: rgba(15, 23, 42, 0.06);
 	font-weight: 700;
 	color: var(--course-text);
@@ -1456,9 +1458,9 @@ function writeStoredValue(key: string, value: string) {
 	align-items: flex-start;
 	gap: 0.15rem;
 	padding: 0.8rem 0.95rem;
-	border-radius: 20px;
+	border-radius: 14px;
 	background: rgba(255, 255, 255, 0.94);
-	box-shadow: 0 16px 30px -28px rgba(15, 23, 42, 0.42);
+	box-shadow: 0 12px 22px -22px rgba(15, 23, 42, 0.18);
 }
 
 .resource-link:hover {
@@ -1558,13 +1560,13 @@ function writeStoredValue(key: string, value: string) {
 	width: 100%;
 	max-width: 100%;
 	height: auto;
-	border-radius: 18px;
+	border-radius: 14px;
 	background: #e2e8f0;
 }
 
 .course-empty {
 	padding: 2rem;
-	border-radius: 24px;
+	border-radius: 20px;
 	background: linear-gradient(180deg, #f8fafc, #ffffff);
 	border: 1px solid var(--course-border);
 	text-align: center;

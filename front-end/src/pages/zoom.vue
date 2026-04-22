@@ -5,21 +5,25 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 </script>
 
 <template>
-	<section class="ZoomClassroom">
+	<section class="page-shell page-shell--narrow zoom-page">
 		<header class="hero">
-			<h1>Join the Virtual Classroom</h1>
-			<p>Use this page to join the class Zoom room.</p>
+			<p class="page-eyebrow">Zoom Room</p>
+			<h1 class="page-title">Join the Virtual Classroom</h1>
+			<p class="page-copy">Use this page to join the class Zoom room.</p>
 		</header>
 
 		<div class="card-grid">
-			<article class="zoom-card" aria-labelledby="zoom-card-title">
+			<article
+				aria-labelledby="zoom-card-title"
+				class="zoom-card site-surface"
+			>
 				<h2 id="zoom-card-title">Zoom Meeting Room</h2>
 				<p>
 					Open the room in a new tab. Join a few minutes early if you
 					need to test audio.
 				</p>
 				<a
-					class="cta"
+					class="site-button site-button--primary"
 					:href="zoomMeetingUrl"
 					rel="noopener"
 					target="_blank"
@@ -38,46 +42,24 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 </template>
 
 <style scoped>
-.ZoomClassroom {
-	padding: 2.5rem 1.5rem 4rem;
+.zoom-page {
 	display: flex;
 	flex-direction: column;
 	gap: 2.5rem;
-	color: #16202a;
-	align-items: center;
 }
 
 .hero {
-	max-width: 720px;
-	text-align: center;
 	display: grid;
-	gap: 1.25rem;
-}
-
-.hero h1 {
-	font-size: clamp(2rem, 4vw, 2.75rem);
-	margin: 0;
-}
-
-.hero p {
-	margin: 0;
-	font-size: 1.05rem;
-	line-height: 1.6;
-	color: #2d3f55;
+	gap: 1rem;
 }
 
 .card-grid {
 	display: grid;
 	gap: 2rem;
-	width: 100%;
-	max-width: 960px;
 }
 
 .zoom-card {
-	background: white;
-	border-radius: 28px;
 	padding: 2rem;
-	box-shadow: 0 18px 40px rgba(16, 42, 66, 0.08);
 	display: grid;
 	gap: 1.25rem;
 }
@@ -91,36 +73,19 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 p {
 	margin: 0;
 	line-height: 1.6;
+	color: var(--color-ink-soft);
 }
 
-.cta {
-	justify-self: center;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.85rem 1.5rem;
-	border-radius: 999px;
-	font-weight: 600;
-	text-decoration: none;
-	background-color: #3a6ea5;
-	color: white;
-	transition:
-		background-color 0.2s ease,
-		transform 0.2s ease;
-}
-
-.cta:hover {
-	background-color: #2d5c8a;
-	transform: translateY(-2px);
+.site-button {
+	justify-self: flex-start;
 }
 
 .fallback {
 	font-size: 0.95rem;
-	color: #2d3f55;
 }
 
 .fallback a {
-	color: #3a6ea5;
+	color: var(--color-accent);
 	font-weight: 600;
 	text-decoration: none;
 }
@@ -130,10 +95,6 @@ p {
 }
 
 @media (max-width: 768px) {
-	.ZoomClassroom {
-		padding: 2rem 1.25rem 3rem;
-	}
-
 	.zoom-card {
 		padding: 1.5rem;
 	}

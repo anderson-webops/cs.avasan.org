@@ -93,108 +93,118 @@ function maybeWarmScheduler(link: NavLink) {
 
 <template>
 	<header class="site-header">
-		<nav class="navbar navbar-expand-xl site-nav">
-			<div class="container-fluid site-nav__inner">
-				<router-link class="site-brand" to="/">
-					<span class="site-brand__title">Classes with Jacob</span>
-				</router-link>
-				<button
-					aria-controls="siteNavbar"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-					class="navbar-toggler site-toggler"
-					data-bs-target="#siteNavbar"
-					data-bs-toggle="collapse"
-					type="button"
-				>
-					<span class="navbar-toggler-icon" />
-				</button>
-				<div
-					id="siteNavbar"
-					class="collapse navbar-collapse site-nav__panel"
-				>
-					<div class="site-nav__content">
-						<ul class="site-nav__links">
-							<li v-for="link in primaryLinks" :key="link.to">
-								<router-link
-									class="site-nav__link"
-									:class="{ 'is-active': isLinkActive(link) }"
-									:to="link.to"
-									@focus="maybeWarmScheduler(link)"
-									@mouseenter="maybeWarmScheduler(link)"
-									@touchstart.passive="
-										maybeWarmScheduler(link)
-									"
-								>
-									{{ link.label }}
-								</router-link>
-							</li>
-						</ul>
+		<div class="site-shell site-shell--wide">
+			<nav class="navbar navbar-expand-xl site-nav">
+				<div class="site-nav__inner site-surface site-surface--strong">
+					<router-link class="site-brand" to="/">
+						<span class="site-brand__title"
+							>Classes with Jacob</span
+						>
+					</router-link>
+					<button
+						aria-controls="siteNavbar"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+						class="navbar-toggler site-toggler"
+						data-bs-target="#siteNavbar"
+						data-bs-toggle="collapse"
+						type="button"
+					>
+						<span class="navbar-toggler-icon" />
+					</button>
+					<div
+						id="siteNavbar"
+						class="collapse navbar-collapse site-nav__panel"
+					>
+						<div class="site-nav__content">
+							<ul class="site-nav__links">
+								<li v-for="link in primaryLinks" :key="link.to">
+									<router-link
+										class="site-nav__link"
+										:class="{
+											'is-active': isLinkActive(link)
+										}"
+										:to="link.to"
+										@focus="maybeWarmScheduler(link)"
+										@mouseenter="maybeWarmScheduler(link)"
+										@touchstart.passive="
+											maybeWarmScheduler(link)
+										"
+									>
+										{{ link.label }}
+									</router-link>
+								</li>
+							</ul>
 
-						<div class="site-nav__aside">
-							<div
-								v-if="utilityLinks.length"
-								class="site-nav__utility"
-							>
-								<router-link
-									v-for="link in utilityLinks"
-									:key="link.to"
-									class="site-nav__utility-link"
-									:class="{ 'is-active': isLinkActive(link) }"
-									:to="link.to"
+							<div class="site-nav__aside">
+								<div
+									v-if="utilityLinks.length"
+									class="site-nav__utility"
 								>
-									{{ link.label }}
-								</router-link>
-							</div>
+									<router-link
+										v-for="link in utilityLinks"
+										:key="link.to"
+										class="site-nav__utility-link"
+										:class="{
+											'is-active': isLinkActive(link)
+										}"
+										:to="link.to"
+									>
+										{{ link.label }}
+									</router-link>
+								</div>
 
-							<div class="site-nav__actions">
-								<span
-									v-if="accountBadge"
-									class="site-nav__badge"
-								>
-									{{ accountBadge }}
-								</span>
+								<div class="site-nav__actions">
+									<span
+										v-if="accountBadge"
+										class="site-nav__badge"
+									>
+										{{ accountBadge }}
+									</span>
 
-								<router-link
-									v-for="link in workspaceLinks"
-									:key="link.to"
-									class="site-nav__action site-nav__action--secondary"
-									:class="{ 'is-active': isLinkActive(link) }"
-									:to="link.to"
-								>
-									{{ link.label }}
-								</router-link>
+									<router-link
+										v-for="link in workspaceLinks"
+										:key="link.to"
+										class="site-button site-button--secondary site-nav__action"
+										:class="{
+											'is-active': isLinkActive(link)
+										}"
+										:to="link.to"
+									>
+										{{ link.label }}
+									</router-link>
 
-								<button
-									v-if="isLoggedIn"
-									class="site-nav__action site-nav__action--danger"
-									type="button"
-									@click="logoutUser"
-								>
-									Log out
-								</button>
-								<button
-									v-else
-									class="site-nav__action site-nav__action--secondary"
-									type="button"
-									@click="emit('loginClick')"
-								>
-									Log in
-								</button>
-								<button
-									v-if="!isLoggedIn"
-									class="site-nav__action site-nav__action--primary"
-									type="button"
-									@click="emit('signupClick')"
-								>
-									Sign up
-								</button>
+									<button
+										v-if="isLoggedIn"
+										class="site-button site-button--secondary site-nav__action site-nav__action--danger"
+										type="button"
+										@click="logoutUser"
+									>
+										Log out
+									</button>
+									<button
+										v-else
+										class="site-button site-button--secondary site-nav__action"
+										type="button"
+										@click="emit('loginClick')"
+									>
+										Log in
+									</button>
+									<button
+										v-if="!isLoggedIn"
+										class="site-button site-button--primary site-nav__action"
+										type="button"
+										@click="emit('signupClick')"
+									>
+										Sign up
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+		</div>
 	</header>
 </template>
 
@@ -202,7 +212,7 @@ function maybeWarmScheduler(link: NavLink) {
 .site-header {
 	position: relative;
 	z-index: 1;
-	padding: 0.85rem 1rem 0;
+	padding-top: 0.9rem;
 }
 
 .site-nav {
@@ -215,37 +225,28 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 .site-nav__inner {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 0.85rem 1rem;
-	border-radius: 24px;
-	border: 1px solid rgba(148, 163, 184, 0.18);
-	background: linear-gradient(
-		145deg,
-		rgba(255, 255, 255, 0.95),
-		rgba(241, 245, 249, 0.9)
-	);
-	box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
-	backdrop-filter: blur(16px);
+	padding: 0.9rem 1rem;
 }
 
 .site-brand {
-	display: grid;
-	gap: 0.18rem;
+	display: inline-flex;
+	align-items: center;
 	flex: 0 0 auto;
 	text-decoration: none;
 }
 
 .site-brand__title {
-	font-size: 1.2rem;
-	font-weight: 800;
-	letter-spacing: 0.01em;
-	color: #10253c;
+	font-family: var(--font-display);
+	font-size: clamp(1.35rem, 2vw, 1.55rem);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	color: var(--color-ink);
 }
 
 .site-toggler {
-	border: 1px solid #cbd5e1;
-	border-radius: 14px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-sm);
+	background: rgba(255, 255, 255, 0.74);
 }
 
 .site-nav__content {
@@ -289,15 +290,14 @@ function maybeWarmScheduler(link: NavLink) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.72rem 0.95rem;
-	border-radius: 999px;
-	color: #27425a;
-	font-weight: 700;
+	padding: 0.55rem 0.75rem;
+	border-radius: var(--radius-sm);
+	color: var(--color-ink-soft);
+	font-weight: 600;
 	text-decoration: none;
 	transition:
 		background-color 0.18s ease,
 		color 0.18s ease,
-		transform 0.18s ease,
 		box-shadow 0.18s ease;
 }
 
@@ -305,16 +305,14 @@ function maybeWarmScheduler(link: NavLink) {
 .site-nav__utility-link:hover,
 .site-nav__link.is-active,
 .site-nav__utility-link.is-active {
-	color: #0f2f4e;
-	background: rgba(191, 219, 254, 0.44);
-	box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.2);
-	transform: translateY(-1px);
+	color: var(--color-ink);
+	background: rgba(255, 255, 255, 0.64);
+	box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
 }
 
 .site-nav__utility-link {
-	padding: 0.64rem 0.82rem;
-	font-size: 0.98rem;
-	color: #50677c;
+	padding-inline: 0.45rem;
+	font-size: 0.95rem;
 }
 
 .site-nav__actions {
@@ -330,59 +328,31 @@ function maybeWarmScheduler(link: NavLink) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.52rem 0.8rem;
-	border-radius: 999px;
-	background: #e2e8f0;
-	color: #334155;
-	font-size: 0.82rem;
+	padding: 0.45rem 0.7rem;
+	border-radius: var(--radius-pill);
+	background: rgba(31, 92, 145, 0.08);
+	color: var(--color-accent);
+	font-size: 0.78rem;
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 }
 
 .site-nav__action {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.72rem 1rem;
-	border-radius: 999px;
-	border: 1px solid transparent;
-	font-weight: 700;
-	text-decoration: none;
-	transition:
-		transform 0.18s ease,
-		box-shadow 0.18s ease,
-		background-color 0.18s ease,
-		border-color 0.18s ease;
+	min-height: 2.9rem;
+	padding-inline: 1rem;
 }
 
-.site-nav__action:hover,
 .site-nav__action.is-active {
-	transform: translateY(-1px);
-}
-
-.site-nav__action--primary {
-	color: #eff6ff;
-	background: linear-gradient(140deg, #2563eb, #1d4ed8);
-	box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
-}
-
-.site-nav__action--secondary {
-	color: #16324d;
-	background: #ffffff;
-	border-color: #cbd5e1;
-	box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
-}
-
-.site-nav__action--secondary.is-active {
-	background: #e0f2fe;
-	border-color: #7dd3fc;
+	background: rgba(255, 255, 255, 0.92);
+	border-color: rgba(31, 92, 145, 0.24);
 }
 
 .site-nav__action--danger {
-	color: #991b1b;
-	background: #fff5f5;
-	border-color: #fecaca;
+	color: #8c1d26;
+	background: rgba(255, 245, 245, 0.96);
+	border-color: rgba(244, 114, 114, 0.35);
+	box-shadow: none;
 }
 
 @media (max-width: 1199px) {
@@ -403,8 +373,12 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 @media (max-width: 700px) {
-	.site-header {
-		padding-inline: 0.7rem;
+	.site-nav__links {
+		width: 100%;
+	}
+
+	.site-nav__links > li {
+		width: 100%;
 	}
 
 	.site-nav__link,

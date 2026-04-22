@@ -15,7 +15,9 @@ function showSignupModal() {
 </script>
 
 <template>
-	<main>
+	<div class="site-frame">
+		<a class="skip-link" href="#main-content">Skip to content</a>
+
 		<TheHeader
 			@login-click="showLoginModal"
 			@signup-click="showSignupModal"
@@ -27,7 +29,9 @@ function showSignupModal() {
 
 		<AccountManagement />
 
-		<RouterView />
+		<main id="main-content" class="site-main">
+			<RouterView />
+		</main>
 		<TheFooter />
-	</main>
+	</div>
 </template>
