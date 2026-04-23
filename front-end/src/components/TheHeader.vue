@@ -270,18 +270,19 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 .site-nav__links {
-	flex: 1 1 0;
+	flex: 1 1 auto;
 	justify-content: center;
 	min-width: 0;
 }
 
 .site-nav__aside {
 	display: flex;
-	flex: 1 1 0;
+	flex: 0 0 auto;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: flex-end;
 	gap: 0.85rem;
+	margin-left: auto;
 	min-width: 0;
 }
 

@@ -973,10 +973,10 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .course-stats {
-	width: min(100%, 22rem);
-	flex: 0 1 22rem;
+	width: min(100%, 29rem);
+	flex: 0 1 29rem;
 	display: grid;
-	grid-template-columns: repeat(3, minmax(7rem, 1fr));
+	grid-template-columns: repeat(3, minmax(8.75rem, 1fr));
 	gap: 0;
 	margin: 0;
 	border-radius: 18px;
@@ -1006,6 +1006,7 @@ function writeStoredValue(key: string, value: string) {
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
+	white-space: nowrap;
 	color: #0f766e;
 }
 
