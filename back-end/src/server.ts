@@ -1,5 +1,5 @@
 // src/server.ts
-import { env, exit } from "node:process";
+import process, { env, exit } from "node:process";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
 import express from "express";

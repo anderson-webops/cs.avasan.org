@@ -88,6 +88,7 @@ const adminTools = [
 </style>
 
 <route lang="yaml">
-  meta:
+meta:
     layout: default
-    requiresAdmin: true</route>
+    requiresAdmin: true
+</route>

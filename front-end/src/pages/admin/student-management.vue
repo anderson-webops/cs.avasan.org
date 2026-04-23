@@ -69,6 +69,7 @@ import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
 </style>
 
 <route lang="yaml">
-  meta:
+meta:
     layout: default
-    requiresAdmin: true</route>
+    requiresAdmin: true
+</route>

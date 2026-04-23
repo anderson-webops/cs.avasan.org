@@ -235,9 +235,9 @@ async function loadRecentSessionNotes() {
 	const resolvedPrimaryEmail = primaryEmail.value;
 
 	if (
-		!recipientName
-		|| recipientName === CUSTOM_OPTION
-		|| !resolvedPrimaryEmail
+		!recipientName ||
+		recipientName === CUSTOM_OPTION ||
+		!resolvedPrimaryEmail
 	) {
 		resetRecentSessionNotes();
 		return;
@@ -268,9 +268,9 @@ async function loadRecentSessionNotes() {
 
 		resetRecentSessionNotes();
 		recentNotesError.value =
-			error?.response?.data?.message
-			?? error?.message
-			?? "Unable to load recent session notes.";
+			error?.response?.data?.message ??
+			error?.message ??
+			"Unable to load recent session notes.";
 	} finally {
 		if (requestToken === recentNotesRequestToken) {
 			recentNotesLoading.value = false;
@@ -319,8 +319,8 @@ async function sendMail() {
 			if (wasSessionNoteSend) {
 				recentSessionNotes.value = data.recentSessionNotes ?? [];
 				recentNotesOwner.value =
-					data.associations?.sessionNoteSavedFor
-					?? recentNotesOwner.value;
+					data.associations?.sessionNoteSavedFor ??
+					recentNotesOwner.value;
 				recentNotesError.value = "";
 				recentNotesLoading.value = false;
 			}
@@ -1109,6 +1109,7 @@ textarea {
 </style>
 
 <route lang="yaml">
-  meta:
+meta:
     layout: default
-    requiresAdmin: true</route>
+    requiresAdmin: true
+</route>

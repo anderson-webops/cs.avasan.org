@@ -65,5 +65,6 @@ onBeforeUnmount(() => {
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: blank</route>
+meta:
+    layout: blank
+</route>

@@ -579,5 +579,6 @@ function isProfileTab(value: string | null): value is ProfileTab {
 </style>
 
 <route lang="yaml">
-  meta:
-    layout: default</route>
+meta:
+    layout: default
+</route>

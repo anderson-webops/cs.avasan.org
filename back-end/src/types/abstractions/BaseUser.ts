@@ -1,7 +1,7 @@
 // src/types/abstractions/BaseUser.ts
-import type { Document, Types } from "mongoose";
+import type { Types } from "mongoose";
 
-export interface IBaseUser extends Document {
+export interface IBaseUser {
 	_id: Types.ObjectId;
 	name: string;
 	email: string;
@@ -9,6 +9,4 @@ export interface IBaseUser extends Document {
 	saveEdit: string; // the “Save” / “Edit” toggle text
 
 	comparePassword: (password: string) => Promise<boolean>;
-
-	toJSON: () => Record<string, unknown>;
 }
