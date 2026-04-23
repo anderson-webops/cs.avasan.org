@@ -19,7 +19,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Course Positioning and Prerequisites",
 					content:
-						"Position the course as the next low-level step after `C++ Level 1`, with C used to expose memory, representation, and data movement more directly. Students should already be comfortable with variables, loops, functions, arrays, and pointers before the course adds stricter debugging and more explicit lifetime management."
+						"Position the course as the next low-level step after `C++ Level 2`, with C used to expose memory, representation, and data movement more directly. Students should already be comfortable with variables, loops, functions, arrays, pointers, and manual lifetime reasoning before the course adds stricter debugging and more explicit representation work."
 				},
 				{
 					title: "Core Outcomes and Daily Working Habits",

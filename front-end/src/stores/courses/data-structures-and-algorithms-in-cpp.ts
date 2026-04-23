@@ -7,9 +7,9 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			title: "DSCPP0 Setup and Positioning",
 			curriculum: [
 				{
-					title: "Course Positioning After C++ Level 1",
+					title: "Course Positioning After C++ Level 2",
 					content:
-						"Position this course as the next serious step after `C++ Level 1`. Students should already be comfortable with variables, control flow, functions, classes, headers, pointers, and references before this sequence shifts the focus to data structures, algorithm design, and complexity."
+						"Position this course as the next serious step after `C++ Level 2`. Students should already be comfortable with variables, control flow, functions, classes, vectors, pointers, references, and manual memory reasoning before this sequence shifts the focus to data structures, algorithm design, and complexity."
 				},
 				{
 					title: "Preferred Toolchain",
