@@ -2,8 +2,6 @@
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the HTML results with vite-ssg
-import { SCHEDULER_ORIGIN } from "@/modules/scheduler";
-
 const siteUrl = "https://classes.jacobdanderson.net";
 const siteDescription =
 	"One-on-one online tutoring with Jacob Anderson for students working through coding projects, STEM coursework, or Spanish goals.";
@@ -114,10 +112,6 @@ useHead(
 				{
 					rel: "dns-prefetch",
 					href: "//scheduler.classes.jacobdanderson.net"
-				},
-				{
-					rel: "preconnect",
-					href: SCHEDULER_ORIGIN
 				},
 				{
 					rel: "canonical",

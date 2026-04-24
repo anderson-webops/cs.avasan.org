@@ -21,10 +21,6 @@ useHead({
 		{
 			rel: "dns-prefetch",
 			href: "//scheduler.classes.jacobdanderson.net"
-		},
-		{
-			rel: "preconnect",
-			href: SCHEDULER_ORIGIN
 		}
 	]
 });

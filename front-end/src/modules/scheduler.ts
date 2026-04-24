@@ -38,5 +38,4 @@ export function warmSchedulerConnections() {
 
 	schedulerWarmthApplied = true;
 	ensureHeadLink("dns-prefetch", "//scheduler.classes.jacobdanderson.net");
-	ensureHeadLink("preconnect", SCHEDULER_ORIGIN);
 }
