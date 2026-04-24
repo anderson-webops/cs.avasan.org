@@ -787,7 +787,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Use the GitHub-backed prompt bank for the full Check-In #4 review sequence.",
-					projectLink: repo("APCS-Check-in-4")
+					projectLink: repo("APCS-Check-in-4"),
+					mediaLink: media("apcs-check-in-4.mp4")
 				}
 			],
 			supplementalProjects: [
