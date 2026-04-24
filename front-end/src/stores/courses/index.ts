@@ -1,4 +1,5 @@
 import type { CourseSummary, RawCourse } from "./types";
+import { normalizeRawCourse } from "./normalization";
 
 export interface CourseCatalogEntry extends CourseSummary {
 	load: () => Promise<RawCourse>;
@@ -360,5 +361,6 @@ export function getCourseCatalogEntry(id: string) {
 }
 
 export async function loadRawCourse(id: string) {
-	return (await getCourseCatalogEntry(id)?.load()) ?? null;
+	const rawCourse = await getCourseCatalogEntry(id)?.load();
+	return rawCourse ? normalizeRawCourse(id, rawCourse) : null;
 }
