@@ -277,6 +277,7 @@ useHead(
 
 .next-steps-card {
 	max-width: 52rem;
+	margin-inline: auto;
 	padding: clamp(1.5rem, 3vw, 2.2rem);
 	display: grid;
 	gap: 1rem 1.25rem;

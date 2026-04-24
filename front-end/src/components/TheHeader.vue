@@ -216,6 +216,7 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 .site-nav {
+	width: 100%;
 	padding: 0;
 }
 
@@ -225,6 +226,12 @@ function maybeWarmScheduler(link: NavLink) {
 }
 
 .site-nav__inner {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.85rem 1.25rem;
 	padding: 0.9rem 1rem;
 }
 
