@@ -1,0 +1,42 @@
+version = 1
+name = "classes.jacobdanderson.net"
+
+[setup]
+script = """
+npm ci --include=optional
+"""
+
+[[actions]]
+name = "Install"
+icon = "tool"
+command = "npm ci --include=optional"
+
+[[actions]]
+name = "Build"
+icon = "run"
+command = "npm run build"
+
+[[actions]]
+name = "Typecheck"
+icon = "test"
+command = "npm run typecheck"
+
+[[actions]]
+name = "Lint"
+icon = "test"
+command = "npm run lint"
+
+[[actions]]
+name = "Frontend Test"
+icon = "test"
+command = "npm run -w front-end test:unit"
+
+[[actions]]
+name = "Frontend Dev"
+icon = "debug"
+command = "npm run dev"
+
+[[actions]]
+name = "Backend Dev"
+icon = "debug"
+command = "npm run server"
