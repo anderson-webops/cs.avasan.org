@@ -94,6 +94,23 @@ function renameModule(course: RawCourse, fromTitle: string, toTitle: string) {
 	if (module) module.title = toTitle;
 }
 
+function setItemLinks(
+	course: RawCourse,
+	moduleTitle: string,
+	itemTitle: string,
+	links: Pick<RawCourseModuleItem, "projectLink" | "solutionLink">
+) {
+	const module = course.modules.find(module => module.title === moduleTitle);
+	const item = module
+		? [...module.curriculum, ...module.supplementalProjects].find(
+				item => item.title === itemTitle
+			)
+		: null;
+	if (!item) return;
+	if (links.projectLink) item.projectLink = links.projectLink;
+	if (links.solutionLink) item.solutionLink = links.solutionLink;
+}
+
 function cleanTitleText(text: string) {
 	return text
 		.replace(/\(COPY\)/g, "")
@@ -103,6 +120,41 @@ function cleanTitleText(text: string) {
 
 function cleanDisplayTitle(text: string) {
 	return cleanTitleText(text)
+		.replace(/\bCheck[ -]in\b/gi, "Check-In")
+		.replace(/ supplemental (\d+)/i, " Supplemental $1")
+		.replace(/^ai search lab (\d+):/i, "AI Search Lab $1:")
+		.replace(/^assembly lab (\d+):/i, "Assembly Lab $1:")
+		.replace(/^c algorithm lab (\d+):/i, "C++ Algorithm Lab $1:")
+		.replace(/^c foundations build (\d+):/i, "C++ Foundations Build $1:")
+		.replace(/^chemistry lab:/i, "Chemistry Lab:")
+		.replace(/^cpp practice:/i, "C++ Practice:")
+		.replace(/^data analysis lab (\d+):/i, "Data Analysis Lab $1:")
+		.replace(/^full stack web lab (\d+):/i, "Full-Stack Web Lab $1:")
+		.replace(/^graphics:/i, "Graphics:")
+		.replace(
+			/^j1x0\d java foundations build (\d+):/i,
+			"Java Foundations Build $1:"
+		)
+		.replace(/^language bridge lab (\d+):/i, "Language Bridge Lab $1:")
+		.replace(/^linux systems lab (\d+):/i, "Linux Systems Lab $1:")
+		.replace(
+			/^low level security lab (\d+):/i,
+			"Low-Level Security Lab $1:"
+		)
+		.replace(/^network security lab (\d+):/i, "Network Security Lab $1:")
+		.replace(/^network systems lab (\d+):/i, "Network Systems Lab $1:")
+		.replace(
+			/^offensive security lab (\d+):/i,
+			"Offensive Security Lab $1:"
+		)
+		.replace(
+			/^pattern implementation lab (\d+):/i,
+			"Pattern Implementation Lab $1:"
+		)
+		.replace(/^physics lab:/i, "Physics Lab:")
+		.replace(/^physics problem lab:/i, "Physics Problem Lab:")
+		.replace(/^refactoring clinic (\d+):/i, "Refactoring Clinic $1:")
+		.replace(/^systems build (\d+):/i, "Systems Build $1:")
 		.replace(/: ai search lab (\d+)/i, ": AI Search Lab $1")
 		.replace(/: assembly lab (\d+)/i, ": Assembly Lab $1")
 		.replace(/: c algorithm lab (\d+)/i, ": C++ Algorithm Lab $1")
@@ -112,6 +164,7 @@ function cleanDisplayTitle(text: string) {
 		.replace(/: data analysis lab (\d+)/i, ": Data Analysis Lab $1")
 		.replace(/: full stack web lab (\d+)/i, ": Full-Stack Web Lab $1")
 		.replace(/: graphics$/i, ": Graphics")
+		.replace(/^images:/i, "Images:")
 		.replace(/: images$/i, ": Images")
 		.replace(
 			/: j1x01 java foundations build (\d+)/i,
@@ -299,6 +352,86 @@ function normalizeJavaScriptLevel2(course: RawCourse) {
 	]);
 }
 
+function normalizePythonLevel1(course: RawCourse) {
+	setItemLinks(course, "Check-In #2", "Check-In #2 Overview", {
+		solutionLink: githubTree("Python-Level-1", "GRS-Check-in-Two-Updated")
+	});
+	setItemLinks(
+		course,
+		"Check-In #2",
+		"Check-In #2: Additional Practice Project",
+		{
+			projectLink: githubTree(
+				"Python-Level-1",
+				"Check-in-Two-Practice-Project"
+			),
+			solutionLink: githubTree(
+				"Python-Level-1",
+				"Check-in-Two-Additional-Practice-ProjectUpdated"
+			)
+		}
+	);
+	setItemLinks(course, "Check-In #3", "Check-In #3 Overview", {
+		solutionLink: githubTree("Python-Level-1", "GRS-Check-in-Three-Updated")
+	});
+}
+
+function normalizePythonLevel2(course: RawCourse) {
+	setItemLinks(course, "Check-In #2", "Check-In #2 Overview", {
+		solutionLink: githubTree("Python-Level-2", "PS-Check-in-2")
+	});
+}
+
+function normalizePythonLevel3(course: RawCourse) {
+	for (const checkIn of [1, 2, 3]) {
+		setItemLinks(
+			course,
+			`Check-In #${checkIn}`,
+			`Check-In #${checkIn} Overview`,
+			{
+				projectLink: githubTree(
+					"Python-Level-3",
+					`AM-Check-In-${checkIn}-Starter`
+				),
+				solutionLink: githubTree(
+					"Python-Level-3",
+					`AM-Check-In-${checkIn}`
+				)
+			}
+		);
+	}
+	setItemLinks(
+		course,
+		"Check-In #2",
+		"Check-In #2: Additional Practice Project",
+		{
+			projectLink: githubTree(
+				"Python-Level-3",
+				"AM-Check-In-2-Additional-Project-Starter"
+			),
+			solutionLink: githubTree(
+				"Python-Level-3",
+				"AM-Check-In-2-Additional-Project"
+			)
+		}
+	);
+	setItemLinks(
+		course,
+		"Check-In #3",
+		"Check-In #3: Additional Practice Project",
+		{
+			projectLink: githubTree(
+				"Python-Level-3",
+				"AM-Check-In-3-Additional-Project-Starter"
+			),
+			solutionLink: githubTree(
+				"Python-Level-3",
+				"AM-Check-In-3-Additional-Project"
+			)
+		}
+	);
+}
+
 function normalizeJavaLevel2(course: RawCourse) {
 	const earlyFileSupplementals = new Set([
 		"Project 2 File IO and Maps",
@@ -341,6 +474,22 @@ function normalizeJavaLevel3(course: RawCourse) {
 		}
 
 		return url;
+	});
+	setItemLinks(course, "Check-In #3", "Check-In #3 Overview", {
+		projectLink: githubTree("Java-Level-3", "AJ-Check-In-3-Starter"),
+		solutionLink: githubTree("Java-Level-3", "AJ-Check-In-3")
+	});
+	setItemLinks(course, "Check-In #3", "Check In #3: Extension Challenge", {
+		projectLink: githubTree("Java-Level-3", "AJ-Check-In-3-Starter"),
+		solutionLink: githubTree("Java-Level-3", "AJ-Check-In-3")
+	});
+	setItemLinks(course, "Check-In #4", "Check-In #4 Overview", {
+		projectLink: githubTree("Java-Level-3", "AJ-Check-In-4-Starter"),
+		solutionLink: githubTree("Java-Level-3", "AJ-Check-In-4")
+	});
+	setItemLinks(course, "Check-In #4", "Check In #4: Extension Challenge", {
+		projectLink: githubTree("Java-Level-3", "AJ-Check-In-4-Starter"),
+		solutionLink: githubTree("Java-Level-3", "AJ-Check-In-4")
 	});
 }
 
@@ -552,6 +701,9 @@ const normalizers: Record<string, (course: RawCourse) => void> = {
 	"low-level-security": normalizeLowLevelSecurity,
 	"low-level-security-part-2": normalizeLowLevelSecurityPart2,
 	"machine-learning": normalizeMachineLearning,
+	"python-level-1": normalizePythonLevel1,
+	"python-level-2": normalizePythonLevel2,
+	"python-level-3": normalizePythonLevel3,
 	"python-to-java-and-cpp-bridge": normalizePythonBridge,
 	"pythonic-design-patterns": normalizePythonicDesignPatterns,
 	"rust-systems-security": normalizeRustSystemsSecurity
