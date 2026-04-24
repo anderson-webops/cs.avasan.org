@@ -28,7 +28,7 @@ describe("courses page access gate", () => {
 
 		await flushPromises();
 		expect(wrapper.text()).toContain(
-			"Course materials are locked until you log in."
+			"Log in to open your assigned courses."
 		);
 
 		await wrapper.get("button").trigger("click");

@@ -9,6 +9,7 @@ type Displayable =
 	| null
 	| undefined
 	| string[]
+	| CourseProgress[]
 	| Tutor[]
 	| (string | Tutor)[];
 
@@ -37,9 +38,16 @@ export interface User {
 	recipientName?: string;
 	tutors?: (string | Tutor)[];
 	courseAccess?: string[];
+	courseProgress?: CourseProgress[];
 	editUsers: boolean;
 	saveEdit: string;
 	[key: string]: Displayable;
+}
+
+export interface CourseProgress {
+	courseId: string;
+	completedModuleIds: string[];
+	completedItemIds: string[];
 }
 
 export interface Admin {

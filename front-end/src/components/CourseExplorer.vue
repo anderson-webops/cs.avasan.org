@@ -189,13 +189,49 @@ const courseStats = computed(() => {
 		(total, module) => total + module.supplementalProjects.length,
 		0
 	);
+	const completedModuleCount = course.modules.filter(module =>
+		isModuleComplete(module)
+	).length;
+	const completedItemCount = course.modules.reduce(
+		(total, module) =>
+			total +
+			[...module.curriculum, ...module.supplementalProjects].filter(
+				item => isItemComplete(item)
+			).length,
+		0
+	);
 
 	return {
 		moduleCount: course.modules.length,
 		lessonCount,
-		supplementalCount
+		supplementalCount,
+		completedModuleCount,
+		completedItemCount,
+		totalItemCount: lessonCount + supplementalCount
 	};
 });
+
+const selectedCourseProgress = computed(() => {
+	const courseId = selectedCourseId.value;
+	if (!courseId || !currentUser.value) return null;
+	return (
+		currentUser.value.courseProgress?.find(
+			progress => progress.courseId === courseId
+		) ?? null
+	);
+});
+
+const hasProgressTracking = computed(
+	() => !props.publicCatalog && !!currentUser.value
+);
+
+const completedModuleIdSet = computed(
+	() => new Set(selectedCourseProgress.value?.completedModuleIds ?? [])
+);
+
+const completedItemIdSet = computed(
+	() => new Set(selectedCourseProgress.value?.completedItemIds ?? [])
+);
 
 const visibleModules = computed<VisibleModule[]>(() => {
 	const course = selectedCourse.value;
@@ -316,6 +352,14 @@ function itemMatches(item: CourseModuleItem, query: string) {
 	return (
 		matchesSearch(item.title, query) || matchesSearch(item.content, query)
 	);
+}
+
+function isModuleComplete(module: CourseModule) {
+	return completedModuleIdSet.value.has(module.id);
+}
+
+function isItemComplete(item: CourseModuleItem) {
+	return completedItemIdSet.value.has(item.id);
 }
 
 function selectCourse(id: string) {
@@ -488,6 +532,20 @@ function writeStoredValue(key: string, value: string) {
 						<dt>Projects</dt>
 						<dd>{{ courseStats.supplementalCount }}</dd>
 					</div>
+					<div v-if="hasProgressTracking" class="stat is-progress">
+						<dt>Done</dt>
+						<dd>
+							{{ courseStats.completedModuleCount }}/{{
+								courseStats.moduleCount
+							}}
+						</dd>
+						<small>
+							{{ courseStats.completedItemCount }}/{{
+								courseStats.totalItemCount
+							}}
+							items
+						</small>
+					</div>
 				</dl>
 			</header>
 
@@ -556,6 +614,11 @@ function writeStoredValue(key: string, value: string) {
 									: undefined
 							"
 							class="outline-button"
+							:class="{
+								'is-complete':
+									hasProgressTracking &&
+									isModuleComplete(module)
+							}"
 							type="button"
 							@click="selectModule(module.id)"
 						>
@@ -574,6 +637,15 @@ function writeStoredValue(key: string, value: string) {
 									<span v-if="module.isFiltered">
 										visible out of
 										{{ module.totalItemCount }}
+									</span>
+									<span
+										v-if="
+											hasProgressTracking &&
+											isModuleComplete(module)
+										"
+										class="complete-pill"
+									>
+										Complete
 									</span>
 								</small>
 							</span>
@@ -603,6 +675,15 @@ function writeStoredValue(key: string, value: string) {
 								Module {{ activeModule.position }}
 							</p>
 							<h3>{{ activeModule.title }}</h3>
+							<p
+								v-if="
+									hasProgressTracking &&
+									isModuleComplete(activeModule)
+								"
+								class="module-complete-note"
+							>
+								Completed
+							</p>
 						</div>
 
 						<div
@@ -683,6 +764,15 @@ function writeStoredValue(key: string, value: string) {
 											<p class="lesson-kicker">Lesson</p>
 											<h5>{{ item.title }}</h5>
 										</div>
+										<span
+											v-if="
+												hasProgressTracking &&
+												isItemComplete(item)
+											"
+											class="item-complete-badge"
+										>
+											Done
+										</span>
 									</header>
 
 									<div
@@ -778,6 +868,15 @@ function writeStoredValue(key: string, value: string) {
 											</p>
 											<h5>{{ item.title }}</h5>
 										</div>
+										<span
+											v-if="
+												hasProgressTracking &&
+												isItemComplete(item)
+											"
+											class="item-complete-badge"
+										>
+											Done
+										</span>
 									</header>
 
 									<div
@@ -977,7 +1076,7 @@ function writeStoredValue(key: string, value: string) {
 	max-width: 27rem;
 	min-width: 0;
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(6.8rem, 1fr));
 	gap: 0;
 	margin: 0;
 	border-radius: 18px;
@@ -1002,6 +1101,10 @@ function writeStoredValue(key: string, value: string) {
 	border-right: none;
 }
 
+.stat.is-progress {
+	background: rgba(236, 253, 245, 0.72);
+}
+
 .stat dt {
 	margin: 0;
 	font-size: clamp(0.68rem, 0.78vw, 0.8rem);
@@ -1016,6 +1119,13 @@ function writeStoredValue(key: string, value: string) {
 	font-size: clamp(1.3rem, 3vw, 1.8rem);
 	font-weight: 700;
 	color: var(--course-text);
+}
+
+.stat small {
+	display: block;
+	margin-top: 0.35rem;
+	line-height: 1.35;
+	color: var(--course-text-soft);
 }
 
 .course-toolbar {
@@ -1211,6 +1321,11 @@ function writeStoredValue(key: string, value: string) {
 	box-shadow: 0 16px 28px -24px rgba(15, 118, 110, 0.22);
 }
 
+.outline-button.is-complete {
+	border-color: rgba(22, 163, 74, 0.2);
+	background: rgba(240, 253, 244, 0.78);
+}
+
 .outline-position,
 .lesson-index {
 	width: 2.5rem;
@@ -1245,8 +1360,35 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .outline-copy small {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 0.5rem;
+	align-items: center;
 	color: var(--course-text-soft);
 	line-height: 1.5;
+}
+
+.complete-pill,
+.module-complete-note,
+.item-complete-badge {
+	display: inline-flex;
+	align-items: center;
+	width: fit-content;
+	border-radius: 999px;
+	background: rgba(22, 163, 74, 0.12);
+	color: #166534;
+	font-weight: 700;
+}
+
+.complete-pill {
+	padding: 0.1rem 0.45rem;
+	font-size: 0.72rem;
+}
+
+.module-complete-note {
+	padding: 0.35rem 0.65rem;
+	font-size: 0.82rem;
+	line-height: 1.2;
 }
 
 .outline-empty,
@@ -1428,6 +1570,14 @@ function writeStoredValue(key: string, value: string) {
 	display: flex;
 	align-items: flex-start;
 	gap: 0.9rem;
+}
+
+.item-complete-badge {
+	margin-left: auto;
+	padding: 0.4rem 0.65rem;
+	font-size: 0.78rem;
+	line-height: 1.2;
+	flex: 0 0 auto;
 }
 
 .lesson-index.is-supplemental {
@@ -1614,7 +1764,6 @@ function writeStoredValue(key: string, value: string) {
 	.course-stats {
 		width: 100%;
 		max-width: none;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 }
 
@@ -1638,6 +1787,10 @@ function writeStoredValue(key: string, value: string) {
 	.jump-link {
 		width: 100%;
 		justify-content: space-between;
+	}
+
+	.item-complete-badge {
+		margin-left: 0;
 	}
 
 	.outline-button {

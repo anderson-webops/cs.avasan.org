@@ -34,8 +34,9 @@ const navItems = [
 const hasActionSlot = computed(() => !!useSlots().actions);
 
 function isActive(path: string) {
-	if (path === "/admin") return route.path === "/admin";
-	return route.path === path || route.path.startsWith(`${path}/`);
+	const currentPath = route?.path ?? "";
+	if (path === "/admin") return currentPath === "/admin";
+	return currentPath === path || currentPath.startsWith(`${path}/`);
 }
 </script>
 

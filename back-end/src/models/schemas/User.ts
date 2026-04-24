@@ -36,6 +36,23 @@ const userSchema: Schema<IUser> = new Schema(
 			type: [String],
 			default: []
 		},
+		courseProgress: {
+			type: [
+				{
+					_id: false,
+					courseId: { type: String, required: true, trim: true },
+					completedModuleIds: {
+						type: [String],
+						default: []
+					},
+					completedItemIds: {
+						type: [String],
+						default: []
+					}
+				}
+			],
+			default: []
+		},
 		editUsers: { type: Boolean, default: false, required: true }, // Added required: true
 		saveEdit: { type: String, default: "Edit", required: true }, // Added required: true
 		role: { type: String, default: "user" }

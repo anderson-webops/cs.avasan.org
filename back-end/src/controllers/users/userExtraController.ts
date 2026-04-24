@@ -24,6 +24,22 @@ function normalizeRecipientName(value: string): string {
 	return value.trim().toLowerCase();
 }
 
+function normalizeStringArray(value: unknown): string[] | null {
+	if (!Array.isArray(value)) return null;
+	return [...new Set(value.map(item => (typeof item === "string" ? item.trim() : "")).filter(Boolean))];
+}
+
+function tutorOwnsUser(user: { tutors?: unknown[] } | null, tutorID: string) {
+	return user?.tutors?.some((tutor) => {
+		const id
+			= tutor && typeof tutor === "object" && "_id" in tutor
+				? tutor._id
+				: tutor;
+		if (!id) return false;
+		return id.toString() === tutorID;
+	}) ?? false;
+}
+
 export const getUsersOfTutor: RequestHandler = async (req, res) => {
 	const paramTutorID = req.params.tutorID;
 	const tutorID = Array.isArray(paramTutorID) ? paramTutorID[0] : paramTutorID;
@@ -137,8 +153,69 @@ export const setUserCourseAccess: RequestHandler = async (req, res) => {
 	}
 
 	user.courseAccess = uniqueCourses;
+	const allowedCourses = new Set(uniqueCourses);
+	user.courseProgress = (user.courseProgress ?? []).filter(progress => allowedCourses.has(progress.courseId));
 	await user.save();
 	res.json({ courseAccess: user.courseAccess });
+};
+
+export const setUserCourseProgress: RequestHandler = async (req, res) => {
+	const userID = getUserIDParam(req, res);
+	if (!userID) return;
+
+	const courseId = typeof req.body?.courseId === "string" ? req.body.courseId.trim() : "";
+	const completedModuleIds = normalizeStringArray(req.body?.completedModuleIds ?? []);
+	const completedItemIds = normalizeStringArray(req.body?.completedItemIds ?? []);
+
+	if (!courseId) {
+		return res.status(400).json({ message: "courseId is required" });
+	}
+
+	if (!completedModuleIds || !completedItemIds) {
+		return res.status(400).json({ message: "Completed IDs must be arrays" });
+	}
+
+	const user = await User.findById(userID).populate("tutors", "_id");
+	if (!user) return res.sendStatus(404);
+
+	if (!(user.courseAccess ?? []).includes(courseId)) {
+		return res.status(400).json({ message: "Course must be assigned before progress can be updated" });
+	}
+
+	const actingTutor = req.currentTutor;
+	const actingAdmin = req.currentAdmin;
+
+	if (!actingAdmin) {
+		if (!actingTutor) {
+			return res.status(403).json({ message: "Tutor session required" });
+		}
+
+		if (!tutorOwnsUser(user, actingTutor._id.toString())) {
+			return res.status(403).json({ message: "You can only update progress for your own students" });
+		}
+
+		const allowed = new Set(actingTutor.coursePermissions ?? []);
+		if (!allowed.has(courseId)) {
+			return res.status(403).json({ message: `Course ${courseId} is not enabled for this tutor` });
+		}
+	}
+
+	const existingProgress = (user.courseProgress ?? []).filter(progress => progress.courseId !== courseId);
+	user.courseProgress = [
+		...existingProgress,
+		{
+			courseId,
+			completedModuleIds,
+			completedItemIds
+		}
+	].sort(
+		(a, b) =>
+			(user.courseAccess ?? []).indexOf(a.courseId)
+			- (user.courseAccess ?? []).indexOf(b.courseId)
+	);
+
+	await user.save();
+	res.json({ courseProgress: user.courseProgress });
 };
 
 export const promoteUserToTutor: RequestHandler = async (req, res) => {

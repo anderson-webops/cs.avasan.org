@@ -17,6 +17,9 @@ describe("CourseExplorer.vue", () => {
 		const appStore = useAppStore();
 		const coursesStore = useCoursesStore();
 		const assignedCourse = coursesStore.courses[0];
+		const course = await coursesStore.loadCourseById(assignedCourse.id);
+		const firstModule = course?.modules[0];
+		const firstItem = firstModule?.curriculum[0];
 
 		appStore.setCurrentUser({
 			_id: "user-1",
@@ -25,6 +28,16 @@ describe("CourseExplorer.vue", () => {
 			age: 12,
 			state: "GA",
 			courseAccess: [assignedCourse.id],
+			courseProgress:
+				firstModule && firstItem
+					? [
+							{
+								courseId: assignedCourse.id,
+								completedModuleIds: [firstModule.id],
+								completedItemIds: [firstItem.id]
+							}
+						]
+					: [],
 			editUsers: false,
 			saveEdit: "Save"
 		});
@@ -37,10 +50,12 @@ describe("CourseExplorer.vue", () => {
 		await flushPromises();
 
 		await vi.waitFor(() => {
-			expect(wrapper.text()).toContain("Course material");
+			expect(wrapper.text()).toContain("Assigned courses");
 		});
 		expect(wrapper.text()).toContain(assignedCourse.name);
 		expect(wrapper.text()).toContain("Core lessons");
 		expect(wrapper.text()).toContain("Projects");
+		expect(wrapper.text()).toContain("Done");
+		expect(wrapper.text()).toContain("Complete");
 	});
 });

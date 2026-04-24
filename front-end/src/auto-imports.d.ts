@@ -205,6 +205,7 @@ declare global {
   const useIntervalFn: typeof import('@vueuse/core').useIntervalFn
   const useKeyModifier: typeof import('@vueuse/core').useKeyModifier
   const useLastChanged: typeof import('@vueuse/core').useLastChanged
+  const useLearnerCourseProgress: typeof import('./composables/useLearnerCourseProgress').useLearnerCourseProgress
   const useLink: typeof import('vue-router/auto').useLink
   const useLocalStorage: typeof import('@vueuse/core').useLocalStorage
   const useMagicKeys: typeof import('@vueuse/core').useMagicKeys
@@ -325,7 +326,10 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Tutor, User, Admin } from './stores/app'
+  export type { LearnerCourseProgressController } from './composables/useLearnerCourseProgress'
+  import('./composables/useLearnerCourseProgress')
+  // @ts-ignore
+  export type { Tutor, User, CourseProgress, Admin } from './stores/app'
   import('./stores/app')
   // @ts-ignore
   export type { SubjectGroup, Highlight, FAQ } from './stores/content'
@@ -540,6 +544,7 @@ declare module 'vue' {
     readonly useIntervalFn: UnwrapRef<typeof import('@vueuse/core')['useIntervalFn']>
     readonly useKeyModifier: UnwrapRef<typeof import('@vueuse/core')['useKeyModifier']>
     readonly useLastChanged: UnwrapRef<typeof import('@vueuse/core')['useLastChanged']>
+    readonly useLearnerCourseProgress: UnwrapRef<typeof import('./composables/useLearnerCourseProgress')['useLearnerCourseProgress']>
     readonly useLink: UnwrapRef<typeof import('vue-router/auto')['useLink']>
     readonly useLocalStorage: UnwrapRef<typeof import('@vueuse/core')['useLocalStorage']>
     readonly useMagicKeys: UnwrapRef<typeof import('@vueuse/core')['useMagicKeys']>

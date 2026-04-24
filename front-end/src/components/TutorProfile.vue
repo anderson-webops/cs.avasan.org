@@ -3,9 +3,11 @@ import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
 import AccountSecurity from "@/components/AccountSecurity.vue";
+import LearnerCourseProgressEditor from "@/components/LearnerCourseProgressEditor.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 // import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
+import { useLearnerCourseProgress } from "@/composables/useLearnerCourseProgress";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
@@ -92,6 +94,12 @@ const courseLookup = computed(() => {
 
 const learnerCount = computed(() => users.value.length);
 const enabledCourseCount = computed(() => permittedCourses.value.length);
+const courseLabel = (id: string) => courseLookup.value[id] ?? id;
+const courseProgress = useLearnerCourseProgress(
+	users,
+	coursesStore.loadCourseById,
+	loadUsers
+);
 
 watch(
 	users,
@@ -137,6 +145,20 @@ async function saveUserCourses(userID: string) {
 	} catch (e: any) {
 		error.value =
 			e.response?.data?.message ?? e.message ?? "Unable to save courses";
+	}
+}
+
+async function saveUserProgress(userID: string) {
+	try {
+		success.value = "";
+		error.value = "";
+		await courseProgress.saveProgress(userID);
+		success.value = "Saved learner progress.";
+	} catch (e: any) {
+		error.value =
+			e.response?.data?.message ??
+			e.message ??
+			"Unable to save learner progress";
 	}
 }
 </script>
@@ -347,6 +369,13 @@ async function saveUserCourses(userID: string) {
 								Save courses
 							</button>
 						</div>
+
+						<LearnerCourseProgressEditor
+							:course-label="courseLabel"
+							:progress="courseProgress"
+							:user-id="String(u._id)"
+							@save-progress="saveUserProgress(String(u._id))"
+						/>
 					</div>
 				</article>
 			</div>

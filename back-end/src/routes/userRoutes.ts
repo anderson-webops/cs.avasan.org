@@ -18,6 +18,7 @@ import {
 	getUsersOfTutor,
 	promoteUserToTutor,
 	setUserCourseAccess,
+	setUserCourseProgress,
 	setUserRecipientAssociation,
 	setUserTutors
 } from "../controllers/users/userExtraController.js";
@@ -64,6 +65,7 @@ router.post("/:userID/promote", validAdmin, promoteUserToTutor);
 
 // Allow tutors and admins to manage course visibility for their students
 router.put("/:userID/courses", userCourseAccessLimiter, validTutorOrAdminSession, setUserCourseAccess);
+router.put("/:userID/course-progress", userCourseAccessLimiter, validTutorOrAdminSession, setUserCourseProgress);
 
 // Delete the user by the user themselves
 router.delete("/user/:userID", validUser, deleteOwnUser);

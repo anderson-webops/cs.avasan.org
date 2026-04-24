@@ -3,9 +3,11 @@ import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
 import AccountSecurity from "@/components/AccountSecurity.vue";
+import LearnerCourseProgressEditor from "@/components/LearnerCourseProgressEditor.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
+import { useLearnerCourseProgress } from "@/composables/useLearnerCourseProgress";
 import { ADMIN_RECIPIENT_NAMES } from "@/modules/adminRecipients";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
@@ -45,6 +47,13 @@ const courseNameMap = computed<Record<string, string>>(
 const courseLabel = (id: string) => courseNameMap.value[id] ?? id;
 const tutorCount = computed(() => tutors.value.length);
 const userCount = computed(() => users.value.length);
+const courseProgress = useLearnerCourseProgress(
+	users,
+	coursesStore.loadCourseById,
+	async () => {
+		await app.fetchUsers();
+	}
+);
 
 /* editable helper for the admin card */
 const {
@@ -316,6 +325,20 @@ function onUserCourseToggle(
 		...userCourseSelections.value,
 		[userID]: [...existing]
 	};
+}
+
+async function saveUserProgress(userID: string) {
+	try {
+		success.value = "";
+		error.value = "";
+		await courseProgress.saveProgress(userID);
+		success.value = "Saved learner progress.";
+	} catch (e: any) {
+		error.value =
+			e.response?.data?.message ??
+			e.message ??
+			"Unable to save learner progress";
+	}
 }
 
 async function saveUserEditorChanges(userID: string) {
@@ -843,6 +866,14 @@ function confirmDeleteAdmin() {
 									</label>
 								</div>
 							</div>
+
+							<LearnerCourseProgressEditor
+								class="editor-block"
+								:course-label="courseLabel"
+								:progress="courseProgress"
+								:user-id="String(u._id)"
+								@save-progress="saveUserProgress(String(u._id))"
+							/>
 
 							<div class="action-row">
 								<button
