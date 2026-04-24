@@ -321,6 +321,8 @@ function isProfileTab(value: string | null): value is ProfileTab {
 	font-size: clamp(2.1rem, 5vw, 2.85rem);
 	font-weight: 700;
 	line-height: 1.12;
+	color: #f8fafc;
+	text-shadow: 0 16px 32px rgba(15, 23, 42, 0.28);
 }
 
 .profile-header p {

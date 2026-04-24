@@ -106,27 +106,27 @@ export const courseCatalog: CourseCatalogEntry[] = [
 					pythonToJavaAndCppBridgeCourse
 			)
 	},
-		{
-			id: "c-level-1",
-			name: "C++ Level 1",
-			load: () =>
-				import("./cpp-level-1").then(
-					({ cppLevel1Course }) => cppLevel1Course
-				)
-		},
-		{
-			id: "cpp-level-2",
-			name: "C++ Level 2",
-			load: () =>
-				import("./cpp-level-2").then(
-					({ cppLevel2Course }) => cppLevel2Course
-				)
-		},
-		{
-			id: "data-structures-and-algorithms-in-cpp",
-			name: "Data Structures and Algorithms in C++",
-			load: () =>
-				import("./data-structures-and-algorithms-in-cpp").then(
+	{
+		id: "c-level-1",
+		name: "C++ Level 1",
+		load: () =>
+			import("./cpp-level-1").then(
+				({ cppLevel1Course }) => cppLevel1Course
+			)
+	},
+	{
+		id: "cpp-level-2",
+		name: "C++ Level 2",
+		load: () =>
+			import("./cpp-level-2").then(
+				({ cppLevel2Course }) => cppLevel2Course
+			)
+	},
+	{
+		id: "data-structures-and-algorithms-in-cpp",
+		name: "Data Structures and Algorithms in C++",
+		load: () =>
+			import("./data-structures-and-algorithms-in-cpp").then(
 				({ dataStructuresAndAlgorithmsInCppCourse }) =>
 					dataStructuresAndAlgorithmsInCppCourse
 			)

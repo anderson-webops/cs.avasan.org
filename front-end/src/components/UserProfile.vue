@@ -228,7 +228,7 @@ const fields = [
 	width: 100%;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
+	grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem);
 	align-items: start;
 	gap: 1rem 1.5rem;
 	padding: clamp(1.35rem, 2.1vw, 1.8rem);
@@ -277,7 +277,9 @@ const fields = [
 }
 
 .workspace-stats {
-	width: min(100%, 19rem);
+	width: 100%;
+	max-width: 19rem;
+	min-width: 0;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(7.5rem, 1fr));
 	gap: 0;
@@ -410,7 +412,7 @@ const fields = [
 	margin-top: 10px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1500px) {
 	.workspace-header,
 	.sheet-summary,
 	.sheet-body {
@@ -419,6 +421,7 @@ const fields = [
 
 	.workspace-stats {
 		width: 100%;
+		max-width: none;
 	}
 }
 

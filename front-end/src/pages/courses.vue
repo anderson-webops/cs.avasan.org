@@ -189,6 +189,20 @@ function openSignup() {
 	color: var(--color-ink-soft);
 }
 
+@media (max-width: 1500px) {
+	.courses-hero {
+		align-items: stretch;
+	}
+
+	.courses-actions {
+		width: 100%;
+	}
+
+	.courses-actions > * {
+		flex: 1 1 12rem;
+	}
+}
+
 @media (max-width: 700px) {
 	.courses-page {
 		padding-top: 0.5rem;

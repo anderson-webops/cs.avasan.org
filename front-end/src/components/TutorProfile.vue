@@ -384,7 +384,7 @@ async function saveUserCourses(userID: string) {
 	width: 100%;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
+	grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem);
 	align-items: start;
 	gap: 1rem 1.5rem;
 	padding: clamp(1.35rem, 2.1vw, 1.8rem);
@@ -459,7 +459,9 @@ async function saveUserCourses(userID: string) {
 }
 
 .workspace-stats {
-	width: min(100%, 19rem);
+	width: 100%;
+	max-width: 19rem;
+	min-width: 0;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(7.5rem, 1fr));
 	gap: 0;
@@ -645,7 +647,7 @@ async function saveUserCourses(userID: string) {
 	margin-top: 10px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1500px) {
 	.workspace-header,
 	.section-heading,
 	.sheet-summary,
@@ -655,6 +657,7 @@ async function saveUserCourses(userID: string) {
 
 	.workspace-stats {
 		width: 100%;
+		max-width: none;
 	}
 }
 

@@ -910,7 +910,7 @@ function writeStoredValue(key: string, value: string) {
 	width: 100%;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
+	grid-template-columns: minmax(0, 1fr) minmax(23rem, 27rem);
 	align-items: start;
 	gap: 1rem 1.5rem;
 	padding: clamp(1.4rem, 2.2vw, 1.9rem);
@@ -973,10 +973,11 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .course-stats {
-	width: min(100%, 29rem);
-	flex: 0 1 29rem;
+	width: 100%;
+	max-width: 27rem;
+	min-width: 0;
 	display: grid;
-	grid-template-columns: repeat(3, minmax(8.75rem, 1fr));
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 0;
 	margin: 0;
 	border-radius: 18px;
@@ -991,6 +992,7 @@ function writeStoredValue(key: string, value: string) {
 	background: transparent;
 	border-right: 1px solid rgba(148, 163, 184, 0.18);
 	min-height: 100%;
+	min-width: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -1002,11 +1004,10 @@ function writeStoredValue(key: string, value: string) {
 
 .stat dt {
 	margin: 0;
-	font-size: 0.82rem;
+	font-size: clamp(0.68rem, 0.78vw, 0.8rem);
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	white-space: nowrap;
 	color: #0f766e;
 }
 
@@ -1599,7 +1600,7 @@ function writeStoredValue(key: string, value: string) {
 	}
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1500px) {
 	.course-hero,
 	.course-toolbar {
 		display: grid;
@@ -1612,6 +1613,7 @@ function writeStoredValue(key: string, value: string) {
 
 	.course-stats {
 		width: 100%;
+		max-width: none;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 }

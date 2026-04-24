@@ -1,21 +1,33 @@
 <script lang="ts" setup>
-const router = useRouter();
-const { t } = useI18n();
-useHead({
-	title: () => t("not-found")
-});
+import AccountManagement from "~/components/AccountManagement.vue";
+import TheHeader from "~/components/TheHeader.vue";
+import { useAppStore } from "../stores/app";
+
+const app = useAppStore();
+
+function showLoginModal() {
+	app.setLoginBlock(true);
+}
+
+function showSignupModal() {
+	app.setSignupBlock(true);
+}
 </script>
 
 <template>
-	<main p="x4 y10" text="center teal-700 dark:gray-200">
-		<div text-4xl>
-			<div i-carbon-warning inline-block />
-		</div>
-		<RouterView />
-		<div>
-			<button btn m="3 t8" text-sm @click="router.back()">
-				{{ t("button.back") }}
-			</button>
-		</div>
-	</main>
+	<div class="site-frame">
+		<a class="skip-link" href="#main-content">Skip to content</a>
+
+		<TheHeader
+			@login-click="showLoginModal"
+			@signup-click="showSignupModal"
+		/>
+
+		<AccountManagement />
+
+		<main id="main-content" class="site-main">
+			<RouterView />
+		</main>
+		<TheFooter />
+	</div>
 </template>
