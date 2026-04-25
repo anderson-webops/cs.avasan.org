@@ -84,13 +84,13 @@ const hasCourseAccess = computed(() => {
 });
 
 const courseEyebrow = computed(() =>
-	props.publicCatalog ? "Course library" : "Assigned courses"
+	props.publicCatalog ? "Course preview" : "Current course"
 );
 
 const courseDescription = computed(() =>
 	props.publicCatalog
-		? "Browse courses and open their project links."
-		: "Search assigned courses and open module summaries and project links."
+		? "Open modules, projects, and supplemental resources from this course."
+		: "Use the controls below to switch courses or search inside this syllabus."
 );
 
 const emptyTitle = computed(() =>
@@ -1009,24 +1009,16 @@ function writeStoredValue(key: string, value: string) {
 	width: 100%;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(23rem, 27rem);
-	align-items: start;
+	grid-template-columns: minmax(0, 1fr) minmax(24rem, 31rem);
+	align-items: center;
 	gap: 1rem 1.5rem;
-	padding: clamp(1.4rem, 2.2vw, 1.9rem);
-	border-radius: 22px;
-	background: linear-gradient(
-		180deg,
-		rgba(248, 250, 252, 0.9),
-		rgba(255, 255, 255, 0.8)
-	);
-	border: 1px solid rgba(148, 163, 184, 0.18);
-	box-shadow: 0 22px 44px -36px rgba(15, 23, 42, 0.24);
+	padding: 0.2rem 0.15rem 0.05rem;
 }
 
 .course-hero-copy {
 	display: flex;
 	flex-direction: column;
-	gap: 0.75rem;
+	gap: 0.55rem;
 	flex: 1 1 34rem;
 	min-width: 0;
 }
@@ -1053,7 +1045,7 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .course-hero h2 {
-	font-size: clamp(2rem, 3.8vw, 3.1rem);
+	font-size: clamp(1.7rem, 3vw, 2.55rem);
 	line-height: 1.08;
 }
 
@@ -1067,21 +1059,21 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .course-description {
-	max-width: 42rem;
-	font-size: 1.04rem;
+	max-width: 46rem;
+	font-size: 0.98rem;
 }
 
 .course-stats {
 	width: 100%;
-	max-width: 27rem;
+	max-width: 31rem;
 	min-width: 0;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(6.8rem, 1fr));
 	gap: 0;
 	margin: 0;
-	border-radius: 18px;
+	border-radius: 16px;
 	overflow: hidden;
-	background: rgba(255, 255, 255, 0.66);
+	background: rgba(255, 255, 255, 0.72);
 	border: 1px solid rgba(148, 163, 184, 0.22);
 	box-shadow: 0 18px 32px -28px rgba(15, 23, 42, 0.18);
 }
