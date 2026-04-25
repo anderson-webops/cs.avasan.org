@@ -19,29 +19,45 @@ export interface FAQ {
 export const useContentStore = defineStore("content", () => {
 	const subjectGroups = ref<SubjectGroup[]>([
 		{
-			title: "Programming & Computer Science",
+			title: "Programming Foundations",
 			subjects: [
-				"Python",
 				"Scratch",
-				"C++",
-				"C",
+				"Python",
 				"Java",
-				"Intro to AI & Machine Learning"
-			]
-		},
-		{
-			title: "Web Development",
-			subjects: [
-				"HTML",
-				"CSS",
 				"JavaScript",
-				"TypeScript",
-				"Responsive Design"
+				"C and C++",
+				"AP Computer Science A"
 			]
 		},
 		{
-			title: "STEM & Language",
-			subjects: ["Math", "Physics", "Spanish"]
+			title: "Advanced CS & Systems",
+			subjects: [
+				"USACO and Algorithms",
+				"Data Structures",
+				"Design Patterns",
+				"Linux and Networking",
+				"Systems Security",
+				"Assembly"
+			]
+		},
+		{
+			title: "Web, Apps & Data",
+			subjects: [
+				"HTML, CSS, and TypeScript",
+				"Web Development Foundations",
+				"Swift App Development",
+				"Data Science",
+				"AI and Machine Learning"
+			]
+		},
+		{
+			title: "Math, Science & Spanish",
+			subjects: [
+				"Algebra 1 and Algebra 2",
+				"Physics",
+				"Chemistry",
+				"Spanish"
+			]
 		}
 	]);
 

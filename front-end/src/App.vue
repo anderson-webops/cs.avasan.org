@@ -4,7 +4,7 @@
 // they will be rendered correctly in the HTML results with vite-ssg
 const siteUrl = "https://classes.jacobdanderson.net";
 const siteDescription =
-	"One-on-one online tutoring with Jacob Anderson for students working through coding projects, STEM coursework, or Spanish goals.";
+	"One-on-one online tutoring with Jacob Anderson for students working through coding, systems, STEM, or Spanish goals.";
 const route = useRoute();
 const noindexMatchers = [
 	/^\/admin(?:\/|$)/,

@@ -67,8 +67,8 @@ useHead(
 					Best for active coursework and projects
 				</p>
 				<h1 id="hero-title" class="page-title">
-					One-on-one help for coding projects, STEM coursework, and
-					Spanish study.
+					One-on-one help for coding projects, systems courses, STEM
+					coursework, and Spanish study.
 				</h1>
 				<p class="page-copy">
 					Former Juni Learning instructor Jacob Anderson works best
@@ -120,9 +120,11 @@ useHead(
 			<div class="section-heading">
 				<h2 id="subjects-title" class="section-title">What I Teach</h2>
 				<p class="section-intro">
-					Most students come for coding and technical coursework.
-					Math, physics, and Spanish support are also available when
-					there is a clear course goal or assignment.
+					Most students come for coding and technical coursework, from
+					first projects through AP CS, algorithms, systems, web,
+					apps, data, and security. Math, science, and Spanish support
+					are also available when there is a clear course goal or
+					assignment.
 				</p>
 			</div>
 			<div class="subject-grid">
