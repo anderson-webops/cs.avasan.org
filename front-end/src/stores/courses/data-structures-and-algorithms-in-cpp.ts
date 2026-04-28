@@ -9,7 +9,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Course Positioning After C++ Level 2",
 					content:
-						"Position this course as the next serious step after `C++ Level 2`. Students should already be comfortable with variables, control flow, functions, classes, vectors, pointers, references, and manual memory reasoning before this sequence shifts the focus to data structures, algorithm design, and complexity."
+						"Position this course as the algorithmic next step after `C++ Level 2`, with `C++ Level 3` preferred first when the student needs more practice with file-backed programs, recursion, STL containers, RAII, and medium-size C++ structure. Students entering this sequence should already be comfortable with variables, control flow, functions, classes, vectors, pointers, references, and ownership reasoning before the focus shifts to data structures, algorithm design, and complexity."
 				},
 				{
 					title: "Preferred Toolchain",

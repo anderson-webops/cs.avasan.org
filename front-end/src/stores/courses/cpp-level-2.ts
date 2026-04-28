@@ -4,6 +4,38 @@ export const cppLevel2Course: RawCourse = {
 	name: "C++ Level 2",
 	modules: [
 		{
+			title: "CPPM0 Lifetime, References, and Ownership Framing",
+			curriculum: [
+				{
+					title: "Course Positioning After C++ Level 1",
+					content:
+						"Position this course as the low-level follow-on after students can already write menu-driven programs with functions, classes, vectors, structs, references, and simple state. Level 2 should deepen the memory model rather than introduce pointer syntax as disconnected trivia."
+				},
+				{
+					title: "References, Const, and API Boundaries",
+					content:
+						"Review pass-by-value, pass-by-reference, and `const` reference before raw pointers. Students should be able to explain when a function owns data, when it only observes data, and when it is allowed to mutate caller-owned data."
+				},
+				{
+					title: "Stack, Heap, and Lifetime Vocabulary",
+					content:
+						"Make lifetime explicit before allocation begins. Students should distinguish stack objects, heap objects, aliases, dangling references, leaks, and objects that clean themselves up when they leave scope."
+				},
+				{
+					title: "Debugging Memory by Evidence",
+					content:
+						"Use small tracing examples, address prints, and debugger inspection to prove where values live and why an alias changes what it changes. The habit is evidence first, assumptions second."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Lifetime Tracing Warm-Up",
+					content:
+						"Trace a short multi-function program by drawing stack frames, aliases, and mutation points. Students should identify which variables are independent copies, which are references, and which values would become invalid after a scope ends."
+				}
+			]
+		},
+		{
 			title: "CPPM1 Pointers and Addresses",
 			curriculum: [
 				{
@@ -154,6 +186,11 @@ export const cppLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM4-Dynamic-Variables-Reference"
 				},
 				{
+					title: "Manual Ownership Before Modern Ownership",
+					content:
+						"Frame raw `new` and `delete` as a teaching tool for understanding ownership, not as the default modern C++ style. Students should name exactly who is responsible for deleting each allocation before they write code that creates it."
+				},
+				{
 					title: "CPPM4 Project 1: Assembly Line",
 					content:
 						"Use dynamically created objects in a small loop-driven workflow so students can see allocation, replacement, and cleanup happen in a concrete program.",
@@ -220,9 +257,14 @@ export const cppLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Profile-Posts"
 				},
 				{
+					title: "RAII and Unique Pointer Review",
+					content:
+						"After the manual-memory capstones, show the modern correction: resources should normally be tied to object lifetime, and single-owner heap data should usually move toward `std::unique_ptr` or a standard container. Students do not need a deep smart-pointer unit yet, but they should not leave thinking raw ownership is the preferred endpoint."
+				},
+				{
 					title: "Next-Step Positioning",
 					content:
-						"Position this course as the bridge into `Data Structures and Algorithms in C++` or `C Systems Engineering`. Students leaving this sequence should now be ready for pointer-heavy debugging, ownership reasoning, and stricter low-level invariants."
+						"Position this course as the bridge into `C++ Level 3`, `Data Structures and Algorithms in C++`, or `C Systems Engineering`. Students leaving this sequence should now be ready for pointer-heavy debugging, ownership reasoning, stricter low-level invariants, and a first pass at modern ownership vocabulary."
 				}
 			],
 			supplementalProjects: [
@@ -234,6 +276,11 @@ export const cppLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Profile-Posts",
 					solutionLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Profile-Posts"
+				},
+				{
+					title: "Modern Ownership Reflection",
+					content:
+						"Pick one manual allocation from a capstone and describe how the design would change if it used a standard container or `std::unique_ptr`. The goal is to compare ownership responsibilities, not to rewrite the whole project."
 				}
 			]
 		}

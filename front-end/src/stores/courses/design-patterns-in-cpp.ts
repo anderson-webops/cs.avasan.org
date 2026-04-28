@@ -9,7 +9,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Modern C++ Toolchain Baseline",
 					content:
-						"Standardize on `CLion` or `VS Code` with a working compiler, debugger, and `CMake` before introducing any pattern work. This course assumes multi-file builds, repeatable compile commands, and debugger access from the first unit."
+						"Standardize on `CLion` or `VS Code` with a working compiler, debugger, and `CMake` before introducing any pattern work. This course assumes multi-file builds, repeatable compile commands, debugger access, and the modern C++ habits developed in `C++ Level 3` or equivalent experience."
 				},
 				{
 					title: "Compiler, CMake, and Debugger Verification",

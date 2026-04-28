@@ -353,9 +353,24 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts"
 				},
 				{
+					title: "Command Loops and Menu Flow",
+					content:
+						"Before the capstone is finished, convert one-shot profile operations into a menu-driven command loop. Students should practice prompting until the user chooses to quit, rejecting invalid choices, and keeping input handling separate from the `Profile` methods that update data."
+				},
+				{
+					title: "Switch Statements and Enum Class Modes",
+					content:
+						"Teach `switch` as the right tool when one discrete value selects the next action, then pair it with `enum class` so menu choices and program modes are named instead of stored as magic numbers or strings. Require each `case` to end with `break`, `return`, or an explicitly discussed fallthrough."
+				},
+				{
+					title: "Simple State Machines and State Diagrams",
+					content:
+						"Draw a small state diagram for the profile manager before coding the loop. Students should identify states such as `MainMenu`, `ViewingPosts`, `EditingPost`, and `Quit`, then explain why the same command can mean different things in different states."
+				},
+				{
 					title: "CPPF8 Project: Profile Posts",
 					content:
-						"Build a small profile manager that stores posts, prints them clearly, sums hearts, removes posts safely, and updates likes. This is the intended endpoint of the Level 1 path before students move into lower-level memory work.",
+						"Build a small profile manager that stores posts, prints them clearly, sums hearts, removes posts safely, and updates likes. The finished version should include a clear command loop, validated menu choices, and at least one named program state so students leave Level 1 with a small interactive application rather than a collection of isolated functions.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts",
 					solutionLink:
@@ -364,7 +379,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Course Recap and Next Steps",
 					content:
-						"Close the course by naming the major ideas students should now be comfortable with: decomposition, object modeling, small records, vectors, and grid-style iteration. Position `C++ Level 2` as the low-level follow-on when they are ready for pointers and manual memory."
+						"Close the course by naming the major ideas students should now be comfortable with: decomposition, object modeling, small records, vectors, grid-style iteration, command loops, `switch`, scoped enums, and simple program states. Position `C++ Level 2` as the low-level follow-on when they are ready for pointers and manual memory."
 				}
 			],
 			supplementalProjects: [
@@ -376,6 +391,11 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts",
 					solutionLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts"
+				},
+				{
+					title: "Profile Posts: State Machine Extension",
+					content:
+						"Add a written state diagram and update the capstone so the user can move between at least three explicit modes. The extension should make students justify why a `switch` plus `enum class` is clearer than another long `if`/`else if` chain."
 				}
 			]
 		}

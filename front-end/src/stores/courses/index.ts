@@ -124,6 +124,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "cpp-level-3",
+		name: "C++ Level 3",
+		load: () =>
+			import("./cpp-level-3").then(
+				({ cppLevel3Course }) => cppLevel3Course
+			)
+	},
+	{
 		id: "data-structures-and-algorithms-in-cpp",
 		name: "Data Structures and Algorithms in C++",
 		load: () =>
