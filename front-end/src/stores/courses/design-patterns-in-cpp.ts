@@ -468,9 +468,14 @@ export const designPatternsInCppCourse: RawCourse = {
 						"Combine Command and State in an editor-style or simulator-style example where mode affects what commands are legal. This keeps the patterns tied to real workflow constraints. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
 				},
 				{
+					title: "Command Parsing without a Giant Switch",
+					content:
+						"Use the CS236 scanner/parser pipeline as a design-pattern bridge: raw text can become tokens, tokens can become command objects, and state objects can decide whether each command is currently legal. Students should still recognize when a simple `switch` is enough and when the command surface has grown past it."
+				},
+				{
 					title: "DPC7 Command and State: Core Project",
 					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward. Strong students can extend the command editor with a tiny scanner that turns text commands into command objects.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC5-Command-and-State-Editor/starter",
 					solutionLink:

@@ -24,14 +24,22 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI0 Project: Build and Debug Checkpoint",
 					content:
-						"Create a tiny multi-file command-line project with one class, one helper module, and one deliberately broken case. Students should fix the bug with a debugger or trace output and record the evidence that proved the fix."
+						"Create a tiny multi-file command-line project with one class, one helper module, and one deliberately broken case. Students should fix the bug with a debugger or trace output and record the evidence that proved the fix.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI0-Build-and-Debug-Checkpoint/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI0-Build-and-Debug-Checkpoint/solution"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Tooling Notebook: Warnings and Debugger Evidence",
 					content:
-						"Keep a short notebook entry showing the compiler command, one warning or debugger observation, and the code change made because of that evidence."
+						"Keep a short notebook entry showing the compiler command, one warning or debugger observation, and the code change made because of that evidence.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI0-Warnings-and-Debugger-Notebook/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI0-Warnings-and-Debugger-Notebook/solution"
 				}
 			]
 		},
@@ -49,6 +57,16 @@ export const cppLevel3Course: RawCourse = {
 						"Introduce `ifstream`, `ofstream`, `getline`, and simple text-file formats. The focus is persistence for small programs, not complex serialization or binary files."
 				},
 				{
+					title: "Scanner and Token Stream Design",
+					content:
+						"Adapt the CS236 scanner idea at a smaller scale: turn raw command text into typed tokens with line numbers, quoted strings, numbers, symbols, comments, and unknown-token handling. This makes `switch`, enums, string parsing, and validation work together before students attempt a full parser."
+				},
+				{
+					title: "Recursive-Descent Parser Boundaries",
+					content:
+						"Introduce the parser boundary without making this a compiler course. Students should see how `match`, `advance`, and one or two recursive list rules keep syntax errors out of the business logic for a command-driven program."
+				},
+				{
 					title: "Simple Parsing and Error Paths",
 					content:
 						"Parse small records from strings or files and decide what should happen when a line is missing a field, has the wrong type, or names an unknown command. Students should practice rejecting bad input without corrupting existing state."
@@ -56,14 +74,31 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI1 Project: Saveable Task Manager",
 					content:
-						"Build a command-driven task manager that can add tasks, mark them complete, filter by status, save to a text file, and reload on startup. The project should require at least one explicit parser function and one validation path."
+						"Build a command-driven task manager that can add tasks, mark them complete, filter by status, save to a text file, and reload on startup. The project should require at least one explicit parser function and one validation path.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Saveable-Task-Manager/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Saveable-Task-Manager/solution"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Parser Extension: Import and Reject Bad Rows",
 					content:
-						"Add a small import command that reports malformed rows without stopping the entire program. Students should explain which data was accepted, which data was rejected, and why."
+						"Add a small import command that reports malformed rows without stopping the entire program. Students should explain which data was accepted, which data was rejected, and why.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Import-and-Reject-Bad-Rows/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Import-and-Reject-Bad-Rows/solution"
+				},
+				{
+					title: "Mini Command Scanner",
+					content:
+						"Build a small tokenizer for task-manager-style commands. It should recognize words, numbers, quoted strings, punctuation, comments, line numbers, and malformed input before any command mutates application state.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Mini-Command-Scanner/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Mini-Command-Scanner/solution"
 				}
 			]
 		},
@@ -88,14 +123,22 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI2 Project: Recursive Maze or Word Search",
 					content:
-						"Implement a recursive search through a small grid. Students should mark visited cells, backtrack safely, and explain why the algorithm stops instead of looping forever."
+						"Implement a recursive search through a small grid. Students should mark visited cells, backtrack safely, and explain why the algorithm stops instead of looping forever.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI2-Recursive-Maze-Search/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI2-Recursive-Maze-Search/solution"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Recursion Trace Drill",
 					content:
-						"Trace three recursive calls by hand before running the program. The submitted work should include the predicted output, the actual output, and one corrected misconception."
+						"Trace three recursive calls by hand before running the program. The submitted work should include the predicted output, the actual output, and one corrected misconception.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI2-Recursion-Trace-Drill/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI2-Recursion-Trace-Drill/solution"
 				}
 			]
 		},
@@ -118,16 +161,29 @@ export const cppLevel3Course: RawCourse = {
 						"Introduce algorithms such as `find`, `count`, `sort`, and `transform` as reusable operations. Students should learn when a standard algorithm expresses intent more clearly than another custom loop."
 				},
 				{
+					title: "Relation-Style Table Operations",
+					content:
+						"Use the CS236 relation project as a practical container exercise: model rows as records, then implement small `select`, `project`, `rename`, and join-style views with `vector`, `set`, and `map`. The goal is database-style thinking without leaving C++ container fluency."
+				},
+				{
 					title: "CPPI3 Project: Inventory Indexer",
 					content:
-						"Build an inventory or library index that stores records in a sequence, maps IDs to records, tracks unique categories, and produces sorted views. The point is practical standard-library fluency before custom data structures."
+						"Build an inventory or library index that stores records in a sequence, maps IDs to records, tracks unique categories, and produces sorted relation-style views such as selected rows, projected names, renamed categories, and supplier joins. The point is practical standard-library fluency before custom data structures.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI3-Inventory-Indexer/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI3-Inventory-Indexer/solution"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Container Tradeoff Mini-Audit",
 					content:
-						"Take one part of the inventory project and justify why the selected container is better than at least one alternative for the operations the program actually performs."
+						"Take one part of the inventory project and justify why the selected container is better than at least one alternative for the operations the program actually performs.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI3-Container-Tradeoff-Audit/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI3-Container-Tradeoff-Audit/solution"
 				}
 			]
 		},
@@ -152,14 +208,22 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI4 Project: Resource-Safe File Processor",
 					content:
-						"Build a file-processing tool that opens input/output files, validates records, reports errors, and relies on object lifetime for cleanup. The project should include at least one deliberately failed open or parse case."
+						"Build a file-processing tool that opens input/output files, validates records, reports errors, and relies on object lifetime for cleanup. The project should include at least one deliberately failed open or parse case.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI4-Resource-Safe-File-Processor/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI4-Resource-Safe-File-Processor/solution"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Ownership Rewrite Reflection",
 					content:
-						"Rewrite one small raw-pointer example from Level 2 using a standard container or `std::unique_ptr`, then explain what cleanup responsibility disappeared and what responsibility remains."
+						"Rewrite one small raw-pointer example from Level 2 using a standard container or `std::unique_ptr`, then explain what cleanup responsibility disappeared and what responsibility remains.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI4-Ownership-Rewrite-Reflection/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI4-Ownership-Rewrite-Reflection/solution"
 				}
 			]
 		},
@@ -184,14 +248,22 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI5 Project: Score or Fraction Toolkit",
 					content:
-						"Build a small value type such as `Fraction`, `Score`, or `Measurement` with validation, output, comparisons, and one or two restrained overloaded operators. Add a templated helper where it improves reuse."
+						"Build a small value type such as `Fraction`, `Score`, or `Measurement` with validation, output, comparisons, and one or two restrained overloaded operators. Add a templated helper where it improves reuse.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI5-Fraction-Toolkit/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI5-Fraction-Toolkit/solution"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Template Error Reading Drill",
 					content:
-						"Trigger one controlled template compile error and practice reading the first useful diagnostic instead of reacting to the entire wall of compiler output."
+						"Trigger one controlled template compile error and practice reading the first useful diagnostic instead of reacting to the entire wall of compiler output.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI5-Template-Error-Reading-Drill/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI5-Template-Error-Reading-Drill/solution"
 				}
 			]
 		},
@@ -214,16 +286,29 @@ export const cppLevel3Course: RawCourse = {
 						"Close the course by naming the next paths clearly. Students ready for algorithmic implementation should continue to `Data Structures and Algorithms in C++`; students interested in architecture should continue to `Design Patterns in C++`; students interested in lower-level representation can move into `C Systems Engineering`."
 				},
 				{
+					title: "Interpreter Pipeline as a Capstone Option",
+					content:
+						"Offer a CS236-inspired capstone path for strong students: scanner, parser, command or AST objects, table-style evaluation, and a dependency graph. This should stay smaller than the original course project, but it gives a clear bridge from medium-size C++ into data structures and patterns."
+				},
+				{
 					title: "CPPI6 Capstone: Saveable Command-Driven Simulation",
 					content:
-						"Build a small simulation or game with saved data, explicit states, STL containers, one recursive or algorithmic subsystem, and a narrow polymorphic interface. The capstone should prove the student can organize a medium-size C++ program without jumping into a full application framework."
+						"Build a small simulation, game, or interpreter-style command engine with saved data, explicit states, STL containers, one recursive or algorithmic subsystem, and a narrow polymorphic interface. The capstone should prove the student can organize a medium-size C++ program without jumping into a full application framework.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI6-Saveable-Command-Simulation/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI6-Saveable-Command-Simulation/solution"
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Architecture Review: Enum State versus Polymorphic State",
 					content:
-						"Take one capstone state transition and compare the simple `enum class` approach with a possible polymorphic State-pattern design. Students should explain which version is more appropriate for the current project size."
+						"Take one capstone state transition and compare the simple `enum class` approach with a possible polymorphic State-pattern design. Students should explain which version is more appropriate for the current project size.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI6-Enum-vs-Polymorphic-State-Review/starter",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI6-Enum-vs-Polymorphic-State-Review/solution"
 				}
 			]
 		}

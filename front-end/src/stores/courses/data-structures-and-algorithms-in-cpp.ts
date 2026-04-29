@@ -135,7 +135,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Adjacency Matrices and Weighted Connectivity",
 					content:
-						"Represent a graph as weighted node-to-node connectivity and make the storage format explicit. Students should be able to explain what `-1` or another sentinel means in the matrix instead of only copying loops that walk it."
+						"Represent a graph as weighted node-to-node connectivity and make the storage format explicit. Students should be able to explain what `-1` or another sentinel means in the matrix instead of only copying loops that walk it. The CS235 navigation lab maps cleanly here: a road network file, weighted adjacency matrix, and route query become the concrete project shape."
 				},
 				{
 					title: "Shortest Path Thinking",
@@ -145,7 +145,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Path Reconstruction",
 					content:
-						"Do not stop at distance values. Students should record parent relationships and reconstruct the actual route so they understand the difference between knowing a cost and knowing the path that produced it."
+						"Do not stop at distance values. Students should record parent relationships and reconstruct the actual route so they understand the difference between knowing a cost and knowing the path that produced it. If visual output is useful, treat map rendering as an optional extension after the path logic is correct."
 				},
 				{
 					title: "Graphs and Shortest Paths: Verification and Reflection",
@@ -266,7 +266,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Visited State and Cycle Prevention",
 					content:
-						"Backtracking only works cleanly when students mark visited cells and reason about state changes carefully. This is the unit where accidental revisits, coordinate mistakes, and off-by-one bugs should be surfaced deliberately."
+						"Backtracking only works cleanly when students mark visited cells and reason about state changes carefully. This is the unit where accidental revisits, coordinate mistakes, and off-by-one bugs should be surfaced deliberately. Use the CS235 5x5x5 maze constraints as the anchor: exactly 125 imported cells, six legal directions, and no mutation of the current maze after a bad import."
 				},
 				{
 					title: "Path Construction and Rollback",
@@ -329,7 +329,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Median of Three and Practical Pivot Choice",
 					content:
-						"Introduce median-of-three as a practical improvement rather than as ritual. The lesson is about reducing bad pivot choices on partially sorted data, not about memorizing a special case in isolation."
+						"Introduce median-of-three as a practical improvement rather than as ritual. The lesson is about reducing bad pivot choices on partially sorted data, not about memorizing a special case in isolation. The source quicksort lab is useful because it separates dynamic buffer ownership, pivot selection, partitioning, and recursive sorting into testable responsibilities."
 				},
 				{
 					title: "Recursive Boundaries and Base Cases",
@@ -392,7 +392,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Single-Linked Nodes and Pointer Updates",
 					content:
-						"Walk through insertion and removal one pointer change at a time. This is the point where students need to be fluent about head updates, middle insertions, and what happens when the target value is missing."
+						"Walk through insertion and removal one pointer change at a time. This is the point where students need to be fluent about head updates, middle insertions, and what happens when the target value is missing. Keep the CS235 linked-list discipline: templated list, no STL inside the implementation, clear/remove/index tests, and no leaks."
 				},
 				{
 					title: "Index Access and Structural Tradeoffs",
@@ -460,7 +460,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Removal with Predecessors",
 					content:
-						"Removal should be taught carefully because it combines structure cases with invariant preservation. Students should explicitly reason through leaf removal, one-child replacement, and two-child replacement using the in-order predecessor."
+						"Removal should be taught carefully because it combines structure cases with invariant preservation. Students should explicitly reason through leaf removal, one-child replacement, two-child replacement using the in-order predecessor, duplicate rejection, and invalid removals that should leave the tree unchanged."
 				},
 				{
 					title: "Binary Search Trees: Verification and Reflection",
@@ -523,7 +523,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Single and Double Rotations",
 					content:
-						"Make left-left, right-right, left-right, and right-left cases concrete with tiny examples. Rotations should be presented as local rewiring that preserves in-order structure while reducing height problems."
+						"Make left-left, right-right, left-right, and right-left cases concrete with tiny examples. Rotations should be presented as local rewiring that preserves in-order structure while reducing height problems. Stress the CS235-style verification cases: ordered inserts, duplicate inserts, missing removals, and repeated add/remove operations that keep every balance factor valid."
 				},
 				{
 					title: "AVL Trees and Rebalancing: Verification and Reflection",
@@ -581,7 +581,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Comparing Standard Containers and Custom Structures",
 					content:
-						"Use timed inserts and lookups to compare `vector`, `set`, `unordered_set`, and the custom linked or tree structures from the course. The point is not to crown one universal winner, but to connect operation patterns to the right tool."
+						"Use timed inserts, removals, and lookups to compare `set`, `unordered_set`, a custom linked list, a BST, and an AVL tree under both random and ordered workloads. The point is not to crown one universal winner, but to connect operation patterns to the right tool and to explain why ordered input punishes an unbalanced BST."
 				},
 				{
 					title: "Interpreting Results Without Overclaiming",
