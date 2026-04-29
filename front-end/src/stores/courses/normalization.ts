@@ -225,6 +225,96 @@ function githubTree(repo: string, path: string) {
 	return `${INSTRUCTION_MATERIAL_BASE}/${repo}/tree/main/${path}`;
 }
 
+const projectLikeTitlePattern =
+	/project|capstone|challenge|lab|practice|drill|notebook|audit|reflection|build|create|implement|exercise/i;
+
+function isProjectLikeItem(item: RawCourseModuleItem) {
+	return (
+		projectLikeTitlePattern.test(item.title) ||
+		Boolean(item.projectLink || item.solutionLink)
+	);
+}
+
+function compactWhitespace(text: string) {
+	return text.replace(/\s+/g, " ").trim();
+}
+
+function lessonArcContent(items: RawCourseModuleItem[]) {
+	const points = items.map((item, index) => {
+		const content = compactWhitespace(item.content);
+		return `${index + 1}. ${item.title}: ${content}`;
+	});
+
+	return `Use this as one instructor-led lesson arc instead of separate short cards. Cover: ${points.join(" ")}`;
+}
+
+function enrichBriefConceptLesson(item: RawCourseModuleItem) {
+	if (compactWhitespace(item.content).length >= 220) return item;
+
+	return {
+		...item,
+		content: `${compactWhitespace(item.content)} In discussion, define the core vocabulary, model one concrete example, ask the student to predict or explain the next step, and connect the idea to the module project before moving on.`
+	};
+}
+
+function groupConceptLessons(items: RawCourseModuleItem[]) {
+	if (items.length <= 4) {
+		return [
+			{
+				title: "Core Concepts and Teaching Flow",
+				content: lessonArcContent(items)
+			}
+		];
+	}
+
+	const midpoint = Math.ceil(items.length / 2);
+	return [
+		{
+			title: "Core Concepts and Teaching Flow",
+			content: lessonArcContent(items.slice(0, midpoint))
+		},
+		{
+			title: "Application, Misconceptions, and Readiness Check",
+			content: lessonArcContent(items.slice(midpoint))
+		}
+	];
+}
+
+function normalizeModuleLessonShape(course: RawCourse) {
+	for (const module of course.modules) {
+		const conceptItems = module.curriculum.filter(
+			item => !isProjectLikeItem(item)
+		);
+
+		if (conceptItems.length === 0) continue;
+
+		if (conceptItems.length <= 2) {
+			module.curriculum = module.curriculum.map(item =>
+				isProjectLikeItem(item) ? item : enrichBriefConceptLesson(item)
+			);
+			continue;
+		}
+
+		const groupedConcepts = groupConceptLessons(conceptItems);
+		const nextCurriculum: RawCourseModuleItem[] = [];
+		let insertedConceptGroup = false;
+
+		for (const item of module.curriculum) {
+			if (isProjectLikeItem(item)) {
+				nextCurriculum.push(item);
+				continue;
+			}
+
+			if (!insertedConceptGroup) {
+				nextCurriculum.push(...groupedConcepts);
+				insertedConceptGroup = true;
+			}
+		}
+
+		module.curriculum = nextCurriculum;
+	}
+}
+
 function normalizeApComputerScienceA(course: RawCourse) {
 	course.modules = orderedModules(course, [
 		"General: Course Introduction and Setup",
@@ -608,7 +698,7 @@ function normalizeLowLevelSecurity(course: RawCourse) {
 		course,
 		module =>
 			/^Applied Studio (?:9|10|11):/.test(module.title) &&
-			!/low level security lab/i.test(module.title)
+			!/low[- ]level security lab/i.test(module.title)
 	);
 	renameModule(
 		course,
@@ -713,5 +803,6 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	const course = cloneCourse(rawCourse);
 	normalizers[id]?.(course);
 	normalizeDisplayTitles(course);
+	normalizeModuleLessonShape(course);
 	return course;
 }
