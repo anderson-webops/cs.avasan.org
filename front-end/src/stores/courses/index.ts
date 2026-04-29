@@ -179,6 +179,22 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "java-without-graphics",
+		name: "Java without Graphics",
+		load: () =>
+			import("./java-graphics-tracks").then(
+				({ javaWithoutGraphicsCourse }) => javaWithoutGraphicsCourse
+			)
+	},
+	{
+		id: "java-with-graphics",
+		name: "Java with Graphics",
+		load: () =>
+			import("./java-graphics-tracks").then(
+				({ javaWithGraphicsCourse }) => javaWithGraphicsCourse
+			)
+	},
+	{
 		id: "ap-computer-science-a",
 		name: "AP Computer Science A",
 		load: () =>
