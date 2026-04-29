@@ -33,7 +33,7 @@ export const cppLevel3Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Tooling Notebook: Warnings and Debugger Evidence",
+					title: "CPPI0 Project 2: Warnings and Debugger Evidence Notebook",
 					content:
 						"Keep a short notebook entry showing the compiler command, one warning or debugger observation, and the code change made because of that evidence.",
 					projectLink:
@@ -83,7 +83,7 @@ export const cppLevel3Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Parser Extension: Import and Reject Bad Rows",
+					title: "CPPI1 Project 2: Import and Reject Bad Rows",
 					content:
 						"Add a small import command that reports malformed rows without stopping the entire program. Students should explain which data was accepted, which data was rejected, and why.",
 					projectLink:
@@ -92,7 +92,7 @@ export const cppLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Import-and-Reject-Bad-Rows/solution"
 				},
 				{
-					title: "Mini Command Scanner",
+					title: "CPPI1 Project 3: Mini Command Scanner",
 					content:
 						"Build a small tokenizer for task-manager-style commands. It should recognize words, numbers, quoted strings, punctuation, comments, line numbers, and malformed input before any command mutates application state.",
 					projectLink:
@@ -132,7 +132,7 @@ export const cppLevel3Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Recursion Trace Drill",
+					title: "CPPI2 Project 2: Recursion Trace Drill",
 					content:
 						"Trace three recursive calls by hand before running the program. The submitted work should include the predicted output, the actual output, and one corrected misconception.",
 					projectLink:
@@ -177,7 +177,7 @@ export const cppLevel3Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Container Tradeoff Mini-Audit",
+					title: "CPPI3 Project 2: Container Tradeoff Mini-Audit",
 					content:
 						"Take one part of the inventory project and justify why the selected container is better than at least one alternative for the operations the program actually performs.",
 					projectLink:
@@ -217,7 +217,7 @@ export const cppLevel3Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Ownership Rewrite Reflection",
+					title: "CPPI4 Project 2: Ownership Rewrite Reflection",
 					content:
 						"Rewrite one small raw-pointer example from Level 2 using a standard container or `std::unique_ptr`, then explain what cleanup responsibility disappeared and what responsibility remains.",
 					projectLink:
@@ -257,7 +257,7 @@ export const cppLevel3Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Template Error Reading Drill",
+					title: "CPPI5 Project 2: Template Error Reading Drill",
 					content:
 						"Trigger one controlled template compile error and practice reading the first useful diagnostic instead of reacting to the entire wall of compiler output.",
 					projectLink:
@@ -302,7 +302,7 @@ export const cppLevel3Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Architecture Review: Enum State versus Polymorphic State",
+					title: "CPPI6 Project 2: Enum State versus Polymorphic State Review",
 					content:
 						"Take one capstone state transition and compare the simple `enum class` approach with a possible polymorphic State-pattern design. Students should explain which version is more appropriate for the current project size.",
 					projectLink:

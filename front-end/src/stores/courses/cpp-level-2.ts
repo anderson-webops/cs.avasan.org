@@ -25,13 +25,35 @@ export const cppLevel2Course: RawCourse = {
 					title: "Debugging Memory by Evidence",
 					content:
 						"Use small tracing examples, address prints, and debugger inspection to prove where values live and why an alias changes what it changes. The habit is evidence first, assumptions second."
+				},
+				{
+					title: "CPPM0 Project 1: Lifetime Tracing Warm-Up",
+					content:
+						"Trace a short multi-function program by drawing stack frames, aliases, and mutation points. Students should identify which variables are independent copies, which are references, and which values would become invalid after a scope ends.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Lifetime-Tracing-Warm-Up",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Lifetime-Tracing-Warm-Up"
+				},
+				{
+					title: "CPPM0 Project 2: Ownership Boundary Debugging",
+					content:
+						"Debug a small program that mixes copies, references, const references, and borrowed observations. Students should explain which function owns data, which function mutates caller-owned data, and which value is only safe because the original object still exists.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Ownership-Boundary-Debugging",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Ownership-Boundary-Debugging"
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "Lifetime Tracing Warm-Up",
+					title: "CPPM0 Project 3: Lifetime Diagram Extension",
 					content:
-						"Trace a short multi-function program by drawing stack frames, aliases, and mutation points. Students should identify which variables are independent copies, which are references, and which values would become invalid after a scope ends."
+						"Extend one CPM0 tracing project with a written before/after diagram. The diagram should label stack values, aliases, mutation points, and lifetime boundaries.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Lifetime-Tracing-Warm-Up",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Lifetime-Tracing-Warm-Up"
 				}
 			]
 		},
@@ -278,9 +300,13 @@ export const cppLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Profile-Posts"
 				},
 				{
-					title: "Modern Ownership Reflection",
+					title: "CPPM5 Project 3: Modern Ownership Reflection",
 					content:
-						"Pick one manual allocation from a capstone and describe how the design would change if it used a standard container or `std::unique_ptr`. The goal is to compare ownership responsibilities, not to rewrite the whole project."
+						"Pick one manual allocation from a capstone and compare it with a standard container or `std::unique_ptr` version. The goal is to compare ownership responsibilities, not to rewrite the whole project.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Modern-Ownership-Reflection",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Modern-Ownership-Reflection"
 				}
 			]
 		}

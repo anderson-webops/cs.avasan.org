@@ -327,13 +327,13 @@ export const cppLevel1Course: RawCourse = {
 			],
 			supplementalProjects: [
 				{
-					title: "Grids and 2D Vectors: Extension Challenge",
+					title: "CPPF7 Project 2: Grid Statistics",
 					content:
-						"Extend the matrix work with a custom check such as row totals, diagonal sums, or input validation for mismatched dimensions.",
+						"Extend grid work by computing row totals, column totals, diagonal totals, and the largest value in a rectangular 2D vector. This gives students a second grid project before the Level 1 capstone.",
 					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Matrix-Addition",
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Grid-Statistics",
 					solutionLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Matrix-Addition"
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Grid-Statistics"
 				}
 			]
 		},
@@ -393,9 +393,13 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts"
 				},
 				{
-					title: "Profile Posts: State Machine Extension",
+					title: "CPPF8 Project 2: Profile Posts State Machine Extension",
 					content:
-						"Add a written state diagram and update the capstone so the user can move between at least three explicit modes. The extension should make students justify why a `switch` plus `enum class` is clearer than another long `if`/`else if` chain."
+						"Add a written state diagram and update the capstone so the user can move between at least three explicit modes. The extension should make students justify why a `switch` plus `enum class` is clearer than another long `if`/`else if` chain.",
+					projectLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-State-Machine-Profile-Posts",
+					solutionLink:
+						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-State-Machine-Profile-Posts"
 				}
 			]
 		}
