@@ -1607,6 +1607,158 @@ export const javaLevel3Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Master-Project-Starter"
 				}
 			]
+		},
+		{
+			title: "AJ19 Post-C++ Java Tooling, Testing, and Packages",
+			curriculum: [
+				{
+					title: "Positioning the Advanced Java Track",
+					content:
+						"Use this track after `C++ Level 3` when a strong student needs a Java course with real engineering weight rather than another syntax review. Students should already be comfortable with classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
+				},
+				{
+					title: "Packages, Builds, and Test Boundaries",
+					content:
+						"Move from single-folder Java exercises to package-organized projects. Cover: source roots, package names, public APIs, helper classes, command-line or IDE builds, JUnit-style test thinking even when using simple assertions, and why a program that is easy to test is usually easier to extend. Require students to separate model logic from console input."
+				},
+				{
+					title: "AJ19 Project 1: Tested Gradebook Service",
+					content:
+						"Build a package-organized gradebook service with students, assignments, score validation, weighted averages, and a small test harness. The console runner should be thin; the gradebook logic should be independently testable.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ19-Tested-Gradebook-Service"
+				},
+				{
+					title: "AJ19 Project 2: Command Parser Test Harness",
+					content:
+						"Write a command parser for a small CLI and test it without running the whole application. Students should parse valid commands, reject malformed commands, and explain where validation belongs.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ19-Command-Parser-Test-Harness"
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "AJ19 Project 3: Characterization Test Bug Fix",
+					content:
+						"Start with a small buggy service, write characterization tests that pin down the current behavior, then make a safe fix and update the tests only when the intended behavior is clear.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ19-Characterization-Test-Bug-Fix"
+				}
+			]
+		},
+		{
+			title: "AJ20 Generics, Interfaces, and Collection API Design",
+			curriculum: [
+				{
+					title: "Generics as API Contracts",
+					content:
+						"Teach generics as a way to write reusable, type-safe APIs, not as angle-bracket decoration. Cover: generic classes, bounded type parameters, generic methods, why raw types lose safety, and how good generic APIs make invalid combinations hard to express."
+				},
+				{
+					title: "Interfaces, Comparators, and Collection Choices",
+					content:
+						"Use interfaces to separate what a component promises from how it stores data. Cover: `Comparable`, `Comparator`, `List`, `Set`, `Map`, `Queue`, `PriorityQueue`, iteration order, uniqueness, lookup behavior, and choosing a collection based on required operations rather than habit."
+				},
+				{
+					title: "AJ20 Project 1: Generic Repository and Query Filters",
+					content:
+						"Build a generic in-memory repository that stores records by ID, supports filtering with predicates, and exposes only safe collection views. Students should explain the type parameter and what invariants the repository protects.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Generic-Repository"
+				},
+				{
+					title: "AJ20 Project 2: Comparator-Driven Priority Scheduler",
+					content:
+						"Create a scheduler that can order tasks by deadline, importance, duration, or a custom comparator. Students should compare `PriorityQueue`, sorted lists, and maps before choosing the main representation.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Comparator-Priority-Scheduler"
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "AJ20 Project 3: Type-Safe Plugin Registry",
+					content:
+						"Design a small registry of named tools or commands with a shared interface. The challenge is to keep registration flexible without falling back to raw `Object` values or unsafe casts.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Type-Safe-Plugin-Registry"
+				}
+			]
+		},
+		{
+			title: "AJ21 Streams, Files, and Data Pipelines",
+			curriculum: [
+				{
+					title: "File-Backed Data Pipelines",
+					content:
+						"Connect Java file I/O to the parser and persistence habits students practiced in C++. Cover: reading lines, validating records, representing bad rows, writing clean output, preserving original data when import fails, and keeping parsing separate from reporting."
+				},
+				{
+					title: "Lambdas, Streams, and Readable Transformations",
+					content:
+						"Introduce lambdas and streams as tools for clear transformations over collections. Cover: `map`, `filter`, `sorted`, `collect`, grouping, custom comparators, and when an explicit loop is still better because the stateful logic would make a stream harder to read."
+				},
+				{
+					title: "AJ21 Project 1: Log Analyzer Pipeline",
+					content:
+						"Read a text log, parse valid rows, collect invalid rows, group events by type, compute summary statistics, and print a stable report. Students should implement the first version with loops and then refactor part of it to streams.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ21-Log-Analyzer-Pipeline"
+				},
+				{
+					title: "AJ21 Project 2: CSV Import Validator",
+					content:
+						"Build a CSV-style importer for records with required fields, type checks, duplicate detection, and a rejected-row report. The program should never corrupt the accepted-data set when a later row fails.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ21-CSV-Import-Validator"
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "AJ21 Project 3: Report Builder Refactor",
+					content:
+						"Take a messy report generator and refactor it into parsing, aggregation, formatting, and output stages. Students should be able to swap one stage without rewriting the whole pipeline.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ21-Report-Builder-Refactor"
+				}
+			]
+		},
+		{
+			title: "AJ22 Concurrency, Services, and Capstone Architecture",
+			curriculum: [
+				{
+					title: "Executors, Tasks, and Shared-State Discipline",
+					content:
+						"Introduce concurrency through bounded task execution rather than raw thread chaos. Cover: `Runnable`, `Callable`, `ExecutorService`, futures, immutable task inputs, synchronized shared state when necessary, and why most bugs come from unclear ownership of mutable data."
+				},
+				{
+					title: "Capstone Architecture and Java-Specific Readiness",
+					content:
+						"Close the advanced Java track by requiring architecture decisions: packages, service boundaries, interfaces, data models, test harnesses, error handling, and one concurrency or event-processing component. Students should be ready afterward for serious Java design-pattern work, larger data-structure projects, or a service/application course."
+				},
+				{
+					title: "AJ22 Project 1: Concurrent Task Runner",
+					content:
+						"Build a task runner that accepts jobs, executes them with a small executor pool, records success or failure, and prints a final report in deterministic order. Students should explain which data is shared and how they kept it safe.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ22-Concurrent-Task-Runner"
+				},
+				{
+					title: "AJ22 Project 2: Event-Driven Simulation Capstone",
+					content:
+						"Build a medium-size simulation such as a tournament scheduler, delivery dispatch board, library queue, or course registration system. It must include packages, interfaces, persistent input/output, tests or test harnesses, and a clear event loop or task-processing model.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ22-Event-Driven-Simulation-Capstone"
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "AJ22 Project 3: Capstone Extension Review",
+					content:
+						"Perform a structured second pass on the capstone: identify one class that does too much, one API that leaks representation details, and one missing test or manual verification case, then fix the most important issue.",
+					projectLink:
+						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ22-Capstone-Extension-Review"
+				}
+			]
 		}
 	]
 };
