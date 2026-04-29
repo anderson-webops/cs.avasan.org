@@ -7,19 +7,9 @@ export const cppLevel3Course: RawCourse = {
 			title: "CPPI0 Bridge Course Setup and Positioning",
 			curriculum: [
 				{
-					title: "Why This Course Exists",
+					title: "Bridge Course Goals, Scale, and Tooling",
 					content:
-						"Position `C++ Level 3` as the bridge between beginner C++ plus manual-memory practice and larger idiomatic C++ work. Students should already know functions, classes, vectors, structs, references, pointers, raw arrays, dynamic memory, and simple command-loop programs."
-				},
-				{
-					title: "From Working Programs to Medium-Size Programs",
-					content:
-						"Set the goal clearly: write programs whose structure survives growth. The course emphasizes command structure, file-backed data, standard-library fluency, recursion, RAII, and small tests before students move into data structures or design patterns."
-				},
-				{
-					title: "Tooling Baseline",
-					content:
-						"Use a local compiler, debugger, warnings, and a repeatable build command from the start. Students should be able to compile a multi-file program, step through a function call, and explain one warning or runtime failure using evidence."
+						"Position `C++ Level 3` as the bridge between beginner/manual-memory C++ and larger idiomatic C++ work. Cover: assumed baseline from Levels 1-2; what makes a program medium-size instead of just longer; why command structure, file-backed state, standard-library fluency, recursion, RAII, and small tests matter together; how to use a repeatable build command, warnings, debugger stepping, and trace output as evidence. By the end of this setup module, students should be able to compile a multi-file program, explain one warning or runtime failure, and describe what structure they will need before moving into data structures or design patterns."
 				},
 				{
 					title: "CPPI0 Project: Build and Debug Checkpoint",
@@ -47,29 +37,14 @@ export const cppLevel3Course: RawCourse = {
 			title: "CPPI1 Command Architecture, File I/O, and Small Parsers",
 			curriculum: [
 				{
-					title: "Command-Driven Program Structure",
+					title: "Command Architecture and File Persistence",
 					content:
-						"Refine the Level 1 command-loop pattern into a cleaner architecture: parse a command, validate it, call a focused function, update program state, and print a stable result. Students should separate command interpretation from data mutation."
+						"Refine the Level 1 command-loop pattern into a structure that can grow: read a line, parse the command, validate arguments, call a focused function, update state, and print a stable result. Cover: separating command interpretation from data mutation; choosing a small text format; using `ifstream`, `ofstream`, and `getline`; deciding what data should be saved; reloading state on startup; and testing persistence by closing and reopening the program. Keep the focus on readable line-based formats, not binary files or complex serialization."
 				},
 				{
-					title: "Line-Based Text File I/O",
+					title: "Scanning, Parsing, and Error Boundaries",
 					content:
-						"Introduce `ifstream`, `ofstream`, `getline`, and simple text-file formats. The focus is persistence for small programs, not complex serialization or binary files."
-				},
-				{
-					title: "Scanner and Token Stream Design",
-					content:
-						"Adapt the CS236 scanner idea at a smaller scale: turn raw command text into typed tokens with line numbers, quoted strings, numbers, symbols, comments, and unknown-token handling. This makes `switch`, enums, string parsing, and validation work together before students attempt a full parser."
-				},
-				{
-					title: "Recursive-Descent Parser Boundaries",
-					content:
-						"Introduce the parser boundary without making this a compiler course. Students should see how `match`, `advance`, and one or two recursive list rules keep syntax errors out of the business logic for a command-driven program."
-				},
-				{
-					title: "Simple Parsing and Error Paths",
-					content:
-						"Parse small records from strings or files and decide what should happen when a line is missing a field, has the wrong type, or names an unknown command. Students should practice rejecting bad input without corrupting existing state."
+						"Adapt the CS236 scanner/parser ideas at a smaller scale without turning this into a compiler course. Cover: tokenizing raw command text into words, numbers, quoted strings, punctuation, comments, and unknown tokens; tracking line numbers; using `enum class` token types; defining a narrow parser boundary with helpers such as `match` and `advance`; rejecting malformed rows, missing fields, wrong types, and unknown commands; and preventing bad input from corrupting existing application state."
 				},
 				{
 					title: "CPPI1 Project: Saveable Task Manager",
@@ -106,19 +81,14 @@ export const cppLevel3Course: RawCourse = {
 			title: "CPPI2 Recursion and the Call Stack",
 			curriculum: [
 				{
-					title: "Base Cases, Recursive Steps, and Stack Frames",
+					title: "Recursion, Base Cases, and Stack Frames",
 					content:
-						"Teach recursion through call-stack diagrams before algorithm vocabulary. Students should identify the base case, the smaller subproblem, and the value returned to the previous frame."
+						"Teach recursion through call-stack diagrams before algorithm vocabulary. Cover: the base case, the recursive step, the smaller subproblem, what data each stack frame owns, what value returns to the previous frame, and why missing or non-progressing base cases lead to infinite recursion. Start with strings, vectors, and small grids so students build control-flow confidence before linked lists or trees."
 				},
 				{
-					title: "Recursive Traversal Before Recursive Data Structures",
+					title: "Recursive Traversal and Backtracking",
 					content:
-						"Start with strings, vectors, and small grids before linked lists or trees. The goal is confidence with the control flow and stack model, not a premature data-structures unit."
-				},
-				{
-					title: "Backtracking as Try, Recurse, Undo",
-					content:
-						"Introduce backtracking as a disciplined pattern: choose a move, recurse, undo the move, and try the next possibility. Keep the search space small enough that students can draw it."
+						"Use traversal problems to show recursion as a practical tool rather than a trick. Cover: marking visited grid cells, stopping at invalid positions, returning success/failure, and the backtracking pattern of choose, recurse, undo, and try the next possibility. Keep the search space small enough that students can draw it and explain exactly why the algorithm stops."
 				},
 				{
 					title: "CPPI2 Project: Recursive Maze or Word Search",
@@ -146,24 +116,14 @@ export const cppLevel3Course: RawCourse = {
 			title: "CPPI3 STL Containers, Iterators, and Algorithms",
 			curriculum: [
 				{
-					title: "Choosing Containers by Behavior",
+					title: "Choosing Containers and Traversing with Iterators",
 					content:
-						"Move beyond `vector` by introducing `array`, `deque`, `set`, `map`, and `unordered_map` as answers to different storage questions. Students should choose containers based on ordering, uniqueness, key lookup, and mutation patterns."
+						"Move beyond `vector` by treating standard containers as design choices. Cover: when `array`, `deque`, `set`, `map`, and `unordered_map` fit better than a vector; how ordering, uniqueness, key lookup, insertion, and mutation patterns affect the choice; how iterators represent positions across different containers; and how iterator invalidation differs from pointer arithmetic. Students should be able to justify a container choice by the operations the program actually performs."
 				},
 				{
-					title: "Iterators as Generalized Positions",
+					title: "Standard Algorithms and Relation-Style Views",
 					content:
-						"Teach iterators as a common way to point at positions in containers. Connect them back to pointer thinking, but keep the emphasis on safe traversal and standard-library conventions."
-				},
-				{
-					title: "Standard Algorithms Before Hand-Written Loops",
-					content:
-						"Introduce algorithms such as `find`, `count`, `sort`, and `transform` as reusable operations. Students should learn when a standard algorithm expresses intent more clearly than another custom loop."
-				},
-				{
-					title: "Relation-Style Table Operations",
-					content:
-						"Use the CS236 relation project as a practical container exercise: model rows as records, then implement small `select`, `project`, `rename`, and join-style views with `vector`, `set`, and `map`. The goal is database-style thinking without leaving C++ container fluency."
+						"Introduce standard algorithms as reusable operations that often communicate intent better than another hand-written loop. Cover: `find`, `count`, `sort`, `transform`, custom predicates, and when explicit loops are still clearer. Then adapt the CS236 relation idea into a practical container exercise: model rows as records and implement small `select`, `project`, `rename`, and join-style views with `vector`, `set`, and `map`."
 				},
 				{
 					title: "CPPI3 Project: Inventory Indexer",
@@ -191,19 +151,14 @@ export const cppLevel3Course: RawCourse = {
 			title: "CPPI4 RAII, Smart Pointers, and Robust Error Handling",
 			curriculum: [
 				{
-					title: "RAII as the Default Ownership Habit",
+					title: "RAII and Single-Owner Resource Design",
 					content:
-						"Teach resource acquisition is initialization as the normal modern C++ answer to cleanup. Students should connect destructors, scope exit, standard containers, and file streams to the same lifetime principle."
+						"Teach RAII as the default modern C++ answer to cleanup: resources are acquired by objects and released automatically when those objects leave scope. Cover: destructors, scope exit, standard containers, file streams, and why this is the same lifetime principle students saw in Level 2. Introduce `std::unique_ptr` as the first smart pointer because it models single ownership clearly; practice deliberate moves and avoid treating heap allocation as the default."
 				},
 				{
-					title: "Unique Ownership with std::unique_ptr",
+					title: "Validation, Exceptions, and Resource Boundaries",
 					content:
-						"Introduce `std::unique_ptr` as the first smart pointer because it models single ownership clearly. Students should practice moving ownership deliberately and avoid treating heap allocation as the default."
-				},
-				{
-					title: "Exceptions and Validation Boundaries",
-					content:
-						"Teach simple exceptions only after RAII is visible. Students should distinguish expected bad input that should be validated from exceptional failures that should interrupt the current operation."
+						"Teach error handling at the same time as resource safety. Cover: expected bad input that should be validated and reported normally; exceptional failures that should interrupt the current operation; failed file opens; parse errors; partial output; and why RAII makes cleanup reliable even when a function returns early or throws. Students should be able to explain what state is preserved after a failed operation."
 				},
 				{
 					title: "CPPI4 Project: Resource-Safe File Processor",
@@ -231,19 +186,14 @@ export const cppLevel3Course: RawCourse = {
 			title: "CPPI5 Value Types, Operator Overloading, and Templates",
 			curriculum: [
 				{
-					title: "Designing Predictable Value Types",
+					title: "Predictable Value Types and Restrained Operators",
 					content:
-						"Review constructors, invariants, `const` methods, and value semantics before adding operator overloading. Students should understand what makes a class safe to copy, compare, print, and store in containers."
+						"Review constructors, invariants, `const` methods, and value semantics before adding operator overloading. Cover: what makes a class safe to copy, compare, print, and store in containers; when `operator<<`, comparison operators, or arithmetic operators make a type read naturally; and why overloaded operators should not hide surprising side effects. Students should leave with a bias toward readable value behavior, not clever syntax."
 				},
 				{
-					title: "Operator Overloading with Restraint",
+					title: "Templates and Diagnostic Reading",
 					content:
-						"Teach operator overloading only when it makes a value type read more naturally. Students should avoid clever overloads that hide side effects or make a class harder to understand."
-				},
-				{
-					title: "Function and Class Templates",
-					content:
-						"Introduce templates as a way to write type-independent code after students have used the standard library. Keep the examples small: reusable min/max helpers, tiny container wrappers, and comparison utilities."
+						"Introduce templates as a way to write type-independent code after students have used the standard library. Cover: small function templates, tiny class-template wrappers, comparison helpers, constraints students should state in plain language, and how to read template compiler errors by finding the first useful diagnostic instead of reacting to the full wall of output."
 				},
 				{
 					title: "CPPI5 Project: Score or Fraction Toolkit",
@@ -271,24 +221,14 @@ export const cppLevel3Course: RawCourse = {
 			title: "CPPI6 Polymorphism and Bridge to Advanced C++",
 			curriculum: [
 				{
-					title: "Inheritance Only When Roles Differ",
+					title: "Polymorphism, Composition, and Runtime Dispatch",
 					content:
-						"Introduce inheritance as a tool for shared interfaces and substitutable roles, not as the default way to reuse code. Students should compare inheritance with composition before choosing either."
+						"Introduce inheritance as a tool for shared interfaces and substitutable roles, not as the default way to reuse code. Cover: composition versus inheritance, virtual functions, runtime dispatch through a small collection of objects with a common interface, and how this differs from a simple `enum class` state machine. Connect the discussion directly to future design-pattern work, especially polymorphic state objects."
 				},
 				{
-					title: "Virtual Functions and Runtime Dispatch",
+					title: "Advanced Pathways and Program Framing",
 					content:
-						"Teach virtual dispatch through a small collection of objects that share a common interface but perform different behavior. Connect this directly to future design-pattern work, especially the difference between a simple enum-based state machine and polymorphic state objects."
-				},
-				{
-					title: "Bridge to Data Structures and Design Patterns",
-					content:
-						"Close the course by naming the next paths clearly. Students ready for algorithmic implementation should continue to `Data Structures and Algorithms in C++`; students interested in architecture should continue to `Design Patterns in C++`; students interested in lower-level representation can move into `C Systems Engineering`."
-				},
-				{
-					title: "Interpreter Pipeline as a Capstone Option",
-					content:
-						"Offer a CS236-inspired capstone path for strong students: scanner, parser, command or AST objects, table-style evaluation, and a dependency graph. This should stay smaller than the original course project, but it gives a clear bridge from medium-size C++ into data structures and patterns."
+						"Close the course by naming the next paths clearly and framing the capstone as evidence of readiness. Cover: when to continue into `Data Structures and Algorithms in C++`, when `Design Patterns in C++` is the better architecture path, and when lower-level representation points toward `C Systems Engineering`. Offer a CS236-inspired capstone option for strong students: scanner, parser, command or AST objects, table-style evaluation, and a dependency graph, kept smaller than the original college project."
 				},
 				{
 					title: "CPPI6 Capstone: Saveable Command-Driven Simulation",

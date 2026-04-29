@@ -7,23 +7,16 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF1 Variables, Types, Strings, and Input/Output",
 			curriculum: [
 				{
-					title: "Creating and Running a C++ Program",
+					title: "Program Setup, Syntax, and Compile-Run Cycle",
 					content:
-						"Start with a single-file console program, the `#include` lines it needs, and the idea that C++ is compiled before it runs. The goal is to make braces, semicolons, and `std::cout` feel normal before the syntax load rises."
+						"Start with a single-file console program and make the compile-run cycle explicit. Cover: `#include`, `main`, braces, semicolons, comments, compiler errors versus runtime behavior, and the idea that C++ is compiled before it runs. Students should practice making one small change, recompiling, reading the output or error, and explaining what changed before the syntax load rises."
 				},
 				{
-					title: "Primitive Types and Strings",
+					title: "Primitive Types, Strings, and Console I/O",
 					content:
-						"Teach integers, doubles, booleans, chars, and `std::string` as the core beginner value types. Students should create variables, read input, print values clearly, and understand simple indexing and string length before moving on.",
+						"Teach integers, doubles, booleans, chars, and `std::string` as the core beginner value types, then connect them directly to `std::cin` and `std::cout`. Cover: declaring and assigning variables, choosing a type, reading typed input, printing labels with values, basic string length/indexing, and common beginner mistakes such as missing quotes, invalid assignments, and input that stops at whitespace.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Primitive-Types-and-Strings-Reference"
-				},
-				{
-					title: "Input and Output",
-					content:
-						"Use `std::cin` and `std::cout` to build confidence with typed input and formatted output. The point here is not clever formatting. It is reliable reading, storing, and printing of user-provided values.",
-					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Input-and-Output-Reference"
 				},
 				{
 					title: "CPPF1 Project 1: Mad Libs",
@@ -60,14 +53,9 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF2 Loops and Conditionals",
 			curriculum: [
 				{
-					title: "Conditionals and Branching",
+					title: "Branching and Repetition",
 					content:
-						"Teach `if`, `else if`, and `else` as the first control-flow fork. Students should compare values cleanly and explain why one branch runs instead of another."
-				},
-				{
-					title: "For Loops and While Loops",
-					content:
-						"Teach loops as controlled repetition with clear start, stop, and update logic. Counted loops and condition-driven loops should both feel readable before students build larger games.",
+						"Teach control flow as a way to choose and repeat behavior. Cover: `if`, `else if`, and `else`; comparison operators; Boolean expressions; ordered branch checks; `for` loops for counted repetition; `while` loops for condition-driven repetition; loop initialization, stopping conditions, and updates; and how to trace variable changes without guessing.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF2-For-Loop-Practice"
 				},
@@ -115,21 +103,14 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF3 Functions",
 			curriculum: [
 				{
-					title: "Function Signatures and Return Values",
+					title: "Function Signatures, Return Values, and Decomposition",
 					content:
-						"Teach functions as named units of work with parameters and return types. Students should be able to read a signature and describe what a function needs and what it gives back."
+						"Teach functions as named units of work with parameters and return types. Cover: reading a function signature, deciding what data a function needs, deciding what it returns, separating calculation from printing, avoiding repeated code, and using small helper functions to make a larger program easier to test. Students should be able to explain why a function exists, not just how to call it."
 				},
 				{
-					title: "Decomposition and Reuse",
+					title: "Randomness and Small Simulation Helpers",
 					content:
-						"Use functions to break a larger program into smaller steps. The main idea is not clever abstraction. It is reducing repeated code and making logic easier to test.",
-					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Function-Practice"
-				},
-				{
-					title: "Randomness and Small Simulations",
-					content:
-						"Introduce `rand()` and simple simulation work only after students are comfortable with basic function calls. Randomness is useful here because it creates a reason to write helper functions instead of one long `main`.",
+						"Introduce `rand()` only after basic function calls are comfortable. Cover: seeding at the correct level, generating bounded random values, wrapping random behavior in helper functions, testing code that has random output, and separating generation logic from game or simulation output. Randomness should create a reason to decompose the program instead of writing one long `main`.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-rand-Reference"
 				},
@@ -168,23 +149,16 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF4 Classes and Objects",
 			curriculum: [
 				{
-					title: "Classes, Objects, and Encapsulation",
+					title: "Classes, Objects, and Encapsulated State",
 					content:
-						"Teach a class as a way to package related data and behavior together. Students should understand public vs private access and why getters/setters exist before they start building bigger objects."
+						"Teach a class as a way to package related data and behavior together. Cover: objects as individual instances, private state, public behavior, constructors, getters/setters when appropriate, and why methods should protect invariants instead of letting every part of the program edit fields directly. Keep the focus on object modeling, not advanced language mechanics."
 				},
 				{
-					title: "Headers and Source Files",
+					title: "Multi-File Class Implementation",
 					content:
-						"Use a small multi-file class to teach declarations, definitions, header guards, and the idea that class design spans multiple files in a real project.",
+						"Use small multi-file classes to teach how real C++ projects split declarations and definitions. Cover: header files, source files, include guards, method declarations versus method bodies, default and overloaded constructors, member functions that update object state, and how to compile a project with more than one `.cpp` file.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Point-Class"
-				},
-				{
-					title: "Constructors and Basic Class Methods",
-					content:
-						"Introduce default and overloaded constructors, along with clear class methods that print or update object state. Keep the focus on object modeling, not on advanced language detail.",
-					projectLink:
-						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF4-Person-Class"
 				},
 				{
 					title: "CPPF4 Project: Cat Class",
@@ -210,16 +184,11 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF5 Vectors and Collection Patterns",
 			curriculum: [
 				{
-					title: "Vectors as Growable Sequences",
+					title: "Vectors as Growable Sequences and Function Inputs",
 					content:
-						"Introduce `std::vector` as the default beginner collection for ordered values that can grow over time. This is the missing bridge between simple values and real collection-based programs.",
+						"Introduce `std::vector` as the default beginner collection for ordered values that can grow over time. Cover: `push_back`, indexing, `size`, iterating with indexes and range-based loops, reading versus mutating a collection, passing vectors to functions, using `const` references for read-only access, and writing summary operations such as totals, filters, and searches.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF5-Vectors-Reference"
-				},
-				{
-					title: "Passing Vectors to Functions",
-					content:
-						"Teach vectors in function signatures and simple read-only iteration. Students should be able to explain when they are reading from a collection versus updating it."
 				},
 				{
 					title: "CPPF5 Project 1: Vector Practice",
@@ -256,9 +225,9 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF6 Structs and Parameter Passing",
 			curriculum: [
 				{
-					title: "References and Const References",
+					title: "References, Const References, and Function Boundaries",
 					content:
-						"Teach references as aliases and `const` references as a safe way to avoid unnecessary copying. This should feel like a data-flow topic, not like a pointer topic.",
+						"Teach references as aliases and `const` references as a safe way to avoid unnecessary copying. Cover: pass-by-value versus pass-by-reference, when a function should mutate caller-owned data, when it should only observe data, why `const` communicates intent, and how to trace what changes after a function call. This should feel like a data-flow topic, not a pointer topic.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Parameter-Passing-Introduction"
 				},
@@ -274,7 +243,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Structs for Small Records",
 					content:
-						"Introduce `struct` as a lightweight way to group related fields. This is where students should first see simple records such as a student, transaction, or post shape.",
+						"Introduce `struct` as a lightweight way to group related fields before the profile capstone. Cover: simple record shapes such as a student, transaction, or post; when a struct is clearer than parallel vectors; passing records to functions; using vectors of structs; and deciding whether a behavior belongs in a function now or in a class later.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF6-Structs-Example"
 				},
@@ -304,16 +273,11 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF7 Grids and 2D Vectors",
 			curriculum: [
 				{
-					title: "Nested Vectors as Grids",
+					title: "Nested Vectors, Grid Traversal, and Nested Loop Patterns",
 					content:
-						"Teach a 2D vector as a grid of rows instead of jumping directly into raw multi-dimensional arrays. Students should be able to read `grid[row][col]`, print a grid, and update a cell without worrying about memory layout tricks.",
+						"Teach a 2D vector as a grid of rows instead of jumping directly into raw multi-dimensional arrays. Cover: reading `grid[row][col]`, row versus column meaning, printing a grid, updating a cell, nested loops for row totals and scans, rectangular versus irregular grids, and why this higher-level model prepares students for raw array layout later without introducing memory tricks too early.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF7-Grids-and-2D-Vectors-Reference"
-				},
-				{
-					title: "Nested Loop Patterns",
-					content:
-						"Use nested loops to print grids, compute row totals, and scan structured data. This should feel like an extension of vector work, not a completely new mental model."
 				},
 				{
 					title: "CPPF7 Project: Matrix Addition",
@@ -341,31 +305,16 @@ export const cppLevel1Course: RawCourse = {
 			title: "CPPF8 Master Project: Profile Posts",
 			curriculum: [
 				{
-					title: "Combining Structs, Classes, and Vectors",
+					title: "Profile Modeling and API Design",
 					content:
-						"Model a `Post` as a small record and a `Profile` as a class that owns a vector of posts. This capstone should feel like a natural combination of the earlier class, struct, and collection work."
-				},
-				{
-					title: "Profile Operations and Validation",
-					content:
-						"Teach add, remove, print, and update operations with index validation. The emphasis is on designing a readable small API, not on manual ownership logic.",
+						"Model a `Post` as a small record and a `Profile` as a class that owns a vector of posts. Cover: why `Post` can be a simple record, why `Profile` should own the collection, how to design add/remove/print/update methods, how to validate indexes before mutation, and how to keep the API readable without introducing manual ownership logic.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts"
 				},
 				{
-					title: "Command Loops and Menu Flow",
+					title: "Command Loops, Switches, and Simple State Machines",
 					content:
-						"Before the capstone is finished, convert one-shot profile operations into a menu-driven command loop. Students should practice prompting until the user chooses to quit, rejecting invalid choices, and keeping input handling separate from the `Profile` methods that update data."
-				},
-				{
-					title: "Switch Statements and Enum Class Modes",
-					content:
-						"Teach `switch` as the right tool when one discrete value selects the next action, then pair it with `enum class` so menu choices and program modes are named instead of stored as magic numbers or strings. Require each `case` to end with `break`, `return`, or an explicitly discussed fallthrough."
-				},
-				{
-					title: "Simple State Machines and State Diagrams",
-					content:
-						"Draw a small state diagram for the profile manager before coding the loop. Students should identify states such as `MainMenu`, `ViewingPosts`, `EditingPost`, and `Quit`, then explain why the same command can mean different things in different states."
+						"Convert one-shot profile operations into a menu-driven command loop. Cover: prompting until quit, rejecting invalid choices, separating input handling from `Profile` methods, using `switch` when one discrete value selects the next action, using `enum class` instead of magic numbers or strings, ending each `case` intentionally, drawing a small state diagram, and explaining states such as `MainMenu`, `ViewingPosts`, `EditingPost`, and `Quit`. Close by naming the Level 1 outcomes: decomposition, object modeling, records, vectors, grids, command loops, switches, scoped enums, and simple program states."
 				},
 				{
 					title: "CPPF8 Project: Profile Posts",
@@ -375,11 +324,6 @@ export const cppLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts",
 					solutionLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-Profile-Posts"
-				},
-				{
-					title: "Course Recap and Next Steps",
-					content:
-						"Close the course by naming the major ideas students should now be comfortable with: decomposition, object modeling, small records, vectors, grid-style iteration, command loops, `switch`, scoped enums, and simple program states. Position `C++ Level 2` as the low-level follow-on when they are ready for pointers and manual memory."
 				}
 			],
 			supplementalProjects: [

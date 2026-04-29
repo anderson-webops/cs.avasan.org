@@ -7,24 +7,14 @@ export const cppLevel2Course: RawCourse = {
 			title: "CPPM0 Lifetime, References, and Ownership Framing",
 			curriculum: [
 				{
-					title: "Course Positioning After C++ Level 1",
+					title: "Level 2 Positioning and Ownership Vocabulary",
 					content:
-						"Position this course as the low-level follow-on after students can already write menu-driven programs with functions, classes, vectors, structs, references, and simple state. Level 2 should deepen the memory model rather than introduce pointer syntax as disconnected trivia."
+						"Position this course as the low-level follow-on after students can already write menu-driven programs with functions, classes, vectors, structs, references, and simple state. Cover: why Level 2 deepens the memory model instead of introducing pointer syntax as disconnected trivia; what it means for a function or class to own data; how observation, mutation, borrowing, and ownership differ; and the vocabulary students will need before raw arrays, heap allocation, and custom containers."
 				},
 				{
-					title: "References, Const, and API Boundaries",
+					title: "References, Lifetimes, and Evidence-Based Debugging",
 					content:
-						"Review pass-by-value, pass-by-reference, and `const` reference before raw pointers. Students should be able to explain when a function owns data, when it only observes data, and when it is allowed to mutate caller-owned data."
-				},
-				{
-					title: "Stack, Heap, and Lifetime Vocabulary",
-					content:
-						"Make lifetime explicit before allocation begins. Students should distinguish stack objects, heap objects, aliases, dangling references, leaks, and objects that clean themselves up when they leave scope."
-				},
-				{
-					title: "Debugging Memory by Evidence",
-					content:
-						"Use small tracing examples, address prints, and debugger inspection to prove where values live and why an alias changes what it changes. The habit is evidence first, assumptions second."
+						"Review pass-by-value, pass-by-reference, and `const` reference before raw pointers. Cover: stack objects, heap objects, aliases, dangling references, leaks, and objects that clean themselves up when they leave scope; when a function may mutate caller-owned data; when it only observes data; and how to use address prints, trace output, and debugger inspection as evidence for where values live and why an alias changes what it changes."
 				},
 				{
 					title: "CPPM0 Project 1: Lifetime Tracing Warm-Up",
@@ -61,14 +51,9 @@ export const cppLevel2Course: RawCourse = {
 			title: "CPPM1 Pointers and Addresses",
 			curriculum: [
 				{
-					title: "Memory Addresses and Dereferencing",
+					title: "Pointer Basics, Aliasing, and Failure Modes",
 					content:
-						"Introduce pointers as variables that store addresses, not regular values. Students should understand `&`, `*`, and `nullptr` before they do anything more complicated."
-				},
-				{
-					title: "Pointer Aliasing and Common Failure Modes",
-					content:
-						"Show how two pointers can refer to the same value, why uninitialized pointers are dangerous, and what makes dangling pointers hard to debug.",
+						"Introduce pointers as variables that store addresses, not regular values. Cover: `&`, `*`, `nullptr`, reading through a pointer, writing through a pointer, pointer aliasing, and how two names can change the same object. Then make failure modes explicit: uninitialized pointers, dangling pointers, null dereferences, stale observations, and why pointer bugs need evidence instead of guessing.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM1-Pointers"
 				},
@@ -107,16 +92,16 @@ export const cppLevel2Course: RawCourse = {
 			title: "CPPM2 Raw Arrays and Pointer Arithmetic",
 			curriculum: [
 				{
-					title: "Fixed-Size Arrays in Contiguous Memory",
+					title: "Raw Arrays as Contiguous Memory",
 					content:
-						"Teach raw arrays as contiguous blocks with fixed size known at compile time. This should be framed as a lower-level model than `std::vector`, not as the new default beginner container.",
+						"Teach raw arrays as fixed-size contiguous blocks and frame them as a lower-level model than `std::vector`, not as the new default beginner container. Cover: explicit size parameters, valid index ranges, how array names decay to addresses, why bounds are not tracked for you, and how raw arrays help explain what safer containers are doing.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Array-Basics-Reference"
 				},
 				{
-					title: "Arrays as Addresses and Offsets",
+					title: "Pointer Arithmetic and Offset Reasoning",
 					content:
-						"Use pointer arithmetic carefully so students understand what `arr + i` really means. The point is memory layout reasoning, not style preference.",
+						"Use pointer arithmetic carefully so students understand what `arr + i` really means. Cover: element-size offsets, moving a pointer through an array, comparing pointer traversal with indexed traversal, stopping before the end, and explaining why the point is memory-layout reasoning rather than style preference.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Pointer-Arithmetic-Reference"
 				},
@@ -155,16 +140,11 @@ export const cppLevel2Course: RawCourse = {
 			title: "CPPM3 Two-Dimensional Arrays and Layout",
 			curriculum: [
 				{
-					title: "Two-Dimensional Array Basics",
+					title: "Two-Dimensional Arrays, Layout, and Function Boundaries",
 					content:
-						"Teach 2D arrays as rows and columns with a concrete storage layout. Students should understand nested loops first and pointer-based flattening only after the grid shape is clear.",
+						"Teach 2D arrays as rows and columns with a concrete storage layout. Cover: nested loops, row/column meaning, row-major storage, rectangular dimensions, multiplication-table tracing, and when a 2D array can be viewed as contiguous memory. Keep pointer-based flattening secondary until the grid shape is clear, then explain what changes when a function receives a pointer view instead of a higher-level container.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM3-Two-Dimensional-Arrays-Reference"
-				},
-				{
-					title: "Flattened Access and Function Boundaries",
-					content:
-						"Show how a 2D array can be viewed as contiguous memory and what changes when functions receive a pointer view instead of a higher-level container."
 				},
 				{
 					title: "CPPM3 Project 1: 2D Array Practice",
@@ -201,16 +181,11 @@ export const cppLevel2Course: RawCourse = {
 			title: "CPPM4 Dynamic Memory and Custom Dynamic Arrays",
 			curriculum: [
 				{
-					title: "Dynamic Variables and Lifetime",
+					title: "Dynamic Allocation and Manual Ownership",
 					content:
-						"Teach `new` and `delete` explicitly so students understand heap allocation, leaks, and dangling pointers. This is where lifetime becomes a first-class design concern.",
+						"Teach `new` and `delete` explicitly so students understand heap allocation, leaks, and dangling pointers. Cover: why heap objects outlive the current stack frame until deleted; how ownership must be assigned before allocation; why every allocation needs exactly one cleanup path; what can go wrong during replacement and resizing; and why raw `new`/`delete` is a teaching tool for ownership rather than the preferred modern endpoint.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM4-Dynamic-Variables-Reference"
-				},
-				{
-					title: "Manual Ownership Before Modern Ownership",
-					content:
-						"Frame raw `new` and `delete` as a teaching tool for understanding ownership, not as the default modern C++ style. Students should name exactly who is responsible for deleting each allocation before they write code that creates it."
 				},
 				{
 					title: "CPPM4 Project 1: Assembly Line",
@@ -256,9 +231,9 @@ export const cppLevel2Course: RawCourse = {
 			title: "CPPM5 Manual-Memory Capstones",
 			curriculum: [
 				{
-					title: "Class-Owned Storage and Invariants",
+					title: "Manual-Memory Class Design",
 					content:
-						"Use capstone-sized classes that own their own storage so students must maintain invariants across multiple methods, not just in a single free function."
+						"Use capstone-sized classes that own their own storage so students must maintain invariants across multiple methods, not just in a single free function. Cover: constructors that establish valid storage, methods that preserve size/capacity rules, copy or resize operations that must not leak, input validation before mutation, and how matrix/profile examples force students to keep class boundaries and ownership rules aligned."
 				},
 				{
 					title: "CPPM5 Project 1: Matrix Fun with a Matrix Class",
@@ -279,14 +254,9 @@ export const cppLevel2Course: RawCourse = {
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Profile-Posts"
 				},
 				{
-					title: "RAII and Unique Pointer Review",
+					title: "Modern Ownership and Next-Step Positioning",
 					content:
-						"After the manual-memory capstones, show the modern correction: resources should normally be tied to object lifetime, and single-owner heap data should usually move toward `std::unique_ptr` or a standard container. Students do not need a deep smart-pointer unit yet, but they should not leave thinking raw ownership is the preferred endpoint."
-				},
-				{
-					title: "Next-Step Positioning",
-					content:
-						"Position this course as the bridge into `C++ Level 3`, `Data Structures and Algorithms in C++`, or `C Systems Engineering`. Students leaving this sequence should now be ready for pointer-heavy debugging, ownership reasoning, stricter low-level invariants, and a first pass at modern ownership vocabulary."
+						"After the manual-memory capstones, show the modern correction: resources should normally be tied to object lifetime, and single-owner heap data should usually move toward `std::unique_ptr` or a standard container. Cover: what cleanup responsibility disappears with RAII, what design responsibility remains, and where the student should go next: `C++ Level 3` for medium-size idiomatic C++, `Data Structures and Algorithms in C++` for implementation depth, or `C Systems Engineering` for lower-level representation."
 				}
 			],
 			supplementalProjects: [
