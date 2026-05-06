@@ -1660,9 +1660,14 @@ export const javaLevel3Course: RawCourse = {
 						"Use interfaces to separate what a component promises from how it stores data. Cover: `Comparable`, `Comparator`, `List`, `Set`, `Map`, `Queue`, `PriorityQueue`, iteration order, uniqueness, lookup behavior, and choosing a collection based on required operations rather than habit."
 				},
 				{
+					title: "Records as Immutable Data Carriers",
+					content:
+						"Introduce Java `record` types for small immutable data carriers. Cover the generated constructor, accessors, `equals`, `hashCode`, and `toString`; compact constructors for validation; records implementing interfaces; and why normal classes are still better for mutable objects, inheritance hierarchies, or behavior-heavy domain models."
+				},
+				{
 					title: "AJ20 Project 1: Generic Repository and Query Filters",
 					content:
-						"Build a generic in-memory repository that stores records by ID, supports filtering with predicates, and exposes only safe collection views. Students should explain the type parameter and what invariants the repository protects.",
+						"Build a generic in-memory repository that stores Java `record` objects by ID through a shared interface, supports filtering with predicates, and exposes only safe collection views. Students should explain the type parameter, what invariants the repository protects, and why records fit immutable snapshot-style data.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Generic-Repository"
 				},
