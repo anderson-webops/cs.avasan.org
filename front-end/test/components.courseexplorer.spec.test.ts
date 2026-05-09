@@ -50,7 +50,7 @@ describe("CourseExplorer.vue", () => {
 		await flushPromises();
 
 		await vi.waitFor(() => {
-			expect(wrapper.text()).toContain("Assigned courses");
+			expect(wrapper.text()).toContain("Current course");
 		});
 		expect(wrapper.text()).toContain(assignedCourse.name);
 		expect(wrapper.text()).toContain("Core lessons");

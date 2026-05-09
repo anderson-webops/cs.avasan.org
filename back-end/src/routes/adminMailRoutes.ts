@@ -171,6 +171,14 @@ function wrapEmailHtml(contentHtml: string): string {
 </html>`;
 }
 
+export async function renderMarkdownEmailHtml(markdown: string): Promise<string> {
+	const contentHtml = await marked.parse(markdown);
+	if (typeof contentHtml !== "string") {
+		throw new TypeError("HTML render did not return a string");
+	}
+	return wrapEmailHtml(contentHtml);
+}
+
 type SendMailInfo = Awaited<
 	ReturnType<ReturnType<typeof nodemailer.createTransport>["sendMail"]>
 >;
@@ -869,13 +877,7 @@ router.post("/send", validAdmin, async (req, res) => {
 			sessionDate = d;
 		}
 
-		// Ensure we always pass a string to nodemailer
-		const contentHtml = await marked.parse(md);
-		if (typeof contentHtml !== "string") {
-			// noinspection ExceptionCaughtLocallyJS
-			throw new TypeError("HTML render did not return a string");
-		}
-		const html = wrapEmailHtml(contentHtml);
+		const html = await renderMarkdownEmailHtml(md);
 
 		const mailBase = {
 			date: new Date(),

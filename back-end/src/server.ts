@@ -3,10 +3,10 @@ import process, { env, exit } from "node:process";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
 import express from "express";
-import rateLimit from "express-rate-limit";
 import mongoose from "mongoose";
 
 import { quoteProxy } from "./controllers/common/quoteProxy.js";
+import { createAdminMailLimiter } from "./middleware/rateLimiters.js";
 import { accountRoutes } from "./routes/accountRoutes.js";
 import { adminMailRoutes } from "./routes/adminMailRoutes.js";
 import { adminRoutes } from "./routes/adminRoutes.js";
@@ -75,16 +75,7 @@ async function main() {
 	});
 
 	// 4) rate limit (can be before or after parsers; keep before routes)
-	const rateWindowMs = Number(env.RATE_WINDOW_MS || 60000);
-	const rateMax = Number(env.RATE_MAX || 20); // v7 also accepts `limit`; be consistent
-	const adminMailLimiter = rateLimit({
-		windowMs: rateWindowMs,
-		limit: rateMax,
-		standardHeaders: true,
-		legacyHeaders: false,
-		message: { message: "Too many requests, slow down." }
-	});
-	app.use("/admin-mail", adminMailLimiter, adminMailRoutes);
+	app.use("/admin-mail", createAdminMailLimiter(), adminMailRoutes);
 
 	//
 	app.use("/quotes", quoteProxy);
