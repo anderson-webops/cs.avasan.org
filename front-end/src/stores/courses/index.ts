@@ -294,6 +294,14 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "unity-game-development",
+		name: "Unity Game Development",
+		load: () =>
+			import("./unity-game-development").then(
+				({ unityGameDevelopmentCourse }) => unityGameDevelopmentCourse
+			)
+	},
+	{
 		id: "linux-systems",
 		name: "Linux Systems",
 		load: () =>

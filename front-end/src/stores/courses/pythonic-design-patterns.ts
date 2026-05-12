@@ -98,7 +98,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-1/tree/main"
 				},
 				{
-					title: "Why Python Changes the Design Patterns Conversation supplemental 2",
+					title: "Why Python Changes the Design Patterns Conversation Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP1 Why Python Changes the Design-Patterns Conversation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -107,7 +107,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-01-pdp1-why-python-changes-the-design-patterns-conv/solution"
 				},
 				{
-					title: "Why Python Changes the Design Patterns Conversation supplemental 3",
+					title: "Why Python Changes the Design Patterns Conversation Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP1 Why Python Changes the Design-Patterns Conversation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -157,7 +157,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-2/tree/main"
 				},
 				{
-					title: "Design Foundations in Python supplemental 2",
+					title: "Design Foundations in Python Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP2 Design Foundations in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -166,7 +166,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-03-pdp2-design-foundations-in-python-supplemental-2/solution"
 				},
 				{
-					title: "Design Foundations in Python supplemental 3",
+					title: "Design Foundations in Python Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP2 Design Foundations in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -220,7 +220,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP1-Strategy-Rulebook/solution"
 				},
 				{
-					title: "Strategy Without Ceremony supplemental 2",
+					title: "Strategy Without Ceremony Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP3 Strategy Without Ceremony. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -229,7 +229,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-05-pdp3-strategy-without-ceremony-supplemental-2/solution"
 				},
 				{
-					title: "Strategy Without Ceremony supplemental 3",
+					title: "Strategy Without Ceremony Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP3 Strategy Without Ceremony. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -283,7 +283,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP2-Factory-and-Builder-Config-Kit/solution"
 				},
 				{
-					title: "Factory and Builder in Python supplemental 2",
+					title: "Factory and Builder in Python Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP4 Factory and Builder in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -292,7 +292,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-07-pdp4-factory-and-builder-in-python-supplemental-2/solution"
 				},
 				{
-					title: "Factory and Builder in Python supplemental 3",
+					title: "Factory and Builder in Python Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP4 Factory and Builder in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -346,7 +346,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP3-Observer-Notification-Hub/solution"
 				},
 				{
-					title: "Observer, Events, and Callbacks supplemental 2",
+					title: "Observer, Events, and Callbacks Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP5 Observer, Events, and Callbacks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -355,7 +355,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-09-pdp5-observer-events-and-callbacks-supplemental-2/solution"
 				},
 				{
-					title: "Observer, Events, and Callbacks supplemental 3",
+					title: "Observer, Events, and Callbacks Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP5 Observer, Events, and Callbacks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -409,7 +409,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP4-Decorator-Proxy-Facade-Toolkit/solution"
 				},
 				{
-					title: "Decorator, Proxy, and Facade supplemental 2",
+					title: "Decorator, Proxy, and Facade Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP6 Decorator, Proxy, and Facade. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -418,7 +418,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-11-pdp6-decorator-proxy-and-facade-supplemental-2/solution"
 				},
 				{
-					title: "Decorator, Proxy, and Facade supplemental 3",
+					title: "Decorator, Proxy, and Facade Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP6 Decorator, Proxy, and Facade. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -472,7 +472,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP5-State-Command-Quest-Loop/solution"
 				},
 				{
-					title: "State and Command supplemental 2",
+					title: "State and Command Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP7 State and Command. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -481,7 +481,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-13-pdp7-state-and-command-supplemental-2/solution"
 				},
 				{
-					title: "State and Command supplemental 3",
+					title: "State and Command Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP7 State and Command. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -535,7 +535,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP6-Adapter-Template-Import-Pipeline/solution"
 				},
 				{
-					title: "Adapter and Integration Boundaries supplemental 2",
+					title: "Adapter and Integration Boundaries Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP8 Adapter and Integration Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -544,7 +544,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-15-pdp8-adapter-and-integration-boundaries-supplemental-2/solution"
 				},
 				{
-					title: "Adapter and Integration Boundaries supplemental 3",
+					title: "Adapter and Integration Boundaries Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP8 Adapter and Integration Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -598,7 +598,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP6-Adapter-Template-Import-Pipeline/solution"
 				},
 				{
-					title: "Method versus Higher Order Functions supplemental 2",
+					title: "Method versus Higher Order Functions Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP9 Template Method versus Higher-Order Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -607,7 +607,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-17-pdp9-template-method-versus-higher-order-functio/solution"
 				},
 				{
-					title: "Method versus Higher Order Functions supplemental 3",
+					title: "Method versus Higher Order Functions Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP9 Template Method versus Higher-Order Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -657,7 +657,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-Level-3/tree/main"
 				},
 				{
-					title: "Singleton, Global State, and Module Patterns supplemental 2",
+					title: "Singleton, Global State, and Module Patterns Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP10 Singleton, Global State, and Module Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -666,7 +666,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-19-pdp10-singleton-global-state-and-module-patterns/solution"
 				},
 				{
-					title: "Singleton, Global State, and Module Patterns supplemental 3",
+					title: "Singleton, Global State, and Module Patterns Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP10 Singleton, Global State, and Module Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -720,7 +720,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP7-Pythonic-Refactor-Capstone/solution"
 				},
 				{
-					title: "Refactoring Python Code Smells supplemental 2",
+					title: "Refactoring Python Code Smells Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP11 Refactoring Python Code Smells. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -729,7 +729,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-21-pdp11-refactoring-python-code-smells-supplemental-2/solution"
 				},
 				{
-					title: "Refactoring Python Code Smells supplemental 3",
+					title: "Refactoring Python Code Smells Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP11 Refactoring Python Code Smells. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -783,7 +783,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP7-Pythonic-Refactor-Capstone/solution"
 				},
 				{
-					title: "Capstone Pythonic Refactor Studio supplemental 2",
+					title: "Capstone Pythonic Refactor Studio Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP12 Capstone Pythonic Refactor Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -792,229 +792,13 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-23-pdp12-capstone-pythonic-refactor-studio-supplemental-2/solution"
 				},
 				{
-					title: "Capstone Pythonic Refactor Studio supplemental 3",
+					title: "Capstone Pythonic Refactor Studio Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PDP12 Capstone Pythonic Refactor Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-supplemental-3/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 14: AI Level 1",
-			curriculum: [
-				{
-					title: "AI Level 1: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 14: AI Level 1, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "AI Level 1: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 14: AI Level 1, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "AI Level 1: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 14: AI Level 1. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main"
-				},
-				{
-					title: "AI Level 1: Review and Reflection",
-					content:
-						"Close Applied Studio 14: AI Level 1 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "AI Level 1: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 14: AI Level 1 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-1/tree/main"
-				},
-				{
-					title: "Applied Studio 14: AI Level 1 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: AI Level 1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-25-applied-studio-14-ai-level-1-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-25-applied-studio-14-ai-level-1-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 14: AI Level 1 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: AI Level 1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-26-applied-studio-14-ai-level-1-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-26-applied-studio-14-ai-level-1-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 15: AI Level 2",
-			curriculum: [
-				{
-					title: "AI Level 2: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 15: AI Level 2, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "AI Level 2: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 15: AI Level 2, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "AI Level 2: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 15: AI Level 2. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main"
-				},
-				{
-					title: "AI Level 2: Review and Reflection",
-					content:
-						"Close Applied Studio 15: AI Level 2 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "AI Level 2: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 15: AI Level 2 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main"
-				},
-				{
-					title: "Applied Studio 15: AI Level 2 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: AI Level 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-27-applied-studio-15-ai-level-2-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-27-applied-studio-15-ai-level-2-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 15: AI Level 2 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: AI Level 2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-28-applied-studio-15-ai-level-2-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-28-applied-studio-15-ai-level-2-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 16: Customized",
-			curriculum: [
-				{
-					title: "Customized: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 16: Customized, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "Customized: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 16: Customized, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "Customized: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 16: Customized. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-Customized-Archive"
-				},
-				{
-					title: "Customized: Review and Reflection",
-					content:
-						"Close Applied Studio 16: Customized by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "Customized: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 16: Customized with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-Customized-Archive"
-				},
-				{
-					title: "Applied Studio 16: Customized supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Customized. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-29-applied-studio-16-customized-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-29-applied-studio-16-customized-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 16: Customized supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: Customized. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-30-applied-studio-16-customized-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-30-applied-studio-16-customized-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 17: Data Science in Python",
-			curriculum: [
-				{
-					title: "Data Science in Python: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 17: Data Science in Python, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
-				},
-				{
-					title: "Data Science in Python: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 17: Data Science in Python, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "Data Science in Python: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 17: Data Science in Python. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main"
-				},
-				{
-					title: "Data Science in Python: Review and Reflection",
-					content:
-						"Close Applied Studio 17: Data Science in Python by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "Data Science in Python: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 17: Data Science in Python with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Data-Science/tree/main"
-				},
-				{
-					title: "Applied Studio 17: Data Science in Python supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Data Science in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-31-applied-studio-17-data-science-in-python-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-31-applied-studio-17-data-science-in-python-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 17: Data Science in Python supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: Data Science in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-32-applied-studio-17-data-science-in-python-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-32-applied-studio-17-data-science-in-python-supplemental-3/solution"
 				}
 			]
 		}

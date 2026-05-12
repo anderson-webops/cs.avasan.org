@@ -31,9 +31,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -42,12 +42,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Set up a small Cargo-based CLI and use it to compare a clean Rust workspace with a fragile manual C/C++ build loop. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/solution"
 				},
 				{
-					title: "Tooling, Cargo, and Why Rust Exists supplemental 2",
+					title: "Tooling, Cargo, and Why Rust Exists Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS0 Tooling, Cargo, and Why Rust Exists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -56,7 +56,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/solution"
 				},
 				{
-					title: "Tooling, Cargo, and Why Rust Exists supplemental 3",
+					title: "Tooling, Cargo, and Why Rust Exists Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS0 Tooling, Cargo, and Why Rust Exists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -94,9 +94,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -105,12 +105,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Build a small CLI that moves strings, vectors, and structs through helper functions so students can see when ownership transfers and when values must be cloned. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS1-Ownership-and-Moves/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/solution"
 				},
 				{
-					title: "Ownership, Moves, and Memory Responsibility supplemental 2",
+					title: "Ownership, Moves, and Memory Responsibility Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS1 Ownership, Moves, and Memory Responsibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -119,7 +119,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/solution"
 				},
 				{
-					title: "Ownership, Moves, and Memory Responsibility supplemental 3",
+					title: "Ownership, Moves, and Memory Responsibility Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS1 Ownership, Moves, and Memory Responsibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -157,9 +157,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -168,12 +168,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Refactor a small parser or buffer-manipulation exercise until it satisfies Rust's borrowing model without cloning away the real ownership story. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS2-Borrowing-and-Aliasing/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/solution"
 				},
 				{
-					title: "Borrowing, Aliasing, and Lifetimes supplemental 2",
+					title: "Borrowing, Aliasing, and Lifetimes Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS2 Borrowing, Aliasing, and Lifetimes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -182,7 +182,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/solution"
 				},
 				{
-					title: "Borrowing, Aliasing, and Lifetimes supplemental 3",
+					title: "Borrowing, Aliasing, and Lifetimes Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS2 Borrowing, Aliasing, and Lifetimes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -220,9 +220,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -231,12 +231,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Build a small input-validation or config-parsing tool that uses `Option`, `Result`, and `?` instead of ad hoc null checks or integer status flags. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS3-Option-and-Result/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/solution"
 				},
 				{
-					title: "Option, Result, and Typed Error Paths supplemental 2",
+					title: "Option, Result, and Typed Error Paths Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS3 Option, Result, and Typed Error Paths. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -245,7 +245,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/solution"
 				},
 				{
-					title: "Option, Result, and Typed Error Paths supplemental 3",
+					title: "Option, Result, and Typed Error Paths Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS3 Option, Result, and Typed Error Paths. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -283,9 +283,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -294,12 +294,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Implement a byte-buffer or log-slice utility that compares safe slicing patterns with the kinds of off-by-one and unchecked indexing bugs students already know from low-level work. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS4-Slices-Strings-and-Bounds/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/solution"
 				},
 				{
-					title: "Strings, Slices, Collections, and Bounds Safety supplemental 2",
+					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS4 Strings, Slices, Collections, and Bounds Safety. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -308,7 +308,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/solution"
 				},
 				{
-					title: "Strings, Slices, Collections, and Bounds Safety supplemental 3",
+					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS4 Strings, Slices, Collections, and Bounds Safety. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -346,9 +346,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -357,12 +357,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Refactor a fragile status-code workflow into structs and enums so the compiler helps enforce legal transitions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS5-Structs-Enums-and-State-Machines/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/solution"
 				},
 				{
-					title: "Structs, Enums, and Safer State Models supplemental 2",
+					title: "Structs, Enums, and Safer State Models Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS5 Structs, Enums, and Safer State Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -371,7 +371,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/solution"
 				},
 				{
-					title: "Structs, Enums, and Safer State Models supplemental 3",
+					title: "Structs, Enums, and Safer State Models Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS5 Structs, Enums, and Safer State Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -409,9 +409,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -420,12 +420,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Build a multi-step validation pipeline with traits and iterator-based transforms so the student can compare clean contracts with ad hoc callback spaghetti. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS6-Traits-and-API-Contracts/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/solution"
 				},
 				{
-					title: "Traits, Iterators, and API Contracts supplemental 2",
+					title: "Traits, Iterators, and API Contracts Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS6 Traits, Iterators, and API Contracts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -434,7 +434,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/solution"
 				},
 				{
-					title: "Traits, Iterators, and API Contracts supplemental 3",
+					title: "Traits, Iterators, and API Contracts Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS6 Traits, Iterators, and API Contracts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -472,9 +472,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -483,12 +483,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Build a small CLI that parses a log or config file, validates each record, and reports trustworthy failures instead of crashing or silently accepting malformed input. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS11-Secure-CLI-Audit-Tool/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/solution"
 				},
 				{
-					title: "Files, Parsers, and Secure CLI Design supplemental 2",
+					title: "Files, Parsers, and Secure CLI Design Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS7 Files, Parsers, and Secure CLI Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -497,7 +497,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/solution"
 				},
 				{
-					title: "Files, Parsers, and Secure CLI Design supplemental 3",
+					title: "Files, Parsers, and Secure CLI Design Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS7 Files, Parsers, and Secure CLI Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -535,9 +535,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -546,12 +546,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Build a small concurrent monitor that compares message passing with shared mutable state and highlights how Rust narrows unsafe race patterns. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS9-Concurrency-with-Threads-and-Channels/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/solution"
 				},
 				{
-					title: "Concurrency and Race Reduction supplemental 2",
+					title: "Concurrency and Race Reduction Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS8 Concurrency and Race Reduction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -560,7 +560,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/solution"
 				},
 				{
-					title: "Concurrency and Race Reduction supplemental 3",
+					title: "Concurrency and Race Reduction Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS8 Concurrency and Race Reduction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -598,9 +598,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -609,12 +609,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Wrap a tiny unsafe or FFI-facing boundary with documented invariants so the student practices narrowing and auditing trust assumptions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS10-Unsafe-and-FFI-Boundaries/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/solution"
 				},
 				{
-					title: "Unsafe, FFI, and Trusted Boundaries supplemental 2",
+					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS9 Unsafe, FFI, and Trusted Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -623,7 +623,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/solution"
 				},
 				{
-					title: "Unsafe, FFI, and Trusted Boundaries supplemental 3",
+					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS9 Unsafe, FFI, and Trusted Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -661,9 +661,9 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/solution"
 				}
 			],
 			supplementalProjects: [
@@ -672,12 +672,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 					content:
 						"Complete a larger audit-and-port capstone where the student documents the old bug classes, the Rust redesign, the remaining risks, and the final testing evidence. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/starter",
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Rust-Systems-Security/tree/main/RSS12-Capstone-Harden-a-Legacy-Tool/solution"
+						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/solution"
 				},
 				{
-					title: "Capstone: Harden a Legacy Tool supplemental 2",
+					title: "Capstone: Harden a Legacy Tool Supplemental 2",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS10 Capstone: Harden a Legacy Tool. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
@@ -686,361 +686,13 @@ export const rustSystemsSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/solution"
 				},
 				{
-					title: "Capstone: Harden a Legacy Tool supplemental 3",
+					title: "Capstone: Harden a Legacy Tool Supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to RSS10 Capstone: Harden a Legacy Tool. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-22-rss10-capstone-harden-a-legacy-tool-supplemental-3/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-22-rss10-capstone-harden-a-legacy-tool-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 12: offensive security lab 10",
-			curriculum: [
-				{
-					title: "offensive security lab 10: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 12: offensive security lab 10, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
-				},
-				{
-					title: "offensive security lab 10: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 12: offensive security lab 10, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "offensive security lab 10: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 12: offensive security lab 10. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-01-offensive-security-lab-10/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-01-offensive-security-lab-10/solution"
-				},
-				{
-					title: "offensive security lab 10: Review and Reflection",
-					content:
-						"Close Applied Studio 12: offensive security lab 10 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "offensive security lab 10: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 12: offensive security lab 10 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-01-offensive-security-lab-10/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-01-offensive-security-lab-10/solution"
-				},
-				{
-					title: "Applied Studio 12: offensive security lab 10 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: offensive security lab 10. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-23-applied-studio-12-offensive-security-lab-10-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-23-applied-studio-12-offensive-security-lab-10-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 12: offensive security lab 10 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: offensive security lab 10. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-24-applied-studio-12-offensive-security-lab-10-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-24-applied-studio-12-offensive-security-lab-10-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 13: offensive security lab 11",
-			curriculum: [
-				{
-					title: "offensive security lab 11: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 13: offensive security lab 11, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
-				},
-				{
-					title: "offensive security lab 11: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 13: offensive security lab 11, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "offensive security lab 11: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 13: offensive security lab 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-02-offensive-security-lab-11/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-02-offensive-security-lab-11/solution"
-				},
-				{
-					title: "offensive security lab 11: Review and Reflection",
-					content:
-						"Close Applied Studio 13: offensive security lab 11 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "offensive security lab 11: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 13: offensive security lab 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-02-offensive-security-lab-11/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-02-offensive-security-lab-11/solution"
-				},
-				{
-					title: "Applied Studio 13: offensive security lab 11 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: offensive security lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-25-applied-studio-13-offensive-security-lab-11-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-25-applied-studio-13-offensive-security-lab-11-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 13: offensive security lab 11 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: offensive security lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-26-applied-studio-13-offensive-security-lab-11-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-26-applied-studio-13-offensive-security-lab-11-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 14: offensive security lab 12",
-			curriculum: [
-				{
-					title: "offensive security lab 12: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 14: offensive security lab 12, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
-				},
-				{
-					title: "offensive security lab 12: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 14: offensive security lab 12, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "offensive security lab 12: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 14: offensive security lab 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-03-offensive-security-lab-12/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-03-offensive-security-lab-12/solution"
-				},
-				{
-					title: "offensive security lab 12: Review and Reflection",
-					content:
-						"Close Applied Studio 14: offensive security lab 12 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "offensive security lab 12: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 14: offensive security lab 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-03-offensive-security-lab-12/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-03-offensive-security-lab-12/solution"
-				},
-				{
-					title: "Applied Studio 14: offensive security lab 12 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: offensive security lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-27-applied-studio-14-offensive-security-lab-12-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-27-applied-studio-14-offensive-security-lab-12-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 14: offensive security lab 12 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: offensive security lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-28-applied-studio-14-offensive-security-lab-12-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-28-applied-studio-14-offensive-security-lab-12-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 15: offensive security lab 13",
-			curriculum: [
-				{
-					title: "offensive security lab 13: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 15: offensive security lab 13, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
-				},
-				{
-					title: "offensive security lab 13: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 15: offensive security lab 13, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "offensive security lab 13: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 15: offensive security lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-04-offensive-security-lab-13/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-04-offensive-security-lab-13/solution"
-				},
-				{
-					title: "offensive security lab 13: Review and Reflection",
-					content:
-						"Close Applied Studio 15: offensive security lab 13 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "offensive security lab 13: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 15: offensive security lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-04-offensive-security-lab-13/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-04-offensive-security-lab-13/solution"
-				},
-				{
-					title: "Applied Studio 15: offensive security lab 13 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: offensive security lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-29-applied-studio-15-offensive-security-lab-13-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-29-applied-studio-15-offensive-security-lab-13-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 15: offensive security lab 13 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: offensive security lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-30-applied-studio-15-offensive-security-lab-13-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-30-applied-studio-15-offensive-security-lab-13-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 16: offensive security lab 14",
-			curriculum: [
-				{
-					title: "offensive security lab 14: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 16: offensive security lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
-				},
-				{
-					title: "offensive security lab 14: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 16: offensive security lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "offensive security lab 14: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 16: offensive security lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-05-offensive-security-lab-14/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-05-offensive-security-lab-14/solution"
-				},
-				{
-					title: "offensive security lab 14: Review and Reflection",
-					content:
-						"Close Applied Studio 16: offensive security lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "offensive security lab 14: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 16: offensive security lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-05-offensive-security-lab-14/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-05-offensive-security-lab-14/solution"
-				},
-				{
-					title: "Applied Studio 16: offensive security lab 14 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: offensive security lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-31-applied-studio-16-offensive-security-lab-14-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-31-applied-studio-16-offensive-security-lab-14-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 16: offensive security lab 14 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: offensive security lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-32-applied-studio-16-offensive-security-lab-14-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-32-applied-studio-16-offensive-security-lab-14-supplemental-3/solution"
-				}
-			]
-		},
-		{
-			title: "Applied Studio 17: offensive security lab 15",
-			curriculum: [
-				{
-					title: "offensive security lab 15: Core Concepts",
-					content:
-						"Introduce the main goal of Applied Studio 17: offensive security lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
-				},
-				{
-					title: "offensive security lab 15: Guided Example",
-					content:
-						"Walk through one representative example for Applied Studio 17: offensive security lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				},
-				{
-					title: "offensive security lab 15: Core Project",
-					content:
-						"Build the central artifact for Applied Studio 17: offensive security lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-06-offensive-security-lab-15/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-06-offensive-security-lab-15/solution"
-				},
-				{
-					title: "offensive security lab 15: Review and Reflection",
-					content:
-						"Close Applied Studio 17: offensive security lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "offensive security lab 15: Extension Challenge",
-					content:
-						"Extend the core build from Applied Studio 17: offensive security lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-06-offensive-security-lab-15/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-06-offensive-security-lab-15/solution"
-				},
-				{
-					title: "Applied Studio 17: offensive security lab 15 supplemental 2",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: offensive security lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-33-applied-studio-17-offensive-security-lab-15-supplemental-2/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-33-applied-studio-17-offensive-security-lab-15-supplemental-2/solution"
-				},
-				{
-					title: "Applied Studio 17: offensive security lab 15 supplemental 3",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: offensive security lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-34-applied-studio-17-offensive-security-lab-15-supplemental-3/starter",
-					solutionLink:
-						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-34-applied-studio-17-offensive-security-lab-15-supplemental-3/solution"
 				}
 			]
 		}
