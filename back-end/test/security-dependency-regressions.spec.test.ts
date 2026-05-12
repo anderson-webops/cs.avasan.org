@@ -6,7 +6,11 @@ import {
 	createAdminMailLimiter,
 	createUserCourseAccessLimiter
 } from "../src/middleware/rateLimiters.js";
-import { renderMarkdownEmailHtml } from "../src/routes/adminMailRoutes.js";
+import { renderMarkdownEmailHtml } from "../src/utils/markdownEmail.js";
+import {
+	defaultSessionNoteSubject,
+	parseScheduledSessionPayload
+} from "../src/utils/scheduledSessions.js";
 
 async function withServer<T>(
 	handler: RequestHandler,
@@ -106,5 +110,44 @@ describe("security dependency regressions", () => {
 		expect(typeof html).toBe("string");
 		expect(html).toContain("safe text");
 		expect(html).toContain("<!doctype html>");
+	});
+
+	it("parses scheduled sessions with only the supported visible status values", () => {
+		const parsed = parseScheduledSessionPayload(
+			{
+				title: "C++ lesson",
+				startAt: "2026-05-12T18:00:00.000Z",
+				endAt: "2026-05-12T19:00:00.000Z",
+				status: "rescheduled",
+				sourceEmail: "STUDENT@example.com"
+			},
+			{ sourceEmail: "fallback@example.com" }
+		);
+
+		expect(parsed.title).toBe("C++ lesson");
+		expect(parsed.status).toBe("rescheduled");
+		expect(parsed.sourceEmail).toBe("student@example.com");
+		expect(parsed.startAt.toISOString()).toBe("2026-05-12T18:00:00.000Z");
+	});
+
+	it("rejects no_show and invalid schedule time ranges", () => {
+		expect(() =>
+			parseScheduledSessionPayload({
+				startAt: "2026-05-12T18:00:00.000Z",
+				endAt: "2026-05-12T19:00:00.000Z",
+				status: "no_show"
+			})
+		).toThrow("status must be scheduled, cancelled, completed, or rescheduled");
+
+		expect(() =>
+			parseScheduledSessionPayload({
+				startAt: "2026-05-12T19:00:00.000Z",
+				endAt: "2026-05-12T18:00:00.000Z"
+			})
+		).toThrow("endAt must be after startAt");
+	});
+
+	it("creates stable default session-note subjects from UTC dates", () => {
+		expect(defaultSessionNoteSubject(new Date(Date.UTC(2026, 4, 2, 12)))).toBe("Session Notes (05/02)");
 	});
 });

@@ -5,13 +5,13 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { env } from "node:process";
 import { Router } from "express";
 import { ImapFlow } from "imapflow";
-import { marked } from "marked";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 import { validAdmin } from "../middleware/auth.js";
 import { InternalEmail } from "../models/schemas/InternalEmail.js";
 import { SessionNote } from "../models/schemas/SessionNote.js";
 import { User } from "../models/schemas/User.js";
+import { renderMarkdownEmailHtml } from "../utils/markdownEmail.js";
 
 const router = Router();
 const DATE_PREFIX_RE = /^(\d{4})-(\d{2})-(\d{2})/;
@@ -143,40 +143,6 @@ function parseDateOnly(dateStr: string): Date | null {
 	// store at UTC noon to avoid TZ-related off-by-one when read in other zones
 	const dt = new Date(Date.UTC(year, month - 1, day, 12));
 	return Number.isNaN(dt.getTime()) ? null : dt;
-}
-
-function wrapEmailHtml(contentHtml: string): string {
-	return `<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="color-scheme" content="light only" />
-		<meta name="supported-color-schemes" content="light only" />
-	</head>
-	<body style="margin:0;padding:24px;background:#ffffff !important;color:#111827 !important;">
-		<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff !important;">
-			<tr>
-				<td align="center" style="background:#ffffff !important;">
-					<table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" style="width:680px;max-width:680px;background:#ffffff !important;color:#111827 !important;">
-						<tr>
-							<td style="padding:24px;background:#ffffff !important;color:#111827 !important;">
-								${contentHtml}
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-	</body>
-</html>`;
-}
-
-export async function renderMarkdownEmailHtml(markdown: string): Promise<string> {
-	const contentHtml = await marked.parse(markdown);
-	if (typeof contentHtml !== "string") {
-		throw new TypeError("HTML render did not return a string");
-	}
-	return wrapEmailHtml(contentHtml);
 }
 
 type SendMailInfo = Awaited<
@@ -345,53 +311,6 @@ function dedupeMatchedUsers(
 	return [...deduped.values()];
 }
 
-async function trimSessionNotesForUser(userID: string): Promise<void> {
-	const notesToKeep = await SessionNote.find({ user: userID })
-		.sort({ sessionDate: -1, createdAt: -1, _id: -1 })
-		.limit(3)
-		.select("_id")
-		.lean();
-
-	const keepIDs = notesToKeep.map(note => note._id);
-	if (keepIDs.length === 0) {
-		return;
-	}
-
-	await SessionNote.deleteMany({
-		user: userID,
-		_id: { $nin: keepIDs }
-	});
-}
-
-async function trimSessionNotesForPrimaryEmail(
-	primaryEmail: string
-): Promise<void> {
-	const normalizedPrimaryEmail = normalizeEmail(primaryEmail);
-	if (!normalizedPrimaryEmail) {
-		return;
-	}
-
-	const notesToKeep = await SessionNote.find({
-		user: { $exists: false },
-		primaryEmail: normalizedPrimaryEmail
-	})
-		.sort({ sessionDate: -1, createdAt: -1, _id: -1 })
-		.limit(3)
-		.select("_id")
-		.lean();
-
-	const keepIDs = notesToKeep.map(note => note._id);
-	if (keepIDs.length === 0) {
-		return;
-	}
-
-	await SessionNote.deleteMany({
-		user: { $exists: false },
-		primaryEmail: normalizedPrimaryEmail,
-		_id: { $nin: keepIDs }
-	});
-}
-
 function serializeSessionNote(
 	note: {
 		_id: unknown;
@@ -489,7 +408,6 @@ async function saveAssociatedRecords(
 			markdown: args.markdown,
 			html: args.html
 		});
-		await trimSessionNotesForUser(associatedPrimaryUser._id);
 		sessionNoteSavedFor = associatedPrimaryUser;
 	}
 	else if (args.sessionDate) {
@@ -502,7 +420,6 @@ async function saveAssociatedRecords(
 			markdown: args.markdown,
 			html: args.html
 		});
-		await trimSessionNotesForPrimaryEmail(primaryRecipient);
 	}
 
 	const internalEmailsSavedFor

@@ -1,10 +1,18 @@
 // src/controllers/users/userExtraController.ts
 import type { RequestHandler } from "express";
+import type { ISessionNote } from "../../types/entities/ISessionNote.js";
 import { Types } from "mongoose";
 import { InternalEmail } from "../../models/schemas/InternalEmail.js";
+import { ScheduledSession } from "../../models/schemas/ScheduledSession.js";
 import { SessionNote } from "../../models/schemas/SessionNote.js";
 import { Tutor } from "../../models/schemas/Tutor.js";
 import { User } from "../../models/schemas/User.js";
+import { renderMarkdownEmailHtml } from "../../utils/markdownEmail.js";
+import {
+	defaultSessionNoteSubject,
+	parseScheduledSessionPayload,
+	serializeScheduledSession
+} from "../../utils/scheduledSessions.js";
 
 function getUserIDParam(req: { params: { userID?: string | string[] } }, res: any): string | null {
 	const paramUserID = req.params.userID;
@@ -38,6 +46,107 @@ function tutorOwnsUser(user: { tutors?: unknown[] } | null, tutorID: string) {
 		if (!id) return false;
 		return id.toString() === tutorID;
 	}) ?? false;
+}
+
+async function findManagedUserForSessionTools(
+	req: Parameters<RequestHandler>[0],
+	res: Parameters<RequestHandler>[1]
+) {
+	const userID = getUserIDParam(req, res);
+	if (!userID) return null;
+
+	const user = await User.findById(userID).populate("tutors", "_id");
+	if (!user) {
+		res.sendStatus(404);
+		return null;
+	}
+
+	if (req.currentAdmin) {
+		return user;
+	}
+
+	const actingTutor = req.currentTutor;
+	if (!actingTutor) {
+		res.status(403).json({ message: "Tutor or admin session required" });
+		return null;
+	}
+
+	if (!tutorOwnsUser(user, actingTutor._id.toString())) {
+		res.status(403).json({ message: "You can only manage sessions for your own students" });
+		return null;
+	}
+
+	return user;
+}
+
+function parseDateOnly(value: unknown): Date | null {
+	if (typeof value !== "string") return null;
+
+	const normalized = value.includes("T") ? value : `${value}T00:00:00.000Z`;
+	const match = normalized.match(/^(\d{4})-(\d{2})-(\d{2})/);
+	if (!match) return null;
+
+	const [, yearStr, monthStr, dayStr] = match;
+	const year = Number(yearStr);
+	const month = Number(monthStr);
+	const day = Number(dayStr);
+	if (!year || !month || !day) return null;
+
+	const date = new Date(Date.UTC(year, month - 1, day, 12));
+	if (Number.isNaN(date.getTime())) return null;
+	if (
+		date.getUTCFullYear() !== year
+		|| date.getUTCMonth() !== month - 1
+		|| date.getUTCDate() !== day
+	) {
+		return null;
+	}
+	return date;
+}
+
+function serializeSessionNote(
+	note: Pick<
+		ISessionNote,
+		| "_id"
+		| "studentName"
+		| "primaryEmail"
+		| "ccEmails"
+		| "subject"
+		| "sessionDate"
+		| "markdown"
+		| "createdAt"
+		| "updatedAt"
+	>
+) {
+	return {
+		_id: String(note._id),
+		studentName: note.studentName,
+		primaryEmail: note.primaryEmail,
+		ccEmails: note.ccEmails ?? [],
+		subject: note.subject,
+		sessionDate: note.sessionDate,
+		markdown: note.markdown,
+		createdAt: note.createdAt,
+		updatedAt: note.updatedAt
+	};
+}
+
+async function getRecentSessionNotesForUser(userID: Types.ObjectId, email: string) {
+	const normalizedEmail = email.trim().toLowerCase();
+	const notes = await SessionNote.find({
+		$or: [
+			{ user: userID },
+			{
+				user: { $exists: false },
+				primaryEmail: normalizedEmail
+			}
+		]
+	})
+		.sort({ sessionDate: -1, createdAt: -1 })
+		.limit(3)
+		.lean();
+
+	return notes.map(serializeSessionNote);
 }
 
 export const getUsersOfTutor: RequestHandler = async (req, res) => {
@@ -218,6 +327,201 @@ export const setUserCourseProgress: RequestHandler = async (req, res) => {
 	res.json({ courseProgress: user.courseProgress });
 };
 
+export const getUserSchedule: RequestHandler = async (req, res) => {
+	const user = await findManagedUserForSessionTools(req, res);
+	if (!user) return;
+
+	const rawFrom = typeof req.query.from === "string" ? req.query.from : "";
+	const from = rawFrom ? new Date(rawFrom) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+	if (Number.isNaN(from.getTime())) {
+		return res.status(400).json({ message: "from must be a valid date" });
+	}
+
+	const sessions = await ScheduledSession.find({
+		user: user._id,
+		startAt: { $gte: from }
+	})
+		.sort({ startAt: 1, createdAt: 1 })
+		.limit(50);
+
+	res.json({ scheduledSessions: sessions.map(serializeScheduledSession) });
+};
+
+export const createUserScheduledSession: RequestHandler = async (req, res) => {
+	const user = await findManagedUserForSessionTools(req, res);
+	if (!user) return;
+
+	let parsed;
+	try {
+		parsed = parseScheduledSessionPayload(req.body ?? {}, { sourceEmail: user.email });
+	}
+	catch (err) {
+		return res.status(400).json({ message: err instanceof Error ? err.message : "Invalid scheduled session" });
+	}
+
+	let tutorID = parsed.tutorId;
+	if (req.currentTutor) {
+		if (tutorID && tutorID !== req.currentTutor._id.toString()) {
+			return res.status(403).json({ message: "Tutors can only assign themselves to sessions" });
+		}
+		tutorID = req.currentTutor._id.toString();
+	}
+
+	if (tutorID) {
+		if (!Types.ObjectId.isValid(tutorID)) {
+			return res.status(400).json({ message: "Invalid tutor ID" });
+		}
+		if (!tutorOwnsUser(user, tutorID)) {
+			return res.status(400).json({ message: "Tutor must be assigned to this student before scheduling" });
+		}
+	}
+
+	const scheduledSession = await ScheduledSession.create({
+		user: user._id,
+		tutor: tutorID ? new Types.ObjectId(tutorID) : undefined,
+		title: parsed.title,
+		courseId: parsed.courseId,
+		startAt: parsed.startAt,
+		endAt: parsed.endAt,
+		timezone: parsed.timezone,
+		status: parsed.status,
+		notes: parsed.notes,
+		sourceEmail: parsed.sourceEmail,
+		externalEventId: parsed.externalEventId,
+		recurrenceId: parsed.recurrenceId
+	});
+
+	res.status(201).json({ scheduledSession: serializeScheduledSession(scheduledSession) });
+};
+
+export const updateUserScheduledSession: RequestHandler = async (req, res) => {
+	const user = await findManagedUserForSessionTools(req, res);
+	if (!user) return;
+
+	const rawSessionID = req.params.sessionID;
+	const sessionID = Array.isArray(rawSessionID) ? rawSessionID[0] : rawSessionID;
+	if (typeof sessionID !== "string" || !Types.ObjectId.isValid(sessionID)) {
+		return res.status(400).json({ message: "Invalid session ID" });
+	}
+
+	const scheduledSession = await ScheduledSession.findOne({
+		_id: sessionID,
+		user: user._id
+	});
+	if (!scheduledSession) return res.sendStatus(404);
+
+	let parsed;
+	try {
+		parsed = parseScheduledSessionPayload(
+			{
+				title: req.body?.title ?? scheduledSession.title,
+				courseId: req.body?.courseId ?? scheduledSession.courseId,
+				startAt: req.body?.startAt ?? scheduledSession.startAt,
+				endAt: req.body?.endAt ?? scheduledSession.endAt,
+				timezone: req.body?.timezone ?? scheduledSession.timezone,
+				status: req.body?.status ?? scheduledSession.status,
+				notes: req.body?.notes ?? scheduledSession.notes,
+				sourceEmail: req.body?.sourceEmail ?? scheduledSession.sourceEmail,
+				externalEventId: req.body?.externalEventId ?? scheduledSession.externalEventId,
+				recurrenceId: req.body?.recurrenceId ?? scheduledSession.recurrenceId,
+				tutorId: req.body?.tutorId
+			},
+			{
+				sourceEmail: scheduledSession.sourceEmail ?? user.email,
+				status: scheduledSession.status
+			}
+		);
+	}
+	catch (err) {
+		return res.status(400).json({ message: err instanceof Error ? err.message : "Invalid scheduled session" });
+	}
+
+	let tutorID = parsed.tutorId ?? scheduledSession.tutor?.toString();
+	if (req.currentTutor) {
+		if (tutorID && tutorID !== req.currentTutor._id.toString()) {
+			return res.status(403).json({ message: "Tutors can only assign themselves to sessions" });
+		}
+		tutorID = req.currentTutor._id.toString();
+	}
+
+	if (tutorID) {
+		if (!Types.ObjectId.isValid(tutorID)) {
+			return res.status(400).json({ message: "Invalid tutor ID" });
+		}
+		if (!tutorOwnsUser(user, tutorID)) {
+			return res.status(400).json({ message: "Tutor must be assigned to this student before scheduling" });
+		}
+	}
+
+	scheduledSession.title = parsed.title;
+	scheduledSession.courseId = parsed.courseId;
+	scheduledSession.startAt = parsed.startAt;
+	scheduledSession.endAt = parsed.endAt;
+	scheduledSession.timezone = parsed.timezone;
+	scheduledSession.status = parsed.status;
+	scheduledSession.notes = parsed.notes;
+	scheduledSession.sourceEmail = parsed.sourceEmail;
+	scheduledSession.externalEventId = parsed.externalEventId;
+	scheduledSession.recurrenceId = parsed.recurrenceId;
+	scheduledSession.tutor = tutorID ? new Types.ObjectId(tutorID) : undefined;
+
+	await scheduledSession.save();
+	res.json({ scheduledSession: serializeScheduledSession(scheduledSession) });
+};
+
+export const getUserRecentSessionNotes: RequestHandler = async (req, res) => {
+	const user = await findManagedUserForSessionTools(req, res);
+	if (!user) return;
+
+	const sessionNotes = await getRecentSessionNotesForUser(user._id, user.email);
+	res.json({ sessionNotes });
+};
+
+export const createUserSessionNote: RequestHandler = async (req, res) => {
+	const user = await findManagedUserForSessionTools(req, res);
+	if (!user) return;
+
+	const sessionDate = parseDateOnly(req.body?.sessionDate);
+	if (!sessionDate) {
+		return res.status(400).json({ message: "sessionDate must be a valid date" });
+	}
+
+	const markdown = typeof req.body?.markdown === "string"
+		? req.body.markdown.trim()
+		: typeof req.body?.md === "string"
+			? req.body.md.trim()
+			: "";
+	if (!markdown) {
+		return res.status(400).json({ message: "markdown is required" });
+	}
+
+	const ccEmails = normalizeStringArray(req.body?.ccEmails ?? []);
+	if (!ccEmails) {
+		return res.status(400).json({ message: "ccEmails must be an array" });
+	}
+
+	const rawSubject = typeof req.body?.subject === "string" ? req.body.subject.trim() : "";
+	const subject = rawSubject || defaultSessionNoteSubject(sessionDate);
+	const html = await renderMarkdownEmailHtml(markdown);
+
+	const note = await SessionNote.create({
+		user: user._id,
+		studentName: user.name,
+		primaryEmail: user.email.trim().toLowerCase(),
+		ccEmails,
+		subject,
+		sessionDate,
+		markdown,
+		html
+	});
+
+	const recentSessionNotes = await getRecentSessionNotesForUser(user._id, user.email);
+	res.status(201).json({
+		sessionNote: serializeSessionNote(note),
+		recentSessionNotes
+	});
+};
+
 export const promoteUserToTutor: RequestHandler = async (req, res) => {
 	const paramUserID = req.params.userID;
 	const userID = Array.isArray(paramUserID) ? paramUserID[0] : paramUserID;
@@ -311,37 +615,22 @@ export const getLoggedInUserCommunications: RequestHandler = async (req, res) =>
 	}
 
 	const normalizedEmail = actingUser.email.trim().toLowerCase();
-	const [sessionNotes, internalEmails] = await Promise.all([
-		SessionNote.find({
-			$or: [
-				{ user: actingUser._id },
-				{
-					user: { $exists: false },
-					primaryEmail: normalizedEmail
-				}
-			]
-		})
-			.sort({ sessionDate: -1, createdAt: -1 })
-			.limit(3)
-			.lean(),
+	const [sessionNotes, internalEmails, scheduledSessions] = await Promise.all([
+		getRecentSessionNotesForUser(actingUser._id, normalizedEmail),
 		InternalEmail.find({ user: actingUser._id })
 			.sort({ sentAt: -1, createdAt: -1 })
 			.limit(12)
-			.lean()
+			.lean(),
+		ScheduledSession.find({
+			user: actingUser._id,
+			startAt: { $gte: new Date() }
+		})
+			.sort({ startAt: 1, createdAt: 1 })
+			.limit(12)
 	]);
 
 	return res.json({
-		sessionNotes: sessionNotes.map(note => ({
-			_id: String(note._id),
-			studentName: note.studentName,
-			primaryEmail: note.primaryEmail,
-			ccEmails: note.ccEmails ?? [],
-			subject: note.subject,
-			sessionDate: note.sessionDate,
-			markdown: note.markdown,
-			createdAt: note.createdAt,
-			updatedAt: note.updatedAt
-		})),
+		sessionNotes,
 		internalEmails: internalEmails.map(email => ({
 			_id: String(email._id),
 			matchedRecipientEmail: email.matchedRecipientEmail,
@@ -355,6 +644,7 @@ export const getLoggedInUserCommunications: RequestHandler = async (req, res) =>
 			sentAt: email.sentAt,
 			createdAt: email.createdAt,
 			updatedAt: email.updatedAt
-		}))
+		})),
+		scheduledSessions: scheduledSessions.map(serializeScheduledSession)
 	});
 };

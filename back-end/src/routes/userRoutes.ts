@@ -9,16 +9,21 @@ import {
 	updateUser
 } from "../controllers/users/userController.js";
 import {
+	createUserScheduledSession,
+	createUserSessionNote,
 	deleteOwnUser,
 	deleteUserAsAdmin,
 	deleteUserAsTutor,
 	getLoggedInUserCommunications,
+	getUserRecentSessionNotes,
+	getUserSchedule,
 	getUsersOfTutor,
 	promoteUserToTutor,
 	setUserCourseAccess,
 	setUserCourseProgress,
 	setUserRecipientAssociation,
-	setUserTutors
+	setUserTutors,
+	updateUserScheduledSession
 } from "../controllers/users/userExtraController.js";
 import {
 	validAdmin,
@@ -60,6 +65,13 @@ router.post("/:userID/promote", validAdmin, promoteUserToTutor);
 // Allow tutors and admins to manage course visibility for their students
 router.put("/:userID/courses", userCourseAccessLimiter, validTutorOrAdminSession, setUserCourseAccess);
 router.put("/:userID/course-progress", userCourseAccessLimiter, validTutorOrAdminSession, setUserCourseProgress);
+
+// Allow tutors and admins to manage student schedules and private note-only logs
+router.get("/:userID/schedule", validTutorOrAdminSession, getUserSchedule);
+router.post("/:userID/schedule", validTutorOrAdminSession, createUserScheduledSession);
+router.put("/:userID/schedule/:sessionID", validTutorOrAdminSession, updateUserScheduledSession);
+router.get("/:userID/session-notes/recent", validTutorOrAdminSession, getUserRecentSessionNotes);
+router.post("/:userID/session-notes", validTutorOrAdminSession, createUserSessionNote);
 
 // Delete the user by the user themselves
 router.delete("/user/:userID", validUser, deleteOwnUser);

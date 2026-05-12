@@ -18,6 +18,7 @@ declare module 'vue' {
     CourseExplorer: typeof import('./components/CourseExplorer.vue')['default']
     LazyMarkdownContent: typeof import('./components/LazyMarkdownContent.vue')['default']
     LearnerCourseProgressEditor: typeof import('./components/LearnerCourseProgressEditor.vue')['default']
+    LearnerSessionTools: typeof import('./components/LearnerSessionTools.vue')['default']
     ProfileDetailsCard: typeof import('./components/ProfileDetailsCard.vue')['default']
     ProfileFields: typeof import('./components/ProfileFields.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -31,9 +31,20 @@ interface InternalEmailRecord {
 	sentAt: string;
 }
 
+interface ScheduledSessionRecord {
+	_id: string;
+	title: string;
+	startAt: string;
+	endAt: string;
+	timezone: string;
+	status: "scheduled" | "cancelled" | "completed" | "rescheduled";
+	notes: string | null;
+}
+
 interface UserCommunicationsResponse {
 	sessionNotes: SessionNoteRecord[];
 	internalEmails: InternalEmailRecord[];
+	scheduledSessions: ScheduledSessionRecord[];
 }
 
 const app = useAppStore();
@@ -43,9 +54,13 @@ const loading = ref(false);
 const error = ref("");
 const sessionNotes = ref<SessionNoteRecord[]>([]);
 const internalEmails = ref<InternalEmailRecord[]>([]);
+const scheduledSessions = ref<ScheduledSessionRecord[]>([]);
 
 const hasHistory = computed(
-	() => sessionNotes.value.length > 0 || internalEmails.value.length > 0
+	() =>
+		sessionNotes.value.length > 0 ||
+		internalEmails.value.length > 0 ||
+		scheduledSessions.value.length > 0
 );
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -78,6 +93,22 @@ function formatTimestamp(value: string) {
 	return timestampFormatter.format(date);
 }
 
+function formatDateTimeRange(session: ScheduledSessionRecord) {
+	const start = new Date(session.startAt);
+	const end = new Date(session.endAt);
+	if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+		return `${session.startAt} - ${session.endAt}`;
+	}
+
+	return `${timestampFormatter.format(start)} - ${end.toLocaleTimeString(
+		"en-US",
+		{
+			hour: "numeric",
+			minute: "2-digit"
+		}
+	)}`;
+}
+
 function renderMarkdown(markdown: string) {
 	const rendered = marked.parse(markdown);
 	if (typeof rendered !== "string") {
@@ -98,6 +129,7 @@ async function loadCommunications() {
 	if (!currentUser.value?._id) {
 		sessionNotes.value = [];
 		internalEmails.value = [];
+		scheduledSessions.value = [];
 		return;
 	}
 
@@ -110,6 +142,7 @@ async function loadCommunications() {
 		);
 		sessionNotes.value = data.sessionNotes ?? [];
 		internalEmails.value = data.internalEmails ?? [];
+		scheduledSessions.value = data.scheduledSessions ?? [];
 	} catch (err: any) {
 		error.value =
 			err.response?.data?.message ??
@@ -117,6 +150,7 @@ async function loadCommunications() {
 			"Unable to load communication history.";
 		sessionNotes.value = [];
 		internalEmails.value = [];
+		scheduledSessions.value = [];
 	} finally {
 		loading.value = false;
 	}
@@ -128,6 +162,7 @@ watch(
 		if (!userID) {
 			sessionNotes.value = [];
 			internalEmails.value = [];
+			scheduledSessions.value = [];
 			error.value = "";
 			return;
 		}
@@ -143,16 +178,62 @@ watch(
 		<div class="section-heading">
 			<div>
 				<p class="section-eyebrow">Communication history</p>
-				<h3>Notes and emails</h3>
+				<h3>Schedule, notes, and emails</h3>
 			</div>
 			<p class="section-copy">
-				Review your most recent session notes and any saved internal
-				emails sent to the email on this account. Session notes keep the
-				three newest entries.
+				Review your upcoming class schedule, the three newest session
+				notes, and any saved internal emails sent to the email on this
+				account.
 			</p>
 		</div>
 
 		<div class="history-grid">
+			<section class="history-panel">
+				<div class="panel-heading">
+					<div>
+						<p class="panel-eyebrow">Schedule</p>
+						<h4>Upcoming sessions</h4>
+					</div>
+					<span class="count-pill">{{
+						scheduledSessions.length
+					}}</span>
+				</div>
+
+				<p v-if="loading" class="empty-copy">
+					Loading upcoming sessions…
+				</p>
+				<p v-else-if="error" class="error-copy">{{ error }}</p>
+				<p
+					v-else-if="scheduledSessions.length === 0"
+					class="empty-copy"
+				>
+					No upcoming sessions are attached to this account yet.
+				</p>
+				<div v-else class="record-list">
+					<article
+						v-for="session in scheduledSessions"
+						:key="session._id"
+						class="record-card is-static"
+					>
+						<div class="record-summary">
+							<div>
+								<p class="record-kicker">
+									{{ formatDateTimeRange(session) }}
+								</p>
+								<h5>{{ session.title }}</h5>
+								<p class="record-subcopy">
+									{{ session.status }} -
+									{{ session.timezone }}
+								</p>
+							</div>
+						</div>
+						<div v-if="session.notes" class="record-meta">
+							{{ session.notes }}
+						</div>
+					</article>
+				</div>
+			</section>
+
 			<section class="history-panel">
 				<div class="panel-heading">
 					<div>
@@ -244,8 +325,8 @@ watch(
 		</div>
 
 		<p v-if="!loading && !error && !hasHistory" class="helper-copy">
-			Messages appear here only when they were sent to the email address
-			on this account.
+			Schedule items and messages appear here only when they are attached
+			to the email address on this account.
 		</p>
 	</section>
 </template>
@@ -317,7 +398,7 @@ watch(
 
 .history-grid {
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 	gap: 1rem;
 }
 
@@ -373,6 +454,10 @@ watch(
 
 .record-summary::-webkit-details-marker {
 	display: none;
+}
+
+.record-card.is-static .record-summary {
+	cursor: default;
 }
 
 .record-action {

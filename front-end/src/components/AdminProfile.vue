@@ -4,6 +4,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
 import AccountSecurity from "@/components/AccountSecurity.vue";
 import LearnerCourseProgressEditor from "@/components/LearnerCourseProgressEditor.vue";
+import LearnerSessionTools from "@/components/LearnerSessionTools.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
@@ -760,6 +761,12 @@ function confirmDeleteAdmin() {
 								</p>
 							</details>
 						</div>
+
+						<LearnerSessionTools
+							:user-email="u.email"
+							:user-id="String(u._id)"
+							:user-name="u.name"
+						/>
 
 						<div
 							v-if="userEditing[u._id]"
