@@ -322,6 +322,407 @@ function normalizeModuleLessonShape(course: RawCourse) {
 	}
 }
 
+type CourseTextSection = "curriculum" | "supplementalProjects";
+
+interface CourseTextContext {
+	courseId: string;
+	course: RawCourse;
+	module: RawCourseModule;
+	item: RawCourseModuleItem;
+	section: CourseTextSection;
+}
+
+const structuredSupportPattern =
+	/\*\*(?:Project goal|Teaching flow|Diagnostic guidance|Remote investigation|Science explanation|Studio focus|AP connection):?\*\*/i;
+
+const placeholderContentPattern =
+	/\b(?:introduce the main goal|build the central artifact|define the success criteria|use the .* snapshot|alternate supplemental snapshot)\b/i;
+
+function wordCount(text: string) {
+	const words = compactWhitespace(text).match(/\b[\w'+-]+\b/g);
+	return words ? words.length : 0;
+}
+
+function contextText(context: CourseTextContext) {
+	return `${context.courseId} ${context.course.name} ${context.module.title} ${context.item.title}`.toLowerCase();
+}
+
+function isCheckInContext(context: CourseTextContext) {
+	return /\bcheck[- ]?in\b|practice exam|assessment/i.test(
+		`${context.module.title} ${context.item.title}`
+	);
+}
+
+function isScienceContext(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (/computer science|data science/i.test(source)) return false;
+
+	return /elementary science|middle-school integrated science|physics|chemistry|biology|earth|ecosystem|motion|matter|weather|energy/i.test(
+		source
+	);
+}
+
+function isAppliedStudioContext(context: CourseTextContext) {
+	return /applied studio|studio|lab \d+/i.test(
+		`${context.module.title} ${context.item.title}`
+	);
+}
+
+function isBriefContent(content: string) {
+	return wordCount(content) < 65 || compactWhitespace(content).length < 460;
+}
+
+function needsContentSupport(context: CourseTextContext) {
+	const content = context.item.content;
+	if (!content.trim()) return true;
+	if (structuredSupportPattern.test(content)) return false;
+
+	return (
+		placeholderContentPattern.test(content) ||
+		isBriefContent(content) ||
+		/Core Concepts and Teaching Flow|Application, Misconceptions, and Readiness Check/.test(
+			context.item.title
+		) ||
+		isAppliedStudioContext(context) ||
+		(isProjectLikeItem(context.item) && wordCount(content) < 95) ||
+		(isCheckInContext(context) && wordCount(content) < 120)
+	);
+}
+
+function subjectFocus(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (/ap computer science|apcs/.test(source)) {
+		return "AP CSA Java reasoning: tracing code, explaining object state, writing method-level logic, and testing edge cases";
+	}
+	if (/python level 1|grs/.test(source)) {
+		return "beginner Python fluency: variables, input, conditionals, loops, functions, and readable console output";
+	}
+	if (/python level 2|ps\d/.test(source)) {
+		return "Python program design: control flow, data structures, user input, and careful testing of console behavior";
+	}
+	if (/python level 3|advanced python|am\d/.test(source)) {
+		return "advanced Python decomposition, algorithmic reasoning, file/data handling, and clear testing habits";
+	}
+	if (/java/.test(source)) {
+		return "object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests";
+	}
+	if (/c\+\+|cpp|c level|data structures.*cpp|algorithm lab/.test(source)) {
+		return "C++ engineering: types, memory ownership, containers, algorithms, command-line behavior, and repeatable tests";
+	}
+	if (/c systems|systems build|assembly/.test(source)) {
+		return "systems programming: machine representation, memory layout, build tooling, low-level debugging, and safe constraints";
+	}
+	if (/usaco|competitive/.test(source)) {
+		return "competitive-programming discipline: input parsing, sample verification, edge cases, and complexity reasoning";
+	}
+	if (/security|offensive|low-level security|network security/.test(source)) {
+		return "safe security analysis: local-only test fixtures, threat modeling, evidence collection, and defensive remediation";
+	}
+	if (/web|html|css|full-stack|api|database/.test(source)) {
+		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
+	}
+	if (
+		/data science|data analysis|machine learning|ai search|ai level|model/.test(
+			source
+		)
+	) {
+		return "data and model reasoning: dataset assumptions, measured output, interpretation, limitations, and responsible use";
+	}
+	if (/unity|game development|game-mechanics/.test(source)) {
+		return "game development: scene setup, state changes, player feedback, playtesting, and a clear completion loop";
+	}
+	if (/design pattern|refactoring|pattern implementation/.test(source)) {
+		return "software design tradeoffs: naming, responsibilities, coupling, refactoring safety, and behavior-preserving tests";
+	}
+	if (isScienceContext(context)) {
+		return "scientific explanation: observable phenomena, models, data, vocabulary, and claim-evidence-reasoning";
+	}
+	if (/algebra|geometry|calculus|math/.test(source)) {
+		return "mathematical reasoning: worked examples, notation, graph or table interpretation, and explanation of each step";
+	}
+
+	return "the module's core concept, a concrete worked example, and a testable student artifact";
+}
+
+function projectExpectations(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (/binary search/.test(source)) {
+		return [
+			"- State the sorted-data precondition before coding.",
+			"- Implement the search so found, missing, first-half, and second-half targets are handled correctly.",
+			"- Trace at least one search by recording the low, high, and middle indices at each step."
+		];
+	}
+	if (/linear search|sequential search/.test(source)) {
+		return [
+			"- Implement the search result in a way that clearly reports found versus not found.",
+			"- Test the first item, last item, middle item, and a missing target.",
+			"- If the data is sorted, explain when the search can stop early and why that is safe."
+		];
+	}
+	if (/sort|selection|insertion|merge|quick/.test(source)) {
+		return [
+			"- Show the array or list before and after the algorithm runs.",
+			"- Test already-sorted, reverse-sorted, duplicate-value, and small-size inputs.",
+			"- Explain which comparisons or swaps dominate the runtime."
+		];
+	}
+	if (/array|matrix|grid|two-dimensional|2d/.test(source)) {
+		return [
+			"- Use a small visible example so row and column positions can be traced.",
+			"- Test first row, last row, first column, last column, and an interior position.",
+			"- Explain how the loop bounds prevent out-of-range indexing."
+		];
+	}
+	if (/dictionary|map|hash|set/.test(source)) {
+		return [
+			"- Demonstrate adding, reading, updating, and checking for a missing key or value.",
+			"- Print or inspect the data structure after each important change.",
+			"- Explain why the chosen structure is better than a plain list for this task."
+		];
+	}
+	if (/calendar machine|date|time/.test(source)) {
+		return [
+			"- Define the conversion assumptions clearly before coding.",
+			"- Print the result in labeled units so the output is not ambiguous.",
+			"- Test zero days, a small number of days, and a value large enough to use every unit."
+		];
+	}
+	if (/cipher|encode|decode|secret|message/.test(source)) {
+		return [
+			"- Preserve or intentionally transform spaces, punctuation, and letter case according to the spec.",
+			"- Test wraparound at the beginning and end of the alphabet.",
+			"- Include one encode/decode round trip that returns the original message."
+		];
+	}
+	if (/file|parser|csv|json|io|input.*output/.test(source)) {
+		return [
+			"- Identify the expected file format and how malformed or missing data will be handled.",
+			"- Test at least one normal file and one awkward file with an empty line or incomplete record.",
+			"- Keep parsing, validation, and output formatting separated enough to debug each part."
+		];
+	}
+	if (/pointer|address|dynamic memory|raw array|memory/.test(source)) {
+		return [
+			"- Draw or annotate the relationship between values, addresses, and ownership before coding.",
+			"- Test allocation, access, resizing or cleanup behavior, and an empty or one-element case.",
+			"- Explain which object owns each resource and when that resource is released."
+		];
+	}
+	if (/web|html|css|api|database|full-stack/.test(source)) {
+		return [
+			"- Define the visible user flow and the data flow before implementation.",
+			"- Verify the feature in the browser at desktop and narrow widths.",
+			"- Check loading, empty, success, and error states instead of only the happy path."
+		];
+	}
+	if (/security|offensive|threat|network/.test(source)) {
+		return [
+			"- Work only against local fixtures, intentionally vulnerable examples, or owned test data.",
+			"- Write the threat model or failure mode before running the lab.",
+			"- Finish with evidence, impact, and a defensive mitigation or hardening step."
+		];
+	}
+	if (
+		/physics|chemistry|science|biology|earth|ecosystem|weather|motion/.test(
+			source
+		)
+	) {
+		return [
+			"- Use a provided image, graph, data table, short video, or simulation rather than required physical supplies.",
+			"- Record observations before explaining them.",
+			"- Finish with a claim, evidence, and reasoning response using the target vocabulary."
+		];
+	}
+
+	return [
+		"- Restate the prompt as a short checklist before coding or building.",
+		"- Implement the base behavior first, then test a normal case and an edge case.",
+		"- Keep the final result explainable: the student should be able to describe the main design choice and one bug they fixed."
+	];
+}
+
+function completionChecks(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (/usaco|competitive/.test(source)) {
+		return [
+			"- The solution passes the sample input/output exactly.",
+			"- The student tests a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.",
+			"- The student states the time complexity and why it fits the expected constraints."
+		];
+	}
+	if (/web|html|css|api|database|full-stack/.test(source)) {
+		return [
+			"- The feature works from a fresh page load without relying on hidden state.",
+			"- Empty, loading, success, and failure states are visible or intentionally handled.",
+			"- The page remains readable and usable on mobile and desktop widths."
+		];
+	}
+	if (/security|offensive|network/.test(source)) {
+		return [
+			"- The lab uses only approved local or owned targets.",
+			"- Findings are written as evidence plus impact, not as vague observations.",
+			"- The student includes a safe remediation, detection, or hardening step."
+		];
+	}
+	if (/science|physics|chemistry|biology|earth|ecosystem/.test(source)) {
+		return [
+			"- The explanation names the phenomenon, the model or data source, and the target vocabulary.",
+			"- The student separates observation from inference.",
+			"- The final answer includes a claim, evidence, and reasoning connection."
+		];
+	}
+
+	return [
+		"- The work runs or presents cleanly from a fresh start.",
+		"- Normal, boundary, and awkward cases have been checked.",
+		"- The student can explain the main logic, data structure, or design decision without reading the code line by line."
+	];
+}
+
+function extensionPrompt(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (/ap computer science|apcs/.test(source)) {
+		return "Add a short tracing table or AP-style follow-up question that changes one condition, loop bound, or method call.";
+	}
+	if (/python level 1|python level 2/.test(source)) {
+		return "Add input validation or one extra mode so the program handles an unexpected user response gracefully.";
+	}
+	if (/java/.test(source)) {
+		return "Add one additional method, test, or subclass/record use case while preserving the public behavior already built.";
+	}
+	if (/c\+\+|cpp|systems|assembly/.test(source)) {
+		return "Add a debug or benchmark mode that exposes an internal state, memory decision, or performance tradeoff.";
+	}
+	if (/science|physics|chemistry|biology|earth|ecosystem/.test(source)) {
+		return "Apply the same model to a new example and explain what would change if one variable were different.";
+	}
+
+	return "Add one small feature that forces the student to reuse the same concept in a new situation rather than only decorating the output.";
+}
+
+function projectSupport(context: CourseTextContext) {
+	return [
+		`**Project goal:** Use this build to turn the prompt into a concrete artifact that demonstrates ${subjectFocus(context)}. Before starting, have the student restate the requirements, identify the expected inputs or state, and name what the finished output should show.`,
+		`**Required outcome:**\n${projectExpectations(context).join("\n")}`,
+		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
+		`**Extension:** ${extensionPrompt(context)}`
+	].join("\n\n");
+}
+
+function lessonSupport(context: CourseTextContext) {
+	return [
+		`**Teaching flow:** Treat this as an instructor-led explanation of ${subjectFocus(context)}. Define the vocabulary first, model one concrete example, ask the student to predict the next step, and then connect the example back to the project or practice task in this module.`,
+		"**Misconception check:** Pause for one likely mistake, such as mixing up a value with its representation, using the wrong loop or condition, assuming hidden state, or skipping the reason a step is valid.",
+		"**Exit check:** The student should explain the idea in their own words and complete one small transfer task without copying the demonstration."
+	].join("\n\n");
+}
+
+function diagnosticSupport(context: CourseTextContext) {
+	return [
+		`**Diagnostic guidance:** Use this as a formative check of ${subjectFocus(context)}, not as a pass/fail quiz. Let the student attempt the prompt independently first, then use targeted questions to reveal whether the issue is vocabulary, tracing, syntax, design, or test coverage.`,
+		"**Evidence of proficiency:** The student can explain the rule, apply it to a new example, correct a small mistake, and describe how they know the result is correct.",
+		"**If the student struggles:** Record the specific misconception, assign one focused remediation problem, and revisit the same skill before moving to a more complex project.",
+		`**Extension:** Ask a fast student to modify the prompt so it still uses the same concept but changes one constraint, input shape, or edge case.`
+	].join("\n\n");
+}
+
+function scienceSupport(context: CourseTextContext) {
+	return [
+		"**Remote investigation:** Use shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. Do not require beakers, kits, or household materials; any physical demonstration should be optional and replaceable with a diagram or data table.",
+		`**Science explanation:** Anchor the activity in ${subjectFocus(context)}. Students should first record observations, then build or annotate a model, and only then write the explanation.`,
+		"**Student output:** Require a claim-evidence-reasoning response, a labeled diagram or data table, and one prediction about a changed condition.",
+		`**Completion checks:**\n${completionChecks(context).join("\n")}`
+	].join("\n\n");
+}
+
+function studioArtifact(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (/assembly/.test(source)) {
+		return "an annotated assembly trace or small program that proves register, stack, and memory behavior";
+	}
+	if (/c systems|systems build/.test(source)) {
+		return "a constrained command-line systems component with explicit memory, file, or process behavior";
+	}
+	if (/algorithm|data structures|cpp/.test(source)) {
+		return "a tested data-structure or algorithm implementation with visible before/after behavior";
+	}
+	if (/physics|chemistry|science/.test(source)) {
+		return "a remote-safe investigation writeup using provided data, a diagram, or a simulation";
+	}
+	if (/security|offensive|network/.test(source)) {
+		return "a safe local security lab report with threat model, evidence, and mitigation";
+	}
+	if (/web|full-stack/.test(source)) {
+		return "a browser-visible feature with defined UI behavior, data flow, and error handling";
+	}
+	if (/data science|machine learning|ai/.test(source)) {
+		return "a notebook or script that turns a defined dataset or state space into measured, interpreted output";
+	}
+
+	return "a working artifact with explicit requirements, test cases, and a short student explanation";
+}
+
+function studioSupport(context: CourseTextContext) {
+	return [
+		`Use this studio as a complete build-and-review session for **${context.item.title}**. The expected artifact is ${studioArtifact(context)}, and the session should be anchored in ${subjectFocus(context)} rather than left as an open-ended placeholder.`,
+		"**Studio focus:** Start by naming the problem, prerequisite concepts, and success criteria. The student should know what they are building, what constraints matter, and what evidence will prove the work is correct.",
+		`**Build sequence:**\n${projectExpectations(context).join("\n")}\n- Review the result against the original goal and record at least one improvement or bug fix.`,
+		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
+		`**Extension:** ${extensionPrompt(context)}`
+	].join("\n\n");
+}
+
+function qualitySupportFor(context: CourseTextContext) {
+	if (isCheckInContext(context)) return diagnosticSupport(context);
+	if (isScienceContext(context)) return scienceSupport(context);
+	if (isAppliedStudioContext(context)) return studioSupport(context);
+	if (isProjectLikeItem(context.item)) return projectSupport(context);
+	return lessonSupport(context);
+}
+
+function rewritePlaceholderCourseText(course: RawCourse, courseId: string) {
+	for (const module of course.modules) {
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				const context = { courseId, course, module, item, section };
+
+				if (
+					placeholderContentPattern.test(item.content) ||
+					(isAppliedStudioContext(context) &&
+						wordCount(item.content) < 90)
+				) {
+					item.content = studioSupport(context);
+				}
+			}
+		}
+	}
+}
+
+function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
+	for (const module of course.modules) {
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				const context = { courseId, course, module, item, section };
+
+				if (!needsContentSupport(context)) continue;
+
+				const currentContent = compactWhitespace(item.content);
+				const support = qualitySupportFor(context);
+				item.content = currentContent
+					? `${currentContent}\n\n${support}`
+					: support;
+			}
+		}
+	}
+}
+
 function normalizeApComputerScienceA(course: RawCourse) {
 	course.modules = orderedModules(course, [
 		"General: Course Introduction and Setup",
@@ -810,6 +1211,8 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	const course = cloneCourse(rawCourse);
 	normalizers[id]?.(course);
 	normalizeDisplayTitles(course);
+	rewritePlaceholderCourseText(course, id);
 	normalizeModuleLessonShape(course);
+	normalizeCourseTextQuality(course, id);
 	return course;
 }

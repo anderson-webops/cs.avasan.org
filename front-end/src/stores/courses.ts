@@ -77,6 +77,8 @@ const BOILERPLATE_SENTENCE_REWRITES: Array<{
 			`Review ${topic}, compare approaches, and record one improvement for the next pass.`
 	}
 ];
+const STRUCTURED_COURSE_SUPPORT_RE =
+	/\*\*(?:Project goal|Teaching flow|Diagnostic guidance|Remote investigation|Science explanation|Studio focus|AP connection):?\*\*/i;
 
 export type {
 	CourseDefinition,
@@ -188,6 +190,16 @@ function compactContent(content: string): string {
 	}
 
 	return "";
+}
+
+function displayCourseContent(content: string) {
+	const normalized = normalizeContent(content);
+
+	if (STRUCTURED_COURSE_SUPPORT_RE.test(normalized)) {
+		return normalized;
+	}
+
+	return compactContent(normalized);
 }
 
 function trimUrl(url: string) {
@@ -305,7 +317,7 @@ function mergeAdjacentSupportItems(items: Array<Omit<CourseModuleItem, "id">>) {
 					(PRESENTATION_TITLE_RE.test(item.title) &&
 						PROJECT_TITLE_RE.test(previousItem.title)))
 			) {
-				previousItem.content = compactContent(
+				previousItem.content = displayCourseContent(
 					`${previousItem.content}\n\n${item.content}`
 				);
 				return mergedItems;
@@ -343,7 +355,7 @@ function normalizeCourse(course: RawCourse, courseId = slugify(course.name)) {
 								const normalizedContent = normalizeContent(
 									extractedLink?.content ?? item.content
 								);
-								return compactContent(normalizedContent);
+								return displayCourseContent(normalizedContent);
 							})(),
 							projectLink: (() => {
 								const explicitProjectLink =
