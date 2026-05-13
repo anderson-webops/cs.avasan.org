@@ -79,7 +79,7 @@ useHead(
 				},
 				{
 					name: "theme-color",
-					content: isDark.value ? "#13264c" : "#3158e8"
+					content: isDark.value ? "#07111f" : "#3158e8"
 				}
 			],
 			link: [

@@ -30,6 +30,25 @@
 	--container-narrow: 760px;
 }
 
+html.dark {
+	color-scheme: dark;
+	--color-page-top: #07111f;
+	--color-page-bottom: #0b1627;
+	--color-surface: rgba(15, 25, 42, 0.86);
+	--color-surface-soft: rgba(18, 29, 48, 0.72);
+	--color-surface-strong: rgba(13, 23, 39, 0.94);
+	--color-border: rgba(148, 163, 184, 0.22);
+	--color-border-strong: rgba(191, 219, 254, 0.28);
+	--color-ink: #eef6ff;
+	--color-ink-soft: #a8bbcf;
+	--color-accent: #7cc7ff;
+	--color-accent-strong: #b7e3ff;
+	--color-accent-soft: rgba(125, 199, 255, 0.14);
+	--focus-ring-color: #5eead4;
+	--shadow-soft: 0 18px 44px -34px rgba(0, 0, 0, 0.7);
+	--shadow-medium: 0 28px 58px -36px rgba(0, 0, 0, 0.72);
+}
+
 html {
 	height: 100%;
 	color-scheme: light;
@@ -61,6 +80,21 @@ body {
 	line-height: 1.6;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
+}
+
+html.dark body {
+	background:
+		radial-gradient(
+			circle at 12% 8%,
+			rgba(56, 189, 248, 0.13),
+			transparent 30rem
+		),
+		radial-gradient(
+			circle at 88% 18%,
+			rgba(20, 184, 166, 0.09),
+			transparent 28rem
+		),
+		linear-gradient(180deg, var(--color-page-top), var(--color-page-bottom));
 }
 
 *,
@@ -168,6 +202,11 @@ button {
 ::selection {
 	background: rgba(31, 92, 145, 0.16);
 	color: var(--color-ink);
+}
+
+html.dark ::selection {
+	background: rgba(94, 234, 212, 0.24);
+	color: #f8fbff;
 }
 
 :where(
@@ -396,6 +435,254 @@ button {
 
 .text-link:hover {
 	text-decoration: underline;
+}
+
+html.dark body :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
+	background-color: rgba(8, 17, 31, 0.9);
+	border-color: rgba(148, 163, 184, 0.34);
+	color: var(--color-ink);
+}
+
+html.dark body :is(input:not([type="checkbox"]):not([type="radio"]), textarea)::placeholder {
+	color: rgba(168, 187, 207, 0.72);
+}
+
+html.dark body :is(select) {
+	color-scheme: dark;
+}
+
+html.dark .site-button--primary {
+	background: linear-gradient(140deg, #2d8dd1, #1f6fa6);
+	color: #f8fbff;
+	box-shadow: 0 18px 34px -24px rgba(56, 189, 248, 0.58);
+}
+
+html.dark .site-button--primary:hover {
+	background: linear-gradient(140deg, #4aa7e8, #287eb8);
+}
+
+html.dark .site-button--secondary {
+	background: rgba(15, 25, 42, 0.84);
+	border-color: rgba(148, 163, 184, 0.32);
+	color: var(--color-ink);
+	box-shadow: 0 12px 28px -22px rgba(0, 0, 0, 0.72);
+}
+
+html.dark .site-button--secondary:hover {
+	background: rgba(24, 38, 60, 0.95);
+}
+
+html.dark .site-button--ghost {
+	border-color: rgba(125, 199, 255, 0.26);
+	color: var(--color-accent);
+}
+
+html.dark .site-button--ghost:hover {
+	background: rgba(125, 199, 255, 0.1);
+}
+
+html.dark .site-chip {
+	background: rgba(15, 25, 42, 0.78);
+	border-color: rgba(148, 163, 184, 0.26);
+	color: var(--color-ink-soft);
+}
+
+html.dark .media-frame {
+	background: #132238;
+}
+
+html.dark .site-toggler {
+	background: rgba(15, 25, 42, 0.84);
+}
+
+html.dark .navbar-toggler-icon {
+	filter: invert(1) saturate(0.4) brightness(1.45);
+}
+
+html.dark body :is(.site-nav__link:hover, .site-nav__utility-link:hover, .site-nav__link.is-active, .site-nav__utility-link.is-active) {
+	background: rgba(125, 199, 255, 0.12);
+	box-shadow: inset 0 0 0 1px rgba(191, 219, 254, 0.16);
+	color: var(--color-ink);
+}
+
+html.dark .site-nav__badge {
+	background: rgba(125, 199, 255, 0.12);
+	color: var(--color-accent-strong);
+}
+
+html.dark .site-nav__action.is-active {
+	background: rgba(125, 199, 255, 0.14);
+	border-color: rgba(125, 199, 255, 0.32);
+}
+
+html.dark .site-nav__action--danger {
+	background: rgba(127, 29, 29, 0.24);
+	border-color: rgba(248, 113, 113, 0.34);
+	color: #fecaca;
+}
+
+html.dark .course-explorer {
+	--course-border: rgba(148, 163, 184, 0.24);
+	--course-border-strong: rgba(191, 219, 254, 0.3);
+	--course-text: #eef6ff;
+	--course-text-soft: #a8bbcf;
+	--course-panel: rgba(15, 25, 42, 0.9);
+	--course-panel-soft: rgba(20, 33, 54, 0.76);
+	--course-accent: #5eead4;
+	--course-accent-soft: rgba(94, 234, 212, 0.14);
+	--course-shadow: 0 22px 46px -34px rgba(0, 0, 0, 0.72);
+}
+
+html.dark body :is(.course-toolbar, .course-workspace, .course-reader, .course-outline, .lesson-card, .reader-empty, .course-empty) {
+	background: var(--course-panel);
+	border-color: var(--course-border);
+	box-shadow: var(--course-shadow);
+}
+
+html.dark body :is(.course-stats, .stat, .search-shell, .course-select, .course-search, .outline-button, .resource-link, .item-media, .lesson-index) {
+	background: var(--course-panel-soft);
+	border-color: var(--course-border);
+	color: var(--course-text);
+}
+
+html.dark body :is(.outline-button.is-active, .jump-link, .complete-pill, .item-complete-badge) {
+	background: rgba(94, 234, 212, 0.14);
+	border-color: rgba(94, 234, 212, 0.24);
+	color: #99f6e4;
+}
+
+html.dark body :is(.resource-link-host, .lesson-kicker, .reader-eyebrow, .section-eyebrow, .outline-eyebrow, .control-label, .course-description) {
+	color: var(--course-text-soft);
+}
+
+html.dark body :is(.workspace-header, .workspace-sheet, .directory-card, .history-panel, .session-tools, .tool-panel, .learner-progress-editor, .mail-card, .history-card, .preview, .admin-shell__body) {
+	background:
+		linear-gradient(
+			145deg,
+			rgba(15, 25, 42, 0.94),
+			rgba(20, 33, 54, 0.86)
+		);
+	border-color: rgba(148, 163, 184, 0.24);
+	box-shadow: 0 28px 58px -40px rgba(0, 0, 0, 0.74);
+	color: var(--color-ink);
+}
+
+html.dark body :is(.sheet-panel, .summary-block, .stat-pill, .record-card, .record-item, .progress-outline, .progress-module, .recipient-preview, .subject-preview, .preview-pane, .history-note, .association-summary, .modal-content, .container) {
+	background: rgba(8, 17, 31, 0.5);
+	border-color: rgba(148, 163, 184, 0.24);
+	box-shadow: inset 0 0 0 1px rgba(191, 219, 254, 0.04);
+	color: var(--color-ink);
+}
+
+html.dark body :is(.workspace-header h2, .workspace-sheet h3, .directory-card h4, .history-panel h3, .tool-panel h4, .mail-card h1, .history-card h2, .progress-title, .record-kicker, .field-stack strong, .summary-copy, .history-note__body, .preview-body, .association-title) {
+	color: var(--color-ink);
+}
+
+html.dark body :is(.workspace-eyebrow, .panel-eyebrow, .summary-label, .section-eyebrow, .tool-eyebrow, .mail-card__eyebrow, .history-note__eyebrow, .progress-label) {
+	color: var(--color-accent);
+}
+
+html.dark body :is(.section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-note__meta, .preview-meta, .association-copy) {
+	color: var(--color-ink-soft);
+}
+
+html.dark body :is(.tools-summary, .record-summary, .summary-toggle) {
+	color: var(--color-ink);
+}
+
+html.dark body :is(.summary-count, .count-pill, .history-note__badge, .recipient-association) {
+	background: rgba(125, 199, 255, 0.14);
+	color: var(--color-accent-strong);
+}
+
+html.dark body :is(.checkbox-grid label, .progress-check, .tool-form label, .field, .manual-recipient, .editor-block, .assignment-editor, .course-editor) {
+	background: rgba(15, 25, 42, 0.72);
+	border-color: rgba(148, 163, 184, 0.24);
+	color: var(--color-ink);
+}
+
+html.dark body :is(.btn-secondary, .ghost-btn, .picker-btn, .tab-btn) {
+	background: rgba(15, 25, 42, 0.86);
+	border-color: rgba(148, 163, 184, 0.28);
+	color: var(--color-ink);
+}
+
+html.dark body :is(.btn-secondary:hover, .ghost-btn:hover, .picker-btn:hover, .tab-btn:hover, .tab-btn.active) {
+	background: rgba(125, 199, 255, 0.14);
+	border-color: rgba(125, 199, 255, 0.32);
+	color: var(--color-accent-strong);
+}
+
+html.dark body :is(.btn-primary, .send-btn) {
+	background: linear-gradient(135deg, #2d8dd1, #1f6fa6);
+	border-color: rgba(125, 199, 255, 0.42);
+	color: #f8fbff;
+}
+
+html.dark body :is(.btn-danger) {
+	background: rgba(127, 29, 29, 0.35);
+	border-color: rgba(248, 113, 113, 0.36);
+	color: #fecaca;
+}
+
+html.dark body :is(.status, .success-copy, .status-banner.is-success) {
+	background: rgba(20, 83, 45, 0.26);
+	border-color: rgba(74, 222, 128, 0.3);
+	color: #bbf7d0;
+}
+
+html.dark body :is(.error, .error-copy, .status-banner.is-error) {
+	background: rgba(127, 29, 29, 0.26);
+	border-color: rgba(248, 113, 113, 0.32);
+	color: #fecaca;
+}
+
+html.dark body :is(.result, pre) {
+	background: rgba(8, 17, 31, 0.86);
+	border-color: rgba(148, 163, 184, 0.26);
+	color: var(--color-ink);
+}
+
+html.dark body :is(.profile-card, .profile-empty, .empty-card, .profile-details-card, .profile-field, .field-row, .scheduler-loading, .shell-panel, .accordion-item, .accordion-button, .accordion-body, .note, .tuition-card, .tool-card, .iframe-wrap) {
+	background: rgba(15, 25, 42, 0.86);
+	border-color: rgba(148, 163, 184, 0.26);
+	color: var(--color-ink);
+	box-shadow: 0 24px 48px -36px rgba(0, 0, 0, 0.72);
+}
+
+html.dark body :is(.field-value, .tool-label, .details, .scheduler-fallback) {
+	color: var(--color-ink-soft);
+}
+
+html.dark body :is(.field-label, .profile-badge) {
+	color: var(--color-accent);
+}
+
+html.dark body :is(.tab, .action.secondary) {
+	background: rgba(15, 25, 42, 0.82);
+	border-color: rgba(148, 163, 184, 0.3);
+	color: var(--color-ink);
+}
+
+html.dark body :is(.tab[aria-selected="true"], .action.primary) {
+	background: linear-gradient(135deg, #2d8dd1, #1f6fa6);
+	border-color: rgba(125, 199, 255, 0.42);
+	color: #f8fbff;
+}
+
+html.dark body :is(.shell-line) {
+	background: rgba(148, 163, 184, 0.28);
+}
+
+html.dark body :is(.modal-content) {
+	background-color: rgba(15, 25, 42, 0.96);
+	border-color: rgba(148, 163, 184, 0.34);
+	color: var(--color-ink);
+}
+
+html.dark body .modal-content .container {
+	background: rgba(15, 25, 42, 0.72) !important;
+	color: var(--color-ink);
 }
 
 #nprogress {
