@@ -1,4 +1,5 @@
 import type { RawCourse, RawCourseModule, RawCourseModuleItem } from "./types";
+import { applyCourseImplementationArtifacts } from "./course-implementation-artifacts";
 import { applyResearchBackedExpansions } from "./research-expansions";
 
 const INSTRUCTION_MATERIAL_BASE = "https://github.com/instruction-material";
@@ -338,6 +339,8 @@ const structuredSupportPattern =
 
 const placeholderContentPattern =
 	/\b(?:introduce the main goal|build the central artifact|define the success criteria|use the .* snapshot|alternate supplemental snapshot)\b/i;
+const scienceEvidencePattern =
+	/\b(?:CER|claim[-, ]+evidence(?:[-, ]+and)?[-, ]+reasoning)\b/i;
 
 function wordCount(text: string) {
 	const words = compactWhitespace(text).match(/\b[\w'+-]+\b/g);
@@ -359,7 +362,7 @@ function isScienceContext(context: CourseTextContext) {
 
 	if (/computer science|data science/i.test(source)) return false;
 
-	return /elementary science|middle-school integrated science|physics|chemistry|biology|earth|ecosystem|motion|matter|weather|energy/i.test(
+	return /elementary[- ]science|middle[- ]school[- ]integrated[- ]science|middle[- ]school[- ]science|physics|chemistry|biology|earth|ecosystem|motion|matter|weather|energy/i.test(
 		source
 	);
 }
@@ -642,6 +645,10 @@ function scienceSupport(context: CourseTextContext) {
 	].join("\n\n");
 }
 
+function scienceEvidenceCheckpoint() {
+	return "**CER checkpoint:** End with a claim, evidence, and reasoning response. The claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why the evidence supports the claim.";
+}
+
 function studioArtifact(context: CourseTextContext) {
 	const source = contextText(context);
 
@@ -719,6 +726,20 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 				item.content = currentContent
 					? `${currentContent}\n\n${support}`
 					: support;
+			}
+		}
+	}
+
+	for (const module of course.modules) {
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				const context = { courseId, course, module, item, section };
+				if (
+					isScienceContext(context) &&
+					!scienceEvidencePattern.test(item.content)
+				) {
+					item.content = `${compactWhitespace(item.content)}\n\n${scienceEvidenceCheckpoint()}`;
+				}
 			}
 		}
 	}
@@ -1214,7 +1235,8 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	normalizeDisplayTitles(course);
 	rewritePlaceholderCourseText(course, id);
 	normalizeModuleLessonShape(course);
-	normalizeCourseTextQuality(course, id);
 	applyResearchBackedExpansions(id, course);
+	applyCourseImplementationArtifacts(id, course);
+	normalizeCourseTextQuality(course, id);
 	return course;
 }

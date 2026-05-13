@@ -29,19 +29,18 @@ describe("research-backed course family expansions", () => {
 			expect(course, courseId).not.toBeNull();
 			expect(profile, courseId).toBeDefined();
 
-			const titles = course!.modules.map(module => module.title);
-			expect(titles, courseId).toContain(
-				`${profile.family}: Standards and Scope Expansion`
-			);
-			expect(titles, courseId).toContain(
-				`${profile.family}: Module Backlog and Sequencing`
-			);
-			expect(titles, courseId).toContain(
+			const coreExpansionTitles = [
+				`${profile.family}: Standards and Scope Expansion`,
+				`${profile.family}: Module Backlog and Sequencing`,
 				`${profile.family}: Project and Assessment Studios`
-			);
+			];
+			const titles = course!.modules.map(module => module.title);
+			for (const title of coreExpansionTitles) {
+				expect(titles, courseId).toContain(title);
+			}
 
 			const expansionModules = course!.modules.filter(module =>
-				module.title.startsWith(`${profile.family}:`)
+				coreExpansionTitles.includes(module.title)
 			);
 
 			expect(expansionModules, courseId).toHaveLength(3);

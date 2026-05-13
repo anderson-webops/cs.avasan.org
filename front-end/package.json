@@ -15,6 +15,7 @@
 		"serve": "vite --port 3333 --open --host",
 		"preview": "vite preview",
 		"preview-https": "serve dist",
+		"courses:audit": "tsx scripts/generate-course-development-artifacts.mts",
 		"test": "vitest run",
 		"test:e2e": "cypress open",
 		"test:unit": "vitest run",
