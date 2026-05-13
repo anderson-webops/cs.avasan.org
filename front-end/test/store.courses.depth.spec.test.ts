@@ -29,7 +29,7 @@ describe("course catalog breadth", () => {
 		const course = await store.loadCourseById("python-level-1");
 
 		expect(course).not.toBeNull();
-		expect(course?.modules.length).toBe(18);
+		expect(course?.modules.length).toBeGreaterThanOrEqual(21);
 		expect(course?.modules[0]?.supplementalProjects.length).toBe(2);
 	});
 

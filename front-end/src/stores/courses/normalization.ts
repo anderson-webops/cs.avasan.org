@@ -1,4 +1,5 @@
 import type { RawCourse, RawCourseModule, RawCourseModuleItem } from "./types";
+import { applyResearchBackedExpansions } from "./research-expansions";
 
 const INSTRUCTION_MATERIAL_BASE = "https://github.com/instruction-material";
 
@@ -1214,5 +1215,6 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	rewritePlaceholderCourseText(course, id);
 	normalizeModuleLessonShape(course);
 	normalizeCourseTextQuality(course, id);
+	applyResearchBackedExpansions(id, course);
 	return course;
 }
