@@ -239,13 +239,20 @@ function compactWhitespace(text: string) {
 	return text.replace(/\s+/g, " ").trim();
 }
 
+function compactLessonPointText(text: string) {
+	return compactWhitespace(text)
+		.replace(/[.!?]+/g, ",")
+		.replace(/,+$/g, "");
+}
+
 function lessonArcContent(items: RawCourseModuleItem[]) {
 	const points = items.map((item, index) => {
-		const content = compactWhitespace(item.content);
-		return `${index + 1}. ${item.title}: ${content}`;
+		const title = compactLessonPointText(item.title);
+		const content = compactLessonPointText(item.content);
+		return `${index + 1}) ${title}: ${content}`;
 	});
 
-	return `Use this as one instructor-led lesson arc instead of separate short cards. Cover: ${points.join(" ")}`;
+	return `Use this as one instructor-led lesson arc covering these sections in sequence: ${points.join("; ")}.`;
 }
 
 function enrichBriefConceptLesson(item: RawCourseModuleItem) {

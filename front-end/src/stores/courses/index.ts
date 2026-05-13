@@ -269,6 +269,23 @@ export const courseCatalog: CourseCatalogEntry[] = [
 			)
 	},
 	{
+		id: "elementary-science",
+		name: "Elementary Science",
+		load: () =>
+			import("./elementary-science").then(
+				({ elementaryScienceCourse }) => elementaryScienceCourse
+			)
+	},
+	{
+		id: "middle-school-integrated-science",
+		name: "Middle School Integrated Science",
+		load: () =>
+			import("./middle-school-integrated-science").then(
+				({ middleSchoolIntegratedScienceCourse }) =>
+					middleSchoolIntegratedScienceCourse
+			)
+	},
+	{
 		id: "intro-to-physics",
 		name: "Intro to Physics",
 		load: () =>
