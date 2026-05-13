@@ -10,6 +10,8 @@ import {
 	transformerVariantGroup
 } from "unocss";
 
+const isVitest = process.env.VITEST === "true";
+
 export default defineConfig({
 	shortcuts: [
 		[
@@ -28,14 +30,18 @@ export default defineConfig({
 			scale: 1.2
 		}),
 		presetTypography(),
-		presetWebFonts({
-			fonts: {
-				sans: "DM Sans",
-				serif: "DM Serif Display",
-				mono: "DM Mono"
-			},
-			processors: createLocalFontProcessor()
-		})
+		...(isVitest
+			? []
+			: [
+					presetWebFonts({
+						fonts: {
+							sans: "DM Sans",
+							serif: "DM Serif Display",
+							mono: "DM Mono"
+						},
+						processors: createLocalFontProcessor()
+					})
+				])
 	],
 	transformers: [transformerDirectives(), transformerVariantGroup()],
 	safelist: "prose prose-sm m-auto text-left".split(" ")

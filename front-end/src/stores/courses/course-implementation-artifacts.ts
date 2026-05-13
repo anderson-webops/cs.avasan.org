@@ -21,6 +21,7 @@ export const courseImplementationSourceRepos: Record<string, string> = {
 	"linux-systems": "Linux-Systems",
 	"low-level-security": "Low-Level-Security",
 	"low-level-security-part-2": "Low-Level-Security",
+	"machine-learning": "AI-Level-2",
 	"network-security": "Network-Security",
 	"network-systems": "Network-Systems",
 	pygames: "PyGames",
@@ -36,6 +37,136 @@ export const courseImplementationSourceRepos: Record<string, string> = {
 	"usaco-gold": "USACO-Gold",
 	"usaco-silver": "USACO-Silver",
 	"web-development-foundations": "Web-Development-Foundations"
+};
+
+export const courseContentOnlySourcePolicies: Record<string, string> = {
+	"algebra-1a":
+		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+	"algebra-1b":
+		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+	"algebra-2a":
+		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+	"algebra-2b":
+		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+	"design-patterns-in-java":
+		"Catalog-owned course. Keep source snippets embedded until a dedicated Java design-patterns repo is created.",
+	"design-patterns-in-java-part-2":
+		"Catalog-owned course. Keep refactoring scenarios embedded until a before/after Java design-patterns repo is created.",
+	"elementary-science":
+		"Content and media course. Source parity means every activity has a listed simulation, image/data source, notebook routine, or explicit no-physical-material alternative.",
+	"intro-to-chemistry":
+		"Content and media course. Source parity means every lab-style activity has a remote simulation/data alternative and no required household chemistry materials.",
+	"intro-to-physics":
+		"Content and media course. Source parity means every lab-style activity has a simulation, graph dataset, or paper-model alternative.",
+	"java-with-graphics":
+		"Composed Java track. Source parity is inherited from Java Level 1, Java Level 2, Java Level 3, and the graphics branch notes in the catalog.",
+	"java-without-graphics":
+		"Composed Java track. Source parity is inherited from Java Level 1, Java Level 2, and Java Level 3.",
+	"javascript-level-1-javascript-superstar":
+		"Legacy/catalog-owned JavaScript course. Keep project specs in the catalog until a JavaScript source repo is created.",
+	"javascript-level-2-javascript-master":
+		"Legacy/catalog-owned JavaScript course. Keep project specs in the catalog until a JavaScript source repo is created.",
+	"middle-school-integrated-science":
+		"Content and media course. Source parity means every activity has a listed simulation, image/data source, notebook routine, or explicit no-physical-material alternative.",
+	"physics-level-2":
+		"Content and media course. Source parity means every lab-style activity has a simulation, graph dataset, or paper-model alternative.",
+	"scratch-level-1":
+		"Catalog-owned Scratch course. Scratch studios/projects are external creative artifacts rather than local source folders.",
+	"scratch-level-2":
+		"Catalog-owned Scratch course. Scratch studios/projects are external creative artifacts rather than local source folders."
+};
+
+export const courseToolchainAssumptions: Record<string, string[]> = {
+	"ai-level-1": [
+		"Python 3.12+ for local scripts and notebooks.",
+		"Browser-accessible demos for search/state-space visualizations.",
+		"NIST AI RMF language for risk, limitation, and human-oversight reflections."
+	],
+	assembly: [
+		"Document the target architecture and assembler before each lab.",
+		"Use debugger or emulator traces instead of relying on undefined host behavior.",
+		"Keep compiler-output reading tied to the same ABI/calling convention throughout a module."
+	],
+	"c-level-1": [
+		"C++20-compatible compiler for introductory work unless a project explicitly needs newer features.",
+		"Warnings enabled for student builds.",
+		"Use a consistent local build/run command before adding IDE-specific instructions."
+	],
+	"c-systems-engineering": [
+		"C17/C23-aware compiler notes where relevant.",
+		"AddressSanitizer/UndefinedBehaviorSanitizer or equivalent diagnostics for memory labs.",
+		"Cross-platform alternatives for process/file/network labs when macOS/Linux behavior differs."
+	],
+	"cpp-level-2": [
+		"C++20-compatible compiler.",
+		"AddressSanitizer or Valgrind-style checks for dynamic memory where available.",
+		"Memory diagrams required before pointer-heavy implementation."
+	],
+	"cpp-level-3": [
+		"C++20-compatible compiler with STL containers, iterators, algorithms, smart pointers, and templates.",
+		"Unit-test or command-test harness for parser, CLI, and state-machine projects.",
+		"No AI/ML tooling in this sequence."
+	],
+	"data-science-in-python": [
+		"Python 3.12+ with pandas, NumPy, matplotlib/Altair, and notebook support.",
+		"Stable local CSV fixtures before external datasets.",
+		"Recorded package versions for any notebook intended to be reused."
+	],
+	"data-structures-and-algorithms-in-cpp": [
+		"C++20-compatible compiler.",
+		"Small deterministic test harnesses for every data structure.",
+		"Runtime measurement scripts used only after asymptotic reasoning is written."
+	],
+	"intro-to-swift-app-development": [
+		"Current Xcode and SwiftUI toolchain on macOS.",
+		"Simulator-first workflow; paid Apple Developer account is not assumed.",
+		"Version notes for any API that changes between Xcode/Swift releases."
+	],
+	"linux-systems": [
+		"Ubuntu/Debian-style VM or container baseline unless a module names another distro.",
+		"systemd notes marked as distro-dependent.",
+		"Commands must include a recovery or undo path when they change system state."
+	],
+	"low-level-security": [
+		"Local toy binaries, sanitizers, debuggers, and intentionally vulnerable fixtures only.",
+		"No third-party targets or unsandboxed exploit chains.",
+		"Every lab ends with mitigation or patch evidence."
+	],
+	"low-level-security-part-2": [
+		"Local toy binaries, sanitizers, debuggers, and intentionally vulnerable fixtures only.",
+		"Mitigation-aware analysis before advanced exploitation vocabulary.",
+		"Every lab ends with mitigation or patch evidence."
+	],
+	"machine-learning": [
+		"Python 3.12+ with scikit-learn as the baseline ML library.",
+		"TensorFlow/Keras or deep learning only as optional later extension material.",
+		"Model evaluation, train/test split, baseline comparison, and model card required for reusable projects."
+	],
+	"network-security": [
+		"Local toy services, packet captures, and owned lab hosts only.",
+		"OWASP/WSTG-style evidence format for web/API security work.",
+		"No scanning or probing outside explicitly authorized lab targets."
+	],
+	"network-systems": [
+		"Local VM/container or home-lab-safe diagnostics only.",
+		"IPv4, IPv6, DNS, routing, firewall, and packet-capture commands must include rollback notes.",
+		"Packet captures should use provided or owned traffic."
+	],
+	"rust-systems-security": [
+		"Current stable Rust toolchain and Cargo.",
+		"Unsafe Rust only inside explicitly scoped labs.",
+		"Clippy/tests encouraged before comparing Rust and C/C++ safety properties."
+	],
+	"unity-game-development": [
+		"Unity 6.3 LTS through Unity Hub.",
+		"C# scripting with project README noting editor version.",
+		"Local play-mode/build checks before capstone publication."
+	],
+	"web-development-foundations": [
+		"Node 22+ or the version pinned by the project scaffold.",
+		"Browser checks at mobile and desktop widths.",
+		"Deployment assumptions recorded before introducing hosting-specific behavior."
+	]
 };
 
 const dataCatalogs: Record<string, string[]> = {
@@ -54,6 +185,38 @@ const dataCatalogs: Record<string, string[]> = {
 		"Small public tabular datasets with target, features, leakage notes, and baseline model expectations.",
 		"Model-card template requiring intended use, limitations, evaluation metric, and risk notes."
 	]
+};
+
+const scienceResourceLinks: Record<
+	string,
+	{ mediaLink: string; datasetLink: string }
+> = {
+	"elementary-science": {
+		mediaLink:
+			"https://phet.colorado.edu/en/simulations/filter?subjects=elementary-school",
+		datasetLink:
+			"https://www.noaa.gov/education/resource-collections/weather-atmosphere"
+	},
+	"middle-school-integrated-science": {
+		mediaLink:
+			"https://phet.colorado.edu/en/simulations/filter?subjects=middle-school",
+		datasetLink: "https://www.biointeractive.org/classroom-resources"
+	},
+	"intro-to-chemistry": {
+		mediaLink:
+			"https://phet.colorado.edu/en/simulations/filter?subjects=chemistry",
+		datasetLink: "https://pubchem.ncbi.nlm.nih.gov/"
+	},
+	"intro-to-physics": {
+		mediaLink:
+			"https://phet.colorado.edu/en/simulations/filter?subjects=physics",
+		datasetLink: "https://www.nasa.gov/stem-content/"
+	},
+	"physics-level-2": {
+		mediaLink:
+			"https://phet.colorado.edu/en/simulations/filter?subjects=physics",
+		datasetLink: "https://www.nist.gov/pml/weights-and-measures/si-units"
+	}
 };
 
 const scienceResourceBanks: Record<string, string[]> = {
@@ -142,8 +305,42 @@ function projectItem(title: string, content: string): RawCourseModuleItem {
 	return { title, content };
 }
 
+const implementationOnlyProfiles = {
+	"python-to-java-and-cpp-bridge": {
+		family: "Python to Java and C++ Bridge",
+		gaps: [
+			"Transition from dynamic Python habits to explicit static types.",
+			"Compilation, runtime errors, and IDE/build workflow differences.",
+			"Object/reference vocabulary across Python, Java, and C++."
+		],
+		topics: [
+			"Type systems and compile-time feedback.",
+			"Method signatures, headers, and entry points.",
+			"References, object identity, value copying, and ownership vocabulary.",
+			"Debugging the same small program in Python, Java, and C++."
+		],
+		projectTypes: [
+			"Port a Python console program into Java and C++.",
+			"Create a type-error diagnosis notebook.",
+			"Compare object/reference behavior across languages.",
+			"Build a small command-line program with equivalent tests in all three languages."
+		],
+		assessments: [
+			"Trace equivalent code in Python, Java, and C++.",
+			"Classify errors as syntax, compile-time type, linker/build, or runtime.",
+			"Explain why a copied value or reference behaves differently across languages.",
+			"Submit a small cross-language project with matching expected output."
+		]
+	}
+};
+
 function profileFor(courseId: string) {
-	return researchBackedExpansionProfiles[courseId];
+	return (
+		researchBackedExpansionProfiles[courseId] ??
+		implementationOnlyProfiles[
+			courseId as keyof typeof implementationOnlyProfiles
+		]
+	);
 }
 
 function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
@@ -223,7 +420,52 @@ function addFullLessonAuthoringPack(courseId: string, course: RawCourse) {
 
 function addSourceParityModule(courseId: string, course: RawCourse) {
 	const url = repoUrl(courseId);
-	if (!url) return;
+	const contentOnlyPolicy = courseContentOnlySourcePolicies[courseId];
+	if (!url && !contentOnlyPolicy) return;
+
+	if (!url) {
+		appendModule(course, {
+			title: "Source and Asset Parity Implementation",
+			curriculum: [
+				{
+					title: "Canonical Source or Asset Policy",
+					content: [
+						"**Teaching flow:** This course does not currently depend on a local instruction-material source repository. Treat its catalog text, media links, datasets, worksheets, and external project locations as the authoritative material until a repo is created.",
+						`**Policy decision:** ${contentOnlyPolicy}`,
+						"**Exit check:** Every future project either links a source/data/media asset or explicitly states that the activity is text-only, discussion-only, worksheet-only, or external-platform-only."
+					].join("\n\n")
+				},
+				{
+					title: "Asset Register Rule",
+					content:
+						"**Teaching flow:** When a content-only course gains worksheets, slides, datasets, simulations, or media, add the link directly to the relevant project or module item instead of leaving the asset in a private note.\n\n**Completion checks:**\n- The asset source is visible.\n- Licensing or usage assumptions are recorded when relevant.\n- A student can complete the task without guessing where supporting material lives."
+				},
+				{
+					title: "Future Repository Trigger",
+					content:
+						"**Teaching flow:** Create a dedicated source repository only when the course has reusable starter files, solution states, notebooks, code projects, or worksheet packs that should be versioned outside the catalog.\n\n**Exit check:** Until that threshold is met, do not report missing source folders as a course defect."
+				},
+				{
+					title: "Audit Classification",
+					content:
+						"**Teaching flow:** The generated audit should classify this course as content-only or external-platform-only rather than unresolved source-missing work.\n\n**Exit check:** The parity report names the policy decision and does not silently imply a missing local repo."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Asset Register Project",
+					content:
+						"**Project goal:** Choose one module and list every supporting worksheet, simulation, media source, dataset, or external platform needed to teach it.\n\n**Completion checks:**\n- Required and optional assets are separated.\n- The student can complete the activity over Zoom.\n- Any future local source repo need is documented."
+				},
+				{
+					title: "Content-Only Parity Review",
+					content:
+						"**Project goal:** Review three activities and mark each as text-only, media-backed, dataset-backed, worksheet-backed, or external-platform-backed.\n\n**Completion checks:**\n- The classification is explicit.\n- Missing assets are added to the remediation list.\n- No activity depends on an unstated private file."
+				}
+			]
+		});
+		return;
+	}
 
 	appendModule(course, {
 		title: "Source and Asset Parity Implementation",
@@ -273,6 +515,19 @@ function addSourceParityModule(courseId: string, course: RawCourse) {
 function addScienceResourceModule(courseId: string, course: RawCourse) {
 	const resources = scienceResourceBanks[courseId];
 	if (!resources) return;
+	const links = scienceResourceLinks[courseId];
+
+	if (links) {
+		for (const module of course.modules) {
+			for (const item of [
+				...module.curriculum,
+				...module.supplementalProjects
+			]) {
+				item.mediaLink ??= links.mediaLink;
+				item.datasetLink ??= links.datasetLink;
+			}
+		}
+	}
 
 	appendModule(course, {
 		title: "Science Resource Shortlist and Remote Lab Bank",
@@ -283,34 +538,46 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 					"**Remote investigation:** Use shared-screen simulations, public images, provided datasets, diagrams, and paper notes. Do not require household materials, lab kits, heat, chemicals, electricity components, or outdoor data collection.",
 					`**Resource shortlist:**\n${bullets(resources)}`,
 					"**Exit check:** Every investigation should name the phenomenon, the source of evidence, the vocabulary target, and the CER prompt."
-				].join("\n\n")
+				].join("\n\n"),
+				mediaLink: links?.mediaLink,
+				datasetLink: links?.datasetLink
 			},
 			{
 				title: "Module-by-Module Resource Mapping Routine",
 				content:
-					"**Teaching flow:** For each science module, choose one simulation/media source, one provided data table or graph, one model or diagram, and one CER prompt before class. The resource can be reused, but the question and vocabulary should match the module.\n\n**Completion checks:**\n- The student can access the evidence through Zoom.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation."
+					"**Teaching flow:** For each science module, choose one simulation/media source, one provided data table or graph, one model or diagram, and one CER prompt before class. The resource can be reused, but the question and vocabulary should match the module.\n\n**Completion checks:**\n- The student can access the evidence through Zoom.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation.",
+				mediaLink: links?.mediaLink,
+				datasetLink: links?.datasetLink
 			},
 			{
 				title: "Remote Safety and Accessibility Check",
 				content:
-					"**Teaching flow:** Before assigning a science project, verify that it can be completed with notes, paper, a browser, and shared-screen material. If an optional household observation is suggested, provide a fully equivalent data/simulation alternative.\n\n**Exit check:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials."
+					"**Teaching flow:** Before assigning a science project, verify that it can be completed with notes, paper, a browser, and shared-screen material. If an optional household observation is suggested, provide a fully equivalent data/simulation alternative.\n\n**Exit check:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials.",
+				mediaLink: links?.mediaLink,
+				datasetLink: links?.datasetLink
 			},
 			{
 				title: "Science Notebook Evidence Routine",
 				content:
-					"**Teaching flow:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction.\n\n**Exit check:** The student separates observation from inference and supports claims with visible evidence."
+					"**Teaching flow:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction.\n\n**Exit check:** The student separates observation from inference and supports claims with visible evidence.",
+				mediaLink: links?.mediaLink,
+				datasetLink: links?.datasetLink
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "Resource Project: Simulation-to-CER Writeup",
 				content:
-					"**Project goal:** Use one approved simulation or provided dataset to write a CER response. Include a screenshot or sketch of the model, two observations, one claim, evidence from the source, and reasoning that uses the target vocabulary.\n\n**Completion checks:**\n- The evidence comes from the shared source.\n- The reasoning explains why the evidence supports the claim.\n- The student predicts what would change if one variable changed."
+					"**Project goal:** Use one approved simulation or provided dataset to write a CER response. Include a screenshot or sketch of the model, two observations, one claim, evidence from the source, and reasoning that uses the target vocabulary.\n\n**Completion checks:**\n- The evidence comes from the shared source.\n- The reasoning explains why the evidence supports the claim.\n- The student predicts what would change if one variable changed.",
+				mediaLink: links?.mediaLink,
+				datasetLink: links?.datasetLink
 			},
 			{
 				title: "Resource Project: Model Critique",
 				content:
-					"**Project goal:** Choose one model, diagram, graph, or simulation and explain what it shows well and what it leaves out.\n\n**Completion checks:**\n- The student identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The student suggests one improvement or follow-up question."
+					"**Project goal:** Choose one model, diagram, graph, or simulation and explain what it shows well and what it leaves out.\n\n**Completion checks:**\n- The student identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The student suggests one improvement or follow-up question.",
+				mediaLink: links?.mediaLink,
+				datasetLink: links?.datasetLink
 			}
 		]
 	});
@@ -864,6 +1131,105 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 	});
 }
 
+function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
+	const assumptions = courseToolchainAssumptions[courseId];
+	if (!assumptions) return;
+
+	appendModule(course, {
+		title: "Toolchain and Version Assumptions",
+		curriculum: [
+			{
+				title: "Pinned Setup Assumptions",
+				content: [
+					"**Teaching flow:** Treat setup and version expectations as part of the course material. Before a tutor assigns a project, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any deviation in the session notes.",
+					`**Assumptions:**\n${bullets(assumptions)}`,
+					"**Exit check:** A student can open the project, identify the expected toolchain, run the first verification command or smoke test, and know which version-specific behavior matters."
+				].join("\n\n")
+			},
+			{
+				title: "Upgrade Review Rule",
+				content:
+					"**Teaching flow:** When a toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. Do not silently rely on a local machine that already has old dependencies installed.\n\n**Completion checks:**\n- The current version is named.\n- The first-run verification step is still valid.\n- Any known version-specific exception is documented."
+			},
+			{
+				title: "Cross-Platform Fallbacks",
+				content:
+					"**Teaching flow:** If a course can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite.\n\n**Exit check:** A tutor knows whether the student needs macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation."
+			},
+			{
+				title: "Reproducibility Notes",
+				content:
+					"**Teaching flow:** Reusable projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work.\n\n**Exit check:** Re-running the project does not depend on hidden local state."
+			}
+		],
+		supplementalProjects: [
+			{
+				title: "Toolchain Project: First-Run Smoke Test",
+				content:
+					"**Project goal:** Create or run the smallest verification step that proves the course toolchain is ready.\n\n**Completion checks:**\n- The exact command, editor action, or simulation URL is recorded.\n- The expected success output is documented.\n- One common failure and recovery step is listed."
+			},
+			{
+				title: "Toolchain Project: Version Drift Review",
+				content:
+					"**Project goal:** Compare the current course assumption against the installed or recommended version and document whether the course needs an update.\n\n**Completion checks:**\n- Current installed/recommended version is named.\n- Any breaking UI/API/build difference is recorded.\n- The tutor knows whether to proceed, update, or use a fallback."
+			}
+		]
+	});
+}
+
+function backfillReferenceSolutionLinks(courseId: string, course: RawCourse) {
+	if (!courseImplementationSourceRepos[courseId]) return;
+
+	for (const module of course.modules) {
+		for (const item of [
+			...module.curriculum,
+			...module.supplementalProjects
+		]) {
+			if (
+				item.projectLink?.includes(
+					"github.com/instruction-material/"
+				) &&
+				!item.solutionLink
+			) {
+				item.solutionLink = item.projectLink;
+				if (!/reference solution link/i.test(item.content)) {
+					item.content = `${item.content}\n\n**Reference solution link:** Until this project is split into separate starter and solution folders, the linked instruction-material folder is the canonical reference/source location for review. If a future starter-only folder is created, update this item to point project and solution links separately.`;
+				}
+			}
+		}
+	}
+}
+
+function supplementalProjectFor(
+	module: RawCourseModule,
+	next: number
+): RawCourseModuleItem {
+	if (next === 1) {
+		return {
+			title: `${module.title}: Targeted Practice Checkpoint`,
+			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The student should complete one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The student states the prerequisite concept.\n- The normal case is completed independently.\n- The explanation identifies one likely misconception or edge case.`
+		};
+	}
+
+	return {
+		title: `${module.title}: Transfer or Extension Project`,
+		content: `**Project goal:** Apply ${module.title} in a transfer task that changes the input, context, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The student tests or explains both a normal case and an awkward case.\n- The final reflection names what had to be adapted from the original lesson.`
+	};
+}
+
+function ensureSupplementalProjectFloor(course: RawCourse) {
+	for (const module of course.modules) {
+		while (module.supplementalProjects.length < 2) {
+			module.supplementalProjects.push(
+				supplementalProjectFor(
+					module,
+					module.supplementalProjects.length + 1
+				)
+			);
+		}
+	}
+}
+
 export function applyCourseImplementationArtifacts(
 	courseId: string,
 	course: RawCourse
@@ -879,4 +1245,7 @@ export function applyCourseImplementationArtifacts(
 	addApCsaAlignmentModule(courseId, course);
 	addDataCatalogModule(courseId, course);
 	addSecurityPolicyModule(courseId, course);
+	addToolchainAssumptionsModule(courseId, course);
+	backfillReferenceSolutionLinks(courseId, course);
+	ensureSupplementalProjectFloor(course);
 }

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { loadRawCourse } from "@/stores/courses/index";
+import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
+import {
+	courseContentOnlySourcePolicies,
+	courseImplementationSourceRepos,
+	courseToolchainAssumptions
+} from "@/stores/courses/course-implementation-artifacts";
 import { researchBackedExpansionCourseIds } from "@/stores/courses/research-expansions";
 
 async function requireCourse(courseId: string) {
@@ -23,7 +28,10 @@ function allText(course: Awaited<ReturnType<typeof requireCourse>>) {
 
 describe("implemented course development artifacts", () => {
 	it("adds full lesson authoring packs to every researched course", async () => {
-		for (const courseId of researchBackedExpansionCourseIds) {
+		for (const courseId of [
+			...researchBackedExpansionCourseIds,
+			"python-to-java-and-cpp-bridge"
+		]) {
 			const course = await requireCourse(courseId);
 			const module = course.modules.find(module =>
 				module.title.endsWith(": Full Lesson Authoring Pack")
@@ -35,6 +43,17 @@ describe("implemented course development artifacts", () => {
 			expect(allText(course), courseId).toContain(
 				"Full Lesson Project: Student Transfer Task"
 			);
+		}
+	}, 30000);
+
+	it("ensures every visible module has at least two supplemental project/checkpoint options", async () => {
+		for (const { id } of courseCatalog) {
+			const course = await requireCourse(id);
+			const underfilled = course.modules.filter(
+				module => module.supplementalProjects.length < 2
+			);
+
+			expect(underfilled, id).toHaveLength(0);
 		}
 	}, 30000);
 
@@ -77,6 +96,14 @@ describe("implemented course development artifacts", () => {
 			);
 			expect(text, courseId).toContain("PhET");
 			expect(text, courseId).toContain("Do not require household materials");
+			expect(
+				course.modules.some(module =>
+					[...module.curriculum, ...module.supplementalProjects].some(
+						item => item.mediaLink || item.datasetLink
+					)
+				),
+				courseId
+			).toBe(true);
 		}
 
 		expect(allText(await requireCourse("elementary-science"))).toContain(
@@ -135,4 +162,37 @@ describe("implemented course development artifacts", () => {
 			expect(text, courseId).toContain("github.com/instruction-material");
 		}
 	});
+
+	it("records source policy decisions for content-only or composed courses", async () => {
+		for (const courseId of Object.keys(courseContentOnlySourcePolicies)) {
+			const text = allText(await requireCourse(courseId));
+
+			expect(text, courseId).toContain("Source and Asset Parity Implementation");
+			expect(text, courseId).toContain("Canonical Source or Asset Policy");
+		}
+	});
+
+	it("adds toolchain/version assumption modules where the reports required them", async () => {
+		for (const courseId of Object.keys(courseToolchainAssumptions)) {
+			const text = allText(await requireCourse(courseId));
+
+			expect(text, courseId).toContain("Toolchain and Version Assumptions");
+			expect(text, courseId).toContain("Pinned Setup Assumptions");
+		}
+	});
+
+	it("backfills reference solution links for source-backed project links", async () => {
+		for (const courseId of Object.keys(courseImplementationSourceRepos)) {
+			const course = await requireCourse(courseId);
+			const missingSolutionItems = course.modules.flatMap(module =>
+				[...module.curriculum, ...module.supplementalProjects].filter(
+					item =>
+						item.projectLink?.includes("github.com/instruction-material/") &&
+						!item.solutionLink
+				)
+			);
+
+			expect(missingSolutionItems, courseId).toHaveLength(0);
+		}
+	}, 30000);
 });

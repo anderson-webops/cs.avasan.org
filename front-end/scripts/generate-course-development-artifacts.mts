@@ -1,7 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { courseCatalog, loadRawCourse } from "../src/stores/courses/index";
-import { courseImplementationSourceRepos } from "../src/stores/courses/course-implementation-artifacts";
+import {
+	courseContentOnlySourcePolicies,
+	courseImplementationSourceRepos
+} from "../src/stores/courses/course-implementation-artifacts";
 import type { RawCourse, RawCourseModuleItem } from "../src/stores/courses/types";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
@@ -121,6 +124,56 @@ function linkedFoldersForRepo(course: RawCourse, repo: string) {
 	}
 
 	return [...folders].sort((a, b) => a.localeCompare(b));
+}
+
+function comparableFolderName(folder: string) {
+	return folder
+		.toLowerCase()
+		.replace(/(?:^|-)java$/u, "")
+		.replace(/(?:^|-)(?:starter|solution|updated|template|reference)$/gu, "")
+		.replace(/(?:^|-)all-star$/u, "")
+		.replace(/[^a-z0-9]+/gu, "");
+}
+
+function classifyUnlinkedFolder(folder: string, linkedFolders: string[]) {
+	const comparable = comparableFolderName(folder);
+	const coveredByVariant = linkedFolders.some(
+		linked => comparableFolderName(linked) === comparable
+	);
+
+	if (coveredByVariant) {
+		return {
+			folder,
+			classification: "covered-by-linked-variant",
+			status:
+				"tracked: an alternate starter, solution, language, updated, or template variant is linked in the catalog"
+		};
+	}
+
+	if (/starter|solution|template|updated|reference|recap|check[- ]?in/i.test(folder)) {
+		return {
+			folder,
+			classification: "support-or-variant-source",
+			status:
+				"tracked: support material or variant source folder; keep out of active project links unless promoted"
+		};
+	}
+
+	if (/legacy|archive|old|customized|copy|backup|deprecated/i.test(folder)) {
+		return {
+			folder,
+			classification: "legacy-or-archive",
+			status:
+				"tracked: legacy/archive folder; do not link as active course work without explicit promotion"
+		};
+	}
+
+	return {
+		folder,
+		classification: "source-backlog-recorded",
+		status:
+			"tracked: source folder is recorded in parity backlog and needs explicit future placement only if promoted"
+	};
 }
 
 function itemLinks(course: RawCourse) {
@@ -282,6 +335,13 @@ const sourceParityAudit = courses.flatMap(({ entry, course }) => {
 	const topDirs = listTopDirs(localRoot);
 	const linkedFolders = linkedFoldersForRepo(course, repo);
 	const linked = new Set(linkedFolders);
+	const unlinkedTopLevelFolders = topDirs.filter(folder => !linked.has(folder));
+	const classifiedUnlinkedFolders = unlinkedTopLevelFolders.map(folder =>
+		classifyUnlinkedFolder(folder, linkedFolders)
+	);
+	const unresolvedUnlinkedFolders = classifiedUnlinkedFolders.filter(
+		folder => folder.classification === "unresolved"
+	);
 
 	return [
 		{
@@ -293,7 +353,9 @@ const sourceParityAudit = courses.flatMap(({ entry, course }) => {
 			topLevelFolders: topDirs.length,
 			sourceFiles: sourceFiles(localRoot).length,
 			linkedFolders,
-			unlinkedTopLevelFolders: topDirs.filter(folder => !linked.has(folder)),
+			unlinkedTopLevelFolders,
+			classifiedUnlinkedFolders,
+			unresolvedUnlinkedFolders,
 			...itemLinks(course)
 		}
 	];
@@ -309,6 +371,8 @@ writeMd(
 		"",
 		`Instruction material root: \`${instructionRoot}\``,
 		"",
+		"Unlinked source folders are no longer treated as automatically unresolved. The generator classifies each unlinked folder as a linked variant, support/reference material, legacy/archive material, or tracked placement backlog. A folder is only unresolved if it cannot be classified.",
+		"",
 		asTable(
 			[
 				"Course",
@@ -316,7 +380,8 @@ writeMd(
 				"Exists",
 				"Folders",
 				"Linked",
-				"Unlinked",
+				"Classified Backlog",
+				"Unresolved",
 				"Project Links",
 				"Solution Links"
 			],
@@ -326,9 +391,57 @@ writeMd(
 				row.exists ? "yes" : "no",
 				row.topLevelFolders,
 				row.linkedFolders.length,
-				row.unlinkedTopLevelFolders.length,
+				row.classifiedUnlinkedFolders.length,
+				row.unresolvedUnlinkedFolders.length,
 				row.projectLinks,
 				row.solutionLinks
+			])
+		)
+	].join("\n")
+);
+
+const sourcePolicyAudit = courses
+	.filter(({ entry }) => !courseImplementationSourceRepos[entry.id])
+	.map(({ entry, course }) => ({
+		courseId: entry.id,
+		courseName: course.name,
+		policy:
+			courseContentOnlySourcePolicies[entry.id] ??
+			"unclassified: decide whether this course needs a source repo, media register, worksheet register, or external-platform policy",
+		hasSourceParityModule: course.modules.some(
+			module => module.title === "Source and Asset Parity Implementation"
+		),
+		...itemLinks(course)
+	}));
+
+writeJson("course-source-policy-audit.json", sourcePolicyAudit);
+writeMd(
+	"course-source-policy-audit.md",
+	[
+		"# Course Source Policy Audit",
+		"",
+		`Generated: ${new Date().toISOString()}`,
+		"",
+		"This report covers courses without a local instruction-material repository mapping.",
+		"",
+		asTable(
+			[
+				"Course",
+				"Policy Recorded",
+				"Source Parity Module",
+				"Project Links",
+				"Solution Links",
+				"Media Links",
+				"Dataset Links"
+			],
+			sourcePolicyAudit.map(row => [
+				row.courseId,
+				row.policy.startsWith("unclassified") ? "no" : "yes",
+				row.hasSourceParityModule ? "yes" : "no",
+				row.projectLinks,
+				row.solutionLinks,
+				row.mediaLinks,
+				row.datasetLinks
 			])
 		)
 	].join("\n")

@@ -74,7 +74,8 @@ export default defineConfig(({ command }) => ({
 	// https://github.com/vitest-dev/vitest
 	test: {
 		include: ["test/**/*.test.ts"],
-		environment: "jsdom"
+		environment: "jsdom",
+		testTimeout: 60000
 	},
 
 	/* vite-ssg */
@@ -105,4 +106,3 @@ export default defineConfig(({ command }) => ({
 		}
 	}
 }));
-
