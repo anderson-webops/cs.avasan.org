@@ -25,7 +25,8 @@ interface NavLink {
 const primaryLinks = computed<NavLink[]>(() => {
 	const links: NavLink[] = [
 		{ label: "Home", to: "/", exact: true },
-		{ label: "Courses", to: "/courses", exact: true }
+		{ label: "Courses", to: "/courses", exact: true },
+		{ label: "Pathways", to: "/pathways", exact: true }
 	];
 
 	if (!isAdmin.value) {

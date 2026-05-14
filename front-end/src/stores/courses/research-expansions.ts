@@ -243,17 +243,18 @@ function buildExpansionModules(profile: ResearchExpansionProfile) {
 
 const scratchProfile: ResearchExpansionProfile = {
 	family: "Scratch",
-	priority: "later",
+	priority: "urgent",
 	sources: ["CSTA K-12 Standards"],
 	gaps: [
 		"Map beginner Scratch projects to events, loops, variables, decomposition, testing, and remixing.",
 		"Add a stronger debugging and iteration thread across both Scratch levels.",
-		"Clarify which tasks are visual-first for younger readers."
+		"Clarify which tasks are visual-first for younger readers.",
+		"Add a blocks-to-pseudocode bridge so students can explain Scratch projects in language that transfers to Python or JavaScript."
 	],
 	topics: [
 		"Broadcasts, clones, lists, custom blocks, game state, sprite coordination, and remix etiquette.",
 		"Computational-thinking vocabulary: sequence, event, loop, condition, variable, abstraction, and debugging.",
-		"Presentation habits and accessibility for younger creators."
+		"Blocks-to-pseudocode explanations, event chains, state diagrams, presentation habits, and accessibility for younger creators."
 	],
 	moduleAdditions: [
 		"Game state and scene transitions.",
@@ -277,7 +278,8 @@ const scratchProfile: ResearchExpansionProfile = {
 	materials: [
 		"Scratch educator references and sample projects.",
 		"Broken-script debugging cards.",
-		"Simple presentation rubric for young students."
+		"Simple presentation rubric for young students.",
+		"Blocks-to-pseudocode glossary and project reflection prompts."
 	]
 };
 

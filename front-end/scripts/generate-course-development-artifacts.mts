@@ -2,6 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { courseCatalog, loadRawCourse } from "../src/stores/courses/index";
 import {
+	coursePublicPathwayByCourseId,
+	coursePublicPathways
+} from "../src/stores/courses/public-pathways";
+import {
 	courseContentOnlySourcePolicies,
 	courseImplementationSourceRepos
 } from "../src/stores/courses/course-implementation-artifacts";
@@ -621,6 +625,91 @@ writeMd(
 				row.courseBoundaries,
 				row.capstoneExpectations,
 				row.recommendedNextWork
+			])
+		)
+	].join("\n")
+);
+
+const pathwayCourseIds = coursePublicPathways.flatMap(pathway =>
+	pathway.courseIds.map(courseId => ({ courseId, pathwayId: pathway.id }))
+);
+const duplicatePathwayCourseIds = pathwayCourseIds
+	.map(row => row.courseId)
+	.filter(
+		(courseId, index, allCourseIds) =>
+			allCourseIds.indexOf(courseId) !== index
+	)
+	.sort((a, b) => a.localeCompare(b));
+const publicPathwayAudit = courses.map(({ entry, course }) => {
+	const pathway = coursePublicPathwayByCourseId.get(entry.id);
+	return {
+		courseId: entry.id,
+		courseName: course.name,
+		pathwayId: pathway?.id ?? "missing",
+		pathwayTitle: pathway?.title ?? "missing",
+		priority: pathway?.priority ?? "missing",
+		outcomes: pathway?.outcomes.length ?? 0,
+		sequencingNotes: pathway?.sequencingNotes.length ?? 0,
+		projectExpectations: pathway?.projectExpectations.length ?? 0,
+		assessmentStyle: pathway?.assessmentStyle.length ?? 0,
+		sourceAndTooling: pathway?.sourceAndTooling.length ?? 0,
+		safetyAndAccess: pathway?.safetyAndAccess.length ?? 0,
+		expansionBacklog: pathway?.expansionBacklog.length ?? 0
+	};
+});
+const unregisteredPathwayIds = [...coursePublicPathwayByCourseId.keys()]
+	.filter(courseId => !courseCatalog.some(entry => entry.id === courseId))
+	.sort((a, b) => a.localeCompare(b));
+
+writeJson("course-public-pathway-audit.json", {
+	pathways: coursePublicPathways.map(pathway => ({
+		id: pathway.id,
+		title: pathway.title,
+		priority: pathway.priority,
+		courseIds: pathway.courseIds
+	})),
+	courses: publicPathwayAudit,
+	duplicatePathwayCourseIds,
+	unregisteredPathwayIds
+});
+writeMd(
+	"course-public-pathway-audit.md",
+	[
+		"# Course Public Pathway Audit",
+		"",
+		`Generated: ${new Date().toISOString()}`,
+		"",
+		[
+			"This report verifies the public course-family pathway layer used by `/pathways`: every visible catalog course should belong to exactly one pathway,",
+			"and each pathway should expose outcomes, sequencing notes, project expectations, assessment style, source/tooling notes, safety boundaries, and expansion backlog."
+		].join(" "),
+		"",
+		`Duplicate pathway course ids: ${duplicatePathwayCourseIds.length}`,
+		"",
+		`Unregistered pathway course ids: ${unregisteredPathwayIds.length}`,
+		"",
+		asTable(
+			[
+				"Course",
+				"Pathway",
+				"Priority",
+				"Outcomes",
+				"Projects",
+				"Assessments",
+				"Sources",
+				"Safety",
+				"Backlog"
+			],
+			publicPathwayAudit.map(row => [
+				row.courseId,
+				row.pathwayId,
+				row.priority,
+				row.outcomes,
+				row.projectExpectations,
+				row.assessmentStyle,
+				row.sourceAndTooling,
+				row.safetyAndAccess,
+				row.expansionBacklog
 			])
 		)
 	].join("\n")
