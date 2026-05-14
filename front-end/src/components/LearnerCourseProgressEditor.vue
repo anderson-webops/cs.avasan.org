@@ -171,14 +171,14 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 	gap: 0.85rem;
 	padding: 1rem;
 	border-radius: 18px;
-	background: rgba(248, 250, 252, 0.72);
-	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+	background: var(--color-surface-soft);
+	box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
 .progress-title,
 .progress-label {
 	margin: 0;
-	color: #10263a;
+	color: var(--color-ink);
 	font-size: 0.84rem;
 	font-weight: 800;
 	letter-spacing: 0.02em;
@@ -191,7 +191,7 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 
 .progress-helper {
 	margin: 0;
-	color: #5b6f82;
+	color: var(--color-ink-soft);
 	line-height: 1.45;
 }
 
@@ -201,8 +201,8 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 	border: 1px solid rgba(148, 163, 184, 0.55);
 	border-radius: 14px;
 	padding: 0.7rem 0.8rem;
-	background: white;
-	color: #10263a;
+	background: var(--color-surface-strong);
+	color: var(--color-ink);
 }
 
 .progress-outline {
@@ -215,8 +215,8 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 
 .progress-module {
 	border-radius: 14px;
-	background: rgba(255, 255, 255, 0.88);
-	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+	background: var(--color-surface-strong);
+	box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
 .progress-module summary {
@@ -233,7 +233,7 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 	display: flex;
 	align-items: flex-start;
 	gap: 0.55rem;
-	color: #10263a;
+	color: var(--color-ink);
 	line-height: 1.45;
 }
 
@@ -248,7 +248,7 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 
 .progress-check.is-item {
 	padding: 0.55rem 0;
-	color: #41566a;
+	color: var(--color-ink-soft);
 	font-size: 0.92rem;
 }
 

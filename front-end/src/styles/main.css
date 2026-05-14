@@ -32,17 +32,17 @@
 
 html.dark {
 	color-scheme: dark;
-	--color-page-top: #07111f;
-	--color-page-bottom: #0b1627;
-	--color-surface: rgba(15, 25, 42, 0.86);
-	--color-surface-soft: rgba(18, 29, 48, 0.72);
-	--color-surface-strong: rgba(13, 23, 39, 0.94);
+	--color-page-top: #06101d;
+	--color-page-bottom: #0a1525;
+	--color-surface: rgba(15, 25, 42, 0.9);
+	--color-surface-soft: rgba(21, 34, 54, 0.8);
+	--color-surface-strong: rgba(12, 22, 38, 0.96);
 	--color-border: rgba(148, 163, 184, 0.22);
 	--color-border-strong: rgba(191, 219, 254, 0.28);
-	--color-ink: #eef6ff;
-	--color-ink-soft: #a8bbcf;
-	--color-accent: #7cc7ff;
-	--color-accent-strong: #b7e3ff;
+	--color-ink: #f4f8ff;
+	--color-ink-soft: #c5d4e5;
+	--color-accent: #95ddff;
+	--color-accent-strong: #d0efff;
 	--color-accent-soft: rgba(125, 199, 255, 0.14);
 	--focus-ring-color: #5eead4;
 	--shadow-soft: 0 18px 44px -34px rgba(0, 0, 0, 0.7);
@@ -443,6 +443,12 @@ html.dark body :is(input:not([type="checkbox"]):not([type="radio"]), textarea, s
 	color: var(--color-ink);
 }
 
+html.dark body :is(.field-input, .editor-select, .tool-form input, .tool-form textarea, .record-item select, .recipient-row select) {
+	background-color: rgba(8, 17, 31, 0.9);
+	border-color: rgba(148, 163, 184, 0.34);
+	color: var(--color-ink);
+}
+
 html.dark body :is(input:not([type="checkbox"]):not([type="radio"]), textarea)::placeholder {
 	color: rgba(168, 187, 207, 0.72);
 }
@@ -524,8 +530,8 @@ html.dark .site-nav__action--danger {
 html.dark .course-explorer {
 	--course-border: rgba(148, 163, 184, 0.24);
 	--course-border-strong: rgba(191, 219, 254, 0.3);
-	--course-text: #eef6ff;
-	--course-text-soft: #a8bbcf;
+	--course-text: #f4f8ff;
+	--course-text-soft: #c5d4e5;
 	--course-panel: rgba(15, 25, 42, 0.9);
 	--course-panel-soft: rgba(20, 33, 54, 0.76);
 	--course-accent: #5eead4;
@@ -555,7 +561,7 @@ html.dark body :is(.resource-link-host, .lesson-kicker, .reader-eyebrow, .sectio
 	color: var(--course-text-soft);
 }
 
-html.dark body :is(.workspace-header, .workspace-sheet, .directory-card, .history-panel, .session-tools, .tool-panel, .learner-progress-editor, .mail-card, .history-card, .preview, .admin-shell__body) {
+html.dark body :is(.workspace-header, .workspace-sheet, .directory-section, .directory-card, .section-heading, .history-section, .history-panel, .session-tools, .tool-panel, .learner-progress-editor, .mail-card, .history-card, .preview, .admin-shell__body) {
 	background:
 		linear-gradient(
 			145deg,
@@ -567,22 +573,22 @@ html.dark body :is(.workspace-header, .workspace-sheet, .directory-card, .histor
 	color: var(--color-ink);
 }
 
-html.dark body :is(.sheet-panel, .summary-block, .stat-pill, .record-card, .record-item, .progress-outline, .progress-module, .recipient-preview, .subject-preview, .preview-pane, .history-note, .association-summary, .modal-content, .container) {
+html.dark body :is(.workspace-stats, .sheet-panel, .summary-block, .stat-pill, .record-card, .record-item, .progress-outline, .progress-module, .recipient-preview, .subject-preview, .preview-pane, .history-note, .association-summary, .status-banner, .modal-content, .container) {
 	background: rgba(8, 17, 31, 0.5);
 	border-color: rgba(148, 163, 184, 0.24);
 	box-shadow: inset 0 0 0 1px rgba(191, 219, 254, 0.04);
 	color: var(--color-ink);
 }
 
-html.dark body :is(.workspace-header h2, .workspace-sheet h3, .directory-card h4, .history-panel h3, .tool-panel h4, .mail-card h1, .history-card h2, .progress-title, .record-kicker, .field-stack strong, .summary-copy, .history-note__body, .preview-body, .association-title) {
+html.dark body :is(.workspace-header h2, .workspace-header strong, .workspace-sheet h3, .section-heading h3, .directory-card h4, .history-panel h3, .panel-heading h4, .record-summary h5, .tool-panel h4, .mail-card h1, .mail-card h2, .mail-card h3, .mail-card__header h2, .history-card h2, .history-note__header h4, .progress-title, .record-kicker, .field-stack strong, .field-value, .summary-copy, .summary-list li, .history-note__body, .preview-body, .record-body, .association-title, .stat-pill strong, .panel-header h3, .directory-card-header h4, .directory-card-name-row h4, .recipient-preview strong, .course-picker-label, .tools-summary, .tools-summary strong, .tool-heading h5, .record-item strong, .profile-card h1, .profile-card h2, .profile-card h3, .profile-empty h1, .profile-empty h2, .profile-empty h3, .tuition-card h2, .tuition-card h3, .tool-card h2, .tool-card h3, .scheduler-loading h2) {
 	color: var(--color-ink);
 }
 
-html.dark body :is(.workspace-eyebrow, .panel-eyebrow, .summary-label, .section-eyebrow, .tool-eyebrow, .mail-card__eyebrow, .history-note__eyebrow, .progress-label) {
+html.dark body :is(.workspace-eyebrow, .panel-eyebrow, .summary-label, .section-eyebrow, .tool-eyebrow, .mail-card__eyebrow, .history-note__eyebrow, .progress-label, .editor-label, .tool-label) {
 	color: var(--color-accent);
 }
 
-html.dark body :is(.section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-note__meta, .preview-meta, .association-copy) {
+html.dark body :is(.workspace-header p:last-child, .section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-card__empty, .history-note__meta, .preview-meta, .association-copy, .stat-pill span, .directory-card-header p, .recipient-association, .tool-form label, .progress-check.is-item, .record-item small, .record-item span, .profile-card p, .profile-empty p, .tool-card p, .tuition-card p, .scheduler-loading-kicker) {
 	color: var(--color-ink-soft);
 }
 
@@ -595,7 +601,7 @@ html.dark body :is(.summary-count, .count-pill, .history-note__badge, .recipient
 	color: var(--color-accent-strong);
 }
 
-html.dark body :is(.checkbox-grid label, .progress-check, .tool-form label, .field, .manual-recipient, .editor-block, .assignment-editor, .course-editor) {
+html.dark body :is(.checkbox-grid label, .progress-check, .tool-form label, .field, .manual-recipient, .editor-block, .assignment-editor, .course-editor, .field-item, .field-row, .profile-field) {
 	background: rgba(15, 25, 42, 0.72);
 	border-color: rgba(148, 163, 184, 0.24);
 	color: var(--color-ink);
@@ -650,7 +656,7 @@ html.dark body :is(.profile-card, .profile-empty, .empty-card, .profile-details-
 	box-shadow: 0 24px 48px -36px rgba(0, 0, 0, 0.72);
 }
 
-html.dark body :is(.field-value, .tool-label, .details, .scheduler-fallback) {
+html.dark body :is(.details, .scheduler-fallback) {
 	color: var(--color-ink-soft);
 }
 
@@ -672,6 +678,10 @@ html.dark body :is(.tab[aria-selected="true"], .action.primary) {
 
 html.dark body :is(.shell-line) {
 	background: rgba(148, 163, 184, 0.28);
+}
+
+html.dark body :is(.summary-list li + li, .course-editor, .assignment-editor) {
+	border-color: rgba(148, 163, 184, 0.24);
 }
 
 html.dark body :is(.modal-content) {

@@ -65,8 +65,8 @@ watch(
 	gap: 0.4rem;
 	padding: 0.9rem 1rem;
 	border-radius: 18px;
-	background: rgba(248, 250, 252, 0.86);
-	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+	background: var(--color-surface-soft);
+	box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
 .field-label {
@@ -74,14 +74,14 @@ watch(
 	font-weight: 700;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: #5f7a8e;
+	color: var(--color-accent);
 }
 
 .field-value {
 	margin: 0;
 	font-size: 1rem;
 	line-height: 1.45;
-	color: #12263a;
+	color: var(--color-ink);
 	word-break: break-word;
 }
 </style>

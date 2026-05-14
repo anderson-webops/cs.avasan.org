@@ -68,6 +68,17 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 
 		<div class="site-shell site-shell--wide site-footer__bottom">
 			<p>© {{ new Date().getFullYear() }} Jacob Anderson.</p>
+			<button
+				class="site-footer__theme-toggle"
+				type="button"
+				:aria-label="
+					isDark ? 'Switch to light mode' : 'Switch to dark mode'
+				"
+				:aria-pressed="isDark"
+				@click="toggleDark()"
+			>
+				{{ isDark ? "Light mode" : "Dark mode" }}
+			</button>
 		</div>
 	</footer>
 </template>
@@ -141,6 +152,11 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 }
 
 .site-footer__bottom {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.85rem 1rem;
 	margin-top: 2rem;
 	padding-top: 1rem;
 	border-top: 1px solid rgba(184, 202, 221, 0.16);
@@ -151,6 +167,30 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 	color: #8fa6c1;
 	font-size: 0.9rem;
 	text-align: left;
+}
+
+.site-footer__theme-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.6rem;
+	padding: 0.6rem 0.9rem;
+	border: 1px solid rgba(158, 195, 244, 0.34);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.08);
+	color: #f6fbff;
+	font-weight: 800;
+	line-height: 1.2;
+	transition:
+		background-color 0.18s ease,
+		border-color 0.18s ease,
+		transform 0.18s ease;
+}
+
+.site-footer__theme-toggle:hover {
+	border-color: rgba(158, 195, 244, 0.62);
+	background: rgba(158, 195, 244, 0.14);
+	transform: translateY(-1px);
 }
 
 @media (max-width: 960px) {

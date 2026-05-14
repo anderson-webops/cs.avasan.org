@@ -58,8 +58,8 @@ function onInput(key: string, value: any) {
 	align-items: center;
 	padding: 0.85rem 1rem;
 	border-radius: 18px;
-	background: rgba(248, 250, 252, 0.86);
-	box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.72);
+	background: var(--color-surface-soft);
+	box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
 .field-row.is-editing {
@@ -71,14 +71,14 @@ function onInput(key: string, value: any) {
 	font-weight: 700;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: #5f7a8e;
+	color: var(--color-accent);
 }
 
 .field-value {
 	margin: 0;
 	font-size: 1rem;
 	line-height: 1.45;
-	color: #12263a;
+	color: var(--color-ink);
 	word-break: break-word;
 }
 
@@ -87,13 +87,13 @@ function onInput(key: string, value: any) {
 	border: 1px solid rgba(148, 163, 184, 0.55);
 	border-radius: 14px;
 	padding: 0.8rem 0.95rem;
-	background: white;
-	color: #0f172a;
+	background: var(--color-surface-strong);
+	color: var(--color-ink);
 	font: inherit;
 }
 
 .field-input:focus {
 	outline: 2px solid rgba(37, 99, 235, 0.18);
-	border-color: #3a6ea5;
+	border-color: var(--color-accent);
 }
 </style>

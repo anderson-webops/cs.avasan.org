@@ -176,20 +176,6 @@ function maybeWarmScheduler(link: NavLink) {
 									</router-link>
 
 									<button
-										class="site-button site-button--secondary site-nav__action site-nav__theme"
-										type="button"
-										:aria-label="
-											isDark
-												? 'Switch to light mode'
-												: 'Switch to dark mode'
-										"
-										:aria-pressed="isDark"
-										@click="toggleDark()"
-									>
-										{{ isDark ? "Light" : "Dark" }}
-									</button>
-
-									<button
 										v-if="isLoggedIn"
 										class="site-button site-button--secondary site-nav__action site-nav__action--danger"
 										type="button"
@@ -364,10 +350,6 @@ function maybeWarmScheduler(link: NavLink) {
 .site-nav__action {
 	min-height: 2.9rem;
 	padding-inline: 1rem;
-}
-
-.site-nav__theme {
-	min-width: 5.6rem;
 }
 
 .site-nav__action.is-active {
