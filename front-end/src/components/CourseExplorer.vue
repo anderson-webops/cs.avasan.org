@@ -1301,6 +1301,7 @@ function writeStoredValue(key: string, value: string) {
 	gap: 0;
 	align-items: stretch;
 	min-height: min(72vh, 68rem);
+	min-width: 0;
 	border: 1px solid rgba(148, 163, 184, 0.2);
 	border-radius: 24px;
 	background: rgba(255, 255, 255, 0.92);
@@ -1320,6 +1321,8 @@ function writeStoredValue(key: string, value: string) {
 .course-outline {
 	position: sticky;
 	top: 1rem;
+	align-self: stretch;
+	min-height: 0;
 	padding: 1.5rem 1.15rem 1.25rem;
 	display: flex;
 	flex-direction: column;
@@ -1342,10 +1345,12 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .outline-list {
+	flex: 1 1 auto;
+	min-height: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 0.35rem;
-	max-height: calc(100vh - 19rem);
+	max-height: none;
 	overflow: auto;
 	padding-right: 0.2rem;
 }
@@ -1832,6 +1837,7 @@ function writeStoredValue(key: string, value: string) {
 
 	.course-outline {
 		position: static;
+		min-height: min(72vh, 68rem);
 		border-right: none;
 		border-bottom: 1px solid rgba(148, 163, 184, 0.16);
 	}
