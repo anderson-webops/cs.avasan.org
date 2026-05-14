@@ -872,6 +872,8 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Build the central artifact for Applied Studio 15: JM Maze Runner Project. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
 					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
+					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Maze-Runner-Project-Solution"
 				},
 				{
@@ -886,6 +888,8 @@ export const javaLevel2Course: RawCourse = {
 					content:
 						"Extend the core build from Applied Studio 15: JM Maze Runner Project with one extra requirement, stricter input handling, or a more realistic variation of the same task. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
 					projectLink:
+						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
+					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Maze-Runner-Project-Solution"
 				},
 				{

@@ -930,7 +930,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Reflect on what concepts were learned, the most challenging and most rewarding parts of the course, and how skills have grown from the beginning to the end.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/End-of-Course-Reflection/solution/main.py"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/End-of-Course-Reflection/starter",
+					solutionLink:
+						"https://github.com/instruction-material/Python-Level-1/tree/main/End-of-Course-Reflection/solution"
 				}
 			],
 			supplementalProjects: []

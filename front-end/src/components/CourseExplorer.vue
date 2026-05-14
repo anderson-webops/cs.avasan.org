@@ -154,8 +154,8 @@ watch(
 );
 
 watch(
-	selectedCourseId,
-	async (courseId, _previousCourseId, onCleanup) => {
+	[selectedCourseId, canViewSolutions],
+	async ([courseId], _previousValue, onCleanup) => {
 		if (!courseId) {
 			selectedCourse.value = null;
 			courseLoadError.value = "";

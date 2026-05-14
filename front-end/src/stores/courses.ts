@@ -7,6 +7,7 @@ import type {
 import { defineStore } from "pinia";
 
 import { computed } from "vue";
+import { useAppStore } from "./app";
 import { courseCatalog, loadRawCourse } from "./courses/index";
 
 const COMBINING_MARKS_RE = /[\u0300-\u036F]/g;
@@ -79,6 +80,10 @@ const BOILERPLATE_SENTENCE_REWRITES: Array<{
 ];
 const STRUCTURED_COURSE_SUPPORT_RE =
 	/\*\*(?:Project goal|Teaching flow|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Remote investigation|Science explanation|Studio focus|AP connection):?\*\*/i;
+
+interface NormalizeCourseOptions {
+	includeSolutions: boolean;
+}
 
 export type {
 	CourseDefinition,
@@ -302,6 +307,9 @@ function extractLeadingResourceLink(title: string, content: string) {
 
 	return {
 		content: remainder.trim(),
+		isSolutionLink:
+			/\bsolution\b/i.test(label) ||
+			DEDICATED_SOLUTION_SEGMENT_RE.test(normalizedUrl),
 		url: normalizedUrl
 	};
 }
@@ -330,7 +338,11 @@ function mergeAdjacentSupportItems(items: Array<Omit<CourseModuleItem, "id">>) {
 	);
 }
 
-function normalizeCourse(course: RawCourse, courseId = slugify(course.name)) {
+function normalizeCourse(
+	course: RawCourse,
+	courseId = slugify(course.name),
+	options: NormalizeCourseOptions = { includeSolutions: true }
+) {
 	return {
 		id: courseId,
 		name: course.name,
@@ -344,53 +356,70 @@ function normalizeCourse(course: RawCourse, courseId = slugify(course.name)) {
 				mergeAdjacentSupportItems(
 					items
 						.filter(item => !shouldHideItem(item.title))
-						.map(item => ({
-							title: item.title,
-							content: (() => {
-								const extractedLink =
-									extractLeadingResourceLink(
-										item.title,
-										item.content
-									);
-								const normalizedContent = normalizeContent(
-									extractedLink?.content ?? item.content
+						.map(item => {
+							const explicitProjectLink = canonicalizeResourceUrl(
+								item.projectLink
+							);
+							const extractedLink = extractLeadingResourceLink(
+								item.title,
+								item.content
+							);
+							const normalizedSolutionLink =
+								canonicalizeResourceUrl(item.solutionLink);
+							const projectLinkIsSolution =
+								DEDICATED_SOLUTION_SEGMENT_RE.test(
+									explicitProjectLink ?? ""
 								);
-								return displayCourseContent(normalizedContent);
-							})(),
-							projectLink: (() => {
-								const explicitProjectLink =
-									canonicalizeResourceUrl(item.projectLink);
-
-								if (explicitProjectLink) {
-									return explicitProjectLink;
-								}
-
-								const extractedLink =
-									extractLeadingResourceLink(
-										item.title,
-										item.content
-									);
-
-								if (extractedLink?.url) {
-									return extractedLink.url;
-								}
-
-								const normalizedSolutionLink =
-									canonicalizeResourceUrl(item.solutionLink);
-
-								return shouldExposeLegacySolutionAsProject(
-									item.title,
-									normalizedSolutionLink
-								)
-									? normalizedSolutionLink
+							const legacySolutionLink =
+								projectLinkIsSolution &&
+								options.includeSolutions
+									? explicitProjectLink
 									: undefined;
-							})(),
-							solutionLink: canonicalizeResourceUrl(
-								item.solutionLink
-							),
-							datasetLink: item.datasetLink,
-							mediaLink: item.mediaLink
-						}))
+							const extractedSolutionLink =
+								extractedLink?.isSolutionLink &&
+								options.includeSolutions
+									? extractedLink.url
+									: undefined;
+							const normalizedContent = normalizeContent(
+								extractedLink?.content ?? item.content
+							);
+
+							return {
+								title: item.title,
+								content:
+									displayCourseContent(normalizedContent),
+								projectLink: (() => {
+									if (
+										explicitProjectLink &&
+										!projectLinkIsSolution
+									) {
+										return explicitProjectLink;
+									}
+
+									if (
+										extractedLink?.url &&
+										!extractedLink.isSolutionLink
+									) {
+										return extractedLink.url;
+									}
+
+									return options.includeSolutions &&
+										shouldExposeLegacySolutionAsProject(
+											item.title,
+											normalizedSolutionLink
+										)
+										? normalizedSolutionLink
+										: undefined;
+								})(),
+								solutionLink: options.includeSolutions
+									? (normalizedSolutionLink ??
+										legacySolutionLink ??
+										extractedSolutionLink)
+									: undefined,
+								datasetLink: item.datasetLink,
+								mediaLink: item.mediaLink
+							};
+						})
 				).map(item => ({
 					id: slugify(`${moduleId}-${prefix}-${item.title}`),
 					...item
@@ -414,17 +443,31 @@ const courseSummaries: CourseSummary[] = courseCatalog.map(({ id, name }) => ({
 	name
 }));
 
-const normalizedCourseCache = new Map<string, CourseDefinition>();
+const normalizedLearnerCourseCache = new Map<string, CourseDefinition>();
+const normalizedStaffCourseCache = new Map<string, CourseDefinition>();
+
+function courseCacheFor(includeSolutions: boolean) {
+	return includeSolutions
+		? normalizedStaffCourseCache
+		: normalizedLearnerCourseCache;
+}
 
 export const useCoursesStore = defineStore("courses", () => {
 	const courses = computed(() => courseSummaries);
+	const appStore = useAppStore();
+
+	const canViewSolutions = computed(
+		() => !!appStore.currentTutor || !!appStore.currentAdmin
+	);
 
 	function getCourseById(id: string) {
-		return normalizedCourseCache.get(id) ?? null;
+		return courseCacheFor(canViewSolutions.value).get(id) ?? null;
 	}
 
 	async function loadCourseById(id: string) {
-		const cachedCourse = normalizedCourseCache.get(id);
+		const includeSolutions = canViewSolutions.value;
+		const courseCache = courseCacheFor(includeSolutions);
+		const cachedCourse = courseCache.get(id);
 
 		if (cachedCourse) {
 			return cachedCourse;
@@ -436,9 +479,11 @@ export const useCoursesStore = defineStore("courses", () => {
 			return null;
 		}
 
-		const normalizedCourse = normalizeCourse(rawCourse, id);
+		const normalizedCourse = normalizeCourse(rawCourse, id, {
+			includeSolutions
+		});
 
-		normalizedCourseCache.set(id, normalizedCourse);
+		courseCache.set(id, normalizedCourse);
 
 		return normalizedCourse;
 	}
