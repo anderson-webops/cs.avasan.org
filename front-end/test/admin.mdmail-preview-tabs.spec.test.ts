@@ -55,4 +55,43 @@ describe("Admin mail preview tabs", () => {
 		).toBe("true");
 		wrapper.unmount();
 	});
+
+	it("implements roving keyboard behavior for the full tab pattern", async () => {
+		const wrapper = mount(MdMail, { attachTo: document.body });
+
+		const composeTab = () => wrapper.find('[data-testid="tab-compose"]');
+		const previewTab = () => wrapper.find('[data-testid="tab-preview"]');
+
+		expect(composeTab().attributes("id")).toBe("tab-compose");
+		expect(composeTab().attributes("aria-controls")).toBe("panel-compose");
+		expect(composeTab().attributes("tabindex")).toBe("0");
+		expect(previewTab().attributes("id")).toBe("tab-preview");
+		expect(previewTab().attributes("aria-controls")).toBe("panel-preview");
+		expect(previewTab().attributes("tabindex")).toBe("-1");
+
+		await composeTab().trigger("keydown", { key: "End" });
+		expect(previewTab().attributes("aria-selected")).toBe("true");
+		expect(previewTab().attributes("tabindex")).toBe("0");
+		expect(
+			wrapper.find('[data-testid="live-preview"]').attributes()
+		).toMatchObject({
+			"aria-labelledby": "tab-preview",
+			id: "panel-preview",
+			role: "tabpanel"
+		});
+
+		await previewTab().trigger("keydown", { key: "Home" });
+		expect(composeTab().attributes("aria-selected")).toBe("true");
+		expect(composeTab().attributes("tabindex")).toBe("0");
+		expect(wrapper.find(".tab-panel").attributes()).toMatchObject({
+			"aria-labelledby": "tab-compose",
+			id: "panel-compose",
+			role: "tabpanel"
+		});
+
+		await composeTab().trigger("keydown", { key: "ArrowLeft" });
+		expect(previewTab().attributes("aria-selected")).toBe("true");
+
+		wrapper.unmount();
+	});
 });

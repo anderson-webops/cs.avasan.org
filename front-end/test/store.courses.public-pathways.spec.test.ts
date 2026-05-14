@@ -77,14 +77,20 @@ describe("public course pathways", () => {
 		expect(pathwayText("usaco")).toMatch(/postmortem/i);
 
 		expect(pathwayText("data-ai-ml")).toMatch(/Iris|Palmer Penguins/i);
+		expect(pathwayText("data-ai-ml")).toMatch(/NYC 311|NOAA Climate Data Online|OpenML/i);
 		expect(pathwayText("data-ai-ml")).toMatch(/train\/test|confusion matrix/i);
 		expect(pathwayText("data-ai-ml")).toMatch(/model card/i);
 
 		expect(pathwayText("science")).toMatch(/No required beakers/i);
+		expect(pathwayText("science")).toMatch(/NASA|NOAA|USGS|HHMI/i);
 		expect(pathwayText("science")).toMatch(/claim-evidence-reasoning|CER/i);
+
+		expect(pathwayText("systems-infrastructure")).toMatch(/safety matrix/i);
+		expect(pathwayText("ap-csa")).toMatch(/42 MCQ \/ 4 FRQ/i);
+		expect(pathwayText("usaco")).toMatch(/brute-force idea|target complexity/i);
 	});
 
-	it("renders the public pathway page with priorities, coverage, and key course families", () => {
+	it("renders the public pathway page with admin priorities, coverage, and key course families", () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);
 		const app = useAppStore();
@@ -102,15 +108,17 @@ describe("public course pathways", () => {
 			}
 		});
 
-		expect(wrapper.text()).toContain("A public map of what each course family is meant to become.");
+		expect(wrapper.text()).toContain("Course-family pathways and what each track prepares students to do.");
 		expect(wrapper.text()).toContain("Scratch and Early Computer Science");
 		expect(wrapper.text()).toContain("JavaScript and Web Development");
 		expect(wrapper.text()).toContain("AP Computer Science A");
 		expect(wrapper.text()).toContain("Network, Low-Level, and Systems Security");
 		expect(wrapper.text()).toContain("Courses covered");
+		expect(wrapper.text()).toContain("Build next");
+		expect(wrapper.text()).toContain("Expansion Backlog");
 	});
 
-	it("shows a planning-tool gate to non-admin visitors", () => {
+	it("shows redacted public pathways to non-admin visitors", () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);
 
@@ -126,7 +134,11 @@ describe("public course pathways", () => {
 			}
 		});
 
-		expect(wrapper.text()).toContain("Pathways are an admin planning tool.");
+		expect(wrapper.text()).toContain("Course-family pathways");
+		expect(wrapper.text()).toContain("Scratch and Early Computer Science");
+		expect(wrapper.text()).toContain("JavaScript and Web Development");
+		expect(wrapper.text()).toContain("Assessment, tooling, and safety");
 		expect(wrapper.text()).not.toContain("Build next");
+		expect(wrapper.text()).not.toContain("Expansion Backlog");
 	});
 });

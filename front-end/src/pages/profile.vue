@@ -253,57 +253,6 @@ function openAuthModal() {
 	backdrop-filter: blur(24px);
 }
 
-.profile-tabs {
-	display: inline-flex;
-	border-radius: 999px;
-	background: rgba(15, 23, 42, 0.05);
-	padding: 0.25rem;
-	margin: 0 auto clamp(1.5rem, 3vw, 2.25rem);
-	gap: 0.25rem;
-}
-
-.profile-tabs.is-workspace-layout {
-	margin: 0 0 1rem;
-	background: rgba(15, 23, 42, 0.2);
-	border: 1px solid rgba(226, 232, 240, 0.14);
-}
-
-.profile-tabs.is-workspace-layout .tab {
-	color: rgba(248, 250, 252, 0.92);
-}
-
-.profile-tabs.is-workspace-layout .tab[aria-selected="true"] {
-	background: rgba(248, 250, 252, 0.94);
-	color: #0f172a;
-	box-shadow: 0 12px 24px -16px rgba(15, 23, 42, 0.65);
-}
-
-.tab {
-	border: none;
-	background: transparent;
-	color: #0f172a;
-	font-weight: 600;
-	font-size: 0.95rem;
-	padding: 0.55rem 1.25rem;
-	border-radius: 999px;
-	cursor: pointer;
-	transition:
-		background 0.2s ease,
-		color 0.2s ease,
-		box-shadow 0.2s ease;
-}
-
-.tab[aria-selected="true"] {
-	background: rgba(15, 23, 42, 0.88);
-	color: #f8fafc;
-	box-shadow: 0 12px 24px -12px rgba(15, 23, 42, 0.6);
-}
-
-.tab:focus-visible {
-	outline: 2px solid #1d4ed8;
-	outline-offset: 2px;
-}
-
 .profile-card :deep(.Signup) {
 	display: flex;
 	flex-direction: column;

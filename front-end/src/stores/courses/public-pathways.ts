@@ -144,7 +144,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sourceAndTooling: [
 			"Use PyGame documentation for Python game-loop material.",
 			"Use Unity Learn, Unity Manual, Build Profiles, Input System, Test Framework, package locks, and Git LFS for Unity projects.",
-			"Keep THIRD_PARTY_ASSETS notes and engine version files with each Unity starter and solution."
+			"Keep THIRD_PARTY_ASSETS notes and engine version files with each Unity starter and solution.",
+			"Treat current Unity starter/solution source folders as the baseline; future mature modules should use checkpoint tags or equivalent history so students can inspect how a game grows over time.",
+			"Unity source packages should document editor version, package baseline, Build Profiles, Input System setup, Edit Mode or Play Mode smoke tests, and asset-license provenance."
 		],
 		safetyAndAccess: [
 			"Use licensed or teacher-provided assets only.",
@@ -154,7 +156,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		expansionBacklog: [
 			"Add CI/build-profile verification for Unity source packages.",
 			"Add more small PyGame labs that isolate collision, level loading, and state transitions.",
-			"Promote playtesting notes from optional reflection to required project evidence."
+			"Promote playtesting notes from optional reflection to required project evidence.",
+			"Create Unity module checkpoints or tags for setup, input, movement, collisions, UI state, build profile, test pass, and final polish."
 		]
 	},
 	{
@@ -179,17 +182,22 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		projectExpectations: [
 			"Notebook that cleans a named dataset, creates visualizations, and states two evidence-backed conclusions.",
 			"Search or game AI lab with state representation, heuristic explanation, and failure-case analysis.",
-			"Model comparison project with baseline, train/test split, metric choice, confusion matrix or error table, and model card."
+			"Model comparison project with baseline, train/test split, metric choice, confusion matrix or error table, and model card.",
+			"Dataset documentation project that writes a mini-datasheet: source, columns, known limitations, missing values, license or attribution note, and appropriate/non-appropriate uses."
 		],
 		assessmentStyle: [
 			"Ask students to explain what each row, feature, label, and metric means.",
 			"Use interpretation questions that separate correlation, prediction, and causation.",
-			"Require limitations, dataset assumptions, and responsible-use notes in final projects."
+			"Require limitations, dataset assumptions, and responsible-use notes in final projects.",
+			"Require an experiment log for ML projects: baseline, model choice, split method, metric, failed attempt, and one next improvement."
 		],
 		sourceAndTooling: [
 			"Use pandas, matplotlib or seaborn, scikit-learn, and small pinned CSV fixtures.",
 			"Keep dataset source notes, license notes, schema notes, and expected output artifacts with each project.",
-			"Use NIST AI RMF and scikit-learn model-evaluation documentation as instructor anchors."
+			"Use NIST AI RMF and scikit-learn model-evaluation documentation as instructor anchors.",
+			"Data Science source pool: NYC 311, NOAA Climate Data Online, CDC BRFSS, Our World in Data, Iris, Palmer Penguins, and small teacher-provided CSV fixtures.",
+			"AI Foundations source pool: OpenStreetMap or OSMnx extracts, MiniZinc-style constraint examples, Lichess puzzles, OpenSpiel examples, and teacher-authored toy state spaces.",
+			"Machine Learning source pool: scikit-learn sample datasets, OpenML, FashionMNIST or CIFAR-10 where appropriate, Hugging Face Datasets, and local train/test fixtures."
 		],
 		safetyAndAccess: [
 			"Do not require students to upload personal data.",
@@ -199,7 +207,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		expansionBacklog: [
 			"Publish a named dataset catalog with schema, license, and artifact expectations.",
 			"Add model-card and evaluation-rubric templates.",
-			"Separate AI search/game topics from ML model-training topics in public descriptions."
+			"Separate AI search/game topics from ML model-training topics in public descriptions.",
+			"Attach mini-datasheet, model-card, and experiment-log templates to every new data or ML project."
 		]
 	},
 	{
@@ -340,12 +349,14 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		safetyAndAccess: [
 			"Do not require router changes, scans of third-party hosts, or home-network reconfiguration.",
 			"Use local traffic, owned domains, or provided captures.",
-			"Keep privileged commands constrained and require rollback notes for configuration changes."
+			"Keep privileged commands constrained and require rollback notes for configuration changes.",
+			"Use a simple safety matrix for each lab: allowed target, prohibited target, required evidence, rollback or cleanup step, and what should be skipped if the student lacks admin access."
 		],
 		expansionBacklog: [
 			"Add a systems prerequisite matrix that shows when C, Assembly, Linux, Networking, Security, and Rust should be taken.",
 			"Add more evidence-based lab rubrics for logs, packets, service state, and rollback.",
-			"Document VM/container setup options for students without full admin access."
+			"Document VM/container setup options for students without full admin access.",
+			"Add course-specific safety matrices for Linux, networking, C systems, assembly, and Rust labs."
 		]
 	},
 	{
@@ -426,12 +437,14 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Use MCQ distractor analysis and FRQ rubrics.",
 			"Keep a recurring error log grouped by syntax, tracing, object state, loops, arrays, and recursion.",
-			"Include digital-exam timing practice and short written explanations of why an answer is valid."
+			"Include digital-exam timing practice and short written explanations of why an answer is valid.",
+			"Practice the current 42 MCQ / 4 FRQ exam shape and score FRQs by rows so students can see partial-credit habits instead of only final answers."
 		],
 		sourceAndTooling: [
 			"Use College Board AP CSA course and exam documentation as the authority.",
 			"Link AP project starter/solution folders in the instruction-material source repo when available.",
-			"Keep downloaded AP media in the static classes media repo, not in Downloads."
+			"Keep downloaded AP media in the static classes media repo, not in Downloads.",
+			"Guardrails to refresh each cycle: official Java subset, Bluebook-style typed and uncompiled practice, four FRQ families, AP Lab Quartet references, data ethics, text-file/dataset practice, wrapper parsing, recursion, ArrayList analysis, and 2D arrays."
 		],
 		safetyAndAccess: [
 			"Do not expose solution links to students where they should only see starters.",
@@ -441,7 +454,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		expansionBacklog: [
 			"Add an explicit AP exam alignment map to the public pathway and internal audits.",
 			"Audit every Replit-era AP link against current GitHub source folders.",
-			"Keep digital-exam and FRQ-family notes refreshed before each May exam cycle."
+			"Keep digital-exam and FRQ-family notes refreshed before each May exam cycle.",
+			"Flag older FRQs as useful practice but adapt instructions and scoring language when they do not match the current digital exam shape."
 		]
 	},
 	{
@@ -461,7 +475,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sequencingNotes: [
 			"Use official USACO problems and USACO Guide topics as the sequencing authority.",
 			"Bronze should emphasize careful implementation before advanced algorithms.",
-			"Silver and Gold should add topic ladders only after students can finish easier problems cleanly under time."
+			"Silver and Gold should add topic ladders only after students can finish easier problems cleanly under time.",
+			"Avoid random chronological contest browsing; choose official problems by division, topic, and slot difficulty so each assignment has a specific purpose."
 		],
 		projectExpectations: [
 			"Problem set with one P1, one P2, and one P3 style task at the student's current division.",
@@ -471,7 +486,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Check exact sample input/output, smallest case, largest reasonable case, ties, duplicates, and impossible cases.",
 			"Require time complexity, memory complexity, and proof of why the algorithm matches constraints.",
-			"Use timed practice only after the student has a repeatable untimed solution process."
+			"Use timed practice only after the student has a repeatable untimed solution process.",
+			"Every assigned official problem should include brute-force idea, target complexity, invariant or proof note, common wrong turns, and postmortem."
 		],
 		sourceAndTooling: [
 			"Use USACO Official and USACO Guide as authoritative references.",
@@ -567,7 +583,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		projectExpectations: [
 			"Remote-safe investigation using a provided image, simulation, data table, or graph.",
 			"Labeled model or diagram paired with a CER explanation.",
-			"Prediction task where one variable changes and the student explains the expected effect."
+			"Prediction task where one variable changes and the student explains the expected effect.",
+			"Each unit should use one shared phenomenon, one simulation or visualization, one public dataset/media source, one notebook or graphic organizer, and one CER routine."
 		],
 		assessmentStyle: [
 			"Use CER writing, vocabulary checks, graph interpretation, diagram labeling, and model critique.",
@@ -577,7 +594,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sourceAndTooling: [
 			"Use NGSS appendices, ACS chemistry guidance, PhET simulations, and vetted NASA/NOAA/USGS/HHMI resources as appropriate.",
 			"Keep every activity Zoom-first with notes, paper, shared screen, and provided source material.",
-			"Maintain a resource shortlist by module: standard, visual/simulation, data source, model, and CER prompt."
+			"Maintain a resource shortlist by module: standard, visual/simulation, data source, model, and CER prompt.",
+			"Elementary and middle-school source pool: PhET, NASA, NOAA, USGS, HHMI BioInteractive, CK-12-style open readings, National Geographic Education, and teacher-authored diagrams or data tables.",
+			"Chemistry/physics source pool: ACS safety and curriculum guidance, PhET simulations, NIST or periodic-table references, NOAA/NASA data where relevant, and teacher-authored graphing or free-body-diagram datasets."
 		],
 		safetyAndAccess: [
 			"No required beakers, kits, chemicals, household experiments, or physical supplies beyond notes and paper.",
@@ -587,7 +606,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		expansionBacklog: [
 			"Write a high-school science pathway after elementary and middle-school courses are stabilized.",
 			"Replace thin science lesson text with phenomenon, model, data, and CER sections.",
-			"Add source/resource registers for every science module."
+			"Add source/resource registers for every science module.",
+			"Add explicit coverage checks for waves, Earth and human activity, heredity/evolution, graphing, model revision, and engineering design."
 		]
 	},
 	{
@@ -661,17 +681,20 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		projectExpectations: [
 			"Responsive portfolio or resource page with accessibility checks and a deployment note.",
 			"API-backed browser app with loading, empty, success, and error states.",
-			"Full-stack-lite project with client, server or mock API, persistence plan, and deployment checklist."
+			"Full-stack-lite project with client, server or mock API, persistence plan, and deployment checklist.",
+			"Debugging lab that uses devtools console, network tab, DOM inspector, keyboard-only navigation, and a small security/input-validation checklist."
 		],
 		assessmentStyle: [
 			"Verify projects in the browser at desktop and narrow widths.",
 			"Check keyboard navigation, labels, contrast, loading/error states, and network tab behavior.",
-			"Ask students to explain the request/response flow and where data lives."
+			"Ask students to explain the request/response flow and where data lives.",
+			"Require one accessibility fix, one async/loading/error-state fix, and one safe-input or output-escaping explanation in substantial web projects."
 		],
 		sourceAndTooling: [
 			"Use MDN JavaScript, RFC 9110 HTTP Semantics, OWASP Web Security Testing Guide, browser devtools, Git, npm, and deployment docs as anchors.",
 			"Keep starter/solution source folders in the Web Development Foundations and JavaScript repos.",
-			"Use linting/formatting and simple local dev server scripts before frameworks."
+			"Use linting/formatting and simple local dev server scripts before frameworks.",
+			"Core topic checklist: semantic HTML, forms and labels, responsive CSS, DOM events, modules, promises, async/await, fetch, JSON, HTTP status codes, local storage, deployment, performance basics, and OWASP-informed validation."
 		],
 		safetyAndAccess: [
 			"Do not require real payment, authentication, or production secrets for student projects.",
@@ -725,12 +748,14 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		safetyAndAccess: [
 			"Prohibited: scanning third-party systems, attacking real services, bypassing access controls, credential harvesting, or using another person's data.",
 			"Allowed: local fixtures, owned test systems, toy examples, provided captures, and defensive hardening.",
-			"Every lab must end with evidence, impact, and mitigation."
+			"Every lab must end with evidence, impact, and mitigation.",
+			"Every security project should state its Bloom-level goal, allowed target, prohibited activity, required artifact, and shutdown or cleanup condition before any tool is used."
 		],
 		expansionBacklog: [
 			"Publish a security prerequisite and course-boundary matrix.",
 			"Add local-only lab manifests and explicit prohibited-activity text to every security course.",
-			"Add more report-writing and remediation rubrics."
+			"Add more report-writing and remediation rubrics.",
+			"Attach a visible safety matrix to each security course family so students can distinguish defensive analysis from prohibited activity."
 		]
 	}
 ];

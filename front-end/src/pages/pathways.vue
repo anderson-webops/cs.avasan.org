@@ -7,7 +7,7 @@ import { coursePublicPathways } from "@/stores/courses/public-pathways";
 defineOptions({ name: "PathwaysPage" });
 
 const app = useAppStore();
-const { isAdmin, isLoggedIn } = storeToRefs(app);
+const { isAdmin } = storeToRefs(app);
 const courseNameById = new Map(
 	courseCatalog.map(course => [course.id, course.name])
 );
@@ -40,58 +40,22 @@ function priorityLabel(priority: string) {
 	if (priority === "soon") return "Strengthen soon";
 	return "Maintain";
 }
-
-function openLogin() {
-	app.setLoginBlock(true);
-}
 </script>
 
 <template>
-	<section
-		v-if="!isAdmin"
-		class="page-shell page-shell--narrow pathways-page"
-	>
-		<header class="pathways-gate site-surface">
-			<p class="page-eyebrow">Course planning</p>
-			<h1 class="page-title">Pathways are an admin planning tool.</h1>
-			<p class="page-copy">
-				Students and families should use assigned courses, Zoom,
-				tuition, and profile pages. The pathway backlog is kept separate
-				because it contains internal course-development priorities
-				rather than student-facing lesson work.
-			</p>
-			<div class="site-action-row">
-				<button
-					v-if="!isLoggedIn"
-					class="site-button site-button--primary"
-					type="button"
-					@click="openLogin"
-				>
-					Log in as admin
-				</button>
-				<RouterLink
-					v-else
-					class="site-button site-button--secondary"
-					to="/courses"
-				>
-					Open assigned courses
-				</RouterLink>
-			</div>
-		</header>
-	</section>
-
-	<section v-else class="page-shell page-shell--wide pathways-page">
+	<section class="page-shell page-shell--wide pathways-page">
 		<header class="pathways-hero site-surface">
 			<div class="pathways-hero__copy">
 				<p class="page-eyebrow">Course pathways</p>
 				<h1 class="page-title">
-					A public map of what each course family is meant to become.
+					Course-family pathways and what each track prepares students
+					to do.
 				</h1>
 				<p class="page-copy">
-					These pathways summarize prerequisites, outcomes, project
-					expectations, assessment styles, tooling, safety boundaries,
-					and remaining expansion work. They keep the catalog
-					inspectable while full lesson text continues to improve.
+					These pages summarize prerequisites, outcomes, project
+					expectations, assessment style, tooling, and safety
+					boundaries for each course family. Internal priorities and
+					expansion backlog details appear only for administrators.
 				</p>
 			</div>
 			<div class="pathways-stats" aria-label="Pathway coverage summary">
@@ -115,11 +79,16 @@ function openLogin() {
 				<div class="pathway-card__header">
 					<div>
 						<p class="pathway-card__eyebrow">
-							{{ priorityLabel(pathway.priority) }}
+							{{
+								isAdmin
+									? priorityLabel(pathway.priority)
+									: "Course pathway"
+							}}
 						</p>
 						<h2>{{ pathway.title }}</h2>
 					</div>
 					<span
+						v-if="isAdmin"
 						class="pathway-card__priority"
 						:class="`pathway-card__priority--${pathway.priority}`"
 					>
@@ -176,7 +145,11 @@ function openLogin() {
 
 				<details>
 					<summary>
-						Assessment, tooling, safety, and next work
+						{{
+							isAdmin
+								? "Assessment, tooling, safety, and next work"
+								: "Assessment, tooling, and safety"
+						}}
 					</summary>
 					<div class="pathway-card__details">
 						<section>
@@ -227,7 +200,7 @@ function openLogin() {
 							</ul>
 						</section>
 
-						<section>
+						<section v-if="isAdmin">
 							<h3>Expansion Backlog</h3>
 							<ul>
 								<li
@@ -250,12 +223,6 @@ function openLogin() {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
-}
-
-.pathways-gate {
-	display: grid;
-	gap: 1rem;
-	padding: clamp(1.6rem, 3vw, 2.35rem);
 }
 
 .pathways-hero {

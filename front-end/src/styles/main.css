@@ -654,6 +654,44 @@ html.dark body :is(.workspace-eyebrow, .panel-eyebrow, .summary-label, .section-
 	color: var(--color-accent);
 }
 
+html.dark body .pathways-stats {
+	background: rgba(15, 23, 42, 0.86);
+	border-color: rgba(148, 163, 184, 0.42);
+}
+
+html.dark body .pathways-stats div {
+	border-left-color: rgba(148, 163, 184, 0.42);
+}
+
+html.dark body .pathways-stats strong {
+	color: #f8fafc;
+}
+
+html.dark body :is(.pathways-stats span, .pathway-card__eyebrow) {
+	color: #bfdbfe;
+}
+
+html.dark body .pathway-card__priority--urgent {
+	background: rgba(251, 146, 60, 0.24);
+	color: #fed7aa;
+}
+
+html.dark body .pathway-card__priority--soon {
+	background: rgba(96, 165, 250, 0.18);
+	color: #bfdbfe;
+}
+
+html.dark body .pathway-card__priority--later {
+	background: rgba(132, 204, 22, 0.16);
+	color: #d9f99d;
+}
+
+html.dark body .course-chip-list li {
+	background: #111d30;
+	border-color: rgba(148, 163, 184, 0.5);
+	color: #f8fafc;
+}
+
 html.dark body :is(.workspace-header p:last-child, .section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-card__empty, .history-note__meta, .preview-meta, .association-copy, .stat-pill span, .directory-card-header p, .recipient-association, .tool-form label, .progress-check.is-item, .record-item small, .record-item span, .tools-summary small, .profile-card p, .profile-empty p, .tool-card p, .tuition-card p, .scheduler-loading-kicker, .dialog-description, .confirm-copy, .auth-switch, .auth-help, .scheduler-direct, .scheduler-fallback, .wheel-fallback p) {
 	color: var(--color-ink-soft);
 }
