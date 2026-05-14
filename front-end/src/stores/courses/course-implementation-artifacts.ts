@@ -493,9 +493,9 @@ const nextWorkByKind: Record<keyof typeof familyAssessmentCadence, string[]> = {
 		"Review public wording for defensive scope before release."
 	],
 	game: [
-		"Create full Unity starter/solution repos with tags.",
-		"Add Git LFS, package locks, test framework, build profiles, and attribution files.",
-		"Replace script-snapshot links with full project links when the repos exist."
+		"Maintain full Unity starter/solution project baselines with tags.",
+		"Keep Git LFS, package locks, test framework, build profiles, and attribution files current.",
+		"Promote script-snapshot links to full-project links as each module reaches project-repo readiness."
 	]
 };
 
@@ -507,6 +507,13 @@ function repoUrl(courseId: string) {
 function repoTreeUrl(courseId: string) {
 	const repo = courseImplementationSourceRepos[courseId];
 	return repo ? `${INSTRUCTION_MATERIAL_URL}/${repo}/tree/main` : undefined;
+}
+
+function repoFolderUrl(courseId: string, folder: string) {
+	const repo = courseImplementationSourceRepos[courseId];
+	return repo
+		? `${INSTRUCTION_MATERIAL_URL}/${repo}/tree/main/${folder}`
+		: undefined;
 }
 
 function bullets(items: string[]) {
@@ -2216,7 +2223,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Repository Shape",
 				content:
-					"**Teaching flow:** Future Unity modules should point to full starter and solution project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development` and update links only after the full project repos exist.\n\n**Exit check:** A student can clone, open, play, test, and build the linked starter state."
+					"**Teaching flow:** Unity modules should move toward full starter and solution project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for future module promotions.\n\n**Exit check:** A student can clone, open, play, test, and build the linked starter state."
 			},
 			{
 				title: "Starter and Solution Tag Model",
@@ -2238,12 +2245,22 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "UGD8 Project 1: Starter Repo Specification",
 				content:
-					"**Project goal:** Write the starter repo specification for one Unity module: scenes, scripts, prefabs, tests, packages, project settings, docs, LFS rules, and attribution file.\n\n**Completion checks:**\n- The starter state is cloneable and playable.\n- Hidden solution work is not included.\n- Validation steps are documented."
+					"**Project goal:** Inspect and extend the full starter project baseline for one Unity module: scenes, scripts, prefabs, tests, packages, project settings, docs, LFS rules, and attribution file.\n\n**Completion checks:**\n- The starter state is cloneable and playable.\n- Hidden solution work is not included.\n- Validation steps are documented.",
+				projectLink: repoFolderUrl(courseId, "UGD-FullProject-Starter"),
+				solutionLink: repoFolderUrl(
+					courseId,
+					"UGD-FullProject-Solution"
+				)
 			},
 			{
 				title: "UGD8 Project 2: Capstone Milestone Plan",
 				content:
-					"**Project goal:** Write a capstone milestone plan from prototype to vertical slice, alpha, beta, final build, and demo.\n\n**Completion checks:**\n- Every milestone has a playable outcome.\n- Scope cuts are identified.\n- Testing/build/attribution tasks are scheduled before the final week."
+					"**Project goal:** Use the linked full-project baseline to write a capstone milestone plan from prototype to vertical slice, alpha, beta, final build, and demo.\n\n**Completion checks:**\n- Every milestone has a playable outcome.\n- Scope cuts are identified.\n- Testing/build/attribution tasks are scheduled before the final week.",
+				projectLink: repoFolderUrl(courseId, "UGD-FullProject-Starter"),
+				solutionLink: repoFolderUrl(
+					courseId,
+					"UGD-FullProject-Solution"
+				)
 			}
 		]
 	});

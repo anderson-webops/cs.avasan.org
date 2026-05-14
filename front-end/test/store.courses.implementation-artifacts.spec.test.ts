@@ -124,6 +124,8 @@ describe("implemented course development artifacts", () => {
 			rebuiltModules.every(module => module.supplementalProjects.length >= 2)
 		).toBe(true);
 		expect(text).toContain("UGD6 Capstone Production");
+		expect(JSON.stringify(course)).toContain("UGD-FullProject-Starter");
+		expect(JSON.stringify(course)).toContain("UGD-FullProject-Solution");
 	});
 
 	it("adds AP CSA alignment, C++ concept matrix, datasets, and safety policy modules", async () => {

@@ -27,6 +27,11 @@ const scienceCourseIds = new Set([
 	"intro-to-physics",
 	"physics-level-2"
 ]);
+const generatedReadinessFiles = new Set([
+	"COURSE_SOURCE_MANIFEST.md",
+	"SOURCE_BACKLOG.md",
+	"verify-course-source.sh"
+]);
 
 function wordCount(text: string) {
 	return text.match(/\b[\w'+-]+\b/g)?.length ?? 0;
@@ -80,8 +85,10 @@ function sourceFiles(root: string) {
 				}
 				continue;
 			}
+			const relative = path.relative(root, fullPath);
+			if (generatedReadinessFiles.has(relative)) continue;
 			if (/\.(?:java|py|cpp|c|h|hpp|js|ts|swift|cs|md)$/i.test(entry.name)) {
-				results.push(path.relative(root, fullPath));
+				results.push(relative);
 			}
 		}
 	}
@@ -135,11 +142,59 @@ function comparableFolderName(folder: string) {
 		.replace(/[^a-z0-9]+/gu, "");
 }
 
-function classifyUnlinkedFolder(folder: string, linkedFolders: string[]) {
+function ledgeredFolders(root: string) {
+	const ledgerPath = path.join(root, "SOURCE_BACKLOG.md");
+	if (!fs.existsSync(ledgerPath)) return new Set<string>();
+	const ledger = fs.readFileSync(ledgerPath, "utf8");
+	const folders = new Set<string>();
+	const folderPattern = /\|\s*`([^`]+)`\s*\|/g;
+	let match: RegExpExecArray | null;
+
+	while ((match = folderPattern.exec(ledger))) folders.add(match[1]);
+
+	return folders;
+}
+
+function isExecutable(file: string) {
+	if (!fs.existsSync(file)) return false;
+	return (fs.statSync(file).mode & 0o111) !== 0;
+}
+
+function unityFullProjectReadiness(root: string) {
+	const required = [
+		".gitattributes",
+		"UGD-FullProject-Starter/ProjectSettings/ProjectVersion.txt",
+		"UGD-FullProject-Starter/Packages/manifest.json",
+		"UGD-FullProject-Starter/Packages/packages-lock.json",
+		"UGD-FullProject-Starter/Assets/Scripts/GameSession.cs",
+		"UGD-FullProject-Starter/Assets/Tests/EditMode/GameSessionTests.cs",
+		"UGD-FullProject-Starter/THIRD_PARTY_ASSETS.md",
+		"UGD-FullProject-Solution/ProjectSettings/ProjectVersion.txt",
+		"UGD-FullProject-Solution/Packages/manifest.json",
+		"UGD-FullProject-Solution/Packages/packages-lock.json",
+		"UGD-FullProject-Solution/Assets/Scripts/GameSession.cs",
+		"UGD-FullProject-Solution/Assets/Tests/EditMode/GameSessionTests.cs",
+		"UGD-FullProject-Solution/THIRD_PARTY_ASSETS.md"
+	];
+	const missing = required.filter(file => !fs.existsSync(path.join(root, file)));
+
+	return {
+		ready: missing.length === 0,
+		missing
+	};
+}
+
+function classifyUnlinkedFolder(
+	folder: string,
+	linkedFolders: string[],
+	repoLinkedFolders: string[],
+	ledgered: Set<string>
+) {
 	const comparable = comparableFolderName(folder);
 	const coveredByVariant = linkedFolders.some(
 		linked => comparableFolderName(linked) === comparable
 	);
+	const linkedBySiblingCourse = repoLinkedFolders.includes(folder);
 
 	if (coveredByVariant) {
 		return {
@@ -147,6 +202,15 @@ function classifyUnlinkedFolder(folder: string, linkedFolders: string[]) {
 			classification: "covered-by-linked-variant",
 			status:
 				"tracked: an alternate starter, solution, language, updated, or template variant is linked in the catalog"
+		};
+	}
+
+	if (linkedBySiblingCourse) {
+		return {
+			folder,
+			classification: "covered-by-shared-repo-course",
+			status:
+				"tracked: active in another catalog course that shares this source repository"
 		};
 	}
 
@@ -165,6 +229,15 @@ function classifyUnlinkedFolder(folder: string, linkedFolders: string[]) {
 			classification: "legacy-or-archive",
 			status:
 				"tracked: legacy/archive folder; do not link as active course work without explicit promotion"
+		};
+	}
+
+	if (ledgered.has(folder)) {
+		return {
+			folder,
+			classification: "ledgered-inactive-source",
+			status:
+				"tracked: listed in SOURCE_BACKLOG.md as inactive/promotable source; not an unresolved active-placement gap"
 		};
 	}
 
@@ -328,6 +401,16 @@ writeMd(
 	].join("\n")
 );
 
+const repoLinkedFolders = new Map<string, string[]>();
+
+for (const { entry, course } of courses) {
+	const repo = courseImplementationSourceRepos[entry.id];
+	if (!repo) continue;
+	const folders = new Set(repoLinkedFolders.get(repo) ?? []);
+	for (const folder of linkedFoldersForRepo(course, repo)) folders.add(folder);
+	repoLinkedFolders.set(repo, [...folders].sort((a, b) => a.localeCompare(b)));
+}
+
 const sourceParityAudit = courses.flatMap(({ entry, course }) => {
 	const repo = courseImplementationSourceRepos[entry.id];
 	if (!repo) return [];
@@ -336,12 +419,29 @@ const sourceParityAudit = courses.flatMap(({ entry, course }) => {
 	const linkedFolders = linkedFoldersForRepo(course, repo);
 	const linked = new Set(linkedFolders);
 	const unlinkedTopLevelFolders = topDirs.filter(folder => !linked.has(folder));
+	const ledgered = ledgeredFolders(localRoot);
+	const sharedRepoLinkedFolders = repoLinkedFolders.get(repo) ?? linkedFolders;
 	const classifiedUnlinkedFolders = unlinkedTopLevelFolders.map(folder =>
-		classifyUnlinkedFolder(folder, linkedFolders)
+		classifyUnlinkedFolder(
+			folder,
+			linkedFolders,
+			sharedRepoLinkedFolders,
+			ledgered
+		)
 	);
 	const unresolvedUnlinkedFolders = classifiedUnlinkedFolders.filter(
 		folder => folder.classification === "unresolved"
 	);
+	const activeBacklogFolders = classifiedUnlinkedFolders.filter(
+		folder => folder.classification === "source-backlog-recorded"
+	);
+	const sourceManifestPath = path.join(localRoot, "COURSE_SOURCE_MANIFEST.md");
+	const sourceBacklogPath = path.join(localRoot, "SOURCE_BACKLOG.md");
+	const verificationScriptPath = path.join(localRoot, "verify-course-source.sh");
+	const unityReadiness =
+		repo === "Unity-Game-Development"
+			? unityFullProjectReadiness(localRoot)
+			: { ready: true, missing: [] as string[] };
 
 	return [
 		{
@@ -355,7 +455,15 @@ const sourceParityAudit = courses.flatMap(({ entry, course }) => {
 			linkedFolders,
 			unlinkedTopLevelFolders,
 			classifiedUnlinkedFolders,
+			activeBacklogFolders,
 			unresolvedUnlinkedFolders,
+			hasSourceManifest: fs.existsSync(sourceManifestPath),
+			hasSourceBacklogLedger: fs.existsSync(sourceBacklogPath),
+			hasVerificationScript: fs.existsSync(verificationScriptPath),
+			verificationScriptExecutable: isExecutable(verificationScriptPath),
+			unityFullProjectRequired: repo === "Unity-Game-Development",
+			unityFullProjectReady: unityReadiness.ready,
+			unityFullProjectMissing: unityReadiness.missing,
 			...itemLinks(course)
 		}
 	];
@@ -371,7 +479,7 @@ writeMd(
 		"",
 		`Instruction material root: \`${instructionRoot}\``,
 		"",
-		"Unlinked source folders are no longer treated as automatically unresolved. The generator classifies each unlinked folder as a linked variant, support/reference material, legacy/archive material, or tracked placement backlog. A folder is only unresolved if it cannot be classified.",
+		"Unlinked source folders are no longer treated as automatically unresolved. The generator classifies each unlinked folder as a linked variant, support/reference material, shared-repo material, legacy/archive material, or ledgered inactive source. A folder is only an active backlog item if it is not linked, not covered by a sibling course, and not recorded in `SOURCE_BACKLOG.md`.",
 		"",
 		asTable(
 			[
@@ -380,8 +488,12 @@ writeMd(
 				"Exists",
 				"Folders",
 				"Linked",
-				"Classified Backlog",
+				"Ledgered/Inactive",
+				"Active Backlog",
 				"Unresolved",
+				"Manifest",
+				"Verify",
+				"Unity Full Project",
 				"Project Links",
 				"Solution Links"
 			],
@@ -392,7 +504,17 @@ writeMd(
 				row.topLevelFolders,
 				row.linkedFolders.length,
 				row.classifiedUnlinkedFolders.length,
+				row.activeBacklogFolders.length,
 				row.unresolvedUnlinkedFolders.length,
+				row.hasSourceManifest ? "yes" : "no",
+				row.hasVerificationScript && row.verificationScriptExecutable
+					? "yes"
+					: "no",
+				row.unityFullProjectRequired
+					? row.unityFullProjectReady
+						? "yes"
+						: "no"
+					: "n/a",
 				row.projectLinks,
 				row.solutionLinks
 			])
@@ -592,6 +714,8 @@ writeMd(
 		"Target version: Unity 6.3 LTS, selected from Unity's current release/support page because support runs through December 2027.",
 		"",
 		"The catalog now includes UGD0-UGD6 rebuild modules covering setup, components, input/movement, physics/collision, UI/state, prefabs/spawning/polish, and capstone production.",
+		"",
+		"The source repo now includes `UGD-FullProject-Starter` and `UGD-FullProject-Solution` full-project baselines with Unity project settings, package manifests/locks, scripts, tests, attribution files, Git LFS rules, and a repository verification script.",
 		"",
 		"Source repo target: `/Users/jacobanderson/Documents/Work/Instruction-Material/Unity-Game-Development` and `https://github.com/instruction-material/Unity-Game-Development`."
 	].join("\n")

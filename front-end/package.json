@@ -16,6 +16,7 @@
 		"preview": "vite preview",
 		"preview-https": "serve dist",
 		"courses:audit": "tsx scripts/generate-course-development-artifacts.mts",
+		"courses:sync-source-readiness": "tsx scripts/sync-course-source-readiness.mts",
 		"test": "vitest run",
 		"test:e2e": "cypress open",
 		"test:unit": "vitest run",
