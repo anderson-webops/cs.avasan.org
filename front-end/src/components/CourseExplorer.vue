@@ -1640,7 +1640,7 @@ function writeStoredValue(key: string, value: string) {
 	max-width: 82ch;
 	font-size: 1.02rem;
 	line-height: 1.8;
-	color: #1e293b;
+	color: var(--course-text-soft);
 }
 
 .item-content-markdown :deep(h1),
@@ -1649,7 +1649,7 @@ function writeStoredValue(key: string, value: string) {
 .item-content-markdown :deep(h4) {
 	margin: 0 0 0.85rem;
 	line-height: 1.3;
-	color: #0f172a;
+	color: var(--course-text);
 }
 
 .item-content-markdown :deep(p),
@@ -1665,7 +1665,7 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .item-content-markdown :deep(a) {
-	color: #0f766e;
+	color: var(--course-accent);
 	font-weight: 600;
 }
 
@@ -1674,7 +1674,8 @@ function writeStoredValue(key: string, value: string) {
 		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono",
 		monospace;
 	font-size: 0.88rem;
-	background: rgba(15, 23, 42, 0.08);
+	background: var(--course-code-bg, rgba(15, 23, 42, 0.08));
+	color: var(--course-code-text, var(--course-accent));
 	padding: 0.15rem 0.4rem;
 	border-radius: 0.35rem;
 }
