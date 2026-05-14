@@ -538,6 +538,18 @@ html.dark .course-explorer {
 	--course-accent-soft: rgba(94, 234, 212, 0.14);
 	--course-code-text: #f9a8d4;
 	--course-code-bg: rgba(244, 114, 182, 0.13);
+	--course-project-resource-bg: rgba(20, 83, 69, 0.5);
+	--course-project-resource-bg-hover: rgba(20, 105, 85, 0.62);
+	--course-project-resource-text: #e7fff8;
+	--course-project-resource-host: #bceee2;
+	--course-solution-resource-bg: rgba(30, 64, 175, 0.42);
+	--course-solution-resource-bg-hover: rgba(37, 99, 235, 0.52);
+	--course-solution-resource-text: #eff6ff;
+	--course-solution-resource-host: #bfdbfe;
+	--course-dataset-resource-bg: rgba(146, 64, 14, 0.42);
+	--course-dataset-resource-bg-hover: rgba(180, 83, 9, 0.52);
+	--course-dataset-resource-text: #fff7ed;
+	--course-dataset-resource-host: #fed7aa;
 	--course-shadow: 0 22px 46px -34px rgba(0, 0, 0, 0.72);
 }
 

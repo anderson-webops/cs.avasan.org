@@ -1603,12 +1603,13 @@ function writeStoredValue(key: string, value: string) {
 	gap: 0.15rem;
 	padding: 0.8rem 0.95rem;
 	border-radius: 14px;
-	background: rgba(255, 255, 255, 0.94);
+	background: var(--course-resource-bg, rgba(255, 255, 255, 0.94));
+	color: var(--course-resource-text, var(--course-text));
 	box-shadow: 0 12px 22px -22px rgba(15, 23, 42, 0.18);
 }
 
 .resource-link:hover {
-	background: rgba(240, 253, 250, 0.96);
+	background: var(--course-resource-bg-hover, rgba(240, 253, 250, 0.96));
 }
 
 .resource-link-label {
@@ -1619,21 +1620,48 @@ function writeStoredValue(key: string, value: string) {
 
 .resource-link-host {
 	font-size: 0.78rem;
-	color: var(--course-text-soft);
+	color: var(--course-resource-host, var(--course-text-soft));
 	line-height: 1.35;
 	word-break: break-word;
 }
 
 .resource-link.is-project {
-	background: rgba(236, 253, 245, 0.92);
+	--course-resource-bg: var(
+		--course-project-resource-bg,
+		rgba(236, 253, 245, 0.92)
+	);
+	--course-resource-bg-hover: var(
+		--course-project-resource-bg-hover,
+		rgba(220, 252, 231, 0.96)
+	);
+	--course-resource-text: var(--course-project-resource-text, #134e4a);
+	--course-resource-host: var(--course-project-resource-host, #47736d);
 }
 
 .resource-link.is-solution {
-	background: rgba(239, 246, 255, 0.94);
+	--course-resource-bg: var(
+		--course-solution-resource-bg,
+		rgba(239, 246, 255, 0.94)
+	);
+	--course-resource-bg-hover: var(
+		--course-solution-resource-bg-hover,
+		rgba(219, 234, 254, 0.96)
+	);
+	--course-resource-text: var(--course-solution-resource-text, #1e3a8a);
+	--course-resource-host: var(--course-solution-resource-host, #486a9c);
 }
 
 .resource-link.is-dataset {
-	background: rgba(255, 247, 237, 0.94);
+	--course-resource-bg: var(
+		--course-dataset-resource-bg,
+		rgba(255, 247, 237, 0.94)
+	);
+	--course-resource-bg-hover: var(
+		--course-dataset-resource-bg-hover,
+		rgba(254, 235, 200, 0.96)
+	);
+	--course-resource-text: var(--course-dataset-resource-text, #7c2d12);
+	--course-resource-host: var(--course-dataset-resource-host, #925f35);
 }
 
 .item-content-markdown {
