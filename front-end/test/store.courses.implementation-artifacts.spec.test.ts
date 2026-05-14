@@ -181,6 +181,117 @@ describe("implemented course development artifacts", () => {
 		}
 	});
 
+	it("attaches standards, source, assessment, toolchain, safety, and capstone metadata to every course", async () => {
+		for (const { id } of courseCatalog) {
+			const course = await requireCourse(id);
+			const metadata = course.developmentMetadata;
+
+			expect(metadata, id).toBeDefined();
+			expect(metadata?.standards.length, id).toBeGreaterThan(0);
+			expect(metadata?.sourcePolicy, id).toBeTruthy();
+			expect(metadata?.assessmentCadence.length, id).toBeGreaterThanOrEqual(4);
+			expect(metadata?.toolchain.length, id).toBeGreaterThanOrEqual(2);
+			expect(metadata?.safetyPolicy.length, id).toBeGreaterThanOrEqual(2);
+			expect(metadata?.courseBoundaries.length, id).toBeGreaterThanOrEqual(2);
+			expect(metadata?.capstoneExpectations.length, id).toBeGreaterThanOrEqual(2);
+			expect(metadata?.recommendedNextWork.length, id).toBeGreaterThanOrEqual(3);
+			expect(allText(course), id).toContain(
+				"Standards, Source, Assessment, and Safety Backbone"
+			);
+		}
+	}, 30000);
+
+	it("implements current AP CSA four-unit and digital FRQ alignment", async () => {
+		const text = allText(await requireCourse("ap-computer-science-a"));
+
+		expect(text).toContain("Unit 1 Using Objects and Methods");
+		expect(text).toContain("Unit 2 Selection and Iteration");
+		expect(text).toContain("Unit 3 Class Creation");
+		expect(text).toContain("Unit 4 Data Collections");
+		expect(text).toContain("FRQ Family 3 Data Analysis with ArrayList");
+		expect(text).toContain("typed responses without compiler feedback");
+		expect(text).toContain("College Board AP Computer Science A CED, Fall 2025 / May 2026 framework");
+	});
+
+	it("adds course-specific architecture for algebra, advanced Python, C++, Java, data/AI/ML, science, systems, and Unity", async () => {
+		for (const courseId of [
+			"algebra-1a",
+			"algebra-1b",
+			"algebra-2a",
+			"algebra-2b"
+		]) {
+			const text = allText(await requireCourse(courseId));
+
+			expect(text, courseId).toContain("Standards-Mapped Algebra Architecture");
+			expect(text, courseId).toContain("Course Object Labels");
+			expect(text, courseId).toContain("Required Anchor and Extension Projects");
+		}
+
+		expect(allText(await requireCourse("python-level-3"))).toContain(
+			"Advanced Python Algorithm and Engineering Studio"
+		);
+		expect(allText(await requireCourse("python-level-3"))).toContain(
+			"Local Document Search Engine"
+		);
+
+		for (const courseId of ["c-level-1", "cpp-level-2", "cpp-level-3"]) {
+			const text = allText(await requireCourse(courseId));
+
+			expect(text, courseId).toContain("Modern Three-Course C++ Spine");
+			expect(text, courseId).toContain("Manual Memory Safety Rule");
+		}
+
+		for (const courseId of [
+			"java-level-1",
+			"java-level-2",
+			"java-level-3",
+			"java-without-graphics",
+			"java-with-graphics"
+		]) {
+			expect(allText(await requireCourse(courseId)), courseId).toContain(
+				"Modern Java and C++-to-Java Accelerated Path"
+			);
+		}
+
+		for (const courseId of [
+			"data-science-in-python",
+			"ai-level-1",
+			"machine-learning"
+		]) {
+			expect(allText(await requireCourse(courseId)), courseId).toContain(
+				"Data Science, AI Foundations, and Machine Learning Boundary Map"
+			);
+		}
+
+		expect(allText(await requireCourse("elementary-science"))).toContain(
+			"K-2 and 3-5 Zoom-Safe Science Scope Map"
+		);
+		expect(
+			allText(await requireCourse("middle-school-integrated-science"))
+		).toContain("Middle School Integrated Science 6-8 Scope Map");
+
+		for (const courseId of [
+			"linux-systems",
+			"network-systems",
+			"network-security",
+			"c-systems-engineering",
+			"assembly",
+			"low-level-security",
+			"low-level-security-part-2",
+			"rust-systems-security"
+		]) {
+			expect(allText(await requireCourse(courseId)), courseId).toContain(
+				"Course-Specific Defensive Lab Contract"
+			);
+		}
+
+		const unityText = allText(await requireCourse("unity-game-development"));
+
+		expect(unityText).toContain("UGD7 Testing, Profiling, Builds, CI, and Asset Pipeline");
+		expect(unityText).toContain("UGD8 Full-Project Starter and Solution Repository Plan");
+		expect(unityText).toContain("full Unity project workflow");
+	}, 30000);
+
 	it("backfills reference solution links for source-backed project links", async () => {
 		for (const courseId of Object.keys(courseImplementationSourceRepos)) {
 			const course = await requireCourse(courseId);

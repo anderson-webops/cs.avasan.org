@@ -447,6 +447,63 @@ writeMd(
 	].join("\n")
 );
 
+const metadataAudit = courses.map(({ entry, course }) => {
+	const metadata = course.developmentMetadata;
+	return {
+		courseId: entry.id,
+		courseName: course.name,
+		hasMetadata: Boolean(metadata),
+		priority: metadata?.priority ?? "missing",
+		standards: metadata?.standards.length ?? 0,
+		hasSourcePolicy: Boolean(metadata?.sourcePolicy),
+		assessmentCadence: metadata?.assessmentCadence.length ?? 0,
+		toolchain: metadata?.toolchain.length ?? 0,
+		safetyPolicy: metadata?.safetyPolicy.length ?? 0,
+		courseBoundaries: metadata?.courseBoundaries.length ?? 0,
+		capstoneExpectations: metadata?.capstoneExpectations.length ?? 0,
+		recommendedNextWork: metadata?.recommendedNextWork.length ?? 0
+	};
+});
+
+writeJson("course-standards-metadata-audit.json", metadataAudit);
+writeMd(
+	"course-standards-metadata-audit.md",
+	[
+		"# Course Standards Metadata Audit",
+		"",
+		`Generated: ${new Date().toISOString()}`,
+		"",
+		"This report verifies that each visible course exposes the metadata backbone requested by the deep-research planning pass: standards/source map, source policy, assessment cadence, toolchain assumptions, safety boundaries, course boundaries, capstone expectations, and recommended next work.",
+		"",
+		asTable(
+			[
+				"Course",
+				"Priority",
+				"Standards",
+				"Source Policy",
+				"Assessments",
+				"Toolchain",
+				"Safety",
+				"Boundaries",
+				"Capstone",
+				"Next Work"
+			],
+			metadataAudit.map(row => [
+				row.courseId,
+				row.priority,
+				row.standards,
+				row.hasSourcePolicy ? "yes" : "no",
+				row.assessmentCadence,
+				row.toolchain,
+				row.safetyPolicy,
+				row.courseBoundaries,
+				row.capstoneExpectations,
+				row.recommendedNextWork
+			])
+		)
+	].join("\n")
+);
+
 const scienceIds = [
 	"elementary-science",
 	"middle-school-integrated-science",
