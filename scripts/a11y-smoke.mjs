@@ -10,16 +10,43 @@ const axeSourcePath = require.resolve("axe-core/axe.min.js");
 const frontendPort = Number(process.env.A11Y_FRONTEND_PORT || 3333);
 const apiPort = Number(process.env.A11Y_API_PORT || 3008);
 const baseUrl = `http://127.0.0.1:${frontendPort}`;
-const routes = [
-	"/",
-	"/profile",
-	"/signup",
-	"/courses",
-	"/wheel",
-	"/teaching",
-	"/admin/people",
-	"/admin/mdmail",
-	"/admin/student-management"
+const routeScenarios = [
+	{
+		name: "public",
+		role: "public",
+		routes: [
+			"/",
+			"/about",
+			"/courses",
+			"/pathways",
+			"/signup",
+			"/payment",
+			"/zoom",
+			"/wheel"
+		]
+	},
+	{
+		name: "student",
+		role: "student",
+		routes: ["/profile", "/courses", "/pathways", "/zoom", "/wheel"]
+	},
+	{
+		name: "tutor",
+		role: "tutor",
+		routes: ["/profile", "/courses", "/teaching", "/pathways", "/zoom"]
+	},
+	{
+		name: "admin",
+		role: "admin",
+		routes: [
+			"/profile",
+			"/courses",
+			"/admin",
+			"/admin/people",
+			"/admin/mdmail",
+			"/admin/student-management"
+		]
+	}
 ];
 const viewportScenarios = [
 	{ height: 900, name: "mobile", width: 390 },
@@ -54,6 +81,45 @@ const chromeCandidates = [
 const chromePath = chromeCandidates.find(candidate => existsSync(candidate));
 if (chromePath) process.env.PUPPETEER_EXECUTABLE_PATH = chromePath;
 
+let activeRole = "public";
+
+const admin = {
+	_id: "admin-accessibility",
+	name: "Accessibility Admin",
+	email: "admin@example.com",
+	editAdmins: false,
+	saveEdit: ""
+};
+const tutor = {
+	_id: "tutor-accessibility",
+	name: "Jacob",
+	email: "classes@example.com",
+	age: 30,
+	state: "GA",
+	usersOfTutorLength: 1,
+	editTutors: false,
+	saveEdit: "",
+	coursePermissions: ["javascript-level-1"]
+};
+const student = {
+	_id: "user-accessibility",
+	name: "Recipient 3",
+	email: "jinen@example.com",
+	age: 15,
+	state: "GA",
+	editUsers: false,
+	saveEdit: "",
+	tutors: [tutor],
+	courseAccess: ["javascript-level-1"],
+	courseProgress: [
+		{
+			courseId: "javascript-level-1",
+			completedModuleIds: [],
+			completedItemIds: []
+		}
+	]
+};
+
 function writeServerLine(prefix, data) {
 	const text = data.toString().trim();
 	if (text) process.stderr.write(`[${prefix}] ${text}\n`);
@@ -71,38 +137,8 @@ function sendJson(res, body, status = 200) {
 }
 
 function createMockApiServer() {
-	const admin = {
-		_id: "admin-accessibility",
-		name: "Accessibility Admin",
-		email: "admin@example.com",
-		editAdmins: false,
-		saveEdit: ""
-	};
-	const users = [
-		{
-			_id: "user-accessibility",
-			name: "Recipient 3",
-			email: "jinen@example.com",
-			age: 15,
-			state: "GA",
-			editUsers: false,
-			saveEdit: "",
-			courseAccess: ["javascript-level-1"]
-		}
-	];
-	const tutors = [
-		{
-			_id: "tutor-accessibility",
-			name: "Jacob",
-			email: "classes@example.com",
-			age: 30,
-			state: "GA",
-			usersOfTutorLength: 1,
-			editTutors: false,
-			saveEdit: "",
-			coursePermissions: ["javascript-level-1"]
-		}
-	];
+	const users = [student];
+	const tutors = [tutor];
 
 	return http.createServer((req, res) => {
 		const url = new URL(req.url || "/", `http://127.0.0.1:${apiPort}`);
@@ -112,14 +148,41 @@ function createMockApiServer() {
 		}
 
 		if (url.pathname === "/accounts/me") {
-			sendJson(res, { adminID: admin._id });
+			if (activeRole === "admin") sendJson(res, { adminID: admin._id });
+			else if (activeRole === "tutor") sendJson(res, { tutorID: tutor._id });
+			else if (activeRole === "student") sendJson(res, { userID: student._id });
+			else sendJson(res, {});
 			return;
 		}
 		if (url.pathname === "/admins/loggedin") {
-			sendJson(res, { currentAdmin: admin });
+			sendJson(
+				res,
+				activeRole === "admin" ? { currentAdmin: admin } : {},
+				activeRole === "admin" ? 200 : 401
+			);
+			return;
+		}
+		if (url.pathname === "/tutors/loggedin") {
+			sendJson(
+				res,
+				activeRole === "tutor" ? { currentTutor: tutor } : {},
+				activeRole === "tutor" ? 200 : 401
+			);
+			return;
+		}
+		if (url.pathname === "/users/loggedin") {
+			sendJson(
+				res,
+				activeRole === "student" ? { currentUser: student } : {},
+				activeRole === "student" ? 200 : 401
+			);
 			return;
 		}
 		if (url.pathname === "/users/all") {
+			sendJson(res, users);
+			return;
+		}
+		if (url.pathname === `/users/oftutor/${tutor._id}`) {
 			sendJson(res, users);
 			return;
 		}
@@ -210,55 +273,64 @@ try {
 	});
 
 	const failures = [];
-	for (const route of routes) {
-		for (const viewport of viewportScenarios) {
-			for (const media of mediaScenarios) {
-				const url = `${baseUrl}${route}`;
-				const page = await browser.newPage();
-				await page.setViewport({
-					deviceScaleFactor: 1,
-					height: viewport.height,
-					width: viewport.width
-				});
-				await page.emulateMediaFeatures([
-					{ name: "prefers-color-scheme", value: media.colorScheme },
-					{
-						name: "prefers-reduced-motion",
-						value: media.prefersReducedMotion
-					}
-				]);
-				await page.evaluateOnNewDocument(storedTheme => {
-					window.localStorage.setItem("vueuse-color-scheme", storedTheme);
-				}, media.storedTheme);
-				await page.goto(url, {
-					timeout: 30_000,
-					waitUntil: "networkidle0"
-				});
-				await page.addScriptTag({ path: axeSourcePath });
-				const result = await page.evaluate(async () => {
-					return await axe.run(document, {
-						resultTypes: ["violations"],
-						runOnly: {
-							type: "tag",
-							values: ["wcag2a", "wcag2aa"]
+	for (const scenario of routeScenarios) {
+		activeRole = scenario.role;
+		for (const route of scenario.routes) {
+			for (const viewport of viewportScenarios) {
+				for (const media of mediaScenarios) {
+					const url = `${baseUrl}${route}`;
+					const page = await browser.newPage();
+					await page.setViewport({
+						deviceScaleFactor: 1,
+						height: viewport.height,
+						width: viewport.width
+					});
+					await page.emulateMediaFeatures([
+						{
+							name: "prefers-color-scheme",
+							value: media.colorScheme
+						},
+						{
+							name: "prefers-reduced-motion",
+							value: media.prefersReducedMotion
 						}
+					]);
+					await page.evaluateOnNewDocument(storedTheme => {
+						window.localStorage.setItem(
+							"vueuse-color-scheme",
+							storedTheme
+						);
+					}, media.storedTheme);
+					await page.goto(url, {
+						timeout: 30_000,
+						waitUntil: "networkidle0"
 					});
-				});
-				await page.close();
-				const violations = result.violations.filter(
-					violation => violation.id !== "frame-tested"
-				);
-				if (violations.length) {
-					failures.push({
-						context: `${viewport.name}/${media.name}`,
-						url,
-						violations
+					await page.addScriptTag({ path: axeSourcePath });
+					const result = await page.evaluate(async () => {
+						return await axe.run(document, {
+							resultTypes: ["violations"],
+							runOnly: {
+								type: "tag",
+								values: ["wcag2a", "wcag2aa"]
+							}
+						});
 					});
-					continue;
+					await page.close();
+					const violations = result.violations.filter(
+						violation => violation.id !== "frame-tested"
+					);
+					if (violations.length) {
+						failures.push({
+							context: `${scenario.name}/${viewport.name}/${media.name}`,
+							url,
+							violations
+						});
+						continue;
+					}
+					console.log(
+						`a11y ok: ${url} (${scenario.name}, ${viewport.name}, ${media.name})`
+					);
 				}
-				console.log(
-					`a11y ok: ${url} (${viewport.name}, ${media.name})`
-				);
 			}
 		}
 	}
