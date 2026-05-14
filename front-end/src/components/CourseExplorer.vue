@@ -2295,7 +2295,22 @@ function writeStoredValue(key: string, value: string) {
 
 .item-content-markdown :deep(ul),
 .item-content-markdown :deep(ol) {
-	padding-left: 1.35rem;
+	display: grid;
+	gap: 0.55rem;
+	padding-left: 1.65rem;
+}
+
+.item-content-markdown :deep(li) {
+	padding-left: 0.25rem;
+}
+
+.item-content-markdown :deep(li::marker) {
+	color: var(--course-accent);
+	font-weight: 800;
+}
+
+.item-content-markdown :deep(li > p) {
+	margin-bottom: 0.35rem;
 }
 
 .item-content-markdown :deep(a) {

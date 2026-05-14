@@ -241,6 +241,16 @@ function compactWhitespace(text: string) {
 	return text.replace(/\s+/g, " ").trim();
 }
 
+function preservesBlockStructure(text: string) {
+	return /(?:^|\n)\s*(?:[-*]|\d+\.)\s+\S/.test(text);
+}
+
+function supportBaseContent(text: string) {
+	if (!preservesBlockStructure(text)) return compactWhitespace(text);
+
+	return text.replace(/\n{3,}/g, "\n\n").trim();
+}
+
 function compactLessonPointText(text: string) {
 	return compactWhitespace(text)
 		.replace(/[.!?]+/g, ",")
@@ -249,12 +259,16 @@ function compactLessonPointText(text: string) {
 
 function lessonArcContent(items: RawCourseModuleItem[]) {
 	const points = items.map((item, index) => {
-		const title = compactLessonPointText(item.title);
+		const title = compactWhitespace(item.title).replace(/:+$/g, "");
 		const content = compactLessonPointText(item.content);
-		return `${index + 1}) ${title}: ${content}`;
+		return `${index + 1}. **${title}:** ${content}`;
 	});
 
-	return `This lesson arc covers these sections in sequence: ${points.join("; ")}.`;
+	return [
+		"This lesson arc covers these sections in sequence:",
+		"",
+		...points
+	].join("\n");
 }
 
 function enrichBriefConceptLesson(item: RawCourseModuleItem) {
@@ -872,7 +886,7 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 
 				if (!needsContentSupport(context)) continue;
 
-				const currentContent = compactWhitespace(item.content);
+				const currentContent = supportBaseContent(item.content);
 				const support = qualitySupportFor(context);
 				item.content = currentContent
 					? `${currentContent}\n\n${support}`
@@ -889,7 +903,7 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 					isScienceContext(context) &&
 					!scienceEvidencePattern.test(item.content)
 				) {
-					item.content = `${compactWhitespace(item.content)}\n\n${scienceEvidenceCheckpoint()}`;
+					item.content = `${supportBaseContent(item.content)}\n\n${scienceEvidenceCheckpoint()}`;
 				}
 			}
 		}

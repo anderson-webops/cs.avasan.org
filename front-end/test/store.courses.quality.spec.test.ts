@@ -79,6 +79,24 @@ describe("course text quality normalization", () => {
 		expect(calendarMachine.content.length).toBeGreaterThan(500);
 	});
 
+	it("formats grouped lesson arcs as readable ordered markdown lists", async () => {
+		const store = useCoursesStore();
+		const course = await store.loadCourseById("python-level-3");
+		expect(course).not.toBeNull();
+
+		const lessonArc = findItem(
+			course!,
+			/Core Concepts and Learning Sequence/,
+			/This lesson arc covers these sections in sequence:/
+		);
+
+		expect(lessonArc.content).toMatch(
+			/This lesson arc covers these sections in sequence:\n\n1\. \*\*Introductions & Setup:\*\*/
+		);
+		expect(lessonArc.content).toMatch(/\n2\. \*\*.+:\*\*/);
+		expect(lessonArc.content).not.toMatch(/1\) .+; 2\)/s);
+	});
+
 	it("adds AP-specific scaffolding to terse AP Computer Science A algorithm projects", async () => {
 		const course = await loadRawCourse("ap-computer-science-a");
 		expect(course).not.toBeNull();
