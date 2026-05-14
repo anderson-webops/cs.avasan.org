@@ -1044,6 +1044,13 @@ textarea {
 .field {
 	margin: 12px 0 6px;
 }
+
+:global(html.dark) .field {
+	background: transparent !important;
+	border-color: transparent !important;
+	box-shadow: none !important;
+}
+
 .field-label {
 	display: block;
 	margin-bottom: 6px;

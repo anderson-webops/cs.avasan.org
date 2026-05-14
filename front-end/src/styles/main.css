@@ -589,7 +589,7 @@ html.dark .course-explorer {
 	--course-shadow: 0 22px 46px -34px rgba(0, 0, 0, 0.72);
 }
 
-html.dark body :is(.course-toolbar, .course-workspace, .course-reader, .course-outline, .lesson-card, .reader-empty, .course-empty) {
+html.dark body :is(.course-toolbar, .course-workspace, .course-outline, .reader-empty, .course-empty) {
 	background: var(--course-panel);
 	border-color: var(--course-border);
 	box-shadow: var(--course-shadow);
@@ -750,10 +750,6 @@ html.dark body :is(
 	.course-hero,
 	.course-stats,
 	.stat,
-	.reader-header,
-	.reader-link-group,
-	.section-header,
-	.lesson-header,
 	.workspace-header,
 	.admin-shell,
 	.admin-shell__hero,
@@ -774,9 +770,7 @@ html.dark body :is(
 	.site-nav__inner,
 	.course-toolbar,
 	.course-workspace,
-	.course-reader,
 	.course-outline,
-	.lesson-card,
 	.reader-empty,
 	.course-empty,
 	.workspace-sheet,
@@ -926,10 +920,28 @@ html.dark body .course-explorer .reader-link-heading.is-supplemental {
 	color: #fed7aa !important;
 }
 
-html.dark body .course-explorer :is(.outline-button, .lesson-card, .course-reader, .course-outline) {
+html.dark body .course-explorer :is(.outline-button, .course-outline) {
 	background-color: var(--course-panel) !important;
 	background-image: none !important;
 	color: var(--course-text) !important;
+}
+
+html.dark body .course-explorer :is(
+	.course-reader,
+	.lesson-card,
+	.reader-header,
+	.reader-link-group,
+	.section-header,
+	.lesson-header
+) {
+	background: transparent !important;
+	background-image: none !important;
+	box-shadow: none !important;
+	color: var(--course-text) !important;
+}
+
+html.dark body .course-explorer .reader-header {
+	border-color: var(--course-border) !important;
 }
 
 html.dark body .course-explorer :is(.lesson-index, .section-count) {
