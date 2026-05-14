@@ -35,6 +35,8 @@ onBeforeUnmount(() => {
 					height="500"
 					scrolling="no"
 					frameborder="0"
+					referrerpolicy="strict-origin-when-cross-origin"
+					sandbox="allow-popups allow-same-origin allow-scripts"
 					@load="isWheelLoaded = true"
 				>
 				</iframe>

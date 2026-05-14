@@ -32,6 +32,12 @@ import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
 					title="Student Management Spreadsheet"
 				></iframe>
 			</div>
+			<noscript>
+				<p class="helper-text">
+					JavaScript is required for the embedded spreadsheet. Use the
+					full spreadsheet link above instead.
+				</p>
+			</noscript>
 		</div>
 	</AdminWorkspaceShell>
 </template>

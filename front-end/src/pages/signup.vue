@@ -90,7 +90,7 @@ onBeforeUnmount(() => {
 		</section>
 
 		<div class="scheduler-container site-surface">
-			<p class="scheduler-direct">
+			<p id="scheduler-embed-help" class="scheduler-direct">
 				If the embedded scheduler is hard to use with your browser or
 				assistive technology,
 				<a
@@ -125,6 +125,7 @@ onBeforeUnmount(() => {
 			<iframe
 				class="scheduler-frame"
 				:class="{ 'is-loaded': schedulerLoaded }"
+				aria-describedby="scheduler-embed-help"
 				:src="schedulerEmbedUrl"
 				title="Class scheduler"
 				:style="{ height: `${schedulerHeight}px` }"
@@ -133,6 +134,12 @@ onBeforeUnmount(() => {
 				sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
 				@load="markSchedulerLoaded"
 			/>
+			<noscript>
+				<p class="scheduler-error">
+					JavaScript is required to use the embedded scheduler. Use
+					the full scheduler link above instead.
+				</p>
+			</noscript>
 
 			<p class="scheduler-fallback">
 				Trouble loading the scheduler?

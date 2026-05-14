@@ -20,6 +20,7 @@
 		"server": "npm run -w back-end server",
 		"server:once": "npm run -w back-end server:once",
 		"serve": "npm run -w front-end serve",
+		"a11y": "node scripts/a11y-smoke.mjs",
 		"lint-server": "npm run -w back-end lint-fix && npm run -w back-end server",
 		"lint-serve": "npm run -w front-end lint-fix && npm run -w front-end serve",
 		"lint": "npm run -w front-end lint && npm run -w back-end lint",
@@ -72,12 +73,14 @@
 		"@typescript-eslint/eslint-plugin": "^8.59.0",
 		"@typescript-eslint/parser": "^8.59.0",
 		"@unocss/eslint-plugin": "^66.6.7",
+		"axe-core": "^4.11.4",
 		"eslint": "^10.1.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.5",
 		"eslint-plugin-vue": "^10.8.0",
 		"globals": "^17.5.0",
 		"prettier": "^3.8.3",
+		"puppeteer": "^24.43.1",
 		"taze": "^19.11.0",
 		"typescript": "^6.0.3"
 	}
