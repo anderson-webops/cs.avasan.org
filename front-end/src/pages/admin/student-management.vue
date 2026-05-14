@@ -9,8 +9,8 @@ import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
 			label: 'Open full spreadsheet',
 			external: true
 		}"
-		intro="Review the published roster view here, then jump to the live Google Sheet only when you need to edit or cross-check the full document."
-		title="Learner Management"
+		intro="Use this as a secondary roster snapshot for cross-checking. Native people, access, and progress work should happen in the admin people workspace and course workspace."
+		title="Roster Spreadsheet"
 	>
 		<div class="sheet-panel">
 			<p class="helper-text">
@@ -29,7 +29,7 @@ import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
 					referrerpolicy="strict-origin-when-cross-origin"
 					sandbox="allow-forms allow-popups allow-same-origin allow-scripts"
 					src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSaHeIeRi1nujjE_klPrxwQ5v6Wf4gLNGgUrcbUIl2gnwCRuf7PQUD0EOT44SLqpotNODfm2bfjqEEN/pubhtml?gid=891834841&amp;single=true&amp;widget=true&amp;headers=false"
-					title="Student Management Spreadsheet"
+					title="Roster Spreadsheet"
 				></iframe>
 			</div>
 			<noscript>

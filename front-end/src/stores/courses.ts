@@ -101,6 +101,24 @@ function slugify(value: string): string {
 		.replace(TRAILING_HYPHENS_RE, "");
 }
 
+function courseEntityId(explicitId: string | undefined, fallbackId: string) {
+	return explicitId?.trim() ? slugify(explicitId) : fallbackId;
+}
+
+function courseEntityAliases(
+	explicitId: string | undefined,
+	fallbackId: string,
+	aliases: string[] | undefined
+) {
+	const normalizedExplicitId = explicitId?.trim() ? slugify(explicitId) : "";
+	return [
+		...(normalizedExplicitId ? [fallbackId] : []),
+		...(aliases ?? []).map(alias => slugify(alias))
+	]
+		.map(alias => alias.trim())
+		.filter(alias => alias && alias !== normalizedExplicitId);
+}
+
 const HIDDEN_ITEM_TITLES = new Set([
 	"session recap & assignment",
 	"recap & assignment review"
@@ -314,28 +332,30 @@ function extractLeadingResourceLink(title: string, content: string) {
 	};
 }
 
-function mergeAdjacentSupportItems(items: Array<Omit<CourseModuleItem, "id">>) {
-	return items.reduce<Array<Omit<CourseModuleItem, "id">>>(
-		(mergedItems, item) => {
-			const previousItem = mergedItems.at(-1);
+type CourseModuleItemDraft = Omit<CourseModuleItem, "id" | "aliases"> & {
+	stableAliases?: string[];
+	stableId?: string;
+};
 
-			if (
-				previousItem &&
-				(MERGE_INTO_PREVIOUS_TITLE_RE.test(item.title) ||
-					(PRESENTATION_TITLE_RE.test(item.title) &&
-						PROJECT_TITLE_RE.test(previousItem.title)))
-			) {
-				previousItem.content = displayCourseContent(
-					`${previousItem.content}\n\n${item.content}`
-				);
-				return mergedItems;
-			}
+function mergeAdjacentSupportItems(items: CourseModuleItemDraft[]) {
+	return items.reduce<CourseModuleItemDraft[]>((mergedItems, item) => {
+		const previousItem = mergedItems.at(-1);
 
-			mergedItems.push(item);
+		if (
+			previousItem &&
+			(MERGE_INTO_PREVIOUS_TITLE_RE.test(item.title) ||
+				(PRESENTATION_TITLE_RE.test(item.title) &&
+					PROJECT_TITLE_RE.test(previousItem.title)))
+		) {
+			previousItem.content = displayCourseContent(
+				`${previousItem.content}\n\n${item.content}`
+			);
 			return mergedItems;
-		},
-		[]
-	);
+		}
+
+		mergedItems.push(item);
+		return mergedItems;
+	}, []);
 }
 
 function normalizeCourse(
@@ -347,7 +367,13 @@ function normalizeCourse(
 		id: courseId,
 		name: course.name,
 		modules: course.modules.map(module => {
-			const moduleId = slugify(`${courseId}-${module.title}`);
+			const generatedModuleId = slugify(`${courseId}-${module.title}`);
+			const moduleId = courseEntityId(module.id, generatedModuleId);
+			const moduleAliases = courseEntityAliases(
+				module.id,
+				generatedModuleId,
+				module.aliases
+			);
 
 			const mapItems = (
 				items: typeof module.curriculum,
@@ -385,6 +411,8 @@ function normalizeCourse(
 							);
 
 							return {
+								stableAliases: item.aliases,
+								stableId: item.id,
 								title: item.title,
 								content:
 									displayCourseContent(normalizedContent),
@@ -420,13 +448,35 @@ function normalizeCourse(
 								mediaLink: item.mediaLink
 							};
 						})
-				).map(item => ({
-					id: slugify(`${moduleId}-${prefix}-${item.title}`),
-					...item
-				}));
+				).map(item => {
+					const generatedItemId = slugify(
+						`${generatedModuleId}-${prefix}-${item.title}`
+					);
+					const itemId = courseEntityId(
+						item.stableId,
+						generatedItemId
+					);
+					const itemAliases = courseEntityAliases(
+						item.stableId,
+						generatedItemId,
+						item.stableAliases
+					);
+					const {
+						stableAliases: _stableAliases,
+						stableId: _stableId,
+						...normalizedItem
+					} = item;
+
+					return {
+						...normalizedItem,
+						id: itemId,
+						...(itemAliases.length ? { aliases: itemAliases } : {})
+					};
+				});
 
 			return {
 				id: moduleId,
+				...(moduleAliases.length ? { aliases: moduleAliases } : {}),
 				title: module.title,
 				curriculum: mapItems(module.curriculum, "curriculum"),
 				supplementalProjects: mapItems(

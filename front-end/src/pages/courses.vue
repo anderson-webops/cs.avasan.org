@@ -91,7 +91,7 @@ function openSignup() {
 					class="site-button site-button--secondary"
 					to="/profile"
 				>
-					Go to Profile
+					Go to Account
 				</RouterLink>
 				<RouterLink
 					v-if="!isLoggedIn"

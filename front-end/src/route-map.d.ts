@@ -65,6 +65,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/admin/people': RouteRecordInfo<
+      '/admin/people',
+      '/admin/people',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/admin/student-management': RouteRecordInfo<
       '/admin/student-management',
       '/admin/student-management',
@@ -110,6 +117,13 @@ declare module 'vue-router/auto-routes' {
     '/signup': RouteRecordInfo<
       '/signup',
       '/signup',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/teaching': RouteRecordInfo<
+      '/teaching',
+      '/teaching',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -178,6 +192,12 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/admin/people.vue': {
+      routes:
+        | '/admin/people'
+      views:
+        | never
+    }
     'src/pages/admin/student-management.vue': {
       routes:
         | '/admin/student-management'
@@ -217,6 +237,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/signup.vue': {
       routes:
         | '/signup'
+      views:
+        | never
+    }
+    'src/pages/teaching.vue': {
+      routes:
+        | '/teaching'
       views:
         | never
     }

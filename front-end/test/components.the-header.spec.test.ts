@@ -51,5 +51,29 @@ describe("TheHeader.vue", () => {
 
 		expect(wrapper.text()).toContain("Zoom");
 		expect(wrapper.text()).toContain("Pathways");
+		expect(wrapper.text()).toContain("Account");
+	});
+
+	it("shows the Teaching workspace link for tutors", () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+		const app = useAppStore();
+		app.setCurrentTutor({
+			_id: "tutor-1",
+			name: "Tutor",
+			email: "tutor@example.com",
+			age: 30,
+			state: "GA",
+			usersOfTutorLength: 1,
+			coursePermissions: [],
+			editTutors: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mountHeader(pinia);
+
+		expect(wrapper.text()).toContain("Teaching");
+		expect(wrapper.text()).toContain("Account");
+		expect(wrapper.text()).not.toContain("Profile");
 	});
 });

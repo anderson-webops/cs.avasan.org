@@ -3,14 +3,14 @@ import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
 import AccountSecurity from "@/components/AccountSecurity.vue";
-import LearnerCourseProgressEditor from "@/components/LearnerCourseProgressEditor.vue";
 import LearnerSessionTools from "@/components/LearnerSessionTools.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 // import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
-import { useLearnerCourseProgress } from "@/composables/useLearnerCourseProgress";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
+
+const props = defineProps<{ mode?: "account" | "teaching" }>();
 
 /* -------------------------------------------------- */
 const app = useAppStore();
@@ -95,12 +95,7 @@ const courseLookup = computed(() => {
 
 const learnerCount = computed(() => users.value.length);
 const enabledCourseCount = computed(() => permittedCourses.value.length);
-const courseLabel = (id: string) => courseLookup.value[id] ?? id;
-const courseProgress = useLearnerCourseProgress(
-	users,
-	coursesStore.loadCourseById,
-	loadUsers
-);
+const isTeachingMode = computed(() => props.mode === "teaching");
 
 watch(
 	users,
@@ -148,20 +143,6 @@ async function saveUserCourses(userID: string) {
 			e.response?.data?.message ?? e.message ?? "Unable to save courses";
 	}
 }
-
-async function saveUserProgress(userID: string) {
-	try {
-		success.value = "";
-		error.value = "";
-		await courseProgress.saveProgress(userID);
-		success.value = "Saved learner progress.";
-	} catch (e: any) {
-		error.value =
-			e.response?.data?.message ??
-			e.message ??
-			"Unable to save learner progress";
-	}
-}
 </script>
 
 <template>
@@ -169,10 +150,19 @@ async function saveUserProgress(userID: string) {
 		<header class="workspace-header">
 			<div>
 				<p class="workspace-eyebrow">Tutor profile</p>
-				<h2>Teaching workspace</h2>
+				<h2>
+					{{
+						isTeachingMode
+							? "Teaching workspace"
+							: "Account details"
+					}}
+				</h2>
 				<p>
-					Keep your account ready, check which classes you can teach,
-					and manage learner course access from one organized view.
+					{{
+						isTeachingMode
+							? "Check which classes you can teach and manage learner course access from one organized view."
+							: "Review your tutor account and manage login security without mixing it with learner operations."
+					}}
 				</p>
 			</div>
 			<div class="workspace-stats">
@@ -280,7 +270,7 @@ async function saveUserProgress(userID: string) {
 			</div>
 		</article>
 
-		<section class="directory-section">
+		<section v-if="isTeachingMode" class="directory-section">
 			<div class="section-heading">
 				<div>
 					<p class="workspace-eyebrow">Learners</p>
@@ -382,13 +372,6 @@ async function saveUserProgress(userID: string) {
 								Save courses
 							</button>
 						</div>
-
-						<LearnerCourseProgressEditor
-							:course-label="courseLabel"
-							:progress="courseProgress"
-							:user-id="String(u._id)"
-							@save-progress="saveUserProgress(String(u._id))"
-						/>
 					</div>
 				</article>
 			</div>

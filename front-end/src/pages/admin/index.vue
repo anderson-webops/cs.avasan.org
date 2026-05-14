@@ -3,16 +3,28 @@ import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
 
 const adminTools = [
 	{
-		title: "Learner Management",
+		title: "People and access",
 		description:
-			"Review the shared student management spreadsheet and current roster workflows.",
-		href: "/admin/student-management"
+			"Manage tutors, learners, role changes, course permissions, recipient associations, and assigned course access.",
+		href: "/admin/people"
 	},
 	{
-		title: "Markdown Mail",
+		title: "Course workspace",
+		description:
+			"Open the course viewer, choose a learner context, and mark module or project progress where the curriculum is visible.",
+		href: "/courses"
+	},
+	{
+		title: "Session notes",
 		description:
 			"Send session notes and internal admin messages with markdown formatting.",
 		href: "/admin/mdmail"
+	},
+	{
+		title: "Roster spreadsheet",
+		description:
+			"Review the shared student management spreadsheet and current roster workflows.",
+		href: "/admin/student-management"
 	}
 ];
 </script>

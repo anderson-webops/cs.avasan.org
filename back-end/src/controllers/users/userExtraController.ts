@@ -310,12 +310,17 @@ export const setUserCourseProgress: RequestHandler = async (req, res) => {
 	}
 
 	const existingProgress = (user.courseProgress ?? []).filter(progress => progress.courseId !== courseId);
+	const updatedBy = actingAdmin?._id ?? actingTutor?._id;
+	const updatedByRole: "admin" | "tutor" = actingAdmin ? "admin" : "tutor";
 	user.courseProgress = [
 		...existingProgress,
 		{
 			courseId,
 			completedModuleIds,
-			completedItemIds
+			completedItemIds,
+			updatedAt: new Date(),
+			...(updatedBy ? { updatedBy } : {}),
+			updatedByRole
 		}
 	].sort(
 		(a, b) =>

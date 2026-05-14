@@ -1,4 +1,6 @@
 export interface RawCourseModuleItem {
+	id?: string;
+	aliases?: string[];
 	title: string;
 	content: string;
 	projectLink?: string;
@@ -8,6 +10,8 @@ export interface RawCourseModuleItem {
 }
 
 export interface RawCourseModule {
+	id?: string;
+	aliases?: string[];
 	title: string;
 	curriculum: RawCourseModuleItem[];
 	supplementalProjects: RawCourseModuleItem[];
@@ -38,10 +42,12 @@ export interface CourseSummary {
 
 export interface CourseModuleItem extends RawCourseModuleItem {
 	id: string;
+	aliases?: string[];
 }
 
 export interface CourseModule {
 	id: string;
+	aliases?: string[];
 	title: string;
 	curriculum: CourseModuleItem[];
 	supplementalProjects: CourseModuleItem[];

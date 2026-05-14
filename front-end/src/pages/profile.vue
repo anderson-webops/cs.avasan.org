@@ -1,19 +1,12 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { computed, defineAsyncComponent, onMounted, ref, watch } from "vue";
+import { computed, defineAsyncComponent } from "vue";
 import { useAppStore } from "@/stores/app";
-
-type ProfileTab = "profile" | "courses" | "manage";
 
 defineOptions({ name: "ProfilePage" });
 
-const PROFILE_TAB_STORAGE_KEY = "classes:profile:active-tab";
-
 const AdminProfile = defineAsyncComponent(
 	() => import("@/components/AdminProfile.vue")
-);
-const CourseExplorer = defineAsyncComponent(
-	() => import("@/components/CourseExplorer.vue")
 );
 const TutorProfile = defineAsyncComponent(
 	() => import("@/components/TutorProfile.vue")
@@ -47,162 +40,57 @@ const profileRole = computed(() => {
 	return null;
 });
 
-const canBrowseCourses = computed(
-	() => !!currentAdmin.value || currentTutor.value || currentUser.value
-);
-
-const profileTabs = computed<ProfileTab[]>(() => {
-	if (currentAdmin.value) return ["profile", "manage", "courses"];
-	if (canBrowseCourses.value) return ["profile", "courses"];
-	return ["profile"];
-});
-
-const activeTab = ref<ProfileTab>("profile");
-const isCourseTab = computed(() => activeTab.value === "courses");
-const isStorageReady = ref(false);
-const hasRestoredStoredTab = ref(false);
 const hasProfile = computed(() => activeProfileComponent.value !== null);
 const isWorkspaceLayout = computed(() => hasProfile.value);
-
-watch(
-	[profileTabs, hasProfile, isStorageReady],
-	([tabs, hasProfileValue, storageReady]) => {
-		if (storageReady && hasProfileValue && !hasRestoredStoredTab.value) {
-			const storedTab = readStoredProfileTab();
-
-			if (storedTab && tabs.includes(storedTab)) {
-				activeTab.value = storedTab;
-			}
-
-			hasRestoredStoredTab.value = true;
-		}
-
-		if (!tabs.includes(activeTab.value)) activeTab.value = tabs[0];
-	},
-	{ immediate: true }
-);
 
 const heroTitle = computed(() => {
 	if (profileRole.value === "Administrator") {
 		return displayName.value
-			? `Welcome back, ${displayName.value}.`
-			: "Lead the learning community.";
+			? `${displayName.value}'s account.`
+			: "Administrator account.";
 	}
 	if (profileRole.value === "Tutor") {
 		return displayName.value
-			? `Welcome back, ${displayName.value}.`
-			: "Guide your learners with confidence.";
+			? `${displayName.value}'s account.`
+			: "Tutor account.";
 	}
 	if (profileRole.value === "Student") {
 		return displayName.value
-			? `Welcome back, ${displayName.value}.`
-			: "Keep your learning on track.";
+			? `${displayName.value}'s account.`
+			: "Student account.";
 	}
-	return "All your profile details in one place.";
+	return "Account access.";
 });
 
 const heroSubtitle = computed(() => {
 	switch (profileRole.value) {
 		case "Administrator":
-			return "Review tutor and student information, manage permissions, and keep your organization running smoothly.";
+			return "Manage your own login and security details here. People, permissions, course access, session notes, and role changes now live under Admin.";
 		case "Tutor":
-			return "Update your availability, stay in sync with your students, and keep every detail ready for the next session.";
+			return "Manage your own login and security details here. Learner operations live in the Teaching workspace and course progress is tracked inside Courses.";
 		case "Student":
-			return "Check your account information, stay connected with your tutor, and be prepared for upcoming lessons.";
+			return "Check your account information, assigned tutors, course access, and communication settings.";
 		default:
-			return "Sign in or create an account to view personalized details, manage classes, and stay organized.";
+			return "Sign in or create an account to view personalized account details.";
 	}
 });
 
 const heroBadge = computed(() =>
-	profileRole.value ? `Signed in as ${profileRole.value}` : "Profile hub"
+	profileRole.value ? `Signed in as ${profileRole.value}` : "Account"
 );
-
-const tabLabels: Record<ProfileTab, string> = {
-	profile: "Profile",
-	manage: "Manage profiles",
-	courses: "Course library"
-};
 
 const profileComponentProps = computed(() => {
 	if (currentAdmin.value) {
-		return { mode: activeTab.value === "manage" ? "manage" : "profile" };
+		return { mode: "account" };
+	}
+	if (currentTutor.value) {
+		return { mode: "account" };
 	}
 	return {};
 });
 
 function openAuthModal() {
 	app.setLoginBlock(true);
-}
-
-function tabButtonId(tab: ProfileTab) {
-	return `profile-tab-${tab}`;
-}
-
-function tabPanelId(tab: ProfileTab) {
-	return `profile-panel-${tab}`;
-}
-
-function setActiveTab(tab: ProfileTab) {
-	activeTab.value = tab;
-}
-
-function handleProfileTabKeydown(event: KeyboardEvent, tab: ProfileTab) {
-	const tabs = profileTabs.value;
-	const currentIndex = tabs.indexOf(tab);
-	if (currentIndex === -1) return;
-
-	let nextIndex = currentIndex;
-	if (event.key === "ArrowRight") {
-		nextIndex = (currentIndex + 1) % tabs.length;
-	} else if (event.key === "ArrowLeft") {
-		nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-	} else if (event.key === "Home") {
-		nextIndex = 0;
-	} else if (event.key === "End") {
-		nextIndex = tabs.length - 1;
-	} else {
-		return;
-	}
-
-	event.preventDefault();
-	const nextTab = tabs[nextIndex];
-	setActiveTab(nextTab);
-	requestAnimationFrame(() => {
-		document.getElementById(tabButtonId(nextTab))?.focus();
-	});
-}
-
-watch(activeTab, value => {
-	if (!isStorageReady.value || !hasProfile.value) return;
-	writeStoredProfileTab(value);
-});
-
-onMounted(() => {
-	isStorageReady.value = true;
-});
-
-function readStoredProfileTab() {
-	if (typeof window === "undefined") return null;
-
-	try {
-		const value = window.localStorage.getItem(PROFILE_TAB_STORAGE_KEY);
-		return isProfileTab(value) ? value : null;
-	} catch {
-		return null;
-	}
-}
-
-function writeStoredProfileTab(value: ProfileTab) {
-	if (typeof window === "undefined") return;
-
-	try {
-		window.localStorage.setItem(PROFILE_TAB_STORAGE_KEY, value);
-	} catch {}
-}
-
-function isProfileTab(value: string | null): value is ProfileTab {
-	return value === "profile" || value === "courses" || value === "manage";
 }
 </script>
 
@@ -227,60 +115,12 @@ function isProfileTab(value: string | null): value is ProfileTab {
 			<div
 				v-if="hasProfile"
 				class="profile-card"
-				:class="{
-					'is-workspace-layout': isWorkspaceLayout,
-					'is-course-layout': isCourseTab
-				}"
+				:class="{ 'is-workspace-layout': isWorkspaceLayout }"
 			>
-				<div
-					v-if="profileTabs.length > 1"
-					class="profile-tabs"
-					:class="{ 'is-workspace-layout': isWorkspaceLayout }"
-					role="tablist"
-					aria-label="Profile sections"
-				>
-					<button
-						v-for="tab in profileTabs"
-						:id="tabButtonId(tab)"
-						:key="tab"
-						:aria-controls="tabPanelId(tab)"
-						:aria-selected="activeTab === tab"
-						class="tab"
-						role="tab"
-						:tabindex="activeTab === tab ? 0 : -1"
-						type="button"
-						@click="setActiveTab(tab)"
-						@keydown="handleProfileTabKeydown($event, tab)"
-					>
-						{{ tabLabels[tab] }}
-					</button>
-				</div>
-
-				<div
-					v-if="activeTab !== 'courses'"
-					:id="tabPanelId(activeTab)"
-					:aria-labelledby="
-						profileTabs.length > 1
-							? tabButtonId(activeTab)
-							: undefined
-					"
-					:role="profileTabs.length > 1 ? 'tabpanel' : undefined"
-					:tabindex="profileTabs.length > 1 ? 0 : undefined"
-				>
-					<component
-						:is="activeProfileComponent"
-						v-bind="profileComponentProps"
-					/>
-				</div>
-				<div
-					v-else
-					:id="tabPanelId(activeTab)"
-					aria-labelledby="profile-tab-courses"
-					role="tabpanel"
-					tabindex="0"
-				>
-					<CourseExplorer />
-				</div>
+				<component
+					:is="activeProfileComponent"
+					v-bind="profileComponentProps"
+				/>
 			</div>
 
 			<div v-else class="profile-empty">

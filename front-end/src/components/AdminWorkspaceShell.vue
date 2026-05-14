@@ -27,8 +27,10 @@ const route = useRoute();
 
 const navItems = [
 	{ label: "Overview", to: "/admin" },
-	{ label: "Learner management", to: "/admin/student-management" },
-	{ label: "Session notes", to: "/admin/mdmail" }
+	{ label: "People and access", to: "/admin/people" },
+	{ label: "Course workspace", to: "/courses" },
+	{ label: "Session notes", to: "/admin/mdmail" },
+	{ label: "Roster spreadsheet", to: "/admin/student-management" }
 ];
 
 const hasActionSlot = computed(() => !!useSlots().actions);

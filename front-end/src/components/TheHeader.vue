@@ -59,8 +59,12 @@ const workspaceLinks = computed<NavLink[]>(() => {
 		links.push({ label: "Admin", to: "/admin", exact: false });
 	}
 
+	if (currentTutor.value) {
+		links.push({ label: "Teaching", to: "/teaching", exact: false });
+	}
+
 	if (isLoggedIn.value) {
-		links.push({ label: "Profile", to: "/profile", exact: false });
+		links.push({ label: "Account", to: "/profile", exact: false });
 	}
 
 	return links;

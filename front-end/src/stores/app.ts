@@ -48,6 +48,9 @@ export interface CourseProgress {
 	courseId: string;
 	completedModuleIds: string[];
 	completedItemIds: string[];
+	updatedAt?: string;
+	updatedBy?: string;
+	updatedByRole?: "admin" | "tutor";
 }
 
 export interface Admin {

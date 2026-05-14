@@ -589,19 +589,19 @@ html.dark .course-explorer {
 	--course-shadow: 0 22px 46px -34px rgba(0, 0, 0, 0.72);
 }
 
-html.dark body :is(.course-toolbar, .course-workspace, .course-outline, .reader-empty, .course-empty) {
+html.dark body :is(.course-toolbar, .staff-context-bar, .course-workspace, .course-outline, .reader-empty, .course-empty) {
 	background: var(--course-panel);
 	border-color: var(--course-border);
 	box-shadow: var(--course-shadow);
 }
 
-html.dark body :is(.course-stats, .stat, .search-shell, .course-select, .course-search, .outline-button, .resource-link, .item-media, .lesson-index) {
+html.dark body :is(.course-stats, .stat, .search-shell, .course-select, .course-search, .outline-button, .resource-link, .item-media, .lesson-index, .progress-save-status, .retry-save, .progress-toggle) {
 	background: var(--course-panel-soft);
 	border-color: var(--course-border);
 	color: var(--course-text);
 }
 
-html.dark body :is(.outline-button.is-active, .jump-link, .complete-pill, .item-complete-badge) {
+html.dark body :is(.outline-button.is-active, .jump-link, .complete-pill, .item-complete-badge, .progress-toggle) {
 	background: rgba(94, 234, 212, 0.14);
 	border-color: rgba(94, 234, 212, 0.24);
 	color: #99f6e4;
@@ -609,6 +609,18 @@ html.dark body :is(.outline-button.is-active, .jump-link, .complete-pill, .item-
 
 html.dark body :is(.resource-link-host, .lesson-kicker, .reader-eyebrow, .section-eyebrow, .outline-eyebrow, .control-label, .course-description) {
 	color: var(--course-text-soft);
+}
+
+html.dark body .course-explorer :is(.progress-save-status.is-error) {
+	background: rgba(127, 29, 29, 0.35);
+	border-color: rgba(248, 113, 113, 0.36);
+	color: #fecaca;
+}
+
+html.dark body .course-explorer :is(.progress-save-status.is-saving, .progress-save-status.is-unsaved) {
+	background: rgba(120, 53, 15, 0.32);
+	border-color: rgba(251, 191, 36, 0.34);
+	color: #fde68a;
 }
 
 html.dark body :is(.workspace-header, .workspace-sheet, .directory-section, .directory-card, .section-heading, .history-section, .history-panel, .session-tools, .tool-panel, .learner-progress-editor, .mail-card, .history-card, .preview, .admin-shell__body, .dialog-panel, .wheel-fallback) {
@@ -633,7 +645,7 @@ html.dark body :is(.workspace-eyebrow, .panel-eyebrow, .summary-label, .section-
 	color: var(--color-accent);
 }
 
-html.dark body :is(.workspace-header p:last-child, .section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-card__empty, .history-note__meta, .preview-meta, .association-copy, .stat-pill span, .directory-card-header p, .recipient-association, .tool-form label, .progress-check.is-item, .record-item small, .record-item span, .profile-card p, .profile-empty p, .tool-card p, .tuition-card p, .scheduler-loading-kicker, .dialog-description, .confirm-copy, .auth-switch, .auth-help, .scheduler-direct, .scheduler-fallback, .wheel-fallback p) {
+html.dark body :is(.workspace-header p:last-child, .section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-card__empty, .history-note__meta, .preview-meta, .association-copy, .stat-pill span, .directory-card-header p, .recipient-association, .tool-form label, .progress-check.is-item, .record-item small, .record-item span, .tools-summary small, .profile-card p, .profile-empty p, .tool-card p, .tuition-card p, .scheduler-loading-kicker, .dialog-description, .confirm-copy, .auth-switch, .auth-help, .scheduler-direct, .scheduler-fallback, .wheel-fallback p) {
 	color: var(--color-ink-soft);
 }
 

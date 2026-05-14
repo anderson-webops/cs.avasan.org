@@ -16,8 +16,29 @@ const routes = [
 	"/signup",
 	"/courses",
 	"/wheel",
+	"/teaching",
+	"/admin/people",
 	"/admin/mdmail",
 	"/admin/student-management"
+];
+const viewportScenarios = [
+	{ height: 900, name: "mobile", width: 390 },
+	{ height: 1000, name: "tablet", width: 768 },
+	{ height: 1000, name: "desktop", width: 1280 }
+];
+const mediaScenarios = [
+	{
+		colorScheme: "light",
+		name: "light",
+		prefersReducedMotion: "no-preference",
+		storedTheme: "light"
+	},
+	{
+		colorScheme: "dark",
+		name: "dark-reduced-motion",
+		prefersReducedMotion: "reduce",
+		storedTheme: "dark"
+	}
 ];
 
 const chromeCandidates = [
@@ -190,32 +211,63 @@ try {
 
 	const failures = [];
 	for (const route of routes) {
-		const url = `${baseUrl}${route}`;
-		const page = await browser.newPage();
-		await page.setViewport({ width: 1280, height: 1000, deviceScaleFactor: 1 });
-		await page.goto(url, { waitUntil: "networkidle0", timeout: 30_000 });
-		await page.addScriptTag({ path: axeSourcePath });
-		const result = await page.evaluate(async () => {
-			return await axe.run(document, {
-				resultTypes: ["violations"],
-				runOnly: {
-					type: "tag",
-					values: ["wcag2a", "wcag2aa"]
+		for (const viewport of viewportScenarios) {
+			for (const media of mediaScenarios) {
+				const url = `${baseUrl}${route}`;
+				const page = await browser.newPage();
+				await page.setViewport({
+					deviceScaleFactor: 1,
+					height: viewport.height,
+					width: viewport.width
+				});
+				await page.emulateMediaFeatures([
+					{ name: "prefers-color-scheme", value: media.colorScheme },
+					{
+						name: "prefers-reduced-motion",
+						value: media.prefersReducedMotion
+					}
+				]);
+				await page.evaluateOnNewDocument(storedTheme => {
+					window.localStorage.setItem("vueuse-color-scheme", storedTheme);
+				}, media.storedTheme);
+				await page.goto(url, {
+					timeout: 30_000,
+					waitUntil: "networkidle0"
+				});
+				await page.addScriptTag({ path: axeSourcePath });
+				const result = await page.evaluate(async () => {
+					return await axe.run(document, {
+						resultTypes: ["violations"],
+						runOnly: {
+							type: "tag",
+							values: ["wcag2a", "wcag2aa"]
+						}
+					});
+				});
+				await page.close();
+				const violations = result.violations.filter(
+					violation => violation.id !== "frame-tested"
+				);
+				if (violations.length) {
+					failures.push({
+						context: `${viewport.name}/${media.name}`,
+						url,
+						violations
+					});
+					continue;
 				}
-			});
-		});
-		await page.close();
-		const violations = result.violations.filter(violation => violation.id !== "frame-tested");
-		if (violations.length) {
-			failures.push({ url, violations });
-			continue;
+				console.log(
+					`a11y ok: ${url} (${viewport.name}, ${media.name})`
+				);
+			}
 		}
-		console.log(`a11y ok: ${url}`);
 	}
 
 	if (failures.length) {
 		for (const failure of failures) {
-			console.error(`\nAccessibility issues for ${failure.url}`);
+			console.error(
+				`\nAccessibility issues for ${failure.url} (${failure.context})`
+			);
 			for (const violation of failure.violations) {
 				console.error(`- [${violation.impact ?? "unknown"}] ${violation.id}: ${violation.help}`);
 				console.error(`  ${violation.helpUrl}`);

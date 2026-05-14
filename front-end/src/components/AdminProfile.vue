@@ -4,17 +4,17 @@ import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
 import AccessibleDialog from "@/components/AccessibleDialog.vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
-import LearnerCourseProgressEditor from "@/components/LearnerCourseProgressEditor.vue";
 import LearnerSessionTools from "@/components/LearnerSessionTools.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
-import { useLearnerCourseProgress } from "@/composables/useLearnerCourseProgress";
 import { ADMIN_RECIPIENT_NAMES } from "@/modules/adminRecipients";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
-const props = defineProps<{ mode?: "profile" | "manage" }>();
+const props = defineProps<{
+	mode?: "account" | "people" | "profile" | "manage";
+}>();
 
 /* -------------------------------------------------- */
 const app = useAppStore();
@@ -64,13 +64,10 @@ const confirmationDescription = computed(
 const confirmationConfirmLabel = computed(
 	() => confirmation.value?.confirmLabel ?? "Confirm"
 );
-const courseProgress = useLearnerCourseProgress(
-	users,
-	coursesStore.loadCourseById,
-	async () => {
-		await app.fetchUsers();
-	}
+const isPeopleMode = computed(
+	() => viewMode.value === "people" || viewMode.value === "manage"
 );
+const isAccountMode = computed(() => !isPeopleMode.value);
 
 /* editable helper for the admin card */
 const {
@@ -344,20 +341,6 @@ function onUserCourseToggle(
 	};
 }
 
-async function saveUserProgress(userID: string) {
-	try {
-		success.value = "";
-		error.value = "";
-		await courseProgress.saveProgress(userID);
-		success.value = "Saved learner progress.";
-	} catch (e: any) {
-		error.value =
-			e.response?.data?.message ??
-			e.message ??
-			"Unable to save learner progress";
-	}
-}
-
 async function saveUserEditorChanges(userID: string) {
 	try {
 		success.value = "";
@@ -515,23 +498,21 @@ function confirmDeleteAdmin() {
 			<div>
 				<p class="workspace-eyebrow">
 					{{
-						viewMode === "profile"
-							? "Administrator profile"
+						isAccountMode
+							? "Administrator account"
 							: "Administration"
 					}}
 				</p>
 				<h2>
 					{{
-						viewMode === "profile"
-							? "Account and teaching access"
-							: "Manage profiles"
+						isAccountMode ? "Account details" : "People and access"
 					}}
 				</h2>
 				<p>
 					{{
-						viewMode === "profile"
-							? "Review your admin account, set tutor course permissions, and shape each learner’s access from one shared workspace."
-							: "Handle role changes and account removals from the same structured workspace used across the rest of the site."
+						isAccountMode
+							? "Review your admin account and manage login security without mixing it with roster or course operations."
+							: "Manage tutors, learners, permissions, assignments, session tools, and role changes from the admin workspace."
 					}}
 				</p>
 			</div>
@@ -559,7 +540,7 @@ function confirmDeleteAdmin() {
 			{{ error }}
 		</p>
 
-		<template v-if="viewMode === 'profile'">
+		<template v-if="isAccountMode">
 			<article v-if="currentAdmin" class="workspace-sheet">
 				<div class="sheet-summary">
 					<div class="summary-block">
@@ -650,7 +631,9 @@ function confirmDeleteAdmin() {
 					</template>
 				</div>
 			</article>
+		</template>
 
+		<template v-else>
 			<section class="directory-section">
 				<div class="section-heading">
 					<div>
@@ -978,14 +961,6 @@ function confirmDeleteAdmin() {
 								</div>
 							</div>
 
-							<LearnerCourseProgressEditor
-								class="editor-block"
-								:course-label="courseLabel"
-								:progress="courseProgress"
-								:user-id="String(u._id)"
-								@save-progress="saveUserProgress(String(u._id))"
-							/>
-
 							<div class="action-row">
 								<button
 									class="btn-primary btn"
@@ -1008,9 +983,6 @@ function confirmDeleteAdmin() {
 					</article>
 				</div>
 			</section>
-		</template>
-
-		<template v-else>
 			<section class="directory-section">
 				<div class="section-heading">
 					<div>

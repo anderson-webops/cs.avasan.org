@@ -1,7 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { nextTick } from "vue";
 import ProfilePage from "@/pages/profile.vue";
 import { useAppStore } from "@/stores/app";
 
@@ -18,16 +17,12 @@ vi.mock("@/components/UserProfile.vue", () => ({
 	default: { template: "<section />" }
 }));
 
-describe("Profile page tabs", () => {
+describe("Profile page account routing", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
-		vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => {
-			callback(0);
-			return 0;
-		});
 	});
 
-	it("uses labelled tab and tabpanel relationships", async () => {
+	it("renders account content without embedding course-library tabs", async () => {
 		const app = useAppStore();
 		app.setCurrentUser({
 			_id: "user-1",
@@ -41,21 +36,9 @@ describe("Profile page tabs", () => {
 		});
 
 		const wrapper = mount(ProfilePage);
-		await nextTick();
 
-		const profileTab = wrapper.find("#profile-tab-profile");
-		expect(profileTab.attributes("role")).toBe("tab");
-		expect(profileTab.attributes("aria-controls")).toBe(
-			"profile-panel-profile"
-		);
-		expect(wrapper.find("#profile-panel-profile").attributes("role")).toBe(
-			"tabpanel"
-		);
-
-		await profileTab.trigger("keydown", { key: "ArrowRight" });
-		expect(wrapper.find("#profile-tab-courses").attributes("aria-selected")).toBe(
-			"true"
-		);
+		expect(wrapper.find('[role="tablist"]').exists()).toBe(false);
+		expect(wrapper.text()).not.toContain("Course library");
 		wrapper.unmount();
 	});
 });

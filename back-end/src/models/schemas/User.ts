@@ -48,6 +48,16 @@ const userSchema: Schema<IUser> = new Schema(
 					completedItemIds: {
 						type: [String],
 						default: []
+					},
+					updatedAt: { type: Date, default: undefined },
+					updatedBy: {
+						type: mongoose.Schema.Types.ObjectId,
+						default: undefined
+					},
+					updatedByRole: {
+						type: String,
+						enum: ["admin", "tutor"],
+						default: undefined
 					}
 				}
 			],

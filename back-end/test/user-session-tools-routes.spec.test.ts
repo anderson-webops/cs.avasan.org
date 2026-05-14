@@ -160,6 +160,17 @@ async function postJson(baseUrl: string, path: string, body: unknown, headers: R
 	});
 }
 
+async function putJson(baseUrl: string, path: string, body: unknown, headers: Record<string, string> = {}) {
+	return fetch(`${baseUrl}${path}`, {
+		method: "PUT",
+		headers: {
+			"content-type": "application/json",
+			...headers
+		},
+		body: JSON.stringify(body)
+	});
+}
+
 describe("user schedule and note-only routes", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
@@ -275,6 +286,43 @@ describe("user schedule and note-only routes", () => {
 				})
 			);
 			expect("deleteMany" in modelMocks).toBe(false);
+		});
+	});
+
+	it("stores course progress metadata for autosaved staff updates", async () => {
+		const save = vi.fn().mockResolvedValue(undefined);
+		const student = {
+			...makeStudent(),
+			courseAccess: ["javascript-level-1"],
+			courseProgress: [],
+			save
+		};
+		modelMocks.userFindById.mockImplementation(() => queryWith(student));
+
+		await withUserRoutes(async baseUrl => {
+			const response = await putJson(
+				baseUrl,
+				`/users/${studentID}/course-progress`,
+				{
+					courseId: "javascript-level-1",
+					completedModuleIds: ["module-1"],
+					completedItemIds: ["item-1"]
+				},
+				{ "x-admin-id": adminID.toString() }
+			);
+
+			expect(response.status).toBe(200);
+			expect(save).toHaveBeenCalledOnce();
+			expect(student.courseProgress[0]).toEqual(
+				expect.objectContaining({
+					completedItemIds: ["item-1"],
+					completedModuleIds: ["module-1"],
+					courseId: "javascript-level-1",
+					updatedBy: adminID,
+					updatedByRole: "admin"
+				})
+			);
+			expect(student.courseProgress[0].updatedAt).toBeInstanceOf(Date);
 		});
 	});
 

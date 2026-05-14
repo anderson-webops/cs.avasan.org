@@ -18,4 +18,7 @@ export interface CourseProgress {
 	courseId: string;
 	completedModuleIds: string[];
 	completedItemIds: string[];
+	updatedAt?: Date;
+	updatedBy?: Types.ObjectId;
+	updatedByRole?: "admin" | "tutor";
 }
