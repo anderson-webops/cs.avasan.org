@@ -205,4 +205,135 @@ describe("CourseExplorer.vue", () => {
 		);
 		expect(wrapper.text()).toContain("Saved");
 	});
+
+	it("renders starter code previews but hides solution previews for learners", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const assignedCourse = coursesStore.courses[0];
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: assignedCourse.id,
+			name: assignedCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Build from the starter.",
+							id: "starter-item",
+							projectLink:
+								"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs/starter",
+							solutionLink:
+								"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs/solution",
+							title: "Starter Project"
+						}
+					],
+					id: "module-1",
+					supplementalProjects: [],
+					title: "Module 1"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [assignedCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Preview starter code");
+		});
+
+		expect(wrapper.text()).not.toContain("Preview solution code");
+		expect(wrapper.text()).not.toContain("Solution repo");
+	});
+
+	it("renders solution code preview controls for staff course context", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const assignedCourse = coursesStore.courses[0];
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: assignedCourse.id,
+			name: assignedCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Compare the solution after attempting the starter.",
+							id: "starter-item",
+							projectLink:
+								"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs/starter",
+							solutionLink:
+								"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs/solution",
+							title: "Starter Project"
+						}
+					],
+					id: "module-1",
+					supplementalProjects: [],
+					title: "Module 1"
+				}
+			]
+		});
+
+		appStore.setCurrentTutor({
+			_id: "tutor-1",
+			name: "Tutor",
+			email: "tutor@example.com",
+			age: 30,
+			state: "GA",
+			usersOfTutorLength: 1,
+			coursePermissions: [assignedCourse.id],
+			editTutors: false,
+			saveEdit: "Save"
+		});
+
+		(api.get as any).mockResolvedValueOnce({
+			data: [
+				{
+					_id: "learner-1",
+					name: "Learner",
+					email: "learner@example.com",
+					age: 12,
+					state: "GA",
+					courseAccess: [assignedCourse.id],
+					courseProgress: [],
+					editUsers: false,
+					saveEdit: "Save"
+				}
+			]
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Preview code");
+		});
+
+		expect(wrapper.text()).toContain("Solution repo");
+	});
 });

@@ -586,6 +586,15 @@ html.dark .course-explorer {
 	--course-dataset-resource-bg-hover: #99460c;
 	--course-dataset-resource-text: #fff7ed;
 	--course-dataset-resource-host: #fed7aa;
+	--course-code-preview-bg: rgba(15, 25, 42, 0.96);
+	--course-code-preview-border: rgba(125, 211, 252, 0.26);
+	--course-code-preview-border-hover: rgba(125, 211, 252, 0.42);
+	--course-code-preview-button-bg: #17365c;
+	--course-code-preview-button-bg-hover: #1e4a7a;
+	--course-code-preview-button-text: #e0f2fe;
+	--course-code-preview-control-bg: #0b1320;
+	--course-code-preview-code-bg: #020617;
+	--course-code-preview-code-text: #e5eefb;
 	--course-shadow: 0 22px 46px -34px rgba(0, 0, 0, 0.72);
 }
 

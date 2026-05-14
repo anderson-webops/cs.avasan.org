@@ -392,6 +392,15 @@ async function addSignup() {
 	filter: brightness(0.96);
 }
 
+:global(html.dark) .text-button {
+	color: #bfdbfe;
+}
+
+:global(html.dark) .text-button:hover {
+	color: #dbeafe;
+	filter: none;
+}
+
 @media (max-width: 520px) {
 	.auth-actions {
 		flex-direction: column;

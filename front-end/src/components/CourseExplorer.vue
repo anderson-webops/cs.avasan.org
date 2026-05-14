@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { CodePreviewResource } from "@/modules/codePreview";
 import type { CourseProgress, User } from "@/stores/app";
 import type {
 	CourseDefinition,
@@ -17,6 +18,7 @@ import {
 import { api } from "@/api";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
+import CodePreview from "./CodePreview.vue";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
 
 const props = withDefaults(
@@ -784,6 +786,25 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	return links;
 }
 
+function codePreviewResources(item: CourseModuleItem): CodePreviewResource[] {
+	return resourceLinks(item)
+		.filter(
+			(
+				resource
+			): resource is ResourceLink & {
+				kind: "project" | "solution";
+			} =>
+				(resource.kind === "project" || resource.kind === "solution") &&
+				resource.host === "github.com"
+		)
+		.map(resource => ({
+			kind: resource.kind,
+			label: resource.label,
+			url: resource.url,
+			host: resource.host
+		}));
+}
+
 watch(selectedCourseId, value => {
 	if (!isStorageReady.value) return;
 	writeStoredValue(COURSE_SELECTION_STORAGE_KEY, value);
@@ -902,16 +923,18 @@ function writeStoredValue(key: string, value: string) {
 					<div v-if="hasProgressTracking" class="stat is-progress">
 						<dt>Done</dt>
 						<dd>
-							{{ courseStats.completedModuleCount }}/{{
-								courseStats.moduleCount
-							}}
+							<span>
+								{{ courseStats.completedModuleCount }}/{{
+									courseStats.moduleCount
+								}}
+							</span>
+							<small>
+								{{ courseStats.completedItemCount }}/{{
+									courseStats.totalItemCount
+								}}
+								items
+							</small>
 						</dd>
-						<small>
-							{{ courseStats.completedItemCount }}/{{
-								courseStats.totalItemCount
-							}}
-							items
-						</small>
 					</div>
 				</dl>
 			</header>
@@ -1276,6 +1299,14 @@ function writeStoredValue(key: string, value: string) {
 										</a>
 									</div>
 
+									<CodePreview
+										v-if="
+											codePreviewResources(item).length >
+											0
+										"
+										:resources="codePreviewResources(item)"
+									/>
+
 									<LazyMarkdownContent
 										v-if="item.content"
 										:content="item.content"
@@ -1406,6 +1437,14 @@ function writeStoredValue(key: string, value: string) {
 											</small>
 										</a>
 									</div>
+
+									<CodePreview
+										v-if="
+											codePreviewResources(item).length >
+											0
+										"
+										:resources="codePreviewResources(item)"
+									/>
 
 									<LazyMarkdownContent
 										v-if="item.content"
