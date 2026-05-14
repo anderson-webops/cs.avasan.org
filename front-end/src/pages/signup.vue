@@ -16,6 +16,8 @@ const MAX_FRAME_HEIGHT = 2200;
 const schedulerLoaded = ref(false);
 const schedulerTimedOut = ref(false);
 const schedulerHeight = ref(MIN_FRAME_HEIGHT);
+const customerPortalUrl = ref(`${schedulerUrl}portal`);
+const customerPortalLabel = ref("Open the customer portal");
 let schedulerLoadTimeout: number | undefined;
 
 useHead({
@@ -48,6 +50,24 @@ function handleSchedulerMessage(event: MessageEvent) {
 		MIN_FRAME_HEIGHT,
 		Math.min(MAX_FRAME_HEIGHT, Math.ceil(payload.height))
 	);
+
+	if (typeof payload.customerPortalUrl === "string") {
+		try {
+			const portalUrl = new URL(payload.customerPortalUrl);
+			if (portalUrl.origin === SCHEDULER_ORIGIN) {
+				customerPortalUrl.value = portalUrl.toString();
+			}
+		} catch {
+			// Ignore malformed iframe messages and keep the safe default link.
+		}
+	}
+
+	if (
+		typeof payload.customerPortalLabel === "string" &&
+		payload.customerPortalLabel.trim()
+	) {
+		customerPortalLabel.value = payload.customerPortalLabel.trim();
+	}
 }
 
 function markSchedulerLoaded() {
@@ -80,8 +100,8 @@ onBeforeUnmount(() => {
 				Book a Time &amp; Send the Context That Matters
 			</h1>
 			<p class="page-copy">
-				Use the scheduler below to book a one-time or recurring
-				50-minute class. Prefer email? Reach me at
+				Use the scheduler below to book a one-time or recurring 30- or
+				60-minute class. Prefer email? Reach me at
 				<a class="text-link" href="mailto:classes@jacobdanderson.net">
 					classes@jacobdanderson.net
 				</a>
@@ -103,6 +123,18 @@ onBeforeUnmount(() => {
 						(opens in a new tab)</span
 					>.
 				</a>
+				<span class="scheduler-direct__portal">
+					Already booked and need to change a class?
+					<a
+						class="text-link"
+						:href="customerPortalUrl"
+						rel="noopener"
+						target="_blank"
+					>
+						{{ customerPortalLabel
+						}}<span class="sr-only"> (opens in a new tab)</span>.
+					</a>
+				</span>
 			</p>
 			<div
 				v-if="!schedulerLoaded"
@@ -290,6 +322,11 @@ onBeforeUnmount(() => {
 	font-size: 0.95rem;
 	color: var(--color-ink-soft);
 	text-align: center;
+}
+
+.scheduler-direct__portal {
+	display: block;
+	margin-top: 0.35rem;
 }
 
 .scheduler-error {
