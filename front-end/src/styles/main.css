@@ -705,7 +705,7 @@ html.dark body :is(.summary-count, .count-pill, .history-note__badge, .recipient
 	color: var(--color-accent-strong);
 }
 
-html.dark body :is(.checkbox-grid label, .progress-check, .tool-form label, .field, .manual-recipient, .editor-block, .assignment-editor, .course-editor, .field-item, .field-row, .profile-field) {
+html.dark body :is(.checkbox-grid label, .progress-check, .tool-form label, .manual-recipient, .editor-block, .assignment-editor, .course-editor, .field-item, .field-row, .profile-field) {
 	background: var(--color-surface-inset);
 	border-color: var(--color-border);
 	color: var(--color-ink);
