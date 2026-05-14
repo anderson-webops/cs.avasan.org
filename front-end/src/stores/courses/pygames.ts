@@ -583,18 +583,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-2/solution"
 				},
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-sur/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-sur/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-3/solution"
 				}
 			]
 		},
@@ -921,18 +921,18 @@ export const pyGamesCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-s/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-s/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-supplemental-2/solution"
 				},
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-s/starter",
+						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-s/solution"
+						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-supplemental-3/solution"
 				}
 			]
 		},

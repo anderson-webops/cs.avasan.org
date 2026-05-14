@@ -2246,20 +2246,26 @@ function addUnityFullProjectWorkflowModules(
 				title: "UGD8 Project 1: Starter Repo Specification",
 				content:
 					"**Project goal:** Inspect and extend the full starter project baseline for one Unity module: scenes, scripts, prefabs, tests, packages, project settings, docs, LFS rules, and attribution file.\n\n**Completion checks:**\n- The starter state is cloneable and playable.\n- Hidden solution work is not included.\n- Validation steps are documented.",
-				projectLink: repoFolderUrl(courseId, "UGD-FullProject-Starter"),
+				projectLink: repoFolderUrl(
+					courseId,
+					"UGD-full-project-starter"
+				),
 				solutionLink: repoFolderUrl(
 					courseId,
-					"UGD-FullProject-Solution"
+					"UGD-full-project-solution"
 				)
 			},
 			{
 				title: "UGD8 Project 2: Capstone Milestone Plan",
 				content:
 					"**Project goal:** Use the linked full-project baseline to write a capstone milestone plan from prototype to vertical slice, alpha, beta, final build, and demo.\n\n**Completion checks:**\n- Every milestone has a playable outcome.\n- Scope cuts are identified.\n- Testing/build/attribution tasks are scheduled before the final week.",
-				projectLink: repoFolderUrl(courseId, "UGD-FullProject-Starter"),
+				projectLink: repoFolderUrl(
+					courseId,
+					"UGD-full-project-starter"
+				),
 				solutionLink: repoFolderUrl(
 					courseId,
-					"UGD-FullProject-Solution"
+					"UGD-full-project-solution"
 				)
 			}
 		]

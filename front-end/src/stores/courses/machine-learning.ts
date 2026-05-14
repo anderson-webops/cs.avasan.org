@@ -41,20 +41,6 @@ export const machineLearningCourse: RawCourse = {
 						"Extend the work from ML0 Setup, Tooling, and Data Workflow with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification"
-				},
-				{
-					title: "Simple Polynomial Regression",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to ML0 Setup, Tooling, and Data Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Polynomial-Regression"
-				},
-				{
-					title: "Simple Polynomial Regression",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to ML0 Setup, Tooling, and Data Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Polynomial-Regression-Starter"
 				}
 			]
 		},
@@ -121,20 +107,6 @@ export const machineLearningCourse: RawCourse = {
 						"https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/639388c2cbc2120a14dcf466e85730eb8be498bb/iris.csv",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ml1_supplemental_project_1.mp4"
-				},
-				{
-					title: "Simple Polynomial Regression",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to ML1 K-Means Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Polynomial-Regression-Updated"
-				},
-				{
-					title: "Weather Image Classifier",
-					content:
-						"Use the linked starter and solution for a supplemental project tied to ML1 K-Means Clustering. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
-					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML7-Weather-Image-Classifier"
 				}
 			]
 		},
@@ -330,18 +302,18 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ML3.5 Decision Trees and Interpretable Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-05-ml3-5-decision-trees-and-interpretable-models-su/starter",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-05-ml3-5-decision-trees-and-interpretable-models-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-05-ml3-5-decision-trees-and-interpretable-models-su/solution"
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-05-ml3-5-decision-trees-and-interpretable-models-supplemental-2/solution"
 				},
 				{
 					title: "ML3.5 Decision Trees and Interpretable Models supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ML3.5 Decision Trees and Interpretable Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-06-ml3-5-decision-trees-and-interpretable-models-su/starter",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-06-ml3-5-decision-trees-and-interpretable-models-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-06-ml3-5-decision-trees-and-interpretable-models-su/solution"
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-06-ml3-5-decision-trees-and-interpretable-models-supplemental-3/solution"
 				}
 			]
 		},
@@ -675,18 +647,18 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ML7.5 Model Evaluation, Comparison, and Dataset Strategy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-15-ml7-5-model-evaluation-comparison-and-dataset-st/starter",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-15-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-15-ml7-5-model-evaluation-comparison-and-dataset-st/solution"
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-15-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-2/solution"
 				},
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to ML7.5 Model Evaluation, Comparison, and Dataset Strategy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-16-ml7-5-model-evaluation-comparison-and-dataset-st/starter",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-16-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-16-ml7-5-model-evaluation-comparison-and-dataset-st/solution"
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-16-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-3/solution"
 				}
 			]
 		},
@@ -847,18 +819,18 @@ export const machineLearningCourse: RawCourse = {
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Customer Segmentation Interview. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-21-applied-studio-13-customer-segmentation-intervie/starter",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-21-applied-studio-13-customer-segmentation-interview-supplemental-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-21-applied-studio-13-customer-segmentation-intervie/solution"
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-21-applied-studio-13-customer-segmentation-interview-supplemental-2/solution"
 				},
 				{
 					title: "Applied Studio 13: Customer Segmentation Interview supplemental 3",
 					content:
 						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: Customer Segmentation Interview. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
 					projectLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-22-applied-studio-13-customer-segmentation-intervie/starter",
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-22-applied-studio-13-customer-segmentation-interview-supplemental-3/starter",
 					solutionLink:
-						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-22-applied-studio-13-customer-segmentation-intervie/solution"
+						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-22-applied-studio-13-customer-segmentation-interview-supplemental-3/solution"
 				}
 			]
 		},
