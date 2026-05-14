@@ -254,7 +254,7 @@ function lessonArcContent(items: RawCourseModuleItem[]) {
 		return `${index + 1}) ${title}: ${content}`;
 	});
 
-	return `Use this as one instructor-led lesson arc covering these sections in sequence: ${points.join("; ")}.`;
+	return `This lesson arc covers these sections in sequence: ${points.join("; ")}.`;
 }
 
 function enrichBriefConceptLesson(item: RawCourseModuleItem) {
@@ -262,7 +262,7 @@ function enrichBriefConceptLesson(item: RawCourseModuleItem) {
 
 	return {
 		...item,
-		content: `${compactWhitespace(item.content)} In discussion, define the core vocabulary, model one concrete example, ask the student to predict or explain the next step, and connect the idea to the module project before moving on.`
+		content: `${compactWhitespace(item.content)} Define the core vocabulary, study one concrete example, predict or explain the next step, and connect the idea to the module project before moving on.`
 	};
 }
 
@@ -270,7 +270,7 @@ function groupConceptLessons(items: RawCourseModuleItem[]) {
 	if (items.length <= 4) {
 		return [
 			{
-				title: "Core Concepts and Teaching Flow",
+				title: "Core Concepts and Learning Sequence",
 				content: lessonArcContent(items)
 			}
 		];
@@ -279,7 +279,7 @@ function groupConceptLessons(items: RawCourseModuleItem[]) {
 	const midpoint = Math.ceil(items.length / 2);
 	return [
 		{
-			title: "Core Concepts and Teaching Flow",
+			title: "Core Concepts and Learning Sequence",
 			content: lessonArcContent(items.slice(0, midpoint))
 		},
 		{
@@ -335,7 +335,7 @@ interface CourseTextContext {
 }
 
 const structuredSupportPattern =
-	/\*\*(?:Project goal|Teaching flow|Diagnostic guidance|Remote investigation|Science explanation|Studio focus|AP connection):?\*\*/i;
+	/\*\*(?:Project goal|Teaching flow|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Remote investigation|Science explanation|Studio focus|AP connection):?\*\*/i;
 
 const placeholderContentPattern =
 	/\b(?:introduce the main goal|build the central artifact|define the success criteria|use the .* snapshot|alternate supplemental snapshot)\b/i;
@@ -345,6 +345,157 @@ const scienceEvidencePattern =
 function wordCount(text: string) {
 	const words = compactWhitespace(text).match(/\b[\w'+-]+\b/g);
 	return words ? words.length : 0;
+}
+
+function capitalizeFirstLetter(value: string) {
+	return `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+}
+
+function capitalizeMatchedFirstLetter(_match: string, first: string) {
+	return capitalizeFirstLetter(first);
+}
+
+function keepMatchedFirstLetter(_match: string, first: string) {
+	return first;
+}
+
+function beforeStartingMatchedFirstLetter(_match: string, first: string) {
+	return `Before starting, ${first}`;
+}
+
+function toMatchedFirstLetter(_match: string, first: string) {
+	return `to ${first}`;
+}
+
+function enoughToMatchedFirstLetter(_match: string, first: string) {
+	return `enough to ${first}`;
+}
+
+function repeatedlyMatchedFirstLetter(_match: string, first: string) {
+	return `Repeatedly ${first}`;
+}
+
+function lowercaseRepeatedlyMatchedFirstLetter(_match: string, first: string) {
+	return `repeatedly ${first}`;
+}
+
+function neutralizeStudentFacingText(text: string) {
+	return text
+		.replace(
+			/\bCore Concepts and Teaching Flow\b/g,
+			"Core Concepts and Learning Sequence"
+		)
+		.replace(/\*\*Teaching flow:\*\*/gi, "**Learning sequence:**")
+		.replace(/\*\*Diagnostic guidance:\*\*/gi, "**Readiness check:**")
+		.replace(/\*\*Misconception check:\*\*/gi, "**Common pitfalls:**")
+		.replace(/\*\*Exit check:\*\*/gi, "**Mastery check:**")
+		.replace(
+			/Use this as one instructor-led lesson arc covering these sections in sequence:/gi,
+			"This lesson arc covers these sections in sequence:"
+		)
+		.replace(
+			/Treat this as an instructor-led explanation of ([^.]+)\./gi,
+			"This lesson introduces $1."
+		)
+		.replace(/\bTreat this module as\b/gi, "This module functions as")
+		.replace(/\bTreat this as the anchor for\b/gi, "This is the anchor for")
+		.replace(/\bTreat this as\b/gi, "Use this as")
+		.replace(/\binstructor-provided\b/gi, "provided")
+		.replace(/\binstructor-approved\b/gi, "approved")
+		.replace(/\binstructor-authored\b/gi, "authored")
+		.replace(/\binstructor references\b/gi, "internal references")
+		.replace(/\bteacher-provided\b/gi, "provided")
+		.replace(/\bteacher requirement\b/gi, "course requirement")
+		.replace(/\bstudent-facing course\b/gi, "visible course")
+		.replace(/\bstudent-facing\b/gi, "visible")
+		.replace(
+			/\bthe tutor should know whether\b/gi,
+			"the priority indicates whether"
+		)
+		.replace(
+			/\bthe tutor should be able to\b/gi,
+			"the course should make it possible to"
+		)
+		.replace(
+			/\bThe tutor should be able to\b/g,
+			"The course should make it possible to"
+		)
+		.replace(/\bA future tutor can\b/g, "A future reviewer can")
+		.replace(/\bA tutor can\b/g, "The course makes it possible to")
+		.replace(/\ba tutor can\b/g, "the course makes it possible to")
+		.replace(/\btutor-ready\b/gi, "review-ready")
+		.replace(/\btutor-visible\b/gi, "solution-visible")
+		.replace(/\btutor notes\b/gi, "review notes")
+		.replace(
+			/\bso the tutor is not forced to improvise\b/gi,
+			"so the materials are not improvised"
+		)
+		.replace(
+			/\bBefore starting, have the student ([a-z])/g,
+			beforeStartingMatchedFirstLetter
+		)
+		.replace(/\bHave the student ([a-z])/g, capitalizeMatchedFirstLetter)
+		.replace(/\bHave students ([a-z])/g, capitalizeMatchedFirstLetter)
+		.replace(/\bAsk the student to ([a-z])/g, capitalizeMatchedFirstLetter)
+		.replace(/\bAsk students to ([a-z])/g, capitalizeMatchedFirstLetter)
+		.replace(/\bAsk the student why\b/g, "Consider why")
+		.replace(/\bAsk the student\b/g, "Consider")
+		.replace(/\bask the student to ([a-z])/g, keepMatchedFirstLetter)
+		.replace(
+			/\bso the student can work faster, with less prompting, and with cleaner reasoning\b/gi,
+			"to build speed, independence, and cleaner reasoning"
+		)
+		.replace(/\bso the student can ([a-z])/g, toMatchedFirstLetter)
+		.replace(
+			/\benough that the student can ([a-z])/g,
+			enoughToMatchedFirstLetter
+		)
+		.replace(
+			/\bThe course should repeatedly ask students to ([a-z])/g,
+			repeatedlyMatchedFirstLetter
+		)
+		.replace(
+			/\bthe course should repeatedly ask students to ([a-z])/g,
+			lowercaseRepeatedlyMatchedFirstLetter
+		)
+		.replace(/\bAsk students why\b/g, "Explain why")
+		.replace(/\bask students why\b/g, "explain why")
+		.replace(/\bAsk students what\b/g, "Consider what")
+		.replace(/\bask students what\b/g, "consider what")
+		.replace(/\bAsk students whether\b/g, "Evaluate whether")
+		.replace(/\bask students whether\b/g, "evaluate whether")
+		.replace(/\bAsk students to ([a-z])/g, capitalizeMatchedFirstLetter)
+		.replace(/\bask students to ([a-z])/g, keepMatchedFirstLetter)
+		.replace(/\bhave students ([a-z])/g, keepMatchedFirstLetter)
+		.replace(/\bLet the student ([a-z])/g, capitalizeMatchedFirstLetter)
+		.replace(/\blet the student ([a-z])/g, keepMatchedFirstLetter)
+		.replace(/\bThe student should be able to\b/g, "Be able to")
+		.replace(/\bStudents should be able to\b/g, "Be able to")
+		.replace(/\bthe student should be able to\b/g, "be able to")
+		.replace(/\bstudents should be able to\b/g, "be able to")
+		.replace(/\bThe student should\b/g, "The expected result should")
+		.replace(/\bStudents should\b/g, "The expected result should")
+		.replace(/\bthe student should\b/g, "the expected result should")
+		.replace(/\bstudents should\b/g, "the expected result should")
+		.replace(/\bThe student has tested or justified\b/g, "Test or justify")
+		.replace(/\bthe student has tested or justified\b/g, "test or justify")
+		.replace(/\bThe student tests\b/g, "Test")
+		.replace(/\bthe student tests\b/g, "test")
+		.replace(/\bThe student can ([a-z])/g, capitalizeMatchedFirstLetter)
+		.replace(/\bthe student can ([a-z])/g, keepMatchedFirstLetter);
+}
+
+function neutralizeStudentFacingCourseText(course: RawCourse) {
+	for (const module of course.modules) {
+		module.title = neutralizeStudentFacingText(module.title);
+
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				item.title = neutralizeStudentFacingText(item.title);
+				item.content = neutralizeStudentFacingText(item.content);
+			}
+		}
+	}
 }
 
 function contextText(context: CourseTextContext) {
@@ -385,7 +536,7 @@ function needsContentSupport(context: CourseTextContext) {
 	return (
 		placeholderContentPattern.test(content) ||
 		isBriefContent(content) ||
-		/Core Concepts and Teaching Flow|Application, Misconceptions, and Readiness Check/.test(
+		/Core Concepts and Learning Sequence|Application, Misconceptions, and Readiness Check/.test(
 			context.item.title
 		) ||
 		isAppliedStudioContext(context) ||
@@ -447,7 +598,7 @@ function subjectFocus(context: CourseTextContext) {
 		return "mathematical reasoning: worked examples, notation, graph or table interpretation, and explanation of each step";
 	}
 
-	return "the module's core concept, a concrete worked example, and a testable student artifact";
+	return "the module's core concept, a concrete worked example, and a testable artifact";
 }
 
 function projectExpectations(context: CourseTextContext) {
@@ -555,8 +706,8 @@ function completionChecks(context: CourseTextContext) {
 	if (/usaco|competitive/.test(source)) {
 		return [
 			"- The solution passes the sample input/output exactly.",
-			"- The student tests a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.",
-			"- The student states the time complexity and why it fits the expected constraints."
+			"- Test a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.",
+			"- State the time complexity and why it fits the expected constraints."
 		];
 	}
 	if (/web|html|css|api|database|full-stack/.test(source)) {
@@ -576,7 +727,7 @@ function completionChecks(context: CourseTextContext) {
 	if (/science|physics|chemistry|biology|earth|ecosystem/.test(source)) {
 		return [
 			"- The explanation names the phenomenon, the model or data source, and the target vocabulary.",
-			"- The student separates observation from inference.",
+			"- Separate observation from inference.",
 			"- The final answer includes a claim, evidence, and reasoning connection."
 		];
 	}
@@ -584,7 +735,7 @@ function completionChecks(context: CourseTextContext) {
 	return [
 		"- The work runs or presents cleanly from a fresh start.",
 		"- Normal, boundary, and awkward cases have been checked.",
-		"- The student can explain the main logic, data structure, or design decision without reading the code line by line."
+		"- Explain the main logic, data structure, or design decision without reading the code line by line."
 	];
 }
 
@@ -607,12 +758,12 @@ function extensionPrompt(context: CourseTextContext) {
 		return "Apply the same model to a new example and explain what would change if one variable were different.";
 	}
 
-	return "Add one small feature that forces the student to reuse the same concept in a new situation rather than only decorating the output.";
+	return "Add one small feature that requires reusing the same concept in a new situation rather than only decorating the output.";
 }
 
 function projectSupport(context: CourseTextContext) {
 	return [
-		`**Project goal:** Use this build to turn the prompt into a concrete artifact that demonstrates ${subjectFocus(context)}. Before starting, have the student restate the requirements, identify the expected inputs or state, and name what the finished output should show.`,
+		`**Project goal:** Use this build to turn the prompt into a concrete artifact that demonstrates ${subjectFocus(context)}. Before starting, restate the requirements, identify the expected inputs or state, and name what the finished output should show.`,
 		`**Required outcome:**\n${projectExpectations(context).join("\n")}`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`
@@ -621,26 +772,26 @@ function projectSupport(context: CourseTextContext) {
 
 function lessonSupport(context: CourseTextContext) {
 	return [
-		`**Teaching flow:** Treat this as an instructor-led explanation of ${subjectFocus(context)}. Define the vocabulary first, model one concrete example, ask the student to predict the next step, and then connect the example back to the project or practice task in this module.`,
-		"**Misconception check:** Pause for one likely mistake, such as mixing up a value with its representation, using the wrong loop or condition, assuming hidden state, or skipping the reason a step is valid.",
-		"**Exit check:** The student should explain the idea in their own words and complete one small transfer task without copying the demonstration."
+		`**Learning sequence:** This lesson introduces ${subjectFocus(context)}. Start with vocabulary, work through one concrete example, predict the next step, and connect the example back to the project or practice task in this module.`,
+		"**Common pitfalls:** Watch for likely mistakes such as mixing up a value with its representation, using the wrong loop or condition, assuming hidden state, or skipping the reason a step is valid.",
+		"**Mastery check:** Explain the idea in your own words and complete one small transfer task without copying the demonstration."
 	].join("\n\n");
 }
 
 function diagnosticSupport(context: CourseTextContext) {
 	return [
-		`**Diagnostic guidance:** Use this as a formative check of ${subjectFocus(context)}, not as a pass/fail quiz. Let the student attempt the prompt independently first, then use targeted questions to reveal whether the issue is vocabulary, tracing, syntax, design, or test coverage.`,
-		"**Evidence of proficiency:** The student can explain the rule, apply it to a new example, correct a small mistake, and describe how they know the result is correct.",
-		"**If the student struggles:** Record the specific misconception, assign one focused remediation problem, and revisit the same skill before moving to a more complex project.",
-		`**Extension:** Ask a fast student to modify the prompt so it still uses the same concept but changes one constraint, input shape, or edge case.`
+		`**Readiness check:** Use this as a formative check of ${subjectFocus(context)}, not as a pass/fail quiz. Attempt the prompt independently first, then use the result to identify whether the issue is vocabulary, tracing, syntax, design, or test coverage.`,
+		"**Evidence of proficiency:** Explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be correct.",
+		"**If this is difficult:** Record the specific misconception, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.",
+		`**Extension:** Modify the prompt so it still uses the same concept but changes one constraint, input shape, or edge case.`
 	].join("\n\n");
 }
 
 function scienceSupport(context: CourseTextContext) {
 	return [
 		"**Remote investigation:** Use shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. Do not require beakers, kits, or household materials; any physical demonstration should be optional and replaceable with a diagram or data table.",
-		`**Science explanation:** Anchor the activity in ${subjectFocus(context)}. Students should first record observations, then build or annotate a model, and only then write the explanation.`,
-		"**Student output:** Require a claim-evidence-reasoning response, a labeled diagram or data table, and one prediction about a changed condition.",
+		`**Science explanation:** Anchor the activity in ${subjectFocus(context)}. Record observations first, then build or annotate a model, and only then write the explanation.`,
+		"**Output:** Complete a claim-evidence-reasoning response, a labeled diagram or data table, and one prediction about a changed condition.",
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`
 	].join("\n\n");
 }
@@ -674,13 +825,13 @@ function studioArtifact(context: CourseTextContext) {
 		return "a notebook or script that turns a defined dataset or state space into measured, interpreted output";
 	}
 
-	return "a working artifact with explicit requirements, test cases, and a short student explanation";
+	return "a working artifact with explicit requirements, test cases, and a short explanation";
 }
 
 function studioSupport(context: CourseTextContext) {
 	return [
 		`Use this studio as a complete build-and-review session for **${context.item.title}**. The expected artifact is ${studioArtifact(context)}, and the session should be anchored in ${subjectFocus(context)} rather than left as an open-ended placeholder.`,
-		"**Studio focus:** Start by naming the problem, prerequisite concepts, and success criteria. The student should know what they are building, what constraints matter, and what evidence will prove the work is correct.",
+		"**Studio focus:** Start by naming the problem, prerequisite concepts, and success criteria. The build should make clear what is being created, what constraints matter, and what evidence will prove the work is correct.",
 		`**Build sequence:**\n${projectExpectations(context).join("\n")}\n- Review the result against the original goal and record at least one improvement or bug fix.`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`
@@ -1238,5 +1389,6 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	applyResearchBackedExpansions(id, course);
 	applyCourseImplementationArtifacts(id, course);
 	normalizeCourseTextQuality(course, id);
+	neutralizeStudentFacingCourseText(course);
 	return course;
 }
