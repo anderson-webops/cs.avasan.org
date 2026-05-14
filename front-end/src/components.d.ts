@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AccessibleDialog: typeof import('./components/AccessibleDialog.vue')['default']
     AccountManagement: typeof import('./components/AccountManagement.vue')['default']
     AccountSecurity: typeof import('./components/AccountSecurity.vue')['default']
     AdminProfile: typeof import('./components/AdminProfile.vue')['default']

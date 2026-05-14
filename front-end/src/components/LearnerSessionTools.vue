@@ -114,6 +114,10 @@ function notePreview(markdown: string) {
 	return markdown.replace(/\s+/g, " ").trim().slice(0, 180);
 }
 
+function statusSelectLabel(session: ScheduledSessionRecord) {
+	return `Update status for ${session.title} on ${formatDateTime(session.startAt)}`;
+}
+
 async function loadSessionTools() {
 	if (!props.userId) return;
 
@@ -280,8 +284,15 @@ async function createSessionNote() {
 			<p v-if="loading" class="muted-copy">
 				Loading schedule and notes...
 			</p>
-			<p v-if="error" class="error-copy">{{ error }}</p>
-			<p v-if="success" class="success-copy">{{ success }}</p>
+			<p v-if="error" class="error-copy" role="alert">{{ error }}</p>
+			<p
+				v-if="success"
+				class="success-copy"
+				role="status"
+				aria-live="polite"
+			>
+				{{ success }}
+			</p>
 
 			<div class="tools-grid">
 				<section class="tool-panel">
@@ -394,6 +405,7 @@ async function createSessionNote() {
 							</div>
 							<select
 								:value="session.status"
+								:aria-label="statusSelectLabel(session)"
 								:disabled="saving"
 								@change="
 									updateSessionStatus(

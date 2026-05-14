@@ -4,6 +4,7 @@ import type { AxiosError } from "axios";
 import { storeToRefs } from "pinia";
 import { computed, ref } from "vue";
 import { api } from "@/api";
+import AccessibleDialog from "@/components/AccessibleDialog.vue";
 import { useAppStore } from "@/stores/app";
 
 const app = useAppStore();
@@ -18,6 +19,11 @@ const errorLogin = ref("");
 
 function changeLoginView(show: boolean) {
 	app.setLoginBlock(show);
+}
+
+function openSignupFromLogin() {
+	changeLoginView(false);
+	changeSignupView(true);
 }
 
 async function loginTutor() {
@@ -110,399 +116,288 @@ async function addSignup() {
 
 <template>
 	<div>
-		<!----------------
-    -   Login Form   -
-    ----------------->
+		<AccessibleDialog
+			close-label="Close login dialog"
+			description="Log in with the email and password connected to your classes account."
+			dialog-id="login-dialog"
+			:open="loginBlock"
+			title="Log in"
+			@close="changeLoginView(false)"
+		>
+			<form class="auth-form loginForm" @submit.prevent="loginTutor">
+				<label for="uname">Email</label>
+				<input
+					id="uname"
+					v-model="loginEmail"
+					autocomplete="email"
+					placeholder="Enter Email"
+					required
+					type="email"
+				/>
 
-		<!-- The Modal -->
-		<div :class="{ showLogin: loginBlock }" class="loginForm modal">
-			<!-- Modal Content -->
-			<form class="animate modal-content" @submit.prevent="loginTutor">
-				<span
-					class="close"
-					title="Close Modal"
-					@click="changeLoginView(false)"
-					>&times;</span
+				<label for="psw1">Password</label>
+				<input
+					id="psw1"
+					v-model="loginPassword"
+					autocomplete="current-password"
+					placeholder="Enter Password"
+					required
+					type="password"
+				/>
+
+				<label class="remember">
+					<input
+						v-model="rememberMe"
+						name="remember"
+						type="checkbox"
+					/>
+					Remember me
+				</label>
+
+				<p
+					v-if="errorLogin"
+					id="login-error"
+					class="error"
+					role="alert"
 				>
+					{{ errorLogin }}
+				</p>
 
-				<div class="imgcontainer">
-					<img
-						alt="Avatar"
-						class="avatar"
-						height="500"
-						loading="lazy"
-						src="https://www.w3schools.com/howto/img_avatar2.png"
-						width="500"
-					/>
-				</div>
-
-				<div class="container">
-					<label for="uname"><b>Email</b></label>
-					<input
-						id="uname"
-						v-model="loginEmail"
-						placeholder="Enter Email"
-						required
-						type="email"
-					/>
-
-					<label for="psw1"><b>Password</b></label>
-					<input
-						id="psw1"
-						v-model="loginPassword"
-						placeholder="Enter Password"
-						required
-						type="password"
-					/>
-
+				<div class="auth-actions">
 					<button class="button" type="submit">Login</button>
-					<label class="remember">
-						<input
-							v-model="rememberMe"
-							name="remember"
-							type="checkbox"
-						/>
-						Remember me
-					</label>
-					<span class="signup"
-						>Don't have an account?
-						<a
-							href="#"
-							@click="
-								changeLoginView(false);
-								changeSignupView(true);
-							"
-							>Sign Up</a
-						></span
-					>
-				</div>
-
-				<div class="container" style="background-color: #f1f1f1">
 					<button
-						class="cancelbtn"
+						class="button secondary"
 						type="button"
 						@click="changeLoginView(false)"
 					>
 						Cancel
 					</button>
-					<p v-if="errorLogin" class="error loginError">
-						{{ errorLogin }}
-					</p>
-					<span class="psw">Forgot <a href="#">password?</a></span>
 				</div>
-			</form>
-		</div>
 
-		<!-- ─── The Sign-Up Modal ──────────────────────────────────────────────── -->
-		<div :class="{ showSignup: signupBlock }" class="modal signupForm">
-			<form class="modal-content animate" @submit.prevent="addSignup">
-				<span class="close" @click="changeSignupView(false)"
-					>&times;</span
-				>
-
-				<div class="container">
-					<h1 class="mb-2">Sign Up</h1>
-					<p>Please fill in this form to create a new account.</p>
-					<hr />
-
-					<!-- ─── Common Fields ─────────────────────────────────────────────── -->
-					<label for="name"><b>Name</b></label>
-					<input
-						id="name"
-						v-model="name"
-						placeholder="Enter Name"
-						required
-						type="text"
-					/>
-
-					<label for="age"><b>Age</b></label>
-					<input
-						id="age"
-						v-model="age"
-						placeholder="Enter Age"
-						required
-						type="text"
-					/>
-
-					<label for="state"><b>State</b></label>
-					<input
-						id="state"
-						v-model="state"
-						placeholder="Enter State"
-						required
-						type="text"
-					/>
-
-					<label for="email"><b>Email</b></label>
-					<input
-						id="email"
-						v-model="email"
-						placeholder="Enter Email"
-						required
-						type="email"
-					/>
-
-					<label for="psw2"><b>Password</b></label>
-					<input
-						id="psw2"
-						v-model="password"
-						placeholder="Enter Password"
-						required
-						type="password"
-					/>
-
-					<label for="psw-repeat"><b>Repeat Password</b></label>
-					<input
-						id="psw-repeat"
-						v-model="passwordRepeat"
-						placeholder="Repeat Password"
-						required
-						type="password"
-					/>
-
-					<button class="signup button" type="submit">
-						Create Account
+				<p class="auth-switch">
+					Don't have an account?
+					<button
+						class="text-button"
+						type="button"
+						@click="openSignupFromLogin"
+					>
+						Sign up
 					</button>
+				</p>
+				<p class="auth-help">
+					Forgot your password? Email
+					<a href="mailto:classes@jacobdanderson.net">
+						classes@jacobdanderson.net </a
+					>.
+				</p>
+			</form>
+		</AccessibleDialog>
 
-					<p v-if="!passwordMatch" class="passwordMatchError">
-						Passwords do not match.
-					</p>
-					<p v-if="error" class="error">
-						{{ error }}
-					</p>
+		<AccessibleDialog
+			close-label="Close sign up dialog"
+			description="Create a learner account to access assigned courses and class information."
+			dialog-id="signup-dialog"
+			:open="signupBlock"
+			title="Sign up"
+			@close="changeSignupView(false)"
+		>
+			<form class="auth-form signupForm" @submit.prevent="addSignup">
+				<label for="name">Name</label>
+				<input
+					id="name"
+					v-model="name"
+					autocomplete="name"
+					placeholder="Enter Name"
+					required
+					type="text"
+				/>
+
+				<label for="age">Age</label>
+				<input
+					id="age"
+					v-model="age"
+					inputmode="numeric"
+					placeholder="Enter Age"
+					required
+					type="text"
+				/>
+
+				<label for="state">State</label>
+				<input
+					id="state"
+					v-model="state"
+					autocomplete="address-level1"
+					placeholder="Enter State"
+					required
+					type="text"
+				/>
+
+				<label for="email">Email</label>
+				<input
+					id="email"
+					v-model="email"
+					autocomplete="email"
+					placeholder="Enter Email"
+					required
+					type="email"
+				/>
+
+				<label for="psw2">Password</label>
+				<input
+					id="psw2"
+					v-model="password"
+					autocomplete="new-password"
+					placeholder="Enter Password"
+					required
+					type="password"
+				/>
+
+				<label for="psw-repeat">Repeat Password</label>
+				<input
+					id="psw-repeat"
+					v-model="passwordRepeat"
+					autocomplete="new-password"
+					placeholder="Repeat Password"
+					required
+					type="password"
+				/>
+
+				<p
+					v-if="!passwordMatch"
+					class="passwordMatchError"
+					role="alert"
+				>
+					Passwords do not match.
+				</p>
+				<p v-if="error" class="error" role="alert">
+					{{ error }}
+				</p>
+
+				<div class="auth-actions">
+					<button class="button" type="submit">Create Account</button>
+					<button
+						class="button secondary"
+						type="button"
+						@click="changeSignupView(false)"
+					>
+						Cancel
+					</button>
 				</div>
 			</form>
-		</div>
+		</AccessibleDialog>
 	</div>
 </template>
 
 <style scoped>
-/*****************************
-*   Login and Signup Forms   *
-*****************************/
+.auth-form {
+	display: grid;
+	gap: 0.8rem;
+}
 
-/* The Modal (background) */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
+.auth-form label {
+	display: grid;
+	gap: 0.35rem;
+	margin: 0;
+	color: var(--color-ink, #10263a);
+	font-weight: 800;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="text"] {
 	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.4);
-	padding-top: 50px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	border: 1px solid #888;
-	width: 80%;
-	margin: auto;
-}
-
-.showSignup,
-.showLogin {
-	display: block !important;
-}
-
-div.loginForm span,
-div.signupForm span {
-	font-family: Optima, sans-serif;
-}
-
-/* The Close Button (x) */
-.close {
-	/* Position it in the top right corner outside of the modal */
-	position: absolute;
-	right: 3%;
-	top: 3%;
-	color: #dc3545;
-	font-size: 35px;
-	font-weight: bold;
-}
-
-/* Close button on hover */
-.close:hover,
-.close:focus {
-	color: #f44336;
-	cursor: pointer;
-}
-
-/* Set a style for login and signup buttons */
-.button {
-	background-color: #4caf50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 100%;
-	/*opacity: 0.9;*/ /*Optional, was on the signup button*/
-}
-
-/* Add padding to containers */
-.container {
-	padding: 16px;
-}
-
-/* Extra style for the cancel button (red) */
-.cancelbtn {
-	width: auto;
-	padding: 10px 18px;
-	background-color: #f44336;
-}
-
-/* Add Zoom Animation */
-.animate {
-	-webkit-animation: animatezoom 0.6s;
-	animation: animatezoom 0.6s;
-}
-
-.passwordMatchError {
-	color: red;
-	font-weight: bold;
-}
-
-p.loginError {
-	margin-left: 24%;
-}
-
-@-webkit-keyframes animatezoom {
-	from {
-		-webkit-transform: scale(0);
-	}
-	to {
-		-webkit-transform: scale(1);
-	}
-}
-
-@keyframes animatezoom {
-	from {
-		transform: scale(0);
-	}
-	to {
-		transform: scale(1);
-	}
-}
-
-/*****************
-*   Login Form   *
-*****************/
-
-/* Bordered form */
-div.loginForm form {
-	border: 3px solid #f1f1f1;
-}
-
-/* Full-width inputs */
-div.loginForm input[type="email"],
-div.loginForm input[type="password"] {
-	width: 100%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
 	box-sizing: border-box;
+	padding: 0.85rem 0.95rem;
+	border: 1px solid var(--color-border, rgba(148, 163, 184, 0.45));
+	border-radius: 14px;
+	background: var(--color-surface-strong, #fff);
+	color: var(--color-ink, #10263a);
+	font: inherit;
 }
 
-/* Add a hover effect for buttons */
-div.loginForm button:hover {
-	opacity: 0.8;
+.remember {
+	display: flex !important;
+	grid-template-columns: none !important;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.55rem !important;
+	font-weight: 600 !important;
 }
 
-/* Center the avatar image inside this container */
-div.loginForm .imgcontainer {
-	text-align: center;
-	margin: 24px 0 12px 0;
+.remember input {
+	width: auto;
 }
 
-/* Avatar image */
-div.loginForm img.avatar {
-	width: 25% !important;
-	border-radius: 50%;
+.auth-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-top: 0.35rem;
 }
 
-/* The "Forgot password" text */
-div.loginForm span.psw {
-	float: right;
-	padding-top: 16px;
+.button {
+	flex: 1 1 12rem;
+	border: 1px solid #2563eb;
+	border-radius: 999px;
+	background: linear-gradient(135deg, #2563eb, #1d4ed8);
+	color: #fff;
+	padding: 0.85rem 1.1rem;
+	cursor: pointer;
+	font-weight: 800;
 }
 
-div.loginForm span.signup {
-	float: right;
-	margin-right: 2px;
+.button.secondary {
+	border-color: var(--color-border, rgba(148, 163, 184, 0.45));
+	background: var(--color-surface-soft, #f8fafc);
+	color: var(--color-ink, #10263a);
 }
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-	div.loginForm span.psw,
-	div.loginForm span.signup {
-		display: block;
-		float: none;
-	}
-
-	div.loginForm .cancelbtn {
-		width: 100%;
-	}
-}
-
-/******************
-*   Signup Form   *
-******************/
-
-/* Full-width input fields */
-div.signupForm input[type="text"],
-div.signupForm input[type="email"],
-div.signupForm input[type="password"] {
-	width: 100%;
-	padding: 15px;
-	margin: 5px 0 22px 0;
-	display: inline-block;
+.text-button {
 	border: none;
-	background: #f1f1f1;
+	background: transparent;
+	color: #1d4ed8;
+	padding: 0;
+	font: inherit;
+	font-weight: 800;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
-div.signupForm input[type="text"]:focus,
-div.signupForm input[type="email"]:focus,
-div.signupForm input[type="password"]:focus {
-	background-color: #ddd;
-	outline: none;
+.auth-switch,
+.auth-help,
+.error,
+.passwordMatchError {
+	margin: 0;
+	line-height: 1.55;
 }
 
-div.signupForm hr {
-	border: 1px solid #f1f1f1;
-	margin-bottom: 25px;
+.auth-switch,
+.auth-help {
+	color: var(--color-ink-soft, #526779);
 }
 
-div.signupForm button:hover {
-	opacity: 1;
+.auth-help a {
+	color: #1d4ed8;
+	font-weight: bold;
 }
 
-/* Clear floats *
-div.signupForm .clearfix::after {
-	content: "";
-	clear: both;
-	display: table;
+.error,
+.passwordMatchError {
+	color: #b91c1c;
+	font-weight: 800;
 }
 
-div.signupForm p.disclamer {
-	display: inline-block;
-	float: right;
+.button:hover,
+.text-button:hover {
+	filter: brightness(0.96);
 }
 
-/* The "All ready have an account" text *
-div.signupForm span.account {
-	float: right;
-	padding-top: 16px;
-}*/
+@media (max-width: 520px) {
+	.auth-actions {
+		flex-direction: column;
+	}
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-	div.signupForm .cancelbtn,
-	div.signupForm {
+	.button {
 		width: 100%;
 	}
 }

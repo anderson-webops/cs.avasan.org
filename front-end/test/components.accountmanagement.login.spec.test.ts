@@ -20,6 +20,7 @@ vi.mock("@/api", () => {
 
 describe("AccountManagement.vue login (happy path)", () => {
 	beforeEach(() => {
+		document.body.innerHTML = "";
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 	});
@@ -42,7 +43,10 @@ describe("AccountManagement.vue login (happy path)", () => {
 			}
 		});
 
-		const wrapper = mount(AccountManagement);
+		const wrapper = mount(AccountManagement, {
+			attachTo: document.body,
+			global: { stubs: { teleport: true } }
+		});
 
 		// Fill form and submit
 		await wrapper.get("#uname").setValue("user@example.com");
@@ -60,12 +64,36 @@ describe("AccountManagement.vue login (happy path)", () => {
 		expect(app.currentUser?.email).toBe("user@example.com");
 		expect(app.loginBlock).toBe(false);
 
-		// Buttons reflect logged-in state (Logout visible, Login/Signup hidden)
-		// These live in TheHeader normally, but AccountManagement just closes the modal.
-		// So we assert modal visibility based on class toggling.
-		const modal = wrapper.find(".loginForm.modal");
-		expect(modal.exists()).toBe(true);
-		// When closed, the "showLogin" class should be absent:
-		expect(modal.classes()).not.toContain("showLogin");
+		expect(document.querySelector("#login-dialog")).toBeNull();
+		wrapper.unmount();
+	});
+
+	it("renders login as an accessible dialog and switches to signup without dead links", async () => {
+		const app = useAppStore();
+		app.setLoginBlock(true);
+
+		const wrapper = mount(AccountManagement, {
+			attachTo: document.body,
+			global: { stubs: { teleport: true } }
+		});
+
+		const dialog = document.querySelector("#login-dialog");
+		expect(dialog?.getAttribute("role")).toBe("dialog");
+		expect(dialog?.getAttribute("aria-modal")).toBe("true");
+		expect(dialog?.getAttribute("aria-labelledby")).toBe(
+			"login-dialog-title"
+		);
+		expect(document.querySelector('a[href="#"]')).toBeNull();
+
+		const signUpButton = wrapper
+			.findAll("button")
+			.find(button => button.text() === "Sign up");
+		if (!signUpButton) throw new Error("Sign up button was not rendered.");
+		await signUpButton.trigger("click");
+
+		expect(app.loginBlock).toBe(false);
+		expect(app.signupBlock).toBe(true);
+		expect(document.querySelector("#signup-dialog")).not.toBeNull();
+		wrapper.unmount();
 	});
 });

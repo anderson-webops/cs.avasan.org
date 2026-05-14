@@ -80,7 +80,7 @@ useHead(
 					rel="noreferrer"
 					target="_blank"
 				>
-					Open Venmo
+					Open Venmo<span class="sr-only"> (opens in a new tab)</span>
 				</a>
 				<RouterLink
 					class="site-button site-button--secondary"

@@ -17,10 +17,17 @@ import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
 				This embedded view is for quick review. Use the full sheet for
 				editing, filters, or protected-range work.
 			</p>
+			<p id="spreadsheet-summary" class="helper-text">
+				Screen reader users should use the full spreadsheet link above
+				for the most complete table navigation and editing controls.
+			</p>
 			<div class="iframe-wrap">
 				<iframe
+					aria-describedby="spreadsheet-summary"
 					allowfullscreen
 					loading="lazy"
+					referrerpolicy="strict-origin-when-cross-origin"
+					sandbox="allow-forms allow-popups allow-same-origin allow-scripts"
 					src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSaHeIeRi1nujjE_klPrxwQ5v6Wf4gLNGgUrcbUIl2gnwCRuf7PQUD0EOT44SLqpotNODfm2bfjqEEN/pubhtml?gid=891834841&amp;single=true&amp;widget=true&amp;headers=false"
 					title="Student Management Spreadsheet"
 				></iframe>

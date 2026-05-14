@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { api } from "@/api";
 import { useAppStore } from "@/stores/app";
 
@@ -17,6 +17,13 @@ const newPassword = ref("");
 const confirmPassword = ref("");
 const passwordStatus = ref("");
 const passwordError = ref("");
+const idPrefix = computed(
+	() =>
+		`account-security-${props.role}-${props.entityId.replace(
+			/[^\w-]/g,
+			"-"
+		)}`
+);
 
 watch(
 	() => props.email,
@@ -89,9 +96,9 @@ async function updatePassword() {
 		<div class="security-section">
 			<h5>Change email</h5>
 			<div class="field">
-				<label for="account-email">Email</label>
+				<label :for="`${idPrefix}-email`">Email</label>
 				<input
-					id="account-email"
+					:id="`${idPrefix}-email`"
 					v-model="email"
 					name="account-email"
 					type="email"
@@ -104,16 +111,27 @@ async function updatePassword() {
 			>
 				Update email
 			</button>
-			<p v-if="emailStatus" class="status">{{ emailStatus }}</p>
-			<p v-if="emailError" class="error">{{ emailError }}</p>
+			<p
+				v-if="emailStatus"
+				class="status"
+				role="status"
+				aria-live="polite"
+			>
+				{{ emailStatus }}
+			</p>
+			<p v-if="emailError" class="error" role="alert">
+				{{ emailError }}
+			</p>
 		</div>
 
 		<div class="security-section">
 			<h5>Change password</h5>
 			<div class="field">
-				<label for="current-password">Current password</label>
+				<label :for="`${idPrefix}-current-password`"
+					>Current password</label
+				>
 				<input
-					id="current-password"
+					:id="`${idPrefix}-current-password`"
 					v-model="currentPassword"
 					autocomplete="current-password"
 					name="current-password"
@@ -121,9 +139,9 @@ async function updatePassword() {
 				/>
 			</div>
 			<div class="field">
-				<label for="new-password">New password</label>
+				<label :for="`${idPrefix}-new-password`">New password</label>
 				<input
-					id="new-password"
+					:id="`${idPrefix}-new-password`"
 					v-model="newPassword"
 					autocomplete="new-password"
 					name="new-password"
@@ -131,9 +149,11 @@ async function updatePassword() {
 				/>
 			</div>
 			<div class="field">
-				<label for="confirm-password">Confirm password</label>
+				<label :for="`${idPrefix}-confirm-password`"
+					>Confirm password</label
+				>
 				<input
-					id="confirm-password"
+					:id="`${idPrefix}-confirm-password`"
 					v-model="confirmPassword"
 					autocomplete="new-password"
 					name="confirm-password"
@@ -147,8 +167,17 @@ async function updatePassword() {
 			>
 				Update password
 			</button>
-			<p v-if="passwordStatus" class="status">{{ passwordStatus }}</p>
-			<p v-if="passwordError" class="error">{{ passwordError }}</p>
+			<p
+				v-if="passwordStatus"
+				class="status"
+				role="status"
+				aria-live="polite"
+			>
+				{{ passwordStatus }}
+			</p>
+			<p v-if="passwordError" class="error" role="alert">
+				{{ passwordError }}
+			</p>
 		</div>
 	</section>
 </template>

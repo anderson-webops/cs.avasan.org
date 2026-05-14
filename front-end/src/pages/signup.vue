@@ -14,7 +14,9 @@ const MIN_FRAME_HEIGHT = 860;
 const MAX_FRAME_HEIGHT = 2200;
 
 const schedulerLoaded = ref(false);
+const schedulerTimedOut = ref(false);
 const schedulerHeight = ref(MIN_FRAME_HEIGHT);
+let schedulerLoadTimeout: number | undefined;
 
 useHead({
 	link: [
@@ -50,14 +52,23 @@ function handleSchedulerMessage(event: MessageEvent) {
 
 function markSchedulerLoaded() {
 	schedulerLoaded.value = true;
+	schedulerTimedOut.value = false;
+	if (schedulerLoadTimeout) {
+		window.clearTimeout(schedulerLoadTimeout);
+		schedulerLoadTimeout = undefined;
+	}
 }
 
 onMounted(() => {
 	window.addEventListener("message", handleSchedulerMessage);
+	schedulerLoadTimeout = window.setTimeout(() => {
+		if (!schedulerLoaded.value) schedulerTimedOut.value = true;
+	}, 8000);
 });
 
 onBeforeUnmount(() => {
 	window.removeEventListener("message", handleSchedulerMessage);
+	if (schedulerLoadTimeout) window.clearTimeout(schedulerLoadTimeout);
 });
 </script>
 
@@ -79,6 +90,20 @@ onBeforeUnmount(() => {
 		</section>
 
 		<div class="scheduler-container site-surface">
+			<p class="scheduler-direct">
+				If the embedded scheduler is hard to use with your browser or
+				assistive technology,
+				<a
+					class="text-link"
+					:href="schedulerUrl"
+					rel="noopener"
+					target="_blank"
+				>
+					open the full scheduler in a new tab<span class="sr-only">
+						(opens in a new tab)</span
+					>.
+				</a>
+			</p>
 			<div
 				v-if="!schedulerLoaded"
 				class="scheduler-loading"
@@ -92,6 +117,10 @@ onBeforeUnmount(() => {
 					<span class="shell-panel" />
 				</div>
 			</div>
+			<p v-if="schedulerTimedOut" class="scheduler-error" role="alert">
+				The embedded scheduler is taking longer than expected. Use the
+				full scheduler link above if it does not load.
+			</p>
 
 			<iframe
 				class="scheduler-frame"
@@ -100,6 +129,8 @@ onBeforeUnmount(() => {
 				title="Class scheduler"
 				:style="{ height: `${schedulerHeight}px` }"
 				loading="eager"
+				referrerpolicy="strict-origin-when-cross-origin"
+				sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
 				@load="markSchedulerLoaded"
 			/>
 
@@ -111,7 +142,9 @@ onBeforeUnmount(() => {
 					rel="noopener"
 					target="_blank"
 				>
-					Open it in a new tab.
+					Open it in a new tab<span class="sr-only">
+						(opens in a new tab)</span
+					>.
 				</a>
 			</p>
 		</div>
@@ -150,6 +183,8 @@ onBeforeUnmount(() => {
 
 .scheduler-container {
 	position: relative;
+	display: grid;
+	gap: 1rem;
 	padding: 1.5rem;
 	overflow: hidden;
 }
@@ -234,11 +269,28 @@ onBeforeUnmount(() => {
 	border-radius: 22px;
 }
 
+.scheduler-direct,
+.scheduler-error,
 .scheduler-fallback {
-	margin-top: 1.25rem;
+	position: relative;
+	z-index: 2;
+	margin: 0;
+	line-height: 1.6;
+}
+
+.scheduler-direct,
+.scheduler-fallback {
 	font-size: 0.95rem;
 	color: var(--color-ink-soft);
 	text-align: center;
+}
+
+.scheduler-error {
+	border-radius: 14px;
+	padding: 0.8rem 1rem;
+	background: rgba(254, 242, 242, 0.92);
+	color: #991b1b;
+	font-weight: 700;
 }
 
 .after-booking {

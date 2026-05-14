@@ -114,16 +114,18 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 					:key="module.id"
 					class="progress-module"
 				>
-					<summary>
-						<label class="progress-check" @click.stop>
-							<input
-								:checked="isModuleComplete(module.id)"
-								type="checkbox"
-								@change="toggleModule(module.id, $event)"
-							/>
-							<span>{{ module.title }}</span>
-						</label>
+					<summary class="progress-module-summary">
+						<span>{{ module.title }}</span>
 					</summary>
+					<label class="progress-check is-module">
+						<input
+							:checked="isModuleComplete(module.id)"
+							type="checkbox"
+							:aria-label="`Mark module ${module.title} complete`"
+							@change="toggleModule(module.id, $event)"
+						/>
+						<span>Module complete</span>
+					</label>
 
 					<div class="progress-item-list">
 						<label
@@ -225,6 +227,11 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 	padding: 0.75rem 0.85rem;
 }
 
+.progress-module-summary {
+	color: var(--color-ink);
+	font-weight: 800;
+}
+
 .progress-module summary::-webkit-details-marker {
 	display: none;
 }
@@ -235,6 +242,12 @@ function toggleItem(item: CourseModuleItem, event: Event) {
 	gap: 0.55rem;
 	color: var(--color-ink);
 	line-height: 1.45;
+}
+
+.progress-check.is-module {
+	padding: 0 0.85rem 0.75rem;
+	color: var(--color-ink-soft);
+	font-size: 0.92rem;
 }
 
 .progress-check input {

@@ -5,7 +5,14 @@ import type {
 	CourseModuleItem
 } from "@/stores/courses";
 import { storeToRefs } from "pinia";
-import { computed, onMounted, ref, shallowRef, watch } from "vue";
+import {
+	computed,
+	onBeforeUnmount,
+	onMounted,
+	ref,
+	shallowRef,
+	watch
+} from "vue";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
@@ -57,6 +64,8 @@ const courseLoadError = ref("");
 const isCourseLoading = ref(false);
 const isStorageReady = ref(false);
 const hasRestoredStoredCourse = ref(false);
+const prefersReducedMotion = ref(false);
+let reducedMotionQuery: MediaQueryList | null = null;
 
 const allCourses = computed(() => courses.value ?? []);
 
@@ -320,6 +329,16 @@ const activeModule = computed(
 		) ?? null
 );
 
+const courseReaderStatus = computed(() => {
+	if (!selectedCourse.value || !activeModule.value) return "";
+	const searchContext = normalizedQuery.value
+		? `${visibleModules.value.length} matching module${
+				visibleModules.value.length === 1 ? "" : "s"
+			}. `
+		: "";
+	return `${searchContext}Showing module ${activeModule.value.position}: ${activeModule.value.title}.`;
+});
+
 const activeModuleProjectLinks = computed(() => {
 	const module = activeModule.value;
 	if (!module) return [];
@@ -475,8 +494,34 @@ watch([activeModuleId, selectedCourseId], ([moduleId, courseId]) => {
 	writeStoredValue(moduleSelectionStorageKey(courseId), moduleId);
 });
 
+function syncReducedMotionPreference(event?: MediaQueryListEvent) {
+	prefersReducedMotion.value =
+		event?.matches ?? reducedMotionQuery?.matches ?? false;
+}
+
 onMounted(() => {
 	isStorageReady.value = true;
+	if (
+		typeof window !== "undefined" &&
+		typeof window.matchMedia === "function"
+	) {
+		reducedMotionQuery = window.matchMedia(
+			"(prefers-reduced-motion: reduce)"
+		);
+		syncReducedMotionPreference();
+		reducedMotionQuery.addEventListener(
+			"change",
+			syncReducedMotionPreference
+		);
+	}
+});
+
+onBeforeUnmount(() => {
+	reducedMotionQuery?.removeEventListener(
+		"change",
+		syncReducedMotionPreference
+	);
+	reducedMotionQuery = null;
 });
 
 function moduleSelectionStorageKey(courseId: string) {
@@ -509,6 +554,7 @@ function writeStoredValue(key: string, value: string) {
 
 <template>
 	<section class="course-explorer">
+		<p class="sr-only" aria-live="polite">{{ courseReaderStatus }}</p>
 		<div v-if="hasCourseAccess" class="course-shell">
 			<header v-if="selectedCourse && courseStats" class="course-hero">
 				<div class="course-hero-copy">
@@ -608,11 +654,13 @@ function writeStoredValue(key: string, value: string) {
 						<button
 							v-for="module in visibleModules"
 							:key="module.id"
+							aria-controls="course-reader-panel"
 							:aria-current="
 								activeModule?.id === module.id
 									? 'true'
 									: undefined
 							"
+							:aria-label="`Show module ${module.position}: ${module.title}`"
 							class="outline-button"
 							:class="{
 								'is-complete':
@@ -668,7 +716,11 @@ function writeStoredValue(key: string, value: string) {
 					</div>
 				</aside>
 
-				<div v-if="activeModule" class="course-reader">
+				<div
+					v-if="activeModule"
+					id="course-reader-panel"
+					class="course-reader"
+				>
 					<header class="reader-header">
 						<div class="reader-copy">
 							<p class="reader-eyebrow">
@@ -792,6 +844,9 @@ function writeStoredValue(key: string, value: string) {
 										>
 											<span class="resource-link-label">
 												{{ resource.label }}
+												<span class="sr-only">
+													(opens in a new tab)
+												</span>
 											</span>
 											<small class="resource-link-host">
 												{{ resource.host }}
@@ -811,18 +866,24 @@ function writeStoredValue(key: string, value: string) {
 										<video
 											v-if="isVideo(item.mediaLink)"
 											class="item-media-video"
-											autoplay
-											loop
+											:autoplay="!prefersReducedMotion"
+											:controls="prefersReducedMotion"
+											:loop="!prefersReducedMotion"
 											muted
 											playsinline
-											preload="auto"
+											:preload="
+												prefersReducedMotion
+													? 'metadata'
+													: 'auto'
+											"
+											:aria-label="`Demo video for ${item.title}`"
 										>
 											<source :src="item.mediaLink" />
 										</video>
 										<img
 											v-else
 											:src="item.mediaLink"
-											alt="Project demo media"
+											:alt="`Project demo media for ${item.title}`"
 											class="item-media-image"
 											loading="lazy"
 										/>
@@ -896,6 +957,9 @@ function writeStoredValue(key: string, value: string) {
 										>
 											<span class="resource-link-label">
 												{{ resource.label }}
+												<span class="sr-only">
+													(opens in a new tab)
+												</span>
 											</span>
 											<small class="resource-link-host">
 												{{ resource.host }}
@@ -915,18 +979,24 @@ function writeStoredValue(key: string, value: string) {
 										<video
 											v-if="isVideo(item.mediaLink)"
 											class="item-media-video"
-											autoplay
-											loop
+											:autoplay="!prefersReducedMotion"
+											:controls="prefersReducedMotion"
+											:loop="!prefersReducedMotion"
 											muted
 											playsinline
-											preload="auto"
+											:preload="
+												prefersReducedMotion
+													? 'metadata'
+													: 'auto'
+											"
+											:aria-label="`Demo video for ${item.title}`"
 										>
 											<source :src="item.mediaLink" />
 										</video>
 										<img
 											v-else
 											:src="item.mediaLink"
-											alt="Project demo media"
+											:alt="`Project demo media for ${item.title}`"
 											class="item-media-image"
 											loading="lazy"
 										/>

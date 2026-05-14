@@ -302,6 +302,11 @@ async function saveUserProgress(userID: string) {
 						<button
 							class="btn-secondary btn"
 							type="button"
+							:aria-label="
+								userEditing[u._id]
+									? `Close course editor for ${u.name}`
+									: `Edit courses for ${u.name}`
+							"
 							@click="toggleUserEdit(u._id)"
 						>
 							{{
@@ -371,6 +376,7 @@ async function saveUserProgress(userID: string) {
 							<button
 								class="btn-primary btn"
 								type="button"
+								:aria-label="`Save course access for ${u.name}`"
 								@click="saveUserCourses(u._id)"
 							>
 								Save courses
@@ -388,8 +394,10 @@ async function saveUserProgress(userID: string) {
 			</div>
 		</section>
 
-		<p v-if="success" class="status">{{ success }}</p>
-		<p v-if="error" class="error">
+		<p v-if="success" class="status" role="status" aria-live="polite">
+			{{ success }}
+		</p>
+		<p v-if="error" class="error" role="alert">
 			{{ error }}
 		</p>
 	</section>

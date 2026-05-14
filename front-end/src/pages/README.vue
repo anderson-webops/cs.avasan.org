@@ -12,7 +12,9 @@
 				target="_blank"
 				rel="noopener"
 			>
-				Vue Router typed routes
+				Vue Router typed routes<span class="sr-only">
+					(opens in a new tab)</span
+				>
 			</a>
 			for more details.
 		</p>

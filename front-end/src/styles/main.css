@@ -244,6 +244,18 @@ html.dark ::selection {
 	top: 1rem;
 }
 
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
 .site-frame {
 	min-height: 100vh;
 	display: flex;
@@ -575,7 +587,7 @@ html.dark body :is(.resource-link-host, .lesson-kicker, .reader-eyebrow, .sectio
 	color: var(--course-text-soft);
 }
 
-html.dark body :is(.workspace-header, .workspace-sheet, .directory-section, .directory-card, .section-heading, .history-section, .history-panel, .session-tools, .tool-panel, .learner-progress-editor, .mail-card, .history-card, .preview, .admin-shell__body) {
+html.dark body :is(.workspace-header, .workspace-sheet, .directory-section, .directory-card, .section-heading, .history-section, .history-panel, .session-tools, .tool-panel, .learner-progress-editor, .mail-card, .history-card, .preview, .admin-shell__body, .dialog-panel, .wheel-fallback) {
 	background:
 		linear-gradient(
 			145deg,
@@ -587,14 +599,14 @@ html.dark body :is(.workspace-header, .workspace-sheet, .directory-section, .dir
 	color: var(--color-ink);
 }
 
-html.dark body :is(.workspace-stats, .sheet-panel, .summary-block, .stat-pill, .record-card, .record-item, .progress-outline, .progress-module, .recipient-preview, .subject-preview, .preview-pane, .history-note, .association-summary, .status-banner, .modal-content, .container) {
+html.dark body :is(.workspace-stats, .sheet-panel, .summary-block, .stat-pill, .record-card, .record-item, .progress-outline, .progress-module, .recipient-preview, .subject-preview, .preview-pane, .history-note, .association-summary, .status-banner, .modal-content, .container, .dialog-close) {
 	background: rgba(8, 17, 31, 0.5);
 	border-color: rgba(148, 163, 184, 0.24);
 	box-shadow: inset 0 0 0 1px rgba(191, 219, 254, 0.04);
 	color: var(--color-ink);
 }
 
-html.dark body :is(.workspace-header h2, .workspace-header strong, .workspace-sheet h3, .section-heading h3, .directory-card h4, .history-panel h3, .panel-heading h4, .record-summary h5, .tool-panel h4, .mail-card h1, .mail-card h2, .mail-card h3, .mail-card__header h2, .history-card h2, .history-note__header h4, .progress-title, .record-kicker, .field-stack strong, .field-value, .summary-copy, .summary-list li, .history-note__body, .preview-body, .record-body, .association-title, .stat-pill strong, .panel-header h3, .directory-card-header h4, .directory-card-name-row h4, .recipient-preview strong, .course-picker-label, .tools-summary, .tools-summary strong, .tool-heading h5, .record-item strong, .profile-card h1, .profile-card h2, .profile-card h3, .profile-empty h1, .profile-empty h2, .profile-empty h3, .tuition-card h2, .tuition-card h3, .tool-card h2, .tool-card h3, .scheduler-loading h2) {
+html.dark body :is(.workspace-header h2, .workspace-header strong, .workspace-sheet h3, .section-heading h3, .directory-card h4, .history-panel h3, .panel-heading h4, .record-summary h5, .tool-panel h4, .mail-card h1, .mail-card h2, .mail-card h3, .mail-card__header h2, .history-card h2, .history-note__header h4, .progress-title, .record-kicker, .field-stack strong, .field-value, .summary-copy, .summary-list li, .history-note__body, .preview-body, .record-body, .association-title, .stat-pill strong, .panel-header h3, .directory-card-header h4, .directory-card-name-row h4, .recipient-preview strong, .course-picker-label, .tools-summary, .tools-summary strong, .tool-heading h5, .record-item strong, .profile-card h1, .profile-card h2, .profile-card h3, .profile-empty h1, .profile-empty h2, .profile-empty h3, .tuition-card h2, .tuition-card h3, .tool-card h2, .tool-card h3, .scheduler-loading h2, .dialog-header h2, .wheel-fallback h2) {
 	color: var(--color-ink);
 }
 
@@ -602,7 +614,7 @@ html.dark body :is(.workspace-eyebrow, .panel-eyebrow, .summary-label, .section-
 	color: var(--color-accent);
 }
 
-html.dark body :is(.workspace-header p:last-child, .section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-card__empty, .history-note__meta, .preview-meta, .association-copy, .stat-pill span, .directory-card-header p, .recipient-association, .tool-form label, .progress-check.is-item, .record-item small, .record-item span, .profile-card p, .profile-empty p, .tool-card p, .tuition-card p, .scheduler-loading-kicker) {
+html.dark body :is(.workspace-header p:last-child, .section-copy, .security-copy, .helper-copy, .helper-text, .hint, .muted-copy, .empty-copy, .summary-copy.is-muted, .record-subcopy, .record-meta, .progress-helper, .field-stack span, .history-card__meta, .history-card__empty, .history-note__meta, .preview-meta, .association-copy, .stat-pill span, .directory-card-header p, .recipient-association, .tool-form label, .progress-check.is-item, .record-item small, .record-item span, .profile-card p, .profile-empty p, .tool-card p, .tuition-card p, .scheduler-loading-kicker, .dialog-description, .confirm-copy, .auth-switch, .auth-help, .scheduler-direct, .scheduler-fallback, .wheel-fallback p) {
 	color: var(--color-ink-soft);
 }
 
@@ -621,7 +633,7 @@ html.dark body :is(.checkbox-grid label, .progress-check, .tool-form label, .fie
 	color: var(--color-ink);
 }
 
-html.dark body :is(.btn-secondary, .ghost-btn, .picker-btn, .tab-btn) {
+html.dark body :is(.btn-secondary, .ghost-btn, .picker-btn, .tab-btn, .button.secondary) {
 	background: rgba(15, 25, 42, 0.86);
 	border-color: rgba(148, 163, 184, 0.28);
 	color: var(--color-ink);
@@ -633,7 +645,7 @@ html.dark body :is(.btn-secondary:hover, .ghost-btn:hover, .picker-btn:hover, .t
 	color: var(--color-accent-strong);
 }
 
-html.dark body :is(.btn-primary, .send-btn) {
+html.dark body :is(.btn-primary, .send-btn, .button:not(.secondary)) {
 	background: linear-gradient(135deg, #2d8dd1, #1f6fa6);
 	border-color: rgba(125, 199, 255, 0.42);
 	color: #f8fbff;
@@ -670,7 +682,7 @@ html.dark body :is(.profile-card, .profile-empty, .empty-card, .profile-details-
 	box-shadow: 0 24px 48px -36px rgba(0, 0, 0, 0.72);
 }
 
-html.dark body :is(.details, .scheduler-fallback) {
+html.dark body :is(.details, .scheduler-fallback, .scheduler-direct) {
 	color: var(--color-ink-soft);
 }
 

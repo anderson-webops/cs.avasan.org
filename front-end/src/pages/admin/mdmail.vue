@@ -45,14 +45,16 @@ interface SendMailResponse {
 }
 
 type DateInputEl = HTMLInputElement & { showPicker?: () => void };
+type MailTab = "compose" | "preview";
 
 const CUSTOM_OPTION = "Custom";
+const MAIL_TABS: MailTab[] = ["compose", "preview"];
 
 const to = ref("");
 const subject = ref("");
 const md = ref("");
 const sending = ref(false);
-const activeTab = ref<"compose" | "preview">("compose");
+const activeTab = ref<MailTab>("compose");
 const selectedRecipientName = ref("");
 
 const subjectDate = ref("");
@@ -144,8 +146,41 @@ watch(subjectDate, value => {
 	subject.value = formatSessionSubject(value);
 });
 
-function switchTab(tab: "compose" | "preview") {
+function switchTab(tab: MailTab) {
 	activeTab.value = tab;
+}
+
+function tabButtonId(tab: MailTab) {
+	return `tab-${tab}`;
+}
+
+function tabPanelId(tab: MailTab) {
+	return `panel-${tab}`;
+}
+
+function handleTabKeydown(event: KeyboardEvent, tab: MailTab) {
+	const currentIndex = MAIL_TABS.indexOf(tab);
+	if (currentIndex === -1) return;
+
+	let nextIndex = currentIndex;
+	if (event.key === "ArrowRight") {
+		nextIndex = (currentIndex + 1) % MAIL_TABS.length;
+	} else if (event.key === "ArrowLeft") {
+		nextIndex = (currentIndex - 1 + MAIL_TABS.length) % MAIL_TABS.length;
+	} else if (event.key === "Home") {
+		nextIndex = 0;
+	} else if (event.key === "End") {
+		nextIndex = MAIL_TABS.length - 1;
+	} else {
+		return;
+	}
+
+	event.preventDefault();
+	const nextTab = MAIL_TABS[nextIndex];
+	switchTab(nextTab);
+	requestAnimationFrame(() => {
+		document.getElementById(tabButtonId(nextTab))?.focus();
+	});
 }
 
 function clearRecipient() {
@@ -393,26 +428,32 @@ function parseDateIso(value: string): string | null {
 						aria-label="Email or preview"
 					>
 						<button
-							id="tab-compose"
+							:id="tabButtonId('compose')"
 							role="tab"
+							:aria-controls="tabPanelId('compose')"
 							:aria-selected="activeTab === 'compose'"
 							class="tab-btn"
 							:class="[{ active: activeTab === 'compose' }]"
+							:tabindex="activeTab === 'compose' ? 0 : -1"
 							type="button"
 							data-testid="tab-compose"
 							@click="switchTab('compose')"
+							@keydown="handleTabKeydown($event, 'compose')"
 						>
 							Compose
 						</button>
 						<button
-							id="tab-preview"
+							:id="tabButtonId('preview')"
 							role="tab"
+							:aria-controls="tabPanelId('preview')"
 							:aria-selected="activeTab === 'preview'"
 							class="tab-btn"
 							:class="[{ active: activeTab === 'preview' }]"
+							:tabindex="activeTab === 'preview' ? 0 : -1"
 							type="button"
 							data-testid="tab-preview"
 							@click="switchTab('preview')"
+							@keydown="handleTabKeydown($event, 'preview')"
 						>
 							Preview
 						</button>
@@ -514,9 +555,16 @@ function parseDateIso(value: string): string | null {
 					</div>
 				</div>
 
-				<div v-if="activeTab === 'compose'" class="tab-panel">
-					<label>Markdown</label>
+				<div
+					v-if="activeTab === 'compose'"
+					:id="tabPanelId('compose')"
+					class="tab-panel"
+					role="tabpanel"
+					:aria-labelledby="tabButtonId('compose')"
+				>
+					<label for="markdown-input">Markdown</label>
 					<textarea
+						id="markdown-input"
 						v-model="md"
 						placeholder="**Hello** _world_"
 						data-testid="md-input"
@@ -525,9 +573,10 @@ function parseDateIso(value: string): string | null {
 
 				<div
 					v-else
+					:id="tabPanelId('preview')"
 					class="tab-panel preview-pane"
 					role="tabpanel"
-					aria-labelledby="tab-preview"
+					:aria-labelledby="tabButtonId('preview')"
 					data-testid="live-preview"
 				>
 					<div class="preview-meta">
@@ -624,7 +673,7 @@ function parseDateIso(value: string): string | null {
 				</div>
 			</div>
 
-			<div v-if="sentOk" class="preview">
+			<div v-if="sentOk" class="preview" role="status" aria-live="polite">
 				<div class="preview-meta">
 					<div><strong>To:</strong> {{ sentRecipients.to }}</div>
 					<div v-if="sentRecipients.cc.length">
@@ -678,7 +727,9 @@ function parseDateIso(value: string): string | null {
 				</div>
 			</div>
 
-			<pre v-else-if="resultText" class="result">{{ resultText }}</pre>
+			<pre v-else-if="resultText" class="result" role="alert">{{
+				resultText
+			}}</pre>
 		</section>
 	</AdminWorkspaceShell>
 </template>

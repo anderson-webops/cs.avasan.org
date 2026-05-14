@@ -28,7 +28,9 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 							rel="noreferrer"
 							target="_blank"
 						>
-							LinkedIn
+							LinkedIn<span class="sr-only">
+								(opens in a new tab)</span
+							>
 						</a>
 					</li>
 					<li>
@@ -37,7 +39,9 @@ import { warmSchedulerConnections } from "@/modules/scheduler";
 							rel="noreferrer"
 							target="_blank"
 						>
-							GitHub
+							GitHub<span class="sr-only">
+								(opens in a new tab)</span
+							>
 						</a>
 					</li>
 				</ul>

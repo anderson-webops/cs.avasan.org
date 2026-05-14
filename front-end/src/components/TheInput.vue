@@ -1,10 +1,19 @@
 <script lang="ts" setup>
+withDefaults(
+	defineProps<{
+		id?: string;
+	}>(),
+	{
+		id: undefined
+	}
+);
+
 const modelValue = defineModel<string>();
 </script>
 
 <template>
 	<input
-		id="input"
+		:id="id"
 		v-model="modelValue"
 		border="~ rounded gray-200 dark:gray-700"
 		p="x-4 y-2"

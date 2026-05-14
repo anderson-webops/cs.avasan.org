@@ -135,6 +135,44 @@ function openAuthModal() {
 	app.setLoginBlock(true);
 }
 
+function tabButtonId(tab: ProfileTab) {
+	return `profile-tab-${tab}`;
+}
+
+function tabPanelId(tab: ProfileTab) {
+	return `profile-panel-${tab}`;
+}
+
+function setActiveTab(tab: ProfileTab) {
+	activeTab.value = tab;
+}
+
+function handleProfileTabKeydown(event: KeyboardEvent, tab: ProfileTab) {
+	const tabs = profileTabs.value;
+	const currentIndex = tabs.indexOf(tab);
+	if (currentIndex === -1) return;
+
+	let nextIndex = currentIndex;
+	if (event.key === "ArrowRight") {
+		nextIndex = (currentIndex + 1) % tabs.length;
+	} else if (event.key === "ArrowLeft") {
+		nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+	} else if (event.key === "Home") {
+		nextIndex = 0;
+	} else if (event.key === "End") {
+		nextIndex = tabs.length - 1;
+	} else {
+		return;
+	}
+
+	event.preventDefault();
+	const nextTab = tabs[nextIndex];
+	setActiveTab(nextTab);
+	requestAnimationFrame(() => {
+		document.getElementById(tabButtonId(nextTab))?.focus();
+	});
+}
+
 watch(activeTab, value => {
 	if (!isStorageReady.value || !hasProfile.value) return;
 	writeStoredProfileTab(value);
@@ -199,26 +237,50 @@ function isProfileTab(value: string | null): value is ProfileTab {
 					class="profile-tabs"
 					:class="{ 'is-workspace-layout': isWorkspaceLayout }"
 					role="tablist"
+					aria-label="Profile sections"
 				>
 					<button
 						v-for="tab in profileTabs"
+						:id="tabButtonId(tab)"
 						:key="tab"
+						:aria-controls="tabPanelId(tab)"
 						:aria-selected="activeTab === tab"
 						class="tab"
 						role="tab"
+						:tabindex="activeTab === tab ? 0 : -1"
 						type="button"
-						@click="activeTab = tab"
+						@click="setActiveTab(tab)"
+						@keydown="handleProfileTabKeydown($event, tab)"
 					>
 						{{ tabLabels[tab] }}
 					</button>
 				</div>
 
-				<component
-					:is="activeProfileComponent"
+				<div
 					v-if="activeTab !== 'courses'"
-					v-bind="profileComponentProps"
-				/>
-				<CourseExplorer v-else />
+					:id="tabPanelId(activeTab)"
+					:aria-labelledby="
+						profileTabs.length > 1
+							? tabButtonId(activeTab)
+							: undefined
+					"
+					:role="profileTabs.length > 1 ? 'tabpanel' : undefined"
+					:tabindex="profileTabs.length > 1 ? 0 : undefined"
+				>
+					<component
+						:is="activeProfileComponent"
+						v-bind="profileComponentProps"
+					/>
+				</div>
+				<div
+					v-else
+					:id="tabPanelId(activeTab)"
+					aria-labelledby="profile-tab-courses"
+					role="tabpanel"
+					tabindex="0"
+				>
+					<CourseExplorer />
+				</div>
 			</div>
 
 			<div v-else class="profile-empty">

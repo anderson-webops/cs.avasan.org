@@ -13,6 +13,15 @@ describe("Admin mail preview tabs", () => {
 		expect(wrapper.find('[data-testid="live-preview"]').exists()).toBe(
 			false
 		);
+		expect(wrapper.find("label[for='markdown-input']").text()).toBe(
+			"Markdown"
+		);
+		expect(wrapper.find("[data-testid='tab-compose']").attributes()).toMatchObject(
+			{
+				"aria-controls": "panel-compose",
+				"aria-selected": "true"
+			}
+		);
 	});
 
 	it("renders markdown preview when preview tab is active", async () => {
@@ -27,5 +36,23 @@ describe("Admin mail preview tabs", () => {
 		expect(previewBody.exists()).toBe(true);
 		expect(previewBody.html()).toContain("<strong>Hello</strong>");
 		expect(previewBody.html()).toContain("<em>world</em>");
+	});
+
+	it("supports arrow-key tab navigation", async () => {
+		const wrapper = mount(MdMail, { attachTo: document.body });
+
+		await wrapper.find('[data-testid="tab-compose"]').trigger("keydown", {
+			key: "ArrowRight"
+		});
+
+		expect(wrapper.find('[data-testid="live-preview"]').exists()).toBe(
+			true
+		);
+		expect(
+			wrapper.find('[data-testid="tab-preview"]').attributes(
+				"aria-selected"
+			)
+		).toBe("true");
+		wrapper.unmount();
 	});
 });

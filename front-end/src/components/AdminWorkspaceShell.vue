@@ -63,6 +63,7 @@ function isActive(path: string) {
 							target="_blank"
 						>
 							{{ action.label }}
+							<span class="sr-only"> (opens in a new tab)</span>
 						</a>
 						<RouterLink
 							v-else-if="action"

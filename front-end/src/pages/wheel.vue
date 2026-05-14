@@ -4,6 +4,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
 defineOptions({ name: "WheelPage" });
 
 const isWheelLoaded = ref(false);
+const wheelChoices = ["lies", "lier", "frog"];
 const wheelUrl =
 	"https://wheeldecide.com/e.php?c1=lies&c2=lier&c3=lies&c4=frog&c5=lier&c6=lies&c7=lier&c8=lies&c9=lier&c10=frog&c11=lies&c12=lier&c13=lies&c14=lier&c15=frog&t=Sophia%27s+Wheel&time=5";
 
@@ -44,8 +45,22 @@ onBeforeUnmount(() => {
 				rel="noopener"
 				target="_blank"
 			>
-				Open wheel in new tab
+				Open wheel in new tab<span class="sr-only">
+					(opens in a new tab)</span
+				>
 			</a>
+			<section class="wheel-fallback" aria-labelledby="wheel-options">
+				<h2 id="wheel-options">Wheel choices</h2>
+				<p>
+					If the embedded wheel is unavailable, use these choices as
+					the manual picker set.
+				</p>
+				<ul>
+					<li v-for="choice in wheelChoices" :key="choice">
+						{{ choice }}
+					</li>
+				</ul>
+			</section>
 		</div>
 	</section>
 </template>
@@ -165,6 +180,45 @@ onBeforeUnmount(() => {
 	text-decoration: none;
 	font-weight: 700;
 	box-shadow: 0 22px 44px -32px rgba(37, 99, 235, 0.68);
+}
+
+.wheel-fallback {
+	width: min(100%, 34rem);
+	display: grid;
+	gap: 0.65rem;
+	padding: 1rem;
+	border: 1px solid rgba(191, 219, 254, 0.24);
+	border-radius: 20px;
+	background: rgba(15, 23, 42, 0.62);
+	color: #dbeafe;
+}
+
+.wheel-fallback h2 {
+	margin: 0;
+	color: #f8fafc;
+	font-size: 1.15rem;
+}
+
+.wheel-fallback p {
+	margin: 0;
+	color: #c7d2fe;
+	line-height: 1.55;
+}
+
+.wheel-fallback ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.wheel-fallback li {
+	padding: 0.35rem 0.65rem;
+	border-radius: 999px;
+	background: rgba(191, 219, 254, 0.12);
+	font-weight: 800;
 }
 
 @media (max-width: 600px) {

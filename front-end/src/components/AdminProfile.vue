@@ -2,6 +2,7 @@
 import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
+import AccessibleDialog from "@/components/AccessibleDialog.vue";
 import AccountSecurity from "@/components/AccountSecurity.vue";
 import LearnerCourseProgressEditor from "@/components/LearnerCourseProgressEditor.vue";
 import LearnerSessionTools from "@/components/LearnerSessionTools.vue";
@@ -27,6 +28,14 @@ const userRecipientNames = ref<Record<string, string>>({});
 const tutorEditing = ref<Record<string, boolean>>({});
 const tutorCourseSelections = ref<Record<string, string[]>>({});
 const userCourseSelections = ref<Record<string, string[]>>({});
+const confirmation = ref<{
+	confirmLabel: string;
+	description: string;
+	onConfirm: () => Promise<void> | void;
+	title: string;
+	variant?: "danger" | "primary";
+} | null>(null);
+const confirmationBusy = ref(false);
 
 const viewMode = computed(() => props.mode ?? "profile");
 
@@ -48,6 +57,13 @@ const courseNameMap = computed<Record<string, string>>(
 const courseLabel = (id: string) => courseNameMap.value[id] ?? id;
 const tutorCount = computed(() => tutors.value.length);
 const userCount = computed(() => users.value.length);
+const confirmationTitle = computed(() => confirmation.value?.title ?? "");
+const confirmationDescription = computed(
+	() => confirmation.value?.description ?? ""
+);
+const confirmationConfirmLabel = computed(
+	() => confirmation.value?.confirmLabel ?? "Confirm"
+);
 const courseProgress = useLearnerCourseProgress(
 	users,
 	coursesStore.loadCourseById,
@@ -372,9 +388,48 @@ async function saveUserEditorChanges(userID: string) {
 	}
 }
 
-async function promoteToTutor(userID: string) {
-	// eslint-disable-next-line no-alert
-	if (!window.confirm("Are you sure you want to Promote?")) return;
+function openConfirmation(config: NonNullable<typeof confirmation.value>) {
+	confirmation.value = config;
+}
+
+function closeConfirmation() {
+	if (confirmationBusy.value) return;
+	confirmation.value = null;
+}
+
+async function runConfirmation() {
+	if (!confirmation.value) return;
+	confirmationBusy.value = true;
+	try {
+		await confirmation.value.onConfirm();
+		confirmation.value = null;
+	} finally {
+		confirmationBusy.value = false;
+	}
+}
+
+function userDisplayName(userID: string) {
+	return users.value.find(user => user._id === userID)?.name ?? "this user";
+}
+
+function tutorDisplayName(tutorID: string) {
+	return (
+		tutors.value.find(tutor => tutor._id === tutorID)?.name ?? "this tutor"
+	);
+}
+
+function promoteToTutor(userID: string) {
+	const name = userDisplayName(userID);
+	openConfirmation({
+		title: "Promote learner to tutor?",
+		description: `${name} will move from the learner list to the tutor list and can be granted course permissions.`,
+		confirmLabel: "Promote to tutor",
+		variant: "primary",
+		onConfirm: () => promoteUserToTutor(userID)
+	});
+}
+
+async function promoteUserToTutor(userID: string) {
 	try {
 		await api.post(`/users/${userID}/promote`);
 		await Promise.all([app.fetchUsers(), app.fetchTutors()]);
@@ -386,15 +441,29 @@ async function promoteToTutor(userID: string) {
 	}
 }
 
-async function confirmDemote(tutorID: string) {
-	// eslint-disable-next-line no-alert
-	if (!window.confirm("Are you sure you want to Demote?")) return;
-	await demoteTutor(tutorID);
+function confirmDemote(tutorID: string) {
+	const name = tutorDisplayName(tutorID);
+	openConfirmation({
+		title: "Demote tutor to learner?",
+		description: `${name} will lose tutor privileges and return to the learner list.`,
+		confirmLabel: "Demote to user",
+		variant: "danger",
+		onConfirm: () => demoteTutor(tutorID)
+	});
 }
 
-async function removeTutor(tutorID: string) {
-	// eslint-disable-next-line no-alert
-	if (!window.confirm("Are you sure you want to Delete?")) return;
+function removeTutor(tutorID: string) {
+	const name = tutorDisplayName(tutorID);
+	openConfirmation({
+		title: "Delete tutor account?",
+		description: `${name} will be permanently removed from the tutor directory.`,
+		confirmLabel: "Delete tutor",
+		variant: "danger",
+		onConfirm: () => deleteTutor(tutorID)
+	});
+}
+
+async function deleteTutor(tutorID: string) {
 	try {
 		await api.delete(`/tutors/remove/${tutorID}`);
 		await app.fetchTutors();
@@ -405,9 +474,18 @@ async function removeTutor(tutorID: string) {
 	}
 }
 
-async function removeUser(userID: string) {
-	// eslint-disable-next-line no-alert
-	if (!window.confirm("Are you sure you want to Delete?")) return;
+function removeUser(userID: string) {
+	const name = userDisplayName(userID);
+	openConfirmation({
+		title: "Delete learner account?",
+		description: `${name} will be permanently removed from the learner directory.`,
+		confirmLabel: "Delete user",
+		variant: "danger",
+		onConfirm: () => deleteUser(userID)
+	});
+}
+
+async function deleteUser(userID: string) {
 	try {
 		await api.delete(`/users/admin/${userID}`);
 		await app.fetchUsers();
@@ -420,9 +498,14 @@ async function removeUser(userID: string) {
 
 function confirmDeleteAdmin() {
 	if (!currentAdmin.value) return;
-	// eslint-disable-next-line no-alert
-	if (!window.confirm("Are you sure you want to Delete?")) return;
-	deleteMe(currentAdmin.value._id);
+	const admin = currentAdmin.value;
+	openConfirmation({
+		title: "Delete admin account?",
+		description: `${admin.name} (${admin.email}) will be permanently removed. This is destructive and cannot be undone from this screen.`,
+		confirmLabel: "Delete admin account",
+		variant: "danger",
+		onConfirm: () => deleteMe(admin._id)
+	});
 }
 </script>
 
@@ -464,8 +547,17 @@ function confirmDeleteAdmin() {
 			</div>
 		</header>
 
-		<p v-if="success" class="status-banner is-success">{{ success }}</p>
-		<p v-if="error" class="status-banner is-error">{{ error }}</p>
+		<p
+			v-if="success"
+			class="status-banner is-success"
+			role="status"
+			aria-live="polite"
+		>
+			{{ success }}
+		</p>
+		<p v-if="error" class="status-banner is-error" role="alert">
+			{{ error }}
+		</p>
 
 		<template v-if="viewMode === 'profile'">
 			<article v-if="currentAdmin" class="workspace-sheet">
@@ -585,6 +677,11 @@ function confirmDeleteAdmin() {
 							<button
 								class="btn-secondary btn"
 								type="button"
+								:aria-label="
+									tutorEditing[t._id]
+										? `Close course editor for ${t.name}`
+										: `Edit courses for ${t.name}`
+								"
 								@click="toggleTutorEdit(t._id)"
 							>
 								{{
@@ -650,6 +747,7 @@ function confirmDeleteAdmin() {
 								<button
 									class="btn-primary btn"
 									type="button"
+									:aria-label="`Save course access for ${t.name}`"
 									@click="saveTutorCourses(t._id)"
 								>
 									Save courses
@@ -657,6 +755,7 @@ function confirmDeleteAdmin() {
 								<button
 									class="btn-secondary btn"
 									type="button"
+									:aria-label="`Cancel course edits for ${t.name}`"
 									@click="cancelTutorEdit(t._id)"
 								>
 									Cancel
@@ -697,6 +796,11 @@ function confirmDeleteAdmin() {
 							<button
 								class="btn-secondary btn"
 								type="button"
+								:aria-label="
+									userEditing[u._id]
+										? `Close assignment editor for ${u.name}`
+										: `Edit assignments for ${u.name}`
+								"
 								@click="
 									userEditing[u._id]
 										? cancelUserEdit(u._id)
@@ -886,6 +990,7 @@ function confirmDeleteAdmin() {
 								<button
 									class="btn-primary btn"
 									type="button"
+									:aria-label="`Save learner assignments for ${u.name}`"
 									@click="saveUserEditorChanges(u._id)"
 								>
 									Save
@@ -893,6 +998,7 @@ function confirmDeleteAdmin() {
 								<button
 									class="btn-secondary btn"
 									type="button"
+									:aria-label="`Cancel learner assignment edits for ${u.name}`"
 									@click="cancelUserEdit(u._id)"
 								>
 									Cancel
@@ -928,6 +1034,7 @@ function confirmDeleteAdmin() {
 						<button
 							class="btn-danger btn"
 							type="button"
+							:aria-label="`Delete admin account for ${currentAdmin.name}`"
 							@click="confirmDeleteAdmin"
 						>
 							Delete admin account
@@ -963,6 +1070,7 @@ function confirmDeleteAdmin() {
 							<button
 								class="btn-secondary btn"
 								type="button"
+								:aria-label="`Demote ${t.name} to user`"
 								@click="confirmDemote(t._id)"
 							>
 								Demote to user
@@ -970,6 +1078,7 @@ function confirmDeleteAdmin() {
 							<button
 								class="btn-danger btn"
 								type="button"
+								:aria-label="`Delete tutor account for ${t.name}`"
 								@click="removeTutor(t._id)"
 							>
 								Delete tutor
@@ -1007,6 +1116,7 @@ function confirmDeleteAdmin() {
 							<button
 								class="btn-primary btn"
 								type="button"
+								:aria-label="`Promote ${u.name} to tutor`"
 								@click="promoteToTutor(u._id)"
 							>
 								Promote to tutor
@@ -1014,6 +1124,7 @@ function confirmDeleteAdmin() {
 							<button
 								class="btn-danger btn"
 								type="button"
+								:aria-label="`Delete learner account for ${u.name}`"
 								@click="removeUser(u._id)"
 							>
 								Delete user
@@ -1023,6 +1134,46 @@ function confirmDeleteAdmin() {
 				</div>
 			</section>
 		</template>
+
+		<AccessibleDialog
+			close-label="Cancel confirmation"
+			:description="confirmationDescription"
+			dialog-id="admin-confirmation-dialog"
+			:open="!!confirmation"
+			:title="confirmationTitle"
+			@close="closeConfirmation"
+		>
+			<p class="confirm-copy">
+				{{ confirmationDescription }}
+			</p>
+			<template #footer>
+				<button
+					class="btn-secondary btn"
+					:disabled="confirmationBusy"
+					type="button"
+					@click="closeConfirmation"
+				>
+					Cancel
+				</button>
+				<button
+					class="btn"
+					:class="
+						confirmation?.variant === 'primary'
+							? 'btn-primary'
+							: 'btn-danger'
+					"
+					:disabled="confirmationBusy"
+					type="button"
+					@click="runConfirmation"
+				>
+					{{
+						confirmationBusy
+							? "Working..."
+							: confirmationConfirmLabel
+					}}
+				</button>
+			</template>
+		</AccessibleDialog>
 	</section>
 </template>
 
@@ -1194,6 +1345,12 @@ function confirmDeleteAdmin() {
 	color: #b91c1c;
 	background: rgba(254, 242, 242, 0.92);
 	box-shadow: inset 0 0 0 1px rgba(252, 165, 165, 0.82);
+}
+
+.confirm-copy {
+	margin: 0;
+	color: var(--color-ink-soft, #41566a);
+	line-height: 1.65;
 }
 
 .workspace-sheet,

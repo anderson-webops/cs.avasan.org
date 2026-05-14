@@ -107,7 +107,7 @@ defineOptions({ name: "AboutPage" });
 				target="_blank"
 				rel="noreferrer"
 			>
-				View LinkedIn
+				View LinkedIn<span class="sr-only"> (opens in a new tab)</span>
 			</a>
 		</section>
 	</section>
