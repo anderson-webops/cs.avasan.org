@@ -1,6 +1,8 @@
 import { mount } from "@vue/test-utils";
-import { describe, expect, it } from "vitest";
+import { createPinia, setActivePinia } from "pinia";
+import { beforeEach, describe, expect, it } from "vitest";
 import PathwaysPage from "@/pages/pathways.vue";
+import { useAppStore } from "@/stores/app";
 import { courseCatalog } from "@/stores/courses/index";
 import {
 	coursePublicPathwayByCourseId,
@@ -14,6 +16,10 @@ function pathwayText(pathwayId: string) {
 }
 
 describe("public course pathways", () => {
+	beforeEach(() => {
+		setActivePinia(createPinia());
+	});
+
 	it("covers every visible catalog course exactly once", () => {
 		const catalogIds = courseCatalog.map(course => course.id).sort();
 		const pathwayIds = coursePublicPathways
@@ -79,7 +85,22 @@ describe("public course pathways", () => {
 	});
 
 	it("renders the public pathway page with priorities, coverage, and key course families", () => {
-		const wrapper = mount(PathwaysPage);
+		const pinia = createPinia();
+		setActivePinia(pinia);
+		const app = useAppStore();
+		app.setCurrentAdmin({
+			_id: "admin-1",
+			name: "Admin",
+			email: "admin@example.com",
+			editAdmins: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(PathwaysPage, {
+			global: {
+				plugins: [pinia]
+			}
+		});
 
 		expect(wrapper.text()).toContain("A public map of what each course family is meant to become.");
 		expect(wrapper.text()).toContain("Scratch and Early Computer Science");
@@ -87,5 +108,25 @@ describe("public course pathways", () => {
 		expect(wrapper.text()).toContain("AP Computer Science A");
 		expect(wrapper.text()).toContain("Network, Low-Level, and Systems Security");
 		expect(wrapper.text()).toContain("Courses covered");
+	});
+
+	it("shows a planning-tool gate to non-admin visitors", () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const wrapper = mount(PathwaysPage, {
+			global: {
+				plugins: [pinia],
+				stubs: {
+					RouterLink: {
+						props: ["to"],
+						template: "<a><slot /></a>"
+					}
+				}
+			}
+		});
+
+		expect(wrapper.text()).toContain("Pathways are an admin planning tool.");
+		expect(wrapper.text()).not.toContain("Build next");
 	});
 });

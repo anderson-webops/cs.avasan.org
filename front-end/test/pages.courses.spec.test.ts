@@ -71,4 +71,41 @@ describe("courses page access gate", () => {
 		);
 		expect(wrapper.text()).toContain("classes@jacobdanderson.net");
 	});
+
+	it("keeps booking calls out of the assigned-course view", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+		const app = useAppStore();
+
+		app.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: ["javascript-level-1"],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CoursesPage, {
+			global: {
+				plugins: [pinia],
+				stubs: {
+					CourseExplorer: {
+						template: "<div>Course explorer</div>"
+					},
+					RouterLink: {
+						props: ["to"],
+						template: "<a><slot /></a>"
+					}
+				}
+			}
+		});
+
+		await flushPromises();
+
+		expect(wrapper.text()).toContain("Open the courses assigned to you.");
+		expect(wrapper.text()).not.toContain("Book a Class");
+	});
 });

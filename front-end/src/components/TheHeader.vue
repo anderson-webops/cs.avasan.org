@@ -26,8 +26,12 @@ const primaryLinks = computed<NavLink[]>(() => {
 	const links: NavLink[] = [
 		{ label: "Home", to: "/", exact: true },
 		{ label: "Courses", to: "/courses", exact: true },
-		{ label: "Pathways", to: "/pathways", exact: true }
+		{ label: "Zoom", to: "/zoom", exact: true }
 	];
+
+	if (isAdmin.value) {
+		links.push({ label: "Pathways", to: "/pathways", exact: true });
+	}
 
 	if (!isAdmin.value) {
 		links.push({
@@ -45,12 +49,6 @@ const primaryLinks = computed<NavLink[]>(() => {
 
 const utilityLinks = computed<NavLink[]>(() => {
 	if (isAdmin.value) return [];
-	if (isLoggedIn.value) {
-		return [
-			{ label: "Zoom", to: "/zoom", exact: true },
-			{ label: "Tuition", to: "/payment", exact: true }
-		];
-	}
 	return [{ label: "Tuition", to: "/payment", exact: true }];
 });
 

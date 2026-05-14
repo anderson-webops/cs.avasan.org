@@ -66,7 +66,10 @@ function openSignup() {
 				</p>
 			</div>
 
-			<div class="site-action-row courses-actions">
+			<div
+				v-if="!isLoggedIn || !hasAssignedCourseAccess"
+				class="site-action-row courses-actions"
+			>
 				<button
 					v-if="!isLoggedIn"
 					class="site-button site-button--secondary"
@@ -91,13 +94,8 @@ function openSignup() {
 					Go to Profile
 				</RouterLink>
 				<RouterLink
-					class="site-button"
-					:class="{
-						'site-button--primary':
-							isLoggedIn && !hasAssignedCourseAccess,
-						'site-button--secondary':
-							!isLoggedIn || hasAssignedCourseAccess
-					}"
+					v-if="!isLoggedIn"
+					class="site-button site-button--secondary"
 					to="/signup"
 					@focus="warmSchedulerConnections"
 					@mouseenter="warmSchedulerConnections"

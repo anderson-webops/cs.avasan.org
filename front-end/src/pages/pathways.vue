@@ -1,9 +1,13 @@
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
+import { useAppStore } from "@/stores/app";
 import { courseCatalog } from "@/stores/courses/index";
 import { coursePublicPathways } from "@/stores/courses/public-pathways";
 
 defineOptions({ name: "PathwaysPage" });
 
+const app = useAppStore();
+const { isAdmin, isLoggedIn } = storeToRefs(app);
 const courseNameById = new Map(
 	courseCatalog.map(course => [course.id, course.name])
 );
@@ -36,10 +40,47 @@ function priorityLabel(priority: string) {
 	if (priority === "soon") return "Strengthen soon";
 	return "Maintain";
 }
+
+function openLogin() {
+	app.setLoginBlock(true);
+}
 </script>
 
 <template>
-	<section class="page-shell page-shell--wide pathways-page">
+	<section
+		v-if="!isAdmin"
+		class="page-shell page-shell--narrow pathways-page"
+	>
+		<header class="pathways-gate site-surface">
+			<p class="page-eyebrow">Course planning</p>
+			<h1 class="page-title">Pathways are an admin planning tool.</h1>
+			<p class="page-copy">
+				Students and families should use assigned courses, Zoom,
+				tuition, and profile pages. The pathway backlog is kept separate
+				because it contains internal course-development priorities
+				rather than student-facing lesson work.
+			</p>
+			<div class="site-action-row">
+				<button
+					v-if="!isLoggedIn"
+					class="site-button site-button--primary"
+					type="button"
+					@click="openLogin"
+				>
+					Log in as admin
+				</button>
+				<RouterLink
+					v-else
+					class="site-button site-button--secondary"
+					to="/courses"
+				>
+					Open assigned courses
+				</RouterLink>
+			</div>
+		</header>
+	</section>
+
+	<section v-else class="page-shell page-shell--wide pathways-page">
 		<header class="pathways-hero site-surface">
 			<div class="pathways-hero__copy">
 				<p class="page-eyebrow">Course pathways</p>
@@ -209,6 +250,12 @@ function priorityLabel(priority: string) {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
+}
+
+.pathways-gate {
+	display: grid;
+	gap: 1rem;
+	padding: clamp(1.6rem, 3vw, 2.35rem);
 }
 
 .pathways-hero {
