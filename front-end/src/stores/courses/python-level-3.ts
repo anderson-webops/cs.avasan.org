@@ -63,9 +63,9 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Write a set of practice functions: return the product of three numbers, return the average of two numbers, count how many times a letter appears in a word, count how many digits in an integer are 7, and compute `a` to the power of `b`. Challenge extensions include factorials and the length of a Hailstone sequence.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Functions-Practice-Starter",
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Functions-Practice/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Functions-Practice"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Functions-Practice/solution"
 				},
 				{
 					title: "Lists",
@@ -77,9 +77,9 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Practice building and using lists without hard-coding results. Create the numbers 1 through 20, the first 20 even numbers, and the first 10 perfect squares. Then write functions that sum lists, return minimum and maximum values, flatten a list of lists, and return the maximum value from each inner list.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Lists-Practice-Starter",
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Lists-Practice/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Lists-Practice"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Lists-Practice/solution"
 				}
 			],
 			supplementalProjects: []
@@ -97,9 +97,9 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Complete a fundamentals problem set that reviews the major ideas covered so far. The set includes list processing, counting, perfect squares, factorial sums, divisors, reverse strings, vowel counts, frequency analysis, and swapping values in a list. This module may take more than one class session, so focus on steady progress and clean solutions.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM3-Python-Fundamentals-Problem-Set-Starter",
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM3-Python-Fundamentals-Problem-Set/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM3-Python-Fundamentals-Problem-Set"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM3-Python-Fundamentals-Problem-Set/solution"
 				}
 			],
 			supplementalProjects: []
@@ -391,7 +391,7 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Reuse the sorting algorithms built earlier and compare their speed on random, sorted, and reversed lists of different sizes.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-2-Additional-Project"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-2-Additional-Project/solution"
 				}
 			],
 			supplementalProjects: []
@@ -421,9 +421,9 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Adapt a sorting algorithm to rank a list of players by different statistics such as batting average, home runs, or RBI. Store each player's data together and sort based on the chosen field, returning a leaderboard in the correct order.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics-Starter",
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM9-Baseball-Analytics/solution"
 				}
 			],
 			supplementalProjects: []
@@ -527,18 +527,18 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Read alternating lines from a file and store them in a dictionary where one line is the key and the next line is its value. This combines file input with dictionary construction.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries-Starter",
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-File-IO-and-Dictionaries/solution"
 				},
 				{
 					title: "AM12 Project 3: Juni Latin with File IO",
 					content:
 						"Read sentences from an input text file, translate each word using a Juni Latin function, and write the translated results to an output file. As a challenge, preserve punctuation in its correct place while translating the words.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO-Starter",
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM12-Juni-Latin-with-File-IO/solution"
 				}
 			],
 			supplementalProjects: []
@@ -576,7 +576,7 @@ export const pythonLevel3Course: RawCourse = {
 					content:
 						"Read letters from a file into a list, sort them in ASCII order using one of the implemented sorting algorithms, and write the sorted results back to a file.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-3-Additional-Project"
+						"https://github.com/instruction-material/Python-Level-3/tree/main/AM-Check-In-3-Additional-Project/solution"
 				}
 			],
 			supplementalProjects: []

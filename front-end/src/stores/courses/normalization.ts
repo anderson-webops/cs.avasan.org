@@ -911,11 +911,11 @@ function normalizePythonLevel3(course: RawCourse) {
 			{
 				projectLink: githubTree(
 					"Python-Level-3",
-					`AM-Check-In-${checkIn}-Starter`
+					`AM-Check-In-${checkIn}/starter`
 				),
 				solutionLink: githubTree(
 					"Python-Level-3",
-					`AM-Check-In-${checkIn}`
+					`AM-Check-In-${checkIn}/solution`
 				)
 			}
 		);
@@ -927,11 +927,11 @@ function normalizePythonLevel3(course: RawCourse) {
 		{
 			projectLink: githubTree(
 				"Python-Level-3",
-				"AM-Check-In-2-Additional-Project-Starter"
+				"AM-Check-In-2-Additional-Project/starter"
 			),
 			solutionLink: githubTree(
 				"Python-Level-3",
-				"AM-Check-In-2-Additional-Project"
+				"AM-Check-In-2-Additional-Project/solution"
 			)
 		}
 	);
@@ -942,11 +942,11 @@ function normalizePythonLevel3(course: RawCourse) {
 		{
 			projectLink: githubTree(
 				"Python-Level-3",
-				"AM-Check-In-3-Additional-Project-Starter"
+				"AM-Check-In-3-Additional-Project/starter"
 			),
 			solutionLink: githubTree(
 				"Python-Level-3",
-				"AM-Check-In-3-Additional-Project"
+				"AM-Check-In-3-Additional-Project/solution"
 			)
 		}
 	);

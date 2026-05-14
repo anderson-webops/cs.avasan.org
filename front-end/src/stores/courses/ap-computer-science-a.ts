@@ -125,8 +125,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Mad Libs",
 					content:
 						"Mad Libs is the right first build for APCS1 because it combines variables, strings, scanner input, and formatted output without introducing structural overhead.",
-					projectLink: repo("APCS1-Mad-Libs-Template"),
-					solutionLink: repo("APCS1-Mad-Libs"),
+					projectLink: repo("APCS1-Mad-Libs/starter"),
+					solutionLink: repo("APCS1-Mad-Libs/solution"),
 					mediaLink: media("apcs1-project-1-mad-libs.mp4")
 				},
 				{
@@ -175,8 +175,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Verifying Expressions",
 					content:
 						"Use the verified starter-and-solution pair for expression tracing and boolean reasoning instead of the original Replit-only workflow.",
-					projectLink: repo("APCS2-Verifying-Expressions-Starter"),
-					solutionLink: repo("APCS2-Verifying-Expressions")
+					projectLink: repo("APCS2-Verifying-Expressions/starter"),
+					solutionLink: repo("APCS2-Verifying-Expressions/solution")
 				},
 				{
 					title: "Chapter 2 Multiple Choice Focus",
@@ -285,8 +285,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Translating Loops",
 					content:
 						"Use the verified starter-and-solution pair for translating between `for` and `while` forms while preserving exact behavior.",
-					projectLink: repo("APCS4-Translating-Loops-Starter"),
-					solutionLink: repo("APCS4-Translating-Loops"),
+					projectLink: repo("APCS4-Translating-Loops/starter"),
+					solutionLink: repo("APCS4-Translating-Loops/solution"),
 					mediaLink: media("apcs4-project-2-translating-loops.mp4")
 				},
 				{
@@ -462,8 +462,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Farm Class",
 					content:
 						"Use the starter-and-solution pair when the student needs one more class-based build with simpler domain language.",
-					projectLink: repo("APCS6-Farm-Class-Starter"),
-					solutionLink: repo("APCS6-Farm-Class"),
+					projectLink: repo("APCS6-Farm-Class/starter"),
+					solutionLink: repo("APCS6-Farm-Class/solution"),
 					mediaLink: media("apcs6-project-1-farm-class.mp4")
 				},
 				{
@@ -544,8 +544,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Many Shapes",
 					content:
 						"Use the verified starter-and-solution pair for the Many Shapes project because it mirrors the source module's polymorphism focus directly.",
-					projectLink: repo("APCS8-Many-Shapes-Starter"),
-					solutionLink: repo("APCS8-Many-Shapes"),
+					projectLink: repo("APCS8-Many-Shapes/starter"),
+					solutionLink: repo("APCS8-Many-Shapes/solution"),
 					mediaLink: media("apcs8-project-1-many-shapes.mp4")
 				}
 			],
@@ -625,8 +625,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Robust Input Practice",
 					content:
 						"Use the verified starter-and-solution pair for robust input practice as the main APCS9 implementation checkpoint.",
-					projectLink: repo("APCS9-Robust-Input-Practice-Starter"),
-					solutionLink: repo("APCS9-Robust-Input-Practice"),
+					projectLink: repo("APCS9-Robust-Input-Practice/starter"),
+					solutionLink: repo("APCS9-Robust-Input-Practice/solution"),
 					mediaLink: media(
 						"apcs9-project-1-robust-input-practice.mp4"
 					)
@@ -752,8 +752,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Card Shuffler",
 					content:
 						"Use the starter-and-solution pair for Card Shuffler to connect objects, ArrayLists, and algorithmic updates in a higher-signal build.",
-					projectLink: repo("APCS11-Card-Shuffler-Starter"),
-					solutionLink: repo("APCS11-Card-Shuffler"),
+					projectLink: repo("APCS11-Card-Shuffler/starter"),
+					solutionLink: repo("APCS11-Card-Shuffler/solution"),
 					mediaLink: media("apcs11-project-3-card-shuffler.mp4")
 				},
 				{
@@ -810,8 +810,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Runtime Analysis Starter",
 					content:
 						"Use the runtime starter if the check-in shows weak step-counting or loop-cost reasoning.",
-					projectLink: repo("APCS13-Runtime-Analysis-Starter"),
-					solutionLink: repo("APCS13-Runtime-Analysis")
+					projectLink: repo("APCS13-Runtime-Analysis/starter"),
+					solutionLink: repo("APCS13-Runtime-Analysis/solution")
 				}
 			]
 		},
@@ -832,8 +832,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Suits, Decks, and Hands",
 					content:
 						"Use the verified starter-and-solution pair for Suits, Decks, and Hands as the main APCS12 build.",
-					projectLink: repo("APCS12-Suit-Deck-and-Hand-Starter"),
-					solutionLink: repo("APCS12-Suit-Deck-and-Hand"),
+					projectLink: repo("APCS12-Suit-Deck-and-Hand/starter"),
+					solutionLink: repo("APCS12-Suit-Deck-and-Hand/solution"),
 					mediaLink: media(
 						"apcs12-project-1-suits-decks-and-hands.mp4"
 					)
@@ -872,8 +872,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Runtime Analysis",
 					content:
 						"Use the verified starter-and-solution pair for runtime analysis as the main APCS13 reasoning checkpoint.",
-					projectLink: repo("APCS13-Runtime-Analysis-Starter"),
-					solutionLink: repo("APCS13-Runtime-Analysis")
+					projectLink: repo("APCS13-Runtime-Analysis/starter"),
+					solutionLink: repo("APCS13-Runtime-Analysis/solution")
 				}
 			],
 			supplementalProjects: [
@@ -936,8 +936,8 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Tracing Recursion",
 					content:
 						"Use the verified starter-and-solution pair for tracing recursion as the main APCS15 reasoning checkpoint.",
-					projectLink: repo("APCS15-Tracing-Recursion-Starter"),
-					solutionLink: repo("APCS15-Tracing-Recursion")
+					projectLink: repo("APCS15-Tracing-Recursion/starter"),
+					solutionLink: repo("APCS15-Tracing-Recursion/solution")
 				},
 				{
 					title: "Recursion Reference Pack",

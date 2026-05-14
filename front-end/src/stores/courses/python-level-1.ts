@@ -16,7 +16,7 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Import `turtle`, create a turtle, move it with `forward()`, turn with `left()` and `right()`, and use `goto()`, `penup()`, `pendown()`, `color()`, `begin_fill()`, and `end_fill()` to create a square, a triangle, and a filled shape in a new location. Practice reading console errors, fixing mistakes, and adding comments to explain code.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS1-Turtle-Exporation-All-Star/main.py"
+						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS1-Turtle-Exporation-All-Star/solution/main.py"
 				}
 			],
 			supplementalProjects: [
@@ -25,9 +25,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Answer short review questions about Python, Turtle setup, drawing commands, and debugging to create a personal study guide.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Recap/solution"
 				},
 				{
 					title: "GrS1 Supplemental Project 2: Open Ended Project - Create a Drawing",
@@ -107,9 +107,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Answer short review questions about loops and shape-building techniques to create a study guide for the module.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS-Loops-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS-Loops-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS-Loops-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GRS-Loops-Recap/solution"
 				}
 			]
 		},
@@ -135,7 +135,7 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Combine loops with random movement to simulate a random walk. Customize the turtle shape and pen size while practicing readable variable names.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS3-Random-Walk/main.py"
+						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS3-Random-Walk/solution/main.py"
 				}
 			],
 			supplementalProjects: [
@@ -151,18 +151,18 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Read console errors and fix a buggy Turtle program step by step until it runs as intended.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS3-Debugging-Practice",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS3-Debugging-Practice/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS3-Debugging-Practice-Solution"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS3-Debugging-Practice/solution"
 				},
 				{
 					title: "GrS3 Supplemental Project 3: Variables and Random Numbers Recap",
 					content:
 						"Answer short review questions about variables, random numbers, and data types to summarize the module.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Game-Mechanics-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Game-Mechanics-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Game-Mechanics-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Game-Mechanics-Recap/solution"
 				},
 				{
 					title: "GrS3 Supplemental Project 4: Open Ended Project - Haphazard Artwork",
@@ -195,9 +195,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Strengthen coordinate plane skills through targeted coordinate questions and movement practice.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS4-Navigating-the-Coordinate-Plane-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS4-Navigating-the-Coordinate-Plane/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS4-Navigating-the-Coordinate-Plane"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS4-Navigating-the-Coordinate-Plane/solution"
 				},
 				{
 					title: "GrS4 Supplemental Project 2: Open Ended Project - Boolean Bonanza",
@@ -315,16 +315,16 @@ export const pythonLevel1Course: RawCourse = {
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/Turtle-Race-Starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/Turtle-Race-Updated/main.py"
+						"https://github.com/instruction-material/Python-Level-1/blob/main/Turtle-Race-Updated/solution/main.py"
 				},
 				{
 					title: "GrS5 Supplemental Project 5: Reassignment and While Loops Recap",
 					content:
 						"Answer short review questions about reassignment, counters, and `while` loops.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reassignment-and-While-Loops-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reassignment-and-While-Loops-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Reassignment-and-While-Loops-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Reassignment-and-While-Loops-Recap/solution"
 				}
 			]
 		},
@@ -425,16 +425,16 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Define a function that draws a random polygon, then call it repeatedly with random positions and colors.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/Randomly-Random-Shapes-Updated/main.py"
+						"https://github.com/instruction-material/Python-Level-1/blob/main/Randomly-Random-Shapes-Updated/solution/main.py"
 				},
 				{
 					title: "GrS7 Supplemental Project 3: Functions Recap",
 					content:
 						"Answer short review questions about function definitions, calls, and reusable code.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-Recap/solution"
 				}
 			]
 		},
@@ -490,9 +490,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Answer short review questions about event listeners, key bindings, and interactive program structure.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Event-Listener-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Event-Listener-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Event-Listener-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Event-Listener-Recap/solution"
 				}
 			]
 		},
@@ -558,7 +558,7 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Combine `screen.onclick()` with functions and parameters so mouse clicks place colorful random circles on the canvas.",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS9-Polka-Dots/main.py"
+						"https://github.com/instruction-material/Python-Level-1/blob/main/GrS9-Polka-Dots/solution/main.py"
 				},
 				{
 					title: "GrS9 Project 4: Click and Draw Rectangles",
@@ -581,9 +581,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Fix a buggy snowman project by tracing function-related errors and correcting how functions are defined and used.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS7-Debugging-Functions",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS7-Debugging-Functions/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS7-Debugging-Functions-Solution"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS7-Debugging-Functions/solution"
 				},
 				{
 					title: "GrS9 Supplemental Project 3: Pyramid with Functions",
@@ -604,9 +604,9 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Answer short review questions about parameters, reusable functions, and click-driven programs.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-2-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-2-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-2-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/Functions-2-Recap/solution"
 				}
 			]
 		},
@@ -747,18 +747,18 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Fix a buggy list-based program by reading console errors and matching the repaired behavior to the stated goals in the comments.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Debugging-Lists",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Debugging-Lists/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Debugging-Lists-Solution"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Debugging-Lists/solution"
 				},
 				{
 					title: "GrS12 Supplemental Project 4: Lists Recap",
 					content:
 						"Answer short review questions about list creation, iteration, indexing, and membership checks.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Lists-Recap-Template",
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Lists-Recap/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Lists-Recap"
+						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS12-Lists-Recap/solution"
 				}
 			]
 		},
@@ -930,7 +930,7 @@ export const pythonLevel1Course: RawCourse = {
 					content:
 						"Reflect on what concepts were learned, the most challenging and most rewarding parts of the course, and how skills have grown from the beginning to the end.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-1/blob/main/End-of-Course-Reflection/main.py"
+						"https://github.com/instruction-material/Python-Level-1/blob/main/End-of-Course-Reflection/solution/main.py"
 				}
 			],
 			supplementalProjects: []

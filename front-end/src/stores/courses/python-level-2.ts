@@ -158,9 +158,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Fix a loop-based rocket launch simulator by reading console errors, locating each bug, and correcting the loop logic until the program runs fully.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Debugging-Loops",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Debugging-Loops/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Debugging-Loops-Solution",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS2-Debugging-Loops/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps2_debugging_loops.gif"
 				},
@@ -337,9 +337,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Fix a ticket-prize script by reading console output, identifying incorrect conditionals, and repairing the program until it behaves correctly.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Debugging-Conditionals",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Debugging-Conditionals/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Debugging-Conditionals-Solution",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS4-Debugging-Conditionals/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps4_debugging_conditionals.gif"
 				}
@@ -454,9 +454,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Repair a guessing-game script by interpreting function-related error messages and fixing bugs one by one.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Debugging-Functions",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Debugging-Functions/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Debugging-Functions-Solution",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS5-Debugging-Functions/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps5_debugging_functions.gif"
 				}
@@ -491,9 +491,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Ask the user for notes and optionally durations, store them in a list structure, and generate a song file from the resulting sequence.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Song-Generator-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Song-Generator/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Song-Generator",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Song-Generator/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_song_generator.gif"
 				}
@@ -522,9 +522,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Read stock trade histories from starter lists and print the most recent trade price and average trade price for each company.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Stock-Trader-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Stock-Trader/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Stock-Trader",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Stock-Trader/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_stock_trader.gif"
 				},
@@ -551,9 +551,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Debug an ice-cream survey program by locating list-related mistakes from the console errors and fixing them in sequence.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Debugging-Lists",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Debugging-Lists/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Debugging-Lists-Solution",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS6-Debugging-Lists/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps6_debugging_lists.gif"
 				}
@@ -581,9 +581,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Upgrade the song generator by using a dictionary that translates note-duration names such as whole, half, quarter, or eighth into the values expected by the music generator.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Song-Generator-2-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Song-Generator-2/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Song-Generator-2",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Song-Generator-2/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps7_song_generator_2.gif"
 				}
@@ -594,9 +594,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Convert a birthday written as `mm/dd/yyyy` into a full written date using dictionaries for month names and day suffixes, including special cases such as 11th through 13th.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Birthday-Converter-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Birthday-Converter/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Birthday-Converter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Birthday-Converter/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps7_birthday_converter.gif"
 				},
@@ -614,9 +614,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Convert menu prices stored in parallel lists into a dictionary and print a formatted menu from the result.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Coffee-Shop-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Coffee-Shop/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Coffee-Shop",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Coffee-Shop/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps7_coffee_shop.gif"
 				},
@@ -625,9 +625,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use nested indexing across dictionaries, lists, and tuples to extract the values needed to print a target sequence of words.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Dictionary-Indexing-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Dictionary-Indexing/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Dictionary-Indexing",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Dictionary-Indexing/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps7_dictionary_indexing.gif"
 				},
@@ -636,9 +636,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Fix a Halloween candy counter by tracing dictionary-related bugs from console messages until the program works correctly.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Debugging-Dictionaries",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Debugging-Dictionaries/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Debugging-Dictionaries-Solution",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS7-Debugging-Dictionaries/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps7_debugging_dictionaries.gif"
 				}
@@ -652,9 +652,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use a dictionary-based translation system to convert text into Morse code and then into a music-based version using short and long note durations.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS8-Morse-Code-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS8-Morse-Code/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS8-Morse-Code",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS8-Morse-Code/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps8_morse_code.gif"
 				}
@@ -694,9 +694,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Remove duplicate student names from class rosters and report the actual number of enrolled students in each course.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps9_class_registration.gif"
 				},
@@ -705,7 +705,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Determine which students are waitlisted once duplicates are removed and enrollment caps are enforced.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration-II",
 					mediaLink:
@@ -725,9 +725,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use a dictionary of player nationalities and a set to count and print the distinct countries represented on a team.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Soccer-Nationalities-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Soccer-Nationalities/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Soccer-Nationalities",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Soccer-Nationalities/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps9_soccer_nationalities.gif"
 				},
@@ -736,9 +736,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Fix a capture-the-flag tracker by correcting set-related errors and verifying the program state after each repair.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Debugging-Sets",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Debugging-Sets/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Debugging-Sets-Solution",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Debugging-Sets/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps9_debugging_sets.gif"
 				}
@@ -799,9 +799,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Quiz the user on state capitals until an incorrect answer is given, then print the final score.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-US-Capitals-Quiz-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-US-Capitals-Quiz/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-US-Capitals-Quiz",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-US-Capitals-Quiz/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps10_us_capitals_quiz.gif"
 				},
@@ -853,9 +853,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use dictionaries and looping menu logic to track how much time remains in a six-hour amusement park visit and which rides the user chooses.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Juni-World-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Juni-World/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Juni-World",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS11-Juni-World/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps11_juni_world.gif"
 				}
@@ -885,9 +885,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Split a review into words, compare them against positive and negative vocabularies, and classify the overall review sentiment.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Review-Sentiment-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Review-Sentiment/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Review-Sentiment",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Review-Sentiment/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps12_review_sentiment.gif"
 				},
@@ -896,9 +896,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Implement a harder version of Wheel of Fortune where the computer keeps a changing list of possible words and avoids committing to a secret word for as long as possible.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Evil-Wheel-of-Fortune-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Evil-Wheel-of-Fortune/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Evil-Wheel-of-Fortune",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Evil-Wheel-of-Fortune/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps_12_evil_hangman.mp4"
 				}
@@ -912,9 +912,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Use a provided word list to build a timed word game around seven random letters, validating guesses, preventing repeats, and scoring accepted words. Optional extensions can add a high score, new game loop, or guaranteed vowels.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Wordsmith-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Wordsmith/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Wordsmith",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Wordsmith/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps13_wordsmith.gif"
 				}
@@ -925,9 +925,9 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Continuously generate random letters and stop when the last three letters typed form a valid three-letter English word.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys/starter",
 					solutionLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys/solution",
 					mediaLink:
 						"https://static.classes.jacobdanderson.net/ps13_typewriter_monkeys.gif"
 				},
@@ -936,7 +936,7 @@ export const pythonLevel2Course: RawCourse = {
 					content:
 						"Generalize the monkey-typing simulation so it searches for a valid word of length `n` and compare how runtime changes as `n` increases.",
 					projectLink:
-						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys-Starter",
+						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Typewriter-Monkeys/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS13-Advanced-Typewriter-Monkeys",
 					mediaLink:
