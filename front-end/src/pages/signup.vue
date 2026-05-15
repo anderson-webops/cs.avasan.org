@@ -1,10 +1,13 @@
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { isDark } from "@/composables/dark";
 import {
+	buildSchedulerEmbedUrl,
 	SCHEDULER_ORIGIN,
 	schedulerEmbedMessageSource,
 	schedulerEmbedResizeType,
-	schedulerEmbedUrl,
+	schedulerEmbedThemeMessageSource,
+	schedulerEmbedThemeType,
 	schedulerUrl
 } from "@/modules/scheduler";
 
@@ -16,6 +19,9 @@ const MAX_FRAME_HEIGHT = 2200;
 const schedulerLoaded = ref(false);
 const schedulerTimedOut = ref(false);
 const schedulerHeight = ref(MIN_FRAME_HEIGHT);
+const schedulerFrame = ref<HTMLIFrameElement | null>(null);
+const schedulerTheme = computed(() => (isDark.value ? "dark" : "light"));
+const schedulerEmbedSrc = ref(buildSchedulerEmbedUrl(schedulerTheme.value));
 const customerPortalUrl = ref(`${schedulerUrl}portal`);
 const customerPortalLabel = ref("Open the customer portal");
 let schedulerLoadTimeout: number | undefined;
@@ -28,6 +34,17 @@ useHead({
 		}
 	]
 });
+
+function postSchedulerTheme() {
+	schedulerFrame.value?.contentWindow?.postMessage(
+		{
+			source: schedulerEmbedThemeMessageSource,
+			type: schedulerEmbedThemeType,
+			theme: schedulerTheme.value
+		},
+		SCHEDULER_ORIGIN
+	);
+}
 
 function handleSchedulerMessage(event: MessageEvent) {
 	if (event.origin !== SCHEDULER_ORIGIN) {
@@ -73,11 +90,14 @@ function handleSchedulerMessage(event: MessageEvent) {
 function markSchedulerLoaded() {
 	schedulerLoaded.value = true;
 	schedulerTimedOut.value = false;
+	postSchedulerTheme();
 	if (schedulerLoadTimeout) {
 		window.clearTimeout(schedulerLoadTimeout);
 		schedulerLoadTimeout = undefined;
 	}
 }
+
+watch(schedulerTheme, () => postSchedulerTheme());
 
 onMounted(() => {
 	window.addEventListener("message", handleSchedulerMessage);
@@ -153,10 +173,11 @@ onBeforeUnmount(() => {
 			</p>
 
 			<iframe
+				ref="schedulerFrame"
 				class="scheduler-frame"
 				:class="{ 'is-loaded': schedulerLoaded }"
 				aria-describedby="scheduler-embed-help"
-				:src="schedulerEmbedUrl"
+				:src="schedulerEmbedSrc"
 				title="Class scheduler"
 				:style="{ height: `${schedulerHeight}px` }"
 				loading="eager"

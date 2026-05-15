@@ -1,9 +1,24 @@
 export const SCHEDULER_ORIGIN = "https://scheduler.classes.jacobdanderson.net";
 export const schedulerUrl = `${SCHEDULER_ORIGIN}/`;
-export const schedulerEmbedUrl = `${schedulerUrl}?embed=1`;
+export type SchedulerEmbedTheme = "light" | "dark";
+
+export function buildSchedulerEmbedUrl(theme?: SchedulerEmbedTheme) {
+	const url = new URL(schedulerUrl);
+	url.searchParams.set("embed", "1");
+
+	if (theme) {
+		url.searchParams.set("theme", theme);
+	}
+
+	return url.toString();
+}
+
+export const schedulerEmbedUrl = buildSchedulerEmbedUrl();
 export const schedulerEmbedMessageSource =
 	"scheduler.classes.jacobdanderson.net";
 export const schedulerEmbedResizeType = "scheduler:resize";
+export const schedulerEmbedThemeMessageSource = "classes.jacobdanderson.net";
+export const schedulerEmbedThemeType = "scheduler:theme";
 
 let schedulerWarmthApplied = false;
 
