@@ -97,6 +97,19 @@ describe("course text quality normalization", () => {
 		expect(lessonArc.content).not.toMatch(/1\) .+; 2\)/s);
 	});
 
+	it("formats authored lesson setup text as neutral student-readable sections", async () => {
+		const course = await loadRawCourse("c-level-1");
+		expect(course).not.toBeNull();
+
+		const setup = findItem(course!, /Program Setup/);
+
+		expect(setup.content).toContain("This lesson begins with");
+		expect(setup.content).toContain("**Key topics:**");
+		expect(setup.content).toContain("- `#include`");
+		expect(setup.content).toContain("**Practice target:**");
+		expect(setup.content).not.toMatch(/Start with|Cover:|Students should/);
+	});
+
 	it("adds AP-specific scaffolding to terse AP Computer Science A algorithm projects", async () => {
 		const course = await loadRawCourse("ap-computer-science-a");
 		expect(course).not.toBeNull();

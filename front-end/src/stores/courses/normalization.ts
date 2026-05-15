@@ -393,8 +393,123 @@ function lowercaseRepeatedlyMatchedFirstLetter(_match: string, first: string) {
 	return `repeatedly ${first}`;
 }
 
-function neutralizeStudentFacingText(text: string) {
+function stripTrailingSentencePunctuation(value: string) {
+	return value.trim().replace(/[.!?]+$/g, "");
+}
+
+function listifyInlineTopics(value: string) {
+	const normalized = stripTrailingSentencePunctuation(value)
+		.replace(/;\s*/g, ", ")
+		.replace(/,\s+and\s+/g, ", ")
+		.replace(/\s+and\s+why\s+/g, ", why ")
+		.replace(/\s+and\s+how\s+/g, ", how ");
+	const topics = normalized
+		.split(/,\s+/)
+		.map(topic => stripTrailingSentencePunctuation(topic))
+		.filter(Boolean);
+
+	if (topics.length < 3) {
+		return `**Key topics:** ${normalized}.`;
+	}
+
+	return `**Key topics:**\n${topics.map(topic => `- ${topic}`).join("\n")}`;
+}
+
+function lessonOpening(label: string, description: string, topics: string) {
+	const normalizedDescription =
+		label === "This lesson begins with"
+			? stripTrailingSentencePunctuation(description).replace(
+					/\band make\b/g,
+					"and makes"
+				)
+			: stripTrailingSentencePunctuation(description);
+
+	return [
+		`${label} ${normalizedDescription}.`,
+		listifyInlineTopics(topics)
+	].join("\n\n");
+}
+
+function neutralizeLessonDirectiveText(text: string) {
 	return text
+		.replace(
+			/^Start with ([^.]+)\. Cover: ([^.]+)\./g,
+			(_match, description, topics) =>
+				lessonOpening("This lesson begins with", description, topics)
+		)
+		.replace(
+			/^Teach ([^.]+)\. Cover: ([^.]+)\./g,
+			(_match, description, topics) =>
+				lessonOpening("This lesson covers", description, topics)
+		)
+		.replace(
+			/^Introduce ([^.]+)\. Cover: ([^.]+)\./g,
+			(_match, description, topics) =>
+				lessonOpening("This lesson introduces", description, topics)
+		)
+		.replace(
+			/^Review ([^.]+)\. Cover: ([^.]+)\./g,
+			(_match, description, topics) =>
+				lessonOpening("This lesson reviews", description, topics)
+		)
+		.replace(
+			/^Position ([^.]+)\. Cover: ([^.]+)\./g,
+			(_match, description, topics) =>
+				lessonOpening("This section positions", description, topics)
+		)
+		.replace(/\bCover:\s*/g, "Key topics include ")
+		.replace(
+			/\bWatch for the idea that\b/g,
+			"A common misconception is that"
+		)
+		.replace(
+			/\bwatch for the idea that\b/g,
+			"a common misconception is that"
+		)
+		.replace(
+			/\bWatch for likely mistakes such as\b/g,
+			"Common mistakes include"
+		)
+		.replace(
+			/\bwatch for likely mistakes such as\b/g,
+			"common mistakes include"
+		)
+		.replace(/\bWatch for\b/g, "Common pitfalls include")
+		.replace(/\bwatch for\b/g, "common pitfalls include")
+		.replace(
+			/\bStudents also often assume\b/g,
+			"Another common assumption is that"
+		)
+		.replace(
+			/\bstudents also often assume\b/g,
+			"another common assumption is that"
+		)
+		.replace(/\bwithout copying the demonstration\b/gi, "independently")
+		.replace(/\bwithout copying the wording\b/gi, "in original wording")
+		.replace(/\bwithout copying code\b/gi, "without duplicating code")
+		.replace(
+			/\bwithout copying the ([a-z][^.]+?)\b/gi,
+			"without duplicating the $1"
+		)
+		.replace(
+			/\s*\bStudents should practice ([^.]+)\./g,
+			(_match, practice) =>
+				`\n\n**Practice target:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(practice))}.`
+		)
+		.replace(
+			/\s*\bStudents should see ([^.]+)\./g,
+			(_match, outcome) =>
+				`\n\n**Visible pattern:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(outcome))}.`
+		)
+		.replace(
+			/\s*\bStudents should understand that ([^.]+)\./g,
+			(_match, outcome) =>
+				`\n\n**Key idea:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(outcome))}.`
+		);
+}
+
+function neutralizeStudentFacingText(text: string) {
+	return neutralizeLessonDirectiveText(text)
 		.replace(
 			/\bCore Concepts and Teaching Flow\b/g,
 			"Core Concepts and Learning Sequence"
@@ -487,10 +602,18 @@ function neutralizeStudentFacingText(text: string) {
 		.replace(/\bStudents should be able to\b/g, "Be able to")
 		.replace(/\bthe student should be able to\b/g, "be able to")
 		.replace(/\bstudents should be able to\b/g, "be able to")
-		.replace(/\bThe student should\b/g, "The expected result should")
-		.replace(/\bStudents should\b/g, "The expected result should")
-		.replace(/\bthe student should\b/g, "the expected result should")
-		.replace(/\bstudents should\b/g, "the expected result should")
+		.replace(/\bThe student should explain\b/g, "Explain")
+		.replace(/\bStudents should explain\b/g, "Explain")
+		.replace(/\bthe student should explain\b/g, "explain")
+		.replace(/\bstudents should explain\b/g, "explain")
+		.replace(/\bThe student should identify\b/g, "Identify")
+		.replace(/\bStudents should identify\b/g, "Identify")
+		.replace(/\bthe student should identify\b/g, "identify")
+		.replace(/\bstudents should identify\b/g, "identify")
+		.replace(/\bThe student should\b/g, "The goal is to")
+		.replace(/\bStudents should\b/g, "The goal is to")
+		.replace(/\bthe student should\b/g, "the goal is to")
+		.replace(/\bstudents should\b/g, "the goal is to")
 		.replace(/\bThe student has tested or justified\b/g, "Test or justify")
 		.replace(/\bthe student has tested or justified\b/g, "test or justify")
 		.replace(/\bThe student tests\b/g, "Test")
@@ -786,15 +909,15 @@ function projectSupport(context: CourseTextContext) {
 
 function lessonSupport(context: CourseTextContext) {
 	return [
-		`**Learning sequence:** This lesson introduces ${subjectFocus(context)}. Start with vocabulary, work through one concrete example, predict the next step, and connect the example back to the project or practice task in this module.`,
-		"**Common pitfalls:** Watch for likely mistakes such as mixing up a value with its representation, using the wrong loop or condition, assuming hidden state, or skipping the reason a step is valid.",
-		"**Mastery check:** Explain the idea in your own words and complete one small transfer task without copying the demonstration."
+		`**Learning sequence:** This lesson introduces ${subjectFocus(context)}. The sequence moves from vocabulary to one concrete example, then to a prediction, explanation, or small transfer task connected to the module project.`,
+		"**Common pitfalls:** Common mistakes include mixing up a value with its representation, using the wrong loop or condition, assuming hidden state, or skipping the reason a step is valid.",
+		"**Mastery check:** Explain the idea in your own words and complete one small transfer task independently."
 	].join("\n\n");
 }
 
 function diagnosticSupport(context: CourseTextContext) {
 	return [
-		`**Readiness check:** Use this as a formative check of ${subjectFocus(context)}, not as a pass/fail quiz. Attempt the prompt independently first, then use the result to identify whether the issue is vocabulary, tracing, syntax, design, or test coverage.`,
+		`**Readiness check:** This is a formative check of ${subjectFocus(context)}, not a pass/fail quiz. Attempt the prompt independently first, then use the result to identify whether the issue is vocabulary, tracing, syntax, design, or test coverage.`,
 		"**Evidence of proficiency:** Explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be correct.",
 		"**If this is difficult:** Record the specific misconception, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.",
 		`**Extension:** Modify the prompt so it still uses the same concept but changes one constraint, input shape, or edge case.`
@@ -803,7 +926,7 @@ function diagnosticSupport(context: CourseTextContext) {
 
 function scienceSupport(context: CourseTextContext) {
 	return [
-		"**Remote investigation:** Use shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. Do not require beakers, kits, or household materials; any physical demonstration should be optional and replaceable with a diagram or data table.",
+		"**Remote investigation:** The activity uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. Do not require beakers, kits, or household materials; any physical demonstration should be optional and replaceable with a diagram or data table.",
 		`**Science explanation:** Anchor the activity in ${subjectFocus(context)}. Record observations first, then build or annotate a model, and only then write the explanation.`,
 		"**Output:** Complete a claim-evidence-reasoning response, a labeled diagram or data table, and one prediction about a changed condition.",
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`
@@ -844,8 +967,8 @@ function studioArtifact(context: CourseTextContext) {
 
 function studioSupport(context: CourseTextContext) {
 	return [
-		`Use this studio as a complete build-and-review session for **${context.item.title}**. The expected artifact is ${studioArtifact(context)}, and the session should be anchored in ${subjectFocus(context)} rather than left as an open-ended placeholder.`,
-		"**Studio focus:** Start by naming the problem, prerequisite concepts, and success criteria. The build should make clear what is being created, what constraints matter, and what evidence will prove the work is correct.",
+		`This studio is a complete build-and-review sequence for **${context.item.title}**. The expected artifact is ${studioArtifact(context)}, anchored in ${subjectFocus(context)} rather than left as an open-ended placeholder.`,
+		"**Studio focus:** Name the problem, prerequisite concepts, and success criteria. The build should make clear what is being created, what constraints matter, and what evidence will prove the work is correct.",
 		`**Build sequence:**\n${projectExpectations(context).join("\n")}\n- Review the result against the original goal and record at least one improvement or bug fix.`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`

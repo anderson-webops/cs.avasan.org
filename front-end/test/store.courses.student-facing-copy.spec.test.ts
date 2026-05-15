@@ -27,7 +27,14 @@ const forbiddenStudentFacingPatterns = [
 	/\btutor-visible\b/i,
 	/\btutor notes\b/i,
 	/\bthe tutor should\b/i,
-	/\bThe tutor should\b/i
+	/\bThe tutor should\b/i,
+	/\bCover:\b/i,
+	/\bThe expected result should\b/i,
+	/\bthe expected result should\b/i,
+	/\bWatch for\b/i,
+	/\bwatch for\b/i,
+	/\bStart with vocabulary\b/i,
+	/\bwithout copying\b/i
 ];
 
 function snippet(value: string, pattern: RegExp) {
