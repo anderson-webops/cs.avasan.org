@@ -108,7 +108,7 @@ describe("public course pathways", () => {
 			}
 		});
 
-		expect(wrapper.text()).toContain("Course-family pathways and what each track prepares students to do.");
+		expect(wrapper.text()).toContain("Course Pathways");
 		expect(wrapper.text()).toContain("Scratch and Early Computer Science");
 		expect(wrapper.text()).toContain("JavaScript and Web Development");
 		expect(wrapper.text()).toContain("AP Computer Science A");
@@ -134,7 +134,7 @@ describe("public course pathways", () => {
 			}
 		});
 
-		expect(wrapper.text()).toContain("Course-family pathways");
+		expect(wrapper.text()).toContain("Course Pathways");
 		expect(wrapper.text()).toContain("Scratch and Early Computer Science");
 		expect(wrapper.text()).toContain("JavaScript and Web Development");
 		expect(wrapper.text()).toContain("Assessment, tooling, and safety");

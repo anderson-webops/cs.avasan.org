@@ -96,9 +96,7 @@ onBeforeUnmount(() => {
 	<section class="page-shell signup-page">
 		<section class="intro">
 			<p class="page-eyebrow">Schedule a Class</p>
-			<h1 class="page-title">
-				Book a Time &amp; Send the Context That Matters
-			</h1>
+			<h1 class="page-title">Book a Class</h1>
 			<p class="page-copy">
 				Use the scheduler below to book a one-time or recurring 30- or
 				60-minute class. Prefer email? Reach me at
@@ -204,7 +202,7 @@ onBeforeUnmount(() => {
 				class="site-button site-button--secondary"
 				to="/payment"
 			>
-				View Tuition Details
+				Tuition
 			</RouterLink>
 		</section>
 	</section>

@@ -47,10 +47,7 @@ function priorityLabel(priority: string) {
 		<header class="pathways-hero site-surface">
 			<div class="pathways-hero__copy">
 				<p class="page-eyebrow">Course pathways</p>
-				<h1 class="page-title">
-					Course-family pathways and what each track prepares students
-					to do.
-				</h1>
+				<h1 class="page-title">Course Pathways</h1>
 				<p class="page-copy">
 					These pages summarize prerequisites, outcomes, project
 					expectations, assessment style, tooling, and safety

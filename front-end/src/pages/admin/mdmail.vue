@@ -413,14 +413,14 @@ function parseDateIso(value: string): string | null {
 <template>
 	<AdminWorkspaceShell
 		intro="Compose session notes and internal admin mail in one place, with a cleaner writing surface and a stable preview flow."
-		title="Session Notes and Admin Mail"
+		title="Notes and Mail"
 	>
 		<section class="wrap">
 			<div class="mail-card">
 				<div class="mail-card__header">
 					<div>
 						<p class="mail-card__eyebrow">Composer</p>
-						<h2>Write once, send with context</h2>
+						<h2>Compose Message</h2>
 					</div>
 					<div
 						class="tabs"

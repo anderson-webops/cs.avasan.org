@@ -7,9 +7,7 @@ defineOptions({ name: "AboutPage" });
 		<section aria-labelledby="intro-title" class="page-hero about-intro">
 			<div class="copy">
 				<p class="page-eyebrow">About Jacob</p>
-				<h1 id="intro-title" class="page-title">
-					Focused Help for the Work in Front of the Student
-				</h1>
+				<h1 id="intro-title" class="page-title">Focused Help</h1>
 				<p class="page-copy">
 					I taught hundreds of students through Juni Learning before
 					moving into direct private instruction. Most students come
@@ -48,7 +46,7 @@ defineOptions({ name: "AboutPage" });
 					</p>
 				</article>
 				<article class="site-surface site-surface--soft">
-					<h3>Debugging and Project Work</h3>
+					<h3>Projects</h3>
 					<p>
 						Useful for students building apps, games, labs, or other
 						project work and needing direct feedback while the work
@@ -56,7 +54,7 @@ defineOptions({ name: "AboutPage" });
 					</p>
 				</article>
 				<article class="site-surface site-surface--soft">
-					<h3>Structured Course Progression</h3>
+					<h3>Course Paths</h3>
 					<p>
 						A good fit when a student needs a defined path with
 						linked projects and supplemental practice instead of

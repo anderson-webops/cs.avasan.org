@@ -6,9 +6,7 @@ defineOptions({ name: "ZellePaymentPage" });
 	<section class="page-shell page-shell--narrow zelle-page">
 		<header class="hero">
 			<p class="page-eyebrow">Pay with Zelle</p>
-			<h1 class="page-title">
-				Use the Class Payment Email in Your Bank’s Zelle Flow
-			</h1>
+			<h1 class="page-title">Zelle</h1>
 			<p class="page-copy">
 				Use the email below in your bank’s Zelle flow.
 			</p>
@@ -34,7 +32,7 @@ defineOptions({ name: "ZellePaymentPage" });
 					class="site-button site-button--secondary"
 					to="/payment"
 				>
-					Back to Tuition &amp; Payment
+					Back to Tuition
 				</RouterLink>
 			</div>
 		</div>

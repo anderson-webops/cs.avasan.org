@@ -8,7 +8,7 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 	<section class="page-shell page-shell--narrow zoom-page">
 		<header class="hero">
 			<p class="page-eyebrow">Zoom Room</p>
-			<h1 class="page-title">Join the Virtual Classroom</h1>
+			<h1 class="page-title">Join Class</h1>
 			<p class="page-copy">Use this page to join the class Zoom room.</p>
 		</header>
 
@@ -17,7 +17,7 @@ const zoomMeetingUrl = "https://us06web.zoom.us/j/2543520025";
 				aria-labelledby="zoom-card-title"
 				class="zoom-card site-surface"
 			>
-				<h2 id="zoom-card-title">Zoom Meeting Room</h2>
+				<h2 id="zoom-card-title">Zoom Room</h2>
 				<p>
 					Open the room in a new tab. Join a few minutes early if you
 					need to test audio.

@@ -28,10 +28,9 @@ const hasAssignedCourseAccess = computed(() => {
 const heroEyebrow = computed(() => "Course library");
 
 const heroTitle = computed(() => {
-	if (!isLoggedIn.value) return "Log in to open your assigned courses.";
-	if (hasAssignedCourseAccess.value)
-		return "Open the courses assigned to you.";
-	return "No courses are assigned to this account yet.";
+	if (!isLoggedIn.value) return "Log In";
+	if (hasAssignedCourseAccess.value) return "Your Courses";
+	return "No Courses Yet";
 });
 
 const heroCopy = computed(() => {
@@ -123,7 +122,7 @@ function openSignup() {
 			class="courses-gate site-surface site-surface--soft"
 			role="status"
 		>
-			<h2>No courses are assigned to this account yet.</h2>
+			<h2>No Courses Yet</h2>
 			<p>
 				Email
 				<a class="text-link" href="mailto:classes@jacobdanderson.net">

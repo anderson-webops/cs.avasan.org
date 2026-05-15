@@ -48,9 +48,7 @@ useHead(
 	<section class="page-shell payment-page">
 		<div class="payment-hero">
 			<p class="page-eyebrow">Tuition &amp; Payment</p>
-			<h1 class="page-title">
-				Straightforward Pricing for Private Classes
-			</h1>
+			<h1 class="page-title">Tuition</h1>
 			<p class="page-copy">
 				Private one-on-one sessions are $40 for 50 minutes.
 			</p>
@@ -142,9 +140,7 @@ useHead(
 			aria-labelledby="schedule-title"
 			class="schedule-section site-surface"
 		>
-			<h2 id="schedule-title" class="section-title">
-				Ready to Schedule?
-			</h2>
+			<h2 id="schedule-title" class="section-title">Schedule</h2>
 			<p class="section-intro">
 				Use the scheduler to book a time, or email if you need help
 				choosing a recurring slot.

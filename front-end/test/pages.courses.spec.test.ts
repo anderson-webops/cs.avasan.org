@@ -27,9 +27,7 @@ describe("courses page access gate", () => {
 		});
 
 		await flushPromises();
-		expect(wrapper.text()).toContain(
-			"Log in to open your assigned courses."
-		);
+		expect(wrapper.text()).toContain("Log In");
 
 		await wrapper.get("button").trigger("click");
 
@@ -66,9 +64,7 @@ describe("courses page access gate", () => {
 
 		await flushPromises();
 
-		expect(wrapper.text()).toContain(
-			"No courses are assigned to this account yet."
-		);
+		expect(wrapper.text()).toContain("No Courses Yet");
 		expect(wrapper.text()).toContain("classes@jacobdanderson.net");
 	});
 
@@ -105,7 +101,7 @@ describe("courses page access gate", () => {
 
 		await flushPromises();
 
-		expect(wrapper.text()).toContain("Open the courses assigned to you.");
+		expect(wrapper.text()).toContain("Your Courses");
 		expect(wrapper.text()).not.toContain("Book a Class");
 	});
 });

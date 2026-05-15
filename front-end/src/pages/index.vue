@@ -66,10 +66,7 @@ useHead(
 				<p class="page-eyebrow">
 					Best for active coursework and projects
 				</p>
-				<h1 id="hero-title" class="page-title">
-					One-on-one help for coding projects, systems courses, STEM
-					coursework, and Spanish study.
-				</h1>
+				<h1 id="hero-title" class="page-title">Private Tutoring</h1>
 				<p class="page-copy">
 					Former Juni Learning instructor Jacob Anderson works best
 					with students who already have an assignment, bug, lab, or
@@ -112,7 +109,7 @@ useHead(
 				class="site-button site-button--secondary"
 				to="/payment"
 			>
-				View Tuition Details
+				Tuition
 			</RouterLink>
 		</section>
 
@@ -145,9 +142,7 @@ useHead(
 
 		<section aria-labelledby="highlights-title" class="home-section">
 			<div class="section-heading">
-				<h2 id="highlights-title" class="section-title">
-					How Sessions Are Used
-				</h2>
+				<h2 id="highlights-title" class="section-title">Sessions</h2>
 			</div>
 			<div class="highlight-grid">
 				<article
@@ -164,7 +159,7 @@ useHead(
 		<section aria-labelledby="next-steps-title" class="home-section">
 			<div class="site-surface next-steps-card">
 				<h2 id="next-steps-title" class="section-title">
-					Book a Time That Fits
+					Book a Class
 				</h2>
 				<p class="section-intro">
 					Use the scheduler for one-time or recurring classes. Add a
