@@ -10,6 +10,52 @@ const AP_2022_FRQ_SCORING =
 	"https://apcentral.collegeboard.org/media/pdf/ap22-sg-computer-science-a.pdf";
 const AP_FRQ_ARCHIVE =
 	"https://apstudents.collegeboard.org/courses/ap-computer-science-a/free-response-questions-by-year";
+const APCS_README =
+	"https://github.com/instruction-material/APCS/blob/main/README.md";
+const WINDOWS_VSCODE_JAVA_SETUP = `
+Use this checklist when setting up Java on Windows with VS Code:
+
+1. Install a full JDK, not only a Java Runtime. The tested setup uses Eclipse Temurin JDK 21:
+
+\`\`\`powershell
+winget install --id EclipseAdoptium.Temurin.21.JDK -e --accept-package-agreements --accept-source-agreements
+\`\`\`
+
+2. Close and reopen PowerShell and VS Code after installation so Windows refreshes \`PATH\` and \`JAVA_HOME\`.
+
+3. Install the VS Code Java Extension Pack:
+
+\`\`\`powershell
+code --install-extension vscjava.vscode-java-pack
+\`\`\`
+
+4. Verify the toolchain from a new PowerShell window:
+
+\`\`\`powershell
+java -version
+javac -version
+echo $env:JAVA_HOME
+where.exe java
+where.exe javac
+\`\`\`
+
+The Eclipse Adoptium JDK path should appear before any old Oracle \`javapath\` entry. If Java reports a missing registry key,
+missing \`java.dll\`, or missing Java SE Runtime, move the Eclipse Adoptium \`bin\` folder above
+\`C:\\ProgramData\\Oracle\\Java\\javapath\` in the system \`Path\`, or remove the old Oracle entry.
+
+5. Open one assignment folder at a time in VS Code, for example:
+
+\`\`\`powershell
+code .\\APCS1-Variables-Reference
+\`\`\`
+
+Most APCS projects use the default Java package and a \`Main.java\` file, so opening the whole APCS repo can confuse VS Code's
+Java runner. For terminal runs, use \`javac Main.java && java Main\` in a single-file assignment, or \`javac *.java && java Main\`
+for folders with multiple Java files.
+
+If VS Code still will not run Java, reopen only the assignment folder, re-check \`java -version\` and \`javac -version\`, then run
+\`Java: Clean Java Language Server Workspace\` from the VS Code Command Palette.
+`.trim();
 
 const repo = (path: string) => `${APCS_REPO_BASE}/${path}`;
 const media = (file: string) => `${STATIC_MEDIA_BASE}/${file}`;
@@ -28,7 +74,12 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Java Toolchain and Workflow",
 					content:
-						"Standardize on a Java 17-capable setup with fast compile-run cycles in `IntelliJ IDEA`, `VS Code`, or an equivalent editor. Students need a low-friction environment for short iterations, print debugging, and tracing."
+						"Standardize on a full JDK, not just a runtime, with fast compile-run cycles in `IntelliJ IDEA`, `VS Code`, or an equivalent editor. Students need a low-friction environment for short iterations, print debugging, and tracing. Java 17 or newer is fine for AP CSA work; the current Windows VS Code setup guide has been tested with Eclipse Temurin JDK 21."
+				},
+				{
+					title: "Windows VS Code Java Setup",
+					content: WINDOWS_VSCODE_JAVA_SETUP,
+					projectLink: APCS_README
 				},
 				{
 					title: "Required Textbook",
