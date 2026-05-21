@@ -91,7 +91,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Reference Pack",
 					content:
 						"Start the course with the repo-backed reference projects for variables, strings, and casting so students build a clean notes-and-sandbox workflow from day one.",
-					projectLink: repo("APCS1-Variables-Reference")
+					projectLink: repo("APCS1-Variables-Reference/solution")
 				}
 			],
 			supplementalProjects: [
@@ -99,19 +99,21 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Strings and Printing Reference",
 					content:
 						"Use this reference build to reinforce output formatting, concatenation, escape characters, and readable console output.",
-					projectLink: repo("APCS1-Strings-and-Printing-Reference")
+					projectLink: repo(
+						"APCS1-Strings-and-Printing-Reference/solution"
+					)
 				},
 				{
 					title: "Casting Reference",
 					content:
 						"Use this reference build when students need a tighter review of integer division, explicit casts, and loss-of-precision reasoning.",
-					projectLink: repo("APCS1-Casting-Reference")
+					projectLink: repo("APCS1-Casting-Reference/solution")
 				},
 				{
 					title: "2020 Practice Exam",
 					content:
 						"Keep the repo practice exam available as a later-course benchmark, but introduce it here so the AP end state is visible early.",
-					projectLink: repo("APCS-A-2020-Practice-Exam")
+					projectLink: repo("APCS-A-2020-Practice-Exam/solution")
 				}
 			]
 		},
@@ -132,7 +134,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Run the verified check-in prompt bank from the APCS repo rather than the original Replit source. This is the direct GitHub-backed replacement for the check-in project link.",
-					projectLink: repo("APCS-Check-in-1")
+					projectLink: repo("APCS-Check-in-1/solution")
 				}
 			],
 			supplementalProjects: [
@@ -141,7 +143,7 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use the additional practice project after the check-in when the student needs one more pass through divisibility checks, ordering conditionals, and loop tracing.",
 					projectLink: repo(
-						"APCS-Check-in-1-Additional-Practice-Project"
+						"APCS-Check-in-1-Additional-Practice-Project/solution"
 					),
 					mediaLink: media("ps4_fizzbuzz.gif")
 				},
@@ -149,13 +151,13 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Variables Reference",
 					content:
 						"Return to the variables reference when the student still hesitates on types, assignment, or `Math.random()` range construction.",
-					projectLink: repo("APCS1-Variables-Reference")
+					projectLink: repo("APCS1-Variables-Reference/solution")
 				},
 				{
 					title: "Loops Reference",
 					content:
 						"Use the loop reference pack for fast remediation on counted iteration before moving into APCS4.",
-					projectLink: repo("APCS4-Loops-Reference")
+					projectLink: repo("APCS4-Loops-Reference/solution")
 				}
 			]
 		},
@@ -191,21 +193,23 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Rounding It Off",
 					content:
 						"Use this project to drill casting-based rounding without relying on `Math` helpers.",
-					projectLink: repo("APCS1-Rounding-It-Off"),
+					projectLink: repo("APCS1-Rounding-It-Off/solution"),
 					mediaLink: media("apcs1-project-2-rounding-it-off.mp4")
 				},
 				{
 					title: "Project: Hospital Survey",
 					content:
 						"Use this project when students need one more structured pass through typed input, variable naming, and console formatting.",
-					projectLink: repo("APCS1-Hospital-Survey"),
+					projectLink: repo("APCS1-Hospital-Survey/solution"),
 					mediaLink: media("apcs1-project-3-hospital-survey.mp4")
 				},
 				{
 					title: "Strings and Printing Reference",
 					content:
 						"Keep the strings and printing reference nearby for remediation on escape characters, concatenation, and output layout.",
-					projectLink: repo("APCS1-Strings-and-Printing-Reference")
+					projectLink: repo(
+						"APCS1-Strings-and-Printing-Reference/solution"
+					)
 				}
 			]
 		},
@@ -240,7 +244,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Quotient and Remainder",
 					content:
 						"Use this build to reinforce integer division and remainder reasoning without hiding behind the modulus operator.",
-					projectLink: repo("APCS2-Quotient-and-Remainder"),
+					projectLink: repo("APCS2-Quotient-and-Remainder/solution"),
 					mediaLink: media(
 						"apcs2-project-1-quotient-and-remainder.mp4"
 					)
@@ -249,7 +253,9 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Too Chicken to Cross the Road",
 					content:
 						"Use the boolean-only version first so students learn to encode logic cleanly before adding conditionals in APCS3.",
-					projectLink: repo("APCS2-Too-Chicken-To-Cross-The-Road"),
+					projectLink: repo(
+						"APCS2-Too-Chicken-To-Cross-The-Road/solution"
+					),
 					mediaLink: media(
 						"apcs2-project-3-too-chicken-to-cross-the-road.mp4"
 					)
@@ -258,7 +264,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Two in One",
 					content:
 						"Use this one-line boolean exercise to force concise reasoning about relationships between values.",
-					projectLink: repo("APCS2-Two-In-One"),
+					projectLink: repo("APCS2-Two-In-One/solution"),
 					mediaLink: media("apcs2-project-4-two-in-one.mp4")
 				}
 			]
@@ -280,14 +286,14 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Elevator Warning",
 					content:
 						"Use Elevator Warning as the cleanest repo-backed APCS3 project for threshold checks, conditionals, and readable output.",
-					projectLink: repo("APCS3-Elevator-Warning"),
+					projectLink: repo("APCS3-Elevator-Warning/solution"),
 					mediaLink: media("apcs3-project-3-elevator-warning.mp4")
 				},
 				{
 					title: "Reference Pack",
 					content:
 						"Keep the conditionals, math-package, and random-number references available as short focused reviews instead of burying those examples inside larger projects.",
-					projectLink: repo("APCS3-Conditionals-Reference")
+					projectLink: repo("APCS3-Conditionals-Reference/solution")
 				}
 			],
 			supplementalProjects: [
@@ -295,26 +301,26 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Too Chicken Take Two",
 					content:
 						"Redo the APCS2 boolean problem with explicit conditionals and nested branches.",
-					projectLink: repo("APCS3-Too-Chicken-Take-Two"),
+					projectLink: repo("APCS3-Too-Chicken-Take-Two/solution"),
 					mediaLink: media("apcs3-project-1-too-chicken-take-two.mp4")
 				},
 				{
 					title: "Reference: Math Package",
 					content:
 						"Use this repo reference when students need to revisit `abs`, `pow`, `sqrt`, and round-off behavior.",
-					projectLink: repo("APCS3-Math-Package-Reference")
+					projectLink: repo("APCS3-Math-Package-Reference/solution")
 				},
 				{
 					title: "Reference: Random Numbers",
 					content:
 						"Use this reference to tighten integer-range generation and avoid off-by-one mistakes with `Math.random()`.",
-					projectLink: repo("APCS3-Random-Numbers-Reference")
+					projectLink: repo("APCS3-Random-Numbers-Reference/solution")
 				},
 				{
 					title: "Project: Math Demo",
 					content:
 						"The source course used a Replit math demo; the repo-backed counterpart is the `APCS3-Math-Fun` project and should be used instead.",
-					projectLink: repo("APCS3-Math-Fun"),
+					projectLink: repo("APCS3-Math-Fun/solution"),
 					mediaLink: media("apcs3-project-2-math-demo.mp4")
 				}
 			]
@@ -344,7 +350,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Loop Reference Pack",
 					content:
 						"Keep the loop references available for targeted review on tracing, nested iteration, and pattern generation.",
-					projectLink: repo("APCS4-Loops-Reference")
+					projectLink: repo("APCS4-Loops-Reference/solution")
 				}
 			],
 			supplementalProjects: [
@@ -352,7 +358,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: For Loop Practice",
 					content:
 						"Use this project to reinforce counted iteration, accumulators, and output-driven tracing.",
-					projectLink: repo("APCS4-For-Loop-Practice"),
+					projectLink: repo("APCS4-For-Loop-Practice/solution"),
 					mediaLink: media("apcs4-project-1-for-loops-practice.mp4")
 				},
 				{
@@ -360,7 +366,7 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use this mixed practice set to drill while-loop termination and nested iteration on structured output problems.",
 					projectLink: repo(
-						"APCS4-While-Loop-and-Nested-Loop-Practice"
+						"APCS4-While-Loop-and-Nested-Loop-Practice/solution"
 					),
 					mediaLink: media(
 						"apcs4-project-3-while-loop-and-nested-loop-practice.mp4"
@@ -371,7 +377,7 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use the reference pack when students need one more clean example of nested iteration before arrays arrive.",
 					projectLink: repo(
-						"APCS4-While-Loops-and-Nested-Loops-Reference"
+						"APCS4-While-Loops-and-Nested-Loops-Reference/solution"
 					)
 				}
 			]
@@ -393,7 +399,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Use the GitHub-backed prompt bank for the full Check-In #2 review instead of the original Replit link.",
-					projectLink: repo("APCS-Check-in-2")
+					projectLink: repo("APCS-Check-in-2/solution")
 				}
 			],
 			supplementalProjects: [
@@ -402,20 +408,20 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use the taxonomy inheritance project after the check-in when the student needs one more structured inheritance build.",
 					projectLink: repo(
-						"APCS-Check-in-2-Additional-Practice-Project"
+						"APCS-Check-in-2-Additional-Practice-Project/solution"
 					)
 				},
 				{
 					title: "Class Example",
 					content:
 						"Use this short class example when constructor syntax or instance variables still feel shaky.",
-					projectLink: repo("APCS5-Class-Example")
+					projectLink: repo("APCS5-Class-Example/solution")
 				},
 				{
 					title: "This Reference",
 					content:
 						"Use the `this` reference pack when students can write a constructor but still cannot explain why `this.field` matters.",
-					projectLink: repo("APCS6-This-Reference")
+					projectLink: repo("APCS6-This-Reference/solution")
 				}
 			]
 		},
@@ -436,14 +442,14 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Student Class",
 					content:
 						"Use the student-class build as the main APCS5 implementation checkpoint because it is a clean class-with-state project from the source sequence.",
-					projectLink: repo("APCS5-Student-Class"),
+					projectLink: repo("APCS5-Student-Class/solution"),
 					mediaLink: media("apcs5-project-2-student-class.mp4")
 				},
 				{
 					title: "Free Response Prep",
 					content:
 						"Start free-response style writing here so students can explain how a small class should behave before inheritance and polymorphism raise the difficulty.",
-					projectLink: repo("APCS5-Free-Response-Practice")
+					projectLink: repo("APCS5-Free-Response-Practice/solution")
 				}
 			],
 			supplementalProjects: [
@@ -451,21 +457,21 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Method Practice",
 					content:
 						"Use the APCS5 method-practice project for short parameter and return-value reps.",
-					projectLink: repo("APCS5-Practice-with-Methods"),
+					projectLink: repo("APCS5-Practice-with-Methods/solution"),
 					mediaLink: media("apcs5-project-1-method-practice.mp4")
 				},
 				{
 					title: "Project: Store Class",
 					content:
 						"Use Store Class when the student needs another object model with a small but meaningful state transition.",
-					projectLink: repo("APCS5-Store-Class"),
+					projectLink: repo("APCS5-Store-Class/solution"),
 					mediaLink: media("apcs5-project-3-store-class.mp4")
 				},
 				{
 					title: "Supplemental: Spreadsheet Width",
 					content:
 						"Use this supplemental build when a student needs more practice turning a precise method spec into code.",
-					projectLink: repo("APCS5-Spreadsheet-Width"),
+					projectLink: repo("APCS5-Spreadsheet-Width/solution"),
 					mediaLink: media(
 						"apcs5-supplemental-project-1-spreadsheet-width.mp4"
 					)
@@ -489,7 +495,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Vending Machine Class",
 					content:
 						"Use the vending-machine project as the main APCS6 build because it exercises constructors, fields, controlled mutation, and method design in one compact model.",
-					projectLink: repo("APCS6-Vending-Machine-Class"),
+					projectLink: repo("APCS6-Vending-Machine-Class/solution"),
 					mediaLink: media(
 						"apcs6-project-1-vending-machine-class.mp4"
 					)
@@ -498,7 +504,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Free Response and Multiple Choice Support",
 					content:
 						"Keep the APCS6 free-response and multiple-choice references available here because this is where students start making subtle object-state mistakes.",
-					projectLink: repo("APCS6-Free-Response-Practice")
+					projectLink: repo("APCS6-Free-Response-Practice/solution")
 				}
 			],
 			supplementalProjects: [
@@ -506,7 +512,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Bank Account Class",
 					content:
 						"Use the bank-account build for clean state transitions, deposits, withdrawals, and invariant thinking.",
-					projectLink: repo("APCS6-Bank-Account-Class"),
+					projectLink: repo("APCS6-Bank-Account-Class/solution"),
 					mediaLink: media("apcs6-project-2-bank-account-class.mp4")
 				},
 				{
@@ -521,7 +527,9 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Reference: Getters and Setters",
 					content:
 						"Use this reference for direct remediation on controlled access patterns and field updates.",
-					projectLink: repo("APCS6-Getters-and-Setters-Reference")
+					projectLink: repo(
+						"APCS6-Getters-and-Setters-Reference/solution"
+					)
 				}
 			]
 		},
@@ -542,7 +550,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Book and PictureBook Class",
 					content:
 						"Use Book and PictureBook Class as the main APCS7 build because it maps directly to the source module and keeps the inheritance tree readable.",
-					projectLink: repo("APCS7-Books-and-Picture-Books"),
+					projectLink: repo("APCS7-Books-and-Picture-Books/solution"),
 					mediaLink: media(
 						"apcs7-project-4-book-and-picturebook-class.mp4"
 					)
@@ -553,28 +561,30 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Pet Class",
 					content:
 						"Use the pet-class build for the first inheritance pass before expanding the class family further.",
-					projectLink: repo("APCS7-Pets"),
+					projectLink: repo("APCS7-Pets/solution"),
 					mediaLink: media("apcs7-project-1-pet-class.mp4")
 				},
 				{
 					title: "Project: More Pets",
 					content:
 						"Use the extended pets build for a second inheritance pass with more subclasses and behavior to compare.",
-					projectLink: repo("APCS7-Pets"),
+					projectLink: repo("APCS7-Pets/solution"),
 					mediaLink: media("apcs7-project-2-more-pets.mp4")
 				},
 				{
 					title: "Project: Pet Special Methods",
 					content:
 						"Use the later pet build to focus on overridden object methods and more specialized subclass behavior.",
-					projectLink: repo("APCS7-Dogs"),
+					projectLink: repo("APCS7-Dogs/solution"),
 					mediaLink: media("apcs7-project-3-pet-special-methods.mp4")
 				},
 				{
 					title: "Multiple Choice Reference",
 					content:
 						"Use the APCS7 multiple-choice reference to reinforce inheritance vocabulary and trace reasoning.",
-					projectLink: repo("APCS7-Multiple-Choice-Reference")
+					projectLink: repo(
+						"APCS7-Multiple-Choice-Reference/solution"
+					)
 				}
 			]
 		},
@@ -605,13 +615,15 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Polymorphism Reference",
 					content:
 						"Use the reference pack for short, explicit examples of superclass references and overridden methods.",
-					projectLink: repo("APCS8-Polymorphism-Reference")
+					projectLink: repo("APCS8-Polymorphism-Reference/solution")
 				},
 				{
 					title: "Multiple Choice Reference",
 					content:
 						"Use the APCS8 multiple-choice reference when students can code a polymorphic model but still struggle to trace one.",
-					projectLink: repo("APCS8-Multiple-Choice-Reference")
+					projectLink: repo(
+						"APCS8-Multiple-Choice-Reference/solution"
+					)
 				}
 			]
 		},
@@ -632,7 +644,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Use the GitHub-backed prompt bank for the main Check-In #3 review sequence.",
-					projectLink: repo("APCS-Check-in-3")
+					projectLink: repo("APCS-Check-in-3/solution")
 				}
 			],
 			supplementalProjects: [
@@ -641,20 +653,22 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use the letter-shifter project to reinforce inheritance, overriding, and character-level string manipulation after the check-in.",
 					projectLink: repo(
-						"APCS-Check-in-3-Additional-Practice-Project"
+						"APCS-Check-in-3-Additional-Practice-Project/solution"
 					)
 				},
 				{
 					title: "ArrayList Reference",
 					content:
 						"Use the ArrayList reference pack when the check-in shows mutation or traversal gaps.",
-					projectLink: repo("APCS11-Array-List-Reference")
+					projectLink: repo("APCS11-Array-List-Reference/solution")
 				},
 				{
 					title: "Multiple Choice Reference",
 					content:
 						"Use the APCS11 multiple-choice reference here because the check-in's later prompts rely on strong collection tracing.",
-					projectLink: repo("APCS11-Multiple-Choice-Reference")
+					projectLink: repo(
+						"APCS11-Multiple-Choice-Reference/solution"
+					)
 				}
 			]
 		},
@@ -688,13 +702,13 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Deck Spec / Specification",
 					content:
 						"The source module's deck-spec work maps to the repo's specification folder. Use it to practice reading and refining incomplete requirements.",
-					projectLink: repo("APCS9-Specification")
+					projectLink: repo("APCS9-Specification/solution")
 				},
 				{
 					title: "Robust Input Solution Build",
 					content:
 						"Use the completed robust-input build when the student needs to compare their input-validation structure against a reference implementation.",
-					projectLink: repo("APCS9-Robust-Input-Practice")
+					projectLink: repo("APCS9-Robust-Input-Practice/solution")
 				}
 			]
 		},
@@ -715,7 +729,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Practice With Arrays",
 					content:
 						"Use the practice-with-arrays project as the main APCS10 implementation checkpoint for traversal, accumulation, and simple array-return methods.",
-					projectLink: repo("APCS10-Practice-With-Arrays"),
+					projectLink: repo("APCS10-Practice-With-Arrays/solution"),
 					mediaLink: media(
 						"apcs10-project-1-practice-with-arrays.mp4"
 					)
@@ -724,7 +738,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Array Reference Pack",
 					content:
 						"Keep the array reference build available for quick remediation on indexing, `.length`, and default values.",
-					projectLink: repo("APCS10-Array-Reference")
+					projectLink: repo("APCS10-Array-Reference/solution")
 				}
 			],
 			supplementalProjects: [
@@ -732,7 +746,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Random Mad Libs",
 					content:
 						"Use Random Mad Lib to connect arrays, random indexing, and lightweight string generation.",
-					projectLink: repo("APCS10-Random-Mad-Lib"),
+					projectLink: repo("APCS10-Random-Mad-Lib/solution"),
 					mediaLink: media("apcs10-project-2-random-mad-libs.mp4")
 				},
 				{
@@ -740,7 +754,7 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use this project for grid traversal, row-and-column reasoning, and nested loops.",
 					projectLink: repo(
-						"APCS10-Practice-With-Two-Dimensional-Arrays"
+						"APCS10-Practice-With-Two-Dimensional-Arrays/solution"
 					),
 					mediaLink: media(
 						"apcs10-project-3-practice-with-two-dimensional-array.mp4"
@@ -750,7 +764,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Matrix Arithmetic",
 					content:
 						"Use matrix arithmetic when the student is ready for a more structured 2D-array build.",
-					projectLink: repo("APCS10-Matrix-Arithmetic"),
+					projectLink: repo("APCS10-Matrix-Arithmetic/solution"),
 					mediaLink: media("apcs10-project-4-matrix-arithmetic.mp4")
 				},
 				{
@@ -779,7 +793,9 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Practice With ArrayLists",
 					content:
 						"Use the ArrayList practice project as the main APCS11 implementation checkpoint for counting, filtering, mutation, and removal logic.",
-					projectLink: repo("APCS11-Practice-With-Array-Lists"),
+					projectLink: repo(
+						"APCS11-Practice-With-Array-Lists/solution"
+					),
 					mediaLink: media(
 						"apcs11-project-1-practice-with-arraylists.mp4"
 					)
@@ -788,7 +804,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "ArrayList Reference Pack",
 					content:
 						"Keep the ArrayList reference build close for method review and quick syntax reinforcement.",
-					projectLink: repo("APCS11-Array-List-Reference")
+					projectLink: repo("APCS11-Array-List-Reference/solution")
 				}
 			],
 			supplementalProjects: [
@@ -796,7 +812,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Fortune Teller",
 					content:
 						"Use FortuneTeller to combine ArrayLists, random selection, and controlled mutation of collection state.",
-					projectLink: repo("APCS11-Fortune-Teller-Class"),
+					projectLink: repo("APCS11-Fortune-Teller-Class/solution"),
 					mediaLink: media("apcs11-project-2-fortune-teller.mp4")
 				},
 				{
@@ -811,13 +827,13 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Free Response Practice",
 					content:
 						"Use the APCS11 FRQ practice build to bridge list manipulation and AP free-response expectations.",
-					projectLink: repo("APCS11-Free-Response-Practice")
+					projectLink: repo("APCS11-Free-Response-Practice/solution")
 				},
 				{
 					title: "Card and Deck Classes",
 					content:
 						"Use the card-and-deck classes as a bridge build when the student needs more object-list modeling before APCS12 and APCS17.",
-					projectLink: repo("APCS11-Card-and-Deck-Classes")
+					projectLink: repo("APCS11-Card-and-Deck-Classes/solution")
 				}
 			]
 		},
@@ -838,7 +854,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Check-In Prompt Bank",
 					content:
 						"Use the GitHub-backed prompt bank for the full Check-In #4 review sequence.",
-					projectLink: repo("APCS-Check-in-4"),
+					projectLink: repo("APCS-Check-in-4/solution"),
 					mediaLink: media("apcs-check-in-4.mp4")
 				}
 			],
@@ -848,14 +864,14 @@ export const apComputerScienceACourse: RawCourse = {
 					content:
 						"Use inversion counting after the check-in when the student needs one more applied problem tying together sorting and runtime ideas.",
 					projectLink: repo(
-						"APCS-Check-in-4-Additional-Practice-Project"
+						"APCS-Check-in-4-Additional-Practice-Project/solution"
 					)
 				},
 				{
 					title: "Project: Minimum and Maximum",
 					content:
 						"Use this project as a targeted follow-up when wrapper constants and search initialization still feel abstract.",
-					projectLink: repo("APCS12-Minimum-and-Maximum")
+					projectLink: repo("APCS12-Minimum-and-Maximum/solution")
 				},
 				{
 					title: "Runtime Analysis Starter",
@@ -895,14 +911,14 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Minimum and Maximum Search",
 					content:
 						"Use this build to reinforce wrapper constants and collection scanning with boxed integers.",
-					projectLink: repo("APCS12-Minimum-and-Maximum"),
+					projectLink: repo("APCS12-Minimum-and-Maximum/solution"),
 					mediaLink: media("apcs12-project-2-minimum-search.mp4")
 				},
 				{
 					title: "Project: Deck Class",
 					content:
 						"Use Deck Class when the student needs another wrapper-style object around a collection before APCS17.",
-					projectLink: repo("APCS12-Deck-Class")
+					projectLink: repo("APCS12-Deck-Class/solution")
 				}
 			]
 		},
@@ -932,7 +948,9 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Linear Search Implementation",
 					content:
 						"Use the linear-search build to compare unsorted search, sorted early exits, and traceable search behavior.",
-					projectLink: repo("APCS13-Linear-Search-Implementation"),
+					projectLink: repo(
+						"APCS13-Linear-Search-Implementation/solution"
+					),
 					mediaLink: media("apcs13-project-2-linear-search.mp4")
 				}
 			]
@@ -954,7 +972,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Selection Sort",
 					content:
 						"Use the selection-sort build as the main APCS14 checkpoint because it gives students a clean invariant to describe while they code.",
-					projectLink: repo("APCS14-Selection-Sort"),
+					projectLink: repo("APCS14-Selection-Sort/solution"),
 					mediaLink: media("apcs14-project-1-selection-sort.mp4")
 				}
 			],
@@ -963,7 +981,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Insertion Sort",
 					content:
 						"Use the insertion-sort build to contrast local shifting with global minimum selection.",
-					projectLink: repo("APCS14-Insertion-Sort"),
+					projectLink: repo("APCS14-Insertion-Sort/solution"),
 					mediaLink: media("apcs14-project-2-insertion-sort.mp4")
 				}
 			]
@@ -994,7 +1012,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Recursion Reference Pack",
 					content:
 						"Keep the recursion reference available for short examples before assigning the longer practice set.",
-					projectLink: repo("APCS15-Recursion-Reference")
+					projectLink: repo("APCS15-Recursion-Reference/solution")
 				}
 			],
 			supplementalProjects: [
@@ -1002,21 +1020,23 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Recursion Practice",
 					content:
 						"Use the full recursion-practice build for factorials, powers, Fibonacci, cascades, and other classic recursive patterns.",
-					projectLink: repo("APCS15-Recursion-Practice"),
+					projectLink: repo("APCS15-Recursion-Practice/solution"),
 					mediaLink: media("apcs15-project-2-recursion-practice.mp4")
 				},
 				{
 					title: "Project: Blob Erase",
 					content:
 						"Use Blob Erase to extend recursion into two-dimensional traversal and backtracking logic.",
-					projectLink: repo("APCS15-Blob-Erase"),
+					projectLink: repo("APCS15-Blob-Erase/solution"),
 					mediaLink: media("apcs15-project-3-blob-erase.mp4")
 				},
 				{
 					title: "Reference: Stack Overflow",
 					content:
 						"Use this reference when students can write a recursive call but still cannot explain why the recursion stops.",
-					projectLink: repo("APCS15-Stack-Overflow-Reference")
+					projectLink: repo(
+						"APCS15-Stack-Overflow-Reference/solution"
+					)
 				}
 			]
 		},
@@ -1037,14 +1057,14 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Binary Search",
 					content:
 						"Use the binary-search build for both iterative and recursive search structure.",
-					projectLink: repo("APCS16-Binary-Search"),
+					projectLink: repo("APCS16-Binary-Search/solution"),
 					mediaLink: media("apcs16-project-1-binary-search.mp4")
 				},
 				{
 					title: "Merge Step Visual",
 					content:
 						"Use the merge visual together with the repo merge-sort project so students can separate the recursive split from the actual merge operation.",
-					projectLink: repo("APCS16-Merge-Sort"),
+					projectLink: repo("APCS16-Merge-Sort/solution"),
 					mediaLink: media("am_10_merge.mp4")
 				}
 			],
@@ -1053,7 +1073,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Project: Merge Sort",
 					content:
 						"Use the merge-sort build for the full divide-and-conquer implementation after students understand the merge step itself.",
-					projectLink: repo("APCS16-Merge-Sort"),
+					projectLink: repo("APCS16-Merge-Sort/solution"),
 					mediaLink: media("apcs16-project-2-merge-sort.mp4")
 				}
 			]
@@ -1075,7 +1095,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Core Project: Spaceships",
 					content:
 						"Use Spaceships as the first full capstone because it pulls together classes, collections, add/remove methods, and `toString()` design in one larger build.",
-					projectLink: repo("APCS17-Spaceships"),
+					projectLink: repo("APCS17-Spaceships/solution"),
 					mediaLink: media("apcs17-master-project-1-spaceships.mp4")
 				},
 				{
@@ -1090,14 +1110,14 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Master Project: Elevens",
 					content:
 						"Use Elevens as the card-game capstone for students who want more stateful gameplay logic and collection updates.",
-					projectLink: repo("APCS17-Elevens"),
+					projectLink: repo("APCS17-Elevens/solution"),
 					mediaLink: media("apcs17-master-project-2-elevens.mp4")
 				},
 				{
 					title: "Master Project: Decode",
 					content:
 						"Use Decode as the lighter-weight string and object capstone built around encode/decode behavior and paired tower logic.",
-					projectLink: repo("APCS17-Decode"),
+					projectLink: repo("APCS17-Decode/solution"),
 					mediaLink: media("apcs17-master-project-3-decode.mp4")
 				},
 				{
@@ -1111,7 +1131,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "2020 Repo Practice Exam",
 					content:
 						"Keep the repo-backed practice exam available as an additional full-run benchmark.",
-					projectLink: repo("APCS-A-2020-Practice-Exam")
+					projectLink: repo("APCS-A-2020-Practice-Exam/solution")
 				}
 			]
 		}
