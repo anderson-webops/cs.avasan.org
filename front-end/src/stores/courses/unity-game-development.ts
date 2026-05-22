@@ -19,13 +19,13 @@ export const unityGameDevelopmentCourse: RawCourse = {
 				{
 					title: "GD6.2 Collecting Coins",
 					content:
-						"Track collectible state and connect collision events to score changes. Students should identify the object responsible for detecting a pickup and the object responsible for storing the score.",
+						"Track collectible state and connect collision events to score changes. Identify the object responsible for detecting a pickup and the object responsible for storing the score.",
 					projectLink: repo("UGD-06-02-collecting-coins")
 				},
 				{
 					title: "GD6.3 Collecting Colliding Chaos",
 					content:
-						"Combine movement, collisions, and collectible logic in one constrained practice project. Students should test at least two collision cases and explain which script owns each behavior.",
+						"Combine movement, collisions, and collectible logic in one constrained practice project. Test at least two collision cases and explain which script owns each behavior.",
 					projectLink: repo("UGD-06-03-collecting-colliding-chaos")
 				}
 			],
@@ -58,7 +58,7 @@ export const unityGameDevelopmentCourse: RawCourse = {
 				{
 					title: "GD7.2 Changing Text",
 					content:
-						"Update text in response to gameplay events. Students should describe what causes the text to change and where that state is stored.",
+						"Update text in response to gameplay events. Describe what causes the text to change and where that state is stored.",
 					projectLink: repo("UGD-07-02-changing-text")
 				},
 				{

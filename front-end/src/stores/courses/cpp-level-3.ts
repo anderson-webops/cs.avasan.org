@@ -9,12 +9,12 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Bridge Course Goals, Scale, and Tooling",
 					content:
-						"Position `C++ Level 3` as the bridge between beginner/manual-memory C++ and larger idiomatic C++ work. Cover: assumed baseline from Levels 1-2; what makes a program medium-size instead of just longer; why command structure, file-backed state, standard-library fluency, recursion, RAII, and small tests matter together; how to use a repeatable build command, warnings, debugger stepping, and trace output as evidence. By the end of this setup module, students should be able to compile a multi-file program, explain one warning or runtime failure, and describe what structure they will need before moving into data structures or design patterns."
+						"Position `C++ Level 3` as the bridge between beginner/manual-memory C++ and larger idiomatic C++ work. Cover: assumed baseline from Levels 1-2; what makes a program medium-size instead of just longer; why command structure, file-backed state, standard-library fluency, recursion, RAII, and small tests matter together; how to use a repeatable build command, warnings, debugger stepping, and trace output as evidence. By the end of this setup module, Be able to compile a multi-file program, explain one warning or runtime failure, and describe what structure they will need before moving into data structures or design patterns."
 				},
 				{
 					title: "CPPI0 Project: Build and Debug Checkpoint",
 					content:
-						"Create a tiny multi-file command-line project with one class, one helper module, and one deliberately broken case. Students should fix the bug with a debugger or trace output and record the evidence that proved the fix.",
+						"Create a tiny multi-file command-line project with one class, one helper module, and one deliberately broken case. Fix the bug with a debugger or trace output and record the evidence that proved the fix.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI0-Build-and-Debug-Checkpoint/starter",
 					solutionLink:
@@ -60,7 +60,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI1 Project 2: Import and Reject Bad Rows",
 					content:
-						"Add a small import command that reports malformed rows without stopping the entire program. Students should explain which data was accepted, which data was rejected, and why.",
+						"Add a small import command that reports malformed rows without stopping the entire program. Explain which data was accepted, which data was rejected, and why.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI1-Import-and-Reject-Bad-Rows/starter",
 					solutionLink:
@@ -93,7 +93,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI2 Project: Recursive Maze or Word Search",
 					content:
-						"Implement a recursive search through a small grid. Students should mark visited cells, backtrack safely, and explain why the algorithm stops instead of looping forever.",
+						"Implement a recursive search through a small grid. Mark visited cells, backtrack safely, and explain why the algorithm stops instead of looping forever.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI2-Recursive-Maze-Search/starter",
 					solutionLink:
@@ -118,7 +118,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Choosing Containers and Traversing with Iterators",
 					content:
-						"Move beyond `vector` by treating standard containers as design choices. Cover: when `array`, `deque`, `set`, `map`, and `unordered_map` fit better than a vector; how ordering, uniqueness, key lookup, insertion, and mutation patterns affect the choice; how iterators represent positions across different containers; and how iterator invalidation differs from pointer arithmetic. Students should be able to justify a container choice by the operations the program actually performs."
+						"Move beyond `vector` by treating standard containers as design choices. Cover: when `array`, `deque`, `set`, `map`, and `unordered_map` fit better than a vector; how ordering, uniqueness, key lookup, insertion, and mutation patterns affect the choice; how iterators represent positions across different containers; and how iterator invalidation differs from pointer arithmetic. Skill target: Justify a container choice by the operations the program actually performs."
 				},
 				{
 					title: "Standard Algorithms and Relation-Style Views",
@@ -158,7 +158,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Validation, Exceptions, and Resource Boundaries",
 					content:
-						"Teach error handling at the same time as resource safety. Cover: expected bad input that should be validated and reported normally; exceptional failures that should interrupt the current operation; failed file opens; parse errors; partial output; and why RAII makes cleanup reliable even when a function returns early or throws. Students should be able to explain what state is preserved after a failed operation."
+						"Teach error handling at the same time as resource safety. Cover: expected bad input that should be validated and reported normally; exceptional failures that should interrupt the current operation; failed file opens; parse errors; partial output; and why RAII makes cleanup reliable even when a function returns early or throws. Skill target: Explain what state is preserved after a failed operation."
 				},
 				{
 					title: "CPPI4 Project: Resource-Safe File Processor",
@@ -188,12 +188,12 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Predictable Value Types and Restrained Operators",
 					content:
-						"Review constructors, invariants, `const` methods, and value semantics before adding operator overloading. Cover: what makes a class safe to copy, compare, print, and store in containers; when `operator<<`, comparison operators, or arithmetic operators make a type read naturally; and why overloaded operators should not hide surprising side effects. Students should leave with a bias toward readable value behavior, not clever syntax."
+						"Review constructors, invariants, `const` methods, and value semantics before adding operator overloading. Cover: what makes a class safe to copy, compare, print, and store in containers; when `operator<<`, comparison operators, or arithmetic operators make a type read naturally; and why overloaded operators should not hide surprising side effects. Leave with a bias toward readable value behavior, not clever syntax."
 				},
 				{
 					title: "Templates and Diagnostic Reading",
 					content:
-						"Introduce templates as a way to write type-independent code after students have used the standard library. Cover: small function templates, tiny class-template wrappers, comparison helpers, constraints students should state in plain language, and how to read template compiler errors by finding the first useful diagnostic instead of reacting to the full wall of output."
+						"Introduce templates as a way to write type-independent code after students have used the standard library. Cover: small function templates, tiny class-template wrappers, comparison helpers, constraints State in plain language, and how to read template compiler errors by finding the first useful diagnostic instead of reacting to the full wall of output."
 				},
 				{
 					title: "CPPI5 Project: Score or Fraction Toolkit",
@@ -233,7 +233,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI6 Capstone: Saveable Command-Driven Simulation",
 					content:
-						"Build a small simulation, game, or interpreter-style command engine with saved data, explicit states, STL containers, one recursive or algorithmic subsystem, and a narrow polymorphic interface. The capstone should prove the student can organize a medium-size C++ program without jumping into a full application framework.",
+						"Build a small simulation, game, or interpreter-style command engine with saved data, explicit states, STL containers, one recursive or algorithmic subsystem, and a narrow polymorphic interface. The capstone should prove the work can organize a medium-size C++ program without jumping into a full application framework.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI6-Saveable-Command-Simulation/starter",
 					solutionLink:
@@ -244,7 +244,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "CPPI6 Project 2: Enum State versus Polymorphic State Review",
 					content:
-						"Take one capstone state transition and compare the simple `enum class` approach with a possible polymorphic State-pattern design. Students should explain which version is more appropriate for the current project size.",
+						"Take one capstone state transition and compare the simple `enum class` approach with a possible polymorphic State-pattern design. Explain which version is more appropriate for the current project size.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-3/tree/main/CPPI6-Enum-vs-Polymorphic-State-Review/starter",
 					solutionLink:

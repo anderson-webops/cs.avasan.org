@@ -199,7 +199,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Lesson: Gravity, Friction, and Balanced Forces",
 					content:
-						"Explain gravity and friction with everyday examples. Use diagrams to show balanced and unbalanced forces, then ask students to predict motion from arrow models."
+						"Explain gravity and friction with everyday examples. Use diagrams to show balanced and unbalanced forces, then Predict motion from arrow models."
 				},
 				{
 					title: "Guided Practice: Motion Graphs for Beginners",

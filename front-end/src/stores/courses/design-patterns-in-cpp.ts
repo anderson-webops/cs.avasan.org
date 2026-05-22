@@ -14,7 +14,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Compiler, CMake, and Debugger Verification",
 					content:
-						"Verify `clang++ --version` or `g++ --version`, `cmake --version`, and `lldb --version` or `gdb --version` up front. Students should prove that they can configure, build, run, and inspect a multi-target project before the first architecture lab."
+						"Verify `clang++ --version` or `g++ --version`, `cmake --version`, and `lldb --version` or `gdb --version` up front. Prove that they can configure, build, run, and inspect a multi-target project before the first architecture lab."
 				},
 				{
 					title: "Sanitizers and Warnings as Design Feedback",
@@ -28,8 +28,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-05-dpc0-setup-and-tooling/starter",
 					solutionLink:
@@ -49,7 +48,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-01-dpc0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +57,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-02-dpc0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -72,12 +71,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Ownership Changes the Conversation",
 					content:
-						"Start with object ownership, RAII, and stack-versus-heap decisions. Students should understand that lifetime is part of architecture in C++, so some textbook patterns must be rewritten to avoid careless heap graphs."
+						"Start with object ownership, RAII, and stack-versus-heap decisions. Key idea: Lifetime is part of architecture in C++, so some textbook patterns must be rewritten to avoid careless heap graphs."
 				},
 				{
 					title: "Value Semantics versus Reference Semantics",
 					content:
-						"Teach when a plain value type or small immutable object removes the need for a pattern entirely. C++ students should learn that some creation and wrapper patterns only become justified once polymorphism, shared lifetime, or runtime variability is actually needed."
+						"Teach when a plain value type or small immutable object removes the need for a pattern entirely. C++ Learn that some creation and wrapper patterns only become justified once polymorphism, shared lifetime, or runtime variability is actually needed."
 				},
 				{
 					title: "Composition over Inheritance with Lifetime in View",
@@ -87,12 +86,11 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Runtime versus Compile-Time Variation",
 					content:
-						"Introduce the idea that C++ can express flexibility through either runtime polymorphism or template-based compile-time structure. Students should begin spotting when a classic pattern remains useful and when a policy or value type is the cleaner fit."
+						"Introduce the idea that C++ can express flexibility through either runtime polymorphism or template-based compile-time structure. Begin spotting when a classic pattern remains useful and when a policy or value type is the cleaner fit."
 				},
 				{
 					title: "DPC1 Why Patterns Look Different in Modern C++: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-06-dpc1-why-patterns-look-different-in-modern-cpp/starter",
 					solutionLink:
@@ -112,7 +110,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Why Patterns Look Different in Modern C++ supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC1 Why Patterns Look Different in Modern C++. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC1 Why Patterns Look Different in Modern C++. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-dpc1-why-patterns-look-different-in-modern-cpp-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +119,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Why Patterns Look Different in Modern C++ supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC1 Why Patterns Look Different in Modern C++. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC1 Why Patterns Look Different in Modern C++. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-dpc1-why-patterns-look-different-in-modern-cpp-supplemental-3/starter",
 					solutionLink:
@@ -135,7 +133,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Abstract Base Classes, Interfaces, and Contracts",
 					content:
-						"Use abstract base classes intentionally for runtime polymorphism rather than as a default wrapper around every class. Students should understand when an interface is clarifying a seam and when it is merely copying Java habits."
+						"Use abstract base classes intentionally for runtime polymorphism rather than as a default wrapper around every class. Key idea: When an interface is clarifying a seam and when it is merely copying Java habits."
 				},
 				{
 					title: "Const-Correctness and Dependency Direction",
@@ -150,12 +148,11 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Practical Move Semantics",
 					content:
-						"Frame move semantics around obvious ownership transfer instead of abstract rules. Students should be able to explain when move-only types make a design safer and when copying a value remains perfectly appropriate."
+						"Frame move semantics around obvious ownership transfer instead of abstract rules. Skill target: Explain when move-only types make a design safer and when copying a value remains perfectly appropriate."
 				},
 				{
 					title: "DPC2 Design Foundations: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-07-dpc2-design-foundations/starter",
 					solutionLink:
@@ -175,7 +172,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Design Foundations supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC2 Design Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC2 Design Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-05-dpc2-design-foundations-supplemental-2/starter",
 					solutionLink:
@@ -184,7 +181,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Design Foundations supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC2 Design Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC2 Design Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-06-dpc2-design-foundations-supplemental-3/starter",
 					solutionLink:
@@ -198,7 +195,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Ownership-Aware Creation",
 					content:
-						"Teach factory patterns through ownership and compatibility questions first. Students should explicitly decide when a factory returns a value, `unique_ptr`, or another handle type rather than copying a Java constructor wrapper blindly."
+						"Teach factory patterns through ownership and compatibility questions first. Explicitly decide when a factory returns a value, `unique_ptr`, or another handle type rather than copying a Java constructor wrapper blindly."
 				},
 				{
 					title: "Abstract Factory for Coordinated Families",
@@ -208,7 +205,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Builder for Configuration-Heavy Setup",
 					content:
-						"Use Builder when setup becomes order-sensitive, verbose, or full of optional pieces. In modern C++, students should compare Builder against value-type configuration structs and direct construction before escalating."
+						"Use Builder when setup becomes order-sensitive, verbose, or full of optional pieces. In modern C++, Compare Builder against value-type configuration structs and direct construction before escalating."
 				},
 				{
 					title: "Creation Tradeoffs in Practice",
@@ -217,8 +214,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC3 Factory Method, Abstract Factory, and Builder: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC1-Factories-and-Builders-Workshop/starter",
 					solutionLink:
@@ -238,7 +234,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Factory Method, Abstract Factory, and Builder supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC3 Factory Method, Abstract Factory, and Builder. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC3 Factory Method, Abstract Factory, and Builder. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-07-dpc3-factory-method-abstract-factory-and-builder-supplemental-2/starter",
 					solutionLink:
@@ -247,7 +243,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Factory Method, Abstract Factory, and Builder supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC3 Factory Method, Abstract Factory, and Builder. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC3 Factory Method, Abstract Factory, and Builder. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-08-dpc3-factory-method-abstract-factory-and-builder-supplemental-3/starter",
 					solutionLink:
@@ -266,7 +262,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Lambdas and Function Objects",
 					content:
-						"Show how lambdas and lightweight callables often cover the same design need with less ceremony. Students should feel the difference between a full strategy family and a short-lived behavior injection."
+						"Show how lambdas and lightweight callables often cover the same design need with less ceremony. Feel the difference between a full strategy family and a short-lived behavior injection."
 				},
 				{
 					title: "Policy-Based Design with Templates",
@@ -280,8 +276,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC4 Strategy and Policy-Based Design: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC2-Strategy-and-Policy-Simulator/starter",
 					solutionLink:
@@ -301,7 +296,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Strategy and Policy Based Design supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC4 Strategy and Policy-Based Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC4 Strategy and Policy-Based Design. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc4-strategy-and-policy-based-design-supplemental-2/starter",
 					solutionLink:
@@ -310,7 +305,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Strategy and Policy Based Design supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC4 Strategy and Policy-Based Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC4 Strategy and Policy-Based Design. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-10-dpc4-strategy-and-policy-based-design-supplemental-3/starter",
 					solutionLink:
@@ -329,7 +324,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Lifetime-Safe Listener Storage",
 					content:
-						"Make listener lifetime the central C++ wrinkle. Students should explicitly compare raw pointers, references, shared ownership, and `weak_ptr` so they can avoid dangling callbacks and stale subscriptions."
+						"Make listener lifetime the central C++ wrinkle. Explicitly compare raw pointers, references, shared ownership, and `weak_ptr` so they can avoid dangling callbacks and stale subscriptions."
 				},
 				{
 					title: "Push versus Pull Models",
@@ -339,12 +334,11 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Failure Handling and Event Hygiene",
 					content:
-						"Discuss duplicate subscriptions, expired listeners, ordering, and escalation behavior. Observer should be taught as a real operational system with edge cases, not as free decoupling. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Discuss duplicate subscriptions, expired listeners, ordering, and escalation behavior. Observer should be taught as a real operational system with edge cases, not as free decoupling."
 				},
 				{
 					title: "DPC5 Observer and Event Flow: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC3-Observer-Event-Hub/starter",
 					solutionLink:
@@ -364,7 +358,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Observer and Event Flow supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC5 Observer and Event Flow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC5 Observer and Event Flow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-11-dpc5-observer-and-event-flow-supplemental-2/starter",
 					solutionLink:
@@ -373,7 +367,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Observer and Event Flow supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC5 Observer and Event Flow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC5 Observer and Event Flow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-12-dpc5-observer-and-event-flow-supplemental-3/starter",
 					solutionLink:
@@ -387,7 +381,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Decorator with Ownership Clarity",
 					content:
-						"Teach Decorator as a way to layer behavior without exploding subclasses. In C++, students should explicitly justify whether the wrapper owns the wrapped object, borrows it, or shares it."
+						"Teach Decorator as a way to layer behavior without exploding subclasses. In C++, Explicitly justify whether the wrapper owns the wrapped object, borrows it, or shares it."
 				},
 				{
 					title: "Adapter for Legacy or Third-Party APIs",
@@ -397,7 +391,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Facade for Subsystem Cleanup",
 					content:
-						"Use Facade when a subsystem currently exposes too much detail. Students should understand that a facade simplifies a boundary; it should not become another oversized god object. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use Facade when a subsystem currently exposes too much detail. Key idea: A facade simplifies a boundary; it should not become another oversized god object."
 				},
 				{
 					title: "Boundary Choice before Pattern Choice",
@@ -406,8 +400,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC6 Decorator, Adapter, and Facade: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC4-Facade-Adapter-Import-Tool/starter",
 					solutionLink:
@@ -418,7 +411,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Project: Facade Adapter Import Tool",
 					content:
-						"Wrap mismatched import formats behind adapters and expose them through a single import facade. The lab is about keeping legacy integration pressure out of the main domain model. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Wrap mismatched import formats behind adapters and expose them through a single import facade. The lab is about keeping legacy integration pressure out of the main domain model.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC4-Facade-Adapter-Import-Tool/starter",
 					solutionLink:
@@ -427,7 +420,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Decorator, Adapter, and Facade supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC6 Decorator, Adapter, and Facade. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC6 Decorator, Adapter, and Facade. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-13-dpc6-decorator-adapter-and-facade-supplemental-2/starter",
 					solutionLink:
@@ -436,7 +429,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Decorator, Adapter, and Facade supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC6 Decorator, Adapter, and Facade. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC6 Decorator, Adapter, and Facade. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-14-dpc6-decorator-adapter-and-facade-supplemental-3/starter",
 					solutionLink:
@@ -455,7 +448,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Undo and Action History",
 					content:
-						"Use action history to make the design consequences concrete. Students should reason about what state a command must capture before execution if it wants to undo safely later. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use action history to make the design consequences concrete. Reason about what state a command must capture before execution if it wants to undo safely later."
 				},
 				{
 					title: "State Objects versus Enum-Driven Branching",
@@ -465,17 +458,17 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Queues, Modes, and Control Flow",
 					content:
-						"Combine Command and State in an editor-style or simulator-style example where mode affects what commands are legal. This keeps the patterns tied to real workflow constraints. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Combine Command and State in an editor-style or simulator-style example where mode affects what commands are legal. This keeps the patterns tied to real workflow constraints."
 				},
 				{
 					title: "Command Parsing without a Giant Switch",
 					content:
-						"Use the CS236 scanner/parser pipeline as a design-pattern bridge: raw text can become tokens, tokens can become command objects, and state objects can decide whether each command is currently legal. Students should still recognize when a simple `switch` is enough and when the command surface has grown past it."
+						"Use the CS236 scanner/parser pipeline as a design-pattern bridge: raw text can become tokens, tokens can become command objects, and state objects can decide whether each command is currently legal. Still recognize when a simple `switch` is enough and when the command surface has grown past it."
 				},
 				{
 					title: "DPC7 Command and State: Core Project",
 					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward. Strong students can extend the command editor with a tiny scanner that turns text commands into command objects.",
+						" Strong students can extend the command editor with a tiny scanner that turns text commands into command objects.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC5-Command-and-State-Editor/starter",
 					solutionLink:
@@ -495,7 +488,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Command and State supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC7 Command and State. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC7 Command and State. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-15-dpc7-command-and-state-supplemental-2/starter",
 					solutionLink:
@@ -504,7 +497,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Command and State supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC7 Command and State. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC7 Command and State. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-16-dpc7-command-and-state-supplemental-3/starter",
 					solutionLink:
@@ -523,12 +516,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Traversal without Leaking Storage Details",
 					content:
-						"Show how traversal helpers and iterator-style views can keep callers from depending on the exact child container structure. Students should learn that exposing raw containers too eagerly weakens the abstraction."
+						"Show how traversal helpers and iterator-style views can keep callers from depending on the exact child container structure. Learn that exposing raw containers too eagerly weakens the abstraction."
 				},
 				{
 					title: "Uniform Operations and Boundary Limits",
 					content:
-						"Use rendering, flattening, or inspection operations to show the upside of a unified interface. Then discuss the limit: not every operation belongs uniformly on both leaves and groups. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use rendering, flattening, or inspection operations to show the upside of a unified interface. Then discuss the limit: not every operation belongs uniformly on both leaves and groups."
 				},
 				{
 					title: "Container Exposure Tradeoffs",
@@ -537,8 +530,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC8 Composite and Iterator: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC6-Composite-Scene-Tree/starter",
 					solutionLink:
@@ -558,7 +550,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Composite and Iterator supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC8 Composite and Iterator. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC8 Composite and Iterator. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-17-dpc8-composite-and-iterator-supplemental-2/starter",
 					solutionLink:
@@ -567,7 +559,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Composite and Iterator supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC8 Composite and Iterator. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC8 Composite and Iterator. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-18-dpc8-composite-and-iterator-supplemental-3/starter",
 					solutionLink:
@@ -581,7 +573,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Why Singleton Is Attractive",
 					content:
-						"Present Singleton honestly as a tempting shortcut for configuration, logging, and shared services. Students should see why it feels convenient before the course critiques the tradeoffs."
+						"Present Singleton honestly as a tempting shortcut for configuration, logging, and shared services. Visible pattern: Why it feels convenient before the course critiques the tradeoffs."
 				},
 				{
 					title: "The Real Risks",
@@ -600,8 +592,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC9 Singleton, Global State, and Dependency Injection: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-08-dpc9-singleton-global-state-and-dependency-injection/starter",
 					solutionLink:
@@ -621,7 +612,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Singleton, Global State, and Dependency Injection supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC9 Singleton, Global State, and Dependency Injection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC9 Singleton, Global State, and Dependency Injection. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-19-dpc9-singleton-global-state-and-dependency-injection-supplemental-2/starter",
 					solutionLink:
@@ -630,7 +621,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Singleton, Global State, and Dependency Injection supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC9 Singleton, Global State, and Dependency Injection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC9 Singleton, Global State, and Dependency Injection. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-20-dpc9-singleton-global-state-and-dependency-injection-supplemental-3/starter",
 					solutionLink:
@@ -644,12 +635,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "RAII Wrappers as Architectural Tools",
 					content:
-						"Teach RAII wrappers as part of the design-pattern conversation, not as a separate memory lecture. A good wrapper makes ownership obvious and impossible to misuse accidentally. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Teach RAII wrappers as part of the design-pattern conversation, not as a separate memory lecture. A good wrapper makes ownership obvious and impossible to misuse accidentally."
 				},
 				{
 					title: "pImpl and Boundary Stability",
 					content:
-						"Use `pImpl` when a public type needs a stable boundary while implementation details stay private. Students should connect this to compile-time hygiene, binary boundaries, and reduced include sprawl."
+						"Use `pImpl` when a public type needs a stable boundary while implementation details stay private. Connect this to compile-time hygiene, binary boundaries, and reduced include sprawl."
 				},
 				{
 					title: "Scope Guards and Cleanup Discipline",
@@ -659,12 +650,11 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Caches, Handles, and Shared Ownership Decisions",
 					content:
-						"Discuss when a resource cache should share ownership and when a move-only handle is safer. Students should justify the ownership graph explicitly instead of guessing at what feels convenient."
+						"Discuss when a resource cache should share ownership and when a move-only handle is safer. Justify the ownership graph explicitly instead of guessing at what feels convenient."
 				},
 				{
 					title: "DPC10 Patterns for Resource Management: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC7-RAII-Resource-Manager/starter",
 					solutionLink:
@@ -684,7 +674,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Patterns for Resource Management supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC10 Patterns for Resource Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC10 Patterns for Resource Management. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-21-dpc10-patterns-for-resource-management-supplemental-2/starter",
 					solutionLink:
@@ -693,7 +683,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Patterns for Resource Management supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC10 Patterns for Resource Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC10 Patterns for Resource Management. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-22-dpc10-patterns-for-resource-management-supplemental-3/starter",
 					solutionLink:
@@ -707,7 +697,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Diagnosing Inheritance and Raw-Pointer Debt",
 					content:
-						"Start from a design that still runs but hides ownership, creation, and variation inside raw pointers or switch-heavy control flow. Students should identify the dominant smells before proposing any pattern."
+						"Start from a design that still runs but hides ownership, creation, and variation inside raw pointers or switch-heavy control flow. Identify the dominant smells before proposing any pattern."
 				},
 				{
 					title: "Reducing Implicit Ownership",
@@ -722,12 +712,11 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Compile-Time and Runtime Clarity",
 					content:
-						"Ask students to explain not just why the new design is safer, but also why it is easier to build, reason about, and debug. C++ refactoring should improve both lifetime correctness and day-to-day clarity."
+						"Explain not just why the new design is safer, but also why it is easier to build, reason about, and debug. C++ refactoring should improve both lifetime correctness and day-to-day clarity."
 				},
 				{
 					title: "DPC11 Legacy Refactoring Lab: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC8-Legacy-Refactor-Capstone/starter",
 					solutionLink:
@@ -747,7 +736,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Legacy Refactoring Lab supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC11 Legacy Refactoring Lab. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC11 Legacy Refactoring Lab. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-23-dpc11-legacy-refactoring-lab-supplemental-2/starter",
 					solutionLink:
@@ -756,7 +745,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Legacy Refactoring Lab supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC11 Legacy Refactoring Lab. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC11 Legacy Refactoring Lab. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-24-dpc11-legacy-refactoring-lab-supplemental-3/starter",
 					solutionLink:
@@ -780,17 +769,16 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Runtime and Compile-Time Tradeoff Review",
 					content:
-						"Ask students to review where they chose runtime polymorphism, where they chose compile-time structure, and where they stayed with plain values or small helpers. This keeps the course anchored in judgment rather than catalogue recall."
+						"Review where they chose runtime polymorphism, where they chose compile-time structure, and where they stayed with plain values or small helpers. This keeps the course anchored in judgment rather than catalogue recall."
 				},
 				{
 					title: "Debugging and Sanitizer Readiness",
 					content:
-						"Capstone work should still be verified through warnings, debugger runs, and targeted sanitizer checks where available. Students should finish the course with the expectation that a design is not complete until it survives inspection."
+						"Capstone work should still be verified through warnings, debugger runs, and targeted sanitizer checks where available. Finish the course with the expectation that a design is not complete until it survives inspection."
 				},
 				{
 					title: "DPC12 Capstone Studio: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc12-capstone-studio/starter",
 					solutionLink:
@@ -810,7 +798,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Capstone Studio supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC12 Capstone Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC12 Capstone Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-25-dpc12-capstone-studio-supplemental-2/starter",
 					solutionLink:
@@ -819,7 +807,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Capstone Studio supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPC12 Capstone Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPC12 Capstone Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-26-dpc12-capstone-studio-supplemental-3/starter",
 					solutionLink:
@@ -828,22 +816,22 @@ export const designPatternsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 14: pattern implementation lab 14",
+			title: "pattern implementation lab 14: Implementation Studio",
 			curriculum: [
 				{
 					title: "pattern implementation lab 14: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: pattern implementation lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"pattern implementation lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "pattern implementation lab 14: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: pattern implementation lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative pattern implementation lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "pattern implementation lab 14: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: pattern implementation lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"pattern implementation lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-01-pattern-implementation-lab-14/starter",
 					solutionLink:
@@ -852,32 +840,32 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "pattern implementation lab 14: Review and Reflection",
 					content:
-						"Close Applied Studio 14: pattern implementation lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"pattern implementation lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "pattern implementation lab 14: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: pattern implementation lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from pattern implementation lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-01-pattern-implementation-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-01-pattern-implementation-lab-14/solution"
 				},
 				{
-					title: "Applied Studio 14: pattern implementation lab 14 supplemental 2",
+					title: "pattern implementation lab 14 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: pattern implementation lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-27-applied-studio-14-pattern-implementation-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-27-applied-studio-14-pattern-implementation-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: pattern implementation lab 14 supplemental 3",
+					title: "pattern implementation lab 14 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: pattern implementation lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-28-applied-studio-14-pattern-implementation-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -886,22 +874,22 @@ export const designPatternsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: pattern implementation lab 15",
+			title: "pattern implementation lab 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "pattern implementation lab 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: pattern implementation lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"pattern implementation lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "pattern implementation lab 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: pattern implementation lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative pattern implementation lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "pattern implementation lab 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: pattern implementation lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"pattern implementation lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-02-pattern-implementation-lab-15/starter",
 					solutionLink:
@@ -910,32 +898,32 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "pattern implementation lab 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: pattern implementation lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"pattern implementation lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "pattern implementation lab 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: pattern implementation lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from pattern implementation lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-02-pattern-implementation-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-02-pattern-implementation-lab-15/solution"
 				},
 				{
-					title: "Applied Studio 15: pattern implementation lab 15 supplemental 2",
+					title: "pattern implementation lab 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: pattern implementation lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-29-applied-studio-15-pattern-implementation-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-29-applied-studio-15-pattern-implementation-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: pattern implementation lab 15 supplemental 3",
+					title: "pattern implementation lab 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: pattern implementation lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-30-applied-studio-15-pattern-implementation-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -944,22 +932,22 @@ export const designPatternsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: pattern implementation lab 16",
+			title: "pattern implementation lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "pattern implementation lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: pattern implementation lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"pattern implementation lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "pattern implementation lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: pattern implementation lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative pattern implementation lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "pattern implementation lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: pattern implementation lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"pattern implementation lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-pattern-implementation-lab-16/starter",
 					solutionLink:
@@ -968,32 +956,32 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "pattern implementation lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: pattern implementation lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"pattern implementation lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "pattern implementation lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: pattern implementation lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from pattern implementation lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-pattern-implementation-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-pattern-implementation-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 16: pattern implementation lab 16 supplemental 2",
+					title: "pattern implementation lab 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: pattern implementation lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-31-applied-studio-16-pattern-implementation-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-31-applied-studio-16-pattern-implementation-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: pattern implementation lab 16 supplemental 3",
+					title: "pattern implementation lab 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: pattern implementation lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-32-applied-studio-16-pattern-implementation-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1002,22 +990,22 @@ export const designPatternsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: pattern implementation lab 17",
+			title: "pattern implementation lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "pattern implementation lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: pattern implementation lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"pattern implementation lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "pattern implementation lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: pattern implementation lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative pattern implementation lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "pattern implementation lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: pattern implementation lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"pattern implementation lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-pattern-implementation-lab-17/starter",
 					solutionLink:
@@ -1026,32 +1014,32 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "pattern implementation lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: pattern implementation lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"pattern implementation lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "pattern implementation lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: pattern implementation lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from pattern implementation lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-pattern-implementation-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-pattern-implementation-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 17: pattern implementation lab 17 supplemental 2",
+					title: "pattern implementation lab 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: pattern implementation lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-33-applied-studio-17-pattern-implementation-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-33-applied-studio-17-pattern-implementation-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: pattern implementation lab 17 supplemental 3",
+					title: "pattern implementation lab 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: pattern implementation lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to pattern implementation lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-34-applied-studio-17-pattern-implementation-lab-17-supplemental-3/starter",
 					solutionLink:

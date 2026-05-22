@@ -19,7 +19,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "CPPM0 Project 1: Lifetime Tracing Warm-Up",
 					content:
-						"Trace a short multi-function program by drawing stack frames, aliases, and mutation points. Students should identify which variables are independent copies, which are references, and which values would become invalid after a scope ends.",
+						"Trace a short multi-function program by drawing stack frames, aliases, and mutation points. Identify which variables are independent copies, which are references, and which values would become invalid after a scope ends.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Lifetime-Tracing-Warm-Up",
 					solutionLink:
@@ -28,7 +28,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "CPPM0 Project 2: Ownership Boundary Debugging",
 					content:
-						"Debug a small program that mixes copies, references, const references, and borrowed observations. Students should explain which function owns data, which function mutates caller-owned data, and which value is only safe because the original object still exists.",
+						"Debug a small program that mixes copies, references, const references, and borrowed observations. Explain which function owns data, which function mutates caller-owned data, and which value is only safe because the original object still exists.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM0-Ownership-Boundary-Debugging",
 					solutionLink:
@@ -69,7 +69,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "CPPM1 Project 2: Pointer Error Examples",
 					content:
-						"Walk through incorrect pointer patterns and explain exactly why they fail. Students should be able to name the bug, not just observe that the program misbehaves.",
+						"Walk through incorrect pointer patterns and explain exactly why they fail. Skill target: Name the bug, not just observe that the program misbehaves.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM1-Pointer-Error-Examples",
 					solutionLink:
@@ -108,7 +108,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "CPPM2 Project 1: Array Practice",
 					content:
-						"Write small array-processing functions that depend on an explicit size parameter. Students should see exactly what raw arrays gain and what safety they lose.",
+						"Write small array-processing functions that depend on an explicit size parameter. Visible pattern: Exactly what raw arrays gain and what safety they lose.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Array-Practice-Starter",
 					solutionLink:
@@ -256,7 +256,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Modern Ownership and Next-Step Positioning",
 					content:
-						"After the manual-memory capstones, show the modern correction: resources should normally be tied to object lifetime, and single-owner heap data should usually move toward `std::unique_ptr` or a standard container. Cover: what cleanup responsibility disappears with RAII, what design responsibility remains, and where the student should go next: `C++ Level 3` for medium-size idiomatic C++, `Data Structures and Algorithms in C++` for implementation depth, or `C Systems Engineering` for lower-level representation."
+						"After the manual-memory capstones, show the modern correction: resources should normally be tied to object lifetime, and single-owner heap data should usually move toward `std::unique_ptr` or a standard container. Cover: what cleanup responsibility disappears with RAII, what design responsibility remains, and where the work should go next: `C++ Level 3` for medium-size idiomatic C++, `Data Structures and Algorithms in C++` for implementation depth, or `C Systems Engineering` for lower-level representation."
 				}
 			],
 			supplementalProjects: [

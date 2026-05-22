@@ -270,7 +270,7 @@ Build a film-production budget from expressions, equations, and unit-rate calcul
 - Cameras equation: \`35c = 105\`, so \`c = 3\`
 - Food cubed: \`10^3 = 1000\`
 
-The rest of the project is intentionally open ended. Students should justify the choices they make and check whether their numbers stay inside the total budget.
+The rest of the project is intentionally open ended. Justify the choices they make and check whether their numbers stay inside the total budget.
 				`.trim()
 				)
 			]
@@ -367,7 +367,7 @@ This project is intentionally open ended. The key deliverables are:
 - a defensible comparison between two product mixes
 - an inequality that converts "items per hour" into the minimum booth time needed
 
-Students should explain why their chosen swag is likely to perform well, not just compute a correct total.
+Explain why their chosen swag is likely to perform well, not just compute a correct total.
 				`.trim()
 			)
 		]),
@@ -375,7 +375,7 @@ Students should explain why their chosen swag is likely to perform well, not jus
 			createLesson(
 				"Review Set",
 				`
-The original source dump listed this check-in but did not preserve the full question set cleanly. This rebuilt review keeps the same skill focus from AA1 through AA5 without the repeated portal chrome.
+This rebuilt review keeps the same skill focus from AA1 through AA5: balanced equations, one-step equations, multi-step equations, inequalities, and equation-based word problems.
 
 **Suggested problems**
 
@@ -415,7 +415,7 @@ Tie every slope computation back to a real rate such as deliveries per week, hei
 				createLesson(
 					"Project Brief",
 					`
-The original project body was not preserved in the source dump, but the module title and surrounding units make the goal clear: use community data to reason about rate of change.
+This project uses community data to reason about rate of change, graph trends, and make a recommendation from the evidence.
 
 **Suggested project flow**
 
@@ -425,7 +425,7 @@ The original project body was not preserved in the source dump, but the module t
 - Compare two groups or two time periods and explain which trend is growing faster.
 - Write a recommendation based on the data, not just the arithmetic.
 
-This reconstructed version keeps the module aligned with AA6 through AA9 even though the original prompt text was missing.
+The final explanation should connect the slope calculation to what is happening in the community context.
 				`.trim(),
 					media.communityDataAnalysis
 				)
@@ -443,7 +443,7 @@ Slope-intercept form is \`y = mx + b\`, where \`m\` is the slope and \`b\` is th
 - Delivery growth from the kick-off project: \`y = 15x\`
 - If a line has slope \`5\` and goes through \`(1, 8)\`, then \`y = 5x + 3\`
 
-Students should be able to read a graph, identify the intercept, and explain what the slope means in context.
+Skill target: Read a graph, identify the intercept, and explain what the slope means in context.
 				`.trim()
 			)
 		]),
@@ -460,7 +460,7 @@ Point-slope form is \`y - y1 = m(x - x1)\`. It is especially useful when the slo
 - If slope is \`5\` and the line goes through \`(1, 8)\`, one point-slope form is \`y - 8 = 5(x - 1)\`
 - Converting \`y - 8 = 5(x - 1)\` to standard form gives \`-5x + y = 3\`
 
-Students should practice moving between point-slope, slope-intercept, and standard form until the three representations feel interchangeable.
+Practice target: Moving between point-slope, slope-intercept, and standard form until the three representations feel interchangeable.
 				`.trim()
 			)
 		]),
@@ -505,16 +505,16 @@ This project combines slope classification with avalanche-risk interpretation.
 				`.trim()
 				),
 				createLesson(
-					"Missing Reference Visual",
+					"Reference Visual",
 					`
-The original project clearly depended on at least one chart that was not included in the source dump. Leave this placeholder in place until the original avalanche-risk image is recovered.
+Use the project graph or table to compare avalanche-risk curves. If a specific chart is unavailable, reconstruct the comparison from the given storm sizes, days, and risk percentages.
 				`.trim(),
 					media.missingImage
 				),
 				createLesson(
-					"Answer Notes",
+					"Reference Notes",
 					`
-The source dump still preserved several answer-key notes:
+Reference results for checking the interpretation:
 
 - Ski-run classification prompt: all listed sites were \`Black Diamond\`.
 - Between days \`2\` and \`4\`, the \`100 cm\` storm had the sharpest decline in avalanche probability.

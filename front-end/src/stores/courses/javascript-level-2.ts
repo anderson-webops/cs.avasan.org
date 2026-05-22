@@ -9,7 +9,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Overview",
 					content:
-						"Use this as a review dialog. Let the learner try each task independently, guide with questions, and keep pacing flexible. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use this as a review dialog. Let the learner try each task independently, guide with questions, and keep pacing flexible.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/bbb5cce14f0a1bc5c5c4b5582da67750"
 				},
@@ -21,17 +21,17 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1: Arrays",
 					content:
-						"Make an array of 20 rollDie() results, log the 10th element, count evens, and log doubled values. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Make an array of 20 rollDie() results, log the 10th element, count evens, and log doubled values."
 				},
 				{
 					title: "Check-In #1: Objects and the Canvas",
 					content:
-						"Create a car object with properties, set up a 1200x1200 canvas, build a cards array of rectangle objects, draw one card, then draw all cards on the canvas. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a car object with properties, set up a 1200x1200 canvas, build a cards array of rectangle objects, draw one card, then draw all cards on the canvas."
 				},
 				{
 					title: "Check-In #1: Additional Practice Project",
 					content:
-						"Create a 3x3 board of random squares or circles and keep redrawing until all match. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a 3x3 board of random squares or circles and keep redrawing until all match.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/c9af625a0a84cbffef3dc7891aa804f9",
 					solutionLink:
@@ -42,14 +42,14 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #1: Extension Challenge",
 					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/bbb5cce14f0a1bc5c5c4b5582da67750"
 				},
 				{
 					title: "Check In #1 supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +58,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-02-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -72,31 +72,31 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Overview",
 					content:
-						"Second review checkpoint; let the learner drive, guide with questions, and adjust pacing. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Second review checkpoint; let the learner drive, guide with questions, and adjust pacing.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/7b72b5cd25d5372e9097f68de4b66db6"
 				},
 				{
 					title: "Check-In #2: Helper Functions and Event Listeners",
 					content:
-						"Explain why helper functions matter; refactor starter code with helpers. Define event listeners and add a click listener to a canvas logging x and y. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Explain why helper functions matter; refactor starter code with helpers. Define event listeners and add a click listener to a canvas logging x and y.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f6a04f3b9405ba212662f72a776bc0cd"
 				},
 				{
 					title: "Check-In #2: APIs",
 					content:
-						"Define APIs and requests. Fetch https://pokeapi.co/api/v2/move/ and log the name of the first returned object. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Define APIs and requests. Fetch https://pokeapi.co/api/v2/move/ and log the name of the first returned object."
 				},
 				{
 					title: "Check-In #2: Databases",
 					content:
-						"Explain SELECT, WHERE, JOIN in SQL. Create a simple schema on dbdiagram.io for books and bookshelves. List the four CRUD operations. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain SELECT, WHERE, JOIN in SQL. Create a simple schema on dbdiagram.io for books and bookshelves. List the four CRUD operations."
 				},
 				{
 					title: "Check-In #2: Additional Practice Project",
 					content:
-						"Use PokeAPI moves to count move types; prompt for a type and display the total. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use PokeAPI moves to count move types; prompt for a type and display the total.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/a320051c74a1a5baa1358818c5bca5bc",
 					solutionLink:
@@ -107,14 +107,14 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #2: Extension Challenge",
 					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/7b72b5cd25d5372e9097f68de4b66db6"
 				},
 				{
 					title: "Check In #2 supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-03-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -123,7 +123,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-04-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -137,27 +137,27 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Introductions & Setup",
 					content:
-						'Connect with the learner and set up CodePen (fork https://codepen.io/junilearning/pen/JjGrYOG). Show saving, running code, and printToScreen("Hello World"). Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.'
+						'Connect with the learner and set up CodePen (fork https://codepen.io/junilearning/pen/JjGrYOG). Show saving, running code, and printToScreen("Hello World").'
 				},
 				{
 					title: "Variables and Strings",
 					content:
-						"Review numbers, strings, booleans, null, undefined with let/const. Explain strings and preferred let/const over var. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review numbers, strings, booleans, null, undefined with let/const. Explain strings and preferred let/const over var."
 				},
 				{
 					title: "Alert and Prompt",
 					content:
-						"Use alert() to message users and prompt() to gather input; log with console.log(). Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use alert() to message users and prompt() to gather input; log with console.log()."
 				},
 				{
 					title: "Conditionals",
 					content:
-						"Review if/else, === vs !== and why to prefer === over ==. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review if/else, === vs !== and why to prefer === over ==."
 				},
 				{
 					title: "JSM1 Project 1: Finish the Lyrics",
 					content:
-						"Prompt for guesses on three snippets, track correct and total, and print results. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Prompt for guesses on three snippets, track correct and total, and print results.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/2d400625754c49aedbb72402eed3ba8f",
 					solutionLink:
@@ -166,17 +166,17 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Loops",
 					content:
-						"Review for and while loops, nested loops, and break; standardize on i and j. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review for and while loops, nested loops, and break; standardize on i and j."
 				},
 				{
 					title: "Math",
 					content:
-						"Use Math.random(), Math.floor/ceil, and Math.PI for randomness and calculations. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use Math.random(), Math.floor/ceil, and Math.PI for randomness and calculations."
 				},
 				{
 					title: "JSM1 Project 2: Double or Nothing",
 					content:
-						"Simulate coin flips with Math.random(); prompt to continue or stop and print final dollars. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Simulate coin flips with Math.random(); prompt to continue or stop and print final dollars.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/546a7d889ffe394b3efeca62a005209c",
 					solutionLink:
@@ -187,7 +187,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Drawing in JavaScript",
 					content:
-						"Explain D3 and SVG basics; set up an svg and append shapes with random colors. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Explain D3 and SVG basics; set up an svg and append shapes with random colors.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/90973aa93a04ccb12c61f3a85280daed",
 					solutionLink:
@@ -196,7 +196,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "HTML & CSS",
 					content:
-						"Review common tags and CSS properties; practice styling a table and alternating rows. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Review common tags and CSS properties; practice styling a table and alternating rows.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/90c67c576d9b57cccffe8a34b4b42525",
 					solutionLink:
@@ -205,7 +205,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Materialize and D3 Interaction",
 					content:
-						'Introduce Materialize components; use `d3.select().on("click", func)` for a simple interaction. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.',
+						'Introduce Materialize components; use `d3.select().on("click", func)` for a simple interaction.',
 					projectLink:
 						"https://codepen.io/junilearning/pen/81d62c84dfa32d88f17d0e012229bf0c",
 					solutionLink:
@@ -216,7 +216,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Fundamentals Review: Extension Challenge",
 					content:
-						"Extend the work from JSM1 Fundamentals Review with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from JSM1 Fundamentals Review with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/2d400625754c49aedbb72402eed3ba8f",
 					solutionLink:
@@ -225,7 +225,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Fundamentals Review supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM1 Fundamentals Review. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM1 Fundamentals Review. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-05-jsm1-fundamentals-review-supplemental-2/starter",
 					solutionLink:
@@ -234,7 +234,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Fundamentals Review supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM1 Fundamentals Review. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM1 Fundamentals Review. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-06-jsm1-fundamentals-review-supplemental-3/starter",
 					solutionLink:
@@ -248,17 +248,17 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Functions",
 					content:
-						"Define functions (arrow syntax), parameters vs arguments, closures, and calling order. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Define functions (arrow syntax), parameters vs arguments, closures, and calling order."
 				},
 				{
 					title: "String Interpolation",
 					content:
-						"Use template strings with backticks and ${} for readable string assembly. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use template strings with backticks and ${} for readable string assembly."
 				},
 				{
 					title: "JSM2 Project 1: Functions Practice",
 					content:
-						"Write functions for sum, difference, product of three, average, factorial, and exponent. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write functions for sum, difference, product of three, average, factorial, and exponent.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/22b54271a2ed49675c512f1034c0e749",
 					solutionLink:
@@ -267,7 +267,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM2 Project 2: Which MetroCard",
 					content:
-						"Compute savings for ride counts, recommend monthly vs pay-per-ride, and print results for sample ride counts and a user input. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Compute savings for ride counts, recommend monthly vs pay-per-ride, and print results for sample ride counts and a user input.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/7295dc0298b2f2da6af9e1287d32456a",
 					solutionLink:
@@ -276,7 +276,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM2 Project 3: Rock Paper Scissors",
 					content:
-						"Build yourTurn(), computerTurn(), and findResult(); continue until someone reaches three wins. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build yourTurn(), computerTurn(), and findResult(); continue until someone reaches three wins.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/30e42b5cf6775bbf059a3d313c96f7c5",
 					solutionLink:
@@ -289,7 +289,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM2 Supplemental Project 1: Geometry Functions",
 					content:
-						"Write geometry helpers (circle circumference/area checks, triangle types, right triangle test) and print results with random inputs. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write geometry helpers (circle circumference/area checks, triangle types, right triangle test) and print results with random inputs.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1f563eb4624314cf5b3673480ec18472",
 					solutionLink:
@@ -298,7 +298,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM2 Supplemental Project 2: Pain at the Pump",
 					content:
-						"Compute fuel cost from MPG, miles, and gas price; test random values; format money with toFixed(2). Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Compute fuel cost from MPG, miles, and gas price; test random values; format money with toFixed(2).",
 					projectLink:
 						"https://codepen.io/junilearning/pen/87b49903a68f15f9132d49b704444083",
 					solutionLink:
@@ -307,7 +307,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM2 Supplemental Project 3: Game of War",
 					content:
-						"Simulate 10 rounds of War drawing random cards, printing draws and scores; Ace high. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Simulate 10 rounds of War drawing random cards, printing draws and scores; Ace high.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/06315e2ce4772499678cc4959f8e2360",
 					solutionLink:
@@ -316,7 +316,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM2 Supplemental Project 4: Debugging Functions",
 					content:
-						"Fix coffee shop profit calculations involving ingredient usage and pricing. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Fix coffee shop profit calculations involving ingredient usage and pricing.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/789be1560455a424d23eacd04d4ac69b",
 					solutionLink:
@@ -330,17 +330,17 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Conditionals",
 					content:
-						"Review if/else, else-if chains, and execution order. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review if/else, else-if chains, and execution order."
 				},
 				{
 					title: "Ternary Operators",
 					content:
-						"Rewrite simple if-else logic with condition ? true : false; note when to keep standard conditionals. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Rewrite simple if-else logic with condition ? true : false; note when to keep standard conditionals."
 				},
 				{
 					title: "JSM3 Project 1: Ternary Operators Practice",
 					content:
-						"Convert provided if-else statements to ternary expressions, including assignments and null checks. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Convert provided if-else statements to ternary expressions, including assignments and null checks.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/a7c2ad78bc62de68676af56657849a9b",
 					solutionLink:
@@ -349,7 +349,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM3 Project 2: Juni Department Store",
 					content:
-						"Apply student discounts with extra adjustments for perfect squares or primes; print final price using functions and conditionals. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Apply student discounts with extra adjustments for perfect squares or primes; print final price using functions and conditionals.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/b3de9678fa8b77aae5cc988f74bd086e",
 					solutionLink:
@@ -358,7 +358,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM3 Project 3: Special Numbers",
 					content:
-						"Write functions to detect self-dividing, perfect, and palindrome numbers; print ranges of each. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write functions to detect self-dividing, perfect, and palindrome numbers; print ranges of each.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1be13919321ab5708564a8a7ca928226",
 					solutionLink:
@@ -369,7 +369,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM3 Supplemental Project 1: Age Milestones",
 					content:
-						"Use ternary operators to check milestone eligibility from a prompted age. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use ternary operators to check milestone eligibility from a prompted age.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/8b95795088fd04a2a6b77fba56416332",
 					solutionLink:
@@ -378,7 +378,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Complex Conditionals supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM3 Complex Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM3 Complex Conditionals. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-07-jsm3-complex-conditionals-supplemental-2/starter",
 					solutionLink:
@@ -387,7 +387,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Complex Conditionals supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM3 Complex Conditionals. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM3 Complex Conditionals. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-08-jsm3-complex-conditionals-supplemental-3/starter",
 					solutionLink:
@@ -401,12 +401,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "The Canvas API",
 					content:
-						"Create a canvas element, set width/height, get 2D context, and understand coordinate grid. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a canvas element, set width/height, get 2D context, and understand coordinate grid."
 				},
 				{
 					title: "JSM4 Project 1: Basic Shapes",
 					content:
-						"Draw rectangles with fillStyle and fillRect; draw arcs with ctx.arc and fill; degreesToRadians provided. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Draw rectangles with fillStyle and fillRect; draw arcs with ctx.arc and fill; degreesToRadians provided.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/7bdedd0b00112751b87d288e4b8120b5",
 					solutionLink:
@@ -415,7 +415,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM4 Project 2: Shining Stars",
 					content:
-						"Use paths with moveTo/lineTo to draw a star, refactor to drawStar(x, y), then draw five stars in a line. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use paths with moveTo/lineTo to draw a star, refactor to drawStar(x, y), then draw five stars in a line.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/fa66f3594a65a54d562d3932d97e2cb7",
 					solutionLink:
@@ -424,7 +424,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Writing Text on the Canvas",
 					content:
-						"Set font, fillStyle, textAlign, and use fillText to place text. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Set font, fillStyle, textAlign, and use fillText to place text.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/9355a832c485b33c747b6c600f2d13ae",
 					solutionLink:
@@ -435,7 +435,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM4 Supplemental Project 1: Loopy Landscape",
 					content:
-						"Draw a landscape using shapes and canvas techniques. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Draw a landscape using shapes and canvas techniques.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/7911fd2b7b0ff50be9320b0c069f0613",
 					solutionLink:
@@ -444,7 +444,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM4 Supplemental Project 2: JNI Stock Price",
 					content:
-						"Plot a stock price line graph with labeled axes on the canvas. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Plot a stock price line graph with labeled axes on the canvas.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/aa96160a1e7c1d1bdac74cfe5e6a9333",
 					solutionLink:
@@ -453,7 +453,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Canvas supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM4 Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM4 Canvas. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-09-jsm4-canvas-supplemental-3/starter",
 					solutionLink:
@@ -467,12 +467,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Arrays",
 					content:
-						"Explain arrays, indices, push/pop, slice vs splice, and element access/reassignment. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain arrays, indices, push/pop, slice vs splice, and element access/reassignment."
 				},
 				{
 					title: "JSM5 Project 1: Foray into Arrays",
 					content:
-						"Manipulate pet arrays, perfect squares, sums, random arrays, and equality of first/last elements using printToScreen(). Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Manipulate pet arrays, perfect squares, sums, random arrays, and equality of first/last elements using printToScreen().",
 					projectLink:
 						"https://codepen.io/junilearning/pen/96047a35895a6620240bd2ce171a71ec",
 					solutionLink:
@@ -481,17 +481,17 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "For-Of and For-Each Iterators",
 					content:
-						"Show for...of and forEach callbacks and closure differences. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Show for...of and forEach callbacks and closure differences."
 				},
 				{
 					title: "Advanced Iterators",
 					content:
-						"Demonstrate map, filter, and reduce with simple examples. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Demonstrate map, filter, and reduce with simple examples."
 				},
 				{
 					title: "JSM5 Project 2: Integrating Iterators",
 					content:
-						"Apply iterators to adjust arrays, invoke functions in objects, sum evens, and filter divisibles. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Apply iterators to adjust arrays, invoke functions in objects, sum evens, and filter divisibles.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/2e76b16dbd71552eeb1179b45b57ae2d",
 					solutionLink:
@@ -500,7 +500,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM5 Project 3: Colorful Cards",
 					content:
-						"Create an array of colors and use an iterator to draw cards in a row on canvas. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create an array of colors and use an iterator to draw cards in a row on canvas.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/b167fc3da0e85d5ff65158f799658566",
 					solutionLink:
@@ -509,12 +509,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Two-Dimensional Arrays",
 					content:
-						"Explain 2D arrays, access with arr[row][col], and generate a 12x12 multiplication table. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain 2D arrays, access with arr[row][col], and generate a 12x12 multiplication table."
 				},
 				{
 					title: "JSM5 Project 4: Colorful Cards in 2D",
 					content:
-						"Create a 5x5 2D array of colors and render as cards on the canvas using iterators. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a 5x5 2D array of colors and render as cards on the canvas using iterators.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1dce247c86d866c1f33a6dce86511c71",
 					solutionLink:
@@ -525,7 +525,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM5 Supplemental Project 1: Pokemon Master",
 					content:
-						"Work through 2D array tasks in the starter to catch them all. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Work through 2D array tasks in the starter to catch them all.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/61d80971229e4f85126de1fcfb54b1d8",
 					solutionLink:
@@ -534,7 +534,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM5 Supplemental Project 2: Random Icons",
 					content:
-						"Generate six randomly colored and chosen icons using arrays and D3/Materialize. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Generate six randomly colored and chosen icons using arrays and D3/Materialize.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/e3ae971ad6fd35c3c0829208cb049099",
 					solutionLink:
@@ -543,7 +543,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Arrays and Iterators supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM5 Arrays and Iterators. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM5 Arrays and Iterators. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-10-jsm5-arrays-and-iterators-supplemental-3/starter",
 					solutionLink:
@@ -557,12 +557,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Objects",
 					content:
-						"Define objects as key-value pairs, add properties, and compare to real-world examples. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Define objects as key-value pairs, add properties, and compare to real-world examples."
 				},
 				{
 					title: "JSM6 Project 1: Small Talk",
 					content:
-						"Create an object about yourself and a user object from prompts; use ternaries to respond to shared properties. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create an object about yourself and a user object from prompts; use ternaries to respond to shared properties.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/c8c02ee2db01eeb4c5f408d9a1f58815",
 					solutionLink:
@@ -571,12 +571,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "For-In Iterator",
 					content:
-						"Iterate object properties with for...in and note object flexibility. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Iterate object properties with for...in and note object flexibility."
 				},
 				{
 					title: "JSM6 Project 2: My Favorite Businesses",
 					content:
-						"Create an array of business objects with properties and products; loop to build template strings. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create an array of business objects with properties and products; loop to build template strings.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/bcc6527a03ffb7ca42b705ff3f3910dd",
 					solutionLink:
@@ -585,13 +585,13 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Animations in the Canvas",
 					content:
-						"Clear the canvas with clearRect and animate with requestAnimationFrame; review via demo. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Clear the canvas with clearRect and animate with requestAnimationFrame; review via demo.",
 					projectLink: "https://codepen.io/junilearning/pen/zYBjpZE"
 				},
 				{
 					title: "JSM6 Project 3: Inflate and Deflate",
 					content:
-						"Animate a ball object growing green then shrinking red using draw, inflate, deflate, and a loop with requestAnimationFrame(). Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Animate a ball object growing green then shrinking red using draw, inflate, deflate, and a loop with requestAnimationFrame().",
 					projectLink:
 						"https://codepen.io/junilearning/pen/d0195323eaa77fa2a273961fa3df61c3",
 					solutionLink:
@@ -602,7 +602,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM6 Supplemental Project 1: My Favorite Businesses II",
 					content:
-						"Extend businesses with images and Materialize Autocomplete to populate cards. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend businesses with images and Materialize Autocomplete to populate cards.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/50854534e6dccd9c7bedc0a2d01aded7",
 					solutionLink:
@@ -611,7 +611,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM6 Supplemental Project 2: Circle March",
 					content:
-						"Animate a grid of circles marching using requestAnimationFrame and canvas drawing. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Animate a grid of circles marching using requestAnimationFrame and canvas drawing.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/7ac4e84b6d1ce34caa732bc0945c6255",
 					solutionLink:
@@ -620,7 +620,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Objects and Properties supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM6 Objects and Properties. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM6 Objects and Properties. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-11-jsm6-objects-and-properties-supplemental-3/starter",
 					solutionLink:
@@ -634,12 +634,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Helper Functions",
 					content:
-						"Emphasize breaking repeated logic into small reusable, well-named functions. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Emphasize breaking repeated logic into small reusable, well-named functions."
 				},
 				{
 					title: "JSM7 Project 1: Refactory",
 					content:
-						"Refactor starter code into helper functions to remove repetition. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Refactor starter code into helper functions to remove repetition.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/3a1383fc8a60d0ff0f55419c9b4940fe",
 					solutionLink:
@@ -648,12 +648,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Mouse Events",
 					content:
-						"Add click, mousedown, and mouseup listeners to a canvas and inspect event data. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Add click, mousedown, and mouseup listeners to a canvas and inspect event data."
 				},
 				{
 					title: "JSM7 Project 2: Which Card",
 					content:
-						"Reuse Colorful Cards, add a click listener to capture x/y and log which color was clicked. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Reuse Colorful Cards, add a click listener to capture x/y and log which color was clicked.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/88140a4225b8cfb5468e91fbccfaa100",
 					solutionLink:
@@ -662,12 +662,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Key Events",
 					content:
-						"Use keydown/keyup listeners and keycodes (e.g., 37/39) for input handling. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use keydown/keyup listeners and keycodes (e.g., 37/39) for input handling."
 				},
 				{
 					title: "JSM7 Project 3: Paddle",
 					content:
-						"Program a paddle controlled by arrow keys; start moving on keydown and stop on keyup. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Program a paddle controlled by arrow keys; start moving on keydown and stop on keyup.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/8ccc67de1bc03e5f2c81f78a411adee1",
 					solutionLink:
@@ -678,7 +678,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM7 Supplemental Project 1: Coastal Cruise",
 					content:
-						"Build helper functions to fill ship seats, check fullness, register passengers, and print manifests. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build helper functions to fill ship seats, check fullness, register passengers, and print manifests.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/13e9d8e0ad56ecbaff7933d0e063d682",
 					solutionLink:
@@ -687,7 +687,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM7 Supplemental Project 2: Juggling Paddle",
 					content:
-						"Animate a falling ball bouncing off a paddle; ball falls off-screen if missed. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Animate a falling ball bouncing off a paddle; ball falls off-screen if missed.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/9c003b58d7ca7770e49f9243dbecb00f",
 					solutionLink:
@@ -696,7 +696,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Helper Functions and Event Listeners supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM7 Helper Functions and Event Listeners. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM7 Helper Functions and Event Listeners. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supplemental-3/starter",
 					solutionLink:
@@ -710,12 +710,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Object Collisions",
 					content:
-						"Explain collision detection for circles (distance vs radii) and rectangles (overlap of edges). Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain collision detection for circles (distance vs radii) and rectangles (overlap of edges)."
 				},
 				{
 					title: "JSM8 Project 1: Circles Collide",
 					content:
-						"Animate two circles moving toward each other; on collision change fill color using interval timing. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Animate two circles moving toward each other; on collision change fill color using interval timing.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/d4a36001e0d9b6e58c640ca0f280284a",
 					solutionLink:
@@ -724,7 +724,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM8 Project 2: Rectangular Collision",
 					content:
-						"Create random rectangles and detect overlap by comparing edges; display a message when overlapping. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create random rectangles and detect overlap by comparing edges; display a message when overlapping.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1c22a392782c8551073c92fe3e825849",
 					solutionLink:
@@ -733,7 +733,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM8 Project 3: The Bouncy Ball",
 					content:
-						"Simulate motion with gravity and friction for a bouncing ball, reversing velocity on collisions with ground/walls. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Simulate motion with gravity and friction for a bouncing ball, reversing velocity on collisions with ground/walls.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1e97468ca0197dcf6ca6d933e175b6fb",
 					solutionLink:
@@ -744,7 +744,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Collisions and Controls: Extension Challenge",
 					content:
-						"Extend the work from JSM8 Collisions and Controls with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from JSM8 Collisions and Controls with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/d4a36001e0d9b6e58c640ca0f280284a",
 					solutionLink:
@@ -753,7 +753,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Collisions and Controls supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM8 Collisions and Controls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM8 Collisions and Controls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-13-jsm8-collisions-and-controls-supplemental-2/starter",
 					solutionLink:
@@ -762,7 +762,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Collisions and Controls supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM8 Collisions and Controls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM8 Collisions and Controls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-14-jsm8-collisions-and-controls-supplemental-3/starter",
 					solutionLink:
@@ -776,12 +776,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Choosing a Game",
 					content:
-						"Select one canvas game project to complete; scope to a 2–3 week effort. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Select one canvas game project to complete; scope to a 2–3 week effort."
 				},
 				{
 					title: "JSM9 Project 1: Falling Skies",
 					content:
-						"Implement falling objects, player movement, collision checks, scoring, and spawn timing in a main loop. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement falling objects, player movement, collision checks, scoring, and spawn timing in a main loop.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/8d640d76fa709de228ec6303625663e3",
 					solutionLink:
@@ -790,7 +790,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM9 Project 2: 2D Breakout",
 					content:
-						"Draw bricks, move ball and paddle, handle collisions and brick removal, and show win state. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Draw bricks, move ball and paddle, handle collisions and brick removal, and show win state.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/0d5f9c3b21921a4bc506a1139a3091bc",
 					solutionLink:
@@ -799,7 +799,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM9 Project 3: Asteroids",
 					content:
-						"Create ship movement and shooting with angles, asteroid splitting, scoring, and game-over detection. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create ship movement and shooting with angles, asteroid splitting, scoring, and game-over detection.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/4d14f6e432dd3b2dcee15a9d95eac750",
 					solutionLink:
@@ -808,7 +808,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM9 Project 4: Animated Starfield",
 					content:
-						"Build star objects with positions and velocity; update and draw repeatedly for animation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build star objects with positions and velocity; update and draw repeatedly for animation.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/6d5f8181e8ea59009eadd259e249c5c5",
 					solutionLink:
@@ -819,7 +819,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Games in the Canvas: Extension Challenge",
 					content:
-						"Extend the work from JSM9 Games in the Canvas with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from JSM9 Games in the Canvas with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/8d640d76fa709de228ec6303625663e3",
 					solutionLink:
@@ -828,7 +828,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Games in the Canvas supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM9 Games in the Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM9 Games in the Canvas. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-15-jsm9-games-in-the-canvas-supplemental-2/starter",
 					solutionLink:
@@ -837,7 +837,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Games in the Canvas supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM9 Games in the Canvas. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM9 Games in the Canvas. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-16-jsm9-games-in-the-canvas-supplemental-3/starter",
 					solutionLink:
@@ -851,12 +851,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "APIs",
 					content:
-						"Explain APIs, requests, and why fetch is asynchronous. Handle promises with then and json(). Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain APIs, requests, and why fetch is asynchronous. Handle promises with then and json()."
 				},
 				{
 					title: "JSM10 Project 1: Programming Jokes",
 					content:
-						"Fetch a random programming joke from https://official-joke-api.appspot.com/jokes/programming/random and display setup and punchline. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Fetch a random programming joke from https://official-joke-api.appspot.com/jokes/programming/random and display setup and punchline.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/55981d32b9659656bb8cc4a17a0526bc",
 					solutionLink:
@@ -865,7 +865,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM10 Project 2: Random Fox Generator",
 					content:
-						"Fetch https://randomfox.ca/floof/, create an img element with the URL, and append it to the page via a button click. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Fetch https://randomfox.ca/floof/, create an img element with the URL, and append it to the page via a button click.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/93750fc08b5b2268a1d78b296295e2e8",
 					solutionLink:
@@ -874,7 +874,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM10 Project 3: Pokedex",
 					content:
-						"Use PokeAPI to build an autocomplete search; display name, id, type, and image for selected Pokemon with error handling. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use PokeAPI to build an autocomplete search; display name, id, type, and image for selected Pokemon with error handling.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/35923b1d6dee01a5f3004d67836eca46",
 					solutionLink:
@@ -885,7 +885,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM10 Supplemental Project 1: Funny Meter",
 					content:
-						"Fetch 10 programming jokes, gather user ratings, and present them one by one from the /jokes/programming/ten endpoint. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Fetch 10 programming jokes, gather user ratings, and present them one by one from the /jokes/programming/ten endpoint.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/bf88ab46e0b7314e0b0999ba35363519",
 					solutionLink:
@@ -894,7 +894,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "APIs and Requests supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM10 APIs and Requests. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM10 APIs and Requests. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-17-jsm10-apis-and-requests-supplemental-2/starter",
 					solutionLink:
@@ -903,7 +903,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "APIs and Requests supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM10 APIs and Requests. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM10 APIs and Requests. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-18-jsm10-apis-and-requests-supplemental-3/starter",
 					solutionLink:
@@ -917,41 +917,39 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Introduction to Databases",
 					content:
-						"Describe relational databases, tables, keys, and why to separate data; reference example diagram. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Describe relational databases, tables, keys, and why to separate data; reference example diagram."
 				},
 				{
 					title: "SQL Queries",
 					content:
-						"Explain SELECT/WHERE and UPDATE syntax for querying and modifying data. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain SELECT/WHERE and UPDATE syntax for querying and modifying data."
 				},
 				{
 					title: "JSM11 Project 1: SQL SELECT Practice",
-					content:
-						"Complete SQLBolt lessons 1–4 on SELECT queries. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					content: "Complete SQLBolt lessons 1–4 on SELECT queries.",
 					projectLink:
 						"https://sqlbolt.com/lesson/select_queries_introduction"
 				},
 				{
 					title: "Primary and Foreign Keys",
 					content:
-						"Define primary vs foreign keys and JOIN usage; relate to real-world IDs. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Define primary vs foreign keys and JOIN usage; relate to real-world IDs."
 				},
 				{
 					title: "JSM11 Project 2: Join Tables Practice",
-					content:
-						"Complete SQLBolt lessons 6–7 on JOINs. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					content: "Complete SQLBolt lessons 6–7 on JOINs.",
 					projectLink:
 						"https://sqlbolt.com/lesson/select_queries_with_joins"
 				},
 				{
 					title: "Database Schemas",
 					content:
-						"Explain schemas and relationships (one-to-many, many-to-many) with dbdiagram example. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain schemas and relationships (one-to-many, many-to-many) with dbdiagram example."
 				},
 				{
 					title: "JSM11 Project 3: Apartment Building",
 					content:
-						"Design unit and resident tables with keys and at least five properties each on dbdiagram.io. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Design unit and resident tables with keys and at least five properties each on dbdiagram.io.",
 					projectLink: "https://dbdiagram.io/d",
 					solutionLink:
 						"https://dbdiagram.io/d/5facb8cf3a78976d7b7b8d44"
@@ -960,15 +958,14 @@ export const javascriptLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "JSM11 Supplemental Project 1: Advanced SQL Queries",
-					content:
-						"Complete SQLBolt lessons 8–12 (nulls and more). Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+					content: "Complete SQLBolt lessons 8–12 (nulls and more).",
 					projectLink:
 						"https://sqlbolt.com/lesson/select_queries_with_nulls"
 				},
 				{
 					title: "JSM11 Supplemental Project 2: Music Library",
 					content:
-						"Create a music library schema with artists, songs, albums, genres using primary/foreign keys. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a music library schema with artists, songs, albums, genres using primary/foreign keys.",
 					projectLink: "https://dbdiagram.io/d",
 					solutionLink:
 						"https://dbdiagram.io/d/5fadb2e23a78976d7b7bb248"
@@ -976,7 +973,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM11 Supplemental Project 3: Altering Tables",
 					content:
-						"Complete SQLBolt lessons 13–18 on inserting and altering tables. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Complete SQLBolt lessons 13–18 on inserting and altering tables.",
 					projectLink: "https://sqlbolt.com/lesson/inserting_rows"
 				}
 			]
@@ -987,22 +984,22 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Introduction to NoSQL",
 					content:
-						"Describe document/collection structure as JSON-like objects compared to relational tables. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Describe document/collection structure as JSON-like objects compared to relational tables."
 				},
 				{
 					title: "CRUD",
 					content:
-						"Explain create/read/update/delete via HTTP methods (POST, GET, PUT, DELETE) with fetch options. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain create/read/update/delete via HTTP methods (POST, GET, PUT, DELETE) with fetch options."
 				},
 				{
 					title: "JSONBin Setup",
 					content:
-						'Create a public bin, store `{"notes": ["my first message"]}`, note GET latest endpoint and PUT endpoint, and practice GET/PUT requests. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.'
+						'Create a public bin, store `{"notes": ["my first message"]}`, note GET latest endpoint and PUT endpoint, and practice GET/PUT requests.'
 				},
 				{
 					title: "JSM12 Project 1: Todo List",
 					content:
-						"Use async/await to GET the bin, render notes, and add notes with PUT; build getDB, renderDB, and addNote functions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use async/await to GET the bin, render notes, and add notes with PUT; build getDB, renderDB, and addNote functions.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1f218d8aafbcc33fd6409a8ab1616e29",
 					solutionLink: "https://codepen.io/junilearning/pen/MWZzbmK",
@@ -1012,7 +1009,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM12 Project 2: Deleting Notes",
 					content:
-						"Add deleteNote to remove items by index with splice, update renderDB to include delete buttons, and persist via PUT. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Add deleteNote to remove items by index with splice, update renderDB to include delete buttons, and persist via PUT.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f8f84204c272d2a6449cda485cbe7736",
 					solutionLink: "https://codepen.io/junilearning/pen/BavGpyN"
@@ -1022,7 +1019,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM12 Supplemental Project 1: Checking Notes",
 					content:
-						"Extend the Todo List to mark todos as completed with checkmarks or strike-through styling. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the Todo List to mark todos as completed with checkmarks or strike-through styling.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/ab6bf77b9d85e1b9a7452d5a307b6b7f",
 					solutionLink:
@@ -1031,7 +1028,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "NoSQL and CRUD supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM12 NoSQL and CRUD. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM12 NoSQL and CRUD. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-19-jsm12-nosql-and-crud-supplemental-2/starter",
 					solutionLink:
@@ -1040,7 +1037,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "NoSQL and CRUD supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM12 NoSQL and CRUD. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM12 NoSQL and CRUD. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-20-jsm12-nosql-and-crud-supplemental-3/starter",
 					solutionLink:
@@ -1054,7 +1051,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM13 Project 1: Message Board",
 					content:
-						"Build a message board storing posts as JSON, with inputs for URL, image, and title; render posts above the form. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a message board storing posts as JSON, with inputs for URL, image, and title; render posts above the form.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/6c0b3c5a207fc24b58c44a5f481922e3",
 					solutionLink: "https://codepen.io/junilearning/pen/GRPwwOg"
@@ -1062,24 +1059,24 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Message Board: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes students are most likely to make in JSM13 Message Board. Have them diagnose a broken attempt, repair it, and explain why the fix works. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Focus on the mistakes common mistakes appear in JSM13 Message Board. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Message Board: Planning and Architecture",
 					content:
-						"Break JSM13 Message Board into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break JSM13 Message Board into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Message Board: Verification and Reflection",
 					content:
-						"Close JSM13 Message Board by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close JSM13 Message Board by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JSM13 Supplemental Project 1: Adding Comments",
 					content:
-						"Allow users to add comments to each post and display them beneath posts. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Allow users to add comments to each post and display them beneath posts.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f40d31ed70aef27cee691e91d947ef14",
 					solutionLink:
@@ -1088,7 +1085,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Message Board supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM13 Message Board. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM13 Message Board. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-21-jsm13-message-board-supplemental-2/starter",
 					solutionLink:
@@ -1097,7 +1094,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Message Board supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM13 Message Board. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM13 Message Board. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-22-jsm13-message-board-supplemental-3/starter",
 					solutionLink:
@@ -1111,7 +1108,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM14 Project 1: Quiz Game",
 					content:
-						"Build a state capitals quiz using canvas to color states based on answers; fetch state data from provided JSONBin and manage game states. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a state capitals quiz using canvas to color states based on answers; fetch state data from provided JSONBin and manage game states.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f8ec7312634d2011e58c44d691d1da13",
 					solutionLink:
@@ -1122,24 +1119,24 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Quiz Game: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes students are most likely to make in JSM14 Quiz Game. Have them diagnose a broken attempt, repair it, and explain why the fix works. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Focus on the mistakes common mistakes appear in JSM14 Quiz Game. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Quiz Game: Planning and Architecture",
 					content:
-						"Break JSM14 Quiz Game into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break JSM14 Quiz Game into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Quiz Game: Verification and Reflection",
 					content:
-						"Close JSM14 Quiz Game by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close JSM14 Quiz Game by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Quiz Game: Extension Challenge",
 					content:
-						"Extend the work from JSM14 Quiz Game with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from JSM14 Quiz Game with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f8ec7312634d2011e58c44d691d1da13",
 					solutionLink:
@@ -1148,7 +1145,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Quiz Game supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM14 Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM14 Quiz Game. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-23-jsm14-quiz-game-supplemental-2/starter",
 					solutionLink:
@@ -1157,7 +1154,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Quiz Game supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM14 Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM14 Quiz Game. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-24-jsm14-quiz-game-supplemental-3/starter",
 					solutionLink:
@@ -1171,27 +1168,26 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM15 Project 1: Master Project",
 					content:
-						"Plan and build a web app or game (example chatroom). Scope to about two weeks, pseudocode stages, and work independently with support. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Plan and build a web app or game (example chatroom). Scope to about two weeks, pseudocode stages, and complete an independent implementation pass with checkpoints."
 				},
 				{
 					title: "Handoff to Web Development Foundations",
 					content:
-						"`Web Development Foundations` should be the default follow-on course for students who complete JavaScript Level 2 successfully. Students should be reasonably comfortable with functions, conditionals, arrays, objects, events, APIs, and basic data modeling before starting it. The goal of that next course is not to reteach core syntax, but to move into file-based local projects, Git and GitHub, npm, dev servers, back-end basics, databases, and deployment. Students who are still shaky in the `JSM10` through `JSM13` range should review those units before making the jump."
+						"`Web Development Foundations` should be the default follow-on course for students who complete JavaScript Level 2 successfully. Be reasonably comfortable with functions, conditionals, arrays, objects, events, APIs, and basic data modeling before starting it. The goal of that next course is not to reteach core syntax, but to move into file-based local projects, Git and GitHub, npm, dev servers, back-end basics, databases, and deployment. Students who are still shaky in the `JSM10` through `JSM13` range should review those units before making the jump."
 				},
 				{
 					title: "Course Recap",
 					content:
-						"Recap course concepts and discuss the next course. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Recap course concepts and discuss the next course."
 				},
 				{
 					title: "JSM15 Master Project: Verification and Reflection",
 					content:
-						"Close JSM15 Master Project by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Close JSM15 Master Project by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				},
 				{
 					title: "JSM15 Master Project: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-jsm15-master-project/starter",
 					solutionLink:
@@ -1202,7 +1198,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM15 Master Project: Extension Challenge",
 					content:
-						"Extend the work from JSM15 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the work from JSM15 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-jsm15-master-project/starter",
 					solutionLink:
@@ -1211,7 +1207,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Master Project supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM15 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM15 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-25-jsm15-master-project-supplemental-2/starter",
 					solutionLink:
@@ -1220,7 +1216,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Master Project supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JSM15 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JSM15 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-26-jsm15-master-project-supplemental-3/starter",
 					solutionLink:

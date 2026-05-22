@@ -14,12 +14,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Creating and Running a Java Program",
 					content:
-						"Review the role of classes, methods, `main()`, console output, and the basic project structure used throughout the course. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review the role of classes, methods, `main()`, console output, and the basic project structure used throughout the course."
 				},
 				{
 					title: "Compilation",
 					content:
-						"Understand that Java code must be compiled before it runs, both to catch syntax issues and to translate source code into a form the computer can execute. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Understand that Java code must be compiled before it runs, both to catch syntax issues and to translate source code into a form the computer can execute."
 				},
 				{
 					title: "Variables, Primitive Data Types, and Strings",
@@ -29,12 +29,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Input, Output, and Commenting",
 					content:
-						"Use `Scanner` to read console input, compare `System.out.print()` with `System.out.println()`, and review both single-line and block comments. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use `Scanner` to read console input, compare `System.out.print()` with `System.out.println()`, and review both single-line and block comments."
 				},
 				{
 					title: "AJ1 Project 1: Mad Libs",
 					content:
-						"Ask the user for several words, store them in descriptive variables, and build a Mad Lib story by concatenating the inputs together. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Ask the user for several words, store them in descriptive variables, and build a Mad Lib story by concatenating the inputs together.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Mad-Lib",
 					solutionLink:
@@ -43,7 +43,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ1 Project 2: Chat Bot",
 					content:
-						"Create a simple chatbot that asks several questions, stores each response, and replies based on the answers. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a simple chatbot that asks several questions, stores each response, and replies based on the answers.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Chat-Bot",
 					solutionLink:
@@ -54,7 +54,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input: Extension Challenge",
 					content:
-						"Extend the work from AJ1 Review: Variables, Strings, and Input with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ1 Review: Variables, Strings, and Input with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Mad-Lib",
 					solutionLink:
@@ -63,7 +63,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ1 Review: Variables, Strings, and Input. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemental-2/starter",
 					solutionLink:
@@ -72,7 +72,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ1 Review: Variables, Strings, and Input. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ1 Review: Variables, Strings, and Input. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemental-3/starter",
 					solutionLink:
@@ -86,17 +86,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review Focus",
 					content:
-						"Use this module as a review resource for one-dimensional arrays, two-dimensional arrays, and `ArrayList`s before the course moves into more advanced data structures. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use this module as a review resource for one-dimensional arrays, two-dimensional arrays, and `ArrayList`s before the course moves into more advanced data structures."
 				},
 				{
 					title: "Arrays",
 					content:
-						"Review how arrays store ordered elements of one type, how indexing works, how to get the length, and how to print an array by iterating through it. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review how arrays store ordered elements of one type, how indexing works, how to get the length, and how to print an array by iterating through it."
 				},
 				{
 					title: "AJ2 Project 1: Array Practice",
 					content:
-						"Write methods that double array values, sum even numbers, generate arrays of random doubles, and total the lengths of words in an array. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write methods that double array values, sum even numbers, generate arrays of random doubles, and total the lengths of words in an array.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Array-Practice",
 					solutionLink:
@@ -105,12 +105,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Two-Dimensional Arrays",
 					content:
-						"Review how 2D arrays represent grids, how to access rows and columns, and how nested loops traverse every element. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review how 2D arrays represent grids, how to access rows and columns, and how nested loops traverse every element."
 				},
 				{
 					title: "AJ2 Project 2: Two-Dimensional Array Practice",
 					content:
-						"Create and fill square grids, find maximum values, generate random matrices, and search 2D arrays for a target value. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create and fill square grids, find maximum values, generate random matrices, and search 2D arrays for a target value.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Two-Dimensional-Array-Practice",
 					solutionLink:
@@ -119,17 +119,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "ArrayLists",
 					content:
-						"Compare arrays with `ArrayList`s, then review `add()`, `get()`, `set()`, and `remove()` for dynamic collections. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare arrays with `ArrayList`s, then review `add()`, `get()`, `set()`, and `remove()` for dynamic collections."
 				},
 				{
 					title: "Primitive Wrapper Objects",
 					content:
-						"Review how wrapper types such as `Integer` and `Double` allow primitive values to be stored inside `ArrayList`s through auto-boxing and unboxing. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review how wrapper types such as `Integer` and `Double` allow primitive values to be stored inside `ArrayList`s through auto-boxing and unboxing."
 				},
 				{
 					title: "AJ2 Project 3: ArrayList Practice",
 					content:
-						"Write methods that filter even numbers, test whether two values sum to zero, remove the smallest value, and append a total sum to an `ArrayList`. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write methods that filter even numbers, test whether two values sum to zero, remove the smallest value, and append a total sum to an `ArrayList`.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Array-List-Practice",
 					solutionLink:
@@ -140,7 +140,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ2 Supplemental Project 1: Test Scores",
 					content:
-						"Store a set of test scores in an array, compute the average, and convert it into a letter grade. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Store a set of test scores in an array, compute the average, and convert it into a letter grade.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Test-Scores",
 					solutionLink:
@@ -149,7 +149,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ2 Supplemental Project 2: Matrix Addition",
 					content:
-						"Read in two matrices of matching dimensions, add them entry by entry, and print the result. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Read in two matrices of matching dimensions, add them entry by entry, and print the result.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Matrix-Addition",
 					solutionLink:
@@ -158,7 +158,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ2 Supplemental Project 3: Sandwich Orders",
 					content:
-						"Build an ingredient list with an `ArrayList`, collect a sandwich order, and convert it into an abbreviated string representation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build an ingredient list with an `ArrayList`, collect a sandwich order, and convert it into an abbreviated string representation.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ2-Sandwich-Orders",
 					solutionLink:
@@ -172,27 +172,27 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Object-Oriented Programming",
 					content:
-						"Review classes, objects, instance variables, methods, constructors, and the overall purpose of object-oriented programming in Java. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review classes, objects, instance variables, methods, constructors, and the overall purpose of object-oriented programming in Java."
 				},
 				{
 					title: "Public and Private Instance Variables",
 					content:
-						"Compare public and private variables, discuss encapsulation, and review why most instance data should stay private behind methods. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare public and private variables, discuss encapsulation, and review why most instance data should stay private behind methods."
 				},
 				{
 					title: "Constructors",
 					content:
-						"Review default constructors and overloaded constructors, then instantiate objects using different constructor signatures. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review default constructors and overloaded constructors, then instantiate objects using different constructor signatures."
 				},
 				{
 					title: "Class Methods",
 					content:
-						"Use getters, setters, and `toString()` to expose and update object state in a controlled way. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use getters, setters, and `toString()` to expose and update object state in a controlled way."
 				},
 				{
 					title: "AJ3 Project 1: Student Class",
 					content:
-						"Create a `Student` class with private fields, constructors, getters, setters, and a coherent `toString()` method. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Student` class with private fields, constructors, getters, setters, and a coherent `toString()` method.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Student-Class",
 					solutionLink:
@@ -201,17 +201,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Static Variables and Methods",
 					content:
-						"Use a static variable such as `numStudents` to track a class-wide total and access it through a static getter. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use a static variable such as `numStudents` to track a class-wide total and access it through a static getter."
 				},
 				{
 					title: "Inheritance and Subclasses",
 					content:
-						"Review how subclasses extend superclasses, inherit public behavior, and use `super()` to reuse parent constructors. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review how subclasses extend superclasses, inherit public behavior, and use `super()` to reuse parent constructors."
 				},
 				{
 					title: "AJ3 Project 2: BakedGood Class",
 					content:
-						"Create a `BakedGood` class and use it as a base for later work with inheritance, abstract classes, interfaces, and enums. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `BakedGood` class and use it as a base for later work with inheritance, abstract classes, interfaces, and enums.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Baked-Good",
 					solutionLink:
@@ -220,24 +220,24 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Abstract Classes and Methods",
 					content:
-						"Make `BakedGood` abstract, add an abstract pricing method, and create a `Bread` subclass that provides a concrete implementation. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Make `BakedGood` abstract, add an abstract pricing method, and create a `Bread` subclass that provides a concrete implementation."
 				},
 				{
 					title: "Interfaces",
 					content:
-						"Create and implement an interface such as `ForSale`, then use `Comparable` to compare baked goods by ingredient count. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create and implement an interface such as `ForSale`, then use `Comparable` to compare baked goods by ingredient count."
 				},
 				{
 					title: "Enums",
 					content:
-						"Use enums to restrict possible values such as loaf sizes and update constructors and instance variables to use those enum types. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use enums to restrict possible values such as loaf sizes and update constructors and instance variables to use those enum types."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Review: Objects and Classes: Extension Challenge",
 					content:
-						"Extend the work from AJ3 Review: Objects and Classes with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ3 Review: Objects and Classes with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Student-Class",
 					solutionLink:
@@ -246,7 +246,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Objects and Classes supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ3 Review: Objects and Classes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ3 Review: Objects and Classes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-03-aj3-review-objects-and-classes-supplemental-2/starter",
 					solutionLink:
@@ -255,7 +255,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Objects and Classes supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ3 Review: Objects and Classes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ3 Review: Objects and Classes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-04-aj3-review-objects-and-classes-supplemental-3/starter",
 					solutionLink:
@@ -269,22 +269,22 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion",
 					content:
-						"Learn how recursive methods solve problems by reducing them to smaller subproblems, and review the roles of the base case and recursive case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how recursive methods solve problems by reducing them to smaller subproblems, and review the roles of the base case and recursive case."
 				},
 				{
 					title: "Sum of the First N Numbers",
 					content:
-						"Trace a recursive example for summing the first `n` numbers and compare the recursive solution with an iterative one. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Trace a recursive example for summing the first `n` numbers and compare the recursive solution with an iterative one."
 				},
 				{
 					title: "Call Stack",
 					content:
-						"Review how recursive calls build up on the call stack, why stack overflow happens, and why recursive overhead sometimes makes iterative solutions faster. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review how recursive calls build up on the call stack, why stack overflow happens, and why recursive overhead sometimes makes iterative solutions faster."
 				},
 				{
 					title: "AJ4 Project 1: Recursion Practice",
 					content:
-						"Write recursive methods for exponents, factorials, digit sums, Fibonacci numbers, and palindrome checking. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write recursive methods for exponents, factorials, digit sums, Fibonacci numbers, and palindrome checking.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Recursion-Practice",
 					solutionLink:
@@ -293,7 +293,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ4 Project 2: Divisible by 7",
 					content:
-						"Use a recursive divisibility rule to determine whether a number is divisible by 7, breaking it into smaller subproblems each step. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a recursive divisibility rule to determine whether a number is divisible by 7, breaking it into smaller subproblems each step.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Divisible-by-7",
 					solutionLink:
@@ -304,7 +304,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion: Extension Challenge",
 					content:
-						"Extend the work from AJ4 Recursion with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ4 Recursion with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Recursion-Practice",
 					solutionLink:
@@ -313,7 +313,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ4 Recursion. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ4 Recursion. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-05-aj4-recursion-supplemental-2/starter",
 					solutionLink:
@@ -322,7 +322,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ4 Recursion. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ4 Recursion. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-06-aj4-recursion-supplemental-3/starter",
 					solutionLink:
@@ -336,12 +336,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search",
 					content:
-						"Learn how linear search checks items one by one in order until the target is found or the collection ends. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how linear search checks items one by one in order until the target is found or the collection ends."
 				},
 				{
 					title: "AJ5 Project 1: Linear Search Implementation",
 					content:
-						"Write a method that searches an array for a target and returns its index or `-1` if it is not found. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write a method that searches an array for a target and returns its index or `-1` if it is not found.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Linear-Search",
 					solutionLink:
@@ -350,12 +350,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Introduction to Big-O Analysis",
 					content:
-						"Use Big-O notation to estimate runtime growth based on input size, focusing on worst-case behavior and dominant terms. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use Big-O notation to estimate runtime growth based on input size, focusing on worst-case behavior and dominant terms."
 				},
 				{
 					title: "AJ5 Project 2: Big-O Practice",
 					content:
-						"Determine the Big-O of several mathematical runtime expressions and connect those expressions to algorithm behavior. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Determine the Big-O of several mathematical runtime expressions and connect those expressions to algorithm behavior.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Big-O-Practice-Starter",
 					solutionLink:
@@ -366,7 +366,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation: Extension Challenge",
 					content:
-						"Extend the work from AJ5 Linear Search and Big-O Notation with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ5 Linear Search and Big-O Notation with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Linear-Search",
 					solutionLink:
@@ -375,7 +375,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ5 Linear Search and Big-O Notation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplemental-2/starter",
 					solutionLink:
@@ -384,7 +384,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ5 Linear Search and Big-O Notation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ5 Linear Search and Big-O Notation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplemental-3/starter",
 					solutionLink:
@@ -398,12 +398,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search",
 					content:
-						"Learn how binary search repeatedly narrows a sorted array by comparing the target to the middle element and discarding half the search space each time. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how binary search repeatedly narrows a sorted array by comparing the target to the middle element and discarding half the search space each time."
 				},
 				{
 					title: "AJ6 Project 1: Binary Search with Iteration",
 					content:
-						"Implement binary search iteratively using lower and upper bounds plus a loop that updates the midpoint after every comparison. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement binary search iteratively using lower and upper bounds plus a loop that updates the midpoint after every comparison.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Iteration",
 					solutionLink:
@@ -412,7 +412,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ6 Project 2: Binary Search with Recursion",
 					content:
-						"Implement binary search recursively, either by passing bounds into each call or by splitting the array into subarrays. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement binary search recursively, either by passing bounds into each call or by splitting the array into subarrays.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Recursion",
 					solutionLink:
@@ -421,12 +421,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Big-O Analysis",
 					content:
-						"Compare binary search with linear search and reason about why halving the problem each step leads to `O(log n)` runtime. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare binary search with linear search and reason about why halving the problem each step leads to `O(log n)` runtime."
 				},
 				{
 					title: "AJ6 Project 3: Precise Square Roots",
 					content:
-						"Use a binary-search-style approach on a numeric interval to approximate square roots to a chosen precision. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a binary-search-style approach on a numeric interval to approximate square roots to a chosen precision.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Precision-Square-Root",
 					solutionLink:
@@ -437,7 +437,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search: Extension Challenge",
 					content:
-						"Extend the work from AJ6 Binary Search with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ6 Binary Search with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Iteration",
 					solutionLink:
@@ -446,7 +446,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ6 Binary Search. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ6 Binary Search. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-09-aj6-binary-search-supplemental-2/starter",
 					solutionLink:
@@ -455,7 +455,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ6 Binary Search. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ6 Binary Search. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-10-aj6-binary-search-supplemental-3/starter",
 					solutionLink:
@@ -469,7 +469,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check-In #1 Overview",
 					content:
-						"Use this check-in as a review of recursion, time complexity, and search algorithms. Focus on explaining how each algorithm works and why its runtime behaves the way it does. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use this check-in as a review of recursion, time complexity, and search algorithms. Focus on explaining how each algorithm works and why its runtime behaves the way it does.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Starter",
 					solutionLink:
@@ -478,27 +478,27 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check-In #1: Recursion",
 					content:
-						"Review recursive methods, base and recursive cases, the dangers of missing base cases, recursive string length, Pascal's triangle, and tracing recursive output. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review recursive methods, base and recursive cases, the dangers of missing base cases, recursive string length, Pascal's triangle, and tracing recursive output."
 				},
 				{
 					title: "Check-In #1: Time Complexity",
 					content:
-						"Practice Big-O notation by simplifying expressions and reasoning about the best and worst cases of different methods. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Practice Big-O notation by simplifying expressions and reasoning about the best and worst cases of different methods."
 				},
 				{
 					title: "Check-In #1: Linear Search",
 					content:
-						"Explain when linear search is useful, complete an unfinished implementation, and describe its best and worst case runtime. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain when linear search is useful, complete an unfinished implementation, and describe its best and worst case runtime."
 				},
 				{
 					title: "Check-In #1: Binary Search",
 					content:
-						"Review both iterative and recursive binary search, finish incomplete implementations, and compare its runtime with linear search. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review both iterative and recursive binary search, finish incomplete implementations, and compare its runtime with linear search."
 				},
 				{
 					title: "Check-In #1: Additional Practice Project",
 					content:
-						"Compare the real-world speeds of linear search and binary search by timing many runs on a large array with millisecond timestamps. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Compare the real-world speeds of linear search and binary search by timing many runs on a large array with millisecond timestamps.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Additional-Practice-Project",
 					solutionLink:
@@ -509,7 +509,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1: Extension Challenge",
 					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Starter",
 					solutionLink:
@@ -518,7 +518,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-11-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -527,7 +527,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-12-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -541,12 +541,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection Sort",
 					content:
-						"Learn how selection sort repeatedly finds the smallest remaining element and places it into the next sorted position. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how selection sort repeatedly finds the smallest remaining element and places it into the next sorted position."
 				},
 				{
 					title: "AJ7 Project 1: Selection Sort",
 					content:
-						"Implement selection sort using two `ArrayList`s and test the algorithm on randomly generated values. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement selection sort using two `ArrayList`s and test the algorithm on randomly generated values.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Selection-Sort",
 					solutionLink:
@@ -555,17 +555,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection Sort Big-O Analysis",
 					content:
-						"Analyze selection sort as a quadratic-time algorithm and compare in-place versus out-of-place space usage. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Analyze selection sort as a quadratic-time algorithm and compare in-place versus out-of-place space usage."
 				},
 				{
 					title: "Insertion Sort",
 					content:
-						"Learn how insertion sort places each new element into the correct spot among the items that are already sorted. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how insertion sort places each new element into the correct spot among the items that are already sorted."
 				},
 				{
 					title: "AJ7 Project 2: Insertion Sort",
 					content:
-						"Implement insertion sort in-place on an array and compare how it behaves on sorted, reverse-sorted, and random input. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement insertion sort in-place on an array and compare how it behaves on sorted, reverse-sorted, and random input.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Insertion-Sort",
 					solutionLink:
@@ -574,14 +574,14 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Insertion Sort Big-O Analysis",
 					content:
-						"Compare insertion sort with selection sort, paying attention to why insertion sort performs especially well on nearly sorted data. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare insertion sort with selection sort, paying attention to why insertion sort performs especially well on nearly sorted data."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "AJ7 Supplemental Project 1: Biggest to Smallest Bookshelf",
 					content:
-						"Store book page counts in an `ArrayList` and use selection sort to organize them from biggest to smallest. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Store book page counts in an `ArrayList` and use selection sort to organize them from biggest to smallest.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ7-Biggest-to-Smallest-Bookshelf",
 					solutionLink:
@@ -590,7 +590,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection and Insertion Sort supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ7 Selection and Insertion Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ7 Selection and Insertion Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-13-aj7-selection-and-insertion-sort-supplemental-2/starter",
 					solutionLink:
@@ -599,7 +599,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection and Insertion Sort supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ7 Selection and Insertion Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ7 Selection and Insertion Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-14-aj7-selection-and-insertion-sort-supplemental-3/starter",
 					solutionLink:
@@ -613,12 +613,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort",
 					content:
-						"Learn how bubble sort repeatedly swaps adjacent values so that large elements bubble toward the end of the list over multiple passes. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how bubble sort repeatedly swaps adjacent values so that large elements bubble toward the end of the list over multiple passes."
 				},
 				{
 					title: "AJ8 Project 1: Bubble Sort Implementation",
 					content:
-						"Implement bubble sort with nested loops, test it on random data, and improve it by shrinking the inner loop range over time. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement bubble sort with nested loops, test it on random data, and improve it by shrinking the inner loop range over time.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Bubble-Sort",
 					solutionLink:
@@ -627,12 +627,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort Big-O Analysis",
 					content:
-						"Analyze why bubble sort is also quadratic time, compare it to other simple sorting algorithms, and review how in-place sorting affects space complexity. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Analyze why bubble sort is also quadratic time, compare it to other simple sorting algorithms, and review how in-place sorting affects space complexity."
 				},
 				{
 					title: "AJ8 Project 2: Alphabetical Order",
 					content:
-						"Adapt bubble sort to work on `ArrayList<String>` values by using `compareTo()` to sort words alphabetically. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Adapt bubble sort to work on `ArrayList<String>` values by using `compareTo()` to sort words alphabetically.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Alphabetical-Order-Starter",
 					solutionLink:
@@ -643,7 +643,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort: Extension Challenge",
 					content:
-						"Extend the work from AJ8 Bubble Sort with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ8 Bubble Sort with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Bubble-Sort",
 					solutionLink:
@@ -652,7 +652,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ8 Bubble Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ8 Bubble Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-15-aj8-bubble-sort-supplemental-2/starter",
 					solutionLink:
@@ -661,7 +661,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ8 Bubble Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ8 Bubble Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-16-aj8-bubble-sort-supplemental-3/starter",
 					solutionLink:
@@ -675,12 +675,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort",
 					content:
-						"Learn how merge sort uses recursion to split an array into smaller pieces, sort those pieces, and merge them back together efficiently. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how merge sort uses recursion to split an array into smaller pieces, sort those pieces, and merge them back together efficiently."
 				},
 				{
 					title: "AJ9 Project 1: Merge Method",
 					content:
-						"Implement the helper method that merges two sorted lists into one sorted result. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement the helper method that merges two sorted lists into one sorted result.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge",
 					solutionLink:
@@ -689,7 +689,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ9 Project 2: Split Method",
 					content:
-						"Practice recursively splitting an `ArrayList` until all sublists are size 1, building intuition for merge sort's divide-and-conquer structure. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Practice recursively splitting an `ArrayList` until all sublists are size 1, building intuition for merge sort's divide-and-conquer structure.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Split",
 					solutionLink:
@@ -698,7 +698,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ9 Project 3: Merge Sort",
 					content:
-						"Combine recursive splitting with the merge helper to implement full merge sort on a list of random numbers. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Combine recursive splitting with the merge helper to implement full merge sort on a list of random numbers.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge-Sort",
 					solutionLink:
@@ -707,14 +707,14 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort Big-O Analysis",
 					content:
-						"Analyze merge sort as a `O(n log n)` algorithm, compare it with quadratic-time sorts, and discuss why recursion overhead means it is most useful on sufficiently large lists. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Analyze merge sort as a `O(n log n)` algorithm, compare it with quadratic-time sorts, and discuss why recursion overhead means it is most useful on sufficiently large lists."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Merge Sort: Extension Challenge",
 					content:
-						"Extend the work from AJ9 Merge Sort with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ9 Merge Sort with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge",
 					solutionLink:
@@ -723,7 +723,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ9 Merge Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ9 Merge Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-17-aj9-merge-sort-supplemental-2/starter",
 					solutionLink:
@@ -732,7 +732,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ9 Merge Sort. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ9 Merge Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-18-aj9-merge-sort-supplemental-3/starter",
 					solutionLink:
@@ -746,7 +746,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check-In #2 Overview",
 					content:
-						"Use this check-in to review the major sorting algorithms in the course and compare how they behave, how they are implemented, and how their runtimes differ. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use this check-in to review the major sorting algorithms in the course and compare how they behave, how they are implemented, and how their runtimes differ.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Starter",
 					solutionLink:
@@ -755,27 +755,27 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check-In #2: Selection Sort",
 					content:
-						"Describe selection sort, predict the state of an array after several passes, complete an implementation, and discuss runtime plus in-place versus out-of-place behavior. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Describe selection sort, predict the state of an array after several passes, complete an implementation, and discuss runtime plus in-place versus out-of-place behavior."
 				},
 				{
 					title: "Check-In #2: Insertion Sort",
 					content:
-						"Review insertion sort, trace several passes on a given list, complete the algorithm, and compare it with selection sort. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review insertion sort, trace several passes on a given list, complete the algorithm, and compare it with selection sort."
 				},
 				{
 					title: "Check-In #2: Bubble Sort",
 					content:
-						"Explain bubble sort, complete an implementation, consider optimizations such as early cutoffs, and compare it with other quadratic-time sorts. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain bubble sort, complete an implementation, consider optimizations such as early cutoffs, and compare it with other quadratic-time sorts."
 				},
 				{
 					title: "Check-In #2: Merge Sort",
 					content:
-						"Merge sorted sublists by hand, finish an incomplete merge sort implementation, and explain why merge sort's time complexity differs from the other sorting algorithms. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Merge sorted sublists by hand, finish an incomplete merge sort implementation, and explain why merge sort's time complexity differs from the other sorting algorithms."
 				},
 				{
 					title: "Check-In #2: Additional Practice Project",
 					content:
-						"Time multiple sorting algorithms on arrays of different sizes and compare how their observed speeds change as the test scale increases. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Time multiple sorting algorithms on arrays of different sizes and compare how their observed speeds change as the test scale increases.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Additional-Practice-Project",
 					solutionLink:
@@ -786,7 +786,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2: Extension Challenge",
 					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Starter",
 					solutionLink:
@@ -795,7 +795,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-19-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -804,7 +804,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-20-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -818,12 +818,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Nested Classes",
 					content:
-						"Compare static nested classes and inner classes, and learn when a HAS-A relationship makes nested classes a good fit. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare static nested classes and inner classes, and learn when a HAS-A relationship makes nested classes a good fit."
 				},
 				{
 					title: "AJ10 Project 1: Juni Bakery",
 					content:
-						"Use nested classes to model a bakery, its workers, and its baked goods, then collect input and print the resulting bakery state. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use nested classes to model a bakery, its workers, and its baked goods, then collect input and print the resulting bakery state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Juni-Bakery-Starter",
 					solutionLink:
@@ -832,12 +832,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Generics",
 					content:
-						"Learn how generic type placeholders such as `T` let one class work with many kinds of data without committing to a concrete type in advance. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how generic type placeholders such as `T` let one class work with many kinds of data without committing to a concrete type in advance."
 				},
 				{
 					title: "AJ10 Project 2: Anything Array",
 					content:
-						"Create a generic `Node`-style wrapper class, test it with several object types, and store those generic nodes inside an array. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a generic `Node`-style wrapper class, test it with several object types, and store those generic nodes inside an array.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Anything-Array",
 					solutionLink:
@@ -846,12 +846,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Exception Handling",
 					content:
-						"Review checked versus runtime exceptions, custom exceptions, `try-catch` blocks, and the difference between handling an exception immediately and declaring it with `throws`. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review checked versus runtime exceptions, custom exceptions, `try-catch` blocks, and the difference between handling an exception immediately and declaring it with `throws`."
 				},
 				{
 					title: "AJ10 Project 3: Exception Practice",
 					content:
-						"Handle file, input, null, and arithmetic exceptions, and create a custom `DivideByZeroException` for more precise error reporting. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Handle file, input, null, and arithmetic exceptions, and create a custom `DivideByZeroException` for more precise error reporting.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Exception-Practice-Starter",
 					solutionLink:
@@ -862,7 +862,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming: Extension Challenge",
 					content:
-						"Extend the work from AJ10 Sustainable Programming with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ10 Sustainable Programming with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Juni-Bakery-Starter",
 					solutionLink:
@@ -871,7 +871,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ10 Sustainable Programming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ10 Sustainable Programming. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-21-aj10-sustainable-programming-supplemental-2/starter",
 					solutionLink:
@@ -880,7 +880,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ10 Sustainable Programming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ10 Sustainable Programming. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-22-aj10-sustainable-programming-supplemental-3/starter",
 					solutionLink:
@@ -894,17 +894,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Introduction to Linked Lists",
 					content:
-						"Compare linked lists with arrays and `ArrayList`s, focusing on how nodes and references make insertion and deletion easier at the cost of direct indexing. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare linked lists with arrays and `ArrayList`s, focusing on how nodes and references make insertion and deletion easier at the cost of direct indexing."
 				},
 				{
 					title: "Singly Linked Lists",
 					content:
-						"Review heads, nodes, links, and one-directional traversal in a singly linked list. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review heads, nodes, links, and one-directional traversal in a singly linked list."
 				},
 				{
 					title: "AJ11 Project 1: Singly Linked List",
 					content:
-						"Implement a singly linked list from starter code, write its inner `Node` class, and build out the methods defined in the interface. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement a singly linked list from starter code, write its inner `Node` class, and build out the methods defined in the interface.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Linked-List-Starter",
 					solutionLink:
@@ -913,12 +913,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Doubly Linked Lists",
 					content:
-						"Compare doubly linked lists with singly linked lists, focusing on head and tail references plus links in both directions. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare doubly linked lists with singly linked lists, focusing on head and tail references plus links in both directions."
 				},
 				{
 					title: "AJ11 Project 2: Doubly Linked List",
 					content:
-						"Extend the linked list implementation to support both next and previous links, a tail reference, and more efficient inserts and deletions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the linked list implementation to support both next and previous links, a tail reference, and more efficient inserts and deletions.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Doubly-Linked-List-Starter",
 					solutionLink:
@@ -929,7 +929,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists: Extension Challenge",
 					content:
-						"Extend the work from AJ11 Linked Lists with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ11 Linked Lists with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Linked-List-Starter",
 					solutionLink:
@@ -938,7 +938,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ11 Linked Lists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ11 Linked Lists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-23-aj11-linked-lists-supplemental-2/starter",
 					solutionLink:
@@ -947,7 +947,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ11 Linked Lists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ11 Linked Lists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-24-aj11-linked-lists-supplemental-3/starter",
 					solutionLink:
@@ -961,12 +961,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Stacks",
 					content:
-						"Learn how stacks use Last In First Out behavior and support operations such as `push`, `pop`, `top`, and `empty`. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how stacks use Last In First Out behavior and support operations such as `push`, `pop`, `top`, and `empty`."
 				},
 				{
 					title: "AJ12 Project 1: Implementing a Stack",
 					content:
-						"Implement a stack with array storage, a top pointer, and checks for overflow and underflow. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement a stack with array storage, a top pointer, and checks for overflow and underflow.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Stack-Starter",
 					solutionLink:
@@ -975,12 +975,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Queues",
 					content:
-						"Learn how queues use First In First Out behavior and support `enqueue`, `dequeue`, `front`, and `empty`. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how queues use First In First Out behavior and support `enqueue`, `dequeue`, `front`, and `empty`."
 				},
 				{
 					title: "AJ12 Project 2: Implementing a Queue",
 					content:
-						"Implement a queue using an array with wrapping indices so that the structure behaves like a circular buffer. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement a queue using an array with wrapping indices so that the structure behaves like a circular buffer.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Queue-Starter",
 					solutionLink:
@@ -991,7 +991,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ12 Supplemental Project 1: Valid Parentheses",
 					content:
-						"Use a stack to determine whether parentheses, brackets, and braces are balanced and properly nested. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a stack to determine whether parentheses, brackets, and braces are balanced and properly nested.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Valid-Parentheses",
 					solutionLink:
@@ -1000,7 +1000,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ12 Supplemental Project 2: Calculator with Stacks",
 					content:
-						"Build a stack-based calculator that treats operators as commands acting on the most recently entered numbers. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a stack-based calculator that treats operators as commands acting on the most recently entered numbers.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Calculator-with-Stacks",
 					solutionLink:
@@ -1009,7 +1009,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ12 Supplemental Project 3: Implementing a Deque",
 					content:
-						"Extend queue ideas into a double-ended queue implemented with a circular array. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend queue ideas into a double-ended queue implemented with a circular array.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ12-Deque-Starter",
 					solutionLink:
@@ -1023,19 +1023,19 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues",
 					content:
-						"Learn how priority queues differ from regular queues by removing highest-priority items first rather than strictly honoring insertion order. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how priority queues differ from regular queues by removing highest-priority items first rather than strictly honoring insertion order."
 				},
 				{
 					title: "Using a Java Priority Queue",
 					content:
-						"Practice the Java `PriorityQueue` API, including adding, peeking, polling, removing, iterating, checking membership, and converting the queue into an array. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Practice the Java `PriorityQueue` API, including adding, peeking, polling, removing, iterating, checking membership, and converting the queue into an array.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Priority-Queue"
 				},
 				{
 					title: "AJ13 Project 1: Class Rank",
 					content:
-						"Create a `Student` class and a comparator that orders students by GPA, then use a priority queue to print students from highest GPA to lowest. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Student` class and a comparator that orders students by GPA, then use a priority queue to print students from highest GPA to lowest.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Class-Rank",
 					solutionLink:
@@ -1044,19 +1044,19 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Maps",
 					content:
-						"Review key-value storage with maps, compare ordered and unordered implementations, and practice the core operations for insertion, retrieval, updates, and iteration. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review key-value storage with maps, compare ordered and unordered implementations, and practice the core operations for insertion, retrieval, updates, and iteration."
 				},
 				{
 					title: "Using a Java Map",
 					content:
-						"Practice the Java `Map` API with `HashMap` and `TreeMap`, including creation, insertion, lookup, removal, and iteration through keys and values. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Practice the Java `Map` API with `HashMap` and `TreeMap`, including creation, insertion, lookup, removal, and iteration through keys and values.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Maps"
 				},
 				{
 					title: "AJ13 Project 2: Letter Frequencies",
 					content:
-						"Read a sentence from the user, build a frequency map of its letters, print the map contents, and identify the most frequent character. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Read a sentence from the user, build a frequency map of its letters, print the map contents, and identify the most frequent character.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Letter-Frequencies",
 					solutionLink:
@@ -1067,14 +1067,14 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues and Maps: Extension Challenge",
 					content:
-						"Extend the work from AJ13 Priority Queues and Maps with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ13 Priority Queues and Maps with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Priority-Queue"
 				},
 				{
 					title: "Priority Queues and Maps supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ13 Priority Queues and Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ13 Priority Queues and Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-25-aj13-priority-queues-and-maps-supplemental-2/starter",
 					solutionLink:
@@ -1083,7 +1083,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues and Maps supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ13 Priority Queues and Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ13 Priority Queues and Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-26-aj13-priority-queues-and-maps-supplemental-3/starter",
 					solutionLink:
@@ -1097,39 +1097,39 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check-In #3 Overview",
 					content:
-						"Use this check-in to revisit sustainable programming ideas, linked lists, stacks, queues, priority queues, and maps through a mix of short explanations and code extensions. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use this check-in to revisit sustainable programming ideas, linked lists, stacks, queues, priority queues, and maps through a mix of short explanations and code extensions.",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3"
 				},
 				{
 					title: "Check-In #3: Sustainable Programming",
 					content:
-						"Review nested classes, generics, and exception handling by building a nested `Riddle` class, a generic `Triple` class, and custom exception logic. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review nested classes, generics, and exception handling by building a nested `Riddle` class, a generic `Triple` class, and custom exception logic."
 				},
 				{
 					title: "Check-In #3: Linked Lists",
 					content:
-						"Compare singly and doubly linked lists, complete `Node` class structures, add methods such as `indexOf()` and `remove()`, and test those methods on real lists. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare singly and doubly linked lists, complete `Node` class structures, add methods such as `indexOf()` and `remove()`, and test those methods on real lists."
 				},
 				{
 					title: "Check-In #3: Stacks",
 					content:
-						"Review stack operations, LIFO behavior, and how stacks can process edit-style input such as backspaces in a stream of key presses. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review stack operations, LIFO behavior, and how stacks can process edit-style input such as backspaces in a stream of key presses."
 				},
 				{
 					title: "Check-In #3: Queues",
 					content:
-						"Review queue operations, FIFO behavior, the idea of a priority queue, and examples where queue-based processing is useful. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review queue operations, FIFO behavior, the idea of a priority queue, and examples where queue-based processing is useful."
 				},
 				{
 					title: "Check-In #3: Maps",
 					content:
-						"Review map creation, iteration, membership checks, duplicate-key behavior, and practical use cases for key-value storage. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review map creation, iteration, membership checks, duplicate-key behavior, and practical use cases for key-value storage."
 				},
 				{
 					title: "Check-In #3: Additional Practice Project",
 					content:
-						"Take a queue of names, reverse it with a stack, then sort it alphabetically with a priority queue, printing the queue after each transformation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Take a queue of names, reverse it with a stack, then sort it alphabetically with a priority queue, printing the queue after each transformation.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3-Additional-Practice-Project-Starter",
 					solutionLink:
@@ -1140,14 +1140,14 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #3: Extension Challenge",
 					content:
-						"Extend the work from Check-In #3 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #3 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3"
 				},
 				{
 					title: "Check In #3 supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #3. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-27-check-in-3-supplemental-2/starter",
 					solutionLink:
@@ -1156,7 +1156,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #3 supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #3. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #3. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-28-check-in-3-supplemental-3/starter",
 					solutionLink:
@@ -1170,22 +1170,22 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Trees",
 					content:
-						"Learn the core vocabulary of trees, including nodes, edges, parents, children, ancestors, descendants, leaves, roots, height, and subtrees. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn the core vocabulary of trees, including nodes, edges, parents, children, ancestors, descendants, leaves, roots, height, and subtrees."
 				},
 				{
 					title: "Binary Search Trees",
 					content:
-						"Review how BSTs organize values so smaller items go left and larger items go right, enabling efficient search, insert, and remove operations. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review how BSTs organize values so smaller items go left and larger items go right, enabling efficient search, insert, and remove operations."
 				},
 				{
 					title: "BST Practice Problems",
 					content:
-						"Practice inserting and deleting nodes from drawn binary search trees and reason through in-order predecessor replacement. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Practice inserting and deleting nodes from drawn binary search trees and reason through in-order predecessor replacement."
 				},
 				{
 					title: "AJ14 Project 1: BST Basic Implementation",
 					content:
-						"Write the `Node` inner class, core BST instance variables, and basic methods such as insert and membership testing. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Write the `Node` inner class, core BST instance variables, and basic methods such as insert and membership testing.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST-Starter",
 					solutionLink:
@@ -1194,12 +1194,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Depth First Search",
 					content:
-						"Use depth-first traversal to print a BST in preorder, inorder, and postorder, and understand how each traversal changes only the print order, not the path taken through the tree. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use depth-first traversal to print a BST in preorder, inorder, and postorder, and understand how each traversal changes only the print order, not the path taken through the tree."
 				},
 				{
 					title: "AJ14 Project 2: BST Traversals",
 					content:
-						"Implement preorder, inorder, and postorder traversals and use inorder traversal to define `toString()`. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement preorder, inorder, and postorder traversals and use inorder traversal to define `toString()`.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST-Traversals",
 					solutionLink:
@@ -1208,7 +1208,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ14 Project 3: BST Clear and Remove",
 					content:
-						"Add recursive clear and remove operations to the BST, including removal cases for nodes with zero, one, or two children. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Add recursive clear and remove operations to the BST, including removal cases for nodes with zero, one, or two children.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST",
 					solutionLink:
@@ -1219,7 +1219,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees: Extension Challenge",
 					content:
-						"Extend the work from AJ14 Binary Search Trees with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ14 Binary Search Trees with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST-Starter",
 					solutionLink:
@@ -1228,7 +1228,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ14 Binary Search Trees. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ14 Binary Search Trees. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-29-aj14-binary-search-trees-supplemental-2/starter",
 					solutionLink:
@@ -1237,7 +1237,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ14 Binary Search Trees. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ14 Binary Search Trees. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-30-aj14-binary-search-trees-supplemental-3/starter",
 					solutionLink:
@@ -1251,27 +1251,27 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables",
 					content:
-						"Learn how hash tables implement maps by storing key-value pairs in buckets chosen by hash functions, ideally enabling near-constant-time lookup. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how hash tables implement maps by storing key-value pairs in buckets chosen by hash functions, ideally enabling near-constant-time lookup."
 				},
 				{
 					title: "Writing a Hash Function",
 					content:
-						"Review the properties of good hash functions, polynomial combinations, and how modulo compression maps a hash code into the table's bounds. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review the properties of good hash functions, polynomial combinations, and how modulo compression maps a hash code into the table's bounds."
 				},
 				{
 					title: "Dealing with Collisions",
 					content:
-						"Compare separate chaining with open addressing, and focus on linear probing plus tombstones as the strategy used in this course. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare separate chaining with open addressing, and focus on linear probing plus tombstones as the strategy used in this course."
 				},
 				{
 					title: "Rehashing",
 					content:
-						"Track load factor and resize the table when it becomes too full by rehashing items into a larger prime-sized array. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Track load factor and resize the table when it becomes too full by rehashing items into a larger prime-sized array."
 				},
 				{
 					title: "AJ15 Project 1: HashMap",
 					content:
-						"Implement a custom `HashMap` with linear probing, tombstones, rehashing, and the usual map operations. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement a custom `HashMap` with linear probing, tombstones, rehashing, and the usual map operations.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map-Starter",
 					solutionLink:
@@ -1280,7 +1280,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ15 Project 2: Juni Search Engine",
 					content:
-						"Use the custom `HashMap`, file reading, and string splitting to build a simple keyword search engine over a text corpus of URLs and tags. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the custom `HashMap`, file reading, and string splitting to build a simple keyword search engine over a text corpus of URLs and tags.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Search-Engine-Starter",
 					solutionLink:
@@ -1291,7 +1291,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables: Extension Challenge",
 					content:
-						"Extend the work from AJ15 Hash Tables with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from AJ15 Hash Tables with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map-Starter",
 					solutionLink:
@@ -1300,7 +1300,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ15 Hash Tables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ15 Hash Tables. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-31-aj15-hash-tables-supplemental-2/starter",
 					solutionLink:
@@ -1309,7 +1309,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ15 Hash Tables. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ15 Hash Tables. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-32-aj15-hash-tables-supplemental-3/starter",
 					solutionLink:
@@ -1323,17 +1323,17 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Graphs",
 					content:
-						"Learn how graphs use vertices and edges to represent relationships, and compare directed, undirected, weighted, and tree-like graph structures. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how graphs use vertices and edges to represent relationships, and compare directed, undirected, weighted, and tree-like graph structures."
 				},
 				{
 					title: "Representing a Graph",
 					content:
-						"Compare adjacency lists, adjacency matrices, and incidence lists, and discuss when each representation is most useful. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare adjacency lists, adjacency matrices, and incidence lists, and discuss when each representation is most useful."
 				},
 				{
 					title: "AJ16 Project 1: Basic Graph Implementation",
 					content:
-						"Implement a graph with a `HashMap` of adjacency lists, add vertices and edges, and test the result through a `toString()` method and a simple main program. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement a graph with a `HashMap` of adjacency lists, add vertices and edges, and test the result through a `toString()` method and a simple main program.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Simple-Graph-Starter",
 					solutionLink:
@@ -1342,12 +1342,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Dijkstra's Shortest Path Algorithm",
 					content:
-						"Learn how Dijkstra's algorithm uses distances, visited vertices, and a priority queue to find shortest paths in weighted graphs with positive edge weights. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how Dijkstra's algorithm uses distances, visited vertices, and a priority queue to find shortest paths in weighted graphs with positive edge weights."
 				},
 				{
 					title: "AJ16 Project 2: Dijkstra's Shortest Path",
 					content:
-						"Use a completed `Vertex` class, an adjacency matrix, and a priority queue to compute shortest paths and reconstruct the shortest path tree. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a completed `Vertex` class, an adjacency matrix, and a priority queue to compute shortest paths and reconstruct the shortest path tree.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Dijkstras-Shortest-Path-Starter",
 					solutionLink:
@@ -1358,7 +1358,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ16 Supplemental Project 1: Eulerian Mail Circuit",
 					content:
-						"Use graph traversal and vertex degree analysis to determine whether a graph has a Eulerian path, a Eulerian cycle, or neither. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use graph traversal and vertex degree analysis to determine whether a graph has a Eulerian path, a Eulerian cycle, or neither.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ16-Eulerian-Mail-Circuit",
 					solutionLink:
@@ -1367,7 +1367,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Graphs supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ16 Graphs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ16 Graphs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-33-aj16-graphs-supplemental-2/starter",
 					solutionLink:
@@ -1376,7 +1376,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Graphs supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ16 Graphs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ16 Graphs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-34-aj16-graphs-supplemental-3/starter",
 					solutionLink:
@@ -1390,29 +1390,29 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check-In #4 Overview",
 					content:
-						"Use this final check-in to review binary search trees, hash tables, and graphs, along with the main vocabulary and algorithm ideas from those topics. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use this final check-in to review binary search trees, hash tables, and graphs, along with the main vocabulary and algorithm ideas from those topics.",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4"
 				},
 				{
 					title: "Check-In #4: Binary Search Trees",
 					content:
-						"Review BST ordering rules, traversal orders, insertion and deletion practice, and why BSTs are useful for ordered lookup structures. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review BST ordering rules, traversal orders, insertion and deletion practice, and why BSTs are useful for ordered lookup structures."
 				},
 				{
 					title: "Check-In #4: Hash Tables",
 					content:
-						"Explain how hash tables work, compute load factors, compare collision-handling strategies, and identify when rehashing is necessary. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain how hash tables work, compute load factors, compare collision-handling strategies, and identify when rehashing is necessary."
 				},
 				{
 					title: "Check-In #4: Graphs",
 					content:
-						"Define graphs and graph vocabulary, build adjacency lists and matrices, compare sparse versus dense representations, and describe Dijkstra's algorithm at a high level. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Define graphs and graph vocabulary, build adjacency lists and matrices, compare sparse versus dense representations, and describe Dijkstra's algorithm at a high level."
 				},
 				{
 					title: "Check-In #4: Additional Practice Project",
 					content:
-						"Extend a BST with a breadth-first search method that prints nodes level by level using a queue. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend a BST with a breadth-first search method that prints nodes level by level using a queue.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4-Additional-Practice-Project",
 					solutionLink:
@@ -1423,14 +1423,14 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #4: Extension Challenge",
 					content:
-						"Extend the work from Check-In #4 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #4 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4"
 				},
 				{
 					title: "Check In #4 supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #4. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-35-check-in-4-supplemental-2/starter",
 					solutionLink:
@@ -1439,7 +1439,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #4 supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #4. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #4. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-36-check-in-4-supplemental-3/starter",
 					solutionLink:
@@ -1453,12 +1453,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Introduction to Street Searcher",
 					content:
-						"Review a Google-Maps-style shortest path tool that loads locations and distances into a weighted graph and uses Dijkstra's algorithm to find routes. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review a Google-Maps-style shortest path tool that loads locations and distances into a weighted graph and uses Dijkstra's algorithm to find routes."
 				},
 				{
 					title: "AJ17 Project 1: Weighted Graph",
 					content:
-						"Create a weighted graph implementation that will support the street searcher project. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a weighted graph implementation that will support the street searcher project.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Weighted-Graph-Starter",
 					solutionLink:
@@ -1467,7 +1467,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ17 Project 2: Loading Data",
 					content:
-						"Read location data from files, store locations in a `HashMap`, and connect those locations in the weighted graph using location names as vertices. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Read location data from files, store locations in a `HashMap`, and connect those locations in the weighted graph using location names as vertices.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Loading-Data-Starter",
 					solutionLink:
@@ -1476,7 +1476,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ17 Project 3: Finding Shortest Paths",
 					content:
-						"Complete the street searcher by running Dijkstra's algorithm on the loaded graph, printing the shortest path, and refining the user interface and error handling. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Complete the street searcher by running Dijkstra's algorithm on the loaded graph, printing the shortest path, and refining the user interface and error handling.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher",
 					solutionLink:
@@ -1492,7 +1492,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps: Extension Challenge",
 					content:
-						"Extend the work from AJ17 Master Project: Google Maps with a tighter constraint, one extra feature, or a slightly more realistic input case. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the work from AJ17 Master Project: Google Maps with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Weighted-Graph-Starter",
 					solutionLink:
@@ -1501,7 +1501,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ17 Master Project: Google Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ17 Master Project: Google Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-37-aj17-master-project-google-maps-supplemental-2/starter",
 					solutionLink:
@@ -1510,7 +1510,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to AJ17 Master Project: Google Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to AJ17 Master Project: Google Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-38-aj17-master-project-google-maps-supplemental-3/starter",
 					solutionLink:
@@ -1529,7 +1529,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Data-Structures Reinforcement without Clutter",
 					content:
-						"Use the extra linked-list, stack, queue, hash-table, and graph folders when a student needs more depth on one structure family after the main module is already complete. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use the extra linked-list, stack, queue, hash-table, and graph folders when a student needs more depth on one structure family after the main module is already complete."
 				},
 				{
 					title: "Capstone Support Material",
@@ -1543,8 +1543,7 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "AJ18 Repo Extension, Starter, and Capstone Library: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Exceptions"
 				}
@@ -1553,56 +1552,56 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Extension: Exceptions Reference Lab",
 					content:
-						"Use the standalone exceptions folder when the student needs a cleaner error-handling example than the larger bakery or data-structures projects. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the standalone exceptions folder when the student needs a cleaner error-handling example than the larger bakery or data-structures projects.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Exceptions"
 				},
 				{
 					title: "Extension: Nested Classes",
 					content:
-						"Use nested classes as an optional design extension for students who want a stronger sense of how helper types can live inside larger structures. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use nested classes as an optional design extension for students who want a stronger sense of how helper types can live inside larger structures.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Nested-Classes"
 				},
 				{
 					title: "Reference: Node Class",
 					content:
-						"Keep the node-class reference visible because it supports the linked-list, tree, and graph sections that arrive later in the course. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Keep the node-class reference visible because it supports the linked-list, tree, and graph sections that arrive later in the course.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Node-Class"
 				},
 				{
 					title: "Extension: Separate Chaining Hash Table",
 					content:
-						"Use the separate-chaining implementation when students want one more explicit collision-handling model beyond the main hash-map work. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the separate-chaining implementation when students want one more explicit collision-handling model beyond the main hash-map work.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Separate-Chaining-Hash-Table"
 				},
 				{
 					title: "Reference: Open Addressing Hash Tables",
 					content:
-						"Keep the open-addressing reference alongside separate chaining so students can compare the main collision strategies directly. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Keep the open-addressing reference alongside separate chaining so students can compare the main collision strategies directly.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Open-Addressing-Reference"
 				},
 				{
 					title: "Extension: Google Maps Showcase",
 					content:
-						"Use the repo's Google Maps branch as a stronger capstone framing example once the weighted-graph and street-searcher work is complete. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the repo's Google Maps branch as a stronger capstone framing example once the weighted-graph and street-searcher work is complete.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Google-Maps"
 				},
 				{
 					title: "Starter: Street Searcher",
 					content:
-						"Expose the starter variant so students can re-enter the capstone path from a scaffold instead of only from the finished solution. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Expose the starter variant so students can re-enter the capstone path from a scaffold instead of only from the finished solution.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher-Starter"
 				},
 				{
 					title: "Starter: Master Project",
 					content:
-						"Use the final master-project starter when a student wants an additional capstone scaffold beyond the main public sequence. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the final master-project starter when a student wants an additional capstone scaffold beyond the main public sequence.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Master-Project-Starter"
 				}
@@ -1614,7 +1613,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Positioning the Advanced Java Track",
 					content:
-						"Use this track after `C++ Level 3` when a strong student needs a Java course with real engineering weight rather than another syntax review. Students should already be comfortable with classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
+						"Use this track after `C++ Level 3` when a strong student needs a Java course with real engineering weight rather than another syntax review. Already be comfortable with classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
 				},
 				{
 					title: "Packages, Builds, and Test Boundaries",
@@ -1631,7 +1630,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ19 Project 2: Command Parser Test Harness",
 					content:
-						"Write a command parser for a small CLI and test it without running the whole application. Students should parse valid commands, reject malformed commands, and explain where validation belongs.",
+						"Write a command parser for a small CLI and test it without running the whole application. Parse valid commands, reject malformed commands, and explain where validation belongs.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ19-Command-Parser-Test-Harness"
 				}
@@ -1667,14 +1666,14 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ20 Project 1: Generic Repository and Query Filters",
 					content:
-						"Build a generic in-memory repository that stores Java `record` objects by ID through a shared interface, supports filtering with predicates, and exposes only safe collection views. Students should explain the type parameter, what invariants the repository protects, and why records fit immutable snapshot-style data.",
+						"Build a generic in-memory repository that stores Java `record` objects by ID through a shared interface, supports filtering with predicates, and exposes only safe collection views. Explain the type parameter, what invariants the repository protects, and why records fit immutable snapshot-style data.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Generic-Repository"
 				},
 				{
 					title: "AJ20 Project 2: Comparator-Driven Priority Scheduler",
 					content:
-						"Create a scheduler that can order tasks by deadline, importance, duration, or a custom comparator. Students should compare `PriorityQueue`, sorted lists, and maps before choosing the main representation.",
+						"Create a scheduler that can order tasks by deadline, importance, duration, or a custom comparator. Compare `PriorityQueue`, sorted lists, and maps before choosing the main representation.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ20-Comparator-Priority-Scheduler"
 				}
@@ -1705,7 +1704,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ21 Project 1: Log Analyzer Pipeline",
 					content:
-						"Read a text log, parse valid rows, collect invalid rows, group events by type, compute summary statistics, and print a stable report. Students should implement the first version with loops and then refactor part of it to streams.",
+						"Read a text log, parse valid rows, collect invalid rows, group events by type, compute summary statistics, and print a stable report. Implement the first version with loops and then refactor part of it to streams.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ21-Log-Analyzer-Pipeline"
 				},
@@ -1721,7 +1720,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ21 Project 3: Report Builder Refactor",
 					content:
-						"Take a messy report generator and refactor it into parsing, aggregation, formatting, and output stages. Students should be able to swap one stage without rewriting the whole pipeline.",
+						"Take a messy report generator and refactor it into parsing, aggregation, formatting, and output stages. Skill target: Swap one stage without rewriting the whole pipeline.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ21-Report-Builder-Refactor"
 				}
@@ -1738,12 +1737,12 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Capstone Architecture and Java-Specific Readiness",
 					content:
-						"Close the advanced Java track by requiring architecture decisions: packages, service boundaries, interfaces, data models, test harnesses, error handling, and one concurrency or event-processing component. Students should be ready afterward for serious Java design-pattern work, larger data-structure projects, or a service/application course."
+						"Close the advanced Java track by requiring architecture decisions: packages, service boundaries, interfaces, data models, test harnesses, error handling, and one concurrency or event-processing component. Be ready afterward for serious Java design-pattern work, larger data-structure projects, or a service/application course."
 				},
 				{
 					title: "AJ22 Project 1: Concurrent Task Runner",
 					content:
-						"Build a task runner that accepts jobs, executes them with a small executor pool, records success or failure, and prints a final report in deterministic order. Students should explain which data is shared and how they kept it safe.",
+						"Build a task runner that accepts jobs, executes them with a small executor pool, records success or failure, and prints a final report in deterministic order. Explain which data is shared and how they kept it safe.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ22-Concurrent-Task-Runner"
 				},

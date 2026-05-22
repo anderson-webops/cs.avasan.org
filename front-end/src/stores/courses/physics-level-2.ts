@@ -24,17 +24,17 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Motion Graph Detective 2D",
 					content:
-						"Extend the motion-graph strand by combining graph interpretation with vector reasoning. Have students compare horizontal and vertical component graphs, estimate turning points, and decide when acceleration changes only one part of the motion. Require them to justify each conclusion with slope, area, or vector language."
+						"Extend the motion-graph strand by combining graph interpretation with vector reasoning. Compare horizontal and vertical component graphs, estimate turning points, and decide when acceleration changes only one part of the motion. Require them to justify each conclusion with slope, area, or vector language."
 				},
 				{
 					title: "Mini Lab or Simulation: Ballistics Model Comparison",
 					content:
-						"Compare a projectile prediction from equations with data from video, a simulator, or a spreadsheet model. Students should decide which assumptions are reasonable, where drag starts to matter, and why a model can still be useful when it is not perfect."
+						"Compare a projectile prediction from equations with data from video, a simulator, or a spreadsheet model. Decide which assumptions are reasonable, where drag starts to matter, and why a model can still be useful when it is not perfect."
 				},
 				{
 					title: "Reflection Question: When Do Components Clarify a Problem?",
 					content:
-						"Ask students to explain one motion problem that looked complex until it was decomposed into perpendicular components. They should identify exactly which quantity became easier to reason about after the coordinate system was chosen."
+						"Explain one motion problem that looked complex until it was decomposed into perpendicular components. They should identify exactly which quantity became easier to reason about after the coordinate system was chosen."
 				}
 			],
 			supplementalProjects: [
@@ -51,7 +51,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Rescue Drone Navigation",
 					content:
-						"Plan a drone route that must compensate for wind or current. Use components, displacement vectors, and a short written explanation to compare intended motion with actual motion. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Plan a drone route that must compensate for wind or current. Use components, displacement vectors, and a short written explanation to compare intended motion with actual motion."
 				}
 			]
 		},
@@ -76,12 +76,12 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Mini Lab or Simulation: Elevator and Scale Force Study",
 					content:
-						"Model an elevator or amusement-ride scenario and compare actual weight with apparent weight. Students should predict when the scale reading exceeds, matches, or falls below true weight and justify each case with a net-force argument."
+						"Model an elevator or amusement-ride scenario and compare actual weight with apparent weight. Predict when the scale reading exceeds, matches, or falls below true weight and justify each case with a net-force argument."
 				},
 				{
 					title: "Reflection Question: What Does Equilibrium Really Mean?",
 					content:
-						"Ask students to explain why equilibrium is not the same thing as 'nothing is happening.' They should distinguish between static equilibrium and constant-velocity motion with zero net force."
+						"Explain why equilibrium is not the same thing as 'nothing is happening.' They should distinguish between static equilibrium and constant-velocity motion with zero net force."
 				}
 			],
 			supplementalProjects: [
@@ -93,7 +93,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often mix up the force pair in Newton's third law with the set of forces on one object. They also commonly assume a larger scale reading means the object's mass changed. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Students often mix up the force pair in Newton's third law with the set of forces on one object. They also commonly assume a larger scale reading means the object's mass changed."
 				},
 				{
 					title: "Extension Project: Tug-of-War System Audit",
@@ -123,12 +123,12 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Mini Lab or Simulation: Pulley or Incline Force Analyzer",
 					content:
-						"Build or simulate a pulley or incline system and compare the predicted acceleration with observed motion. Students should keep a force summary, a diagram, and a short note about how friction or mass mismatch changes the result."
+						"Build or simulate a pulley or incline system and compare the predicted acceleration with observed motion. Keep a force summary, a diagram, and a short note about how friction or mass mismatch changes the result."
 				},
 				{
 					title: "Reflection Question: Which Assumption Matters Most Here?",
 					content:
-						"Ask students to identify the single assumption that most strongly shapes the answer in an incline or pulley problem. Examples include neglecting pulley mass, assuming constant friction, or choosing the positive direction poorly."
+						"Identify the single assumption that most strongly shapes the answer in an incline or pulley problem. Examples include neglecting pulley mass, assuming constant friction, or choosing the positive direction poorly."
 				}
 			],
 			supplementalProjects: [
@@ -170,12 +170,12 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Mini Lab or Simulation: Collision Lab with Momentum Ledger",
 					content:
-						"Run a cart, marble, or digital collision investigation and keep a momentum accounting table. Students should record predictions, classify the collision type, and explain why momentum and kinetic energy do not always behave the same way."
+						"Run a cart, marble, or digital collision investigation and keep a momentum accounting table. Record predictions, classify the collision type, and explain why momentum and kinetic energy do not always behave the same way."
 				},
 				{
 					title: "Reflection Question: Why Is System Choice So Important?",
 					content:
-						"Ask students to explain how the same event looks different when the chosen system changes. They should use the words momentum, external force, and impulse correctly in the response. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain how the same event looks different when the chosen system changes. They should use the words momentum, external force, and impulse correctly in the response."
 				}
 			],
 			supplementalProjects: [
@@ -192,7 +192,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Safety System Design Review",
 					content:
-						"Compare helmets, airbags, or crumple zones through the impulse idea. Require students to explain how changing impact time can reduce force without claiming momentum disappears. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Compare helmets, airbags, or crumple zones through the impulse idea. Require students to explain how changing impact time can reduce force without claiming momentum disappears."
 				}
 			]
 		},
@@ -217,12 +217,12 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Mini Lab or Simulation: Balance and Door-Handle Investigation",
 					content:
-						"Use a meter stick balance, weighted ruler, or door-handle test to compare rotational effectiveness at different distances from the pivot. Students should connect physical effort to torque rather than claiming one side is simply 'heavier' in every case."
+						"Use a meter stick balance, weighted ruler, or door-handle test to compare rotational effectiveness at different distances from the pivot. Connect physical effort to torque rather than claiming one side is simply 'heavier' in every case."
 				},
 				{
 					title: "Reflection Question: How Is Rotation Like Translation, and How Is It Different?",
 					content:
-						"Ask students to map force to torque, mass to rotational inertia qualitatively, and linear acceleration to angular acceleration. The goal is not perfect formalism but deeper structural comparison."
+						"Map force to torque, mass to rotational inertia qualitatively, and linear acceleration to angular acceleration. The goal is not perfect formalism but deeper structural comparison."
 				}
 			],
 			supplementalProjects: [
@@ -239,7 +239,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Torque Design Challenge",
 					content:
-						"Design a lifting or balancing tool using lever-arm reasoning. Explain where the pivot should go, where the effort force should be applied, and what tradeoffs the design introduces. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Design a lifting or balancing tool using lever-arm reasoning. Explain where the pivot should go, where the effort force should be applied, and what tradeoffs the design introduces."
 				}
 			]
 		},
@@ -264,12 +264,12 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Mini Lab or Simulation: Simple Orbit Simulator in Python or Spreadsheet",
 					content:
-						"Build a basic orbit model with a spreadsheet, Desmos, or simple Python code that updates position and velocity qualitatively. Students should compare a low-orbit and high-orbit case and explain what changes in period, speed, and curvature."
+						"Build a basic orbit model with a spreadsheet, Desmos, or simple Python code that updates position and velocity qualitatively. Compare a low-orbit and high-orbit case and explain what changes in period, speed, and curvature."
 				},
 				{
 					title: "Reflection Question: Why Doesn't an Orbiting Object 'Run Out of Gravity'?",
 					content:
-						"Ask students to explain why astronauts feel weightless in orbit even though gravity is still present. They should connect free fall, orbital motion, and continuous inward acceleration in one coherent explanation."
+						"Explain why astronauts feel weightless in orbit even though gravity is still present. They should connect free fall, orbital motion, and continuous inward acceleration in one coherent explanation."
 				}
 			],
 			supplementalProjects: [
@@ -306,17 +306,17 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Graph and Data Exercise: I-V Curves and Circuit Tables",
 					content:
-						"Collect or interpret current-voltage data for resistive elements and compare linear versus non-linear behavior qualitatively. Ask students to build a clean circuit table listing current, potential difference, and resistance for each branch or component in a mixed circuit."
+						"Collect or interpret current-voltage data for resistive elements and compare linear versus non-linear behavior qualitatively. Build a clean circuit table listing current, potential difference, and resistance for each branch or component in a mixed circuit."
 				},
 				{
 					title: "Mini Lab or Simulation: Series-Parallel Circuit Build",
 					content:
-						"Build or simulate a series-parallel circuit and compare predictions with measured or observed results. Students should keep a circuit diagram, note where potential drops occur, and explain how current splits or recombines at junctions."
+						"Build or simulate a series-parallel circuit and compare predictions with measured or observed results. Keep a circuit diagram, note where potential drops occur, and explain how current splits or recombines at junctions."
 				},
 				{
 					title: "Reflection Question: What Does Voltage Explain Better Than Current Alone?",
 					content:
-						"Ask students to explain one circuit behavior that becomes clearer once potential difference is considered explicitly. They should avoid the shortcut claim that voltage is just 'electricity strength.'"
+						"Explain one circuit behavior that becomes clearer once potential difference is considered explicitly. They should avoid the shortcut claim that voltage is just 'electricity strength.'"
 				}
 			],
 			supplementalProjects: [
@@ -333,7 +333,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Circuit Design Audit",
 					content:
-						"Design a circuit that achieves a target brightness or resistance pattern, then justify the design in schematic and verbal form. Include at least one branch and one design tradeoff. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Design a circuit that achieves a target brightness or resistance pattern, then justify the design in schematic and verbal form. Include at least one branch and one design tradeoff."
 				}
 			]
 		},
@@ -353,17 +353,17 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Heating Curves and Image Trends",
 					content:
-						"Interpret a heating curve to identify temperature changes versus phase-change plateaus, then compare that skill to reading an optics graph or image-distance table. Ask students to describe what the graph means physically, not just to label segments."
+						"Interpret a heating curve to identify temperature changes versus phase-change plateaus, then compare that skill to reading an optics graph or image-distance table. Describe what the graph means physically, not just to label segments."
 				},
 				{
 					title: "Mini Lab or Simulation: Insulation Test or Lens Investigation",
 					content:
-						"Run a small thermal or optics investigation, such as comparing insulation materials, tracing heat loss, or exploring image formation with simple lenses or mirrors. Students should define what counts as evidence and note where the simplified classroom model begins to break down."
+						"Run a small thermal or optics investigation, such as comparing insulation materials, tracing heat loss, or exploring image formation with simple lenses or mirrors. Define what counts as evidence and note where the simplified classroom model begins to break down."
 				},
 				{
 					title: "Reflection Question: When Does a Model Need to Change?",
 					content:
-						"Ask students to describe one topic in the course where an earlier simple model was helpful and one place where a more refined model was needed later. This helps bridge introductory and modern viewpoints without losing coherence."
+						"Describe one topic in the course where an earlier simple model was helpful and one place where a more refined model was needed later. This helps bridge introductory and modern viewpoints without losing coherence."
 				}
 			],
 			supplementalProjects: [
@@ -400,7 +400,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Prediction Versus Observation",
 					content:
-						"Compare an experimental or simulated dataset to a model prediction and ask students to separate random error, systematic error, and model breakdown. Require a graph that makes the comparison visible rather than hiding it inside paragraphs."
+						"Compare an experimental or simulated dataset to a model prediction and Separate random error, systematic error, and model breakdown. Require a graph that makes the comparison visible rather than hiding it inside paragraphs."
 				},
 				{
 					title: "Mini Lab or Simulation: Engineering Modeling Challenge",
@@ -410,7 +410,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Reflection Question: What Makes a Physics Answer Convincing?",
 					content:
-						"Ask students to explain how diagrams, equations, graphs, and plain-language reasoning support one another in a strong final explanation. They should describe one weakness in their own model and one improvement they would prioritize next."
+						"Explain how diagrams, equations, graphs, and plain-language reasoning support one another in a strong final explanation. They should describe one weakness in their own model and one improvement they would prioritize next."
 				}
 			],
 			supplementalProjects: [
@@ -432,338 +432,338 @@ export const physicsLevel2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 10: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 10: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 10: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 10: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 10: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 10: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 10: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 10: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 10: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 11: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 11: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 11: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 11: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 11: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 11: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 11: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 11: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 12: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 12: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 12: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 12: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 12: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 12: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 12: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 12: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 13: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 13: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 13: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 13: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 13: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 13: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 13: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 13: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 14: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 14: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 14: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 14: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 15: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 15: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 15: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 15: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 16: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 16: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 16: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 16: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 17: physics problem lab",
+			title: "physics problem lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "physics problem lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: physics problem lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"physics problem lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "physics problem lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: physics problem lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative physics problem lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "physics problem lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: physics problem lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"physics problem lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics problem lab: Review and Reflection",
 					content:
-						"Close Applied Studio 17: physics problem lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"physics problem lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics problem lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: physics problem lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from physics problem lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics problem lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: physics problem lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by physics problem lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 17: physics problem lab: Open-Ended Variant",
+					title: "physics problem lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 17: physics problem lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by physics problem lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		}

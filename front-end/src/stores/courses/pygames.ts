@@ -24,12 +24,11 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "From One File to Organized Games",
 					content:
-						"Frame the course as a progression from tiny one-file experiments into larger games with cleaner helper functions, clear state variables, and reusable subsystems. Students should know from the beginning that code organization matters as projects grow."
+						"Frame the course as a progression from tiny one-file experiments into larger games with cleaner helper functions, clear state variables, and reusable subsystems. Key idea: From the beginning that code organization matters as projects grow."
 				},
 				{
 					title: "PyG0 Setup, Editors, and Asset Workflow: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/music"
 				}
@@ -38,14 +37,14 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG0 Setup, Editors, and Asset Workflow: Extension Challenge",
 					content:
-						"Extend the work from PyG0 Setup, Editors, and Asset Workflow with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG0 Setup, Editors, and Asset Workflow with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/music"
 				},
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG0 Setup, Editors, and Asset Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplemental-2/starter",
 					solutionLink:
@@ -54,7 +53,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG0 Setup, Editors, and Asset Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG0 Setup, Editors, and Asset Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplemental-3/starter",
 					solutionLink:
@@ -123,7 +122,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Actors: Extension Challenge",
 					content:
-						"Extend the work from PyG1 Object-Oriented Programming: Actors with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG1 Object-Oriented Programming: Actors with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -132,7 +131,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Actors supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG1 Object-Oriented Programming: Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-supplemental-2/starter",
 					solutionLink:
@@ -141,7 +140,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Actors supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG1 Object-Oriented Programming: Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG1 Object-Oriented Programming: Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-supplemental-3/starter",
 					solutionLink:
@@ -200,7 +199,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Event Handling: Extension Challenge",
 					content:
-						"Extend the work from PyG2 Event Handling with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG2 Event Handling with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -209,7 +208,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Event Handling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG2 Event Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG2 Event Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-05-pyg2-event-handling-supplemental-2/starter",
 					solutionLink:
@@ -218,7 +217,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Event Handling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG2 Event Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG2 Event Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-06-pyg2-event-handling-supplemental-3/starter",
 					solutionLink:
@@ -287,7 +286,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Advanced Actors supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG3 Object-Oriented Programming: Advanced Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG3 Object-Oriented Programming: Advanced Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-07-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
@@ -296,7 +295,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Advanced Actors supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG3 Object-Oriented Programming: Advanced Actors. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG3 Object-Oriented Programming: Advanced Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-08-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
@@ -350,7 +349,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Collectibles: Extension Challenge",
 					content:
-						"Extend the work from PyG4 Managing Multiple Objects: Collectibles with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG4 Managing Multiple Objects: Collectibles with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -359,7 +358,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG4 Managing Multiple Objects: Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supplemental-2/starter",
 					solutionLink:
@@ -368,7 +367,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG4 Managing Multiple Objects: Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG4 Managing Multiple Objects: Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supplemental-3/starter",
 					solutionLink:
@@ -413,7 +412,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles: Extension Challenge",
 					content:
-						"Extend the work from Check-In #1: Actors, Events, ZRects, Collectibles with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #1: Actors, Events, ZRects, Collectibles with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -422,7 +421,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1: Actors, Events, ZRects, Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-supplemental-2/starter",
 					solutionLink:
@@ -431,7 +430,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1: Actors, Events, ZRects, Collectibles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1: Actors, Events, ZRects, Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-supplemental-3/starter",
 					solutionLink:
@@ -490,7 +489,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Physics: Extension Challenge",
 					content:
-						"Extend the work from PyG5 Physics with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG5 Physics with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -499,7 +498,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Physics supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG5 Physics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG5 Physics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-13-pyg5-physics-supplemental-2/starter",
 					solutionLink:
@@ -508,7 +507,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Physics supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG5 Physics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG5 Physics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-14-pyg5-physics-supplemental-3/starter",
 					solutionLink:
@@ -572,7 +571,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces: Extension Challenge",
 					content:
-						"Extend the work from PyG6 Managing Multiple Objects: Obstacles and Surfaces with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG6 Managing Multiple Objects: Obstacles and Surfaces with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -581,7 +580,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG6 Managing Multiple Objects: Obstacles and Surfaces. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-2/starter",
 					solutionLink:
@@ -590,7 +589,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG6 Managing Multiple Objects: Obstacles and Surfaces. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG6 Managing Multiple Objects: Obstacles and Surfaces. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-3/starter",
 					solutionLink:
@@ -635,7 +634,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #2: Gravity, Friction, Platforms: Extension Challenge",
 					content:
-						"Extend the work from Check-In #2: Gravity, Friction, Platforms with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #2: Gravity, Friction, Platforms with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -644,7 +643,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2: Gravity, Friction, Platforms. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplemental-2/starter",
 					solutionLink:
@@ -653,7 +652,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2: Gravity, Friction, Platforms. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2: Gravity, Friction, Platforms. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplemental-3/starter",
 					solutionLink:
@@ -720,7 +719,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Levels and System Control: Extension Challenge",
 					content:
-						"Extend the work from PyG7 Levels and System Control with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG7 Levels and System Control with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -729,7 +728,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Levels and System Control supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG7 Levels and System Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG7 Levels and System Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-19-pyg7-levels-and-system-control-supplemental-2/starter",
 					solutionLink:
@@ -738,7 +737,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Levels and System Control supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG7 Levels and System Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG7 Levels and System Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-20-pyg7-levels-and-system-control-supplemental-3/starter",
 					solutionLink:
@@ -786,7 +785,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Projectiles: Extension Challenge",
 					content:
-						"Extend the work from PyG8 Game Elements: Projectiles with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG8 Game Elements: Projectiles with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -795,7 +794,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Projectiles supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG8 Game Elements: Projectiles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG8 Game Elements: Projectiles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-21-pyg8-game-elements-projectiles-supplemental-2/starter",
 					solutionLink:
@@ -804,7 +803,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Projectiles supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG8 Game Elements: Projectiles. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG8 Game Elements: Projectiles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-22-pyg8-game-elements-projectiles-supplemental-3/starter",
 					solutionLink:
@@ -840,19 +839,19 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Enemy AI: Planning and Architecture",
 					content:
-						"Break PyG9 Game Elements: Enemy AI into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break PyG9 Game Elements: Enemy AI into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Game Elements: Enemy AI: Verification and Reflection",
 					content:
-						"Close PyG9 Game Elements: Enemy AI by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close PyG9 Game Elements: Enemy AI by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Game Elements: Enemy AI: Extension Challenge",
 					content:
-						"Extend the work from PyG9 Game Elements: Enemy AI with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG9 Game Elements: Enemy AI with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -861,7 +860,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Enemy AI supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG9 Game Elements: Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG9 Game Elements: Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-23-pyg9-game-elements-enemy-ai-supplemental-2/starter",
 					solutionLink:
@@ -870,7 +869,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Enemy AI supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG9 Game Elements: Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG9 Game Elements: Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-24-pyg9-game-elements-enemy-ai-supplemental-3/starter",
 					solutionLink:
@@ -910,7 +909,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI: Extension Challenge",
 					content:
-						"Extend the work from Check-In #3: System Control, Projectiles, Enemy AI with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #3: System Control, Projectiles, Enemy AI with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -919,7 +918,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #3: System Control, Projectiles, Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-supplemental-2/starter",
 					solutionLink:
@@ -928,7 +927,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #3: System Control, Projectiles, Enemy AI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #3: System Control, Projectiles, Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-supplemental-3/starter",
 					solutionLink:
@@ -953,24 +952,24 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Ninja Versus Alien: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes students are most likely to make in PyG10 Ninja Versus Alien. Have them diagnose a broken attempt, repair it, and explain why the fix works. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Focus on the mistakes common mistakes appear in PyG10 Ninja Versus Alien. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Ninja Versus Alien: Planning and Architecture",
 					content:
-						"Break PyG10 Ninja Versus Alien into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break PyG10 Ninja Versus Alien into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Ninja Versus Alien: Verification and Reflection",
 					content:
-						"Close PyG10 Ninja Versus Alien by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close PyG10 Ninja Versus Alien by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Ninja Versus Alien: Extension Challenge",
 					content:
-						"Extend the work from PyG10 Ninja Versus Alien with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG10 Ninja Versus Alien with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -979,7 +978,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Ninja Versus Alien supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG10 Ninja Versus Alien. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG10 Ninja Versus Alien. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-27-pyg10-ninja-versus-alien-supplemental-2/starter",
 					solutionLink:
@@ -988,7 +987,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Ninja Versus Alien supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG10 Ninja Versus Alien. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG10 Ninja Versus Alien. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-28-pyg10-ninja-versus-alien-supplemental-3/starter",
 					solutionLink:
@@ -1013,24 +1012,24 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Space Invaders: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes students are most likely to make in PyG11 Space Invaders. Have them diagnose a broken attempt, repair it, and explain why the fix works. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Focus on the mistakes common mistakes appear in PyG11 Space Invaders. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Space Invaders: Planning and Architecture",
 					content:
-						"Break PyG11 Space Invaders into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break PyG11 Space Invaders into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Space Invaders: Verification and Reflection",
 					content:
-						"Close PyG11 Space Invaders by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close PyG11 Space Invaders by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Space Invaders: Extension Challenge",
 					content:
-						"Extend the work from PyG11 Space Invaders with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from PyG11 Space Invaders with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -1039,7 +1038,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Space Invaders supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG11 Space Invaders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG11 Space Invaders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-29-pyg11-space-invaders-supplemental-2/starter",
 					solutionLink:
@@ -1048,7 +1047,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Space Invaders supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG11 Space Invaders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG11 Space Invaders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-30-pyg11-space-invaders-supplemental-3/starter",
 					solutionLink:
@@ -1087,12 +1086,11 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Bridge to Larger Python Projects",
 					content:
-						"Make the transition explicit from game-specific code to broader Python engineering. Students should leave knowing how to break a large project into helpers, how to move from one-file scripts toward more organized structures, and why the PyGames course is a stepping stone rather than a side branch."
+						"Make the transition explicit from game-specific code to broader Python engineering. Leave knowing how to break a large project into helpers, how to move from one-file scripts toward more organized structures, and why the PyGames course is a stepping stone rather than a side branch."
 				},
 				{
 					title: "PyG12 Master Project: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/sounds"
 				}
@@ -1101,14 +1099,14 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG12 Master Project: Extension Challenge",
 					content:
-						"Extend the work from PyG12 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the work from PyG12 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/sounds"
 				},
 				{
 					title: "Master Project supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG12 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG12 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-31-pyg12-master-project-supplemental-2/starter",
 					solutionLink:
@@ -1117,7 +1115,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Master Project supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PyG12 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PyG12 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-32-pyg12-master-project-supplemental-3/starter",
 					solutionLink:
@@ -1126,52 +1124,52 @@ export const pyGamesCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: images",
+			title: "images: Implementation Studio",
 			curriculum: [
 				{
 					title: "images: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: images, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"images: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "images: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: images, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative images example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "images: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: images. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"images: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/images"
 				},
 				{
 					title: "images: Review and Reflection",
 					content:
-						"Close Applied Studio 17: images by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"images: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "images: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: images with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from images: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/images"
 				},
 				{
-					title: "Applied Studio 17: images supplemental 2",
+					title: "images supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: images. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to images: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: images supplemental 3",
+					title: "images supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: images. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to images: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-34-applied-studio-17-images-supplemental-3/starter",
 					solutionLink:

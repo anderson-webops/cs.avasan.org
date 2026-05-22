@@ -253,7 +253,7 @@ Quadratic transformations are predictable:
 - Flip \`y = 2x^2 + 3\` across the x-axis and then shift up \`3\` -> \`y = -2x^2\`
 - Scale \`y = 2x^2 + 3\` by \`3\`, shift left \`4\`, shift up \`2\` -> \`y = 6(x + 4)^2 + 11\`
 
-Several original prompts in the recovered source relied on missing color-coded images. The generated comparison graph below replaces those visuals with a clean reusable reference.
+The generated comparison graph below provides a clean reusable reference for transformation questions that depend on visual comparison.
 				`.trim(),
 				media.quadraticTransforms
 			),
@@ -284,15 +284,15 @@ If the directrix is \`y = 1\` and the focus is \`(2, 3)\`, then the parabola is
 				`.trim()
 			),
 			createLesson(
-				"Missing Original Graph Prompts",
+				"Graph Prompt Reference",
 				`
-The recovered source referenced several graph-only prompts whose original screenshots were not present:
+Use a graphing tool or the placeholder image below for graph-only prompts such as:
 
 - color-match parabola comparison questions
 - a few transformation sketches with no surviving coordinates
 - at least one directrix-focus reference image
 
-Use the placeholder below anywhere those original source images are still unavailable.
+The written response should identify the transformation, asymptote, intercept, or focus/directrix relationship being tested.
 				`.trim(),
 				media.missingImage
 			)
@@ -462,7 +462,7 @@ Polynomial graphs are controlled mainly by degree, leading coefficient, and zero
 			createLesson(
 				"Feature-Based Graphing",
 				`
-Sometimes the recovered source gives graph features instead of a full equation. That still tells you a lot.
+Sometimes a prompt gives graph features instead of a full equation. Those features still determine much of the graph.
 
 **Example sketch prompt**
 
@@ -572,11 +572,11 @@ which gives \`x = 7\`.
 				media.rationalFunctions
 			),
 			createLesson(
-				"Missing Original Rational Graphs",
+				"Rational Graph References",
 				`
-Some recovered rational-function prompts depended on screenshots that were not preserved, including a few graph-reading exercises with asymptotes, holes, and range questions.
+Some rational-function prompts work best with graph references, including graph-reading exercises with asymptotes, holes, and range questions.
 
-Use the generated rational-function gallery when a clean replacement is enough, and fall back to the placeholder below when the original graph cannot be reconstructed from the text alone.
+Use the generated rational-function gallery when a clean reference is enough, and use the linked reference visual when the exact graph must be supplied separately.
 				`.trim(),
 				media.missingImage
 			)
@@ -749,10 +749,10 @@ continuity at \`x = 3\` requires \`2c + 9 = 6c + 1\`, so \`c = 2\`.
 				`
 This check-in closes the course by revisiting rational functions, rational operations, radical equations, and piecewise models.
 
-**Instructor stance**
+**Review stance**
 
-- let the student try the question independently first
-- guide before reteaching
+- Try the question independently first
+- use hints before full reteaching is needed
 - use the results to decide whether to spiral back or move on
 				`.trim()
 			),
@@ -775,20 +775,20 @@ This check-in closes the course by revisiting rational functions, rational opera
   - \`C(x) = 2.75x\` for \`x >= 5\`
   - \`22\` dollars means \`8\` bags
 
-Reuse the generated rational, radical, and piecewise visuals for the review whenever the original graph in the recovered source was missing or corrupted.
+Reuse the generated rational, radical, and piecewise visuals for any review item that needs a graph reference.
 				`.trim(),
 				media.rationalFunctions
 			),
 			createLesson(
-				"Missing Check-In Visuals",
+				"Check-In Visual References",
 				`
-Several surviving check-in prompts still refer to screenshots that do not exist in the recovered source package:
+Use a graphing tool or the placeholder image below for visual prompts such as:
 
 - one rational-function graph with multiple asymptotes and a hole
 - at least one piecewise graph-definition prompt
 - one floor-function transformation sketch
 
-Use the placeholder below whenever those original references are still unavailable.
+The important part is the explanation: name the graph feature and connect it to the equation or transformation.
 				`.trim(),
 				media.missingImage
 			)

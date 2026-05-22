@@ -9,7 +9,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Scratch basics",
 					content:
-						"Create a Scratch account and explore the code blocks. Learn how the stage and sprites work, and experiment with the green flag to start scripts. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a Scratch account and explore the code blocks. Learn how the stage and sprites work, and experiment with the green flag to start scripts."
 				},
 				{
 					title: "Project 1 – Hungry Hippo",
@@ -21,31 +21,31 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Starting in Scratch: Planning and Architecture",
 					content:
-						"Break GS1 Starting in Scratch into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break GS1 Starting in Scratch into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Starting in Scratch: Verification and Reflection",
 					content:
-						"Close GS1 Starting in Scratch by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close GS1 Starting in Scratch by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Starting in Scratch: Extension Challenge",
 					content:
-						"Extend the work from GS1 Starting in Scratch with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from GS1 Starting in Scratch with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink: "https://scratch.mit.edu/projects/304003593/",
 					solutionLink: "https://scratch.mit.edu/projects/313184786/"
 				},
 				{
 					title: "Starting in Scratch: Fluency Drill",
 					content:
-						"Repeat the core ideas from GS1 Starting in Scratch on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Repeat the core ideas from GS1 Starting in Scratch on a smaller problem to build speed, independence, and cleaner reasoning."
 				},
 				{
 					title: "Starting in Scratch: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS1 Starting in Scratch. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS1 Starting in Scratch. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -83,19 +83,19 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Event Listeners: Extension Challenge",
 					content:
-						"Extend the work from GS2 Event Listeners with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from GS2 Event Listeners with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink: "https://scratch.mit.edu/projects/287920173/",
 					solutionLink: "https://scratch.mit.edu/projects/287887351/"
 				},
 				{
 					title: "Event Listeners: Fluency Drill",
 					content:
-						"Repeat the core ideas from GS2 Event Listeners on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Repeat the core ideas from GS2 Event Listeners on a smaller problem to build speed, independence, and cleaner reasoning."
 				},
 				{
 					title: "Event Listeners: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS2 Event Listeners. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS2 Event Listeners. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -133,19 +133,19 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Pen with Event Listeners: Extension Challenge",
 					content:
-						"Extend the work from GS3 Pen with Event Listeners with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from GS3 Pen with Event Listeners with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink: "https://scratch.mit.edu/projects/313084455/",
 					solutionLink: "https://scratch.mit.edu/projects/287952358/"
 				},
 				{
 					title: "Pen with Event Listeners: Fluency Drill",
 					content:
-						"Repeat the core ideas from GS3 Pen with Event Listeners on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Repeat the core ideas from GS3 Pen with Event Listeners on a smaller problem to build speed, independence, and cleaner reasoning."
 				},
 				{
 					title: "Pen with Event Listeners: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS3 Pen with Event Listeners. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS3 Pen with Event Listeners. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -190,12 +190,12 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Loops: Fluency Drill",
 					content:
-						"Repeat the core ideas from GS4 Loops on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Repeat the core ideas from GS4 Loops on a smaller problem to build speed, independence, and cleaner reasoning."
 				},
 				{
 					title: "Loops: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS4 Loops. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS4 Loops. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -247,7 +247,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Basic Conditionals: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS5 Basic Conditionals. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS5 Basic Conditionals. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -278,7 +278,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Advanced Conditionals: Verification and Reflection",
 					content:
-						"Close GS6 Advanced Conditionals by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close GS6 Advanced Conditionals by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
@@ -299,7 +299,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Advanced Conditionals: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS6 Advanced Conditionals. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS6 Advanced Conditionals. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -351,7 +351,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "User Input: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS7 User Input. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS7 User Input. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -403,7 +403,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "X & Y Coordinates: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS8 X & Y Coordinates. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS8 X & Y Coordinates. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -432,7 +432,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Variables: Verification and Reflection",
 					content:
-						"Close GS9 Variables by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close GS9 Variables by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
@@ -484,7 +484,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Message Broadcasting: Verification and Reflection",
 					content:
-						"Close GS10 Message Broadcasting by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close GS10 Message Broadcasting by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
@@ -505,7 +505,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Message Broadcasting: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS10 Message Broadcasting. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS10 Message Broadcasting. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -522,17 +522,17 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Hedgehog Race: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes students are most likely to make in GS11 Hedgehog Race. Have them diagnose a broken attempt, repair it, and explain why the fix works. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Focus on the mistakes common mistakes appear in GS11 Hedgehog Race. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Hedgehog Race: Planning and Architecture",
 					content:
-						"Break GS11 Hedgehog Race into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break GS11 Hedgehog Race into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Hedgehog Race: Verification and Reflection",
 					content:
-						"Close GS11 Hedgehog Race by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close GS11 Hedgehog Race by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
@@ -546,12 +546,12 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Hedgehog Race: Fluency Drill",
 					content:
-						"Repeat the core ideas from GS11 Hedgehog Race on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Repeat the core ideas from GS11 Hedgehog Race on a smaller problem to build speed, independence, and cleaner reasoning."
 				},
 				{
 					title: "Hedgehog Race: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS11 Hedgehog Race. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS11 Hedgehog Race. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -568,36 +568,36 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Asteroid Dodge: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes students are most likely to make in GS12 Asteroid Dodge. Have them diagnose a broken attempt, repair it, and explain why the fix works. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Focus on the mistakes common mistakes appear in GS12 Asteroid Dodge. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Asteroid Dodge: Planning and Architecture",
 					content:
-						"Break GS12 Asteroid Dodge into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break GS12 Asteroid Dodge into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Asteroid Dodge: Verification and Reflection",
 					content:
-						"Close GS12 Asteroid Dodge by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close GS12 Asteroid Dodge by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Asteroid Dodge: Extension Challenge",
 					content:
-						"Extend the work from GS12 Asteroid Dodge with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from GS12 Asteroid Dodge with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink: "https://scratch.mit.edu/projects/303001451/",
 					solutionLink: "https://scratch.mit.edu/projects/302948550/"
 				},
 				{
 					title: "Asteroid Dodge: Fluency Drill",
 					content:
-						"Repeat the core ideas from GS12 Asteroid Dodge on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Repeat the core ideas from GS12 Asteroid Dodge on a smaller problem to build speed, independence, and cleaner reasoning."
 				},
 				{
 					title: "Asteroid Dodge: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS12 Asteroid Dodge. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by GS12 Asteroid Dodge. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
@@ -629,185 +629,185 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS13 Master Project: Extension Challenge",
 					content:
-						"Extend the work from GS13 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Extend the work from GS13 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case."
 				},
 				{
 					title: "GS13 Master Project: Fluency Drill",
 					content:
-						"Repeat the core ideas from GS13 Master Project on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Repeat the core ideas from GS13 Master Project on a smaller problem to build speed, independence, and cleaner reasoning."
 				},
 				{
 					title: "GS13 Master Project: Open-Ended Variant",
 					content:
-						"Create an original variation inspired by GS13 Master Project. Keep the scope small, but require one meaningful design or reasoning choice. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Create an original variation inspired by GS13 Master Project. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 14: Scratch studio",
+			title: "Scratch studio: Implementation Studio",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: Scratch studio, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: Scratch studio, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: Scratch studio. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Close Applied Studio 14: Scratch studio by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: Scratch studio with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 14: Scratch studio: Open-Ended Variant",
+					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 14: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 15: Scratch studio",
+			title: "Scratch studio: Implementation Studio",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: Scratch studio, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: Scratch studio, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: Scratch studio. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Close Applied Studio 15: Scratch studio by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: Scratch studio with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 15: Scratch studio: Open-Ended Variant",
+					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 15: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 16: Scratch studio",
+			title: "Scratch studio: Implementation Studio",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: Scratch studio, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: Scratch studio, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: Scratch studio. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Close Applied Studio 16: Scratch studio by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: Scratch studio with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 16: Scratch studio: Open-Ended Variant",
+					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 16: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 17: Scratch studio",
+			title: "Scratch studio: Implementation Studio",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: Scratch studio, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: Scratch studio, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: Scratch studio. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Close Applied Studio 17: Scratch studio by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: Scratch studio with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: Scratch studio. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 17: Scratch studio: Open-Ended Variant",
+					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 17: Scratch studio. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		}

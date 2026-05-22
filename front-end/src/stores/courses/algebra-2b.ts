@@ -60,7 +60,7 @@ Logarithms undo exponentials. If \`b^x = a\`, then \`log_b(a) = x\`. The base st
 - \`log_3(1/9) = -2\`
 - \`log_125(5) = 1/3\`
 
-Common logarithms use base \`10\`, and natural logarithms use base \`e\`. The graph-and-table reference below replaces the missing introductory screenshots from the recovered source.
+Common logarithms use base \`10\`, and natural logarithms use base \`e\`. The graph-and-table reference below provides a reusable visual for comparing logarithmic growth.
 				`.trim(),
 				media.logReference
 			),
@@ -344,7 +344,7 @@ Example:
 - If \`A = [[4, 7], [2, 6]]\` and \`B = [[3, 0], [1, 2]]\`, then
   \`A / B = A * B^(-1) = [[1/6, 3.5], [-1/3, 3]]\`
 
-This covers the matrix-inverse and quotient work that survived into the cleaned Check-in #1 set, even though several of the original screenshots were missing.
+This covers the matrix-inverse and quotient work needed for the cleaned Check-in #1 set.
 				`.trim()
 			)
 		]),
@@ -511,11 +511,9 @@ Desmos is an appropriate calculator for the larger tables in this module. Use a 
 				`.trim()
 			),
 			createLesson(
-				"Missing Original Data Screenshots",
+				"Data Visual References",
 				`
-The recovered source referenced several unlabeled scatter plots, slope graphs, and hand-drawn line-of-best-fit sketches that were not preserved.
-
-Use the placeholder below anywhere a prompt still depends on an exact missing screenshot instead of on the cleaned data or the generated regression reference.
+Use the cleaned data, a generated regression graph, or the placeholder image below whenever a prompt needs a scatter plot, slope graph, or line-of-best-fit sketch.
 				`.trim(),
 				media.missingImage
 			)
@@ -593,11 +591,9 @@ In a right triangle, the two acute angles are complementary. That is why \`sin(A
 				`.trim()
 			),
 			createLesson(
-				"Missing Original Triangle Prompts",
+				"Triangle Diagram References",
 				`
-Several of the right-triangle and angle-finding exercises originally depended on diagram-only prompts whose exact side labels were not recoverable from the exported text.
-
-Use the placeholder below whenever a specific diagram is still missing and the cleaned written version is not enough to reconstruct the prompt faithfully.
+Use the cleaned written values or the placeholder image below whenever a right-triangle or angle-finding exercise needs a diagram reference.
 				`.trim(),
 				media.missingImage
 			)

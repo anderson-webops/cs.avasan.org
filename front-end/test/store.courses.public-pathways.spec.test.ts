@@ -48,12 +48,12 @@ describe("public course pathways", () => {
 			expect(pathway.assessmentStyle.length, pathway.id).toBeGreaterThanOrEqual(3);
 			expect(pathway.sourceAndTooling.length, pathway.id).toBeGreaterThanOrEqual(3);
 			expect(pathway.safetyAndAccess.length, pathway.id).toBeGreaterThanOrEqual(3);
-			expect(pathway.expansionBacklog.length, pathway.id).toBeGreaterThanOrEqual(3);
+			expect(pathway.adminExpansionBacklog.length, pathway.id).toBeGreaterThanOrEqual(3);
 		}
 	});
 
 	it("captures the high-priority research constraints that were easy to miss", () => {
-		expect(coursePublicPathways.find(pathway => pathway.id === "scratch-early-cs")?.priority).toBe("urgent");
+		expect(coursePublicPathways.find(pathway => pathway.id === "scratch-early-cs")?.adminPriority).toBe("urgent");
 		expect(pathwayText("scratch-early-cs")).toMatch(/blocks-to-pseudocode|pseudocode/i);
 
 		expect(pathwayText("web-javascript")).toMatch(/async|fetch/i);

@@ -73,32 +73,32 @@ function buildStandardsModule(
 			{
 				title: "Priority and Authoritative Source Map",
 				content: [
-					`**Teaching flow:** Treat this as the anchor for the next ${profile.family} curriculum pass. Priority is **${profile.priority}**, so the tutor should know whether this is a must-fix course-family gap or a scheduled enrichment target before writing new lessons.`,
+					`**Course scope:** This anchors the next ${profile.family} curriculum pass. Priority is **${profile.priority}**, which identifies whether the gap is a must-fix requirement or a scheduled enrichment target.`,
 					`**Authoritative sources to use:**\n${sourceBullets(profile.sources)}`,
-					"**Exit check:** The student-facing course should eventually be traceable to these standards, docs, or tooling references rather than only to inherited project names."
+					"**Completion check:** The visible course is traceable to these standards, docs, or tooling references rather than only to inherited project names."
 				].join("\n\n")
 			},
 			{
 				title: "Core Gap Map",
 				content: [
-					`**Teaching flow:** Use these gaps as the scope-control checklist for ${profile.family}. Before creating a new module, identify which gap it closes and what prerequisite knowledge it assumes.`,
+					`**Course scope:** These gaps form the scope-control checklist for ${profile.family}. Each new module should identify the gap it closes and the prerequisite knowledge it assumes.`,
 					`**Gaps to close:**\n${bullets(profile.gaps)}`,
-					"**Exit check:** A planned lesson is ready only if it closes one of these gaps with a concrete explanation, worked example, practice task, and completion check."
+					"**Completion check:** A planned lesson is ready only if it closes one of these gaps with a concrete explanation, worked example, practice task, and completion check."
 				].join("\n\n")
 			},
 			{
 				title: "Missing and Underdeveloped Topic Backlog",
 				content: [
-					`**Teaching flow:** These topics should be researched or expanded before the course is treated as comprehensive. Keep the list visible during lesson writing so the course does not overbuild easy topics while skipping harder prerequisites.`,
+					`**Course scope:** These topics need research or expansion before the course is treated as comprehensive. The backlog keeps harder prerequisites visible while new material is written.`,
 					`**Topic backlog:**\n${bullets(profile.topics)}`,
-					"**Misconception check:** Ask whether a student could explain how each topic connects to a real project. If not, add a smaller bridge lesson before the major project."
+					"**Common pitfalls:** Each topic should connect to a real project. If the connection is unclear, add a smaller bridge lesson before the major project."
 				].join("\n\n")
 			},
 			{
 				title: "Expansion Boundary and Course Fit",
 				content: [
-					`**Teaching flow:** Use the priority and backlog to decide what belongs in ${profile.family} and what should move to a prerequisite, follow-up, or separate course. This prevents one course from absorbing every interesting adjacent topic.`,
-					"**Exit check:** The tutor should be able to name the course boundary, one topic that must be added soon, and one topic that is intentionally deferred."
+					`**Course scope:** The priority and backlog clarify what belongs in ${profile.family} and what should move to a prerequisite, follow-up, or separate course. This prevents one course from absorbing every interesting adjacent topic.`,
+					"**Completion check:** The course boundary, one near-term addition, and one intentionally deferred topic are explicit."
 				].join("\n\n")
 			}
 		],
@@ -106,15 +106,15 @@ function buildStandardsModule(
 			{
 				title: "Checkpoint: Prerequisite and Standards Map",
 				content: [
-					`**Diagnostic guidance:** Build a one-page map for ${profile.family} that lists prerequisites, target standards or docs, and the first observable skill students should demonstrate.`,
-					`**Completion checks:**\n- The map names at least three prerequisites.\n- Each planned module cites a standard, official document, or deliberate toolchain target.\n- The tutor can explain what evidence would show that a student is ready to move on.`
+					`**Readiness check:** Build a one-page map for ${profile.family} that lists prerequisites, target standards or docs, and the first observable readiness skill.`,
+					`**Completion checks:**\n- The map names at least three prerequisites.\n- Each planned module cites a standard, official document, or deliberate toolchain target.\n- The evidence for readiness is explicit.`
 				].join("\n\n")
 			},
 			{
 				title: "Checkpoint: Sequence Gap Triage",
 				content: [
-					`**Diagnostic guidance:** Review the current course sequence and mark every gap as prerequisite, core lesson, project practice, assessment, enrichment, or optional reference.`,
-					`**Completion checks:**\n- No gap remains as a vague reminder without an owner.\n- Required gaps appear before the project that depends on them.\n- Optional enrichment is labeled so tutors do not accidentally treat it as required pacing.`
+					`**Readiness check:** Review the current course sequence and mark every gap as prerequisite, core lesson, project practice, assessment, enrichment, or optional reference.`,
+					`**Completion checks:**\n- No gap remains as a vague reminder without an owner.\n- Required gaps appear before the project that depends on them.\n- Optional enrichment is labeled separately from required pacing.`
 				].join("\n\n")
 			}
 		]
@@ -130,33 +130,33 @@ function buildSequencingModule(
 			{
 				title: "Suggested Module Additions",
 				content: [
-					`**Teaching flow:** Convert these additions into full modules only after source material, examples, and assessments are selected. The order should follow prerequisite dependency, not just topic popularity.`,
+					`**Course scope:** Convert these additions into full modules only after source material, examples, and assessments are selected. The order should follow prerequisite dependency, not just topic popularity.`,
 					`**Module additions to build:**\n${bullets(profile.moduleAdditions)}`,
-					"**Exit check:** Every future module should state the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension."
+					"**Completion check:** Every future module should state the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension."
 				].join("\n\n")
 			},
 			{
 				title: "Tooling, Materials, and Source Preparation",
 				content: [
-					`**Teaching flow:** Prepare the materials before writing lessons so the tutor is not forced to improvise source code, datasets, simulations, or version choices during class.`,
+					`**Course scope:** Prepare materials before writing lessons so source code, datasets, simulations, and version choices are explicit before class.`,
 					`**Materials to prepare:**\n${bullets(profile.materials)}`,
 					profile.safety
 						? `**Safety or delivery boundary:** ${profile.safety}`
-						: "**Safety or delivery boundary:** Use age-appropriate examples, cite source material, and keep project scope small enough for a tutor-led online lesson."
+						: "**Safety or delivery boundary:** Use age-appropriate examples, cite source material, and keep project scope small enough for an online lesson."
 				].join("\n\n")
 			},
 			{
 				title: "Ready-to-Author Checklist",
 				content: [
-					`**Teaching flow:** Use this checklist before converting the ${profile.family} backlog into lesson text.`,
+					`**Course scope:** Use this checklist before converting the ${profile.family} backlog into lesson text.`,
 					"**Completion checks:**\n- The module has a named prerequisite and observable outcome.\n- The project has required behavior, test cases, and an extension.\n- The assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any toolchain, dataset, simulation, or source-code dependency is linked and version-aware."
 				].join("\n\n")
 			},
 			{
 				title: "Source and Maintenance Notes",
 				content: [
-					`**Teaching flow:** Keep a short maintenance note for ${profile.family} whenever the expansion depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
-					"**Exit check:** The note should say what must be refreshed each term, which links or versions are stable, and which materials should be treated as instructor references instead of student assignments."
+					`**Course scope:** Keep a short maintenance note for ${profile.family} whenever the expansion depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
+					"**Completion check:** The note states what must be refreshed each term, which links or versions are stable, and which materials are internal references rather than assignments."
 				].join("\n\n")
 			}
 		],
@@ -171,7 +171,7 @@ function buildSequencingModule(
 			{
 				title: "Planning Project: Materials Readiness Pass",
 				content: [
-					`**Project goal:** Create a materials checklist for ${profile.family}: source code, starter/solution files, datasets, simulations, diagrams, rubrics, and tool versions.`,
+					`**Project goal:** Create a materials checklist for ${profile.family}: source code, starter/reference files, datasets, simulations, diagrams, rubrics, and tool versions.`,
 					"**Completion checks:**\n- Every required project has a starter state or equivalent handout.\n- Every assessment has a rubric or answer-check method.\n- Any external tool or source is documented with a stable URL."
 				].join("\n\n")
 			}
@@ -193,31 +193,31 @@ function buildProjectModule(
 			{
 				title: "Project Ladder",
 				content: [
-					`**Teaching flow:** Use these project types to create a progression from guided practice to independent capstone work. Every project should name the artifact, required behavior, evidence of correctness, and one extension for fast students.`,
+					`**Course scope:** These project types create a progression from guided practice to independent capstone work. Every project should name the artifact, required behavior, evidence of correctness, and one extension path.`,
 					`**Project ladder:**\n${bullets(profile.projectTypes)}`,
-					"**Exit check:** A project is not complete just because it runs or the answer is found; the student should explain the main design, model, proof, or reasoning choice."
+					"**Completion check:** A project is complete when the main design, model, proof, or reasoning choice is explained, not only when it runs or produces an answer."
 				].join("\n\n")
 			},
 			{
 				title: "Assessment and Checkpoint Model",
 				content: [
-					`**Diagnostic guidance:** Use these checks to decide whether the student understands ${profile.family} concepts well enough to proceed.`,
+					`**Readiness check:** These checks identify whether ${profile.family} concepts are ready for the next module.`,
 					`**Assessment ideas:**\n${bullets(profile.assessments)}`,
-					"**Evidence of proficiency:** The student can transfer the same idea to a new example, explain why the result is valid, and identify one limitation or edge case."
+					"**Evidence of proficiency:** The work demonstrates the ability to transfer the same idea to a new example, explain why the result is valid, and identify one limitation or edge case."
 				].join("\n\n")
 			},
 			{
 				title: "Rubric and Reflection Expectations",
 				content: [
-					"**Teaching flow:** Add a short reflection to every major project. The reflection should name the goal, describe the approach, show evidence, identify a bug or misconception, and propose one next improvement.",
-					"**Completion checks:**\n- The deliverable is visible, runnable, or inspectable.\n- The student has tested or justified a normal case and an edge case.\n- The student can explain the work without reading every line or step from notes."
+					"**Course scope:** Every major project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.",
+					"**Completion checks:**\n- The deliverable is visible, runnable, or inspectable.\n- A normal case and an edge case are tested or justified.\n- The explanation does not depend on reading every line or step from notes."
 				].join("\n\n")
 			},
 			{
 				title: "Capstone Readiness Gate",
 				content: [
-					`**Diagnostic guidance:** Before a student starts a ${profile.family} capstone, verify that the prerequisite modules, project ladder, and assessment model have all been practiced on smaller artifacts.`,
-					"**Evidence of proficiency:** The student can state the capstone goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version."
+					`**Readiness check:** Before a ${profile.family} capstone begins, the prerequisite modules, project ladder, and assessment model should already be practiced on smaller artifacts.`,
+					"**Evidence of proficiency:** The work demonstrates the ability to state the capstone goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version."
 				].join("\n\n")
 			}
 		],
@@ -249,7 +249,7 @@ const scratchProfile: ResearchExpansionProfile = {
 		"Map beginner Scratch projects to events, loops, variables, decomposition, testing, and remixing.",
 		"Add a stronger debugging and iteration thread across both Scratch levels.",
 		"Clarify which tasks are visual-first for younger readers.",
-		"Add a blocks-to-pseudocode bridge so students can explain Scratch projects in language that transfers to Python or JavaScript."
+		"Add a blocks-to-pseudocode bridge so Scratch project explanations use language that transfers to Python or JavaScript."
 	],
 	topics: [
 		"Broadcasts, clones, lists, custom blocks, game state, sprite coordination, and remix etiquette.",
@@ -967,7 +967,7 @@ const middleScienceProfile: ResearchExpansionProfile = {
 		"Simulation and public-data catalog.",
 		"CER and model-critique rubrics."
 	],
-	safety: "No beakers, kits, or required household experiments. Use simulations, data, diagrams, and teacher-provided media."
+	safety: "No beakers, kits, or required household experiments. Use simulations, data, diagrams, and provided media."
 };
 
 const physicsProfile: ResearchExpansionProfile = {

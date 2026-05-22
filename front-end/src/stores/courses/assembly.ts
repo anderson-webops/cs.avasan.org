@@ -9,7 +9,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Preferred IDEs and Core Toolchain",
 					content:
-						"Standardize on `CLion` or `VS Code`, then make the real requirement the toolchain beneath the editor. Students should verify `clang --version`, `lldb --version`, and `cmake --version` before the course depends on disassembly, debugging, or mixed C and assembly builds."
+						"Standardize on `CLion` or `VS Code`, then make the real requirement the toolchain beneath the editor. Verify `clang --version`, `lldb --version`, and `cmake --version` before the course depends on disassembly, debugging, or mixed C and assembly builds."
 				},
 				{
 					title: "macOS and Windows Walkthroughs",
@@ -24,12 +24,11 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Audience, Prerequisites, and Core Outcomes",
 					content:
-						"Position the course after `C Systems Engineering` or equivalent low-level C work. Students should already be comfortable with pointers, structs, stack versus heap, compilation, and debugger basics before the course asks them to read registers, trace stack frames, and explain calling conventions at the instruction level."
+						"Position the course after `C Systems Engineering` or equivalent low-level C work. Already be comfortable with pointers, structs, stack versus heap, compilation, and debugger basics before the course asks them to read registers, trace stack frames, and explain calling conventions at the instruction level."
 				},
 				{
 					title: "ASM0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-asm0-setup-and-tooling/starter",
 					solutionLink:
@@ -49,7 +48,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to ASM0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to ASM0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-asm0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +57,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to ASM0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to ASM0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-asm0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -72,27 +71,26 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Assembler, Linker, Object Files, and Executables",
 					content:
-						"Teach the assembly pipeline as a concrete artifact flow: source becomes object code, objects become a linked executable, and each stage exposes different evidence. Students should know where symbols, relocation, and disassembly fit long before they write large amounts of assembly."
+						"Teach the assembly pipeline as a concrete artifact flow: source becomes object code, objects become a linked executable, and each stage exposes different evidence. Key idea: Where symbols, relocation, and disassembly fit long before they write large amounts of assembly."
 				},
 				{
 					title: "Intel versus AT&T Syntax",
 					content:
-						"Explain operand ordering, immediate prefixes, register naming, and memory syntax differences between Intel and AT&T notation. The course writes Intel syntax, but students should be able to identify the same instruction in both forms so compiler output does not become unreadable."
+						"Explain operand ordering, immediate prefixes, register naming, and memory syntax differences between Intel and AT&T notation. The course writes Intel syntax, but Be able to identify the same instruction in both forms so compiler output does not become unreadable."
 				},
 				{
 					title: "Disassembly Workflow and Read-Before-Write Discipline",
 					content:
-						"Start from reading before writing. Students should disassemble tiny programs, identify function boundaries, spot prologues and epilogues, and only then begin writing their own routines so assembly feels observable rather than mystical."
+						"Start from reading before writing. Disassemble tiny programs, identify function boundaries, spot prologues and epilogues, and only then begin writing their own routines so assembly feels observable rather than mystical."
 				},
 				{
 					title: "C-to-Assembly Compare: Hello Function",
 					content:
-						"Put a short C function and its generated assembly side by side before rewriting anything. Take a simple C helper, compile it with and without optimization, and ask students to identify the arguments, return value, and where the function begins and ends in the disassembly."
+						"Put a short C function and its generated assembly side by side before rewriting anything. Take a simple C helper, compile it with and without optimization, and Identify the arguments, return value, and where the function begins and ends in the disassembly."
 				},
 				{
 					title: "Unit 1: Machine Model and Toolchain: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-1-machine-model-and-toolchain/starter",
 					solutionLink:
@@ -112,7 +110,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 1: Machine Model and Toolchain supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Machine Model and Toolchain. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Machine Model and Toolchain. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +119,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 1: Machine Model and Toolchain supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Machine Model and Toolchain. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Machine Model and Toolchain. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-3/starter",
 					solutionLink:
@@ -135,7 +133,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "General-Purpose Registers and Partial Register Views",
 					content:
-						"Teach `rax`, `rbx`, `rcx`, `rdx`, the pointer and index registers, and the relationship between 64-bit, 32-bit, 16-bit, and 8-bit register views. Students should understand that partial-register writes can zero or preserve upper bits depending on the instruction and destination width."
+						"Teach `rax`, `rbx`, `rcx`, `rdx`, the pointer and index registers, and the relationship between 64-bit, 32-bit, 16-bit, and 8-bit register views. Key idea: Partial-register writes can zero or preserve upper bits depending on the instruction and destination width."
 				},
 				{
 					title: "mov, Zero Extension, and Sign Extension",
@@ -170,7 +168,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 2: Registers and Data Movement supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Registers and Data Movement. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Registers and Data Movement. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-2/starter",
 					solutionLink:
@@ -179,7 +177,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 2: Registers and Data Movement supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Registers and Data Movement. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Registers and Data Movement. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-3/starter",
 					solutionLink:
@@ -193,7 +191,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "add, sub, imul, and idiv",
 					content:
-						"Teach the arithmetic instructions as state changes over explicit registers rather than as magical one-line operators. Students should understand which instructions write only one destination register, which ones use implicit registers, and why signed division requires deliberate setup."
+						"Teach the arithmetic instructions as state changes over explicit registers rather than as magical one-line operators. Key idea: Which instructions write only one destination register, which ones use implicit registers, and why signed division requires deliberate setup."
 				},
 				{
 					title: "and, or, xor, test, and Condition Checks",
@@ -203,7 +201,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Flags, Condition Codes, and Arithmetic Visibility",
 					content:
-						"Teach the zero flag, sign flag, carry flag, and overflow flag as observable state that later drives conditional branches. Students should be able to explain not only what a calculation produced, but what flags that calculation set and why."
+						"Teach the zero flag, sign flag, carry flag, and overflow flag as observable state that later drives conditional branches. Skill target: Explain not only what a calculation produced, but what flags that calculation set and why."
 				},
 				{
 					title: "C-to-Assembly Compare: Arithmetic Helper",
@@ -212,8 +210,7 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Arithmetic and Logic: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-3-arithmetic-and-logic/starter",
 					solutionLink:
@@ -233,7 +230,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 3: Arithmetic and Logic supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Arithmetic and Logic. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Arithmetic and Logic. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-3-arithmetic-and-logic-supplemental-2/starter",
 					solutionLink:
@@ -242,7 +239,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 3: Arithmetic and Logic supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Arithmetic and Logic. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Arithmetic and Logic. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-3-arithmetic-and-logic-supplemental-3/starter",
 					solutionLink:
@@ -256,12 +253,12 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "cmp, jmp, and Conditional Jumps",
 					content:
-						"Teach branching by making the compare-and-branch relationship explicit. Students should understand that `cmp` prepares flags and `jcc` reads them, which is a clearer model than treating each conditional jump as a stand-alone feature."
+						"Teach branching by making the compare-and-branch relationship explicit. Key idea: `cmp` prepares flags and `jcc` reads them, which is a clearer model than treating each conditional jump as a stand-alone feature."
 				},
 				{
 					title: "Loop Construction and State Tracing",
 					content:
-						"Build loops from labels, compares, and jumps instead of hiding iteration in higher-level syntax. The course should repeatedly ask students to predict the loop counter, current address, and exit condition before they run the next instruction."
+						"Build loops from labels, compares, and jumps instead of hiding iteration in higher-level syntax. The course should repeatedly Predict the loop counter, current address, and exit condition before they run the next instruction."
 				},
 				{
 					title: "Search and Accumulation Patterns",
@@ -271,7 +268,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Project: Array Sum and Search Routines",
 					content:
-						"Use the array lab to connect loops, comparisons, pointer stepping, and return values. Students should be able to explain exactly how each pass through the loop changes the accumulator or search result and what causes the branch to continue or exit.",
+						"Use the array lab to connect loops, comparisons, pointer stepping, and return values. Skill target: Explain exactly how each pass through the loop changes the accumulator or search result and what causes the branch to continue or exit.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM2-Array-Sum-and-Search/starter",
 					solutionLink:
@@ -291,7 +288,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 4: Branching and Loops supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Branching and Loops. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Branching and Loops. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-4-branching-and-loops-supplemental-2/starter",
 					solutionLink:
@@ -300,7 +297,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 4: Branching and Loops supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Branching and Loops. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Branching and Loops. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-4-branching-and-loops-supplemental-3/starter",
 					solutionLink:
@@ -314,7 +311,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "call, ret, and Return Addresses",
 					content:
-						"Teach `call` and `ret` as stack operations as well as control-flow operations. Students should understand that the return address becomes data on the stack, which is why call depth, frame layout, and corruption bugs become visible in assembly."
+						"Teach `call` and `ret` as stack operations as well as control-flow operations. Key idea: The return address becomes data on the stack, which is why call depth, frame layout, and corruption bugs become visible in assembly."
 				},
 				{
 					title: "Stack Frames and Local Storage",
@@ -324,7 +321,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Saved Registers and Stack Alignment",
 					content:
-						"Explain why some registers must be preserved across calls and why stack alignment matters before calling into another function. This is the point where students should learn to treat calls as ABI obligations, not just as jumps with a convenient return."
+						"Explain why some registers must be preserved across calls and why stack alignment matters before calling into another function. This is the point where Learn to treat calls as ABI obligations, not just as jumps with a convenient return."
 				},
 				{
 					title: "C-to-Assembly Compare: Stack Frame Walkthrough",
@@ -333,8 +330,7 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: The Stack and Function Calls: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-5-the-stack-and-function-calls/starter",
 					solutionLink:
@@ -354,7 +350,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 5: The Stack and Function Calls supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: The Stack and Function Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: The Stack and Function Calls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental-2/starter",
 					solutionLink:
@@ -363,7 +359,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 5: The Stack and Function Calls supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: The Stack and Function Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: The Stack and Function Calls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental-3/starter",
 					solutionLink:
@@ -377,7 +373,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Parameter Passing and Return Values",
 					content:
-						"Teach the System V AMD64 calling convention directly: which registers carry the first arguments, where integer return values come back, and when values spill to the stack. Students should be able to predict the first few arguments before stepping a call."
+						"Teach the System V AMD64 calling convention directly: which registers carry the first arguments, where integer return values come back, and when values spill to the stack. Skill target: Predict the first few arguments before stepping a call."
 				},
 				{
 					title: "Caller-Saved versus Callee-Saved Registers",
@@ -412,7 +408,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 6: Calling Conventions and ABI supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Calling Conventions and ABI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Calling Conventions and ABI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-2/starter",
 					solutionLink:
@@ -421,7 +417,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 6: Calling Conventions and ABI supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Calling Conventions and ABI. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Calling Conventions and ABI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-3/starter",
 					solutionLink:
@@ -435,7 +431,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Base Plus Index Plus Scale Addressing",
 					content:
-						"Teach complex addressing as a readable formula instead of a scary syntax form. Students should learn to decode base register, scaled index, and displacement into a clear statement like 'array base plus element index times element size plus field offset.'"
+						"Teach complex addressing as a readable formula instead of a scary syntax form. Skill target: Decode base register, scaled index, and displacement into a clear statement like 'array base plus element index times element size plus field offset.'"
 				},
 				{
 					title: "Arrays, Strings, and Sequential Memory Walks",
@@ -450,7 +446,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Project: String Length and Copy Routines",
 					content:
-						"Use the string lab to make pointer walking, null termination, and capacity-aware copying visible instruction by instruction. Students should be able to justify every load, store, and branch in terms of address movement and buffer boundaries.",
+						"Use the string lab to make pointer walking, null termination, and capacity-aware copying visible instruction by instruction. Skill target: Justify every load, store, and branch in terms of address movement and buffer boundaries.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM3-String-Length-and-Copy/starter",
 					solutionLink:
@@ -470,7 +466,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 7: Memory Addressing and Data Structures supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Memory Addressing and Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Memory Addressing and Data Structures. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-supplemental-2/starter",
 					solutionLink:
@@ -479,7 +475,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 7: Memory Addressing and Data Structures supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Memory Addressing and Data Structures. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Memory Addressing and Data Structures. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-supplemental-3/starter",
 					solutionLink:
@@ -493,7 +489,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Minimal Linux Syscall Examples",
 					content:
-						"Teach direct syscalls as the lowest visible interface between user-space code and the kernel, even if the active classroom build sometimes uses a libc-backed harness for portability. Students should understand the idea of putting a syscall number and arguments in the right registers and then interpreting the return value as success or failure."
+						"Teach direct syscalls as the lowest visible interface between user-space code and the kernel, even if the active classroom build sometimes uses a libc-backed harness for portability. Key idea: The idea of putting a syscall number and arguments in the right registers and then interpreting the return value as success or failure."
 				},
 				{
 					title: "libc versus Direct Syscalls",
@@ -528,7 +524,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 8: System Calls and Runtime Interaction supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: System Calls and Runtime Interaction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: System Calls and Runtime Interaction. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supplemental-2/starter",
 					solutionLink:
@@ -537,7 +533,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 8: System Calls and Runtime Interaction supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: System Calls and Runtime Interaction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: System Calls and Runtime Interaction. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supplemental-3/starter",
 					solutionLink:
@@ -551,7 +547,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Compile C to Assembly on Purpose",
 					content:
-						"Make compiler output a first-class teaching tool. Students should repeatedly compile small C helpers to assembly so they can compare their manual code shape to the compiler's choices instead of imagining the compiler as an opaque black box."
+						"Make compiler output a first-class teaching tool. Repeatedly compile small C helpers to assembly so they can compare their manual code shape to the compiler's choices instead of imagining the compiler as an opaque black box."
 				},
 				{
 					title: "Map Source Lines to Instructions",
@@ -570,8 +566,7 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 9: Reading Compiler Output: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-9-reading-compiler-output/starter",
 					solutionLink:
@@ -591,7 +586,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 9: Reading Compiler Output supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Reading Compiler Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Reading Compiler Output. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-19-unit-9-reading-compiler-output-supplemental-2/starter",
 					solutionLink:
@@ -600,7 +595,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 9: Reading Compiler Output supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Reading Compiler Output. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Reading Compiler Output. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-20-unit-9-reading-compiler-output-supplemental-3/starter",
 					solutionLink:
@@ -629,12 +624,11 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Instruction-Level Debug Pass on an Existing Lab",
 					content:
-						"Re-open an earlier lab and debug it from the assembly side only, without immediately jumping back to the C harness. Students should prove they can explain the bug or behavior from the instruction stream and machine state directly."
+						"Re-open an earlier lab and debug it from the assembly side only, without immediately jumping back to the C harness. Prove they can explain the bug or behavior from the instruction stream and machine state directly."
 				},
 				{
 					title: "Unit 10: Debugging at Instruction Level: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-10-debugging-at-instruction-level/starter",
 					solutionLink:
@@ -654,7 +648,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 10: Debugging at Instruction Level supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Debugging at Instruction Level. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Debugging at Instruction Level. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemental-2/starter",
 					solutionLink:
@@ -663,7 +657,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 10: Debugging at Instruction Level supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Debugging at Instruction Level. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Debugging at Instruction Level. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemental-3/starter",
 					solutionLink:
@@ -677,7 +671,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Branch Cost and Predictability",
 					content:
-						"Introduce branches as potential performance costs without turning the course into premature micro-optimization. Students should understand at a high level why predictable straight-line code often behaves differently from branch-heavy code, even when the instruction count looks similar on paper."
+						"Introduce branches as potential performance costs without turning the course into premature micro-optimization. Key idea: At a high level why predictable straight-line code often behaves differently from branch-heavy code, even when the instruction count looks similar on paper."
 				},
 				{
 					title: "Memory Locality and Access Patterns",
@@ -696,8 +690,7 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Performance and Code Shape: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-11-performance-and-code-shape/starter",
 					solutionLink:
@@ -717,7 +710,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 11: Performance and Code Shape supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Performance and Code Shape. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Performance and Code Shape. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-2/starter",
 					solutionLink:
@@ -726,7 +719,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 11: Performance and Code Shape supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Performance and Code Shape. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Performance and Code Shape. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-3/starter",
 					solutionLink:
@@ -775,7 +768,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 12: Security and Reliability Visibility supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Security and Reliability Visibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Security and Reliability Visibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supplemental-2/starter",
 					solutionLink:
@@ -784,7 +777,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 12: Security and Reliability Visibility supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Security and Reliability Visibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Security and Reliability Visibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supplemental-3/starter",
 					solutionLink:
@@ -803,7 +796,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "SIMD and Wider Data Paths",
 					content:
-						"Treat SIMD as a later specialization rather than a prerequisite. Students should first be fluent in scalar register tracing and calling conventions, then move into packed-data operations once the underlying mental model is stable."
+						"Treat SIMD as a later specialization rather than a prerequisite. First be fluent in scalar register tracing and calling conventions, then move into packed-data operations once the underlying mental model is stable."
 				},
 				{
 					title: "Reverse-Engineering Elective",
@@ -817,8 +810,7 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "ASM13 Expansion Ideas and Next Steps: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-asm13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -838,7 +830,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to ASM13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to ASM13 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -847,7 +839,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to ASM13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to ASM13 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -856,22 +848,22 @@ export const assemblyCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: assembly lab 15",
+			title: "assembly lab 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "assembly lab 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: assembly lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"assembly lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "assembly lab 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: assembly lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative assembly lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "assembly lab 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: assembly lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"assembly lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-assembly-lab-15/starter",
 					solutionLink:
@@ -880,32 +872,32 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: assembly lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"assembly lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "assembly lab 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: assembly lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from assembly lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-assembly-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-assembly-lab-15/solution"
 				},
 				{
-					title: "Applied Studio 15: assembly lab 15 supplemental 2",
+					title: "assembly lab 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: assembly lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to assembly lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-29-applied-studio-15-assembly-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-29-applied-studio-15-assembly-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: assembly lab 15 supplemental 3",
+					title: "assembly lab 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: assembly lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to assembly lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-30-applied-studio-15-assembly-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -914,22 +906,22 @@ export const assemblyCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: assembly lab 16",
+			title: "assembly lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "assembly lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: assembly lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"assembly lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "assembly lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: assembly lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative assembly lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "assembly lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: assembly lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"assembly lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-assembly-lab-16/starter",
 					solutionLink:
@@ -938,32 +930,32 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: assembly lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"assembly lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "assembly lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: assembly lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from assembly lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-assembly-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-assembly-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 16: assembly lab 16 supplemental 2",
+					title: "assembly lab 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: assembly lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to assembly lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-31-applied-studio-16-assembly-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-31-applied-studio-16-assembly-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: assembly lab 16 supplemental 3",
+					title: "assembly lab 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: assembly lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to assembly lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-32-applied-studio-16-assembly-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -972,22 +964,22 @@ export const assemblyCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: assembly lab 17",
+			title: "assembly lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "assembly lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: assembly lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"assembly lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "assembly lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: assembly lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative assembly lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "assembly lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: assembly lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"assembly lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-assembly-lab-17/starter",
 					solutionLink:
@@ -996,32 +988,32 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: assembly lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"assembly lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "assembly lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: assembly lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from assembly lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-assembly-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-assembly-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 17: assembly lab 17 supplemental 2",
+					title: "assembly lab 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: assembly lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to assembly lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-33-applied-studio-17-assembly-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-33-applied-studio-17-assembly-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: assembly lab 17 supplemental 3",
+					title: "assembly lab 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: assembly lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to assembly lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-34-applied-studio-17-assembly-lab-17-supplemental-3/starter",
 					solutionLink:

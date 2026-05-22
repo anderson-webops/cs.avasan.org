@@ -41,7 +41,7 @@ describe("implemented course development artifacts", () => {
 			expect(module?.curriculum.length, courseId).toBe(4);
 			expect(module?.supplementalProjects.length, courseId).toBe(2);
 			expect(allText(course), courseId).toContain(
-				"Full Lesson Project: Student Transfer Task"
+				"Full Lesson Project: Transfer Task"
 			);
 		}
 	}, 30000);

@@ -14,7 +14,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Objects vs. Classes",
 					content:
-						"Learn how a class acts as a template and an object acts as an instance with its own data and behavior. Use this module to connect class design to real-world entities. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how a class acts as a template and an object acts as an instance with its own data and behavior. Use this module to connect class design to real-world entities."
 				},
 				{
 					title: "JM1 Project 1: Dog Class",
@@ -26,14 +26,14 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "More on Object-Oriented Programming",
 					content:
-						"Connect the `Dog` class to broader OOP ideas such as modularity, reusability, encapsulation, and scalability. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Connect the `Dog` class to broader OOP ideas such as modularity, reusability, encapsulation, and scalability."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM1 Supplemental Project 1: Employee Class",
 					content:
-						"Create an `Employee` class with identifying information, getters, setters, and a `toString()` method, then create and update employee objects in `main()`. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create an `Employee` class with identifying information, getters, setters, and a `toString()` method, then create and update employee objects in `main()`.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM1-Supplemental-Project-1-Employee",
 					solutionLink:
@@ -47,7 +47,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM2 Project 1: Person Class",
 					content:
-						"Create a `Person` class with core instance variables, constructors, getters, setters, and `toString()`, then create multiple people and update their state through methods. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Person` class with core instance variables, constructors, getters, setters, and `toString()`, then create multiple people and update their state through methods.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM2-Person-Class",
 					solutionLink:
@@ -77,7 +77,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM2 Supplemental Project 1: Boba Shop",
 					content:
-						"Create a `Boba` class with multiple constructors, update methods, and a comparison method to check whether two drink orders are the same. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Boba` class with multiple constructors, update methods, and a comparison method to check whether two drink orders are the same.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM2-Supplemental-Project-2-Boba",
 					solutionLink:
@@ -100,12 +100,12 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Static Variables and Methods",
 					content:
-						"Use static members for class-wide information and practice calling static methods through the class itself rather than through an object. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use static members for class-wide information and practice calling static methods through the class itself rather than through an object."
 				},
 				{
 					title: "JM3 Project 2: House Class",
 					content:
-						"Create a `House` class with a static total count, implement `Comparable<House>`, sort an array of houses by price with square footage as a tiebreaker, and print the sorted results. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `House` class with a static total count, implement `Comparable<House>`, sort an array of houses by price with square footage as a tiebreaker, and print the sorted results.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM3-House-Class",
 					solutionLink:
@@ -114,14 +114,14 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "compareTo Method",
 					content:
-						"Learn how `compareTo()` defines ordering for custom objects and why that ordering enables `Arrays.sort()` to work on arrays of those objects. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how `compareTo()` defines ordering for custom objects and why that ordering enables `Arrays.sort()` to work on arrays of those objects."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM3 Supplemental Project 1: Basketball Statistics",
 					content:
-						"Create a `Player` class with stats, sorting behavior, and foul tracking, then sort a team of players and determine whether each player is disqualified. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Player` class with stats, sorting behavior, and foul tracking, then sort a team of players and determine whether each player is disqualified.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM3-Supplemental-Project-1-Basketball-Statistics",
 					solutionLink:
@@ -130,7 +130,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Static Variables & Methods Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM3 Static Variables & Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM3 Static Variables & Methods. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-01-jm3-static-variables-and-methods-supplemental-3/starter",
 					solutionLink:
@@ -144,34 +144,34 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Overview",
 					content:
-						"Use this module as a low-pressure review of object-oriented programming basics in Java, including classes, constructors, instance methods, static members, and comparable objects. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use this module as a low-pressure review of object-oriented programming basics in Java, including classes, constructors, instance methods, static members, and comparable objects.",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1"
 				},
 				{
 					title: "Check-In #1: Classes and Objects",
 					content:
-						"Review the difference between a class and an object by creating a `Car` class with private instance variables, multiple constructors, and several `Car` instances in `main()`. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review the difference between a class and an object by creating a `Car` class with private instance variables, multiple constructors, and several `Car` instances in `main()`."
 				},
 				{
 					title: "Check-In #1: Class Methods",
 					content:
-						"Add getters, a `drive` method, a `toString` method, and a comparison method such as `sameMileage()` that takes another object and checks shared state. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Add getters, a `drive` method, a `toString` method, and a comparison method such as `sameMileage()` that takes another object and checks shared state."
 				},
 				{
 					title: "Check-In #1: Static Variables and Methods",
 					content:
-						"Use a static variable to track how many `Car` objects exist and a static getter method to return that class-wide count. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use a static variable to track how many `Car` objects exist and a static getter method to return that class-wide count."
 				},
 				{
 					title: "Check-In #1: Comparable Objects",
 					content:
-						"Implement `Comparable` for the `Car` class, define `compareTo()`, sort an array of cars, and explain when `compareTo()` should return `-1`, `0`, or `1`. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Implement `Comparable` for the `Car` class, define `compareTo()`, sort an array of cars, and explain when `compareTo()` should return `-1`, `0`, or `1`."
 				},
 				{
 					title: "Check-In #1: Additional Practice Project",
 					content:
-						"Create a comparable `Card` class with rank and suit, implement constructors and getters, write `toString()`, define `compareTo()`, and sort an array of randomly generated cards. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a comparable `Card` class with rank and suit, implement constructors and getters, write `toString()`, define `compareTo()`, and sort an array of randomly generated cards.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1-Additional-Project",
 					solutionLink:
@@ -182,14 +182,14 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1: Extension Challenge",
 					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1"
 				},
 				{
 					title: "Check-In #1 Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-02-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -198,7 +198,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #1. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-03-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -212,12 +212,12 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Subclasses",
 					content:
-						"Learn how subclasses extend superclasses, inherit public behavior, and add or override their own features while still respecting encapsulation. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how subclasses extend superclasses, inherit public behavior, and add or override their own features while still respecting encapsulation."
 				},
 				{
 					title: "JM4 Project 1: Rectangle and Square Class",
 					content:
-						"Create a `Rectangle` class, then create a `Square` subclass that uses `extends`, calls parent constructors with `super()`, and optionally overrides methods such as `getArea()`. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Rectangle` class, then create a `Square` subclass that uses `extends`, calls parent constructors with `super()`, and optionally overrides methods such as `getArea()`.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Rectangle-and-Square-Class",
 					solutionLink:
@@ -226,7 +226,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM4 Project 2: Book and PictureBook Class",
 					content:
-						"Extend a previous `Book` class by creating a `PictureBook` subclass with an illustrator field, custom comparison methods, and an overridden `toString()` method. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend a previous `Book` class by creating a `PictureBook` subclass with an illustrator field, custom comparison methods, and an overridden `toString()` method.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Book-and-Picture-Book-Class",
 					solutionLink:
@@ -235,7 +235,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM4 Project 3: Vehicle Inheritance",
 					content:
-						"Use a starter project with `Vehicle`, `LandVehicle`, `Car`, and `Motorcycle` classes to practice multi-level inheritance, `super`, and subclass-specific implementations. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a starter project with `Vehicle`, `LandVehicle`, `Car`, and `Motorcycle` classes to practice multi-level inheritance, `super`, and subclass-specific implementations.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Project-3-Vehicle-Inheritance-Starter",
 					solutionLink:
@@ -246,7 +246,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM4 Supplemental Project 1: Pet, Dog, and Cat Class",
 					content:
-						"Create a `Pet` superclass with `Dog` and `Cat` subclasses, override `toString()`, add subclass-specific behaviors, and optionally extend the hierarchy with another pet type. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Pet` superclass with `Dog` and `Cat` subclasses, override `toString()`, add subclass-specific behaviors, and optionally extend the hierarchy with another pet type.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Supplemental-Project-1-Pet-Dog-and-Cat-Class",
 					solutionLink:
@@ -255,7 +255,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM4 Supplemental Project 2: Lesson and DanceLesson Class",
 					content:
-						"Create a `Lesson` class, extend it with a `DanceLesson` subclass, sort lesson objects, and write comparison helpers based on difficulty. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Lesson` class, extend it with a `DanceLesson` subclass, sort lesson objects, and write comparison helpers based on difficulty.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM4-Lesson-and-DanceLesson-Class",
 					solutionLink:
@@ -264,7 +264,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Subclasses & Inheritance Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM4 Subclasses & Inheritance. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM4 Subclasses & Inheritance. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-04-jm4-subclasses-and-inheritance-supplemental-3/starter",
 					solutionLink:
@@ -278,19 +278,19 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps",
 					content:
-						"Learn how Java maps store key-value pairs and why they are useful for contact lists, lookups, inventories, and other associative data problems. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how Java maps store key-value pairs and why they are useful for contact lists, lookups, inventories, and other associative data problems."
 				},
 				{
 					title: "Using a Java Map",
 					content:
-						"Practice `put()`, `get()`, `containsKey()`, `remove()`, `size()`, `keySet()`, `values()`, `getOrDefault()`, and `putIfAbsent()` while working with `HashMap` examples. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Practice `put()`, `get()`, `containsKey()`, `remove()`, `size()`, `keySet()`, `values()`, `getOrDefault()`, and `putIfAbsent()` while working with `HashMap` examples.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM5-Maps"
 				},
 				{
 					title: "JM5 Project 1: Letter Frequencies",
 					content:
-						"Read a sentence from the user, build a frequency map of its letters, print the map contents, and determine which character appears most often. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Read a sentence from the user, build a frequency map of its letters, print the map contents, and determine which character appears most often.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM5-Letter-Frequencies",
 					solutionLink:
@@ -299,7 +299,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM5 Project 2: Dealership Database",
 					content:
-						"Extend the vehicle inheritance project by using a map to build a dealership inventory keyed by vehicle identification number, with methods to add, remove, search, and display cars. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the vehicle inheritance project by using a map to build a dealership inventory keyed by vehicle identification number, with methods to add, remove, search, and display cars.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM5-PROJECT-2-DealershipDatabase",
 					solutionLink:
@@ -310,7 +310,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM5 Supplemental Project 1: Lending Library",
 					content:
-						"Build a library lookup program using a map from book titles to authors, with searching and full inventory display. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a library lookup program using a map from book titles to authors, with searching and full inventory display.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM5-Supplemental-Project-1-Lending-Library",
 					solutionLink:
@@ -319,7 +319,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM5 Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM5 Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-05-jm5-maps-supplemental-2/starter",
 					solutionLink:
@@ -328,7 +328,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM5 Maps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM5 Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-06-jm5-maps-supplemental-3/starter",
 					solutionLink:
@@ -342,12 +342,12 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Errors and Exception Handling",
 					content:
-						"Review exceptions as a way to detect and manage problems in a program, then use `try-catch` blocks to keep programs running even when some operations fail. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Review exceptions as a way to detect and manage problems in a program, then use `try-catch` blocks to keep programs running even when some operations fail."
 				},
 				{
 					title: "JM6 Project 1: Try-Catch This",
 					content:
-						"Practice writing `try-catch` blocks for arithmetic errors such as division by zero and array access errors such as out-of-bounds indices. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Practice writing `try-catch` blocks for arithmetic errors such as division by zero and array access errors such as out-of-bounds indices.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Try-Catch-Practice",
 					solutionLink:
@@ -356,12 +356,12 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading in Java",
 					content:
-						"Learn how a thread creates an independent path of execution, how `run()` and `start()` work together, and how `sleep()` introduces delays that often need `try-catch` protection. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Learn how a thread creates an independent path of execution, how `run()` and `start()` work together, and how `sleep()` introduces delays that often need `try-catch` protection."
 				},
 				{
 					title: "JM6 Project 2: Bouncing Zeros",
 					content:
-						"Create a simple console animation by printing a moving `0`, updating its position, and running the animation inside a thread with controlled timing. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a simple console animation by printing a moving `0`, updating its position, and running the animation inside a thread with controlled timing.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Bouncing-Zeros",
 					solutionLink:
@@ -372,7 +372,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM6 Supplemental Project 1: Barnyard Orchestra",
 					content:
-						"Use multiple threads to create a simple orchestra of repeating animal sounds played at different intervals. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use multiple threads to create a simple orchestra of repeating animal sounds played at different intervals.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Supplemental-Project-1-Barnyard-Orchestra",
 					solutionLink:
@@ -381,7 +381,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM6 Threading & Error Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM6 Threading & Error Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-07-jm6-threading-and-error-handling-supplemental-2/starter",
 					solutionLink:
@@ -390,7 +390,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM6 Threading & Error Handling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM6 Threading & Error Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-08-jm6-threading-and-error-handling-supplemental-3/starter",
 					solutionLink:
@@ -413,7 +413,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2: Inheritance",
 					content:
-						"Read and analyze an `HourClock` class, then create a `RomanClock` subclass that extends the original behavior and overrides `displayTime()`. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Read and analyze an `HourClock` class, then create a `RomanClock` subclass that extends the original behavior and overrides `displayTime()`."
 				},
 				{
 					title: "Check-In #2: Threading and Error Handling",
@@ -423,12 +423,12 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2: Maps",
 					content:
-						"Create a map inside the `RomanClock` class, populate it with Roman numeral keys and decimal values, iterate through the entries, and conditionally insert missing values. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a map inside the `RomanClock` class, populate it with Roman numeral keys and decimal values, iterate through the entries, and conditionally insert missing values."
 				},
 				{
 					title: "Check-In #2: Additional Practice Project",
 					content:
-						"Create a `MinuteClock` subclass that tracks minutes as well as hours, overrides `displayTime()`, and updates both fields correctly in `tick()`. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `MinuteClock` subclass that tracks minutes as well as hours, overrides `displayTime()`, and updates both fields correctly in `tick()`.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2-Additional-Project",
 					solutionLink:
@@ -439,7 +439,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2: Extension Challenge",
 					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2-Starter-Updated",
 					solutionLink:
@@ -448,7 +448,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-09-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -457,7 +457,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Check-In #2. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-10-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -480,24 +480,24 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes students are most likely to make in JM7 Bank Account. Have them diagnose a broken attempt, repair it, and explain why the fix works. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Focus on the mistakes common mistakes appear in JM7 Bank Account. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Bank Account: Planning and Architecture",
 					content:
-						"Break JM7 Bank Account into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break JM7 Bank Account into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Bank Account: Verification and Reflection",
 					content:
-						"Close JM7 Bank Account by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close JM7 Bank Account by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM7 Supplemental Project 1: Calculator",
 					content:
-						"Create a `Calculator` class with methods for arithmetic operations, factorials, and exponents, then build a console interface for the user to choose operations and inputs. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Calculator` class with methods for arithmetic operations, factorials, and exponents, then build a console interface for the user to choose operations and inputs.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM7-Calculator/src/main/java",
 					solutionLink:
@@ -506,7 +506,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM7 Bank Account. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM7 Bank Account. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-11-jm7-bank-account-supplemental-2/starter",
 					solutionLink:
@@ -515,7 +515,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM7 Bank Account. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM7 Bank Account. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-12-jm7-bank-account-supplemental-3/starter",
 					solutionLink:
@@ -529,14 +529,14 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Writing to a File",
 					content:
-						"Use `FileWriter` inside a try-with-resources block to create or open files and write lines of output directly to disk instead of only printing to the console. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use `FileWriter` inside a try-with-resources block to create or open files and write lines of output directly to disk instead of only printing to the console.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Writing-to-a-File"
 				},
 				{
 					title: "JM8 Project 1: Crazy Name Tags Printer",
 					content:
-						"Ask the user for a name, then write different letter-by-letter transformations of that name into one or more files. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Ask the user for a name, then write different letter-by-letter transformations of that name into one or more files.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Project-1-Crazy-Name-Tags-Printer",
 					solutionLink:
@@ -545,14 +545,14 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Reading from a File",
 					content:
-						"Use `File` and `Scanner` inside `try-catch` logic to read lines from a text file, collect them into a string, and close resources properly after reading. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use `File` and `Scanner` inside `try-catch` logic to read lines from a text file, collect them into a string, and close resources properly after reading.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Reading-from-a-File/src/main/java"
 				},
 				{
 					title: "JM8 Project 2: File IO and Maps",
 					content:
-						"Read alternating lines from a file and load them into a map so odd-numbered lines become keys and the following lines become their values. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Read alternating lines from a file and load them into a map so odd-numbered lines become keys and the following lines become their values.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Project-2-File-IO-and-Maps/src/main/java",
 					solutionLink:
@@ -563,7 +563,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM8 Supplemental Project 1: Bank Account with File I/O",
 					content:
-						"Extend the bank account system so account information can be saved to a file and loaded again when the program starts. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the bank account system so account information can be saved to a file and loaded again when the program starts.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM8-Supplemental-Project-Bank-Account/src/main/java",
 					solutionLink:
@@ -572,7 +572,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM8 File I/O. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM8 File I/O. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-13-jm8-file-i-o-supplemental-2/starter",
 					solutionLink:
@@ -581,7 +581,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM8 File I/O. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM8 File I/O. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-14-jm8-file-i-o-supplemental-3/starter",
 					solutionLink:
@@ -595,7 +595,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM9 Project 1: Maze Reader",
 					content:
-						"Create a `Maze` class that reads maze layouts from text files, stores the starting position, prints the maze, and determines whether moves and exits are valid. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Create a `Maze` class that reads maze layouts from text files, stores the starting position, prints the maze, and determines whether moves and exits are valid.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Reader-Starter",
 					solutionLink:
@@ -604,7 +604,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM9 Project 2: Maze Runner",
 					content:
-						"Build a playable maze game by adding a `Player` class and a `MazeGame` controller that processes user input, updates player movement, and ends the game when the exit is reached. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a playable maze game by adding a `Player` class and a `MazeGame` controller that processes user input, updates player movement, and ends the game when the exit is reached.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-2",
 					solutionLink:
@@ -613,19 +613,19 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner: Planning and Architecture",
 					content:
-						"Break JM9 Maze Runner into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Break JM9 Maze Runner into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
 				},
 				{
 					title: "Maze Runner: Verification and Reflection",
 					content:
-						"Close JM9 Maze Runner by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close JM9 Maze Runner by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM9 Supplemental Project 1: Maze Runner Part 3",
 					content:
-						"Add a countdown timer to the maze game with threading and end the game when time runs out. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Add a countdown timer to the maze game with threading and end the game when time runs out.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
 					solutionLink:
@@ -634,7 +634,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM9 Maze Runner. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM9 Maze Runner. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-15-jm9-maze-runner-supplemental-2/starter",
 					solutionLink:
@@ -643,7 +643,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM9 Maze Runner. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM9 Maze Runner. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-16-jm9-maze-runner-supplemental-3/starter",
 					solutionLink:
@@ -676,8 +676,7 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "JM10 Master Project: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM7-Calculator"
 				}
@@ -686,14 +685,14 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM10 Master Project: Extension Challenge",
 					content:
-						"Extend the work from JM10 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the work from JM10 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM7-Calculator"
 				},
 				{
 					title: "Master Project Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM10 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM10 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-17-jm10-master-project-supplemental-2/starter",
 					solutionLink:
@@ -702,7 +701,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Master Project Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to JM10 Master Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM10 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-18-jm10-master-project-supplemental-3/starter",
 					solutionLink:
@@ -721,12 +720,12 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Reference and Solution Boundaries",
 					content:
-						"Starter-only or solution-only folders stay support-oriented. The public course surfaces the most useful ones below while still keeping the main Java 2 progression readable. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Starter-only or solution-only folders stay support-oriented. The public course surfaces the most useful ones below while still keeping the main Java 2 progression readable."
 				},
 				{
 					title: "When to Reach for the Extension Bank",
 					content:
-						"Use these extensions when a student needs more structured practice with maps, file handling, console project design, or threading previews before moving on to higher-level Java work. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use these extensions when a student needs more structured practice with maps, file handling, console project design, or threading previews before moving on to higher-level Java work."
 				},
 				{
 					title: "Repo Extension and Reference Library: Verification and Reflection",
@@ -735,8 +734,7 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "JM11 Repo Extension and Reference Library: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-stdinstdout"
 				}
@@ -745,108 +743,108 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Extension: stdin/stdout Practice",
 					content:
-						"Use a focused console-I/O exercise when students need more confidence with Java input/output mechanics in isolation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a focused console-I/O exercise when students need more confidence with Java input/output mechanics in isolation.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-stdinstdout"
 				},
 				{
 					title: "Extension: Java File I/O",
 					content:
-						"Use the dedicated file-I/O folder when the student needs one more direct pass over reading, writing, and file handling before the larger JM8 work. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the dedicated file-I/O folder when the student needs one more direct pass over reading, writing, and file handling before the larger JM8 work.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Java-File-IO"
 				},
 				{
 					title: "Reference: HashMaps Examples",
 					content:
-						"Keep a smaller maps example bank available when the main dealership or file-I/O projects feel too large for the immediate practice need. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Keep a smaller maps example bank available when the main dealership or file-I/O projects feel too large for the immediate practice need.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Java-Hash-Maps-Examples"
 				},
 				{
 					title: "Extension: Dog Class Test",
 					content:
-						"Use the dog-class test harness as a lightweight object-model review before students move into the later multi-class projects. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the dog-class test harness as a lightweight object-model review before students move into the later multi-class projects.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM1-Dog-Class-Test"
 				},
 				{
 					title: "Extension: Tic Tac Toe Console",
 					content:
-						"Use a compact console game to reinforce control flow, object organization, and user interaction without the complexity of the maze branch. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a compact console game to reinforce control flow, object organization, and user interaction without the complexity of the maze branch.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM10-Tic-Tac-Toe-Console"
 				},
 				{
 					title: "Preview: Threading Example",
 					content:
-						"Keep the threading example visible as a preview for students who are ready to see how timed or concurrent behavior starts to appear in Java. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Keep the threading example visible as a preview for students who are ready to see how timed or concurrent behavior starts to appear in Java.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Threading-Example"
 				},
 				{
 					title: "Reference: Try-Catch Example",
 					content:
-						"Use a smaller exception-handling example when students need a cleaner reference than the larger try-catch projects. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use a smaller exception-handling example when students need a cleaner reference than the larger try-catch projects.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Try-Catch-Example"
 				},
 				{
 					title: "Extension: Password Management System",
 					content:
-						"Use a stronger practical console project to reinforce classes, file handling, and guarded user interaction in one place. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a stronger practical console project to reinforce classes, file handling, and guarded user interaction in one place.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Password-Management-System"
 				}
 			]
 		},
 		{
-			title: "Applied Studio 14: JM Master Project Example Quiz Game",
+			title: "JM Master Project Example Quiz Game: Implementation Studio",
 			curriculum: [
 				{
 					title: "JM Master Project Example Quiz Game: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: JM Master Project Example Quiz Game, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"JM Master Project Example Quiz Game: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: JM Master Project Example Quiz Game, naming the key inputs, the expected outputs, and the checkpoints worth verifying early."
+						"A representative JM Master Project Example Quiz Game example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: JM Master Project Example Quiz Game. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"JM Master Project Example Quiz Game: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Review and Reflection",
 					content:
-						"Close Applied Studio 14: JM Master Project Example Quiz Game by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer."
+						"JM Master Project Example Quiz Game: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM Master Project Example Quiz Game: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: JM Master Project Example Quiz Game with one extra requirement, stricter input handling, or a more realistic variation of the same task. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the core build from JM Master Project Example Quiz Game: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
 				{
-					title: "Applied Studio 14: JM Master Project Example Quiz Game Supplemental 2",
+					title: "JM Master Project Example Quiz Game Supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: JM Master Project Example Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM Master Project Example Quiz Game: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz-game-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz-game-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: JM Master Project Example Quiz Game Supplemental 3",
+					title: "JM Master Project Example Quiz Game Supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: JM Master Project Example Quiz Game. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM Master Project Example Quiz Game: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-20-applied-studio-14-jm-master-project-example-quiz-game-supplemental-3/starter",
 					solutionLink:
@@ -855,22 +853,22 @@ export const javaLevel2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: JM Maze Runner Project",
+			title: "JM Maze Runner Project: Implementation Studio",
 			curriculum: [
 				{
 					title: "JM Maze Runner Project: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: JM Maze Runner Project, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"JM Maze Runner Project: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "JM Maze Runner Project: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: JM Maze Runner Project, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"A representative JM Maze Runner Project example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "JM Maze Runner Project: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: JM Maze Runner Project. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"JM Maze Runner Project: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
 					solutionLink:
@@ -879,32 +877,32 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Review and Reflection",
 					content:
-						"Close Applied Studio 15: JM Maze Runner Project by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"JM Maze Runner Project: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM Maze Runner Project: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: JM Maze Runner Project with one extra requirement, stricter input handling, or a more realistic variation of the same task. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Extend the core build from JM Maze Runner Project: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Maze-Runner-Project-Solution"
 				},
 				{
-					title: "Applied Studio 15: JM Maze Runner Project Supplemental 2",
+					title: "JM Maze Runner Project Supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: JM Maze Runner Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM Maze Runner Project: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-21-applied-studio-15-jm-maze-runner-project-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-21-applied-studio-15-jm-maze-runner-project-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: JM Maze Runner Project Supplemental 3",
+					title: "JM Maze Runner Project Supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: JM Maze Runner Project. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to JM Maze Runner Project: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-22-applied-studio-15-jm-maze-runner-project-supplemental-3/starter",
 					solutionLink:

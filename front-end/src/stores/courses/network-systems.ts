@@ -9,7 +9,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Preferred IDE and Real Linux Environment",
 					content:
-						"Standardize on `VS Code` and make the real requirement a usable Linux shell rather than the editor itself. This course is command-line and lab oriented, so students should expect to run diagnostics and configuration changes on a Linux VM, remote server, WSL instance, or disposable cloud host rather than only from a local desktop shell."
+						"Standardize on `VS Code` and make the real requirement a usable Linux shell rather than the editor itself. This course is command-line and lab oriented, so Expect to run diagnostics and configuration changes on a Linux VM, remote server, WSL instance, or disposable cloud host rather than only from a local desktop shell."
 				},
 				{
 					title: "macOS and Windows Walkthroughs",
@@ -24,12 +24,11 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Positioning, Prerequisites, and Core Outcomes",
 					content:
-						"Position the course after `Linux Systems` and frame it as the layer that explains how services on one host become reachable, unreachable, slow, or misrouted from somewhere else. Students should already be comfortable editing config files and running Linux diagnostics before the course asks them to reason about ports, sockets, routing, DNS, firewalls, and IPv6 behavior."
+						"Position the course after `Linux Systems` and frame it as the layer that explains how services on one host become reachable, unreachable, slow, or misrouted from somewhere else. Already be comfortable editing config files and running Linux diagnostics before the course asks them to reason about ports, sockets, routing, DNS, firewalls, and IPv6 behavior."
 				},
 				{
 					title: "NS0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-ns0-setup-and-tooling/starter",
 					solutionLink:
@@ -49,7 +48,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NS0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-ns0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +57,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NS0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-ns0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -72,7 +71,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Interfaces, Frames, Packets, Sockets, and Ports",
 					content:
-						"Teach the vocabulary in concrete layers: interfaces attach a host to a network, frames move locally, packets move end to end, sockets bind applications to the stack, and ports distinguish services on one host. Students should be able to explain these as related but different objects instead of using them interchangeably."
+						"Teach the vocabulary in concrete layers: interfaces attach a host to a network, frames move locally, packets move end to end, sockets bind applications to the stack, and ports distinguish services on one host. Skill target: Explain these as related but different objects instead of using them interchangeably."
 				},
 				{
 					title: "TCP versus UDP",
@@ -87,12 +86,11 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "One Request, Many Layers",
 					content:
-						"Have students narrate one HTTP or SSH request from application intent down through addressing and transport and then back up on the receiving side. This gives the course a stable mental model to revisit in DNS, routing, and firewall units."
+						"Narrate one HTTP or SSH request from application intent down through addressing and transport and then back up on the receiving side. This gives the course a stable mental model to revisit in DNS, routing, and firewall units."
 				},
 				{
 					title: "Unit 1: The Network Stack in Plain English: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-1-the-network-stack-in-plain-english/starter",
 					solutionLink:
@@ -112,7 +110,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: The Network Stack in Plain English supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: The Network Stack in Plain English. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: The Network Stack in Plain English. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-unit-1-the-network-stack-in-plain-english-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +119,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: The Network Stack in Plain English supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: The Network Stack in Plain English. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: The Network Stack in Plain English. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-unit-1-the-network-stack-in-plain-english-supplemental-3/starter",
 					solutionLink:
@@ -135,7 +133,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "MAC, IPv4, and IPv6 Addresses",
 					content:
-						"Teach MAC addresses as local-link identifiers, IPv4 and IPv6 addresses as network-layer identities, and hostnames as human-facing labels that must be resolved. Students should understand that a hostname is not the same thing as the destination address ultimately used on the wire."
+						"Teach MAC addresses as local-link identifiers, IPv4 and IPv6 addresses as network-layer identities, and hostnames as human-facing labels that must be resolved. Key idea: A hostname is not the same thing as the destination address ultimately used on the wire."
 				},
 				{
 					title: "Public versus Private Addressing",
@@ -154,8 +152,7 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Addresses and Naming: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming/starter",
 					solutionLink:
@@ -175,7 +172,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Addresses and Naming supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Addresses and Naming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Addresses and Naming. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-2-addresses-and-naming-supplemental-2/starter",
 					solutionLink:
@@ -184,7 +181,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Addresses and Naming supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Addresses and Naming. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Addresses and Naming. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming-supplemental-3/starter",
 					solutionLink:
@@ -198,7 +195,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Local Subnets and Default Gateways",
 					content:
-						"Teach local subnet behavior as the boundary between destinations a host can reach directly and destinations that must go through a router. Students should understand that the default gateway is not a magic internet button; it is simply the next hop for traffic that leaves the local segment."
+						"Teach local subnet behavior as the boundary between destinations a host can reach directly and destinations that must go through a router. Key idea: The default gateway is not a magic internet button; it is simply the next hop for traffic that leaves the local segment."
 				},
 				{
 					title: "How Routers Forward Traffic",
@@ -217,8 +214,7 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edge/starter",
 					solutionLink:
@@ -238,7 +234,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Switches, Routers, NAT, and the Internet Edge. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Switches, Routers, NAT, and the Internet Edge. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edge-supplemental-2/starter",
 					solutionLink:
@@ -247,7 +243,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Switches, Routers, NAT, and the Internet Edge. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Switches, Routers, NAT, and the Internet Edge. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-3-switches-routers-nat-and-the-internet-edge-supplemental-3/starter",
 					solutionLink:
@@ -261,7 +257,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "What a Port Actually Identifies",
 					content:
-						"Teach a port as one part of a socket endpoint, not as a stand-alone service identity. Students should understand that a process, protocol, local address, and port together define what is actually listening or connected."
+						"Teach a port as one part of a socket endpoint, not as a stand-alone service identity. Key idea: A process, protocol, local address, and port together define what is actually listening or connected."
 				},
 				{
 					title: "Ephemeral Ports and Client-Side Source Ports",
@@ -276,7 +272,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Project: Map All Listening Services on a Linux Host",
 					content:
-						"Use the listening-services lab to inventory TCP and UDP listeners, tie them back to processes, and classify which ports are expected, internal, or suspicious. Students should produce a short service map that makes the host's network surface visible instead of assuming they know what is exposed.",
+						"Use the listening-services lab to inventory TCP and UDP listeners, tie them back to processes, and classify which ports are expected, internal, or suspicious. Produce a short service map that makes the host's network surface visible instead of assuming they know what is exposed.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS1-Listening-Services-Map/starter",
 					solutionLink:
@@ -296,7 +292,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Ports and Listening Services supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Ports and Listening Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Ports and Listening Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-4-ports-and-listening-services-supplemental-2/starter",
 					solutionLink:
@@ -305,7 +301,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Ports and Listening Services supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Ports and Listening Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Ports and Listening Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-unit-4-ports-and-listening-services-supplemental-3/starter",
 					solutionLink:
@@ -324,7 +320,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Caching and Resolver State",
 					content:
-						"Use caching to explain why DNS changes can appear inconsistent during deployment or troubleshooting. Students should understand that cached success, cached failure, and local override files all shape what a resolver returns."
+						"Use caching to explain why DNS changes can appear inconsistent during deployment or troubleshooting. Key idea: Cached success, cached failure, and local override files all shape what a resolver returns."
 				},
 				{
 					title: "dig, nslookup, host, and Resolver Configuration",
@@ -354,7 +350,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: DNS and Name Resolution supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: DNS and Name Resolution. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: DNS and Name Resolution. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-11-unit-5-dns-and-name-resolution-supplemental-2/starter",
 					solutionLink:
@@ -363,7 +359,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: DNS and Name Resolution supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: DNS and Name Resolution. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: DNS and Name Resolution. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-12-unit-5-dns-and-name-resolution-supplemental-3/starter",
 					solutionLink:
@@ -377,7 +373,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "ping, traceroute, tracepath, and mtr",
 					content:
-						"Teach the core path tools as different ways of answering different questions: basic reachability, approximate hop path, path MTU hints, and repeated latency observation. Students should stop treating them as interchangeable and instead ask what evidence each one is actually collecting."
+						"Teach the core path tools as different ways of answering different questions: basic reachability, approximate hop path, path MTU hints, and repeated latency observation. Stop treating them as interchangeable and instead ask what evidence each one is actually collecting."
 				},
 				{
 					title: "curl, nc, and telnet for Service Checks",
@@ -392,7 +388,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Project: Diagnose Why a Service Is Reachable Locally but Not from Another Machine",
 					content:
-						"Use the reachability lab to compare localhost success, same-subnet failure, and outside failure cases against service state, route state, and firewall state. Students should write down the failure signature before they edit anything so the later fix has real diagnostic context.",
+						"Use the reachability lab to compare localhost success, same-subnet failure, and outside failure cases against service state, route state, and firewall state. Write down the failure signature before they edit anything so the later fix has real diagnostic context.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS2-Local-vs-Remote-Reachability-Diagnosis/starter",
 					solutionLink:
@@ -412,7 +408,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Core Diagnostics supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Core Diagnostics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Core Diagnostics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-13-unit-6-core-diagnostics-supplemental-2/starter",
 					solutionLink:
@@ -421,7 +417,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Core Diagnostics supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Core Diagnostics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Core Diagnostics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-14-unit-6-core-diagnostics-supplemental-3/starter",
 					solutionLink:
@@ -435,12 +431,12 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "ip addr, ip link, and Interface State",
 					content:
-						"Use `ip addr` and `ip link` to make interface state visible: addresses, link state, and whether an interface is even up. Students should understand that no amount of higher-level diagnostics matters if the interface itself is down or misaddressed."
+						"Use `ip addr` and `ip link` to make interface state visible: addresses, link state, and whether an interface is even up. Key idea: No amount of higher-level diagnostics matters if the interface itself is down or misaddressed."
 				},
 				{
 					title: "ip route and Static versus Dynamic Paths",
 					content:
-						"Teach `ip route` as the host's own forwarding decision table. Students should understand default routes, directly connected networks, and the difference between routes learned automatically and routes set deliberately for a lab or override."
+						"Teach `ip route` as the host's own forwarding decision table. Key idea: Default routes, directly connected networks, and the difference between routes learned automatically and routes set deliberately for a lab or override."
 				},
 				{
 					title: "ARP, Neighbor Discovery, and ip neigh",
@@ -470,7 +466,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Linux Interface and Route Management supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Linux Interface and Route Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Linux Interface and Route Management. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-15-unit-7-linux-interface-and-route-management-supplemental-2/starter",
 					solutionLink:
@@ -479,7 +475,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Linux Interface and Route Management supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Linux Interface and Route Management. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Linux Interface and Route Management. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-16-unit-7-linux-interface-and-route-management-supplemental-3/starter",
 					solutionLink:
@@ -512,8 +508,7 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: IPv6 in Practice: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/starter",
 					solutionLink:
@@ -533,7 +528,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: IPv6 in Practice supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: IPv6 in Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: IPv6 in Practice. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-17-unit-8-ipv6-in-practice-supplemental-2/starter",
 					solutionLink:
@@ -542,7 +537,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: IPv6 in Practice supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: IPv6 in Practice. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: IPv6 in Practice. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-18-unit-8-ipv6-in-practice-supplemental-3/starter",
 					solutionLink:
@@ -556,7 +551,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "UFW Basics",
 					content:
-						"Teach UFW as a safe, readable host-policy layer rather than as a wall of raw packet filter rules. Students should understand allow, deny, limit, delete, and numbered rules before they try to expose a service deliberately."
+						"Teach UFW as a safe, readable host-policy layer rather than as a wall of raw packet filter rules. Key idea: Allow, deny, limit, delete, and numbered rules before they try to expose a service deliberately."
 				},
 				{
 					title: "Application Profiles, Logging, and Safe Rollout",
@@ -571,7 +566,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Project: Build and Verify a UFW Policy for a Web Server",
 					content:
-						"Use the UFW lab to allow only the intended service surface, keep remote administration safe, and verify the result from another host. Students should write down which ports are intentionally reachable, which are not, and how they proved both claims.",
+						"Use the UFW lab to allow only the intended service surface, keep remote administration safe, and verify the result from another host. Write down which ports are intentionally reachable, which are not, and how they proved both claims.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS3-UFW-Web-Server-Policy/starter",
 					solutionLink:
@@ -591,7 +586,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Firewalls and Host Policy supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Firewalls and Host Policy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Firewalls and Host Policy. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-19-unit-9-firewalls-and-host-policy-supplemental-2/starter",
 					solutionLink:
@@ -600,7 +595,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Firewalls and Host Policy supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Firewalls and Host Policy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Firewalls and Host Policy. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-20-unit-9-firewalls-and-host-policy-supplemental-3/starter",
 					solutionLink:
@@ -619,7 +614,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Safe Filter Expressions",
 					content:
-						"Use small, safe filter expressions such as host, port, and protocol filters so captures stay focused and readable. Students should learn that the capture filter is part of the diagnostic design, not just an optimization for large networks."
+						"Use small, safe filter expressions such as host, port, and protocol filters so captures stay focused and readable. Learn that the capture filter is part of the diagnostic design, not just an optimization for large networks."
 				},
 				{
 					title: "Host Capture versus Router Capture",
@@ -649,7 +644,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Packet Capture and Deep Inspection supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Packet Capture and Deep Inspection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Packet Capture and Deep Inspection. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-21-unit-10-packet-capture-and-deep-inspection-supplemental-2/starter",
 					solutionLink:
@@ -658,7 +653,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Packet Capture and Deep Inspection supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Packet Capture and Deep Inspection. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Packet Capture and Deep Inspection. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-22-unit-10-packet-capture-and-deep-inspection-supplemental-3/starter",
 					solutionLink:
@@ -672,7 +667,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "HTTP and HTTPS",
 					content:
-						"Use HTTP and HTTPS to connect protocol behavior back to ports, hostnames, and TLS. Students should know what remains visible before encryption, what becomes opaque after TLS, and why HTTPS diagnostics often require both packet-level and application-level thinking."
+						"Use HTTP and HTTPS to connect protocol behavior back to ports, hostnames, and TLS. Key idea: What remains visible before encryption, what becomes opaque after TLS, and why HTTPS diagnostics often require both packet-level and application-level thinking."
 				},
 				{
 					title: "SSH as a Diagnostic and Administrative Protocol",
@@ -682,17 +677,16 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "SMTP and DNS as Support Protocols",
 					content:
-						"Use SMTP and DNS to show that not every important network protocol looks like interactive browsing. Students should be able to explain how name resolution and mail transport still depend on the same reachability, port, and policy concepts as the rest of the course."
+						"Use SMTP and DNS to show that not every important network protocol looks like interactive browsing. Skill target: Explain how name resolution and mail transport still depend on the same reachability, port, and policy concepts as the rest of the course."
 				},
 				{
 					title: "How TLS Changes Visibility",
 					content:
-						"Explain that TLS protects application payload visibility but does not make the existence of the connection itself invisible. Students should understand which layers still reveal addresses, ports, and timing and which layers become opaque after encryption begins."
+						"Explain that TLS protects application payload visibility but does not make the existence of the connection itself invisible. Key idea: Which layers still reveal addresses, ports, and timing and which layers become opaque after encryption begins."
 				},
 				{
 					title: "Unit 11: Common Application Protocols: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-11-common-application-protocols/starter",
 					solutionLink:
@@ -712,7 +706,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Common Application Protocols supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Common Application Protocols. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplemental-2/starter",
 					solutionLink:
@@ -721,7 +715,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Common Application Protocols supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Common Application Protocols. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Common Application Protocols. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplemental-3/starter",
 					solutionLink:
@@ -735,7 +729,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Expose Only What Must Be Reachable",
 					content:
-						"Teach exposure as a deliberate design decision rather than a side effect of starting a service. Students should be able to name which ports are meant to be public, which ports are private, and how firewall or proxy layers enforce that boundary."
+						"Teach exposure as a deliberate design decision rather than a side effect of starting a service. Skill target: Name which ports are meant to be public, which ports are private, and how firewall or proxy layers enforce that boundary."
 				},
 				{
 					title: "Reverse Proxy and Firewall Layering",
@@ -745,7 +739,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Safe Port Forwarding and External Validation",
 					content:
-						"Teach safe port forwarding as a last-mile exposure step that must be paired with limited scope and outside verification. Students should understand that validating from the same host is not enough once the question is whether another machine on another segment can really reach the service."
+						"Teach safe port forwarding as a last-mile exposure step that must be paired with limited scope and outside verification. Key idea: Validating from the same host is not enough once the question is whether another machine on another segment can really reach the service."
 				},
 				{
 					title: "Project Pass: Validate the NAT and Exposure Topology from Outside",
@@ -770,7 +764,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Secure Exposure of Services supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Secure Exposure of Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Secure Exposure of Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-25-unit-12-secure-exposure-of-services-supplemental-2/starter",
 					solutionLink:
@@ -779,7 +773,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Secure Exposure of Services supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Secure Exposure of Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Secure Exposure of Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-26-unit-12-secure-exposure-of-services-supplemental-3/starter",
 					solutionLink:
@@ -812,8 +806,7 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "NS13 Expansion Ideas and Next Steps: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-ns13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -833,7 +826,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NS13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NS13 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-27-ns13-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -842,7 +835,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NS13 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NS13 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-28-ns13-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -851,22 +844,22 @@ export const networkSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: network systems lab 15",
+			title: "network systems lab 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "network systems lab 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: network systems lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"network systems lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "network systems lab 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: network systems lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative network systems lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "network systems lab 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: network systems lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"network systems lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/starter",
 					solutionLink:
@@ -875,32 +868,32 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: network systems lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"network systems lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "network systems lab 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: network systems lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from network systems lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/solution"
 				},
 				{
-					title: "Applied Studio 15: network systems lab 15 supplemental 2",
+					title: "network systems lab 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: network systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network systems lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-29-applied-studio-15-network-systems-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-29-applied-studio-15-network-systems-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: network systems lab 15 supplemental 3",
+					title: "network systems lab 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: network systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network systems lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-30-applied-studio-15-network-systems-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -909,22 +902,22 @@ export const networkSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: network systems lab 16",
+			title: "network systems lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "network systems lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: network systems lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"network systems lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "network systems lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: network systems lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative network systems lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "network systems lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: network systems lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"network systems lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/starter",
 					solutionLink:
@@ -933,32 +926,32 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: network systems lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"network systems lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "network systems lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: network systems lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from network systems lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 16: network systems lab 16 supplemental 2",
+					title: "network systems lab 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network systems lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-31-applied-studio-16-network-systems-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-31-applied-studio-16-network-systems-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: network systems lab 16 supplemental 3",
+					title: "network systems lab 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network systems lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-32-applied-studio-16-network-systems-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -967,22 +960,22 @@ export const networkSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: network systems lab 17",
+			title: "network systems lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "network systems lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: network systems lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"network systems lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "network systems lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: network systems lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative network systems lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "network systems lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: network systems lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"network systems lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/starter",
 					solutionLink:
@@ -991,32 +984,32 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: network systems lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"network systems lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "network systems lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: network systems lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from network systems lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 17: network systems lab 17 supplemental 2",
+					title: "network systems lab 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network systems lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-33-applied-studio-17-network-systems-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-33-applied-studio-17-network-systems-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: network systems lab 17 supplemental 3",
+					title: "network systems lab 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network systems lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-34-applied-studio-17-network-systems-lab-17-supplemental-3/starter",
 					solutionLink:

@@ -9,7 +9,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Rustup, Cargo, rustfmt, and Clippy",
 					content:
-						"Standardize the workflow around `rustup`, `cargo`, `rustfmt`, and `clippy`. Students should feel that the Rust toolchain is part of the security story because it makes structured feedback, repeatable builds, and static analysis normal."
+						"Standardize the workflow around `rustup`, `cargo`, `rustfmt`, and `clippy`. Feel that the Rust toolchain is part of the security story because it makes structured feedback, repeatable builds, and static analysis normal."
 				},
 				{
 					title: "The Comparative Framing",
@@ -19,17 +19,16 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Compiler Guidance as an Engineering Tool",
 					content:
-						"Students should see the compiler as a collaborator that narrows unsafe states early. The goal is not blind obedience to borrow-checker rules; it is understanding the engineering reason those rules exist."
+						"Visible pattern: The compiler as a collaborator that narrows unsafe states early. The goal is not blind obedience to borrow-checker rules; it is understanding the engineering reason those rules exist."
 				},
 				{
 					title: "Tooling, Cargo, and Why Rust Exists: Verification and Reflection",
 					content:
-						"Close RSS0 Tooling, Cargo, and Why Rust Exists by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close RSS0 Tooling, Cargo, and Why Rust Exists by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				},
 				{
 					title: "RSS0 Tooling, Cargo, and Why Rust Exists: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
@@ -40,7 +39,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: First Cargo Audit CLI",
 					content:
-						"Set up a small Cargo-based CLI and use it to compare a clean Rust workspace with a fragile manual C/C++ build loop. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Set up a small Cargo-based CLI and use it to compare a clean Rust workspace with a fragile manual C/C++ build loop.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
@@ -49,7 +48,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Tooling, Cargo, and Why Rust Exists Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS0 Tooling, Cargo, and Why Rust Exists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS0 Tooling, Cargo, and Why Rust Exists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +57,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Tooling, Cargo, and Why Rust Exists Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS0 Tooling, Cargo, and Why Rust Exists. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS0 Tooling, Cargo, and Why Rust Exists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-02-rss0-tooling-cargo-and-why-rust-exists-supplemental-3/starter",
 					solutionLink:
@@ -82,7 +81,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Drop Timing and Scope",
 					content:
-						"Explain how values are cleaned up when they leave scope and why that makes resource lifetime more explicit than in manual-memory designs. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain how values are cleaned up when they leave scope and why that makes resource lifetime more explicit than in manual-memory designs."
 				},
 				{
 					title: "Ownership, Moves, and Memory Responsibility: Verification and Reflection",
@@ -91,8 +90,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS1 Ownership, Moves, and Memory Responsibility: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
@@ -103,7 +101,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Ownership and Move Tracer",
 					content:
-						"Build a small CLI that moves strings, vectors, and structs through helper functions so students can see when ownership transfers and when values must be cloned. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a small CLI that moves strings, vectors, and structs through helper functions so students can see when ownership transfers and when values must be cloned.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
@@ -112,7 +110,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Ownership, Moves, and Memory Responsibility Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS1 Ownership, Moves, and Memory Responsibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS1 Ownership, Moves, and Memory Responsibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +119,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Ownership, Moves, and Memory Responsibility Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS1 Ownership, Moves, and Memory Responsibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS1 Ownership, Moves, and Memory Responsibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-04-rss1-ownership-moves-and-memory-responsibility-supplemental-3/starter",
 					solutionLink:
@@ -135,27 +133,26 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Shared vs. Mutable Borrowing",
 					content:
-						"Teach Rust's borrowing rules as a way to limit ambiguous mutation and observation. Students should connect this to the kinds of aliasing bugs that become hard to reason about in larger C/C++ systems."
+						"Teach Rust's borrowing rules as a way to limit ambiguous mutation and observation. Connect this to the kinds of aliasing bugs that become hard to reason about in larger C/C++ systems."
 				},
 				{
 					title: "Lifetime Reasoning without Mysticism",
 					content:
-						"Introduce lifetime thinking through scope relationships first and explicit annotations second. The goal is practical reasoning about which reference can safely outlive which value. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Introduce lifetime thinking through scope relationships first and explicit annotations second. The goal is practical reasoning about which reference can safely outlive which value."
 				},
 				{
 					title: "Why Borrow Checking Matters for Security",
 					content:
-						"Make the security angle explicit: a compiler that rejects dangling references or conflicting mutable access is removing a meaningful class of memory safety hazards before runtime. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Make the security angle explicit: a compiler that rejects dangling references or conflicting mutable access is removing a meaningful class of memory safety hazards before runtime."
 				},
 				{
 					title: "Borrowing, Aliasing, and Lifetimes: Verification and Reflection",
 					content:
-						"Close RSS2 Borrowing, Aliasing, and Lifetimes by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close RSS2 Borrowing, Aliasing, and Lifetimes by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				},
 				{
 					title: "RSS2 Borrowing, Aliasing, and Lifetimes: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
@@ -166,7 +163,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Borrowing and Aliasing Lab",
 					content:
-						"Refactor a small parser or buffer-manipulation exercise until it satisfies Rust's borrowing model without cloning away the real ownership story. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Refactor a small parser or buffer-manipulation exercise until it satisfies Rust's borrowing model without cloning away the real ownership story.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
@@ -175,7 +172,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Borrowing, Aliasing, and Lifetimes Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS2 Borrowing, Aliasing, and Lifetimes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS2 Borrowing, Aliasing, and Lifetimes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
@@ -184,7 +181,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Borrowing, Aliasing, and Lifetimes Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS2 Borrowing, Aliasing, and Lifetimes. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS2 Borrowing, Aliasing, and Lifetimes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rss2-borrowing-aliasing-and-lifetimes-supplemental-3/starter",
 					solutionLink:
@@ -198,17 +195,17 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option instead of Null-like Conventions",
 					content:
-						"Use `Option` to replace sentinel returns and nullable conventions. Students should feel why absence modeled in the type system is safer than absence hidden in documentation or magic values."
+						"Use `Option` to replace sentinel returns and nullable conventions. Feel why absence modeled in the type system is safer than absence hidden in documentation or magic values."
 				},
 				{
 					title: "Result, Match, and the Question-Mark Operator",
 					content:
-						"Teach `Result` as a typed alternative to error-code conventions. Pattern matching and `?` should feel like a disciplined error-propagation style, not just new syntax. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Teach `Result` as a typed alternative to error-code conventions. Pattern matching and `?` should feel like a disciplined error-propagation style, not just new syntax."
 				},
 				{
 					title: "Error Handling and Security Posture",
 					content:
-						"Connect Rust's typed failure paths to safer parsing and validation. A system is easier to secure when failure states are explicit and hard to ignore. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Connect Rust's typed failure paths to safer parsing and validation. A system is easier to secure when failure states are explicit and hard to ignore."
 				},
 				{
 					title: "Option, Result, and Typed Error Paths: Verification and Reflection",
@@ -217,8 +214,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS3 Option, Result, and Typed Error Paths: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
@@ -229,7 +225,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Option and Result Audit Tool",
 					content:
-						"Build a small input-validation or config-parsing tool that uses `Option`, `Result`, and `?` instead of ad hoc null checks or integer status flags. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a small input-validation or config-parsing tool that uses `Option`, `Result`, and `?` instead of ad hoc null checks or integer status flags.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
@@ -238,7 +234,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option, Result, and Typed Error Paths Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS3 Option, Result, and Typed Error Paths. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS3 Option, Result, and Typed Error Paths. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
@@ -247,7 +243,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option, Result, and Typed Error Paths Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS3 Option, Result, and Typed Error Paths. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS3 Option, Result, and Typed Error Paths. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-08-rss3-option-result-and-typed-error-paths-supplemental-3/starter",
 					solutionLink:
@@ -261,7 +257,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "String, str, Vec, and Slice Differences",
 					content:
-						"Teach owned strings, borrowed string slices, vectors, arrays, and slices as distinct tools rather than one generic container idea. Students should know which operations are cheap views and which allocate or move ownership."
+						"Teach owned strings, borrowed string slices, vectors, arrays, and slices as distinct tools rather than one generic container idea. Key idea: Which operations are cheap views and which allocate or move ownership."
 				},
 				{
 					title: "Indexing, Iteration, and Safer Access Patterns",
@@ -271,7 +267,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Parser-Facing Safety",
 					content:
-						"Use small parser examples so bounds safety feels like a real systems concern rather than a toy rule. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use small parser examples so bounds safety feels like a real systems concern rather than a toy rule."
 				},
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety: Verification and Reflection",
@@ -280,8 +276,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS4 Strings, Slices, Collections, and Bounds Safety: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
@@ -292,7 +287,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Slice and Bounds Workbench",
 					content:
-						"Implement a byte-buffer or log-slice utility that compares safe slicing patterns with the kinds of off-by-one and unchecked indexing bugs students already know from low-level work. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Implement a byte-buffer or log-slice utility that compares safe slicing patterns with the kinds of off-by-one and unchecked indexing bugs students already know from low-level work.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
@@ -301,7 +296,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS4 Strings, Slices, Collections, and Bounds Safety. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS4 Strings, Slices, Collections, and Bounds Safety. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
@@ -310,7 +305,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS4 Strings, Slices, Collections, and Bounds Safety. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS4 Strings, Slices, Collections, and Bounds Safety. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-10-rss4-strings-slices-collections-and-bounds-safety-supplemental-3/starter",
 					solutionLink:
@@ -324,17 +319,17 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs for Explicit Data Modeling",
 					content:
-						"Use structs to make ownership, state, and transitions visible. Students should see that good modeling reduces security bugs because it narrows the number of half-valid states code can represent."
+						"Use structs to make ownership, state, and transitions visible. Visible pattern: That good modeling reduces security bugs because it narrows the number of half-valid states code can represent."
 				},
 				{
 					title: "Enums and Impossible States",
 					content:
-						"Compare tagged enums and pattern matching to ad hoc integer codes, booleans, or loosely coordinated fields. Rust shines when a type can make impossible states unrepresentable. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare tagged enums and pattern matching to ad hoc integer codes, booleans, or loosely coordinated fields. Rust shines when a type can make impossible states unrepresentable."
 				},
 				{
 					title: "Pattern Matching as Validation",
 					content:
-						"Teach `match` not just as syntax, but as a way to force complete reasoning across every state the program can inhabit. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Teach `match` not just as syntax, but as a way to force complete reasoning across every state the program can inhabit."
 				},
 				{
 					title: "Structs, Enums, and Safer State Models: Verification and Reflection",
@@ -343,8 +338,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS5 Structs, Enums, and Safer State Models: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
@@ -355,7 +349,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: State Machine Refactor",
 					content:
-						"Refactor a fragile status-code workflow into structs and enums so the compiler helps enforce legal transitions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Refactor a fragile status-code workflow into structs and enums so the compiler helps enforce legal transitions.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
@@ -364,7 +358,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs, Enums, and Safer State Models Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS5 Structs, Enums, and Safer State Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS5 Structs, Enums, and Safer State Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
@@ -373,7 +367,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs, Enums, and Safer State Models Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS5 Structs, Enums, and Safer State Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS5 Structs, Enums, and Safer State Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-12-rss5-structs-enums-and-safer-state-models-supplemental-3/starter",
 					solutionLink:
@@ -387,17 +381,17 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits as Behavior Contracts",
 					content:
-						"Teach traits as explicit contracts for reusable behavior. Students should compare them with interfaces, abstract classes, or virtual methods without losing the Rust-specific emphasis on disciplined composition."
+						"Teach traits as explicit contracts for reusable behavior. Compare them with interfaces, abstract classes, or virtual methods without losing the Rust-specific emphasis on disciplined composition."
 				},
 				{
 					title: "Iterator Safety vs. Invalidation Risk",
 					content:
-						"Use iterators and collection transforms to explain why Rust makes it harder to mutate collections in unsafe ways while traversing them. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use iterators and collection transforms to explain why Rust makes it harder to mutate collections in unsafe ways while traversing them."
 				},
 				{
 					title: "Secure API Boundaries",
 					content:
-						"Good trait and iterator design can reduce misuse by forcing callers into safer shapes. This matters for security-sensitive code because APIs are part of the attack surface. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Good trait and iterator design can reduce misuse by forcing callers into safer shapes. This matters for security-sensitive code because APIs are part of the attack surface."
 				},
 				{
 					title: "Traits, Iterators, and API Contracts: Verification and Reflection",
@@ -406,8 +400,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS6 Traits, Iterators, and API Contracts: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
@@ -418,7 +411,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Trait-Based Validation Pipeline",
 					content:
-						"Build a multi-step validation pipeline with traits and iterator-based transforms so the student can compare clean contracts with ad hoc callback spaghetti. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a multi-step validation pipeline with traits and iterator-based transforms so the work can compare clean contracts with ad hoc callback spaghetti.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
@@ -427,7 +420,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits, Iterators, and API Contracts Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS6 Traits, Iterators, and API Contracts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS6 Traits, Iterators, and API Contracts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
@@ -436,7 +429,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits, Iterators, and API Contracts Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS6 Traits, Iterators, and API Contracts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS6 Traits, Iterators, and API Contracts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-14-rss6-traits-iterators-and-api-contracts-supplemental-3/starter",
 					solutionLink:
@@ -450,17 +443,17 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "File I/O and Parser Discipline",
 					content:
-						"Teach parsing as a systems task where small unchecked assumptions cause real bugs. Use Rust's file APIs and typed error model to build safer parse-and-validate workflows. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Teach parsing as a systems task where small unchecked assumptions cause real bugs. Use Rust's file APIs and typed error model to build safer parse-and-validate workflows."
 				},
 				{
 					title: "Input Validation and Trust Boundaries",
 					content:
-						"Make untrusted input a first-class theme. Students should identify where the CLI receives external data and what validation or normalization happens before it is trusted. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Make untrusted input a first-class theme. Identify where the CLI receives external data and what validation or normalization happens before it is trusted."
 				},
 				{
 					title: "Security Logging and Failure Visibility",
 					content:
-						"Show how structured errors and explicit validation failures make later debugging and auditing easier. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Show how structured errors and explicit validation failures make later debugging and auditing easier."
 				},
 				{
 					title: "Files, Parsers, and Secure CLI Design: Verification and Reflection",
@@ -469,8 +462,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS7 Files, Parsers, and Secure CLI Design: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
@@ -481,7 +473,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Secure CLI Audit Tool",
 					content:
-						"Build a small CLI that parses a log or config file, validates each record, and reports trustworthy failures instead of crashing or silently accepting malformed input. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a small CLI that parses a log or config file, validates each record, and reports trustworthy failures instead of crashing or silently accepting malformed input.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
@@ -490,7 +482,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Files, Parsers, and Secure CLI Design Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS7 Files, Parsers, and Secure CLI Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS7 Files, Parsers, and Secure CLI Design. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
@@ -499,7 +491,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Files, Parsers, and Secure CLI Design Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS7 Files, Parsers, and Secure CLI Design. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS7 Files, Parsers, and Secure CLI Design. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-16-rss7-files-parsers-and-secure-cli-design-supplemental-3/starter",
 					solutionLink:
@@ -513,27 +505,26 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Threads, Channels, and Shared State",
 					content:
-						"Introduce Rust concurrency with the same comparative posture as earlier units. Students should see where Rust's ownership and trait rules make it harder to create unsafe shared-state patterns."
+						"Introduce Rust concurrency with the same comparative posture as earlier units. Visible pattern: Where Rust's ownership and trait rules make it harder to create unsafe shared-state patterns."
 				},
 				{
 					title: "Data Races vs. Logic Races",
 					content:
-						"Be honest about the boundary: Rust removes many memory-safety race problems, but it does not eliminate higher-level logic races or bad protocol design. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Be honest about the boundary: Rust removes many memory-safety race problems, but it does not eliminate higher-level logic races or bad protocol design."
 				},
 				{
 					title: "Choosing Channels or Shared Structures",
 					content:
-						"Compare message-passing and shared-state approaches so students can reason about design tradeoffs instead of applying concurrency tools blindly. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare message-passing and shared-state approaches so students can reason about design tradeoffs instead of applying concurrency tools blindly."
 				},
 				{
 					title: "Concurrency and Race Reduction: Verification and Reflection",
 					content:
-						"Close RSS8 Concurrency and Race Reduction by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close RSS8 Concurrency and Race Reduction by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				},
 				{
 					title: "RSS8 Concurrency and Race Reduction: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
@@ -544,7 +535,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Threads and Channels Monitor",
 					content:
-						"Build a small concurrent monitor that compares message passing with shared mutable state and highlights how Rust narrows unsafe race patterns. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Build a small concurrent monitor that compares message passing with shared mutable state and highlights how Rust narrows unsafe race patterns.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
@@ -553,7 +544,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Concurrency and Race Reduction Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS8 Concurrency and Race Reduction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS8 Concurrency and Race Reduction. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
@@ -562,7 +553,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Concurrency and Race Reduction Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS8 Concurrency and Race Reduction. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS8 Concurrency and Race Reduction. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-18-rss8-concurrency-and-race-reduction-supplemental-3/starter",
 					solutionLink:
@@ -576,27 +567,26 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "What Unsafe Actually Means",
 					content:
-						"Teach `unsafe` as a narrow escape hatch, not a forbidden magic zone. Students should learn which guarantees the compiler stops checking and why that creates a smaller trusted computing boundary that must be justified carefully."
+						"Teach `unsafe` as a narrow escape hatch, not a forbidden magic zone. Learn which guarantees the compiler stops checking and why that creates a smaller trusted computing boundary that must be justified carefully."
 				},
 				{
 					title: "FFI as a Real-World Boundary",
 					content:
-						"Use FFI examples to show where Rust still depends on external correctness and where unsafety can re-enter the system through other languages or libraries. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use FFI examples to show where Rust still depends on external correctness and where unsafety can re-enter the system through other languages or libraries."
 				},
 				{
 					title: "Auditing Unsafe Blocks",
 					content:
-						"Require comments and reasoning around every unsafe block so students treat each one as an audit target. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Require comments and reasoning around every unsafe block so students treat each one as an audit target."
 				},
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries: Verification and Reflection",
 					content:
-						"Close RSS9 Unsafe, FFI, and Trusted Boundaries by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Close RSS9 Unsafe, FFI, and Trusted Boundaries by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				},
 				{
 					title: "RSS9 Unsafe, FFI, and Trusted Boundaries: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -607,7 +597,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Unsafe and FFI Boundary Review",
 					content:
-						"Wrap a tiny unsafe or FFI-facing boundary with documented invariants so the student practices narrowing and auditing trust assumptions. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Wrap a tiny unsafe or FFI-facing boundary with documented invariants so the student practices narrowing and auditing trust assumptions.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -616,7 +606,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS9 Unsafe, FFI, and Trusted Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS9 Unsafe, FFI, and Trusted Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -625,7 +615,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS9 Unsafe, FFI, and Trusted Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS9 Unsafe, FFI, and Trusted Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-20-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-3/starter",
 					solutionLink:
@@ -654,12 +644,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool: Verification and Reflection",
 					content:
-						"Close RSS10 Capstone: Harden a Legacy Tool by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Close RSS10 Capstone: Harden a Legacy Tool by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
 				},
 				{
 					title: "RSS10 Capstone: Harden a Legacy Tool: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
@@ -670,7 +659,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: Harden a Legacy Tool",
 					content:
-						"Complete a larger audit-and-port capstone where the student documents the old bug classes, the Rust redesign, the remaining risks, and the final testing evidence. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Complete a larger audit-and-port capstone where the student documents the old bug classes, the Rust redesign, the remaining risks, and the final testing evidence.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
@@ -679,7 +668,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS10 Capstone: Harden a Legacy Tool. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS10 Capstone: Harden a Legacy Tool. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
@@ -688,7 +677,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to RSS10 Capstone: Harden a Legacy Tool. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to RSS10 Capstone: Harden a Legacy Tool. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-22-rss10-capstone-harden-a-legacy-tool-supplemental-3/starter",
 					solutionLink:

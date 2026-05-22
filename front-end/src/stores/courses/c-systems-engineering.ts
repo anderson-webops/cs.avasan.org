@@ -9,7 +9,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Preferred IDEs and Core Toolchain",
 					content:
-						"Standardize on `CLion` or `VS Code` and make the real requirement the underlying toolchain rather than the editor itself. Students should verify `clang --version`, `cmake --version`, and `lldb --version` or an equivalent GCC and GDB toolchain before the course depends on debugging, binary inspection, or sanitizer-backed runs."
+						"Standardize on `CLion` or `VS Code` and make the real requirement the underlying toolchain rather than the editor itself. Verify `clang --version`, `cmake --version`, and `lldb --version` or an equivalent GCC and GDB toolchain before the course depends on debugging, binary inspection, or sanitizer-backed runs."
 				},
 				{
 					title: "macOS and Windows Setup Walkthroughs",
@@ -19,7 +19,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Course Positioning and Prerequisites",
 					content:
-						"Position the course as the next low-level step after `C++ Level 2`, with C used to expose memory, representation, and data movement more directly. Students should already be comfortable with variables, loops, functions, arrays, pointers, and manual lifetime reasoning before the course adds stricter debugging and more explicit representation work."
+						"Position the course as the next low-level step after `C++ Level 2`, with C used to expose memory, representation, and data movement more directly. Already be comfortable with variables, loops, functions, arrays, pointers, and manual lifetime reasoning before the course adds stricter debugging and more explicit representation work."
 				},
 				{
 					title: "Core Outcomes and Daily Working Habits",
@@ -28,8 +28,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "CSE0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-cse0-setup-and-tooling/starter",
 					solutionLink:
@@ -49,7 +48,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to CSE0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to CSE0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-cse0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +57,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to CSE0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to CSE0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-cse0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -77,7 +76,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Runtime Model Compared to Higher-Level Languages",
 					content:
-						"Compare C's runtime model to higher-level environments that hide allocation, object layout, and dispatch details. Students should understand that C gives fewer automatic protections but a clearer view of data movement and memory representation, which is exactly why it is valuable for systems work."
+						"Compare C's runtime model to higher-level environments that hide allocation, object layout, and dispatch details. Key idea: C gives fewer automatic protections but a clearer view of data movement and memory representation, which is exactly why it is valuable for systems work."
 				},
 				{
 					title: "Headers, Source Files, and Observable Build Boundaries",
@@ -91,8 +90,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Why C for Systems Work: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-1-why-c-for-systems-work/starter",
 					solutionLink:
@@ -112,7 +110,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Why C for Systems Work. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Why C for Systems Work. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-unit-1-why-c-for-systems-work-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +119,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Why C for Systems Work. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Why C for Systems Work. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-unit-1-why-c-for-systems-work-supplemental-3/starter",
 					solutionLink:
@@ -145,7 +143,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Signed vs Unsigned Integers and Two's Complement",
 					content:
-						"Show that the same 16 bits can name one unsigned value and one signed value, then connect that idea to two's complement and the meaning of the top bit. Students should be able to explain signedness as an interpretation rule rather than as a different kind of memory."
+						"Show that the same 16 bits can name one unsigned value and one signed value, then connect that idea to two's complement and the meaning of the top bit. Skill target: Explain signedness as an interpretation rule rather than as a different kind of memory."
 				},
 				{
 					title: "Project: Hex and Binary Inspector",
@@ -170,7 +168,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 2: Binary, Hex, and Number Representation supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Binary, Hex, and Number Representation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Binary, Hex, and Number Representation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-unit-2-binary-hex-and-number-representation-supplemental-2/starter",
 					solutionLink:
@@ -179,7 +177,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 2: Binary, Hex, and Number Representation supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Binary, Hex, and Number Representation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Binary, Hex, and Number Representation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-2-binary-hex-and-number-representation-supplemental-3/starter",
 					solutionLink:
@@ -193,7 +191,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "AND, OR, XOR, NOT, and Shifts",
 					content:
-						"Teach the bitwise operators as data-shaping tools rather than as abstract truth tables alone. Students should know what gets cleared with AND, what gets set with OR, what toggles with XOR, and why left and right shifts only make sense when they can describe the bit movement clearly."
+						"Teach the bitwise operators as data-shaping tools rather than as abstract truth tables alone. Key idea: What gets cleared with AND, what gets set with OR, what toggles with XOR, and why left and right shifts only make sense when they can describe the bit movement clearly."
 				},
 				{
 					title: "Masking, Flag Extraction, and Bit Packing",
@@ -203,7 +201,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "XOR as a Reversible Byte-Level Transform",
 					content:
-						"Give XOR special attention because it shows up in parity, toggling, checksums, and simple reversible transforms. Students should explain in plain language why `x ^ k ^ k` returns the original byte instead of treating XOR as a magic classroom trick."
+						"Give XOR special attention because it shows up in parity, toggling, checksums, and simple reversible transforms. Explain in plain language why `x ^ k ^ k` returns the original byte instead of treating XOR as a magic classroom trick."
 				},
 				{
 					title: "Project: Bitflag Configuration Parser",
@@ -237,7 +235,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 3: Bitwise Operations supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Bitwise Operations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Bitwise Operations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-3-bitwise-operations-supplemental-2/starter",
 					solutionLink:
@@ -246,7 +244,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 3: Bitwise Operations supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Bitwise Operations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Bitwise Operations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-3-bitwise-operations-supplemental-3/starter",
 					solutionLink:
@@ -260,7 +258,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Addresses and Pointer Arithmetic",
 					content:
-						"Use arrays and pointer arithmetic to show that addresses move in element-sized steps rather than in vague 'next item' intuition. Students should learn to connect pointer movement directly to type size and memory layout."
+						"Use arrays and pointer arithmetic to show that addresses move in element-sized steps rather than in vague 'next item' intuition. Skill target: Connect pointer movement directly to type size and memory layout."
 				},
 				{
 					title: "Stack vs Heap vs Static Storage",
@@ -275,7 +273,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Project: Memory Visualizer for Arrays and Structs",
 					content:
-						"Use the memory visualizer to print stack, heap, and static addresses alongside member offsets in a small struct. Students should identify likely padding and explain why adjacent array elements move by one element size rather than one byte.",
+						"Use the memory visualizer to print stack, heap, and static addresses alongside member offsets in a small struct. Identify likely padding and explain why adjacent array elements move by one element size rather than one byte.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE4-Memory-Visualizer/starter",
 					solutionLink:
@@ -295,7 +293,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 4: Memory and Layout supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Memory and Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Memory and Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-4-memory-and-layout-supplemental-2/starter",
 					solutionLink:
@@ -304,7 +302,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 4: Memory and Layout supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Memory and Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Memory and Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-10-unit-4-memory-and-layout-supplemental-3/starter",
 					solutionLink:
@@ -318,12 +316,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "C Strings vs Raw Byte Arrays",
 					content:
-						"Teach C strings as one special convention built on top of bytes: a sequence terminated by `\\0`. Students should understand that a byte buffer is not automatically a string and that treating arbitrary bytes like text is a fast path to truncated reads or misleading output."
+						"Teach C strings as one special convention built on top of bytes: a sequence terminated by `\\0`. Key idea: A byte buffer is not automatically a string and that treating arbitrary bytes like text is a fast path to truncated reads or misleading output."
 				},
 				{
 					title: "Length vs Capacity and Null Termination",
 					content:
-						"Separate the number of meaningful characters from the size of the allocated buffer. Students should be able to explain why a destination buffer needs capacity-aware copying and where the terminator ends up after a safe copy."
+						"Separate the number of meaningful characters from the size of the allocated buffer. Skill target: Explain why a destination buffer needs capacity-aware copying and where the terminator ends up after a safe copy."
 				},
 				{
 					title: "Safe Copy Patterns and Byte Dumps",
@@ -353,7 +351,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 5: Strings and Byte Buffers supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: Strings and Byte Buffers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: Strings and Byte Buffers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-11-unit-5-strings-and-byte-buffers-supplemental-2/starter",
 					solutionLink:
@@ -362,7 +360,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 5: Strings and Byte Buffers supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: Strings and Byte Buffers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: Strings and Byte Buffers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-12-unit-5-strings-and-byte-buffers-supplemental-3/starter",
 					solutionLink:
@@ -376,7 +374,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "FILE Pointers, Buffered I O, and Binary vs Text Modes",
 					content:
-						"Introduce `FILE *` as the basic stream handle for structured reading and writing. Students should know when text parsing is appropriate, when binary formats are more stable, and why checking return values matters more than assuming the file behaved as expected."
+						"Introduce `FILE *` as the basic stream handle for structured reading and writing. Key idea: When text parsing is appropriate, when binary formats are more stable, and why checking return values matters more than assuming the file behaved as expected."
 				},
 				{
 					title: "Reading Structured Data One Field at a Time",
@@ -386,7 +384,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Checksums, Validation, and Parse Boundaries",
 					content:
-						"Teach validation as part of parsing, not as an optional afterthought. Students should reject bad magic values, mismatched checksums, or truncated records before they start treating bytes as trustworthy data."
+						"Teach validation as part of parsing, not as an optional afterthought. Reject bad magic values, mismatched checksums, or truncated records before they start treating bytes as trustworthy data."
 				},
 				{
 					title: "Project: Packet Serializer Deserializer",
@@ -420,7 +418,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 6: Files, Streams, and Parsing supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Files, Streams, and Parsing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Files, Streams, and Parsing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-13-unit-6-files-streams-and-parsing-supplemental-2/starter",
 					solutionLink:
@@ -429,7 +427,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 6: Files, Streams, and Parsing supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Files, Streams, and Parsing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Files, Streams, and Parsing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-14-unit-6-files-streams-and-parsing-supplemental-3/starter",
 					solutionLink:
@@ -443,7 +441,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "malloc, calloc, realloc, and free",
 					content:
-						"Teach the heap allocation calls as explicit ownership decisions instead of as generic ways to 'make more memory.' Students should know which call zeroes memory, which one resizes an existing region, and why every successful allocation needs a clear path to cleanup."
+						"Teach the heap allocation calls as explicit ownership decisions instead of as generic ways to 'make more memory.' Key idea: Which call zeroes memory, which one resizes an existing region, and why every successful allocation needs a clear path to cleanup."
 				},
 				{
 					title: "Ownership and Lifetime Invariants",
@@ -453,7 +451,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Leaks, Double Frees, and Invalid Access",
 					content:
-						"Use small examples to show how heap bugs usually come from broken lifetime rules rather than from the allocator itself being mysterious. Students should be able to describe the failure in terms of ownership and cleanup instead of only saying the program crashed."
+						"Use small examples to show how heap bugs usually come from broken lifetime rules rather than from the allocator itself being mysterious. Skill target: Describe the failure in terms of ownership and cleanup instead of only saying the program crashed."
 				},
 				{
 					title: "Project: Dynamic Ring Buffer",
@@ -478,7 +476,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 7: Dynamic Memory and Lifetime supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Dynamic Memory and Lifetime. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Dynamic Memory and Lifetime. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-15-unit-7-dynamic-memory-and-lifetime-supplemental-2/starter",
 					solutionLink:
@@ -487,7 +485,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 7: Dynamic Memory and Lifetime supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Dynamic Memory and Lifetime. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Dynamic Memory and Lifetime. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-16-unit-7-dynamic-memory-and-lifetime-supplemental-3/starter",
 					solutionLink:
@@ -516,12 +514,11 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Design Exercise: Command Handler Table",
 					content:
-						"Have students sketch a command table for a toy parser and explain which inputs map to which handlers. The exercise should make indirect control flow feel understandable before students encounter it in larger programs."
+						"Sketch a command table for a toy parser and explain which inputs map to which handlers. The exercise should make indirect control flow feel understandable before students encounter it in larger programs."
 				},
 				{
 					title: "Unit 8: Function Pointers and Dispatch: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-8-function-pointers-and-dispatch/starter",
 					solutionLink:
@@ -541,7 +538,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: Function Pointers and Dispatch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: Function Pointers and Dispatch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplemental-2/starter",
 					solutionLink:
@@ -550,7 +547,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: Function Pointers and Dispatch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: Function Pointers and Dispatch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplemental-3/starter",
 					solutionLink:
@@ -564,7 +561,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Dynamic Arrays, Linked Lists, and Ring Buffers",
 					content:
-						"Compare the main beginner-friendly C data structures by the questions they answer well: contiguous storage, cheap appends, cheap front removal, or stable node insertion. Students should learn to justify the structure choice instead of treating every container as a generic list."
+						"Compare the main beginner-friendly C data structures by the questions they answer well: contiguous storage, cheap appends, cheap front removal, or stable node insertion. Skill target: Justify the structure choice instead of treating every container as a generic list."
 				},
 				{
 					title: "Hash Tables at a Beginner-Friendly Level",
@@ -579,7 +576,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Project Pass: Extend the Dynamic Ring Buffer",
 					content:
-						"Return to the ring-buffer lab and use it as the main data-structure case study for invariants, queue order, and resizing behavior. Students should treat the structure as a maintained system with rules, not as a one-off container that 'seems to work.'",
+						"Return to the ring-buffer lab and use it as the main data-structure case study for invariants, queue order, and resizing behavior. Treat the structure as a maintained system with rules, not as a one-off container that 'seems to work.'",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE7-Dynamic-Ring-Buffer/starter",
 					solutionLink:
@@ -599,7 +596,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 9: Data Structures in C supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Data Structures in C. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Data Structures in C. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-19-unit-9-data-structures-in-c-supplemental-2/starter",
 					solutionLink:
@@ -608,7 +605,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 9: Data Structures in C supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Data Structures in C. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Data Structures in C. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-20-unit-9-data-structures-in-c-supplemental-3/starter",
 					solutionLink:
@@ -632,7 +629,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit Conversion Reliability",
 					content:
-						"Use temperature, voltage, or timing conversions to show why a conversion routine is an engineering artifact, not just a math exercise. Students should validate ranges, choose units deliberately, and explain the scaling used in the code."
+						"Use temperature, voltage, or timing conversions to show why a conversion routine is an engineering artifact, not just a math exercise. Validate ranges, choose units deliberately, and explain the scaling used in the code."
 				},
 				{
 					title: "Numeric Error and Approximation",
@@ -641,8 +638,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: Engineering Math in Code: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-10-engineering-math-in-code/starter",
 					solutionLink:
@@ -662,7 +658,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Engineering Math in Code. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Engineering Math in Code. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-21-unit-10-engineering-math-in-code-supplemental-2/starter",
 					solutionLink:
@@ -671,7 +667,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Engineering Math in Code. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Engineering Math in Code. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-22-unit-10-engineering-math-in-code-supplemental-3/starter",
 					solutionLink:
@@ -685,7 +681,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Compiler Flags and Warning Discipline",
 					content:
-						"Treat compiler flags as engineering policy rather than optional noise. Students should get used to `-Wall`, `-Wextra`, and `-Wpedantic`, and should see warnings as evidence of assumptions that need to be checked before the code deserves trust."
+						"Treat compiler flags as engineering policy rather than optional noise. Get used to `-Wall`, `-Wextra`, and `-Wpedantic`, and should see warnings as evidence of assumptions that need to be checked before the code deserves trust."
 				},
 				{
 					title: "Debuggers, Sanitizers, and Evidence-Driven Diagnosis",
@@ -695,7 +691,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Binary Inspection with objdump and nm",
 					content:
-						"Introduce `objdump` or `llvm-objdump` and `nm` as ways to inspect the built artifact itself. Students should understand that systems engineering includes observing the binary, not only the source, especially when they want to confirm symbols, sections, or compiled layout choices."
+						"Introduce `objdump` or `llvm-objdump` and `nm` as ways to inspect the built artifact itself. Key idea: Systems engineering includes observing the binary, not only the source, especially when they want to confirm symbols, sections, or compiled layout choices."
 				},
 				{
 					title: "Tooling Pass on a Real Utility",
@@ -704,8 +700,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Systems Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-11-systems-tooling/starter",
 					solutionLink:
@@ -725,7 +720,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 11: Systems Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Systems Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Systems Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-23-unit-11-systems-tooling-supplemental-2/starter",
 					solutionLink:
@@ -734,7 +729,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 11: Systems Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Systems Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Systems Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-24-unit-11-systems-tooling-supplemental-3/starter",
 					solutionLink:
@@ -758,7 +753,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Write Output That Another Tool Could Trust",
 					content:
-						"Students should produce normalized output with stable formatting, explicit derived fields, and clear handling of invalid input. The capstone should feel like a utility another engineer could actually use or extend rather than like a classroom printout."
+						"Produce normalized output with stable formatting, explicit derived fields, and clear handling of invalid input. The capstone should feel like a utility another engineer could actually use or extend rather than like a classroom printout."
 				},
 				{
 					title: "Project: Capstone Telemetry Transform CLI",
@@ -783,7 +778,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Capstone Engineering Utility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Capstone Engineering Utility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplemental-2/starter",
 					solutionLink:
@@ -792,7 +787,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Capstone Engineering Utility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Capstone Engineering Utility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplemental-3/starter",
 					solutionLink:
@@ -801,22 +796,22 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 14: systems build 14",
+			title: "systems build 14: Implementation Studio",
 			curriculum: [
 				{
 					title: "systems build 14: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: systems build 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"systems build 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "systems build 14: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: systems build 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative systems build 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "systems build 14: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: systems build 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"systems build 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
@@ -825,32 +820,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 14: Review and Reflection",
 					content:
-						"Close Applied Studio 14: systems build 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"systems build 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 14: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: systems build 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from systems build 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/solution"
 				},
 				{
-					title: "Applied Studio 14: systems build 14 supplemental 2",
+					title: "systems build 14 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: systems build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: systems build 14 supplemental 3",
+					title: "systems build 14 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: systems build 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-28-applied-studio-14-systems-build-14-supplemental-3/starter",
 					solutionLink:
@@ -859,22 +854,22 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: systems build 15",
+			title: "systems build 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "systems build 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: systems build 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"systems build 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "systems build 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: systems build 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative systems build 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "systems build 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: systems build 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"systems build 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
@@ -883,32 +878,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: systems build 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"systems build 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: systems build 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from systems build 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/solution"
 				},
 				{
-					title: "Applied Studio 15: systems build 15 supplemental 2",
+					title: "systems build 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: systems build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: systems build 15 supplemental 3",
+					title: "systems build 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: systems build 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-30-applied-studio-15-systems-build-15-supplemental-3/starter",
 					solutionLink:
@@ -917,22 +912,22 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: systems build 16",
+			title: "systems build 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "systems build 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: systems build 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"systems build 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "systems build 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: systems build 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative systems build 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "systems build 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: systems build 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"systems build 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
@@ -941,32 +936,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: systems build 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"systems build 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: systems build 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from systems build 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/solution"
 				},
 				{
-					title: "Applied Studio 16: systems build 16 supplemental 2",
+					title: "systems build 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: systems build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: systems build 16 supplemental 3",
+					title: "systems build 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: systems build 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-32-applied-studio-16-systems-build-16-supplemental-3/starter",
 					solutionLink:
@@ -975,22 +970,22 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: systems build 17",
+			title: "systems build 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "systems build 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: systems build 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"systems build 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "systems build 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: systems build 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative systems build 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "systems build 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: systems build 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"systems build 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
@@ -999,32 +994,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: systems build 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"systems build 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: systems build 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from systems build 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/solution"
 				},
 				{
-					title: "Applied Studio 17: systems build 17 supplemental 2",
+					title: "systems build 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: systems build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: systems build 17 supplemental 3",
+					title: "systems build 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: systems build 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to systems build 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-34-applied-studio-17-systems-build-17-supplemental-3/starter",
 					solutionLink:

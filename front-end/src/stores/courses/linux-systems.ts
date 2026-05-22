@@ -9,7 +9,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Why the Linux Environment Is the Real Classroom",
 					content:
-						"Position the course as an operating-systems and administration class, not just a list of shell commands. Students should treat the Linux environment as the place where files live, services run, logs accumulate, and debugging happens, with VS Code or another editor acting only as a careful companion to terminal work."
+						"Position the course as an operating-systems and administration class, not just a list of shell commands. Treat the Linux environment as the place where files live, services run, logs accumulate, and debugging happens, with VS Code or another editor acting only as a careful companion to terminal work."
 				},
 				{
 					title: "Recommended Tooling on macOS",
@@ -49,7 +49,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to LS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to LS0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-ls0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +58,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to LS0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to LS0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-ls0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -72,7 +72,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Terminal Basics, History, Pipes, Redirection, and Exit Codes",
 					content:
-						"Introduce the shell as a command runner that connects small tools together. Students should learn how command history reduces repeated typing, how pipes move output from one tool into another, how redirection captures output into files, and how exit codes communicate success or failure even when a command prints nothing interesting."
+						"Introduce the shell as a command runner that connects small tools together. Learn how command history reduces repeated typing, how pipes move output from one tool into another, how redirection captures output into files, and how exit codes communicate success or failure even when a command prints nothing interesting."
 				},
 				{
 					title: "Core Navigation and File Management Commands",
@@ -91,8 +91,7 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Shell Foundations: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-1-shell-foundations/starter",
 					solutionLink:
@@ -112,7 +111,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: Shell Foundations supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Shell Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Shell Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-unit-1-shell-foundations-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +120,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: Shell Foundations supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Shell Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Shell Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-unit-1-shell-foundations-supplemental-3/starter",
 					solutionLink:
@@ -135,7 +134,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Read the Linux Filesystem as a Map of Intent",
 					content:
-						'Walk through `/`, `/home`, `/root`, `/etc`, `/var`, `/usr`, `/opt`, `/tmp`, `/srv`, and `/dev` with the question "what belongs here and why." Students should leave this lesson understanding that path choice signals meaning: configuration in one place, durable application state in another, temporary scratch data somewhere else, and service-owned content somewhere else again.'
+						'Walk through `/`, `/home`, `/root`, `/etc`, `/var`, `/usr`, `/opt`, `/tmp`, `/srv`, and `/dev` with the question "what belongs here and why." Leave this lesson understanding that path choice signals meaning: configuration in one place, durable application state in another, temporary scratch data somewhere else, and service-owned content somewhere else again.'
 				},
 				{
 					title: "Pseudo-Filesystems: /proc and /sys",
@@ -145,12 +144,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Choosing Between /var, /srv, and /opt",
 					content:
-						"Teach the judgment call behind application layout. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`; students should be able to defend those choices instead of scattering files arbitrarily."
+						"Teach the judgment call behind application layout. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`; Be able to defend those choices instead of scattering files arbitrarily."
 				},
 				{
 					title: "Project: Deploy a Static Site from /srv",
 					content:
-						"Use the static-site lab to make the directory-purpose lesson concrete by placing a document root under `/srv/linux-systems-site`, copying in content, and pairing that path with an Nginx server block. Students should explain why `/srv` is appropriate for served content and why `/tmp` or a random home-directory path would be a weaker production choice.",
+						"Use the static-site lab to make the directory-purpose lesson concrete by placing a document root under `/srv/linux-systems-site`, copying in content, and pairing that path with an Nginx server block. Explain why `/srv` is appropriate for served content and why `/tmp` or a random home-directory path would be a weaker production choice.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS2-Static-Site-from-srv/starter",
 					solutionLink:
@@ -170,7 +169,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Filesystem Hierarchy and Directory Purpose. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-2/starter",
 					solutionLink:
@@ -179,7 +178,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Filesystem Hierarchy and Directory Purpose. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Filesystem Hierarchy and Directory Purpose. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-3/starter",
 					solutionLink:
@@ -193,7 +192,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Read, Write, Execute, and Directory Permission Semantics",
 					content:
-						"Teach the difference between file permissions and directory permissions, especially the fact that execute on a directory governs traversal rather than program execution. Students should be able to predict what happens when a service can read a file but cannot enter the directory that contains it."
+						"Teach the difference between file permissions and directory permissions, especially the fact that execute on a directory governs traversal rather than program execution. Skill target: Predict what happens when a service can read a file but cannot enter the directory that contains it."
 				},
 				{
 					title: "Ownership Changes with chmod, chown, chgrp, and umask",
@@ -208,12 +207,11 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Permission Debugging as a Systems Skill",
 					content:
-						"Use realistic failures such as `Permission denied` during a deploy, an unreadable log file, or a web server that cannot open its content directory. Students should build the habit of checking user identity, group membership, file ownership, and mode bits before making random permission changes."
+						"Use realistic failures such as `Permission denied` during a deploy, an unreadable log file, or a web server that cannot open its content directory. Build the habit of checking user identity, group membership, file ownership, and mode bits before making random permission changes."
 				},
 				{
 					title: "Unit 3: Users, Groups, and Permissions: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-3-users-groups-and-permissions/starter",
 					solutionLink:
@@ -233,7 +231,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Users, Groups, and Permissions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental-2/starter",
 					solutionLink:
@@ -242,7 +240,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: Users, Groups, and Permissions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: Users, Groups, and Permissions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental-3/starter",
 					solutionLink:
@@ -266,7 +264,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Environment Files and Service-Specific Configuration",
 					content:
-						"Show how applications often separate executable code from environment settings, secrets, or per-service overrides. Students should understand why environment files are useful, where they are typically referenced from, and why configuration should be explicit enough that another operator can reconstruct the service later."
+						"Show how applications often separate executable code from environment settings, secrets, or per-service overrides. Key idea: Why environment files are useful, where they are typically referenced from, and why configuration should be explicit enough that another operator can reconstruct the service later."
 				},
 				{
 					title: "Readable Configs Beat Clever Configs",
@@ -275,8 +273,7 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: Editing and Configuration: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-4-editing-and-configuration/starter",
 					solutionLink:
@@ -296,7 +293,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Editing and Configuration supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Editing and Configuration. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Editing and Configuration. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-4-editing-and-configuration-supplemental-2/starter",
 					solutionLink:
@@ -305,7 +302,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Editing and Configuration supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: Editing and Configuration. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: Editing and Configuration. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-4-editing-and-configuration-supplemental-3/starter",
 					solutionLink:
@@ -319,7 +316,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspecting Processes with ps, top, and htop",
 					content:
-						"Teach process inspection as a story about what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Students should be able to move between snapshot tools like `ps` and live views like `top` or `htop` depending on whether they are chasing a momentary bug or an active performance problem."
+						"Teach process inspection as a story about what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Skill target: Move between snapshot tools like `ps` and live views like `top` or `htop` depending on whether they are chasing a momentary bug or an active performance problem."
 				},
 				{
 					title: "Signals, kill, pkill, and Process Shutdown",
@@ -334,12 +331,11 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Zombies, Orphans, and Process Ownership",
 					content:
-						"Introduce zombies and orphans as bookkeeping realities of process supervision rather than as mysterious trivia. Students should know what it means when a parent process fails to reap a child and why proper service management is better than leaving long-lived application processes attached to random shells."
+						"Introduce zombies and orphans as bookkeeping realities of process supervision rather than as mysterious trivia. Key idea: What it means when a parent process fails to reap a child and why proper service management is better than leaving long-lived application processes attached to random shells."
 				},
 				{
 					title: "Unit 5: Processes and Job Control: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-5-processes-and-job-control/starter",
 					solutionLink:
@@ -359,7 +355,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: Processes and Job Control supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: Processes and Job Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: Processes and Job Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-5-processes-and-job-control-supplemental-2/starter",
 					solutionLink:
@@ -368,7 +364,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: Processes and Job Control supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: Processes and Job Control. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: Processes and Job Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-5-processes-and-job-control-supplemental-3/starter",
 					solutionLink:
@@ -387,7 +383,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Reading Unit Files",
 					content:
-						"Walk through the structure of a unit file by identifying the role of `[Unit]`, `[Service]`, and `[Install]` sections. Students should understand why working directory, executable path, environment variables, user identity, and restart policy all belong in the definition instead of being left to memory."
+						"Walk through the structure of a unit file by identifying the role of `[Unit]`, `[Service]`, and `[Install]` sections. Key idea: Why working directory, executable path, environment variables, user identity, and restart policy all belong in the definition instead of being left to memory."
 				},
 				{
 					title: "Daily Commands: status, start, stop, restart, reload, enable, disable",
@@ -422,7 +418,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Services and systemd supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Services and systemd. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Services and systemd. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-13-unit-6-services-and-systemd-supplemental-2/starter",
 					solutionLink:
@@ -431,7 +427,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Services and systemd supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Services and systemd. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Services and systemd. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-14-unit-6-services-and-systemd-supplemental-3/starter",
 					solutionLink:
@@ -445,7 +441,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "journalctl as the First Stop for Service Debugging",
 					content:
-						"Teach `journalctl` as the central way to read systemd-managed service output, boot logs, and recent failures. Students should learn how to scope logs by unit, boot, and time window so they can answer targeted questions instead of dumping enormous unfiltered output."
+						"Teach `journalctl` as the central way to read systemd-managed service output, boot logs, and recent failures. Learn how to scope logs by unit, boot, and time window so they can answer targeted questions instead of dumping enormous unfiltered output."
 				},
 				{
 					title: "Application Logs vs System Logs",
@@ -460,12 +456,11 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Diagnosing Boot Failures and Service Crashes",
 					content:
-						"Work through a break/fix story where a service fails after a bad config change or a wrong file path. Students should learn to start with status, move to recent logs, identify the first trustworthy error, and only then decide whether the fix is a config repair, a path correction, or a permission change."
+						"Work through a break/fix story where a service fails after a bad config change or a wrong file path. Skill target: Start with status, move to recent logs, identify the first trustworthy error, and only then decide whether the fix is a config repair, a path correction, or a permission change."
 				},
 				{
 					title: "Unit 7: Logging and Observability: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-7-logging-and-observability/starter",
 					solutionLink:
@@ -485,7 +480,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Logging and Observability supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Logging and Observability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Logging and Observability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-15-unit-7-logging-and-observability-supplemental-2/starter",
 					solutionLink:
@@ -494,7 +489,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Logging and Observability supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Logging and Observability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Logging and Observability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-16-unit-7-logging-and-observability-supplemental-3/starter",
 					solutionLink:
@@ -508,12 +503,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "cron and Crontab Syntax",
 					content:
-						"Introduce `cron` as the classic scheduling tool for repeatable command execution. Students should learn how to read the five timing fields, how to test a command manually before scheduling it, and why the command written into the crontab needs full paths and explicit assumptions."
+						"Introduce `cron` as the classic scheduling tool for repeatable command execution. Learn how to read the five timing fields, how to test a command manually before scheduling it, and why the command written into the crontab needs full paths and explicit assumptions."
 				},
 				{
 					title: "Cron Environment Gotchas",
 					content:
-						"Teach the common surprise that scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so students should learn to make scheduled commands self-sufficient and observable."
+						"Teach the common surprise that scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so Learn to make scheduled commands self-sufficient and observable."
 				},
 				{
 					title: "systemd Timers vs cron",
@@ -523,12 +518,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Automating Cleanup and Backup Tasks",
 					content:
-						"Use cleanup and backup examples to show how small shell scripts become maintainable operational tools when they are idempotent, logged, and scheduled deliberately. Students should understand how a reliable scheduled task includes verification, retention thinking, and a failure story instead of only a command that seems to work once."
+						"Use cleanup and backup examples to show how small shell scripts become maintainable operational tools when they are idempotent, logged, and scheduled deliberately. Key idea: How a reliable scheduled task includes verification, retention thinking, and a failure story instead of only a command that seems to work once."
 				},
 				{
 					title: "Project: Write a Backup Script and Schedule It with cron and a Timer",
 					content:
-						"Use the backup lab to build a small archive script, schedule it first with `cron` and then with a `systemd` timer, and compare the operational experience. Students should be able to explain what changed in observability, environment handling, and reliability when they moved between the two schedulers.",
+						"Use the backup lab to build a small archive script, schedule it first with `cron` and then with a `systemd` timer, and compare the operational experience. Skill target: Explain what changed in observability, environment handling, and reliability when they moved between the two schedulers.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS6-Backup-Cron-and-Timer/starter",
 					solutionLink:
@@ -548,7 +543,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: Scheduling and Automation supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: Scheduling and Automation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: Scheduling and Automation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-17-unit-8-scheduling-and-automation-supplemental-2/starter",
 					solutionLink:
@@ -557,7 +552,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: Scheduling and Automation supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: Scheduling and Automation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: Scheduling and Automation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-18-unit-8-scheduling-and-automation-supplemental-3/starter",
 					solutionLink:
@@ -571,7 +566,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Package Managers: apt, dnf, yum, and Related Tools",
 					content:
-						"Introduce package management as the operating system's official mechanism for installing, upgrading, and removing software with tracked dependencies. Students should recognize that command syntax differs across distributions, but the underlying administrative questions stay the same: what is installed, where did it come from, and how will it be updated safely later."
+						"Introduce package management as the operating system's official mechanism for installing, upgrading, and removing software with tracked dependencies. Recognize that command syntax differs across distributions, but the underlying administrative questions stay the same: what is installed, where did it come from, and how will it be updated safely later."
 				},
 				{
 					title: "Package Install vs Source Build vs Tarball Drop",
@@ -581,17 +576,16 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Understand Where Installed Software Lives",
 					content:
-						"Tie package management back to filesystem layout by showing how binaries, libraries, config files, and service units can end up under different directories. Students should learn to inspect the package view of software and the filesystem view of software together instead of assuming that an installed app is a single folder."
+						"Tie package management back to filesystem layout by showing how binaries, libraries, config files, and service units can end up under different directories. Skill target: Inspect the package view of software and the filesystem view of software together instead of assuming that an installed app is a single folder."
 				},
 				{
 					title: "Keeping Systems Patched without Losing Control",
 					content:
-						"Teach patching as a balance between timeliness and operational confidence. Students should practice reading what will change, understanding whether a service restart is implied, and recording what was upgraded so that post-change debugging has an audit trail."
+						"Teach patching as a balance between timeliness and operational confidence. Practice target: Reading what will change, understanding whether a service restart is implied, and recording what was upgraded so that post-change debugging has an audit trail."
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-9-package-management-and-software-layout/starter",
 					solutionLink:
@@ -611,7 +605,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Package Management and Software Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-supplemental-2/starter",
 					solutionLink:
@@ -620,7 +614,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Package Management and Software Layout. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Package Management and Software Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-supplemental-3/starter",
 					solutionLink:
@@ -634,7 +628,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspect Interfaces and Routes with ip",
 					content:
-						"Teach `ip` as the modern way to inspect addresses, interfaces, and routes. Students should be able to answer basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next."
+						"Teach `ip` as the modern way to inspect addresses, interfaces, and routes. Skill target: Answer basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next."
 				},
 				{
 					title: "Listening Services and Sockets with ss",
@@ -653,8 +647,7 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: Networking from a Systems View: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-10-networking-from-a-systems-view/starter",
 					solutionLink:
@@ -674,7 +667,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Networking from a Systems View. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemental-2/starter",
 					solutionLink:
@@ -683,7 +676,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: Networking from a Systems View. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: Networking from a Systems View. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemental-3/starter",
 					solutionLink:
@@ -697,7 +690,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Nginx Fundamentals",
 					content:
-						"Teach Nginx as both a static file server and a reverse proxy. Students should understand the role of a `server` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service."
+						"Teach Nginx as both a static file server and a reverse proxy. Key idea: The role of a `server` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service."
 				},
 				{
 					title: "Apache Fundamentals",
@@ -712,7 +705,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "TLS, Virtual Hosts, Server Blocks, Reload vs Restart",
 					content:
-						"Even if the full TLS setup is saved for later, students should learn the vocabulary and the lifecycle commands. A careful operator validates config, reloads when possible, restarts only when necessary, and understands that multi-site hosting depends on explicit host-based routing whether the server is Nginx or Apache."
+						"Even if the full TLS setup is saved for later, Learn the vocabulary and the lifecycle commands. A careful operator validates config, reloads when possible, restarts only when necessary, and understands that multi-site hosting depends on explicit host-based routing whether the server is Nginx or Apache."
 				},
 				{
 					title: "Project: Run a Small App Behind Nginx",
@@ -746,7 +739,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Web Servers supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Web Servers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Web Servers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-23-unit-11-web-servers-supplemental-2/starter",
 					solutionLink:
@@ -755,7 +748,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Web Servers supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Web Servers. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Web Servers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-24-unit-11-web-servers-supplemental-3/starter",
 					solutionLink:
@@ -769,27 +762,26 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Disks, Mounts, and Capacity with df, du, mount, and fstab",
 					content:
-						'Introduce storage management through the operator questions that come up in real systems work: what is mounted, how full is it, and what will happen on the next boot. Students should learn to distinguish device-level thinking from directory-level usage so that they can tell whether a problem is "the filesystem is full" or "one path is unexpectedly large."'
+						'Introduce storage management through the operator questions that come up in real systems work: what is mounted, how full is it, and what will happen on the next boot. Skill target: Distinguish device-level thinking from directory-level usage so that they can tell whether a problem is "the filesystem is full" or "one path is unexpectedly large."'
 				},
 				{
 					title: "Backup Patterns for Small Linux Systems",
 					content:
-						"Teach backups as a reliability practice rather than a checkbox. Students should think about what must be preserved, how often it changes, where archives should live, how retention works, and how to tell whether a backup succeeded beyond simply seeing that a file was created."
+						"Teach backups as a reliability practice rather than a checkbox. Think about what must be preserved, how often it changes, where archives should live, how retention works, and how to tell whether a backup succeeded beyond simply seeing that a file was created."
 				},
 				{
 					title: "log and tmp Cleanup as Operational Hygiene",
 					content:
-						"Connect cleanup to both reliability and security by showing how leftover logs, temporary files, and stale archives can consume space or expose unnecessary data. Students should learn that predictable cleanup is part of stable system behavior, not an afterthought once the machine is already in trouble."
+						"Connect cleanup to both reliability and security by showing how leftover logs, temporary files, and stale archives can consume space or expose unnecessary data. Learn that predictable cleanup is part of stable system behavior, not an afterthought once the machine is already in trouble."
 				},
 				{
 					title: "Recovery Workflow after a Bad Config Change",
 					content:
-						"End the course with recovery discipline: find the most recent change, validate syntax, compare against backups, rollback narrowly, and document the incident. Students should leave knowing that reliable operations is not the absence of mistakes; it is the presence of a repeatable recovery workflow when a change goes wrong."
+						"End the course with recovery discipline: find the most recent change, validate syntax, compare against backups, rollback narrowly, and document the incident. Leave knowing that reliable operations is not the absence of mistakes; it is the presence of a repeatable recovery workflow when a change goes wrong."
 				},
 				{
 					title: "Unit 12: Storage, Backups, and Reliability: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-12-storage-backups-and-reliability/starter",
 					solutionLink:
@@ -809,7 +801,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Storage, Backups, and Reliability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-supplemental-2/starter",
 					solutionLink:
@@ -818,7 +810,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Storage, Backups, and Reliability. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Storage, Backups, and Reliability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-supplemental-3/starter",
 					solutionLink:
@@ -827,22 +819,22 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 14: linux systems lab 14",
+			title: "linux systems lab 14: Implementation Studio",
 			curriculum: [
 				{
 					title: "linux systems lab 14: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: linux systems lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"linux systems lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "linux systems lab 14: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: linux systems lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative linux systems lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "linux systems lab 14: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: linux systems lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"linux systems lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/starter",
 					solutionLink:
@@ -851,32 +843,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 14: Review and Reflection",
 					content:
-						"Close Applied Studio 14: linux systems lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"linux systems lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 14: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: linux systems lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from linux systems lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/solution"
 				},
 				{
-					title: "Applied Studio 14: linux systems lab 14 supplemental 2",
+					title: "linux systems lab 14 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: linux systems lab 14 supplemental 3",
+					title: "linux systems lab 14 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: linux systems lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -885,22 +877,22 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: linux systems lab 15",
+			title: "linux systems lab 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "linux systems lab 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: linux systems lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"linux systems lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "linux systems lab 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: linux systems lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative linux systems lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "linux systems lab 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: linux systems lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"linux systems lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/starter",
 					solutionLink:
@@ -909,32 +901,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: linux systems lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"linux systems lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: linux systems lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from linux systems lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/solution"
 				},
 				{
-					title: "Applied Studio 15: linux systems lab 15 supplemental 2",
+					title: "linux systems lab 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: linux systems lab 15 supplemental 3",
+					title: "linux systems lab 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: linux systems lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -943,22 +935,22 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: linux systems lab 16",
+			title: "linux systems lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "linux systems lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: linux systems lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"linux systems lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "linux systems lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: linux systems lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative linux systems lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "linux systems lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: linux systems lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"linux systems lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/starter",
 					solutionLink:
@@ -967,32 +959,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: linux systems lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"linux systems lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: linux systems lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from linux systems lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 16: linux systems lab 16 supplemental 2",
+					title: "linux systems lab 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: linux systems lab 16 supplemental 3",
+					title: "linux systems lab 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: linux systems lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1001,22 +993,22 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: linux systems lab 17",
+			title: "linux systems lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "linux systems lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: linux systems lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"linux systems lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "linux systems lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: linux systems lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative linux systems lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "linux systems lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: linux systems lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"linux systems lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/starter",
 					solutionLink:
@@ -1025,32 +1017,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: linux systems lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"linux systems lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: linux systems lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from linux systems lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 17: linux systems lab 17 supplemental 2",
+					title: "linux systems lab 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: linux systems lab 17 supplemental 3",
+					title: "linux systems lab 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: linux systems lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to linux systems lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemental-3/starter",
 					solutionLink:

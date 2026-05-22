@@ -123,7 +123,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Review Goal",
 					content:
-						"Use the first check-in as guided review rather than a formal test. Focus on what the student can explain and debug independently across variables, conditionals, loops, and basic exceptions."
+						"Use the first check-in as guided review rather than a formal test. Focus on what the explanation covers and debug independently across variables, conditionals, loops, and basic exceptions."
 				},
 				{
 					title: "Learning Target Coverage",
@@ -167,7 +167,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Variables, Primitive Types, and Strings",
 					content:
-						"Teach `int`, `double`, `boolean`, and `String` as the basic vocabulary of Java programs. Students should be able to declare, initialize, print, and update values without syntax friction."
+						"Teach `int`, `double`, `boolean`, and `String` as the basic vocabulary of Java programs. Skill target: Declare, initialize, print, and update values without syntax friction."
 				},
 				{
 					title: "Scanners, Formatting, and Casting",
@@ -185,7 +185,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Barron's Chapter 2 Habit",
 					content:
-						"Start multiple-choice tracing early. The APCS1 chapter work is mainly about casting, output, and expression evaluation, so students should be able to justify answers line by line."
+						"Start multiple-choice tracing early. The APCS1 chapter work is mainly about casting, output, and expression evaluation, so Be able to justify answers line by line."
 				}
 			],
 			supplementalProjects: [
@@ -224,7 +224,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Relational and Logical Operators",
 					content:
-						"Students should be able to evaluate compound boolean expressions exactly, including short-circuit behavior and correct `String` equality with `.equals()`."
+						"Skill target: Evaluate compound boolean expressions exactly, including short-circuit behavior and correct `String` equality with `.equals()`."
 				},
 				{
 					title: "Core Project: Verifying Expressions",
@@ -275,7 +275,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Conditionals, Scope, and Nesting",
 					content:
-						"Teach `if`, `else if`, and `else` as precise control-flow tools. Students should be able to explain which branch runs and why, especially in nested cases."
+						"Teach `if`, `else if`, and `else` as precise control-flow tools. Skill target: Explain which branch runs and why, especially in nested cases."
 				},
 				{
 					title: "Packages, Math, and Randomness",
@@ -331,7 +331,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "For Loops, While Loops, and Infinite Loop Risk",
 					content:
-						"Teach counted loops and condition-driven loops as separate tools with separate failure modes. Students should know when a loop terminates and what state changes make that possible."
+						"Teach counted loops and condition-driven loops as separate tools with separate failure modes. Key idea: When a loop terminates and what state changes make that possible."
 				},
 				{
 					title: "Nested Loops and Early Exception Reasoning",
@@ -431,7 +431,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Classes, Fields, and Constructors",
 					content:
-						"Start the object sequence by focusing on how a class groups state and behavior. Students should be able to name what belongs as an instance variable and what belongs in a method."
+						"Start the object sequence by focusing on how a class groups state and behavior. Skill target: Name what belongs as an instance variable and what belongs in a method."
 				},
 				{
 					title: "Accessors, Mutators, and Method Practice",
@@ -539,12 +539,12 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Superclass and Subclass Design",
 					content:
-						"Teach inheritance as a way to capture shared state and behavior without copy-pasting class logic. Students should be able to justify why a subclass relationship is appropriate."
+						"Teach inheritance as a way to capture shared state and behavior without copy-pasting class logic. Skill target: Justify why a subclass relationship is appropriate."
 				},
 				{
 					title: "Constructors, `super`, and Overriding",
 					content:
-						"Make constructor chaining and method overriding explicit. Students should know what gets inherited, what gets customized, and when `super(...)` is required."
+						"Make constructor chaining and method overriding explicit. Key idea: What gets inherited, what gets customized, and when `super(...)` is required."
 				},
 				{
 					title: "Core Project: Book and PictureBook Class",
@@ -599,7 +599,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Type Reasoning and Invalid Calls",
 					content:
-						"Students should be able to explain which method runs, which calls fail at compile time, and why a reference type constrains what members are visible."
+						"Skill target: Explain which method runs, which calls fail at compile time, and why a reference type constrains what members are visible."
 				},
 				{
 					title: "Core Project: Many Shapes",
@@ -787,7 +787,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Mutation, Traversal, and Removal Rules",
 					content:
-						"Students should know when enhanced `for` loops are appropriate, when index-based loops are safer, and why removal during enhanced iteration breaks."
+						"Key idea: When enhanced `for` loops are appropriate, when index-based loops are safer, and why removal during enhanced iteration breaks."
 				},
 				{
 					title: "Core Project: Practice With ArrayLists",
@@ -933,7 +933,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Best, Average, and Worst Case",
 					content:
-						"Students should know how to describe runtime across favorable, typical, and unfavorable cases, especially for loops and search tasks."
+						"Key idea: How to describe runtime across favorable, typical, and unfavorable cases, especially for loops and search tasks."
 				},
 				{
 					title: "Core Project: Runtime Analysis",
@@ -1046,7 +1046,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Binary Search Preconditions",
 					content:
-						"Teach binary search as a fast search that only works because the data is sorted. Students should be able to explain how each comparison halves the remaining search space."
+						"Teach binary search as a fast search that only works because the data is sorted. Skill target: Explain how each comparison halves the remaining search space."
 				},
 				{
 					title: "Merge Sort and Divide-and-Conquer",

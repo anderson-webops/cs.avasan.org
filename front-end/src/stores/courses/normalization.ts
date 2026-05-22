@@ -492,17 +492,17 @@ function neutralizeLessonDirectiveText(text: string) {
 			"without duplicating the $1"
 		)
 		.replace(
-			/\s*\bStudents should practice ([^.]+)\./g,
+			/\s*\bPractice target: ([^.]+)\./g,
 			(_match, practice) =>
 				`\n\n**Practice target:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(practice))}.`
 		)
 		.replace(
-			/\s*\bStudents should see ([^.]+)\./g,
+			/\s*\bVisible pattern: ([^.]+)\./g,
 			(_match, outcome) =>
 				`\n\n**Visible pattern:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(outcome))}.`
 		)
 		.replace(
-			/\s*\bStudents should understand that ([^.]+)\./g,
+			/\s*\bKey idea: ([^.]+)\./g,
 			(_match, outcome) =>
 				`\n\n**Key idea:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(outcome))}.`
 		);
@@ -519,11 +519,11 @@ function neutralizeStudentFacingText(text: string) {
 		.replace(/\*\*Misconception check:\*\*/gi, "**Common pitfalls:**")
 		.replace(/\*\*Exit check:\*\*/gi, "**Mastery check:**")
 		.replace(
-			/Use this as one instructor-led lesson arc covering these sections in sequence:/gi,
+			/Use this as one guided lesson arc covering these sections in sequence:/gi,
 			"This lesson arc covers these sections in sequence:"
 		)
 		.replace(
-			/Treat this as an instructor-led explanation of ([^.]+)\./gi,
+			/Treat this as an guided explanation of ([^.]+)\./gi,
 			"This lesson introduces $1."
 		)
 		.replace(/\bTreat this module as\b/gi, "This module functions as")
@@ -567,16 +567,16 @@ function neutralizeStudentFacingText(text: string) {
 		.replace(/\bHave students ([a-z])/g, capitalizeMatchedFirstLetter)
 		.replace(/\bAsk the student to ([a-z])/g, capitalizeMatchedFirstLetter)
 		.replace(/\bAsk students to ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bAsk the student why\b/g, "Consider why")
+		.replace(/\bConsider why\b/g, "Consider why")
 		.replace(/\bAsk the student\b/g, "Consider")
 		.replace(/\bask the student to ([a-z])/g, keepMatchedFirstLetter)
 		.replace(
-			/\bso the student can work faster, with less prompting, and with cleaner reasoning\b/gi,
+			/\bso the work can work faster, with less prompting, and with cleaner reasoning\b/gi,
 			"to build speed, independence, and cleaner reasoning"
 		)
-		.replace(/\bso the student can ([a-z])/g, toMatchedFirstLetter)
+		.replace(/\bso the work can ([a-z])/g, toMatchedFirstLetter)
 		.replace(
-			/\benough that the student can ([a-z])/g,
+			/\benough that the work can ([a-z])/g,
 			enoughToMatchedFirstLetter
 		)
 		.replace(
@@ -587,9 +587,9 @@ function neutralizeStudentFacingText(text: string) {
 			/\bthe course should repeatedly ask students to ([a-z])/g,
 			lowercaseRepeatedlyMatchedFirstLetter
 		)
-		.replace(/\bAsk students why\b/g, "Explain why")
+		.replace(/\bConsider why\b/g, "Explain why")
 		.replace(/\bask students why\b/g, "explain why")
-		.replace(/\bAsk students what\b/g, "Consider what")
+		.replace(/\bConsider what\b/g, "Consider what")
 		.replace(/\bask students what\b/g, "consider what")
 		.replace(/\bAsk students whether\b/g, "Evaluate whether")
 		.replace(/\bask students whether\b/g, "evaluate whether")
@@ -599,17 +599,17 @@ function neutralizeStudentFacingText(text: string) {
 		.replace(/\bLet the student ([a-z])/g, capitalizeMatchedFirstLetter)
 		.replace(/\blet the student ([a-z])/g, keepMatchedFirstLetter)
 		.replace(/\bThe student should be able to\b/g, "Be able to")
-		.replace(/\bStudents should be able to\b/g, "Be able to")
+		.replace(/\bBe able to\b/g, "Be able to")
 		.replace(/\bthe student should be able to\b/g, "be able to")
-		.replace(/\bstudents should be able to\b/g, "be able to")
+		.replace(/\bBe able to\b/g, "be able to")
 		.replace(/\bThe student should explain\b/g, "Explain")
-		.replace(/\bStudents should explain\b/g, "Explain")
+		.replace(/\bExplain\b/g, "Explain")
 		.replace(/\bthe student should explain\b/g, "explain")
-		.replace(/\bstudents should explain\b/g, "explain")
+		.replace(/\bExplain\b/g, "explain")
 		.replace(/\bThe student should identify\b/g, "Identify")
-		.replace(/\bStudents should identify\b/g, "Identify")
+		.replace(/\bIdentify\b/g, "Identify")
 		.replace(/\bthe student should identify\b/g, "identify")
-		.replace(/\bstudents should identify\b/g, "identify")
+		.replace(/\bIdentify\b/g, "identify")
 		.replace(/\bThe student should\b/g, "The goal is to")
 		.replace(/\bStudents should\b/g, "The goal is to")
 		.replace(/\bthe student should\b/g, "the goal is to")
@@ -833,7 +833,7 @@ function projectExpectations(context: CourseTextContext) {
 	return [
 		"- Restate the prompt as a short checklist before coding or building.",
 		"- Implement the base behavior first, then test a normal case and an edge case.",
-		"- Keep the final result explainable: the student should be able to describe the main design choice and one bug they fixed."
+		"- Keep the final result explainable: the work should be able to describe the main design choice and one bug they fixed."
 	];
 }
 
@@ -1249,10 +1249,7 @@ function normalizeJavaLevel2(course: RawCourse) {
 		"Supplemental Project Bank Account",
 		"Master Project Example Quiz Game"
 	]);
-	const duplicateCheckIns = new Set([
-		"Applied Studio 16: JM Check in 2",
-		"Applied Studio 17: JM Check in 2"
-	]);
+	const duplicateCheckIns = new Set(["JM Check in 2: Implementation Studio"]);
 
 	removeSupplementals(
 		course,
@@ -1351,13 +1348,13 @@ function normalizeDataStructuresCpp(course: RawCourse) {
 		"DSCPP8 AVL Trees and Rebalancing",
 		"DSCPP2 Graphs and Shortest Paths",
 		"DSCPP9 Benchmarking and Data-Structure Tradeoffs",
-		"Applied Studio 11: c algorithm lab 11",
-		"Applied Studio 12: c algorithm lab 12",
-		"Applied Studio 13: c algorithm lab 13",
-		"Applied Studio 14: c algorithm lab 14",
-		"Applied Studio 15: c algorithm lab 15",
-		"Applied Studio 16: c algorithm lab 16",
-		"Applied Studio 17: c algorithm lab 17"
+		"c algorithm lab 11: Implementation Studio",
+		"c algorithm lab 12: Implementation Studio",
+		"c algorithm lab 13: Implementation Studio",
+		"c algorithm lab 14: Implementation Studio",
+		"c algorithm lab 15: Implementation Studio",
+		"c algorithm lab 16: Implementation Studio",
+		"c algorithm lab 17: Implementation Studio"
 	]);
 }
 
@@ -1383,71 +1380,44 @@ function normalizeMachineLearning(course: RawCourse) {
 
 function normalizeDesignPatternsJava(course: RawCourse) {
 	const mixedJavaLevelModules = new Set([
-		"Applied Studio 11: AJ Check In 3",
-		"Applied Studio 12: AJ Check in 4",
-		"Applied Studio 13: Flower Class",
-		"Applied Studio 14: Sum of the First N"
+		"AJ Check In 3: Implementation Studio",
+		"AJ Check in 4: Implementation Studio",
+		"Flower Class: Implementation Studio",
+		"Sum of the First N: Implementation Studio"
 	]);
 
 	removeModules(course, module => mixedJavaLevelModules.has(module.title));
 	renameModule(
 		course,
-		"Applied Studio 15: pattern implementation lab 15",
-		"Applied Studio 11: pattern implementation lab 15"
+		"Pattern Implementation Lab 15: Implementation Studio",
+		"Pattern Implementation Lab 11: Implementation Studio"
 	);
 	renameModule(
 		course,
-		"Applied Studio 16: pattern implementation lab 16",
-		"Applied Studio 12: pattern implementation lab 16"
+		"Pattern Implementation Lab 16: Implementation Studio",
+		"Pattern Implementation Lab 12: Implementation Studio"
 	);
 	renameModule(
 		course,
-		"Applied Studio 17: pattern implementation lab 17",
-		"Applied Studio 13: pattern implementation lab 17"
+		"Pattern Implementation Lab 17: Implementation Studio",
+		"Pattern Implementation Lab 13: Implementation Studio"
 	);
 }
 
 function normalizePythonicDesignPatterns(course: RawCourse) {
-	removeModules(course, module => module.title.startsWith("Applied Studio"));
+	const isImplementationStudio = (module: RawCourseModule) =>
+		module.title.endsWith(": Implementation Studio");
+
+	removeModules(course, isImplementationStudio);
 }
 
 function normalizeLowLevelSecurity(course: RawCourse) {
-	removeModules(
-		course,
-		module =>
-			/^Applied Studio (?:9|10|11):/.test(module.title) &&
-			!/low[- ]level security lab/i.test(module.title)
-	);
-	renameModule(
-		course,
-		"Applied Studio 12: low level security lab 7",
-		"Applied Studio 9: low level security lab 7"
-	);
-	renameModule(
-		course,
-		"Applied Studio 13: low level security lab 8",
-		"Applied Studio 10: low level security lab 8"
-	);
-	renameModule(
-		course,
-		"Applied Studio 14: low level security lab 9",
-		"Applied Studio 11: low level security lab 9"
-	);
-	renameModule(
-		course,
-		"Applied Studio 15: low level security lab 10",
-		"Applied Studio 12: low level security lab 10"
-	);
-	renameModule(
-		course,
-		"Applied Studio 16: low level security lab 11",
-		"Applied Studio 13: low level security lab 11"
-	);
-	renameModule(
-		course,
-		"Applied Studio 17: low level security lab 12",
-		"Applied Studio 14: low level security lab 12"
-	);
+	const isOffensiveStudio = (module: RawCourseModule) =>
+		/^Offensive Security Lab \d+: Implementation Studio$/.test(
+			module.title
+		);
+
+	removeModules(course, isOffensiveStudio);
 }
 
 function normalizeLowLevelSecurityPart2(course: RawCourse) {
@@ -1481,7 +1451,10 @@ function rustFolderForModule(title: string) {
 }
 
 function normalizeRustSystemsSecurity(course: RawCourse) {
-	removeModules(course, module => module.title.startsWith("Applied Studio"));
+	const isImplementationStudio = (module: RawCourseModule) =>
+		module.title.endsWith(": Implementation Studio");
+
+	removeModules(course, isImplementationStudio);
 
 	updateCourseLinks(course, (url, { module, key }) => {
 		if (url.includes("/Rust-Systems-Security/tree/main/")) {

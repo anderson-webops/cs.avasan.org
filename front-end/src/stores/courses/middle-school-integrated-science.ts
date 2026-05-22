@@ -24,7 +24,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Data Practice: Tables, Graphs, and Pattern Claims",
 					content:
-						"Use a small dataset to practice choosing graph types, labeling axes, identifying trends, and writing a claim with evidence. Students should distinguish a pattern in the data from a possible explanation for the pattern."
+						"Use a small dataset to practice choosing graph types, labeling axes, identifying trends, and writing a claim with evidence. Distinguish a pattern in the data from a possible explanation for the pattern."
 				}
 			],
 			supplementalProjects: [

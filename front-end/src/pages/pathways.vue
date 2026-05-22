@@ -20,7 +20,7 @@ const priorityRank = {
 const sortedPathways = computed(() =>
 	[...coursePublicPathways].sort(
 		(a, b) =>
-			priorityRank[a.priority] - priorityRank[b.priority] ||
+			priorityRank[a.adminPriority] - priorityRank[b.adminPriority] ||
 			a.title.localeCompare(b.title)
 	)
 );
@@ -78,7 +78,7 @@ function priorityLabel(priority: string) {
 						<p class="pathway-card__eyebrow">
 							{{
 								isAdmin
-									? priorityLabel(pathway.priority)
+									? priorityLabel(pathway.adminPriority)
 									: "Course pathway"
 							}}
 						</p>
@@ -87,9 +87,9 @@ function priorityLabel(priority: string) {
 					<span
 						v-if="isAdmin"
 						class="pathway-card__priority"
-						:class="`pathway-card__priority--${pathway.priority}`"
+						:class="`pathway-card__priority--${pathway.adminPriority}`"
 					>
-						{{ pathway.priority }}
+						{{ pathway.adminPriority }}
 					</span>
 				</div>
 
@@ -201,7 +201,7 @@ function priorityLabel(priority: string) {
 							<h3>Expansion Backlog</h3>
 							<ul>
 								<li
-									v-for="item in pathway.expansionBacklog"
+									v-for="item in pathway.adminExpansionBacklog"
 									:key="item"
 								>
 									{{ item }}

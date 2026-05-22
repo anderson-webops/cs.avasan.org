@@ -9,7 +9,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Editor, Runtime, and TypeScript Baseline",
 					content:
-						"Standardize on `TypeScript` with either `VS Code` or `WebStorm`, verify `node`, `npm`, and `npx tsc --version`, and make the course workspace explicit from day one. Students should expect the implementation language to be TS even when some early examples stay small and script-like."
+						"Standardize on `TypeScript` with either `VS Code` or `WebStorm`, verify `node`, `npm`, and `npx tsc --version`, and make the course workspace explicit from day one. Expect the implementation language to be TS even when some early examples stay small and script-like."
 				},
 				{
 					title: "Linux-Friendly Lab Environment",
@@ -28,8 +28,7 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "NSEC0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-03-nsec0-setup-and-tooling/starter",
 					solutionLink:
@@ -49,7 +48,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NSEC0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NSEC0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-nsec0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +57,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NSEC0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NSEC0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-nsec0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -72,7 +71,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Attack Surface in Real Services",
 					content:
-						"Teach attack surface as every externally reachable input, management path, credential boundary, and background integration a service exposes. Students should learn to name the surface area of a simple app before they talk about specific mitigations."
+						"Teach attack surface as every externally reachable input, management path, credential boundary, and background integration a service exposes. Skill target: Name the surface area of a simple app before they talk about specific mitigations."
 				},
 				{
 					title: "Trust Boundaries and Data Ownership",
@@ -87,12 +86,11 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Threat Modeling Small TS Services",
 					content:
-						"Walk through a lightweight threat-modeling process for a toy Node or TypeScript service. Students should identify assets, actors, entry points, trust boundaries, likely failures, and the first monitoring signals they would want before deployment."
+						"Walk through a lightweight threat-modeling process for a toy Node or TypeScript service. Identify assets, actors, entry points, trust boundaries, likely failures, and the first monitoring signals they would want before deployment."
 				},
 				{
 					title: "Unit 1: Security Model of Networked Systems: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-04-unit-1-security-model-of-networked-systems/starter",
 					solutionLink:
@@ -112,7 +110,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 1: Security Model of Networked Systems supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Security Model of Networked Systems. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Security Model of Networked Systems. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-03-unit-1-security-model-of-networked-systems-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +119,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 1: Security Model of Networked Systems supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 1: Security Model of Networked Systems. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 1: Security Model of Networked Systems. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-04-unit-1-security-model-of-networked-systems-supplemental-3/starter",
 					solutionLink:
@@ -135,7 +133,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "What a Listening Service Exposes",
 					content:
-						"Treat a listening socket as a concrete exposure point rather than a vague idea of 'the server'. Students should be able to explain which process, protocol, address, and port are actually reachable and which clients can reach them."
+						"Treat a listening socket as a concrete exposure point rather than a vague idea of 'the server'. Skill target: Explain which process, protocol, address, and port are actually reachable and which clients can reach them."
 				},
 				{
 					title: "Localhost versus LAN versus Public Internet",
@@ -145,17 +143,17 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "TCP and UDP from a Security Perspective",
 					content:
-						"Compare TCP and UDP by what they expose to monitoring, how abuse or spoofing risk differs, and what validation assumptions each protocol tends to encourage. Students should stop thinking only in terms of connection style and start thinking about observability and control surfaces."
+						"Compare TCP and UDP by what they expose to monitoring, how abuse or spoofing risk differs, and what validation assumptions each protocol tends to encourage. Stop thinking only in terms of connection style and start thinking about observability and control surfaces."
 				},
 				{
 					title: "Map Ports Back to Real Processes",
 					content:
-						"Use `ss`, `lsof`, and service managers to tie listeners back to specific processes and configs. The main habit is to verify the real service surface before trying to secure it. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use `ss`, `lsof`, and service managers to tie listeners back to specific processes and configs. The main habit is to verify the real service surface before trying to secure it."
 				},
 				{
 					title: "Project: Local-Only Port Inventory Tool",
 					content:
-						"Build a defensive inventory tool that classifies listeners by protocol, bind address, owner, and likely exposure level. Students should treat the output as the first draft of a host attack-surface report rather than as a raw command dump.",
+						"Build a defensive inventory tool that classifies listeners by protocol, bind address, owner, and likely exposure level. Treat the output as the first draft of a host attack-surface report rather than as a raw command dump.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC1-Local-Port-Inventory-Tool/starter",
 					solutionLink:
@@ -175,7 +173,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 2: Sockets, Ports, and Services supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Sockets, Ports, and Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Sockets, Ports, and Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-05-unit-2-sockets-ports-and-services-supplemental-2/starter",
 					solutionLink:
@@ -184,7 +182,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 2: Sockets, Ports, and Services supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 2: Sockets, Ports, and Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 2: Sockets, Ports, and Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-06-unit-2-sockets-ports-and-services-supplemental-3/starter",
 					solutionLink:
@@ -198,7 +196,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Requests, Headers, Cookies, and Tokens",
 					content:
-						"Make the HTTP request concrete: method, path, headers, body, cookie state, and bearer tokens all represent different trust claims. Students should be able to explain what each one proves and what each one can be forged or misused to do."
+						"Make the HTTP request concrete: method, path, headers, body, cookie state, and bearer tokens all represent different trust claims. Skill target: Explain what each one proves and what each one can be forged or misused to do."
 				},
 				{
 					title: "Authentication versus Authorization",
@@ -213,12 +211,11 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "State Changes, Idempotence, and Error Surfaces",
 					content:
-						"Teach why method choice, status codes, retry behavior, and response details all matter to security. Students should understand that sloppy API behavior makes abuse harder to detect and legitimate failures harder to investigate."
+						"Teach why method choice, status codes, retry behavior, and response details all matter to security. Key idea: Sloppy API behavior makes abuse harder to detect and legitimate failures harder to investigate."
 				},
 				{
 					title: "Unit 3: HTTP and API Security Basics: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-05-unit-3-http-and-api-security-basics/starter",
 					solutionLink:
@@ -238,7 +235,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 3: HTTP and API Security Basics supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: HTTP and API Security Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: HTTP and API Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-07-unit-3-http-and-api-security-basics-supplemental-2/starter",
 					solutionLink:
@@ -247,7 +244,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 3: HTTP and API Security Basics supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 3: HTTP and API Security Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 3: HTTP and API Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-08-unit-3-http-and-api-security-basics-supplemental-3/starter",
 					solutionLink:
@@ -261,7 +258,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "What TLS Protects and What It Does Not",
 					content:
-						"Teach TLS as protection for data in transit against interception and tampering, not as a blanket application-security solution. Students should know that TLS does not replace correct authorization, input validation, or safe server behavior."
+						"Teach TLS as protection for data in transit against interception and tampering, not as a blanket application-security solution. Key idea: That TLS does not replace correct authorization, input validation, or safe server behavior."
 				},
 				{
 					title: "Certificates and Trust at a High Level",
@@ -271,7 +268,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Reverse-Proxy Termination",
 					content:
-						"Show where TLS often terminates in real deployments and how that changes what the upstream app sees. Students should understand why trusted proxy headers, secure forwarding rules, and internal-only app listeners matter once TLS ends at the edge."
+						"Show where TLS often terminates in real deployments and how that changes what the upstream app sees. Key idea: Why trusted proxy headers, secure forwarding rules, and internal-only app listeners matter once TLS ends at the edge."
 				},
 				{
 					title: "Why Plain HTTP Is Still Risky",
@@ -280,8 +277,7 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: TLS and Secure Transport: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-06-unit-4-tls-and-secure-transport/starter",
 					solutionLink:
@@ -301,7 +297,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 4: TLS and Secure Transport supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: TLS and Secure Transport. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: TLS and Secure Transport. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-4-tls-and-secure-transport-supplemental-2/starter",
 					solutionLink:
@@ -310,7 +306,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 4: TLS and Secure Transport supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 4: TLS and Secure Transport. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 4: TLS and Secure Transport. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-10-unit-4-tls-and-secure-transport-supplemental-3/starter",
 					solutionLink:
@@ -324,7 +320,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Malformed Requests and Parser Edges",
 					content:
-						"Teach malformed requests as a boundary problem, not just a coding inconvenience. Students should look for parser ambiguity, missing fields, unexpected nesting, unsupported content types, and type confusion before values ever touch business logic."
+						"Teach malformed requests as a boundary problem, not just a coding inconvenience. Look for parser ambiguity, missing fields, unexpected nesting, unsupported content types, and type confusion before values ever touch business logic."
 				},
 				{
 					title: "Size Limits and Resource Exhaustion",
@@ -334,7 +330,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Schema Validation and Safe Rejection",
 					content:
-						"Use typed request schemas and clear rejection paths to normalize defensive boundary handling. Students should return consistent errors, avoid leaking internals, and keep enough detail in logs to debug without echoing unsafe input back to the client."
+						"Use typed request schemas and clear rejection paths to normalize defensive boundary handling. Return consistent errors, avoid leaking internals, and keep enough detail in logs to debug without echoing unsafe input back to the client."
 				},
 				{
 					title: "Normalize Before Deeper Logic",
@@ -364,7 +360,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 5: Input Validation on the Network Boundary supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: Input Validation on the Network Boundary. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: Input Validation on the Network Boundary. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-unit-5-input-validation-on-the-network-boundary-supplemental-2/starter",
 					solutionLink:
@@ -373,7 +369,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 5: Input Validation on the Network Boundary supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 5: Input Validation on the Network Boundary. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 5: Input Validation on the Network Boundary. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-12-unit-5-input-validation-on-the-network-boundary-supplemental-3/starter",
 					solutionLink:
@@ -387,7 +383,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Access Logs and Structured Logs",
 					content:
-						"Teach the difference between generic access logs and structured application logs, then show why both matter. Students should understand which questions each log type can answer during routine monitoring and during a real incident."
+						"Teach the difference between generic access logs and structured application logs, then show why both matter. Key idea: Which questions each log type can answer during routine monitoring and during a real incident."
 				},
 				{
 					title: "Suspicious Activity Indicators",
@@ -397,7 +393,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Rate-Limit and Abuse Telemetry",
 					content:
-						"Teach rate limiting as both a control and a source of evidence. Students should log throttle decisions, track source identity carefully, and understand the difference between a strict limit, a challenge, and a hard block."
+						"Teach rate limiting as both a control and a source of evidence. Log throttle decisions, track source identity carefully, and understand the difference between a strict limit, a challenge, and a hard block."
 				},
 				{
 					title: "Reading Logs After Simulated Bad Requests",
@@ -427,7 +423,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 6: Logging, Monitoring, and Forensics supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Logging, Monitoring, and Forensics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Logging, Monitoring, and Forensics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-13-unit-6-logging-monitoring-and-forensics-supplemental-2/starter",
 					solutionLink:
@@ -436,7 +432,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 6: Logging, Monitoring, and Forensics supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 6: Logging, Monitoring, and Forensics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 6: Logging, Monitoring, and Forensics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-14-unit-6-logging-monitoring-and-forensics-supplemental-3/starter",
 					solutionLink:
@@ -450,7 +446,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "UFW Review and Least-Open Policy",
 					content:
-						"Review host firewall behavior with a deny-by-default mindset, then explicitly map which ports should be reachable from which networks. Students should learn to treat exposure policy as a design decision that should be documented, not guessed."
+						"Review host firewall behavior with a deny-by-default mindset, then explicitly map which ports should be reachable from which networks. Skill target: Treat exposure policy as a design decision that should be documented, not guessed."
 				},
 				{
 					title: "Reverse Proxies as Security Boundaries",
@@ -465,7 +461,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Trusted Proxy Headers and Real Client Identity",
 					content:
-						"Explain when forwarded headers are trustworthy, when they are attacker-controlled, and how misconfigured proxy trust corrupts logs, rate limits, or auth logic. Students should understand that client identity is a boundary decision, not a free value."
+						"Explain when forwarded headers are trustworthy, when they are attacker-controlled, and how misconfigured proxy trust corrupts logs, rate limits, or auth logic. Key idea: Client identity is a boundary decision, not a free value."
 				},
 				{
 					title: "Project: TLS and Proxy Configuration Companion App",
@@ -490,7 +486,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 7: Firewalls, Proxies, and Exposure supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Firewalls, Proxies, and Exposure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Firewalls, Proxies, and Exposure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-15-unit-7-firewalls-proxies-and-exposure-supplemental-2/starter",
 					solutionLink:
@@ -499,7 +495,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 7: Firewalls, Proxies, and Exposure supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 7: Firewalls, Proxies, and Exposure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 7: Firewalls, Proxies, and Exposure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-16-unit-7-firewalls-proxies-and-exposure-supplemental-3/starter",
 					solutionLink:
@@ -513,7 +509,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Express or Fastify Hardening Basics",
 					content:
-						"Use one small service to show safe defaults around routing, parser configuration, central error handling, and defensive middleware ordering. Students should understand how framework defaults and app-specific decisions combine into a real boundary."
+						"Use one small service to show safe defaults around routing, parser configuration, central error handling, and defensive middleware ordering. Key idea: How framework defaults and app-specific decisions combine into a real boundary."
 				},
 				{
 					title: "Security Headers and Browser-Side Policy",
@@ -523,7 +519,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "CORS, Body Limits, and Parsing Rules",
 					content:
-						"Teach CORS as a browser policy surface, not an authentication mechanism, then pair it with strict body parsing and request-size limits. Students should be able to explain exactly which clients a CORS rule affects and which clients it does not."
+						"Teach CORS as a browser policy surface, not an authentication mechanism, then pair it with strict body parsing and request-size limits. Skill target: Explain exactly which clients a CORS rule affects and which clients it does not."
 				},
 				{
 					title: "Route-Level Authentication and Authorization",
@@ -532,8 +528,7 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Secure Node/TypeScript Services: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-07-unit-8-secure-node-typescript-services/starter",
 					solutionLink:
@@ -553,7 +548,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 8: Secure Node/TypeScript Services supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: Secure Node/TypeScript Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: Secure Node/TypeScript Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-17-unit-8-secure-node-typescript-services-supplemental-2/starter",
 					solutionLink:
@@ -562,7 +557,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 8: Secure Node/TypeScript Services supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 8: Secure Node/TypeScript Services. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 8: Secure Node/TypeScript Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-18-unit-8-secure-node-typescript-services-supplemental-3/starter",
 					solutionLink:
@@ -616,7 +611,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 9: Defensive Network Tooling in TS supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Defensive Network Tooling in TS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Defensive Network Tooling in TS. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-19-unit-9-defensive-network-tooling-in-ts-supplemental-2/starter",
 					solutionLink:
@@ -625,7 +620,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 9: Defensive Network Tooling in TS supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 9: Defensive Network Tooling in TS. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 9: Defensive Network Tooling in TS. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-20-unit-9-defensive-network-tooling-in-ts-supplemental-3/starter",
 					solutionLink:
@@ -639,7 +634,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Connection Lifecycle and Session State",
 					content:
-						"Teach connect, authenticate, subscribe, send, receive, and disconnect as distinct phases with different failure risks. Students should stop treating a WebSocket as a magical persistent tunnel and start treating it as a stateful security boundary."
+						"Teach connect, authenticate, subscribe, send, receive, and disconnect as distinct phases with different failure risks. Stop treating a WebSocket as a magical persistent tunnel and start treating it as a stateful security boundary."
 				},
 				{
 					title: "Event Validation and Message Contracts",
@@ -649,7 +644,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Abuse Handling, Backpressure, and Disconnect Policy",
 					content:
-						"Cover message floods, invalid event spam, reconnect storms, and idle-session cleanup. Students should understand that availability protection is part of real-time security, not separate from it."
+						"Cover message floods, invalid event spam, reconnect storms, and idle-session cleanup. Key idea: Availability protection is part of real-time security, not separate from it."
 				},
 				{
 					title: "Broadcast Boundaries and Data Leakage",
@@ -659,7 +654,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Project: Secure Mini Chat or Notification Service",
 					content:
-						"Build a small real-time service with authenticated connections, validated events, bounded room membership, and basic abuse controls. Students should prioritize correct boundaries and observability over flashy features.",
+						"Build a small real-time service with authenticated connections, validated events, bounded room membership, and basic abuse controls. Prioritize correct boundaries and observability over flashy features.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC5-Secure-Real-Time-Notifier/starter",
 					solutionLink:
@@ -679,7 +674,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 10: WebSockets and Real Time Security supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: WebSockets and Real-Time Security. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: WebSockets and Real-Time Security. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-21-unit-10-websockets-and-real-time-security-supplemental-2/starter",
 					solutionLink:
@@ -688,7 +683,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 10: WebSockets and Real Time Security supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 10: WebSockets and Real-Time Security. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 10: WebSockets and Real-Time Security. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-22-unit-10-websockets-and-real-time-security-supplemental-3/starter",
 					solutionLink:
@@ -702,7 +697,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Environment Variables and Secret Handling",
 					content:
-						"Teach secrets as runtime configuration that should be injected deliberately, rotated when needed, and kept out of source control and logs. Students should be able to distinguish public config, internal config, and true secrets."
+						"Teach secrets as runtime configuration that should be injected deliberately, rotated when needed, and kept out of source control and logs. Skill target: Distinguish public config, internal config, and true secrets."
 				},
 				{
 					title: "TLS Certificate Placement and Renewal Ownership",
@@ -712,7 +707,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Service Exposure, Logs, and Recovery Signals",
 					content:
-						"Teach deployment review as a combined exercise in public exposure, logging quality, health checks, and rollback clarity. Students should know what evidence they need before declaring a deployment secure enough to expose."
+						"Teach deployment review as a combined exercise in public exposure, logging quality, health checks, and rollback clarity. Key idea: What evidence they need before declaring a deployment secure enough to expose."
 				},
 				{
 					title: "Secure Release Checklist",
@@ -721,8 +716,7 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Deployment Security Basics: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-08-unit-11-deployment-security-basics/starter",
 					solutionLink:
@@ -742,7 +736,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 11: Deployment Security Basics supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Deployment Security Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Deployment Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-23-unit-11-deployment-security-basics-supplemental-2/starter",
 					solutionLink:
@@ -751,7 +745,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 11: Deployment Security Basics supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 11: Deployment Security Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 11: Deployment Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-24-unit-11-deployment-security-basics-supplemental-3/starter",
 					solutionLink:
@@ -765,7 +759,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Rules of Engagement and Safe Penetration-Test Scope",
 					content:
-						"Teach penetration testing as an authorized defensive activity with explicit scope, approval, timing, and stop conditions. Students should only test local labs, staging systems, or environments they own or have written permission to assess, and they should learn to define what counts as in-bounds before any probing begins."
+						"Teach penetration testing as an authorized defensive activity with explicit scope, approval, timing, and stop conditions. Only test local labs, staging systems, or environments they own or have written permission to assess, and they should learn to define what counts as in-bounds before any probing begins."
 				},
 				{
 					title: "Build a Repeatable Defensive Test Plan",
@@ -775,7 +769,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Use AI to Draft Checks, Payload Variants, and Review Notes",
 					content:
-						"Teach AI as a constrained assistant for defensive work: drafting test matrices, generating benign local payload variations, summarizing logs, suggesting follow-up checks, and helping write clearer triage or disclosure notes. Students should also learn the hard boundaries: never use AI as the final authority, never ask it to target unauthorized systems, never trust its security claims without local verification, and never let it replace a written scope or evidence trail."
+						"Teach AI as a constrained assistant for defensive work: drafting test matrices, generating benign local payload variations, summarizing logs, suggesting follow-up checks, and helping write clearer triage or disclosure notes. Also learn the hard boundaries: never use AI as the final authority, never ask it to target unauthorized systems, never trust its security claims without local verification, and never let it replace a written scope or evidence trail."
 				},
 				{
 					title: "Ethics and Responsible Disclosure for Network Findings",
@@ -784,8 +778,7 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure/starter",
 					solutionLink:
@@ -805,7 +798,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-25-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-2/starter",
 					solutionLink:
@@ -814,7 +807,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-26-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-3/starter",
 					solutionLink:
@@ -828,12 +821,12 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Design a Small Secure Network Service",
 					content:
-						"Have students design a small TS service with a clear purpose, explicit actors, mapped trust boundaries, and a narrow exposed surface. The capstone should start with threat modeling and architecture before implementation begins."
+						"Design a small TS service with a clear purpose, explicit actors, mapped trust boundaries, and a narrow exposed surface. The capstone should start with threat modeling and architecture before implementation begins."
 				},
 				{
 					title: "Implement Controls and Observability Together",
 					content:
-						"Require validation, auth, authorization, rate limits, structured logs, and deployment notes as part of the same deliverable. Students should not treat security and monitoring as separate post-build tasks."
+						"Require validation, auth, authorization, rate limits, structured logs, and deployment notes as part of the same deliverable. Not treat security and monitoring as separate post-build tasks."
 				},
 				{
 					title: "Audit the Service with an Authorized Test Playbook",
@@ -847,8 +840,7 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 13: Capstone: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-10-unit-13-capstone/starter",
 					solutionLink:
@@ -868,7 +860,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 13: Capstone supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 13: Capstone. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 13: Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-27-unit-13-capstone-supplemental-2/starter",
 					solutionLink:
@@ -877,7 +869,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 13: Capstone supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Unit 13: Capstone. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Unit 13: Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-28-unit-13-capstone-supplemental-3/starter",
 					solutionLink:
@@ -891,27 +883,26 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "DNS and Email Security Follow-Up",
 					content:
-						"Extend the course with DNS security, resolver trust, email authentication, and delivery-surface protection once students can already reason about the core service boundary. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the course with DNS security, resolver trust, email authentication, and delivery-surface protection once students can already reason about the core service boundary."
 				},
 				{
 					title: "OAuth and Session Security",
 					content:
-						"Add a deeper identity module on session lifecycle, delegated auth, token scopes, and callback-boundary handling after the HTTP and authz foundations are stable. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Add a deeper identity module on session lifecycle, delegated auth, token scopes, and callback-boundary handling after the HTTP and authz foundations are stable."
 				},
 				{
 					title: "WAF, CDN, and Edge Controls",
 					content:
-						"Introduce WAF concepts, CDN caching risks, rate-limit policy at the edge, and request filtering as a follow-on to the reverse-proxy and logging units. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Introduce WAF concepts, CDN caching risks, rate-limit policy at the edge, and request filtering as a follow-on to the reverse-proxy and logging units."
 				},
 				{
 					title: "Cloud Network Security Path",
 					content:
-						"Build a follow-up course around VPCs, security groups, subnets, private services, and public edge design so students can move from host-level hardening into cloud network architecture. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Build a follow-up course around VPCs, security groups, subnets, private services, and public edge design so students can move from host-level hardening into cloud network architecture."
 				},
 				{
 					title: "NSEC14 Expansion Ideas and Next Steps: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-nsec14-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -931,7 +922,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NSEC14 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NSEC14 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-29-nsec14-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -940,7 +931,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to NSEC14 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to NSEC14 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-30-nsec14-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -949,22 +940,22 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: network security lab 16",
+			title: "network security lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "network security lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: network security lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"network security lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "network security lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: network security lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative network security lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "network security lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: network security lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"network security lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/starter",
 					solutionLink:
@@ -973,32 +964,32 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "network security lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: network security lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"network security lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "network security lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: network security lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from network security lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 16: network security lab 16 supplemental 2",
+					title: "network security lab 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network security lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-31-applied-studio-16-network-security-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-31-applied-studio-16-network-security-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: network security lab 16 supplemental 3",
+					title: "network security lab 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: network security lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-32-applied-studio-16-network-security-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1007,22 +998,22 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: network security lab 17",
+			title: "network security lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "network security lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: network security lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"network security lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "network security lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: network security lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative network security lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "network security lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: network security lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"network security lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/starter",
 					solutionLink:
@@ -1031,32 +1022,32 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "network security lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: network security lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"network security lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "network security lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: network security lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from network security lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 17: network security lab 17 supplemental 2",
+					title: "network security lab 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network security lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-33-applied-studio-17-network-security-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-33-applied-studio-17-network-security-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: network security lab 17 supplemental 3",
+					title: "network security lab 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: network security lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to network security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-34-applied-studio-17-network-security-lab-17-supplemental-3/starter",
 					solutionLink:

@@ -44,7 +44,7 @@ Use the kick-off project as placement rather than as a formal test.
 - Project 1 checks polynomial manipulation and quadratic solving.
 - Project 2 checks graphing quadratics, function notation, inverse functions, and data modeling.
 - If the student stalls on a question, jump directly to the matching module instead of forcing a full completion.
-- Keep the focus on the math tasks rather than on platform logistics or repeated instructor notes.
+- Keep the focus on the math tasks rather than on platform logistics or repeated process notes.
 				`.trim()
 			),
 			createLesson(
@@ -434,9 +434,9 @@ Use this module as a short sports-modeling bridge between solving quadratics and
 
 - Use factoring, completing the square, and the quadratic formula to analyze shot paths
 - Compare vertex form and intercept form for basketball arcs
-- Ask students to justify which solving method is fastest for each quadratic they encounter
+- Justify which solving method is fastest for each quadratic they encounter
 
-Have the student finish by sketching a half-court shot model and explaining which form of the quadratic is most useful for each question.
+Finish by sketching a half-court shot model and explaining which form of the quadratic is most useful for each question.
 				`.trim()
 				)
 			]
@@ -549,7 +549,7 @@ Use this module as a short sports-graphing project tied to quadratic transformat
 - graphing in standard form
 - transformations of quadratic models
 
-Ask the student to design a sports shot or stadium-arc model, then describe how shifting, stretching, or reflecting the parabola changes the situation.
+Design a sports shot or stadium-arc model, then describe how shifting, stretching, or reflecting the parabola changes the situation.
 				`.trim()
 				)
 			]
@@ -791,7 +791,7 @@ Inverse variation has the form \`y = k/x\`.
 				`
 Data rarely lands perfectly on a clean function, so this module focuses on choosing a reasonable model and interpreting what it says.
 
-**Image-based classification answer notes**
+**Graph-classification reference**
 
 - quadratic
 - exponential
@@ -800,12 +800,12 @@ Data rarely lands perfectly on a clean function, so this module focuses on choos
 - cubic
 - linear
 
-Use those labels as answer-key notes for the original graph prompts, and pair them with a live graphing tool if you want students to recreate the shapes.
+Use those labels as a check after classifying each graph by its visible shape. A live graphing tool can recreate nearby examples for extra practice.
 				`.trim(),
 				media.costOfLivingTrend
 			),
 			createLesson(
-				"Residuals and Source Gaps",
+				"Residuals and Visual References",
 				`
 Residual = actual value minus predicted value.
 
@@ -820,8 +820,8 @@ Residual = actual value minus predicted value.
 
 **Visual-reference note**
 
-- Several residual plots and scatterplots depend on visual references that are still missing from the imported material.
-- Use the placeholder below wherever one of those prompts still needs an image box.
+- Some residual plots and scatterplots are best handled with a graphing tool or the placeholder image below.
+- Focus on identifying the residual as vertical prediction error and explaining whether the model overpredicts or underpredicts.
 				`.trim(),
 				media.missingImage
 			)
@@ -865,7 +865,7 @@ The photon-count data for this activity is:
 
 - Highest measured count: \`x = 0\`
 - Lowest-likelihood positions in the zero-filled comparison line are the inserted half-step gaps such as \`x = -3.5, -2.5, ..., 3.5\`
-- The candidate best-fit equations in this activity appear to be on a different scale than the raw count data, so treat them as qualitative prompts unless the data is rescaled first
+- The candidate best-fit equations use a different scale than the raw count data, so treat them as model-shape comparisons unless the data is rescaled first
 
 **de Broglie wavelength**
 
@@ -878,11 +878,9 @@ The photon-count data for this activity is:
 					media.photonCounts
 				),
 				createLesson(
-					"Experiment Visual Placeholder",
+					"Experiment Visual Reference",
 					`
-Some simulator screenshots, graph-choice images, and a helium-atom data graphic are still missing from the imported material.
-
-Use the placeholder below wherever this project still depends on one of those missing visuals.
+Use the photon-count graph, simulator sketch, or placeholder image below to anchor the visual parts of the experiment. The written explanation should still identify the pattern, the likely best-fit shape, and how wavelength changes with mass and speed.
 				`.trim(),
 					media.missingImage
 				)
@@ -929,16 +927,16 @@ This project combines exponential growth with quadratic transformations.
 			createLesson(
 				"Course Reflection and Recording Studio Prompt",
 				`
-Use the master project to let the student explain one idea from Algebra 1B in their own words.
+Use the master project to explain one idea from Algebra 1B clearly and accurately.
 
-**Student task**
+**Practice task**
 
 - choose the concept that felt most challenging or most satisfying
 - explain the purpose of that concept
 - give at least one real-world application
 - design and solve at least two original problems
 
-This module works best as a short, student-led teaching demo rather than as a written worksheet.
+This module works best as a short presentation-style demo rather than as a written worksheet.
 				`.trim()
 			)
 		]),
@@ -948,10 +946,10 @@ This module works best as a short, student-led teaching demo rather than as a wr
 				`
 This check-in reviews graphing quadratics, transformations, functions, inverse functions, variation, exponential models, and data analysis.
 
-**Instructor stance**
+**Review stance**
 
-- let the student try each problem independently first
-- use guiding questions before full reteaching
+- Try each problem independently first
+- use guiding questions before full reteaching is needed
 - treat the results as feedback for the next few sessions, not as a formal exam grade
 				`.trim()
 			),
@@ -1004,15 +1002,15 @@ This check-in reviews graphing quadratics, transformations, functions, inverse f
 				media.checkIn2FunctionGraph
 			),
 			createLesson(
-				"Check-In Visual Placeholder",
+				"Check-In Visual Reference",
 				`
-Some graph-only prompts in this check-in still depend on missing reference images:
+Use a graphing tool or the placeholder image below for graph-only prompts such as:
 
 - the vertical-line-test example
 - the inverse-existence graph in the advanced section
 - one additional practice graph used for extrema and intervals
 
-Use the placeholder below anywhere the check-in still depends on one of those missing visuals.
+The key goal is to justify each decision from the graph feature being tested.
 				`.trim(),
 				media.missingImage
 			)

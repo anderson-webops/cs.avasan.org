@@ -24,7 +24,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Guided Exploration: Atomic Model Simulation",
 					content:
-						"Use an atom simulation or diagram sequence to identify the nucleus, electron cloud, atomic number, and charge. Have students change particle counts and describe how the atom's identity or charge changes, so the model feels interactive rather than memorized."
+						"Use an atom simulation or diagram sequence to identify the nucleus, electron cloud, atomic number, and charge. Change particle counts and describe how the atom's identity or charge changes, so the model feels interactive rather than memorized."
 				},
 				{
 					title: "Mini Lab: Water Cohesion and Surface Tension",
@@ -39,7 +39,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Does Water Behave So Differently?",
 					content:
-						"Ask students to connect the atom-scale ideas from this module to the visible behavior of water in the surface-tension and density demonstrations. They should explain what chemistry can reveal that simple description alone cannot."
+						"Connect the atom-scale ideas from this module to the visible behavior of water in the surface-tension and density demonstrations. They should explain what chemistry can reveal that simple description alone cannot."
 				}
 			],
 			supplementalProjects: [
@@ -71,12 +71,12 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Mini Lab: Making Oobleck",
 					content:
-						"Use Oobleck to challenge the idea that every material behaves like a perfect textbook solid or liquid. Ask students to press, squeeze, and release the material, then explain why it seems solid under sudden force but flows more like a liquid when handled gently."
+						"Use Oobleck to challenge the idea that every material behaves like a perfect textbook solid or liquid. Press, squeeze, and release the material, then explain why it seems solid under sudden force but flows more like a liquid when handled gently."
 				},
 				{
 					title: "Guided Comparison: Apple, Water, and Balloon",
 					content:
-						"Compare an apple, a glass of water, and an air-filled balloon as concrete examples of solids, liquids, and gases. Have students draw or describe how particles would be arranged inside each one and how freely those particles can move."
+						"Compare an apple, a glass of water, and an air-filled balloon as concrete examples of solids, liquids, and gases. Draw or describe how particles would be arranged inside each one and how freely those particles can move."
 				},
 				{
 					title: "Worked Example Set: Particle Motion Across Phases",
@@ -86,12 +86,12 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Design Challenge: Real-World Use for a Weird Material",
 					content:
-						"Ask students to propose a practical use for a material like Oobleck or another unusual substance. Push them to justify the idea using the material's observed properties rather than imagination alone."
+						"Propose a practical use for a material like Oobleck or another unusual substance. Push them to justify the idea using the material's observed properties rather than imagination alone."
 				},
 				{
 					title: "Reflection Question: When Do Categories Start to Blur?",
 					content:
-						"Have students explain why Oobleck is useful even though it does not fit neatly into a single state-of-matter label in everyday language. This reflection should reinforce that scientific models are tools that sometimes need refinement rather than rigid boxes."
+						"Explain why Oobleck is useful even though it does not fit neatly into a single state-of-matter label in everyday language. This reflection should reinforce that scientific models are tools that sometimes need refinement rather than rigid boxes."
 				}
 			],
 			supplementalProjects: [
@@ -103,12 +103,12 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think gases are 'weightless' or that liquids have no structure at all. They may also assume anything that pours must be a liquid in the same sense as water. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Students often think gases are 'weightless' or that liquids have no structure at all. They may also assume anything that pours must be a liquid in the same sense as water."
 				},
 				{
 					title: "Extension Project: Material Sorting Challenge",
 					content:
-						"Choose several everyday materials and sort them by which state-of-matter model fits best. For any borderline case, explain what property makes classification harder. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Choose several everyday materials and sort them by which state-of-matter model fits best. For any borderline case, explain what property makes classification harder."
 				}
 			]
 		},
@@ -128,7 +128,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Simulation Challenge: States of Matter Under Heating and Compression",
 					content:
-						"Use a states-of-matter simulation to watch how particle motion changes when energy is added or when the container volume changes. Have students test heating, cooling, and compression separately so they can describe how temperature and pressure influence the dominant phase."
+						"Use a states-of-matter simulation to watch how particle motion changes when energy is added or when the container volume changes. Test heating, cooling, and compression separately so they can describe how temperature and pressure influence the dominant phase."
 				},
 				{
 					title: "Worked Example Set: Coexistence, Vapor, and Everyday Phase Change",
@@ -138,7 +138,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Particle Storyboard: Explain a Phase Change at the Atomic Level",
 					content:
-						"Have students draw or narrate what particles are doing during melting, freezing, evaporation, or condensation. The focus should be on motion, spacing, and energy rather than advanced equations."
+						"Draw or narrate what particles are doing during melting, freezing, evaporation, or condensation. The focus should be on motion, spacing, and energy rather than advanced equations."
 				},
 				{
 					title: "Reflection Question: What Actually Changes During a Phase Change?",
@@ -160,7 +160,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Extension Project: Heating and Cooling Diary",
 					content:
-						"Track one household example of a phase change, such as ice melting or condensation forming, over time. Describe the visible change and the particle-level explanation side by side. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Track one household example of a phase change, such as ice melting or condensation forming, over time. Describe the visible change and the particle-level explanation side by side."
 				}
 			]
 		},
@@ -185,7 +185,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Pattern Hunt: Sections and Families of the Table",
 					content:
-						"Identify broad regions such as metals, nonmetals, and noble gases, keeping the emphasis conceptual and age-appropriate. Ask students what kinds of similarities or differences they notice across rows and columns."
+						"Identify broad regions such as metals, nonmetals, and noble gases, keeping the emphasis conceptual and age-appropriate. Consider what kinds of similarities or differences they notice across rows and columns."
 				},
 				{
 					title: "Creative Application: Build Names and Words from Element Symbols",
@@ -195,7 +195,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Is the Periodic Table So Useful?",
 					content:
-						"Ask students to explain why scientists benefit from a system that organizes elements in a predictable way. They should point to the table as a tool for understanding matter, not just as a memorization challenge."
+						"Explain why scientists benefit from a system that organizes elements in a predictable way. They should point to the table as a tool for understanding matter, not just as a memorization challenge."
 				}
 			],
 			supplementalProjects: [
@@ -212,7 +212,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Extension Project: Mystery Element Cards",
 					content:
-						"Write short clue cards using atomic number, symbol, or typical uses and have students identify the matching element. Then ask them to create new clue cards for someone else to solve. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Write short clue cards using atomic number, symbol, or typical uses and have students identify the matching element. Then ask them to create new clue cards for someone else to solve."
 				}
 			]
 		},
@@ -232,12 +232,12 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Particle Modeling Exercise: Track Atoms Through a Reaction",
 					content:
-						"Have students count atoms on both sides of a simple equation and explain how the same atoms are rearranged into new products. This should reinforce conservation more clearly than memorizing vocabulary alone."
+						"Count atoms on both sides of a simple equation and explain how the same atoms are rearranged into new products. This should reinforce conservation more clearly than memorizing vocabulary alone."
 				},
 				{
 					title: "Mini Lab: Elephant Toothpaste",
 					content:
-						"Use the elephant-toothpaste reaction to discuss catalysts, gas release, and why trapped oxygen bubbles create a dramatic foam. Ask students to identify the trigger for the reaction and explain what visible clues suggest that a chemical change occurred."
+						"Use the elephant-toothpaste reaction to discuss catalysts, gas release, and why trapped oxygen bubbles create a dramatic foam. Identify the trigger for the reaction and explain what visible clues suggest that a chemical change occurred."
 				},
 				{
 					title: "Mini Lab: Baking Soda Volcano",
@@ -264,7 +264,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Extension Project: Reaction Detective Board",
 					content:
-						"Collect several everyday examples and decide whether each is a chemical change or a physical change. Defend each classification with evidence rather than intuition alone. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft."
+						"Collect several everyday examples and decide whether each is a chemical change or a physical change. Defend each classification with evidence rather than intuition alone."
 				}
 			]
 		},
@@ -279,7 +279,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Mini Lab: Making Invisible Ink",
 					content:
-						"Use diluted lemon juice to make invisible ink and reveal it with gentle heat, then connect the result to oxidation and dilution. Have students explain why adding water changes visibility and whether the starting mixture behaves more like a mixture or a solution."
+						"Use diluted lemon juice to make invisible ink and reveal it with gentle heat, then connect the result to oxidation and dilution. Explain why adding water changes visibility and whether the starting mixture behaves more like a mixture or a solution."
 				},
 				{
 					title: "Simulation Challenge: What Dissolving Looks Like at the Atomic Level",
@@ -299,7 +299,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Are Some Mixtures Easy to Separate?",
 					content:
-						"Ask students to compare a heterogeneous mixture with a true solution and explain why one can often be separated mechanically while the other requires a process like evaporation. They should explicitly mention what is happening at the particle scale."
+						"Compare a heterogeneous mixture with a true solution and explain why one can often be separated mechanically while the other requires a process like evaporation. They should explicitly mention what is happening at the particle scale."
 				}
 			],
 			supplementalProjects: [
@@ -336,17 +336,17 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Model-Building Exercise: Represent the Chemistry Safely",
 					content:
-						"Have students choose a safe way to explain the chemistry, such as a diagram, particle storyboard, household-object model, or carefully selected demonstration. The key is making the starting substances, the transformation, and the final outcome clear."
+						"Choose a safe way to explain the chemistry, such as a diagram, particle storyboard, household-object model, or carefully selected demonstration. The key is making the starting substances, the transformation, and the final outcome clear."
 				},
 				{
 					title: "Scientific Communication: Present the Reaction Clearly",
 					content:
-						"Students should explain their chosen chemistry in plain language, then add the particle-level explanation that makes it scientific rather than purely descriptive. Encourage a short presentation or writeup that balances accuracy, visuals, and explanation."
+						"Explain their chosen chemistry in plain language, then add the particle-level explanation that makes it scientific rather than purely descriptive. Encourage a short presentation or writeup that balances accuracy, visuals, and explanation."
 				},
 				{
 					title: "Course Recap: Connect the Major Themes",
 					content:
-						"Review the major strands of the course: atoms, water behavior, states of matter, phase changes, the periodic table, reactions, and mixtures and solutions. Ask students to identify which idea changed their thinking the most and which experiments best revealed chemistry they could not see directly."
+						"Review the major strands of the course: atoms, water behavior, states of matter, phase changes, the periodic table, reactions, and mixtures and solutions. Identify which idea changed their thinking the most and which experiments best revealed chemistry they could not see directly."
 				},
 				{
 					title: "Reflection Question: How Has Your Picture of Matter Changed?",
@@ -373,422 +373,422 @@ export const introToChemistryCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 8: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 8: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 8: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 8: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 8: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 8: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 8: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 8: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 8: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 9: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 9: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 9: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 9: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 9: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 9: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 9: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 9: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 9: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 10: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 10: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 10: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 10: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 10: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 10: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 10: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 10: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 10: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 11: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 11: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 11: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 11: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 11: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 11: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 11: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 11: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 11: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 12: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 12: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 12: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 12: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 12: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 12: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 12: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 12: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 12: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 13: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 13: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 13: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 13: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 13: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 13: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 13: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 13: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 13: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 14: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 14: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 14: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 14: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 14: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 15: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 15: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 15: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 15: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 15: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 16: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 16: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 16: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 16: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 16: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Applied Studio 17: chemistry lab",
+			title: "chemistry lab: Implementation Studio",
 			curriculum: [
 				{
 					title: "chemistry lab: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: chemistry lab, define the success criteria, and review the concepts students must understand before they begin the main build or problem. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "chemistry lab: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: chemistry lab, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative chemistry lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "chemistry lab: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: chemistry lab. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done."
+						"chemistry lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
 				},
 				{
 					title: "chemistry lab: Review and Reflection",
 					content:
-						"Close Applied Studio 17: chemistry lab by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"chemistry lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "chemistry lab: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: chemistry lab with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Extend the core build from chemistry lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "chemistry lab: Open Practice",
 					content:
-						"Create a compact variant inspired by Applied Studio 17: chemistry lab. Keep the scope tight, but require one meaningful design or reasoning decision. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create a compact variant inspired by chemistry lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Applied Studio 17: chemistry lab: Open-Ended Variant",
+					title: "chemistry lab: Open-Ended Variant: Implementation Studio",
 					content:
-						"Create an original variation inspired by Applied Studio 17: chemistry lab. Keep the scope small, but require one meaningful design or reasoning choice. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Create an original variation inspired by chemistry lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		}

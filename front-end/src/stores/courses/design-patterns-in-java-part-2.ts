@@ -19,7 +19,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Workflow: Characterize, Slice, Verify",
 					content:
-						"Teach a repeatable loop: identify the smell, describe the desired improvement, isolate the smallest safe step, run tests or manual checks, and only then continue. Students should treat naming, extraction, and movement as tactical moves toward better architecture."
+						"Teach a repeatable loop: identify the smell, describe the desired improvement, isolate the smallest safe step, run tests or manual checks, and only then continue. Treat naming, extraction, and movement as tactical moves toward better architecture."
 				},
 				{
 					title: "Worked Example Set: Smell Diagnosis Before Change",
@@ -29,17 +29,16 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Write the Refactor Plan Before Touching Code",
 					content:
-						"Have students write a small staged plan naming the smell, the next one or two refactorings, and the expected benefit before editing. This prevents flailing and makes code review discussion more precise."
+						"Write a small staged plan naming the smell, the next one or two refactorings, and the expected benefit before editing. This prevents flailing and makes code review discussion more precise."
 				},
 				{
 					title: "Reflection Question: What Makes a Refactor Reckless?",
 					content:
-						"Ask students to explain how a good refactor differs from a rewrite that merely hopes the new version will be better. They should mention verification and change granularity explicitly. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain how a good refactor differs from a rewrite that merely hopes the new version will be better. They should mention verification and change granularity explicitly."
 				},
 				{
 					title: "DPR1 Code Smells and Safe Refactoring Workflow: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-08-dpr1-code-smells-and-safe-refactoring-workflow/starter",
 					solutionLink:
@@ -59,7 +58,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR1 Code Smells and Safe Refactoring Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR1 Code Smells and Safe Refactoring Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-dpr1-code-smells-and-safe-refactoring-workflow-supplemental-2/starter",
 					solutionLink:
@@ -68,7 +67,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR1 Code Smells and Safe Refactoring Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR1 Code Smells and Safe Refactoring Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-dpr1-code-smells-and-safe-refactoring-workflow-supplemental-3/starter",
 					solutionLink:
@@ -87,7 +86,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Worked Example Set: Shrinking a Long Method",
 					content:
-						"Start with a dense Java method, then refactor it in very small steps using extraction, better local names, split temporaries, and algorithm replacement where the logic is overgrown. Students should see that many later architectural improvements begin here."
+						"Start with a dense Java method, then refactor it in very small steps using extraction, better local names, split temporaries, and algorithm replacement where the logic is overgrown. Visible pattern: That many later architectural improvements begin here."
 				},
 				{
 					title: "Method Object Versus Plain Extraction",
@@ -102,17 +101,16 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Pattern Connection: Clear Methods Make Later Patterns Possible",
 					content:
-						"Show how Strategy, Template Method, and Command become easier to introduce after method-level mess is removed. Students should understand that patterns often fail when built on top of unreadable methods."
+						"Show how Strategy, Template Method, and Command become easier to introduce after method-level mess is removed. Key idea: Patterns often fail when built on top of unreadable methods."
 				},
 				{
 					title: "Reflection Question: When Is Extraction Enough?",
 					content:
-						"Ask students to explain when they should stop at smaller methods and when they should continue toward a new class or pattern. The answer should reference responsibility, not raw line count alone."
+						"Explain when they should stop at smaller methods and when they should continue toward a new class or pattern. The answer should reference responsibility, not raw line count alone."
 				},
 				{
 					title: "DPR2 Composing Methods: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr2-composing-methods/starter",
 					solutionLink:
@@ -123,7 +121,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can pick the smallest composing-method refactor that improves clarity. Ask them to justify why they used Method Object instead of another Extract Method. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Check whether students can pick the smallest composing-method refactor that improves clarity. Ask them to justify why they used Method Object instead of another Extract Method.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr2-composing-methods/starter",
 					solutionLink:
@@ -132,7 +130,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR2 Composing Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR2 Composing Methods. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-dpr2-composing-methods-supplemental-2/starter",
 					solutionLink:
@@ -141,7 +139,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR2 Composing Methods. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR2 Composing Methods. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-dpr2-composing-methods-supplemental-3/starter",
 					solutionLink:
@@ -175,17 +173,16 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Re-home Behavior Without Breaking Clients",
 					content:
-						"Take a collaboration tangle and move the logic to the objects that actually own the data and decision-making context. Track what client code becomes simpler after the move. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Take a collaboration tangle and move the logic to the objects that actually own the data and decision-making context. Track what client code becomes simpler after the move."
 				},
 				{
 					title: "Reflection Question: Who Should Own This Behavior?",
 					content:
-						"Ask students to explain how they detect that a method belongs somewhere else. A good answer should mention what data the method leans on and which object's invariants it really serves. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain how they detect that a method belongs somewhere else. A good answer should mention what data the method leans on and which object's invariants it really serves."
 				},
 				{
 					title: "DPR3 Moving Features Between Objects: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-10-dpr3-moving-features-between-objects/starter",
 					solutionLink:
@@ -205,7 +202,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR3 Moving Features Between Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR3 Moving Features Between Objects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplemental-2/starter",
 					solutionLink:
@@ -214,7 +211,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR3 Moving Features Between Objects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR3 Moving Features Between Objects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-dpr3-moving-features-between-objects-supplemental-3/starter",
 					solutionLink:
@@ -243,7 +240,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Data Modeling Lab: Upgrade a Weak Domain Model",
 					content:
-						"Take a Java model made of primitives and loosely coordinated arrays or collections and evolve it into named objects with better boundaries. Have students justify every new type introduced."
+						"Take a Java model made of primitives and loosely coordinated arrays or collections and evolve it into named objects with better boundaries. Justify every new type introduced."
 				},
 				{
 					title: "Pattern Connection: State, Strategy, and Value Objects",
@@ -253,12 +250,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: When Is a Primitive No Longer Good Enough?",
 					content:
-						"Ask students to explain what signs show that a string, int, or array has turned into a disguised domain concept. They should mention validation rules, behavior, or repeated interpretation logic."
+						"Explain what signs show that a string, int, or array has turned into a disguised domain concept. They should mention validation rules, behavior, or repeated interpretation logic."
 				},
 				{
 					title: "DPR4 Organizing Data: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr4-organizing-data/starter",
 					solutionLink:
@@ -278,7 +274,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR4 Organizing Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR4 Organizing Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-dpr4-organizing-data-supplemental-2/starter",
 					solutionLink:
@@ -287,7 +283,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR4 Organizing Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR4 Organizing Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-08-dpr4-organizing-data-supplemental-3/starter",
 					solutionLink:
@@ -311,7 +307,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Replace Conditional with Polymorphism Versus Simpler Cleanup",
 					content:
-						"Teach students to reserve polymorphism for stable behavioral variation across types or states, not for every if-else chain. Compare this with Strategy and State from the first course. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Teach students to reserve polymorphism for stable behavioral variation across types or states, not for every if-else chain. Compare this with Strategy and State from the first course."
 				},
 				{
 					title: "Null Object and Assertion as Design Signals",
@@ -321,17 +317,16 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Conditional Tangle Rescue",
 					content:
-						"Take a Java policy engine or workflow method with nested flags and refactor it into clearer control flow, optionally ending in polymorphism where justified. Students should record which conditional refactors happened before any pattern was introduced."
+						"Take a Java policy engine or workflow method with nested flags and refactor it into clearer control flow, optionally ending in polymorphism where justified. Record which conditional refactors happened before any pattern was introduced."
 				},
 				{
 					title: "Reflection Question: When Does a Conditional Signal a Missing Type?",
 					content:
-						"Ask students to explain when a conditional is just logic and when it reveals a deeper modeling problem. They should point to recurring variation, duplicated branches, or type-code-driven behavior."
+						"Explain when a conditional is just logic and when it reveals a deeper modeling problem. They should point to recurring variation, duplicated branches, or type-code-driven behavior."
 				},
 				{
 					title: "DPR5 Simplifying Conditional Expressions: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-12-dpr5-simplifying-conditional-expressions/starter",
 					solutionLink:
@@ -351,7 +346,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR5 Simplifying Conditional Expressions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR5 Simplifying Conditional Expressions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr5-simplifying-conditional-expressions-supplemental-2/starter",
 					solutionLink:
@@ -360,7 +355,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR5 Simplifying Conditional Expressions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR5 Simplifying Conditional Expressions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-10-dpr5-simplifying-conditional-expressions-supplemental-3/starter",
 					solutionLink:
@@ -384,7 +379,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Factory Method Reappears Through Refactoring",
 					content:
-						"Use Replace Constructor with Factory Method to show how refactoring techniques can lead directly into a design pattern. This is a good bridge between the first course and the second. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use Replace Constructor with Factory Method to show how refactoring techniques can lead directly into a design pattern. This is a good bridge between the first course and the second."
 				},
 				{
 					title: "Exceptions, Preconditions, and API Shape",
@@ -394,17 +389,16 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Reduce Call-Site Noise in a Service Layer",
 					content:
-						"Take a Java service class with confusing calls and refactor it until the main use cases read clearly from the caller's perspective. Students should highlight which method-call simplifications improved the design most."
+						"Take a Java service class with confusing calls and refactor it until the main use cases read clearly from the caller's perspective. Highlight which method-call simplifications improved the design most."
 				},
 				{
 					title: "Reflection Question: What Makes a Call Site Honest?",
 					content:
-						"Ask students to explain when an API reveals intent and when it leaks too much internal detail. They should mention naming, parameter shape, and side-effect clarity. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain when an API reveals intent and when it leaks too much internal detail. They should mention naming, parameter shape, and side-effect clarity."
 				},
 				{
 					title: "DPR6 Simplifying Method Calls: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr6-simplifying-method-calls/starter",
 					solutionLink:
@@ -415,7 +409,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can choose between Introduce Parameter Object and Preserve Whole Object. Use a quick prompt asking when a constructor should become a factory method. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Check whether students can choose between Introduce Parameter Object and Preserve Whole Object. Use a quick prompt asking when a constructor should become a factory method.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr6-simplifying-method-calls/starter",
 					solutionLink:
@@ -424,7 +418,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR6 Simplifying Method Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR6 Simplifying Method Calls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr6-simplifying-method-calls-supplemental-2/starter",
 					solutionLink:
@@ -433,7 +427,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR6 Simplifying Method Calls. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR6 Simplifying Method Calls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-12-dpr6-simplifying-method-calls-supplemental-3/starter",
 					solutionLink:
@@ -472,12 +466,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: Which Abstraction Actually Earned Its Place?",
 					content:
-						"Ask students to identify an abstraction they removed or collapsed and explain why it no longer served the model. They should distinguish meaningful generalization from speculative generality."
+						"Identify an abstraction they removed or collapsed and explain why it no longer served the model. They should distinguish meaningful generalization from speculative generality."
 				},
 				{
 					title: "DPR7 Dealing with Generalization: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-14-dpr7-dealing-with-generalization/starter",
 					solutionLink:
@@ -497,7 +490,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR7 Dealing with Generalization. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR7 Dealing with Generalization. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr7-dealing-with-generalization-supplemental-2/starter",
 					solutionLink:
@@ -506,7 +499,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR7 Dealing with Generalization. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR7 Dealing with Generalization. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-14-dpr7-dealing-with-generalization-supplemental-3/starter",
 					solutionLink:
@@ -535,7 +528,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Refactor Until the Pattern Is Obvious",
 					content:
-						"Require students to stop after each small change and ask whether the named pattern is now justified or still premature. This builds restraint and sequence awareness. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Require students to stop after each small change and ask whether the named pattern is now justified or still premature. This builds restraint and sequence awareness."
 				},
 				{
 					title: "Tradeoff Review: Pattern Arrival Versus Pattern Forcing",
@@ -545,12 +538,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: Which Step Made the Biggest Difference?",
 					content:
-						"Ask students whether the biggest improvement came from the named pattern or from one of the smaller refactoring steps leading up to it. A strong answer often recognizes that the pattern only worked because the groundwork was done first."
+						"Compare whether the biggest improvement came from the named pattern or from one of the smaller refactoring steps leading up to it. A strong answer often recognizes that the pattern only worked because the groundwork was done first."
 				},
 				{
 					title: "DPR8 Refactoring Toward Patterns: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns/starter",
 					solutionLink:
@@ -570,7 +562,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR8 Refactoring Toward Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR8 Refactoring Toward Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns-supplemental-2/starter",
 					solutionLink:
@@ -579,7 +571,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR8 Refactoring Toward Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR8 Refactoring Toward Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-16-dpr8-refactoring-toward-patterns-supplemental-3/starter",
 					solutionLink:
@@ -608,22 +600,21 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Characterization Test then Structural Change",
 					content:
-						"Write or simulate a small set of characterization checks on brittle Java code, then perform a planned refactor while preserving the observable behavior. Students should see the emotional difference between refactoring blind and refactoring with a safety net."
+						"Write or simulate a small set of characterization checks on brittle Java code, then perform a planned refactor while preserving the observable behavior. Visible pattern: The emotional difference between refactoring blind and refactoring with a safety net."
 				},
 				{
 					title: "Design Review: Refactoring Pace and Reviewability",
 					content:
-						"Teach how to package refactors into readable commits or change sets rather than one giant diff. This makes the work maintainable for teams and for the student's future self. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Teach how to package refactors into readable commits or change sets rather than one giant diff. This makes the work maintainable for teams and for the student's future self."
 				},
 				{
 					title: "Reflection Question: What Let You Move Faster Safely?",
 					content:
-						"Ask students to name the exact seam, test, or dependency change that reduced refactoring risk the most. They should connect confidence to design structure, not luck. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Name the exact seam, test, or dependency change that reduced refactoring risk the most. They should connect confidence to design structure, not luck."
 				},
 				{
 					title: "DPR9 Testability, DI, and Refactoring with Confidence: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-16-dpr9-testability-di-and-refactoring-with-confidence/starter",
 					solutionLink:
@@ -643,7 +634,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR9 Testability, DI, and Refactoring with Confidence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR9 Testability, DI, and Refactoring with Confidence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr9-testability-di-and-refactoring-with-confidence-supplemental-2/starter",
 					solutionLink:
@@ -652,7 +643,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR9 Testability, DI, and Refactoring with Confidence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR9 Testability, DI, and Refactoring with Confidence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-18-dpr9-testability-di-and-refactoring-with-confidence-supplemental-3/starter",
 					solutionLink:
@@ -671,12 +662,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnosis Pass: Smells, Risks, and Refactor Sequence",
 					content:
-						"List the main smell categories present, the behavior that must stay unchanged, and the ordered refactoring steps planned. Students should name both the technique categories and any patterns they expect to emerge."
+						"List the main smell categories present, the behavior that must stay unchanged, and the ordered refactoring steps planned. Name both the technique categories and any patterns they expect to emerge."
 				},
 				{
 					title: "Execution Pass: Small Safe Transformations",
 					content:
-						"Perform the refactor as a sequence of readable changes rather than a single giant rewrite. Require validation after each meaningful stage. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Perform the refactor as a sequence of readable changes rather than a single giant rewrite. Require validation after each meaningful stage."
 				},
 				{
 					title: "Pattern Arrival Review",
@@ -686,7 +677,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Final Architecture Review",
 					content:
-						"Evaluate the codebase in terms of smell reduction, package clarity, collaboration boundaries, and changeability. Students should explain the next improvement they would make only if the project continued."
+						"Evaluate the codebase in terms of smell reduction, package clarity, collaboration boundaries, and changeability. Explain the next improvement they would make only if the project continued."
 				},
 				{
 					title: "Capstone Reflection: From Catalog Knowledge to Judgment",
@@ -695,8 +686,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR10 Capstone Refactoring Studio: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr10-capstone-refactoring-studio/starter",
 					solutionLink:
@@ -716,7 +706,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR10 Capstone Refactoring Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR10 Capstone Refactoring Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-19-dpr10-capstone-refactoring-studio-supplemental-2/starter",
 					solutionLink:
@@ -725,7 +715,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DPR10 Capstone Refactoring Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DPR10 Capstone Refactoring Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-20-dpr10-capstone-refactoring-studio-supplemental-3/starter",
 					solutionLink:
@@ -734,22 +724,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 11: refactoring clinic 11",
+			title: "refactoring clinic 11: Implementation Studio",
 			curriculum: [
 				{
 					title: "refactoring clinic 11: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 11: refactoring clinic 11, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"refactoring clinic 11: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 11: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 11: refactoring clinic 11, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative refactoring clinic 11 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "refactoring clinic 11: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 11: refactoring clinic 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"refactoring clinic 11: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
@@ -758,32 +748,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 11: Review and Reflection",
 					content:
-						"Close Applied Studio 11: refactoring clinic 11 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"refactoring clinic 11: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 11: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 11: refactoring clinic 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from refactoring clinic 11: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/solution"
 				},
 				{
-					title: "Applied Studio 11: refactoring clinic 11 supplemental 2",
+					title: "refactoring clinic 11 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: refactoring clinic 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-21-applied-studio-11-refactoring-clinic-11-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-21-applied-studio-11-refactoring-clinic-11-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 11: refactoring clinic 11 supplemental 3",
+					title: "refactoring clinic 11 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: refactoring clinic 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-22-applied-studio-11-refactoring-clinic-11-supplemental-3/starter",
 					solutionLink:
@@ -792,22 +782,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 12: refactoring clinic 12",
+			title: "refactoring clinic 12: Implementation Studio",
 			curriculum: [
 				{
 					title: "refactoring clinic 12: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 12: refactoring clinic 12, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"refactoring clinic 12: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 12: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 12: refactoring clinic 12, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative refactoring clinic 12 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "refactoring clinic 12: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 12: refactoring clinic 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"refactoring clinic 12: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
@@ -816,32 +806,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 12: Review and Reflection",
 					content:
-						"Close Applied Studio 12: refactoring clinic 12 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"refactoring clinic 12: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 12: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 12: refactoring clinic 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from refactoring clinic 12: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/solution"
 				},
 				{
-					title: "Applied Studio 12: refactoring clinic 12 supplemental 2",
+					title: "refactoring clinic 12 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: refactoring clinic 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-23-applied-studio-12-refactoring-clinic-12-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-23-applied-studio-12-refactoring-clinic-12-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 12: refactoring clinic 12 supplemental 3",
+					title: "refactoring clinic 12 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: refactoring clinic 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-24-applied-studio-12-refactoring-clinic-12-supplemental-3/starter",
 					solutionLink:
@@ -850,22 +840,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 13: refactoring clinic 13",
+			title: "refactoring clinic 13: Implementation Studio",
 			curriculum: [
 				{
 					title: "refactoring clinic 13: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 13: refactoring clinic 13, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"refactoring clinic 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 13: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 13: refactoring clinic 13, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative refactoring clinic 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "refactoring clinic 13: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 13: refactoring clinic 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"refactoring clinic 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
@@ -874,32 +864,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 13: Review and Reflection",
 					content:
-						"Close Applied Studio 13: refactoring clinic 13 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"refactoring clinic 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 13: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 13: refactoring clinic 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from refactoring clinic 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/solution"
 				},
 				{
-					title: "Applied Studio 13: refactoring clinic 13 supplemental 2",
+					title: "refactoring clinic 13 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: refactoring clinic 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-25-applied-studio-13-refactoring-clinic-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-25-applied-studio-13-refactoring-clinic-13-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 13: refactoring clinic 13 supplemental 3",
+					title: "refactoring clinic 13 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: refactoring clinic 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-26-applied-studio-13-refactoring-clinic-13-supplemental-3/starter",
 					solutionLink:
@@ -908,22 +898,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 14: refactoring clinic 14",
+			title: "refactoring clinic 14: Implementation Studio",
 			curriculum: [
 				{
 					title: "refactoring clinic 14: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: refactoring clinic 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"refactoring clinic 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 14: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: refactoring clinic 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative refactoring clinic 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "refactoring clinic 14: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: refactoring clinic 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"refactoring clinic 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
@@ -932,32 +922,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 14: Review and Reflection",
 					content:
-						"Close Applied Studio 14: refactoring clinic 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"refactoring clinic 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 14: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: refactoring clinic 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from refactoring clinic 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/solution"
 				},
 				{
-					title: "Applied Studio 14: refactoring clinic 14 supplemental 2",
+					title: "refactoring clinic 14 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: refactoring clinic 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-27-applied-studio-14-refactoring-clinic-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-27-applied-studio-14-refactoring-clinic-14-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: refactoring clinic 14 supplemental 3",
+					title: "refactoring clinic 14 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: refactoring clinic 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-28-applied-studio-14-refactoring-clinic-14-supplemental-3/starter",
 					solutionLink:
@@ -966,22 +956,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: refactoring clinic 15",
+			title: "refactoring clinic 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "refactoring clinic 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: refactoring clinic 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"refactoring clinic 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: refactoring clinic 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative refactoring clinic 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "refactoring clinic 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: refactoring clinic 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"refactoring clinic 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
@@ -990,32 +980,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: refactoring clinic 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"refactoring clinic 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: refactoring clinic 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from refactoring clinic 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/solution"
 				},
 				{
-					title: "Applied Studio 15: refactoring clinic 15 supplemental 2",
+					title: "refactoring clinic 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: refactoring clinic 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-29-applied-studio-15-refactoring-clinic-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-29-applied-studio-15-refactoring-clinic-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: refactoring clinic 15 supplemental 3",
+					title: "refactoring clinic 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: refactoring clinic 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-30-applied-studio-15-refactoring-clinic-15-supplemental-3/starter",
 					solutionLink:
@@ -1024,22 +1014,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: refactoring clinic 16",
+			title: "refactoring clinic 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "refactoring clinic 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: refactoring clinic 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"refactoring clinic 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: refactoring clinic 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative refactoring clinic 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "refactoring clinic 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: refactoring clinic 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"refactoring clinic 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
@@ -1048,32 +1038,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: refactoring clinic 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"refactoring clinic 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: refactoring clinic 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from refactoring clinic 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/solution"
 				},
 				{
-					title: "Applied Studio 16: refactoring clinic 16 supplemental 2",
+					title: "refactoring clinic 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: refactoring clinic 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-31-applied-studio-16-refactoring-clinic-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-31-applied-studio-16-refactoring-clinic-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: refactoring clinic 16 supplemental 3",
+					title: "refactoring clinic 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: refactoring clinic 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-32-applied-studio-16-refactoring-clinic-16-supplemental-3/starter",
 					solutionLink:
@@ -1082,22 +1072,22 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: refactoring clinic 17",
+			title: "refactoring clinic 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "refactoring clinic 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: refactoring clinic 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"refactoring clinic 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: refactoring clinic 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative refactoring clinic 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "refactoring clinic 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: refactoring clinic 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"refactoring clinic 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:
@@ -1106,32 +1096,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: refactoring clinic 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"refactoring clinic 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: refactoring clinic 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from refactoring clinic 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/solution"
 				},
 				{
-					title: "Applied Studio 17: refactoring clinic 17 supplemental 2",
+					title: "refactoring clinic 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: refactoring clinic 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-33-applied-studio-17-refactoring-clinic-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-33-applied-studio-17-refactoring-clinic-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: refactoring clinic 17 supplemental 3",
+					title: "refactoring clinic 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: refactoring clinic 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to refactoring clinic 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-34-applied-studio-17-refactoring-clinic-17-supplemental-3/starter",
 					solutionLink:

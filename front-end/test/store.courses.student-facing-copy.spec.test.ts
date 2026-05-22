@@ -1,5 +1,13 @@
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
+
+const testDir = dirname(fileURLToPath(import.meta.url));
+const frontEndDir = resolve(testDir, "..");
+const repoRoot = resolve(frontEndDir, "..");
+const coursesSourceDir = resolve(frontEndDir, "src/stores/courses");
 
 const forbiddenStudentFacingPatterns = [
 	/\bTeaching flow\b/i,
@@ -26,8 +34,11 @@ const forbiddenStudentFacingPatterns = [
 	/\btutor-ready\b/i,
 	/\btutor-visible\b/i,
 	/\btutor notes\b/i,
+	/\btutor\b/i,
 	/\bthe tutor should\b/i,
 	/\bThe tutor should\b/i,
+	/\binstructor\b/i,
+	/\bteacher\b/i,
 	/\bCover:\b/i,
 	/\bThe expected result should\b/i,
 	/\bthe expected result should\b/i,
@@ -36,6 +47,36 @@ const forbiddenStudentFacingPatterns = [
 	/\bStart with vocabulary\b/i,
 	/\bwithout copying\b/i
 ];
+
+const forbiddenRawGeneratedPatterns = [
+	/Use the linked starter and solution/i,
+	/Have students finish the missing implementation/i,
+	/Anchor the lesson in one concrete example/i,
+	/Have students test at least one custom case/i,
+	/Introduce the main goal of Applied Studio/i,
+	/Build the central artifact for Applied Studio/i,
+	/Break the work into a small sequence/i,
+	/Applied Studio \d+/i,
+	/recovered source/i,
+	/source dump/i,
+	/original screenshots/i,
+	/missing reference images/i,
+	/Use the placeholder below/i,
+	/answer-key notes/i,
+	/qualitative prompts/i
+];
+
+const rawCourseFiles = readdirSync(coursesSourceDir)
+	.filter(file => file.endsWith(".ts"))
+	.filter(
+		file =>
+			![
+				"index.ts",
+				"normalization.ts",
+				"types.ts"
+			].includes(file)
+	)
+	.map(file => resolve(coursesSourceDir, file));
 
 function snippet(value: string, pattern: RegExp) {
 	const match = value.match(pattern);
@@ -49,6 +90,41 @@ function snippet(value: string, pattern: RegExp) {
 }
 
 describe("student-facing course copy", () => {
+	it("keeps generated boilerplate and recovery notes out of raw course source", () => {
+		const files = [
+			...rawCourseFiles,
+			resolve(repoRoot, "front-end/scripts/materialize-course-expansions.ts")
+		];
+		const failures: string[] = [];
+
+		for (const file of files) {
+			const source = readFileSync(file, "utf8");
+
+			for (const pattern of forbiddenRawGeneratedPatterns) {
+				if (!pattern.test(source)) continue;
+
+				failures.push(
+					`${file.replace(`${repoRoot}/`, "")}: ${snippet(source, pattern)}`
+				);
+			}
+		}
+
+		expect(failures).toEqual([]);
+	});
+
+	it("keeps internal planning markdown out of the course source directory", () => {
+		const planningFiles = readdirSync(coursesSourceDir).filter(
+			file =>
+				file.endsWith("-expansion-audit-plan.md") ||
+				file.endsWith("-repo-alignment-plan.md") ||
+				file.endsWith("rework-plan.md")
+		);
+		const privatePlanningDir = resolve(repoRoot, "no-include/course-planning");
+
+		expect(planningFiles).toEqual([]);
+		expect(existsSync(privatePlanningDir)).toBe(true);
+	});
+
 	it("keeps visible catalog lessons neutral instead of instructor-facing", async () => {
 		const failures: string[] = [];
 

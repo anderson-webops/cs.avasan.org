@@ -14,12 +14,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Day-One Tooling and Local-Lab Boundaries",
 					content:
-						"Assume a strictly local lab-only environment and make sanitizers, debugger setup, and disassembly tools part of the first session instead of an appendix. Students should verify `clang`, `lldb`, `cmake`, and `llvm-objdump` or `objdump` early so later mitigation and exploitability discussions are grounded in observable local builds rather than abstract descriptions."
+						"Assume a strictly local lab-only environment and make sanitizers, debugger setup, and disassembly tools part of the first session instead of an appendix. Verify `clang`, `lldb`, `cmake`, and `llvm-objdump` or `objdump` early so later mitigation and exploitability discussions are grounded in observable local builds rather than abstract descriptions."
 				},
 				{
 					title: "Preferred IDEs and Platform Setup",
 					content:
-						"Recommend `CLion` or `VS Code` with `C/C++`, `CMake Tools`, `CodeLLDB`, and `Hex Editor` when VS Code is used. On macOS, students should install Xcode command-line tools and CMake; on Windows, WSL2 plus Ubuntu is the cleanest path so the labs stay close to the Linux-oriented debugging environment they will use most often."
+						"Recommend `CLion` or `VS Code` with `C/C++`, `CMake Tools`, `CodeLLDB`, and `Hex Editor` when VS Code is used. On macOS, Install Xcode command-line tools and CMake; on Windows, WSL2 plus Ubuntu is the cleanest path so the labs stay close to the Linux-oriented debugging environment they will use most often."
 				},
 				{
 					title: "Ethics Statement and Defensive Scope",
@@ -29,12 +29,11 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Core Outcomes for Part 2",
 					content:
-						"Set expectations clearly: students should distinguish a crash from an exploitable condition, explain how bug classes can lead to control-flow or data corruption, evaluate mitigations such as ASLR, NX, canaries, RELRO, and allocator behavior, and produce patch notes plus regression checks that close the bug class rather than only describing it."
+						"Set expectations clearly: Distinguish a crash from an exploitable condition, explain how bug classes can lead to control-flow or data corruption, evaluate mitigations such as ASLR, NX, canaries, RELRO, and allocator behavior, and produce patch notes plus regression checks that close the bug class rather than only describing it."
 				},
 				{
 					title: "LLS Part 2 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-04-rust-systems-lab-15/starter",
 					solutionLink:
@@ -54,7 +53,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "LLS Part 2 Setup and Tooling Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to LLS Part 2 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to LLS Part 2 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-01-lls-part-2-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -63,7 +62,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "LLS Part 2 Setup and Tooling Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to LLS Part 2 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to LLS Part 2 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-02-lls-part-2-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -77,7 +76,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Reachability, Controllability, Impact, and Attacker Assumptions",
 					content:
-						"Teach exploitability triage as a disciplined decision process. Students should ask whether untrusted input reaches the bug, whether the attacker can shape the failing bytes or state, what the likely impact is, and what assumptions about the environment are required before a maintainers’ note should call the issue security-relevant."
+						"Teach exploitability triage as a disciplined decision process. Ask whether untrusted input reaches the bug, whether the attacker can shape the failing bytes or state, what the likely impact is, and what assumptions about the environment are required before a maintainers’ note should call the issue security-relevant."
 				},
 				{
 					title: "Crash Taxonomy for Defensive Analysis",
@@ -87,7 +86,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Write Short Exploitability Notes for Maintainers",
 					content:
-						"Students should learn to write concise notes that name reachability, attacker control, current mitigations, likely impact, and immediate next steps. The note should be short enough to be useful in a triage queue but concrete enough that another engineer can tell why the issue was classified as availability-only, disclosure-relevant, or corruption-relevant."
+						"Skill target: Write concise notes that name reachability, attacker control, current mitigations, likely impact, and immediate next steps. The note should be short enough to be useful in a triage queue but concrete enough that another engineer can tell why the issue was classified as availability-only, disclosure-relevant, or corruption-relevant."
 				},
 				{
 					title: "Project: LLS13 Crash Classification Lab",
@@ -112,7 +111,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 1: Exploitability Triage Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 1: Exploitability Triage. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 1: Exploitability Triage. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-03-module-1-exploitability-triage-supplemental-2/starter",
 					solutionLink:
@@ -121,7 +120,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 1: Exploitability Triage Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 1: Exploitability Triage. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 1: Exploitability Triage. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-04-module-1-exploitability-triage-supplemental-3/starter",
 					solutionLink:
@@ -145,7 +144,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Safer APIs, Stack Canaries, and Layered Defenses",
 					content:
-						"Compare safer bounded APIs and validation-first copy rules to mitigations such as stack canaries. Students should understand that canaries and hardening settings help detect or disrupt stack corruption, but they do not justify leaving unchecked copy logic in place."
+						"Compare safer bounded APIs and validation-first copy rules to mitigations such as stack canaries. Key idea: Canaries and hardening settings help detect or disrupt stack corruption, but they do not justify leaving unchecked copy logic in place."
 				},
 				{
 					title: "Project: LLS14 Stack Frame Corruption Demo and Fix",
@@ -170,7 +169,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 2: Stack Corruption in Toy Programs Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 2: Stack Corruption in Toy Programs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 2: Stack Corruption in Toy Programs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-05-module-2-stack-corruption-in-toy-programs-supplemental-2/starter",
 					solutionLink:
@@ -179,7 +178,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 2: Stack Corruption in Toy Programs Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 2: Stack Corruption in Toy Programs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 2: Stack Corruption in Toy Programs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-06-module-2-stack-corruption-in-toy-programs-supplemental-3/starter",
 					solutionLink:
@@ -193,7 +192,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Use-After-Free, Double Free, and Stale Pointer Reuse",
 					content:
-						"Teach heap-lifetime issues as ownership and lifecycle failures, not as magic allocator trivia. Students should understand why stale references, repeated frees, and reused heap slots can turn ordinary bookkeeping mistakes into disclosure or corruption problems when old handles or pointers still reach new objects."
+						"Teach heap-lifetime issues as ownership and lifecycle failures, not as magic allocator trivia. Key idea: Why stale references, repeated frees, and reused heap slots can turn ordinary bookkeeping mistakes into disclosure or corruption problems when old handles or pointers still reach new objects."
 				},
 				{
 					title: "Ownership Mistakes That Escalate Risk",
@@ -203,7 +202,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Allocator Behavior at a High Level",
 					content:
-						"Introduce allocator reuse and heap metadata concepts only at the level needed for defenders to reason about risk. Students should leave with a mental model that reused slots and freed objects can change who a stale reference points to, without drifting into real-world exploitation kits or public-target techniques."
+						"Introduce allocator reuse and heap metadata concepts only at the level needed for defenders to reason about risk. Leave with a mental model that reused slots and freed objects can change who a stale reference points to, without drifting into real-world exploitation kits or public-target techniques."
 				},
 				{
 					title: "Project: LLS15 Heap Lifetime Audit",
@@ -228,7 +227,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 3: Heap Lifetime and Heap Metadata Concepts Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 3: Heap Lifetime and Heap Metadata Concepts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 3: Heap Lifetime and Heap Metadata Concepts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-07-module-3-heap-lifetime-and-heap-metadata-concepts-supplemental-2/starter",
 					solutionLink:
@@ -237,7 +236,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 3: Heap Lifetime and Heap Metadata Concepts Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 3: Heap Lifetime and Heap Metadata Concepts. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 3: Heap Lifetime and Heap Metadata Concepts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-08-module-3-heap-lifetime-and-heap-metadata-concepts-supplemental-3/starter",
 					solutionLink:
@@ -251,7 +250,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Uninitialized Reads, Oversized Reads, and Stale Data Disclosure",
 					content:
-						"Teach disclosure bugs as trust-boundary problems where bytes that should stay internal cross into logs, responses, or other observable outputs. Students should recognize that a leak can matter even when the program does not crash, because addresses, object contents, and stale internal notes can still change the risk profile of a later bug."
+						"Teach disclosure bugs as trust-boundary problems where bytes that should stay internal cross into logs, responses, or other observable outputs. Recognize that a leak can matter even when the program does not crash, because addresses, object contents, and stale internal notes can still change the risk profile of a later bug."
 				},
 				{
 					title: "Why Leaked Addresses or Object Contents Matter",
@@ -270,8 +269,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Module 4: Information Disclosure and Memory Observation: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rust-systems-lab-16/starter",
 					solutionLink:
@@ -291,7 +289,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 4: Information Disclosure and Memory Observation Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 4: Information Disclosure and Memory Observation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 4: Information Disclosure and Memory Observation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-09-module-4-information-disclosure-and-memory-observation-supplemental-2/starter",
 					solutionLink:
@@ -300,7 +298,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 4: Information Disclosure and Memory Observation Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 4: Information Disclosure and Memory Observation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 4: Information Disclosure and Memory Observation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-10-module-4-information-disclosure-and-memory-observation-supplemental-3/starter",
 					solutionLink:
@@ -314,7 +312,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "NX, ASLR, PIE, RELRO, Stack Canaries, and Hardened Allocators",
 					content:
-						"Introduce common mitigations as factors that change exploitability analysis, not as excuses to ignore the underlying bug. Students should know what NX, ASLR, PIE, RELRO, stack canaries, and hardened allocators are trying to prevent or make harder, and how those mitigations change the confidence and wording of a triage note."
+						"Introduce common mitigations as factors that change exploitability analysis, not as excuses to ignore the underlying bug. Key idea: What NX, ASLR, PIE, RELRO, stack canaries, and hardened allocators are trying to prevent or make harder, and how those mitigations change the confidence and wording of a triage note."
 				},
 				{
 					title: "Mitigations Shrink the Attack Surface but Do Not Replace Fixes",
@@ -349,7 +347,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 5: Mitigation Aware Analysis Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 5: Mitigation-Aware Analysis. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 5: Mitigation-Aware Analysis. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-11-module-5-mitigation-aware-analysis-supplemental-2/starter",
 					solutionLink:
@@ -358,7 +356,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 5: Mitigation Aware Analysis Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 5: Mitigation-Aware Analysis. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 5: Mitigation-Aware Analysis. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-12-module-5-mitigation-aware-analysis-supplemental-3/starter",
 					solutionLink:
@@ -382,7 +380,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Why Modern Mitigations and Safer Languages Are Valuable",
 					content:
-						"Connect the previous modules to language and platform choice. Students should understand why mitigations, safer libraries, and safer languages meaningfully reduce risk, while still recognizing that legacy native code and performance-sensitive systems often require disciplined hardening rather than complete rewrites."
+						"Connect the previous modules to language and platform choice. Key idea: Why mitigations, safer libraries, and safer languages meaningfully reduce risk, while still recognizing that legacy native code and performance-sensitive systems often require disciplined hardening rather than complete rewrites."
 				},
 				{
 					title: "Module 6: Control-Flow Thinking for Defenders: Verification and Reflection",
@@ -391,8 +389,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Module 6: Control-Flow Thinking for Defenders: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rust-systems-lab-17/starter",
 					solutionLink:
@@ -412,7 +409,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 6: Control Flow Thinking for Defenders Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 6: Control-Flow Thinking for Defenders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 6: Control-Flow Thinking for Defenders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-13-module-6-control-flow-thinking-for-defenders-supplemental-2/starter",
 					solutionLink:
@@ -421,7 +418,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 6: Control Flow Thinking for Defenders Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 6: Control-Flow Thinking for Defenders. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 6: Control-Flow Thinking for Defenders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-14-module-6-control-flow-thinking-for-defenders-supplemental-3/starter",
 					solutionLink:
@@ -435,7 +432,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Reproduce, Assess, Prioritize, Patch, and Add a Regression",
 					content:
-						"Teach the complete defensive workflow as a loop: reproduce the bug, assess exploitability, prioritize it, patch narrowly, and add a regression case. Students should see this as the operational counterpart to exploitability analysis, because a precise triage note without a precise patch path still leaves the team exposed."
+						"Teach the complete defensive workflow as a loop: reproduce the bug, assess exploitability, prioritize it, patch narrowly, and add a regression case. Visible pattern: This as the operational counterpart to exploitability analysis, because a precise triage note without a precise patch path still leaves the team exposed."
 				},
 				{
 					title: "Communicate Clearly About Security-Relevant Bugs",
@@ -445,12 +442,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Use AI to Accelerate Triage, Not Replace Evidence",
 					content:
-						"Teach AI as a narrow assistant for defensive work: summarize sanitizer output, propose regression cases, help structure disclosure notes, compare two patch options, or convert a long debugging session into a clearer maintainer-facing report. Students should also learn the limits: AI can hallucinate exploitability claims, miss the real root cause, or suggest unsafe follow-ups, so every claim must still be checked against the local toy binary, debugger output, sanitizer evidence, and the written lab boundary."
+						"Teach AI as a narrow assistant for defensive work: summarize sanitizer output, propose regression cases, help structure disclosure notes, compare two patch options, or convert a long debugging session into a clearer maintainer-facing report. Also learn the limits: AI can hallucinate exploitability claims, miss the real root cause, or suggest unsafe follow-ups, so every claim must still be checked against the local toy binary, debugger output, sanitizer evidence, and the written lab boundary."
 				},
 				{
 					title: "Patch Notes Should Close the Bug Class",
 					content:
-						"Students should learn to describe not only what line changed, but what assumption was invalid and how the patch changes the invariant. This helps prevent shallow fixes that silence one reproduction case while leaving the bug class alive elsewhere in the codebase."
+						"Skill target: Describe not only what line changed, but what assumption was invalid and how the patch changes the invariant. This helps prevent shallow fixes that silence one reproduction case while leaving the bug class alive elsewhere in the codebase."
 				},
 				{
 					title: "Project: LLS17 Disclosure and Triage Report",
@@ -475,7 +472,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 7: From Bug Report to Patch Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 7: From Bug Report to Patch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 7: From Bug Report to Patch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-15-module-7-from-bug-report-to-patch-supplemental-2/starter",
 					solutionLink:
@@ -484,7 +481,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 7: From Bug Report to Patch Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 7: From Bug Report to Patch. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 7: From Bug Report to Patch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-16-module-7-from-bug-report-to-patch-supplemental-3/starter",
 					solutionLink:
@@ -533,7 +530,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 8: Capstone Audit Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 8: Capstone Audit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 8: Capstone Audit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-17-module-8-capstone-audit-supplemental-2/starter",
 					solutionLink:
@@ -542,7 +539,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 8: Capstone Audit Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 8: Capstone Audit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 8: Capstone Audit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-18-module-8-capstone-audit-supplemental-3/starter",
 					solutionLink:
@@ -551,22 +548,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 10: Low-Level Security Lab 13",
+			title: "Low-Level Security Lab 13: Implementation Studio",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 13: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 10: low level security lab 13, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"low level security lab 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 13: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 10: low level security lab 13, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative low level security lab 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Low-Level Security Lab 13: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 10: low level security lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"low level security lab 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/starter",
 					solutionLink:
@@ -575,32 +572,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 13: Review and Reflection",
 					content:
-						"Close Applied Studio 10: low level security lab 13 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"low level security lab 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 13: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 10: low level security lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from low level security lab 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/solution"
 				},
 				{
-					title: "Applied Studio 10: Low-Level Security Lab 13 Supplemental 2",
+					title: "Low-Level Security Lab 13 Supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: low level security lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-19-applied-studio-10-low-level-security-lab-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-19-applied-studio-10-low-level-security-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 10: Low-Level Security Lab 13 Supplemental 3",
+					title: "Low-Level Security Lab 13 Supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 10: low level security lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-20-applied-studio-10-low-level-security-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -609,22 +606,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 11: Low-Level Security Lab 14",
+			title: "Low-Level Security Lab 14: Implementation Studio",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 14: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 11: low level security lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"low level security lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 14: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 11: low level security lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative low level security lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Low-Level Security Lab 14: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 11: low level security lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"low level security lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/starter",
 					solutionLink:
@@ -633,32 +630,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 14: Review and Reflection",
 					content:
-						"Close Applied Studio 11: low level security lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"low level security lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 14: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 11: low level security lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from low level security lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/solution"
 				},
 				{
-					title: "Applied Studio 11: Low-Level Security Lab 14 Supplemental 2",
+					title: "Low-Level Security Lab 14 Supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: low level security lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-21-applied-studio-11-low-level-security-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-21-applied-studio-11-low-level-security-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 11: Low-Level Security Lab 14 Supplemental 3",
+					title: "Low-Level Security Lab 14 Supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: low level security lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-22-applied-studio-11-low-level-security-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -667,22 +664,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 12: Low-Level Security Lab 15",
+			title: "Low-Level Security Lab 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 12: low level security lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"low level security lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 12: low level security lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative low level security lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Low-Level Security Lab 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 12: low level security lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"low level security lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/starter",
 					solutionLink:
@@ -691,32 +688,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 15: Review and Reflection",
 					content:
-						"Close Applied Studio 12: low level security lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"low level security lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 12: low level security lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from low level security lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/solution"
 				},
 				{
-					title: "Applied Studio 12: Low-Level Security Lab 15 Supplemental 2",
+					title: "Low-Level Security Lab 15 Supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: low level security lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-23-applied-studio-12-low-level-security-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-23-applied-studio-12-low-level-security-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 12: Low-Level Security Lab 15 Supplemental 3",
+					title: "Low-Level Security Lab 15 Supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: low level security lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-24-applied-studio-12-low-level-security-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -725,22 +722,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 13: Low-Level Security Lab 16",
+			title: "Low-Level Security Lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 13: low level security lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"low level security lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 13: low level security lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative low level security lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Low-Level Security Lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 13: low level security lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"low level security lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/starter",
 					solutionLink:
@@ -749,32 +746,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 13: low level security lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"low level security lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 13: low level security lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from low level security lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 13: Low-Level Security Lab 16 Supplemental 2",
+					title: "Low-Level Security Lab 16 Supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: low level security lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-25-applied-studio-13-low-level-security-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-25-applied-studio-13-low-level-security-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 13: Low-Level Security Lab 16 Supplemental 3",
+					title: "Low-Level Security Lab 16 Supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: low level security lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-26-applied-studio-13-low-level-security-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -783,22 +780,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 14: Low-Level Security Lab 17",
+			title: "Low-Level Security Lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: low level security lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"low level security lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: low level security lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative low level security lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "Low-Level Security Lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: low level security lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"low level security lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/starter",
 					solutionLink:
@@ -807,32 +804,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 14: low level security lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"low level security lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: low level security lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from low level security lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 14: Low-Level Security Lab 17 Supplemental 2",
+					title: "Low-Level Security Lab 17 Supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: low level security lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-27-applied-studio-14-low-level-security-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-27-applied-studio-14-low-level-security-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: Low-Level Security Lab 17 Supplemental 3",
+					title: "Low-Level Security Lab 17 Supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: low level security lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to low level security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-28-applied-studio-14-low-level-security-lab-17-supplemental-3/starter",
 					solutionLink:

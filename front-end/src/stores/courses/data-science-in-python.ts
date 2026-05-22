@@ -19,17 +19,16 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Course Positioning between Python and Machine Learning",
 					content:
-						"Frame this course as the bridge between core Python and model-centered ML. Students should learn how to load, clean, inspect, visualize, and communicate with data before they are expected to train predictive systems."
+						"Frame this course as the bridge between core Python and model-centered ML. Learn how to load, clean, inspect, visualize, and communicate with data before they are expected to train predictive systems."
 				},
 				{
 					title: "Analysis Habits and Reproducibility",
 					content:
-						"Require clear file naming, saved notebooks, lightweight markdown explanations, and explicit notes about assumptions. Reproducibility should feel like part of data science itself, not like an extra teacher requirement."
+						"Require clear file naming, saved notebooks, lightweight markdown explanations, and explicit notes about assumptions. Reproducibility should feel like part of data science itself, not an extra external requirement."
 				},
 				{
 					title: "DSP0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main"
 				}
@@ -38,14 +37,14 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Legacy Archive: Data Science in Python Workspace",
 					content:
-						"Use the older umbrella Python archive when you need the original single-folder Juni layout or want to compare the current course structure with the legacy material organization. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Use the older umbrella Python archive when you need the original single-folder Juni layout or want to compare the current course structure with the legacy material organization.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main"
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DSP0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DSP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-dsp0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -54,7 +53,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to DSP0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to DSP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-dsp0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -68,7 +67,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Questions before Calculations",
 					content:
-						"Define data science as asking answerable questions, gathering relevant evidence, and communicating what the evidence can and cannot support. Students should begin every project with a question that matters more than the chart they hope to make."
+						"Define data science as asking answerable questions, gathering relevant evidence, and communicating what the evidence can and cannot support. Begin every project with a question that matters more than the chart they hope to make."
 				},
 				{
 					title: "Evidence, Assumptions, and Scope",
@@ -78,7 +77,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Data Science versus Machine Learning",
 					content:
-						"Separate descriptive analysis, visualization, and cleaning work from predictive modeling. Students should understand that a strong data scientist can provide real value before training any model."
+						"Separate descriptive analysis, visualization, and cleaning work from predictive modeling. Key idea: A strong data scientist can provide real value before training any model."
 				},
 				{
 					title: "Portfolio Mindset",
@@ -87,8 +86,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				},
 				{
 					title: "Module 1: What Data Science Is: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/starter",
 					solutionLink:
@@ -99,7 +97,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: What Data Science Is",
 					content:
-						"Keep a compact analysis log for what data science is that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about why the chosen question is worth answering with data in the first place. Students should practice making their reasoning inspectable.",
+						"Keep a compact analysis log for what data science is that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about why the chosen question is worth answering with data in the first place. Practice target: Making their reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-1-what-data-science-is/starter",
 					solutionLink:
@@ -108,7 +106,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 1: What Data Science Is supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 1: What Data Science Is. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 1: What Data Science Is. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-module-1-what-data-science-is-supplemental-2/starter",
 					solutionLink:
@@ -117,7 +115,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 1: What Data Science Is supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 1: What Data Science Is. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 1: What Data Science Is. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-module-1-what-data-science-is-supplemental-3/starter",
 					solutionLink:
@@ -131,7 +129,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Cells, Markdown, and Narrative Structure",
 					content:
-						"Teach notebooks as a communication tool, not just a place to run code. Students should learn to combine code cells, markdown, and short conclusions so another person can follow the reasoning from question to result."
+						"Teach notebooks as a communication tool, not just a place to run code. Skill target: Combine code cells, markdown, and short conclusions so another person can follow the reasoning from question to result."
 				},
 				{
 					title: "Restart-and-Run-All Discipline",
@@ -141,17 +139,16 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "When to Graduate into Scripts or Apps",
 					content:
-						"Show when a notebook has outgrown itself and should become a reusable Python module, script, or dashboard app. Students should know that notebooks are ideal for exploration, but not always for long-term project structure."
+						"Show when a notebook has outgrown itself and should become a reusable Python module, script, or dashboard app. Key idea: That notebooks are ideal for exploration, but not always for long-term project structure."
 				},
 				{
 					title: "Versioning Small Analyses",
 					content:
-						"Require lightweight Git use or at least dated checkpoints for notebooks and datasets. Students should build the habit of saving iterations instead of overwriting analytical work with no trail."
+						"Require lightweight Git use or at least dated checkpoints for notebooks and datasets. Build the habit of saving iterations instead of overwriting analytical work with no trail."
 				},
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/starter",
 					solutionLink:
@@ -162,7 +159,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Notebook Workflow and Reproducibility",
 					content:
-						"Keep a compact analysis log for notebook workflow and reproducibility that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which parts of the analysis are exploratory and which should be preserved as stable steps. Students should practice making their reasoning inspectable.",
+						"Keep a compact analysis log for notebook workflow and reproducibility that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which parts of the analysis are exploratory and which should be preserved as stable steps. Practice target: Making their reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-2-notebook-workflow-and-reproducibility/starter",
 					solutionLink:
@@ -171,7 +168,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 2: Notebook Workflow and Reproducibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 2: Notebook Workflow and Reproducibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-supplemental-2/starter",
 					solutionLink:
@@ -180,7 +177,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 2: Notebook Workflow and Reproducibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 2: Notebook Workflow and Reproducibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-supplemental-3/starter",
 					solutionLink:
@@ -194,7 +191,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Loading CSVs and Inspecting Schema",
 					content:
-						"Use `pandas` to load tabular data, inspect columns, preview rows, and identify the shape of a dataset before deeper analysis begins. Students should stop treating raw data files as opaque blobs."
+						"Use `pandas` to load tabular data, inspect columns, preview rows, and identify the shape of a dataset before deeper analysis begins. Stop treating raw data files as opaque blobs."
 				},
 				{
 					title: "Selecting, Filtering, and Sorting",
@@ -209,12 +206,11 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Derived Columns and Transformations",
 					content:
-						"Have students create new columns from existing data, standardize labels, and compute simple metrics. This is the first place where analytical judgment starts to shape the dataset itself."
+						"Create new columns from existing data, standardize labels, and compute simple metrics. This is the first place where analytical judgment starts to shape the dataset itself."
 				},
 				{
 					title: "Module 3: pandas Foundations: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/starter",
 					solutionLink:
@@ -225,7 +221,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: pandas Foundations",
 					content:
-						"Keep a compact analysis log for pandas foundations that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which transformations are merely helpful and which ones materially change the meaning of the dataset. Students should practice making their reasoning inspectable.",
+						"Keep a compact analysis log for pandas foundations that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which transformations are merely helpful and which ones materially change the meaning of the dataset. Practice target: Making their reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-3-pandas-foundations/starter",
 					solutionLink:
@@ -234,7 +230,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 3: pandas Foundations supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 3: pandas Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 3: pandas Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-module-3-pandas-foundations-supplemental-2/starter",
 					solutionLink:
@@ -243,7 +239,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 3: pandas Foundations supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 3: pandas Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 3: pandas Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-3-pandas-foundations-supplemental-3/starter",
 					solutionLink:
@@ -262,7 +258,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Duplicates and Inconsistent Categories",
 					content:
-						"Work through duplicate rows, inconsistent labels, whitespace issues, and accidental category splits. Students should understand how small formatting defects can distort counts, averages, and rankings."
+						"Work through duplicate rows, inconsistent labels, whitespace issues, and accidental category splits. Key idea: How small formatting defects can distort counts, averages, and rankings."
 				},
 				{
 					title: "Validation Checks and Sanity Tests",
@@ -272,12 +268,11 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Documenting Cleaning Decisions",
 					content:
-						"Students should record what they dropped, changed, or imputed and why. A clean analysis includes a clean explanation of how the raw data was turned into something trustworthy enough to use."
+						"Record what they dropped, changed, or imputed and why. A clean analysis includes a clean explanation of how the raw data was turned into something trustworthy enough to use."
 				},
 				{
 					title: "Module 4: Cleaning and Validation: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/starter",
 					solutionLink:
@@ -288,7 +283,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Cleaning and Validation",
 					content:
-						"Keep a compact analysis log for cleaning and validation that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which cleaning decision had the biggest effect on the final answer. Students should practice making their reasoning inspectable.",
+						"Keep a compact analysis log for cleaning and validation that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which cleaning decision had the biggest effect on the final answer. Practice target: Making their reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-4-cleaning-and-validation/starter",
 					solutionLink:
@@ -297,7 +292,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 4: Cleaning and Validation supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 4: Cleaning and Validation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 4: Cleaning and Validation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-4-cleaning-and-validation-supplemental-2/starter",
 					solutionLink:
@@ -306,7 +301,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 4: Cleaning and Validation supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 4: Cleaning and Validation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 4: Cleaning and Validation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-4-cleaning-and-validation-supplemental-3/starter",
 					solutionLink:
@@ -320,7 +315,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Choosing the Right Chart",
 					content:
-						"Teach line, bar, scatter, histogram, box plot, and basic distribution views as tools for specific questions rather than decorations. Students should be able to defend a chart choice in one sentence."
+						"Teach line, bar, scatter, histogram, box plot, and basic distribution views as tools for specific questions rather than decorations. Skill target: Defend a chart choice in one sentence."
 				},
 				{
 					title: "Misleading Scales and Weak Comparisons",
@@ -330,17 +325,16 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Averages, Spread, Correlation, and Outliers",
 					content:
-						"Teach descriptive statistics in service of context. Students should know what these measures can reveal, but also when a summary number hides important structure in the data. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Teach descriptive statistics in service of context. Key idea: What these measures can reveal, but also when a summary number hides important structure in the data."
 				},
 				{
 					title: "Correlation Is Not Causation",
 					content:
-						"Keep causation claims disciplined by asking what the dataset can actually support. Students should practice writing careful conclusions that do not overstate what a pattern proves. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Keep causation claims disciplined by asking what the dataset can actually support. Practice target: Writing careful conclusions that do not overstate what a pattern proves."
 				},
 				{
 					title: "Module 5: Visualization and Statistics in Context: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DS1-Simple-Stats-Starter",
 					solutionLink:
@@ -360,14 +354,14 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Project: Mode Finder",
 					content:
-						"Use a tight, focused statistics exercise to reinforce frequency tables, categorical reasoning, and the gap between raw counts and meaningful interpretation. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a tight, focused statistics exercise to reinforce frequency tables, categorical reasoning, and the gap between raw counts and meaningful interpretation.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DS1-Mode"
 				},
 				{
 					title: "Module 5: Visualization and Statistics in Context supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 5: Visualization and Statistics in Context. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 5: Visualization and Statistics in Context. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context-supplemental-3/starter",
 					solutionLink:
@@ -386,22 +380,21 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Selecting What Matters",
 					content:
-						"Have students choose which tables, plots, and metrics belong in the final explanation and which distract from the main question. This is where analysis becomes communication instead of accumulation."
+						"Choose which tables, plots, and metrics belong in the final explanation and which distract from the main question. This is where analysis becomes communication instead of accumulation."
 				},
 				{
 					title: "Writing Short, Useful Conclusions",
 					content:
-						"Practice two- to four-sentence interpretations that connect a visual to an actual decision or insight. Students should avoid both chart dumping and dramatic overclaiming. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Practice two- to four-sentence interpretations that connect a visual to an actual decision or insight. Avoid both chart dumping and dramatic overclaiming."
 				},
 				{
 					title: "Audience-Aware Presentation",
 					content:
-						"Explain how the same data might be presented differently for a peer, a school club, a teacher, or a portfolio reviewer. Students should learn to tune explanations without changing the evidence."
+						"Explain how the same data might be presented differently for a peer, a school club, an academic audience, or a portfolio reviewer. Skill target: Tune explanations without changing the evidence."
 				},
 				{
 					title: "Module 6: Storytelling with Data: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/starter",
 					solutionLink:
@@ -412,7 +405,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Storytelling with Data",
 					content:
-						"Keep a compact analysis log for storytelling with data that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which part of the story is genuinely supported and which part is still only a hypothesis. Students should practice making their reasoning inspectable.",
+						"Keep a compact analysis log for storytelling with data that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which part of the story is genuinely supported and which part is still only a hypothesis. Practice target: Making their reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data/starter",
 					solutionLink:
@@ -421,7 +414,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 6: Storytelling with Data supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 6: Storytelling with Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 6: Storytelling with Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data-supplemental-2/starter",
 					solutionLink:
@@ -430,7 +423,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 6: Storytelling with Data supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 6: Storytelling with Data. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 6: Storytelling with Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-6-storytelling-with-data-supplemental-3/starter",
 					solutionLink:
@@ -454,17 +447,16 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Streamlit for Interactive Exploration",
 					content:
-						"Use `Streamlit` to wrap analyses in sliders, selectors, and filtered views. The course should treat dashboards as a communication product, not just a fun extra. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use `Streamlit` to wrap analyses in sliders, selectors, and filtered views. The course should treat dashboards as a communication product, not just a fun extra."
 				},
 				{
 					title: "Designing a Useful Analytical Interface",
 					content:
-						"Teach restraint in dashboard design: clear controls, few charts, obvious labels, and a visible explanation of what the user is seeing. Students should understand that an overloaded dashboard is not a better dashboard."
+						"Teach restraint in dashboard design: clear controls, few charts, obvious labels, and a visible explanation of what the user is seeing. Key idea: An overloaded dashboard is not a better dashboard."
 				},
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/starter",
 					solutionLink:
@@ -475,7 +467,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Dashboards with Altair and Streamlit",
 					content:
-						"Keep a compact analysis log for dashboards with altair and streamlit that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which interactions actually help the user answer the question faster. Students should practice making their reasoning inspectable.",
+						"Keep a compact analysis log for dashboards with altair and streamlit that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about which interactions actually help the user answer the question faster. Practice target: Making their reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-7-dashboards-with-altair-and-streamlit/starter",
 					solutionLink:
@@ -484,7 +476,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 7: Dashboards with Altair and Streamlit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 7: Dashboards with Altair and Streamlit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-supplemental-2/starter",
 					solutionLink:
@@ -493,7 +485,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 7: Dashboards with Altair and Streamlit. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 7: Dashboards with Altair and Streamlit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-supplemental-3/starter",
 					solutionLink:
@@ -512,22 +504,21 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Shape the Dataset to the Question",
 					content:
-						"Have students decide which columns matter, which records should be filtered, and what derived metrics are worth creating. This is the stage where an analysis becomes tailored rather than generic."
+						"Decide which columns matter, which records should be filtered, and what derived metrics are worth creating. This is the stage where an analysis becomes tailored rather than generic."
 				},
 				{
 					title: "Compare Multiple Analytical Angles",
 					content:
-						"Require at least two complementary views of the same dataset, such as a trend chart plus a grouped comparison or a distribution plus a ranking. Students should learn that one chart rarely answers the whole question."
+						"Require at least two complementary views of the same dataset, such as a trend chart plus a grouped comparison or a distribution plus a ranking. Learn that one chart rarely answers the whole question."
 				},
 				{
 					title: "Make the Work Portfolio-Ready",
 					content:
-						"Students should package the project as a notebook, short deck, or dashboard with an introduction, method, findings, and reflection. The finished artifact should be something they could show outside the class."
+						"Package the project as a notebook, short deck, or dashboard with an introduction, method, findings, and reflection. The finished artifact should be something they could show outside the class."
 				},
 				{
 					title: "Module 8: Domain Projects: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DM7-Simple-Sort"
 				}
@@ -536,14 +527,14 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Project: Simple Sort and Ranking Warmup",
 					content:
-						"Use a compact sorting lab as a way to reason about ranking logic, ordering metrics, and what a leaderboard or sorted report is actually claiming about the data. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use a compact sorting lab as a way to reason about ranking logic, ordering metrics, and what a leaderboard or sorted report is actually claiming about the data.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DM7-Simple-Sort"
 				},
 				{
 					title: "Module 8: Domain Projects supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 8: Domain Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 8: Domain Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-16-module-8-domain-projects-supplemental-2/starter",
 					solutionLink:
@@ -552,7 +543,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 8: Domain Projects supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 8: Domain Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 8: Domain Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-17-module-8-domain-projects-supplemental-3/starter",
 					solutionLink:
@@ -566,7 +557,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Question, Dataset, and Scope Lock",
 					content:
-						"Finalize a capstone question, identify the dataset, and set a scope that can be finished well. Students should avoid open-ended ambition and instead commit to a question they can answer clearly."
+						"Finalize a capstone question, identify the dataset, and set a scope that can be finished well. Avoid open-ended ambition and instead commit to a question they can answer clearly."
 				},
 				{
 					title: "Clean, Analyze, and Communicate",
@@ -576,17 +567,16 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Build a Dashboard or Narrative Notebook",
 					content:
-						"Choose the right final format for the question. Some capstones are better as a polished notebook with commentary; others should become a compact Streamlit or Altair-backed dashboard. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Choose the right final format for the question. Some capstones are better as a polished notebook with commentary; others should become a compact Streamlit or Altair-backed dashboard."
 				},
 				{
 					title: "Reflect on Next Steps",
 					content:
-						"Use the capstone reflection to decide whether the next course should be `Machine Learning`, `AI Level 1`, `Web Development Foundations`, or a more advanced Python track. Students should leave with a better sense of whether they enjoy modeling, storytelling, or productizing data work."
+						"Use the capstone reflection to decide whether the next course should be `Machine Learning`, `AI Level 1`, `Web Development Foundations`, or a more advanced Python track. Leave with a better sense of whether they enjoy modeling, storytelling, or productizing data work."
 				},
 				{
 					title: "Module 9: Data Science Capstone: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/starter",
 					solutionLink:
@@ -597,7 +587,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Log: Data Science Capstone",
 					content:
-						"Keep a compact analysis log for data science capstone that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about what claim the project ultimately makes and what evidence best supports it. Students should practice making their reasoning inspectable.",
+						"Keep a compact analysis log for data science capstone that records the question being asked, the dataset assumptions being made, the exact columns or calculations used, and one short note about what claim the project ultimately makes and what evidence best supports it. Practice target: Making their reasoning inspectable.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-9-data-science-capstone/starter",
 					solutionLink:
@@ -606,7 +596,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 9: Data Science Capstone supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 9: Data Science Capstone. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 9: Data Science Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-18-module-9-data-science-capstone-supplemental-2/starter",
 					solutionLink:
@@ -615,7 +605,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 9: Data Science Capstone supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Module 9: Data Science Capstone. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to Module 9: Data Science Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-19-module-9-data-science-capstone-supplemental-3/starter",
 					solutionLink:
@@ -624,22 +614,22 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 11: data analysis lab 11",
+			title: "data analysis lab 11: Implementation Studio",
 			curriculum: [
 				{
 					title: "data analysis lab 11: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 11: data analysis lab 11, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"data analysis lab 11: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "data analysis lab 11: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 11: data analysis lab 11, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative data analysis lab 11 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "data analysis lab 11: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 11: data analysis lab 11. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"data analysis lab 11: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
@@ -648,32 +638,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 11: Review and Reflection",
 					content:
-						"Close Applied Studio 11: data analysis lab 11 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"data analysis lab 11: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 11: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 11: data analysis lab 11 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from data analysis lab 11: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/solution"
 				},
 				{
-					title: "Applied Studio 11: data analysis lab 11 supplemental 2",
+					title: "data analysis lab 11 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: data analysis lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 11: data analysis lab 11 supplemental 3",
+					title: "data analysis lab 11 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 11: data analysis lab 11. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemental-3/starter",
 					solutionLink:
@@ -682,22 +672,22 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 12: data analysis lab 12",
+			title: "data analysis lab 12: Implementation Studio",
 			curriculum: [
 				{
 					title: "data analysis lab 12: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 12: data analysis lab 12, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"data analysis lab 12: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "data analysis lab 12: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 12: data analysis lab 12, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative data analysis lab 12 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "data analysis lab 12: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 12: data analysis lab 12. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"data analysis lab 12: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
@@ -706,32 +696,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 12: Review and Reflection",
 					content:
-						"Close Applied Studio 12: data analysis lab 12 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"data analysis lab 12: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 12: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 12: data analysis lab 12 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from data analysis lab 12: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/solution"
 				},
 				{
-					title: "Applied Studio 12: data analysis lab 12 supplemental 2",
+					title: "data analysis lab 12 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: data analysis lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 12: data analysis lab 12 supplemental 3",
+					title: "data analysis lab 12 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 12: data analysis lab 12. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemental-3/starter",
 					solutionLink:
@@ -740,22 +730,22 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 13: data analysis lab 13",
+			title: "data analysis lab 13: Implementation Studio",
 			curriculum: [
 				{
 					title: "data analysis lab 13: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 13: data analysis lab 13, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"data analysis lab 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "data analysis lab 13: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 13: data analysis lab 13, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative data analysis lab 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "data analysis lab 13: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 13: data analysis lab 13. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"data analysis lab 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
@@ -764,32 +754,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 13: Review and Reflection",
 					content:
-						"Close Applied Studio 13: data analysis lab 13 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"data analysis lab 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 13: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 13: data analysis lab 13 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from data analysis lab 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/solution"
 				},
 				{
-					title: "Applied Studio 13: data analysis lab 13 supplemental 2",
+					title: "data analysis lab 13 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: data analysis lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 13: data analysis lab 13 supplemental 3",
+					title: "data analysis lab 13 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 13: data analysis lab 13. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -798,22 +788,22 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 14: data analysis lab 14",
+			title: "data analysis lab 14: Implementation Studio",
 			curriculum: [
 				{
 					title: "data analysis lab 14: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: data analysis lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"data analysis lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "data analysis lab 14: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: data analysis lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative data analysis lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "data analysis lab 14: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: data analysis lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"data analysis lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
@@ -822,32 +812,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 14: Review and Reflection",
 					content:
-						"Close Applied Studio 14: data analysis lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"data analysis lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 14: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: data analysis lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from data analysis lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/solution"
 				},
 				{
-					title: "Applied Studio 14: data analysis lab 14 supplemental 2",
+					title: "data analysis lab 14 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: data analysis lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: data analysis lab 14 supplemental 3",
+					title: "data analysis lab 14 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: data analysis lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -856,22 +846,22 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: data analysis lab 15",
+			title: "data analysis lab 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "data analysis lab 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: data analysis lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"data analysis lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "data analysis lab 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: data analysis lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative data analysis lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "data analysis lab 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: data analysis lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"data analysis lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
@@ -880,32 +870,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: data analysis lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"data analysis lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: data analysis lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from data analysis lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/solution"
 				},
 				{
-					title: "Applied Studio 15: data analysis lab 15 supplemental 2",
+					title: "data analysis lab 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: data analysis lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: data analysis lab 15 supplemental 3",
+					title: "data analysis lab 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: data analysis lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -914,22 +904,22 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: data analysis lab 16",
+			title: "data analysis lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "data analysis lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: data analysis lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"data analysis lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "data analysis lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: data analysis lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative data analysis lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "data analysis lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: data analysis lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"data analysis lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
@@ -938,32 +928,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: data analysis lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"data analysis lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: data analysis lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from data analysis lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 16: data analysis lab 16 supplemental 2",
+					title: "data analysis lab 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: data analysis lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: data analysis lab 16 supplemental 3",
+					title: "data analysis lab 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: data analysis lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -972,22 +962,22 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: data analysis lab 17",
+			title: "data analysis lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "data analysis lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: data analysis lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"data analysis lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "data analysis lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: data analysis lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative data analysis lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "data analysis lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: data analysis lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"data analysis lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
@@ -996,32 +986,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: data analysis lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"data analysis lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: data analysis lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from data analysis lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 17: data analysis lab 17 supplemental 2",
+					title: "data analysis lab 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: data analysis lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: data analysis lab 17 supplemental 3",
+					title: "data analysis lab 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: data analysis lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to data analysis lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemental-3/starter",
 					solutionLink:

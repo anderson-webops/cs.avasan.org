@@ -19,17 +19,16 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Local Build vs TestFlight vs App Store",
 					content:
-						"Walk through a concrete release ladder: run in Xcode, test on simulator, test on device, archive, upload, distribute through TestFlight, and finally prepare for App Review. Students should be able to explain what changes at each step, especially around signing, metadata, and who can access the build."
+						"Walk through a concrete release ladder: run in Xcode, test on simulator, test on device, archive, upload, distribute through TestFlight, and finally prepare for App Review. Skill target: Explain what changes at each step, especially around signing, metadata, and who can access the build."
 				},
 				{
 					title: "Reflection Question: Where Does Publishing Friction Come From?",
 					content:
-						"Ask students to explain which parts of the Apple app pipeline are technical, which are organizational, and which are account-related. The goal is to reduce confusion later by making invisible dependencies explicit now."
+						"Explain which parts of the Apple app pipeline are technical, which are organizational, and which are account-related. The goal is to reduce confusion later by making invisible dependencies explicit now."
 				},
 				{
 					title: "SAD1 Apple Developer Ecosystem Overview: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/legacy"
 				}
@@ -45,14 +44,14 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Mod5Pro3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD1 Apple Developer Ecosystem Overview. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD1 Apple Developer Ecosystem Overview. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod5Pro3"
 				},
 				{
 					title: "Apple Developer Ecosystem Overview supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD1 Apple Developer Ecosystem Overview. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD1 Apple Developer Ecosystem Overview. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-01-sad1-apple-developer-ecosystem-overview-supplemental-3/starter",
 					solutionLink:
@@ -85,8 +84,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				},
 				{
 					title: "SAD2 Mac Setup and Project Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod1Pro1"
 				}
@@ -102,7 +100,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Mac Setup and Project Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD2 Mac Setup and Project Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD2 Mac Setup and Project Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-02-sad2-mac-setup-and-project-tooling-supplemental-2/starter",
 					solutionLink:
@@ -111,7 +109,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Mac Setup and Project Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD2 Mac Setup and Project Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD2 Mac Setup and Project Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-03-sad2-mac-setup-and-project-tooling-supplemental-3/starter",
 					solutionLink:
@@ -140,12 +138,11 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: Which Part of Signing Is Conceptual vs Configurational?",
 					content:
-						"Ask students to separate the big idea of trusted app identity from the specific Xcode settings that implement it. This makes later troubleshooting much calmer and more systematic. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Separate the big idea of trusted app identity from the specific Xcode settings that implement it. This makes later troubleshooting much calmer and more systematic."
 				},
 				{
 					title: "SAD3 Certificates, Signing, and Bundle IDs: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod1Pro2"
 				}
@@ -161,7 +158,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Certificates, Signing, and Bundle IDs supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD3 Certificates, Signing, and Bundle IDs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD3 Certificates, Signing, and Bundle IDs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-04-sad3-certificates-signing-and-bundle-ids-supplemental-2/starter",
 					solutionLink:
@@ -170,7 +167,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Certificates, Signing, and Bundle IDs supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD3 Certificates, Signing, and Bundle IDs. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD3 Certificates, Signing, and Bundle IDs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-05-sad3-certificates-signing-and-bundle-ids-supplemental-3/starter",
 					solutionLink:
@@ -189,7 +186,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Build and Run Destinations",
 					content:
-						"Show how to choose simulator destinations, connect a real device, trust the developer path, and verify that the correct scheme is selected. Students should learn the difference between an app that compiles, an app that launches, and an app that behaves correctly."
+						"Show how to choose simulator destinations, connect a real device, trust the developer path, and verify that the correct scheme is selected. Learn the difference between an app that compiles, an app that launches, and an app that behaves correctly."
 				},
 				{
 					title: "Practical Walkthrough: Logs, Console Output, and Crash Clues",
@@ -199,12 +196,11 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Mini Lab: First Launch Troubleshooting",
 					content:
-						"Take a blank or simple starter app, run it on simulator, then on device if available, and document what changed between the two paths. Students should record one issue they encountered or might realistically encounter and how they would investigate it."
+						"Take a blank or simple starter app, run it on simulator, then on device if available, and document what changed between the two paths. Record one issue they encountered or might realistically encounter and how they would investigate it."
 				},
 				{
 					title: "SAD4 Running on Simulator and Device: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod1Pro3"
 				}
@@ -220,7 +216,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Running on Simulator and Device supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD4 Running on Simulator and Device. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD4 Running on Simulator and Device. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-06-sad4-running-on-simulator-and-device-supplemental-2/starter",
 					solutionLink:
@@ -229,7 +225,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Running on Simulator and Device supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD4 Running on Simulator and Device. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD4 Running on Simulator and Device. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-07-sad4-running-on-simulator-and-device-supplemental-3/starter",
 					solutionLink:
@@ -248,22 +244,21 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Internal vs External Testing",
 					content:
-						"Explain the difference between internal and external TestFlight groups, what information each workflow requires, and why beta notes and review context matter. Students should understand where testing sits between private development and public release."
+						"Explain the difference between internal and external TestFlight groups, what information each workflow requires, and why beta notes and review context matter. Key idea: Where testing sits between private development and public release."
 				},
 				{
 					title: "Practical Walkthrough: Version Numbers, Build Numbers, and Assets",
 					content:
-						"Review screenshots, app icons, version numbers, build numbers, descriptions, and support information. Connect each item to the student-facing reality of uploading a build later in the course."
+						"Review screenshots, app icons, version numbers, build numbers, descriptions, and support information. Connect each item to the learner-facing reality of uploading a build later in the course."
 				},
 				{
 					title: "Reflection Question: What Makes an App Feel Release-Ready?",
 					content:
-						"Ask students to explain why a stable build can still be unready for testing or review if the metadata and presentation are weak. They should identify at least one non-code requirement that affects the shipping pipeline."
+						"Explain why a stable build can still be unready for testing or review if the metadata and presentation are weak. They should identify at least one non-code requirement that affects the shipping pipeline."
 				},
 				{
 					title: "SAD5 App Store Connect and TestFlight Workflow: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod2Pro1"
 				}
@@ -279,7 +274,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Store Connect and TestFlight Workflow supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD5 App Store Connect and TestFlight Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD5 App Store Connect and TestFlight Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-08-sad5-app-store-connect-and-testflight-workflow-supplemental-2/starter",
 					solutionLink:
@@ -288,7 +283,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Store Connect and TestFlight Workflow supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD5 App Store Connect and TestFlight Workflow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD5 App Store Connect and TestFlight Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-09-sad5-app-store-connect-and-testflight-workflow-supplemental-3/starter",
 					solutionLink:
@@ -307,7 +302,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Navigation, Assets, and Data as App Systems",
 					content:
-						"Compare what belongs in view code, what belongs in assets, and what belongs in the app's data model. Treat navigation and data flow as structural systems rather than decorative extras. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Compare what belongs in view code, what belongs in assets, and what belongs in the app's data model. Treat navigation and data flow as structural systems rather than decorative extras."
 				},
 				{
 					title: "Worked Example Set: Reading a Tiny App Blueprint",
@@ -317,12 +312,11 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: Which Part of an App Should Change Most Slowly?",
 					content:
-						"Ask students to compare core structure with surface-level UI and explain which decisions should stay stable and which should be easy to revise. The goal is to start building architectural judgment."
+						"Compare core structure with surface-level UI and explain which decisions should stay stable and which should be easy to revise. The goal is to start building architectural judgment."
 				},
 				{
 					title: "SAD6 What an App Is Structurally: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod2Pro2"
 				}
@@ -338,7 +332,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "What an App Is Structurally supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD6 What an App Is Structurally. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD6 What an App Is Structurally. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-10-sad6-what-an-app-is-structurally-supplemental-2/starter",
 					solutionLink:
@@ -347,7 +341,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "What an App Is Structurally supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD6 What an App Is Structurally. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD6 What an App Is Structurally. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-11-sad6-what-an-app-is-structurally-supplemental-3/starter",
 					solutionLink:
@@ -371,17 +365,16 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Asset Catalogs and Preview Canvas",
 					content:
-						"Show how images, icons, and colors are added, and how the preview canvas supports fast SwiftUI iteration. Students should know why assets belong in dedicated containers instead of scattered file imports."
+						"Show how images, icons, and colors are added, and how the preview canvas supports fast SwiftUI iteration. Key idea: Why assets belong in dedicated containers instead of scattered file imports."
 				},
 				{
 					title: "Reflection Question: Which Xcode Areas Do You Need Every Day?",
 					content:
-						"Ask students to identify which Xcode panes matter for everyday app work and which ones are more occasional configuration tools. This helps reduce cognitive overload when the interface feels large."
+						"Identify which Xcode panes matter for everyday app work and which ones are more occasional configuration tools. This helps reduce cognitive overload when the interface feels large."
 				},
 				{
 					title: "SAD7 Xcode Project Anatomy: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod3Pro1"
 				}
@@ -397,7 +390,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Xcode Project Anatomy supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD7 Xcode Project Anatomy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD7 Xcode Project Anatomy. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-12-sad7-xcode-project-anatomy-supplemental-2/starter",
 					solutionLink:
@@ -406,7 +399,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Xcode Project Anatomy supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD7 Xcode Project Anatomy. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD7 Xcode Project Anatomy. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-13-sad7-xcode-project-anatomy-supplemental-3/starter",
 					solutionLink:
@@ -439,7 +432,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Does Modifier Order Matter?",
 					content:
-						"Ask students to explain one example where changing modifier order changes the result. They should focus on layout or styling consequences, not just say that SwiftUI is 'sensitive.'. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain one example where changing modifier order changes the result. They should focus on layout or styling consequences, not just say that SwiftUI is 'sensitive.'."
 				}
 			],
 			supplementalProjects: [
@@ -455,7 +448,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SwiftUI Mental Model supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD8 SwiftUI Mental Model. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD8 SwiftUI Mental Model. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-14-sad8-swiftui-mental-model-supplemental-2/starter",
 					solutionLink:
@@ -464,7 +457,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SwiftUI Mental Model supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD8 SwiftUI Mental Model. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD8 SwiftUI Mental Model. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-15-sad8-swiftui-mental-model-supplemental-3/starter",
 					solutionLink:
@@ -488,17 +481,16 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practice Lab: Turning Raw Data into View Content",
 					content:
-						"Take a few small pieces of app content and transform them into values a SwiftUI view can render cleanly. Students should practice conditional display, simple loops, and safe handling of missing data."
+						"Take a few small pieces of app content and transform them into values a SwiftUI view can render cleanly. Practice target: Conditional display, simple loops, and safe handling of missing data."
 				},
 				{
 					title: "Reflection Question: Which Swift Basics Show Up Most Often in Apps?",
 					content:
-						"Ask students to identify which language features feel most central to day-to-day app code so far and why. This keeps the language connected to real usage instead of isolated drills. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Identify which language features feel most central to day-to-day app code so far and why. This keeps the language connected to real usage instead of isolated drills."
 				},
 				{
 					title: "SAD9 Swift Basics in App Context: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod3Pro2"
 				}
@@ -514,7 +506,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Swift Basics in App Context supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD9 Swift Basics in App Context. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD9 Swift Basics in App Context. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-16-sad9-swift-basics-in-app-context-supplemental-2/starter",
 					solutionLink:
@@ -523,7 +515,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Swift Basics in App Context supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD9 Swift Basics in App Context. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD9 Swift Basics in App Context. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-17-sad9-swift-basics-in-app-context-supplemental-3/starter",
 					solutionLink:
@@ -552,12 +544,11 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Are Structs So Important in SwiftUI?",
 					content:
-						"Ask students to compare a struct as a piece of app data with a struct as a reusable view and explain what both uses share. The goal is architectural intuition, not memorized terminology."
+						"Compare a struct as a piece of app data with a struct as a reusable view and explain what both uses share. The goal is architectural intuition, not memorized terminology."
 				},
 				{
 					title: "SAD10 Functions, Structs, and Enums: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod4Pro1"
 				}
@@ -573,7 +564,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Functions, Structs, and Enums supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD10 Functions, Structs, and Enums. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD10 Functions, Structs, and Enums. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-18-sad10-functions-structs-and-enums-supplemental-2/starter",
 					solutionLink:
@@ -582,7 +573,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Functions, Structs, and Enums supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD10 Functions, Structs, and Enums. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD10 Functions, Structs, and Enums. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-19-sad10-functions-structs-and-enums-supplemental-3/starter",
 					solutionLink:
@@ -606,17 +597,16 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practice Lab: Favorite Toggle and Editable Notes",
 					content:
-						"Build one small interaction that is purely local and one that should be shared across multiple views. Students should explain why the two interactions do not deserve the same state approach."
+						"Build one small interaction that is purely local and one that should be shared across multiple views. Explain why the two interactions do not deserve the same state approach."
 				},
 				{
 					title: "Reflection Question: What Does It Mean to Own State?",
 					content:
-						"Ask students to define state ownership in plain language and connect it to the app bugs they are most likely to create at this stage. Clear reasoning here pays off heavily in later CRUD and networking modules."
+						"Define state ownership in plain language and connect it to the app bugs they are most likely to create at this stage. Clear reasoning here pays off heavily in later CRUD and networking modules."
 				},
 				{
 					title: "SAD11 State and Data Flow: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod4Pro2"
 				}
@@ -632,7 +622,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "State and Data Flow supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD11 State and Data Flow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD11 State and Data Flow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-20-sad11-state-and-data-flow-supplemental-2/starter",
 					solutionLink:
@@ -641,7 +631,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "State and Data Flow supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD11 State and Data Flow. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD11 State and Data Flow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-21-sad11-state-and-data-flow-supplemental-3/starter",
 					solutionLink:
@@ -674,7 +664,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Deserves a Tab vs a Drill-Down Screen?",
 					content:
-						"Ask students to defend which parts of an app should be top-level destinations and which should be reached only from context. This improves product thinking as well as navigation structure."
+						"Defend which parts of an app should be top-level destinations and which should be reached only from context. This improves product thinking as well as navigation structure."
 				}
 			],
 			supplementalProjects: [
@@ -690,7 +680,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Navigation and Multi Screen Apps supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD12 Navigation and Multi-Screen Apps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD12 Navigation and Multi-Screen Apps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-22-sad12-navigation-and-multi-screen-apps-supplemental-2/starter",
 					solutionLink:
@@ -699,7 +689,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Navigation and Multi Screen Apps supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD12 Navigation and Multi-Screen Apps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD12 Navigation and Multi-Screen Apps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-23-sad12-navigation-and-multi-screen-apps-supplemental-3/starter",
 					solutionLink:
@@ -713,17 +703,17 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Editable Lists and Forms",
 					content:
-						"Introduce lists and forms as the backbone of many practical apps. Show how add, edit, delete, and completion-style workflows turn a static SwiftUI demo into a real data-driven product. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Introduce lists and forms as the backbone of many practical apps. Show how add, edit, delete, and completion-style workflows turn a static SwiftUI demo into a real data-driven product."
 				},
 				{
 					title: "Worked Example Set: Add, Toggle, and Delete",
 					content:
-						"Work small examples for creating new items from form inputs, toggling item state, and deleting rows cleanly. Explain why clean data mutation matters just as much as polished layout. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Work small examples for creating new items from form inputs, toggling item state, and deleting rows cleanly. Explain why clean data mutation matters just as much as polished layout."
 				},
 				{
 					title: "Project: Simple Tracker App",
 					content:
-						"Build a simple tracker app with a creation flow, a list of items, completion toggles, and deletion support. This project is the main foundation for the later persistence module, so students should keep the code organized enough to evolve rather than rewrite.",
+						"Build a simple tracker app with a creation flow, a list of items, completion toggles, and deletion support. This project is the main foundation for the later persistence module, so Keep the code organized enough to evolve rather than rewrite.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD5-Simple-Tracker-App/starter",
 					solutionLink:
@@ -732,7 +722,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Makes CRUD Feel Predictable?",
 					content:
-						"Ask students to explain which interactions in a tracker app should feel immediate and which ones need more guardrails or confirmation. This connects interface design to data integrity. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explain which interactions in a tracker app should feel immediate and which ones need more guardrails or confirmation. This connects interface design to data integrity."
 				}
 			],
 			supplementalProjects: [
@@ -748,7 +738,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Lists, Forms, and CRUD Patterns supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD13 Lists, Forms, and CRUD Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD13 Lists, Forms, and CRUD Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-24-sad13-lists-forms-and-crud-patterns-supplemental-2/starter",
 					solutionLink:
@@ -757,7 +747,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Lists, Forms, and CRUD Patterns supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD13 Lists, Forms, and CRUD Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD13 Lists, Forms, and CRUD Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-25-sad13-lists-forms-and-crud-patterns-supplemental-3/starter",
 					solutionLink:
@@ -794,7 +784,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: When Does a Feature Need Permission Planning?",
 					content:
-						"Ask students to explain which device-linked features feel simple in a demo but require more thoughtful permission messaging or privacy planning in a real app. The point is to connect feature excitement to product responsibility."
+						"Explain which device-linked features feel simple in a demo but require more thoughtful permission messaging or privacy planning in a real app. The point is to connect feature excitement to product responsibility."
 				}
 			],
 			supplementalProjects: [
@@ -810,7 +800,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Media, Maps, and Device Features supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD14 Media, Maps, and Device Features. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD14 Media, Maps, and Device Features. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-26-sad14-media-maps-and-device-features-supplemental-2/starter",
 					solutionLink:
@@ -819,7 +809,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Media, Maps, and Device Features supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD14 Media, Maps, and Device Features. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD14 Media, Maps, and Device Features. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-27-sad14-media-maps-and-device-features-supplemental-3/starter",
 					solutionLink:
@@ -843,7 +833,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Project: API-Powered Reference App",
 					content:
-						"Build a simple reference app backed by a public JSON endpoint. Students should decode entries, show a loading indicator, handle failure gracefully, and add at least a small search or filtering experience so the result feels like an app, not just a fetch demo.",
+						"Build a simple reference app backed by a public JSON endpoint. Decode entries, show a loading indicator, handle failure gracefully, and add at least a small search or filtering experience so the result feels like an app, not just a fetch demo.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD6-API-Reference-App/starter",
 					solutionLink:
@@ -852,7 +842,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Is the Loading State Part of the Product?",
 					content:
-						"Ask students to explain why the user experience of waiting, retrying, or failing to load is part of the app's design quality, not just an engineering detail. This helps prevent the common beginner habit of only building the happy path."
+						"Explain why the user experience of waiting, retrying, or failing to load is part of the app's design quality, not just an engineering detail. This helps prevent the common beginner habit of only building the happy path."
 				}
 			],
 			supplementalProjects: [
@@ -868,7 +858,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Networking and Data Loading supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD15 Networking and Data Loading. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD15 Networking and Data Loading. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-28-sad15-networking-and-data-loading-supplemental-2/starter",
 					solutionLink:
@@ -877,7 +867,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Networking and Data Loading supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD15 Networking and Data Loading. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD15 Networking and Data Loading. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-29-sad15-networking-and-data-loading-supplemental-3/starter",
 					solutionLink:
@@ -901,7 +891,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Project Pass: Persist the Simple Tracker App",
 					content:
-						"Return to the tracker app and add local persistence so items survive app relaunches. Students should connect a lightweight store, encode/decode the list data, and keep the add/toggle/delete flows working after persistence is introduced.",
+						"Return to the tracker app and add local persistence so items survive app relaunches. Connect a lightweight store, encode/decode the list data, and keep the add/toggle/delete flows working after persistence is introduced.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD5-Simple-Tracker-App/starter",
 					solutionLink:
@@ -910,7 +900,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Changes Once Data Lasts?",
 					content:
-						"Ask students to explain how persistence changes testing, debugging, and user expectations. They should identify at least one new edge case that only appears after data survives between launches."
+						"Explain how persistence changes testing, debugging, and user expectations. They should identify at least one new edge case that only appears after data survives between launches."
 				}
 			],
 			supplementalProjects: [
@@ -926,7 +916,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Persistence supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD16 Persistence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD16 Persistence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-30-sad16-persistence-supplemental-2/starter",
 					solutionLink:
@@ -935,7 +925,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Persistence supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD16 Persistence. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD16 Persistence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-31-sad16-persistence-supplemental-3/starter",
 					solutionLink:
@@ -959,17 +949,16 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Previews and Basic Test Concepts",
 					content:
-						"Use previews for fast UI checks and introduce simple unit and UI test ideas conceptually. Students should understand that testing is about confidence and regression prevention, even if they are not writing a large suite yet."
+						"Use previews for fast UI checks and introduce simple unit and UI test ideas conceptually. Key idea: Testing is about confidence and regression prevention, even if they are not writing a large suite yet."
 				},
 				{
 					title: "Reflection Question: Which Signal Do You Trust First?",
 					content:
-						"Ask students to name which debugging signals they trust most in different situations: preview behavior, runtime logs, breakpoint inspection, or user reproduction steps. This builds troubleshooting judgment instead of rote habits."
+						"Name which debugging signals they trust most in different situations: preview behavior, runtime logs, breakpoint inspection, or user reproduction steps. This builds troubleshooting judgment instead of rote habits."
 				},
 				{
 					title: "SAD17 Debugging and Testing: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod4Pro3"
 				}
@@ -985,7 +974,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Debugging and Testing supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD17 Debugging and Testing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD17 Debugging and Testing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-32-sad17-debugging-and-testing-supplemental-2/starter",
 					solutionLink:
@@ -994,7 +983,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Debugging and Testing supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD17 Debugging and Testing. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD17 Debugging and Testing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-33-sad17-debugging-and-testing-supplemental-3/starter",
 					solutionLink:
@@ -1013,7 +1002,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Worked Example Set: Polishing a Rough Screen",
 					content:
-						"Take a rough SwiftUI screen and improve hierarchy, spacing, labeling, and contrast deliberately. Students should see that many 'ugly app' problems are really clarity problems. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Take a rough SwiftUI screen and improve hierarchy, spacing, labeling, and contrast deliberately. Visible pattern: That many 'ugly app' problems are really clarity problems."
 				},
 				{
 					title: "Practice Lab: Accessibility Labels and Content Review",
@@ -1023,12 +1012,11 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Makes an App Feel Intentionally Designed?",
 					content:
-						"Ask students to identify the difference between a screen that merely functions and a screen that feels deliberate, readable, and respectful of the user. They should reference both aesthetics and accessibility."
+						"Identify the difference between a screen that merely functions and a screen that feels deliberate, readable, and respectful of the user. They should reference both aesthetics and accessibility."
 				},
 				{
 					title: "SAD18 App Design and Accessibility: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod5Pro1"
 				}
@@ -1044,7 +1032,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Design and Accessibility supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD18 App Design and Accessibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD18 App Design and Accessibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-34-sad18-app-design-and-accessibility-supplemental-2/starter",
 					solutionLink:
@@ -1053,7 +1041,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Design and Accessibility supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD18 App Design and Accessibility. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD18 App Design and Accessibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-35-sad18-app-design-and-accessibility-supplemental-3/starter",
 					solutionLink:
@@ -1067,7 +1055,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Archive, Upload, and Release Checklists",
 					content:
-						"Walk through the final publishing path conceptually before the capstone wrap-up: archive build, upload process, App Store Connect checklists, TestFlight release, and review basics. Students should understand the release path as an ordered workflow, not a final mysterious button."
+						"Walk through the final publishing path conceptually before the capstone wrap-up: archive build, upload process, App Store Connect checklists, TestFlight release, and review basics. Key idea: The release path as an ordered workflow, not a final mysterious button."
 				},
 				{
 					title: "Practical Walkthrough: Build Metadata and Preflight Review",
@@ -1082,12 +1070,11 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Still Needs to Be True After the App 'Works'?",
 					content:
-						"Ask students to list the non-code requirements that must still be satisfied after the product itself feels feature-complete. This reinforces the full-stack product mindset of the course."
+						"List the non-code requirements that must still be satisfied after the product itself feels feature-complete. This reinforces the full-stack product mindset of the course."
 				},
 				{
 					title: "SAD19 Final Publishing Walkthrough: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod5Pro2"
 				}
@@ -1103,7 +1090,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Final Publishing Walkthrough supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD19 Final Publishing Walkthrough. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD19 Final Publishing Walkthrough. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-36-sad19-final-publishing-walkthrough-supplemental-2/starter",
 					solutionLink:
@@ -1112,7 +1099,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Final Publishing Walkthrough supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD19 Final Publishing Walkthrough. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD19 Final Publishing Walkthrough. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-37-sad19-final-publishing-walkthrough-supplemental-3/starter",
 					solutionLink:
@@ -1131,12 +1118,12 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Build Phase: Implement, Test, and Polish",
 					content:
-						"Students should build the capstone in small passes: core navigation and data first, then persistence or networking if needed, then polish, accessibility, and release-readiness checks. Use the final project to revisit architecture, debugging, and quality tradeoffs in one place."
+						"Build the capstone in small passes: core navigation and data first, then persistence or networking if needed, then polish, accessibility, and release-readiness checks. Use the final project to revisit architecture, debugging, and quality tradeoffs in one place."
 				},
 				{
 					title: "Project: Publish-Ready Capstone App",
 					content:
-						"Use the capstone starter as a shipping-minded shell for a final app that includes intentional navigation, polished core screens, accessibility review, and store/testing preparation notes. Students should be able to explain not only what the app does, but how they would prepare it for TestFlight or the App Store.",
+						"Use the capstone starter as a shipping-minded shell for a final app that includes intentional navigation, polished core screens, accessibility review, and store/testing preparation notes. Skill target: Explain not only what the app does, but how they would prepare it for TestFlight or the App Store.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD7-Publish-Ready-Capstone/starter",
 					solutionLink:
@@ -1145,7 +1132,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Did You Learn About Shipping, Not Just Coding?",
 					content:
-						"Ask students to explain which parts of the course most changed how they think about building for Apple platforms. They should mention at least one setup, architecture, testing, accessibility, or publishing lesson in addition to SwiftUI code."
+						"Explain which parts of the course most changed how they think about building for Apple platforms. They should mention at least one setup, architecture, testing, accessibility, or publishing lesson in addition to SwiftUI code."
 				}
 			],
 			supplementalProjects: [
@@ -1161,7 +1148,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Capstone App supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD20 Capstone App. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD20 Capstone App. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-38-sad20-capstone-app-supplemental-2/starter",
 					solutionLink:
@@ -1170,7 +1157,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Capstone App supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SAD20 Capstone App. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SAD20 Capstone App. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-39-sad20-capstone-app-supplemental-3/starter",
 					solutionLink:
@@ -1189,12 +1176,12 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Legacy Means Reference, Not Core Scope",
 					content:
-						"Keep the `legacy/` materials and the older `Mod*` folders available only when an instructor needs to recover an older demo or compare historical scaffolds. They should not re-enter the main public course flow."
+						"Keep the `legacy/` materials and the older `Mod*` folders available only for historical demo recovery or scaffold comparison. They should not re-enter the main public course flow."
 				},
 				{
 					title: "Shapes Studio as Intentional Enrichment",
 					content:
-						"Expose `SADX-SwiftUI-Shapes-Studio` as optional enrichment because it still reinforces useful SwiftUI drawing and layout ideas, but it sits outside the main shipping-app spine. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Expose `SADX-SwiftUI-Shapes-Studio` as optional enrichment because it still reinforces useful SwiftUI drawing and layout ideas, but it sits outside the main shipping-app spine."
 				},
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries: Verification and Reflection",
@@ -1203,8 +1190,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				},
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-Swift-UI-Shapes-Studio/starter",
 					solutionLink:
@@ -1215,7 +1201,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Extension: SwiftUI Shapes Studio",
 					content:
-						"Use the shapes-focused enrichment pack for extra practice with paths, custom drawing, and SwiftUI composition after the main course flow is stable. Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.",
+						"Use the shapes-focused enrichment pack for extra practice with paths, custom drawing, and SwiftUI composition after the main course flow is stable.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-Swift-UI-Shapes-Studio/starter",
 					solutionLink:
@@ -1224,7 +1210,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SADX Enrichment and Legacy Archive Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SADX Enrichment and Legacy Archive Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-40-sadx-enrichment-and-legacy-archive-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -1233,7 +1219,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to SADX Enrichment and Legacy Archive Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to SADX Enrichment and Legacy Archive Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-41-sadx-enrichment-and-legacy-archive-boundaries-supplemental-3/starter",
 					solutionLink:

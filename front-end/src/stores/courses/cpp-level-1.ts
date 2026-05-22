@@ -9,7 +9,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Program Setup, Syntax, and Compile-Run Cycle",
 					content:
-						"Start with a single-file console program and make the compile-run cycle explicit. Cover: `#include`, `main`, braces, semicolons, comments, compiler errors versus runtime behavior, and the idea that C++ is compiled before it runs. Students should practice making one small change, recompiling, reading the output or error, and explaining what changed before the syntax load rises."
+						"Start with a single-file console program and make the compile-run cycle explicit. Cover: `#include`, `main`, braces, semicolons, comments, compiler errors versus runtime behavior, and the idea that C++ is compiled before it runs. Practice target: Making one small change, recompiling, reading the output or error, and explaining what changed before the syntax load rises."
 				},
 				{
 					title: "Primitive Types, Strings, and Console I/O",
@@ -21,7 +21,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "CPPF1 Project 1: Mad Libs",
 					content:
-						"Build a short Mad Libs generator with string variables, prompts, and a printed story. Students should name their variables well, test at least two custom stories, and explain how inputs move through the program.",
+						"Build a short Mad Libs generator with string variables, prompts, and a printed story. Name their variables well, test at least two custom stories, and explain how inputs move through the program.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF1-Mad-Libs",
 					solutionLink:
@@ -105,7 +105,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Function Signatures, Return Values, and Decomposition",
 					content:
-						"Teach functions as named units of work with parameters and return types. Cover: reading a function signature, deciding what data a function needs, deciding what it returns, separating calculation from printing, avoiding repeated code, and using small helper functions to make a larger program easier to test. Students should be able to explain why a function exists, not just how to call it."
+						"Teach functions as named units of work with parameters and return types. Cover: reading a function signature, deciding what data a function needs, deciding what it returns, separating calculation from printing, avoiding repeated code, and using small helper functions to make a larger program easier to test. Skill target: Explain why a function exists, not just how to call it."
 				},
 				{
 					title: "Randomness and Small Simulation Helpers",
@@ -117,7 +117,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "CPPF3 Project 1: Probability Functions",
 					content:
-						"Write functions that simulate small random events such as coin flips, dice rolls, or card draws. Students should separate generation logic from printing logic.",
+						"Write functions that simulate small random events such as coin flips, dice rolls, or card draws. Separate generation logic from printing logic.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Probability-Functions",
 					solutionLink:

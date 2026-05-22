@@ -3,7 +3,7 @@ export type CoursePathwayPriority = "urgent" | "soon" | "later";
 export interface CoursePublicPathway {
 	id: string;
 	title: string;
-	priority: CoursePathwayPriority;
+	adminPriority: CoursePathwayPriority;
 	courseIds: string[];
 	audience: string;
 	prerequisiteSummary: string;
@@ -13,28 +13,28 @@ export interface CoursePublicPathway {
 	assessmentStyle: string[];
 	sourceAndTooling: string[];
 	safetyAndAccess: string[];
-	expansionBacklog: string[];
+	adminExpansionBacklog: string[];
 }
 
 export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "scratch-early-cs",
 		title: "Scratch and Early Computer Science",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: ["scratch-level-1", "scratch-level-2"],
 		audience:
 			"Young learners who need visual programming, creative projects, and explicit computational-thinking language before moving into text programming.",
 		prerequisiteSummary:
-			"No prior coding is required, but students should be able to follow a short sequence of steps, explain what changed on screen, and revise a project after feedback.",
+			"No prior coding is required; readiness means following a short sequence of steps, explaining what changed on screen, and revising a project after feedback.",
 		outcomes: [
 			"Build event-driven Scratch projects with loops, conditionals, variables, broadcasts, clones, and lists.",
-			"Translate blocks-to-pseudocode so students can explain sequence, state, and debugging in language that transfers to Python or JavaScript.",
+			"Translate blocks-to-pseudocode so sequence, state, and debugging language transfers to Python or JavaScript.",
 			"Present a polished project with instructions, controls, replay state, and a short explanation of one bug they fixed."
 		],
 		sequencingNotes: [
 			"Scratch Level 1 should focus on events, motion, loops, conditionals, variables, and visual debugging.",
 			"Scratch Level 2 should add broadcasts, clones, lists, multi-scene state, remix etiquette, and more formal project review.",
-			"Students should not leave the pathway thinking Scratch is only decoration; every project should name the computational idea being practiced."
+			"The pathway should not treat Scratch as decoration; every project should name the computational idea being practiced."
 		],
 		projectExpectations: [
 			"Maze or collector game with timer, score, and clear win/loss states.",
@@ -42,7 +42,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Clone-based avoidance or collection game backed by a rubric for controls, feedback, organization, and explanation."
 		],
 		assessmentStyle: [
-			"Ask students to explain one event chain from input to visible result.",
+			"Explain one event chain from input to visible result.",
 			"Use broken-script debugging checkpoints that require prediction, repair, and retest.",
 			"Require a brief project presentation that names the goal, the main blocks used, and one improvement after playtesting."
 		],
@@ -53,10 +53,10 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		safetyAndAccess: [
 			"Keep projects browser-accessible and age-appropriate.",
-			"Use only student-safe shared assets or teacher-provided media.",
+			"Use only age-appropriate shared assets or provided media.",
 			"Make any account-sharing or public remixing optional and supervised."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Write a formal Scratch pathway map from events to pseudocode to first Python/JavaScript concepts.",
 			"Add rubric-backed capstones for Level 1 and Level 2.",
 			"Add more debugging-first exercises instead of only build-from-scratch prompts."
@@ -65,7 +65,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "python-programming",
 		title: "Python Programming Foundations and Advanced Python",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: [
 			"python-level-1",
 			"python-level-2",
@@ -93,7 +93,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Use function-level tests or assertions for normal, boundary, and awkward cases.",
-			"Ask students to trace before running and to identify type, mutation, off-by-one, and missing-return bugs.",
+			"Trace before running and to identify type, mutation, off-by-one, and missing-return bugs.",
 			"Review capstones for requirements, organization, input/output behavior, and explanation quality."
 		],
 		sourceAndTooling: [
@@ -106,7 +106,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Keep web/API examples read-only and replaceable with fixture files.",
 			"Do not require paid services or personal credentials for core projects."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Finish the Python Level 3 source parity audit for legacy standalone files and folders.",
 			"Add a named testing/debugging spine across Levels 1 through 3.",
 			"Add stronger project rubrics for advanced Python capstones."
@@ -115,12 +115,12 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "game-development",
 		title: "Game Development with PyGame and Unity",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: ["pygames", "unity-game-development"],
 		audience:
 			"Students who learn well through interactive projects and are ready to reason about game loops, state, input, feedback, and playtesting.",
 		prerequisiteSummary:
-			"PyGame students should know Python functions, loops, and lists. Unity students should be ready for C# scripts, scenes, prefabs, components, and editor workflow.",
+			"PyGame Know Python functions, loops, and lists. Unity Be ready for C# scripts, scenes, prefabs, components, and editor workflow.",
 		outcomes: [
 			"Build games around a clear update loop, input model, collision or interaction rules, UI state, and restart/end conditions.",
 			"Separate model/state decisions from rendering or scene setup so bugs can be diagnosed without guessing.",
@@ -145,15 +145,15 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Use PyGame documentation for Python game-loop material.",
 			"Use Unity Learn, Unity Manual, Build Profiles, Input System, Test Framework, package locks, and Git LFS for Unity projects.",
 			"Keep THIRD_PARTY_ASSETS notes and engine version files with each Unity starter and solution.",
-			"Treat current Unity starter/solution source folders as the baseline; future mature modules should use checkpoint tags or equivalent history so students can inspect how a game grows over time.",
+			"Treat current Unity starter/solution source folders as the baseline; future mature modules should use checkpoint tags or equivalent history so game-growth history can be inspected over time.",
 			"Unity source packages should document editor version, package baseline, Build Profiles, Input System setup, Edit Mode or Play Mode smoke tests, and asset-license provenance."
 		],
 		safetyAndAccess: [
-			"Use licensed or teacher-provided assets only.",
+			"Use licensed or provided assets only.",
 			"Make heavy Unity editor work optional when a student's computer cannot run the full toolchain.",
 			"Keep multiplayer, analytics, ads, and monetization out of the core course."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Add CI/build-profile verification for Unity source packages.",
 			"Add more small PyGame labs that isolate collision, level loading, and state transitions.",
 			"Promote playtesting notes from optional reflection to required project evidence.",
@@ -163,12 +163,12 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "data-ai-ml",
 		title: "Data Science, AI, and Machine Learning",
-		priority: "soon",
+		adminPriority: "soon",
 		courseIds: ["data-science-in-python", "ai-level-1", "machine-learning"],
 		audience:
 			"Students ready to reason from data, search spaces, model behavior, evaluation, and responsible interpretation without treating output as magic.",
 		prerequisiteSummary:
-			"Students should know Python basics, lists/dictionaries, functions, and enough algebra or graph reading to interpret tables and metrics.",
+			"Key idea: Python basics, lists/dictionaries, functions, and enough algebra or graph reading to interpret tables and metrics.",
 		outcomes: [
 			"Load, clean, visualize, and explain named datasets such as Iris, Palmer Penguins, Titanic-style survival data, weather records, or local CSV fixtures.",
 			"Build AI search or rule-based systems with explicit state spaces, heuristics, limitations, and test cases.",
@@ -186,7 +186,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Dataset documentation project that writes a mini-datasheet: source, columns, known limitations, missing values, license or attribution note, and appropriate/non-appropriate uses."
 		],
 		assessmentStyle: [
-			"Ask students to explain what each row, feature, label, and metric means.",
+			"Explain what each row, feature, label, and metric means.",
 			"Use interpretation questions that separate correlation, prediction, and causation.",
 			"Require limitations, dataset assumptions, and responsible-use notes in final projects.",
 			"Require an experiment log for ML projects: baseline, model choice, split method, metric, failed attempt, and one next improvement."
@@ -194,9 +194,9 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sourceAndTooling: [
 			"Use pandas, matplotlib or seaborn, scikit-learn, and small pinned CSV fixtures.",
 			"Keep dataset source notes, license notes, schema notes, and expected output artifacts with each project.",
-			"Use NIST AI RMF and scikit-learn model-evaluation documentation as instructor anchors.",
-			"Data Science source pool: NYC 311, NOAA Climate Data Online, CDC BRFSS, Our World in Data, Iris, Palmer Penguins, and small teacher-provided CSV fixtures.",
-			"AI Foundations source pool: OpenStreetMap or OSMnx extracts, MiniZinc-style constraint examples, Lichess puzzles, OpenSpiel examples, and teacher-authored toy state spaces.",
+			"Use NIST AI RMF and scikit-learn model-evaluation documentation as reference anchors.",
+			"Data Science source pool: NYC 311, NOAA Climate Data Online, CDC BRFSS, Our World in Data, Iris, Palmer Penguins, and small provided CSV fixtures.",
+			"AI Foundations source pool: OpenStreetMap or OSMnx extracts, MiniZinc-style constraint examples, Lichess puzzles, OpenSpiel examples, and authored toy state spaces.",
 			"Machine Learning source pool: scikit-learn sample datasets, OpenML, FashionMNIST or CIFAR-10 where appropriate, Hugging Face Datasets, and local train/test fixtures."
 		],
 		safetyAndAccess: [
@@ -204,7 +204,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Prefer local notebooks and provided datasets over live API dependencies.",
 			"Frame AI output as advisory and limited, especially around sensitive predictions or classifications."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Publish a named dataset catalog with schema, license, and artifact expectations.",
 			"Add model-card and evaluation-rubric templates.",
 			"Separate AI search/game topics from ML model-training topics in public descriptions.",
@@ -214,7 +214,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "algebra",
 		title: "Algebra 1 and Algebra 2",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: ["algebra-1a", "algebra-1b", "algebra-2a", "algebra-2b"],
 		audience:
 			"Students needing structured support in school algebra, graph interpretation, modeling, written justification, and cumulative practice.",
@@ -223,7 +223,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		outcomes: [
 			"Solve, graph, and explain linear, quadratic, exponential, polynomial, rational, and function-based problems at the correct course level.",
 			"Connect symbolic, graphical, tabular, and verbal representations instead of treating procedures as isolated tricks.",
-			"Write enough justification that a tutor can see whether an error is arithmetic, notation, concept, or strategy."
+			"Write enough justification to classify an error as arithmetic, notation, concept, or strategy."
 		],
 		sequencingNotes: [
 			"Use Common Core algebra domains as the standards map and keep representation changes visible.",
@@ -250,7 +250,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Do not rely on copyrighted textbook pages as course text.",
 			"Use accessible diagrams and alternative text for graph-heavy material."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Build a formal algebra project taxonomy for practice, modeling, error analysis, and enrichment.",
 			"Audit remaining image placeholders and replace them with owned or source-safe visuals.",
 			"Add stronger cumulative assessments across Algebra 1B, 2A, and 2B."
@@ -259,7 +259,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "cpp-and-algorithms",
 		title: "C++ Levels 1-3 and C++ Data Structures",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: [
 			"c-level-1",
 			"cpp-level-2",
@@ -293,14 +293,14 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sourceAndTooling: [
 			"Use ISO C++ Core Guidelines, local Makefile or CMake workflows, and source folders under Instruction-Material.",
 			"Keep starter/solution naming consistent across CPP Level 1-3 and DS&A repos.",
-			"Use CS235/CS236-inspired concepts only after rewriting them into original, tutor-ready course projects."
+			"Use CS235/CS236-inspired concepts only after rewriting them into original course projects."
 		],
 		safetyAndAccess: [
 			"Keep memory labs local and educational, not exploit-oriented.",
 			"Avoid requiring platform-specific IDE features unless a Makefile or command-line alternative exists.",
 			"Keep AI/ML topics out of the C++ sequence so the AI/ML pathway remains distinct."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Finish C++ naming normalization checks across all project and supplemental folders.",
 			"Add one more project per thin module where the recently created courses still have fewer than two real builds.",
 			"Add more explicit virtual interface, template, and RAII practice in Level 3."
@@ -309,7 +309,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "systems-infrastructure",
 		title: "Systems, Assembly, Linux, Networking, and Rust",
-		priority: "soon",
+		adminPriority: "soon",
 		courseIds: [
 			"c-systems-engineering",
 			"assembly",
@@ -320,7 +320,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students ready to understand how programs interact with operating systems, memory, processes, services, networks, and safer systems languages.",
 		prerequisiteSummary:
-			"Students should be comfortable with command-line work, typed programming basics, files, and debugging small programs before taking these courses.",
+			"Be comfortable with command-line work, typed programming basics, files, and debugging small programs before taking these courses.",
 		outcomes: [
 			"Explain machine representation, memory layout, stack/heap behavior, build tooling, processes, files, permissions, services, logs, and diagnostics.",
 			"Use Linux and network tools to gather evidence and explain system state without guessing.",
@@ -339,7 +339,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Require command transcripts, annotated outputs, and short evidence-to-claim explanations.",
 			"Use checklists for setup, verification, rollback, and failure-mode diagnosis.",
-			"Ask students to distinguish observation from inference in system and network troubleshooting."
+			"Distinguish observation from inference in system and network troubleshooting."
 		],
 		sourceAndTooling: [
 			"Use local VMs, containers, or owned servers where needed.",
@@ -352,7 +352,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Keep privileged commands constrained and require rollback notes for configuration changes.",
 			"Use a simple safety matrix for each lab: allowed target, prohibited target, required evidence, rollback or cleanup step, and what should be skipped if the student lacks admin access."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Add a systems prerequisite matrix that shows when C, Assembly, Linux, Networking, Security, and Rust should be taken.",
 			"Add more evidence-based lab rubrics for logs, packets, service state, and rollback.",
 			"Document VM/container setup options for students without full admin access.",
@@ -362,7 +362,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "java-pathway",
 		title: "Java Core, Graphics Tracks, and Advanced OOP",
-		priority: "soon",
+		adminPriority: "soon",
 		courseIds: [
 			"java-level-1",
 			"java-level-2",
@@ -373,7 +373,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students moving from introductory Java into stronger object-oriented design, inheritance, interfaces, abstract classes, records, graphics, and non-graphics application work.",
 		prerequisiteSummary:
-			"Students should know variables, control flow, methods, arrays or ArrayLists, and basic class construction before the advanced tracks.",
+			"Key idea: Variables, control flow, methods, arrays or ArrayLists, and basic class construction before the advanced tracks.",
 		outcomes: [
 			"Write Java classes with encapsulation, constructors, methods, inheritance, polymorphism, abstract classes, interfaces, and records where appropriate.",
 			"Choose between graphics and non-graphics tracks depending on whether the next project should emphasize visual interaction or deeper backend/model design.",
@@ -404,7 +404,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Keep projects local and avoid external service credentials for core work.",
 			"Do not mix AP exam constraints into non-AP Java unless explicitly useful."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Finish a distinct advanced Java course suitable after C++ Level 3.",
 			"Add more records, interface, abstract-class, and collection-heavy source examples.",
 			"Keep Java graphics and non-graphics pathways visibly separate in public course descriptions."
@@ -413,12 +413,12 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "ap-csa",
 		title: "AP Computer Science A",
-		priority: "soon",
+		adminPriority: "soon",
 		courseIds: ["ap-computer-science-a"],
 		audience:
 			"Students preparing for AP Computer Science A or seeking a Java course with exam-aligned tracing, class design, arrays, ArrayLists, inheritance, recursion, and sorting/searching.",
 		prerequisiteSummary:
-			"Students should be ready for Java syntax and object-oriented reasoning. Prior programming helps, but the course must still explicitly teach AP-scoped Java.",
+			"Be ready for Java syntax and object-oriented reasoning. Prior programming helps, but the course must still explicitly teach AP-scoped Java.",
 		outcomes: [
 			"Master AP CSA units from primitive types through objects, boolean logic, iteration, writing classes, arrays, ArrayLists, 2D arrays, inheritance, and recursion.",
 			"Practice MCQ reasoning, FRQ method writing, scoring, and error logs using College Board-aligned expectations.",
@@ -438,7 +438,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Use MCQ distractor analysis and FRQ rubrics.",
 			"Keep a recurring error log grouped by syntax, tracing, object state, loops, arrays, and recursion.",
 			"Include digital-exam timing practice and short written explanations of why an answer is valid.",
-			"Practice the current 42 MCQ / 4 FRQ exam shape and score FRQs by rows so students can see partial-credit habits instead of only final answers."
+			"Practice the current 42 MCQ / 4 FRQ exam shape and score FRQs by rows so partial-credit habits are visible instead of only final answers."
 		],
 		sourceAndTooling: [
 			"Use College Board AP CSA course and exam documentation as the authority.",
@@ -451,7 +451,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Avoid copying proprietary textbook material into course text.",
 			"Use practice problems in a way that respects source and licensing boundaries."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Add an explicit AP exam alignment map to the public pathway and internal audits.",
 			"Audit every Replit-era AP link against current GitHub source folders.",
 			"Keep digital-exam and FRQ-family notes refreshed before each May exam cycle.",
@@ -461,12 +461,12 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "usaco",
 		title: "USACO and Competitive Programming",
-		priority: "soon",
+		adminPriority: "soon",
 		courseIds: ["usaco-bronze", "usaco-silver", "usaco-gold"],
 		audience:
 			"Students who already have programming fluency and need disciplined contest problem solving, implementation speed, edge-case testing, and postmortems.",
 		prerequisiteSummary:
-			"Bronze students should be comfortable with loops, arrays or vectors, strings, maps/sets, and file-style input. Silver and Gold require stronger algorithms and proof habits.",
+			"Bronze Be comfortable with loops, arrays or vectors, strings, maps/sets, and file-style input. Silver and Gold require stronger algorithms and proof habits.",
 		outcomes: [
 			"Solve official-style P1, P2, and P3 problems with correct parsing, sample verification, edge cases, and complexity reasoning.",
 			"Progress from Bronze simulation and sorting/searching into Silver data structures and Gold graph/dynamic-programming patterns.",
@@ -475,7 +475,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sequencingNotes: [
 			"Use official USACO problems and USACO Guide topics as the sequencing authority.",
 			"Bronze should emphasize careful implementation before advanced algorithms.",
-			"Silver and Gold should add topic ladders only after students can finish easier problems cleanly under time.",
+			"Silver and Gold should add topic ladders only after easier problems can be solved cleanly under time.",
 			"Avoid random chronological contest browsing; choose official problems by division, topic, and slot difficulty so each assignment has a specific purpose."
 		],
 		projectExpectations: [
@@ -499,7 +499,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Keep coaching focused on understanding, not answer dumping.",
 			"Make language choice explicit before a problem set so syntax friction does not obscure the algorithm."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Create a visible Bronze-to-Silver-to-Gold prerequisite map.",
 			"Add official-problem sequencing tables by topic and difficulty.",
 			"Add a postmortem rubric and recurring edge-case checklist."
@@ -508,7 +508,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "design-patterns",
 		title: "Design Patterns and Refactoring",
-		priority: "later",
+		adminPriority: "later",
 		courseIds: [
 			"design-patterns-in-java",
 			"design-patterns-in-java-part-2",
@@ -518,7 +518,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Intermediate students who can already build classes and now need vocabulary for responsibility, coupling, refactoring, polymorphism, and language-specific pattern tradeoffs.",
 		prerequisiteSummary:
-			"Students should know classes, methods, collections, and basic testing in the language used by the specific pattern course.",
+			"Key idea: Classes, methods, collections, and basic testing in the language used by the specific pattern course.",
 		outcomes: [
 			"Recognize when a pattern clarifies responsibilities and when it only adds unnecessary architecture.",
 			"Refactor working code while preserving behavior with tests or driver programs.",
@@ -535,7 +535,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Write a pattern critique explaining why one pattern was chosen and one was rejected."
 		],
 		assessmentStyle: [
-			"Ask students to identify the responsibility that moved during refactoring.",
+			"Identify the responsibility that moved during refactoring.",
 			"Require behavior-preserving tests before and after a refactor.",
 			"Use design tradeoff prompts, not just vocabulary quizzes."
 		],
@@ -545,11 +545,11 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Keep cross-language comparisons explicit when a course borrows an idea from another language."
 		],
 		safetyAndAccess: [
-			"Do not over-abstract beginner code before students can see the concrete problem.",
+			"Do not over-abstract beginner code before the concrete problem is visible.",
 			"Keep refactor targets small enough to review during tutoring.",
 			"Preserve existing behavior unless the project explicitly asks for a feature change."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Add more pattern misuse and anti-pattern examples.",
 			"Add before/after tests to every major refactoring lab.",
 			"Create a cross-language comparison appendix for Java, C++, and Python patterns."
@@ -558,7 +558,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "science",
 		title: "Elementary, Middle School, Chemistry, and Physics",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: [
 			"elementary-science",
 			"middle-school-integrated-science",
@@ -588,7 +588,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Use CER writing, vocabulary checks, graph interpretation, diagram labeling, and model critique.",
-			"Ask students to separate what they saw from what they inferred.",
+			"Separate what they saw from what they inferred.",
 			"Use short formative checks rather than physical lab completion as proof of understanding."
 		],
 		sourceAndTooling: [
@@ -603,7 +603,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Any optional physical demo needs an equivalent diagram, simulation, or data table.",
 			"Use age-appropriate content and avoid unsafe home-lab instructions."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Write a high-school science pathway after elementary and middle-school courses are stabilized.",
 			"Replace thin science lesson text with phenomenon, model, data, and CER sections.",
 			"Add source/resource registers for every science module.",
@@ -613,12 +613,12 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "swift-mobile",
 		title: "Swift and Mobile App Development",
-		priority: "soon",
+		adminPriority: "soon",
 		courseIds: ["intro-to-swift-app-development"],
 		audience:
 			"Students interested in iOS-style app development, SwiftUI views, app structure, navigation, state, assets, persistence, and release-minded polish.",
 		prerequisiteSummary:
-			"Students should have general programming readiness and be able to work with files and a local IDE. Prior Swift is not required for the intro course.",
+			"Have general programming readiness and be able to work with files and a local IDE. Prior Swift is not required for the intro course.",
 		outcomes: [
 			"Build SwiftUI apps with views, state, navigation, lists, forms, assets, and simple data flow.",
 			"Understand app structure: entry point, scenes, view hierarchy, model/data responsibilities, and previews.",
@@ -635,7 +635,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Capstone app with intentional navigation, accessibility pass, and release-readiness notes."
 		],
 		assessmentStyle: [
-			"Ask students to label app entry point, scene, view hierarchy, navigation model, and data model responsibilities.",
+			"Label app entry point, scene, view hierarchy, navigation model, and data model responsibilities.",
 			"Use UI behavior checks plus code explanations.",
 			"Require one accessibility or usability improvement in major projects."
 		],
@@ -649,7 +649,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Keep networking examples mockable when credentials or live APIs are unavailable.",
 			"Make device-specific features optional unless the student has the required hardware."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Add more testing and accessibility checkpoints.",
 			"Clarify which projects require macOS/Xcode versus conceptual review.",
 			"Add a follow-up Swift course after the intro sequence if demand grows."
@@ -658,7 +658,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "web-javascript",
 		title: "JavaScript and Web Development",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: [
 			"javascript-level-1-javascript-superstar",
 			"javascript-level-2-javascript-master",
@@ -667,7 +667,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students moving from browser JavaScript projects into full web-development habits: files, Git, npm, dev servers, accessibility, APIs, deployment, and operations.",
 		prerequisiteSummary:
-			"JavaScript Level 1 can start near the beginning. Web Development Foundations assumes students can read and write small JavaScript programs and work with HTML/CSS and the DOM.",
+			"JavaScript Level 1 can start near the beginning. Web Development Foundations assumes readiness with small JavaScript programs, HTML/CSS, and the DOM.",
 		outcomes: [
 			"Build browser projects with HTML, CSS, JavaScript, DOM events, forms, fetch/async APIs, local state, and responsive layout.",
 			"Use file-based projects, Git/GitHub, npm scripts, local dev servers, browser devtools, and deployment workflows.",
@@ -687,7 +687,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Verify projects in the browser at desktop and narrow widths.",
 			"Check keyboard navigation, labels, contrast, loading/error states, and network tab behavior.",
-			"Ask students to explain the request/response flow and where data lives.",
+			"Explain the request/response flow and where data lives.",
 			"Require one accessibility fix, one async/loading/error-state fix, and one safe-input or output-escaping explanation in substantial web projects."
 		],
 		sourceAndTooling: [
@@ -701,7 +701,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Use safe mock APIs or provided endpoints for early work.",
 			"Treat security topics as defensive design and safe validation, not offensive web testing."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Add an explicit JavaScript-to-Web pathway diagram.",
 			"Add concrete async/fetch, accessibility, HTTP, and deployment projects.",
 			"Prepare a follow-up Full-Stack Web Apps course if Web Development Foundations becomes too broad."
@@ -710,7 +710,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 	{
 		id: "security",
 		title: "Network, Low-Level, and Systems Security",
-		priority: "urgent",
+		adminPriority: "urgent",
 		courseIds: [
 			"network-security",
 			"low-level-security",
@@ -719,7 +719,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		audience:
 			"Students who need careful, ethical, local-only security education grounded in threat modeling, evidence collection, impact, and defensive remediation.",
 		prerequisiteSummary:
-			"Students should know command-line basics and enough networking, systems, or C/C++ context to understand the specific security course they are taking.",
+			"Key idea: Command-line basics and enough networking, systems, or C/C++ context to understand the specific security course they are taking.",
 		outcomes: [
 			"Write threat models, identify assets and trust boundaries, collect evidence, describe impact, and propose defensive mitigations.",
 			"Use local fixtures, intentionally vulnerable examples, owned targets, or provided packet captures to study security behavior safely.",
@@ -737,7 +737,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Grade evidence quality, impact explanation, remediation, and ethical boundary compliance.",
-			"Ask students to distinguish vulnerability, exploitability, impact, and fix.",
+			"Distinguish vulnerability, exploitability, impact, and fix.",
 			"Require a short report rather than only screenshots or command output."
 		],
 		sourceAndTooling: [
@@ -751,11 +751,11 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Every lab must end with evidence, impact, and mitigation.",
 			"Every security project should state its Bloom-level goal, allowed target, prohibited activity, required artifact, and shutdown or cleanup condition before any tool is used."
 		],
-		expansionBacklog: [
+		adminExpansionBacklog: [
 			"Publish a security prerequisite and course-boundary matrix.",
 			"Add local-only lab manifests and explicit prohibited-activity text to every security course.",
 			"Add more report-writing and remediation rubrics.",
-			"Attach a visible safety matrix to each security course family so students can distinguish defensive analysis from prohibited activity."
+			"Attach a visible safety matrix to each security course family to distinguish defensive analysis from prohibited activity."
 		]
 	}
 ];

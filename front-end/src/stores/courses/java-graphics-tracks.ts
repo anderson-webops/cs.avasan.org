@@ -114,7 +114,7 @@ const graphicsIntroModule: RawCourseModule = {
 		{
 			title: "Graphics Setup Expectations",
 			content:
-				"Keep graphics work intentionally small and local: students should understand coordinates, shape sizing, color selection, repeated drawing with loops, and helper methods that compose a larger scene. Do not let graphics setup replace the main Java goals of clean control flow and object design."
+				"Keep graphics work intentionally small and local: Understand coordinates, shape sizing, color selection, repeated drawing with loops, and helper methods that compose a larger scene. Do not let graphics setup replace the main Java goals of clean control flow and object design."
 		}
 	],
 	supplementalProjects: [
@@ -138,7 +138,7 @@ const graphicsBranchModules: RawCourseModule[] = [
 			{
 				title: "Coordinate Systems and Drawing Primitives",
 				content:
-					"Teach the drawing surface as a coordinate system with an origin, x/y directions, widths, heights, colors, and layering order. Students should predict where a shape appears before running the program."
+					"Teach the drawing surface as a coordinate system with an origin, x/y directions, widths, heights, colors, and layering order. Predict where a shape appears before running the program."
 			},
 			{
 				title: "Java Graphics Project 1: Rainbow",

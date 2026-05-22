@@ -229,7 +229,7 @@ const scienceResourceBanks: Record<string, string[]> = {
 		"NGSS elementary performance expectations and appendices for grade-band scope.",
 		"PhET elementary-friendly simulations for forces, matter, sound, light, and simple systems.",
 		"NASA, NOAA, and USGS images or maps for weather, Earth materials, space, and environmental observations.",
-		"Teacher-provided image cards and data tables for sorting, graphing, and CER-lite responses."
+		"provided image cards and data tables for sorting, graphing, and CER-lite responses."
 	],
 	"middle-school-integrated-science": [
 		"NGSS middle-school physical, life, Earth/space, and engineering standards.",
@@ -240,7 +240,7 @@ const scienceResourceBanks: Record<string, string[]> = {
 	"intro-to-chemistry": [
 		"ACS chemistry teaching guidelines and safety language.",
 		"PhET Build an Atom, Molecule Shapes, Reactants Products and Leftovers, pH Scale, and Concentration-style simulations.",
-		"Periodic table and reaction datasets supplied by the tutor rather than gathered from household chemicals.",
+		"Periodic table and reaction datasets supplied by provided materials rather than gathered from household chemicals.",
 		"Particle diagrams, balancing cards, stoichiometry tables, and CER templates."
 	],
 	"intro-to-physics": [
@@ -276,7 +276,7 @@ const cppConceptMatrix = [
 ];
 
 const securityPolicy = [
-	"All security labs must use owned local fixtures, intentionally vulnerable toy apps, provided packet captures, or instructor-approved lab VMs.",
+	"All security labs must use owned local fixtures, intentionally vulnerable toy apps, provided packet captures, or approved lab VMs.",
 	"Every lab starts with scope, authorization, target, allowed tools, and stop conditions.",
 	"Every finding is written as evidence plus impact, followed by defensive remediation, detection, or hardening.",
 	"Students do not scan, probe, exploit, or collect data from third-party systems.",
@@ -420,7 +420,7 @@ const boundaryOverrides: Record<string, string[]> = {
 	],
 	"java-level-1": [
 		"Builds Java foundations for students who need the full language ramp.",
-		"Accelerated students can skip repetitive syntax drills after placement evidence."
+		"Accelerated placements can skip repetitive syntax drills after placement evidence."
 	],
 	"java-level-2": [
 		"Owns interfaces, abstract classes, records, collections, exceptions, files, and tests beyond AP-style basics."
@@ -480,7 +480,7 @@ const nextWorkByKind: Record<keyof typeof familyAssessmentCadence, string[]> = {
 	science: [
 		"Write phenomenon bundles with simulation/media/data sources per unit.",
 		"Create K-2, 3-5, and 6-8 notebook templates.",
-		"Add CER/model-rubric examples for tutors."
+		"Add CER/model-rubric examples for reviewers."
 	],
 	"data-ai-ml": [
 		"Build dataset cards, model cards, and evaluation templates.",
@@ -577,7 +577,7 @@ function safetyPolicyFor(kind: keyof typeof familyAssessmentCadence) {
 	}
 	if (kind === "data-ai-ml") {
 		return [
-			"Use public, synthetic, or instructor-provided datasets only.",
+			"Use public, synthetic, or provided datasets only.",
 			"Record source, license or usage assumption, sensitive fields, limitations, and intended use before analysis or modeling.",
 			"Require human review and limitation notes for AI/ML outputs."
 		];
@@ -585,7 +585,7 @@ function safetyPolicyFor(kind: keyof typeof familyAssessmentCadence) {
 	if (kind === "game") {
 		return [
 			"Use only self-created or clearly licensed assets.",
-			"Keep projects small enough to build and recover during tutoring.",
+			"Keep projects small enough to build and recover during live sessions.",
 			"Record third-party asset provenance before capstone publication."
 		];
 	}
@@ -652,7 +652,7 @@ function setCourseDevelopmentMetadata(courseId: string, course: RawCourse) {
 	const capstoneExpectations = capstoneFor(courseId, kind);
 	if (courseBoundaries.length < 2) {
 		courseBoundaries.push(
-			"Separate required course outcomes from optional enrichment before assigning the next project."
+			"Separate required course outcomes from optional enrichment before starting the next project."
 		);
 	}
 	if (capstoneExpectations.length < 2) {
@@ -666,8 +666,8 @@ function setCourseDevelopmentMetadata(courseId: string, course: RawCourse) {
 		sourcePolicy: sourcePolicyFor(courseId),
 		assessmentCadence: familyAssessmentCadence[kind],
 		toolchain: courseToolchainAssumptions[courseId] ?? [
-			"Use the course's linked source repo, browser-based material, or instructor-provided artifacts as the setup baseline.",
-			"Record any version-sensitive setup before assigning reusable projects."
+			"Use the course's linked source repo, browser-based material, or provided artifacts as the setup baseline.",
+			"Record any version-sensitive setup before starting reusable projects."
 		],
 		safetyPolicy: safetyPolicyFor(kind),
 		courseBoundaries,
@@ -677,7 +677,7 @@ function setCourseDevelopmentMetadata(courseId: string, course: RawCourse) {
 
 	if (metadata.standards.length === 0) {
 		metadata.standards = [
-			"Course-family research profile and instructor-authored progression map."
+			"Course-family research profile and authored progression map."
 		];
 	}
 
@@ -694,38 +694,38 @@ function addMetadataBackboneModule(course: RawCourse) {
 			{
 				title: "Standards and Source Crosswalk",
 				content: [
-					"**Teaching flow:** Treat this module as the catalog-visible control panel for the course. It names the standards, official docs, source policy, or authored progression that future lessons and projects must trace back to.",
+					"**Learning sequence:** Treat this module as the catalog-visible control panel for the course. It names the standards, official docs, source policy, or authored progression that future lessons and projects must trace back to.",
 					`**Priority:** ${metadata.priority}`,
 					`**Standards/source map:**\n${bullets(metadata.standards)}`,
 					`**Source policy:** ${metadata.sourcePolicy}`,
-					"**Exit check:** A tutor can explain what external standard, source repo, official documentation, or explicit content policy justifies the course sequence."
+					"**Completion check:** The course makes it possible to explain what external standard, source repo, official documentation, or explicit content policy justifies the course sequence."
 				].join("\n\n")
 			},
 			{
 				title: "Assessment Cadence",
 				content: [
-					"**Diagnostic guidance:** Use this cadence to decide what evidence should exist before a student moves on. This prevents long lesson lists from replacing mastery checks.",
+					"**Readiness check:** Use this cadence to decide what evidence should exist before the course progression continues. This prevents long lesson lists from replacing mastery checks.",
 					`**Cadence:**\n${bullets(metadata.assessmentCadence)}`,
-					"**Exit check:** Each module has a formative check, a project or transfer task, and a clear way to record what the student should review next."
+					"**Completion check:** Each module has a formative check, a project or transfer task, and a clear way to record what needs review next."
 				].join("\n\n")
 			},
 			{
 				title: "Toolchain and Safety Boundary",
 				content: [
-					"**Teaching flow:** Confirm the setup and safety assumptions before assigning work. For content courses this means media/data access; for code courses this means source, tools, versions, and reset steps; for systems/security this means scope and authorization.",
+					"**Learning sequence:** Confirm the setup and safety assumptions before starting work. For content courses this means media/data access; for code courses this means source, tools, versions, and reset steps; for systems/security this means scope and authorization.",
 					`**Toolchain:**\n${bullets(metadata.toolchain)}`,
 					`**Safety boundary:**\n${bullets(metadata.safetyPolicy)}`,
-					"**Exit check:** The student can start safely, recover from setup drift, and complete the task without hidden private files or unsafe assumptions."
+					"**Completion check:** The setup supports safe starts, recovery from setup drift, and completion of the task without hidden private files or unsafe assumptions."
 				].join("\n\n")
 			},
 			{
 				title: "Boundary, Capstone, and Next Work",
 				content: [
-					"**Teaching flow:** Use these boundaries to prevent course-family overlap and to decide what the next authoring pass should build.",
+					"**Learning sequence:** Use these boundaries to prevent course-family overlap and to decide what the next authoring pass should build.",
 					`**Course boundaries:**\n${bullets(metadata.courseBoundaries)}`,
 					`**Capstone expectations:**\n${bullets(metadata.capstoneExpectations)}`,
 					`**Recommended next work:**\n${bullets(metadata.recommendedNextWork)}`,
-					"**Exit check:** The course has a coherent endpoint and a clear next implementation target instead of an open-ended content backlog."
+					"**Completion check:** The course has a coherent endpoint and a clear next implementation target instead of an open-ended content backlog."
 				].join("\n\n")
 			}
 		],
@@ -800,8 +800,8 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 					: `${module.title}: Modeling or Error-Analysis Project`;
 			const content =
 				next === 1
-					? `**Project goal:** Convert ${module.title} into a short standards-aligned practice set. Include one worked example, three independent problems, one graph/table/verbal representation where appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The student shows every algebraic step.\n- At least one problem asks for a reason, not just an answer.\n- The tutor records one misconception to review before the next module.`
-					: `**Project goal:** Apply ${module.title} in a modeling, graphing, or error-analysis context. The student should interpret a situation, choose a representation, solve, and explain whether the answer makes sense.\n\n**Completion checks:**\n- The project contains a concrete scenario or flawed worked solution.\n- The student explains the choice of equation, graph, or table.\n- The final answer includes a units/context check or corrected error statement.`;
+					? `**Project goal:** Convert ${module.title} into a short standards-aligned practice set. Include one worked example, three independent problems, one graph/table/verbal representation where appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The work shows every algebraic step.\n- At least one problem asks for a reason, not just an answer.\n- Review notes record one misconception to revisit before the next module.`
+					: `**Project goal:** Apply ${module.title} in a modeling, graphing, or error-analysis context. The work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The project contains a concrete scenario or flawed worked solution.\n- The work explains the choice of equation, graph, or table.\n- The final answer includes a units/context check or corrected error statement.`;
 
 			module.supplementalProjects.push(projectItem(title, content));
 		}
@@ -818,46 +818,46 @@ function addFullLessonAuthoringPack(courseId: string, course: RawCourse) {
 			{
 				title: "Lesson 1: Concept Setup and First Worked Example",
 				content: [
-					`**Teaching flow:** Start the first full lesson by naming the exact ${profile.family} concept and connecting it to a concrete artifact. Use one item from the topic backlog as the focus, define the vocabulary, then work through a small example slowly enough that the student can predict the next step before seeing it.`,
+					`**Learning sequence:** Start the first full lesson by naming the exact ${profile.family} concept and connecting it to a concrete artifact. Use one item from the topic backlog as the focus, define the vocabulary, then work through a small example slowly enough that the work demonstrates the ability to predict the next step before seeing it.`,
 					`**Concept pool:**\n${bullets(profile.topics.slice(0, 4))}`,
-					"**Exit check:** The student can restate the concept, identify the input or evidence being used, and explain the first worked example without copying the wording."
+					"**Completion check:** The work demonstrates the ability to restate the concept, identify the input or evidence being used, and explain the first worked example without copying the wording."
 				].join("\n\n")
 			},
 			{
 				title: "Lesson 2: Guided Practice, Misconceptions, and Vocabulary",
 				content: [
-					`**Teaching flow:** Turn the worked example into guided practice. Ask the student to complete the next step, name why that step is valid, and compare it to a common mistake. Keep the misconception check discipline-specific instead of generic.`,
+					`**Learning sequence:** Turn the worked example into guided practice. Require the work to complete the next step, name why that step is valid, and compare it to a common mistake. Keep the misconception check discipline-specific instead of generic.`,
 					`**Misconception targets:**\n${bullets(profile.gaps.slice(0, 3))}`,
-					"**Exit check:** The student fixes one flawed example and explains the correction."
+					"**Completion check:** The work fixes one flawed example and explains the correction."
 				].join("\n\n")
 			},
 			{
 				title: "Lesson 3: Independent Transfer and Edge Cases",
 				content: [
-					`**Teaching flow:** Give the student a new but nearby task that uses the same idea with a changed constraint. This is the point where a tutor should stop demonstrating and require the student to plan, attempt, test, and revise.`,
+					`**Learning sequence:** Use a new but nearby task that applies the same idea with a changed constraint. The sequence shifts from demonstration to planning, attempting, testing, and revising.`,
 					`**Transfer options:**\n${bullets(profile.projectTypes.slice(0, 4))}`,
-					"**Exit check:** The student handles one normal case and one boundary, edge, or changed-condition case."
+					"**Completion check:** The work handles one normal case and one boundary, edge, or changed-condition case."
 				].join("\n\n")
 			},
 			{
 				title: "Lesson 4: Project Review, Reflection, and Next Step",
 				content: [
-					`**Teaching flow:** End the lesson sequence with a review of the artifact, not a vague recap. Ask what worked, what failed, what evidence proves the result, and what next module should build on this work.`,
+					`**Learning sequence:** End the lesson sequence with a review of the artifact, not a vague recap. The review names what worked, what failed, what evidence proves the result, and what the next module should build on.`,
 					`**Assessment options:**\n${bullets(profile.assessments.slice(0, 4))}`,
-					"**Exit check:** The student submits or presents a short reflection naming the goal, evidence, bug or misconception, and next improvement."
+					"**Completion check:** The work includes a short reflection naming the goal, evidence, bug or misconception, and next improvement."
 				].join("\n\n")
 			}
 		],
 		supplementalProjects: [
 			{
-				title: "Full Lesson Project: Tutor-Ready Worked Example",
+				title: "Full Lesson Project: Review-Ready Worked Example",
 				content:
-					"**Project goal:** Write one tutor-ready worked example for this course family. Include the prompt, expected student prediction, solution steps, common wrong turn, and a short check for understanding.\n\n**Completion checks:**\n- The example is small enough to teach live.\n- The explanation includes why each step is valid.\n- The worked example leads naturally into one project or transfer task."
+					"**Project goal:** Write one review-ready worked example for this course family. Include the prompt, expected prediction point, solution steps, common wrong turn, and a short check for understanding.\n\n**Completion checks:**\n- The example is small enough to teach live.\n- The explanation includes why each step is valid.\n- The worked example leads naturally into one project or transfer task."
 			},
 			{
-				title: "Full Lesson Project: Student Transfer Task",
+				title: "Full Lesson Project: Transfer Task",
 				content:
-					"**Project goal:** Create a nearby transfer task that changes one constraint from the worked example. The task should require the same core concept but prevent rote copying.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The task has normal and edge-case expectations.\n- The student must explain the answer, artifact, or model."
+					"**Project goal:** Create a nearby transfer task that changes one constraint from the worked example. The task should require the same core concept but prevent rote copying.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The task has normal and edge-case expectations.\n- The explanation covers the answer, artifact, or model."
 			}
 		]
 	});
@@ -875,32 +875,32 @@ function addSourceParityModule(courseId: string, course: RawCourse) {
 				{
 					title: "Canonical Source or Asset Policy",
 					content: [
-						"**Teaching flow:** This course does not currently depend on a local instruction-material source repository. Treat its catalog text, media links, datasets, worksheets, and external project locations as the authoritative material until a repo is created.",
+						"**Learning sequence:** This course does not currently depend on a local instruction-material source repository. Treat its catalog text, media links, datasets, worksheets, and external project locations as the authoritative material until a repo is created.",
 						`**Policy decision:** ${contentOnlyPolicy}`,
-						"**Exit check:** Every future project either links a source/data/media asset or explicitly states that the activity is text-only, discussion-only, worksheet-only, or external-platform-only."
+						"**Completion check:** Every future project either links a source/data/media asset or explicitly states that the activity is text-only, discussion-only, worksheet-only, or external-platform-only."
 					].join("\n\n")
 				},
 				{
 					title: "Asset Register Rule",
 					content:
-						"**Teaching flow:** When a content-only course gains worksheets, slides, datasets, simulations, or media, add the link directly to the relevant project or module item instead of leaving the asset in a private note.\n\n**Completion checks:**\n- The asset source is visible.\n- Licensing or usage assumptions are recorded when relevant.\n- A student can complete the task without guessing where supporting material lives."
+						"**Learning sequence:** When a content-only course gains worksheets, slides, datasets, simulations, or media, add the link directly to the relevant project or module item instead of leaving the asset in a private note.\n\n**Completion checks:**\n- The asset source is visible.\n- Licensing or usage assumptions are recorded when relevant.\n- The task can be completed without guessing where supporting material lives."
 				},
 				{
 					title: "Future Repository Trigger",
 					content:
-						"**Teaching flow:** Create a dedicated source repository only when the course has reusable starter files, solution states, notebooks, code projects, or worksheet packs that should be versioned outside the catalog.\n\n**Exit check:** Until that threshold is met, do not report missing source folders as a course defect."
+						"**Learning sequence:** Create a dedicated source repository only when the course has reusable starter files, solution states, notebooks, code projects, or worksheet packs that should be versioned outside the catalog.\n\n**Completion check:** Until that threshold is met, do not report missing source folders as a course defect."
 				},
 				{
 					title: "Audit Classification",
 					content:
-						"**Teaching flow:** The generated audit should classify this course as content-only or external-platform-only rather than unresolved source-missing work.\n\n**Exit check:** The parity report names the policy decision and does not silently imply a missing local repo."
+						"**Learning sequence:** The generated audit should classify this course as content-only or external-platform-only rather than unresolved source-missing work.\n\n**Completion check:** The parity report names the policy decision and does not silently imply a missing local repo."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Asset Register Project",
 					content:
-						"**Project goal:** Choose one module and list every supporting worksheet, simulation, media source, dataset, or external platform needed to teach it.\n\n**Completion checks:**\n- Required and optional assets are separated.\n- The student can complete the activity over Zoom.\n- Any future local source repo need is documented."
+						"**Project goal:** Choose one module and list every supporting worksheet, simulation, media source, dataset, or external platform needed to teach it.\n\n**Completion checks:**\n- Required and optional assets are separated.\n- The work demonstrates the ability to complete the activity over Zoom.\n- Any future local source repo need is documented."
 				},
 				{
 					title: "Content-Only Parity Review",
@@ -918,26 +918,26 @@ function addSourceParityModule(courseId: string, course: RawCourse) {
 			{
 				title: "Canonical Source Repository",
 				content: [
-					`**Teaching flow:** Use the instruction-material repository as the canonical source for starter files, solutions, and project assets. Every new project should be added here first, then linked from the course catalog after the starter and solution states are clear.`,
+					`**Learning sequence:** Use the instruction-material repository as the canonical source for starter files, solutions, and project assets. Every new project should be added here first, then linked from the course catalog after the starter and solution states are clear.`,
 					`**Canonical repo:** ${url}`,
-					"**Exit check:** A project is link-ready only when the starter, solution, README or instructions, and expected tests/assets are all identifiable."
+					"**Completion check:** A project is link-ready only when the starter, solution, README or instructions, and expected tests/assets are all identifiable."
 				].join("\n\n"),
 				projectLink: repoTreeUrl(courseId)
 			},
 			{
 				title: "Parity Rules for Future Projects",
 				content:
-					"**Teaching flow:** Treat source parity as a release gate. Starter folders should contain only what a student should receive; solution folders should represent one complete reference path; supplemental variants should be named consistently with the course/module prefix.\n\n**Completion checks:**\n- Every catalog project has a source folder or explicit no-code exception.\n- Every solution link points to a dedicated solution or complete reference folder.\n- Legacy, duplicate, or archive-only folders are not linked as active work without a note."
+					"**Learning sequence:** Treat source parity as a release gate. Starter folders should contain only the starting state; solution folders should represent one complete reference path; supplemental variants should be named consistently with the course/module prefix.\n\n**Completion checks:**\n- Every catalog project has a source folder or explicit no-code exception.\n- Every solution link points to a dedicated solution or complete reference folder.\n- Legacy, duplicate, or archive-only folders are not linked as active work without a note."
 			},
 			{
 				title: "Local Audit Requirement",
 				content:
-					"**Teaching flow:** Run the local source parity artifact generator after adding or renaming project folders. The generated `no-include` report should be reviewed before committing catalog links.\n\n**Exit check:** The report lists linked folders, unlinked top-level folders, project-link counts, solution-link counts, and any missing local root."
+					"**Learning sequence:** Run the local source parity artifact generator after adding or renaming project folders. The generated `no-include` report should be reviewed before committing catalog links.\n\n**Completion check:** The report lists linked folders, unlinked top-level folders, project-link counts, solution-link counts, and any missing local root."
 			},
 			{
 				title: "Maintenance Contract",
 				content:
-					"**Teaching flow:** Keep course text, source repos, and public GitHub links synchronized. If a project moves, update the source repo first, then course links, then the parity artifact.\n\n**Exit check:** A future tutor can open the course, click the project, identify the starter state, and compare against the solution without guessing which folder is current."
+					"**Learning sequence:** Keep course text, source repos, and public GitHub links synchronized. If a project moves, update the source repo first, then course links, then the parity artifact.\n\n**Completion check:** A future reviewer can open the course, click the project, identify the starter state, and compare against the solution without guessing which folder is current."
 			}
 		],
 		supplementalProjects: [
@@ -982,7 +982,7 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 				content: [
 					"**Remote investigation:** Use shared-screen simulations, public images, provided datasets, diagrams, and paper notes. Do not require household materials, lab kits, heat, chemicals, electricity components, or outdoor data collection.",
 					`**Resource shortlist:**\n${bullets(resources)}`,
-					"**Exit check:** Every investigation should name the phenomenon, the source of evidence, the vocabulary target, and the CER prompt."
+					"**Completion check:** Every investigation should name the phenomenon, the source of evidence, the vocabulary target, and the CER prompt."
 				].join("\n\n"),
 				mediaLink: links?.mediaLink,
 				datasetLink: links?.datasetLink
@@ -990,21 +990,21 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			{
 				title: "Module-by-Module Resource Mapping Routine",
 				content:
-					"**Teaching flow:** For each science module, choose one simulation/media source, one provided data table or graph, one model or diagram, and one CER prompt before class. The resource can be reused, but the question and vocabulary should match the module.\n\n**Completion checks:**\n- The student can access the evidence through Zoom.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation.",
+					"**Learning sequence:** For each science module, choose one simulation/media source, one provided data table or graph, one model or diagram, and one CER prompt before class. The resource can be reused, but the question and vocabulary should match the module.\n\n**Completion checks:**\n- The work demonstrates the ability to access the evidence through Zoom.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation.",
 				mediaLink: links?.mediaLink,
 				datasetLink: links?.datasetLink
 			},
 			{
 				title: "Remote Safety and Accessibility Check",
 				content:
-					"**Teaching flow:** Before assigning a science project, verify that it can be completed with notes, paper, a browser, and shared-screen material. If an optional household observation is suggested, provide a fully equivalent data/simulation alternative.\n\n**Exit check:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials.",
+					"**Learning sequence:** Before assigning a science project, verify that it can be completed with notes, paper, a browser, and shared-screen material. If an optional household observation is suggested, provide a fully equivalent data/simulation alternative.\n\n**Completion check:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials.",
 				mediaLink: links?.mediaLink,
 				datasetLink: links?.datasetLink
 			},
 			{
 				title: "Science Notebook Evidence Routine",
 				content:
-					"**Teaching flow:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction.\n\n**Exit check:** The student separates observation from inference and supports claims with visible evidence.",
+					"**Learning sequence:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction.\n\n**Completion check:** The work separates observation from inference and supports claims with visible evidence.",
 				mediaLink: links?.mediaLink,
 				datasetLink: links?.datasetLink
 			}
@@ -1013,14 +1013,14 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			{
 				title: "Resource Project: Simulation-to-CER Writeup",
 				content:
-					"**Project goal:** Use one approved simulation or provided dataset to write a CER response. Include a screenshot or sketch of the model, two observations, one claim, evidence from the source, and reasoning that uses the target vocabulary.\n\n**Completion checks:**\n- The evidence comes from the shared source.\n- The reasoning explains why the evidence supports the claim.\n- The student predicts what would change if one variable changed.",
+					"**Project goal:** Use one approved simulation or provided dataset to write a CER response. Include a screenshot or sketch of the model, two observations, one claim, evidence from the source, and reasoning that uses the target vocabulary.\n\n**Completion checks:**\n- The evidence comes from the shared source.\n- The reasoning explains why the evidence supports the claim.\n- The work includes a prediction for what would change if one variable changed.",
 				mediaLink: links?.mediaLink,
 				datasetLink: links?.datasetLink
 			},
 			{
 				title: "Resource Project: Model Critique",
 				content:
-					"**Project goal:** Choose one model, diagram, graph, or simulation and explain what it shows well and what it leaves out.\n\n**Completion checks:**\n- The student identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The student suggests one improvement or follow-up question.",
+					"**Project goal:** Choose one model, diagram, graph, or simulation and explain what it shows well and what it leaves out.\n\n**Completion checks:**\n- The work identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The student suggests one improvement or follow-up question.",
 				mediaLink: links?.mediaLink,
 				datasetLink: links?.datasetLink
 			}
@@ -1037,22 +1037,22 @@ function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Portal Structure Decision",
 				content:
-					"**Teaching flow:** Use `supplementalProjects` for explicit practice sets, application/modeling projects, error-analysis tasks, and enrichment. Keep core curriculum items for concept instruction, worked examples, and guided practice. Existing imported module projects can remain in curriculum for continuity, but every module should also expose at least two explicit project/practice options in the project area.\n\n**Exit check:** A tutor can distinguish required concept instruction from optional/remedial/enrichment project work without reading the entire module."
+					"**Learning sequence:** Use `supplementalProjects` for explicit practice sets, application/modeling projects, error-analysis tasks, and enrichment. Keep core curriculum items for concept instruction, worked examples, and guided practice. Existing imported module projects can remain in curriculum for continuity, but every module should also expose at least two explicit project/practice options in the project area.\n\n**Completion check:** The course makes it possible to distinguish required concept instruction from optional/remedial/enrichment project work without reading the entire module."
 			},
 			{
 				title: "Assessment Cadence",
 				content:
-					"**Diagnostic guidance:** Use a short formative check after each major topic, a cumulative mixed-practice check every few modules, and an error-analysis task before moving into a new representation type.\n\n**Evidence of proficiency:** The student solves, explains, checks reasonableness, and can identify a common algebraic error."
+					"**Readiness check:** Use a short formative check after each major topic, a cumulative mixed-practice check every few modules, and an error-analysis task before moving into a new representation type.\n\n**Evidence of proficiency:** The student solves, explains, checks reasonableness, and can identify a common algebraic error."
 			},
 			{
 				title: "Representation Balance",
 				content:
-					"**Teaching flow:** Each algebra project should include at least two representations when reasonable: equation, graph, table, verbal rule, diagram, or contextual model.\n\n**Exit check:** The student can translate between representations and explain what each one reveals."
+					"**Learning sequence:** Each algebra project should include at least two representations when reasonable: equation, graph, table, verbal rule, diagram, or contextual model.\n\n**Completion check:** The work demonstrates the ability to translate between representations and explain what each one reveals."
 			},
 			{
 				title: "Worked Example Density",
 				content:
-					"**Teaching flow:** For each new algebra skill, provide one clean worked example, one flawed example to repair, and one transfer problem with changed numbers or context.\n\n**Exit check:** The student can explain the difference between procedure and reason."
+					"**Learning sequence:** For each new algebra skill, provide one clean worked example, one flawed example to repair, and one transfer problem with changed numbers or context.\n\n**Completion check:** The work demonstrates the ability to explain the difference between procedure and reason."
 			}
 		],
 		supplementalProjects: [
@@ -1064,7 +1064,7 @@ function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Taxonomy Project: Modeling or Error-Analysis Task",
 				content:
-					"**Project goal:** Build either a contextual model or an error-analysis task for one algebra topic.\n\n**Completion checks:**\n- The task asks why, not only what.\n- The student checks units or context.\n- A likely misconception is named in the tutor notes."
+					"**Project goal:** Build either a contextual model or an error-analysis task for one algebra topic.\n\n**Completion checks:**\n- The task asks why, not only what.\n- The work checks units or context.\n- A likely misconception is named in the review notes."
 			}
 		]
 	});
@@ -1079,22 +1079,22 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Decision: Keep One Course with K-2 and 3-5 Paths",
 				content:
-					"**Teaching flow:** Keep Elementary Science as one course for scheduling simplicity, but label each activity with a K-2 path and a 3-5 path during future lesson writing. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Exit check:** Every future elementary science module should name the simpler path, the advanced path, and the shared phenomenon."
+					"**Learning sequence:** Keep Elementary Science as one course for scheduling simplicity, but label each activity with a K-2 path and a 3-5 path during future lesson writing. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Completion check:** Every future elementary science module should name the simpler path, the advanced path, and the shared phenomenon."
 			},
 			{
 				title: "K-2 Path",
 				content:
-					"**Teaching flow:** Use short phenomena, images, drawings, sorting, matching, and oral explanation. Keep writing light and use sentence frames: I observe, I think, my evidence is, and I wonder.\n\n**Exit check:** The student can make observations, ask a question, and explain one idea with a drawing or sentence."
+					"**Learning sequence:** Use short phenomena, images, drawings, sorting, matching, and oral explanation. Keep writing light and use sentence frames: I observe, I think, my evidence is, and I wonder.\n\n**Completion check:** The work demonstrates the ability to make observations, ask a question, and explain one idea with a drawing or sentence."
 			},
 			{
 				title: "Grades 3-5 Path",
 				content:
-					"**Teaching flow:** Add simple measurements, data tables, graph reading, model critique, and claim-evidence-reasoning paragraphs. Ask students to compare examples and explain what would change if one condition changed.\n\n**Exit check:** The student can use evidence from a shared source and connect it to a science vocabulary term."
+					"**Learning sequence:** Add simple measurements, data tables, graph reading, model critique, and claim-evidence-reasoning paragraphs. Require the work to compare examples and explain what would change if one condition changed.\n\n**Completion check:** The work demonstrates the ability to use evidence from a shared source and connect it to a science vocabulary term."
 			},
 			{
 				title: "Shared Zoom Constraint",
 				content:
-					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Exit check:** A student without supplies can complete the same learning goal."
+					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Completion check:** The same learning goal can be completed the same learning goal."
 			}
 		],
 		supplementalProjects: [
@@ -1128,7 +1128,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "Project Folder Hygiene",
 					content:
-						"Explain Assets, Scenes, Scripts, Prefabs, Materials, and Packages. Students should create a clean folder structure before writing scripts so assets do not become untraceable later."
+						"Explain Assets, Scenes, Scripts, Prefabs, Materials, and Packages. Create a clean folder structure before writing scripts so assets do not become untraceable later."
 				},
 				{
 					title: "Asset Licensing and Attribution",
@@ -1160,7 +1160,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "GameObjects and Components",
 					content:
-						"Teach Unity objects as component containers. Students should explain which behavior belongs to the transform, collider, renderer, rigidbody, and custom script."
+						"Teach Unity objects as component containers. Explain which behavior belongs to the transform, collider, renderer, rigidbody, and custom script."
 				},
 				{
 					title: "Script Lifecycle",
@@ -1170,7 +1170,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "Inspector Variables",
 					content:
-						"Use serialized fields to tune values without hardcoding every number. Students should change speed or health in the inspector and explain why that is useful."
+						"Use serialized fields to tune values without hardcoding every number. Change speed or health in the inspector and explain why that is useful."
 				},
 				{
 					title: "Debugging Component State",
@@ -1197,7 +1197,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "Input to Intent",
 					content:
-						"Convert keyboard or controller input into intent before changing position or velocity. Students should describe what the input means before applying movement."
+						"Convert keyboard or controller input into intent before changing position or velocity. Describe what the input means before applying movement."
 				},
 				{
 					title: "Movement Models",
@@ -1234,7 +1234,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "Collision vs Trigger",
 					content:
-						"Separate physical collision from trigger detection. Students should know when an object should block movement and when it should only report contact."
+						"Separate physical collision from trigger detection. The work should know when an object should block movement and when it should only report contact."
 				},
 				{
 					title: "Collectibles and Score",
@@ -1392,25 +1392,25 @@ function addCppMatrixModule(courseId: string, course: RawCourse) {
 			{
 				title: "Baseline and Progression Matrix",
 				content: [
-					"**Teaching flow:** Use this matrix when placing students after the original C++ Level 1 material or after Python/Java prerequisites.",
+					"**Learning sequence:** Use this matrix when placing students after the original C++ Level 1 material or after Python/Java prerequisites.",
 					`**Matrix:**\n${bullets(cppConceptMatrix)}`,
-					"**Exit check:** The tutor can identify whether the next lesson should be syntax fluency, memory reasoning, standard-library design, parser/state-machine architecture, or DS&A."
+					"**Completion check:** the course can identify whether the next lesson should be syntax fluency, memory reasoning, standard-library design, parser/state-machine architecture, or DS&A."
 				].join("\n\n")
 			},
 			{
 				title: "CS235/CS236 Concept Extraction",
 				content:
-					"**Teaching flow:** Extract CS235-style object, container, and data-structure discipline into Level 3/DS&A, and CS236-style scanner/parser, relation, and state-machine ideas into Level 3 command architecture. Keep the projects smaller than college assignments but preserve the core reasoning."
+					"**Learning sequence:** Extract CS235-style object, container, and data-structure discipline into Level 3/DS&A, and CS236-style scanner/parser, relation, and state-machine ideas into Level 3 command architecture. Keep the projects smaller than college assignments but preserve the core reasoning."
 			},
 			{
 				title: "No AI/ML Boundary",
 				content:
-					"**Teaching flow:** Do not use C++ Level 3 as an AI/ML course. Students may build parsers, command simulations, and state machines, but model training and ML evaluation belong in AI/Data Science/Machine Learning."
+					"**Learning sequence:** Do not use C++ Level 3 as an AI/ML course. Students may build parsers, command simulations, and state machines, but model training and ML evaluation belong in AI/Data Science/Machine Learning."
 			},
 			{
 				title: "Placement Check",
 				content:
-					"**Diagnostic guidance:** Ask the student to explain a pointer/reference example, use a vector or map appropriately, trace a recursive call, and describe how a command parser rejects bad input. Use the weakest answer to choose the next module."
+					"**Readiness check:** Require the work to explain a pointer/reference example, use a vector or map appropriately, trace a recursive call, and describe how a command parser rejects bad input. Use the weakest answer to choose the next module."
 			}
 		],
 		supplementalProjects: [
@@ -1422,7 +1422,7 @@ function addCppMatrixModule(courseId: string, course: RawCourse) {
 			{
 				title: "Matrix Project: CS235/CS236-Inspired Mini Build",
 				content:
-					"**Project goal:** Choose either a relation-style container view or a scanner/parser mini build and implement the smallest useful version.\n\n**Completion checks:**\n- The project has a clear input format.\n- Invalid input is rejected safely.\n- The student explains which college-level idea was simplified."
+					"**Project goal:** Choose either a relation-style container view or a scanner/parser mini build and implement the smallest useful version.\n\n**Completion checks:**\n- The project has a clear input format.\n- Invalid input is rejected safely.\n- The work explains which college-level idea was simplified."
 			}
 		]
 	});
@@ -1439,23 +1439,23 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 				content: [
 					"**AP connection:** Use the current College Board AP CSA framework as the exam-facing map for pacing and review.",
 					`**Unit map:**\n${bullets(apCsaUnitMap)}`,
-					"**Exit check:** Every AP review assignment should name the unit, Java construct, tracing skill, and likely FRQ or MCQ pattern."
+					"**Completion check:** Every AP review assignment should name the unit, Java construct, tracing skill, and likely FRQ or MCQ pattern."
 				].join("\n\n")
 			},
 			{
 				title: "FRQ Cadence",
 				content:
-					"**Teaching flow:** Add one short FRQ-style task after class design, arrays/ArrayLists, 2D arrays, inheritance/polymorphism, and recursion. Use official-style rubrics: correctness, object state, loop bounds, method contract, and edge cases.\n\n**Exit check:** The student can explain where points would be earned or lost."
+					"**Learning sequence:** Add one short FRQ-style task after class design, arrays/ArrayLists, 2D arrays, inheritance/polymorphism, and recursion. Use official-style rubrics: correctness, object state, loop bounds, method contract, and edge cases.\n\n**Completion check:** The work demonstrates the ability to explain where points would be earned or lost."
 			},
 			{
 				title: "MCQ Distractor Analysis",
 				content:
-					"**Diagnostic guidance:** After each MCQ practice set, classify missed questions by distractor type: off-by-one, reference vs value, integer division, boolean logic, object state, array bounds, or method dispatch.\n\n**Exit check:** The student keeps an error log and repeats a targeted remediation problem."
+					"**Readiness check:** After each MCQ practice set, classify missed questions by distractor type: off-by-one, reference vs value, integer division, boolean logic, object state, array bounds, or method dispatch.\n\n**Completion check:** The student keeps an error log and repeats a targeted remediation problem."
 			},
 			{
 				title: "Solution-Link Remediation Rule",
 				content:
-					"**Teaching flow:** Any AP CSA project without a solution link should be either paired with a local source solution, marked as discussion-only, or added to the source-parity remediation list.\n\n**Exit check:** The tutor knows whether a project is expected to be independently checked, discussed orally, or compared against a reference solution."
+					"**Learning sequence:** Any AP CSA project without a solution link should be either paired with a local source solution, marked as discussion-only, or added to the source-parity remediation list.\n\n**Completion check:** the course notes show whether a project is expected to be independently checked, discussed orally, or compared against a reference solution."
 			}
 		],
 		supplementalProjects: [
@@ -1483,25 +1483,25 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 			{
 				title: "Approved Dataset and Fixture Sources",
 				content: [
-					"**Teaching flow:** Use stable, inspectable datasets before introducing heavier tooling. Every dataset should have a source, license/usage note, target question, and known caveat.",
+					"**Learning sequence:** Use stable, inspectable datasets before introducing heavier tooling. Every dataset should have a source, license/usage note, target question, and known caveat.",
 					`**Catalog:**\n${bullets(catalog)}`,
-					"**Exit check:** The student can name the target, features or evidence, limitation, and evaluation method before coding."
+					"**Completion check:** The work demonstrates the ability to name the target, features or evidence, limitation, and evaluation method before coding."
 				].join("\n\n")
 			},
 			{
 				title: "Reproducibility Contract",
 				content:
-					"**Teaching flow:** Each notebook or script should run from top to bottom with fixed seeds or documented randomness, visible imports, environment notes, and clear data-loading paths.\n\n**Exit check:** A fresh run reproduces the main table, graph, model metric, or AI behavior."
+					"**Learning sequence:** Each notebook or script should run from top to bottom with fixed seeds or documented randomness, visible imports, environment notes, and clear data-loading paths.\n\n**Completion check:** A fresh run reproduces the main table, graph, model metric, or AI behavior."
 			},
 			{
 				title: "Evaluation and Limitation Notes",
 				content:
-					"**Diagnostic guidance:** Require a baseline, metric, validation split or test scenario, and limitation note when the course uses models or AI behavior.\n\n**Evidence of proficiency:** The student can explain why the metric fits the problem and where the result should not be trusted."
+					"**Readiness check:** Require a baseline, metric, validation split or test scenario, and limitation note when the course uses models or AI behavior.\n\n**Evidence of proficiency:** The work demonstrates the ability to explain why the metric fits the problem and where the result should not be trusted."
 			},
 			{
 				title: "Responsible Use Check",
 				content:
-					"**Teaching flow:** Use NIST AI RMF language at a student-appropriate level: intended use, risk, harm, uncertainty, mitigation, and human oversight.\n\n**Exit check:** The student writes one limitation or risk statement for each major AI/ML/data project."
+					"**Learning sequence:** Use NIST AI RMF language at a student-appropriate level: intended use, risk, harm, uncertainty, mitigation, and human oversight.\n\n**Completion check:** The work includes one limitation or risk statement for each major AI/ML/data project."
 			}
 		],
 		supplementalProjects: [
@@ -1540,25 +1540,25 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Allowed Lab Scope",
 				content: [
-					"**Teaching flow:** Start every systems or security lab by naming scope, target, tools, and stop conditions.",
+					"**Learning sequence:** Start every systems or security lab by naming scope, target, tools, and stop conditions.",
 					`**Policy:**\n${bullets(securityPolicy)}`,
-					"**Exit check:** The student can explain why the lab is authorized and what defensive outcome it produces."
+					"**Completion check:** The work demonstrates the ability to explain why the lab is authorized and what defensive outcome it produces."
 				].join("\n\n")
 			},
 			{
 				title: "Disallowed Work",
 				content:
-					"**Safety boundary:** Do not scan third-party systems, test credentials against real services, collect real user data, bypass access controls, run destructive host commands, or publish exploit steps detached from remediation.\n\n**Exit check:** Any unclear target is treated as out of scope until explicitly approved."
+					"**Safety boundary:** Do not scan third-party systems, test credentials against real services, collect real user data, bypass access controls, run destructive host commands, or publish exploit steps detached from remediation.\n\n**Completion check:** Any unclear target is treated as out of scope until explicitly approved."
 			},
 			{
 				title: "Evidence and Remediation Format",
 				content:
-					"**Teaching flow:** Findings should use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note.\n\n**Exit check:** A lab is incomplete without a mitigation or hardening step."
+					"**Learning sequence:** Findings should use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note.\n\n**Completion check:** A lab is incomplete without a mitigation or hardening step."
 			},
 			{
 				title: "Tooling Setup and Recovery",
 				content:
-					"**Teaching flow:** Prefer VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. Record how to reset the lab before starting.\n\n**Exit check:** The student can restore the lab to a known state."
+					"**Learning sequence:** Prefer VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. Record how to reset the lab before starting.\n\n**Completion check:** The work demonstrates the ability to restore the lab to a known state."
 			}
 		],
 		supplementalProjects: [
@@ -1586,25 +1586,25 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: "Pinned Setup Assumptions",
 				content: [
-					"**Teaching flow:** Treat setup and version expectations as part of the course material. Before a tutor assigns a project, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any deviation in the session notes.",
+					"**Learning sequence:** Treat setup and version expectations as part of the course material. Before a project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any deviation in the session notes.",
 					`**Assumptions:**\n${bullets(assumptions)}`,
-					"**Exit check:** A student can open the project, identify the expected toolchain, run the first verification command or smoke test, and know which version-specific behavior matters."
+					"**Completion check:** The project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters."
 				].join("\n\n")
 			},
 			{
 				title: "Upgrade Review Rule",
 				content:
-					"**Teaching flow:** When a toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. Do not silently rely on a local machine that already has old dependencies installed.\n\n**Completion checks:**\n- The current version is named.\n- The first-run verification step is still valid.\n- Any known version-specific exception is documented."
+					"**Learning sequence:** When a toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. Do not silently rely on a local machine that already has old dependencies installed.\n\n**Completion checks:**\n- The current version is named.\n- The first-run verification step is still valid.\n- Any known version-specific exception is documented."
 			},
 			{
 				title: "Cross-Platform Fallbacks",
 				content:
-					"**Teaching flow:** If a course can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite.\n\n**Exit check:** A tutor knows whether the student needs macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation."
+					"**Learning sequence:** If a course can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite.\n\n**Completion check:** The setup notes identify whether the work requires macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation."
 			},
 			{
 				title: "Reproducibility Notes",
 				content:
-					"**Teaching flow:** Reusable projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work.\n\n**Exit check:** Re-running the project does not depend on hidden local state."
+					"**Learning sequence:** Reusable projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work.\n\n**Completion check:** Re-running the project does not depend on hidden local state."
 			}
 		],
 		supplementalProjects: [
@@ -1616,7 +1616,7 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: "Toolchain Project: Version Drift Review",
 				content:
-					"**Project goal:** Compare the current course assumption against the installed or recommended version and document whether the course needs an update.\n\n**Completion checks:**\n- Current installed/recommended version is named.\n- Any breaking UI/API/build difference is recorded.\n- The tutor knows whether to proceed, update, or use a fallback."
+					"**Project goal:** Compare the current course assumption against the installed or recommended version and document whether the course needs an update.\n\n**Completion checks:**\n- Current installed/recommended version is named.\n- Any breaking UI/API/build difference is recorded.\n- the course notes show whether to proceed, update, or use a fallback."
 			}
 		]
 	});
@@ -1665,25 +1665,25 @@ function addAlgebraStandardsArchitectureModule(
 			{
 				title: "Course Scope Map",
 				content: [
-					"**Teaching flow:** Use this as the standards-facing course spine. Lessons should build from concept explanation to worked example, guided practice, mixed practice, project application, and assessment rather than appearing as a flat worksheet list.",
+					"**Learning sequence:** Use this as the standards-facing course spine. Lessons should build from concept explanation to worked example, guided practice, mixed practice, project application, and assessment rather than appearing as a flat worksheet list.",
 					`**Scope:**\n${bullets(scope)}`,
-					"**Exit check:** A tutor can point to the topic family, representation type, and modeling role for each major module."
+					"**Completion check:** The course makes it possible to point to the topic family, representation type, and modeling role for each major module."
 				].join("\n\n")
 			},
 			{
 				title: "Course Object Labels",
 				content:
-					"**Teaching flow:** Label every future artifact as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. This keeps live instruction, homework, optional extension, and mastery checks from blurring together.\n\n**Exit check:** A family can tell which items teach, which items practice, which items assess, and which items extend."
+					"**Learning sequence:** Label every future artifact as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. This keeps live instruction, homework, optional extension, and mastery checks from blurring together.\n\n**Completion check:** A family can tell which items teach, which items practice, which items assess, and which items extend."
 			},
 			{
 				title: "Required Anchor and Extension Projects",
 				content:
-					"**Project goal:** Each algebra course should have one required anchor modeling project and one optional extension project. Anchor projects should use context, representation choice, solution, and reasonableness check; extensions should change the constraint or add a second method.\n\n**Completion checks:**\n- At least two representations are used.\n- The student writes a reasoning paragraph.\n- The project has a remediation path for prerequisite gaps."
+					"**Project goal:** Each algebra course should have one required anchor modeling project and one optional extension project. Anchor projects should use context, representation choice, solution, and reasonableness check; extensions should change the constraint or add a second method.\n\n**Completion checks:**\n- At least two representations are used.\n- The work includes a reasoning paragraph.\n- The project has a remediation path for prerequisite gaps."
 			},
 			{
 				title: "Practice Set Types",
 				content:
-					"**Diagnostic guidance:** Rotate six practice formats: worked example, near-transfer fluency, error analysis, interleaved mixed set, retrieval spiral, and compact application set.\n\n**Evidence of proficiency:** The student can solve, explain, identify a common error, and transfer the same idea to a changed context."
+					"**Readiness check:** Rotate six practice formats: worked example, near-transfer fluency, error analysis, interleaved mixed set, retrieval spiral, and compact application set.\n\n**Evidence of proficiency:** The work demonstrates the ability to solve, explain, identify a common error, and transfer the same idea to a changed context."
 			}
 		],
 		supplementalProjects: [
@@ -1695,7 +1695,7 @@ function addAlgebraStandardsArchitectureModule(
 			{
 				title: "Extension Project: Changed Constraint",
 				content:
-					"**Project goal:** Extend the anchor project by changing one constraint, adding a second method, or comparing two models.\n\n**Completion checks:**\n- The changed condition is explicit.\n- The student explains why the original method still works or must change.\n- The result is compared against the original case."
+					"**Project goal:** Extend the anchor project by changing one constraint, adding a second method, or comparing two models.\n\n**Completion checks:**\n- The changed condition is explicit.\n- The work explains why the original method still works or must change.\n- The result is compared against the original case."
 			}
 		]
 	});
@@ -1709,22 +1709,22 @@ function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 				{
 					title: "K-2 Primary Science Path",
 					content:
-						"**Remote investigation:** K-2 activities emphasize concrete observation, picture sorting, labeled drawings, short oral explanation, simple patterns, and sentence frames. Core topics include pushes and pulls, light and sound, sky patterns, material properties, habitats, local weather, plant/animal needs, and simple engineering design.\n\n**Exit check:** The student can observe, sort, sketch, and explain one pattern using simple evidence."
+						"**Remote investigation:** K-2 activities emphasize concrete observation, picture sorting, labeled drawings, short oral explanation, simple patterns, and sentence frames. Core topics include pushes and pulls, light and sound, sky patterns, material properties, habitats, local weather, plant/animal needs, and simple engineering design.\n\n**Completion check:** The work demonstrates the ability to observe, sort, sketch, and explain one pattern using simple evidence."
 				},
 				{
 					title: "Grades 3-5 Upper Elementary Path",
 					content:
-						"**Remote investigation:** Grades 3-5 activities add fair-test reasoning, variables, data tables, bar or line graphs, model revision, cause/effect language, and fuller CER writing. Core topics include weather/climate patterns, natural hazards, forces/magnets, life cycles, fossils/adaptation, energy, waves, Earth features, particle models, ecosystems, water distribution, and sky patterns.\n\n**Exit check:** The student uses data or a shared simulation to revise a model and write a short CER response."
+						"**Remote investigation:** Grades 3-5 activities add fair-test reasoning, variables, data tables, bar or line graphs, model revision, cause/effect language, and fuller CER writing. Core topics include weather/climate patterns, natural hazards, forces/magnets, life cycles, fossils/adaptation, energy, waves, Earth features, particle models, ecosystems, water distribution, and sky patterns.\n\n**Completion check:** The work uses data or a shared simulation to revise a model and write a short CER response."
 				},
 				{
 					title: "Engineering Every Year",
 					content:
-						"**Teaching flow:** Engineering is not a bonus unit. Every grade band should include criteria, constraints, solution comparison, revision after evidence, and a short design reflection.\n\n**Exit check:** The student can explain what problem the design solves, what tradeoff was chosen, and what evidence would improve the solution."
+						"**Learning sequence:** Engineering is not a bonus unit. Every grade band should include criteria, constraints, solution comparison, revision after evidence, and a short design reflection.\n\n**Completion check:** The work demonstrates the ability to explain what problem the design solves, what tradeoff was chosen, and what evidence would improve the solution."
 				},
 				{
 					title: "Physical-Material Boundary",
 					content:
-						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Exit check:** A student with only paper, notes, and browser/shared-screen access can complete the same learning goal."
+						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Completion check:** The same learning goal can be completed with only paper, notes, and browser/shared-screen access the same learning goal."
 				}
 			],
 			supplementalProjects: [
@@ -1750,34 +1750,34 @@ function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 			{
 				title: "Grade 6 Theme: Systems Students Can See and Model",
 				content:
-					"**Remote investigation:** Grade 6 centers visible systems: cells and body systems, structure/function, Earth-sun-moon patterns, weather, water cycle, regional climate, hazard monitoring, and introductory engineering design.\n\n**Exit check:** The student builds a model from a shared source and explains how one part of the system affects another."
+					"**Remote investigation:** Grade 6 centers visible systems: cells and body systems, structure/function, Earth-sun-moon patterns, weather, water cycle, regional climate, hazard monitoring, and introductory engineering design.\n\n**Completion check:** The work builds a model from a shared source and explains how one part of the system affects another."
 			},
 			{
 				title: "Grade 7 Theme: Matter Moving Through Living and Earth Systems",
 				content:
-					"**Remote investigation:** Grade 7 centers atoms and molecules, substance properties, chemical reactions, conservation of atoms, ecosystems, photosynthesis/respiration conceptually, cycling of matter and energy, Earth materials, resources, and human impacts.\n\n**Exit check:** The student traces matter or energy through a model and supports the explanation with data or simulation evidence."
+					"**Remote investigation:** Grade 7 centers atoms and molecules, substance properties, chemical reactions, conservation of atoms, ecosystems, photosynthesis/respiration conceptually, cycling of matter and energy, Earth materials, resources, and human impacts.\n\n**Completion check:** The work traces matter or energy through a model and supports the explanation with data or simulation evidence."
 			},
 			{
 				title: "Grade 8 Theme: Forces, Waves, Heredity, and Evolutionary Change",
 				content:
-					"**Remote investigation:** Grade 8 centers one-dimensional forces and motion, collisions, fields qualitatively, energy and wave models, information transfer, inheritance and variation, mutations conceptually, natural selection, fossils, biodiversity, and human-impact solutions.\n\n**Exit check:** The student compares multiple lines of evidence and writes a CER or model critique."
+					"**Remote investigation:** Grade 8 centers one-dimensional forces and motion, collisions, fields qualitatively, energy and wave models, information transfer, inheritance and variation, mutations conceptually, natural selection, fossils, biodiversity, and human-impact solutions.\n\n**Completion check:** The work compares multiple lines of evidence and writes a CER or model critique."
 			},
 			{
 				title: "6-8 Coverage Guardrail",
 				content:
-					"**Teaching flow:** Across the full sequence, verify coverage of PS1 matter, PS2 forces, PS3 energy, PS4 waves, LS1 organisms, LS2 ecosystems, LS3 heredity, LS4 evolution, ESS1 space, ESS2 Earth systems, ESS3 human impact, and ETS1 engineering.\n\n**Exit check:** No strand is skipped because it is difficult to do as a home lab."
+					"**Learning sequence:** Across the full sequence, verify coverage of PS1 matter, PS2 forces, PS3 energy, PS4 waves, LS1 organisms, LS2 ecosystems, LS3 heredity, LS4 evolution, ESS1 space, ESS2 Earth systems, ESS3 human impact, and ETS1 engineering.\n\n**Completion check:** No strand is skipped because it is difficult to do as a home lab."
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "Integrated Science Project: Public Dataset CER",
 				content:
-					"**Project goal:** Use a public dataset or instructor-provided table to explain a science phenomenon with claim, evidence, reasoning, and limitation.\n\n**Completion checks:**\n- The evidence is visible in the data.\n- The reasoning names a system interaction.\n- The limitation states what the data cannot prove."
+					"**Project goal:** Use a public dataset or provided table to explain a science phenomenon with claim, evidence, reasoning, and limitation.\n\n**Completion checks:**\n- The evidence is visible in the data.\n- The reasoning names a system interaction.\n- The limitation states what the data cannot prove."
 			},
 			{
 				title: "Integrated Science Project: Model Revision",
 				content:
-					"**Project goal:** Draw an initial model, inspect a simulation or media source, then revise the model and explain what changed.\n\n**Completion checks:**\n- The revised model is visibly different.\n- The explanation names the new evidence.\n- The student identifies one model limitation."
+					"**Project goal:** Draw an initial model, inspect a simulation or media source, then revise the model and explain what changed.\n\n**Completion checks:**\n- The revised model is visibly different.\n- The explanation names the new evidence.\n- The work identifies one model limitation."
 			}
 		]
 	});
@@ -1810,25 +1810,25 @@ function addDataAiMlBoundaryModule(courseId: string, course: RawCourse) {
 			{
 				title: "Artifact Boundary",
 				content: [
-					"**Teaching flow:** Use the artifact boundary to prevent Data Science, AI Foundations, and Machine Learning from becoming diluted copies of one another.",
+					"**Learning sequence:** Use the artifact boundary to prevent Data Science, AI Foundations, and Machine Learning from becoming diluted copies of one another.",
 					`**Boundary:**\n${bullets(lines)}`,
-					"**Exit check:** A tutor can explain why the project belongs in this course and not one of the adjacent data/AI/ML courses."
+					"**Completion check:** The course makes it possible to explain why the project belongs in this course and not one of the adjacent data/AI/ML courses."
 				].join("\n\n")
 			},
 			{
 				title: "Required Responsible-Use Checkpoint",
 				content:
-					"**Diagnostic guidance:** Require a short responsible-use checkpoint before any final artifact: audience, data/source, assumptions, limitations, likely failure modes, and what a human should verify.\n\n**Evidence of proficiency:** The student can name one realistic way the artifact could mislead someone."
+					"**Readiness check:** Require a short responsible-use checkpoint before any final artifact: audience, data/source, assumptions, limitations, likely failure modes, and what a human should verify.\n\n**Evidence of proficiency:** The work demonstrates the ability to name one realistic way the artifact could mislead someone."
 			},
 			{
 				title: "Reproducible Artifact Requirement",
 				content:
-					"**Teaching flow:** Every final data/AI/ML artifact should include setup notes, source or fixture details, the exact question or goal, evaluation evidence, and a short explanation of limitations.\n\n**Exit check:** Another tutor can rerun or inspect the artifact without private context."
+					"**Learning sequence:** Every final data/AI/ML artifact should include setup notes, source or fixture details, the exact question or goal, evaluation evidence, and a short explanation of limitations.\n\n**Completion check:** another reviewer can rerun or inspect the artifact without private context."
 			},
 			{
 				title: "Anti-Overlap Review",
 				content:
-					"**Teaching flow:** Before adding a new project, classify it by grading emphasis: cleaning and communication means Data Science; state representation and algorithmic reasoning means AI Foundations; generalization and model evaluation means Machine Learning.\n\n**Exit check:** The rubric matches the course identity."
+					"**Learning sequence:** Before adding a new project, classify it by grading emphasis: cleaning and communication means Data Science; state representation and algorithmic reasoning means AI Foundations; generalization and model evaluation means Machine Learning.\n\n**Completion check:** The rubric matches the course identity."
 			}
 		],
 		supplementalProjects: [
@@ -1855,12 +1855,12 @@ function addAdvancedPythonStudioModule(courseId: string, course: RawCourse) {
 			{
 				title: "Studio Sequence",
 				content:
-					"**Teaching flow:** Treat Python Level 3 as a 14-16 week bridge into algorithms, data structures, Java/C++ transfer, and software quality. Sequence the course through recursion and correctness, backtracking/generators/memoization, searching and indexing, sorting and ordering, runtime and memory analysis, file-backed programs, capstone proposal, implementation, optimization, and final defense.\n\n**Exit check:** The student can explain correctness, data representation, asymptotic cost, and testing evidence for every major project."
+					"**Learning sequence:** Treat Python Level 3 as a 14-16 week bridge into algorithms, data structures, Java/C++ transfer, and software quality. Sequence the course through recursion and correctness, backtracking/generators/memoization, searching and indexing, sorting and ordering, runtime and memory analysis, file-backed programs, capstone proposal, implementation, optimization, and final defense.\n\n**Completion check:** The work demonstrates the ability to explain correctness, data representation, asymptotic cost, and testing evidence for every major project."
 			},
 			{
 				title: "Required Advanced Python Topics",
 				content:
-					"**Teaching flow:** Add iterators, generators, itertools, decorators for instrumentation or memoization, context managers, type hints, dataclasses, modules/packages, pytest, timeit, cProfile, tracemalloc, heapq, bisect, deque, and pathlib/csv/json as tools that unlock algorithmic projects.\n\n**Exit check:** Each advanced language feature is tied to a project need, not taught as isolated syntax."
+					"**Learning sequence:** Add iterators, generators, itertools, decorators for instrumentation or memoization, context managers, type hints, dataclasses, modules/packages, pytest, timeit, cProfile, tracemalloc, heapq, bisect, deque, and pathlib/csv/json as tools that unlock algorithmic projects.\n\n**Completion check:** Each advanced language feature is tied to a project need, not taught as isolated syntax."
 			},
 			{
 				title: "Project Ladder",
@@ -1870,7 +1870,7 @@ function addAdvancedPythonStudioModule(courseId: string, course: RawCourse) {
 			{
 				title: "Capstone Defense",
 				content:
-					"**Diagnostic guidance:** Capstones should require file-backed data, algorithm choice, performance evidence, documentation, and tests. Strong defaults include local document search, external sort pipeline, puzzle solver suite, route planner, and simplified compressor/archive inspector.\n\n**Evidence of proficiency:** The student can defend the data structure choice, runtime tradeoff, and at least one limitation."
+					"**Readiness check:** Capstones should require file-backed data, algorithm choice, performance evidence, documentation, and tests. Strong defaults include local document search, external sort pipeline, puzzle solver suite, route planner, and simplified compressor/archive inspector.\n\n**Evidence of proficiency:** The work demonstrates the ability to defend the data structure choice, runtime tradeoff, and at least one limitation."
 			}
 		],
 		supplementalProjects: [
@@ -1907,34 +1907,34 @@ function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
 			{
 				title: "Accelerated Placement Rule",
 				content:
-					"**Diagnostic guidance:** Strong students coming from C++ should skip repetitive beginner syntax only after showing evidence with Java method signatures, classes, package layout, collections, exceptions, and tests. The bridge focuses on differences in practice, not re-teaching loops.\n\n**Exit check:** The student can explain what Java makes explicit, what it hides compared with C++, and what the compiler catches."
+					"**Readiness check:** Strong students coming from C++ should skip repetitive beginner syntax only after showing evidence with Java method signatures, classes, package layout, collections, exceptions, and tests. The bridge focuses on differences in practice, not re-teaching loops.\n\n**Completion check:** The work demonstrates the ability to explain what Java makes explicit, what it hides compared with C++, and what the compiler catches."
 			},
 			{
 				title: "Modern Java Core",
 				content:
-					"**Teaching flow:** Deepen Java around interfaces, abstract classes, records, enums, generics, package boundaries, exceptions, collections, sequenced collection ideas where available, streams, NIO Path/Files, and JUnit. Use Java 21 as a compatibility floor and Java 25 LTS as the modern target where tooling permits.\n\n**Exit check:** The student can choose class, record, interface, abstract class, enum, collection, or stream intentionally."
+					"**Learning sequence:** Deepen Java around interfaces, abstract classes, records, enums, generics, package boundaries, exceptions, collections, sequenced collection ideas where available, streams, NIO Path/Files, and JUnit. Use Java 21 as a compatibility floor and Java 25 LTS as the modern target where tooling permits.\n\n**Completion check:** The work demonstrates the ability to choose class, record, interface, abstract class, enum, collection, or stream intentionally."
 			},
 			{
 				title: "Graphics and Non-Graphics Branches",
 				content:
-					"**Teaching flow:** Keep shared Java core unified, then branch. The non-graphics path emphasizes services, data/file pipelines, testing, concurrency, ServiceLoader, and optional Spring Boot. The graphics path emphasizes JavaFX, event-driven state, scene/UI architecture, background tasks, and local persistence.\n\n**Exit check:** The application model is the reason for the branch, not a workaround for missing core Java depth."
+					"**Learning sequence:** Keep shared Java core unified, then branch. The non-graphics path emphasizes services, data/file pipelines, testing, concurrency, ServiceLoader, and optional Spring Boot. The graphics path emphasizes JavaFX, event-driven state, scene/UI architecture, background tasks, and local persistence.\n\n**Completion check:** The application model is the reason for the branch, not a workaround for missing core Java depth."
 			},
 			{
 				title: "Post-AP Difference",
 				content:
-					"**Teaching flow:** AP CSA remains the exam floor. Modern Java work should go beyond AP with records, richer collections, streams, NIO, tests, concurrency, plugin/service architecture, and refactoring.\n\n**Exit check:** A project demonstrates serious Java platform fluency rather than only AP-style fragments."
+					"**Learning sequence:** AP CSA remains the exam floor. Modern Java work should go beyond AP with records, richer collections, streams, NIO, tests, concurrency, plugin/service architecture, and refactoring.\n\n**Completion check:** A project demonstrates serious Java platform fluency rather than only AP-style fragments."
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "Modern Java Project: File Indexer or Log Analyzer",
 				content:
-					"**Project goal:** Build a Java application using records/classes, collections, NIO file traversal, stream or loop-based aggregation, and JUnit tests.\n\n**Completion checks:**\n- File errors are handled clearly.\n- Tests cover empty, small, and malformed inputs.\n- The student explains the data model and API boundary."
+					"**Project goal:** Build a Java application using records/classes, collections, NIO file traversal, stream or loop-based aggregation, and JUnit tests.\n\n**Completion checks:**\n- File errors are handled clearly.\n- Tests cover empty, small, and malformed inputs.\n- The work explains the data model and API boundary."
 			},
 			{
 				title: "Modern Java Project: ServiceLoader Plugin Pipeline",
 				content:
-					"**Project goal:** Build a small plugin-style processor using interfaces, packages, ServiceLoader or explicit factories, and tests.\n\n**Completion checks:**\n- Interface and implementation roles are separate.\n- Adding a new plugin does not require rewriting the core loop.\n- The student explains why this is not just inheritance for its own sake."
+					"**Project goal:** Build a small plugin-style processor using interfaces, packages, ServiceLoader or explicit factories, and tests.\n\n**Completion checks:**\n- Interface and implementation roles are separate.\n- Adding a new plugin does not require rewriting the core loop.\n- The work explains why this is not just inheritance for its own sake."
 			}
 		]
 	});
@@ -1972,32 +1972,32 @@ function addCppThreeCourseSpineModule(courseId: string, course: RawCourse) {
 			{
 				title: "Level-Specific Focus",
 				content: [
-					"**Teaching flow:** Use this spine to keep the three C++ courses from collapsing into one oversized repo. Each level should have a distinct language and design responsibility.",
+					"**Learning sequence:** Use this spine to keep the three C++ courses from collapsing into one oversized repo. Each level should have a distinct language and design responsibility.",
 					`**Focus:**\n${bullets(levelFocus[courseId])}`,
-					"**Exit check:** The student can explain which C++ level owns the next concept and why it is not being moved into DS&A, C Systems, or AI/ML."
+					"**Completion check:** The work demonstrates the ability to explain which C++ level owns the next concept and why it is not being moved into DS&A, C Systems, or AI/ML."
 				].join("\n\n")
 			},
 			{
 				title: "Testing and Build Bar",
 				content:
-					"**Teaching flow:** Multi-file assignments should use CMake or a documented Makefile, out-of-source or clean build guidance, warning-clean builds, and a test target or explicit run script. Manual-memory work should include sanitizer or Valgrind-style evidence when available.\n\n**Exit check:** A fresh checkout has a repeatable build/run/test path."
+					"**Learning sequence:** Multi-file assignments should use CMake or a documented Makefile, out-of-source or clean build guidance, warning-clean builds, and a test target or explicit run script. Manual-memory work should include sanitizer or Valgrind-style evidence when available.\n\n**Completion check:** A fresh checkout has a repeatable build/run/test path."
 			},
 			{
 				title: "Manual Memory Safety Rule",
 				content:
-					"**Teaching flow:** Teach raw arrays and explicit new/delete as controlled contrast, then return students to RAII, vector/array/span, and smart-pointer ownership. Do not normalize hidden ownership in raw pointers.\n\n**Exit check:** The student can draw ownership and cleanup responsibility before implementing pointer-heavy code."
+					"**Learning sequence:** Teach raw arrays and explicit new/delete as controlled contrast, then return students to RAII, vector/array/span, and smart-pointer ownership. Do not normalize hidden ownership in raw pointers.\n\n**Completion check:** The work demonstrates the ability to draw ownership and cleanup responsibility before implementing pointer-heavy code."
 			},
 			{
 				title: "Branch-Course Readiness",
 				content:
-					"**Diagnostic guidance:** DS&A should follow Level 2 readiness; C Systems, Assembly, Design Patterns, and Low-Level Security should assume Level 3-style architecture and ownership discipline unless a tutor explicitly accelerates a student.\n\n**Evidence of proficiency:** The student can use containers, reason about lifetime, trace recursion, and explain an interface or parser boundary."
+					"**Readiness check:** DS&A should follow Level 2 readiness; C Systems, Assembly, Design Patterns, and Low-Level Security should assume Level 3-style architecture and ownership discipline unless course placement explicitly accelerates the path.\n\n**Evidence of proficiency:** The work demonstrates the ability to use containers, reason about lifetime, trace recursion, and explain an interface or parser boundary."
 			}
 		],
 		supplementalProjects: [
 			{
 				title: "C++ Spine Project: Build-Test Harness",
 				content:
-					"**Project goal:** Add a repeatable build and test harness to one C++ project.\n\n**Completion checks:**\n- The README names build/run/test commands.\n- At least one edge case is tested.\n- The student can explain what the compiler or sanitizer is checking."
+					"**Project goal:** Add a repeatable build and test harness to one C++ project.\n\n**Completion checks:**\n- The README names build/run/test commands.\n- At least one edge case is tested.\n- The work demonstrates the ability to explain what the compiler or sanitizer is checking."
 			},
 			{
 				title: "C++ Spine Project: Ownership and Interface Review",
@@ -2091,7 +2091,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			],
 			prohibited: [
 				"Third-party targets, exploit chaining, persistence, credential theft, or public PoC release.",
-				"Binary-only third-party reverse engineering unless explicitly licensed and instructor-provided.",
+				"Binary-only third-party reverse engineering unless explicitly licensed and provided.",
 				"Any work outside the toy/lab scope."
 			],
 			project:
@@ -2135,9 +2135,9 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Environment and Tooling Baseline",
 				content: [
-					"**Teaching flow:** Use this course-specific baseline before assigning systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.",
+					"**Learning sequence:** Use this course-specific baseline before starting systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.",
 					`**Environment:**\n${bullets(config.environment)}`,
-					"**Exit check:** The student can name the lab boundary, setup path, and recovery method."
+					"**Completion check:** The work demonstrates the ability to name the lab boundary, setup path, and recovery method."
 				].join("\n\n")
 			},
 			{
@@ -2145,7 +2145,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 				content: [
 					"**Safety boundary:** These activities are outside the course scope even if a student knows how to attempt them.",
 					`**Do not do:**\n${bullets(config.prohibited)}`,
-					"**Exit check:** Any ambiguous target or action is paused until the tutor narrows scope."
+					"**Completion check:** Any ambiguous target or action is paused until scope is narrowed."
 				].join("\n\n")
 			},
 			{
@@ -2155,7 +2155,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Evidence Rubric",
 				content:
-					"**Diagnostic guidance:** Grade systems/security work on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe scope or missing mitigation.\n\n**Evidence of proficiency:** The student can show what happened, why it mattered, how it was fixed or constrained, and how the result was verified."
+					"**Readiness check:** Grade systems/security work on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe scope or missing mitigation.\n\n**Evidence of proficiency:** The work demonstrates the ability to show what happened, why it mattered, how it was fixed or constrained, and how the result was verified."
 			}
 		],
 		supplementalProjects: [
@@ -2185,22 +2185,22 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Unity Test Framework",
 				content:
-					"**Teaching flow:** Add Edit Mode tests for logic and Play Mode smoke tests for scene boot. Tests should prove score rules, state transitions, and scene loading before the capstone is considered complete.\n\n**Exit check:** A tutor can run the smallest test set and identify whether failure is code, scene wiring, package setup, or build configuration."
+					"**Learning sequence:** Add Edit Mode tests for logic and Play Mode smoke tests for scene boot. Tests should prove score rules, state transitions, and scene loading before the capstone is considered complete.\n\n**Completion check:** The course makes it possible to run the smallest test set and identify whether failure is code, scene wiring, package setup, or build configuration."
 			},
 			{
 				title: "Build Profiles and Deployment",
 				content:
-					"**Teaching flow:** Use Build Profiles for desktop and optional Web builds. The course should teach build configuration as a repeatable artifact, not a final-session surprise.\n\n**Exit check:** The student can create a local build, record the Unity editor version, and explain the target platform."
+					"**Learning sequence:** Use Build Profiles for desktop and optional Web builds. The course should teach build configuration as a repeatable artifact, not a final-session surprise.\n\n**Completion check:** The work demonstrates the ability to create a local build, record the Unity editor version, and explain the target platform."
 			},
 			{
 				title: "Git LFS and Asset Attribution",
 				content:
-					"**Teaching flow:** Track source binaries and large media with Git LFS, commit package manifests/locks, and maintain `THIRD_PARTY_ASSETS.md` with source, license, date imported, modification note, and first branch/tag.\n\n**Exit check:** A clean clone has scripts, package locks, and asset provenance."
+					"**Learning sequence:** Track source binaries and large media with Git LFS, commit package manifests/locks, and maintain `THIRD_PARTY_ASSETS.md` with source, license, date imported, modification note, and first branch/tag.\n\n**Completion check:** A clean clone has scripts, package locks, and asset provenance."
 			},
 			{
 				title: "Profiling and Bug Bash",
 				content:
-					"**Teaching flow:** Profile only concrete issues: scene boot, excessive spawning, expensive update loops, or memory-heavy assets. Keep a bug bash log with reproduction, fix, and retest.\n\n**Exit check:** The student can describe one measured issue and one verified fix."
+					"**Learning sequence:** Profile only concrete issues: scene boot, excessive spawning, expensive update loops, or memory-heavy assets. Keep a bug bash log with reproduction, fix, and retest.\n\n**Completion check:** The work demonstrates the ability to describe one measured issue and one verified fix."
 			}
 		],
 		supplementalProjects: [
@@ -2223,12 +2223,12 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Repository Shape",
 				content:
-					"**Teaching flow:** Unity modules should move toward full starter and solution project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for future module promotions.\n\n**Exit check:** A student can clone, open, play, test, and build the linked starter state."
+					"**Learning sequence:** Unity modules should move toward full starter and solution project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for future module promotions.\n\n**Completion check:** The linked starter state can be cloned, opened, played, tested, and built."
 			},
 			{
 				title: "Starter and Solution Tag Model",
 				content:
-					"**Teaching flow:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-solution` in starter/solution repos. Keep solution links tutor-visible where the portal supports that distinction.\n\n**Exit check:** A tutor can compare starter and solution states without guessing which folder is current."
+					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-solution` in starter/solution repos. Keep solution links solution-visible where the portal supports that distinction.\n\n**Completion check:** The course makes it possible to compare starter and solution states without guessing which folder is current."
 			},
 			{
 				title: "Capstone Options",
@@ -2236,9 +2236,9 @@ function addUnityFullProjectWorkflowModules(
 					"**Project goal:** Capstone options should stay small and finishable: Relic Runner platformer, Robot Repair top-down adventure, or Arena Alchemist survival loop. Each must include start, play, failure or win, restart, build, attribution, and demo.\n\n**Completion checks:**\n- Scope is small enough for a vertical slice.\n- The project has a test or smoke-check path.\n- The final demo explains architecture and one hard bug."
 			},
 			{
-				title: "Tutor Operations",
+				title: "Session Workflow",
 				content:
-					"**Teaching flow:** Use a weekly loop: prework, guided live build, independent implementation on screen, tagged checkpoint or pull request, rubric review, and reflection note.\n\n**Exit check:** Every session produces a visible checkpoint and next action."
+					"**Learning sequence:** Use a weekly loop: prework, guided live build, independent implementation on screen, tagged checkpoint or pull request, rubric review, and reflection note.\n\n**Completion check:** Every session produces a visible checkpoint and next action."
 			}
 		],
 		supplementalProjects: [
@@ -2302,13 +2302,13 @@ function supplementalProjectFor(
 	if (next === 1) {
 		return {
 			title: `${module.title}: Targeted Practice Checkpoint`,
-			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The student should complete one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The student states the prerequisite concept.\n- The normal case is completed independently.\n- The explanation identifies one likely misconception or edge case.`
+			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The work completes one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The prerequisite concept is stated clearly.\n- The normal case is completed independently.\n- The explanation identifies one likely misconception or edge case.`
 		};
 	}
 
 	return {
 		title: `${module.title}: Transfer or Extension Project`,
-		content: `**Project goal:** Apply ${module.title} in a transfer task that changes the input, context, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The student tests or explains both a normal case and an awkward case.\n- The final reflection names what had to be adapted from the original lesson.`
+		content: `**Project goal:** Apply ${module.title} in a transfer task that changes the input, context, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The work tests or explains both a normal case and an awkward case.\n- The final reflection names what had to be adapted from the original lesson.`
 	};
 }
 

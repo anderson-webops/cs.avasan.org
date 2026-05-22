@@ -14,7 +14,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Packages, Virtual Environments, and Lightweight Testing",
 					content:
-						"Require a virtual environment, a simple `tests/` folder, and at least one repeatable run command before the first real pattern lab begins. Students should learn that safe refactoring depends on a stable workflow, not just on good intentions."
+						"Require a virtual environment, a simple `tests/` folder, and at least one repeatable run command before the first real pattern lab begins. Learn that safe refactoring depends on a stable workflow, not just on good intentions."
 				},
 				{
 					title: "Positioning against Python 2, Python 3, and the Java Track",
@@ -28,8 +28,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				},
 				{
 					title: "PDP0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main"
 				}
@@ -45,14 +44,14 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Pythonic Design Patterns",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
 				},
 				{
 					title: "Pythonic Design Patterns",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
 				}
@@ -74,7 +73,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Modules and Packages as Architectural Boundaries",
 					content:
-						"Show that Python module boundaries often do work that other languages push into extra classes. Students should learn to see packages, imports, and file ownership as part of the design vocabulary."
+						"Show that Python module boundaries often do work that other languages push into extra classes. Skill target: See packages, imports, and file ownership as part of the design vocabulary."
 				},
 				{
 					title: "When the Textbook Form Still Helps",
@@ -83,8 +82,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				},
 				{
 					title: "PDP1 Why Python Changes the Design-Patterns Conversation: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main"
 				}
@@ -100,7 +98,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Why Python Changes the Design Patterns Conversation Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP1 Why Python Changes the Design-Patterns Conversation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP1 Why Python Changes the Design-Patterns Conversation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-01-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-2/starter",
 					solutionLink:
@@ -109,7 +107,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Why Python Changes the Design Patterns Conversation Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP1 Why Python Changes the Design-Patterns Conversation. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP1 Why Python Changes the Design-Patterns Conversation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-02-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-3/starter",
 					solutionLink:
@@ -128,12 +126,12 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Protocols, ABCs, and Informal Interfaces",
 					content:
-						"Teach `typing.Protocol`, abstract base classes, and duck typing as three different tools with different tradeoffs. Students should learn that Python can express contracts lightly without pretending every project needs heavy interface scaffolding."
+						"Teach `typing.Protocol`, abstract base classes, and duck typing as three different tools with different tradeoffs. Learn that Python can express contracts lightly without pretending every project needs heavy interface scaffolding."
 				},
 				{
 					title: "Data Classes, Configuration Objects, and Dependency Direction",
 					content:
-						"Use `dataclasses` and small configuration objects to make dependencies explicit and data movement readable. This sets up later Builder, Adapter, and refactoring work. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Use `dataclasses` and small configuration objects to make dependencies explicit and data movement readable. This sets up later Builder, Adapter, and refactoring work."
 				},
 				{
 					title: "Seams for Testing and Refactoring",
@@ -142,8 +140,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				},
 				{
 					title: "PDP2 Design Foundations in Python: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main"
 				}
@@ -159,7 +156,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Design Foundations in Python Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP2 Design Foundations in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP2 Design Foundations in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-03-pdp2-design-foundations-in-python-supplemental-2/starter",
 					solutionLink:
@@ -168,7 +165,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Design Foundations in Python Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP2 Design Foundations in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP2 Design Foundations in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-04-pdp2-design-foundations-in-python-supplemental-3/starter",
 					solutionLink:
@@ -182,7 +179,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Functions as Strategies",
 					content:
-						"Start Strategy with plain callables and dictionaries of behavior rather than with class hierarchies. Students should first feel how simple it is to swap behavior in Python before adding object structure."
+						"Start Strategy with plain callables and dictionaries of behavior rather than with class hierarchies. First feel how simple it is to swap behavior in Python before adding object structure."
 				},
 				{
 					title: "Callable Objects When State Matters",
@@ -192,17 +189,16 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Replacing Long Conditionals with Selected Behavior",
 					content:
-						"Use long pricing, scoring, or rule-selection chains to show when Strategy improves clarity. Students should connect the pattern to conditional pressure rather than to abstract pattern memorization."
+						"Use long pricing, scoring, or rule-selection chains to show when Strategy improves clarity. Connect the pattern to conditional pressure rather than to abstract pattern memorization."
 				},
 				{
 					title: "When a Dictionary Lookup Beats a Full Pattern",
 					content:
-						"Explicitly compare Strategy with a simple mapping of names to functions. The Pythonic lesson is that structure should grow only when the problem justifies it. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Explicitly compare Strategy with a simple mapping of names to functions. The Pythonic lesson is that structure should grow only when the problem justifies it."
 				},
 				{
 					title: "PDP3 Strategy Without Ceremony: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP1-Strategy-Rulebook/starter",
 					solutionLink:
@@ -222,7 +218,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Strategy Without Ceremony Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP3 Strategy Without Ceremony. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP3 Strategy Without Ceremony. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-05-pdp3-strategy-without-ceremony-supplemental-2/starter",
 					solutionLink:
@@ -231,7 +227,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Strategy Without Ceremony Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP3 Strategy Without Ceremony. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP3 Strategy Without Ceremony. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-06-pdp3-strategy-without-ceremony-supplemental-3/starter",
 					solutionLink:
@@ -245,7 +241,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Factory Functions and Named Constructors",
 					content:
-						"Teach factory functions and `@classmethod` constructors as the default Python tools for creation pressure. Students should see how these options already solve many textbook Factory Method problems cleanly."
+						"Teach factory functions and `@classmethod` constructors as the default Python tools for creation pressure. Visible pattern: How these options already solve many textbook Factory Method problems cleanly."
 				},
 				{
 					title: "Builder for Configuration-Heavy Objects",
@@ -260,12 +256,11 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "What to Avoid in Python Creation Code",
 					content:
-						"Warn against creation frameworks that merely hide constructors behind more constructors. Python creation code should usually become shorter and clearer, not more ceremonial. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Warn against creation frameworks that merely hide constructors behind more constructors. Python creation code should usually become shorter and clearer, not more ceremonial."
 				},
 				{
 					title: "PDP4 Factory and Builder in Python: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP2-Factory-and-Builder-Config-Kit/starter",
 					solutionLink:
@@ -285,7 +280,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Factory and Builder in Python Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP4 Factory and Builder in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP4 Factory and Builder in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-07-pdp4-factory-and-builder-in-python-supplemental-2/starter",
 					solutionLink:
@@ -294,7 +289,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Factory and Builder in Python Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP4 Factory and Builder in Python. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP4 Factory and Builder in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-08-pdp4-factory-and-builder-in-python-supplemental-3/starter",
 					solutionLink:
@@ -318,17 +313,16 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Unsubscribe, Ordering, and Failure Handling",
 					content:
-						"Make the operational concerns explicit: duplicate subscriptions, stale listeners, listener exceptions, and event ordering all affect whether an event system stays understandable. Students should not mistake Observer for free decoupling."
+						"Make the operational concerns explicit: duplicate subscriptions, stale listeners, listener exceptions, and event ordering all affect whether an event system stays understandable. Not mistake Observer for free decoupling."
 				},
 				{
 					title: "Sync versus Async Event Flow",
 					content:
-						"Keep async treatment conceptual but concrete enough that students can reason about when immediate callbacks are sufficient and when background event handling changes the failure model. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Keep async treatment conceptual but concrete enough that students can reason about when immediate callbacks are sufficient and when background event handling changes the failure model."
 				},
 				{
 					title: "PDP5 Observer, Events, and Callbacks: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP3-Observer-Notification-Hub/starter",
 					solutionLink:
@@ -348,7 +342,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Observer, Events, and Callbacks Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP5 Observer, Events, and Callbacks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP5 Observer, Events, and Callbacks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-09-pdp5-observer-events-and-callbacks-supplemental-2/starter",
 					solutionLink:
@@ -357,7 +351,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Observer, Events, and Callbacks Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP5 Observer, Events, and Callbacks. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP5 Observer, Events, and Callbacks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-10-pdp5-observer-events-and-callbacks-supplemental-3/starter",
 					solutionLink:
@@ -376,7 +370,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Proxy for Control, Facade for Simplicity",
 					content:
-						"Make the distinction explicit: a proxy controls or guards access to something real, while a facade simplifies a messy subsystem. Students should stop grouping every wrapper under one vague category."
+						"Make the distinction explicit: a proxy controls or guards access to something real, while a facade simplifies a messy subsystem. Stop grouping every wrapper under one vague category."
 				},
 				{
 					title: "Layering Behavior without Hiding Intent",
@@ -390,8 +384,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				},
 				{
 					title: "PDP6 Decorator, Proxy, and Facade: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP4-Decorator-Proxy-Facade-Toolkit/starter",
 					solutionLink:
@@ -411,7 +404,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Decorator, Proxy, and Facade Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP6 Decorator, Proxy, and Facade. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP6 Decorator, Proxy, and Facade. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-11-pdp6-decorator-proxy-and-facade-supplemental-2/starter",
 					solutionLink:
@@ -420,7 +413,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Decorator, Proxy, and Facade Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP6 Decorator, Proxy, and Facade. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP6 Decorator, Proxy, and Facade. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-12-pdp6-decorator-proxy-and-facade-supplemental-3/starter",
 					solutionLink:
@@ -434,7 +427,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Explicit State Objects versus Enum-Driven Branching",
 					content:
-						"Teach State as a response to behavior that changes by mode, not as a universal replacement for every flag. Students should compare a growing branch tree with explicit state objects and choose based on the actual complexity."
+						"Teach State as a response to behavior that changes by mode, not as a universal replacement for every flag. Compare a growing branch tree with explicit state objects and choose based on the actual complexity."
 				},
 				{
 					title: "Commands as Callables, Objects, and History Entries",
@@ -444,17 +437,16 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Undo, Replay, and Action Queues",
 					content:
-						"Show how Command becomes more valuable when actions need history or delayed execution. This keeps the pattern tied to a real operational benefit rather than a naming exercise. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Show how Command becomes more valuable when actions need history or delayed execution. This keeps the pattern tied to a real operational benefit rather than a naming exercise."
 				},
 				{
 					title: "Combining State and Command Carefully",
 					content:
-						"Turn-based flows, editors, and workflow systems often use both patterns together. Students should learn to separate mode logic from action packaging so the design stays explainable. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Turn-based flows, editors, and workflow systems often use both patterns together. Skill target: Separate mode logic from action packaging so the design stays explainable."
 				},
 				{
 					title: "PDP7 State and Command: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP5-State-Command-Quest-Loop/starter",
 					solutionLink:
@@ -474,7 +466,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "State and Command Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP7 State and Command. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP7 State and Command. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-13-pdp7-state-and-command-supplemental-2/starter",
 					solutionLink:
@@ -483,7 +475,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "State and Command Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP7 State and Command. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP7 State and Command. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-14-pdp7-state-and-command-supplemental-3/starter",
 					solutionLink:
@@ -497,7 +489,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Adapters for Third-Party Data and APIs",
 					content:
-						"Teach Adapter as a boundary-normalization tool whenever outside systems return awkward names, shapes, or expectations. Students should learn to isolate external weirdness near the edge rather than spreading it through the codebase."
+						"Teach Adapter as a boundary-normalization tool whenever outside systems return awkward names, shapes, or expectations. Skill target: Isolate external weirdness near the edge rather than spreading it through the codebase."
 				},
 				{
 					title: "Compatibility Layers and Anti-Corruption Boundaries",
@@ -507,17 +499,16 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Testing Adapters with Small, Explicit Fixtures",
 					content:
-						"Adapter code should be validated with tiny fixtures that make field mapping and default handling obvious. Students should treat boundary tests as evidence that the internal model is staying protected."
+						"Adapter code should be validated with tiny fixtures that make field mapping and default handling obvious. Treat boundary tests as evidence that the internal model is staying protected."
 				},
 				{
 					title: "When a Translation Function Is Enough",
 					content:
-						"Not every adapter needs a class. A well-named translation function or lightweight wrapper may be the clearest move when the source pressure is small. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Not every adapter needs a class. A well-named translation function or lightweight wrapper may be the clearest move when the source pressure is small."
 				},
 				{
 					title: "PDP8 Adapter and Integration Boundaries: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP6-Adapter-Template-Import-Pipeline/starter",
 					solutionLink:
@@ -537,7 +528,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Adapter and Integration Boundaries Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP8 Adapter and Integration Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP8 Adapter and Integration Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-15-pdp8-adapter-and-integration-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -546,7 +537,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Adapter and Integration Boundaries Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP8 Adapter and Integration Boundaries. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP8 Adapter and Integration Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-16-pdp8-adapter-and-integration-boundaries-supplemental-3/starter",
 					solutionLink:
@@ -565,7 +556,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Replacing Template Method with Callables or Composition",
 					content:
-						"Show how higher-order functions, small collaborators, or composed pipeline steps often express the same intent more cleanly in Python. Students should feel the tradeoff instead of being told a slogan."
+						"Show how higher-order functions, small collaborators, or composed pipeline steps often express the same intent more cleanly in Python. Feel the tradeoff instead of being told a slogan."
 				},
 				{
 					title: "Choosing by Extension Pressure",
@@ -579,8 +570,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				},
 				{
 					title: "PDP9 Template Method versus Higher-Order Functions: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP6-Adapter-Template-Import-Pipeline/starter",
 					solutionLink:
@@ -600,7 +590,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Method versus Higher Order Functions Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP9 Template Method versus Higher-Order Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP9 Template Method versus Higher-Order Functions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-17-pdp9-template-method-versus-higher-order-functions-supplemental-2/starter",
 					solutionLink:
@@ -609,7 +599,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Method versus Higher Order Functions Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP9 Template Method versus Higher-Order Functions. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP9 Template Method versus Higher-Order Functions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-18-pdp9-template-method-versus-higher-order-functions-supplemental-3/starter",
 					solutionLink:
@@ -628,7 +618,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Hidden Globals, Implicit Coupling, and Test Pain",
 					content:
-						"Show how global state quietly spreads dependencies across functions and modules. Students should connect hidden global reads and writes to flaky tests, surprising behavior, and difficult refactors."
+						"Show how global state quietly spreads dependencies across functions and modules. Connect hidden global reads and writes to flaky tests, surprising behavior, and difficult refactors."
 				},
 				{
 					title: "Context Objects, App Factories, and Explicit Wiring",
@@ -638,12 +628,11 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "When Shared Process State Is Still Legitimate",
 					content:
-						"Do not pretend every shared object is wrong. Some caches, registries, or process-wide resources are fine if their lifecycle and ownership are explicit and narrow. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"Do not pretend every shared object is wrong. Some caches, registries, or process-wide resources are fine if their lifecycle and ownership are explicit and narrow."
 				},
 				{
 					title: "PDP10 Singleton, Global State, and Module Patterns: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main"
 				}
@@ -659,7 +648,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Singleton, Global State, and Module Patterns Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP10 Singleton, Global State, and Module Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP10 Singleton, Global State, and Module Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-19-pdp10-singleton-global-state-and-module-patterns/starter",
 					solutionLink:
@@ -668,7 +657,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Singleton, Global State, and Module Patterns Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP10 Singleton, Global State, and Module Patterns. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP10 Singleton, Global State, and Module Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-20-pdp10-singleton-global-state-and-module-patterns/starter",
 					solutionLink:
@@ -687,12 +676,12 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Tangled Conditionals and Mixed Responsibilities",
 					content:
-						"Use duplicate branches, mixed formatting/business logic, and kitchen-sink classes to show when Strategy, Adapter, or simple extraction might help. Students should map smells to the smallest effective cleanup step."
+						"Use duplicate branches, mixed formatting/business logic, and kitchen-sink classes to show when Strategy, Adapter, or simple extraction might help. Map smells to the smallest effective cleanup step."
 				},
 				{
 					title: "Data, Behavior, and Overgrown Objects",
 					content:
-						"Ask whether a class is carrying real behavior, merely holding data, or doing too many unrelated jobs. Python students should learn to move behavior closer to the data without treating every record as an object-heavy design exercise."
+						"Ask whether a class is carrying real behavior, merely holding data, or doing too many unrelated jobs. Python Learn to move behavior closer to the data without treating every record as an object-heavy design exercise."
 				},
 				{
 					title: "Tests and Characterization before Structural Change",
@@ -701,8 +690,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				},
 				{
 					title: "PDP11 Refactoring Python Code Smells: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP7-Pythonic-Refactor-Capstone/starter",
 					solutionLink:
@@ -722,7 +710,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Refactoring Python Code Smells Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP11 Refactoring Python Code Smells. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP11 Refactoring Python Code Smells. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-21-pdp11-refactoring-python-code-smells-supplemental-2/starter",
 					solutionLink:
@@ -731,7 +719,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Refactoring Python Code Smells Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP11 Refactoring Python Code Smells. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP11 Refactoring Python Code Smells. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-22-pdp11-refactoring-python-code-smells-supplemental-3/starter",
 					solutionLink:
@@ -755,7 +743,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Document Patterns Used and Patterns Avoided",
 					content:
-						"Students should explicitly record which patterns arrived naturally, which possible patterns were rejected, and why the Pythonic solution stayed lighter in some areas. The avoidance decisions matter as much as the chosen ones."
+						"The reflection records which patterns arrived naturally, which possible patterns were rejected, and why the Pythonic solution stayed lighter in some areas. The avoidance decisions matter as much as the chosen ones."
 				},
 				{
 					title: "Final Review: More Pythonic, More Maintainable, Still Explainable",
@@ -764,8 +752,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				},
 				{
 					title: "PDP12 Capstone Pythonic Refactor Studio: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP7-Pythonic-Refactor-Capstone/starter",
 					solutionLink:
@@ -785,7 +772,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Capstone Pythonic Refactor Studio Supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP12 Capstone Pythonic Refactor Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP12 Capstone Pythonic Refactor Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-23-pdp12-capstone-pythonic-refactor-studio-supplemental-2/starter",
 					solutionLink:
@@ -794,7 +781,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Capstone Pythonic Refactor Studio Supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to PDP12 Capstone Pythonic Refactor Studio. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to PDP12 Capstone Pythonic Refactor Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-supplemental-3/starter",
 					solutionLink:

@@ -75,11 +75,6 @@ const GITHUB_BLOB_SEGMENT_RE = /\/blob\//i;
 const FIRST_WHITESPACE_RE = /\s/;
 const CHECK_IN_PREFIX_RE = /^check-?in\s*#?\d*:?\s*/i;
 const DUPLICATE_COLON_TITLE_RE = /^(.+): \1$/;
-const PROJECT_ADDITION_SENTENCE =
-	"Have students test at least one custom case, explain the main design choice, and note one revision after the first working draft.";
-const GENERAL_ADDITION_SENTENCE =
-	"Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.";
-
 const COURSE_CONFIG: Record<string, CourseConfig> = {
 	"scratch-level-1": {
 		codeBacked: false,
@@ -495,25 +490,7 @@ function dedupeRepeatedTitle(title: string) {
 }
 
 function expandSlightly(title: string, content: string) {
-	let normalizedContent = content
-		.replace(` ${PROJECT_ADDITION_SENTENCE}`, "")
-		.replace(` ${GENERAL_ADDITION_SENTENCE}`, "");
-
-	if (
-		!normalizedContent ||
-		normalizedContent.length >= 185 ||
-		normalizedContent.includes("\n\n")
-	) {
-		return normalizedContent;
-	}
-
-	const addition = PROJECT_TITLE_RE.test(title)
-		? PROJECT_ADDITION_SENTENCE
-		: GENERAL_ADDITION_SENTENCE;
-
-	return SENTENCE_END_RE.test(normalizedContent)
-		? `${normalizedContent} ${addition}`
-		: `${normalizedContent}. ${addition}`;
+	return content.trim();
 }
 
 function normalizeItem(item: RawCourseModuleItem): RawCourseModuleItem {
@@ -592,10 +569,10 @@ function buildSupplementalSupportItem(
 			title: `${focus}: Extension Challenge`,
 			content: `Extend the work from ${moduleTitle} with a tighter constraint, one extra feature, or a slightly more realistic input case.`
 		},
-		{
-			title: `${focus}: Fluency Drill`,
-			content: `Repeat the core ideas from ${moduleTitle} on a smaller problem so the student can work faster, with less prompting, and with cleaner reasoning.`
-		},
+			{
+				title: `${focus}: Fluency Drill`,
+				content: `Repeat the core ideas from ${moduleTitle} on a smaller problem to build speed, independence, and cleaner reasoning.`
+			},
 		{
 			title: `${focus}: Open-Ended Variant`,
 			content: `Create an original variation inspired by ${moduleTitle}. Keep the scope small, but require one meaningful design or reasoning choice.`
@@ -618,7 +595,7 @@ function buildLinkedSupplementalProjectItem(
 
 	return {
 		title,
-		content: `Use the linked starter and solution for a supplemental project tied to ${moduleTitle}. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.`,
+		content: `Supplemental project connected to ${moduleTitle}. The linked starter provides the implementation artifact, and the solution provides the reference state.`,
 		projectLink: resource.projectLink,
 		solutionLink: resource.solutionLink
 	};
@@ -1654,30 +1631,30 @@ async function main() {
 				`${config.moduleFocus} ${studioIndex}`,
 				studioIndex
 			);
-			const focus = nextFocusLabel(config.moduleFocus, resource, config);
-			const moduleTitle = `Applied Studio ${studioIndex}: ${focus}`;
-			const newModule: RawCourseModule = {
-				title: moduleTitle,
-				curriculum: [
-					{
-						title: `${focus}: Core Concepts`,
-						content: `Introduce the main goal of ${moduleTitle}, define the success criteria, and review the concepts students must understand before they begin the main build or problem.`
-					},
-					{
-						title: `${focus}: Guided Example`,
-						content: `Walk through one representative example for ${moduleTitle}, naming the key inputs, the expected outputs, and the checkpoints worth verifying early.`
-					},
-					{
-						title: `${focus}: Core Project`,
-						content: `Build the central artifact for ${moduleTitle}. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.`,
-						projectLink: resource?.projectLink,
-						solutionLink: resource?.solutionLink
-					},
-					{
-						title: `${focus}: Review and Reflection`,
-						content: `Close ${moduleTitle} by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer.`
-					}
-				],
+				const focus = nextFocusLabel(config.moduleFocus, resource, config);
+				const moduleTitle = `${focus}: Implementation Studio`;
+				const newModule: RawCourseModule = {
+					title: moduleTitle,
+					curriculum: [
+						{
+							title: `${focus}: Core Concepts`,
+							content: `${moduleTitle} defines the target artifact, required behavior, and core concepts needed for the build or problem set.`
+						},
+						{
+							title: `${focus}: Guided Example`,
+							content: `A representative example for ${moduleTitle} names the key inputs, expected outputs, and checkpoints worth verifying early.`
+						},
+						{
+							title: `${focus}: Core Project`,
+							content: `${moduleTitle} centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.`,
+							projectLink: resource?.projectLink,
+							solutionLink: resource?.solutionLink
+						},
+						{
+							title: `${focus}: Review and Reflection`,
+							content: `${moduleTitle} closes with the edge cases that matter most and one improvement that would make the next iteration cleaner or safer.`
+						}
+					],
 				supplementalProjects: [
 					{
 						title: `${focus}: Extension Challenge`,
@@ -1818,7 +1795,7 @@ async function main() {
 			) {
 				module.curriculum.push({
 					title: `${module.title}: Core Project`,
-					content: `Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.`,
+					content: `Core implementation project for ${module.title}. The starter provides the working artifact, and the reference solution provides one complete implementation path with at least one custom verification case.`,
 					projectLink: resource.projectLink,
 					solutionLink: resource.solutionLink
 				});

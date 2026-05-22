@@ -33,8 +33,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF0 Setup and Tooling: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf0-setup-and-tooling/starter",
 					solutionLink:
@@ -54,7 +53,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-wdf0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -63,7 +62,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF0 Setup and Tooling. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-wdf0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -77,7 +76,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Why the JavaScript Path Should Expand into Web Development",
 					content:
-						"Position this course as the bridge from browser-focused JavaScript to full web-development fluency. The current JavaScript courses are still valuable for programming, DOM work, and browser APIs, but students should now learn how those skills connect to project structure, back-end services, databases, deployment, hosting, and operations."
+						"Position this course as the bridge from browser-focused JavaScript to full web-development fluency. The current JavaScript courses are still valuable for programming, DOM work, and browser APIs, but Now learn how those skills connect to project structure, back-end services, databases, deployment, hosting, and operations."
 				},
 				{
 					title: "Main Goals of the Expanded Path",
@@ -101,8 +100,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF1 Positioning, Goals, and Suggested Course Family: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-family/starter",
 					solutionLink:
@@ -122,7 +120,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF1 Positioning, Goals, and Suggested Course Family. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF1 Positioning, Goals, and Suggested Course Family. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-wdf1-positioning-goals-and-suggested-course-family-supplemental-2/starter",
 					solutionLink:
@@ -131,7 +129,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF1 Positioning, Goals, and Suggested Course Family. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF1 Positioning, Goals, and Suggested Course Family. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-wdf1-positioning-goals-and-suggested-course-family-supplemental-3/starter",
 					solutionLink:
@@ -155,7 +153,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Add Git and GitHub as Normal Workflow Tools",
 					content:
-						'Teach repository initialization, commit hygiene, branch awareness, and remote publishing as part of normal development rather than as an optional add-on after the code is "done." Students should connect Git not only to collaboration, but to safe experimentation, rollback, and project history during longer builds.'
+						'Teach repository initialization, commit hygiene, branch awareness, and remote publishing as part of normal development rather than as an optional add-on after the code is "done." Connect Git not only to collaboration, but to safe experimentation, rollback, and project history during longer builds.'
 				},
 				{
 					title: "Make Browser Devtools a Recurring Strand",
@@ -164,8 +162,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF2 Stage 1: Strengthen the Existing JavaScript Courses: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/starter",
 					solutionLink:
@@ -185,7 +182,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-2/starter",
 					solutionLink:
@@ -194,7 +191,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-3/starter",
 					solutionLink:
@@ -213,7 +210,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "npm and Package Management",
 					content:
-						"Introduce npm as the mechanism for package installation, scripts, and local tooling rather than as a magical prerequisite for frameworks. Students should understand what `package.json` is for, why dependencies and devDependencies differ, and how scripts like `dev`, `build`, and `start` capture repeatable project behavior."
+						"Introduce npm as the mechanism for package installation, scripts, and local tooling rather than as a magical prerequisite for frameworks. Key idea: What `package.json` is for, why dependencies and devDependencies differ, and how scripts like `dev`, `build`, and `start` capture repeatable project behavior."
 				},
 				{
 					title: "Modules, Bundlers, and Local Dev Servers at a Gentle Level",
@@ -227,8 +224,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF3 Stage 2: Web Development Foundations: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF1-Portfolio-Custom-Domain/starter",
 					solutionLink:
@@ -248,7 +244,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 2: Web Development Foundations supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF3 Stage 2: Web Development Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF3 Stage 2: Web Development Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf3-stage-2-web-development-foundations-supplemental-2/starter",
 					solutionLink:
@@ -257,7 +253,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 2: Web Development Foundations supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF3 Stage 2: Web Development Foundations. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF3 Stage 2: Web Development Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf3-stage-2-web-development-foundations-supplemental-3/starter",
 					solutionLink:
@@ -276,7 +272,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Routing and Multi-View Thinking",
 					content:
-						"Teach client-side routing as a way to represent multiple screens or views in one application without reloading the entire page. Students should connect this to information architecture, URL design, and the idea that front-end applications need deliberate navigation structures rather than one growing script file."
+						"Teach client-side routing as a way to represent multiple screens or views in one application without reloading the entire page. Connect this to information architecture, URL design, and the idea that front-end applications need deliberate navigation structures rather than one growing script file."
 				},
 				{
 					title: "State Management Basics and Async Data Loading",
@@ -286,12 +282,11 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Accessibility and Responsive Design as Core Requirements",
 					content:
-						"Treat accessibility and responsive design as first-class constraints in front-end work rather than polish for the end. Students should practice semantic HTML, keyboard access, readable contrast, flexible layouts, and content priorities across screen sizes so their app work is credible outside a demo environment."
+						"Treat accessibility and responsive design as first-class constraints in front-end work rather than polish for the end. Practice target: Semantic HTML, keyboard access, readable contrast, flexible layouts, and content priorities across screen sizes so their app work is credible outside a demo environment."
 				},
 				{
 					title: "WDF4 Stage 3: Front-End Applications: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF4-Realtime-Chat-App/starter",
 					solutionLink:
@@ -311,7 +306,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 3: Front End Applications supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF4 Stage 3: Front-End Applications. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF4 Stage 3: Front-End Applications. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf4-stage-3-front-end-applications-supplemental-2/starter",
 					solutionLink:
@@ -320,7 +315,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 3: Front End Applications supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF4 Stage 3: Front-End Applications. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF4 Stage 3: Front-End Applications. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf4-stage-3-front-end-applications-supplemental-3/starter",
 					solutionLink:
@@ -334,7 +329,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Node.js Runtime and Server-Side JavaScript",
 					content:
-						"Introduce Node.js as the runtime that lets JavaScript move from the browser into server work, tooling, and automation. Students should understand that the same language now runs in a different environment with different APIs, different security boundaries, and a different responsibility for input handling and process lifecycle."
+						"Introduce Node.js as the runtime that lets JavaScript move from the browser into server work, tooling, and automation. Key idea: The same language now runs in a different environment with different APIs, different security boundaries, and a different responsibility for input handling and process lifecycle."
 				},
 				{
 					title: "Express or Fastify as the API Surface",
@@ -344,7 +339,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "REST APIs, Request Validation, and Error Shapes",
 					content:
-						'Teach simple RESTful patterns and pair them immediately with request validation and explicit error handling. Students should understand that an API is more than a route that "works"; it is a contract that must handle missing fields, invalid payloads, malformed input, and repeatable response shapes.'
+						'Teach simple RESTful patterns and pair them immediately with request validation and explicit error handling. Key idea: An API is more than a route that "works"; it is a contract that must handle missing fields, invalid payloads, malformed input, and repeatable response shapes.'
 				},
 				{
 					title: "Auth Basics and Session vs Token Concepts",
@@ -353,8 +348,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF5 Stage 4: Back-End Basics: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF3-Booking-Contact-App/starter",
 					solutionLink:
@@ -365,7 +359,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Booking or Contact App with Email Integration",
 					content:
-						"Use the booking/contact lab to make request validation, environment variables, and server-side delivery logic concrete. Students should handle public form input on the client, validate it again on the server, and understand that email configuration belongs in environment settings rather than in shipped client code.",
+						"Use the booking/contact lab to make request validation, environment variables, and server-side delivery logic concrete. Handle public form input on the client, validate it again on the server, and understand that email configuration belongs in environment settings rather than in shipped client code.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF3-Booking-Contact-App/starter",
 					solutionLink:
@@ -374,7 +368,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 4: Back End Basics supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF5 Stage 4: Back-End Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF5 Stage 4: Back-End Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-11-wdf5-stage-4-back-end-basics-supplemental-2/starter",
 					solutionLink:
@@ -383,7 +377,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 4: Back End Basics supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF5 Stage 4: Back-End Basics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF5 Stage 4: Back-End Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-12-wdf5-stage-4-back-end-basics-supplemental-3/starter",
 					solutionLink:
@@ -397,7 +391,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "MongoDB Basics and Data Modeling",
 					content:
-						"Teach MongoDB as a practical entry point into document databases and data models. Students should learn what a collection and document are, how application code maps user-facing features onto stored data, and why schema thinking still matters even in a NoSQL environment."
+						"Teach MongoDB as a practical entry point into document databases and data models. Learn what a collection and document are, how application code maps user-facing features onto stored data, and why schema thinking still matters even in a NoSQL environment."
 				},
 				{
 					title: "Schemas, Validation, and CRUD",
@@ -407,7 +401,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Indexes at a High Level",
 					content:
-						"Introduce indexes conceptually rather than as a deep database-internals topic. Students should understand that indexes trade extra storage and write cost for faster queries and that data shape and access patterns influence performance long before a project becomes large."
+						"Introduce indexes conceptually rather than as a deep database-internals topic. Key idea: Indexes trade extra storage and write cost for faster queries and that data shape and access patterns influence performance long before a project becomes large."
 				},
 				{
 					title: "When to Choose SQL vs NoSQL",
@@ -416,8 +410,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF6 Stage 5: Databases and Data Models: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF2-Notes-App-with-MongoDB/starter",
 					solutionLink:
@@ -428,7 +421,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Blog or Notes App with MongoDB",
 					content:
-						"Use the notes app lab to combine MongoDB basics, schemas, validation, and CRUD in a full-stack workflow. Students should be able to explain how the browser talks to the API, how the API validates payloads, how the database stores notes, and why a simple index or schema constraint improves the project beyond a basic demo.",
+						"Use the notes app lab to combine MongoDB basics, schemas, validation, and CRUD in a full-stack workflow. Skill target: Explain how the browser talks to the API, how the API validates payloads, how the database stores notes, and why a simple index or schema constraint improves the project beyond a basic demo.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF2-Notes-App-with-MongoDB/starter",
 					solutionLink:
@@ -437,7 +430,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 5: Databases and Data Models supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF6 Stage 5: Databases and Data Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF6 Stage 5: Databases and Data Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-13-wdf6-stage-5-databases-and-data-models-supplemental-2/starter",
 					solutionLink:
@@ -446,7 +439,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 5: Databases and Data Models supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF6 Stage 5: Databases and Data Models. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF6 Stage 5: Databases and Data Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-14-wdf6-stage-5-databases-and-data-models-supplemental-3/starter",
 					solutionLink:
@@ -465,22 +458,21 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Static Hosting vs App Hosting",
 					content:
-						"Explain the difference between static hosting and application hosting in terms of build output, runtime needs, scalability, and operational complexity. This is the point where students should understand why a front-end portfolio can live on a static platform while a server-backed app needs a runtime environment, logs, and often a database connection."
+						"Explain the difference between static hosting and application hosting in terms of build output, runtime needs, scalability, and operational complexity. This is the point where Understand why a front-end portfolio can live on a static platform while a server-backed app needs a runtime environment, logs, and often a database connection."
 				},
 				{
 					title: "Reverse Proxies, Environment Configuration, Monitoring, and Logs",
 					content:
-						"Teach reverse proxies, environment configuration, monitoring, and logs as part of deployment rather than as optional operations trivia. Students should see that deployment quality depends on observability, configuration boundaries, and the ability to distinguish front-end failures from API failures after the project leaves localhost."
+						"Teach reverse proxies, environment configuration, monitoring, and logs as part of deployment rather than as optional operations trivia. Visible pattern: That deployment quality depends on observability, configuration boundaries, and the ability to distinguish front-end failures from API failures after the project leaves localhost."
 				},
 				{
 					title: "Deployment as a Repeatable Process",
 					content:
-						"Make deployment repeatable by teaching build scripts, environment-specific configuration, domain verification, and post-deploy checks. Students should end this stage able to describe what they would test immediately after shipping a site or app and what evidence they would collect if something broke."
+						"Make deployment repeatable by teaching build scripts, environment-specific configuration, domain verification, and post-deploy checks. End this stage able to describe what they would test immediately after shipping a site or app and what evidence they would collect if something broke."
 				},
 				{
 					title: "WDF7 Stage 6: Hosting and Deployment: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF5-Separate-Deployment-Lab/starter",
 					solutionLink:
@@ -491,7 +483,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Ship a Front End and Back End Separately",
 					content:
-						"Use the deployment lab to separate front-end and back-end hosting concerns on purpose. Students should configure an API base URL boundary, reason about CORS and reverse proxies, document environment differences across local and hosted environments, and verify the combined system after deploying each side independently.",
+						"Use the deployment lab to separate front-end and back-end hosting concerns on purpose. Configure an API base URL boundary, reason about CORS and reverse proxies, document environment differences across local and hosted environments, and verify the combined system after deploying each side independently.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF5-Separate-Deployment-Lab/starter",
 					solutionLink:
@@ -500,7 +492,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 6: Hosting and Deployment supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF7 Stage 6: Hosting and Deployment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF7 Stage 6: Hosting and Deployment. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-15-wdf7-stage-6-hosting-and-deployment-supplemental-2/starter",
 					solutionLink:
@@ -509,7 +501,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 6: Hosting and Deployment supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF7 Stage 6: Hosting and Deployment. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF7 Stage 6: Hosting and Deployment. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-16-wdf7-stage-6-hosting-and-deployment-supplemental-3/starter",
 					solutionLink:
@@ -523,7 +515,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Linux and Server Basics for Web Developers",
 					content:
-						"Cover SSH, service processes, logs, environment files, and file locations so deployment does not stop at a platform dashboard. Students should understand enough Linux and server structure to connect code to runtime files, service processes, log locations, and safe operational changes."
+						"Cover SSH, service processes, logs, environment files, and file locations so deployment does not stop at a platform dashboard. Key idea: Enough Linux and server structure to connect code to runtime files, service processes, log locations, and safe operational changes."
 				},
 				{
 					title: "Cloud and Platform Ideas",
@@ -542,8 +534,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF8 Hosting and Operations Topics to Add: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf8-hosting-and-operations-topics-to-add/starter",
 					solutionLink:
@@ -563,7 +554,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Hosting and Operations Topics to Add supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF8 Hosting and Operations Topics to Add. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF8 Hosting and Operations Topics to Add. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-17-wdf8-hosting-and-operations-topics-to-add-supplemental-2/starter",
 					solutionLink:
@@ -572,7 +563,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Hosting and Operations Topics to Add supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF8 Hosting and Operations Topics to Add. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF8 Hosting and Operations Topics to Add. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-18-wdf8-hosting-and-operations-topics-to-add-supplemental-3/starter",
 					solutionLink:
@@ -595,7 +586,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project: Blog or Notes App with MongoDB",
 					content:
-						"Use a notes-style application to connect database modeling, CRUD routes, browser-side rendering, and validation. Students should leave the project able to describe both the user-facing behavior and the server/database flow underneath it.",
+						"Use a notes-style application to connect database modeling, CRUD routes, browser-side rendering, and validation. Leave the project able to describe both the user-facing behavior and the server/database flow underneath it.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF2-Notes-App-with-MongoDB/starter",
 					solutionLink:
@@ -642,7 +633,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Good Practical Projects supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF9 Good Practical Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF9 Good Practical Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-19-wdf9-good-practical-projects-supplemental-2/starter",
 					solutionLink:
@@ -651,7 +642,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Good Practical Projects supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF9 Good Practical Projects. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF9 Good Practical Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-20-wdf9-good-practical-projects-supplemental-3/starter",
 					solutionLink:
@@ -665,7 +656,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Logs and Uptime",
 					content:
-						"Add a follow-up strand focused on actual production operations, beginning with logs and uptime. Students should understand that once a project is live, part of the job is making sure it stays reachable, emits useful signals, and can be diagnosed when users report problems."
+						"Add a follow-up strand focused on actual production operations, beginning with logs and uptime. Key idea: Once a project is live, part of the job is making sure it stays reachable, emits useful signals, and can be diagnosed when users report problems."
 				},
 				{
 					title: "TLS and Reverse Proxies",
@@ -684,8 +675,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF10 Suggested Advanced Strand: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf10-suggested-advanced-strand/starter",
 					solutionLink:
@@ -705,7 +695,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Suggested Advanced Strand supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF10 Suggested Advanced Strand. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF10 Suggested Advanced Strand. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-21-wdf10-suggested-advanced-strand-supplemental-2/starter",
 					solutionLink:
@@ -714,7 +704,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Suggested Advanced Strand supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF10 Suggested Advanced Strand. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF10 Suggested Advanced Strand. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-22-wdf10-suggested-advanced-strand-supplemental-3/starter",
 					solutionLink:
@@ -728,17 +718,17 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Ports and Listening Services",
 					content:
-						"Cross-link this course with networking by teaching ports and listening services as concrete operational facts. Students should understand that browsers, APIs, databases, and reverse proxies all communicate through explicit ports and that many deployment bugs start with services not listening where the rest of the system expects them to be."
+						"Cross-link this course with networking by teaching ports and listening services as concrete operational facts. Key idea: Browsers, APIs, databases, and reverse proxies all communicate through explicit ports and that many deployment bugs start with services not listening where the rest of the system expects them to be."
 				},
 				{
 					title: "DNS and Domain Routing",
 					content:
-						"Teach DNS and domain routing as the networking layer that makes published sites and APIs reachable. Students should be able to connect hostname records to the hosting platform or server that answers them and explain why DNS changes can affect deployment timing and rollback strategy."
+						"Teach DNS and domain routing as the networking layer that makes published sites and APIs reachable. Skill target: Connect hostname records to the hosting platform or server that answers them and explain why DNS changes can affect deployment timing and rollback strategy."
 				},
 				{
 					title: "TLS, HTTPS, and Trust Boundaries",
 					content:
-						"Use TLS and HTTPS to connect networking, security, and deployment. Students should understand why secure transport matters, where termination often happens, and how HTTPS relates to modern browsers, cookies, API access, and user trust."
+						"Use TLS and HTTPS to connect networking, security, and deployment. Key idea: Why secure transport matters, where termination often happens, and how HTTPS relates to modern browsers, cookies, API access, and user trust."
 				},
 				{
 					title: "Firewalls, Security Groups, and localhost vs LAN vs Public Deployment",
@@ -747,8 +737,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF11 Integration with Network Topics: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf11-integration-with-network-topics/starter",
 					solutionLink:
@@ -768,7 +757,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Integration with Network Topics supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF11 Integration with Network Topics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF11 Integration with Network Topics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-23-wdf11-integration-with-network-topics-supplemental-2/starter",
 					solutionLink:
@@ -777,7 +766,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Integration with Network Topics supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF11 Integration with Network Topics. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF11 Integration with Network Topics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-24-wdf11-integration-with-network-topics-supplemental-3/starter",
 					solutionLink:
@@ -796,7 +785,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "CI/CD with GitHub Actions",
 					content:
-						"Introduce CI/CD as the automation layer that can lint, test, build, and deploy projects after the manual workflow is already clear. Students should see CI/CD as a codified version of their development and deployment discipline, not as a shortcut that replaces understanding."
+						"Introduce CI/CD as the automation layer that can lint, test, build, and deploy projects after the manual workflow is already clear. Visible pattern: CI/CD as a codified version of their development and deployment discipline, not as a shortcut that replaces understanding."
 				},
 				{
 					title: "Postgres as a SQL Companion Track",
@@ -810,8 +799,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF12 Expansion Ideas and Next Steps: Core Project",
-					content:
-						"Use this module build as the main implementation checkpoint. Students should finish the starter, verify one custom case, and compare design choices against the reference solution afterward.",
+					content: "",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-11-wdf12-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -831,7 +819,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF12 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF12 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-25-wdf12-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -840,7 +828,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to WDF12 Expansion Ideas and Next Steps. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to WDF12 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-26-wdf12-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -849,22 +837,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 14: full stack web lab 14",
+			title: "full stack web lab 14: Implementation Studio",
 			curriculum: [
 				{
 					title: "full stack web lab 14: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 14: full stack web lab 14, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"full stack web lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "full stack web lab 14: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 14: full stack web lab 14, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative full stack web lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "full stack web lab 14: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 14: full stack web lab 14. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"full stack web lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-full-stack-web-lab-14/starter",
 					solutionLink:
@@ -873,32 +861,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 14: Review and Reflection",
 					content:
-						"Close Applied Studio 14: full stack web lab 14 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"full stack web lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 14: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 14: full stack web lab 14 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from full stack web lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-full-stack-web-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-full-stack-web-lab-14/solution"
 				},
 				{
-					title: "Applied Studio 14: full stack web lab 14 supplemental 2",
+					title: "full stack web lab 14 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: full stack web lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 14: full stack web lab 14 supplemental 3",
+					title: "full stack web lab 14 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 14: full stack web lab 14. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-28-applied-studio-14-full-stack-web-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -907,22 +895,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 15: full stack web lab 15",
+			title: "full stack web lab 15: Implementation Studio",
 			curriculum: [
 				{
 					title: "full stack web lab 15: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 15: full stack web lab 15, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"full stack web lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "full stack web lab 15: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 15: full stack web lab 15, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative full stack web lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "full stack web lab 15: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 15: full stack web lab 15. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"full stack web lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-full-stack-web-lab-15/starter",
 					solutionLink:
@@ -931,32 +919,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 15: Review and Reflection",
 					content:
-						"Close Applied Studio 15: full stack web lab 15 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"full stack web lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 15: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 15: full stack web lab 15 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from full stack web lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-full-stack-web-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-full-stack-web-lab-15/solution"
 				},
 				{
-					title: "Applied Studio 15: full stack web lab 15 supplemental 2",
+					title: "full stack web lab 15 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: full stack web lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 15: full stack web lab 15 supplemental 3",
+					title: "full stack web lab 15 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 15: full stack web lab 15. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-30-applied-studio-15-full-stack-web-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -965,22 +953,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 16: full stack web lab 16",
+			title: "full stack web lab 16: Implementation Studio",
 			curriculum: [
 				{
 					title: "full stack web lab 16: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 16: full stack web lab 16, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"full stack web lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "full stack web lab 16: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 16: full stack web lab 16, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative full stack web lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "full stack web lab 16: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 16: full stack web lab 16. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"full stack web lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-full-stack-web-lab-16/starter",
 					solutionLink:
@@ -989,32 +977,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 16: Review and Reflection",
 					content:
-						"Close Applied Studio 16: full stack web lab 16 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"full stack web lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 16: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 16: full stack web lab 16 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from full stack web lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-full-stack-web-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-full-stack-web-lab-16/solution"
 				},
 				{
-					title: "Applied Studio 16: full stack web lab 16 supplemental 2",
+					title: "full stack web lab 16 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: full stack web lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 16: full stack web lab 16 supplemental 3",
+					title: "full stack web lab 16 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 16: full stack web lab 16. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-32-applied-studio-16-full-stack-web-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1023,22 +1011,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Applied Studio 17: full stack web lab 17",
+			title: "full stack web lab 17: Implementation Studio",
 			curriculum: [
 				{
 					title: "full stack web lab 17: Core Concepts",
 					content:
-						"Introduce the main goal of Applied Studio 17: full stack web lab 17, define the success criteria, and review the concepts students must understand before they begin the main build or problem."
+						"full stack web lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
 				},
 				{
 					title: "full stack web lab 17: Guided Example",
 					content:
-						"Walk through one representative example for Applied Studio 17: full stack web lab 17, naming the key inputs, the expected outputs, and the checkpoints worth verifying early. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"A representative full stack web lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
 				},
 				{
 					title: "full stack web lab 17: Core Project",
 					content:
-						"Build the central artifact for Applied Studio 17: full stack web lab 17. Break the work into a small sequence, implement the first working version, then tighten one weak spot before calling it done.",
+						"full stack web lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-full-stack-web-lab-17/starter",
 					solutionLink:
@@ -1047,32 +1035,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 17: Review and Reflection",
 					content:
-						"Close Applied Studio 17: full stack web lab 17 by testing the edge cases that matter most and writing down one improvement that would make the next iteration cleaner or safer. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on."
+						"full stack web lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 17: Extension Challenge",
 					content:
-						"Extend the core build from Applied Studio 17: full stack web lab 17 with one extra requirement, stricter input handling, or a more realistic variation of the same task. Anchor the lesson in one concrete example and one quick debugging or reasoning check before moving on.",
+						"Extend the core build from full stack web lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-full-stack-web-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-full-stack-web-lab-17/solution"
 				},
 				{
-					title: "Applied Studio 17: full stack web lab 17 supplemental 2",
+					title: "full stack web lab 17 supplemental 2: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: full stack web lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Applied Studio 17: full stack web lab 17 supplemental 3",
+					title: "full stack web lab 17 supplemental 3: Implementation Studio",
 					content:
-						"Use the linked starter and solution for a supplemental project tied to Applied Studio 17: full stack web lab 17. Have students finish the missing implementation, test at least two custom cases, and write down one design change they would make after the first working version.",
+						"Supplemental project connected to full stack web lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-34-applied-studio-17-full-stack-web-lab-17-supplemental-3/starter",
 					solutionLink:
