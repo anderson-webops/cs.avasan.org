@@ -264,6 +264,64 @@ describe("CourseExplorer.vue", () => {
 		expect(wrapper.text()).not.toContain("Solution repo");
 	});
 
+	it("renders non-file media resources as links instead of broken images", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const assignedCourse = coursesStore.courses[0];
+		const phetLink =
+			"https://phet.colorado.edu/en/simulations/filter?subjects=middle-school";
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: assignedCourse.id,
+			name: assignedCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Use a simulation resource.",
+							id: "science-resource",
+							mediaLink: phetLink,
+							title: "Simulation Resource"
+						}
+					],
+					id: "module-1",
+					supplementalProjects: [],
+					title: "Module 1"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [assignedCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Simulation resources");
+		});
+
+		const link = wrapper.find(`a[href="${phetLink}"]`);
+		expect(link.exists()).toBe(true);
+		expect(wrapper.find(`img[src="${phetLink}"]`).exists()).toBe(false);
+	});
+
 	it("renders solution code preview controls for staff course context", async () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);

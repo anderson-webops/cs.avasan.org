@@ -9,22 +9,22 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Course Setup: Zoom Science Notebook",
 					content:
-						"No physical lab supplies are required beyond paper or notes. Set up a notebook or digital document for dated vocabulary, sketches, questions, evidence, and short explanations. Make the Zoom format explicit: activities use shared images, simulations, short videos, discussion, paper sketches, and simple graphs."
+						"No physical lab supplies are required beyond paper or notes. A notebook or digital document is used for dated vocabulary, sketches, questions, evidence, and short explanations. The Zoom format relies on shared images, simulations, short videos, discussion, paper sketches, and simple graphs."
 				},
 				{
 					title: "Lesson: Observing, Inferring, and Asking Testable Questions",
 					content:
-						"Teach the difference between an observation, an inference, and a question. Use a mystery image or short nature clip on screen, then have students write five observations, two inferences, and one question that could be investigated with more evidence."
+						"Observations describe what is directly visible or measurable, inferences explain what the evidence may mean, and testable questions point toward evidence that could be collected or analyzed. A mystery image or short nature clip can support five observations, two inferences, and one evidence-based question."
 				},
 				{
 					title: "Guided Practice: Claims, Evidence, and Reasoning",
 					content:
-						"Introduce a simple claim-evidence-reasoning structure. Students make a claim about an image, animal behavior clip, weather map, or simple data table, cite evidence from the source, and explain why the evidence supports the claim."
+						"Claim-evidence-reasoning connects an answer, visible evidence, and an explanation. A claim about an image, animal behavior clip, weather map, or simple data table is stronger when it cites evidence from the source and explains why that evidence supports the claim."
 				},
 				{
 					title: "Data Mini Lesson: Counting, Sorting, and Simple Graphs",
 					content:
-						"Practice turning observations into data by sorting objects in a shared picture or teacher-provided dataset. Students create a tally table and a simple bar graph, then explain what pattern the graph shows."
+						"Observations can become data by sorting objects in a shared picture or provided dataset. A tally table and simple bar graph make the pattern visible, and the explanation should separate what the graph shows from what it might mean."
 				}
 			],
 			supplementalProjects: [
@@ -120,7 +120,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Lesson: Weather Variables",
 					content:
-						"Introduce temperature, wind, clouds, precipitation, and humidity using current weather maps or teacher-provided examples. Students learn to describe weather with measurements and observations rather than only with feelings."
+						"Temperature, wind, clouds, precipitation, and humidity describe weather with measurements and observations rather than only with feelings. Current weather maps or provided examples make these variables visible."
 				},
 				{
 					title: "Lesson: The Water Cycle",

@@ -87,14 +87,15 @@ describe("course text quality normalization", () => {
 		const lessonArc = findItem(
 			course!,
 			/Core Concepts and Learning Sequence/,
-			/This lesson arc covers these sections in sequence:/
+			/Core topics in this module:/
 		);
 
 		expect(lessonArc.content).toMatch(
-			/This lesson arc covers these sections in sequence:\n\n1\. \*\*Introductions & Setup:\*\*/
+			/Core topics in this module:\n\n1\. \*\*Introductions & Setup\*\*/
 		);
-		expect(lessonArc.content).toMatch(/\n2\. \*\*.+:\*\*/);
+		expect(lessonArc.content).toMatch(/\n2\. \*\*.+\*\*\n\s+/);
 		expect(lessonArc.content).not.toMatch(/1\) .+; 2\)/s);
+		expect(lessonArc.content).not.toMatch(/This lesson arc covers/i);
 	});
 
 	it("formats authored lesson setup text as neutral student-readable sections", async () => {
@@ -108,6 +109,7 @@ describe("course text quality normalization", () => {
 		expect(setup.content).toContain("- `#include`");
 		expect(setup.content).toContain("**Practice target:**");
 		expect(setup.content).not.toMatch(/Start with|Cover:|Students should/);
+		expect(setup.content).not.toMatch(/\*\*Learning sequence:\*\*/);
 	});
 
 	it("adds AP-specific scaffolding to terse AP Computer Science A algorithm projects", async () => {
@@ -139,9 +141,12 @@ describe("course text quality normalization", () => {
 
 		expect(corpus).toContain("**Remote investigation:**");
 		expect(corpus).toContain(
-			"Do not require beakers, kits, or household materials"
+			"The activity does not require beakers, kits, or household materials"
 		);
 		expect(corpus).toContain("claim-evidence-reasoning");
+		expect(corpus).not.toContain(
+			"Anchor the activity in web development workflow"
+		);
 	});
 
 	it("turns applied studio labs into explicit studio specifications", async () => {

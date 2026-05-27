@@ -95,7 +95,9 @@ describe("implemented course development artifacts", () => {
 				"Science Resource Shortlist and Remote Lab Bank"
 			);
 			expect(text, courseId).toContain("PhET");
-			expect(text, courseId).toContain("Do not require household materials");
+			expect(text, courseId).toContain(
+				"The activity does not require household materials"
+			);
 			expect(
 				course.modules.some(module =>
 					[...module.curriculum, ...module.supplementalProjects].some(

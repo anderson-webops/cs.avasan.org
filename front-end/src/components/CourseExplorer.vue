@@ -39,11 +39,12 @@ interface VisibleModule extends CourseModule {
 
 interface ResourceLink {
 	host: string;
-	kind: "project" | "solution" | "dataset";
+	kind: "project" | "solution" | "dataset" | "media";
 	label: string;
 	url: string;
 }
 
+const IMAGE_FILE_RE = /\.(?:avif|gif|jpe?g|png|svg|webp)(?:\?|$)/i;
 const VIDEO_FILE_RE = /\.(?:mp4|webm|ogg)(?:\?|$)/i;
 const WHITESPACE_RE = /\s+/g;
 const WWW_PREFIX_RE = /^www\./;
@@ -703,6 +704,14 @@ function isVideo(link: string) {
 	return VIDEO_FILE_RE.test(link);
 }
 
+function isImage(link: string) {
+	return IMAGE_FILE_RE.test(link);
+}
+
+function isEmbeddedMedia(link: string) {
+	return isVideo(link) || isImage(link);
+}
+
 function linkHost(url: string) {
 	try {
 		return new URL(url).hostname.replace(WWW_PREFIX_RE, "");
@@ -755,6 +764,7 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	const projectUrl = item.projectLink?.trim();
 	const solutionUrl = item.solutionLink?.trim();
 	const datasetUrl = item.datasetLink?.trim();
+	const mediaUrl = item.mediaLink?.trim();
 
 	if (projectUrl) {
 		links.push({
@@ -780,6 +790,17 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 			label: "Dataset",
 			url: datasetUrl,
 			host: linkHost(datasetUrl)
+		});
+	}
+
+	if (mediaUrl && !isEmbeddedMedia(mediaUrl)) {
+		links.push({
+			kind: "media",
+			label: mediaUrl.includes("phet.colorado.edu")
+				? "Simulation resources"
+				: "Media resource",
+			url: mediaUrl,
+			host: linkHost(mediaUrl)
 		});
 	}
 
@@ -1313,7 +1334,10 @@ function writeStoredValue(key: string, value: string) {
 									/>
 
 									<div
-										v-if="item.mediaLink"
+										v-if="
+											item.mediaLink &&
+											isEmbeddedMedia(item.mediaLink)
+										"
 										class="item-media"
 									>
 										<video
@@ -1334,7 +1358,7 @@ function writeStoredValue(key: string, value: string) {
 											<source :src="item.mediaLink" />
 										</video>
 										<img
-											v-else
+											v-else-if="isImage(item.mediaLink)"
 											:src="item.mediaLink"
 											:alt="`Project demo media for ${item.title}`"
 											class="item-media-image"
@@ -1452,7 +1476,10 @@ function writeStoredValue(key: string, value: string) {
 									/>
 
 									<div
-										v-if="item.mediaLink"
+										v-if="
+											item.mediaLink &&
+											isEmbeddedMedia(item.mediaLink)
+										"
 										class="item-media"
 									>
 										<video
@@ -1473,7 +1500,7 @@ function writeStoredValue(key: string, value: string) {
 											<source :src="item.mediaLink" />
 										</video>
 										<img
-											v-else
+											v-else-if="isImage(item.mediaLink)"
 											:src="item.mediaLink"
 											:alt="`Project demo media for ${item.title}`"
 											class="item-media-image"

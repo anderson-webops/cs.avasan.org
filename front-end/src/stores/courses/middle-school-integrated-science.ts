@@ -9,17 +9,17 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Course Setup: Remote Science Workflow",
 					content:
-						"No beakers, kits, or required household experiments are needed. Set expectations for a Zoom-based science course using notebooks, shared simulations, images, public datasets, diagrams, short readings, and structured discussion. Optional observations may be assigned only when they are safe and simple."
+						"No beakers, kits, or required household experiments are needed. The course uses notebooks, shared simulations, images, public datasets, diagrams, short readings, and structured discussion. Optional observations are included only when they are safe, simple, and replaceable with an equivalent data or simulation option."
 				},
 				{
 					title: "Lesson: Questions, Variables, and Fair Tests",
 					content:
-						"Introduce independent variables, dependent variables, controls, constants, and fair tests. Use sample scenarios so students can identify what changes, what is measured, and what must stay the same."
+						"Independent variables, dependent variables, controls, constants, and fair tests define whether evidence can answer a scientific question. Sample scenarios show what changes, what is measured, and what must stay the same."
 				},
 				{
 					title: "Lesson: Models as Useful Simplifications",
 					content:
-						"Teach models as tools for explaining systems, not perfect copies of reality. Compare diagrams, simulations, graphs, equations, and written explanations, then ask what each model reveals and hides."
+						"Models are tools for explaining systems, not perfect copies of reality. Diagrams, simulations, graphs, equations, and written explanations each reveal some details while hiding or simplifying others."
 				},
 				{
 					title: "Data Practice: Tables, Graphs, and Pattern Claims",
