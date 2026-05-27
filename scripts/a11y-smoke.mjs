@@ -103,8 +103,8 @@ const tutor = {
 };
 const student = {
 	_id: "user-accessibility",
-	name: "Recipient 3",
-	email: "jinen@example.com",
+	name: "Student Test",
+	email: "student@example.com",
 	age: 15,
 	state: "GA",
 	editUsers: false,

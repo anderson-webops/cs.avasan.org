@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import type { AdminRecipient } from "@/modules/adminRecipients";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
 import AdminWorkspaceShell from "@/components/AdminWorkspaceShell.vue";
-import { ADMIN_RECIPIENTS } from "@/modules/adminRecipients";
+import { fetchAdminRecipients } from "@/modules/adminRecipients";
 
 // allow single newlines to render as <br> and keep GitHub-flavored markdown
 marked.setOptions({ breaks: true, gfm: true });
@@ -56,6 +57,9 @@ const md = ref("");
 const sending = ref(false);
 const activeTab = ref<MailTab>("compose");
 const selectedRecipientName = ref("");
+const adminRecipients = ref<AdminRecipient[]>([]);
+const recipientsLoading = ref(false);
+const recipientsError = ref("");
 
 const subjectDate = ref("");
 const dateInput = ref<DateInputEl | null>(null);
@@ -85,7 +89,7 @@ function renderPreview(markdown: string): string {
 
 const livePreviewHtml = computed(() => renderPreview(md.value));
 const selectedRecipient = computed(() =>
-	ADMIN_RECIPIENTS.find(
+	adminRecipients.value.find(
 		recipient => recipient.name === selectedRecipientName.value
 	)
 );
@@ -114,7 +118,7 @@ watch(
 			to.value = "";
 			return;
 		}
-		const recip = ADMIN_RECIPIENTS.find(r => r.name === name);
+		const recip = adminRecipients.value.find(r => r.name === name);
 		if (!recip) {
 			to.value = "";
 			return;
@@ -123,6 +127,21 @@ watch(
 		to.value = [primary, ...cc].filter(Boolean).join(", ");
 	},
 	{ immediate: true }
+);
+
+watch(
+	adminRecipients,
+	() => {
+		if (!selectedRecipientName.value || isCustomRecipient.value) return;
+		const recip = selectedRecipient.value;
+		if (!recip) {
+			to.value = "";
+			return;
+		}
+		const [primary, ...cc] = recip.emails;
+		to.value = [primary, ...cc].filter(Boolean).join(", ");
+	},
+	{ deep: true }
 );
 
 watch(
@@ -145,6 +164,24 @@ watch(subjectDate, value => {
 	}
 	subject.value = formatSessionSubject(value);
 });
+
+async function loadAdminRecipientList() {
+	recipientsLoading.value = true;
+	recipientsError.value = "";
+	try {
+		adminRecipients.value = await fetchAdminRecipients();
+	} catch (error: any) {
+		adminRecipients.value = [];
+		recipientsError.value =
+			error?.response?.data?.message ??
+			error?.message ??
+			"Unable to load saved recipients.";
+	} finally {
+		recipientsLoading.value = false;
+	}
+}
+
+onMounted(loadAdminRecipientList);
 
 function switchTab(tab: MailTab) {
 	activeTab.value = tab;
@@ -474,7 +511,7 @@ function parseDateIso(value: string): string | null {
 									Select a person
 								</option>
 								<option
-									v-for="recipient in ADMIN_RECIPIENTS"
+									v-for="recipient in adminRecipients"
 									:key="recipient.name"
 									:value="recipient.name"
 								>
@@ -495,6 +532,12 @@ function parseDateIso(value: string): string | null {
 							v-if="!isCustomRecipient"
 							class="recipient-preview"
 						>
+							<p v-if="recipientsLoading" class="hint">
+								Loading saved recipients…
+							</p>
+							<p v-else-if="recipientsError" class="error">
+								{{ recipientsError }}
+							</p>
 							<div>
 								<strong>To:</strong> {{ primaryEmail || "—" }}
 							</div>

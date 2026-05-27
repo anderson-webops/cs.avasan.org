@@ -1,6 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import MdMail from "@/pages/admin/mdmail.vue";
+
+vi.mock("@/modules/adminRecipients", () => ({
+	fetchAdminRecipients: vi.fn().mockResolvedValue([])
+}));
 
 const findPreviewBody = (wrapper: ReturnType<typeof mount>) =>
 	wrapper.find('[data-testid="live-preview-body"]');

@@ -11,6 +11,7 @@ import { validAdmin } from "../middleware/auth.js";
 import { InternalEmail } from "../models/schemas/InternalEmail.js";
 import { SessionNote } from "../models/schemas/SessionNote.js";
 import { User } from "../models/schemas/User.js";
+import { loadAdminRecipients } from "../utils/adminRecipients.js";
 import { renderMarkdownEmailHtml } from "../utils/markdownEmail.js";
 
 const router = Router();
@@ -128,6 +129,20 @@ const MailSchema = z.object({
 	md: z.string().min(1),
 	recipientName: z.string().trim().min(1).optional(),
 	sessionDate: z.string().trim().optional()
+});
+
+router.get("/recipients", validAdmin, (_req, res) => {
+	try {
+		return res.json({
+			recipients: loadAdminRecipients()
+		});
+	}
+	catch (error) {
+		console.error("admin-mail/recipients failed:", error);
+		return res.status(500).json({
+			message: "Admin recipient configuration is unavailable."
+		});
+	}
 });
 
 function parseDateOnly(dateStr: string): Date | null {

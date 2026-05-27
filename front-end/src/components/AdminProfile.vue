@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { AdminRecipient } from "@/modules/adminRecipients";
 import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
 import { api } from "@/api";
@@ -8,7 +9,7 @@ import LearnerSessionTools from "@/components/LearnerSessionTools.vue";
 import ProfileFields from "@/components/ProfileFields.vue";
 import { useDeleteAccount } from "@/composables/useDeleteAccount";
 import { useEditable } from "@/composables/useEditable";
-import { ADMIN_RECIPIENT_NAMES } from "@/modules/adminRecipients";
+import { fetchAdminRecipients } from "@/modules/adminRecipients";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 
@@ -28,6 +29,8 @@ const userRecipientNames = ref<Record<string, string>>({});
 const tutorEditing = ref<Record<string, boolean>>({});
 const tutorCourseSelections = ref<Record<string, string[]>>({});
 const userCourseSelections = ref<Record<string, string[]>>({});
+const adminRecipients = ref<AdminRecipient[]>([]);
+const recipientListError = ref("");
 const confirmation = ref<{
 	confirmLabel: string;
 	description: string;
@@ -57,6 +60,9 @@ const courseNameMap = computed<Record<string, string>>(
 const courseLabel = (id: string) => courseNameMap.value[id] ?? id;
 const tutorCount = computed(() => tutors.value.length);
 const userCount = computed(() => users.value.length);
+const adminRecipientNames = computed(() =>
+	adminRecipients.value.map(recipient => recipient.name)
+);
 const confirmationTitle = computed(() => confirmation.value?.title ?? "");
 const confirmationDescription = computed(
 	() => confirmation.value?.description ?? ""
@@ -86,10 +92,24 @@ const fields = [
 
 /* fetch everything once */
 async function loadAll() {
+	const recipientListRequest = fetchAdminRecipients()
+		.then(recipients => {
+			adminRecipients.value = recipients;
+			recipientListError.value = "";
+		})
+		.catch((error: any) => {
+			adminRecipients.value = [];
+			recipientListError.value =
+				error?.response?.data?.message ??
+				error?.message ??
+				"Unable to load saved recipient labels.";
+		});
+
 	await Promise.all([
 		app.fetchTutors(),
 		app.fetchUsers(),
-		app.refreshCurrentAdmin()
+		app.refreshCurrentAdmin(),
+		recipientListRequest
 	]);
 }
 
@@ -173,10 +193,10 @@ function userCourseLabels(userID: string) {
 
 function recipientOptionsForUser(userID: string) {
 	const currentValue = userRecipientNames.value[userID]?.trim();
-	if (!currentValue || ADMIN_RECIPIENT_NAMES.includes(currentValue)) {
-		return ADMIN_RECIPIENT_NAMES;
+	if (!currentValue || adminRecipientNames.value.includes(currentValue)) {
+		return adminRecipientNames.value;
 	}
-	return [...ADMIN_RECIPIENT_NAMES, currentValue];
+	return [...adminRecipientNames.value, currentValue];
 }
 
 watch(
@@ -888,6 +908,12 @@ function confirmDeleteAdmin() {
 									Choose the same recipient label used in Send
 									Markdown Email. Pick the blank option to
 									remove the association.
+								</p>
+								<p
+									v-if="recipientListError"
+									class="helper-text error-text"
+								>
+									{{ recipientListError }}
 								</p>
 							</div>
 
