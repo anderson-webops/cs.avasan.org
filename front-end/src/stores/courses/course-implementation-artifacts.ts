@@ -255,6 +255,8 @@ const scienceResourceBanks: Record<string, string[]> = {
 	]
 };
 
+const authoredLearnerCourseIds = new Set(["intro-to-chemistry"]);
+
 const apCsaUnitMap = [
 	"Unit 1 Using Objects and Methods: primitive values, objects, String, Math, method calls, wrapper parsing, input/output, and API reading.",
 	"Unit 2 Selection and Iteration: boolean logic, conditionals, loops, nested loops, tracing, debugging, and method/control-structure FRQ practice.",
@@ -962,18 +964,6 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 	if (!resources) return;
 	const links = scienceResourceLinks[courseId];
 
-	if (links) {
-		for (const module of course.modules) {
-			for (const item of [
-				...module.curriculum,
-				...module.supplementalProjects
-			]) {
-				item.mediaLink ??= links.mediaLink;
-				item.datasetLink ??= links.datasetLink;
-			}
-		}
-	}
-
 	appendModule(course, {
 		title: "Science Resource Shortlist and Remote Lab Bank",
 		curriculum: [
@@ -990,23 +980,17 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			{
 				title: "Module-by-Module Resource Mapping Routine",
 				content:
-					"**Learning sequence:** For each science module, choose one simulation/media source, one provided data table or graph, one model or diagram, and one CER prompt before class. The resource can be reused, but the question and vocabulary should match the module.\n\n**Completion checks:**\n- The work demonstrates the ability to access the evidence through Zoom.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation.",
-				mediaLink: links?.mediaLink,
-				datasetLink: links?.datasetLink
+					"**Learning sequence:** Each science module should connect one simulation or media source, one provided data table or graph, one model or diagram, and one CER prompt to the module question and vocabulary.\n\n**Completion checks:**\n- The evidence can be accessed through Zoom or a browser.\n- The task works without physical supplies.\n- The final product is a diagram, graph, data table, CER response, or short presentation."
 			},
 			{
 				title: "Remote Safety and Accessibility Check",
 				content:
-					"**Learning sequence:** Before assigning a science project, verify that it can be completed with notes, paper, a browser, and shared-screen material. If an optional household observation is suggested, provide a fully equivalent data/simulation alternative.\n\n**Completion check:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials.",
-				mediaLink: links?.mediaLink,
-				datasetLink: links?.datasetLink
+					"**Learning sequence:** Required science projects should be completable with notes, paper, a browser, and shared-screen material. Optional household observations need a fully equivalent data or simulation alternative.\n\n**Completion check:** No required project depends on beakers, kits, food, chemicals, heat, electricity, outdoor access, or parent-managed materials."
 			},
 			{
 				title: "Science Notebook Evidence Routine",
 				content:
-					"**Learning sequence:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction.\n\n**Completion check:** The work separates observation from inference and supports claims with visible evidence.",
-				mediaLink: links?.mediaLink,
-				datasetLink: links?.datasetLink
+					"**Learning sequence:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction.\n\n**Completion check:** The work separates observation from inference and supports claims with visible evidence."
 			}
 		],
 		supplementalProjects: [
@@ -1014,14 +998,12 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 				title: "Resource Project: Simulation-to-CER Writeup",
 				content:
 					"**Project goal:** Use one approved simulation or provided dataset to write a CER response. Include a screenshot or sketch of the model, two observations, one claim, evidence from the source, and reasoning that uses the target vocabulary.\n\n**Completion checks:**\n- The evidence comes from the shared source.\n- The reasoning explains why the evidence supports the claim.\n- The work includes a prediction for what would change if one variable changed.",
-				mediaLink: links?.mediaLink,
-				datasetLink: links?.datasetLink
+				mediaLink: links?.mediaLink
 			},
 			{
 				title: "Resource Project: Model Critique",
 				content:
-					"**Project goal:** Choose one model, diagram, graph, or simulation and explain what it shows well and what it leaves out.\n\n**Completion checks:**\n- The work identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The student suggests one improvement or follow-up question.",
-				mediaLink: links?.mediaLink,
+					"**Project goal:** Choose one model, diagram, graph, or simulation and explain what it shows well and what it leaves out.\n\n**Completion checks:**\n- The work identifies at least two strengths and one limitation.\n- The critique uses science vocabulary accurately.\n- The critique suggests one improvement or follow-up question.",
 				datasetLink: links?.datasetLink
 			}
 		]
@@ -2329,12 +2311,18 @@ export function applyCourseImplementationArtifacts(
 	courseId: string,
 	course: RawCourse
 ) {
+	const isAuthoredLearnerCourse = authoredLearnerCourseIds.has(courseId);
+
 	setCourseDevelopmentMetadata(courseId, course);
-	addMetadataBackboneModule(course);
+	if (!isAuthoredLearnerCourse) {
+		addMetadataBackboneModule(course);
+	}
 	addAlgebraSupplementalProjects(courseId, course);
-	addFullLessonAuthoringPack(courseId, course);
-	addSourceParityModule(courseId, course);
-	addScienceResourceModule(courseId, course);
+	if (!isAuthoredLearnerCourse) {
+		addFullLessonAuthoringPack(courseId, course);
+		addSourceParityModule(courseId, course);
+		addScienceResourceModule(courseId, course);
+	}
 	addAlgebraTaxonomyModule(courseId, course);
 	addAlgebraStandardsArchitectureModule(courseId, course);
 	addElementaryScienceDecision(courseId, course);

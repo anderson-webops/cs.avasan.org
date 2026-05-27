@@ -759,6 +759,51 @@ function solutionLabel(url: string) {
 	return "Solution link";
 }
 
+function datasetLabel(url: string) {
+	const normalizedUrl = url.toLowerCase();
+
+	if (normalizedUrl.includes("acs.org")) {
+		return "Chemistry reference";
+	}
+
+	if (normalizedUrl.includes("nist.gov")) {
+		return "Measurement reference";
+	}
+
+	if (normalizedUrl.includes("nextgenscience.org")) {
+		return "Standards reference";
+	}
+
+	if (normalizedUrl.includes("pubchem.ncbi.nlm.nih.gov")) {
+		return "Chemistry database";
+	}
+
+	if (
+		normalizedUrl.includes("nasa.gov") ||
+		normalizedUrl.includes("noaa.gov") ||
+		normalizedUrl.includes("usgs.gov") ||
+		normalizedUrl.includes("biointeractive.org")
+	) {
+		return "Science resource";
+	}
+
+	return "Dataset";
+}
+
+function mediaLabel(url: string) {
+	const normalizedUrl = url.toLowerCase();
+
+	if (normalizedUrl.includes("phet.colorado.edu/en/simulations/filter")) {
+		return "Simulation collection";
+	}
+
+	if (normalizedUrl.includes("phet.colorado.edu")) {
+		return "PhET simulation";
+	}
+
+	return "Media resource";
+}
+
 function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	const links: ResourceLink[] = [];
 	const projectUrl = item.projectLink?.trim();
@@ -787,7 +832,7 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	if (datasetUrl) {
 		links.push({
 			kind: "dataset",
-			label: "Dataset",
+			label: datasetLabel(datasetUrl),
 			url: datasetUrl,
 			host: linkHost(datasetUrl)
 		});
@@ -796,9 +841,7 @@ function resourceLinks(item: CourseModuleItem): ResourceLink[] {
 	if (mediaUrl && !isEmbeddedMedia(mediaUrl)) {
 		links.push({
 			kind: "media",
-			label: mediaUrl.includes("phet.colorado.edu")
-				? "Simulation resources"
-				: "Media resource",
+			label: mediaLabel(mediaUrl),
 			url: mediaUrl,
 			host: linkHost(mediaUrl)
 		});

@@ -314,12 +314,71 @@ describe("CourseExplorer.vue", () => {
 		await flushPromises();
 
 		await vi.waitFor(() => {
-			expect(wrapper.text()).toContain("Simulation resources");
+			expect(wrapper.text()).toContain("Simulation collection");
 		});
 
 		const link = wrapper.find(`a[href="${phetLink}"]`);
 		expect(link.exists()).toBe(true);
 		expect(wrapper.find(`img[src="${phetLink}"]`).exists()).toBe(false);
+	});
+
+	it("labels science reference links by purpose instead of calling every link a dataset", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const assignedCourse = coursesStore.courses[0];
+		const acsLink =
+			"https://www.acs.org/education/whatischemistry/periodictable.html";
+		const phetLink = "https://phet.colorado.edu/en/simulations/build-an-atom";
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: assignedCourse.id,
+			name: assignedCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Use chemistry references.",
+							datasetLink: acsLink,
+							id: "chemistry-resource",
+							mediaLink: phetLink,
+							title: "Chemistry Resource"
+						}
+					],
+					id: "module-1",
+					supplementalProjects: [],
+					title: "Module 1"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [assignedCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Chemistry reference");
+			expect(wrapper.text()).toContain("PhET simulation");
+		});
+
+		expect(wrapper.text()).not.toContain("Dataset");
 	});
 
 	it("renders solution code preview controls for staff course context", async () => {

@@ -7,6 +7,8 @@ import {
 } from "@/stores/courses/course-implementation-artifacts";
 import { researchBackedExpansionCourseIds } from "@/stores/courses/research-expansions";
 
+const authoredLearnerCourseIds = new Set(["intro-to-chemistry"]);
+
 async function requireCourse(courseId: string) {
 	const course = await loadRawCourse(courseId);
 	expect(course, courseId).not.toBeNull();
@@ -84,7 +86,6 @@ describe("implemented course development artifacts", () => {
 		for (const courseId of [
 			"elementary-science",
 			"middle-school-integrated-science",
-			"intro-to-chemistry",
 			"intro-to-physics",
 			"physics-level-2"
 		]) {
@@ -107,6 +108,11 @@ describe("implemented course development artifacts", () => {
 				courseId
 			).toBe(true);
 		}
+
+		const chemistryText = allText(await requireCourse("intro-to-chemistry"));
+		expect(chemistryText).toContain("CHM10 Chemistry Resource Bank");
+		expect(chemistryText).toContain("Core Chemistry References");
+		expect(chemistryText).toContain("Remote-Safe Investigation Checklist");
 
 		expect(allText(await requireCourse("elementary-science"))).toContain(
 			"Decision: Keep One Course with K-2 and 3-5 Paths"
@@ -169,6 +175,8 @@ describe("implemented course development artifacts", () => {
 
 	it("records source policy decisions for content-only or composed courses", async () => {
 		for (const courseId of Object.keys(courseContentOnlySourcePolicies)) {
+			if (authoredLearnerCourseIds.has(courseId)) continue;
+
 			const text = allText(await requireCourse(courseId));
 
 			expect(text, courseId).toContain("Source and Asset Parity Implementation");
@@ -199,9 +207,11 @@ describe("implemented course development artifacts", () => {
 			expect(metadata?.courseBoundaries.length, id).toBeGreaterThanOrEqual(2);
 			expect(metadata?.capstoneExpectations.length, id).toBeGreaterThanOrEqual(2);
 			expect(metadata?.recommendedNextWork.length, id).toBeGreaterThanOrEqual(3);
-			expect(allText(course), id).toContain(
-				"Standards, Source, Assessment, and Safety Backbone"
-			);
+			if (!authoredLearnerCourseIds.has(id)) {
+				expect(allText(course), id).toContain(
+					"Standards, Source, Assessment, and Safety Backbone"
+				);
+			}
 		}
 	}, 30000);
 

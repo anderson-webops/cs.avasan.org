@@ -1464,14 +1464,18 @@ export const researchBackedExpansionProfiles: Record<
 	"web-development-foundations": webProfile
 };
 
+const authoredLearnerExpansionCourseIds = new Set(["intro-to-chemistry"]);
+
 export const researchBackedExpansionCourseIds = Object.keys(
 	researchBackedExpansionProfiles
-);
+).filter(courseId => !authoredLearnerExpansionCourseIds.has(courseId));
 
 export function applyResearchBackedExpansions(
 	courseId: string,
 	course: RawCourse
 ) {
+	if (authoredLearnerExpansionCourseIds.has(courseId)) return;
+
 	const profile = researchBackedExpansionProfiles[courseId];
 
 	if (!profile) return;

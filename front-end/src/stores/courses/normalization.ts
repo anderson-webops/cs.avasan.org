@@ -302,6 +302,15 @@ function enrichBriefConceptLesson(item: RawCourseModuleItem) {
 	};
 }
 
+function hasAttachedResource(item: RawCourseModuleItem) {
+	return Boolean(
+		item.projectLink ||
+		item.solutionLink ||
+		item.datasetLink ||
+		item.mediaLink
+	);
+}
+
 function groupConceptLessons(items: RawCourseModuleItem[]) {
 	if (items.length <= 4) {
 		return [
@@ -334,6 +343,13 @@ function normalizeModuleLessonShape(course: RawCourse) {
 		if (conceptItems.length === 0) continue;
 
 		if (conceptItems.length <= 2) {
+			module.curriculum = module.curriculum.map(item =>
+				isProjectLikeItem(item) ? item : enrichBriefConceptLesson(item)
+			);
+			continue;
+		}
+
+		if (conceptItems.some(hasAttachedResource)) {
 			module.curriculum = module.curriculum.map(item =>
 				isProjectLikeItem(item) ? item : enrichBriefConceptLesson(item)
 			);

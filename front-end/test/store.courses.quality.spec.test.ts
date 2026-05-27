@@ -149,6 +149,41 @@ describe("course text quality normalization", () => {
 		);
 	});
 
+	it("keeps Intro to Chemistry authored, deduplicated, and resource-specific", async () => {
+		const course = await loadRawCourse("intro-to-chemistry");
+		expect(course).not.toBeNull();
+
+		const moduleTitles = course!.modules.map(module => module.title);
+		const duplicateTitles = moduleTitles.filter(
+			(title, index) => moduleTitles.indexOf(title) !== index
+		);
+		const text = allCourseText(course);
+		const items = course!.modules.flatMap(module => [
+			...module.curriculum,
+			...module.supplementalProjects
+		]);
+		const linkedItems = items.filter(
+			item => item.mediaLink || item.datasetLink
+		);
+		const phetLinks = new Set(
+			items
+				.map(item => item.mediaLink)
+				.filter((link): link is string => Boolean(link))
+		);
+
+		expect(duplicateTitles).toEqual([]);
+		expect(text).not.toMatch(/Implementation Studio|Full Lesson Authoring Pack/i);
+		expect(text).not.toMatch(/Standards and Scope Expansion|Module Backlog/i);
+		expect(text).not.toMatch(/Source and Asset Parity Implementation/i);
+		expect(text).not.toMatch(/Guide students|Require students|Push them/i);
+		expect(items.length).toBeGreaterThanOrEqual(50);
+		expect(linkedItems.length).toBeGreaterThan(8);
+		expect(linkedItems.length).toBeLessThan(items.length * 0.65);
+		expect(phetLinks.size).toBeGreaterThanOrEqual(6);
+		expect(text).toContain("Remote-Safe Investigation Checklist");
+		expect(text).toContain("Chemistry Explanation Rubric");
+	});
+
 	it("turns applied studio labs into explicit studio specifications", async () => {
 		const course = await loadRawCourse("low-level-security");
 		expect(course).not.toBeNull();
