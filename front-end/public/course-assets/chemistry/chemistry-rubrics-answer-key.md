@@ -1,6 +1,6 @@
 # Intro to Chemistry Rubrics and Answer Key
 
-This key supports the remote materials pack. It is concise by design: use it to check reasoning, not to replace a written explanation.
+This key supports the remote materials pack. Use it to check reasoning, compare worked examples, and identify common misconception patterns before revising a response.
 
 ## General CER Rubric
 
@@ -13,6 +13,20 @@ This key supports the remote materials pack. It is concise by design: use it to 
 ## Measurement Tables Key
 
 Table A is easiest to interpret because units and precision are consistent. Table B can be used after conversion. Table C is not reliable by itself because the numbers lack units and measurement labels. A strong response explains that arithmetic can be correct while the chemistry conclusion is wrong if the unit context is missing.
+
+Worked conversion examples:
+
+1. `0.0248 kg = 24.8 g`
+2. `0.050 L = 50.0 mL`
+3. `295 K ≈ 21.9 C`
+
+Common revision target: a response that says "Table B is wrong" is too broad. Table B is repairable because the units are present; Table C is the one that lacks enough context.
+
+## Model Comparison Key
+
+A strong comparison chooses the model based on the question being answered. For composition, `H₂O` is efficient because it shows the fixed hydrogen-to-oxygen ratio. For particle spacing or motion, a particle diagram or simulation is better. For a change over time, a graph is usually stronger. The limitation should be specific: a balanced equation conserves atoms, but it does not show reaction speed, energy, or mechanism unless extra information is supplied.
+
+Sample answer: A heating curve is best for explaining why temperature can pause during boiling because the flat graph region directly shows temperature over time. It is not enough by itself to show what particles are doing, so a particle diagram should be added for the reasoning part.
 
 ## Matter and Classification Key
 
@@ -28,7 +42,15 @@ Carbon-12, carbon-13, and carbon-14 are all carbon because they have six protons
 
 ## Ion Formula Key
 
-Examples: NaCl, KF, MgO, CaBr2, Al2O3, NH4NO3. A correct explanation balances total positive and negative charge without changing the ion identities.
+Examples: `NaCl`, `KF`, `MgO`, `CaBr₂`, `Al₂O₃`, `NH₄NO₃`. A correct explanation balances total positive and negative charge without changing the ion identities.
+
+Worked charge-balance examples:
+
+1. `Mg²⁺` and `Cl⁻`: one magnesium ion contributes +2, so two chloride ions are needed for -2 total. Formula: `MgCl₂`.
+2. `Al³⁺` and `O²⁻`: two aluminum ions contribute +6 and three oxide ions contribute -6. Formula: `Al₂O₃`.
+3. `NH₄⁺` and `NO₃⁻`: charges balance one-to-one. Formula: `NH₄NO₃`.
+
+Common revision target: do not change chloride into `Cl²⁻` to make the charges work. Change the number of ions, not the ion charge.
 
 ## Periodic Trend Key
 
@@ -36,11 +58,32 @@ Across period 2 from Li to F, atomic radius generally decreases while attraction
 
 ## Bonding and Formula Key
 
-Metal plus nonmetal formulas are usually introduced as ionic at this level. Nonmetal plus nonmetal formulas are usually introduced as covalent. NaCl and MgCl2 should be described as formula units, not separate molecules. Water and carbon dioxide both have three atoms, but water is bent while carbon dioxide is linear.
+Metal plus nonmetal formulas are usually introduced as ionic at this level. Nonmetal plus nonmetal formulas are usually introduced as covalent. `NaCl` and `MgCl₂` should be described as formula units, not separate molecules. Water and carbon dioxide both have three atoms, but water is bent while carbon dioxide is linear.
+
+## Lewis Structure Key
+
+Strong Lewis-style work shows a defensible electron count and a structure clue, not just a memorized drawing.
+
+| Formula | Expected First-Pass Reasoning |
+| --- | --- |
+| `H₂` | One shared pair gives each hydrogen two electrons. |
+| `O₂` | Twelve valence electrons support a double bond and two lone pairs on each oxygen in the common intro model. |
+| `H₂O` | Oxygen forms two O-H bonds and has two lone pairs, so the shape is bent rather than linear. |
+| `CO₂` | Carbon is central with two double bonds to oxygen, producing a linear model. |
+| `CH₄` | Carbon forms four single bonds to hydrogen and has no lone pairs. |
+| `NH₃` | Nitrogen forms three N-H bonds and has one lone pair, giving a pyramidal shape in the intro model. |
+
+Common revision target: a formula gives atom count but not shape. The answer must reference bonding and lone pairs when explaining why `H₂O` and `CO₂` differ.
 
 ## Heating Curve Key
 
 The flat sections at 0 C and 100 C represent phase changes. Energy is still transferred during those flat sections, but it changes particle arrangement and attractions rather than increasing average particle motion.
+
+## Phase Diagram Key
+
+Strong phase-diagram reasoning treats the diagram as a map of conditions. Point A is solid, B is liquid, and C is gas in the simplified model. Point D is on the melting/freezing boundary and point E is on the boiling/condensing boundary. Moving right usually increases temperature; moving up increases pressure. A response should state both coordinates before naming the state.
+
+Sample answer: At 25 C and 3 atm, the model favors liquid rather than gas because pressure is higher than ordinary 1 atm conditions. The exact boundary depends on the substance, so this simplified table should not be treated as a universal phase diagram.
 
 ## Intermolecular Property Key
 
@@ -48,15 +91,50 @@ Water should be predicted to have stronger attractions and a higher boiling poin
 
 ## Reaction Type Key
 
-`2H2 + O2 -> 2H2O` is synthesis. `2H2O2 -> 2H2O + O2` is decomposition. `CH4 + 2O2 -> CO2 + 2H2O` is combustion. `AgNO3 + NaCl -> AgCl + NaNO3` is double replacement and precipitation. `Zn + 2HCl -> ZnCl2 + H2` is single replacement. Acid plus base producing salt and water is neutralization.
+`2H₂ + O₂ → 2H₂O` is synthesis. `2H₂O₂ → 2H₂O + O₂` is decomposition. `CH₄ + 2O₂ → CO₂ + 2H₂O` is combustion. `AgNO₃ + NaCl → AgCl + NaNO₃` is double replacement and precipitation. `Zn + 2HCl → ZnCl₂ + H₂` is single replacement. Acid plus base producing salt and water is neutralization.
+
+## Reaction Energy and Rate Key
+
+Energy evidence and rate evidence are different claims. A glow stick emitting light supports energy transfer; fading over time supports a rate or reactant-use observation. Crushing a tablet supports a rate claim through surface area but does not by itself prove heat release. A catalyst case supports faster reaction if the setup compares with and without the catalyst. A cold-pack case supports energy absorption if temperature decreases in the surroundings.
+
+Common revision target: do not write "the reaction is fast because it releases energy." Rate needs time-based evidence; energy needs heat, light, electrical, or other transfer evidence.
+
+## Equilibrium Key
+
+Strong equilibrium answers name opposing processes. In a sealed carbonated drink, carbon dioxide leaves the liquid and dissolves back into the liquid. At equilibrium those processes continue at matching rates. Opening the container lowers pressure, so gas leaving becomes favored until a new condition is reached. In saturated solution, dissolving and recrystallizing can both continue even when the visible amount of solid appears stable.
+
+Common revision target: avoid defining equilibrium as "nothing is happening." The correct intro idea is dynamic balance.
+
+## Redox Key
+
+Strong redox answers name electron-transfer direction or electron-density change. In rusting, iron is oxidized into iron-containing compounds while oxygen is reduced in the simplified model. In a zinc/copper cell, zinc metal becomes zinc ions while copper ions become copper metal. The visible evidence alone shows chemical change; redox language explains a more specific particle-level pattern.
+
+Common revision target: redox is not a synonym for any reaction. It is appropriate only when electron transfer or changed electron ownership is part of the model.
 
 ## Concentration and pH Key
 
 More solute at the same volume increases concentration. Adding water to the same solute decreases concentration. Doubling both solute and volume leaves concentration about the same. Lower pH means more acidic; dilution usually moves pH toward neutral but does not mean the acid or base has disappeared.
 
+Worked reasoning examples:
+
+1. If solute doubles and volume is unchanged, concentration increases.
+2. If solute is unchanged and water is added, concentration decreases because the same amount is spread through more solution.
+3. If solute and volume both double, the ratio can stay about the same.
+4. A pH change of 1 is not a small linear step; pH is logarithmic, so explanations should avoid treating pH 3 and pH 4 as one ordinary unit apart.
+
 ## Molar Mass and Stoichiometry Key
 
-`H2O` is about 18 g/mol. `CO2` is about 44 g/mol. `NaCl` is about 58.5 g/mol. `CaCO3` is about 100 g/mol. 36 g of water is about 2 mol. In `2H2 + O2 -> 2H2O`, 1 mol oxygen produces 2 mol water. In `CH4 + 2O2 -> CO2 + 2H2O`, 1 mol methane produces 2 mol water.
+`H₂O` is about 18 g/mol. `CO₂` is about 44 g/mol. `NaCl` is about 58.5 g/mol. `CaCO₃` is about 100 g/mol. 36 g of water is about 2 mol. In `2H₂ + O₂ → 2H₂O`, 1 mol oxygen produces 2 mol water. In `CH₄ + 2O₂ → CO₂ + 2H₂O`, 1 mol methane produces 2 mol water.
+
+Worked setup examples:
+
+1. `H₂O`: `2(1) + 16 = 18 g/mol`.
+2. `CO₂`: `12 + 2(16) = 44 g/mol`.
+3. `NaCl`: `23 + 35.5 = 58.5 g/mol`.
+4. `CaCO₃`: `40 + 12 + 3(16) = 100 g/mol`.
+5. `36 g H₂O × (1 mol / 18 g) = 2 mol H₂O`.
+
+Common revision target: coefficients from balanced equations compare moles, not grams directly. A grams-to-grams problem must go grams → moles → mole ratio → moles → grams.
 
 ## Stoichiometry Error Key
 
@@ -72,3 +150,7 @@ Case A changes a formula instead of using coefficients. Case B uses the wrong mo
 | Chemistry Accuracy | Terms such as atom, ion, molecule, solution, concentration, reaction, energy, and evidence are used correctly |
 | Safety | No required step depends on household chemicals, heat, glassware, ingestion, pressure, or disposal |
 | Revision | The final artifact names one uncertainty and one piece of evidence that would change the conclusion |
+
+Capstone example: For carbonation, a strong claim could be "Opening a sealed carbonated drink lowers pressure and causes dissolved carbon dioxide to leave solution." Good evidence could include a pressure-change scenario, a gas-solubility diagram, and a pH table. The particle model should explain dissolved gas particles and gas-space particles, while the limitation should name missing exact measurements.
+
+Common revision target: a capstone topic such as "batteries" or "cleaning" is too broad until narrowed to one claim, one evidence set, and one model.

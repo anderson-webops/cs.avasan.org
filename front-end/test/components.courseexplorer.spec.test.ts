@@ -2,6 +2,7 @@ import { flushPromises, mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { api } from "@/api";
+import { resetCourseAssetPreviewCache } from "@/modules/courseAssetPreview";
 import CourseExplorer from "@/components/CourseExplorer.vue";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
@@ -17,11 +18,13 @@ describe("CourseExplorer.vue", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
+		resetCourseAssetPreviewCache();
 		vi.useRealTimers();
 	});
 
 	afterEach(() => {
 		vi.useRealTimers();
+		vi.unstubAllGlobals();
 	});
 
 	it("renders course stats for an assigned learner without throwing", async () => {
@@ -393,6 +396,104 @@ describe("CourseExplorer.vue", () => {
 
 		expect(wrapper.text()).not.toContain("Rubric / answer key");
 		expect(wrapper.text()).not.toContain("Dataset");
+	});
+
+	it("renders local course asset fragments inside the course viewer", async () => {
+		const fetcher = vi.fn(async () => ({
+			ok: true,
+			text: async () =>
+				[
+					"# Intro to Chemistry Remote Materials Pack",
+					"",
+					"## Measurement Tables and Unit Conversions",
+					"",
+					"Measurement text that should not appear in the section preview.",
+					"",
+					"## Heating Curve Data",
+					"",
+					"Flat regions can still involve energy transfer.",
+					"",
+					"## Capstone Evidence Seeds",
+					"",
+					"Capstone text that should not appear."
+				].join("\n")
+		})) as any;
+		vi.stubGlobal("fetch", fetcher);
+
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const assignedCourse = coursesStore.courses[0];
+		const materialLink =
+			"/course-assets/chemistry/chemistry-materials-pack.md#heating-curve-data";
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: assignedCourse.id,
+			name: assignedCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Compare local chemistry data.",
+							datasetLink: materialLink,
+							id: "chemistry-material",
+							solutionLink:
+								"/course-assets/chemistry/chemistry-rubrics-answer-key.md#heating-curve-key",
+							title: "Chemistry Material"
+						}
+					],
+					id: "module-1",
+					supplementalProjects: [],
+					title: "Module 1"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [assignedCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("View Heating curve data");
+		});
+
+		expect(wrapper.text()).not.toContain("Rubric / answer key");
+
+		await wrapper.find(".course-asset-preview-toggle").trigger("click");
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Course resource section");
+			expect(wrapper.text()).toContain("Heating Curve Data");
+			expect(wrapper.text()).toContain(
+				"Flat regions can still involve energy transfer."
+			);
+		});
+
+		expect(fetcher).toHaveBeenCalledWith(
+			"/course-assets/chemistry/chemistry-materials-pack.md"
+		);
+		expect(wrapper.text()).not.toContain(
+			"Measurement text that should not appear"
+		);
+		expect(wrapper.text()).not.toContain("Capstone text that should not appear");
 	});
 
 	it("renders solution code preview controls for staff course context", async () => {

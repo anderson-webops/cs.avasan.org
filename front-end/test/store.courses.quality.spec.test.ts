@@ -1,7 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
+import fs from "node:fs";
 import { createPinia, setActivePinia } from "pinia";
 import { useCoursesStore } from "@/stores/courses";
 import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
+import { slugMarkdownHeading } from "@/modules/courseAssetPreview";
 
 function allCourseText(course: Awaited<ReturnType<typeof loadRawCourse>>) {
 	if (!course) return "";
@@ -37,6 +39,15 @@ function findItem(
 	}
 
 	throw new Error(`Could not find course item matching ${titlePattern}`);
+}
+
+function markdownHeadingSlugs(path: string) {
+	const markdown = fs.readFileSync(path, "utf8");
+	return new Set(
+		[...markdown.matchAll(/^##+\s+(.+)$/gm)].map(match =>
+			slugMarkdownHeading(match[1])
+		)
+	);
 }
 
 describe("course text quality normalization", () => {
@@ -184,15 +195,54 @@ describe("course text quality normalization", () => {
 		expect(text).not.toMatch(/Guide students|Require students|Push them/i);
 		expect(text).not.toContain("CHM0");
 		expect(items.length).toBeGreaterThanOrEqual(70);
-		expect(linkedItems.length).toBeGreaterThan(items.length * 0.75);
-		expect(localMaterialLinks.length).toBeGreaterThan(24);
-		expect(answerKeyLinks.length).toBeGreaterThan(16);
+		expect(linkedItems).toHaveLength(items.length);
+		expect(localMaterialLinks.length).toBeGreaterThan(32);
+		expect(answerKeyLinks.length).toBeGreaterThan(24);
 		expect(phetLinks.size).toBeGreaterThanOrEqual(6);
+		expect(text).toContain("Phase Diagrams as Maps of Conditions");
+		expect(text).toContain("Reaction Energy and Rates");
+		expect(text).toContain("Redox, Batteries, and Electron Transfer");
 		expect(text).toContain("Remote-Safe Investigation Checklist");
 		expect(text).toContain("Chemistry Explanation Rubric");
 		expect(text).toContain("CHM10 Advanced Chemistry Map");
 		expect(text).toContain("CHM12 Chemistry Resource Bank");
 		expect(text).toContain("Stoichiometry Error Analysis");
+	});
+
+	it("keeps Intro to Chemistry local asset fragments backed by real headings", async () => {
+		const course = await loadRawCourse("intro-to-chemistry");
+		expect(course).not.toBeNull();
+
+		const materialHeadings = markdownHeadingSlugs(
+			"public/course-assets/chemistry/chemistry-materials-pack.md"
+		);
+		const answerHeadings = markdownHeadingSlugs(
+			"public/course-assets/chemistry/chemistry-rubrics-answer-key.md"
+		);
+		const missingFragments: string[] = [];
+
+		for (const module of course!.modules) {
+			for (const item of [
+				...module.curriculum,
+				...module.supplementalProjects
+			]) {
+				for (const link of [item.datasetLink, item.solutionLink]) {
+					if (!link?.startsWith("/course-assets/chemistry/")) continue;
+					if (!link.includes("#")) continue;
+
+					const [path, hash] = link.split("#", 2);
+					const headingSet = path.includes("materials-pack")
+						? materialHeadings
+						: answerHeadings;
+
+					if (!headingSet.has(hash)) {
+						missingFragments.push(`${item.title}: ${link}`);
+					}
+				}
+			}
+		}
+
+		expect(missingFragments).toEqual([]);
 	});
 
 	it("turns applied studio labs into explicit studio specifications", async () => {

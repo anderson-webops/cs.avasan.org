@@ -20,7 +20,8 @@ const REFERENCES = {
 	acsPeriodicTable:
 		"https://www.acs.org/education/whatischemistry/periodictable.html",
 	ngssAppendices: "https://www.nextgenscience.org/resources/ngss-appendices",
-	nistSiUnits: "https://www.nist.gov/pml/owm/metric-si/si-units"
+	nistSiUnits: "https://www.nist.gov/pml/owm/metric-si/si-units",
+	openStaxChemistry: "https://openstax.org/details/books/chemistry-2e"
 } as const;
 
 const MATERIALS = {
@@ -73,7 +74,9 @@ export const introToChemistryCourse: RawCourse = {
 						"**Remote-safe activity:** Compare a particle diagram, a chemical formula, and a simulation screenshot for the same substance or process. Identify one strength and one limitation of each representation.",
 						"**Output:** A model-comparison table with the columns representation, what it shows well, what it hides, and when it is useful.",
 						"**CER checkpoint:** Defend which model is best for explaining a beginner question about matter, and identify one question that the model cannot answer by itself."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("model-comparison-cards"),
+					solutionLink: answerKey("model-comparison-key")
 				},
 				{
 					title: "Safety and Remote Investigation Boundaries",
@@ -106,7 +109,9 @@ export const introToChemistryCourse: RawCourse = {
 						"**Project goal:** Choose two representations of the same chemistry idea and compare how well they explain it. Good choices include a formula versus a particle diagram, a graph versus a simulation, or a word explanation versus an equation.",
 						"**Requirements:** Name the chemistry idea, explain what each representation shows, identify what each leaves out, and choose which one is most useful for a beginner explanation.",
 						"**Completion checks:** The comparison uses at least three chemistry vocabulary terms and includes one limitation instead of claiming any model is perfect."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("model-comparison-cards"),
+					solutionLink: answerKey("model-comparison-key")
 				}
 			]
 		},
@@ -132,7 +137,9 @@ export const introToChemistryCourse: RawCourse = {
 						"**Remote-safe activity:** Classify examples such as oxygen gas, water, salt water, brass, air, carbon dioxide, and trail mix. The key is whether the composition is fixed and whether atoms are bonded into a new substance.",
 						"**Output:** A decision tree for element, compound, homogeneous mixture, and heterogeneous mixture.",
 						"**CER checkpoint:** Explain why salt water is not the same category as sodium chloride even though both contain sodium and chlorine."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("matter-and-classification-cards"),
+					solutionLink: answerKey("matter-and-classification-key")
 				},
 				{
 					title: "Particle Models of Solids, Liquids, and Gases",
@@ -341,10 +348,10 @@ export const introToChemistryCourse: RawCourse = {
 					title: "Ionic Compounds and Formula Units",
 					content: [
 						"**Concept path:** Ionic compounds form from patterns of positive and negative ions. A formula unit shows the simplest whole-number ratio needed for total charge balance.",
-						"**Remote-safe activity:** Use the ion cards to build neutral formulas such as NaCl, MgCl2, Al2O3, CaF2, and NH4NO3. Balance total positive and negative charge before writing the formula.",
-						"**Worked example:** Aluminum is `+3` and oxide is `-2`, so the smallest neutral ratio is two aluminum ions and three oxide ions: `Al2O3`.",
+						"**Remote-safe activity:** Use the ion cards to build neutral formulas such as `NaCl`, `MgCl₂`, `Al₂O₃`, `CaF₂`, and `NH₄NO₃`. Balance total positive and negative charge before writing the formula.",
+						"**Worked example:** Aluminum is `+3` and oxide is `-2`, so the smallest neutral ratio is two aluminum ions and three oxide ions: `Al₂O₃`.",
 						"**Output:** Six ionic formula examples with charge-balance evidence.",
-						"**CER checkpoint:** Explain why MgCl2 needs two chloride ions for one magnesium ion."
+						"**CER checkpoint:** Explain why `MgCl₂` needs two chloride ions for one magnesium ion."
 					].join("\n\n"),
 					datasetLink: material("ion-and-formula-cards"),
 					solutionLink: answerKey("ion-formula-key")
@@ -353,10 +360,12 @@ export const introToChemistryCourse: RawCourse = {
 					title: "Covalent Molecules and Lewis-Style Thinking",
 					content: [
 						"**Concept path:** Covalent molecules share electron pairs between nonmetal atoms. Lewis-style diagrams help track valence electrons and bonding patterns without requiring advanced quantum detail.",
-						"**Remote-safe activity:** Sketch simple dot or line structures for H2, O2, H2O, CO2, CH4, and NH3. Count bonds and lone pairs where appropriate.",
+						"**Remote-safe activity:** Sketch simple dot or line structures for `H₂`, `O₂`, `H₂O`, `CO₂`, `CH₄`, and `NH₃`. Count bonds and lone pairs where appropriate.",
 						"**Output:** A molecule sketch set with formula, atom count, bonds, and one limitation of the drawing.",
 						"**CER checkpoint:** Explain why water and carbon dioxide have different shapes even though both contain three atoms."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("lewis-structure-practice-set"),
+					solutionLink: answerKey("lewis-structure-key")
 				},
 				{
 					title: "Molecular Shape and Polarity",
@@ -436,7 +445,9 @@ export const introToChemistryCourse: RawCourse = {
 						"**Remote-safe activity:** Read a simplified phase diagram and identify solid, liquid, gas, melting, boiling, and sublimation regions. Compare what changes when pressure increases or temperature decreases.",
 						"**Output:** Three phase-diagram coordinate questions and one changed-condition prediction.",
 						"**CER checkpoint:** Explain why pressure can matter for phase, not only temperature."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("phase-diagram-data"),
+					solutionLink: answerKey("phase-diagram-key")
 				}
 			],
 			supplementalProjects: [
@@ -493,7 +504,7 @@ export const introToChemistryCourse: RawCourse = {
 					content: [
 						"**Concept path:** Reaction types such as synthesis, decomposition, single replacement, double replacement, combustion, precipitation, and acid-base reaction describe patterns that help predict products and organize evidence.",
 						"**Remote-safe activity:** Sort the reaction type cards by pattern. The goal is pattern recognition and evidence, not advanced prediction rules.",
-						"**Worked example:** `CH4 + 2O2 -> CO2 + 2H2O` is combustion because a carbon-containing fuel reacts with oxygen and forms carbon dioxide and water.",
+						"**Worked example:** `CH₄ + 2O₂ → CO₂ + 2H₂O` is combustion because a carbon-containing fuel reacts with oxygen and forms carbon dioxide and water.",
 						"**Output:** A reaction-type chart with one reason for each classification.",
 						"**CER checkpoint:** Explain how a reaction type helps summarize what changed."
 					].join("\n\n"),
@@ -636,8 +647,8 @@ export const introToChemistryCourse: RawCourse = {
 					title: "Molar Mass and Unit Conversion",
 					content: [
 						"**Concept path:** Molar mass connects grams to moles. Periodic table masses provide the bridge from measurable lab-scale mass to particle-scale amount.",
-						"**Remote-safe activity:** Calculate molar masses for H2O, CO2, NaCl, O2, and CaCO3 using a periodic table and the practice set. Keep units visible at every step.",
-						"**Worked example:** `H2O` has two hydrogens and one oxygen. With approximate masses H = 1 and O = 16, the molar mass is `2(1) + 16 = 18 g/mol`.",
+						"**Remote-safe activity:** Calculate molar masses for `H₂O`, `CO₂`, `NaCl`, `O₂`, and `CaCO₃` using a periodic table and the practice set. Keep units visible at every step.",
+						"**Worked example:** `H₂O` has two hydrogens and one oxygen. With approximate masses H = 1 and O = 16, the molar mass is `2(1) + 16 = 18 g/mol`.",
 						"**Output:** Five molar-mass calculations and two grams-to-moles conversions.",
 						"**CER checkpoint:** Explain why molar mass depends on formula composition."
 					].join("\n\n"),
@@ -651,7 +662,7 @@ export const introToChemistryCourse: RawCourse = {
 					content: [
 						"**Concept path:** Coefficients in a balanced equation create mole ratios. Stoichiometry uses those ratios to connect reactant amounts to product amounts.",
 						"**Remote-safe activity:** Read a balanced equation from the practice set and identify all usable mole ratios. Use simple one-step conversions before combining with grams.",
-						"**Worked example:** In `2H2 + O2 -> 2H2O`, the ratio from oxygen to water is `1 mol O2 : 2 mol H2O`. The ratio comes from coefficients, not subscripts.",
+						"**Worked example:** In `2H₂ + O₂ → 2H₂O`, the ratio from oxygen to water is `1 mol O₂ : 2 mol H₂O`. The ratio comes from coefficients, not subscripts.",
 						"**Output:** Four mole-ratio problems with the ratio highlighted before calculation.",
 						"**CER checkpoint:** Explain why unbalanced equations cannot support stoichiometry."
 					].join("\n\n"),
@@ -711,7 +722,8 @@ export const introToChemistryCourse: RawCourse = {
 						"**Output:** A two-column explanation separating energy evidence from rate evidence.",
 						"**CER checkpoint:** Explain why a reaction can be energetically favorable but still slow without enough useful collisions."
 					].join("\n\n"),
-					datasetLink: material("capstone-evidence-seeds")
+					datasetLink: material("reaction-energy-and-rate-cases"),
+					solutionLink: answerKey("reaction-energy-and-rate-key")
 				},
 				{
 					title: "Equilibrium as Dynamic Balance",
@@ -722,7 +734,8 @@ export const introToChemistryCourse: RawCourse = {
 						"**Output:** A dynamic-balance diagram with forward process, reverse process, changed condition, and predicted shift.",
 						"**CER checkpoint:** Explain why equilibrium is not the same as nothing happening."
 					].join("\n\n"),
-					datasetLink: material("capstone-evidence-seeds")
+					datasetLink: material("equilibrium-evidence-cases"),
+					solutionLink: answerKey("equilibrium-key")
 				},
 				{
 					title: "Redox, Batteries, and Electron Transfer",
@@ -733,7 +746,8 @@ export const introToChemistryCourse: RawCourse = {
 						"**Output:** A redox story map with substance before, substance after, electron-transfer idea, and visible evidence.",
 						"**CER checkpoint:** Explain why redox is more specific than simply saying a chemical reaction happened."
 					].join("\n\n"),
-					datasetLink: material("capstone-evidence-seeds")
+					datasetLink: material("redox-evidence-cases"),
+					solutionLink: answerKey("redox-key")
 				},
 				{
 					title: "Nuclear, Organic, and Materials Chemistry Boundaries",
@@ -804,7 +818,9 @@ export const introToChemistryCourse: RawCourse = {
 						"**Remote-safe activity:** Draft a CER-based capstone explanation. Use course concepts from at least four modules, such as atoms, periodic table, bonding, phase change, reactions, solutions, or stoichiometry.",
 						"**Output:** A structured explanation with claim, evidence, reasoning, model, vocabulary, and prediction sections.",
 						"**CER checkpoint:** Check whether every claim has evidence and whether every vocabulary term is used accurately."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("capstone-evidence-seeds"),
+					solutionLink: answerKey("capstone-rubric")
 				},
 				{
 					title: "Presentation, Revision, and Reflection",
@@ -813,7 +829,9 @@ export const introToChemistryCourse: RawCourse = {
 						"**Remote-safe activity:** Present the capstone as slides, a short written report, or an annotated notebook page. Revise after feedback by strengthening evidence, clarifying vocabulary, or narrowing the claim.",
 						"**Output:** A final capstone artifact and a short reflection naming one strengthened idea and one remaining question.",
 						"**CER checkpoint:** Explain what evidence would change the conclusion."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("capstone-evidence-seeds"),
+					solutionLink: answerKey("capstone-rubric")
 				}
 			],
 			supplementalProjects: [
@@ -845,11 +863,11 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Core Chemistry References",
 					content: [
-						"**Resource bank:** Use the ACS Chemistry Guidelines, ACS periodic table, NIST SI units page, NGSS appendices, and the local materials pack as reference material for standards, safety boundaries, periodic-table reading, units, and evidence practices.",
+						"**Resource bank:** Use the ACS Chemistry Guidelines, ACS periodic table, NIST SI units page, NGSS appendices, OpenStax Chemistry 2e, and the local materials pack as reference material for standards, safety boundaries, periodic-table reading, units, equations, and evidence practices.",
 						"**Use:** These links are not separate assignments by default. They support the specific lessons and projects that cite them.",
 						"**Completion check:** Any reference used in a project should be named in the evidence log with a short note explaining what it contributed."
 					].join("\n\n"),
-					datasetLink: MATERIALS.pack,
+					datasetLink: REFERENCES.openStaxChemistry,
 					solutionLink: MATERIALS.answerKey
 				},
 				{
@@ -869,7 +887,9 @@ export const introToChemistryCourse: RawCourse = {
 						"**Use:** Before a project begins, identify the phenomenon, evidence source, vocabulary target, model, and final CER prompt. If the evidence source is a simulation or table, record why that source is appropriate for the claim being made.",
 						"**Safety boundary:** Tasks may use public datasets, diagrams, readings, simulations, or simple observations that do not require handling chemicals. Anything involving beakers, kits, unknown chemicals, heat, pressure buildup, electrical components, ingestion, outdoor collection, or adult-managed supplies is replaced with a nonphysical evidence source.",
 						"**Completion check:** The task names the evidence source clearly and can be finished without acquiring or mixing materials."
-					].join("\n\n")
+					].join("\n\n"),
+					datasetLink: material("remote-investigation-checklist"),
+					solutionLink: answerKey("general-cer-rubric")
 				},
 				{
 					title: "Chemistry Explanation Rubric",

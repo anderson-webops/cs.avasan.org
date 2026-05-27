@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { CodePreviewResource } from "@/modules/codePreview";
+import type { CourseAssetResource } from "@/modules/courseAssetPreview";
 import type { CourseProgress, User } from "@/stores/app";
 import type {
 	CourseDefinition,
@@ -19,6 +20,7 @@ import { api } from "@/api";
 import { useAppStore } from "@/stores/app";
 import { useCoursesStore } from "@/stores/courses";
 import CodePreview from "./CodePreview.vue";
+import CourseAssetPreview from "./CourseAssetPreview.vue";
 import LazyMarkdownContent from "./LazyMarkdownContent.vue";
 
 const props = withDefaults(
@@ -843,6 +845,10 @@ function datasetLabel(url: string) {
 		return "NGSS appendices";
 	}
 
+	if (normalizedUrl.includes("openstax.org")) {
+		return "OpenStax reference";
+	}
+
 	if (normalizedUrl.includes("pubchem.ncbi.nlm.nih.gov")) {
 		return "Chemistry database";
 	}
@@ -936,6 +942,14 @@ function codePreviewResources(item: CourseModuleItem): CodePreviewResource[] {
 			url: resource.url,
 			host: resource.host
 		}));
+}
+
+function courseAssetPreviewResources(
+	item: CourseModuleItem
+): CourseAssetResource[] {
+	return resourceLinks(item).filter(resource =>
+		resource.url.startsWith("/course-assets/")
+	);
 }
 
 watch(selectedCourseId, value => {
@@ -1432,6 +1446,16 @@ function writeStoredValue(key: string, value: string) {
 										</a>
 									</div>
 
+									<CourseAssetPreview
+										v-if="
+											courseAssetPreviewResources(item)
+												.length > 0
+										"
+										:resources="
+											courseAssetPreviewResources(item)
+										"
+									/>
+
 									<CodePreview
 										v-if="
 											codePreviewResources(item).length >
@@ -1573,6 +1597,16 @@ function writeStoredValue(key: string, value: string) {
 											</small>
 										</a>
 									</div>
+
+									<CourseAssetPreview
+										v-if="
+											courseAssetPreviewResources(item)
+												.length > 0
+										"
+										:resources="
+											courseAssetPreviewResources(item)
+										"
+									/>
 
 									<CodePreview
 										v-if="

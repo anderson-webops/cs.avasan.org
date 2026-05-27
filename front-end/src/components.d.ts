@@ -17,6 +17,7 @@ declare module 'vue' {
     AdminProfile: typeof import('./components/AdminProfile.vue')['default']
     AdminWorkspaceShell: typeof import('./components/AdminWorkspaceShell.vue')['default']
     CodePreview: typeof import('./components/CodePreview.vue')['default']
+    CourseAssetPreview: typeof import('./components/CourseAssetPreview.vue')['default']
     CourseExplorer: typeof import('./components/CourseExplorer.vue')['default']
     LazyMarkdownContent: typeof import('./components/LazyMarkdownContent.vue')['default']
     LearnerCourseProgressEditor: typeof import('./components/LearnerCourseProgressEditor.vue')['default']
