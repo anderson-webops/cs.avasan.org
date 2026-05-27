@@ -51,6 +51,7 @@ const WWW_PREFIX_RE = /^www\./;
 const REFERENCE_TITLE_RE = /reference/i;
 const STARTER_RE = /starter/i;
 const CAPSTONE_TITLE_RE = /capstone|master project/i;
+const PROJECT_PREFIX_RE = /^Project:\s*/i;
 const COURSE_SELECTION_STORAGE_KEY = "classes:course-explorer:selected-course";
 const MODULE_SELECTION_STORAGE_KEY_PREFIX =
 	"classes:course-explorer:active-module:";
@@ -462,7 +463,7 @@ const activeModuleSupplementalLinks = computed(() => {
 
 	return module.supplementalProjects.map((item, index) => ({
 		id: itemAnchorId(module.id, item.id),
-		label: `Project ${index + 1}: ${item.title}`
+		label: `${index + 1}. ${item.title.replace(PROJECT_PREFIX_RE, "")}`
 	}));
 });
 
@@ -713,6 +714,10 @@ function isEmbeddedMedia(link: string) {
 }
 
 function linkHost(url: string) {
+	if (url.startsWith("/course-assets/")) {
+		return "Course asset";
+	}
+
 	try {
 		return new URL(url).hostname.replace(WWW_PREFIX_RE, "");
 	} catch {
@@ -748,11 +753,20 @@ function projectLabel(item: CourseModuleItem, url: string) {
 }
 
 function solutionLabel(url: string) {
-	if (url.toLowerCase().includes("scratch.mit.edu")) {
+	const normalizedUrl = url.toLowerCase();
+
+	if (
+		normalizedUrl.includes("answer-key") ||
+		normalizedUrl.includes("rubric")
+	) {
+		return "Rubric / answer key";
+	}
+
+	if (normalizedUrl.includes("scratch.mit.edu")) {
 		return "Scratch solution";
 	}
 
-	if (url.toLowerCase().includes("github.com")) {
+	if (normalizedUrl.includes("github.com")) {
 		return "Solution repo";
 	}
 
@@ -762,16 +776,71 @@ function solutionLabel(url: string) {
 function datasetLabel(url: string) {
 	const normalizedUrl = url.toLowerCase();
 
+	if (normalizedUrl.includes("chemistry-materials-pack")) {
+		if (normalizedUrl.includes("measurement")) {
+			return "Measurement tables";
+		}
+		if (normalizedUrl.includes("matter-and-classification")) {
+			return "Matter cards";
+		}
+		if (normalizedUrl.includes("physical-and-chemical-change")) {
+			return "Change cards";
+		}
+		if (normalizedUrl.includes("isotope")) {
+			return "Isotope table";
+		}
+		if (normalizedUrl.includes("ion-and-formula")) {
+			return "Ion cards";
+		}
+		if (normalizedUrl.includes("periodic-trend")) {
+			return "Trend table";
+		}
+		if (normalizedUrl.includes("bonding-and-formula")) {
+			return "Bonding cards";
+		}
+		if (normalizedUrl.includes("heating-curve")) {
+			return "Heating curve data";
+		}
+		if (normalizedUrl.includes("intermolecular")) {
+			return "Property cards";
+		}
+		if (normalizedUrl.includes("reaction-type")) {
+			return "Reaction cards";
+		}
+		if (normalizedUrl.includes("concentration-and-ph")) {
+			return "Solution tables";
+		}
+		if (normalizedUrl.includes("molar-mass")) {
+			return "Mole practice set";
+		}
+		if (normalizedUrl.includes("stoichiometry-error")) {
+			return "Error cases";
+		}
+		if (normalizedUrl.includes("capstone-evidence")) {
+			return "Evidence seeds";
+		}
+
+		return "Chemistry materials";
+	}
+
+	if (normalizedUrl.includes("periodictable")) {
+		return "ACS periodic table";
+	}
+
+	if (normalizedUrl.includes("middle-and-high-school-chemistry")) {
+		return "ACS chemistry guidelines";
+	}
+
 	if (normalizedUrl.includes("acs.org")) {
-		return "Chemistry reference";
+		return "ACS chemistry reference";
 	}
 
 	if (normalizedUrl.includes("nist.gov")) {
-		return "Measurement reference";
+		return "NIST SI units";
 	}
 
 	if (normalizedUrl.includes("nextgenscience.org")) {
-		return "Standards reference";
+		return "NGSS appendices";
 	}
 
 	if (normalizedUrl.includes("pubchem.ncbi.nlm.nih.gov")) {
@@ -1240,9 +1309,9 @@ function writeStoredValue(key: string, value: string) {
 								v-if="activeModuleProjectLinks.length > 0"
 								class="reader-link-group"
 							>
-								<h4 class="reader-link-heading">Projects:</h4>
+								<h4 class="reader-link-heading">Lessons:</h4>
 								<nav
-									aria-label="Jump to module project"
+									aria-label="Jump to module lesson"
 									class="reader-jump-links"
 								>
 									<a
@@ -1261,7 +1330,7 @@ function writeStoredValue(key: string, value: string) {
 								class="reader-link-group"
 							>
 								<h4 class="reader-link-heading is-supplemental">
-									Supplemental Projects:
+									Supplemental:
 								</h4>
 								<nav
 									aria-label="Jump to supplemental project"
@@ -2492,7 +2561,8 @@ function writeStoredValue(key: string, value: string) {
 
 	.course-outline {
 		position: static;
-		min-height: min(72vh, 68rem);
+		min-height: 0;
+		max-height: min(48vh, 30rem);
 		border-right: none;
 		border-bottom: 1px solid rgba(148, 163, 184, 0.16);
 	}

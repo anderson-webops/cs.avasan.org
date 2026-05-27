@@ -163,7 +163,13 @@ describe("course text quality normalization", () => {
 			...module.supplementalProjects
 		]);
 		const linkedItems = items.filter(
-			item => item.mediaLink || item.datasetLink
+			item => item.mediaLink || item.datasetLink || item.solutionLink
+		);
+		const localMaterialLinks = items.filter(item =>
+			item.datasetLink?.includes("chemistry-materials-pack.md")
+		);
+		const answerKeyLinks = items.filter(item =>
+			item.solutionLink?.includes("chemistry-rubrics-answer-key.md")
 		);
 		const phetLinks = new Set(
 			items
@@ -176,12 +182,17 @@ describe("course text quality normalization", () => {
 		expect(text).not.toMatch(/Standards and Scope Expansion|Module Backlog/i);
 		expect(text).not.toMatch(/Source and Asset Parity Implementation/i);
 		expect(text).not.toMatch(/Guide students|Require students|Push them/i);
-		expect(items.length).toBeGreaterThanOrEqual(50);
-		expect(linkedItems.length).toBeGreaterThan(8);
-		expect(linkedItems.length).toBeLessThan(items.length * 0.65);
+		expect(text).not.toContain("CHM0");
+		expect(items.length).toBeGreaterThanOrEqual(70);
+		expect(linkedItems.length).toBeGreaterThan(items.length * 0.75);
+		expect(localMaterialLinks.length).toBeGreaterThan(24);
+		expect(answerKeyLinks.length).toBeGreaterThan(16);
 		expect(phetLinks.size).toBeGreaterThanOrEqual(6);
 		expect(text).toContain("Remote-Safe Investigation Checklist");
 		expect(text).toContain("Chemistry Explanation Rubric");
+		expect(text).toContain("CHM10 Advanced Chemistry Map");
+		expect(text).toContain("CHM12 Chemistry Resource Bank");
+		expect(text).toContain("Stoichiometry Error Analysis");
 	});
 
 	it("turns applied studio labs into explicit studio specifications", async () => {

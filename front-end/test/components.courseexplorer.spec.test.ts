@@ -331,6 +331,10 @@ describe("CourseExplorer.vue", () => {
 		const assignedCourse = coursesStore.courses[0];
 		const acsLink =
 			"https://www.acs.org/education/whatischemistry/periodictable.html";
+		const localMaterialLink =
+			"/course-assets/chemistry/chemistry-materials-pack.md#heating-curve-data";
+		const answerKeyLink =
+			"/course-assets/chemistry/chemistry-rubrics-answer-key.md#heating-curve-key";
 		const phetLink = "https://phet.colorado.edu/en/simulations/build-an-atom";
 
 		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
@@ -345,6 +349,13 @@ describe("CourseExplorer.vue", () => {
 							id: "chemistry-resource",
 							mediaLink: phetLink,
 							title: "Chemistry Resource"
+						},
+						{
+							content: "Use local chemistry materials.",
+							datasetLink: localMaterialLink,
+							id: "local-chemistry-material",
+							solutionLink: answerKeyLink,
+							title: "Local Chemistry Material"
 						}
 					],
 					id: "module-1",
@@ -374,10 +385,13 @@ describe("CourseExplorer.vue", () => {
 		await flushPromises();
 
 		await vi.waitFor(() => {
-			expect(wrapper.text()).toContain("Chemistry reference");
+			expect(wrapper.text()).toContain("ACS periodic table");
+			expect(wrapper.text()).toContain("Heating curve data");
 			expect(wrapper.text()).toContain("PhET simulation");
+			expect(wrapper.text()).toContain("Course asset");
 		});
 
+		expect(wrapper.text()).not.toContain("Rubric / answer key");
 		expect(wrapper.text()).not.toContain("Dataset");
 	});
 
@@ -403,6 +417,15 @@ describe("CourseExplorer.vue", () => {
 							solutionLink:
 								"https://github.com/instruction-material/APCS/tree/main/APCS1-Mad-Libs/solution",
 							title: "Starter Project"
+						},
+						{
+							content: "Compare local chemistry data against the rubric.",
+							datasetLink:
+								"/course-assets/chemistry/chemistry-materials-pack.md#heating-curve-data",
+							id: "chemistry-material",
+							solutionLink:
+								"/course-assets/chemistry/chemistry-rubrics-answer-key.md#heating-curve-key",
+							title: "Chemistry Material"
 						}
 					],
 					id: "module-1",
@@ -452,5 +475,8 @@ describe("CourseExplorer.vue", () => {
 		});
 
 		expect(wrapper.text()).toContain("Solution repo");
+		expect(wrapper.text()).toContain("Heating curve data");
+		expect(wrapper.text()).toContain("Rubric / answer key");
+		expect(wrapper.text()).toContain("Course asset");
 	});
 });

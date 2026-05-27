@@ -110,7 +110,8 @@ describe("implemented course development artifacts", () => {
 		}
 
 		const chemistryText = allText(await requireCourse("intro-to-chemistry"));
-		expect(chemistryText).toContain("CHM10 Chemistry Resource Bank");
+		expect(chemistryText).toContain("CHM10 Advanced Chemistry Map");
+		expect(chemistryText).toContain("CHM12 Chemistry Resource Bank");
 		expect(chemistryText).toContain("Core Chemistry References");
 		expect(chemistryText).toContain("Remote-Safe Investigation Checklist");
 
