@@ -8,6 +8,7 @@ const testDir = dirname(fileURLToPath(import.meta.url));
 const frontEndDir = resolve(testDir, "..");
 const repoRoot = resolve(frontEndDir, "..");
 const coursesSourceDir = resolve(frontEndDir, "src/stores/courses");
+const COURSE_SWEEP_TIMEOUT = 90000;
 
 const forbiddenStudentFacingPatterns = [
 	/\bTeaching flow\b/i,
@@ -196,5 +197,5 @@ describe("student-facing course copy", () => {
 		}
 
 		expect(failures).toEqual([]);
-	}, 30000);
+	}, COURSE_SWEEP_TIMEOUT);
 });

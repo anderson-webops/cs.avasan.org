@@ -311,8 +311,12 @@ const courseStats = computed(() => {
 		(total, module) => total + module.supplementalProjects.length,
 		0
 	);
-	const completedModuleCount = course.modules.filter(module =>
-		isModuleComplete(module)
+	const moduleCount = course.modules.filter(
+		module => module.kind !== "appendix"
+	).length;
+	const appendixCount = course.modules.length - moduleCount;
+	const completedModuleCount = course.modules.filter(
+		module => module.kind !== "appendix" && isModuleComplete(module)
 	).length;
 	const completedItemCount = course.modules.reduce(
 		(total, module) =>
@@ -324,7 +328,8 @@ const courseStats = computed(() => {
 	);
 
 	return {
-		moduleCount: course.modules.length,
+		moduleCount,
+		appendixCount,
 		lessonCount,
 		supplementalCount,
 		completedModuleCount,
@@ -446,8 +451,13 @@ const courseReaderStatus = computed(() => {
 				visibleModules.value.length === 1 ? "" : "s"
 			}. `
 		: "";
-	return `${searchContext}Showing module ${activeModule.value.position}: ${activeModule.value.title}.`;
+	const activeKind = moduleKindLabel(activeModule.value).toLowerCase();
+	return `${searchContext}Showing ${activeKind} ${activeModule.value.position}: ${activeModule.value.title}.`;
 });
+
+function moduleKindLabel(module: Pick<CourseModule, "kind">) {
+	return module.kind === "appendix" ? "Appendix" : "Module";
+}
 
 const activeModuleProjectLinks = computed(() => {
 	const module = activeModule.value;
@@ -791,8 +801,14 @@ function datasetLabel(url: string) {
 		if (normalizedUrl.includes("isotope")) {
 			return "Isotope table";
 		}
+		if (normalizedUrl.includes("atomic-structure-checkpoint")) {
+			return "Atomic checkpoint";
+		}
 		if (normalizedUrl.includes("ion-and-formula")) {
 			return "Ion cards";
+		}
+		if (normalizedUrl.includes("nomenclature")) {
+			return "Naming cards";
 		}
 		if (normalizedUrl.includes("periodic-trend")) {
 			return "Trend table";
@@ -802,6 +818,12 @@ function datasetLabel(url: string) {
 		}
 		if (normalizedUrl.includes("heating-curve")) {
 			return "Heating curve data";
+		}
+		if (normalizedUrl.includes("gas-law")) {
+			return "Gas law scenarios";
+		}
+		if (normalizedUrl.includes("energy-phase-and-gas")) {
+			return "Energy checkpoint";
 		}
 		if (normalizedUrl.includes("intermolecular")) {
 			return "Property cards";
@@ -815,11 +837,17 @@ function datasetLabel(url: string) {
 		if (normalizedUrl.includes("molar-mass")) {
 			return "Mole practice set";
 		}
+		if (normalizedUrl.includes("quantitative-chemistry")) {
+			return "Quantitative checkpoint";
+		}
 		if (normalizedUrl.includes("stoichiometry-error")) {
 			return "Error cases";
 		}
 		if (normalizedUrl.includes("capstone-evidence")) {
 			return "Evidence seeds";
+		}
+		if (normalizedUrl.includes("capstone-defense")) {
+			return "Capstone defense";
 		}
 
 		return "Chemistry materials";
@@ -1059,6 +1087,10 @@ function writeStoredValue(key: string, value: string) {
 						<dt>Modules</dt>
 						<dd>{{ courseStats.moduleCount }}</dd>
 					</div>
+					<div v-if="courseStats.appendixCount > 0" class="stat">
+						<dt>Appendices</dt>
+						<dd>{{ courseStats.appendixCount }}</dd>
+					</div>
 					<div class="stat">
 						<dt>Core lessons</dt>
 						<dd>{{ courseStats.lessonCount }}</dd>
@@ -1217,7 +1249,7 @@ function writeStoredValue(key: string, value: string) {
 									? 'true'
 									: undefined
 							"
-							:aria-label="`Show module ${module.position}: ${module.title}`"
+							:aria-label="`Show ${moduleKindLabel(module).toLowerCase()} ${module.position}: ${module.title}`"
 							class="outline-button"
 							:class="{
 								'is-complete':
@@ -1281,7 +1313,8 @@ function writeStoredValue(key: string, value: string) {
 					<header class="reader-header">
 						<div class="reader-copy">
 							<p class="reader-eyebrow">
-								Module {{ activeModule.position }}
+								{{ moduleKindLabel(activeModule) }}
+								{{ activeModule.position }}
 							</p>
 							<h3>{{ activeModule.title }}</h3>
 							<label
@@ -1299,7 +1332,15 @@ function writeStoredValue(key: string, value: string) {
 										)
 									"
 								/>
-								<span>Mark module complete</span>
+								<span>
+									Mark
+									{{
+										moduleKindLabel(
+											activeModule
+										).toLowerCase()
+									}}
+									complete
+								</span>
 							</label>
 							<p
 								v-if="
@@ -1419,6 +1460,11 @@ function writeStoredValue(key: string, value: string) {
 										</label>
 									</header>
 
+									<LazyMarkdownContent
+										v-if="item.content"
+										:content="item.content"
+									/>
+
 									<div
 										v-if="resourceLinks(item).length > 0"
 										class="resource-list"
@@ -1462,11 +1508,6 @@ function writeStoredValue(key: string, value: string) {
 											0
 										"
 										:resources="codePreviewResources(item)"
-									/>
-
-									<LazyMarkdownContent
-										v-if="item.content"
-										:content="item.content"
 									/>
 
 									<div
@@ -1571,6 +1612,11 @@ function writeStoredValue(key: string, value: string) {
 										</label>
 									</header>
 
+									<LazyMarkdownContent
+										v-if="item.content"
+										:content="item.content"
+									/>
+
 									<div
 										v-if="resourceLinks(item).length > 0"
 										class="resource-list"
@@ -1614,11 +1660,6 @@ function writeStoredValue(key: string, value: string) {
 											0
 										"
 										:resources="codePreviewResources(item)"
-									/>
-
-									<LazyMarkdownContent
-										v-if="item.content"
-										:content="item.content"
 									/>
 
 									<div
@@ -2510,6 +2551,48 @@ function writeStoredValue(key: string, value: string) {
 	display: grid;
 	gap: 0.55rem;
 	padding-left: 1.65rem;
+}
+
+.item-content-markdown :deep(table) {
+	display: block;
+	width: max-content;
+	max-width: 100%;
+	border-spacing: 0;
+	border-collapse: separate;
+	overflow-x: auto;
+	border: 1px solid var(--course-border);
+	border-radius: 14px;
+	background: var(--course-table-bg, rgba(255, 255, 255, 0.76));
+	box-shadow: 0 12px 26px -24px rgba(15, 23, 42, 0.28);
+}
+
+.item-content-markdown :deep(th),
+.item-content-markdown :deep(td) {
+	padding: 0.65rem 0.8rem;
+	border-right: 1px solid var(--course-border);
+	border-bottom: 1px solid var(--course-border);
+	text-align: left;
+	vertical-align: top;
+	min-width: 7.5rem;
+}
+
+.item-content-markdown :deep(th:last-child),
+.item-content-markdown :deep(td:last-child) {
+	border-right: 0;
+}
+
+.item-content-markdown :deep(tr:last-child td) {
+	border-bottom: 0;
+}
+
+.item-content-markdown :deep(th) {
+	background: var(--course-table-heading-bg, rgba(14, 116, 144, 0.1));
+	color: var(--course-text);
+	font-weight: 900;
+}
+
+.item-content-markdown :deep(tbody tr:nth-child(even) td) {
+	background: var(--course-table-row-alt-bg, rgba(15, 23, 42, 0.035));
 }
 
 .item-content-markdown :deep(li) {

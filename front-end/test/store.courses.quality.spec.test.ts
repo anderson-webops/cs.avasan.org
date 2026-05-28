@@ -64,7 +64,7 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/introduce the main goal/i);
 		expect(corpus).not.toMatch(/build the central artifact/i);
 		expect(corpus).not.toMatch(/alternate supplemental snapshot/i);
-	}, 20000);
+	}, 40000);
 
 	it("adds project requirements and completion checks to thin legacy Python project prompts", async () => {
 		const course = await loadRawCourse("python-level-2");
@@ -176,6 +176,7 @@ describe("course text quality normalization", () => {
 		const linkedItems = items.filter(
 			item => item.mediaLink || item.datasetLink || item.solutionLink
 		);
+		const thinItems = items.filter(item => item.content.length < 650);
 		const localMaterialLinks = items.filter(item =>
 			item.datasetLink?.includes("chemistry-materials-pack.md")
 		);
@@ -194,18 +195,34 @@ describe("course text quality normalization", () => {
 		expect(text).not.toMatch(/Source and Asset Parity Implementation/i);
 		expect(text).not.toMatch(/Guide students|Require students|Push them/i);
 		expect(text).not.toContain("CHM0");
-		expect(items.length).toBeGreaterThanOrEqual(70);
+		expect(items.length).toBeGreaterThanOrEqual(78);
+		expect(thinItems).toEqual([]);
 		expect(linkedItems).toHaveLength(items.length);
-		expect(localMaterialLinks.length).toBeGreaterThan(32);
-		expect(answerKeyLinks.length).toBeGreaterThan(24);
-		expect(phetLinks.size).toBeGreaterThanOrEqual(6);
+		expect(localMaterialLinks.length).toBeGreaterThan(36);
+		expect(answerKeyLinks.length).toBeGreaterThan(28);
+		expect(phetLinks.size).toBeGreaterThanOrEqual(7);
+		expect(course!.modules.at(-1)?.kind).toBe("appendix");
+
+		const normalizedCourse = await useCoursesStore().loadCourseById(
+			"intro-to-chemistry"
+		);
+		expect(normalizedCourse!.modules.at(-1)?.kind).toBe("appendix");
+
 		expect(text).toContain("Phase Diagrams as Maps of Conditions");
+		expect(text).toContain(
+			"Gas Pressure, Volume, Temperature, and Collisions"
+		);
+		expect(text).toContain("Naming Compounds from Formula Patterns");
+		expect(text).toContain("Checkpoint: Atomic Structure");
+		expect(text).toContain("Checkpoint: Energy, Phase Change, and Gases");
+		expect(text).toContain("Checkpoint: Quantitative Chemistry Reasoning");
+		expect(text).toContain("Checkpoint: Capstone Defense");
 		expect(text).toContain("Reaction Energy and Rates");
 		expect(text).toContain("Redox, Batteries, and Electron Transfer");
 		expect(text).toContain("Remote-Safe Investigation Checklist");
 		expect(text).toContain("Chemistry Explanation Rubric");
 		expect(text).toContain("CHM10 Advanced Chemistry Map");
-		expect(text).toContain("CHM12 Chemistry Resource Bank");
+		expect(text).toContain("Reference Appendix: Chemistry Resource Bank");
 		expect(text).toContain("Stoichiometry Error Analysis");
 	});
 

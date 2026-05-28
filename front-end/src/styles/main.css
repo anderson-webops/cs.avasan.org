@@ -602,6 +602,9 @@ html.dark .course-explorer {
 	--course-asset-preview-button-bg-hover: #115e59;
 	--course-asset-preview-button-text: #ccfbf1;
 	--course-asset-preview-control-bg: #0b1320;
+	--course-table-bg: rgba(15, 25, 42, 0.92);
+	--course-table-heading-bg: rgba(94, 234, 212, 0.1);
+	--course-table-row-alt-bg: rgba(148, 163, 184, 0.07);
 	--course-shadow: 0 22px 46px -34px rgba(0, 0, 0, 0.72);
 }
 

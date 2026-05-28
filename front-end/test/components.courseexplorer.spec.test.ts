@@ -76,6 +76,76 @@ describe("CourseExplorer.vue", () => {
 		expect(wrapper.text()).toContain("Complete");
 	});
 
+	it("counts reference appendices separately from course modules", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const assignedCourse = coursesStore.courses[0];
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: assignedCourse.id,
+			name: assignedCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Core lesson content.",
+							id: "lesson-1",
+							title: "Core Lesson"
+						}
+					],
+					id: "module-1",
+					supplementalProjects: [],
+					title: "Core Module"
+				},
+				{
+					curriculum: [
+						{
+							content: "Reference material.",
+							id: "appendix-item",
+							title: "Reference Item"
+						}
+					],
+					id: "appendix-1",
+					kind: "appendix",
+					supplementalProjects: [],
+					title: "Reference Appendix"
+				}
+			]
+		});
+
+		appStore.setCurrentUser({
+			_id: "user-1",
+			name: "Student",
+			email: "student@example.com",
+			age: 12,
+			state: "GA",
+			courseAccess: [assignedCourse.id],
+			courseProgress: [],
+			editUsers: false,
+			saveEdit: "Save"
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.text()).toContain("Reference Appendix");
+		});
+
+		expect(wrapper.find(".course-stats").text()).toContain("Modules1");
+		expect(wrapper.find(".course-stats").text()).toContain("Appendices1");
+		expect(
+			wrapper.find('[aria-label="Show appendix 2: Reference Appendix"]').exists()
+		).toBe(true);
+	});
+
 	it("matches saved progress against stable ID aliases", async () => {
 		const pinia = createPinia();
 		setActivePinia(pinia);
@@ -336,6 +406,8 @@ describe("CourseExplorer.vue", () => {
 			"https://www.acs.org/education/whatischemistry/periodictable.html";
 		const localMaterialLink =
 			"/course-assets/chemistry/chemistry-materials-pack.md#heating-curve-data";
+		const namingCardsLink =
+			"/course-assets/chemistry/chemistry-materials-pack.md#nomenclature-practice-cards";
 		const answerKeyLink =
 			"/course-assets/chemistry/chemistry-rubrics-answer-key.md#heating-curve-key";
 		const phetLink = "https://phet.colorado.edu/en/simulations/build-an-atom";
@@ -359,6 +431,12 @@ describe("CourseExplorer.vue", () => {
 							id: "local-chemistry-material",
 							solutionLink: answerKeyLink,
 							title: "Local Chemistry Material"
+						},
+						{
+							content: "Name chemistry formulas.",
+							datasetLink: namingCardsLink,
+							id: "naming-cards",
+							title: "Naming Cards"
 						}
 					],
 					id: "module-1",
@@ -390,6 +468,7 @@ describe("CourseExplorer.vue", () => {
 		await vi.waitFor(() => {
 			expect(wrapper.text()).toContain("ACS periodic table");
 			expect(wrapper.text()).toContain("Heating curve data");
+			expect(wrapper.text()).toContain("Naming cards");
 			expect(wrapper.text()).toContain("PhET simulation");
 			expect(wrapper.text()).toContain("Course asset");
 		});
@@ -475,6 +554,9 @@ describe("CourseExplorer.vue", () => {
 		});
 
 		expect(wrapper.text()).not.toContain("Rubric / answer key");
+		expect(wrapper.html().indexOf("Compare local chemistry data.")).toBeLessThan(
+			wrapper.html().indexOf("View Heating curve data")
+		);
 
 		await wrapper.find(".course-asset-preview-toggle").trigger("click");
 		await flushPromises();

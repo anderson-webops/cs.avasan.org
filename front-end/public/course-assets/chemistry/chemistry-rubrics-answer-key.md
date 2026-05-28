@@ -22,6 +22,8 @@ Worked conversion examples:
 
 Common revision target: a response that says "Table B is wrong" is too broad. Table B is repairable because the units are present; Table C is the one that lacks enough context.
 
+Scientific notation and precision examples: `0.000425 g` is `4.25 x 10^-4 g`. `2.50 mL` has three significant figures, while `2.5 mL` has two. If an expected mass is `25.0 g` and a measured mass is `24.5 g`, the percent error is `2.0%`. A strong data-quality response names units, precision, and uncertainty rather than only reporting a calculator result.
+
 ## Model Comparison Key
 
 A strong comparison chooses the model based on the question being answered. For composition, `H₂O` is efficient because it shows the fixed hydrogen-to-oxygen ratio. For particle spacing or motion, a particle diagram or simulation is better. For a change over time, a graph is usually stronger. The limitation should be specific: a balanced equation conserves atoms, but it does not show reaction speed, energy, or mechanism unless extra information is supplied.
@@ -40,6 +42,18 @@ Melting ice, tearing paper, dissolving sugar, boiling water, and filtering sand 
 
 Carbon-12, carbon-13, and carbon-14 are all carbon because they have six protons. They differ by neutron count and mass number. The simplified chlorine average is 35.5 because `(35 x 0.75) + (37 x 0.25) = 35.5`.
 
+## Atomic Structure Checkpoint Key
+
+| Item | Expected Reasoning |
+| --- | --- |
+| A | 8 protons identifies oxygen; mass number is 16; neutral electron count is 8. |
+| B | Carbon has 6 protons; carbon-14 has 8 neutrons; neutral carbon has 6 electrons. |
+| C | 11 protons identifies sodium; mass number is 23; 10 electrons gives `+1` charge. |
+| D | 17 protons identifies chlorine; mass number is 35; 18 electrons gives `-1` charge. |
+| E | The periodic-table mass is an abundance-weighted average of naturally occurring isotopes, not the mass number of every chlorine atom. |
+
+Common revision target: if the element name changes when only electrons change, the response is confusing ion charge with element identity.
+
 ## Ion Formula Key
 
 Examples: `NaCl`, `KF`, `MgO`, `CaBr₂`, `Al₂O₃`, `NH₄NO₃`. A correct explanation balances total positive and negative charge without changing the ion identities.
@@ -51,6 +65,12 @@ Worked charge-balance examples:
 3. `NH₄⁺` and `NO₃⁻`: charges balance one-to-one. Formula: `NH₄NO₃`.
 
 Common revision target: do not change chloride into `Cl²⁻` to make the charges work. Change the number of ions, not the ion charge.
+
+## Nomenclature Key
+
+Ionic examples should include sodium chloride for `NaCl`, magnesium chloride for `MgCl₂`, calcium fluoride for `CaF₂`, ammonium nitrate for `NH₄NO₃`, and aluminum oxide for `Al₂O₃`. Covalent examples should include carbon dioxide for `CO₂`, dinitrogen monoxide for `N₂O`, and phosphorus trichloride for `PCl₃`.
+
+Common revision target: do not use covalent prefixes for ordinary ionic formulas in this introductory model. `MgCl₂` is magnesium chloride, not magnesium dichloride, because the subscript is controlled by charge balance.
 
 ## Periodic Trend Key
 
@@ -84,6 +104,16 @@ The flat sections at 0 C and 100 C represent phase changes. Energy is still tran
 Strong phase-diagram reasoning treats the diagram as a map of conditions. Point A is solid, B is liquid, and C is gas in the simplified model. Point D is on the melting/freezing boundary and point E is on the boiling/condensing boundary. Moving right usually increases temperature; moving up increases pressure. A response should state both coordinates before naming the state.
 
 Sample answer: At 25 C and 3 atm, the model favors liquid rather than gas because pressure is higher than ordinary 1 atm conditions. The exact boundary depends on the substance, so this simplified table should not be treated as a universal phase diagram.
+
+## Energy Phase and Gas Checkpoint Key
+
+Strong responses connect each evidence source to a particle-level explanation. Heating-curve flat regions involve energy transfer during phase change. Phase-diagram answers must state both temperature and pressure. Intermolecular-property answers should cite attraction evidence rather than familiarity. Gas-scenario answers should explain pressure through collision frequency, collision strength, amount of particles, or available volume.
+
+## Gas Law Scenario Key
+
+Volume decrease at constant amount and temperature raises pressure because wall collisions become more frequent. Temperature increase in fixed volume raises pressure because particles move faster and collide more strongly. Adding particles in fixed volume raises pressure because more particles collide with the walls. Increasing volume lowers pressure when amount and temperature are roughly constant. Cooling lowers pressure in fixed volume because particle motion decreases.
+
+Common revision target: do not explain gas behavior by saying particles get bigger or smaller. The introductory model should use motion, spacing, collisions, amount, and container volume.
 
 ## Intermolecular Property Key
 
@@ -124,7 +154,7 @@ Worked reasoning examples:
 
 ## Molar Mass and Stoichiometry Key
 
-`H₂O` is about 18 g/mol. `CO₂` is about 44 g/mol. `NaCl` is about 58.5 g/mol. `CaCO₃` is about 100 g/mol. 36 g of water is about 2 mol. In `2H₂ + O₂ → 2H₂O`, 1 mol oxygen produces 2 mol water. In `CH₄ + 2O₂ → CO₂ + 2H₂O`, 1 mol methane produces 2 mol water.
+`H₂O` is about 18 g/mol. `CO₂` is about 44 g/mol. `NaCl` is about 58.5 g/mol. `CaCO₃` is about 100 g/mol. 36 g of water is about 2 mol. 2.5 mol of carbon dioxide is about 110 g. In `2H₂ + O₂ → 2H₂O`, 1 mol oxygen produces 2 mol water. In `CH₄ + 2O₂ → CO₂ + 2H₂O`, 1 mol methane produces 2 mol water.
 
 Worked setup examples:
 
@@ -133,8 +163,15 @@ Worked setup examples:
 3. `NaCl`: `23 + 35.5 = 58.5 g/mol`.
 4. `CaCO₃`: `40 + 12 + 3(16) = 100 g/mol`.
 5. `36 g H₂O × (1 mol / 18 g) = 2 mol H₂O`.
+6. `2.5 mol CO₂ × (44 g / 1 mol) = 110 g CO₂`.
 
 Common revision target: coefficients from balanced equations compare moles, not grams directly. A grams-to-grams problem must go grams → moles → mole ratio → moles → grams.
+
+## Quantitative Chemistry Checkpoint Key
+
+`CaCO₃` is about `100 g/mol`: `40 + 12 + 3(16)`. `58.5 g NaCl` is `1.0 mol NaCl` using `58.5 g/mol`. In `2H₂ + O₂ → 2H₂O`, 4 mol `H₂` produces 4 mol `H₂O` because the ratio is `2:2`, or `1:1` after simplification. For methane to water, the setup should go `g CH₄ → mol CH₄ → mol H₂O → g H₂O`; the `1:2` mole ratio comes from the balanced equation.
+
+Common revision target: coefficients cannot be applied directly to grams because balanced equations compare particles or moles, not mass.
 
 ## Stoichiometry Error Key
 

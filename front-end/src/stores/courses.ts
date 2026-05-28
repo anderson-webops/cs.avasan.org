@@ -482,6 +482,7 @@ function normalizeCourse(
 			return {
 				id: moduleId,
 				...(moduleAliases.length ? { aliases: moduleAliases } : {}),
+				...(module.kind ? { kind: module.kind } : {}),
 				title: module.title,
 				curriculum: mapItems(module.curriculum, "curriculum"),
 				supplementalProjects: mapItems(

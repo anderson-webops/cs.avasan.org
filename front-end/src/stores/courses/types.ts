@@ -12,6 +12,7 @@ export interface RawCourseModuleItem {
 export interface RawCourseModule {
 	id?: string;
 	aliases?: string[];
+	kind?: "module" | "appendix";
 	title: string;
 	curriculum: RawCourseModuleItem[];
 	supplementalProjects: RawCourseModuleItem[];
@@ -48,6 +49,7 @@ export interface CourseModuleItem extends RawCourseModuleItem {
 export interface CourseModule {
 	id: string;
 	aliases?: string[];
+	kind?: "module" | "appendix";
 	title: string;
 	curriculum: CourseModuleItem[];
 	supplementalProjects: CourseModuleItem[];

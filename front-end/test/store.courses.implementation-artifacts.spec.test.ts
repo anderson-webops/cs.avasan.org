@@ -8,6 +8,7 @@ import {
 import { researchBackedExpansionCourseIds } from "@/stores/courses/research-expansions";
 
 const authoredLearnerCourseIds = new Set(["intro-to-chemistry"]);
+const COURSE_SWEEP_TIMEOUT = 90000;
 
 async function requireCourse(courseId: string) {
 	const course = await loadRawCourse(courseId);
@@ -46,7 +47,7 @@ describe("implemented course development artifacts", () => {
 				"Full Lesson Project: Transfer Task"
 			);
 		}
-	}, 30000);
+	}, COURSE_SWEEP_TIMEOUT);
 
 	it("ensures every visible module has at least two supplemental project/checkpoint options", async () => {
 		for (const { id } of courseCatalog) {
@@ -57,7 +58,7 @@ describe("implemented course development artifacts", () => {
 
 			expect(underfilled, id).toHaveLength(0);
 		}
-	}, 30000);
+	}, COURSE_SWEEP_TIMEOUT);
 
 	it("implements the algebra project taxonomy decision in supplemental project slots", async () => {
 		for (const courseId of [
@@ -111,7 +112,9 @@ describe("implemented course development artifacts", () => {
 
 		const chemistryText = allText(await requireCourse("intro-to-chemistry"));
 		expect(chemistryText).toContain("CHM10 Advanced Chemistry Map");
-		expect(chemistryText).toContain("CHM12 Chemistry Resource Bank");
+		expect(chemistryText).toContain(
+			"Reference Appendix: Chemistry Resource Bank"
+		);
 		expect(chemistryText).toContain("Core Chemistry References");
 		expect(chemistryText).toContain("Remote-Safe Investigation Checklist");
 

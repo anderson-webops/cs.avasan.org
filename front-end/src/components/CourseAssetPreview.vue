@@ -163,7 +163,7 @@ async function handleResourceChange() {
 				<p class="course-asset-preview-eyebrow">
 					Course resource section
 				</p>
-				<h6>{{ title }}</h6>
+				<p class="course-asset-preview-title">{{ title }}</p>
 				<LazyMarkdownContent :content="previewContent" />
 			</div>
 		</div>
@@ -298,10 +298,12 @@ async function handleResourceChange() {
 	text-transform: uppercase;
 }
 
-.course-asset-preview-content h6 {
+.course-asset-preview-title {
 	margin: 0;
 	color: var(--course-text);
 	font-size: clamp(1.05rem, 2vw, 1.2rem);
+	font-weight: 900;
+	line-height: 1.35;
 }
 
 .course-asset-preview-content :deep(.item-content-markdown) {

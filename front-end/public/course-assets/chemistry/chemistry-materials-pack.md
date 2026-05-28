@@ -32,6 +32,18 @@ Use these tables to decide which data is usable, which needs conversion, and whi
 
 **Use:** Convert kilograms to grams, liters to milliliters, and Kelvin to Celsius when needed. Explain why Table C cannot support a precise chemistry conclusion without labels.
 
+### Precision, Scientific Notation, and Error Practice
+
+| Prompt | Strong Response Target |
+| --- | --- |
+| Rewrite `0.000425 g` in scientific notation. | `4.25 x 10^-4 g`; keep the unit attached. |
+| Identify significant figures in `2.50 mL`. | Three significant figures; the final zero is measured precision. |
+| Compare `2.5 g` and `2.50 g`. | Same value, different reported precision. |
+| Expected mass is `25.0 g`; measured mass is `24.5 g`. | Percent error is `|24.5 - 25.0| / 25.0 x 100 = 2.0%`. |
+| A graph has unlabeled axes. | Pattern may be visible, but the chemistry meaning is not defensible. |
+
+**Use:** Treat units, precision, graph labels, and uncertainty notes as part of the evidence. A calculator answer with too many digits should be rounded to the precision supported by the measurements.
+
 ## Model Comparison Cards
 
 Use these cards to decide which representation is most useful for a specific chemistry question. A strong answer names both a strength and a limitation.
@@ -107,6 +119,37 @@ Use these ions to build neutral ionic formulas by balancing total positive and n
 | `NH₄⁺` | +1 | `NO₃⁻` | -1 |
 
 Example: `Mg²⁺` needs two `Cl⁻` ions, so the neutral formula is `MgCl₂`.
+
+## Atomic Structure Checkpoint
+
+Solve each item by naming protons, neutrons, electrons, mass number, atomic number, and charge when relevant.
+
+| Item | Prompt |
+| --- | --- |
+| A | A neutral atom has 8 protons and 8 neutrons. Identify the element, mass number, and electron count. |
+| B | Carbon-14 is neutral. Identify protons, neutrons, electrons, and mass number. |
+| C | A sodium particle has 11 protons, 12 neutrons, and 10 electrons. Identify element, isotope mass number, and charge. |
+| D | A chlorine particle has 17 protons, 18 neutrons, and 18 electrons. Identify element, isotope mass number, and charge. |
+| E | Chlorine's periodic-table mass is near 35.5 rather than exactly 35 or 37. Explain what that average means. |
+
+**Use:** The checkpoint is complete only when the rule is visible: protons identify element, neutrons affect isotope, electrons affect charge, and average atomic mass depends on isotope abundance.
+
+## Nomenclature Practice Cards
+
+Use these cards to practice moving between formula, name, and naming rule.
+
+| Formula or Name | Type | Expected Partner | Naming Rule |
+| --- | --- | --- | --- |
+| `NaCl` | ionic | sodium chloride | metal name + nonmetal ending changed to `-ide` |
+| `MgCl₂` | ionic | magnesium chloride | charge balance affects formula, not a `di-` prefix |
+| calcium fluoride | ionic | `CaF₂` | calcium is `+2`, fluoride is `-1` |
+| `NH₄NO₃` | ionic with polyatomic ions | ammonium nitrate | keep polyatomic ion names together |
+| `CO₂` | covalent | carbon dioxide | prefix marks two oxygen atoms |
+| dinitrogen monoxide | covalent | `N₂O` | prefixes show atom counts |
+| `PCl₃` | covalent | phosphorus trichloride | prefix on chlorine marks three atoms |
+| aluminum oxide | ionic | `Al₂O₃` | smallest neutral whole-number ion ratio |
+
+**Use:** Decide whether the formula is ionic or covalent before naming. Ionic names primarily communicate ion identity and charge balance; covalent names use prefixes to communicate atom counts.
 
 ## Periodic Trend Mini Table
 
@@ -184,6 +227,31 @@ Use this simplified map to reason about state from temperature and pressure. The
 | G | 25 | 3.0 | liquid remains favored at higher pressure |
 
 **Use:** Locate the point, identify the region or boundary, then predict how moving right, left, up, or down changes the favored state.
+
+## Gas Law Scenarios
+
+Use these scenarios with a gas-particle model. Keep one variable controlled when possible before making a claim.
+
+| Scenario | Variable Changed | Controlled Variables | Expected Collision-Level Reasoning |
+| --- | --- | --- | --- |
+| A | Volume decreases | amount and temperature roughly constant | particles collide with walls more often, so pressure rises |
+| B | Temperature increases | amount and volume constant | particles move faster and collide more strongly, so pressure rises |
+| C | More gas particles are added | volume and temperature constant | more particles create more wall collisions, so pressure rises |
+| D | Volume increases | amount and temperature roughly constant | particles spread out, so wall collisions become less frequent |
+| E | Temperature decreases | amount and volume constant | slower particles create weaker/fewer effective collisions |
+
+**Use:** Explain gas behavior through particles and collisions before using formula shortcuts. The goal is to identify pressure, volume, temperature, and amount as related variables, not to memorize every gas law name.
+
+## Energy Phase and Gas Checkpoint
+
+| Task | Evidence Source | Response Target |
+| --- | --- | --- |
+| Heating curve | Heating curve data | Identify whether temperature changes or phase changes are happening. |
+| Phase diagram | Phase diagram data | State temperature and pressure before naming the favored state. |
+| Attractions | Intermolecular property cards | Predict a property and cite attraction evidence. |
+| Gas scenario | Gas law scenarios | Explain pressure change through collision frequency or strength. |
+
+**Use:** Each answer should include visible or numerical evidence and a particle-level explanation. Avoid claims that particles grow, disappear, or change identity during ordinary phase changes.
 
 ## Intermolecular Property Cards
 
@@ -271,8 +339,23 @@ Use approximate atomic masses: H = 1, C = 12, O = 16, Na = 23, Cl = 35.5, Ca = 4
 3. Find molar mass for `NaCl`.
 4. Find molar mass for `CaCO₃`.
 5. Convert 36 g of `H₂O` to moles.
-6. For `2H₂ + O₂ → 2H₂O`, identify the mole ratio from oxygen to water.
-7. For `CH₄ + 2O₂ → CO₂ + 2H₂O`, identify the mole ratio from methane to water.
+6. Convert 2.5 mol of `CO₂` to grams.
+7. For `2H₂ + O₂ → 2H₂O`, identify the mole ratio from oxygen to water.
+8. For `CH₄ + 2O₂ → CO₂ + 2H₂O`, identify the mole ratio from methane to water.
+9. Use `2H₂ + O₂ → 2H₂O` to find moles of water from 3 mol oxygen.
+10. Use `CH₄ + 2O₂ → CO₂ + 2H₂O` to set up grams methane to grams water. Do not solve until the units are arranged.
+
+## Quantitative Chemistry Checkpoint
+
+| Task | Prompt |
+| --- | --- |
+| Molar mass | Find molar mass of `CaCO₃` and show each element contribution. |
+| Grams to moles | Convert 58.5 g `NaCl` to moles using molar mass. |
+| Mole ratio | In `2H₂ + O₂ → 2H₂O`, convert 4 mol `H₂` to mol `H₂O`. |
+| Grams-to-grams setup | Set up conversion from 16 g `CH₄` to grams `H₂O` for `CH₄ + 2O₂ → CO₂ + 2H₂O`. |
+| Error diagnosis | Explain why using coefficients directly on grams is invalid. |
+
+**Use:** Circle the conversion factor that comes from the periodic table and underline the conversion factor that comes from the balanced equation.
 
 ## Stoichiometry Error Cases
 
@@ -313,3 +396,16 @@ Use these as starting points when a capstone needs a remote-safe source set. Eac
 | Cooking browning | image sequence, temperature notes, reaction evidence, energy/rate case | reaction evidence, energy, molecules | Browning is chemical change evidence when new color and aroma appear under heat |
 | Acid rain and stone | pH table, carbonate formula, reaction card, before/after surface image | acids, reactions, gas formation, materials | Acidic water can react with carbonate materials and alter surfaces |
 | Cleaning chemistry | pH table, polarity/intermolecular cards, surfactant diagram from a vetted source | polarity, solutions, pH, materials | Cleaning depends on matching particle interactions, not only "stronger chemicals" |
+
+## Capstone Defense Checkpoint
+
+Use these questions before presenting the final capstone artifact.
+
+1. What is the exact claim?
+2. Which evidence directly supports the claim?
+3. Which model explains what cannot be seen directly?
+4. Which vocabulary terms are essential, and are they used accurately?
+5. What uncertainty or limitation remains?
+6. What new evidence would change the conclusion?
+
+**Use:** If any answer depends on uncited evidence, unsafe physical work, or a broad topic instead of a narrow claim, revise before presenting.

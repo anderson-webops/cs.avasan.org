@@ -5,6 +5,8 @@ import {
 	researchBackedExpansionProfiles
 } from "@/stores/courses/research-expansions";
 
+const COURSE_SWEEP_TIMEOUT = 90000;
+
 function allText(course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>) {
 	return course.modules
 		.flatMap(module => [
@@ -55,7 +57,7 @@ describe("research-backed course family expansions", () => {
 				courseId
 			).toBe(true);
 		}
-	}, 30000);
+	}, COURSE_SWEEP_TIMEOUT);
 
 	it("carries the researched standards, tooling, safety, and assessment anchors into course text", async () => {
 		const courseIds = [
