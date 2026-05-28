@@ -54,6 +54,8 @@ const REFERENCE_TITLE_RE = /reference/i;
 const STARTER_RE = /starter/i;
 const CAPSTONE_TITLE_RE = /capstone|master project/i;
 const PROJECT_PREFIX_RE = /^Project:\s*/i;
+const LEARNER_SELECTION_STORAGE_KEY =
+	"classes:course-explorer:selected-learner";
 const COURSE_SELECTION_STORAGE_KEY = "classes:course-explorer:selected-course";
 const MODULE_SELECTION_STORAGE_KEY_PREFIX =
 	"classes:course-explorer:active-module:";
@@ -80,7 +82,8 @@ const progressSaveStatus = ref<
 const progressSaveError = ref("");
 const progressDrafts = ref<Record<string, CourseProgress>>({});
 const isStorageReady = ref(false);
-const hasRestoredStoredCourse = ref(false);
+const hasRestoredStoredLearner = ref(false);
+const currentHashAnchor = ref(readCurrentHashAnchor());
 const prefersReducedMotion = ref(false);
 let reducedMotionQuery: MediaQueryList | null = null;
 let progressSaveTimer: ReturnType<typeof setTimeout> | null = null;
@@ -209,8 +212,8 @@ watch(
 );
 
 watch(
-	managedLearners,
-	value => {
+	[managedLearners, isStorageReady, currentHashAnchor],
+	([value, storageReady]) => {
 		if (!isStaffContext.value) return;
 
 		if (value.length === 0) {
@@ -218,7 +221,55 @@ watch(
 			return;
 		}
 
-		if (!value.some(user => user._id === selectedLearnerId.value)) {
+		if (!storageReady) return;
+
+		const selectedStillValid = value.some(
+			user => user._id === selectedLearnerId.value
+		);
+		const hashCourseId = courseIdFromHash(
+			allCourses.value.map(course => course.id)
+		);
+		const learnerForHash = preferredLearnerIdForCourse(value, hashCourseId);
+		const storedLearnerId = readStoredValue(LEARNER_SELECTION_STORAGE_KEY);
+		const storedLearner = value.find(user => user._id === storedLearnerId);
+
+		if (!hasRestoredStoredLearner.value) {
+			hasRestoredStoredLearner.value = true;
+
+			if (
+				storedLearner &&
+				(!hashCourseId ||
+					learnerCanAccessCourse(storedLearner, hashCourseId))
+			) {
+				selectedLearnerId.value = storedLearner._id;
+				return;
+			}
+
+			if (learnerForHash) {
+				selectedLearnerId.value = learnerForHash;
+				return;
+			}
+
+			if (storedLearner) {
+				selectedLearnerId.value = storedLearner._id;
+				return;
+			}
+		}
+
+		if (
+			selectedStillValid &&
+			(!hashCourseId ||
+				learnerCanAccessCourse(selectedLearner.value, hashCourseId))
+		) {
+			return;
+		}
+
+		if (learnerForHash) {
+			selectedLearnerId.value = learnerForHash;
+			return;
+		}
+
+		if (!selectedStillValid) {
 			selectedLearnerId.value = value[0]._id;
 		}
 	},
@@ -230,38 +281,34 @@ watch([selectedLearnerId, selectedCourseId], () => {
 });
 
 watch(
-	[courseList, isStorageReady],
+	[courseList, isStorageReady, currentHashAnchor],
 	([availableCourses, storageReady]) => {
 		if (availableCourses.length === 0) {
 			selectedCourseId.value = "";
 			return;
 		}
 
-		if (storageReady && !hasRestoredStoredCourse.value) {
-			const storedCourseId = readStoredValue(
-				COURSE_SELECTION_STORAGE_KEY
-			);
+		if (!storageReady) return;
 
-			if (
-				storedCourseId &&
-				availableCourses.some(course => course.id === storedCourseId)
-			) {
-				selectedCourseId.value = storedCourseId;
-				hasRestoredStoredCourse.value = true;
-				return;
-			}
+		const availableCourseIds = availableCourses.map(course => course.id);
+		const hashCourseId = courseIdFromHash(availableCourseIds);
+		const storedCourseId = readStoredValue(COURSE_SELECTION_STORAGE_KEY);
 
-			hasRestoredStoredCourse.value = true;
+		if (hashCourseId) {
+			selectedCourseId.value = hashCourseId;
+			return;
 		}
 
-		if (
-			!selectedCourseId.value ||
-			!availableCourses.some(
-				course => course.id === selectedCourseId.value
-			)
-		) {
-			selectedCourseId.value = availableCourses[0].id;
+		if (storedCourseId && availableCourseIds.includes(storedCourseId)) {
+			selectedCourseId.value = storedCourseId;
+			return;
 		}
+
+		if (availableCourseIds.includes(selectedCourseId.value)) {
+			return;
+		}
+
+		selectedCourseId.value = availableCourses[0].id;
 	},
 	{ immediate: true }
 );
@@ -407,29 +454,36 @@ const visibleModules = computed<VisibleModule[]>(() => {
 });
 
 watch(
-	[visibleModules, selectedCourseId, isStorageReady],
+	[visibleModules, selectedCourseId, isStorageReady, currentHashAnchor],
 	([modules, courseId, storageReady]) => {
 		if (modules.length === 0 || !courseId) {
 			activeModuleId.value = "";
 			return;
 		}
 
-		if (modules.some(module => module.id === activeModuleId.value)) {
+		if (!storageReady) return;
+
+		const hashModuleId = moduleIdFromHash(modules);
+
+		if (hashModuleId) {
+			activeModuleId.value = hashModuleId;
 			return;
 		}
 
-		if (storageReady) {
-			const storedModuleId = readStoredValue(
-				moduleSelectionStorageKey(courseId)
-			);
+		const storedModuleId = readStoredValue(
+			moduleSelectionStorageKey(courseId)
+		);
 
-			if (
-				storedModuleId &&
-				modules.some(module => module.id === storedModuleId)
-			) {
-				activeModuleId.value = storedModuleId;
-				return;
-			}
+		if (
+			storedModuleId &&
+			modules.some(module => module.id === storedModuleId)
+		) {
+			activeModuleId.value = storedModuleId;
+			return;
+		}
+
+		if (modules.some(module => module.id === activeModuleId.value)) {
+			return;
 		}
 
 		activeModuleId.value = modules[0].id;
@@ -481,6 +535,74 @@ const activeModuleSupplementalLinks = computed(() => {
 
 function normalizeSearch(value: string) {
 	return value.toLowerCase().replace(WHITESPACE_RE, " ").trim();
+}
+
+function readCurrentHashAnchor() {
+	if (typeof window === "undefined") return "";
+
+	const rawHash = window.location.hash.replace(/^#/, "").trim();
+	if (!rawHash) return "";
+
+	try {
+		return decodeURIComponent(rawHash);
+	} catch {
+		return rawHash;
+	}
+}
+
+function syncHashAnchor() {
+	currentHashAnchor.value = readCurrentHashAnchor();
+}
+
+function courseIdFromHash(courseIds: string[]) {
+	const anchor = currentHashAnchor.value;
+	if (!anchor) return "";
+
+	return (
+		[...courseIds]
+			.sort((left, right) => right.length - left.length)
+			.find(
+				courseId =>
+					anchor === courseId || anchor.startsWith(`${courseId}-`)
+			) ?? ""
+	);
+}
+
+function learnerCanAccessCourse(
+	learner: Pick<User, "courseAccess"> | null | undefined,
+	courseId: string
+) {
+	return !!learner && (learner.courseAccess ?? []).includes(courseId);
+}
+
+function preferredLearnerIdForCourse(learners: User[], courseId: string) {
+	if (!courseId) return "";
+	return (
+		learners.find(learner => learnerCanAccessCourse(learner, courseId))
+			?._id ?? ""
+	);
+}
+
+function moduleIdFromHash(modules: VisibleModule[]) {
+	const anchor = currentHashAnchor.value;
+	if (!anchor) return "";
+
+	for (const module of modules) {
+		const allItems = [...module.curriculum, ...module.supplementalProjects];
+		if (
+			allItems.some(item => itemAnchorId(module.id, item.id) === anchor)
+		) {
+			return module.id;
+		}
+	}
+
+	const matchingModule = [...modules]
+		.sort((left, right) => right.id.length - left.id.length)
+		.find(
+			module => anchor === module.id || anchor.startsWith(`${module.id}-`)
+		);
+
+	return matchingModule?.id ?? "";
 }
 
 function matchesSearch(value: string, query: string) {
@@ -985,6 +1107,11 @@ watch(selectedCourseId, value => {
 	writeStoredValue(COURSE_SELECTION_STORAGE_KEY, value);
 });
 
+watch(selectedLearnerId, value => {
+	if (!isStorageReady.value || !isStaffContext.value) return;
+	writeStoredValue(LEARNER_SELECTION_STORAGE_KEY, value);
+});
+
 watch([activeModuleId, selectedCourseId], ([moduleId, courseId]) => {
 	if (!isStorageReady.value || !courseId) return;
 	writeStoredValue(moduleSelectionStorageKey(courseId), moduleId);
@@ -996,6 +1123,7 @@ function syncReducedMotionPreference(event?: MediaQueryListEvent) {
 }
 
 onMounted(() => {
+	syncHashAnchor();
 	isStorageReady.value = true;
 	if (
 		typeof window !== "undefined" &&
@@ -1013,6 +1141,10 @@ onMounted(() => {
 
 	if (typeof document !== "undefined") {
 		document.addEventListener("visibilitychange", handleVisibilityChange);
+	}
+
+	if (typeof window !== "undefined") {
+		window.addEventListener("hashchange", syncHashAnchor);
 	}
 });
 
@@ -1032,6 +1164,9 @@ onBeforeUnmount(() => {
 			"visibilitychange",
 			handleVisibilityChange
 		);
+	}
+	if (typeof window !== "undefined") {
+		window.removeEventListener("hashchange", syncHashAnchor);
 	}
 });
 

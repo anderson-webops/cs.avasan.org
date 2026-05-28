@@ -14,16 +14,37 @@ vi.mock("@/api", () => ({
 	}
 }));
 
+function installLocalStorageStub() {
+	const values = new Map<string, string>();
+
+	Object.defineProperty(window, "localStorage", {
+		configurable: true,
+		value: {
+			clear: () => values.clear(),
+			getItem: (key: string) => values.get(key) ?? null,
+			removeItem: (key: string) => values.delete(key),
+			setItem: (key: string, value: string) => {
+				values.set(key, value);
+			}
+		}
+	});
+}
+
 describe("CourseExplorer.vue", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
 		vi.clearAllMocks();
 		resetCourseAssetPreviewCache();
 		vi.useRealTimers();
+		installLocalStorageStub();
+		window.localStorage.clear();
+		window.history.replaceState({}, "", "/courses");
 	});
 
 	afterEach(() => {
 		vi.useRealTimers();
+		window.localStorage.clear();
+		window.history.replaceState({}, "", "/courses");
 		vi.unstubAllGlobals();
 	});
 
@@ -277,6 +298,239 @@ describe("CourseExplorer.vue", () => {
 			}
 		);
 		expect(wrapper.text()).toContain("Saved");
+	});
+
+	it("restores staff learner, course, and module context on deep-link refresh", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const fallbackCourse = coursesStore.courses[0];
+		const chemistryCourse = coursesStore.courses.find(
+			course => course.id === "intro-to-chemistry"
+		);
+
+		if (!chemistryCourse) throw new Error("Expected Intro to Chemistry course.");
+
+		const chemistryModuleId = "chm1-chemistry-basics";
+		const chemistryItemId =
+			"intro-to-chemistry-chm1-chemistry-basics-curriculum-mini-lab-diy-lava-lamp-and-density";
+		const hashAnchor = `${chemistryModuleId}-${chemistryItemId}`;
+
+		window.localStorage.setItem(
+			"classes:course-explorer:selected-learner",
+			"learner-chemistry"
+		);
+		window.localStorage.setItem(
+			"classes:course-explorer:selected-course",
+			chemistryCourse.id
+		);
+		window.localStorage.setItem(
+			`classes:course-explorer:active-module:${chemistryCourse.id}`,
+			chemistryModuleId
+		);
+		window.history.replaceState({}, "", `/courses#${hashAnchor}`);
+
+		vi.spyOn(coursesStore, "loadCourseById").mockImplementation(
+			async courseId => {
+				if (courseId === chemistryCourse.id) {
+					return {
+						id: chemistryCourse.id,
+						name: chemistryCourse.name,
+						modules: [
+							{
+								curriculum: [
+									{
+										content: "Density predicts which liquid sits on top.",
+										id: chemistryItemId,
+										title: "Mini Lab: DIY Lava Lamp and Density"
+									}
+								],
+								id: chemistryModuleId,
+								supplementalProjects: [],
+								title: "CHM1 Chemistry Basics"
+							}
+						]
+					};
+				}
+
+				return {
+					id: fallbackCourse.id,
+					name: fallbackCourse.name,
+					modules: [
+						{
+							curriculum: [
+								{
+									content: "Fallback content.",
+									id: "fallback-item",
+									title: "Fallback Lesson"
+								}
+							],
+							id: "fallback-module",
+							supplementalProjects: [],
+							title: "Fallback Module"
+						}
+					]
+				};
+			}
+		);
+
+		appStore.setCurrentTutor({
+			_id: "tutor-1",
+			name: "Tutor",
+			email: "tutor@example.com",
+			age: 30,
+			state: "GA",
+			usersOfTutorLength: 2,
+			coursePermissions: [fallbackCourse.id, chemistryCourse.id],
+			editTutors: false,
+			saveEdit: "Save"
+		});
+
+		(api.get as any).mockResolvedValueOnce({
+			data: [
+				{
+					_id: "learner-fallback",
+					name: "Fallback Learner",
+					email: "fallback@example.com",
+					age: 12,
+					state: "GA",
+					courseAccess: [fallbackCourse.id],
+					courseProgress: [],
+					editUsers: false,
+					saveEdit: "Save"
+				},
+				{
+					_id: "learner-chemistry",
+					name: "Chemistry Learner",
+					email: "chemistry@example.com",
+					age: 13,
+					state: "GA",
+					courseAccess: [chemistryCourse.id],
+					courseProgress: [],
+					editUsers: false,
+					saveEdit: "Save"
+				}
+			]
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.find<HTMLSelectElement>("#learner-select").element.value).toBe(
+				"learner-chemistry"
+			);
+			expect(wrapper.find<HTMLSelectElement>("#course-select").element.value).toBe(
+				chemistryCourse.id
+			);
+			expect(wrapper.text()).toContain("Mini Lab: DIY Lava Lamp and Density");
+		});
+
+		expect(wrapper.text()).toContain("Showing module 1: CHM1 Chemistry Basics.");
+		expect(coursesStore.loadCourseById).toHaveBeenCalledWith(
+			chemistryCourse.id
+		);
+	});
+
+	it("uses a course hash to choose the matching learner when no stored learner exists", async () => {
+		const pinia = createPinia();
+		setActivePinia(pinia);
+
+		const appStore = useAppStore();
+		const coursesStore = useCoursesStore();
+		const fallbackCourse = coursesStore.courses[0];
+		const chemistryCourse = coursesStore.courses.find(
+			course => course.id === "intro-to-chemistry"
+		);
+
+		if (!chemistryCourse) throw new Error("Expected Intro to Chemistry course.");
+
+		window.history.replaceState(
+			{},
+			"",
+			"/courses#intro-to-chemistry-chm1-chemistry-basics"
+		);
+
+		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
+			id: chemistryCourse.id,
+			name: chemistryCourse.name,
+			modules: [
+				{
+					curriculum: [
+						{
+							content: "Chemistry basics content.",
+							id: "chemistry-item",
+							title: "Chemistry Basics Lesson"
+						}
+					],
+					id: "chm1-chemistry-basics",
+					supplementalProjects: [],
+					title: "CHM1 Chemistry Basics"
+				}
+			]
+		});
+
+		appStore.setCurrentTutor({
+			_id: "tutor-1",
+			name: "Tutor",
+			email: "tutor@example.com",
+			age: 30,
+			state: "GA",
+			usersOfTutorLength: 2,
+			coursePermissions: [fallbackCourse.id, chemistryCourse.id],
+			editTutors: false,
+			saveEdit: "Save"
+		});
+
+		(api.get as any).mockResolvedValueOnce({
+			data: [
+				{
+					_id: "learner-fallback",
+					name: "Fallback Learner",
+					email: "fallback@example.com",
+					age: 12,
+					state: "GA",
+					courseAccess: [fallbackCourse.id],
+					courseProgress: [],
+					editUsers: false,
+					saveEdit: "Save"
+				},
+				{
+					_id: "learner-chemistry",
+					name: "Chemistry Learner",
+					email: "chemistry@example.com",
+					age: 13,
+					state: "GA",
+					courseAccess: [chemistryCourse.id],
+					courseProgress: [],
+					editUsers: false,
+					saveEdit: "Save"
+				}
+			]
+		});
+
+		const wrapper = mount(CourseExplorer, {
+			global: {
+				plugins: [pinia]
+			}
+		});
+		await flushPromises();
+
+		await vi.waitFor(() => {
+			expect(wrapper.find<HTMLSelectElement>("#learner-select").element.value).toBe(
+				"learner-chemistry"
+			);
+			expect(wrapper.find<HTMLSelectElement>("#course-select").element.value).toBe(
+				chemistryCourse.id
+			);
+			expect(wrapper.text()).toContain("Chemistry Basics Lesson");
+		});
 	});
 
 	it("renders starter code previews but hides solution previews for learners", async () => {
