@@ -2683,9 +2683,17 @@ function writeStoredValue(key: string, value: string) {
 
 .item-content-markdown :deep(ul),
 .item-content-markdown :deep(ol) {
-	display: grid;
-	gap: 0.55rem;
-	padding-left: 1.65rem;
+	margin-inline-start: 0;
+	padding-inline-start: 1.85rem;
+	list-style-position: outside;
+}
+
+.item-content-markdown :deep(ul) {
+	list-style-type: disc;
+}
+
+.item-content-markdown :deep(ol) {
+	list-style-type: decimal;
 }
 
 .item-content-markdown :deep(table) {
@@ -2731,7 +2739,11 @@ function writeStoredValue(key: string, value: string) {
 }
 
 .item-content-markdown :deep(li) {
-	padding-left: 0.25rem;
+	padding-inline-start: 0.35rem;
+}
+
+.item-content-markdown :deep(li + li) {
+	margin-top: 0.45rem;
 }
 
 .item-content-markdown :deep(li::marker) {
