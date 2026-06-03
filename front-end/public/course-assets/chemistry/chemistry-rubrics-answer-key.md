@@ -4,11 +4,11 @@ This key supports the remote materials pack. Use it to check reasoning, compare 
 
 ## General CER Rubric
 
-| Level | Claim | Evidence | Reasoning | Model and Vocabulary |
-| --- | --- | --- | --- | --- |
-| Strong | Specific, testable, and directly answers the prompt | Accurate, cited from the provided source, and includes units when relevant | Explains why the evidence supports the claim and addresses limits or uncertainty | Uses target terms accurately and connects visible evidence to particles, formulas, equations, or graphs |
-| Proficient | Answers the prompt but may be broad | Mostly accurate and relevant | Connects evidence to claim with a reasonable explanation | Uses most target terms correctly |
-| Developing | Vague or partly off-topic | Missing, weak, or uncited | Restates evidence without explaining why it matters | Uses terms loosely or confuses observation with inference |
+| Level      | Claim                                               | Evidence                                                                   | Reasoning                                                                        | Model and Vocabulary                                                                                    |
+| ---------- | --------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Strong     | Specific, testable, and directly answers the prompt | Accurate, cited from the provided source, and includes units when relevant | Explains why the evidence supports the claim and addresses limits or uncertainty | Uses target terms accurately and connects visible evidence to particles, formulas, equations, or graphs |
+| Proficient | Answers the prompt but may be broad                 | Mostly accurate and relevant                                               | Connects evidence to claim with a reasonable explanation                         | Uses most target terms correctly                                                                        |
+| Developing | Vague or partly off-topic                           | Missing, weak, or uncited                                                  | Restates evidence without explaining why it matters                              | Uses terms loosely or confuses observation with inference                                               |
 
 ## Measurement Tables Key
 
@@ -30,6 +30,42 @@ A strong comparison chooses the model based on the question being answered. For 
 
 Sample answer: A heating curve is best for explaining why temperature can pause during boiling because the flat graph region directly shows temperature over time. It is not enough by itself to show what particles are doing, so a particle diagram should be added for the reasoning part.
 
+## Original Phenomena Case Library Key
+
+Strong case explanations connect a visible observation to a model and name the evidence limit. Expected connections include:
+
+1. Water cohesion and surface tension: visible beading or doming supports a model of attraction between water molecules, but it does not directly show individual molecules.
+2. Lava-lamp density: oil and water separate because density and intermolecular interactions differ; gas bubbles can temporarily reduce the effective density of colored water droplets or carry liquid upward.
+3. Oobleck: sudden-force resistance shows that simple solid/liquid categories are models with limits, not perfect boxes.
+4. Apple, water, and balloon: solids keep shape, liquids take container shape while staying close together, and gases spread through available space.
+5. Soda and balloon: opening or changing pressure lets dissolved carbon dioxide leave solution and enter the gas space.
+6. Elephant toothpaste: foam is trapped gas from a decomposition reaction; the catalyst changes rate, not the amount of atoms available.
+7. Baking soda volcano: gas production supports an acid-base reaction model because carbon dioxide is produced.
+8. Invisible ink: the starting liquid can be discussed as a solution, while the revealed message requires separate reaction or oxidation evidence.
+9. Mixture separation: the correct method depends on particle size, solubility, and whether the mixture is homogeneous or heterogeneous.
+
+Common revision target: do not treat a dramatic demonstration as the explanation. The response should name the observation, chemistry idea, evidence, and model limit.
+
+## Original Reaction Projects Key
+
+Strong restored reaction-project responses should include:
+
+1. Introduction to Chemical Reactions: phase changes are physical changes unless evidence shows new substances. In `CH₄ + 2O₂ → CO₂ + 2H₂O`, the subscript in `CH₄` means four hydrogen atoms in one methane molecule; the coefficient `2` before `O₂` means two oxygen molecules. Oxygen is a reactant in the combustion model. In `4Fe(s) + 3O₂(g) → 2Fe₂O₃(s)`, `Fe` is iron, `(s)` means solid, `(g)` means gas, and `(l)` would mean liquid.
+2. Elephant Toothpaste: yeast acts as a catalyst in the simplified activity, hydrogen peroxide decomposes into water and oxygen, oxygen gas gets trapped by soap as foam, and scaling the activity changes amount without changing the underlying reaction model.
+3. Making a Volcano: vinegar and baking soda are modeled as an acid-base reaction that produces carbon dioxide gas. The bubbles or foam are reaction evidence because the model produces a gas, but the classroom volcano is an analogy and does not use the same process as real molten-rock volcanism.
+
+Common revision target: do not use dramatic appearance as the proof. The response should identify reactants, products or likely products, reaction evidence, and the limitation of the model or demonstration.
+
+## Original Solutions Projects Key
+
+Strong restored solutions-project responses should include:
+
+1. Making Invisible Ink: lemon juice and water form a mixture that can be discussed as a solution. Dilution can make the dried mark harder to see. The later darkening is separate reaction evidence, commonly explained with oxidation or heat-triggered chemical change in an introductory model.
+2. Solution Simulation: the solute is the substance being dissolved and the solvent does the dissolving. In water, polar orientation and charge attractions help explain why ions spread through solution. `NaNO₃` contains sodium, nitrogen, and oxygen; `NaCl` contains sodium and chlorine; `CuSO₄` contains copper, sulfur, and oxygen. `KBr` contains potassium and bromine.
+3. Separating Mixtures: rocks, gravel, and sand are heterogeneous and can be separated by particle size. Sand and salt can be separated by dissolving the salt and filtering sand in a model. Saltwater is homogeneous at the visible scale and requires removing solvent, such as by evaporation in a diagram or time-lapse model, to recover salt.
+
+Common revision target: do not say a dissolved substance disappears. It is distributed at a particle scale that is not visible directly.
+
 ## Matter and Classification Key
 
 Oxygen gas is an element. Pure water and carbon dioxide are compounds. Salt water, brass, and air are homogeneous mixtures. Trail mix and granite are heterogeneous mixtures. Light is not matter in this context. The unknown clear liquid is not enough information because appearance alone does not prove pure substance or mixture.
@@ -44,13 +80,13 @@ Carbon-12, carbon-13, and carbon-14 are all carbon because they have six protons
 
 ## Atomic Structure Checkpoint Key
 
-| Item | Expected Reasoning |
-| --- | --- |
-| A | 8 protons identifies oxygen; mass number is 16; neutral electron count is 8. |
-| B | Carbon has 6 protons; carbon-14 has 8 neutrons; neutral carbon has 6 electrons. |
-| C | 11 protons identifies sodium; mass number is 23; 10 electrons gives `+1` charge. |
-| D | 17 protons identifies chlorine; mass number is 35; 18 electrons gives `-1` charge. |
-| E | The periodic-table mass is an abundance-weighted average of naturally occurring isotopes, not the mass number of every chlorine atom. |
+| Item | Expected Reasoning                                                                                                                    |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| A    | 8 protons identifies oxygen; mass number is 16; neutral electron count is 8.                                                          |
+| B    | Carbon has 6 protons; carbon-14 has 8 neutrons; neutral carbon has 6 electrons.                                                       |
+| C    | 11 protons identifies sodium; mass number is 23; 10 electrons gives `+1` charge.                                                      |
+| D    | 17 protons identifies chlorine; mass number is 35; 18 electrons gives `-1` charge.                                                    |
+| E    | The periodic-table mass is an abundance-weighted average of naturally occurring isotopes, not the mass number of every chlorine atom. |
 
 Common revision target: if the element name changes when only electrons change, the response is confusing ion charge with element identity.
 
@@ -76,6 +112,14 @@ Common revision target: do not use covalent prefixes for ordinary ionic formulas
 
 Across period 2 from Li to F, atomic radius generally decreases while attraction for electrons generally increases. Na is larger than Li because it is lower in group 1. Cl is larger than F but still strongly attracts electrons because both are halogens.
 
+## Periodic Table Reference Comparison Key
+
+A strong reference comparison names what each source contributed. ACS can serve as the default classroom table for element boxes and student-friendly descriptions. RSC is useful for interactive trends, element pages, histories, and richer context. IUPAC is useful for standard names, symbols, and official periodic-table framing. Ptable is useful for quick interactive scanning and filtering.
+
+For symbol-word work, every symbol must be real and capitalization must be correct. For example, `Co` is cobalt and is not the same as writing separate carbon and oxygen symbols unless the intended symbols are `C` and `O`. A complete answer lists full element names, atomic numbers, and at least one property note or source note.
+
+Common revision target: do not cite "the periodic table" as a source without naming which table or which fact was checked.
+
 ## Bonding and Formula Key
 
 Metal plus nonmetal formulas are usually introduced as ionic at this level. Nonmetal plus nonmetal formulas are usually introduced as covalent. `NaCl` and `MgCl₂` should be described as formula units, not separate molecules. Water and carbon dioxide both have three atoms, but water is bent while carbon dioxide is linear.
@@ -84,14 +128,14 @@ Metal plus nonmetal formulas are usually introduced as ionic at this level. Nonm
 
 Strong Lewis-style work shows a defensible electron count and a structure clue, not just a memorized drawing.
 
-| Formula | Expected First-Pass Reasoning |
-| --- | --- |
-| `H₂` | One shared pair gives each hydrogen two electrons. |
-| `O₂` | Twelve valence electrons support a double bond and two lone pairs on each oxygen in the common intro model. |
-| `H₂O` | Oxygen forms two O-H bonds and has two lone pairs, so the shape is bent rather than linear. |
-| `CO₂` | Carbon is central with two double bonds to oxygen, producing a linear model. |
-| `CH₄` | Carbon forms four single bonds to hydrogen and has no lone pairs. |
-| `NH₃` | Nitrogen forms three N-H bonds and has one lone pair, giving a pyramidal shape in the intro model. |
+| Formula | Expected First-Pass Reasoning                                                                               |
+| ------- | ----------------------------------------------------------------------------------------------------------- |
+| `H₂`    | One shared pair gives each hydrogen two electrons.                                                          |
+| `O₂`    | Twelve valence electrons support a double bond and two lone pairs on each oxygen in the common intro model. |
+| `H₂O`   | Oxygen forms two O-H bonds and has two lone pairs, so the shape is bent rather than linear.                 |
+| `CO₂`   | Carbon is central with two double bonds to oxygen, producing a linear model.                                |
+| `CH₄`   | Carbon forms four single bonds to hydrogen and has no lone pairs.                                           |
+| `NH₃`   | Nitrogen forms three N-H bonds and has one lone pair, giving a pyramidal shape in the intro model.          |
 
 Common revision target: a formula gives atom count but not shape. The answer must reference bonding and lone pairs when explaining why `H₂O` and `CO₂` differ.
 
@@ -167,9 +211,30 @@ Worked setup examples:
 
 Common revision target: coefficients from balanced equations compare moles, not grams directly. A grams-to-grams problem must go grams → moles → mole ratio → moles → grams.
 
+## Water Formation Stoichiometry and Heat Key
+
+Balanced equation: `2H₂ + O₂ → 2H₂O`.
+
+Given `1 mol H₂` and `2 mol O₂`, the balanced ratio needs `2 mol H₂ : 1 mol O₂`. For `1 mol H₂`, only `0.5 mol O₂` is needed, so hydrogen is the limiting reactant.
+
+Reacted:
+
+1. `H₂` used: `1 mol`
+2. `O₂` used: `0.5 mol`
+3. `H₂O` produced: `1 mol`
+
+Left over:
+
+1. `H₂` left: `0 mol`
+2. `O₂` left: `1.5 mol`
+
+The reaction is exothermic. If liquid water forms, `1 mol H₂O(l)` releases about `285.8 kJ`; with sign convention, `ΔH ≈ -285.8 kJ` for the mole produced in this case. If water vapor forms, `1 mol H₂O(g)` releases about `241.8 kJ`. A concise answer is: `1.5 mol O₂` left, `1 mol H₂O` produced, and about `286 kJ` released if liquid water forms.
+
+Common revision target: do not consume all available oxygen just because it is listed. The limiting reactant controls product amount, and the heat value depends on product state.
+
 ## Quantitative Chemistry Checkpoint Key
 
-`CaCO₃` is about `100 g/mol`: `40 + 12 + 3(16)`. `58.5 g NaCl` is `1.0 mol NaCl` using `58.5 g/mol`. In `2H₂ + O₂ → 2H₂O`, 4 mol `H₂` produces 4 mol `H₂O` because the ratio is `2:2`, or `1:1` after simplification. For methane to water, the setup should go `g CH₄ → mol CH₄ → mol H₂O → g H₂O`; the `1:2` mole ratio comes from the balanced equation.
+`CaCO₃` is about `100 g/mol`: `40 + 12 + 3(16)`. `58.5 g NaCl` is `1.0 mol NaCl` using `58.5 g/mol`. In `2H₂ + O₂ → 2H₂O`, 4 mol `H₂` produces 4 mol `H₂O` because the ratio is `2:2`, or `1:1` after simplification. For `1 mol H₂` and `2 mol O₂`, hydrogen limits the reaction, `1.5 mol O₂` remains, `1 mol H₂O` forms, and about `285.8 kJ` is released if liquid water forms. For methane to water, the setup should go `g CH₄ → mol CH₄ → mol H₂O → g H₂O`; the `1:2` mole ratio comes from the balanced equation.
 
 Common revision target: coefficients cannot be applied directly to grams because balanced equations compare particles or moles, not mass.
 
@@ -179,14 +244,14 @@ Case A changes a formula instead of using coefficients. Case B uses the wrong mo
 
 ## Capstone Rubric
 
-| Category | Strong Evidence |
-| --- | --- |
-| Scope | The topic is narrow enough to explain with course vocabulary and remote evidence |
-| Evidence | At least two evidence types are used, such as a simulation, diagram, data table, equation, or reference |
-| Model | A particle, formula, equation, graph, or system model explains what cannot be seen directly |
+| Category           | Strong Evidence                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Scope              | The topic is narrow enough to explain with course vocabulary and remote evidence                              |
+| Evidence           | At least two evidence types are used, such as a simulation, diagram, data table, equation, or reference       |
+| Model              | A particle, formula, equation, graph, or system model explains what cannot be seen directly                   |
 | Chemistry Accuracy | Terms such as atom, ion, molecule, solution, concentration, reaction, energy, and evidence are used correctly |
-| Safety | No required step depends on household chemicals, heat, glassware, ingestion, pressure, or disposal |
-| Revision | The final artifact names one uncertainty and one piece of evidence that would change the conclusion |
+| Safety             | No required step depends on household chemicals, heat, glassware, ingestion, pressure, or disposal            |
+| Revision           | The final artifact names one uncertainty and one piece of evidence that would change the conclusion           |
 
 Capstone example: For carbonation, a strong claim could be "Opening a sealed carbonated drink lowers pressure and causes dissolved carbon dioxide to leave solution." Good evidence could include a pressure-change scenario, a gas-solubility diagram, and a pH table. The particle model should explain dissolved gas particles and gas-space particles, while the limitation should name missing exact measurements.
 

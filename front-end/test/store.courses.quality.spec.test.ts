@@ -190,8 +190,12 @@ describe("course text quality normalization", () => {
 		);
 
 		expect(duplicateTitles).toEqual([]);
-		expect(text).not.toMatch(/Implementation Studio|Full Lesson Authoring Pack/i);
-		expect(text).not.toMatch(/Standards and Scope Expansion|Module Backlog/i);
+		expect(text).not.toMatch(
+			/Implementation Studio|Full Lesson Authoring Pack/i
+		);
+		expect(text).not.toMatch(
+			/Standards and Scope Expansion|Module Backlog/i
+		);
 		expect(text).not.toMatch(/Source and Asset Parity Implementation/i);
 		expect(text).not.toMatch(/Guide students|Require students|Push them/i);
 		expect(text).not.toContain("CHM0");
@@ -203,9 +207,8 @@ describe("course text quality normalization", () => {
 		expect(phetLinks.size).toBeGreaterThanOrEqual(7);
 		expect(course!.modules.at(-1)?.kind).toBe("appendix");
 
-		const normalizedCourse = await useCoursesStore().loadCourseById(
-			"intro-to-chemistry"
-		);
+		const normalizedCourse =
+			await useCoursesStore().loadCourseById("intro-to-chemistry");
 		expect(normalizedCourse!.modules.at(-1)?.kind).toBe("appendix");
 
 		expect(text).toContain("Phase Diagrams as Maps of Conditions");
@@ -224,6 +227,45 @@ describe("course text quality normalization", () => {
 		expect(text).toContain("CHM10 Advanced Chemistry Map");
 		expect(text).toContain("Reference Appendix: Chemistry Resource Bank");
 		expect(text).toContain("Stoichiometry Error Analysis");
+		expect(text).toContain("Original Phenomena Case Library");
+		expect(text).toMatch(/original project source index/i);
+		expect(text).toContain("Everyday Chemistry Observation Log");
+		expect(text).toContain("Material Sorting Challenge");
+		expect(text).toContain("Heating and Cooling Diary");
+		expect(text).toContain("Reaction Detective Board");
+		expect(text).toContain("Kitchen Chemistry Sort");
+		expect(text).toContain("Chemistry in Your World Showcase");
+		expect(text).toContain("Course Map and Learning Workflow");
+		expect(text).toContain("Atom Simulation and Atom Builder Challenge");
+		expect(text).toContain("Water Tension Experiment");
+		expect(text).toContain("Making a DIY Lava Lamp");
+		expect(text).toContain("Making Oobleck Case Analysis");
+		expect(text).toContain("States of Matter Simulation Report");
+		expect(text).toContain("Exploration of the Periodic Table");
+		expect(text).toContain("Name Making with the Periodic Table");
+		expect(text).toContain("Introduction to Chemical Reactions");
+		expect(text).toContain("Elephant Toothpaste Case Analysis");
+		expect(text).toContain("Making a Volcano Case Analysis");
+		expect(text).toContain("Making Invisible Ink Case Analysis");
+		expect(text).toContain("Solution Simulation");
+		expect(text).toContain("Separating Mixtures");
+		expect(text).toContain("Model Your Own Reaction");
+		expect(text).toContain("water cohesion and surface tension");
+		expect(text).toContain("elephant toothpaste");
+		expect(text).toContain("baking-soda volcanoes");
+		expect(text).toContain("invisible ink");
+		expect(text).toContain("PBS/ChemThink atom simulation");
+		expect(text).toContain("PBS periodic table interactive");
+		expect(text).toContain("JavaLab dissolution simulation");
+		expect(text).toContain("PubChem periodic table");
+		expect(text).toContain("Periodic Table Reference Set");
+		expect(text).toContain("Royal Society of Chemistry periodic table");
+		expect(text).toContain("IUPAC periodic table");
+		expect(text).toContain(
+			"Limiting Reactants, Leftovers, and Heat Released"
+		);
+		expect(text).toContain("1.5 mol O₂");
+		expect(text).toContain("285.8 kJ");
 	});
 
 	it("keeps Intro to Chemistry local asset fragments backed by real headings", async () => {
@@ -244,7 +286,8 @@ describe("course text quality normalization", () => {
 				...module.supplementalProjects
 			]) {
 				for (const link of [item.datasetLink, item.solutionLink]) {
-					if (!link?.startsWith("/course-assets/chemistry/")) continue;
+					if (!link?.startsWith("/course-assets/chemistry/"))
+						continue;
 					if (!link.includes("#")) continue;
 
 					const [path, hash] = link.split("#", 2);
