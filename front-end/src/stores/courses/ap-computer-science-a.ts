@@ -12,6 +12,7 @@ const AP_FRQ_ARCHIVE =
 	"https://apstudents.collegeboard.org/courses/ap-computer-science-a/free-response-questions-by-year";
 const APCS_README =
 	"https://github.com/instruction-material/APCS/blob/main/README.md";
+const APCS_TRACKS_GUIDE = "/course-assets/apcs/apcs-pacing-tracks.md";
 const WINDOWS_VSCODE_JAVA_SETUP = `
 Use this checklist when setting up Java on Windows with VS Code:
 
@@ -70,6 +71,16 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Course Positioning",
 					content:
 						"AP Computer Science A is a Java course built around problem solving, object-oriented design, arrays, ArrayLists, inheritance, recursion, and exam-style tracing. The course should be treated as both a real programming class and a specific AP exam prep track."
+				},
+				{
+					title: "Pacing Tracks and Acceleration Guide",
+					content: [
+						"Use the APCS track guide when the full sequence would move too slowly or when a learner needs a more supported route. The guide separates the course into an AP Sprint Track, Standard AP Track, Supported Mastery Track, Challenge Bridge Track, and Exam Final Stretch Track.",
+						"**Fast-placement rule:** Use APCS1-4 mostly as diagnostics for experienced Python or C++ learners. Backfill only Java-specific gaps such as `.equals()` versus `==`, integer division, casting, `Scanner`, `Math.random()`, file/class naming, and AP-style tracing.",
+						"**Core-route rule:** Do not skip APCS5-8, APCS10-12, or APCS13-16 completely. These modules contain the AP-specific Java object model, inheritance/polymorphism, arrays/ArrayLists, wrapper constraints, recursion, runtime, searching, and sorting.",
+						"**Challenge rule:** When APCS work is too easy, keep the AP concept but upgrade the artifact: add validation, multiple classes, test cases, file input, a menu loop, edge-case writeups, or an FRQ-style explanation."
+					].join("\n\n"),
+					datasetLink: APCS_TRACKS_GUIDE
 				},
 				{
 					title: "Java Toolchain and Workflow",

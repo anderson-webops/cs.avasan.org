@@ -140,6 +140,29 @@ describe("course text quality normalization", () => {
 		expect(binarySearch.content).toContain("Trace at least one search");
 	});
 
+	it("adds an AP Computer Science A pacing track guide", async () => {
+		const course = await loadRawCourse("ap-computer-science-a");
+		expect(course).not.toBeNull();
+
+		const guideItem = findItem(
+			course!,
+			/Pacing Tracks and Acceleration Guide/
+		);
+		const guidePath = "public/course-assets/apcs/apcs-pacing-tracks.md";
+		const guide = fs.readFileSync(guidePath, "utf8");
+
+		expect(guideItem.datasetLink).toBe(
+			"/course-assets/apcs/apcs-pacing-tracks.md"
+		);
+		expect(guideItem.content).toContain("AP Sprint Track");
+		expect(guideItem.content).toContain("Supported Mastery Track");
+		expect(guideItem.content).toContain("Challenge Bridge Track");
+		expect(guide).toContain("Today-Ready Recommendation");
+		expect(guide).toContain("APCS5/APCS6");
+		expect(guide).toContain("AJ20: generics, interfaces, records");
+		expect(guide).not.toMatch(/Instructor Note|HQ Support|Slack|Juni/i);
+	});
+
 	it("keeps science investigations explicitly remote-safe and evidence-based", async () => {
 		const courses = await Promise.all([
 			loadRawCourse("elementary-science"),
