@@ -110,7 +110,15 @@ const forbiddenRawGeneratedPatterns = [
 	/\bstudent-led\b/i,
 	/\bShow the a picture\b/i,
 	/\bshow the how\b/i,
-	/\bdelete of all a list\b/i
+	/\bdelete of all a list\b/i,
+	/\bShow students\b/i,
+	/\bEncourage students\b/i,
+	/\bTeach managing\b/i,
+	/\bIf the struggles\b/i,
+	/\bshow the the\b/i,
+	/\bthe the understands\b/i,
+	/\bInstructional note\b/i,
+	/\bteacher-authored\b/i
 ];
 
 const rawCourseFiles = readdirSync(coursesSourceDir)

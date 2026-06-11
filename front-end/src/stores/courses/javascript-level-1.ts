@@ -31,7 +31,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check-In #1: Conditionals",
 					content:
-						"Explain if/else if/else. Ask for a number; if <= 50 print a success message else a sorry message. Create booleans for homework and chores; if both true print that you can go outside, otherwise that you cannot. Update to allow outside if either is true using ||."
+						"Review `if`, `else if`, and `else` branches. Write a program that asks for a number; if the number is less than or equal to 50, print a success message, otherwise print a sorry message. Create booleans for homework and chores; if both are true, print that going outside is allowed, otherwise print that it is not. Then update the condition to allow going outside if either value is true using `||`."
 				},
 				{
 					title: "Check-In #1: Drawing in JavaScript",

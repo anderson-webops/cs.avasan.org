@@ -692,7 +692,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Course Recap & Next Steps",
 					content:
-						"Wrap up the course by recapping the major ideas learned: unsupervised learning and clustering, supervised learning and classification, KNN, Naive Bayes, neural networks, regression, overfitting and evaluation, and image classification. Discuss how these pieces fit together in the Master Project. Then talk about recommended next courses based on interests and confidence—options might include USACO training for advanced competitive programming, AP Computer Science, or language-specific Level 1 courses in Java, JavaScript, or C++. Choose a path that best matches the goals at hand and treat the Master Project as a portfolio piece to share with teachers, mentors, or future programs."
+						"Wrap up the course by recapping the major ideas learned: unsupervised learning and clustering, supervised learning and classification, KNN, Naive Bayes, neural networks, regression, overfitting and evaluation, and image classification. Connect those ideas to the Master Project by identifying which techniques were used, what evidence supports the results, and what limitations remain. Recommended next courses can be chosen based on interests and confidence; strong options include USACO training for advanced competitive programming, AP Computer Science, or language-specific Level 1 courses in Java, JavaScript, or C++. Treat the Master Project as a portfolio piece that demonstrates a complete data/modeling workflow."
 				}
 			],
 			supplementalProjects: [

@@ -354,7 +354,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "DP beyond the First Table",
 					content:
-						"Show students that Gold DP may involve richer transitions, combinatorial counts, or less obvious state compressions. The key is still the same: define the right subproblem first."
+						"Gold DP often involves richer transitions, combinatorial counts, or less obvious state compressions. The key is still the same: define the right subproblem first."
 				},
 				{
 					title: "Count Carefully, Mod Carefully",

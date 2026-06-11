@@ -595,8 +595,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Use NGSS appendices, ACS chemistry guidance, PhET simulations, and vetted NASA/NOAA/USGS/HHMI resources as appropriate.",
 			"Keep every activity Zoom-first with notes, paper, shared screen, and provided source material.",
 			"Maintain a resource shortlist by module: standard, visual/simulation, data source, model, and CER prompt.",
-			"Elementary and middle-school source pool: PhET, NASA, NOAA, USGS, HHMI BioInteractive, CK-12-style open readings, National Geographic Education, and teacher-authored diagrams or data tables.",
-			"Chemistry/physics source pool: ACS safety and curriculum guidance, PhET simulations, NIST or periodic-table references, NOAA/NASA data where relevant, and teacher-authored graphing or free-body-diagram datasets."
+			"Elementary and middle-school source pool: PhET, NASA, NOAA, USGS, HHMI BioInteractive, CK-12-style open readings, National Geographic Education, and original diagrams or data tables.",
+			"Chemistry/physics source pool: ACS safety and curriculum guidance, PhET simulations, NIST or periodic-table references, NOAA/NASA data where relevant, and original graphing or free-body-diagram datasets."
 		],
 		safetyAndAccess: [
 			"No required beakers, kits, chemicals, household experiments, or physical supplies beyond notes and paper.",

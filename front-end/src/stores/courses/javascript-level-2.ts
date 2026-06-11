@@ -9,7 +9,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Overview",
 					content:
-						"Use this as a review dialog. Let the learner try each task independently, guide with questions, and keep pacing flexible.",
+						"Use this check-in as a flexible review of core JavaScript skills. Each task should be attempted independently first, then repaired through targeted reasoning about syntax, control flow, data, and output.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/bbb5cce14f0a1bc5c5c4b5582da67750"
 				},

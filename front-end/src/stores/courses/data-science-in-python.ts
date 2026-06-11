@@ -437,7 +437,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "When Static Charts Stop Being Enough",
 					content:
-						"Show students the limitations of a notebook that only produces fixed outputs. Once the audience wants filtering, parameter changes, or rapid comparison, a dashboard becomes the better communication tool."
+						"A notebook that only produces fixed outputs becomes limiting when the audience needs filtering, parameter changes, or rapid comparison. In those situations, a dashboard becomes the better communication tool."
 				},
 				{
 					title: "Altair for Cleaner Chart Construction",

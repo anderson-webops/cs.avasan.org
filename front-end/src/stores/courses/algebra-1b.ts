@@ -235,9 +235,9 @@ To combine rational expressions, use a shared denominator exactly as you would w
   - \`2y + 4 = 2(y + 2)\`
   - then build a shared denominator from \`5y\` and \`2(y + 2)\`
 
-**Instructional note**
+**Strategy note**
 
-- Encourage students to factor denominators first; it often reveals a smaller least common denominator than a direct product would.
+- Factoring denominators first often reveals a smaller least common denominator than a direct product would.
 				`.trim()
 			),
 			createLesson(

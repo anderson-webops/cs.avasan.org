@@ -309,7 +309,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Getting user input",
 					content:
-						'Explain that event listeners respond to button presses, but sometimes we want to respond to text typed by the user. Introduce the "ask ___ and wait" block and the "answer" variable. Show how to use the equality (=) block to compare the user\'s answer to a correct value and how to use < and > blocks to compare numbers.'
+						'Event listeners respond to button presses, but many projects also need text typed by the user. The "ask ___ and wait" block collects typed input, and the "answer" variable stores the most recent response. Use the equality (=) block to compare the answer to a correct value, and use < and > blocks when a typed number should be compared by size.'
 				},
 				{
 					title: "Project 1 – Math Facts",

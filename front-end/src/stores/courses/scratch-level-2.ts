@@ -107,7 +107,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Nested loops",
 					content:
-						'Review what a loop is (there should be familiarity with the repeat block in Scratch). What does the word "nested" mean? Think of Russian nesting dolls: nested means something placed inside another thing. Thus, nested loops are loops inside of other loops!\nWhy might we want to use nested loops?'
+						"Nested loops are loops placed inside other loops. The idea is similar to Russian nesting dolls: one structure sits inside another structure.\nA nested loop is useful when a repeated action itself contains another repeated action, such as drawing several rows of shapes, building grids, or repeating an animation pattern multiple times."
 				},
 				{
 					title: "GM2 Project 1: Square Inception",
@@ -209,7 +209,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Cloning",
 					content:
-						"Sometimes in our projects or games, we want to have one sprite that's duplicated many times, doing slightly different things. We can make clones or copies of this sprite in our code.\nCreate a new Scratch project. Using this project as rough guide, introduce the create clone of myself, when I start as a clone , and delete this clone blocks.\nMost of the time we don't want to see the original sprite, since the clones are doing the things we actually want! Show how to “hide” the parent and “show” the clones."
+						"Cloning creates temporary copies of a sprite while the project runs. This is useful when many similar objects should appear on screen, such as raindrops, paint marks, enemies, stars, or collectibles.\nThe main Scratch blocks are `create clone of myself`, `when I start as a clone`, and `delete this clone`. Most clone-based projects hide the original parent sprite and show only the clones, because the clones are the objects that move, collide, and disappear."
 				},
 				{
 					title: "GM4 Project 1: Jackson Pollock Clones",
@@ -305,7 +305,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Strings",
 					content:
-						"In programming, we work with different kinds of information, or data, that is stored inside of variables. Up until now, we've mainly focused on numbers inside of variables. What kind of things have we done when working with numbers inside of variables? For example, we've kept track of a score and timer, we've added numbers together, and we've checked to see which of two numbers is bigger or smaller.\nAnother kind of information that we use a lot when coding is words and letters, which we call strings. If the struggles with the terminology of string, you can have them visualize spelling words with letters from a can of Alphabet Soup. We could (with a lot of messiness) put a thread through a bunch of letters to string them together into a word!\nCreate a new Scratch project. Using this project as a rough guide, introduce the join __ __, letter __ of __, and length of __ blocks. Make sure to explain that the length of a string in programming includes spaces and all other characters."
+						"Programs can store different kinds of data. Earlier variables mainly held numbers for scores, timers, movement, and comparisons. Strings store text: words, letters, spaces, punctuation, and other characters.\nA string can be thought of as characters connected in order. Scratch string blocks make it possible to join text, read a specific character, and measure text length. Practice with `join __ __`, `letter __ of __`, and `length of __`. String length includes spaces and punctuation, not just letters."
 				},
 				{
 					title: "GM5 Project 1: Security Bot",
@@ -457,7 +457,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Functions",
 					content:
-						"We're going to learn how to make our own custom blocks in Scratch! When we make a block, we make a special set of instructions that have a name and can take in some specific inputs. If we want the sprite to use the instructions, we just use that new block. This custom block we create is called a function.\nUsing this project as a rough guide, show the the My Blocks section and guide them through creating and using an adding block like the one in the example. We can name the function with the label text, and choose what kind of information we can put into the function (e.g. numbers, words, conditions).\nIt is particularly important the the understands the difference between defining a function (or custom block) with the given inputs, and using that function in our code with specific inputs.\nMaking our own blocks can help us make our code look more organized. For example, in the Music Memory game, we could have divided our code up into functions to make it a bit easier to read! You may choose to work through editing the Music Memory game to simplify it with functions now or later, like in this project."
+						"Custom blocks in Scratch work like functions. A function is a named set of instructions that can be reused whenever the sprite needs that behavior. Some functions also take inputs, such as numbers, words, or conditions.\nUse the My Blocks section to create a custom block, define what it does, and then call it from another script. The key distinction is definition versus use: defining a function describes the behavior once, while calling the function runs that behavior with specific input values.\nFunctions keep projects organized by separating repeated behavior into named pieces. A game such as Music Memory could use functions for playing a note sequence, checking an answer, resetting a round, or displaying feedback."
 				},
 				{
 					title: "GM8 Project 1: My First Functions",
