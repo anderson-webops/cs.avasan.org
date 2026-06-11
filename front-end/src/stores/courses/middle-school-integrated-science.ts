@@ -110,7 +110,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Project: Selection Simulation Reflection",
 					content:
-						"Use a teacher-provided simulation or dataset to track how trait frequencies change. Summarize the starting variation, environmental pressure, result, and one limitation of the model."
+						"Use a provided simulation or dataset to track how trait frequencies change. Summarize the starting variation, environmental pressure, result, and one limitation of the model."
 				}
 			]
 		},
@@ -209,7 +209,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Simulation Practice: Particle Models of Reactions",
 					content:
-						"Use an online particle model or teacher-provided diagrams. Students track atoms before and after a reaction and explain why coefficients are needed in simple chemical equations."
+						"Use an online particle model or provided diagrams. Students track atoms before and after a reaction and explain why coefficients are needed in simple chemical equations."
 				}
 			],
 			supplementalProjects: [
@@ -221,7 +221,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Project: Chemical Change Evidence Case File",
 					content:
-						"Review a set of teacher-provided scenarios and classify each as physical change, chemical change, or not enough information. Explain the evidence and uncertainty for each case."
+						"Review a set of provided scenarios and classify each as physical change, chemical change, or not enough information. Explain the evidence and uncertainty for each case."
 				}
 			]
 		},
@@ -295,7 +295,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Project: Force Diagram Challenge Set",
 					content:
-						"Draw free-body diagrams for several teacher-provided scenarios. For each, predict whether the object speeds up, slows down, changes direction, or stays balanced."
+						"Draw free-body diagrams for several provided scenarios. For each, predict whether the object speeds up, slows down, changes direction, or stays balanced."
 				}
 			]
 		},
@@ -327,7 +327,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Project: Virtual Circuit Investigation",
 					content:
-						"Use a circuit simulation or teacher-provided screenshots to compare series and parallel circuits. Explain how brightness, current path, and failure behavior differ."
+						"Use a circuit simulation or provided screenshots to compare series and parallel circuits. Explain how brightness, current path, and failure behavior differ."
 				},
 				{
 					title: "Project: Wave Communication Design",

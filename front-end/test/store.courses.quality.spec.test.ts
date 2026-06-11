@@ -57,37 +57,52 @@ describe("course text quality normalization", () => {
 		setActivePinia(createPinia());
 	});
 
-	it("removes generated placeholder language from loaded catalog text", async () => {
-		const courses = await Promise.all(
-			courseCatalog.map(entry => loadRawCourse(entry.id))
-		);
-		const corpus = courses.map(allCourseText).join("\n");
+	it(
+		"removes generated placeholder language from loaded catalog text",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const corpus = courses.map(allCourseText).join("\n");
 
-		expect(corpus).not.toMatch(/introduce the main goal/i);
-		expect(corpus).not.toMatch(/build the central artifact/i);
-		expect(corpus).not.toMatch(/alternate supplemental snapshot/i);
-	}, 40000);
+			expect(corpus).not.toMatch(/introduce the main goal/i);
+			expect(corpus).not.toMatch(/build the central artifact/i);
+			expect(corpus).not.toMatch(/alternate supplemental snapshot/i);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
-	it("keeps internal implementation-planning scaffolds out of visible course text", async () => {
-		const courses = await Promise.all(
-			courseCatalog.map(entry => loadRawCourse(entry.id))
-		);
-		const corpus = courses.map(allCourseText).join("\n");
+	it(
+		"keeps internal implementation-planning scaffolds out of visible course text",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const corpus = courses.map(allCourseText).join("\n");
 
-		expect(corpus).not.toMatch(/Implementation Studio/i);
-		expect(corpus).not.toMatch(/Full Lesson Authoring Pack/i);
-		expect(corpus).not.toMatch(/Source and Asset Parity Implementation/i);
-		expect(corpus).not.toMatch(
-			/Standards, Source, Assessment, and Safety Backbone/i
-		);
-		expect(corpus).not.toMatch(
-			/defines the target artifact, required behavior, and core concepts needed/i
-		);
-		expect(corpus).not.toMatch(
-			/linked starter provides the implementation artifact/i
-		);
-		expect(corpus).toContain("Implementation Lab");
-	}, 40000);
+			expect(corpus).not.toMatch(/Implementation Studio/i);
+			expect(corpus).not.toMatch(/Full Lesson Authoring Pack/i);
+			expect(corpus).not.toMatch(
+				/Source and Asset Parity Implementation/i
+			);
+			expect(corpus).not.toMatch(
+				/Standards, Source, Assessment, and Safety Backbone/i
+			);
+			expect(corpus).not.toMatch(/Module Backlog and Sequencing/i);
+			expect(corpus).not.toMatch(/Ready-to-Author Checklist/i);
+			expect(corpus).not.toMatch(/Planning Project:/i);
+			expect(corpus).not.toMatch(/\*\*Course scope:\*\*/i);
+			expect(corpus).not.toMatch(
+				/defines the target artifact, required behavior, and core concepts needed/i
+			);
+			expect(corpus).not.toMatch(
+				/linked starter provides the implementation artifact/i
+			);
+			expect(corpus).toContain("Implementation Lab");
+			expect(corpus).toContain("Learning Roadmap and Sequencing");
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("adds project requirements and completion checks to thin legacy Python project prompts", async () => {
 		const course = await loadRawCourse("python-level-2");
@@ -177,12 +192,14 @@ describe("course text quality normalization", () => {
 		expect(guideItem.datasetLink).toBe(
 			"/course-assets/apcs/apcs-pacing-tracks.md"
 		);
-		expect(guideItem.content).toContain("AP Sprint Track");
-		expect(guideItem.content).toContain("Supported Mastery Track");
-		expect(guideItem.content).toContain("Challenge Bridge Track");
+		expect(guideItem.content).toContain("Quick, Standard, Supported");
+		expect(guide).toMatch(/\|\s*Quick Track\s*\|\s*Fast\s*\|/);
+		expect(guide).toMatch(/\|\s*Standard Track\s*\|\s*Medium\s*\|/);
+		expect(guide).toMatch(/\|\s*Supported Track\s*\|\s*Slow\s*\|/);
+		expect(guide).toMatch(/\|\s*Challenge Track\s*\|\s*Hard\s*\|/);
 		expect(guide).toContain("Today-Ready Recommendation");
 		expect(guide).toContain("APCS5/APCS6");
-		expect(guide).toContain("AJ20: generics, interfaces, records");
+		expect(guide).toContain("Generics, interfaces, records");
 		expect(guide).not.toMatch(/Instructor Note|HQ Support|Slack|Juni/i);
 	});
 

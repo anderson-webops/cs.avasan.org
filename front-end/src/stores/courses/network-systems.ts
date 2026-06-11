@@ -148,7 +148,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "DNS Names versus Actual Endpoints",
 					content:
-						"Treat DNS as a naming system that maps labels to records, not as the same thing as routing or transport. A student should be able to explain how the same hostname may resolve to multiple records and why resolution success does not automatically prove port reachability."
+						"Treat DNS as a naming system that maps labels to records, not as the same thing as routing or transport. Be able to explain how the same hostname may resolve to multiple records and why resolution success does not automatically prove port reachability."
 				},
 				{
 					title: "Unit 2: Addresses and Naming: Core Project",

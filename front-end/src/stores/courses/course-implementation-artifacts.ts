@@ -1991,7 +1991,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Repository Shape",
 				content:
-					"**Learning sequence:** Unity modules should move toward full starter and solution project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for future module promotions.\n\n**Completion check:** The linked starter state can be cloned, opened, played, tested, and built."
+					"**Learning sequence:** Unity modules should move toward full starter and solution project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Completion check:** The linked starter state can be cloned, opened, played, tested, and built."
 			},
 			{
 				title: "Starter and Solution Tag Model",

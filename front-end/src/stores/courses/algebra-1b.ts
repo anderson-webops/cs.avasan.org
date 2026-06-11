@@ -925,7 +925,7 @@ This project combines exponential growth with quadratic transformations.
 		]),
 		createModule("AB22 Master Project: Algebra 1B", [
 			createLesson(
-				"Course Reflection and Recording Studio Prompt",
+				"Course Reflection and Presentation Reflection Prompt",
 				`
 Use the master project to explain one idea from Algebra 1B clearly and accurately.
 

@@ -7,7 +7,9 @@ import {
 
 const COURSE_SWEEP_TIMEOUT = 90000;
 
-function allText(course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>) {
+function allText(
+	course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>
+) {
 	return course.modules
 		.flatMap(module => [
 			module.title,
@@ -21,43 +23,49 @@ function allText(course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>)
 }
 
 describe("research-backed course family expansions", () => {
-	it("adds the standards, sequencing, and project studio modules to every audited course", async () => {
-		expect(researchBackedExpansionCourseIds.length).toBeGreaterThan(35);
+	it(
+		"adds the standards, sequencing, and project practice modules to every audited course",
+		async () => {
+			expect(researchBackedExpansionCourseIds.length).toBeGreaterThan(35);
 
-		for (const courseId of researchBackedExpansionCourseIds) {
-			const course = await loadRawCourse(courseId);
-			const profile = researchBackedExpansionProfiles[courseId];
+			for (const courseId of researchBackedExpansionCourseIds) {
+				const course = await loadRawCourse(courseId);
+				const profile = researchBackedExpansionProfiles[courseId];
 
-			expect(course, courseId).not.toBeNull();
-			expect(profile, courseId).toBeDefined();
+				expect(course, courseId).not.toBeNull();
+				expect(profile, courseId).toBeDefined();
 
-			const coreExpansionTitles = [
-				`${profile.family}: Standards and Scope Expansion`,
-				`${profile.family}: Module Backlog and Sequencing`,
-				`${profile.family}: Project and Assessment Studios`
-			];
-			const titles = course!.modules.map(module => module.title);
-			for (const title of coreExpansionTitles) {
-				expect(titles, courseId).toContain(title);
+				const coreExpansionTitles = [
+					`${profile.family}: Standards and Learning Scope`,
+					`${profile.family}: Learning Roadmap and Sequencing`,
+					`${profile.family}: Project and Assessment Practice`
+				];
+				const titles = course!.modules.map(module => module.title);
+				for (const title of coreExpansionTitles) {
+					expect(titles, courseId).toContain(title);
+				}
+
+				const expansionModules = course!.modules.filter(module =>
+					coreExpansionTitles.includes(module.title)
+				);
+
+				expect(expansionModules, courseId).toHaveLength(3);
+				expect(
+					expansionModules.every(
+						module => module.curriculum.length >= 4
+					),
+					courseId
+				).toBe(true);
+				expect(
+					expansionModules.every(
+						module => module.supplementalProjects.length >= 2
+					),
+					courseId
+				).toBe(true);
 			}
-
-			const expansionModules = course!.modules.filter(module =>
-				coreExpansionTitles.includes(module.title)
-			);
-
-			expect(expansionModules, courseId).toHaveLength(3);
-			expect(
-				expansionModules.every(module => module.curriculum.length >= 4),
-				courseId
-			).toBe(true);
-			expect(
-				expansionModules.every(
-					module => module.supplementalProjects.length >= 2
-				),
-				courseId
-			).toBe(true);
-		}
-	}, COURSE_SWEEP_TIMEOUT);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("carries the researched standards, tooling, safety, and assessment anchors into course text", async () => {
 		const courseIds = [
@@ -86,7 +94,7 @@ describe("research-backed course family expansions", () => {
 		expect(corpus).toContain("scikit-learn Model Evaluation");
 		expect(corpus).toContain("Unity Learn");
 		expect(corpus).toContain("No physical supplies beyond paper");
-		expect(corpus).toContain("Project Studio:");
+		expect(corpus).toContain("Project Option:");
 		expect(corpus).toContain("Assessment and Checkpoint Model");
 	});
 });

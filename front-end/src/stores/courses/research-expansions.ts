@@ -68,36 +68,36 @@ function buildStandardsModule(
 	profile: ResearchExpansionProfile
 ): RawCourseModule {
 	return {
-		title: `${profile.family}: Standards and Scope Expansion`,
+		title: `${profile.family}: Standards and Learning Scope`,
 		curriculum: [
 			{
 				title: "Priority and Authoritative Source Map",
 				content: [
-					`**Course scope:** This anchors the next ${profile.family} curriculum pass. Priority is **${profile.priority}**, which identifies whether the gap is a must-fix requirement or a scheduled enrichment target.`,
+					`**Learning scope:** This section identifies the standards, documentation, and tooling references that keep ${profile.family} aligned with current expectations. Priority is **${profile.priority}**, which means these items should shape pacing and practice before lower-priority enrichment.`,
 					`**Authoritative sources to use:**\n${sourceBullets(profile.sources)}`,
 					"**Completion check:** The visible course is traceable to these standards, docs, or tooling references rather than only to inherited project names."
 				].join("\n\n")
 			},
 			{
-				title: "Core Gap Map",
+				title: "Skills to Strengthen",
 				content: [
-					`**Course scope:** These gaps form the scope-control checklist for ${profile.family}. Each new module should identify the gap it closes and the prerequisite knowledge it assumes.`,
-					`**Gaps to close:**\n${bullets(profile.gaps)}`,
-					"**Completion check:** A planned lesson is ready only if it closes one of these gaps with a concrete explanation, worked example, practice task, and completion check."
+					`**Learning scope:** These gaps identify the skills or explanations that most need reinforcement in ${profile.family}. Each section should make the prerequisite knowledge explicit before moving into larger projects.`,
+					`**Skills to strengthen:**\n${bullets(profile.gaps)}`,
+					"**Completion check:** A lesson or project is ready when it includes a concrete explanation, worked example, practice task, and completion check for one of these skills."
 				].join("\n\n")
 			},
 			{
-				title: "Missing and Underdeveloped Topic Backlog",
+				title: "Topics to Expand",
 				content: [
-					`**Course scope:** These topics need research or expansion before the course is treated as comprehensive. The backlog keeps harder prerequisites visible while new material is written.`,
-					`**Topic backlog:**\n${bullets(profile.topics)}`,
+					`**Learning scope:** These topics mark the next areas where ${profile.family} can become more complete. They should be introduced in prerequisite order and tied to a concrete project or checkpoint.`,
+					`**Expansion topics:**\n${bullets(profile.topics)}`,
 					"**Common pitfalls:** Each topic should connect to a real project. If the connection is unclear, add a smaller bridge lesson before the major project."
 				].join("\n\n")
 			},
 			{
-				title: "Expansion Boundary and Course Fit",
+				title: "Course Boundaries and Next Steps",
 				content: [
-					`**Course scope:** The priority and backlog clarify what belongs in ${profile.family} and what should move to a prerequisite, follow-up, or separate course. This prevents one course from absorbing every interesting adjacent topic.`,
+					`**Learning scope:** The priority and expansion topics clarify what belongs in ${profile.family} and what should move to a prerequisite, follow-up, or separate course. This prevents one course from absorbing every interesting adjacent topic.`,
 					"**Completion check:** The course boundary, one near-term addition, and one intentionally deferred topic are explicit."
 				].join("\n\n")
 			}
@@ -125,20 +125,20 @@ function buildSequencingModule(
 	profile: ResearchExpansionProfile
 ): RawCourseModule {
 	return {
-		title: `${profile.family}: Module Backlog and Sequencing`,
+		title: `${profile.family}: Learning Roadmap and Sequencing`,
 		curriculum: [
 			{
-				title: "Suggested Module Additions",
+				title: "Suggested Learning Extensions",
 				content: [
-					`**Course scope:** Convert these additions into full modules only after source material, examples, and assessments are selected. The order should follow prerequisite dependency, not just topic popularity.`,
-					`**Module additions to build:**\n${bullets(profile.moduleAdditions)}`,
-					"**Completion check:** Every future module should state the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension."
+					`**Learning scope:** These additions can become full modules after the source material, examples, and assessments are clear. The order should follow prerequisite dependency, not just topic popularity.`,
+					`**Suggested additions:**\n${bullets(profile.moduleAdditions)}`,
+					"**Completion check:** Every module states the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension."
 				].join("\n\n")
 			},
 			{
 				title: "Tooling, Materials, and Source Preparation",
 				content: [
-					`**Course scope:** Prepare materials before writing lessons so source code, datasets, simulations, and version choices are explicit before class.`,
+					`**Learning scope:** Prepare materials before starting a module so source code, datasets, simulations, and version choices are explicit.`,
 					`**Materials to prepare:**\n${bullets(profile.materials)}`,
 					profile.safety
 						? `**Safety or delivery boundary:** ${profile.safety}`
@@ -146,30 +146,30 @@ function buildSequencingModule(
 				].join("\n\n")
 			},
 			{
-				title: "Ready-to-Author Checklist",
+				title: "Module Readiness Checklist",
 				content: [
-					`**Course scope:** Use this checklist before converting the ${profile.family} backlog into lesson text.`,
+					`**Learning scope:** Use this checklist before expanding ${profile.family} with a new lesson, project, or assessment.`,
 					"**Completion checks:**\n- The module has a named prerequisite and observable outcome.\n- The project has required behavior, test cases, and an extension.\n- The assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any toolchain, dataset, simulation, or source-code dependency is linked and version-aware."
 				].join("\n\n")
 			},
 			{
-				title: "Source and Maintenance Notes",
+				title: "Source Refresh Notes",
 				content: [
-					`**Course scope:** Keep a short maintenance note for ${profile.family} whenever the expansion depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
-					"**Completion check:** The note states what must be refreshed each term, which links or versions are stable, and which materials are internal references rather than assignments."
+					`**Learning scope:** Keep a short refresh note for ${profile.family} whenever the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
+					"**Completion check:** The note states what must be refreshed each term, which links or versions are stable, and which materials are reference-only rather than assignments."
 				].join("\n\n")
 			}
 		],
 		supplementalProjects: [
 			{
-				title: "Planning Project: Module Dependency Graph",
+				title: "Roadmap Project: Module Dependency Graph",
 				content: [
-					`**Project goal:** Draw or write a dependency graph for the next ${profile.family} expansion pass. Show which modules unlock later projects and which topics can be taught as optional enrichment.`,
+					`**Project goal:** Draw or write a dependency graph for ${profile.family}. Show which modules unlock later projects and which topics work as optional enrichment.`,
 					"**Completion checks:**\n- At least five modules or topic clusters are included.\n- Every edge explains the prerequisite relationship.\n- One risky ordering decision is identified and revised."
 				].join("\n\n")
 			},
 			{
-				title: "Planning Project: Materials Readiness Pass",
+				title: "Roadmap Project: Materials Readiness Pass",
 				content: [
 					`**Project goal:** Create a materials checklist for ${profile.family}: source code, starter/reference files, datasets, simulations, diagrams, rubrics, and tool versions.`,
 					"**Completion checks:**\n- Every required project has a starter state or equivalent handout.\n- Every assessment has a rubric or answer-check method.\n- Any external tool or source is documented with a stable URL."
@@ -188,12 +188,12 @@ function buildProjectModule(
 	);
 
 	return {
-		title: `${profile.family}: Project and Assessment Studios`,
+		title: `${profile.family}: Project and Assessment Practice`,
 		curriculum: [
 			{
 				title: "Project Ladder",
 				content: [
-					`**Course scope:** These project types create a progression from guided practice to independent capstone work. Every project should name the artifact, required behavior, evidence of correctness, and one extension path.`,
+					`**Learning scope:** These project types create a progression from guided practice to independent capstone work. Every project should name the artifact, required behavior, evidence of correctness, and one extension path.`,
 					`**Project ladder:**\n${bullets(profile.projectTypes)}`,
 					"**Completion check:** A project is complete when the main design, model, proof, or reasoning choice is explained, not only when it runs or produces an answer."
 				].join("\n\n")
@@ -209,7 +209,7 @@ function buildProjectModule(
 			{
 				title: "Rubric and Reflection Expectations",
 				content: [
-					"**Course scope:** Every major project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.",
+					"**Learning scope:** Every major project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.",
 					"**Completion checks:**\n- The deliverable is visible, runnable, or inspectable.\n- A normal case and an edge case are tested or justified.\n- The explanation does not depend on reading every line or step from notes."
 				].join("\n\n")
 			},
@@ -222,9 +222,9 @@ function buildProjectModule(
 			}
 		],
 		supplementalProjects: projects.map(project => ({
-			title: `Project Studio: ${projectTitle(project)}`,
+			title: `Project Option: ${projectTitle(project)}`,
 			content: [
-				`**Project goal:** Build or plan ${project}. Treat this as a concrete expansion candidate for ${profile.family}, not a vague enrichment idea.`,
+				`**Project goal:** Build or plan ${project}. Treat this as a concrete practice option for ${profile.family}, not a vague enrichment idea.`,
 				`**Required outcome:**\n- Define the artifact and expected inputs, outputs, data, or model.\n- Include one normal case, one boundary case, and one awkward or failure case.\n- Write a short explanation of the main design or reasoning decision.`,
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
 				"**Extension:** Add one variant that changes a constraint without changing the core concept."

@@ -633,7 +633,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Listening Services and Sockets with ss",
 					content:
-						"Use `ss` to connect network thinking back to process thinking. A student should be able to inspect which ports are listening, whether an expected service is actually bound, and whether a reverse proxy or app process is reachable on the port the rest of the configuration assumes."
+						"Use `ss` to connect network thinking back to process thinking. Be able to inspect which ports are listening, whether an expected service is actually bound, and whether a reverse proxy or app process is reachable on the port the rest of the configuration assumes."
 				},
 				{
 					title: "Testing Connectivity with ping, curl, and dig",

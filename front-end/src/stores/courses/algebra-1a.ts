@@ -849,7 +849,7 @@ This project connects linear models and systems of equations to research output.
 		),
 		createModule("AA17 Master Project: Algebra 1A", [
 			createLesson(
-				"Course Reflection and Recording Studio Prompt",
+				"Course Reflection and Presentation Reflection Prompt",
 				`
 The master project closes the course with a short student-led explanation.
 
@@ -859,7 +859,7 @@ The master project closes the course with a short student-led explanation.
 - Explain what the concept is for.
 - Describe at least one real-world use.
 - Design and solve at least two original problems.
-- Use Recording Studio to present the explanation clearly and concisely.
+- Record a short presentation that explains the explanation clearly and concisely.
 
 This project should feel like a short capstone reflection, not another worksheet.
 				`.trim()

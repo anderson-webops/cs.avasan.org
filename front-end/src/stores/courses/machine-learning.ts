@@ -675,7 +675,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML8 Project 1: Master Project Workspace",
 					content:
-						"Use the canonical capstone workspace in the repo as the starting structure for the final project. The student should compare at least two models, justify the evaluation metric, and leave the notebook organized enough to share as a portfolio artifact.",
+						"Use the canonical capstone workspace in the repo as the starting structure for the final project. Compare at least two models, justify the evaluation metric, and leave the notebook organized enough to share as a portfolio artifact.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML8-Master-Project"
 				},

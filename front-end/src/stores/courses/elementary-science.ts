@@ -31,7 +31,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Project: Observation Field Guide Page",
 					content:
-						"Choose a plant, animal, rock, cloud, household object, or teacher-provided image. Create a field guide page with a labeled sketch, five observations, two questions, and one inference clearly marked as an inference."
+						"Choose a plant, animal, rock, cloud, household object, or provided image. Create a field guide page with a labeled sketch, five observations, two questions, and one inference clearly marked as an inference."
 				},
 				{
 					title: "Project: Evidence Detective Card",
@@ -162,7 +162,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Lesson: Properties of Materials",
 					content:
-						"Discuss color, texture, hardness, flexibility, transparency, absorbency, magnetism, and whether a material floats or sinks. Use images and teacher-provided data instead of requiring students to collect supplies."
+						"Discuss color, texture, hardness, flexibility, transparency, absorbency, magnetism, and whether a material floats or sinks. Use images and provided data instead of requiring students to collect supplies."
 				},
 				{
 					title: "Guided Practice: Choosing Materials for a Purpose",
@@ -221,7 +221,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Project: Simple Machine Scavenger Map",
 					content:
-						"Use images, memory, or teacher-provided examples to identify simple machines in everyday objects. Create a map or list with each object, the simple machine type, and the job it helps perform."
+						"Use images, memory, or provided examples to identify simple machines in everyday objects. Create a map or list with each object, the simple machine type, and the job it helps perform."
 				}
 			]
 		},
