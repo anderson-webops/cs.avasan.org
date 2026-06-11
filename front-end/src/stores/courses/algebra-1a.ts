@@ -12,8 +12,7 @@ const media = {
 	checkIn2PeaProduction: `${MEDIA_BASE}/checkin-2-pea-production.svg`,
 	checkIn2Inequality: `${MEDIA_BASE}/checkin-2-inequality-y-lte-negx-plus-7.svg`,
 	systemsGraphing: `${MEDIA_BASE}/aa12-systems-graphing.svg`,
-	checkIn3ParabolaLine: `${MEDIA_BASE}/checkin-3-parabola-line.svg`,
-	missingImage: `${MEDIA_BASE}/missing-image-placeholder.svg`
+	checkIn3ParabolaLine: `${MEDIA_BASE}/checkin-3-parabola-line.svg`
 } as const;
 
 function createLesson(title: string, content: string, mediaLink?: string) {
@@ -508,8 +507,7 @@ This project combines slope classification with avalanche-risk interpretation.
 					"Reference Visual",
 					`
 Use the project graph or table to compare avalanche-risk curves. If a specific chart is unavailable, reconstruct the comparison from the given storm sizes, days, and risk percentages.
-				`.trim(),
-					media.missingImage
+				`.trim()
 				),
 				createLesson(
 					"Reference Notes",

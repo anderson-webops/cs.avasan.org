@@ -11,8 +11,7 @@ const media = {
 	probabilityTables: `${MEDIA_BASE}/alb6-probability-tables.svg`,
 	statisticsRegression: `${MEDIA_BASE}/alb7-statistics-regression.svg`,
 	unitCircleTrig: `${MEDIA_BASE}/alb8-unit-circle-trig.svg`,
-	trigGraphs: `${MEDIA_BASE}/alb9-trig-graphs.svg`,
-	missingImage: `${MEDIA_BASE}/missing-image-placeholder.svg`
+	trigGraphs: `${MEDIA_BASE}/alb9-trig-graphs.svg`
 } as const;
 
 function createLesson(title: string, content: string, mediaLink?: string) {
@@ -175,7 +174,7 @@ Representative recovered applications:
 - \`1800 = 300e^(0.18t)\` -> \`ln(6) = 0.18t\`
 - \`2.3 = 0.7(1.1)^t\` -> \`t = log_1.1(2.3 / 0.7)\`
 
-Several original graph-reading prompts survived only as captions. When a specific screenshot still cannot be reconstructed from the text, fall back to the course placeholder asset instead of leaving the prompt blank.
+Several original graph-reading prompts survived only as captions. When a specific screenshot cannot be reconstructed from the text, rebuild the graph from the available equation, table, or transformation description instead of showing a blank visual.
 				`.trim()
 			)
 		]),
@@ -513,9 +512,9 @@ Desmos is an appropriate calculator for the larger tables in this module. Use a 
 			createLesson(
 				"Data Visual References",
 				`
-Use the cleaned data, a generated regression graph, or the placeholder image below whenever a prompt needs a scatter plot, slope graph, or line-of-best-fit sketch.
+Use the cleaned data or the generated regression reference whenever a prompt needs a scatter plot, slope graph, or line-of-best-fit sketch.
 				`.trim(),
-				media.missingImage
+				media.statisticsRegression
 			)
 		]),
 		createModule("ALB8 Trigonometry Basics", [
@@ -593,9 +592,9 @@ In a right triangle, the two acute angles are complementary. That is why \`sin(A
 			createLesson(
 				"Triangle Diagram References",
 				`
-Use the cleaned written values or the placeholder image below whenever a right-triangle or angle-finding exercise needs a diagram reference.
+Use the cleaned written values or the unit-circle/special-triangle reference whenever a right-triangle or angle-finding exercise needs a diagram reference.
 				`.trim(),
-				media.missingImage
+				media.unitCircleTrig
 			)
 		]),
 		createModule("ALB9 Graphing Trigonometric Functions", [
@@ -660,7 +659,7 @@ For \`y = a tan(bx) + d\`:
 - \`2cos(pi x) + 7\` -> amplitude \`2\`, period \`2\`, midline \`y = 7\`
 - \`-3cos(2x) + 1.5\` -> amplitude \`3\`, period \`pi\`, midline \`y = 1.5\`
 
-The generated trig-graph reference covers the standard parent graphs. If a particular transformation prompt still depends on a missing screenshot, use the course placeholder asset only for that specific prompt.
+The generated trig-graph reference covers the standard parent graphs. If a particular transformation prompt still depends on a missing screenshot, rebuild the graph from the equation by identifying amplitude, period, midline, phase shift, and reflection first.
 				`.trim(),
 				media.trigGraphs
 			)

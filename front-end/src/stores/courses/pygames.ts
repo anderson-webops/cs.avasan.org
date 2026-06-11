@@ -1071,7 +1071,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Bonus Concepts for Assets",
 					content:
-						"If the project uses images or sounds outside the provided asset bank, prototype with placeholder assets first and then replace them with final files later. Resize images so they match practical sprite sizes, crop or normalize sounds when needed, and explore the PyGame Zero documentation for ideas such as more advanced input, music control, and simple particle effects that can make the Master Project feel more polished."
+						"If the project uses images or sounds outside the provided asset bank, prototype with temporary assets first and then replace them with final files later. Resize images so they match practical sprite sizes, crop or normalize sounds when needed, and explore the PyGame Zero documentation for ideas such as more advanced input, music control, and simple particle effects that can make the Master Project feel more polished."
 				},
 				{
 					title: "Master Project Presentation",

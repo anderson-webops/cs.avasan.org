@@ -243,7 +243,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sourceAndTooling: [
 			"Anchor standards to Common Core high-school algebra and functions domains where appropriate.",
 			"Use graphing calculators or Desmos-style visuals when they clarify representation changes.",
-			"Keep worksheet/image placeholders explicit until original source visuals are replaced."
+			"Track unresolved worksheet or image replacements explicitly until original source visuals are replaced with owned or source-safe materials."
 		],
 		safetyAndAccess: [
 			"Keep external calculators or graphing tools optional when a school requires a specific platform.",
@@ -252,7 +252,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		adminExpansionBacklog: [
 			"Build a formal algebra project taxonomy for practice, modeling, error analysis, and enrichment.",
-			"Audit remaining image placeholders and replace them with owned or source-safe visuals.",
+			"Audit remaining unresolved image references and replace them with owned or source-safe visuals.",
 			"Add stronger cumulative assessments across Algebra 1B, 2A, and 2B."
 		]
 	},

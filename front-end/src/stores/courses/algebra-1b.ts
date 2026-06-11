@@ -13,8 +13,7 @@ const media = {
 	photonCounts: `${MEDIA_BASE}/ab20-photon-counts.svg`,
 	radiofungiCanopies: `${MEDIA_BASE}/ab21-radiofungi-canopies.svg`,
 	checkIn2QuadraticGraph: `${MEDIA_BASE}/checkin-2-quadratic-graph.svg`,
-	checkIn2FunctionGraph: `${MEDIA_BASE}/checkin-2-function-graph.svg`,
-	missingImage: `${MEDIA_BASE}/missing-image-placeholder.svg`
+	checkIn2FunctionGraph: `${MEDIA_BASE}/checkin-2-function-graph.svg`
 } as const;
 
 function createLesson(title: string, content: string, mediaLink?: string) {
@@ -820,10 +819,9 @@ Residual = actual value minus predicted value.
 
 **Visual-reference note**
 
-- Some residual plots and scatterplots are best handled with a graphing tool or the placeholder image below.
+- Some residual plots and scatterplots are best handled with a graphing tool built from the provided data.
 - Focus on identifying the residual as vertical prediction error and explaining whether the model overpredicts or underpredicts.
-				`.trim(),
-				media.missingImage
+				`.trim()
 			)
 		]),
 		createModule(
@@ -880,9 +878,9 @@ The photon-count data for this activity is:
 				createLesson(
 					"Experiment Visual Reference",
 					`
-Use the photon-count graph, simulator sketch, or placeholder image below to anchor the visual parts of the experiment. The written explanation should still identify the pattern, the likely best-fit shape, and how wavelength changes with mass and speed.
+Use the photon-count graph or a simulator sketch to anchor the visual parts of the experiment. The written explanation should still identify the pattern, the likely best-fit shape, and how wavelength changes with mass and speed.
 				`.trim(),
-					media.missingImage
+					media.photonCounts
 				)
 			]
 		),
@@ -1004,7 +1002,7 @@ This check-in reviews graphing quadratics, transformations, functions, inverse f
 			createLesson(
 				"Check-In Visual Reference",
 				`
-Use a graphing tool or the placeholder image below for graph-only prompts such as:
+Use a graphing tool or the generated function reference for graph-only prompts such as:
 
 - the vertical-line-test example
 - the inverse-existence graph in the advanced section
@@ -1012,7 +1010,7 @@ Use a graphing tool or the placeholder image below for graph-only prompts such a
 
 The key goal is to justify each decision from the graph feature being tested.
 				`.trim(),
-				media.missingImage
+				media.checkIn2FunctionGraph
 			)
 		])
 	]

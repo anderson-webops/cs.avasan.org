@@ -9,8 +9,7 @@ const media = {
 	polynomialBehavior: `${MEDIA_BASE}/ala7-polynomial-behavior.svg`,
 	rationalFunctions: `${MEDIA_BASE}/ala8-rational-functions.svg`,
 	radicalFunctions: `${MEDIA_BASE}/ala10-radical-functions.svg`,
-	piecewiseFunctions: `${MEDIA_BASE}/ala11-piecewise-functions.svg`,
-	missingImage: `${MEDIA_BASE}/missing-image-placeholder.svg`
+	piecewiseFunctions: `${MEDIA_BASE}/ala11-piecewise-functions.svg`
 } as const;
 
 function createLesson(title: string, content: string, mediaLink?: string) {
@@ -286,7 +285,7 @@ If the directrix is \`y = 1\` and the focus is \`(2, 3)\`, then the parabola is
 			createLesson(
 				"Graph Prompt Reference",
 				`
-Use a graphing tool or the placeholder image below for graph-only prompts such as:
+Use a graphing tool or the generated quadratic-transformation reference for graph-only prompts such as:
 
 - color-match parabola comparison questions
 - a few transformation sketches with no surviving coordinates
@@ -294,7 +293,7 @@ Use a graphing tool or the placeholder image below for graph-only prompts such a
 
 The written response should identify the transformation, asymptote, intercept, or focus/directrix relationship being tested.
 				`.trim(),
-				media.missingImage
+				media.quadraticTransforms
 			)
 		]),
 		createModule("Check-in #1", [
@@ -578,7 +577,7 @@ Some rational-function prompts work best with graph references, including graph-
 
 Use the generated rational-function gallery when a clean reference is enough, and use the linked reference visual when the exact graph must be supplied separately.
 				`.trim(),
-				media.missingImage
+				media.rationalFunctions
 			)
 		]),
 		createModule("ALA9 Rational Function Operations", [
@@ -782,7 +781,7 @@ Reuse the generated rational, radical, and piecewise visuals for any review item
 			createLesson(
 				"Check-In Visual References",
 				`
-Use a graphing tool or the placeholder image below for visual prompts such as:
+Use a graphing tool or the generated rational/piecewise references for visual prompts such as:
 
 - one rational-function graph with multiple asymptotes and a hole
 - at least one piecewise graph-definition prompt
@@ -790,7 +789,7 @@ Use a graphing tool or the placeholder image below for visual prompts such as:
 
 The important part is the explanation: name the graph feature and connect it to the equation or transformation.
 				`.trim(),
-				media.missingImage
+				media.piecewiseFunctions
 			)
 		])
 	]

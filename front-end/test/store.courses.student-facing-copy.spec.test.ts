@@ -118,7 +118,10 @@ const forbiddenRawGeneratedPatterns = [
 	/\bshow the the\b/i,
 	/\bthe the understands\b/i,
 	/\bInstructional note\b/i,
-	/\bteacher-authored\b/i
+	/\bteacher-authored\b/i,
+	/missing-image-placeholder\.svg/i,
+	/\bplaceholder image below\b/i,
+	/\bcourse placeholder asset\b/i
 ];
 
 const rawCourseFiles = readdirSync(coursesSourceDir)
