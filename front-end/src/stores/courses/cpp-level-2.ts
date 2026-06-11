@@ -9,7 +9,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Level 2 Positioning and Ownership Vocabulary",
 					content:
-						"Position this course as the low-level follow-on after students can already write menu-driven programs with functions, classes, vectors, structs, references, and simple state. Cover: why Level 2 deepens the memory model instead of introducing pointer syntax as disconnected trivia; what it means for a function or class to own data; how observation, mutation, borrowing, and ownership differ; and the vocabulary students will need before raw arrays, heap allocation, and custom containers."
+						"This course is the low-level follow-on after learners can already write menu-driven programs with functions, classes, vectors, structs, references, and simple state. Include why Level 2 deepens the memory model instead of introducing pointer syntax as disconnected trivia; what it means for a function or class to own data; how observation, mutation, borrowing, and ownership differ; and the vocabulary needed before raw arrays, heap allocation, and custom containers."
 				},
 				{
 					title: "References, Lifetimes, and Evidence-Based Debugging",
@@ -80,7 +80,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Pointers: Practice Lab",
 					content:
-						"Use the pointer-practice lab when students need a longer tracing exercise with moving pointers and string-backed memory.",
+						"Use the pointer-practice lab when moving pointers and string-backed memory need a longer tracing exercise.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM1-Pointer-Practice",
 					solutionLink:
@@ -94,14 +94,14 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Raw Arrays as Contiguous Memory",
 					content:
-						"Teach raw arrays as fixed-size contiguous blocks and frame them as a lower-level model than `std::vector`, not as the new default beginner container. Cover: explicit size parameters, valid index ranges, how array names decay to addresses, why bounds are not tracked for you, and how raw arrays help explain what safer containers are doing.",
+						"Raw arrays are fixed-size contiguous blocks and should be framed as a lower-level model than `std::vector`, not as the new default beginner container. Include explicit size parameters, valid index ranges, how array names decay to addresses, why bounds are not tracked for you, and how raw arrays help explain what safer containers are doing.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Array-Basics-Reference"
 				},
 				{
 					title: "Pointer Arithmetic and Offset Reasoning",
 					content:
-						"Use pointer arithmetic carefully so students understand what `arr + i` really means. Cover: element-size offsets, moving a pointer through an array, comparing pointer traversal with indexed traversal, stopping before the end, and explaining why the point is memory-layout reasoning rather than style preference.",
+						"Use pointer arithmetic carefully so `arr + i` is understood as an address calculation. Include element-size offsets, moving a pointer through an array, comparing pointer traversal with indexed traversal, stopping before the end, and explaining why the point is memory-layout reasoning rather than style preference.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Pointer-Arithmetic-Reference"
 				},
@@ -128,7 +128,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Raw Arrays: Verification Drill",
 					content:
-						"Re-run the array practice with one or two custom cases and have students explain how indexes and addresses line up in memory.",
+						"Re-run the array practice with one or two custom cases and explain how indexes and addresses line up in memory.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM2-Array-Practice",
 					solutionLink:
@@ -142,7 +142,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Two-Dimensional Arrays, Layout, and Function Boundaries",
 					content:
-						"Teach 2D arrays as rows and columns with a concrete storage layout. Cover: nested loops, row/column meaning, row-major storage, rectangular dimensions, multiplication-table tracing, and when a 2D array can be viewed as contiguous memory. Keep pointer-based flattening secondary until the grid shape is clear, then explain what changes when a function receives a pointer view instead of a higher-level container.",
+						"2D arrays are rows and columns with a concrete storage layout. Include nested loops, row/column meaning, row-major storage, rectangular dimensions, multiplication-table tracing, and when a 2D array can be viewed as contiguous memory. Keep pointer-based flattening secondary until the grid shape is clear, then explain what changes when a function receives a pointer view instead of a higher-level container.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM3-Two-Dimensional-Arrays-Reference"
 				},
@@ -158,7 +158,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "CPPM3 Project 2: Bank Transactions",
 					content:
-						"Use a raw 2D grid to model recurring account data and print it clearly. The project matters because it forces students to keep row/column meaning straight.",
+						"Use a raw 2D grid to model recurring account data and print it clearly. The project matters because it forces row/column meaning to stay explicit.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM3-Bank-Transactions",
 					solutionLink:
@@ -169,7 +169,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Two-Dimensional Arrays: Extension Challenge",
 					content:
-						"Add one more grid calculation or validation rule so students have to defend their row/column logic in a fresh case.",
+						"Add one more grid calculation or validation rule so row/column logic has to be defended in a fresh case.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM3-2D-Array-Practice",
 					solutionLink:
@@ -183,14 +183,14 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Dynamic Allocation and Manual Ownership",
 					content:
-						"Teach `new` and `delete` explicitly so students understand heap allocation, leaks, and dangling pointers. Cover: why heap objects outlive the current stack frame until deleted; how ownership must be assigned before allocation; why every allocation needs exactly one cleanup path; what can go wrong during replacement and resizing; and why raw `new`/`delete` is a teaching tool for ownership rather than the preferred modern endpoint.",
+						"`new` and `delete` make heap allocation, leaks, and dangling pointers explicit. Include why heap objects outlive the current stack frame until deleted; how ownership must be assigned before allocation; why every allocation needs exactly one cleanup path; what can go wrong during replacement and resizing; and why raw `new`/`delete` is a learning tool for ownership rather than the preferred modern endpoint.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM4-Dynamic-Variables-Reference"
 				},
 				{
 					title: "CPPM4 Project 1: Assembly Line",
 					content:
-						"Use dynamically created objects in a small loop-driven workflow so students can see allocation, replacement, and cleanup happen in a concrete program.",
+						"Use dynamically created objects in a small loop-driven workflow so allocation, replacement, and cleanup happen in a concrete program.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM4-Assembly-Line",
 					solutionLink:
@@ -208,7 +208,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "CPPM4 Project 3: Grocery List",
 					content:
-						"Adapt the custom dynamic array to store real record data instead of plain integers. This is where students see how quickly manual container management becomes more demanding.",
+						"Adapt the custom dynamic array to store real record data instead of plain integers. This shows how quickly manual container management becomes more demanding.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM4-Grocery-List",
 					solutionLink:
@@ -219,7 +219,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Dynamic Memory: Verification and Reflection",
 					content:
-						"Pause after the custom-array work and have students explain what gets allocated, copied, and deleted at each stage of a resize.",
+						"Pause after the custom-array work and explain what gets allocated, copied, and deleted at each stage of a resize.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM4-Dynamic-Array-Implementation",
 					solutionLink:
@@ -233,7 +233,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Manual-Memory Class Design",
 					content:
-						"Use capstone-sized classes that own their own storage so students must maintain invariants across multiple methods, not just in a single free function. Cover: constructors that establish valid storage, methods that preserve size/capacity rules, copy or resize operations that must not leak, input validation before mutation, and how matrix/profile examples force students to keep class boundaries and ownership rules aligned."
+						"Use capstone-sized classes that own their own storage so invariants have to be maintained across multiple methods, not just in a single free function. Include constructors that establish valid storage, methods that preserve size/capacity rules, copy or resize operations that must not leak, input validation before mutation, and how matrix/profile examples force class boundaries and ownership rules to stay aligned."
 				},
 				{
 					title: "CPPM5 Project 1: Matrix Fun with a Matrix Class",
@@ -263,7 +263,7 @@ export const cppLevel2Course: RawCourse = {
 				{
 					title: "Manual-Memory Capstones: Extension Challenge",
 					content:
-						"Extend either capstone with one extra operation or safety check so students can keep reasoning about ownership under a little more pressure.",
+						"Extend either capstone with one extra operation or safety check so ownership reasoning continues under a little more pressure.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-2/tree/main/CPPM5-Profile-Posts",
 					solutionLink:

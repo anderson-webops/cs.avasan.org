@@ -29,7 +29,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Design Exercise: Smell or Reasonable Simplicity?",
 					content:
-						"Give several short Java designs and Classify them as healthy simplicity, code smell, or pattern-shaped overkill. The point is to train judgment before introducing the named patterns themselves."
+						"Give several short Java designs and classify them as healthy simplicity, code smell, or pattern-shaped overkill. The point is to train judgment before introducing the named patterns themselves."
 				},
 				{
 					title: "Reflection Question: When Does a Pattern Actually Help?",
@@ -81,7 +81,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Interfaces, Abstract Classes, and Contracts",
 					content:
-						"Teach interfaces as behavioral contracts and abstract classes as partial implementation tools, not interchangeable ceremony. Use package boundaries, visibility modifiers, and `final` to show how Java makes dependency direction and collaboration visible."
+						"Interfaces are behavioral contracts, while abstract classes are partial implementation tools; they are not interchangeable ceremony. Use package boundaries, visibility modifiers, and `final` to show how Java makes dependency direction and collaboration visible."
 				},
 				{
 					title: "Concept Lesson: Composition, Cohesion, and Dependency Direction",
@@ -163,7 +163,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Builder",
 					content:
-						"Teach Builder as a response to large object setup, optional configuration, and unreadable telescoping constructors. Compare a fluent builder with static factories and plain constructors so students can feel the tradeoff."
+						"Builder responds to large object setup, optional configuration, and unreadable telescoping constructors. Compare a fluent builder with static factories and plain constructors so the tradeoff is concrete."
 				},
 				{
 					title: "Worked Example Set: Duplicated Creation Logic in a Java App",
@@ -225,7 +225,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Prototype",
 					content:
-						"Teach Prototype when cloning configured objects is simpler than reconstructing them from scratch. Focus on controlled copying, variation from a seed object, and the risks of shallow versus deep copy."
+						"Prototype fits when cloning configured objects is simpler than reconstructing them from scratch. Focus on controlled copying, variation from a seed object, and the risks of shallow versus deep copy."
 				},
 				{
 					title: "Singleton and Why to Be Skeptical",
@@ -245,7 +245,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Worked Example Set: Clone, Wrap, or Simplify?",
 					content:
-						"Give a legacy-integration example where students must choose between Prototype, Adapter, and Facade based on what the current pain actually is. Use this lesson to reinforce that pattern selection starts from forces, not names."
+						"Give a legacy-integration example where Prototype, Adapter, and Facade must be chosen based on what the current pain actually is. Use this lesson to reinforce that pattern selection starts from forces, not names."
 				},
 				{
 					title: "Reflection Question: Why Is Singleton So Tempting?",
@@ -302,7 +302,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Composite",
 					content:
-						"Teach Composite through recursive structures such as menus, scene graphs, or document trees. Key idea: When treating leaf and group nodes uniformly improves client code."
+						"Composite is clearest through recursive structures such as menus, scene graphs, or document trees. Key idea: when treating leaf and group nodes uniformly improves client code."
 				},
 				{
 					title: "Decorator",
@@ -312,12 +312,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Proxy and Flyweight",
 					content:
-						"Teach Proxy as controlled indirection for lazy loading, access control, or observation, and Flyweight as shared intrinsic state for memory-sensitive repeated objects. Make students articulate why these two patterns solve different problems even though both can involve wrappers and delegation."
+						"Proxy is controlled indirection for lazy loading, access control, or observation, while Flyweight is shared intrinsic state for memory-sensitive repeated objects. The important distinction is why these two patterns solve different problems even though both can involve wrappers and delegation."
 				},
 				{
 					title: "Worked Example Set: Tree, Wrapper, or Indirection?",
 					content:
-						"Compare a drawing app, resource viewer, and icon-heavy UI to decide whether the real pressure is hierarchy, layered behavior, access indirection, or object count. This helps students avoid using Decorator where Composite or Proxy would be cleaner."
+						"Compare a drawing app, resource viewer, and icon-heavy UI to decide whether the real pressure is hierarchy, layered behavior, access indirection, or object count. This helps avoid using Decorator where Composite or Proxy would be cleaner."
 				},
 				{
 					title: "Reflection Question: Which Structural Pattern Changes the Client View?",
@@ -374,12 +374,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "State",
 					content:
-						"Teach State as an object-oriented response to behavior that changes based on internal mode or phase. Use examples like workflow stages, player states, or document lifecycle transitions to contrast State with Strategy."
+						"State is an object-oriented response to behavior that changes based on internal mode or phase. Use examples like workflow stages, player states, or document lifecycle transitions to contrast State with Strategy."
 				},
 				{
 					title: "Template Method",
 					content:
-						"Use Template Method when an algorithm skeleton is fixed but selected steps vary across subclasses. Show both the power and the inheritance coupling so students know when composition might be cleaner."
+						"Use Template Method when an algorithm skeleton is fixed but selected steps vary across subclasses. Show both the power and the inheritance coupling so composition tradeoffs stay visible."
 				},
 				{
 					title: "Iterator",
@@ -441,7 +441,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Observer",
 					content:
-						"Teach Observer through notifications, UI listeners, and event-driven collaboration where publishers should not know their consumers in detail. Make coupling direction and unsubscribe behavior explicit."
+						"Observer is easiest to understand through notifications, UI listeners, and event-driven collaboration where publishers should not know their consumers in detail. Make coupling direction and unsubscribe behavior explicit."
 				},
 				{
 					title: "Command",
@@ -451,7 +451,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Chain of Responsibility",
 					content:
-						"Teach Chain of Responsibility as staged handling where each object can process, pass along, or stop a request. Use middleware, validation pipelines, or event filters as intuitive Java examples."
+						"Chain of Responsibility is staged handling where each object can process, pass along, or stop a request. Use middleware, validation pipelines, or event filters as intuitive Java examples."
 				},
 				{
 					title: "Mediator, Memento, and Visitor",
@@ -513,7 +513,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Dependency Injection",
 					content:
-						"Teach constructor injection and dependency inversion as practical architecture tools, not container worship. Learn how injected collaborators create seams for testing and refactoring even without a DI framework."
+						"Constructor injection and dependency inversion are practical architecture tools, not container worship. Injected collaborators create seams for testing and refactoring even without a DI framework."
 				},
 				{
 					title: "Plugin Architecture and Event Bus Thinking",
@@ -528,7 +528,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Repository and Service Layering",
 					content:
-						"Teach repository and service boundaries where appropriate so domain logic, persistence, and integration concerns do not collapse into the same classes. Use this to reinforce package structure and dependency direction from the earlier modules."
+						"Repository and service boundaries keep domain logic, persistence, and integration concerns from collapsing into the same classes. Use this to reinforce package structure and dependency direction from the earlier modules."
 				},
 				{
 					title: "Worked Example Set: From Pattern Catalog to Application Architecture",
@@ -677,12 +677,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Architecture Review: Package Layout, Seams, and Testability",
 					content:
-						"Evaluate the final design in terms of package structure, dependency direction, and ease of change. Make students defend whether the resulting design is actually easier to extend or test."
+						"Evaluate the final design in terms of package structure, dependency direction, and ease of change. The resulting design should be defensible as actually easier to extend or test."
 				},
 				{
 					title: "Capstone Reflection: What Changed and What Stayed Simple?",
 					content:
-						"Close the course by documenting the original pain, the chosen patterns, the tradeoffs introduced, and the places where simplicity won over more abstraction. This reflection should prepare students for the follow-up refactoring course."
+						"Close the course by documenting the original pain, the chosen patterns, the tradeoffs introduced, and the places where simplicity won over more abstraction. This reflection prepares the path into the follow-up refactoring course."
 				},
 				{
 					title: "DPJ10 Capstone Refactor: Core Project",

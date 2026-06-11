@@ -93,7 +93,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Use function-level tests or assertions for normal, boundary, and awkward cases.",
-			"Trace before running and to identify type, mutation, off-by-one, and missing-return bugs.",
+			"Trace before running to identify type, mutation, off-by-one, and missing-return bugs.",
 			"Review capstones for requirements, organization, input/output behavior, and explanation quality."
 		],
 		sourceAndTooling: [
@@ -526,7 +526,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sequencingNotes: [
 			"Start with code smells and refactoring before naming too many patterns.",
-			"Teach patterns through small before/after examples and only then through larger projects.",
+			"Introduce patterns through small before/after examples before moving into larger projects.",
 			"Keep Pythonic patterns idiomatic instead of forcing Java-style architecture into Python."
 		],
 		projectExpectations: [

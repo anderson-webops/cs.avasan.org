@@ -432,7 +432,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Reproduce, Assess, Prioritize, Patch, and Add a Regression",
 					content:
-						"Teach the complete defensive workflow as a loop: reproduce the bug, assess exploitability, prioritize it, patch narrowly, and add a regression case. Visible pattern: This as the operational counterpart to exploitability analysis, because a precise triage note without a precise patch path still leaves the team exposed."
+						"The complete defensive workflow is a loop: reproduce the bug, assess exploitability, prioritize it, patch narrowly, and add a regression case. This is the operational counterpart to exploitability analysis, because a precise triage note without a precise patch path still leaves the team exposed."
 				},
 				{
 					title: "Communicate Clearly About Security-Relevant Bugs",

@@ -76,7 +76,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Value Semantics versus Reference Semantics",
 					content:
-						"Teach when a plain value type or small immutable object removes the need for a pattern entirely. C++ Learn that some creation and wrapper patterns only become justified once polymorphism, shared lifetime, or runtime variability is actually needed."
+						"A plain value type or small immutable object can remove the need for a pattern entirely. In C++, some creation and wrapper patterns only become justified once polymorphism, shared lifetime, or runtime variability is actually needed."
 				},
 				{
 					title: "Composition over Inheritance with Lifetime in View",
@@ -138,7 +138,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Const-Correctness and Dependency Direction",
 					content:
-						"Make `const` part of the design language, not a syntax detail. Clear read-only boundaries help students reason about collaboration, ownership, and mutation before the first major pattern refactor."
+						"Make `const` part of the design language, not a syntax detail. Clear read-only boundaries help clarify collaboration, ownership, and mutation before the first major pattern refactor."
 				},
 				{
 					title: "Header and Source Organization",
@@ -195,7 +195,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Ownership-Aware Creation",
 					content:
-						"Teach factory patterns through ownership and compatibility questions first. Explicitly decide when a factory returns a value, `unique_ptr`, or another handle type rather than copying a Java constructor wrapper blindly."
+						"Factory patterns should start with ownership and compatibility questions. Explicitly decide when a factory returns a value, `unique_ptr`, or another handle type rather than copying a Java constructor wrapper blindly."
 				},
 				{
 					title: "Abstract Factory for Coordinated Families",
@@ -257,7 +257,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Runtime Strategy Objects",
 					content:
-						"Teach Strategy first in its classic runtime-polymorphism form so students can reason about swappable behavior. Use pricing, scoring, or routing rules where the runtime choice is a genuine product requirement."
+						"Strategy should first appear in its classic runtime-polymorphism form so swappable behavior is easy to reason about. Use pricing, scoring, or routing rules where the runtime choice is a genuine product requirement."
 				},
 				{
 					title: "Lambdas and Function Objects",
@@ -319,7 +319,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Subscriptions and Event Fan-Out",
 					content:
-						"Teach Observer as a controlled way to notify multiple listeners without hard-coding downstream reactions into the publisher. Use event fan-out, logs, dashboards, and alerts as realistic examples rather than abstract listener diagrams."
+						"Observer is a controlled way to notify multiple listeners without hard-coding downstream reactions into the publisher. Use event fan-out, logs, dashboards, and alerts as realistic examples rather than abstract listener diagrams."
 				},
 				{
 					title: "Lifetime-Safe Listener Storage",
@@ -381,7 +381,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Decorator with Ownership Clarity",
 					content:
-						"Teach Decorator as a way to layer behavior without exploding subclasses. In C++, Explicitly justify whether the wrapper owns the wrapped object, borrows it, or shares it."
+						"Decorator layers behavior without exploding subclasses. In C++, explicitly justify whether the wrapper owns the wrapped object, borrows it, or shares it."
 				},
 				{
 					title: "Adapter for Legacy or Third-Party APIs",
@@ -443,7 +443,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Commands as Explicit User or System Actions",
 					content:
-						"Teach Command as a way to package actions, queue work, and make undo or history possible. Good command objects should represent meaningful behavior transitions rather than merely wrapping one-line functions."
+						"Command packages actions, queues work, and makes undo or history possible. Good command objects should represent meaningful behavior transitions rather than merely wrapping one-line functions."
 				},
 				{
 					title: "Undo and Action History",
@@ -468,7 +468,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "DPC7 Command and State: Core Project",
 					content:
-						" Strong students can extend the command editor with a tiny scanner that turns text commands into command objects.",
+						"Extend the command editor with a tiny scanner that turns text commands into command objects.",
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC5-Command-and-State-Editor/starter",
 					solutionLink:
@@ -511,7 +511,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Trees of Heterogeneous Objects",
 					content:
-						"Teach Composite through scene graphs, widget trees, or editor hierarchies where leaf and container nodes must share a common interface. The lesson should make structural recursion feel useful rather than ornamental."
+						"Composite works well for scene graphs, widget trees, or editor hierarchies where leaf and container nodes must share a common interface. The lesson should make structural recursion feel useful rather than ornamental."
 				},
 				{
 					title: "Traversal without Leaking Storage Details",
@@ -578,7 +578,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "The Real Risks",
 					content:
-						"Teach hidden dependencies, static initialization problems, weak test seams, and lifetime ambiguity as the real costs of global state. In C++, static lifetime also brings concrete order-of-initialization concerns that cannot be hand-waved away."
+						"Hidden dependencies, static initialization problems, weak test seams, and lifetime ambiguity are the real costs of global state. In C++, static lifetime also brings concrete order-of-initialization concerns that cannot be hand-waved away."
 				},
 				{
 					title: "Scoped Services and Injected Dependencies",
@@ -635,7 +635,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "RAII Wrappers as Architectural Tools",
 					content:
-						"Teach RAII wrappers as part of the design-pattern conversation, not as a separate memory lecture. A good wrapper makes ownership obvious and impossible to misuse accidentally."
+						"RAII wrappers belong in the design-pattern conversation, not as a separate memory lecture. A good wrapper makes ownership obvious and impossible to misuse accidentally."
 				},
 				{
 					title: "pImpl and Boundary Stability",
@@ -759,7 +759,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Choosing the Right Medium-Sized Problem",
 					content:
-						"Use a medium-sized engine, editor tool, simulation framework, or importer pipeline as the capstone target. The project should be large enough for real boundary pressure, but still small enough that students can justify every abstraction they add."
+						"Use a medium-sized engine, editor tool, simulation framework, or importer pipeline as the capstone target. The project should be large enough for real boundary pressure, but still small enough that every added abstraction can be justified."
 				},
 				{
 					title: "Pattern Justification as a Required Deliverable",

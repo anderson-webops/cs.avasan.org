@@ -19,7 +19,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Data Cleaning and Visualization First",
 					content:
-						"Before any model is trained, Inspect columns, missing values, scales, and class balance. Basic plotting and train/test thinking should be treated as part of the baseline workflow, not as optional polish after the algorithm appears."
+						"Before any model is trained, inspect columns, missing values, scales, and class balance. Basic plotting and train/test thinking should be treated as part of the baseline workflow, not as optional polish after the algorithm appears."
 				},
 				{
 					title: "Model Comparison as the Course Habit",
@@ -607,7 +607,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Classification Metrics beyond Accuracy",
 					content:
-						"Teach accuracy, precision, recall, F1, and the confusion matrix as different lenses on model quality. Key idea: Why a single percentage can hide the wrong failure mode, especially on imbalanced data."
+						"Accuracy, precision, recall, F1, and the confusion matrix are different lenses on model quality. Key idea: why a single percentage can hide the wrong failure mode, especially on imbalanced data."
 				},
 				{
 					title: "Regression Metrics and Residual Thinking",

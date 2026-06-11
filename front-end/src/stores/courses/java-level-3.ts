@@ -1537,7 +1537,7 @@ export const javaLevel3Course: RawCourse = {
 						"Keep the `AJ17` starters and side folders visible as capstone support, not as hidden repo drift. Students who want to push the Google Maps branch further should be able to find the supporting scaffolds quickly."
 				},
 				{
-					title: "Repo Extension, , and Capstone Library: Verification and Reflection",
+					title: "Repo Extension, Starter, and Capstone Library: Verification and Reflection",
 					content:
 						"Finish AJ18 Repo Extension, Starter, and Capstone Library with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},

@@ -104,6 +104,45 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it("guards against raw generated grammar artifacts in course sources", () => {
+		const sourcePaths = [
+			"src/stores/courses/java-level-3.ts",
+			"src/stores/courses/machine-learning.ts",
+			"src/stores/courses/public-pathways.ts",
+			"src/stores/courses/design-patterns-in-java.ts",
+			"src/stores/courses/design-patterns-in-cpp.ts",
+			"src/stores/courses/low-level-security-part-2.ts"
+		];
+		const corpus = sourcePaths
+			.map(path => fs.readFileSync(path, "utf8"))
+			.join("\n");
+
+		expect(corpus).not.toMatch(/Repo Extension,\s*,/);
+		expect(corpus).not.toMatch(/Before any model is trained, Inspect/);
+		expect(corpus).not.toMatch(/Trace before running and to identify/);
+		expect(corpus).not.toMatch(/and Classify them/);
+		expect(corpus).not.toMatch(/C\+\+ Learn/);
+		expect(corpus).not.toMatch(/In C\+\+, Explicitly/);
+		expect(corpus).not.toMatch(/Visible pattern: This as/);
+		expect(corpus).not.toMatch(/Teach patterns through small before/);
+		expect(corpus).not.toMatch(/Teach accuracy, precision, recall/);
+	});
+
+	it("keeps C++ and design-pattern course source copy course-facing", () => {
+		const sourcePaths = [
+			"src/stores/courses/cpp-level-1.ts",
+			"src/stores/courses/cpp-level-2.ts",
+			"src/stores/courses/design-patterns-in-java.ts",
+			"src/stores/courses/design-patterns-in-cpp.ts"
+		];
+		const corpus = sourcePaths
+			.map(path => fs.readFileSync(path, "utf8"))
+			.join("\n");
+
+		expect(corpus).not.toMatch(/\bTeach\b/);
+		expect(corpus).not.toMatch(/\bstudents?\b/i);
+	});
+
 	it("adds project requirements and completion checks to thin legacy Python project prompts", async () => {
 		const course = await loadRawCourse("python-level-2");
 		expect(course).not.toBeNull();
