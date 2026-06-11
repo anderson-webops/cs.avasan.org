@@ -41,7 +41,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can convert units without losing meaning, label graphs with quantities and units, and explain why the same measured value can be both precise and inaccurate. Use one quick oral prompt: 'If two groups got slightly different walking speeds, does that automatically mean one group is wrong?'"
+						"Readiness check: convert units without losing meaning, label graphs with quantities and units, and explain why the same measured value can be both precise and inaccurate. Prompt: 'If two groups got slightly different walking speeds, does that automatically mean one group is wrong?'"
 				},
 				{
 					title: "Misconception Watchlist",
@@ -93,7 +93,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can move fluently between story, graph, and equation without being coached toward a specific formula. Use a short prompt where they must explain the sign of velocity and acceleration in words, not just symbols."
+						"Readiness check: move fluently between story, graph, and equation without being coached toward a specific formula. Prompt: explain the sign of velocity and acceleration in words, not just symbols."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -145,7 +145,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Use quick whiteboard checks where students must draw a complete free-body diagram from a single sentence prompt. Ask them to justify the direction of each force before any calculations happen."
+						"Use quick whiteboard checks that start from a single sentence prompt and produce a complete free-body diagram. Each force direction should be justified before any calculations happen."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -175,7 +175,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Height-Speed and Energy Bar Charts",
 					content:
-						"Use tables or simulation data showing how speed changes with height on a ramp or track. Build energy bar charts alongside numeric data so students can see energy conservation visually and mathematically. Ask them to compare a no-friction graph with a rough-surface graph and explain the missing mechanical energy."
+						"Use tables or simulation data showing how speed changes with height on a ramp or track. Build energy bar charts alongside numeric data so energy conservation is visible both graphically and mathematically. Compare a no-friction graph with a rough-surface graph and explain the missing mechanical energy."
 				},
 				{
 					title: "Mini Lab: Roller Coaster Energy Storyboard",
@@ -197,7 +197,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can distinguish energy stored in a system from energy transferred into or out of it. Ask them to narrate an energy story in words before writing any equations."
+						"Readiness check: distinguish energy stored in a system from energy transferred into or out of it. Prompt: narrate an energy story in words before writing any equations."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -249,7 +249,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can predict what happens when one component is removed or replaced before they touch the hardware. A good checkpoint is having them explain current and voltage in the same circuit without mixing the two ideas."
+						"Readiness check: predict what happens when one component is removed or replaced before touching the hardware. A good checkpoint explains current and voltage in the same circuit without mixing the two ideas."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -301,7 +301,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can identify amplitude, frequency, and wavelength from both pictures and graphs. Use one short prompt that asks what changes when a sound gets louder versus when it gets higher in pitch."
+						"Readiness check: identify amplitude, frequency, and wavelength from both pictures and graphs. Prompt: explain what changes when a sound gets louder versus when it gets higher in pitch."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -353,7 +353,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can propose a question that is narrow enough to test, identify uncertainty honestly, and choose a graph that matches the data type. A strong checkpoint is asking them to predict in advance what result would count as evidence for or against their hypothesis."
+						"Readiness check: propose a question that is narrow enough to test, identify uncertainty honestly, and choose a graph that matches the data type. A strong checkpoint predicts in advance what result would count as evidence for or against the hypothesis."
 				},
 				{
 					title: "Misconception Watchlist",

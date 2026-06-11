@@ -49,7 +49,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can define a design pattern as a reusable solution shape instead of a library feature or template. Use a short prompt that asks whether every duplicated `if` statement deserves a Strategy refactor.",
+						"Readiness check: define a design pattern as a reusable solution shape instead of a library feature or template. Prompt: decide whether every duplicated `if` statement deserves a Strategy refactor, and justify the answer.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-04-dpj1-what-patterns-are-and-what-they-are-not/starter",
 					solutionLink:
@@ -121,7 +121,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can justify an interface with a collaboration boundary rather than habit. Ask them to explain when an immutable data object is cleaner than a highly configurable mutable one.",
+						"Readiness check: justify an interface with a collaboration boundary rather than habit. Prompt: explain when an immutable data object is cleaner than a highly configurable mutable one.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-05-dpj2-java-design-foundations/starter",
 					solutionLink:
@@ -193,7 +193,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain why Abstract Factory is about coordinated families rather than just more factories. Use a short prompt asking when a named constructor is enough and a Builder is unnecessary.",
+						"Readiness check: explain why Abstract Factory is about coordinated families rather than just more factories. Prompt: identify when a named constructor is enough and a Builder is unnecessary.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-06-dpj3-creational-patterns-i/starter",
 					solutionLink:
@@ -265,7 +265,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can distinguish wrapping an incompatible API from simplifying a noisy subsystem. Use a quick prompt asking whether a logger should automatically become a Singleton.",
+						"Readiness check: distinguish wrapping an incompatible API from simplifying a noisy subsystem. Prompt: decide whether a logger should automatically become a Singleton.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-07-dpj4-creational-patterns-ii-and-boundary-patterns/starter",
 					solutionLink:
@@ -337,7 +337,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can justify Flyweight with repeated intrinsic state rather than simple reuse. Use a quick prompt asking whether a layered coffee-order system wants Decorator or Builder.",
+						"Readiness check: justify Flyweight with repeated intrinsic state rather than simple reuse. Prompt: decide whether a layered coffee-order system wants Decorator or Builder.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-08-dpj5-structural-patterns-in-depth/starter",
 					solutionLink:
@@ -409,7 +409,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can choose State versus Strategy based on who selects the behavior and when it changes. Ask them whether Template Method helps when inheritance is already the source of the current design pain.",
+						"Readiness check: choose State versus Strategy based on who selects the behavior and when it changes. Prompt: decide whether Template Method helps when inheritance is already the source of the current design pain.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-09-dpj6-behavioral-patterns-i/starter",
 					solutionLink:
@@ -481,7 +481,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can distinguish event subscription from ordered request handling and from centralized coordination. Use a short prompt asking when Memento is better than exposing every field for manual rollback.",
+						"Readiness check: distinguish event subscription from ordered request handling and centralized coordination. Prompt: identify when Memento is better than exposing every field for manual rollback.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-10-dpj7-behavioral-patterns-ii/starter",
 					solutionLink:
@@ -553,7 +553,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can describe DI without mentioning a container at all. Use a short prompt asking what a repository boundary protects the rest of the system from.",
+						"Readiness check: describe DI without mentioning a container at all. Prompt: explain what a repository boundary protects the rest of the system from.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-11-dpj8-modern-extensions-and-architecture-level-patterns/starter",
 					solutionLink:
@@ -625,7 +625,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can argue against a pattern when the underlying smell is weak. Ask them to identify the smallest useful next refactor rather than the biggest theoretical rewrite.",
+						"Readiness check: argue against a pattern when the underlying smell is weak. Prompt: identify the smallest useful next refactor rather than the biggest theoretical rewrite.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-12-dpj9-pattern-selection-and-refactoring-judgment/starter",
 					solutionLink:
@@ -697,7 +697,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can justify each introduced pattern with a concrete before-and-after change story. Use a short checkpoint asking what parts of the final design remained intentionally plain.",
+						"Readiness check: justify each introduced pattern with a concrete before-and-after change story. Prompt: name which parts of the final design remained intentionally plain.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-13-dpj10-capstone-refactor/starter",
 					solutionLink:

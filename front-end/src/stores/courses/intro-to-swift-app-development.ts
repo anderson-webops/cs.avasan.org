@@ -37,7 +37,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can accurately describe the role of Xcode, TestFlight, App Store Connect, and the Apple Developer Program without blending them together. A useful prompt is: 'What can you do with a local simulator build that you cannot do with an App Store listing?'",
+						"Readiness check: accurately describe the role of Xcode, TestFlight, App Store Connect, and the Apple Developer Program without blending them together. Prompt: 'What can you do with a local simulator build that you cannot do with an App Store listing?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/legacy"
 				},
@@ -93,7 +93,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain why a Mac is required for practical iOS shipping work and can create a new project without getting lost in Xcode's initial templates. Ask them where screenshots, exported builds, and app notes should live before they start coding for real.",
+						"Readiness check: explain why a Mac is required for practical iOS shipping work and create a new project without getting lost in Xcode's initial templates. Prompt: identify where screenshots, exported builds, and app notes should live before real app work begins.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod1Pro1"
 				},
@@ -151,7 +151,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can define a bundle identifier, explain what 'team' means in Xcode, and say why a locally runnable build still depends on signing context. A good short prompt is: 'Why can two apps not share the same production bundle identifier?'",
+						"Readiness check: define a bundle identifier, explain what 'team' means in Xcode, and say why a locally runnable build still depends on signing context. Prompt: 'Why can two apps not share the same production bundle identifier?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod1Pro2"
 				},
@@ -209,7 +209,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can switch destinations intentionally, recognize the difference between simulator-only confidence and real-device confidence, and find the basic logging surfaces in Xcode. Ask them what they would inspect first if a build compiles but never launches on a phone.",
+						"Readiness check: switch destinations intentionally, recognize the difference between simulator-only confidence and real-device confidence, and find the basic logging surfaces in Xcode. Prompt: identify what to inspect first if a build compiles but never launches on a phone.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod1Pro3"
 				},
@@ -267,7 +267,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can distinguish a build number from a version number and can explain why screenshots and descriptions are part of the release process. A short prompt: 'What can stop a release even if the code itself is fine?'",
+						"Readiness check: distinguish a build number from a version number and explain why screenshots and descriptions are part of the release process. Prompt: 'What can stop a release even if the code itself is fine?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod2Pro1"
 				},
@@ -325,7 +325,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can label the app entry point, scene, view hierarchy, navigation model, and data model responsibilities in a small example. They should be able to describe structure without relying on memorized code fragments.",
+						"Readiness check: label the app entry point, scene, view hierarchy, navigation model, and data model responsibilities in a small example. The structure should be explainable without relying on memorized code fragments.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod2Pro2"
 				},
@@ -383,7 +383,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can locate the file navigator, target settings, assets, and previews fast enough to support normal app iteration. A helpful checkpoint is asking them where they would change the bundle ID or add a new image.",
+						"Readiness check: locate the file navigator, target settings, assets, and previews fast enough to support normal app iteration. A helpful checkpoint identifies where to change the bundle ID or add a new image.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod3Pro1"
 				},
@@ -439,7 +439,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain SwiftUI as a declarative system and can identify the major branches of a small view tree without help. A useful prompt is asking what happens first when a `Text` view also has padding, background, and corner radius modifiers.",
+						"Readiness check: explain SwiftUI as a declarative system and identify the major branches of a small view tree without help. Prompt: describe what happens first when a `Text` view also has padding, background, and corner radius modifiers.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD1-Welcome-Profile-App/starter",
 					solutionLink:
@@ -499,7 +499,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can model a small piece of app data using the right combination of constants, arrays, optionals, and conditionals. One useful prompt is asking how they would represent an optional profile subtitle that may or may not exist.",
+						"Readiness check: model a small piece of app data using the right combination of constants, arrays, optionals, and conditionals. Prompt: represent an optional profile subtitle that may or may not exist.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod3Pro2"
 				},
@@ -557,7 +557,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can write a small helper function with clear labels, define a struct for app data, and name an enum that captures a real UI state cleanly. A short prompt: 'What would an enum express better than three related booleans?'",
+						"Readiness check: write a small helper function with clear labels, define a struct for app data, and name an enum that captures a real UI state cleanly. Prompt: 'What would an enum express better than three related booleans?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod4Pro1"
 				},
@@ -615,7 +615,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can point to the single owner of a value and explain why a child view might need a binding rather than its own duplicate state. Use one short prompt where they predict what happens if two views each keep their own unsynchronized copy of the same setting.",
+						"Readiness check: point to the single owner of a value and explain why a child view might need a binding rather than its own duplicate state. Prompt: predict what happens if two views each keep their own unsynchronized copy of the same setting.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod4Pro2"
 				},
@@ -671,7 +671,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain the role of a `NavigationStack`, a `TabView`, and a sheet without using them interchangeably. A useful prompt is: 'Why should favorites be a tab in one app but a detail section in another?'",
+						"Readiness check: explain the role of a `NavigationStack`, a `TabView`, and a sheet without using them interchangeably. Prompt: 'Why should favorites be a tab in one app but a detail section in another?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD3-Multi-Tab-Hobby-App/starter",
 					solutionLink:
@@ -729,7 +729,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can add an item, mutate one property on an existing item, and delete a row without introducing unclear ownership or stale UI. A strong prompt is asking what should happen to the list after an add form succeeds.",
+						"Readiness check: add an item, mutate one property on an existing item, and delete a row without introducing unclear ownership or stale UI. Prompt: describe what should happen to the list after an add form succeeds.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD5-Simple-Tracker-App/starter",
 					solutionLink:
@@ -791,7 +791,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can describe when an app should use bundled assets versus remote media, and how a list selection should influence a map-centered view. A useful prompt is: 'What has to happen in the app before a location permission request makes sense?'",
+						"Readiness check: describe when an app should use bundled assets versus remote media, and how a list selection should influence a map-centered view. Prompt: 'What has to happen in the app before a location permission request makes sense?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD2-Media-Gallery-App/starter",
 					solutionLink:
@@ -849,7 +849,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain the full path from URL to decoded model to visible list row, and can name the UI states the feature must represent. A short prompt: 'What should the app do before the first response arrives?'",
+						"Readiness check: explain the full path from URL to decoded model to visible list row, and name the UI states the feature must represent. Prompt: 'What should the app do before the first response arrives?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD6-API-Reference-App/starter",
 					solutionLink:
@@ -907,7 +907,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain where persistent data is loaded, when it should be saved, and what should happen if stored data is missing or malformed. A useful prompt is asking how a first launch should differ from a tenth launch.",
+						"Readiness check: explain where persistent data is loaded, when it should be saved, and what should happen if stored data is missing or malformed. Prompt: compare a first launch with a tenth launch.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD5-Simple-Tracker-App/starter",
 					solutionLink:
@@ -967,7 +967,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can choose a debugging tool that matches the kind of failure they are seeing and can explain the difference between a preview issue and a runtime issue. A short prompt: 'If the layout looks wrong but the data is correct, where do you inspect first?'",
+						"Readiness check: choose a debugging tool that matches the kind of failure and explain the difference between a preview issue and a runtime issue. Prompt: 'If the layout looks wrong but the data is correct, where do you inspect first?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod4Pro3"
 				},
@@ -1025,7 +1025,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can identify at least three design or accessibility problems in a rough screen and suggest concrete fixes. A strong prompt is: 'Would this still work well with large dynamic type?'",
+						"Readiness check: identify at least three design or accessibility problems in a rough screen and suggest concrete fixes. Prompt: 'Would this still work well with large dynamic type?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod5Pro1"
 				},
@@ -1083,7 +1083,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can outline the order of archive, upload, metadata review, TestFlight, and App Review without skipping critical steps. A useful prompt is asking which publishing artifact they should prepare before the final upload even begins.",
+						"Readiness check: outline the order of archive, upload, metadata review, TestFlight, and App Review without skipping critical steps. Prompt: identify which publishing artifact should be prepared before the final upload begins.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod5Pro2"
 				},
@@ -1139,7 +1139,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can defend their capstone scope, explain their navigation and data choices, and outline a plausible TestFlight/App Store preparation path. A strong prompt is: 'If you had one more week, what would you improve before inviting external testers?'",
+						"Readiness check: defend the capstone scope, explain navigation and data choices, and outline a plausible TestFlight/App Store preparation path. Prompt: 'If you had one more week, what would you improve before inviting external testers?'",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD7-Publish-Ready-Capstone/starter",
 					solutionLink:

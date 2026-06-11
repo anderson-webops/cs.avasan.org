@@ -113,6 +113,8 @@ const forbiddenRawGeneratedPatterns = [
 	/\bdelete of all a list\b/i,
 	/\bShow students\b/i,
 	/\bEncourage students\b/i,
+	/\bCheck whether students can\b/i,
+	/\bAsk them\b/i,
 	/\bTeach managing\b/i,
 	/\bIf the struggles\b/i,
 	/\bshow the the\b/i,

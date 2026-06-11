@@ -41,7 +41,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can resolve vectors accurately, label angles consistently, and explain why horizontal and vertical equations can be solved separately in projectile motion. Use one quick prompt that asks them to choose axes and defend the choice before calculating."
+						"Readiness check: resolve vectors accurately, label angles consistently, and explain why horizontal and vertical equations can be solved separately in projectile motion. Prompt: choose axes and defend the choice before calculating."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -88,7 +88,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can identify all external forces before solving and can state whether the system is accelerating along each chosen axis. Use a short whiteboard checkpoint where they must explain a scale reading without relying on intuition alone."
+						"Readiness check: identify all external forces before solving and state whether the system is accelerating along each chosen axis. A short whiteboard checkpoint explains a scale reading without relying on intuition alone."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -135,7 +135,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can decide when static friction should be compared against a maximum value and when kinetic friction is the better model. A strong checkpoint is having them explain why the normal force is not always equal to weight."
+						"Readiness check: decide when static friction should be compared against a maximum value and when kinetic friction is the better model. A strong checkpoint explains why the normal force is not always equal to weight."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -182,7 +182,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can distinguish momentum conservation from kinetic-energy conservation and can interpret the sign of momentum consistently. Use one prompt where they must decide whether a force-time graph indicates a large force for a short time or a smaller force for a longer time."
+						"Readiness check: distinguish momentum conservation from kinetic-energy conservation and interpret the sign of momentum consistently. Prompt: decide whether a force-time graph indicates a large force for a short time or a smaller force for a longer time."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -229,7 +229,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can identify the pivot, choose a sign convention, and explain why a large force near the pivot may be less effective than a smaller force farther away. A quick oral prompt about opening a heavy door works well here."
+						"Readiness check: identify the pivot, choose a sign convention, and explain why a large force near the pivot may be less effective than a smaller force farther away. A quick prompt about opening a heavy door works well here."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -259,7 +259,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Radius, Period, and Inverse-Square Trends",
 					content:
-						"Compare how orbital radius changes period, speed, and gravitational force using tables, plots, or simulation output. Include an inverse-square comparison so students can see why distance matters so strongly in gravity problems. Ask them to describe trends before computing exact values."
+						"Compare how orbital radius changes period, speed, and gravitational force using tables, plots, or simulation output. Include an inverse-square comparison so the distance effect in gravity problems is visible before exact values are computed."
 				},
 				{
 					title: "Mini Lab or Simulation: Simple Orbit Simulator in Python or Spreadsheet",
@@ -276,7 +276,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can identify the inward direction in circular motion and can explain why constant speed does not imply zero acceleration. Use one short prompt that compares gravity at Earth's surface with gravity in low orbit."
+						"Readiness check: identify the inward direction in circular motion and explain why constant speed does not imply zero acceleration. Prompt: compare gravity at Earth's surface with gravity in low orbit."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -323,7 +323,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can compare branch current and branch voltage correctly in series and parallel settings. A useful checkpoint is asking them to predict what changes everywhere in the circuit when one resistor is increased."
+						"Readiness check: compare branch current and branch voltage correctly in series and parallel settings. A useful checkpoint predicts what changes everywhere in the circuit when one resistor is increased."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -370,7 +370,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can distinguish heat from temperature, identify the dominant heat-transfer pathway in a scenario, and interpret a heating curve in words. If optics is included, ask them to explain what a lens is doing to rays rather than merely naming the lens type."
+						"Readiness check: distinguish heat from temperature, identify the dominant heat-transfer pathway in a scenario, and interpret a heating curve in words. If optics is included, the checkpoint should explain what a lens is doing to rays rather than merely naming the lens type."
 				},
 				{
 					title: "Misconception Watchlist",
@@ -417,7 +417,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can defend their system choice, assumptions, graph choice, and uncertainty treatment under follow-up questioning. A strong checkpoint is whether they can explain what evidence would have changed their conclusion."
+						"Readiness check: defend the system choice, assumptions, graph choice, and uncertainty treatment under follow-up questioning. A strong checkpoint explains what evidence would have changed the conclusion."
 				},
 				{
 					title: "Misconception Watchlist",

@@ -49,7 +49,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can classify a smell before proposing a pattern or refactoring. Use a short prompt asking which is riskier: changing five things at once or committing a sequence of tiny safe improvements.",
+						"Readiness check: classify a smell before proposing a pattern or refactoring. Prompt: decide which is riskier: changing five things at once or committing a sequence of tiny safe improvements.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-08-dpr1-code-smells-and-safe-refactoring-workflow/starter",
 					solutionLink:
@@ -121,7 +121,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can pick the smallest composing-method refactor that improves clarity. Ask them to justify why they used Method Object instead of another Extract Method.",
+						"Readiness check: pick the smallest composing-method refactor that improves clarity. Prompt: justify why Method Object is better than another Extract Method in the given case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr2-composing-methods/starter",
 					solutionLink:
@@ -193,7 +193,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can distinguish Extract Class from Move Method or Move Field. Use a short prompt asking whether a forwarding layer is clarifying a boundary or hiding nothing useful.",
+						"Readiness check: distinguish Extract Class from Move Method or Move Field. Prompt: decide whether a forwarding layer is clarifying a boundary or hiding nothing useful.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-10-dpr3-moving-features-between-objects/starter",
 					solutionLink:
@@ -265,7 +265,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can name when Replace Type Code with Class is enough and when State or Strategy is the better move. Ask them to justify whether a collection should be directly exposed or wrapped.",
+						"Readiness check: name when Replace Type Code with Class is enough and when State or Strategy is the better move. Prompt: justify whether a collection should be directly exposed or wrapped.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr4-organizing-data/starter",
 					solutionLink:
@@ -337,7 +337,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can improve a conditional without defaulting immediately to polymorphism. Use a short prompt asking whether a null check repeated in ten places is a candidate for Null Object.",
+						"Readiness check: improve a conditional without defaulting immediately to polymorphism. Prompt: decide whether a null check repeated in ten places is a candidate for Null Object.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-12-dpr5-simplifying-conditional-expressions/starter",
 					solutionLink:
@@ -409,7 +409,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can choose between Introduce Parameter Object and Preserve Whole Object. Use a quick prompt asking when a constructor should become a factory method.",
+						"Readiness check: choose between Introduce Parameter Object and Preserve Whole Object. Prompt: identify when a constructor should become a factory method.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr6-simplifying-method-calls/starter",
 					solutionLink:
@@ -481,7 +481,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can say when Extract Interface helps even if Extract Superclass would also compile. Use a short prompt asking why Collapse Hierarchy can be an improvement rather than a loss of sophistication.",
+						"Readiness check: say when Extract Interface helps even if Extract Superclass would also compile. Prompt: explain why Collapse Hierarchy can be an improvement rather than a loss of sophistication.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-14-dpr7-dealing-with-generalization/starter",
 					solutionLink:
@@ -553,7 +553,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can narrate a multi-step path from smell to pattern without skipping the intermediate refactors. Use a short prompt asking whether every switch statement should end in polymorphism.",
+						"Readiness check: narrate a multi-step path from smell to pattern without skipping the intermediate refactors. Prompt: decide whether every switch statement should end in polymorphism.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns/starter",
 					solutionLink:
@@ -625,7 +625,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain why DI improves refactorability even without a framework container. Use a short prompt asking what kind of test is sufficient before a small structural change.",
+						"Readiness check: explain why DI improves refactorability even without a framework container. Prompt: identify what kind of test is sufficient before a small structural change.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-16-dpr9-testability-di-and-refactoring-with-confidence/starter",
 					solutionLink:
@@ -697,7 +697,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Diagnostic Checkpoint",
 					content:
-						"Check whether students can explain their refactor sequence in terms of risk reduction as well as final architecture. Use a short prompt asking which proposed change they intentionally postponed and why.",
+						"Readiness check: explain the refactor sequence in terms of risk reduction as well as final architecture. Prompt: name which proposed change was intentionally postponed and why.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr10-capstone-refactoring-studio/starter",
 					solutionLink:
