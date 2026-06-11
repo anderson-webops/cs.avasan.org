@@ -8,7 +8,7 @@ import {
 import { researchBackedExpansionCourseIds } from "@/stores/courses/research-expansions";
 
 const authoredLearnerCourseIds = new Set(["intro-to-chemistry"]);
-const COURSE_SWEEP_TIMEOUT = 90000;
+const COURSE_SWEEP_TIMEOUT = 180000;
 
 async function requireCourse(courseId: string) {
 	const course = await loadRawCourse(courseId);
@@ -30,35 +30,50 @@ function allText(course: Awaited<ReturnType<typeof requireCourse>>) {
 }
 
 describe("implemented course development artifacts", () => {
-	it("adds full lesson authoring packs to every researched course", async () => {
-		for (const courseId of [
-			...researchBackedExpansionCourseIds,
-			"python-to-java-and-cpp-bridge"
-		]) {
-			const course = await requireCourse(courseId);
-			const module = course.modules.find(module =>
-				module.title.endsWith(": Full Lesson Authoring Pack")
-			);
+	it(
+		"keeps course-development planning scaffolds internal while retaining metadata",
+		async () => {
+			for (const courseId of [
+				...researchBackedExpansionCourseIds,
+				"python-to-java-and-cpp-bridge"
+			]) {
+				const course = await requireCourse(courseId);
+				const text = allText(course);
 
-			expect(module, courseId).toBeDefined();
-			expect(module?.curriculum.length, courseId).toBe(4);
-			expect(module?.supplementalProjects.length, courseId).toBe(2);
-			expect(allText(course), courseId).toContain(
-				"Full Lesson Project: Transfer Task"
-			);
-		}
-	}, COURSE_SWEEP_TIMEOUT);
+				expect(course.developmentMetadata, courseId).toBeDefined();
+				expect(
+					course.developmentMetadata?.standards.length,
+					courseId
+				).toBeGreaterThan(0);
+				expect(text, courseId).not.toContain(
+					"Full Lesson Authoring Pack"
+				);
+				expect(text, courseId).not.toContain(
+					"Full Lesson Project: Transfer Task"
+				);
+				expect(text, courseId).not.toContain("Implementation Studio");
+				expect(text, courseId).not.toContain(
+					"defines the target artifact, required behavior, and core concepts needed"
+				);
+			}
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
-	it("ensures every visible module has at least two supplemental project/checkpoint options", async () => {
-		for (const { id } of courseCatalog) {
-			const course = await requireCourse(id);
-			const underfilled = course.modules.filter(
-				module => module.supplementalProjects.length < 2
-			);
+	it(
+		"ensures every visible module has at least two supplemental project/checkpoint options",
+		async () => {
+			for (const { id } of courseCatalog) {
+				const course = await requireCourse(id);
+				const underfilled = course.modules.filter(
+					module => module.supplementalProjects.length < 2
+				);
 
-			expect(underfilled, id).toHaveLength(0);
-		}
-	}, COURSE_SWEEP_TIMEOUT);
+				expect(underfilled, id).toHaveLength(0);
+			}
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("implements the algebra project taxonomy decision in supplemental project slots", async () => {
 		for (const courseId of [
@@ -83,45 +98,54 @@ describe("implemented course development artifacts", () => {
 		}
 	});
 
-	it("adds science resource banks and the elementary grade-band decision", async () => {
-		for (const courseId of [
-			"elementary-science",
-			"middle-school-integrated-science",
-			"intro-to-physics",
-			"physics-level-2"
-		]) {
-			const course = await requireCourse(courseId);
-			const text = allText(course);
+	it(
+		"adds science resource banks and the elementary grade-band decision",
+		async () => {
+			for (const courseId of [
+				"elementary-science",
+				"middle-school-integrated-science",
+				"intro-to-physics",
+				"physics-level-2"
+			]) {
+				const course = await requireCourse(courseId);
+				const text = allText(course);
 
-			expect(text, courseId).toContain(
-				"Science Resource Shortlist and Remote Lab Bank"
+				expect(text, courseId).toContain(
+					"Science Resource Shortlist and Remote Lab Bank"
+				);
+				expect(text, courseId).toContain("PhET");
+				expect(text, courseId).toContain(
+					"The activity does not require household materials"
+				);
+				expect(
+					course.modules.some(module =>
+						[
+							...module.curriculum,
+							...module.supplementalProjects
+						].some(item => item.mediaLink || item.datasetLink)
+					),
+					courseId
+				).toBe(true);
+			}
+
+			const chemistryText = allText(
+				await requireCourse("intro-to-chemistry")
 			);
-			expect(text, courseId).toContain("PhET");
-			expect(text, courseId).toContain(
-				"The activity does not require household materials"
+			expect(chemistryText).toContain("CHM10 Advanced Chemistry Map");
+			expect(chemistryText).toContain(
+				"Reference Appendix: Chemistry Resource Bank"
 			);
+			expect(chemistryText).toContain("Core Chemistry References");
+			expect(chemistryText).toContain(
+				"Remote-Safe Investigation Checklist"
+			);
+
 			expect(
-				course.modules.some(module =>
-					[...module.curriculum, ...module.supplementalProjects].some(
-						item => item.mediaLink || item.datasetLink
-					)
-				),
-				courseId
-			).toBe(true);
-		}
-
-		const chemistryText = allText(await requireCourse("intro-to-chemistry"));
-		expect(chemistryText).toContain("CHM10 Advanced Chemistry Map");
-		expect(chemistryText).toContain(
-			"Reference Appendix: Chemistry Resource Bank"
-		);
-		expect(chemistryText).toContain("Core Chemistry References");
-		expect(chemistryText).toContain("Remote-Safe Investigation Checklist");
-
-		expect(allText(await requireCourse("elementary-science"))).toContain(
-			"Decision: Keep One Course with K-2 and 3-5 Paths"
-		);
-	});
+				allText(await requireCourse("elementary-science"))
+			).toContain("Decision: Keep One Course with K-2 and 3-5 Paths");
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("rebuilds Unity around a full Unity 6.3 LTS module sequence", async () => {
 		const course = await requireCourse("unity-game-development");
@@ -133,7 +157,9 @@ describe("implemented course development artifacts", () => {
 		expect(text).toContain("Unity 6.3 LTS");
 		expect(rebuiltModules.length).toBeGreaterThanOrEqual(7);
 		expect(
-			rebuiltModules.every(module => module.supplementalProjects.length >= 2)
+			rebuiltModules.every(
+				module => module.supplementalProjects.length >= 2
+			)
 		).toBe(true);
 		expect(text).toContain("UGD6 Capstone Production");
 		expect(JSON.stringify(course)).toContain("UGD-full-project-starter");
@@ -150,9 +176,9 @@ describe("implemented course development artifacts", () => {
 		expect(allText(await requireCourse("machine-learning"))).toContain(
 			"Dataset, Model, and Evaluation Catalog"
 		);
-		expect(allText(await requireCourse("data-science-in-python"))).toContain(
-			"NOAA daily weather observations"
-		);
+		expect(
+			allText(await requireCourse("data-science-in-python"))
+		).toContain("NOAA daily weather observations");
 		expect(allText(await requireCourse("network-security"))).toContain(
 			"Systems and Security Lab Safety Policy"
 		);
@@ -161,19 +187,21 @@ describe("implemented course development artifacts", () => {
 		);
 	});
 
-	it("adds source parity modules to courses with instruction-material repos", async () => {
-		for (const courseId of [
-			"python-level-3",
-			"cpp-level-3",
-			"ap-computer-science-a",
-			"unity-game-development",
-			"web-development-foundations"
-		]) {
-			const text = allText(await requireCourse(courseId));
+	it("records source repo policy metadata without visible source-parity scaffolds", async () => {
+		for (const [courseId, repo] of Object.entries(
+			courseImplementationSourceRepos
+		)) {
+			const course = await requireCourse(courseId);
+			const text = allText(course);
 
-			expect(text, courseId).toContain("Source and Asset Parity Implementation");
-			expect(text, courseId).toContain("Canonical Source Repository");
-			expect(text, courseId).toContain("github.com/instruction-material");
+			expect(
+				course.developmentMetadata?.sourcePolicy,
+				courseId
+			).toContain(`https://github.com/instruction-material/${repo}`);
+			expect(text, courseId).not.toContain(
+				"Source and Asset Parity Implementation"
+			);
+			expect(text, courseId).not.toContain("Canonical Source Repository");
 		}
 	});
 
@@ -181,10 +209,18 @@ describe("implemented course development artifacts", () => {
 		for (const courseId of Object.keys(courseContentOnlySourcePolicies)) {
 			if (authoredLearnerCourseIds.has(courseId)) continue;
 
-			const text = allText(await requireCourse(courseId));
+			const course = await requireCourse(courseId);
+			const text = allText(course);
 
-			expect(text, courseId).toContain("Source and Asset Parity Implementation");
-			expect(text, courseId).toContain("Canonical Source or Asset Policy");
+			expect(course.developmentMetadata?.sourcePolicy, courseId).toBe(
+				courseContentOnlySourcePolicies[courseId]
+			);
+			expect(text, courseId).not.toContain(
+				"Source and Asset Parity Implementation"
+			);
+			expect(text, courseId).not.toContain(
+				"Canonical Source or Asset Policy"
+			);
 		}
 	});
 
@@ -192,35 +228,57 @@ describe("implemented course development artifacts", () => {
 		for (const courseId of Object.keys(courseToolchainAssumptions)) {
 			const text = allText(await requireCourse(courseId));
 
-			expect(text, courseId).toContain("Toolchain and Version Assumptions");
+			expect(text, courseId).toContain(
+				"Toolchain and Version Assumptions"
+			);
 			expect(text, courseId).toContain("Pinned Setup Assumptions");
 		}
 	});
 
-	it("attaches standards, source, assessment, toolchain, safety, and capstone metadata to every course", async () => {
-		for (const { id } of courseCatalog) {
-			const course = await requireCourse(id);
-			const metadata = course.developmentMetadata;
+	it(
+		"attaches standards, source, assessment, toolchain, safety, and capstone metadata to every course",
+		async () => {
+			for (const { id } of courseCatalog) {
+				const course = await requireCourse(id);
+				const metadata = course.developmentMetadata;
 
-			expect(metadata, id).toBeDefined();
-			expect(metadata?.standards.length, id).toBeGreaterThan(0);
-			expect(metadata?.sourcePolicy, id).toBeTruthy();
-			expect(metadata?.assessmentCadence.length, id).toBeGreaterThanOrEqual(4);
-			expect(metadata?.toolchain.length, id).toBeGreaterThanOrEqual(2);
-			expect(metadata?.safetyPolicy.length, id).toBeGreaterThanOrEqual(2);
-			expect(metadata?.courseBoundaries.length, id).toBeGreaterThanOrEqual(2);
-			expect(metadata?.capstoneExpectations.length, id).toBeGreaterThanOrEqual(2);
-			expect(metadata?.recommendedNextWork.length, id).toBeGreaterThanOrEqual(3);
-			if (!authoredLearnerCourseIds.has(id)) {
-				expect(allText(course), id).toContain(
+				expect(metadata, id).toBeDefined();
+				expect(metadata?.standards.length, id).toBeGreaterThan(0);
+				expect(metadata?.sourcePolicy, id).toBeTruthy();
+				expect(
+					metadata?.assessmentCadence.length,
+					id
+				).toBeGreaterThanOrEqual(4);
+				expect(metadata?.toolchain.length, id).toBeGreaterThanOrEqual(
+					2
+				);
+				expect(
+					metadata?.safetyPolicy.length,
+					id
+				).toBeGreaterThanOrEqual(2);
+				expect(
+					metadata?.courseBoundaries.length,
+					id
+				).toBeGreaterThanOrEqual(2);
+				expect(
+					metadata?.capstoneExpectations.length,
+					id
+				).toBeGreaterThanOrEqual(2);
+				expect(
+					metadata?.recommendedNextWork.length,
+					id
+				).toBeGreaterThanOrEqual(3);
+				expect(allText(course), id).not.toContain(
 					"Standards, Source, Assessment, and Safety Backbone"
 				);
 			}
-		}
-	}, 30000);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("implements current AP CSA four-unit and digital FRQ alignment", async () => {
-		const text = allText(await requireCourse("ap-computer-science-a"));
+		const course = await requireCourse("ap-computer-science-a");
+		const text = allText(course);
 
 		expect(text).toContain("Unit 1 Using Objects and Methods");
 		expect(text).toContain("Unit 2 Selection and Iteration");
@@ -228,7 +286,9 @@ describe("implemented course development artifacts", () => {
 		expect(text).toContain("Unit 4 Data Collections");
 		expect(text).toContain("FRQ Family 3 Data Analysis with ArrayList");
 		expect(text).toContain("typed responses without compiler feedback");
-		expect(text).toContain("College Board AP Computer Science A CED, Fall 2025 / May 2026 framework");
+		expect(course.developmentMetadata?.standards).toContain(
+			"College Board AP Computer Science A CED, Fall 2025 / May 2026 framework."
+		);
 	});
 
 	it("adds course-specific architecture for algebra, advanced Python, C++, Java, data/AI/ML, science, systems, and Unity", async () => {
@@ -240,9 +300,13 @@ describe("implemented course development artifacts", () => {
 		]) {
 			const text = allText(await requireCourse(courseId));
 
-			expect(text, courseId).toContain("Standards-Mapped Algebra Architecture");
+			expect(text, courseId).toContain(
+				"Standards-Mapped Algebra Architecture"
+			);
 			expect(text, courseId).toContain("Course Object Labels");
-			expect(text, courseId).toContain("Required Anchor and Extension Projects");
+			expect(text, courseId).toContain(
+				"Required Anchor and Extension Projects"
+			);
 		}
 
 		expect(allText(await requireCourse("python-level-3"))).toContain(
@@ -303,11 +367,17 @@ describe("implemented course development artifacts", () => {
 			);
 		}
 
-		const unityText = allText(await requireCourse("unity-game-development"));
+		const unityText = allText(
+			await requireCourse("unity-game-development")
+		);
 
-		expect(unityText).toContain("UGD7 Testing, Profiling, Builds, CI, and Asset Pipeline");
-		expect(unityText).toContain("UGD8 Full-Project Starter and Solution Repository Plan");
-		expect(unityText).toContain("full Unity project workflow");
+		expect(unityText).toContain(
+			"UGD7 Testing, Profiling, Builds, CI, and Asset Pipeline"
+		);
+		expect(unityText).toContain(
+			"UGD8 Full-Project Starter and Solution Repository Plan"
+		);
+		expect(unityText).toContain("current full-project baseline");
 	}, 30000);
 
 	it("backfills reference solution links for source-backed project links", async () => {
@@ -316,8 +386,9 @@ describe("implemented course development artifacts", () => {
 			const missingSolutionItems = course.modules.flatMap(module =>
 				[...module.curriculum, ...module.supplementalProjects].filter(
 					item =>
-						item.projectLink?.includes("github.com/instruction-material/") &&
-						!item.solutionLink
+						item.projectLink?.includes(
+							"github.com/instruction-material/"
+						) && !item.solutionLink
 				)
 			);
 

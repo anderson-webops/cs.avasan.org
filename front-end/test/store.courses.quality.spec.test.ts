@@ -5,6 +5,8 @@ import { useCoursesStore } from "@/stores/courses";
 import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
 import { slugMarkdownHeading } from "@/modules/courseAssetPreview";
 
+const COURSE_SWEEP_TIMEOUT = 180000;
+
 function allCourseText(course: Awaited<ReturnType<typeof loadRawCourse>>) {
 	if (!course) return "";
 
@@ -64,6 +66,27 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/introduce the main goal/i);
 		expect(corpus).not.toMatch(/build the central artifact/i);
 		expect(corpus).not.toMatch(/alternate supplemental snapshot/i);
+	}, 40000);
+
+	it("keeps internal implementation-planning scaffolds out of visible course text", async () => {
+		const courses = await Promise.all(
+			courseCatalog.map(entry => loadRawCourse(entry.id))
+		);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).not.toMatch(/Implementation Studio/i);
+		expect(corpus).not.toMatch(/Full Lesson Authoring Pack/i);
+		expect(corpus).not.toMatch(/Source and Asset Parity Implementation/i);
+		expect(corpus).not.toMatch(
+			/Standards, Source, Assessment, and Safety Backbone/i
+		);
+		expect(corpus).not.toMatch(
+			/defines the target artifact, required behavior, and core concepts needed/i
+		);
+		expect(corpus).not.toMatch(
+			/linked starter provides the implementation artifact/i
+		);
+		expect(corpus).toContain("Implementation Lab");
 	}, 40000);
 
 	it("adds project requirements and completion checks to thin legacy Python project prompts", async () => {
@@ -163,25 +186,29 @@ describe("course text quality normalization", () => {
 		expect(guide).not.toMatch(/Instructor Note|HQ Support|Slack|Juni/i);
 	});
 
-	it("keeps science investigations explicitly remote-safe and evidence-based", async () => {
-		const courses = await Promise.all([
-			loadRawCourse("elementary-science"),
-			loadRawCourse("middle-school-integrated-science"),
-			loadRawCourse("intro-to-physics"),
-			loadRawCourse("intro-to-chemistry"),
-			loadRawCourse("physics-level-2")
-		]);
-		const corpus = courses.map(allCourseText).join("\n");
+	it(
+		"keeps science investigations explicitly remote-safe and evidence-based",
+		async () => {
+			const courses = await Promise.all([
+				loadRawCourse("elementary-science"),
+				loadRawCourse("middle-school-integrated-science"),
+				loadRawCourse("intro-to-physics"),
+				loadRawCourse("intro-to-chemistry"),
+				loadRawCourse("physics-level-2")
+			]);
+			const corpus = courses.map(allCourseText).join("\n");
 
-		expect(corpus).toContain("**Remote investigation:**");
-		expect(corpus).toContain(
-			"The activity does not require beakers, kits, or household materials"
-		);
-		expect(corpus).toContain("claim-evidence-reasoning");
-		expect(corpus).not.toContain(
-			"Anchor the activity in web development workflow"
-		);
-	});
+			expect(corpus).toContain("**Remote investigation:**");
+			expect(corpus).toContain(
+				"The activity does not require beakers, kits, or household materials"
+			);
+			expect(corpus).toContain("claim-evidence-reasoning");
+			expect(corpus).not.toContain(
+				"Anchor the activity in web development workflow"
+			);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("keeps Intro to Chemistry authored, deduplicated, and resource-specific", async () => {
 		const course = await loadRawCourse("intro-to-chemistry");

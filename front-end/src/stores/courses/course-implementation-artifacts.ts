@@ -506,11 +506,6 @@ function repoUrl(courseId: string) {
 	return repo ? `${INSTRUCTION_MATERIAL_URL}/${repo}` : undefined;
 }
 
-function repoTreeUrl(courseId: string) {
-	const repo = courseImplementationSourceRepos[courseId];
-	return repo ? `${INSTRUCTION_MATERIAL_URL}/${repo}/tree/main` : undefined;
-}
-
 function repoFolderUrl(courseId: string, folder: string) {
 	const repo = courseImplementationSourceRepos[courseId];
 	return repo
@@ -686,66 +681,6 @@ function setCourseDevelopmentMetadata(courseId: string, course: RawCourse) {
 	course.developmentMetadata = metadata;
 }
 
-function addMetadataBackboneModule(course: RawCourse) {
-	const metadata = course.developmentMetadata;
-	if (!metadata) return;
-
-	appendModule(course, {
-		title: "Standards, Source, Assessment, and Safety Backbone",
-		curriculum: [
-			{
-				title: "Standards and Source Crosswalk",
-				content: [
-					"**Learning sequence:** Treat this module as the catalog-visible control panel for the course. It names the standards, official docs, source policy, or authored progression that future lessons and projects must trace back to.",
-					`**Priority:** ${metadata.priority}`,
-					`**Standards/source map:**\n${bullets(metadata.standards)}`,
-					`**Source policy:** ${metadata.sourcePolicy}`,
-					"**Completion check:** The course makes it possible to explain what external standard, source repo, official documentation, or explicit content policy justifies the course sequence."
-				].join("\n\n")
-			},
-			{
-				title: "Assessment Cadence",
-				content: [
-					"**Readiness check:** Use this cadence to decide what evidence should exist before the course progression continues. This prevents long lesson lists from replacing mastery checks.",
-					`**Cadence:**\n${bullets(metadata.assessmentCadence)}`,
-					"**Completion check:** Each module has a formative check, a project or transfer task, and a clear way to record what needs review next."
-				].join("\n\n")
-			},
-			{
-				title: "Toolchain and Safety Boundary",
-				content: [
-					"**Learning sequence:** Confirm the setup and safety assumptions before starting work. For content courses this means media/data access; for code courses this means source, tools, versions, and reset steps; for systems/security this means scope and authorization.",
-					`**Toolchain:**\n${bullets(metadata.toolchain)}`,
-					`**Safety boundary:**\n${bullets(metadata.safetyPolicy)}`,
-					"**Completion check:** The setup supports safe starts, recovery from setup drift, and completion of the task without hidden private files or unsafe assumptions."
-				].join("\n\n")
-			},
-			{
-				title: "Boundary, Capstone, and Next Work",
-				content: [
-					"**Learning sequence:** Use these boundaries to prevent course-family overlap and to decide what the next authoring pass should build.",
-					`**Course boundaries:**\n${bullets(metadata.courseBoundaries)}`,
-					`**Capstone expectations:**\n${bullets(metadata.capstoneExpectations)}`,
-					`**Recommended next work:**\n${bullets(metadata.recommendedNextWork)}`,
-					"**Completion check:** The course has a coherent endpoint and a clear next implementation target instead of an open-ended content backlog."
-				].join("\n\n")
-			}
-		],
-		supplementalProjects: [
-			{
-				title: "Backbone Project: Standards-to-Artifact Trace",
-				content:
-					"**Project goal:** Choose one module and trace it from standard or source policy to lesson, project, assessment, and capstone relevance.\n\n**Completion checks:**\n- The trace names the standard, official doc, or source repo.\n- The assessment evidence is explicit.\n- The next remediation or extension step is visible."
-			},
-			{
-				title: "Backbone Project: Course Boundary Review",
-				content:
-					"**Project goal:** Review one planned lesson or project and decide whether it belongs in this course, a prerequisite, a follow-up, or an optional enrichment path.\n\n**Completion checks:**\n- The decision references the course boundary.\n- Required work is separated from enrichment.\n- Any source, safety, or toolchain update is recorded."
-			}
-		]
-	});
-}
-
 const implementationOnlyProfiles = {
 	"python-to-java-and-cpp-bridge": {
 		family: "Python to Java and C++ Bridge",
@@ -808,155 +743,6 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 			module.supplementalProjects.push(projectItem(title, content));
 		}
 	}
-}
-
-function addFullLessonAuthoringPack(courseId: string, course: RawCourse) {
-	const profile = profileFor(courseId);
-	if (!profile) return;
-
-	appendModule(course, {
-		title: `${profile.family}: Full Lesson Authoring Pack`,
-		curriculum: [
-			{
-				title: "Lesson 1: Concept Setup and First Worked Example",
-				content: [
-					`**Learning sequence:** Start the first full lesson by naming the exact ${profile.family} concept and connecting it to a concrete artifact. Use one item from the topic backlog as the focus, define the vocabulary, then work through a small example slowly enough that the work demonstrates the ability to predict the next step before seeing it.`,
-					`**Concept pool:**\n${bullets(profile.topics.slice(0, 4))}`,
-					"**Completion check:** The work demonstrates the ability to restate the concept, identify the input or evidence being used, and explain the first worked example without copying the wording."
-				].join("\n\n")
-			},
-			{
-				title: "Lesson 2: Guided Practice, Misconceptions, and Vocabulary",
-				content: [
-					`**Learning sequence:** Turn the worked example into guided practice. Require the work to complete the next step, name why that step is valid, and compare it to a common mistake. Keep the misconception check discipline-specific instead of generic.`,
-					`**Misconception targets:**\n${bullets(profile.gaps.slice(0, 3))}`,
-					"**Completion check:** The work fixes one flawed example and explains the correction."
-				].join("\n\n")
-			},
-			{
-				title: "Lesson 3: Independent Transfer and Edge Cases",
-				content: [
-					`**Learning sequence:** Use a new but nearby task that applies the same idea with a changed constraint. The sequence shifts from demonstration to planning, attempting, testing, and revising.`,
-					`**Transfer options:**\n${bullets(profile.projectTypes.slice(0, 4))}`,
-					"**Completion check:** The work handles one normal case and one boundary, edge, or changed-condition case."
-				].join("\n\n")
-			},
-			{
-				title: "Lesson 4: Project Review, Reflection, and Next Step",
-				content: [
-					`**Learning sequence:** End the lesson sequence with a review of the artifact, not a vague recap. The review names what worked, what failed, what evidence proves the result, and what the next module should build on.`,
-					`**Assessment options:**\n${bullets(profile.assessments.slice(0, 4))}`,
-					"**Completion check:** The work includes a short reflection naming the goal, evidence, bug or misconception, and next improvement."
-				].join("\n\n")
-			}
-		],
-		supplementalProjects: [
-			{
-				title: "Full Lesson Project: Review-Ready Worked Example",
-				content:
-					"**Project goal:** Write one review-ready worked example for this course family. Include the prompt, expected prediction point, solution steps, common wrong turn, and a short check for understanding.\n\n**Completion checks:**\n- The example is small enough to teach live.\n- The explanation includes why each step is valid.\n- The worked example leads naturally into one project or transfer task."
-			},
-			{
-				title: "Full Lesson Project: Transfer Task",
-				content:
-					"**Project goal:** Create a nearby transfer task that changes one constraint from the worked example. The task should require the same core concept but prevent rote copying.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The task has normal and edge-case expectations.\n- The explanation covers the answer, artifact, or model."
-			}
-		]
-	});
-}
-
-function addSourceParityModule(courseId: string, course: RawCourse) {
-	const url = repoUrl(courseId);
-	const contentOnlyPolicy = courseContentOnlySourcePolicies[courseId];
-	if (!url && !contentOnlyPolicy) return;
-
-	if (!url) {
-		appendModule(course, {
-			title: "Source and Asset Parity Implementation",
-			curriculum: [
-				{
-					title: "Canonical Source or Asset Policy",
-					content: [
-						"**Learning sequence:** This course does not currently depend on a local instruction-material source repository. Treat its catalog text, media links, datasets, worksheets, and external project locations as the authoritative material until a repo is created.",
-						`**Policy decision:** ${contentOnlyPolicy}`,
-						"**Completion check:** Every future project either links a source/data/media asset or explicitly states that the activity is text-only, discussion-only, worksheet-only, or external-platform-only."
-					].join("\n\n")
-				},
-				{
-					title: "Asset Register Rule",
-					content:
-						"**Learning sequence:** When a content-only course gains worksheets, slides, datasets, simulations, or media, add the link directly to the relevant project or module item instead of leaving the asset in a private note.\n\n**Completion checks:**\n- The asset source is visible.\n- Licensing or usage assumptions are recorded when relevant.\n- The task can be completed without guessing where supporting material lives."
-				},
-				{
-					title: "Future Repository Trigger",
-					content:
-						"**Learning sequence:** Create a dedicated source repository only when the course has reusable starter files, solution states, notebooks, code projects, or worksheet packs that should be versioned outside the catalog.\n\n**Completion check:** Until that threshold is met, do not report missing source folders as a course defect."
-				},
-				{
-					title: "Audit Classification",
-					content:
-						"**Learning sequence:** The generated audit should classify this course as content-only or external-platform-only rather than unresolved source-missing work.\n\n**Completion check:** The parity report names the policy decision and does not silently imply a missing local repo."
-				}
-			],
-			supplementalProjects: [
-				{
-					title: "Asset Register Project",
-					content:
-						"**Project goal:** Choose one module and list every supporting worksheet, simulation, media source, dataset, or external platform needed to teach it.\n\n**Completion checks:**\n- Required and optional assets are separated.\n- The work demonstrates the ability to complete the activity over Zoom.\n- Any future local source repo need is documented."
-				},
-				{
-					title: "Content-Only Parity Review",
-					content:
-						"**Project goal:** Review three activities and mark each as text-only, media-backed, dataset-backed, worksheet-backed, or external-platform-backed.\n\n**Completion checks:**\n- The classification is explicit.\n- Missing assets are added to the remediation list.\n- No activity depends on an unstated private file."
-				}
-			]
-		});
-		return;
-	}
-
-	appendModule(course, {
-		title: "Source and Asset Parity Implementation",
-		curriculum: [
-			{
-				title: "Canonical Source Repository",
-				content: [
-					`**Learning sequence:** Use the instruction-material repository as the canonical source for starter files, solutions, and project assets. Every new project should be added here first, then linked from the course catalog after the starter and solution states are clear.`,
-					`**Canonical repo:** ${url}`,
-					"**Completion check:** A project is link-ready only when the starter, solution, README or instructions, and expected tests/assets are all identifiable."
-				].join("\n\n"),
-				projectLink: repoTreeUrl(courseId)
-			},
-			{
-				title: "Parity Rules for Future Projects",
-				content:
-					"**Learning sequence:** Treat source parity as a release gate. Starter folders should contain only the starting state; solution folders should represent one complete reference path; supplemental variants should be named consistently with the course/module prefix.\n\n**Completion checks:**\n- Every catalog project has a source folder or explicit no-code exception.\n- Every solution link points to a dedicated solution or complete reference folder.\n- Legacy, duplicate, or archive-only folders are not linked as active work without a note."
-			},
-			{
-				title: "Local Audit Requirement",
-				content:
-					"**Learning sequence:** Run the local source parity artifact generator after adding or renaming project folders. The generated `no-include` report should be reviewed before committing catalog links.\n\n**Completion check:** The report lists linked folders, unlinked top-level folders, project-link counts, solution-link counts, and any missing local root."
-			},
-			{
-				title: "Maintenance Contract",
-				content:
-					"**Learning sequence:** Keep course text, source repos, and public GitHub links synchronized. If a project moves, update the source repo first, then course links, then the parity artifact.\n\n**Completion check:** A future reviewer can open the course, click the project, identify the starter state, and compare against the solution without guessing which folder is current."
-			}
-		],
-		supplementalProjects: [
-			{
-				title: "Parity Project: Starter/Solution Link Review",
-				content:
-					"**Project goal:** Pick three active projects and verify that each has a starter or base folder, a solution or reference folder when appropriate, and course text that names the expected deliverable.\n\n**Completion checks:**\n- Broken links are recorded.\n- Archive-only folders are not treated as active starters.\n- Any missing solution is marked as intentionally absent or added to the remediation list.",
-				projectLink: repoTreeUrl(courseId)
-			},
-			{
-				title: "Parity Project: Legacy Folder Triage",
-				content:
-					"**Project goal:** Review unlinked top-level folders from the parity report and classify them as active project, supplemental project, reference-only, duplicate, archive, or delete candidate.\n\n**Completion checks:**\n- Every unlinked folder has a classification.\n- Active folders receive a planned module/project placement.\n- Duplicates and archive shadows are not linked back into the active catalog accidentally.",
-				projectLink: repoTreeUrl(courseId)
-			}
-		]
-	});
 }
 
 function addScienceResourceModule(courseId: string, course: RawCourse) {
@@ -2314,13 +2100,8 @@ export function applyCourseImplementationArtifacts(
 	const isAuthoredLearnerCourse = authoredLearnerCourseIds.has(courseId);
 
 	setCourseDevelopmentMetadata(courseId, course);
-	if (!isAuthoredLearnerCourse) {
-		addMetadataBackboneModule(course);
-	}
 	addAlgebraSupplementalProjects(courseId, course);
 	if (!isAuthoredLearnerCourse) {
-		addFullLessonAuthoringPack(courseId, course);
-		addSourceParityModule(courseId, course);
 		addScienceResourceModule(courseId, course);
 	}
 	addAlgebraTaxonomyModule(courseId, course);
