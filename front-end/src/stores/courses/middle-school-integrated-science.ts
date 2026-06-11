@@ -7,17 +7,17 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS1 Scientific Reasoning, Models, and Data",
 			curriculum: [
 				{
-					title: "Course Setup: Remote Science Workflow",
+					title: "Remote Science Workflow",
 					content:
 						"No beakers, kits, or required household experiments are needed. The course uses notebooks, shared simulations, images, public datasets, diagrams, short readings, and structured discussion. Optional observations are included only when they are safe, simple, and replaceable with an equivalent data or simulation option."
 				},
 				{
-					title: "Lesson: Questions, Variables, and Fair Tests",
+					title: "Questions, Variables, and Fair Tests",
 					content:
 						"Independent variables, dependent variables, controls, constants, and fair tests define whether evidence can answer a scientific question. Sample scenarios show what changes, what is measured, and what must stay the same."
 				},
 				{
-					title: "Lesson: Models as Useful Simplifications",
+					title: "Models as Useful Simplifications",
 					content:
 						"Models are tools for explaining systems, not perfect copies of reality. Diagrams, simulations, graphs, equations, and written explanations each reveal some details while hiding or simplifying others."
 				},
@@ -44,24 +44,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS2 Cells, Microscopes, and Body Systems",
 			curriculum: [
 				{
-					title: "Lesson: Cells as the Basic Unit of Life",
+					title: "Cells as the Basic Unit of Life",
 					content:
 						"Introduce cells, cell theory, and the idea that structure supports function. Use microscope images or virtual slides to compare plant, animal, and bacterial cells at an appropriate level."
 				},
 				{
-					title: "Lesson: Organelles and Cell Jobs",
+					title: "Organelles and Cell Jobs",
 					content:
 						"Cover the nucleus, cell membrane, cytoplasm, mitochondria, chloroplasts, cell wall, and vacuole. Keep the focus on the job of each structure and how cells meet life needs."
 				},
 				{
-					title: "Lesson: From Cells to Body Systems",
+					title: "From Cells to Body Systems",
 					content:
 						"Connect cells, tissues, organs, and organ systems. Use the digestive, respiratory, circulatory, nervous, and muscular systems to show how specialized parts work together."
 				},
 				{
 					title: "Guided Practice: System Interaction Case Study",
 					content:
-						"Use a case such as running up stairs, eating lunch, or reacting to a hot surface. Students trace which body systems are involved and how matter, energy, or information moves."
+						"Use a case such as running up stairs, eating lunch, or reacting to a hot surface. Trace which body systems are involved and how matter, energy, or information moves."
 				}
 			],
 			supplementalProjects: [
@@ -81,24 +81,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS3 Genetics, Traits, and Adaptation",
 			curriculum: [
 				{
-					title: "Lesson: DNA, Genes, and Inherited Traits",
+					title: "DNA, Genes, and Inherited Traits",
 					content:
 						"Introduce DNA and genes as instructions that influence traits. Distinguish inherited traits from learned behaviors and environmental effects without overcomplicating molecular biology."
 				},
 				{
-					title: "Lesson: Variation and Natural Selection",
+					title: "Variation and Natural Selection",
 					content:
 						"Explain that individuals in a population vary and that some variations can affect survival and reproduction. Use simulation or card-based examples on screen rather than physical manipulatives."
 				},
 				{
-					title: "Lesson: Adaptations Are Population-Level Changes",
+					title: "Adaptations Are Population-Level Changes",
 					content:
 						"Clarify that individual organisms do not choose to evolve. Populations change over generations when inherited traits become more or less common."
 				},
 				{
 					title: "Guided Practice: Trait Data and Environmental Pressure",
 					content:
-						"Analyze a small dataset showing trait frequencies before and after an environmental change. Students identify the selected trait and explain the evidence."
+						"Analyze a small dataset showing trait frequencies before and after an environmental change. Identify the selected trait and explain the evidence."
 				}
 			],
 			supplementalProjects: [
@@ -118,24 +118,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS4 Ecosystems, Energy Flow, and Human Impact",
 			curriculum: [
 				{
-					title: "Lesson: Energy Flow and Matter Cycling",
+					title: "Energy Flow and Matter Cycling",
 					content:
 						"Review producers, consumers, decomposers, food webs, and energy pyramids. Emphasize that energy flows through ecosystems while matter cycles through organisms and the environment."
 				},
 				{
-					title: "Lesson: Population Dynamics",
+					title: "Population Dynamics",
 					content:
 						"Discuss carrying capacity, limiting factors, competition, predation, disease, and resource availability. Use graphs and scenarios to predict population changes."
 				},
 				{
-					title: "Lesson: Biodiversity and Ecosystem Stability",
+					title: "Biodiversity and Ecosystem Stability",
 					content:
 						"Connect biodiversity to resilience and ecosystem services. Use examples such as pollination, soil health, clean water, fisheries, and forests."
 				},
 				{
 					title: "Case Study: Human Impact and Tradeoffs",
 					content:
-						"Analyze a case involving land use, pollution, invasive species, conservation, or climate pressure. Students identify stakeholders, benefits, costs, and evidence."
+						"Analyze a case involving land use, pollution, invasive species, conservation, or climate pressure. Identify stakeholders, benefits, costs, and evidence."
 				}
 			],
 			supplementalProjects: [
@@ -155,24 +155,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS5 Earth Systems, Weather, and Climate Data",
 			curriculum: [
 				{
-					title: "Lesson: Earth as Interacting Systems",
+					title: "Earth as Interacting Systems",
 					content:
 						"Introduce the geosphere, hydrosphere, atmosphere, and biosphere. Use examples showing that one event, such as a wildfire, storm, or drought, affects several systems at once."
 				},
 				{
-					title: "Lesson: Weather, Air Masses, and Forecasting",
+					title: "Weather, Air Masses, and Forecasting",
 					content:
 						"Cover temperature, pressure, humidity, fronts, wind, clouds, and precipitation. Use maps and forecasts to show how meteorologists infer future conditions from current data."
 				},
 				{
-					title: "Lesson: Climate Patterns and Climate Change",
+					title: "Climate Patterns and Climate Change",
 					content:
 						"Distinguish weather from climate and short-term variation from long-term trends. Use graphs of temperature, precipitation, or carbon dioxide and discuss evidence-based reasoning."
 				},
 				{
 					title: "Data Practice: Reading Earth Science Graphs",
 					content:
-						"Analyze a real or simplified dataset involving temperature, precipitation, sea level, storm frequency, or carbon dioxide. Students identify the trend, scale, and uncertainty."
+						"Analyze a real or simplified dataset involving temperature, precipitation, sea level, storm frequency, or carbon dioxide. Identify the trend, scale, and uncertainty."
 				}
 			],
 			supplementalProjects: [
@@ -192,24 +192,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS6 Matter, Atoms, and Chemical Change",
 			curriculum: [
 				{
-					title: "Lesson: Atoms, Elements, Molecules, and Compounds",
+					title: "Atoms, Elements, Molecules, and Compounds",
 					content:
-						"Introduce particle-level explanations for matter. Students distinguish atoms, elements, molecules, compounds, mixtures, and pure substances using diagrams and formulas."
+						"Introduce particle-level explanations for matter. Distinguish atoms, elements, molecules, compounds, mixtures, and pure substances using diagrams and formulas."
 				},
 				{
-					title: "Lesson: Conservation of Matter",
+					title: "Conservation of Matter",
 					content:
 						"Explain that atoms are rearranged during physical and chemical changes, but matter is conserved in closed systems. Use balanced visual models rather than requiring physical reactions."
 				},
 				{
-					title: "Lesson: Physical vs. Chemical Change",
+					title: "Physical vs. Chemical Change",
 					content:
-						"Compare melting, dissolving, cutting, burning, rusting, cooking, and reacting. Students look for evidence such as gas formation, color change, temperature change, precipitate formation, and new substances."
+						"Compare melting, dissolving, cutting, burning, rusting, cooking, and reacting. Look for evidence such as gas formation, color change, temperature change, precipitate formation, and new substances."
 				},
 				{
 					title: "Simulation Practice: Particle Models of Reactions",
 					content:
-						"Use an online particle model or provided diagrams. Students track atoms before and after a reaction and explain why coefficients are needed in simple chemical equations."
+						"Use an online particle model or provided diagrams. Track atoms before and after a reaction and explain why coefficients are needed in simple chemical equations."
 				}
 			],
 			supplementalProjects: [
@@ -229,24 +229,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS7 Energy, Heat, and Engineering Tradeoffs",
 			curriculum: [
 				{
-					title: "Lesson: Forms and Transfers of Energy",
+					title: "Forms and Transfers of Energy",
 					content:
 						"Introduce kinetic, potential, thermal, chemical, electrical, light, and sound energy. Focus on energy transfer and transformation in systems rather than memorizing isolated forms."
 				},
 				{
-					title: "Lesson: Heat Transfer",
+					title: "Heat Transfer",
 					content:
-						"This section covers conduction, convection, and radiation using diagrams, simulations, and everyday examples. Students identify which transfer method dominates in a given scenario."
+						"This section covers conduction, convection, and radiation using diagrams, simulations, and everyday examples. Identify which transfer method dominates in a given scenario."
 				},
 				{
-					title: "Lesson: Energy Efficiency and Constraints",
+					title: "Energy Efficiency and Constraints",
 					content:
 						"Discuss useful energy, wasted energy, efficiency, cost, reliability, safety, and environmental impact. Connect the topic to engineering decisions and tradeoffs."
 				},
 				{
 					title: "Guided Practice: Energy Flow Diagrams",
 					content:
-						"Students draw energy flow diagrams for systems such as a phone charging, a roller coaster, a lamp, a refrigerator, or a car. They identify inputs, outputs, and losses."
+						"Draw energy flow diagrams for systems such as a phone charging, a roller coaster, a lamp, a refrigerator, or a car. Identify inputs, outputs, and losses."
 				}
 			],
 			supplementalProjects: [
@@ -266,24 +266,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS8 Forces, Motion, and Graphs",
 			curriculum: [
 				{
-					title: "Lesson: Position, Speed, Velocity, and Acceleration",
+					title: "Position, Speed, Velocity, and Acceleration",
 					content:
 						"Define motion quantities and relate them to everyday examples. Use simple calculations and graphs to connect words, numbers, and visual representations."
 				},
 				{
-					title: "Lesson: Newton's Laws in Plain Language",
+					title: "Newton's Laws in Plain Language",
 					content:
 						"Introduce inertia, force causing acceleration, and action-reaction pairs. Use diagrams and scenarios rather than formal derivations."
 				},
 				{
-					title: "Lesson: Gravity, Friction, and Normal Force",
+					title: "Gravity, Friction, and Normal Force",
 					content:
-						"Discuss common forces and how free-body diagrams simplify motion problems. Students practice drawing force arrows and predicting whether motion will change."
+						"Discuss common forces and how free-body diagrams simplify motion problems. Practice drawing force arrows and predicting whether motion will change."
 				},
 				{
 					title: "Data Practice: Motion Graph Interpretation",
 					content:
-						"Analyze position-time and speed-time graphs. Students describe motion, calculate simple speed, and identify where an object is speeding up, slowing down, or staying steady."
+						"Analyze position-time and speed-time graphs. Describe motion, calculate simple speed, and identify where an object is speeding up, slowing down, or staying steady."
 				}
 			],
 			supplementalProjects: [
@@ -303,22 +303,22 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS9 Waves, Light, Sound, Electricity, and Magnetism",
 			curriculum: [
 				{
-					title: "Lesson: Wave Properties",
+					title: "Wave Properties",
 					content:
 						"Introduce amplitude, wavelength, frequency, and wave speed. Use simulations and diagrams to compare water waves, sound waves, light waves, and seismic waves."
 				},
 				{
-					title: "Lesson: Light and Sound Interactions",
+					title: "Light and Sound Interactions",
 					content:
 						"Cover reflection, absorption, transmission, refraction, echoes, pitch, and loudness. Emphasize how waves carry energy and information."
 				},
 				{
-					title: "Lesson: Electricity and Circuits",
+					title: "Electricity and Circuits",
 					content:
 						"Introduce charge, current, voltage, resistance, conductors, insulators, series circuits, and parallel circuits using virtual circuit builders rather than physical components."
 				},
 				{
-					title: "Lesson: Magnetism and Electromagnetism",
+					title: "Magnetism and Electromagnetism",
 					content:
 						"Discuss magnetic poles, fields, compasses, motors, generators, and electromagnets at a conceptual level. Use visual field models and simple cause-and-effect reasoning."
 				}
@@ -340,24 +340,24 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 			title: "MS10 Space Systems and Integrated Science Capstone",
 			curriculum: [
 				{
-					title: "Lesson: Earth, Moon, Sun, and Gravity",
+					title: "Earth, Moon, Sun, and Gravity",
 					content:
 						"Explain day and night, seasons, Moon phases, eclipses, tides, and orbital motion using models and animations. Emphasize model limitations and common misconceptions."
 				},
 				{
-					title: "Lesson: Solar System Scale and Planetary Conditions",
+					title: "Solar System Scale and Planetary Conditions",
 					content:
 						"Compare planets, moons, asteroids, and comets by distance, size, gravity, atmosphere, temperature, and surface conditions. Discuss why scale models are hard but useful."
 				},
 				{
-					title: "Lesson: Stars, Galaxies, and Evidence From Light",
+					title: "Stars, Galaxies, and Evidence From Light",
 					content:
 						"Introduce stars, galaxies, spectra, and the idea that light carries information about distant objects. Keep the focus on evidence and scientific inference from observations."
 				},
 				{
 					title: "Capstone Studio: Research, Model, Explain, Revise",
 					content:
-						"Students choose a question from life science, Earth science, physical science, or space science. They build a model or analysis, explain evidence, receive feedback, and revise the final presentation."
+						"Choose a question from life science, Earth science, physical science, or space science. Build a model or analysis, explain evidence, receive feedback, and revise the final presentation."
 				}
 			],
 			supplementalProjects: [

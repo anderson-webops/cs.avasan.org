@@ -159,7 +159,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Problem: Shortcut",
 					content:
-						"Use shortest-path information inside a second optimization question so students see distance arrays as tools, not endpoints.",
+						"Use shortest-path information inside a second optimization question so distance arrays become tools, not endpoints.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG11-Shortcut"
 				},

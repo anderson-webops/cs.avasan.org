@@ -441,7 +441,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Struct Field Offsets and Data Layout Thinking",
 					content:
-						"Bring back struct offsets from C so students see that assembly code addressing a field is just layout reasoning made explicit. This helps them transfer earlier layout work into reverse engineering and compiler-output reading later in the course."
+						"Bring back struct offsets from C so assembly code that addresses a field becomes layout reasoning made explicit. This helps transfer earlier layout work into reverse engineering and compiler-output reading later in the course."
 				},
 				{
 					title: "Project: String Length and Copy Routines",
@@ -494,7 +494,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "libc versus Direct Syscalls",
 					content:
-						"Compare libc calls and direct syscalls so students see that runtime interaction can happen at different layers. The key lesson is not choosing one forever, but understanding what extra behavior a runtime library adds beyond the raw kernel boundary."
+						"Compare libc calls and direct syscalls so runtime interaction is visible at different layers. The key lesson is not choosing one forever, but understanding what extra behavior a runtime library adds beyond the raw kernel boundary."
 				},
 				{
 					title: "argc, argv, and Process Startup State",

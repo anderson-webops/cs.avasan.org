@@ -12,7 +12,7 @@ export const physicsLevel2Course: RawCourse = {
 						"This course builds on Intro to Physics and assumes comfort with algebra, graph reading, and basic trigonometry. Refresh the modeling workflow: VS Code or PyCharm for optional Python notebooks, spreadsheets for quick data work, and browser tools like PhET and Desmos for visual reasoning. Explain that the course now expects more multi-step modeling, clearer assumptions, and stronger graph interpretation than the introductory sequence."
 				},
 				{
-					title: "Concept Lesson: Functions, Vectors, and Coordinate Systems",
+					title: "Functions, Vectors, and Coordinate Systems",
 					content:
 						"Treat position, velocity, and acceleration as functions that can be analyzed numerically, graphically, and geometrically. Reinforce vector direction, magnitude, and components, then explain how a well-chosen coordinate system can simplify a complicated problem dramatically. Build the habit of choosing axes before writing equations."
 				},
@@ -59,7 +59,7 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY9 Multi-Force Systems and Equilibrium",
 			curriculum: [
 				{
-					title: "Concept Lesson: Net Force in Real Systems",
+					title: "Net Force in Real Systems",
 					content:
 						"Move beyond single-force examples and treat forces as vectors that can combine, oppose, or redirect motion. Emphasize equilibrium, acceleration, and the importance of isolating one object at a time in multi-object systems. Keep free-body diagrams central instead of treating them as a warm-up step."
 				},
@@ -106,7 +106,7 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY10 Friction, Inclines, and Connected Systems",
 			curriculum: [
 				{
-					title: "Concept Lesson: Friction and Ramp Geometry",
+					title: "Friction and Ramp Geometry",
 					content:
 						"Develop static and kinetic friction carefully and connect both to the normal force and the surfaces involved. Use inclined planes to make force components concrete and to show why geometry matters in mechanics. Add connected systems such as pulleys so students must coordinate several equations rather than solve only one object at a time."
 				},
@@ -153,7 +153,7 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY11 Momentum, Impulse, and Collisions",
 			curriculum: [
 				{
-					title: "Concept Lesson: Momentum as a Conserved Quantity",
+					title: "Momentum as a Conserved Quantity",
 					content:
 						"Introduce momentum as a vector quantity that is often more useful than force alone when analyzing short interactions. Define impulse as force applied over time and connect it to the change in momentum. Use collisions to show how conservation laws organize messy events into a solvable structure."
 				},
@@ -200,7 +200,7 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY12 Rotational Motion and Torque",
 			curriculum: [
 				{
-					title: "Concept Lesson: Angular Quantities and Torque",
+					title: "Angular Quantities and Torque",
 					content:
 						"Extend mechanics from straight-line motion to rotation by introducing angular displacement, angular velocity, angular acceleration, and torque. Use levers, doors, wrenches, and balance points to make the ideas physical before formalizing them. Emphasize that where a force acts matters just as much as how large it is."
 				},
@@ -247,7 +247,7 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY13 Gravitation, Circular Motion, and Orbits",
 			curriculum: [
 				{
-					title: "Concept Lesson: Universal Gravitation and Inward Acceleration",
+					title: "Universal Gravitation and Inward Acceleration",
 					content:
 						"Develop gravity as a universal interaction between masses rather than only as a local downward pull. Pair that idea with circular motion so students can see how an inward net force changes direction continuously even when speed stays constant. This module should feel like a bridge from terrestrial mechanics to space applications."
 				},
@@ -294,14 +294,14 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY14 Electricity, Circuits, and Fields",
 			curriculum: [
 				{
-					title: "Concept Lesson: From Circuits to Fields",
+					title: "From Circuits to Fields",
 					content:
 						"Advance the electricity unit by connecting circuit reasoning to electric field and potential ideas. Review current, voltage, and resistance, then extend to equivalent resistance, junction reasoning, and how potential difference drives charge motion. Keep the physics grounded in practical circuits while showing the deeper conceptual layer behind them."
 				},
 				{
 					title: "Worked Example Set: Series-Parallel Analysis and Potential Drops",
 					content:
-						"Work several circuits with mixed branches, equivalent resistance, and qualitative current comparisons. Use simple energy and potential language so students see voltage as more than a number on a meter. Include one troubleshooting example where the circuit behavior reveals the hidden structure."
+						"Work several circuits with mixed branches, equivalent resistance, and qualitative current comparisons. Use simple energy and potential language so voltage is more than a number on a meter. Include one troubleshooting example where the circuit behavior reveals the hidden structure."
 				},
 				{
 					title: "Graph and Data Exercise: I-V Curves and Circuit Tables",
@@ -341,7 +341,7 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY15 Thermal Physics, Optics, and Modern Bridges",
 			curriculum: [
 				{
-					title: "Concept Lesson: Heat Transfer and Model Boundaries",
+					title: "Heat Transfer and Model Boundaries",
 					content:
 						"Introduce temperature, internal energy, specific heat, and the three main heat-transfer pathways: conduction, convection, and radiation. Then bridge to optics and early modern-physics ideas by showing how models can shift when wave behavior, energy quantization, or light-matter interaction becomes important. This module is intentionally a bridge module: it broadens the student's map of physics without requiring a full advanced course in each topic."
 				},
@@ -388,7 +388,7 @@ export const physicsLevel2Course: RawCourse = {
 			title: "PHY16 Engineering Physics Capstone",
 			curriculum: [
 				{
-					title: "Concept Lesson: Building a Defensible Physics Model",
+					title: "Building a Defensible Physics Model",
 					content:
 						"Bring the course together by focusing on assumptions, approximations, uncertainty, and communication. Explain that a strong capstone does not need to be huge; it needs to be coherent, testable, and honest about limits. Encourage projects that combine at least two major themes, such as vectors with forces, collisions with momentum, or circuits with power and heat."
 				},

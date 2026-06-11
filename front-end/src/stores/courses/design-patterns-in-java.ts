@@ -12,7 +12,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 						"Set up a Java workspace in IntelliJ IDEA or VS Code with a current JDK, a build tool such as Gradle or Maven, and a debugger that works across packages and multiple files. Treat package structure, tests, and build scripts as part of the design lesson rather than as incidental setup."
 				},
 				{
-					title: "Concept Lesson: Pattern, Anti-Pattern, and Overengineering",
+					title: "Pattern, Anti-Pattern, and Overengineering",
 					content:
 						"Use Refactoring.Guru's framing that patterns are reusable design ideas, not copy-paste recipes or status symbols. Contrast genuine recurring design problems with over-designed code that introduces interfaces, factories, or inheritance before any flexibility is actually needed."
 				},
@@ -79,12 +79,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 			title: "DPJ2 Java Design Foundations",
 			curriculum: [
 				{
-					title: "Concept Lesson: Interfaces, Abstract Classes, and Contracts",
+					title: "Interfaces, Abstract Classes, and Contracts",
 					content:
 						"Interfaces are behavioral contracts, while abstract classes are partial implementation tools; they are not interchangeable ceremony. Use package boundaries, visibility modifiers, and `final` to show how Java makes dependency direction and collaboration visible."
 				},
 				{
-					title: "Concept Lesson: Composition, Cohesion, and Dependency Direction",
+					title: "Composition, Cohesion, and Dependency Direction",
 					content:
 						"Develop composition over inheritance, high cohesion, and low coupling as the base layer underneath almost every later pattern. Before any refactor starts, explain which class owns which responsibility."
 				},

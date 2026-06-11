@@ -508,12 +508,12 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Cron Environment Gotchas",
 					content:
-						"This section covers the common surprise that scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so Learn to make scheduled commands self-sufficient and observable."
+						"This section covers the common surprise that scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so scheduled commands should be self-sufficient and observable."
 				},
 				{
 					title: "systemd Timers vs cron",
 					content:
-						"Compare `systemd` timers to `cron` in terms of logging, service integration, missed-run behavior, and operational visibility. The aim is not to declare one winner forever, but to help students choose the right scheduling surface for the kind of system they are operating."
+						"Compare `systemd` timers to `cron` in terms of logging, service integration, missed-run behavior, and operational visibility. The aim is not to declare one winner forever, but to choose the right scheduling surface for the kind of system being operated."
 				},
 				{
 					title: "Automating Cleanup and Backup Tasks",

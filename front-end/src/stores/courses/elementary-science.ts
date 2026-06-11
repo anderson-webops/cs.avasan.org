@@ -7,12 +7,12 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES1 Scientists, Questions, and Evidence",
 			curriculum: [
 				{
-					title: "Course Setup: Zoom Science Notebook",
+					title: "Zoom Science Notebook",
 					content:
 						"No physical lab supplies are required beyond paper or notes. A notebook or digital document is used for dated vocabulary, sketches, questions, evidence, and short explanations. The Zoom format relies on shared images, simulations, short videos, discussion, paper sketches, and simple graphs."
 				},
 				{
-					title: "Lesson: Observing, Inferring, and Asking Testable Questions",
+					title: "Observing, Inferring, and Asking Testable Questions",
 					content:
 						"Observations describe what is directly visible or measurable, inferences explain what the evidence may mean, and testable questions point toward evidence that could be collected or analyzed. A mystery image or short nature clip can support five observations, two inferences, and one evidence-based question."
 				},
@@ -22,7 +22,7 @@ export const elementaryScienceCourse: RawCourse = {
 						"Claim-evidence-reasoning connects an answer, visible evidence, and an explanation. A claim about an image, animal behavior clip, weather map, or simple data table is stronger when it cites evidence from the source and explains why that evidence supports the claim."
 				},
 				{
-					title: "Data Mini Lesson: Counting, Sorting, and Simple Graphs",
+					title: "Counting, Sorting, and Simple Graphs",
 					content:
 						"Observations can become data by sorting objects in a shared picture or provided dataset. A tally table and simple bar graph make the pattern visible, and the explanation should separate what the graph shows from what it might mean."
 				}
@@ -44,24 +44,24 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES2 Living Things and Life Needs",
 			curriculum: [
 				{
-					title: "Lesson: What Makes Something Living?",
+					title: "What Makes Something Living?",
 					content:
 						"Introduce living things through needs, growth, response, reproduction, and cells at an elementary level. Compare clear examples and edge cases such as seeds, fire, robots, and viruses without requiring advanced biology vocabulary."
 				},
 				{
-					title: "Lesson: Plants, Animals, and Survival Needs",
+					title: "Plants, Animals, and Survival Needs",
 					content:
 						"Compare plant and animal needs: water, energy, air, space, protection, and suitable conditions. Use diagrams and images to show that plants make food using sunlight while animals get energy by eating other organisms."
 				},
 				{
 					title: "Guided Practice: Structure and Function",
 					content:
-						"Use animal and plant images to connect body parts to jobs. Examples can include bird beaks, fish fins, cactus spines, roots, leaves, claws, and fur. Students explain how a structure helps a living thing survive."
+						"Use animal and plant images to connect body parts to jobs. Examples can include bird beaks, fish fins, cactus spines, roots, leaves, claws, and fur. Explain how a structure helps a living thing survive."
 				},
 				{
 					title: "Sensemaking Discussion: What Would Change If the Environment Changed?",
 					content:
-						"Present a change such as less rain, colder weather, fewer insects, or a new predator. Students predict which organisms would struggle, which might do well, and what evidence supports their thinking."
+						"Present a change such as less rain, colder weather, fewer insects, or a new predator. Predict which organisms would struggle, which might do well, and what evidence supports the prediction."
 				}
 			],
 			supplementalProjects: [
@@ -81,24 +81,24 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES3 Habitats, Food Chains, and Ecosystems",
 			curriculum: [
 				{
-					title: "Lesson: Habitats and Ecosystem Parts",
+					title: "Habitats and Ecosystem Parts",
 					content:
 						"Introduce habitats as places that provide what organisms need. Separate living parts, such as plants and animals, from nonliving parts, such as sunlight, water, air, rocks, and temperature."
 				},
 				{
-					title: "Lesson: Producers, Consumers, and Decomposers",
+					title: "Producers, Consumers, and Decomposers",
 					content:
 						"Build food chains from shared pictures and simple cards. Explain producers, consumers, and decomposers, then emphasize that energy starts with sunlight for most ecosystems."
 				},
 				{
 					title: "Guided Practice: Food Web Cause and Effect",
 					content:
-						"Move from one food chain to a small food web. Ask what happens if one organism becomes more common or less common, and have students trace the effects through the web."
+						"Move from one food chain to a small food web. Ask what happens if one organism becomes more common or less common, then trace the effects through the web."
 				},
 				{
 					title: "Data Talk: Population Change",
 					content:
-						"Use a simple graph of animal or plant populations over time. Students describe increases, decreases, and possible causes while separating what the graph shows from what they infer."
+						"Use a simple graph of animal or plant populations over time. Describe increases, decreases, and possible causes while separating what the graph shows from what it suggests."
 				}
 			],
 			supplementalProjects: [
@@ -118,22 +118,22 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES4 Weather, Water, and Earth Changes",
 			curriculum: [
 				{
-					title: "Lesson: Weather Variables",
+					title: "Weather Variables",
 					content:
 						"Temperature, wind, clouds, precipitation, and humidity describe weather with measurements and observations rather than only with feelings. Current weather maps or provided examples make these variables visible."
 				},
 				{
-					title: "Lesson: The Water Cycle",
+					title: "The Water Cycle",
 					content:
 						"This section covers evaporation, condensation, precipitation, runoff, and collection using diagrams and animation. Emphasize that water changes location and state, but the same water is recycled through the system."
 				},
 				{
 					title: "Guided Practice: Reading Weather Data",
 					content:
-						"Use a simple forecast, weather graph, or map. Students identify patterns, make a short prediction, and explain which data points influenced their prediction."
+						"Use a simple forecast, weather graph, or map. Identify patterns, make a short prediction, and explain which data points influenced the prediction."
 				},
 				{
-					title: "Lesson: Slow and Fast Earth Changes",
+					title: "Slow and Fast Earth Changes",
 					content:
 						"Compare slow changes such as erosion, weathering, and deposition with fast changes such as earthquakes, floods, and volcanic eruptions. Use images, maps, and animations rather than physical demonstrations."
 				}
@@ -155,24 +155,24 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES5 Matter, Materials, and Changes",
 			curriculum: [
 				{
-					title: "Lesson: Solids, Liquids, and Gases",
+					title: "Solids, Liquids, and Gases",
 					content:
-						"Introduce states of matter through shape, volume, and particle spacing using diagrams and simulations. Students compare examples and explain why some materials are easy to classify while others are more complicated."
+						"Introduce states of matter through shape, volume, and particle spacing using diagrams and simulations. Compare examples and explain why some materials are easy to classify while others are more complicated."
 				},
 				{
-					title: "Lesson: Properties of Materials",
+					title: "Properties of Materials",
 					content:
-						"Discuss color, texture, hardness, flexibility, transparency, absorbency, magnetism, and whether a material floats or sinks. Use images and provided data instead of requiring students to collect supplies."
+						"Discuss color, texture, hardness, flexibility, transparency, absorbency, magnetism, and whether a material floats or sinks. Use images and provided data instead of requiring physical supplies."
 				},
 				{
 					title: "Guided Practice: Choosing Materials for a Purpose",
 					content:
-						"Give a design problem such as building an umbrella, backpack, bridge, or window. Students choose materials from a list and justify the choices using properties."
+						"Use a design problem such as building an umbrella, backpack, bridge, or window. Choose materials from a list and justify the choices using properties."
 				},
 				{
-					title: "Lesson: Reversible and Irreversible Changes",
+					title: "Reversible and Irreversible Changes",
 					content:
-						"Compare changes such as melting, freezing, tearing, dissolving, cooking, burning, and rusting using safe images, videos, and examples. Students decide whether the original material can be easily recovered."
+						"Compare changes such as melting, freezing, tearing, dissolving, cooking, burning, and rusting using safe images, videos, and examples. Decide whether the original material can be easily recovered."
 				}
 			],
 			supplementalProjects: [
@@ -192,14 +192,14 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES6 Forces, Motion, and Simple Machines",
 			curriculum: [
 				{
-					title: "Lesson: Pushes, Pulls, Speed, and Direction",
+					title: "Pushes, Pulls, Speed, and Direction",
 					content:
 						"Introduce force as a push or pull that can change motion. Use animations, short videos, and simple drawings to discuss starting, stopping, speeding up, slowing down, and changing direction."
 				},
 				{
-					title: "Lesson: Gravity, Friction, and Balanced Forces",
+					title: "Gravity, Friction, and Balanced Forces",
 					content:
-						"Explain gravity and friction with everyday examples. Use diagrams to show balanced and unbalanced forces, then Predict motion from arrow models."
+						"Explain gravity and friction with everyday examples. Use diagrams to show balanced and unbalanced forces, then predict motion from arrow models."
 				},
 				{
 					title: "Guided Practice: Motion Graphs for Beginners",
@@ -207,7 +207,7 @@ export const elementaryScienceCourse: RawCourse = {
 						"Use a simple position-over-time graph to describe whether an object is still, moving slowly, or moving quickly. Keep the graph reading visual and intuitive."
 				},
 				{
-					title: "Lesson: Simple Machines as Force Helpers",
+					title: "Simple Machines as Force Helpers",
 					content:
 						"Introduce levers, pulleys, wheels and axles, inclined planes, wedges, and screws as tools that make work easier by changing force or distance. Use pictures and virtual examples."
 				}
@@ -229,24 +229,24 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES7 Light, Sound, and Signals",
 			curriculum: [
 				{
-					title: "Lesson: Light Travels and Interacts",
+					title: "Light Travels and Interacts",
 					content:
 						"Introduce light as something that travels from a source and can be reflected, absorbed, or transmitted. Use diagrams, images, and virtual ray models instead of requiring flashlights or physical materials."
 				},
 				{
-					title: "Lesson: Shadows, Reflection, and Color",
+					title: "Shadows, Reflection, and Color",
 					content:
 						"Discuss how shadows form when light is blocked and how reflection lets us see objects. Connect color to the light that reaches our eyes at an age-appropriate level."
 				},
 				{
-					title: "Lesson: Sound as Vibration",
+					title: "Sound as Vibration",
 					content:
 						"This section covers that sound comes from vibrations traveling through matter. Use videos, wave diagrams, and audio examples to compare loudness, pitch, and source."
 				},
 				{
 					title: "Guided Practice: Signals and Communication",
 					content:
-						"Compare light and sound signals such as traffic lights, alarms, music, animal calls, and coded messages. Students explain what information the signal carries and why the signal works."
+						"Compare light and sound signals such as traffic lights, alarms, music, animal calls, and coded messages. Explain what information the signal carries and why the signal works."
 				}
 			],
 			supplementalProjects: [
@@ -266,24 +266,24 @@ export const elementaryScienceCourse: RawCourse = {
 			title: "ES8 Space, Patterns, and Science Design",
 			curriculum: [
 				{
-					title: "Lesson: Day, Night, and Sky Patterns",
+					title: "Day, Night, and Sky Patterns",
 					content:
 						"Introduce the Sun, Moon, stars, day and night, and repeating sky patterns. Use animations and diagrams to show that many sky changes are patterns caused by motion."
 				},
 				{
-					title: "Lesson: Planets and the Solar System",
+					title: "Planets and the Solar System",
 					content:
 						"Compare planets by size, distance, surface, atmosphere, and temperature at an elementary level. Emphasize that models are scaled-down tools and that no single classroom diagram shows all distances accurately."
 				},
 				{
 					title: "Guided Practice: Model Strengths and Limits",
 					content:
-						"Show two or three models of the same science idea, such as the solar system or water cycle. Students identify what each model helps explain and what each model leaves out."
+						"Compare two or three models of the same science idea, such as the solar system or water cycle. Identify what each model helps explain and what each model leaves out."
 				},
 				{
 					title: "Course Capstone: Ask, Model, Explain",
 					content:
-						"Review the course by having students choose one science question, build a model or visual explanation, and present a claim supported by evidence. Keep the final product Zoom-friendly: slides, drawings, paper notes, or a short recorded explanation."
+						"Choose one science question, build a model or visual explanation, and present a claim supported by evidence. Keep the final product Zoom-friendly: slides, drawings, paper notes, or a short recorded explanation."
 				}
 			],
 			supplementalProjects: [

@@ -361,7 +361,7 @@ Use this check-in as a guided review rather than a formal exam.
 - arithmetic and geometric sequences
 - matrix operations
 
-If the student stalls, stop and reteach the specific skill instead of pressing through the full set.
+If work stalls, stop and revisit the specific skill instead of pressing through the full set.
 				`.trim()
 			),
 			createLesson(
@@ -380,7 +380,7 @@ If the student stalls, stop and reteach the specific skill instead of pressing t
 - Geometric review: \`3, 21, 147, ...\` has \`r = 7\`
 - Infinite-series review: \`0.777777... = 7/9\`
 
-Reuse the generated exponential/logarithmic and matrix graphics while the student explains each step aloud.
+Reuse the generated exponential/logarithmic and matrix graphics while explaining each step aloud.
 				`.trim(),
 				media.expLogFamilies
 			)
@@ -699,7 +699,7 @@ Treat the check-in as planning data for future reteaching, not as a formal exam.
 - If \`x = sin(y)\`, then \`sin(-y) = -x\`
 - \`y = 2cos(pi x) + 7\` has amplitude \`2\`, period \`2\`, and midline \`y = 7\`
 
-Reuse the probability, statistics, unit-circle, and trig-graph references while the student talks through each answer.
+Reuse the probability, statistics, unit-circle, and trig-graph references while talking through each answer.
 				`.trim(),
 				media.trigGraphs
 			)

@@ -42,8 +42,8 @@ Use the kick-off sequence to find the right starting point in the course without
 - Project 1 targets early equation skills: AA1, AA2, and AA4.
 - Project 2 targets graphing skills: AA6, AA8, AA9, and AA10.
 - Project 3 targets systems of equations: AA12, AA13, and AA14.
-- If a student gets stuck, move straight into the matching module instead of forcing the full project in order.
-- Record where the student stopped and assign unfinished pieces as homework when appropriate.
+- If a question stalls, move straight into the matching module instead of forcing the full project in order.
+- Record the stopping point and use unfinished pieces as targeted follow-up practice when appropriate.
 				`.trim()
 			),
 			createLesson(
@@ -387,7 +387,7 @@ This rebuilt review keeps the same skill focus from AA1 through AA5: balanced eq
 - Word problem: \`29 + 3p = 74\` -> \`p = 15\`
 - Word problem: \`3c + 0.75c - 25 = 50\` -> \`c = 20\`
 
-Use this as a dialogue-based checkpoint rather than a timed exam.
+Use this as a placement checkpoint rather than a timed exam.
 				`.trim()
 			)
 		]),

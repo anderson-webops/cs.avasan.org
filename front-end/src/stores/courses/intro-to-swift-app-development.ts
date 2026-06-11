@@ -7,12 +7,12 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD1 Apple Developer Ecosystem Overview",
 			curriculum: [
 				{
-					title: "Concept Lesson: The Apple Development Pipeline",
+					title: "The Apple Development Pipeline",
 					content:
 						"Start the course with the ecosystem itself, not with random SwiftUI snippets. Define what Xcode, the Apple Developer Program, App Store Connect, and TestFlight each do, and explain the difference between building locally, testing internally, distributing to testers, and publishing publicly. Make the pipeline visible early so later setup and publishing steps feel connected."
 				},
 				{
-					title: "Concept Lesson: Apple Platforms at a High Level",
+					title: "Apple Platforms at a High Level",
 					content:
 						"Compare iPhone, iPad, Mac, and watchOS at a high level and explain why this course focuses first on iPhone-style SwiftUI apps. Use this module to set scope expectations: students are learning a practical path to a first shipped app, not every Apple platform all at once."
 				},
@@ -63,7 +63,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD2 Mac Setup and Project Tooling",
 			curriculum: [
 				{
-					title: "Concept Lesson: Machine Requirements and Platform Reality",
+					title: "Machine Requirements and Platform Reality",
 					content:
 						"Explain clearly that real iOS building, simulator use, signing, archiving, and App Store publishing require macOS and Xcode. Windows can support note-taking or light Swift syntax exploration, but it is not a complete replacement for the practical parts of the course. Set expectations early so students do not build a workflow that collapses later."
 				},
@@ -121,14 +121,14 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD3 Certificates, Signing, and Bundle IDs",
 			curriculum: [
 				{
-					title: "Concept Lesson: What Code Signing Actually Means",
+					title: "What Code Signing Actually Means",
 					content:
 						"Introduce code signing as proof of authorship and permission rather than as a mysterious Xcode checkbox. Explain teams, bundle identifiers, development signing, and distribution signing conceptually before students hit the errors in practice."
 				},
 				{
 					title: "Practical Walkthrough: Team Selection and Bundle IDs",
 					content:
-						"Show where team selection lives in Xcode and how a bundle identifier uniquely names an app. Connect bundle IDs to device builds, archived uploads, and App Store records so students see why naming decisions matter."
+						"Show where team selection lives in Xcode and how a bundle identifier uniquely names an app. Connect bundle IDs to device builds, archived uploads, and App Store records so naming decisions have an explicit practical purpose."
 				},
 				{
 					title: "Troubleshooting Lab: Why Provisioning Problems Happen",
@@ -179,7 +179,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD4 Running on Simulator and Device",
 			curriculum: [
 				{
-					title: "Concept Lesson: Simulator vs Real Device",
+					title: "Simulator vs Real Device",
 					content:
 						"Explain the strengths and limits of the iOS Simulator and why certain checks still need a real iPhone. Use this module to compare rapid UI iteration, hardware features, permissions, and performance realism."
 				},
@@ -237,7 +237,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD5 App Store Connect and TestFlight Workflow",
 			curriculum: [
 				{
-					title: "Concept Lesson: Metadata, Builds, and Reviewer Context",
+					title: "Metadata, Builds, and Reviewer Context",
 					content:
 						"Introduce App Store Connect as the operational side of app distribution: metadata, screenshots, versions, build numbers, testers, review notes, and release control. Make clear that publishing is partly a product-communication task, not only a code task."
 				},
@@ -295,12 +295,12 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD6 What an App Is Structurally",
 			curriculum: [
 				{
-					title: "Concept Lesson: Entry Point, Lifecycle, Scenes, and Views",
+					title: "Entry Point, Lifecycle, Scenes, and Views",
 					content:
 						"Explain what an app is structurally before diving deeper into Swift syntax. Cover the app entry point, scenes, views, navigation, assets, and data flow so students can place each later topic inside a coherent architecture."
 				},
 				{
-					title: "Concept Lesson: Navigation, Assets, and Data as App Systems",
+					title: "Navigation, Assets, and Data as App Systems",
 					content:
 						"Compare what belongs in view code, what belongs in assets, and what belongs in the app's data model. Treat navigation and data flow as structural systems rather than decorative extras."
 				},
@@ -353,7 +353,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD7 Xcode Project Anatomy",
 			curriculum: [
 				{
-					title: "Concept Lesson: Navigating an Xcode Project",
+					title: "Navigating an Xcode Project",
 					content:
 						"Review the project navigator, targets, schemes, asset catalogs, preview canvas, and configuration files at a practical level. The purpose is not memorizing every panel but knowing where common app-development work actually lives."
 				},
@@ -411,7 +411,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD8 SwiftUI Mental Model",
 			curriculum: [
 				{
-					title: "Concept Lesson: Declarative UI and View Trees",
+					title: "Declarative UI and View Trees",
 					content:
 						"Introduce SwiftUI as a declarative system where views describe UI state rather than imperatively drawing one widget at a time. Explain `body`, view trees, modifiers, and layout containers so students understand what SwiftUI is trying to optimize for."
 				},
@@ -469,7 +469,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD9 Swift Basics in App Context",
 			curriculum: [
 				{
-					title: "Concept Lesson: Variables, Constants, and Types",
+					title: "Variables, Constants, and Types",
 					content:
 						"This section covers Swift language basics in the context of app code rather than as abstract textbook material. Cover `let`, `var`, common types, strings, arrays, dictionaries, optionals, conditionals, and loops using examples that feed directly into UI and app data."
 				},
@@ -527,17 +527,17 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD10 Functions, Structs, and Enums",
 			curriculum: [
 				{
-					title: "Concept Lesson: Functions and Parameter Labels",
+					title: "Functions and Parameter Labels",
 					content:
 						"Introduce functions as named units of behavior and explain why Swift parameter labels improve call-site clarity. Use app-flavored examples such as formatting labels, choosing icons, or deriving status messages."
 				},
 				{
-					title: "Concept Lesson: Structs as App Data and Views",
+					title: "Structs as App Data and Views",
 					content:
 						"Show how structs can represent both model data and SwiftUI views, and explain why that dual role is so common in SwiftUI architecture. Connect this directly to reusable components and structured data instead of repeating hard-coded view snippets."
 				},
 				{
-					title: "Concept Lesson: Enums for App State",
+					title: "Enums for App State",
 					content:
 						"Introduce enums as a way to represent a closed set of app states or routes, such as loading, loaded, and failed or a set of tab destinations. Use them to teach stronger thinking about state than scattered booleans alone."
 				},
@@ -585,14 +585,14 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD11 State and Data Flow",
 			curriculum: [
 				{
-					title: "Concept Lesson: `@State`, `@Binding`, and Observable Data",
+					title: "`@State`, `@Binding`, and Observable Data",
 					content:
 						"This section covers `@State`, `@Binding`, `@StateObject`, and the broader observation model as answers to the question: who owns this data and who is allowed to change it? Focus on ownership first so the wrappers feel motivated instead of magical."
 				},
 				{
 					title: "Worked Example Set: Local State vs Shared State",
 					content:
-						"Compare local toggle state, editable form state, and a small shared store so students see where each pattern belongs. Use examples that show how state bugs happen when ownership is vague or duplicated."
+						"Compare local toggle state, editable form state, and a small shared store so each pattern has a clear ownership boundary. Use examples that show how state bugs happen when ownership is vague or duplicated."
 				},
 				{
 					title: "Practice Lab: Favorite Toggle and Editable Notes",
@@ -643,7 +643,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD12 Navigation and Multi-Screen Apps",
 			curriculum: [
 				{
-					title: "Concept Lesson: Navigation Stacks, Tabs, and Sheets",
+					title: "Navigation Stacks, Tabs, and Sheets",
 					content:
 						"Introduce the major navigation patterns students will actually use in beginner apps: stack navigation, tab navigation, and sheet presentation. Explain when each pattern fits and how data moves across screen boundaries."
 				},
@@ -701,7 +701,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD13 Lists, Forms, and CRUD Patterns",
 			curriculum: [
 				{
-					title: "Concept Lesson: Editable Lists and Forms",
+					title: "Editable Lists and Forms",
 					content:
 						"Introduce lists and forms as the backbone of many practical apps. Show how add, edit, delete, and completion-style workflows turn a static SwiftUI demo into a real data-driven product."
 				},
@@ -759,7 +759,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD14 Media, Maps, and Device Features",
 			curriculum: [
 				{
-					title: "Concept Lesson: Images, Icons, Maps, and Permissions",
+					title: "Images, Icons, Maps, and Permissions",
 					content:
 						"Introduce richer app features through media and maps, but keep permissions and device integration at a practical high level. Explain where assets live, how SF Symbols and images differ, and why hardware-linked features add responsibility as well as excitement."
 				},
@@ -821,7 +821,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD15 Networking and Data Loading",
 			curriculum: [
 				{
-					title: "Concept Lesson: APIs, JSON, and Async Loading",
+					title: "APIs, JSON, and Async Loading",
 					content:
 						"This section covers networking as a structured workflow: request data, decode JSON, represent loading state, represent error state, and render success cleanly. Most app-networking bugs are state and architecture problems as much as syntax problems."
 				},
@@ -879,7 +879,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD16 Persistence",
 			curriculum: [
 				{
-					title: "Concept Lesson: Local Data That Survives Relaunch",
+					title: "Local Data That Survives Relaunch",
 					content:
 						"Introduce `UserDefaults`, file storage, and the idea of local persistence before mentioning larger systems like SwiftData or Core Data. Emphasize that persistence changes product expectations: a tracker that forgets everything is not the same product as one that remembers."
 				},
@@ -937,7 +937,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD17 Debugging and Testing",
 			curriculum: [
 				{
-					title: "Concept Lesson: Debugging as Observation",
+					title: "Debugging as Observation",
 					content:
 						"This section covers debugging as a disciplined observation process rather than trial-and-error clicking. Review console logs, breakpoints, previews, and the role of small reproducible cases in SwiftUI app work."
 				},
@@ -995,7 +995,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD18 App Design and Accessibility",
 			curriculum: [
 				{
-					title: "Concept Lesson: Readability, Spacing, and Touch Targets",
+					title: "Readability, Spacing, and Touch Targets",
 					content:
 						"Introduce design quality as part of app quality rather than an optional finishing layer. Cover typography, spacing, visual hierarchy, touch target sizing, dark-mode resilience, and why accessible structure makes the app better for everyone."
 				},
@@ -1053,7 +1053,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD19 Final Publishing Walkthrough",
 			curriculum: [
 				{
-					title: "Concept Lesson: Archive, Upload, and Release Checklists",
+					title: "Archive, Upload, and Release Checklists",
 					content:
 						"Walk through the final publishing path conceptually before the capstone wrap-up: archive build, upload process, App Store Connect checklists, TestFlight release, and review basics. Key idea: The release path as an ordered workflow, not a final mysterious button."
 				},
@@ -1111,7 +1111,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 			title: "SAD20 Capstone App",
 			curriculum: [
 				{
-					title: "Concept Lesson: Scope a Capstone Like a Real App",
+					title: "Scope a Capstone Like a Real App",
 					content:
 						"Frame the capstone as a coherent app that can realistically be tested and presented, not as a dumping ground for every feature learned in the course. The project definition should include scope, audience, primary user flow, and the minimum set of features that make the app worth testing."
 				},

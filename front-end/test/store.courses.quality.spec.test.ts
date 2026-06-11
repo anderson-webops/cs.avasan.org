@@ -178,6 +178,20 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/\bthen connect that difference\b/);
 		expect(corpus).not.toMatch(/\bthen show how\b/);
 		expect(corpus).not.toMatch(/Visible pattern: That/);
+		expect(corpus).not.toMatch(
+			/title:\s*"(?:Course Setup|Lesson|Concept Lesson|Data Mini Lesson):/i
+		);
+		expect(corpus).not.toMatch(/Use this as a dialogue-based checkpoint/i);
+		expect(corpus).not.toMatch(/Pause whenever the student/i);
+		expect(corpus).not.toMatch(
+			/If (?:a|the) student (?:gets stuck|stalls)/i
+		);
+		expect(corpus).not.toMatch(
+			/\bwhile the student (?:explains|talks)\b/i
+		);
+		expect(corpus).not.toMatch(
+			/\bstudents (?:trace|identify|distinguish|draw|describe|choose|see)\b/i
+		);
 	});
 
 	it("keeps course expansion templates from regenerating instructor-action copy", () => {
@@ -280,6 +294,9 @@ describe("course text quality normalization", () => {
 		);
 		expect(guideItem.content).toContain("Slow/Supported");
 		expect(guideItem.content).toContain("Fast/Quick");
+		expect(guide).toContain(
+			"Use this readme to choose a route through AP Computer Science A"
+		);
 		expect(guide).toMatch(/\|\s*Quick Track\s*\|\s*Fast\s*\|/);
 		expect(guide).toMatch(/\|\s*Standard Track\s*\|\s*Medium\s*\|/);
 		expect(guide).toMatch(/\|\s*Supported Track\s*\|\s*Slow\s*\|/);

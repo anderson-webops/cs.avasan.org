@@ -9,22 +9,22 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Normalize File-Based Local Development Early",
 					content:
-						"Set the course expectation that students will work in real project folders on disk rather than only in browser playgrounds. The editor is important, but the core habit is learning to manage files, terminals, local servers, and project structure in a way that prepares students for frameworks, back ends, hosting, and team collaboration."
+						"The course uses real project folders on disk rather than only browser playgrounds. The editor is important, but the core habit is learning to manage files, terminals, local servers, and project structure in a way that prepares the work for frameworks, back ends, hosting, and team collaboration."
 				},
 				{
 					title: "Preferred IDEs and Core Extensions",
 					content:
-						"Recommend `WebStorm` or `VS Code` and explain that the choice matters less than having strong support for project navigation, linting, formatting, Git, and integrated terminals. If students choose VS Code, make `ESLint`, `Prettier`, and `EditorConfig` early defaults, with `GitLens` or remote-development tools added only when they clarify the workflow rather than distract from it."
+						"`WebStorm` and `VS Code` are both appropriate choices when the workflow has strong support for project navigation, linting, formatting, Git, and integrated terminals. In VS Code, `ESLint`, `Prettier`, and `EditorConfig` are useful early defaults, with `GitLens` or remote-development tools added only when they clarify the workflow rather than distract from it."
 				},
 				{
 					title: "macOS and Windows Walkthroughs",
 					content:
-						"On macOS, install Node.js LTS, the chosen editor, and verify that `node`, `npm`, and a local dev server` all work before moving into frameworks or deployment. On Windows, do the same and teach path handling, terminals, and environment variables early so hosting and backend topics do not feel like a second course with different rules."
+						"On macOS, install Node.js LTS, the chosen editor, and verify that `node`, `npm`, and a local dev server` all work before moving into frameworks or deployment. On Windows, the same setup should include early practice with path handling, terminals, and environment variables so hosting and backend topics do not feel like a second course with different rules."
 				},
 				{
 					title: "Course Workspace and Folder Structure",
 					content:
-						"Create a workspace with folders for `html-css`, `javascript`, `full-stack`, and `deployment` so the course can evolve from static front-end work to server-backed projects without losing organization. This structure also gives students a concrete sense that front-end code, server code, deployment notes, and operational files often belong in related but distinct places."
+						"Create a workspace with folders for `html-css`, `javascript`, `full-stack`, and `deployment` so the course can evolve from static front-end work to server-backed projects without losing organization. This structure also makes it concrete that front-end code, server code, deployment notes, and operational files often belong in related but distinct places."
 				},
 				{
 					title: "Early Module on Browser Devtools, Git, npm, and Project Structure",
@@ -86,7 +86,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Suggested Course Family and Placement",
 					content:
-						"Describe the broader family as `JavaScript Level 1`, `JavaScript Level 2`, `Web Development Foundations`, `Full-Stack Web Apps`, and optionally `Deployment and Cloud Hosting`. This course should feel like the first place where all of those later directions become visible and where students see how front-end practice grows into publishing and operations work."
+						"Describe the broader family as `JavaScript Level 1`, `JavaScript Level 2`, `Web Development Foundations`, `Full-Stack Web Apps`, and optionally `Deployment and Cloud Hosting`. This course should feel like the first place where all of those later directions become visible and where front-end practice starts growing into publishing and operations work."
 				},
 				{
 					title: "Entry Expectations from JavaScript Level 1 and 2",
@@ -795,7 +795,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Object Storage and CDN Delivery",
 					content:
-						"Add S3-style object storage and CDN delivery as a forward-looking topic that connects assets, performance, caching, and global delivery. This helps students see that front-end files, uploaded media, and performance strategy often involve storage and delivery systems beyond the app server itself."
+						"Add S3-style object storage and CDN delivery as a forward-looking topic that connects assets, performance, caching, and global delivery. This makes clear that front-end files, uploaded media, and performance strategy often involve storage and delivery systems beyond the app server itself."
 				},
 				{
 					title: "WDF12 Expansion Ideas and Next Steps: Core Project",

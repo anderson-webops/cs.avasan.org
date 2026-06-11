@@ -311,7 +311,7 @@ Use this check-in as a guided review of the first three modules, not as a formal
 - using the quadratic formula
 - graphing quadratics in multiple forms
 
-If the student stalls, stop and reteach the specific method immediately.
+If work stalls, stop and revisit the specific method immediately.
 				`.trim()
 			),
 			createLesson(
@@ -328,7 +328,7 @@ If the student stalls, stop and reteach the specific method immediately.
 - \`y = -(1/2)x^2\` -> down, wider
 - \`y = -(x - 3)^2 + 5\` is the result of flipping \`y = x^2 - 5\` across the x-axis and shifting right \`3\`
 
-Reuse the generated complex-plane and quadratic graph packs while the student explains how they found each answer.
+Reuse the generated complex-plane and quadratic graph packs while explaining how each answer was found.
 				`.trim(),
 				media.complexPlane
 			)
@@ -337,7 +337,7 @@ Reuse the generated complex-plane and quadratic graph packs while the student ex
 			createLesson(
 				"Polynomial Operations and Factoring",
 				`
-In this module, students move from quadratics to higher-degree polynomials and start tracking structure more deliberately.
+This module moves from quadratics to higher-degree polynomials and tracks structure more deliberately.
 
 **Representative skills**
 

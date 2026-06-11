@@ -12,14 +12,14 @@ export const introToPhysicsCourse: RawCourse = {
 						"Start the course by setting up a light-weight physics workflow rather than a heavy programming stack. Use VS Code or PyCharm if Python modeling will be helpful later, but keep browser tools like PhET, Desmos, and spreadsheets ready because this course should stay highly visual and experimental. Create one physics folder for lab notes, exported graphs, photos, and short simulation writeups, and explain that no CMake or large software setup is required."
 				},
 				{
-					title: "Concept Lesson: Measurement, Units, and Significant Figures",
+					title: "Measurement, Units, and Significant Figures",
 					content:
 						"Introduce physics as the practice of building models from measurements, not just memorizing formulas. Review SI units, prefixes, unit conversions, significant figures, and the difference between precision and accuracy. Frame uncertainty as part of honest scientific communication: every distance, time, and mass measurement has a useful range, not a magical exact value."
 				},
 				{
 					title: "Worked Example Set: Estimation and Uncertainty",
 					content:
-						"Work through short examples that convert units, compare measured values, and round answers to appropriate precision. Include one estimate-first problem, such as predicting walking speed down a hallway before timing it, so students see that a rough model can still be valuable. Connect the examples to engineering habits: track assumptions, record units every line, and explain where the largest uncertainty comes from."
+						"Work through short examples that convert units, compare measured values, and round answers to appropriate precision. Include one estimate-first problem, such as predicting walking speed down a hallway before timing it, so the value of a rough model is concrete. Connect the examples to engineering habits: track assumptions, record units every line, and explain where the largest uncertainty comes from."
 				},
 				{
 					title: "Graph and Data Exercise: Walking Trial Table",
@@ -59,9 +59,9 @@ export const introToPhysicsCourse: RawCourse = {
 			title: "PHY2 Motion Graphs and Kinematics",
 			curriculum: [
 				{
-					title: "Concept Lesson: Position, Velocity, and Acceleration",
+					title: "Position, Velocity, and Acceleration",
 					content:
-						"Treat kinematics as the language of motion and make motion graphs a full strand rather than a quick side topic. Differentiate distance from displacement, speed from velocity, and velocity from acceleration, and use multiple examples where direction changes the interpretation. Connect verbal descriptions, diagrams, graphs, and equations so students see that all four are views of the same physical story."
+						"Treat kinematics as the language of motion and make motion graphs a full strand rather than a quick side topic. Differentiate distance from displacement, speed from velocity, and velocity from acceleration, and use multiple examples where direction changes the interpretation. Connect verbal descriptions, diagrams, graphs, and equations as four views of the same physical story."
 				},
 				{
 					title: "Worked Example Set: Reading Motion Stories",
@@ -111,7 +111,7 @@ export const introToPhysicsCourse: RawCourse = {
 			title: "PHY3 Forces, Free-Body Diagrams, and Newton's Laws",
 			curriculum: [
 				{
-					title: "Concept Lesson: Forces as Interactions",
+					title: "Forces as Interactions",
 					content:
 						"Introduce force as an interaction between objects rather than as a vague push that automatically causes motion. Develop Newton's laws with heavy emphasis on repeated free-body diagram practice, especially balanced versus unbalanced situations. Treat weight, normal force, tension, applied force, and friction as distinct ideas so later engineering problems stay organized."
 				},
@@ -163,7 +163,7 @@ export const introToPhysicsCourse: RawCourse = {
 			title: "PHY4 Gravity, Work, and Energy",
 			curriculum: [
 				{
-					title: "Concept Lesson: Gravity and Energy as a Unifying Theme",
+					title: "Gravity and Energy as a Unifying Theme",
 					content:
 						"Connect gravity to the broader idea of energy so mechanics feels like one coherent story rather than disconnected topics. Compare mass and weight, introduce gravitational potential and kinetic energy, and explain work as energy transfer. Frame energy as a bookkeeping tool that helps students organize many different motion situations."
 				},
@@ -215,7 +215,7 @@ export const introToPhysicsCourse: RawCourse = {
 			title: "PHY5 Electricity and Basic Circuits",
 			curriculum: [
 				{
-					title: "Concept Lesson: Charge, Current, Voltage, and Resistance",
+					title: "Charge, Current, Voltage, and Resistance",
 					content:
 						"Introduce electricity gently through practical circuits rather than abstract field theory first. Define charge, current, voltage, and resistance, and build the habit of describing what each quantity means physically. Use water-flow analogies carefully: helpful for intuition, but never a substitute for precise reasoning."
 				},
@@ -267,7 +267,7 @@ export const introToPhysicsCourse: RawCourse = {
 			title: "PHY6 Waves, Sound, and Light",
 			curriculum: [
 				{
-					title: "Concept Lesson: Wave Behavior Across Media",
+					title: "Wave Behavior Across Media",
 					content:
 						"Introduce amplitude, wavelength, frequency, and wave speed through visual and auditory examples. Compare mechanical waves such as sound with electromagnetic waves such as light, while keeping the focus on shared wave ideas first. Use this module to make physics feel highly observable and pattern-based."
 				},
@@ -319,7 +319,7 @@ export const introToPhysicsCourse: RawCourse = {
 			title: "PHY7 Capstone Lab and Scientific Communication",
 			curriculum: [
 				{
-					title: "Concept Lesson: Designing a Fair Physics Investigation",
+					title: "Designing a Fair Physics Investigation",
 					content:
 						"Bring the course together by revisiting scientific questions, variables, controls, uncertainty, and model limits. Explain that the capstone should combine conceptual understanding, graphing, experimental design, and clear communication rather than just producing a flashy result."
 				},

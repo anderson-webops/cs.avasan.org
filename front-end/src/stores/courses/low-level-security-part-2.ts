@@ -207,7 +207,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Project: LLS15 Heap Lifetime Audit",
 					content:
-						"Use the heap-lifetime lab to review a toy session pool where a released slot can be reused while an old handle still exists. The patch should make lifetime rules explicit and block stale-handle access so students see how a narrow ownership fix closes an otherwise security-relevant confusion bug.",
+						"Use the heap-lifetime lab to review a toy session pool where a released slot can be reused while an old handle still exists. The patch should make lifetime rules explicit and block stale-handle access so the ownership fix clearly closes an otherwise security-relevant confusion bug.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS15-Heap-Lifetime-Audit/starter",
 					solutionLink:
@@ -218,7 +218,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Heap Lifetime and Heap Metadata Concepts",
 					content:
-						"Keep a written audit notebook for heap lifetime and heap metadata concepts that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on ownership boundaries, stale-handle reuse, and why allocator reuse changes the threat story so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for heap lifetime and heap metadata concepts that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on ownership boundaries, stale-handle reuse, and why allocator reuse changes the threat story so the security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS15-Heap-Lifetime-Audit/starter",
 					solutionLink:

@@ -7,7 +7,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			title: "DPR1 Code Smells and Safe Refactoring Workflow",
 			curriculum: [
 				{
-					title: "Concept Lesson: Refactoring as Behavior-Preserving Design Change",
+					title: "Refactoring as Behavior-Preserving Design Change",
 					content:
 						"Use Refactoring.Guru's framing that refactoring changes internal structure without changing externally visible behavior. Work in small steps with a safety net rather than attempting one heroic rewrite."
 				},
@@ -163,7 +163,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Delegation Boundaries: Hide or Remove the Middle Man",
 					content:
-						"This section covers Hide Delegate and Remove Middle Man together so students see both sides of delegation exposure. The question is not whether delegation is good, but whether the current layer is clarifying or merely forwarding everything."
+						"This section covers Hide Delegate and Remove Middle Man together so both sides of delegation exposure are visible. The question is not whether delegation is good, but whether the current layer is clarifying or merely forwarding everything."
 				},
 				{
 					title: "Local Extension and Foreign Method for Library Friction",
@@ -235,7 +235,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Associations, Encapsulation, and Collection Safety",
 					content:
-						"This section covers field and collection encapsulation together with association direction changes so students see data design as API design. Good refactors should make illegal states harder to represent."
+						"This section covers field and collection encapsulation together with association direction changes so data design is treated as API design. Good refactors should make illegal states harder to represent."
 				},
 				{
 					title: "Data Modeling Lab: Upgrade a Weak Domain Model",

@@ -583,7 +583,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		projectExpectations: [
 			"Remote-safe investigation using a provided image, simulation, data table, or graph.",
 			"Labeled model or diagram paired with a CER explanation.",
-			"Prediction task where one variable changes and the student explains the expected effect.",
+			"Prediction task where one variable changes and the expected effect is explained.",
 			"Each unit should use one shared phenomenon, one simulation or visualization, one public dataset/media source, one notebook or graphic organizer, and one CER routine."
 		],
 		assessmentStyle: [

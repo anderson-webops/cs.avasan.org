@@ -42,7 +42,7 @@ Use the kick-off project as placement rather than as a formal test.
 
 - Project 1 checks polynomial manipulation and quadratic solving.
 - Project 2 checks graphing quadratics, function notation, inverse functions, and data modeling.
-- If the student stalls on a question, jump directly to the matching module instead of forcing a full completion.
+- If a question stalls, jump directly to the matching module instead of forcing a full completion.
 - Keep the focus on the math tasks rather than on platform logistics or repeated process notes.
 				`.trim()
 			),
@@ -455,7 +455,7 @@ Use this check-in as a guided review rather than as a formal exam.
 - completing the square
 - quadratic formula
 
-Pause whenever the student gets stuck and reteach the relevant method immediately.
+If work gets stuck, pause and revisit the relevant method immediately.
 				`.trim()
 			),
 			createLesson(
@@ -567,7 +567,7 @@ Functions assign each input exactly one output.
 - A function's domain is the set of allowed inputs
 - A function's range is the set of outputs it can produce
 
-Use tables and graphs together so students see how a function behaves, not just how it is written.
+Use tables and graphs together so function behavior is visible, not just the written rule.
 				`.trim(),
 				media.checkIn2FunctionGraph
 			),
