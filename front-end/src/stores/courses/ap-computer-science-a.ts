@@ -86,7 +86,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Java Toolchain and Workflow",
 					content:
-						"Standardize on a full JDK, not just a runtime, with fast compile-run cycles in `IntelliJ IDEA`, `VS Code`, or an equivalent editor. Students need a low-friction environment for short iterations, print debugging, and tracing. Java 17 or newer is fine for AP CSA work; the current Windows VS Code setup guide has been tested with Eclipse Temurin JDK 21."
+						"Standardize on a full JDK, not just a runtime, with fast compile-run cycles in `IntelliJ IDEA`, `VS Code`, or an equivalent editor. The workflow should support short iterations, print debugging, and tracing without environment friction. Java 17 or newer is fine for AP CSA work; the current Windows VS Code setup guide has been tested with Eclipse Temurin JDK 21."
 				},
 				{
 					title: "Windows VS Code Java Setup",
@@ -775,7 +775,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Matrix Arithmetic",
 					content:
-						"Use matrix arithmetic when the student is ready for a more structured 2D-array build.",
+						"Use matrix arithmetic as a more structured 2D-array build.",
 					projectLink: repo("APCS10-Matrix-Arithmetic/solution"),
 					mediaLink: media("apcs10-project-4-matrix-arithmetic.mp4")
 				},
@@ -983,7 +983,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Core Project: Selection Sort",
 					content:
-						"Use the selection-sort build as the main APCS14 checkpoint because it gives students a clean invariant to describe while they code.",
+						"Use the selection-sort build as the main APCS14 checkpoint because it gives the algorithm a clean invariant to describe while coding.",
 					projectLink: repo("APCS14-Selection-Sort/solution"),
 					mediaLink: media("apcs14-project-1-selection-sort.mp4")
 				}
@@ -1084,7 +1084,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Merge Sort",
 					content:
-						"Use the merge-sort build for the full divide-and-conquer implementation after students understand the merge step itself.",
+						"Use the merge-sort build for the full divide-and-conquer implementation after the merge step itself is clear.",
 					projectLink: repo("APCS16-Merge-Sort/solution"),
 					mediaLink: media("apcs16-project-2-merge-sort.mp4")
 				}
@@ -1096,7 +1096,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Practice Exam and FRQ Rhythm",
 					content:
-						"Reserve full practice exams for timed work and use past FRQs throughout the final stretch so students normalize tracing, partial credit thinking, and time management."
+						"Reserve full practice exams for timed work and use past FRQs throughout the final stretch so tracing, partial-credit thinking, and time management become routine."
 				},
 				{
 					title: "Next Course Positioning",

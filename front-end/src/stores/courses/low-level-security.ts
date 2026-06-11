@@ -150,7 +150,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Negative Tests for Malformed Inputs",
 					content:
-						"Teach bug-finding by creating test inputs that should be rejected: too short, too long, wrong declared length, unknown opcode, invalid characters, or missing body bytes. Encourage naming each test after the assumption it challenges so the debugging story stays clear."
+						"This section covers bug-finding by creating test inputs that should be rejected: too short, too long, wrong declared length, unknown opcode, invalid characters, or missing body bytes. Encourage naming each test after the assumption it challenges so the debugging story stays clear."
 				},
 				{
 					title: "LLS3 Project 3: Length-Prefixed Parser",
@@ -329,7 +329,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Code Review Heuristics for Low-Level Safety",
 					content:
-						"Teach a short review checklist: unchecked lengths, copies into fixed buffers, stale references after ownership changes, arithmetic on untrusted sizes, silent truncation, and missing failure paths. Encourage reviewers to leave comments that name the violated invariant rather than only pointing at syntax."
+						"This section covers a short review checklist: unchecked lengths, copies into fixed buffers, stale references after ownership changes, arithmetic on untrusted sizes, silent truncation, and missing failure paths. Encourage reviewers to leave comments that name the violated invariant rather than only pointing at syntax."
 				},
 				{
 					title: "Documenting a Vulnerability Clearly",

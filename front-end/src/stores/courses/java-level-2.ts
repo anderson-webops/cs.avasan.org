@@ -725,7 +725,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "When to Reach for the Extension Bank",
 					content:
-						"Use these extensions when a student needs more structured practice with maps, file handling, console project design, or threading previews before moving on to higher-level Java work."
+						"Use these extensions for more structured practice with maps, file handling, console project design, or threading previews before moving on to higher-level Java work."
 				},
 				{
 					title: "Repo Extension and Reference Library: Verification and Reflection",
@@ -743,14 +743,14 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Extension: stdin/stdout Practice",
 					content:
-						"Use a focused console-I/O exercise when students need more confidence with Java input/output mechanics in isolation.",
+						"Use a focused console-I/O exercise for more confidence with Java input/output mechanics in isolation.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-stdinstdout"
 				},
 				{
 					title: "Extension: Java File I/O",
 					content:
-						"Use the dedicated file-I/O folder when the student needs one more direct pass over reading, writing, and file handling before the larger JM8 work.",
+						"Use the dedicated file-I/O folder for one more direct pass over reading, writing, and file handling before the larger JM8 work.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Java-File-IO"
 				},
@@ -785,7 +785,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Reference: Try-Catch Example",
 					content:
-						"Use a smaller exception-handling example when students need a cleaner reference than the larger try-catch projects.",
+						"Use a smaller exception-handling example for a cleaner reference than the larger try-catch projects.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM6-Try-Catch-Example"
 				},

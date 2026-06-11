@@ -1529,7 +1529,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Data-Structures Reinforcement without Clutter",
 					content:
-						"Use the extra linked-list, stack, queue, hash-table, and graph folders when a student needs more depth on one structure family after the main module is already complete."
+						"Use the extra linked-list, stack, queue, hash-table, and graph folders for more depth on one structure family after the main module is already complete."
 				},
 				{
 					title: "Capstone Support Material",
@@ -1552,7 +1552,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Extension: Exceptions Reference Lab",
 					content:
-						"Use the standalone exceptions folder when the student needs a cleaner error-handling example than the larger bakery or data-structures projects.",
+						"Use the standalone exceptions folder for a cleaner error-handling example than the larger bakery or data-structures projects.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Exceptions"
 				},
@@ -1613,7 +1613,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Positioning the Advanced Java Track",
 					content:
-						"Use this track after `C++ Level 3` when a strong student needs a Java course with real engineering weight rather than another syntax review. Already be comfortable with classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
+						"Use this track after `C++ Level 3` when the next Java course should have real engineering weight rather than another syntax review. Prerequisite comfort: classes, data structures, recursion, file-backed command programs, parsing, and medium-size program organization. The new Java-specific goals are repeatable builds, packages, testable services, standard-library fluency, safer APIs, and capstone-scale architecture."
 				},
 				{
 					title: "Packages, Builds, and Test Boundaries",
@@ -1651,7 +1651,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Generics as API Contracts",
 					content:
-						"Teach generics as a way to write reusable, type-safe APIs, not as angle-bracket decoration. Cover: generic classes, bounded type parameters, generic methods, why raw types lose safety, and how good generic APIs make invalid combinations hard to express."
+						"This section covers generics as a way to write reusable, type-safe APIs, not as angle-bracket decoration. Cover: generic classes, bounded type parameters, generic methods, why raw types lose safety, and how good generic APIs make invalid combinations hard to express."
 				},
 				{
 					title: "Interfaces, Comparators, and Collection Choices",

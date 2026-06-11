@@ -129,7 +129,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Cells, Markdown, and Narrative Structure",
 					content:
-						"Teach notebooks as a communication tool, not just a place to run code. Skill target: Combine code cells, markdown, and short conclusions so another person can follow the reasoning from question to result."
+						"This section covers notebooks as a communication tool, not just a place to run code. Skill target: Combine code cells, markdown, and short conclusions so another person can follow the reasoning from question to result."
 				},
 				{
 					title: "Restart-and-Run-All Discipline",
@@ -196,7 +196,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Selecting, Filtering, and Sorting",
 					content:
-						"Teach column selection, row filtering, sorting, and boolean masks as the basic grammar of tabular analysis. These operations should become automatic before grouping and aggregation are introduced."
+						"This section covers column selection, row filtering, sorting, and boolean masks as the basic grammar of tabular analysis. These operations should become automatic before grouping and aggregation are introduced."
 				},
 				{
 					title: "Grouping and Aggregation",
@@ -315,7 +315,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Choosing the Right Chart",
 					content:
-						"Teach line, bar, scatter, histogram, box plot, and basic distribution views as tools for specific questions rather than decorations. Skill target: Defend a chart choice in one sentence."
+						"This section covers line, bar, scatter, histogram, box plot, and basic distribution views as tools for specific questions rather than decorations. Skill target: Defend a chart choice in one sentence."
 				},
 				{
 					title: "Misleading Scales and Weak Comparisons",
@@ -325,7 +325,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Averages, Spread, Correlation, and Outliers",
 					content:
-						"Teach descriptive statistics in service of context. Key idea: What these measures can reveal, but also when a summary number hides important structure in the data."
+						"This section covers descriptive statistics in service of context. Key idea: What these measures can reveal, but also when a summary number hides important structure in the data."
 				},
 				{
 					title: "Correlation Is Not Causation",
@@ -452,7 +452,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Designing a Useful Analytical Interface",
 					content:
-						"Teach restraint in dashboard design: clear controls, few charts, obvious labels, and a visible explanation of what the user is seeing. Key idea: An overloaded dashboard is not a better dashboard."
+						"This section covers restraint in dashboard design: clear controls, few charts, obvious labels, and a visible explanation of what the user is seeing. Key idea: An overloaded dashboard is not a better dashboard."
 				},
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit: Core Project",

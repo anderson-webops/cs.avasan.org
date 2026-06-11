@@ -112,6 +112,54 @@ Good next-project choices for this route:
 | Recursion                       | Blob Erase                                  | Stack-frame trace and base-case explanation                                      |
 | Algorithms                      | Binary Search and Merge Sort                | Preconditions, pass-by-pass trace, and runtime comparison                        |
 
+## Today-Ready Recommendation
+
+For an advanced learner who already knows Python well, has covered C++ arrays, vectors, dynamic arrays, signed and unsigned integer behavior, Makefiles, and basic build troubleshooting, APCS1-4 should not be treated as a slow beginner sequence. Use them as a compact Java diagnostic, then move quickly into the first AP-specific Java design work.
+
+Recommended next lesson:
+
+1. Spend 10-15 minutes on a quick APCS1-4 diagnostic: integer division, casting, `.equals()` versus `==`, boolean chains, `Scanner`, and one loop trace.
+2. If the diagnostic is clean, move directly into **APCS5/APCS6** class design with `Bank Account`, `Vending Machine`, or a custom `Gradebook CLI`.
+3. Require private fields, constructors, validation rules, instance methods, a small menu loop, and at least three manual test cases.
+4. Add one AP-style written explanation: identify the object state before and after two method calls, explain one invariant, and describe one edge case.
+5. Use the next session to branch into inheritance and polymorphism if the object model is stable, or into arrays/`ArrayList` if object references and mutation need more practice.
+
+Suggested hard version:
+
+1. Build a `Gradebook` with `Student`, `Assignment`, and `Gradebook` classes.
+2. Store collections in arrays first, then refactor to `ArrayList`.
+3. Add methods for adding grades, dropping the lowest grade, calculating averages, and printing a ranked report.
+4. Write a short trace showing how one method mutates object state.
+5. Explain which parts are inside AP CSA scope and which parts are extra Java engineering practice.
+
+This route keeps the course challenging without skipping the AP Java core. The point is not to avoid APCS1-4 forever; it is to backfill only the Java-specific pieces that actually fail under diagnostic pressure.
+
+## Session Cadence Templates
+
+Use these class patterns when selecting a pace:
+
+| Track           | 60-Minute Session Pattern                                                                                       | Homework Pattern                                                                                     |
+| --------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Supported Track | 10 min review, 15 min guided example, 25 min project work, 10 min explanation checkpoint                         | Finish the same project, write one explanation, and complete one small targeted drill                |
+| Standard Track  | 10 min concept review, 35 min representative project, 10 min trace or FRQ-style check, 5 min assignment planning | Finish or extend the project, then complete one Barron's or FRQ-aligned practice item                |
+| Quick Track     | 10 min diagnostic, 40 min high-value Java/AP project, 10 min written reasoning                                   | Complete the project extension and one trace that checks the Java-specific concept                   |
+| Challenge Track | 5 min requirement framing, 40 min larger build, 10 min tests/edge cases, 5 min design notes                      | Add validation, tests, refactoring, or an AP-style writeup rather than repeating basic syntax drills |
+| Exam Track      | 20 min timed practice, 20 min correction, 15 min weak-topic repair, 5 min next target                            | Redo missed parts, write correction notes, and complete one targeted timed section                   |
+
+## Advanced Java Extensions
+
+AP CSA has a deliberately limited Java subset. Advanced learners can still benefit from seeing what comes after the AP subset, but those topics should be labeled as extension work so they do not blur the exam target.
+
+Good extension topics after the AP core is stable:
+
+1. **Generics, interfaces, records:** Useful for modern Java design, but beyond the normal AP CSA requirement set. Use them after classes, inheritance, and `ArrayList` are already reliable.
+2. **Unit tests:** A lightweight unit-test or manual test harness can replace repetitive worksheets for advanced learners.
+3. **File input/output:** Useful for larger projects, but not necessary for the AP exam.
+4. **Build tools:** Gradle, Maven, or deeper VS Code configuration can help with larger Java projects, but should not block AP-topic progress.
+5. **Collections beyond `ArrayList`:** `HashMap`, `HashSet`, `Queue`, and `Stack` are useful later, but keep AP practice focused on arrays and `ArrayList`.
+
+Use these extensions as rewards for demonstrated mastery, not as replacements for AP tracing. A learner who can build with records but cannot trace an `ArrayList` removal loop still needs AP-style collection practice.
+
 ## Non-Negotiable AP Java Skills
 
 Every track should check these skills:
@@ -270,26 +318,6 @@ Use these rules when deciding whether a module should be compressed.
 | The learner finishes the base project quickly and correctly  | Upgrade the project instead of assigning a near-duplicate                       |
 | The learner misses Java-specific behavior                    | Stop and repair; do not treat general programming fluency as enough             |
 | The AP exam is soon                                          | Replace large builds with FRQs, scoring-guideline review, and weak-topic repair |
-
-## Today-Ready Recommendation for a Strong Python/C++ Learner
-
-If Java setup, booleans, `System.out`, `System.err`, and basic operators have already been covered, use the next lesson to jump into Java object modeling.
-
-Best next path:
-
-1. Start with APCS5/APCS6 object modeling rather than more syntax repetition.
-2. Choose `Vending Machine Class`, `Bank Account Class`, or a custom `Gradebook CLI`.
-3. Require constructors, private fields, accessors/mutators only where useful, validation, and clear object-state changes.
-4. Add at least three manual tests or edge cases.
-5. End with a short trace explaining how one method call changes object state.
-
-If the project is too easy, immediately add one of these upgrades:
-
-1. Store multiple objects in an array or `ArrayList`.
-2. Add a menu loop with robust input handling.
-3. Split responsibilities into two classes.
-4. Add a written invariant for each mutable class.
-5. Add one AP-style FRQ prompt about the object model.
 
 ## Suggested Course Continuation After APCS
 

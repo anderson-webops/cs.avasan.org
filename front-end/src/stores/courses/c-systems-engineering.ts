@@ -71,7 +71,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Translation Units, Compilation, and Linking",
 					content:
-						"Teach C as a language that becomes useful when students understand how source files become object files and how those objects are linked into a program. The goal is not linker trivia for its own sake, but a grounded model of where declarations, definitions, and build artifacts live."
+						"This section covers C as a language that becomes useful when students understand how source files become object files and how those objects are linked into a program. The goal is not linker trivia for its own sake, but a grounded model of where declarations, definitions, and build artifacts live."
 				},
 				{
 					title: "Runtime Model Compared to Higher-Level Languages",
@@ -133,7 +133,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Bits, Nibbles, Bytes, and Words",
 					content:
-						"Teach binary representation at the physical grouping level first: bits form nibbles, nibbles form bytes, and bytes are the practical units students will keep seeing in memory dumps and file formats. This removes the intimidation factor from later byte-level work."
+						"This section covers binary representation at the physical grouping level first: bits form nibbles, nibbles form bytes, and bytes are the practical units students will keep seeing in memory dumps and file formats. This removes the intimidation factor from later byte-level work."
 				},
 				{
 					title: "Decimal, Binary, and Hex Conversions",
@@ -191,7 +191,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "AND, OR, XOR, NOT, and Shifts",
 					content:
-						"Teach the bitwise operators as data-shaping tools rather than as abstract truth tables alone. Key idea: What gets cleared with AND, what gets set with OR, what toggles with XOR, and why left and right shifts only make sense when they can describe the bit movement clearly."
+						"This section covers the bitwise operators as data-shaping tools rather than as abstract truth tables alone. Key idea: What gets cleared with AND, what gets set with OR, what toggles with XOR, and why left and right shifts only make sense when they can describe the bit movement clearly."
 				},
 				{
 					title: "Masking, Flag Extraction, and Bit Packing",
@@ -268,7 +268,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Alignment, Padding, Arrays, and Struct Layout",
 					content:
-						"Teach struct layout with `sizeof`, `offsetof`, and printed addresses so students can see where padding appears and why alignment exists. The course should avoid treating struct size as mysterious compiler behavior when it can be measured directly."
+						"This section covers struct layout with `sizeof`, `offsetof`, and printed addresses so students can see where padding appears and why alignment exists. The course should avoid treating struct size as mysterious compiler behavior when it can be measured directly."
 				},
 				{
 					title: "Project: Memory Visualizer for Arrays and Structs",
@@ -316,7 +316,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "C Strings vs Raw Byte Arrays",
 					content:
-						"Teach C strings as one special convention built on top of bytes: a sequence terminated by `\\0`. Key idea: A byte buffer is not automatically a string and that treating arbitrary bytes like text is a fast path to truncated reads or misleading output."
+						"This section covers C strings as one special convention built on top of bytes: a sequence terminated by `\\0`. Key idea: A byte buffer is not automatically a string and that treating arbitrary bytes like text is a fast path to truncated reads or misleading output."
 				},
 				{
 					title: "Length vs Capacity and Null Termination",
@@ -384,7 +384,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Checksums, Validation, and Parse Boundaries",
 					content:
-						"Teach validation as part of parsing, not as an optional afterthought. Reject bad magic values, mismatched checksums, or truncated records before they start treating bytes as trustworthy data."
+						"This section covers validation as part of parsing, not as an optional afterthought. Reject bad magic values, mismatched checksums, or truncated records before they start treating bytes as trustworthy data."
 				},
 				{
 					title: "Project: Packet Serializer Deserializer",
@@ -441,7 +441,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "malloc, calloc, realloc, and free",
 					content:
-						"Teach the heap allocation calls as explicit ownership decisions instead of as generic ways to 'make more memory.' Key idea: Which call zeroes memory, which one resizes an existing region, and why every successful allocation needs a clear path to cleanup."
+						"This section covers the heap allocation calls as explicit ownership decisions instead of as generic ways to 'make more memory.' Key idea: Which call zeroes memory, which one resizes an existing region, and why every successful allocation needs a clear path to cleanup."
 				},
 				{
 					title: "Ownership and Lifetime Invariants",
@@ -499,7 +499,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Callbacks and Function Pointer Basics",
 					content:
-						"Teach function pointers as stored behavior that lets one part of the program call another indirectly. Students do not need exotic syntax games; they need a practical model of callbacks, handlers, and how code can be selected by data."
+						"This section covers function pointers as stored behavior that lets one part of the program call another indirectly. Students do not need exotic syntax games; they need a practical model of callbacks, handlers, and how code can be selected by data."
 				},
 				{
 					title: "Dispatch Tables and State Machines",
@@ -624,7 +624,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Overflow-Aware Arithmetic and Range Checks",
 					content:
-						"Make students think about maximum values before they multiply, shift, or convert units. Systems code often fails not because the formula is wrong, but because the input range was never checked before the formula ran."
+						"Think about maximum values before multiplying, shifting, or converting units. Systems code often fails not because the formula is wrong, but because the input range was never checked before the formula ran."
 				},
 				{
 					title: "Unit Conversion Reliability",

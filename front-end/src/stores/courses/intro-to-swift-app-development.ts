@@ -471,7 +471,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Variables, Constants, and Types",
 					content:
-						"Teach Swift language basics in the context of app code rather than as abstract textbook material. Cover `let`, `var`, common types, strings, arrays, dictionaries, optionals, conditionals, and loops using examples that feed directly into UI and app data."
+						"This section covers Swift language basics in the context of app code rather than as abstract textbook material. Cover `let`, `var`, common types, strings, arrays, dictionaries, optionals, conditionals, and loops using examples that feed directly into UI and app data."
 				},
 				{
 					title: "Worked Example Set: Modeling App Content with Basic Types",
@@ -587,7 +587,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: `@State`, `@Binding`, and Observable Data",
 					content:
-						"Teach `@State`, `@Binding`, `@StateObject`, and the broader observation model as answers to the question: who owns this data and who is allowed to change it? Focus on ownership first so the wrappers feel motivated instead of magical."
+						"This section covers `@State`, `@Binding`, `@StateObject`, and the broader observation model as answers to the question: who owns this data and who is allowed to change it? Focus on ownership first so the wrappers feel motivated instead of magical."
 				},
 				{
 					title: "Worked Example Set: Local State vs Shared State",
@@ -823,7 +823,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: APIs, JSON, and Async Loading",
 					content:
-						"Teach networking as a structured workflow: request data, decode JSON, represent loading state, represent error state, and render success cleanly. Make students understand that most app-networking bugs are state and architecture problems as much as syntax problems."
+						"This section covers networking as a structured workflow: request data, decode JSON, represent loading state, represent error state, and render success cleanly. Most app-networking bugs are state and architecture problems as much as syntax problems."
 				},
 				{
 					title: "Worked Example Set: Loading, Loaded, and Failed UI States",
@@ -939,7 +939,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Debugging as Observation",
 					content:
-						"Teach debugging as a disciplined observation process rather than trial-and-error clicking. Review console logs, breakpoints, previews, and the role of small reproducible cases in SwiftUI app work."
+						"This section covers debugging as a disciplined observation process rather than trial-and-error clicking. Review console logs, breakpoints, previews, and the role of small reproducible cases in SwiftUI app work."
 				},
 				{
 					title: "Worked Example Set: UI Bug vs Data Bug vs Build Bug",
@@ -1002,7 +1002,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Worked Example Set: Polishing a Rough Screen",
 					content:
-						"Take a rough SwiftUI screen and improve hierarchy, spacing, labeling, and contrast deliberately. Visible pattern: That many 'ugly app' problems are really clarity problems."
+						"Take a rough SwiftUI screen and improve hierarchy, spacing, labeling, and contrast deliberately. Many 'ugly app' problems are really clarity problems."
 				},
 				{
 					title: "Practice Lab: Accessibility Labels and Content Review",

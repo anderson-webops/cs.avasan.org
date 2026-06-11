@@ -760,7 +760,7 @@ const usacoProfile: ResearchExpansionProfile = {
 	gaps: [
 		"Build calibrated Bronze, Silver, and Gold ladders from official problems.",
 		"Add solution explanations and complexity targets, not just problem links.",
-		"Teach contest workflow, debugging, and post-contest review."
+		"Include contest workflow, debugging, and post-contest review."
 	],
 	topics: [
 		"Bronze simulation, complete search, sorting, maps, sets, prefix sums, and greedy.",
@@ -800,7 +800,7 @@ const designPatternsProfile: ResearchExpansionProfile = {
 	priority: "later",
 	sources: ["ISO C++ Core Guidelines", "Python Tutorial"],
 	gaps: [
-		"Teach patterns as refactoring tools, not memorized diagrams.",
+		"Present patterns as refactoring tools, not memorized diagrams.",
 		"Split Java, C++, and Python idioms instead of copying the same pattern language everywhere.",
 		"Add anti-patterns and when-not-to-use-this-pattern discussions."
 	],

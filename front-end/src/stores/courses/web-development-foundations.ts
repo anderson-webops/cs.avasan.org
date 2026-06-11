@@ -153,7 +153,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Add Git and GitHub as Normal Workflow Tools",
 					content:
-						'Teach repository initialization, commit hygiene, branch awareness, and remote publishing as part of normal development rather than as an optional add-on after the code is "done." Connect Git not only to collaboration, but to safe experimentation, rollback, and project history during longer builds.'
+						'This section covers repository initialization, commit hygiene, branch awareness, and remote publishing as part of normal development rather than as an optional add-on after the code is "done." Connect Git not only to collaboration, but to safe experimentation, rollback, and project history during longer builds.'
 				},
 				{
 					title: "Make Browser Devtools a Recurring Strand",
@@ -173,7 +173,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Strengthen the Existing JavaScript Courses",
 					content:
-						"Keep a running notebook for strengthen the existing javascript courses that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on Git checkpoints, local project organization, and devtools usage so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for the existing JavaScript course bridge that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on Git checkpoints, local project organization, and devtools usage so students build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/starter",
 					solutionLink:
@@ -205,7 +205,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Project Structure and Front-End Workspace Habits",
 					content:
-						"Teach students how to separate HTML, CSS, JavaScript, assets, configuration, and build outputs so a project stays understandable as it grows. This is where naming conventions, folder boundaries, and deliberate entry points become part of the course, because hosting and build tooling depend on those structural habits later."
+						"This section covers how to separate HTML, CSS, JavaScript, assets, configuration, and build outputs so a project stays understandable as it grows. This is where naming conventions, folder boundaries, and deliberate entry points become part of the course, because hosting and build tooling depend on those structural habits later."
 				},
 				{
 					title: "npm and Package Management",
@@ -220,7 +220,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Environment Variables, Forms, and Validation",
 					content:
-						"Teach environment variables as configuration boundaries rather than as secret magic strings. Pair that lesson with forms and validation so students learn early that user input and deployment configuration are both data surfaces that need explicit handling, clear defaults, and careful debugging."
+						"This section covers environment variables as configuration boundaries rather than as secret magic strings. Pair that lesson with forms and validation so students learn early that user input and deployment configuration are both data surfaces that need explicit handling, clear defaults, and careful debugging."
 				},
 				{
 					title: "WDF3 Stage 2: Web Development Foundations: Core Project",
@@ -272,7 +272,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Routing and Multi-View Thinking",
 					content:
-						"Teach client-side routing as a way to represent multiple screens or views in one application without reloading the entire page. Connect this to information architecture, URL design, and the idea that front-end applications need deliberate navigation structures rather than one growing script file."
+						"This section covers client-side routing as a way to represent multiple screens or views in one application without reloading the entire page. Connect this to information architecture, URL design, and the idea that front-end applications need deliberate navigation structures rather than one growing script file."
 				},
 				{
 					title: "State Management Basics and Async Data Loading",
@@ -339,7 +339,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "REST APIs, Request Validation, and Error Shapes",
 					content:
-						'Teach simple RESTful patterns and pair them immediately with request validation and explicit error handling. Key idea: An API is more than a route that "works"; it is a contract that must handle missing fields, invalid payloads, malformed input, and repeatable response shapes.'
+						'This section covers simple RESTful patterns paired immediately with request validation and explicit error handling. Key idea: An API is more than a route that "works"; it is a contract that must handle missing fields, invalid payloads, malformed input, and repeatable response shapes.'
 				},
 				{
 					title: "Auth Basics and Session vs Token Concepts",
@@ -391,7 +391,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "MongoDB Basics and Data Modeling",
 					content:
-						"Teach MongoDB as a practical entry point into document databases and data models. Learn what a collection and document are, how application code maps user-facing features onto stored data, and why schema thinking still matters even in a NoSQL environment."
+						"This section covers MongoDB as a practical entry point into document databases and data models. Learn what a collection and document are, how application code maps user-facing features onto stored data, and why schema thinking still matters even in a NoSQL environment."
 				},
 				{
 					title: "Schemas, Validation, and CRUD",
@@ -453,17 +453,17 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Domain Names, DNS, and Deployment Targets",
 					content:
-						'Teach students how domain names, DNS records, and deployment targets fit together so publishing feels concrete. A deployed project is not just "on the internet"; it has a hosting surface, a domain, DNS configuration, environment settings, and a verification story after each change.'
+						'This section covers how domain names, DNS records, and deployment targets fit together so publishing feels concrete. A deployed project is not just "on the internet"; it has a hosting surface, a domain, DNS configuration, environment settings, and a verification story after each change.'
 				},
 				{
 					title: "Static Hosting vs App Hosting",
 					content:
-						"Explain the difference between static hosting and application hosting in terms of build output, runtime needs, scalability, and operational complexity. This is the point where Understand why a front-end portfolio can live on a static platform while a server-backed app needs a runtime environment, logs, and often a database connection."
+						"Explain the difference between static hosting and application hosting in terms of build output, runtime needs, scalability, and operational complexity. This is where the course distinguishes why a front-end portfolio can live on a static platform while a server-backed app needs a runtime environment, logs, and often a database connection."
 				},
 				{
 					title: "Reverse Proxies, Environment Configuration, Monitoring, and Logs",
 					content:
-						"Teach reverse proxies, environment configuration, monitoring, and logs as part of deployment rather than as optional operations trivia. Visible pattern: That deployment quality depends on observability, configuration boundaries, and the ability to distinguish front-end failures from API failures after the project leaves localhost."
+						"This section covers reverse proxies, environment configuration, monitoring, and logs as part of deployment rather than as optional operations trivia. Key idea: deployment quality depends on observability, configuration boundaries, and the ability to distinguish front-end failures from API failures after the project leaves localhost."
 				},
 				{
 					title: "Deployment as a Repeatable Process",
@@ -525,7 +525,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Database Hosting and Recovery Basics",
 					content:
-						"Teach MongoDB Atlas and local MongoDB together so students can reason about development and hosted environments as related but different contexts. Add backup and restore basics so learners understand that data hosting always implies reliability planning, not just a connection string."
+						"This section covers MongoDB Atlas and local MongoDB together so students can reason about development and hosted environments as related but different contexts. Add backup and restore basics so learners understand that data hosting always implies reliability planning, not just a connection string."
 				},
 				{
 					title: "Use Hosting Topics to Connect the Whole Stack",
@@ -624,7 +624,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Good Practical Projects",
 					content:
-						"Keep a running notebook for good practical projects that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on how each project reinforces hosting, debugging, and stack-wide reasoning so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for practical project work that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on how each project reinforces hosting, debugging, and stack-wide reasoning so students build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF1-Portfolio-Custom-Domain/starter",
 					solutionLink:
@@ -666,7 +666,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Backups, Environment Rotation, and Performance Basics",
 					content:
-						"Teach backups, environment rotation, and performance basics as a natural next step once students have published full-stack work. The lesson is that stable production systems are not only built; they are maintained, rotated, backed up, and observed over time."
+						"This section covers backups, environment rotation, and performance basics as a natural next step once students have published full-stack work. The lesson is that stable production systems are not only built; they are maintained, rotated, backed up, and observed over time."
 				},
 				{
 					title: "Move from Deployment to Operations Thinking",
@@ -686,7 +686,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Suggested Advanced Strand",
 					content:
-						"Keep a running notebook for suggested advanced strand that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on logs, uptime, certificate handling, backups, and environment rotation so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for the advanced operations strand that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on logs, uptime, certificate handling, backups, and environment rotation so students build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf10-suggested-advanced-strand/starter",
 					solutionLink:
@@ -723,7 +723,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "DNS and Domain Routing",
 					content:
-						"Teach DNS and domain routing as the networking layer that makes published sites and APIs reachable. Skill target: Connect hostname records to the hosting platform or server that answers them and explain why DNS changes can affect deployment timing and rollback strategy."
+						"This section covers DNS and domain routing as the networking layer that makes published sites and APIs reachable. Skill target: Connect hostname records to the hosting platform or server that answers them and explain why DNS changes can affect deployment timing and rollback strategy."
 				},
 				{
 					title: "TLS, HTTPS, and Trust Boundaries",
@@ -733,7 +733,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Firewalls, Security Groups, and localhost vs LAN vs Public Deployment",
 					content:
-						"Teach the difference between `localhost`, a LAN-accessible service, and a public deployment, then connect that difference to firewalls and security groups. The important idea is that exposure level changes the security and operational assumptions of the app even when the code itself has not changed."
+						"This section covers the difference between `localhost`, a LAN-accessible service, and a public deployment, then connects that difference to firewalls and security groups. The important idea is that exposure level changes the security and operational assumptions of the app even when the code itself has not changed."
 				},
 				{
 					title: "WDF11 Integration with Network Topics: Core Project",
@@ -748,7 +748,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Workflow Notebook: Integration with Network Topics",
 					content:
-						"Keep a running notebook for integration with network topics that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on ports, DNS, HTTPS boundaries, and network exposure differences so students build habits that carry from local work into real hosting and operations.",
+						"Keep a running notebook for network-topic integration that records the commands, editor setup, files changed, deployment assumptions, and debugging decisions made in that part of the course. Focus especially on ports, DNS, HTTPS boundaries, and network exposure differences so students build habits that carry from local work into real hosting and operations.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf11-integration-with-network-topics/starter",
 					solutionLink:

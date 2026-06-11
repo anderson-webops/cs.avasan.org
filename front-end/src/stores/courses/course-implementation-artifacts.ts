@@ -928,7 +928,7 @@ function addUnityRebuildModules(courseId: string, course: RawCourse) {
 				{
 					title: "GameObjects and Components",
 					content:
-						"Teach Unity objects as component containers. Explain which behavior belongs to the transform, collider, renderer, rigidbody, and custom script."
+						"Unity objects are component containers. Explain which behavior belongs to the transform, collider, renderer, rigidbody, and custom script."
 				},
 				{
 					title: "Script Lifecycle",
@@ -1753,7 +1753,7 @@ function addCppThreeCourseSpineModule(courseId: string, course: RawCourse) {
 			{
 				title: "Manual Memory Safety Rule",
 				content:
-					"**Learning sequence:** Teach raw arrays and explicit new/delete as controlled contrast, then return students to RAII, vector/array/span, and smart-pointer ownership. Do not normalize hidden ownership in raw pointers.\n\n**Completion check:** The work demonstrates the ability to draw ownership and cleanup responsibility before implementing pointer-heavy code."
+					"**Learning sequence:** Raw arrays and explicit new/delete are controlled contrast points, then the course returns to RAII, vector/array/span, and smart-pointer ownership. Do not normalize hidden ownership in raw pointers.\n\n**Completion check:** The work demonstrates the ability to draw ownership and cleanup responsibility before implementing pointer-heavy code."
 			},
 			{
 				title: "Branch-Course Readiness",

@@ -19,7 +19,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Workflow: Characterize, Slice, Verify",
 					content:
-						"Teach a repeatable loop: identify the smell, describe the desired improvement, isolate the smallest safe step, run tests or manual checks, and only then continue. Treat naming, extraction, and movement as tactical moves toward better architecture."
+						"A repeatable loop anchors the course: identify the smell, describe the desired improvement, isolate the smallest safe step, run tests or manual checks, and only then continue. Treat naming, extraction, and movement as tactical moves toward better architecture."
 				},
 				{
 					title: "Worked Example Set: Smell Diagnosis Before Change",
@@ -81,12 +81,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring.Guru Category: Composing Methods",
 					content:
-						"Cover the full category directly: Extract Method, Inline Method, Extract Variable, Inline Temp, Replace Temp with Query, Split Temporary Variable, Remove Assignments to Parameters, Replace Method with Method Object, and Substitute Algorithm. Teach these as the core moves for taming Long Method and improving local readability."
+						"Cover the full category directly: Extract Method, Inline Method, Extract Variable, Inline Temp, Replace Temp with Query, Split Temporary Variable, Remove Assignments to Parameters, Replace Method with Method Object, and Substitute Algorithm. This section covers these as the core moves for taming Long Method and improving local readability."
 				},
 				{
 					title: "Worked Example Set: Shrinking a Long Method",
 					content:
-						"Start with a dense Java method, then refactor it in very small steps using extraction, better local names, split temporaries, and algorithm replacement where the logic is overgrown. Visible pattern: That many later architectural improvements begin here."
+						"Start with a dense Java method, then refactor it in very small steps using extraction, better local names, split temporaries, and algorithm replacement where the logic is overgrown. Many later architectural improvements begin here."
 				},
 				{
 					title: "Method Object Versus Plain Extraction",
@@ -163,7 +163,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Delegation Boundaries: Hide or Remove the Middle Man",
 					content:
-						"Teach Hide Delegate and Remove Middle Man together so students see both sides of delegation exposure. The question is not whether delegation is good, but whether the current layer is clarifying or merely forwarding everything."
+						"This section covers Hide Delegate and Remove Middle Man together so students see both sides of delegation exposure. The question is not whether delegation is good, but whether the current layer is clarifying or merely forwarding everything."
 				},
 				{
 					title: "Local Extension and Foreign Method for Library Friction",
@@ -225,7 +225,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring.Guru Category: Organizing Data",
 					content:
-						"Cover Self Encapsulate Field, Replace Data Value with Object, Change Value to Reference, Change Reference to Value, Replace Array with Object, Duplicate Observed Data, Change Unidirectional Association to Bidirectional, Change Bidirectional Association to Unidirectional, Replace Magic Number with Symbolic Constant, Encapsulate Field, Encapsulate Collection, Replace Type Code with Class, Replace Type Code with Subclasses, Replace Type Code with State/Strategy, and Replace Subclass with Fields. Teach the category as a way of making data expressive, explicit, and collaboration-friendly."
+						"Cover Self Encapsulate Field, Replace Data Value with Object, Change Value to Reference, Change Reference to Value, Replace Array with Object, Duplicate Observed Data, Change Unidirectional Association to Bidirectional, Change Bidirectional Association to Unidirectional, Replace Magic Number with Symbolic Constant, Encapsulate Field, Encapsulate Collection, Replace Type Code with Class, Replace Type Code with Subclasses, Replace Type Code with State/Strategy, and Replace Subclass with Fields. This section covers the category as a way of making data expressive, explicit, and collaboration-friendly."
 				},
 				{
 					title: "Worked Example Set: Primitive Obsession and Type Codes",
@@ -235,7 +235,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Associations, Encapsulation, and Collection Safety",
 					content:
-						"Teach field and collection encapsulation together with association direction changes so students see data design as API design. Good refactors should make illegal states harder to represent."
+						"This section covers field and collection encapsulation together with association direction changes so students see data design as API design. Good refactors should make illegal states harder to represent."
 				},
 				{
 					title: "Data Modeling Lab: Upgrade a Weak Domain Model",
@@ -369,7 +369,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring.Guru Category: Simplifying Method Calls",
 					content:
-						"Cover Rename Method, Add Parameter, Remove Parameter, Separate Query from Modifier, Parameterize Method, Introduce Parameter Object, Preserve Whole Object, Remove Setting Method, Replace Parameter with Explicit Methods, Replace Parameter with Method Call, Hide Method, Replace Constructor with Factory Method, Replace Error Code with Exception, and Replace Exception with Test. Teach this category as API cleanup for call sites, responsibilities, and object lifecycle."
+						"Cover Rename Method, Add Parameter, Remove Parameter, Separate Query from Modifier, Parameterize Method, Introduce Parameter Object, Preserve Whole Object, Remove Setting Method, Replace Parameter with Explicit Methods, Replace Parameter with Method Call, Hide Method, Replace Constructor with Factory Method, Replace Error Code with Exception, and Replace Exception with Test. This section covers this category as API cleanup for call sites, responsibilities, and object lifecycle."
 				},
 				{
 					title: "Worked Example Set: Cleaning a Public API",
@@ -441,7 +441,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring.Guru Category: Dealing with Generalization",
 					content:
-						"Cover Pull Up Field, Pull Up Method, Pull Up Constructor Body, Push Down Field, Push Down Method, Extract Subclass, Extract Superclass, Extract Interface, Collapse Hierarchy, Form Template Method, Replace Inheritance with Delegation, and Replace Delegation with Inheritance. Teach the category as the disciplined way to reshape inheritance and abstraction once the real variation is understood."
+						"Cover Pull Up Field, Pull Up Method, Pull Up Constructor Body, Push Down Field, Push Down Method, Extract Subclass, Extract Superclass, Extract Interface, Collapse Hierarchy, Form Template Method, Replace Inheritance with Delegation, and Replace Delegation with Inheritance. This section covers the category as the disciplined way to reshape inheritance and abstraction once the real variation is understood."
 				},
 				{
 					title: "Worked Example Set: Fixing a Bad Hierarchy",
@@ -456,7 +456,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Delegation Versus Inheritance Revisited",
 					content:
-						"Teach Replace Inheritance with Delegation and Replace Delegation with Inheritance together so students can compare the forces honestly. Java design should not worship either one uncritically."
+						"This section covers Replace Inheritance with Delegation and Replace Delegation with Inheritance together so students can compare the forces honestly. Java design should not worship either one uncritically."
 				},
 				{
 					title: "Mini Lab: Repair a Parallel Hierarchy",
@@ -513,7 +513,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "From Technique Catalog to Pattern Choice",
 					content:
-						"Teach how refactoring techniques pave the road into patterns instead of jumping there directly. Examples should include Replace Constructor with Factory Method toward Factory Method, Replace Type Code with State or Strategy toward State or Strategy, Replace Conditional with Polymorphism toward Strategy or State, and Form Template Method toward Template Method."
+						"This section covers how refactoring techniques pave the road into patterns instead of jumping there directly. Examples should include Replace Constructor with Factory Method toward Factory Method, Replace Type Code with State or Strategy toward State or Strategy, Replace Conditional with Polymorphism toward Strategy or State, and Form Template Method toward Template Method."
 				},
 				{
 					title: "Pattern Entry Paths from Refactoring.Guru",
@@ -533,7 +533,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Tradeoff Review: Pattern Arrival Versus Pattern Forcing",
 					content:
-						"Teach the difference between discovering a stable abstraction through refactoring and forcing a catalog pattern because it seems advanced. Use before-and-after change scenarios as the arbiter."
+						"This section covers the difference between discovering a stable abstraction through refactoring and forcing a catalog pattern because it seems advanced. Use before-and-after change scenarios as the arbiter."
 				},
 				{
 					title: "Reflection Question: Which Step Made the Biggest Difference?",
@@ -605,7 +605,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Design Review: Refactoring Pace and Reviewability",
 					content:
-						"Teach how to package refactors into readable commits or change sets rather than one giant diff. This makes the work maintainable for teams and for the student's future self."
+						"This section covers how to package refactors into readable commits or change sets rather than one giant diff. This makes the work maintainable for teams and for the student's future self."
 				},
 				{
 					title: "Reflection Question: What Let You Move Faster Safely?",

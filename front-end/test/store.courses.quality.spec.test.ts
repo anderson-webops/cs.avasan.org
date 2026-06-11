@@ -52,6 +52,25 @@ function markdownHeadingSlugs(path: string) {
 	);
 }
 
+function visibleCourseSourceCorpus() {
+	const excludedFiles = new Set([
+		"course-implementation-artifacts.ts",
+		"normalization.ts",
+		"research-expansions.ts"
+	]);
+
+	return fs
+		.readdirSync("src/stores/courses")
+		.filter(
+			file =>
+				file.endsWith(".ts") &&
+				!excludedFiles.has(file) &&
+				file !== "index.ts"
+		)
+		.map(file => fs.readFileSync(`src/stores/courses/${file}`, "utf8"))
+		.join("\n");
+}
+
 describe("course text quality normalization", () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
@@ -141,6 +160,37 @@ describe("course text quality normalization", () => {
 
 		expect(corpus).not.toMatch(/\bTeach\b/);
 		expect(corpus).not.toMatch(/\bstudents?\b/i);
+	});
+
+	it("keeps visible course source copy free of instructor-action artifacts", () => {
+		const corpus = visibleCourseSourceCorpus();
+
+		expect(corpus).not.toMatch(/\bTeach\b/);
+		expect(corpus).not.toMatch(/This section covers students/);
+		expect(corpus).not.toMatch(/\bUnderstand why/);
+		expect(corpus).not.toMatch(
+			/for strengthen the existing javascript courses/i
+		);
+		expect(corpus).not.toMatch(/for good practical projects/i);
+		expect(corpus).not.toMatch(/for suggested advanced strand/i);
+		expect(corpus).not.toMatch(/for integration with network topics/i);
+		expect(corpus).not.toMatch(/\band pair them\b/);
+		expect(corpus).not.toMatch(/\bthen connect that difference\b/);
+		expect(corpus).not.toMatch(/\bthen show how\b/);
+		expect(corpus).not.toMatch(/Visible pattern: That/);
+	});
+
+	it("keeps course expansion templates from regenerating instructor-action copy", () => {
+		const corpus = [
+			"src/stores/courses/course-implementation-artifacts.ts",
+			"src/stores/courses/research-expansions.ts"
+		]
+			.map(path => fs.readFileSync(path, "utf8"))
+			.join("\n");
+
+		expect(corpus).not.toMatch(/\bTeach\b/);
+		expect(corpus).not.toMatch(/Teach students/i);
+		expect(corpus).not.toMatch(/Instructor Note/i);
 	});
 
 	it("adds project requirements and completion checks to thin legacy Python project prompts", async () => {

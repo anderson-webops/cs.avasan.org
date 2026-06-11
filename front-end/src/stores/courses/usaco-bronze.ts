@@ -14,7 +14,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Bronze-Level Problem Framing",
 					content:
-						"Teach Bronze problems as exercises in accurate simulation, manageable brute force, careful counting, and well-structured conditionals. The course should reduce fear by showing that many Bronze tasks are approachable once the story is translated into data and steps."
+						"This section covers Bronze problems as exercises in accurate simulation, manageable brute force, careful counting, and well-structured conditionals. The course should reduce fear by showing that many Bronze tasks are approachable once the story is translated into data and steps."
 				},
 				{
 					title: "Trace First, Optimize Second",

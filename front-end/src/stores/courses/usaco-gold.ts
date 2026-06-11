@@ -73,7 +73,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Space and Time Tradeoffs",
 					content:
-						"Teach when a DP can be compressed, when it cannot, and how to reason about whether a recurrence is actually feasible under the given limits."
+						"This section covers when a DP can be compressed, when it cannot, and how to reason about whether a recurrence is actually feasible under the given limits."
 				},
 				{
 					title: "Recognize DP in the Wild",
@@ -129,7 +129,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Dijkstra's Algorithm and Relaxation",
 					content:
-						"Teach Dijkstra as repeated relaxation over the currently cheapest frontier. Key idea: The role of the priority queue and why nonnegative weights matter."
+						"This section covers Dijkstra as repeated relaxation over the currently cheapest frontier. Key idea: The role of the priority queue and why nonnegative weights matter."
 				},
 				{
 					title: "Use Distance Information Strategically",
@@ -185,7 +185,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Minimum Spanning Tree Intuition",
 					content:
-						"Teach MSTs as the cheapest way to connect everything under the given edge structure. Key idea: The objective clearly before they memorize Kruskal or Prim."
+						"This section covers MSTs as the cheapest way to connect everything under the given edge structure. Key idea: The objective clearly before they memorize Kruskal or Prim."
 				},
 				{
 					title: "Disjoint Set Union as a Connectivity Tool",

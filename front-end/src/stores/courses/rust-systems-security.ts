@@ -71,12 +71,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Single Ownership as a Memory Rule",
 					content:
-						"Teach ownership as one clear owner for a resource at a time. Compare it directly to the kinds of ambiguous cleanup responsibility that lead to double free or use-after-free bugs in C and C++."
+						"This section covers ownership as one clear owner for a resource at a time. Compare it directly to the kinds of ambiguous cleanup responsibility that lead to double free or use-after-free bugs in C and C++."
 				},
 				{
 					title: "Moves, Copies, and Clone",
 					content:
-						"Make students distinguish cheap copy semantics for simple values from ownership-moving semantics for heap-backed data. This distinction is central to understanding why Rust prevents some accidental aliasing patterns."
+						"Distinguish cheap copy semantics for simple values from ownership-moving semantics for heap-backed data. This distinction is central to understanding why Rust prevents some accidental aliasing patterns."
 				},
 				{
 					title: "Drop Timing and Scope",
@@ -133,7 +133,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Shared vs. Mutable Borrowing",
 					content:
-						"Teach Rust's borrowing rules as a way to limit ambiguous mutation and observation. Connect this to the kinds of aliasing bugs that become hard to reason about in larger C/C++ systems."
+						"This section covers Rust's borrowing rules as a way to limit ambiguous mutation and observation. Connect this to the kinds of aliasing bugs that become hard to reason about in larger C/C++ systems."
 				},
 				{
 					title: "Lifetime Reasoning without Mysticism",
@@ -200,7 +200,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Result, Match, and the Question-Mark Operator",
 					content:
-						"Teach `Result` as a typed alternative to error-code conventions. Pattern matching and `?` should feel like a disciplined error-propagation style, not just new syntax."
+						"This section covers `Result` as a typed alternative to error-code conventions. Pattern matching and `?` should feel like a disciplined error-propagation style, not just new syntax."
 				},
 				{
 					title: "Error Handling and Security Posture",
@@ -257,7 +257,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "String, str, Vec, and Slice Differences",
 					content:
-						"Teach owned strings, borrowed string slices, vectors, arrays, and slices as distinct tools rather than one generic container idea. Key idea: Which operations are cheap views and which allocate or move ownership."
+						"This section covers owned strings, borrowed string slices, vectors, arrays, and slices as distinct tools rather than one generic container idea. Key idea: Which operations are cheap views and which allocate or move ownership."
 				},
 				{
 					title: "Indexing, Iteration, and Safer Access Patterns",
@@ -319,7 +319,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs for Explicit Data Modeling",
 					content:
-						"Use structs to make ownership, state, and transitions visible. Visible pattern: That good modeling reduces security bugs because it narrows the number of half-valid states code can represent."
+						"Use structs to make ownership, state, and transitions visible. Good modeling reduces security bugs because it narrows the number of half-valid states code can represent."
 				},
 				{
 					title: "Enums and Impossible States",
@@ -329,7 +329,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Pattern Matching as Validation",
 					content:
-						"Teach `match` not just as syntax, but as a way to force complete reasoning across every state the program can inhabit."
+						"This section covers `match` not just as syntax, but as a way to force complete reasoning across every state the program can inhabit."
 				},
 				{
 					title: "Structs, Enums, and Safer State Models: Verification and Reflection",
@@ -381,7 +381,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits as Behavior Contracts",
 					content:
-						"Teach traits as explicit contracts for reusable behavior. Compare them with interfaces, abstract classes, or virtual methods without losing the Rust-specific emphasis on disciplined composition."
+						"This section covers traits as explicit contracts for reusable behavior. Compare them with interfaces, abstract classes, or virtual methods without losing the Rust-specific emphasis on disciplined composition."
 				},
 				{
 					title: "Iterator Safety vs. Invalidation Risk",
@@ -443,7 +443,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "File I/O and Parser Discipline",
 					content:
-						"Teach parsing as a systems task where small unchecked assumptions cause real bugs. Use Rust's file APIs and typed error model to build safer parse-and-validate workflows."
+						"This section covers parsing as a systems task where small unchecked assumptions cause real bugs. Use Rust's file APIs and typed error model to build safer parse-and-validate workflows."
 				},
 				{
 					title: "Input Validation and Trust Boundaries",
@@ -567,7 +567,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "What Unsafe Actually Means",
 					content:
-						"Teach `unsafe` as a narrow escape hatch, not a forbidden magic zone. Learn which guarantees the compiler stops checking and why that creates a smaller trusted computing boundary that must be justified carefully."
+						"This section covers `unsafe` as a narrow escape hatch, not a forbidden magic zone. Learn which guarantees the compiler stops checking and why that creates a smaller trusted computing boundary that must be justified carefully."
 				},
 				{
 					title: "FFI as a Real-World Boundary",

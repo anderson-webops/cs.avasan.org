@@ -9,7 +9,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Course Positioning After C++ Level 2",
 					content:
-						"Position this course as the algorithmic next step after `C++ Level 2`, with `C++ Level 3` preferred first when the student needs more practice with file-backed programs, recursion, STL containers, RAII, and medium-size C++ structure. Students entering this sequence should already be comfortable with variables, control flow, functions, classes, vectors, pointers, references, and ownership reasoning before the focus shifts to data structures, algorithm design, and complexity."
+						"Position this course as the algorithmic next step after `C++ Level 2`, with `C++ Level 3` preferred first when file-backed programs, recursion, STL containers, RAII, and medium-size C++ structure need more practice. Learners entering this sequence should already be comfortable with variables, control flow, functions, classes, vectors, pointers, references, and ownership reasoning before the focus shifts to data structures, algorithm design, and complexity."
 				},
 				{
 					title: "Preferred Toolchain",
@@ -76,7 +76,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Filtering, Removal, and Stable Output",
 					content:
-						"Teach sequence mutation through task filtering and removal. Key idea: The difference between searching, erasing, and printing sorted views rather than treating a vector like a magical bag of values."
+						"This section covers sequence mutation through task filtering and removal. Key idea: The difference between searching, erasing, and printing sorted views rather than treating a vector like a magical bag of values."
 				},
 				{
 					title: "Command-Style Program Structure",
@@ -138,7 +138,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Shortest Path Thinking",
 					content:
-						"Teach shortest-path work as a repeated relaxation problem rather than as memorized Dijkstra vocabulary. The key judgment is understanding why a currently known best cost can still improve through another route until the frontier closes."
+						"This section covers shortest-path work as a repeated relaxation problem rather than as memorized Dijkstra vocabulary. The key judgment is understanding why a currently known best cost can still improve through another route until the frontier closes."
 				},
 				{
 					title: "Path Reconstruction",
@@ -329,7 +329,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursive Boundaries and Base Cases",
 					content:
-						"Make students prove where the recursion stops and why the subranges shrink. Quicksort bugs often come from boundary confusion rather than from misunderstanding the big idea."
+						"Require proof of where the recursion stops and why the subranges shrink. Quicksort bugs often come from boundary confusion rather than from misunderstanding the big idea."
 				},
 				{
 					title: "Quicksort and Partitioning: Verification and Reflection",
@@ -381,12 +381,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Why Templates Matter Here",
 					content:
-						"Teach templates as a way to reuse the same linked-list logic across multiple data types without copying code. Key idea: The compile-time nature of templates instead of treating them like runtime generics."
+						"This section covers templates as a way to reuse the same linked-list logic across multiple data types without copying code. Key idea: The compile-time nature of templates instead of treating them like runtime generics."
 				},
 				{
 					title: "Single-Linked Nodes and Pointer Updates",
 					content:
-						"Walk through insertion and removal one pointer change at a time. This is the point where students need to be fluent about head updates, middle insertions, and what happens when the target value is missing. Keep the CS235 linked-list discipline: templated list, no STL inside the implementation, clear/remove/index tests, and no leaks."
+						"Walk through insertion and removal one pointer change at a time. This is the point where head updates, middle insertions, and missing-target behavior must be fluent. Keep the CS235 linked-list discipline: templated list, no STL inside the implementation, clear/remove/index tests, and no leaks."
 				},
 				{
 					title: "Index Access and Structural Tradeoffs",
@@ -510,7 +510,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Heights and Balance Factors",
 					content:
-						"Teach height maintenance and balance factors as structural evidence. Key idea: How to compute imbalance, not just memorize the names of the rotation cases."
+						"This section covers height maintenance and balance factors as structural evidence. Key idea: How to compute imbalance, not just memorize the names of the rotation cases."
 				},
 				{
 					title: "Single and Double Rotations",

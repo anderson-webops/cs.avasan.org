@@ -239,7 +239,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Range Aggregation as a Core Silver Tool",
 					content:
-						"Teach prefix sums and cumulative counts as the right abstraction when the problem asks repeated questions about segments or totals. Stop recomputing the same range work from scratch."
+						"This section covers prefix sums and cumulative counts as the right abstraction when the problem asks repeated questions about segments or totals. Stop recomputing the same range work from scratch."
 				},
 				{
 					title: "Count Indirectly when Direct Counting Is Awkward",

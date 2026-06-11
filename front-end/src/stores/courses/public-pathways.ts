@@ -175,7 +175,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Train and evaluate simple ML models with train/test splits, baseline comparison, confusion matrices or error metrics, and a short model card."
 		],
 		sequencingNotes: [
-			"Data Science should come before ML when students need more practice with pandas, plots, missing data, and interpretation.",
+			"Data Science should come before ML when pandas, plots, missing data, and interpretation need more practice.",
 			"AI Level 1 should stay focused on search, games, rules, and responsible AI concepts rather than statistical ML.",
 			"Machine Learning should add scikit-learn evaluation, overfitting, fairness limits, and model documentation without duplicating the AI-only course."
 		],
@@ -329,7 +329,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sequencingNotes: [
 			"C systems and Assembly should anchor memory representation before deeper security or Rust topics.",
 			"Linux Systems should teach operational habits: commands, services, logs, configs, deployment, and rollback notes.",
-			"Network Systems should precede Network Security when students need routing, DNS, HTTP/TLS, NAT, firewall, and packet-capture context."
+			"Network Systems should precede Network Security when routing, DNS, HTTP/TLS, NAT, firewall, and packet-capture context are not yet comfortable."
 		],
 		projectExpectations: [
 			"Systems CLI utility with explicit file, memory, process, or signal behavior and a verification transcript.",

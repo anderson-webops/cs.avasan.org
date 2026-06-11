@@ -236,7 +236,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Lesson: Heat Transfer",
 					content:
-						"Teach conduction, convection, and radiation using diagrams, simulations, and everyday examples. Students identify which transfer method dominates in a given scenario."
+						"This section covers conduction, convection, and radiation using diagrams, simulations, and everyday examples. Students identify which transfer method dominates in a given scenario."
 				},
 				{
 					title: "Lesson: Energy Efficiency and Constraints",

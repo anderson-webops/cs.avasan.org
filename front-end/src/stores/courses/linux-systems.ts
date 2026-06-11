@@ -82,7 +82,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Filtering and Searching in the Shell",
 					content:
-						"Teach `grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs` as a family of inspection tools rather than isolated commands. The key lesson is that Linux work scales when students can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around."
+						"This section covers `grep`, `find`, `rg`, `sort`, `uniq`, `wc`, and `xargs` as a family of inspection tools rather than isolated commands. The key lesson is that Linux work scales when students can search a tree, narrow results, count patterns, and pass findings into a follow-up command without manually copying file names around."
 				},
 				{
 					title: "Build Small Pipelines Before Writing Scripts",
@@ -144,7 +144,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Choosing Between /var, /srv, and /opt",
 					content:
-						"Teach the judgment call behind application layout. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`. The expected outcome is a defensible layout choice instead of files scattered arbitrarily."
+						"This section covers the judgment call behind application layout. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`. The expected outcome is a defensible layout choice instead of files scattered arbitrarily."
 				},
 				{
 					title: "Project: Deploy a Static Site from /srv",
@@ -192,7 +192,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Read, Write, Execute, and Directory Permission Semantics",
 					content:
-						"Teach the difference between file permissions and directory permissions, especially the fact that execute on a directory governs traversal rather than program execution. Skill target: Predict what happens when a service can read a file but cannot enter the directory that contains it."
+						"This section covers the difference between file permissions and directory permissions, especially the fact that execute on a directory governs traversal rather than program execution. Skill target: Predict what happens when a service can read a file but cannot enter the directory that contains it."
 				},
 				{
 					title: "Ownership Changes with chmod, chown, chgrp, and umask",
@@ -254,7 +254,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Terminal Editing with nano, vim, sed, and tee",
 					content:
-						"Students do not need to become editor fanatics, but they do need to edit files confidently in a Linux environment. Teach `nano` and `vim` for interactive edits, then show how `sed` and `tee` help with controlled replacements, scripted updates, and privilege-bound writes."
+						"The goal is confident file editing in a Linux environment, not editor fanaticism. This section covers `nano` and `vim` for interactive edits, then shows how `sed` and `tee` help with controlled replacements, scripted updates, and privilege-bound writes."
 				},
 				{
 					title: "Safe Configuration Editing Patterns",
@@ -316,7 +316,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspecting Processes with ps, top, and htop",
 					content:
-						"Teach process inspection as a story about what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Skill target: Move between snapshot tools like `ps` and live views like `top` or `htop` depending on whether they are chasing a momentary bug or an active performance problem."
+						"This section covers process inspection as a story about what is running, who owns it, how much CPU or memory it is using, and whether it still matches the expected command line. Skill target: Move between snapshot tools like `ps` and live views like `top` or `htop` depending on whether they are chasing a momentary bug or an active performance problem."
 				},
 				{
 					title: "Signals, kill, pkill, and Process Shutdown",
@@ -388,7 +388,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Daily Commands: status, start, stop, restart, reload, enable, disable",
 					content:
-						"Teach `systemctl status/start/stop/restart/reload/enable/disable` as a minimal operator toolkit. The important distinction is not only what each verb does, but when reload is safer than restart, when enable affects future boots instead of the current session, and how to verify state after each action."
+						"This section covers `systemctl status/start/stop/restart/reload/enable/disable` as a minimal operator toolkit. The important distinction is not only what each verb does, but when reload is safer than restart, when enable affects future boots instead of the current session, and how to verify state after each action."
 				},
 				{
 					title: "Dependencies, Startup Ordering, and Environment Overrides",
@@ -441,7 +441,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "journalctl as the First Stop for Service Debugging",
 					content:
-						"Teach `journalctl` as the central way to read systemd-managed service output, boot logs, and recent failures. Learn how to scope logs by unit, boot, and time window so they can answer targeted questions instead of dumping enormous unfiltered output."
+						"This section covers `journalctl` as the central way to read systemd-managed service output, boot logs, and recent failures. Learn how to scope logs by unit, boot, and time window so they can answer targeted questions instead of dumping enormous unfiltered output."
 				},
 				{
 					title: "Application Logs vs System Logs",
@@ -508,7 +508,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Cron Environment Gotchas",
 					content:
-						"Teach the common surprise that scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so Learn to make scheduled commands self-sufficient and observable."
+						"This section covers the common surprise that scheduled jobs often run with a smaller environment than interactive shells. Missing PATH entries, relative paths, and unstated shell assumptions are routine sources of failure, so Learn to make scheduled commands self-sufficient and observable."
 				},
 				{
 					title: "systemd Timers vs cron",
@@ -581,7 +581,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Keeping Systems Patched without Losing Control",
 					content:
-						"Teach patching as a balance between timeliness and operational confidence. Practice target: Reading what will change, understanding whether a service restart is implied, and recording what was upgraded so that post-change debugging has an audit trail."
+						"This section covers patching as a balance between timeliness and operational confidence. Practice target: Reading what will change, understanding whether a service restart is implied, and recording what was upgraded so that post-change debugging has an audit trail."
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout: Core Project",
@@ -628,7 +628,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Inspect Interfaces and Routes with ip",
 					content:
-						"Teach `ip` as the modern way to inspect addresses, interfaces, and routes. Skill target: Answer basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next."
+						"This section covers `ip` as the modern way to inspect addresses, interfaces, and routes. Skill target: Answer basic systems questions such as whether the machine has an address, which interface owns it, and where packets are expected to go next."
 				},
 				{
 					title: "Listening Services and Sockets with ss",
@@ -638,7 +638,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Testing Connectivity with ping, curl, and dig",
 					content:
-						"Teach `ping`, `curl`, and `dig` as distinct tools with distinct jobs: reachability, HTTP-level testing, and DNS inspection. The point is to avoid hand-wavy networking guesses and replace them with specific checks at the right layer."
+						"This section covers `ping`, `curl`, and `dig` as distinct tools with distinct jobs: reachability, HTTP-level testing, and DNS inspection. The point is to avoid hand-wavy networking guesses and replace them with specific checks at the right layer."
 				},
 				{
 					title: "Bridge to a Networking Course without Losing the Systems Lens",
@@ -690,7 +690,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Nginx Fundamentals",
 					content:
-						"Teach Nginx as both a static file server and a reverse proxy. Key idea: The role of a `server` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service."
+						"This section covers Nginx as both a static file server and a reverse proxy. Key idea: The role of a `server` block, a document root, a location block, and the difference between testing config syntax and actually reloading the service."
 				},
 				{
 					title: "Apache Fundamentals",
@@ -767,7 +767,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Backup Patterns for Small Linux Systems",
 					content:
-						"Teach backups as a reliability practice rather than a checkbox. Think about what must be preserved, how often it changes, where archives should live, how retention works, and how to tell whether a backup succeeded beyond simply seeing that a file was created."
+						"This section covers backups as a reliability practice rather than a checkbox. Think about what must be preserved, how often it changes, where archives should live, how retention works, and how to tell whether a backup succeeded beyond simply seeing that a file was created."
 				},
 				{
 					title: "log and tmp Cleanup as Operational Hygiene",

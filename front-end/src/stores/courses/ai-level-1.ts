@@ -75,7 +75,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "States, Actions, Goals, and Costs",
 					content:
-						"Teach every AI problem as a question about state changes. Skill target: Say what a valid state looks like, what transitions are allowed, what counts as success, and whether a path should be judged by steps, cost, score, or some other metric."
+						"Every AI problem can be framed as a question about state changes. Skill target: say what a valid state looks like, what transitions are allowed, what counts as success, and whether a path should be judged by steps, cost, score, or some other metric."
 				},
 				{
 					title: "Graphs as a Universal Representation",
@@ -109,7 +109,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Project: Graphs with Network Visualization",
 					content:
-						"Use `networkx` to draw graph structures and make the difference between representation and traversal visible. Visible pattern: That a search algorithm is easier to debug when the structure is easy to inspect.",
+						"Use `networkx` to draw graph structures and make the difference between representation and traversal visible. A search algorithm is easier to debug when the structure is easy to inspect.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Graphs-with-Network-Updated"
 				},
@@ -200,12 +200,12 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Depth-First Search as Structured Exploration",
 					content:
-						"Teach DFS as a systematic way to explore one branch fully, record visited nodes, and backtrack cleanly. Key idea: Where DFS is useful for reachability, component finding, and exhaustive path exploration."
+						"This section covers DFS as a systematic way to explore one branch fully, record visited nodes, and backtrack cleanly. Key idea: Where DFS is useful for reachability, component finding, and exhaustive path exploration."
 				},
 				{
 					title: "Breadth-First Search and Unweighted Shortest Paths",
 					content:
-						"Teach BFS as the correct default when edge costs are uniform and the first shortest path matters. Skill target: Defend BFS in a shortest-step setting instead of choosing it only because they remember the name."
+						"This section covers BFS as the correct default when edge costs are uniform and the first shortest path matters. Skill target: Defend BFS in a shortest-step setting instead of choosing it only because they remember the name."
 				},
 				{
 					title: "Visited Sets, Parents, and Path Reconstruction",
@@ -263,7 +263,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Depth-Limited and Iterative Deepening Search",
 					content:
-						"Teach DLS and IDS as tools for controlling explosion in deep trees while still reasoning about completeness. Visible pattern: Why search often needs operational constraints as much as it needs cleverness."
+						"This section covers DLS and IDS as tools for controlling explosion in deep trees while still reasoning about completeness. Visible pattern: Why search often needs operational constraints as much as it needs cleverness."
 				},
 				{
 					title: "Uniform Cost Search and Weighted Paths",
@@ -331,7 +331,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Rules as Small AI",
 					content:
-						"Introduce rule-based systems as a legitimate form of AI when the domain is structured and the reasoning can be written down clearly. Visible pattern: That not all intelligent behavior comes from statistical models."
+						"Introduce rule-based systems as a legitimate form of AI when the domain is structured and the reasoning can be written down clearly. Not all intelligent behavior comes from statistical models."
 				},
 				{
 					title: "Decision Logic, Constraints, and State Tracking",
@@ -404,7 +404,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Evaluation Functions and Tradeoffs",
 					content:
-						"Teach heuristic evaluation as a practical compromise when exhaustive search is too expensive. Practice target: Designing scores that reflect the actual objectives of the game, not just arbitrary numbers."
+						"This section covers heuristic evaluation as a practical compromise when exhaustive search is too expensive. Practice target: Designing scores that reflect the actual objectives of the game, not just arbitrary numbers."
 				},
 				{
 					title: "Debugging a Game AI",

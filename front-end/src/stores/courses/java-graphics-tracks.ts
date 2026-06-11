@@ -138,7 +138,7 @@ const graphicsBranchModules: RawCourseModule[] = [
 			{
 				title: "Coordinate Systems and Drawing Primitives",
 				content:
-					"Teach the drawing surface as a coordinate system with an origin, x/y directions, widths, heights, colors, and layering order. Predict where a shape appears before running the program."
+					"This section covers the drawing surface as a coordinate system with an origin, x/y directions, widths, heights, colors, and layering order. Predict where a shape appears before running the program."
 			},
 			{
 				title: "Java Graphics Project 1: Rainbow",

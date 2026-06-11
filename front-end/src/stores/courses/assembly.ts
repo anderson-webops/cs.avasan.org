@@ -71,7 +71,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Assembler, Linker, Object Files, and Executables",
 					content:
-						"Teach the assembly pipeline as a concrete artifact flow: source becomes object code, objects become a linked executable, and each stage exposes different evidence. Key idea: Where symbols, relocation, and disassembly fit long before they write large amounts of assembly."
+						"This section covers the assembly pipeline as a concrete artifact flow: source becomes object code, objects become a linked executable, and each stage exposes different evidence. Key idea: Where symbols, relocation, and disassembly fit long before they write large amounts of assembly."
 				},
 				{
 					title: "Intel versus AT&T Syntax",
@@ -133,7 +133,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "General-Purpose Registers and Partial Register Views",
 					content:
-						"Teach `rax`, `rbx`, `rcx`, `rdx`, the pointer and index registers, and the relationship between 64-bit, 32-bit, 16-bit, and 8-bit register views. Key idea: Partial-register writes can zero or preserve upper bits depending on the instruction and destination width."
+						"This section covers `rax`, `rbx`, `rcx`, `rdx`, the pointer and index registers, and the relationship between 64-bit, 32-bit, 16-bit, and 8-bit register views. Key idea: Partial-register writes can zero or preserve upper bits depending on the instruction and destination width."
 				},
 				{
 					title: "mov, Zero Extension, and Sign Extension",
@@ -191,7 +191,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "add, sub, imul, and idiv",
 					content:
-						"Teach the arithmetic instructions as state changes over explicit registers rather than as magical one-line operators. Key idea: Which instructions write only one destination register, which ones use implicit registers, and why signed division requires deliberate setup."
+						"This section covers the arithmetic instructions as state changes over explicit registers rather than as magical one-line operators. Key idea: Which instructions write only one destination register, which ones use implicit registers, and why signed division requires deliberate setup."
 				},
 				{
 					title: "and, or, xor, test, and Condition Checks",
@@ -201,7 +201,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Flags, Condition Codes, and Arithmetic Visibility",
 					content:
-						"Teach the zero flag, sign flag, carry flag, and overflow flag as observable state that later drives conditional branches. Skill target: Explain not only what a calculation produced, but what flags that calculation set and why."
+						"This section covers the zero flag, sign flag, carry flag, and overflow flag as observable state that later drives conditional branches. Skill target: Explain not only what a calculation produced, but what flags that calculation set and why."
 				},
 				{
 					title: "C-to-Assembly Compare: Arithmetic Helper",
@@ -253,7 +253,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "cmp, jmp, and Conditional Jumps",
 					content:
-						"Teach branching by making the compare-and-branch relationship explicit. Key idea: `cmp` prepares flags and `jcc` reads them, which is a clearer model than treating each conditional jump as a stand-alone feature."
+						"This section covers branching by making the compare-and-branch relationship explicit. Key idea: `cmp` prepares flags and `jcc` reads them, which is a clearer model than treating each conditional jump as a stand-alone feature."
 				},
 				{
 					title: "Loop Construction and State Tracing",
@@ -311,7 +311,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "call, ret, and Return Addresses",
 					content:
-						"Teach `call` and `ret` as stack operations as well as control-flow operations. Key idea: The return address becomes data on the stack, which is why call depth, frame layout, and corruption bugs become visible in assembly."
+						"This section covers `call` and `ret` as stack operations as well as control-flow operations. Key idea: The return address becomes data on the stack, which is why call depth, frame layout, and corruption bugs become visible in assembly."
 				},
 				{
 					title: "Stack Frames and Local Storage",
@@ -373,7 +373,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Parameter Passing and Return Values",
 					content:
-						"Teach the System V AMD64 calling convention directly: which registers carry the first arguments, where integer return values come back, and when values spill to the stack. Skill target: Predict the first few arguments before stepping a call."
+						"This section covers the System V AMD64 calling convention directly: which registers carry the first arguments, where integer return values come back, and when values spill to the stack. Skill target: Predict the first few arguments before stepping a call."
 				},
 				{
 					title: "Caller-Saved versus Callee-Saved Registers",
@@ -431,7 +431,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Base Plus Index Plus Scale Addressing",
 					content:
-						"Teach complex addressing as a readable formula instead of a scary syntax form. Skill target: Decode base register, scaled index, and displacement into a clear statement like 'array base plus element index times element size plus field offset.'"
+						"This section covers complex addressing as a readable formula instead of a scary syntax form. Skill target: Decode base register, scaled index, and displacement into a clear statement like 'array base plus element index times element size plus field offset.'"
 				},
 				{
 					title: "Arrays, Strings, and Sequential Memory Walks",
@@ -489,7 +489,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Minimal Linux Syscall Examples",
 					content:
-						"Teach direct syscalls as the lowest visible interface between user-space code and the kernel, even if the active classroom build sometimes uses a libc-backed harness for portability. Key idea: The idea of putting a syscall number and arguments in the right registers and then interpreting the return value as success or failure."
+						"This section covers direct syscalls as the lowest visible interface between user-space code and the kernel, even if the active classroom build sometimes uses a libc-backed harness for portability. Key idea: The idea of putting a syscall number and arguments in the right registers and then interpreting the return value as success or failure."
 				},
 				{
 					title: "libc versus Direct Syscalls",
@@ -609,7 +609,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Step Instructions, Not Just Source Lines",
 					content:
-						"Teach stepping by instruction so students stop thinking of a line of source as the smallest meaningful debugging unit. They should learn to watch how one compare, one move, or one conditional jump changes the machine state before the next instruction runs."
+						"This section covers stepping by instruction so the smallest meaningful debugging unit becomes a machine instruction rather than a line of source. Watch how one compare, one move, or one conditional jump changes the machine state before the next instruction runs."
 				},
 				{
 					title: "Watching Registers and Memory Together",
@@ -619,7 +619,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Breakpoints on Functions and Addresses",
 					content:
-						"Teach symbolic breakpoints and raw address breakpoints so students can debug both source-friendly code and stripped-down instruction sequences. This is especially useful once optimization or reverse-engineering exercises make source-line stepping less reliable."
+						"This section covers symbolic breakpoints and raw address breakpoints for both source-friendly code and stripped-down instruction sequences. This is especially useful once optimization or reverse-engineering exercises make source-line stepping less reliable."
 				},
 				{
 					title: "Instruction-Level Debug Pass on an Existing Lab",
@@ -733,7 +733,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Stack Canaries, PIE, and Binary Hardening Signals",
 					content:
-						"Teach stack canaries, PIE, and related hardening features as visible patterns around the code students already understand. The point is not exhaustive exploit mitigation coverage; it is helping students recognize how security features show up around functions, calls, and process layout."
+						"This section covers stack canaries, PIE, and related hardening features as visible patterns around the code students already understand. The point is not exhaustive exploit mitigation coverage; it is helping students recognize how security features show up around functions, calls, and process layout."
 				},
 				{
 					title: "How Assembly Explains Low-Level Bugs",

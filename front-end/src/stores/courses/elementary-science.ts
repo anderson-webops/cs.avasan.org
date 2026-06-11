@@ -125,7 +125,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Lesson: The Water Cycle",
 					content:
-						"Teach evaporation, condensation, precipitation, runoff, and collection using diagrams and animation. Emphasize that water changes location and state, but the same water is recycled through the system."
+						"This section covers evaporation, condensation, precipitation, runoff, and collection using diagrams and animation. Emphasize that water changes location and state, but the same water is recycled through the system."
 				},
 				{
 					title: "Guided Practice: Reading Weather Data",
@@ -241,7 +241,7 @@ export const elementaryScienceCourse: RawCourse = {
 				{
 					title: "Lesson: Sound as Vibration",
 					content:
-						"Teach that sound comes from vibrations traveling through matter. Use videos, wave diagrams, and audio examples to compare loudness, pitch, and source."
+						"This section covers that sound comes from vibrations traveling through matter. Use videos, wave diagrams, and audio examples to compare loudness, pitch, and source."
 				},
 				{
 					title: "Guided Practice: Signals and Communication",

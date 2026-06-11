@@ -126,7 +126,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Protocols, ABCs, and Informal Interfaces",
 					content:
-						"Teach `typing.Protocol`, abstract base classes, and duck typing as three different tools with different tradeoffs. Learn that Python can express contracts lightly without pretending every project needs heavy interface scaffolding."
+						"This section covers `typing.Protocol`, abstract base classes, and duck typing as three different tools with different tradeoffs. Learn that Python can express contracts lightly without pretending every project needs heavy interface scaffolding."
 				},
 				{
 					title: "Data Classes, Configuration Objects, and Dependency Direction",
@@ -241,7 +241,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Factory Functions and Named Constructors",
 					content:
-						"Teach factory functions and `@classmethod` constructors as the default Python tools for creation pressure. Visible pattern: How these options already solve many textbook Factory Method problems cleanly."
+						"This section covers factory functions and `@classmethod` constructors as the default Python tools for creation pressure. Visible pattern: How these options already solve many textbook Factory Method problems cleanly."
 				},
 				{
 					title: "Builder for Configuration-Heavy Objects",
@@ -303,7 +303,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Subscription Lists and Event Fan-Out",
 					content:
-						"Teach Observer as a controlled way to notify multiple listeners without hard-coding every downstream action into the source object. In Python, this often begins with lists of callables before it becomes a larger event abstraction."
+						"This section covers Observer as a controlled way to notify multiple listeners without hard-coding every downstream action into the source object. In Python, this often begins with lists of callables before it becomes a larger event abstraction."
 				},
 				{
 					title: "Designing Event Payloads and Listener Contracts",
@@ -427,7 +427,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Explicit State Objects versus Enum-Driven Branching",
 					content:
-						"Teach State as a response to behavior that changes by mode, not as a universal replacement for every flag. Compare a growing branch tree with explicit state objects and choose based on the actual complexity."
+						"This section covers State as a response to behavior that changes by mode, not as a universal replacement for every flag. Compare a growing branch tree with explicit state objects and choose based on the actual complexity."
 				},
 				{
 					title: "Commands as Callables, Objects, and History Entries",
@@ -489,7 +489,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Adapters for Third-Party Data and APIs",
 					content:
-						"Teach Adapter as a boundary-normalization tool whenever outside systems return awkward names, shapes, or expectations. Skill target: Isolate external weirdness near the edge rather than spreading it through the codebase."
+						"This section covers Adapter as a boundary-normalization tool whenever outside systems return awkward names, shapes, or expectations. Skill target: Isolate external weirdness near the edge rather than spreading it through the codebase."
 				},
 				{
 					title: "Compatibility Layers and Anti-Corruption Boundaries",
@@ -551,7 +551,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Inheritance-Based Skeletons and Hook Methods",
 					content:
-						"Teach the textbook Template Method shape so students can recognize it, but keep the use case concrete: a stable algorithm skeleton with a few genuine hooks. This should feel like a niche tool, not a default architecture style."
+						"The textbook Template Method shape is included for recognition, but the use case should stay concrete: a stable algorithm skeleton with a few genuine hooks. This should feel like a niche tool, not a default architecture style."
 				},
 				{
 					title: "Replacing Template Method with Callables or Composition",
@@ -613,7 +613,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Module-Level Singletons and Why They Feel Convenient",
 					content:
-						"Teach module state, cached objects, and one-per-process resources as the Python forms students will actually encounter. The lesson should start from real convenience before it moves into the costs."
+						"This section covers module state, cached objects, and one-per-process resources as the Python forms students will actually encounter. The lesson should start from real convenience before it moves into the costs."
 				},
 				{
 					title: "Hidden Globals, Implicit Coupling, and Test Pain",
@@ -671,7 +671,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "From Large Script to Coherent Modules",
 					content:
-						"Teach script-to-application refactors as a series of small moves: extract functions, name concepts, isolate I/O, group state, and split files by responsibility. The point is to make evolution realistic instead of magical."
+						"This section covers script-to-application refactors as a series of small moves: extract functions, name concepts, isolate I/O, group state, and split files by responsibility. The point is to make evolution realistic instead of magical."
 				},
 				{
 					title: "Tangled Conditionals and Mixed Responsibilities",

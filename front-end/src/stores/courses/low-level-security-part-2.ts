@@ -76,7 +76,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Reachability, Controllability, Impact, and Attacker Assumptions",
 					content:
-						"Teach exploitability triage as a disciplined decision process. Ask whether untrusted input reaches the bug, whether the attacker can shape the failing bytes or state, what the likely impact is, and what assumptions about the environment are required before a maintainers’ note should call the issue security-relevant."
+						"This section covers exploitability triage as a disciplined decision process. Ask whether untrusted input reaches the bug, whether the attacker can shape the failing bytes or state, what the likely impact is, and what assumptions about the environment are required before a maintainers’ note should call the issue security-relevant."
 				},
 				{
 					title: "Crash Taxonomy for Defensive Analysis",
@@ -192,7 +192,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Use-After-Free, Double Free, and Stale Pointer Reuse",
 					content:
-						"Teach heap-lifetime issues as ownership and lifecycle failures, not as magic allocator trivia. Key idea: Why stale references, repeated frees, and reused heap slots can turn ordinary bookkeeping mistakes into disclosure or corruption problems when old handles or pointers still reach new objects."
+						"This section covers heap-lifetime issues as ownership and lifecycle failures, not as magic allocator trivia. Key idea: Why stale references, repeated frees, and reused heap slots can turn ordinary bookkeeping mistakes into disclosure or corruption problems when old handles or pointers still reach new objects."
 				},
 				{
 					title: "Ownership Mistakes That Escalate Risk",
@@ -250,7 +250,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Uninitialized Reads, Oversized Reads, and Stale Data Disclosure",
 					content:
-						"Teach disclosure bugs as trust-boundary problems where bytes that should stay internal cross into logs, responses, or other observable outputs. Recognize that a leak can matter even when the program does not crash, because addresses, object contents, and stale internal notes can still change the risk profile of a later bug."
+						"This section covers disclosure bugs as trust-boundary problems where bytes that should stay internal cross into logs, responses, or other observable outputs. Recognize that a leak can matter even when the program does not crash, because addresses, object contents, and stale internal notes can still change the risk profile of a later bug."
 				},
 				{
 					title: "Why Leaked Addresses or Object Contents Matter",
@@ -442,7 +442,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Use AI to Accelerate Triage, Not Replace Evidence",
 					content:
-						"Teach AI as a narrow assistant for defensive work: summarize sanitizer output, propose regression cases, help structure disclosure notes, compare two patch options, or convert a long debugging session into a clearer maintainer-facing report. Also learn the limits: AI can hallucinate exploitability claims, miss the real root cause, or suggest unsafe follow-ups, so every claim must still be checked against the local toy binary, debugger output, sanitizer evidence, and the written lab boundary."
+						"This section covers AI as a narrow assistant for defensive work: summarize sanitizer output, propose regression cases, help structure disclosure notes, compare two patch options, or convert a long debugging session into a clearer maintainer-facing report. Also learn the limits: AI can hallucinate exploitability claims, miss the real root cause, or suggest unsafe follow-ups, so every claim must still be checked against the local toy binary, debugger output, sanitizer evidence, and the written lab boundary."
 				},
 				{
 					title: "Patch Notes Should Close the Bug Class",
