@@ -21,7 +21,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Loops",
 					content:
-						'When have you heard the word "loop" before? What do you think loops are for in programming? Loops let us repeat code however many times we want!\nDiscuss with the why loops might be helpful. For example, we don\'t have to copy our code a bunch of times, we can keep our code simpler, and some things would be impossible without loops (i.e. things that happen forever).\nOpen a new Scratch project. Have click on the Control section and look at the repeat and forever blocks. Discuss what these might be used for. Point out that both of these blocks have a "mouth" where we can insert other code blocks to be repeated!\nShow the an example of repeating the move __ steps and turn ___ degrees blocks. Start with the repeat block and then try the forever block.'
+						'Loops repeat code without copying the same blocks over and over. They make movement, animation, drawing, and forever-running game behavior easier to build and easier to revise.\nOpen the Control blocks and compare `repeat` with `forever`. Both blocks contain a "mouth" where other blocks can be placed and repeated.\nPractice by repeating `move __ steps` and `turn ___ degrees`. Start with a fixed `repeat` count, then try the same motion inside a `forever` loop.'
 				},
 				{
 					title: "GM1 Project 2: Drawing Mouse",
@@ -33,7 +33,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Conditionals",
 					content:
-						'In programming, a lot of the time we only want something to happen if something else is true or has been done. A conditional statement is something that needs be met in order for something else to happen.\nDiscuss with the about "conditionals" in real life, emphasizing the if/then aspect of such situations. Some examples include: If you eat your dinner, then you can have dessert. If you get your homework done, then you can play videogames. If it is cold outside, then you need to wear a jacket.\nIn addition, usually when we are checking a condition, there is more than one thing that can happen as a response to that condition. This is when a if... then... else conditional statement might come into use!\nOpen a new Scratch project. Take the time to introduce the to the various conditional blocks, in addition to asking for user input. Here are some rough projects you can use as guidance: if/then, if/then/else, user input.'
+						'Conditionals let a program choose what happens based on whether something is true. A real-life conditional looks like "if it is cold, wear a jacket." In Scratch, an `if` block runs code only when its condition is true.\nAn `if...then...else` block adds a second path: one set of blocks runs when the condition is true, and another set runs when it is false. Practice with sensing blocks, comparison blocks, and user input so the program can respond to different answers or game states.'
 				},
 				{
 					title: "GM1 Project 3: Math Facts",
@@ -45,7 +45,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Variables",
 					content:
-						"Variables are places that we store information that can change. Variables can store words, numbers, etc. Variables are helpful when we want to keep track of something like a score or time.\nOpen a new Scratch project. Have click on the Variables section and show them how to make a variable and use the set __ to __ and change __ by __ blocks.\nUsing a repeat block, make the cat say the numbers 1 to 10 (one by one). Here is a reference project.\nAsk to figure out how to make the cat count backward from 10 to 0, and then how to count backward from 100 to 0 by 10s."
+						"Variables store information that can change, such as a score, timer, answer, or level number. In Scratch, the `set __ to __` block replaces a variable's value, while `change __ by __` increases or decreases the current value.\nPractice by making the cat count from 1 to 10 with a loop. Then modify the same idea so the cat counts backward from 10 to 0 and backward from 100 to 0 by 10s."
 				},
 				{
 					title: "GM1 Project 4: Speed Click",
@@ -57,7 +57,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Message Broadcasting",
 					content:
-						"Previously, we learned about how to use conditional statements to do something if something else happens. However, we haven't learned how to make this work across different sprites. For example, we might want a sprite to say something once another sprite is done moving. In these situations, we use message broadcasting.\nOpen a new Scratch project. Have click on the Events section and and look at the broadcast __ when I receive __ blocks. Explain that broadcasting is a way that sprites can send each other messages to trigger/start certain parts of our code.\nand\nUsing this project as a rough guide, show the how to make the ball start bouncing only after the cat is done talking."
+						"Broadcasting lets sprites send messages to each other. This is useful when one sprite should wait for another sprite to finish speaking, moving, or changing state before its own script begins.\nOpen the Events blocks and compare `broadcast __` with `when I receive __`. Practice by making one sprite finish a short action, broadcast a message, and trigger a second sprite to start moving only after that message is received."
 				},
 				{
 					title: "GM1 Project 5: Dance Off",
@@ -69,14 +69,14 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM1 Project 6: Hedgehog Race",
 					content:
-						"Play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\nCreate a comment in the project to write out the different steps of what we will need to code.\nStarter code is provided, but it is also fine to create a project from scratch with custom sprites, costumes, and backdrops.",
+						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.",
 					projectLink: "https://scratch.mit.edu/projects/304551665/",
 					solutionLink: "https://scratch.mit.edu/projects/305082197/"
 				},
 				{
 					title: "GM1 Project 7: Asteroid Dodge",
 					content:
-						"Play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\nCreate a comment in the project to write out the different steps of what we will need to code.\nStarter code is provided, but it is also fine to create a project from scratch with custom sprites, costumes, and backdrops.",
+						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.",
 					projectLink: "https://scratch.mit.edu/projects/303001451/",
 					solutionLink: "https://scratch.mit.edu/projects/302948550/"
 				}
@@ -159,7 +159,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Complex conditionals",
 					content:
-						"Review with the what a conditional is (they should have familiarity with the if __ then __ and if __ then __ else __ blocks in Scratch). Often, we don't decide to do something because of just one thing; sometimes we want something to happen when two or more things are true at the same time, or when either one thing or another thing are true!\nOpen a new Scratch project. Using this project as a rough guide, introduce the and , or , and not blocks."
+						"Complex conditionals combine more than one condition. The `and` block requires both conditions to be true, the `or` block requires at least one condition to be true, and the `not` block reverses true and false.\nPractice by making a sprite respond differently when it touches multiple colors, either one of two colors, or none of the target colors."
 				},
 				{
 					title: "GM3 Project 1: Color Spotter",
@@ -405,7 +405,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Lists",
 					content:
-						"Earlier, we learned about strings, which are a way to put single letters and symbols together and store them in variables. What if we wanted to store a whole bunch of different numbers or words together at once? We can store those kinds of things in another type of variable, called a list.\nIn real life, what might you put into a list? For example: groceries, your favorite sports, places you've lived, the names of your family members.\nIn programming, we put items into lists so that we can conveniently look through them in our programs!\nCreate a new Scratch project. Using this project as a rough guide, show the how to create a list, add elements to a list, get the length of a list, and delete of all a list."
+						"Lists store many related values in one variable-like structure. A list can hold items such as groceries, favorite sports, places, names, scores, or words.\nIn programming, lists make it easier to store, inspect, add, remove, and count related items without creating a separate variable for each one.\nPractice by creating a list, adding elements, reading the list length, and deleting all items from the list."
 				},
 				{
 					title: "GM7 Project 1: Bucket List",
@@ -561,14 +561,14 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM9 Project 1: Fish Food",
 					content:
-						"Play through the demo and identify the different elements of the game to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\nCreate a blank Scratch project and add a comment in the project to write out the different steps of what we will need to code. This is created from a blank project in preparation for the Master Project. Set up custom sprites and backdrops to create Fish Food.\nFinally, share the project!",
+						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nCreate a blank Scratch project and add a project comment that lists the implementation steps. Build Fish Food with custom sprites and backdrops as preparation for the master project.\nFinally, share the project!",
 					projectLink: "https://scratch.mit.edu/projects/468227197",
 					solutionLink: "https://scratch.mit.edu/projects/468227197"
 				},
 				{
 					title: "Fish Food: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in GM9 Fish Food. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes in GM9 Fish Food. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Fish Food: Planning and Architecture",
@@ -607,14 +607,14 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM10 Project 1: Treasure Cave",
 					content:
-						"Play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\nCreate a comment in the project to write out the different steps of what we will need to code.\nStarter code is provided, but it is also fine to create a project from scratch with custom sprites, costumes, and backdrops.\nFinally, share the project!",
+						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.\nFinally, share the project!",
 					projectLink: "https://scratch.mit.edu/projects/315336651/",
 					solutionLink: "https://scratch.mit.edu/projects/309661591/"
 				},
 				{
 					title: "Treasure Cave: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in GM10 Treasure Cave. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes in GM10 Treasure Cave. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Treasure Cave: Planning and Architecture",
@@ -631,7 +631,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM10 Supplemental Project 1: Fruit Ninja",
 					content:
-						"Play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\n\t\t\t\tCreate a comment in the project to write out the different steps of what we will need to code.",
+						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps.",
 					projectLink: "https://scratch.mit.edu/projects/346953687/",
 					solutionLink: "https://scratch.mit.edu/projects/348994271/"
 				},
@@ -653,7 +653,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM11 Project 1: Master Project",
 					content:
-						"For your Master Project, you now have the skills and knowledge to design and build a game of your own! Spend some time brainstorming what kind of game to make, thinking about the past projects created and different elements to incorporate. Make sure to include lists and functions in the project.\n\t\t\t\tOnce there is an idea, discuss the plan for programming the game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\n\t\t\t\tCreate a new Scratch project and add a comment to write out the different steps of what we will need to code.\n\t\t\t\tProgram the game as independently as possible! As described above, this may take approximately two classes to complete."
+						"The master project is an original Scratch game that combines the course's major ideas. Brainstorm the game type, sprites, controls, rules, win/loss condition, variables, lists, and functions before building.\nCreate a new Scratch project and add a planning comment that lists the implementation steps. Build the game as independently as possible, revising the plan when the design changes. A complete project may take more than one class session."
 				},
 				{
 					title: "Master Project Presentation",
@@ -663,7 +663,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Course Recap",
 					content:
-						"We've learned a lot over these past few months! Can you recap the different topics we learned in this course?\n\t\t\t\tHelp come up with a list of coding concepts they've learned through Scratch. It might be helpful to look back at the module titles or code from previous projects they've created.\n\t\t\t\tIf anything is missing, make sure the list includes conditionals, XY coordinates, variables, event listeners, loops, and functions.\n\t\t\t\tGreat job! Many of these concepts from Scratch will be used in Python as well. As a next step, preview Python Level 1 and note how the same logic skills will carry over once the code is typed out instead of assembled from blocks."
+						"End the course by reviewing the major Scratch concepts: events, loops, conditionals, complex conditionals, variables, broadcasting, cloning, lists, functions, coordinates, game states, and project planning.\nConnect those ideas to the next text-based programming course. The same logic skills carry over into Python, but the blocks become typed code."
 				},
 				{
 					title: "Optional Extra Practice: Typing Games",

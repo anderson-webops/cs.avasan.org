@@ -197,6 +197,9 @@ describe("course text quality normalization", () => {
 		expect(guide).toMatch(/\|\s*Standard Track\s*\|\s*Medium\s*\|/);
 		expect(guide).toMatch(/\|\s*Supported Track\s*\|\s*Slow\s*\|/);
 		expect(guide).toMatch(/\|\s*Challenge Track\s*\|\s*Hard\s*\|/);
+		expect(guide).toContain("How To Use This Guide");
+		expect(guide).toContain("Placement Checkpoints");
+		expect(guide).toContain("The track can change during the course");
 		expect(guide).toContain("Today-Ready Recommendation");
 		expect(guide).toContain("APCS5/APCS6");
 		expect(guide).toContain("Generics, interfaces, records");

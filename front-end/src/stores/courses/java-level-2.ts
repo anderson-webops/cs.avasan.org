@@ -480,7 +480,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in JM7 Bank Account. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes that appear in JM7 Bank Account. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Bank Account: Planning and Architecture",

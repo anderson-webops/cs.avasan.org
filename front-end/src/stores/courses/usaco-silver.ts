@@ -14,12 +14,12 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Stronger Debugging under Time Pressure",
 					content:
-						"Require custom tests, reasoning about invariants, and quick rejection of bad approaches. Silver Not only find bugs; they should diagnose whether the entire strategy is wrong before wasting time polishing it."
+						"Require custom tests, reasoning about invariants, and quick rejection of bad approaches. In Silver, debugging means finding bugs and diagnosing whether the entire strategy is wrong before wasting time polishing it."
 				},
 				{
 					title: "Comfort with Java or Another Strong Contest Language",
 					content:
-						"Many of the Silver repo solutions lean on Java, so Be comfortable reading and writing contest code in a strongly structured environment. The language still matters less than the algorithmic habit."
+						"Many of the Silver repo solutions lean on Java, so the course expects comfort reading and writing contest code in a strongly structured environment. The language still matters less than the algorithmic habit."
 				},
 				{
 					title: "Catalog the Core Silver Patterns",

@@ -4,6 +4,22 @@ Use this guide to choose how quickly to move through AP Computer Science A. The 
 
 The course can be taken at different speeds. A faster track should still verify Java-specific details, AP-style tracing, object-oriented design, arrays, `ArrayList`, recursion, searching, sorting, and written explanation.
 
+## How To Use This Guide
+
+Use this as a placement readme before choosing the next APCS module. Start by identifying the learner's current evidence, not just their confidence: recent code, hand tracing, Java-specific mistakes, and how independently they can explain object state. Then choose the track that preserves AP requirements while avoiding unnecessary repetition.
+
+The track can change during the course. A learner might use the Quick Track for APCS1-4, the Challenge Track for classes and collections, and the Exam Track near the AP test. The only rule is that compression should be earned with evidence: working code, correct traces, and clear explanations.
+
+## Placement Checkpoints
+
+Before assigning a track, check these five signals:
+
+1. **Syntax transfer:** The learner can translate known Python/C++ ideas into Java without confusing Java file names, class names, `main`, semicolons, braces, primitive types, or `String` handling.
+2. **Java-specific behavior:** The learner can explain `.equals()` versus `==`, integer division, casting, `Scanner` input, `Math.random()`, reference aliases, and wrapper types.
+3. **Object modeling:** The learner can design a small class with private fields, constructors, useful methods, controlled mutation, and a written invariant.
+4. **AP tracing:** The learner can trace code by hand without relying on the compiler, especially loops, arrays, `ArrayList` mutation, recursion, and polymorphic method calls.
+5. **Written reasoning:** The learner can explain why a solution works, where it can fail, and how an AP scorer would award partial credit.
+
 ## Quick Chooser
 
 | Track           | Pace    | Best Fit                                                                      | What To Do                                                                                              | What Not To Skip                                                                                                                 |

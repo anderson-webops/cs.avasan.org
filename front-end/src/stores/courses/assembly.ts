@@ -76,7 +76,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Intel versus AT&T Syntax",
 					content:
-						"Explain operand ordering, immediate prefixes, register naming, and memory syntax differences between Intel and AT&T notation. The course writes Intel syntax, but Be able to identify the same instruction in both forms so compiler output does not become unreadable."
+						"Explain operand ordering, immediate prefixes, register naming, and memory syntax differences between Intel and AT&T notation. The course writes Intel syntax, but the expected outcome is recognizing the same instruction in both forms so compiler output does not become unreadable."
 				},
 				{
 					title: "Disassembly Workflow and Read-Before-Write Discipline",

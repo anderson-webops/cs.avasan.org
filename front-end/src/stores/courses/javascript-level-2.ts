@@ -1059,7 +1059,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Message Board: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in JSM13 Message Board. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes that appear in JSM13 Message Board. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Message Board: Planning and Architecture",
@@ -1119,7 +1119,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Quiz Game: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in JSM14 Quiz Game. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes that appear in JSM14 Quiz Game. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Quiz Game: Planning and Architecture",

@@ -851,7 +851,7 @@ This project connects linear models and systems of equations to research output.
 			createLesson(
 				"Course Reflection and Presentation Reflection Prompt",
 				`
-The master project closes the course with a short student-led explanation.
+The master project closes the course with a short independent explanation.
 
 **Student task**
 

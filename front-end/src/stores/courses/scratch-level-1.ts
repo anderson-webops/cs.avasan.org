@@ -465,7 +465,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Message broadcasting",
 					content:
-						"Previously we learned how to use conditional statements to do something if something else happens. However, we haven't learned how to make this work across different sprites. For example, we might want a sprite to say something once another sprite is done moving. In these situations, we use message broadcasting.\n\nOpen a new Scratch project. Have click on the Events section and look at the broadcast __ and when I receive __ blocks. Explain that broadcasting is a way that sprites can send each other messages to trigger or start certain parts of our code.\n\nUsing this project as a rough guide, show the how to make the ball start bouncing only after the cat is done talking."
+						"Broadcasting lets sprites send messages to each other. This is useful when one sprite should wait for another sprite to finish speaking, moving, or changing state before its own script begins.\n\nOpen the Events blocks and compare `broadcast __` with `when I receive __`. Practice by making one sprite finish a short action, broadcast a message, and trigger a second sprite to start moving only after that message is received."
 				},
 				{
 					title: "GS10 Project 1 – Dance Off",
@@ -515,14 +515,14 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS11 Project 1 – Hedgehog Race",
 					content:
-						"Let's put our skills to the test! Let's use what we've learned in the course to build this Hedgehog Race game.\n\nPlay through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\n\nCreate a comment in the project to write out the different steps of what we will need to code.\n\nStarter code is provided, but it is also fine to create a project from scratch with custom sprites, costumes, and backdrops.\n\nFinally, share the project!",
+						"Build Hedgehog Race by planning the moving pieces before programming. Play through the demo and identify the game elements that need to be built: sprite behavior, controls, event reactions, variables, scoring, and end conditions.\n\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.\n\nFinally, share the project!",
 					projectLink: "https://scratch.mit.edu/projects/304551665/",
 					solutionLink: "https://scratch.mit.edu/projects/305082197/"
 				},
 				{
 					title: "Hedgehog Race: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in GS11 Hedgehog Race. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes in GS11 Hedgehog Race. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Hedgehog Race: Planning and Architecture",
@@ -539,7 +539,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS11 Supplemental Project 1 – Save the Wizard",
 					content:
-						"Play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\n\nCreate a comment in the project to write out the different steps of what we will need to code.\n\nThe wizard has been turned into a frog! Help him collect potions while avoiding skeletons to turn back into a wizard.\n\n1. Let's start by working on our frog wizard! Make it so when the green flag is clicked, he goes to the center of the screen, changes his size and moves when the arrow keys are pressed.\n2. Next, let's make the skeleton move! We want the skeleton to go to a random position on the far right side of the screen and constantly move left. When it is touching the frog or the left edge, make it go back to the right side.\n3. Now do the same thing to the potion. If you want to make the game more challenging, make the potion wait a few seconds before appearing on the right again. (Hint: you'll need to use show/hide blocks).\n4. Our frog needs to be able to level up and down in order to win or lose the game. Start by making a variable to keep track of the level and set it to 1 when the green flag is clicked.\n5. Make message broadcasts for leveling up and down. When they level up, if they are at level 4, they win the game. Otherwise, increase their level by 1, switch the costume and increase the size. When they level down, if they are at level 1, they lose the game. Otherwise, decrease their level by 1, switch the costume and decrease the size.\n6. Make sure to broadcast the level-up/level-down messages when the skeletons or potion touch the frog.\n7. Feel free to add another skeleton to make the game more difficult.\n8. Add sound effects and backdrop changes for the finishing touches!",
+						"Play through the demo and identify the game elements that need to be programmed: sprite behavior, controls, event reactions, variables, scoring, and end conditions.\n\nAdd a project comment that lists the implementation steps.\n\nThe wizard has been turned into a frog. Help him collect potions while avoiding skeletons to turn back into a wizard.\n\n1. Program the frog wizard so that when the green flag is clicked, he goes to the center of the screen, changes size, and moves with the arrow keys.\n2. Program the skeleton to start at a random position on the far right side and move left. When it touches the frog or the left edge, send it back to the right side.\n3. Program the potion with a similar reset pattern. For a harder version, make the potion wait a few seconds before appearing on the right again. Hint: use show/hide blocks.\n4. Add a level variable. Set it to 1 at the start of the game and use it to control win/loss progress.\n5. Create broadcasts for leveling up and leveling down. Leveling up at level 4 wins the game; otherwise, increase the level, switch costume, and increase size. Leveling down at level 1 loses the game; otherwise, decrease the level, switch costume, and decrease size.\n6. Broadcast the level-up or level-down messages when the skeletons or potion touch the frog.\n7. Add another skeleton for extra difficulty.\n8. Add sound effects and backdrop changes for the finishing touches.",
 					projectLink: "https://scratch.mit.edu/projects/332395747/",
 					solutionLink: "https://scratch.mit.edu/projects/330724703/"
 				},
@@ -561,14 +561,14 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS12 Project 1 – Asteroid Dodge",
 					content:
-						"Play through the demo and identify the different elements of the game that they will have to program in order to create this game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?\n\nCreate a comment in the project to write out the different steps of what we will need to code.\n\nStarter code is provided, but it is also fine to create a project from scratch with custom sprites, costumes, and backdrops.\n\nFinally, share the project!",
+						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\n\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.\n\nFinally, share the project!",
 					projectLink: "https://scratch.mit.edu/projects/303001451/",
 					solutionLink: "https://scratch.mit.edu/projects/302948550/"
 				},
 				{
 					title: "Asteroid Dodge: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in GS12 Asteroid Dodge. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes in GS12 Asteroid Dodge. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Asteroid Dodge: Planning and Architecture",
@@ -607,7 +607,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS13 Project 1 – Master Project",
 					content:
-						"For your Master Project, you now have the skills and knowledge to design and build a game of your own! Spend some time brainstorming what kind of game to make, thinking about the past projects created and different elements to incorporate.\n\nOnce there is an idea, discuss the plan for programming the game. Helpful questions include: what does each sprite do? How do we control it? How does each sprite react to certain events? What variables do we need to keep track of? How does the game end?"
+						"The master project is an original Scratch game that combines the course's major ideas. Brainstorm the game type, sprites, controls, rules, win/loss condition, variables, and event structure before building.\n\nPlan the implementation by answering: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?"
 				},
 				{
 					title: "Master Project Presentation",
@@ -617,7 +617,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Course recap",
 					content:
-						"We've learned a lot over these past few months! Can you recap the different topics we learned in this course?\n\nHelp compile a list of coding concepts learned through Scratch. It might be helpful to look back at the module titles or code from previous projects created.\n\nIf any are missing, make sure the list includes conditionals, XY coordinates, variables, event listeners and loops."
+						"End the course by reviewing the major Scratch concepts: events, loops, conditionals, variables, broadcasting, coordinates, game states, sprite behavior, and project planning.\n\nConnect those ideas to Python Level 1. The same logic skills carry over, but the blocks become typed code."
 				},
 				{
 					title: "Optional Extra Practice – Typing Games",

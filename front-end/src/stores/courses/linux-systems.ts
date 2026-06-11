@@ -144,7 +144,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Choosing Between /var, /srv, and /opt",
 					content:
-						"Teach the judgment call behind application layout. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`; Be able to defend those choices instead of scattering files arbitrarily."
+						"Teach the judgment call behind application layout. Content that a service is serving often fits under `/srv`, mutable state belongs under `/var`, and self-contained optional software can live under `/opt`. The expected outcome is a defensible layout choice instead of files scattered arbitrarily."
 				},
 				{
 					title: "Project: Deploy a Static Site from /srv",
@@ -633,7 +633,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Listening Services and Sockets with ss",
 					content:
-						"Use `ss` to connect network thinking back to process thinking. Be able to inspect which ports are listening, whether an expected service is actually bound, and whether a reverse proxy or app process is reachable on the port the rest of the configuration assumes."
+						"Use `ss` to connect network thinking back to process thinking. Inspect which ports are listening, whether an expected service is actually bound, and whether a reverse proxy or app process is reachable on the port the rest of the configuration assumes."
 				},
 				{
 					title: "Testing Connectivity with ping, curl, and dig",

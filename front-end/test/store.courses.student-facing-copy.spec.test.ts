@@ -100,7 +100,17 @@ const forbiddenRawGeneratedPatterns = [
 	/missing reference images/i,
 	/Use the placeholder below/i,
 	/answer-key notes/i,
-	/qualitative prompts/i
+	/qualitative prompts/i,
+	/\bthey will have to program\b/i,
+	/\bwhat we will need to code\b/i,
+	/\bmistakes common mistakes\b/i,
+	/\bBe able to\b/,
+	/\bSilver Not\b/i,
+	/\band should see warnings\b/i,
+	/\bstudent-led\b/i,
+	/\bShow the a picture\b/i,
+	/\bshow the how\b/i,
+	/\bdelete of all a list\b/i
 ];
 
 const rawCourseFiles = readdirSync(coursesSourceDir)

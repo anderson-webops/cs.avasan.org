@@ -516,7 +516,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Build for Explanation, Not Just Output",
 					content:
-						"Require the capstone to expose its logic through traces, notes, diagrams, or evaluation summaries. Be able to explain why the system made a choice and how it would fail, not just demonstrate that it runs."
+						"Require the capstone to expose its logic through traces, notes, diagrams, or evaluation summaries. The expected outcome is an explanation of why the system made a choice and how it would fail, not just a demonstration that it runs."
 				},
 				{
 					title: "Measure Improvement over a Baseline",

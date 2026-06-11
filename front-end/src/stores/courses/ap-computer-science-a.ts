@@ -76,6 +76,7 @@ export const apComputerScienceACourse: RawCourse = {
 					title: "Pacing Tracks and Acceleration Guide",
 					content: [
 						"Use the APCS track guide when the full sequence would move too slowly or when a learner needs a more supported route. The guide separates the course into Quick, Standard, Supported, Challenge, and Exam tracks, with concrete module decisions for each route.",
+						"Use the placement checkpoints in the guide to choose the route from evidence: recent code, Java-specific mistakes, hand tracing, object-state explanations, and AP-style written reasoning.",
 						"**Fast-placement rule:** Use APCS1-4 mostly as diagnostics for experienced Python or C++ learners. Backfill only Java-specific gaps such as `.equals()` versus `==`, integer division, casting, `Scanner`, `Math.random()`, file/class naming, and AP-style tracing.",
 						"**Core-route rule:** Do not skip APCS5-8, APCS10-12, or APCS13-16 completely. These modules contain the AP-specific Java object model, inheritance/polymorphism, arrays/ArrayLists, wrapper constraints, recursion, runtime, searching, and sorting.",
 						"**Challenge rule:** When APCS work is too easy, keep the AP concept but upgrade the artifact: add validation, multiple classes, test cases, file input, a menu loop, edge-case writeups, or an FRQ-style explanation."
@@ -196,7 +197,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Barron's Chapter 2 Habit",
 					content:
-						"Start multiple-choice tracing early. The APCS1 chapter work is mainly about casting, output, and expression evaluation, so Be able to justify answers line by line."
+						"Start multiple-choice tracing early. The APCS1 chapter work is mainly about casting, output, and expression evaluation, so answer choices should be justified line by line."
 				}
 			],
 			supplementalProjects: [

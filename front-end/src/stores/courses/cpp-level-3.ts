@@ -9,7 +9,7 @@ export const cppLevel3Course: RawCourse = {
 				{
 					title: "Bridge Course Goals, Scale, and Tooling",
 					content:
-						"Position `C++ Level 3` as the bridge between beginner/manual-memory C++ and larger idiomatic C++ work. Cover: assumed baseline from Levels 1-2; what makes a program medium-size instead of just longer; why command structure, file-backed state, standard-library fluency, recursion, RAII, and small tests matter together; how to use a repeatable build command, warnings, debugger stepping, and trace output as evidence. By the end of this setup module, Be able to compile a multi-file program, explain one warning or runtime failure, and describe what structure they will need before moving into data structures or design patterns."
+						"Position `C++ Level 3` as the bridge between beginner/manual-memory C++ and larger idiomatic C++ work. Cover the assumed baseline from Levels 1-2, what makes a program medium-size instead of just longer, why command structure and file-backed state matter, how standard-library fluency connects to recursion and RAII, and how repeatable build commands, warnings, debugger stepping, and trace output provide evidence. By the end of this setup module, the expected outcome is a compiled multi-file program, one explained warning or runtime failure, and a clear description of the structure needed before moving into data structures or design patterns."
 				},
 				{
 					title: "CPPI0 Project: Build and Debug Checkpoint",

@@ -681,7 +681,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Compiler Flags and Warning Discipline",
 					content:
-						"Treat compiler flags as engineering policy rather than optional noise. Get used to `-Wall`, `-Wextra`, and `-Wpedantic`, and should see warnings as evidence of assumptions that need to be checked before the code deserves trust."
+						"Treat compiler flags as engineering policy rather than optional noise. Use `-Wall`, `-Wextra`, and `-Wpedantic`, then treat warnings as evidence of assumptions that need to be checked before the code deserves trust."
 				},
 				{
 					title: "Debuggers, Sanitizers, and Evidence-Driven Diagnosis",

@@ -952,7 +952,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Ninja Versus Alien: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in PyG10 Ninja Versus Alien. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes that appear in PyG10 Ninja Versus Alien. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Ninja Versus Alien: Planning and Architecture",
@@ -1012,7 +1012,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Space Invaders: Debugging and Failure Modes",
 					content:
-						"Focus on the mistakes common mistakes appear in PyG11 Space Invaders. Diagnose a broken attempt, repair it, and explain why the fix works."
+						"Focus on common mistakes that appear in PyG11 Space Invaders. Diagnose a broken attempt, repair it, and explain why the fix works."
 				},
 				{
 					title: "Space Invaders: Planning and Architecture",
