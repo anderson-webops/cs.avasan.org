@@ -10,6 +10,30 @@ Use this as a placement readme before choosing the next APCS module. Start by id
 
 The track can change during the course. A learner might use the Quick Track for APCS1-4, the Challenge Track for classes and collections, and the Exam Track near the AP test. The only rule is that compression should be earned with evidence: working code, correct traces, and clear explanations.
 
+## Track Labels At A Glance
+
+The names below map the informal pacing choices to concrete APCS routes:
+
+| Informal Choice | Course Track    | Best Use Case                                                                                           |
+| --------------- | --------------- | ------------------------------------------------------------------------------------------------------- |
+| Slow / Easy     | Supported Track | The learner needs smaller steps, more worked examples, and confidence before independent projects.      |
+| Medium          | Standard Track  | The learner is comfortable with programming but still benefits from the normal APCS concept sequence.   |
+| Fast / Quick    | Quick Track     | The learner already knows Python, C++, or another language well and only needs Java/AP-specific gaps.   |
+| Hard            | Challenge Track | The learner can finish normal APCS work quickly and needs deeper Java builds, tests, and edge cases.    |
+| Exam-Focused    | Exam Track      | The AP test is close, or the main goal is score preparation, timed practice, and scoring-guideline use. |
+
+Choosing a track does not permanently lock the course. A strong learner can move quickly through syntax review, slow down for object modeling, switch into challenge projects for collections, and later use the exam track for timed FRQ work.
+
+## Fast Placement Decision
+
+Use these rules when a class needs a quick route decision:
+
+1. Choose **Supported Track** when Java syntax, hand tracing, or basic debugging is still unstable.
+2. Choose **Standard Track** when the learner can complete regular projects but still benefits from a predictable sequence.
+3. Choose **Quick Track** when Python/C++ knowledge transfers cleanly and Java-specific gaps are narrow.
+4. Choose **Challenge Track** when the base project is correct quickly enough that repetition would waste time.
+5. Choose **Exam Track** when AP-style timing, scoring language, and weak-topic repair matter more than another full build.
+
 ## Placement Checkpoints
 
 Before assigning a track, check these five signals:

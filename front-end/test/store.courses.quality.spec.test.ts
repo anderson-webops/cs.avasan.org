@@ -192,12 +192,18 @@ describe("course text quality normalization", () => {
 		expect(guideItem.datasetLink).toBe(
 			"/course-assets/apcs/apcs-pacing-tracks.md"
 		);
-		expect(guideItem.content).toContain("Quick, Standard, Supported");
+		expect(guideItem.content).toContain("Slow/Supported");
+		expect(guideItem.content).toContain("Fast/Quick");
 		expect(guide).toMatch(/\|\s*Quick Track\s*\|\s*Fast\s*\|/);
 		expect(guide).toMatch(/\|\s*Standard Track\s*\|\s*Medium\s*\|/);
 		expect(guide).toMatch(/\|\s*Supported Track\s*\|\s*Slow\s*\|/);
 		expect(guide).toMatch(/\|\s*Challenge Track\s*\|\s*Hard\s*\|/);
+		expect(guide).toMatch(/\|\s*Slow \/ Easy\s*\|\s*Supported Track\s*\|/);
+		expect(guide).toMatch(/\|\s*Fast \/ Quick\s*\|\s*Quick Track\s*\|/);
+		expect(guide).toMatch(/\|\s*Hard\s*\|\s*Challenge Track\s*\|/);
 		expect(guide).toContain("How To Use This Guide");
+		expect(guide).toContain("Track Labels At A Glance");
+		expect(guide).toContain("Fast Placement Decision");
 		expect(guide).toContain("Placement Checkpoints");
 		expect(guide).toContain("The track can change during the course");
 		expect(guide).toContain("Today-Ready Recommendation");
