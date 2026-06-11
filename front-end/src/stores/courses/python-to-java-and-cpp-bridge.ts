@@ -84,7 +84,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Functions, Parameters, and Return Types: Verification and Reflection",
 					content:
-						"Close PTJ1 Functions, Parameters, and Return Types by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PTJ1 Functions, Parameters, and Return Types with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "PTJ1 Functions, Parameters, and Return Types: Core Project",
@@ -146,7 +146,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Collections, Strings, and Indexing: Verification and Reflection",
 					content:
-						"Close PTJ2 Collections, Strings, and Indexing by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PTJ2 Collections, Strings, and Indexing with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "PTJ2 Collections, Strings, and Indexing: Core Project",
@@ -208,7 +208,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Classes and Objects across Languages: Verification and Reflection",
 					content:
-						"Close PTJ3 Classes and Objects across Languages by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PTJ3 Classes and Objects across Languages with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "PTJ3 Classes and Objects across Languages: Core Project",
@@ -270,7 +270,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Java Specific Adaptation: Verification and Reflection",
 					content:
-						"Close PTJ4 Java-Specific Adaptation by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PTJ4 Java-Specific Adaptation with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "PTJ4 Java-Specific Adaptation: Core Project",
@@ -332,7 +332,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "C++ Specific Adaptation: Verification and Reflection",
 					content:
-						"Close PTJ5 C++-Specific Adaptation by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PTJ5 C++-Specific Adaptation with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "PTJ5 C++-Specific Adaptation: Core Project",

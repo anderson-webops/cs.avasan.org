@@ -1186,7 +1186,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries: Verification and Reflection",
 					content:
-						"Close SADX Enrichment and Legacy Archive Boundaries by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish SADX Enrichment and Legacy Archive Boundaries with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries: Core Project",

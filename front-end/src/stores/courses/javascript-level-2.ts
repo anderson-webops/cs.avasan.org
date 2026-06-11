@@ -1069,7 +1069,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Message Board: Verification and Reflection",
 					content:
-						"Close JSM13 Message Board by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JSM13 Message Board with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -1129,7 +1129,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Quiz Game: Verification and Reflection",
 					content:
-						"Close JSM14 Quiz Game by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JSM14 Quiz Game with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -1183,7 +1183,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM15 Master Project: Verification and Reflection",
 					content:
-						"Close JSM15 Master Project by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JSM15 Master Project with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "JSM15 Master Project: Core Project",

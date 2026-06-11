@@ -5,7 +5,7 @@ import {
 	researchBackedExpansionProfiles
 } from "@/stores/courses/research-expansions";
 
-const COURSE_SWEEP_TIMEOUT = 90000;
+const COURSE_SWEEP_TIMEOUT = 180000;
 
 function allText(
 	course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>

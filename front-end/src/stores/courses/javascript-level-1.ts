@@ -1148,7 +1148,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Master Project: Verification and Reflection",
 					content:
-						"Close JSS15 Master Project by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JSS15 Master Project with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [

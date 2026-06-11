@@ -126,7 +126,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Nested Loops: Verification and Reflection",
 					content:
-						"Close GM2 Nested Loops by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM2 Nested Loops with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -178,7 +178,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Complex Conditionals: Verification and Reflection",
 					content:
-						"Close GM3 Complex Conditionals by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM3 Complex Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -228,7 +228,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Cloning: Verification and Reflection",
 					content:
-						"Close GM4 Cloning by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM4 Cloning with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -324,7 +324,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Strings: Verification and Reflection",
 					content:
-						"Close GM5 Strings by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM5 Strings with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -374,7 +374,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Mathematical Operators: Verification and Reflection",
 					content:
-						"Close GM6 Mathematical Operators by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM6 Mathematical Operators with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -476,7 +476,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Functions: Verification and Reflection",
 					content:
-						"Close GM8 Functions by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM8 Functions with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -578,7 +578,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Fish Food: Verification and Reflection",
 					content:
-						"Close GM9 Fish Food by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM9 Fish Food with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -624,7 +624,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Treasure Cave: Verification and Reflection",
 					content:
-						"Close GM10 Treasure Cave by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GM10 Treasure Cave with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [

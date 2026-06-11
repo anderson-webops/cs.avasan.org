@@ -70,7 +70,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Overloaded Constructors & Comparison Methods: Verification and Reflection",
 					content:
-						"Close JM2 Overloaded Constructors & Comparison Methods by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JM2 Overloaded Constructors & Comparison Methods with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -490,7 +490,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account: Verification and Reflection",
 					content:
-						"Close JM7 Bank Account by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JM7 Bank Account with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -618,7 +618,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner: Verification and Reflection",
 					content:
-						"Close JM9 Maze Runner by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JM9 Maze Runner with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -730,7 +730,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Repo Extension and Reference Library: Verification and Reflection",
 					content:
-						"Close JM11 Repo Extension and Reference Library by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JM11 Repo Extension and Reference Library with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "JM11 Repo Extension and Reference Library: Core Project",

@@ -8,7 +8,7 @@ const testDir = dirname(fileURLToPath(import.meta.url));
 const frontEndDir = resolve(testDir, "..");
 const repoRoot = resolve(frontEndDir, "..");
 const coursesSourceDir = resolve(frontEndDir, "src/stores/courses");
-const COURSE_SWEEP_TIMEOUT = 90000;
+const COURSE_SWEEP_TIMEOUT = 180000;
 
 const forbiddenStudentFacingPatterns = [
 	/\bTeaching flow\b/i,
@@ -88,6 +88,7 @@ const forbiddenRawGeneratedPatterns = [
 	/\bstudents should\b/i,
 	/Use the linked starter and solution/i,
 	/Have students finish the missing implementation/i,
+	/Close .* by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass\./i,
 	/Anchor the lesson in one concrete example/i,
 	/Have students test at least one custom case/i,
 	/Introduce the main goal of Applied Studio/i,

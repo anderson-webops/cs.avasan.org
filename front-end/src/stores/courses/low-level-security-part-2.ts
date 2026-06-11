@@ -265,7 +265,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 4: Information Disclosure and Memory Observation: Verification and Reflection",
 					content:
-						"Close Module 4: Information Disclosure and Memory Observation by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish Module 4: Information Disclosure and Memory Observation with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "Module 4: Information Disclosure and Memory Observation: Core Project",
@@ -385,7 +385,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 6: Control-Flow Thinking for Defenders: Verification and Reflection",
 					content:
-						"Close Module 6: Control-Flow Thinking for Defenders by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish Module 6: Control-Flow Thinking for Defenders with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "Module 6: Control-Flow Thinking for Defenders: Core Project",

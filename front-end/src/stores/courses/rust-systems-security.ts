@@ -24,7 +24,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Tooling, Cargo, and Why Rust Exists: Verification and Reflection",
 					content:
-						"Close RSS0 Tooling, Cargo, and Why Rust Exists by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS0 Tooling, Cargo, and Why Rust Exists with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS0 Tooling, Cargo, and Why Rust Exists: Core Project",
@@ -86,7 +86,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Ownership, Moves, and Memory Responsibility: Verification and Reflection",
 					content:
-						"Close RSS1 Ownership, Moves, and Memory Responsibility by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS1 Ownership, Moves, and Memory Responsibility with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS1 Ownership, Moves, and Memory Responsibility: Core Project",
@@ -148,7 +148,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Borrowing, Aliasing, and Lifetimes: Verification and Reflection",
 					content:
-						"Close RSS2 Borrowing, Aliasing, and Lifetimes by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS2 Borrowing, Aliasing, and Lifetimes with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS2 Borrowing, Aliasing, and Lifetimes: Core Project",
@@ -210,7 +210,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option, Result, and Typed Error Paths: Verification and Reflection",
 					content:
-						"Close RSS3 Option, Result, and Typed Error Paths by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS3 Option, Result, and Typed Error Paths with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS3 Option, Result, and Typed Error Paths: Core Project",
@@ -272,7 +272,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety: Verification and Reflection",
 					content:
-						"Close RSS4 Strings, Slices, Collections, and Bounds Safety by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS4 Strings, Slices, Collections, and Bounds Safety with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS4 Strings, Slices, Collections, and Bounds Safety: Core Project",
@@ -334,7 +334,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs, Enums, and Safer State Models: Verification and Reflection",
 					content:
-						"Close RSS5 Structs, Enums, and Safer State Models by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS5 Structs, Enums, and Safer State Models with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS5 Structs, Enums, and Safer State Models: Core Project",
@@ -396,7 +396,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits, Iterators, and API Contracts: Verification and Reflection",
 					content:
-						"Close RSS6 Traits, Iterators, and API Contracts by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS6 Traits, Iterators, and API Contracts with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS6 Traits, Iterators, and API Contracts: Core Project",
@@ -458,7 +458,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Files, Parsers, and Secure CLI Design: Verification and Reflection",
 					content:
-						"Close RSS7 Files, Parsers, and Secure CLI Design by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS7 Files, Parsers, and Secure CLI Design with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS7 Files, Parsers, and Secure CLI Design: Core Project",
@@ -520,7 +520,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Concurrency and Race Reduction: Verification and Reflection",
 					content:
-						"Close RSS8 Concurrency and Race Reduction by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS8 Concurrency and Race Reduction with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS8 Concurrency and Race Reduction: Core Project",
@@ -582,7 +582,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries: Verification and Reflection",
 					content:
-						"Close RSS9 Unsafe, FFI, and Trusted Boundaries by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS9 Unsafe, FFI, and Trusted Boundaries with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS9 Unsafe, FFI, and Trusted Boundaries: Core Project",
@@ -644,7 +644,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool: Verification and Reflection",
 					content:
-						"Close RSS10 Capstone: Harden a Legacy Tool by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish RSS10 Capstone: Harden a Legacy Tool with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "RSS10 Capstone: Harden a Legacy Tool: Core Project",

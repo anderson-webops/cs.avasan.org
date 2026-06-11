@@ -508,7 +508,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Regression with Neural Networks: Verification and Reflection",
 					content:
-						"Close ML6 Regression with Neural Networks by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish ML6 Regression with Neural Networks with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -568,7 +568,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Image Classifier: Verification and Reflection",
 					content:
-						"Close ML7 Image Classifier by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish ML7 Image Classifier with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [

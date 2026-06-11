@@ -580,7 +580,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Unit 9: Repo Extension Bank and Canonical Variants: Verification and Reflection",
 					content:
-						"Close Unit 9: Repo Extension Bank and Canonical Variants by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish Unit 9: Repo Extension Bank and Canonical Variants with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "Unit 9: Repo Extension Bank and Canonical Variants: Core Project",

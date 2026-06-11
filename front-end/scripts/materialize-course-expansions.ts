@@ -545,7 +545,7 @@ function buildCurriculumSupportItem(
 		},
 		{
 			title: `${focus}: Debugging and Failure Modes`,
-			content: `Focus on the mistakes students are most likely to make in ${moduleTitle}. Have them diagnose a broken attempt, repair it, and explain why the fix works.`
+			content: `Focus on common mistakes in ${moduleTitle}. The checkpoint diagnoses a broken attempt, repairs it, and explains why the fix works.`
 		},
 		{
 			title: `${focus}: Planning and Architecture`,
@@ -553,7 +553,7 @@ function buildCurriculumSupportItem(
 		},
 		{
 			title: `${focus}: Verification and Reflection`,
-			content: `Close ${moduleTitle} by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass.`
+			content: `Finish ${moduleTitle} with a concise review of the required output, one alternate approach, and one specific improvement for a later revision.`
 		}
 	];
 	return variants[(index - 1) % variants.length];

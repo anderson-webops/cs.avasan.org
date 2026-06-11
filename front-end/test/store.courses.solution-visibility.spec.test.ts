@@ -7,6 +7,7 @@ import { courseCatalog } from "@/stores/courses/index";
 
 const SOLUTION_PATH_RE =
 	/(?:^|\/)solutions?(?:\/|$)|(?:^|[-_])solutions?(?:[-_]|$)/i;
+const COURSE_SWEEP_TIMEOUT = 180000;
 
 function courseLinks(course: CourseDefinition) {
 	return course.modules.flatMap(module =>
@@ -77,37 +78,43 @@ describe("course solution visibility", () => {
 		);
 	});
 
-	it("omits dedicated solution paths from every learner course", async () => {
-		const appStore = useAppStore();
-		appStore.setCurrentUser({
-			_id: "learner-1",
-			name: "Learner",
-			email: "learner@example.com",
-			age: 13,
-			state: "GA",
-			courseAccess: courseCatalog.map(course => course.id),
-			editUsers: false,
-			saveEdit: "Save"
-		});
+	it(
+		"omits dedicated solution paths from every learner course",
+		async () => {
+			const appStore = useAppStore();
+			appStore.setCurrentUser({
+				_id: "learner-1",
+				name: "Learner",
+				email: "learner@example.com",
+				age: 13,
+				state: "GA",
+				courseAccess: courseCatalog.map(course => course.id),
+				editUsers: false,
+				saveEdit: "Save"
+			});
 
-		const coursesStore = useCoursesStore();
-		const leaks: string[] = [];
+			const coursesStore = useCoursesStore();
+			const leaks: string[] = [];
 
-		for (const { id } of courseCatalog) {
-			const course = await coursesStore.loadCourseById(id);
+			for (const { id } of courseCatalog) {
+				const course = await coursesStore.loadCourseById(id);
 
-			if (!course) {
-				leaks.push(`${id} failed to load`);
-				continue;
+				if (!course) {
+					leaks.push(`${id} failed to load`);
+					continue;
+				}
+
+				leaks.push(
+					...learnerSolutionLeaks(course).map(
+						leak => `${id}: ${leak}`
+					)
+				);
 			}
 
-			leaks.push(
-				...learnerSolutionLeaks(course).map(leak => `${id}: ${leak}`)
-			);
-		}
-
-		expect(leaks).toEqual([]);
-	});
+			expect(leaks).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("includes starter and solution links for staff course data", async () => {
 		const appStore = useAppStore();

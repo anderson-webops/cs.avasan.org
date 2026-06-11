@@ -844,7 +844,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Enemy AI: Verification and Reflection",
 					content:
-						"Close PyG9 Game Elements: Enemy AI by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PyG9 Game Elements: Enemy AI with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -902,7 +902,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI: Verification and Reflection",
 					content:
-						"Close Check-In #3: System Control, Projectiles, Enemy AI by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish Check-In #3: System Control, Projectiles, Enemy AI with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -962,7 +962,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Ninja Versus Alien: Verification and Reflection",
 					content:
-						"Close PyG10 Ninja Versus Alien by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PyG10 Ninja Versus Alien with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -1022,7 +1022,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Space Invaders: Verification and Reflection",
 					content:
-						"Close PyG11 Space Invaders by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish PyG11 Space Invaders with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [

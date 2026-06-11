@@ -1539,7 +1539,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Repo Extension, , and Capstone Library: Verification and Reflection",
 					content:
-						"Close AJ18 Repo Extension, Starter, and Capstone Library by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish AJ18 Repo Extension, Starter, and Capstone Library with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "AJ18 Repo Extension, Starter, and Capstone Library: Core Project",

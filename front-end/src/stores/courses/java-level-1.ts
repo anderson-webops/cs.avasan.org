@@ -111,7 +111,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Casting and Operators: Verification and Reflection",
 					content:
-						"Close JS2 Casting and Operators by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JS2 Casting and Operators with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -187,7 +187,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Conditionals: Verification and Reflection",
 					content:
-						"Close JS3 Conditionals by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JS3 Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -338,7 +338,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Practice with Loops & Conditionals: Verification and Reflection",
 					content:
-						"Close JS5 Practice with Loops & Conditionals by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JS5 Practice with Loops & Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -459,7 +459,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Methods: Verification and Reflection",
 					content:
-						"Close JS6 Methods by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JS6 Methods with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -646,7 +646,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Two Dimensional Arrays: Verification and Reflection",
 					content:
-						"Close JS8 Two-Dimensional Arrays by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JS8 Two-Dimensional Arrays with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -776,7 +776,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Master Project: Battleship: Verification and Reflection",
 					content:
-						"Close JS9 Master Project: Battleship by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish JS9 Master Project: Battleship with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [

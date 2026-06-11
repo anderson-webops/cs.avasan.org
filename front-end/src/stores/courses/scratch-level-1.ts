@@ -26,7 +26,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Starting in Scratch: Verification and Reflection",
 					content:
-						"Close GS1 Starting in Scratch by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GS1 Starting in Scratch with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -278,7 +278,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Advanced Conditionals: Verification and Reflection",
 					content:
-						"Close GS6 Advanced Conditionals by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GS6 Advanced Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -432,7 +432,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Variables: Verification and Reflection",
 					content:
-						"Close GS9 Variables by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GS9 Variables with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -484,7 +484,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Message Broadcasting: Verification and Reflection",
 					content:
-						"Close GS10 Message Broadcasting by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GS10 Message Broadcasting with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -532,7 +532,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Hedgehog Race: Verification and Reflection",
 					content:
-						"Close GS11 Hedgehog Race by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GS11 Hedgehog Race with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -578,7 +578,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Asteroid Dodge: Verification and Reflection",
 					content:
-						"Close GS12 Asteroid Dodge by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish GS12 Asteroid Dodge with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				}
 			],
 			supplementalProjects: [

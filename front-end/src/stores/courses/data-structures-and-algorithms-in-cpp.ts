@@ -86,7 +86,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Interfaces, Records, and a Task Manager CLI: Verification and Reflection",
 					content:
-						"Close DSCPP1 Interfaces, Records, and a Task Manager CLI by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP1 Interfaces, Records, and a Task Manager CLI with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP1 Interfaces, Records, and a Task Manager CLI: Core Project",
@@ -148,7 +148,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Graphs and Shortest Paths: Verification and Reflection",
 					content:
-						"Close DSCPP2 Graphs and Shortest Paths by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP2 Graphs and Shortest Paths with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP2 Graphs and Shortest Paths: Core Project",
@@ -210,7 +210,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "STL Containers and State Based Text Generation: Verification and Reflection",
 					content:
-						"Close DSCPP3 STL Containers and State-Based Text Generation by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP3 STL Containers and State-Based Text Generation with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP3 STL Containers and State-Based Text Generation: Core Project",
@@ -272,7 +272,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursion and Backtracking in 3D Mazes: Verification and Reflection",
 					content:
-						"Close DSCPP4 Recursion and Backtracking in 3D Mazes by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP4 Recursion and Backtracking in 3D Mazes with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP4 Recursion and Backtracking in 3D Mazes: Core Project",
@@ -334,7 +334,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Quicksort and Partitioning: Verification and Reflection",
 					content:
-						"Close DSCPP5 Quicksort and Partitioning by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP5 Quicksort and Partitioning with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP5 Quicksort and Partitioning: Core Project",
@@ -396,7 +396,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Templates and Linked Structures: Verification and Reflection",
 					content:
-						"Close DSCPP6 Templates and Linked Structures by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP6 Templates and Linked Structures with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP6 Templates and Linked Structures: Core Project",
@@ -458,7 +458,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Binary Search Trees: Verification and Reflection",
 					content:
-						"Close DSCPP7 Binary Search Trees by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP7 Binary Search Trees with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP7 Binary Search Trees: Core Project",
@@ -520,7 +520,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "AVL Trees and Rebalancing: Verification and Reflection",
 					content:
-						"Close DSCPP8 AVL Trees and Rebalancing by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP8 AVL Trees and Rebalancing with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP8 AVL Trees and Rebalancing: Core Project",
@@ -582,7 +582,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Benchmarking and Data Structure Tradeoffs: Verification and Reflection",
 					content:
-						"Close DSCPP9 Benchmarking and Data-Structure Tradeoffs by checking outputs, comparing alternate approaches, and recording one improvement that would make the work more robust on a second pass."
+						"Finish DSCPP9 Benchmarking and Data-Structure Tradeoffs with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
 				},
 				{
 					title: "DSCPP9 Benchmarking and Data-Structure Tradeoffs: Core Project",
