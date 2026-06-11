@@ -20,6 +20,7 @@ const REFERENCES = {
 		"https://www.acs.org/education/policies/middle-and-high-school-chemistry.html",
 	acsPeriodicTable:
 		"https://www.acs.org/education/whatischemistry/periodictable.html",
+	bondEnergyVideo: "https://youtu.be/NgD9yHSJ29I?si=PtfBNaN9iDDQGf9L",
 	elephantToothpasteAtomClip: "https://youtu.be/nfGXG8Lnndc?t=50",
 	elephantToothpasteDemo: "https://youtu.be/p5qvi20J5IM",
 	elephantToothpasteScaleUp: "https://youtu.be/Kou7ur5xt_4",
@@ -43,6 +44,7 @@ const REFERENCES = {
 	ptablePeriodicTable: "https://ptable.com/",
 	pubChemPeriodicTable:
 		"https://pubchem.ncbi.nlm.nih.gov/periodic-table/#view=table",
+	radiationVideo: "https://youtu.be/Zw0pHT47AAU?si=KYPy8CI_dL59CpEB",
 	rscPeriodicTable: "https://www.rsc.org/periodic-table",
 	saltWaterEvaporationTimeLapse:
 		"https://youtu.be/MrmpTO3FZdQ?si=LjzUUQUSqqrxHasm",
@@ -314,6 +316,21 @@ export const introToChemistryCourse: RawCourse = {
 					solutionLink: answerKey("isotope-key")
 				},
 				{
+					title: "Radioisotopes, Radiation, and Half-Life",
+					content: [
+						"**Concept path:** A radioisotope is an isotope with an unstable nucleus, often because its neutron count is too high or too low for its proton count. Hydrogen normally has one proton and no neutrons; tritium is hydrogen with one proton and two neutrons, making it radioactive. Tritium can be used in self-luminous exit signs because its decay energy causes a phosphor coating to glow. Radioactive decay is a nuclear process in which an unstable nucleus releases particles or electromagnetic energy as it moves toward a more stable arrangement.",
+						"**Alpha radiation:** Alpha decay emits a helium nucleus, which contains two protons and two neutrons. Alpha particles are relatively heavy, carry a `+2` charge, and travel only short distances in air. They are easy to stop outside the body but can be hazardous if alpha-emitting material is inhaled or swallowed.",
+						"**Beta radiation:** Beta particles are much lighter than alpha particles and usually travel farther through air and thin materials. In beta-minus decay, a neutron in the nucleus turns into a proton and emits an electron plus an antineutrino. In beta-plus decay, a proton turns into a neutron and emits a positron plus a neutrino.",
+						"**Gamma radiation:** Gamma radiation is a high-energy electromagnetic wave. Gamma decay emits a high-energy photon rather than a proton, neutron, or electron. Gamma rays usually travel the farthest of the three radiation types and require dense shielding such as lead or thick concrete for strong attenuation.",
+						"**Half-life:** Half-life is the amount of time required for half of the radioactive nuclei in a sample to decay. After one half-life, half of the original radioactive atoms remain; after two half-lives, one-quarter remain; after three half-lives, one-eighth remain. The half-life pattern describes a large sample statistically, not the exact moment when a single atom will decay.",
+						"**Remote-safe activity:** Build a comparison table for alpha, beta-minus, beta-plus, and gamma decay. Include what leaves the nucleus, what changes inside the nucleus, relative travel distance, and one shielding note.",
+						"**Output:** A radiation comparison table and one half-life calculation showing the fraction remaining after three half-lives.",
+						"**CER checkpoint:** Explain why changing neutron count can create a radioisotope without changing the element identity."
+					].join("\n\n"),
+					datasetLink: material("isotope-table"),
+					mediaLink: REFERENCES.radiationVideo
+				},
+				{
 					title: "Ions and Charge",
 					content: [
 						"**Concept path:** An ion is an atom or bonded group of atoms with a net electrical charge because the number of protons and electrons is unequal. Losing electrons makes a positive ion, or cation, because there are more protons than electrons; gaining electrons makes a negative ion, or anion, because there are more electrons than protons. Ordinary ion formation changes electron count, not proton count, so the element identity remains the same. This is why a sodium atom and a sodium ion are both sodium, even though their charge and chemical behavior differ.",
@@ -533,7 +550,7 @@ export const introToChemistryCourse: RawCourse = {
 				{
 					title: "Bond Energies and Reaction Estimates",
 					content: [
-						"**Concept path:** A covalent bond energy is an average energy needed to break one mole of a specific kind of bond in gaseous substances. Larger values usually mean a stronger bond, but the table values are averages; the exact energy depends on the molecule and surroundings. Bond energies connect structure to reaction energy because reactions break bonds in reactants and form bonds in products.",
+						"**Concept path:** A covalent bond energy is an average energy needed to break one mole of a specific kind of bond in gaseous substances. Bond energies are determined experimentally and listed in reference tables. Larger values usually mean a stronger bond, but the table values are averages; the exact energy depends on the molecule and surroundings. Bond energies connect structure to reaction energy because reactions break bonds in reactants and form bonds in products.",
 						"**Use this section:** Read the table in `kJ/mol` of bonds. For a rough reaction-energy estimate, add the bond energies for bonds broken, add the bond energies for bonds formed, then compare them with `ΔH ≈ bonds broken - bonds formed`. A negative estimate means the formed bonds release more energy than the broken bonds required; a positive estimate means more energy is required to break bonds than is released by forming new ones.",
 						[
 							"**Common single-bond energies from the UT General Chemistry table (kJ/mol):**",
@@ -568,7 +585,8 @@ export const introToChemistryCourse: RawCourse = {
 						"**Output:** A short table listing bonds broken, bonds formed, the estimated energy comparison, and one sentence explaining whether the estimate is exothermic or endothermic.",
 						"**CER checkpoint:** Explain why stronger product bonds can make a reaction release energy even though bond breaking itself requires energy."
 					].join("\n\n"),
-					datasetLink: REFERENCES.utAustinBondEnergies
+					datasetLink: REFERENCES.utAustinBondEnergies,
+					mediaLink: REFERENCES.bondEnergyVideo
 				},
 				{
 					title: "Naming Compounds from Formula Patterns",
