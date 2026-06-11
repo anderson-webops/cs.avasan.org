@@ -24,7 +24,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Read Constraints as Design Signals",
 					content:
-						"Teach students to use input limits to narrow the candidate solution family quickly. At Gold level, the constraints often tell you more than the story paragraph does."
+						"Use input limits to narrow the candidate solution family quickly. At Gold level, the constraints often tell you more than the story paragraph does."
 				},
 				{
 					title: "USG0 Setup and Gold Mindset: Core Project",
@@ -63,12 +63,12 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "State Design and Recurrence Thinking",
 					content:
-						"Teach students to define a DP state so that each smaller answer supports a larger one cleanly. The most important Gold habit here is choosing the right subproblem, not coding the table quickly."
+						"Define a DP state so that each smaller answer supports a larger one cleanly. The most important Gold habit here is choosing the right subproblem, not coding the table quickly."
 				},
 				{
 					title: "Transitions, Base Cases, and Ordering",
 					content:
-						"Require students to state how each DP cell depends on earlier work and in what order the states can be computed. The recurrence should be explainable in plain language before it is translated into code."
+						"State how each DP cell depends on earlier work and in what order the states can be computed. The recurrence should be explainable in plain language before it is translated into code."
 				},
 				{
 					title: "Space and Time Tradeoffs",
@@ -124,7 +124,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Weighted Graph Modeling",
 					content:
-						"Teach students to identify what the nodes and edges actually represent in a weighted setting. Gold shortest-path work becomes much easier when the model is precise before Dijkstra's algorithm is even considered."
+						"Identify what the nodes and edges actually represent in a weighted setting. Gold shortest-path work becomes much easier when the model is precise before Dijkstra's algorithm is even considered."
 				},
 				{
 					title: "Dijkstra's Algorithm and Relaxation",
@@ -195,7 +195,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Edge Ordering and Greedy Validity",
 					content:
-						"Require students to explain why the chosen next edge is safe. This is an important place to practice small proof sketches for greedy algorithms."
+						"Explain why the chosen next edge is safe. This is an important place to practice small proof sketches for greedy algorithms."
 				},
 				{
 					title: "Connectivity Problems beyond the Template",
@@ -239,7 +239,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Prefix Structure beyond Simple Arrays",
 					content:
-						"Teach students to move from simple prefix sums into update-friendly structures when the problem demands repeated changes and queries. The point is to keep the range intuition while upgrading the data structure."
+						"Move from simple prefix sums into update-friendly structures when the problem demands repeated changes and queries. The point is to keep the range intuition while upgrading the data structure."
 				},
 				{
 					title: "Fenwick Tree Mechanics",

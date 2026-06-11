@@ -552,7 +552,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Map Source Lines to Instructions",
 					content:
-						"Teach students to align a source-level branch, loop, or local variable with its instruction-level representation. This becomes the bridge between high-level reasoning and low-level debugging when they later step instruction by instruction."
+						"Align a source-level branch, loop, or local variable with its instruction-level representation. This becomes the bridge between high-level reasoning and low-level debugging when stepping instruction by instruction."
 				},
 				{
 					title: "Optimization Changes the Shape, Not the Goal",
@@ -681,7 +681,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Instruction Count versus Real Performance",
 					content:
-						"Teach students to distrust simplistic 'fewer instructions always wins' thinking. Some instructions are more expensive than others, memory access matters, and compiler optimizations often reshape the cost model in ways students need to observe rather than assume."
+						"Distrust simplistic 'fewer instructions always wins' thinking. Some instructions are more expensive than others, memory access matters, and compiler optimizations often reshape the cost model in ways that should be observed rather than assumed."
 				},
 				{
 					title: "C-to-Assembly Compare: Loop Shape versus Loop Cost",

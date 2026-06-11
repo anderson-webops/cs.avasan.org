@@ -200,7 +200,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Machine Learning source pool: scikit-learn sample datasets, OpenML, FashionMNIST or CIFAR-10 where appropriate, Hugging Face Datasets, and local train/test fixtures."
 		],
 		safetyAndAccess: [
-			"Do not require students to upload personal data.",
+			"Do not upload personal data.",
 			"Prefer local notebooks and provided datasets over live API dependencies.",
 			"Frame AI output as advisory and limited, especially around sensitive predictions or classifications."
 		],
@@ -237,7 +237,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Use short quizzes, explanation prompts, graph/table interpretation, and error diagnosis.",
-			"Require students to state what each variable represents and why each transformation is allowed.",
+			"State what each variable represents and why each transformation is allowed.",
 			"Track misconceptions across sessions rather than only marking answers wrong."
 		],
 		sourceAndTooling: [

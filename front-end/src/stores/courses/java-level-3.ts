@@ -1618,7 +1618,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Packages, Builds, and Test Boundaries",
 					content:
-						"Move from single-folder Java exercises to package-organized projects. Cover: source roots, package names, public APIs, helper classes, command-line or IDE builds, JUnit-style test thinking even when using simple assertions, and why a program that is easy to test is usually easier to extend. Require students to separate model logic from console input."
+						"Move from single-folder Java exercises to package-organized projects. Cover: source roots, package names, public APIs, helper classes, command-line or IDE builds, JUnit-style test thinking even when using simple assertions, and why a program that is easy to test is usually easier to extend. Model logic should stay separate from console input."
 				},
 				{
 					title: "AJ19 Project 1: Tested Gradebook Service",

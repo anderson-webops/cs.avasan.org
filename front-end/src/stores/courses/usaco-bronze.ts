@@ -63,7 +63,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Turn Story Problems into Variables and Steps",
 					content:
-						"Teach students to translate narrative wording into a tiny model: what is tracked, what changes each step, and when the answer should be updated. The first win at Bronze is usually accurate modeling, not deep theory."
+						"Translate narrative wording into a tiny model: what is tracked, what changes each step, and when the answer should be updated. The first win at Bronze is usually accurate modeling, not deep theory."
 				},
 				{
 					title: "Follow the Rules Exactly",
@@ -124,7 +124,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Intervals and Coverage Thinking",
 					content:
-						"Teach students to reason about segments, overlaps, and gaps with small sorted lists or interval scans. Many Bronze tasks become easier once the timeline or number line is made explicit."
+						"Reason about segments, overlaps, and gaps with small sorted lists or interval scans. Many Bronze tasks become easier once the timeline or number line is made explicit."
 				},
 				{
 					title: "Greedy Choice with Just Enough Justification",
@@ -139,7 +139,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Sorted Input as a Strategic Advantage",
 					content:
-						"Teach students to sort when it clarifies the structure of the task. Bronze solutions often become dramatically simpler once the data is in a useful order."
+						"Sort when it clarifies the structure of the task. Bronze solutions often become dramatically simpler once the data is in a useful order."
 				},
 				{
 					title: "Unit 2: Intervals, Arrays, and Greedy Warmups: Core Project",
@@ -178,7 +178,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Frequency and Ranking Problems",
 					content:
-						"Teach students to count occurrences, rank values, and compare groups without overcomplicating the data structures. Many Bronze tasks can be solved with careful counts and sorted lists alone."
+						"Count occurrences, rank values, and compare groups without overcomplicating the data structures. Many Bronze tasks can be solved with careful counts and sorted lists alone."
 				},
 				{
 					title: "Look for the Key Ordering",
@@ -188,7 +188,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Explain the Metric Being Optimized",
 					content:
-						"Require students to state exactly what quantity is being maximized, minimized, or counted. This helps prevent the common mistake of solving a nearby but different problem."
+						"State exactly what quantity is being maximized, minimized, or counted. This helps prevent the common mistake of solving a nearby but different problem."
 				},
 				{
 					title: "Compare Similar Solutions",
@@ -249,7 +249,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Separate Representation from Process",
 					content:
-						"Teach students to decide what data structure best represents the problem before choosing the algorithmic loop that uses it. This is the first step toward Silver-level thinking."
+						"Decide what data structure best represents the problem before choosing the algorithmic loop that uses it. This is the first step toward Silver-level thinking."
 				},
 				{
 					title: "Stay Grounded in Bronze Simplicity",
@@ -298,7 +298,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Know When Bronze Is Solved",
 					content:
-						"Teach students to stop polishing once the solution is clearly correct, tested, and within constraints. This is important for contest pacing and prevents time loss on unnecessary rewrites."
+						"Stop polishing once the solution is clearly correct, tested, and within constraints. This is important for contest pacing and prevents time loss on unnecessary rewrites."
 				},
 				{
 					title: "Reflect on Weak Spots",

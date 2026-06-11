@@ -113,7 +113,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Worked Example Set: Blocks, Ramps, and Pulleys",
 					content:
-						"Work through a block at rest on a ramp, a sliding crate with kinetic friction, and a simple connected-mass or pulley example. Require students to choose axes along and perpendicular to the incline, then interpret each sign and term physically. Use the worked examples to normalize slow, organized setup."
+						"Work through a block at rest on a ramp, a sliding crate with kinetic friction, and a simple connected-mass or pulley example. Choose axes along and perpendicular to the incline, then interpret each sign and term physically. Use the worked examples to normalize slow, organized setup."
 				},
 				{
 					title: "Graph and Data Exercise: Acceleration Versus Angle",
@@ -160,7 +160,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Worked Example Set: Recoil, Bounces, and Crash Carts",
 					content:
-						"Work examples involving elastic and inelastic collisions, recoil, and impulse comparisons. Require students to define the system first and then state whether external impulses are negligible. Keep the emphasis on sign, direction, and physical interpretation."
+						"Work examples involving elastic and inelastic collisions, recoil, and impulse comparisons. Define the system first and then state whether external impulses are negligible. Keep the emphasis on sign, direction, and physical interpretation."
 				},
 				{
 					title: "Graph and Data Exercise: Force-Time and Momentum Accounting",
@@ -192,7 +192,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Extension Project: Safety System Design Review",
 					content:
-						"Compare helmets, airbags, or crumple zones through the impulse idea. Require students to explain how changing impact time can reduce force without claiming momentum disappears."
+						"Compare helmets, airbags, or crumple zones through the impulse idea. Explain how changing impact time can reduce force without claiming momentum disappears."
 				}
 			]
 		},

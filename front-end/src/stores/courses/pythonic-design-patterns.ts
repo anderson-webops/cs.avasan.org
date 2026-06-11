@@ -63,7 +63,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Dynamic Typing, Duck Typing, and Protocol Thinking",
 					content:
-						"Teach students to focus on behavior and shape rather than concrete inheritance trees. Pythonic architecture often starts from the question 'what capabilities do I need?' instead of 'which subclass should exist?'"
+						"Focus on behavior and shape rather than concrete inheritance trees. Pythonic architecture often starts from the question 'what capabilities do I need?' instead of 'which subclass should exist?'"
 				},
 				{
 					title: "Functions, Closures, and Decorators as First-Class Design Tools",
@@ -380,7 +380,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Cross-Cutting Concerns without Framework Bloat",
 					content:
-						"Use caching, auth checks, tracing, and high-level service orchestration as examples of cross-cutting concerns. The course should teach students to apply these narrowly rather than building their own mini-framework by accident."
+						"Use caching, auth checks, tracing, and high-level service orchestration as examples of cross-cutting concerns. Apply these narrowly rather than building a mini-framework by accident."
 				},
 				{
 					title: "PDP6 Decorator, Proxy, and Facade: Core Project",

@@ -581,7 +581,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Anomaly Summaries from Logs and Metadata",
 					content:
-						"Teach students to transform noisy network evidence into a short ranked summary that a human operator can act on. This is where defensive tooling becomes useful rather than merely interesting."
+						"Transform noisy network evidence into a short ranked summary that a human operator can act on. This is where defensive tooling becomes useful rather than merely interesting."
 				},
 				{
 					title: "Packet Metadata Without Full Packet Abuse",

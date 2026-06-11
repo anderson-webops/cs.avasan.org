@@ -63,7 +63,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Sets, Maps, and Fast Membership Reasoning",
 					content:
-						"Teach students to reach for hash-based structures when the problem is really about uniqueness, fast lookup, or counting distinct states. This is one of the first Silver shifts away from only array-based thinking."
+						"Use hash-based structures when the problem is really about uniqueness, fast lookup, or counting distinct states. This is one of the first Silver shifts away from only array-based thinking."
 				},
 				{
 					title: "Model the Right Entity",
@@ -124,7 +124,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Traversal as a Problem Family",
 					content:
-						"Teach students to recognize when a problem is secretly about reachability, components, shortest unweighted paths, or propagation through a state graph. Silver success often starts with spotting the hidden graph."
+						"Recognize when a problem is secretly about reachability, components, shortest unweighted paths, or propagation through a state graph. Silver success often starts with spotting the hidden graph."
 				},
 				{
 					title: "DFS for Exhaustive Structure",
@@ -178,7 +178,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Sort to Reveal Structure",
 					content:
-						"Teach students to look for orderings that make the problem simpler: numeric order, lexical order, or a custom ranking that exposes the main constraint. Silver problems frequently unlock once the data is sorted the right way."
+						"Look for orderings that make the problem simpler: numeric order, lexical order, or a custom ranking that exposes the main constraint. Silver problems frequently unlock once the data is sorted the right way."
 				},
 				{
 					title: "Search over Data and Search over Answers",
@@ -310,7 +310,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Spot the Bottleneck",
 					content:
-						"Require students to say which step of their simulation dominates the runtime and whether restructuring could fix it. This grows algorithmic awareness without losing the practical contest mindset."
+						"Identify which step of the simulation dominates the runtime and whether restructuring could fix it. This grows algorithmic awareness without losing the practical contest mindset."
 				},
 				{
 					title: "Compare Greedy to Search or DP Alternatives",

@@ -72,7 +72,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Evidence, Assumptions, and Scope",
 					content:
-						"Teach students to name where the data came from, what is missing, and what assumptions are being imposed during analysis. This helps prevent the common habit of treating a CSV file as a complete or neutral view of reality."
+						"Name where the data came from, what is missing, and what assumptions are being imposed during analysis. This helps prevent the common habit of treating a CSV file as a complete or neutral view of reality."
 				},
 				{
 					title: "Data Science versus Machine Learning",
@@ -253,7 +253,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Missing Values and Type Issues",
 					content:
-						"Teach students to inspect nulls, mixed types, empty strings, and malformed numeric data before building any chart or summary. Data cleaning should feel like evidence protection rather than tedious prep work."
+						"Inspect nulls, mixed types, empty strings, and malformed numeric data before building any chart or summary. Data cleaning should feel like evidence protection rather than tedious prep work."
 				},
 				{
 					title: "Duplicates and Inconsistent Categories",
@@ -375,7 +375,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Framing a Clear Analytical Claim",
 					content:
-						"Teach students to move from a vague topic like sports, movies, or weather into a crisp claim backed by evidence. Good data storytelling starts with a claim that can be tested and defended."
+						"Move from a vague topic like sports, movies, or weather into a crisp claim backed by evidence. Good data storytelling starts with a claim that can be tested and defended."
 				},
 				{
 					title: "Selecting What Matters",

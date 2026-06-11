@@ -322,7 +322,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Verify Protections in a Binary Build",
 					content:
-						"Teach students to inspect actual build outputs so mitigation talk stays tied to evidence. At a beginner level, that means looking for compile-time and build-time signs of PIE, sanitizers, stack protectors, or related hardening settings and recording the comparison in a small build matrix rather than relying on assumptions."
+						"Inspect actual build outputs so mitigation talk stays tied to evidence. At a beginner level, that means looking for compile-time and build-time signs of PIE, sanitizers, stack protectors, or related hardening settings and recording the comparison in a small build matrix rather than relying on assumptions."
 				},
 				{
 					title: "Project: LLS16 Mitigation Comparison Build Matrix",
@@ -500,7 +500,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Rank Findings, Patch, and Verify",
 					content:
-						"Require students to rank the findings, patch them, and verify the fixes with explicit checks. The capstone is not complete when the output “looks better”; it is complete when the findings are prioritized, the patches are justified, and the regression evidence shows the bug classes are actually closed."
+						"The capstone requires ranked findings, justified patches, and explicit verification checks. It is not complete when the output “looks better”; it is complete when the findings are prioritized, the patches are justified, and the regression evidence shows the bug classes are actually closed."
 				},
 				{
 					title: "Deliver an Audit Packet and Mitigation Summary",

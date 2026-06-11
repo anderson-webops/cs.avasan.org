@@ -215,7 +215,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Project: XOR Encoder Decoder",
 					content:
-						"Use the XOR lab to compare the original bytes, encoded bytes, and decoded bytes for the same message. Require students to explain why the transform is reversible and what XOR is really doing to each bit.",
+						"Use the XOR lab to compare the original bytes, encoded bytes, and decoded bytes for the same message. Explain why the transform is reversible and what XOR is really doing to each bit.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE3-XOR-Encoder-Decoder/starter",
 					solutionLink:
@@ -571,7 +571,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Data Structure Invariants Are Part of the Design",
 					content:
-						"Teach students to name invariants such as valid count ranges, non-null storage after initialization, or head and tail relationships. This helps them debug the structure by reasoning about what must stay true, not only by staring at code."
+						"Name invariants such as valid count ranges, non-null storage after initialization, or head and tail relationships. This helps debug the structure by reasoning about what must stay true, not only by staring at code."
 				},
 				{
 					title: "Project Pass: Extend the Dynamic Ring Buffer",
@@ -619,7 +619,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Fixed Point Thinking Instead of Immediate Floats",
 					content:
-						"Teach students to represent some physical quantities in scaled integers when exact decimal storage is not available or when deterministic transforms matter. This keeps the math connected to systems constraints instead of assuming floating-point is always the default answer."
+						"Represent some physical quantities in scaled integers when exact decimal storage is not available or when deterministic transforms matter. This keeps the math connected to systems constraints instead of assuming floating-point is always the default answer."
 				},
 				{
 					title: "Overflow-Aware Arithmetic and Range Checks",
@@ -748,7 +748,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Read Input, Validate Early, Transform Deliberately",
 					content:
-						"Require students to validate each row or record before it enters the main transform path. This is the capstone version of the whole course philosophy: bytes and fields should become trusted data only after the code has checked the boundaries and assumptions explicitly."
+						"Validate each row or record before it enters the main transform path. This is the capstone version of the whole course philosophy: bytes and fields should become trusted data only after the code has checked the boundaries and assumptions explicitly."
 				},
 				{
 					title: "Write Output That Another Tool Could Trust",

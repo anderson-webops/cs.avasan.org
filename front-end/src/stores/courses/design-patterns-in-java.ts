@@ -34,7 +34,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Reflection Question: When Does a Pattern Actually Help?",
 					content:
-						"Require students to explain the problem that must exist before a pattern becomes justified. They should name at least one case where a pattern would be premature and one where a smell clearly points toward structural change."
+						"Explain the problem that must exist before a pattern becomes justified. Include at least one case where a pattern would be premature and one where a smell clearly points toward structural change."
 				},
 				{
 					title: "DPJ1 What Patterns Are and What They Are Not: Core Project",
@@ -86,7 +86,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Composition, Cohesion, and Dependency Direction",
 					content:
-						"Develop composition over inheritance, high cohesion, and low coupling as the base layer underneath almost every later pattern. Make students explain which class owns which responsibility before any refactor starts."
+						"Develop composition over inheritance, high cohesion, and low coupling as the base layer underneath almost every later pattern. Before any refactor starts, explain which class owns which responsibility."
 				},
 				{
 					title: "Worked Example Set: Packages, Seams, and Immutable Value Objects",
@@ -101,7 +101,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Design Review: Favoring Explicit Package Structure",
 					content:
-						"Teach students to ask whether the package layout reveals the architecture or merely mirrors folders. Good Java design should make stable boundaries obvious in the codebase."
+						"Ask whether the package layout reveals the architecture or merely mirrors folders. Good Java design should make stable boundaries obvious in the codebase."
 				},
 				{
 					title: "Reflection Question: What Makes a Good Seam in Java?",
@@ -173,7 +173,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Selection Drill: Factory or Builder?",
 					content:
-						"Give examples where students must decide whether the real problem is product family selection, complex configuration, or both. This prevents Builder and Factory from collapsing into one vague 'object creation' lesson."
+						"Use examples that require deciding whether the real problem is product family selection, complex configuration, or both. This prevents Builder and Factory from collapsing into one vague 'object creation' lesson."
 				},
 				{
 					title: "Reflection Question: How Much Creation Logic Is Too Much?",
@@ -389,7 +389,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Worked Example Set: Replace Conditionals with Behavior Objects",
 					content:
-						"Start with long conditional logic, then compare refactors using Strategy, State, or Template Method. Require students to explain why one of the three is the best fit instead of using them interchangeably."
+						"Start with long conditional logic, then compare refactors using Strategy, State, or Template Method. Explain why one of the three is the best fit instead of using them interchangeably."
 				},
 				{
 					title: "Reflection Question: Where Does the Decision Live Now?",
@@ -590,7 +590,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "When Not to Use the Pattern",
 					content:
-						"Every pattern in the course should now get an explicit restraint pass. Teach students to delete abstractions, collapse hierarchies, or keep direct code when the collaboration pressure is low."
+						"Every pattern in the course should now get an explicit restraint pass. Delete abstractions, collapse hierarchies, or keep direct code when the collaboration pressure is low."
 				},
 				{
 					title: "Design Review Exercise: Name the Tradeoff, Not Just the Pattern",

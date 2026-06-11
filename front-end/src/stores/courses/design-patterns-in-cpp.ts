@@ -143,7 +143,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Header and Source Organization",
 					content:
-						"Teach students to split declarations, implementations, and stable boundaries cleanly. This course should treat file organization, include discipline, and smaller APIs as part of good architecture."
+						"Split declarations, implementations, and stable boundaries cleanly. This course should treat file organization, include discipline, and smaller APIs as part of good architecture."
 				},
 				{
 					title: "Practical Move Semantics",
@@ -210,7 +210,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Creation Tradeoffs in Practice",
 					content:
-						"Require students to justify whether the real pressure is family selection, staged assembly, or both. The right creation pattern should emerge from readability and ownership clarity, not from catalog completion."
+						"Justify whether the real pressure is family selection, staged assembly, or both. The right creation pattern should emerge from readability and ownership clarity, not from catalog completion."
 				},
 				{
 					title: "DPC3 Factory Method, Abstract Factory, and Builder: Core Project",
@@ -272,7 +272,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Choosing Runtime versus Compile-Time Flexibility",
 					content:
-						"Require students to justify whether the design needs late binding, test seams, and plugin-style variability, or whether compile-time selection is cleaner. This is one of the core judgment moves in modern C++ architecture."
+						"Justify whether the design needs late binding, test seams, and plugin-style variability, or whether compile-time selection is cleaner. This is one of the core judgment moves in modern C++ architecture."
 				},
 				{
 					title: "DPC4 Strategy and Policy-Based Design: Core Project",
@@ -396,7 +396,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Boundary Choice before Pattern Choice",
 					content:
-						"Require students to decide whether the real problem is layered behavior, mismatched APIs, or subsystem sprawl. The right pattern should follow from the boundary issue, not from terminology alone."
+						"Decide whether the real problem is layered behavior, mismatched APIs, or subsystem sprawl. The right pattern should follow from the boundary issue, not from terminology alone."
 				},
 				{
 					title: "DPC6 Decorator, Adapter, and Facade: Core Project",
@@ -526,7 +526,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Container Exposure Tradeoffs",
 					content:
-						"Require students to justify whether they expose iterators, flattened snapshots, visitor-style helpers, or no traversal API at all. C++ gives several options, so the abstraction should be deliberate."
+						"Justify whether to expose iterators, flattened snapshots, visitor-style helpers, or no traversal API at all. C++ gives several options, so the abstraction should be deliberate."
 				},
 				{
 					title: "DPC8 Composite and Iterator: Core Project",
@@ -588,7 +588,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "When a Global Really Is Global",
 					content:
-						"Allow for rare cases where a process-wide singleton is justified, but require students to explain why narrower ownership failed first. This unit should end with skepticism, not prohibition for its own sake."
+						"Allow for rare cases where a process-wide singleton is justified, but explain why narrower ownership failed first. This unit should end with skepticism, not prohibition for its own sake."
 				},
 				{
 					title: "DPC9 Singleton, Global State, and Dependency Injection: Core Project",
@@ -764,7 +764,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Pattern Justification as a Required Deliverable",
 					content:
-						"Require students to name each pattern or C++ ownership tool in the capstone and explain which flexibility, lifetime, or testability pressure it solves. A pattern with no stated pressure should be treated as suspect."
+						"Name each pattern or C++ ownership tool in the capstone and explain which flexibility, lifetime, or testability pressure it solves. A pattern with no stated pressure should be treated as suspect."
 				},
 				{
 					title: "Runtime and Compile-Time Tradeoff Review",

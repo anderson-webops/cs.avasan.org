@@ -19,7 +19,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Early Debugging Habits",
 					content:
-						"Teach students to rerun quickly, read tracebacks, and check asset paths, image names, and event handlers early. Most PyGame frustration comes from input, timing, or asset-loading mistakes that become easy to diagnose once the student builds the habit."
+						"Rerun quickly, read tracebacks, and check asset paths, image names, and event handlers early. Most PyGame frustration comes from input, timing, or asset-loading mistakes that become easy to diagnose once the habit is built."
 				},
 				{
 					title: "From One File to Organized Games",

@@ -278,7 +278,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Comparing Search Strategies Honestly",
 					content:
-						"Require students to compare algorithms by memory use, guarantees, path quality, and runtime behavior on the same problem family. The goal is to make tradeoffs explicit rather than celebrating any single algorithm as 'the AI one'."
+						"Compare algorithms by memory use, guarantees, path quality, and runtime behavior on the same problem family. The goal is to make tradeoffs explicit rather than celebrating any single algorithm as 'the AI one'."
 				},
 				{
 					title: "Unit 4: Informed and Bounded Search: Core Project",
@@ -341,7 +341,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "When Search Beats Rules and When Rules Beat Search",
 					content:
-						"Teach students to choose between hand-authored rules and search over a space of possibilities. The right answer often depends on whether the structure is known, stable, and explainable."
+						"Choose between hand-authored rules and search over a space of possibilities. The right answer often depends on whether the structure is known, stable, and explainable."
 				},
 				{
 					title: "Feature Thinking before Machine Learning",
@@ -460,7 +460,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Labels, Benchmarks, and Success Criteria",
 					content:
-						"Teach students to define what counts as a correct or useful output before they optimize anything. Even in small AI systems, evaluation depends on clear labels, goals, baselines, and constraints."
+						"Define what counts as a correct or useful output before optimizing anything. Even in small AI systems, evaluation depends on clear labels, goals, baselines, and constraints."
 				},
 				{
 					title: "Bias, Failure Cases, and Overconfidence",

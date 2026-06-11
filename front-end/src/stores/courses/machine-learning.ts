@@ -14,7 +14,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Notebook Cells vs. Reusable Python Modules",
 					content:
-						"Teach students to keep notebooks for quick exploration while still organizing reusable helpers, cleaning steps, and plotting logic into functions they can move into `.py` files later. This keeps the course from feeling like one long sequence of disconnected notebook cells."
+						"Keep notebooks useful for quick exploration while still organizing reusable helpers, cleaning steps, and plotting logic into functions that can move into `.py` files later. This keeps the course from feeling like one long sequence of disconnected notebook cells."
 				},
 				{
 					title: "Data Cleaning and Visualization First",

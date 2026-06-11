@@ -9,7 +9,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Concept Lesson: Refactoring as Behavior-Preserving Design Change",
 					content:
-						"Use Refactoring.Guru's framing that refactoring changes internal structure without changing externally visible behavior. Teach students to work in small steps with a safety net rather than attempting one heroic rewrite."
+						"Use Refactoring.Guru's framing that refactoring changes internal structure without changing externally visible behavior. Work in small steps with a safety net rather than attempting one heroic rewrite."
 				},
 				{
 					title: "Code Smells from Refactoring.Guru",
@@ -96,7 +96,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Refactor a Calculation Pipeline Safely",
 					content:
-						"Take a pricing, scoring, or report-generation method and refactor it into cleaner smaller steps without changing observable output. Require students to document which composing-method moves were used."
+						"Take a pricing, scoring, or report-generation method and refactor it into cleaner smaller steps without changing observable output. Document which composing-method moves were used."
 				},
 				{
 					title: "Pattern Connection: Clear Methods Make Later Patterns Possible",
@@ -307,7 +307,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Replace Conditional with Polymorphism Versus Simpler Cleanup",
 					content:
-						"Teach students to reserve polymorphism for stable behavioral variation across types or states, not for every if-else chain. Compare this with Strategy and State from the first course."
+						"Reserve polymorphism for stable behavioral variation across types or states, not for every if-else chain. Compare this with Strategy and State from the first course."
 				},
 				{
 					title: "Null Object and Assertion as Design Signals",
@@ -461,7 +461,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Repair a Parallel Hierarchy",
 					content:
-						"Take a Java design where hierarchy changes cascade across multiple class trees and simplify the abstraction story. Require students to explain whether the final design is flatter, deeper, or simply cleaner."
+						"Take a Java design where hierarchy changes cascade across multiple class trees and simplify the abstraction story. Explain whether the final design is flatter, deeper, or simply cleaner."
 				},
 				{
 					title: "Reflection Question: Which Abstraction Actually Earned Its Place?",
@@ -528,7 +528,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Mini Lab: Refactor Until the Pattern Is Obvious",
 					content:
-						"Require students to stop after each small change and ask whether the named pattern is now justified or still premature. This builds restraint and sequence awareness."
+						"Stop after each small change and ask whether the named pattern is now justified or still premature. This builds restraint and sequence awareness."
 				},
 				{
 					title: "Tradeoff Review: Pattern Arrival Versus Pattern Forcing",
@@ -585,7 +585,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Tests as Refactoring Safety Nets",
 					content:
-						"Teach students to use tests, approval checks, or explicit manual verification scripts as safety nets during refactoring. The point is confidence in behavior preservation, not maximal test theory."
+						"Use tests, approval checks, or explicit manual verification scripts as safety nets during refactoring. The point is confidence in behavior preservation, not maximal test theory."
 				},
 				{
 					title: "Dependency Injection for Refactoring Seams",

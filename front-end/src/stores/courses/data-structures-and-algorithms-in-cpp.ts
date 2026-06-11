@@ -195,7 +195,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Vectors, Sets, Maps, and Deques as Different Stories",
 					content:
-						"Teach each container as solving a different problem: vectors preserve sequence, sets track uniqueness, maps connect keys to values, and deques are helpful when the state window slides forward over time."
+						"Each container solves a different problem: vectors preserve sequence, sets track uniqueness, maps connect keys to values, and deques are helpful when the state window slides forward over time."
 				},
 				{
 					title: "Tokenization and Cleanup",

@@ -133,7 +133,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Troubleshooting Lab: Why Provisioning Problems Happen",
 					content:
-						"Review common signing failures such as mismatched bundle IDs, missing capabilities, or the wrong team/account context. Teach students to read the error message, identify which layer failed, and fix the configuration instead of clicking random settings."
+						"Review common signing failures such as mismatched bundle IDs, missing capabilities, or the wrong team/account context. The important habit is reading the error message, identifying which layer failed, and fixing the configuration instead of clicking random settings."
 				},
 				{
 					title: "Reflection Question: Which Part of Signing Is Conceptual vs Configurational?",
@@ -191,7 +191,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Logs, Console Output, and Crash Clues",
 					content:
-						"Introduce console logs, build output, and the kinds of messages that matter during the first run-on-device workflow. Teach students to capture the first useful failure signal rather than chasing symptoms."
+						"Introduce console logs, build output, and the kinds of messages that matter during the first run-on-device workflow. The goal is to capture the first useful failure signal rather than chasing symptoms."
 				},
 				{
 					title: "Mini Lab: First Launch Troubleshooting",
@@ -1113,7 +1113,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Concept Lesson: Scope a Capstone Like a Real App",
 					content:
-						"Frame the capstone as a coherent app that can realistically be tested and presented, not as a dumping ground for every feature learned in the course. Require students to define scope, audience, primary user flow, and the minimum set of features that make the app worth testing."
+						"Frame the capstone as a coherent app that can realistically be tested and presented, not as a dumping ground for every feature learned in the course. The project definition should include scope, audience, primary user flow, and the minimum set of features that make the app worth testing."
 				},
 				{
 					title: "Build Phase: Implement, Test, and Polish",

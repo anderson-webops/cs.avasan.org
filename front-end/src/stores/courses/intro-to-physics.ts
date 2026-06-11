@@ -118,7 +118,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Worked Example Set: Free-Body Diagram Repetition",
 					content:
-						"Work through a hanging object, a crate on a floor, an elevator rider, and a tug-of-war setup. Each example should require students to isolate one object at a time, label every external force, and connect the net force to the motion. Build repetition on purpose so the diagramming habit feels routine before the math gets harder."
+						"Work through a hanging object, a crate on a floor, an elevator rider, and a tug-of-war setup. Each example should isolate one object at a time, label every external force, and connect the net force to the motion. Build repetition on purpose so the diagramming habit feels routine before the math gets harder."
 				},
 				{
 					title: "Graph and Data Exercise: Net Force and Acceleration",
@@ -232,7 +232,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Mini Lab: Circuit Build and Measurement Log",
 					content:
-						"Build a simple series or parallel circuit and keep a careful measurement log. Record predicted versus observed bulb behavior, current direction, and any measured voltage or current values available from classroom tools. Require students to sketch the circuit before and after assembly."
+						"Build a simple series or parallel circuit and keep a careful measurement log. Record predicted versus observed bulb behavior, current direction, and any measured voltage or current values available from classroom tools. Sketch the circuit before and after assembly."
 				},
 				{
 					title: "Simulation Challenge: Circuit Debugging",

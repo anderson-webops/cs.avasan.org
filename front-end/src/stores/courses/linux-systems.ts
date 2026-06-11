@@ -269,7 +269,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Readable Configs Beat Clever Configs",
 					content:
-						"Teach students to favor clear comments, stable indentation, and small focused changes over dense one-liners that are hard to audit later. The Linux operator who comes back to a file three weeks later should still be able to explain what changed and why."
+						"Favor clear comments, stable indentation, and small focused changes over dense one-liners that are hard to audit later. The Linux operator who comes back to a file three weeks later should still be able to explain what changed and why."
 				},
 				{
 					title: "Unit 4: Editing and Configuration: Core Project",
@@ -321,7 +321,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Signals, kill, pkill, and Process Shutdown",
 					content:
-						"Explain that `kill` sends signals rather than magically destroying processes. Compare graceful termination to forceful termination and teach students to inspect why a process is stuck before escalating to stronger signals."
+						"Explain that `kill` sends signals rather than magically destroying processes. Compare graceful termination to forceful termination and inspect why a process is stuck before escalating to stronger signals."
 				},
 				{
 					title: "Foreground Jobs, Background Jobs, nohup, and Shell Sessions",
@@ -700,7 +700,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Reverse Proxy vs Static File Serving",
 					content:
-						"Make students explain the operational difference between serving files directly from disk and forwarding requests to an upstream application. This distinction is central to real Linux work because it shapes what should be inspected first during an outage: the content path, the web server config, the upstream process, or the network path between them."
+						"Explain the operational difference between serving files directly from disk and forwarding requests to an upstream application. This distinction is central to real Linux work because it shapes what should be inspected first during an outage: the content path, the web server config, the upstream process, or the network path between them."
 				},
 				{
 					title: "TLS, Virtual Hosts, Server Blocks, Reload vs Restart",
