@@ -48,14 +48,14 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "src",
 					content:
-						"Supplemental project connected to PTJ0 Positioning and Workflow Translation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter"
 				},
 				{
 					title: "Positioning and Workflow Translation supplemental 3",
 					content:
-						"Supplemental project connected to PTJ0 Positioning and Workflow Translation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-ptj0-positioning-and-workflow-translation-supplemental-3/starter",
 					solutionLink:
@@ -108,7 +108,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Functions, Parameters, and Return Types supplemental 2",
 					content:
-						"Supplemental project connected to PTJ1 Functions, Parameters, and Return Types. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-ptj1-functions-parameters-and-return-types-supplemental-2/starter",
 					solutionLink:
@@ -117,7 +117,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Functions, Parameters, and Return Types supplemental 3",
 					content:
-						"Supplemental project connected to PTJ1 Functions, Parameters, and Return Types. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-ptj1-functions-parameters-and-return-types-supplemental-3/starter",
 					solutionLink:
@@ -170,7 +170,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Collections, Strings, and Indexing supplemental 2",
 					content:
-						"Supplemental project connected to PTJ2 Collections, Strings, and Indexing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplemental-2/starter",
 					solutionLink:
@@ -179,7 +179,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Collections, Strings, and Indexing supplemental 3",
 					content:
-						"Supplemental project connected to PTJ2 Collections, Strings, and Indexing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplemental-3/starter",
 					solutionLink:
@@ -232,7 +232,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Classes and Objects across Languages supplemental 2",
 					content:
-						"Supplemental project connected to PTJ3 Classes and Objects across Languages. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-ptj3-classes-and-objects-across-languages-supplemental-2/starter",
 					solutionLink:
@@ -241,7 +241,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Classes and Objects across Languages supplemental 3",
 					content:
-						"Supplemental project connected to PTJ3 Classes and Objects across Languages. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-ptj3-classes-and-objects-across-languages-supplemental-3/starter",
 					solutionLink:
@@ -294,7 +294,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Java Specific Adaptation supplemental 2",
 					content:
-						"Supplemental project connected to PTJ4 Java-Specific Adaptation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-08-ptj4-java-specific-adaptation-supplemental-2/starter",
 					solutionLink:
@@ -303,7 +303,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Java Specific Adaptation supplemental 3",
 					content:
-						"Supplemental project connected to PTJ4 Java-Specific Adaptation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-09-ptj4-java-specific-adaptation-supplemental-3/starter",
 					solutionLink:
@@ -356,7 +356,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "C++ Specific Adaptation supplemental 2",
 					content:
-						"Supplemental project connected to PTJ5 C++-Specific Adaptation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-cpp-specific-adaptation-supplemental-2/starter",
 					solutionLink:
@@ -365,7 +365,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "C++ Specific Adaptation supplemental 3",
 					content:
-						"Supplemental project connected to PTJ5 C++-Specific Adaptation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-cpp-specific-adaptation-supplemental-3/starter",
 					solutionLink:
@@ -374,12 +374,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 11: Implementation Studio",
+			title: "language bridge lab 11: Implementation Lab",
 			curriculum: [
 				{
 					title: "language bridge lab 11: Core Concepts",
 					content:
-						"language bridge lab 11: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "language bridge lab 11: Guided Example",
@@ -389,7 +389,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 11: Core Project",
 					content:
-						"language bridge lab 11: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/starter",
 					solutionLink:
@@ -398,32 +398,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 11: Review and Reflection",
 					content:
-						"language bridge lab 11: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "language bridge lab 11: Extension Challenge",
 					content:
-						"Extend the core build from language bridge lab 11: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/solution"
 				},
 				{
-					title: "language bridge lab 11 supplemental 2: Implementation Studio",
+					title: "language bridge lab 11 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-12-applied-studio-7-language-bridge-lab-11-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-12-applied-studio-7-language-bridge-lab-11-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 11 supplemental 3: Implementation Studio",
+					title: "language bridge lab 11 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-13-applied-studio-7-language-bridge-lab-11-supplemental-3/starter",
 					solutionLink:
@@ -432,12 +432,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 12: Implementation Studio",
+			title: "language bridge lab 12: Implementation Lab",
 			curriculum: [
 				{
 					title: "language bridge lab 12: Core Concepts",
 					content:
-						"language bridge lab 12: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "language bridge lab 12: Guided Example",
@@ -447,7 +447,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 12: Core Project",
 					content:
-						"language bridge lab 12: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/starter",
 					solutionLink:
@@ -456,32 +456,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 12: Review and Reflection",
 					content:
-						"language bridge lab 12: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "language bridge lab 12: Extension Challenge",
 					content:
-						"Extend the core build from language bridge lab 12: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/solution"
 				},
 				{
-					title: "language bridge lab 12 supplemental 2: Implementation Studio",
+					title: "language bridge lab 12 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-14-applied-studio-8-language-bridge-lab-12-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-14-applied-studio-8-language-bridge-lab-12-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 12 supplemental 3: Implementation Studio",
+					title: "language bridge lab 12 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-15-applied-studio-8-language-bridge-lab-12-supplemental-3/starter",
 					solutionLink:
@@ -490,12 +490,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 13: Implementation Studio",
+			title: "language bridge lab 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "language bridge lab 13: Core Concepts",
 					content:
-						"language bridge lab 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "language bridge lab 13: Guided Example",
@@ -505,7 +505,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 13: Core Project",
 					content:
-						"language bridge lab 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/starter",
 					solutionLink:
@@ -514,32 +514,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 13: Review and Reflection",
 					content:
-						"language bridge lab 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "language bridge lab 13: Extension Challenge",
 					content:
-						"Extend the core build from language bridge lab 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/solution"
 				},
 				{
-					title: "language bridge lab 13 supplemental 2: Implementation Studio",
+					title: "language bridge lab 13 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-16-applied-studio-9-language-bridge-lab-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-16-applied-studio-9-language-bridge-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 13 supplemental 3: Implementation Studio",
+					title: "language bridge lab 13 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-17-applied-studio-9-language-bridge-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -548,12 +548,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 14: Implementation Studio",
+			title: "language bridge lab 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "language bridge lab 14: Core Concepts",
 					content:
-						"language bridge lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "language bridge lab 14: Guided Example",
@@ -563,7 +563,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 14: Core Project",
 					content:
-						"language bridge lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/starter",
 					solutionLink:
@@ -572,32 +572,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 14: Review and Reflection",
 					content:
-						"language bridge lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "language bridge lab 14: Extension Challenge",
 					content:
-						"Extend the core build from language bridge lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/solution"
 				},
 				{
-					title: "language bridge lab 14 supplemental 2: Implementation Studio",
+					title: "language bridge lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-18-applied-studio-10-language-bridge-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-18-applied-studio-10-language-bridge-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 14 supplemental 3: Implementation Studio",
+					title: "language bridge lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-19-applied-studio-10-language-bridge-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -606,12 +606,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 15: Implementation Studio",
+			title: "language bridge lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "language bridge lab 15: Core Concepts",
 					content:
-						"language bridge lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "language bridge lab 15: Guided Example",
@@ -621,7 +621,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 15: Core Project",
 					content:
-						"language bridge lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/starter",
 					solutionLink:
@@ -630,32 +630,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 15: Review and Reflection",
 					content:
-						"language bridge lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "language bridge lab 15: Extension Challenge",
 					content:
-						"Extend the core build from language bridge lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/solution"
 				},
 				{
-					title: "language bridge lab 15 supplemental 2: Implementation Studio",
+					title: "language bridge lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-20-applied-studio-11-language-bridge-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-20-applied-studio-11-language-bridge-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 15 supplemental 3: Implementation Studio",
+					title: "language bridge lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-21-applied-studio-11-language-bridge-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -664,12 +664,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 16: Implementation Studio",
+			title: "language bridge lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "language bridge lab 16: Core Concepts",
 					content:
-						"language bridge lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "language bridge lab 16: Guided Example",
@@ -679,7 +679,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 16: Core Project",
 					content:
-						"language bridge lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/starter",
 					solutionLink:
@@ -688,32 +688,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 16: Review and Reflection",
 					content:
-						"language bridge lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "language bridge lab 16: Extension Challenge",
 					content:
-						"Extend the core build from language bridge lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/solution"
 				},
 				{
-					title: "language bridge lab 16 supplemental 2: Implementation Studio",
+					title: "language bridge lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-22-applied-studio-12-language-bridge-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-22-applied-studio-12-language-bridge-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 16 supplemental 3: Implementation Studio",
+					title: "language bridge lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-23-applied-studio-12-language-bridge-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -722,12 +722,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 17: Implementation Studio",
+			title: "language bridge lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "language bridge lab 17: Core Concepts",
 					content:
-						"language bridge lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "language bridge lab 17: Guided Example",
@@ -737,7 +737,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 17: Core Project",
 					content:
-						"language bridge lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/starter",
 					solutionLink:
@@ -746,32 +746,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 17: Review and Reflection",
 					content:
-						"language bridge lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "language bridge lab 17: Extension Challenge",
 					content:
-						"Extend the core build from language bridge lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/solution"
 				},
 				{
-					title: "language bridge lab 17 supplemental 2: Implementation Studio",
+					title: "language bridge lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-24-applied-studio-13-language-bridge-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-24-applied-studio-13-language-bridge-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 17 supplemental 3: Implementation Studio",
+					title: "language bridge lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to language bridge lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-25-applied-studio-13-language-bridge-lab-17-supplemental-3/starter",
 					solutionLink:
@@ -780,12 +780,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "graphics: Implementation Studio",
+			title: "graphics: Implementation Lab",
 			curriculum: [
 				{
 					title: "graphics: Core Concepts",
 					content:
-						"graphics: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "graphics: Guided Example",
@@ -795,37 +795,37 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "graphics: Core Project",
 					content:
-						"graphics: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/graphics"
 				},
 				{
 					title: "graphics: Review and Reflection",
 					content:
-						"graphics: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "graphics: Extension Challenge",
 					content:
-						"Extend the core build from graphics: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/graphics"
 				},
 				{
-					title: "graphics supplemental 2: Implementation Studio",
+					title: "graphics supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to graphics: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-26-applied-studio-14-graphics-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-26-applied-studio-14-graphics-supplemental-2/solution"
 				},
 				{
-					title: "graphics supplemental 3: Implementation Studio",
+					title: "graphics supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to graphics: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-27-applied-studio-14-graphics-supplemental-3/starter",
 					solutionLink:
@@ -834,12 +834,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "CPP practice: Implementation Studio",
+			title: "CPP practice: Implementation Lab",
 			curriculum: [
 				{
 					title: "CPP practice: Core Concepts",
 					content:
-						"CPP practice: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "CPP practice: Guided Example",
@@ -849,7 +849,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "CPP practice: Core Project",
 					content:
-						"CPP practice: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/starter",
 					solutionLink:
@@ -858,32 +858,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "CPP practice: Review and Reflection",
 					content:
-						"CPP practice: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "CPP practice: Extension Challenge",
 					content:
-						"Extend the core build from CPP practice: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/solution"
 				},
 				{
-					title: "CPP practice supplemental 2: Implementation Studio",
+					title: "CPP practice supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to CPP practice: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-28-applied-studio-15-cpp-practice-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-28-applied-studio-15-cpp-practice-supplemental-2/solution"
 				},
 				{
-					title: "CPP practice supplemental 3: Implementation Studio",
+					title: "CPP practice supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to CPP practice: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-29-applied-studio-15-cpp-practice-supplemental-3/starter",
 					solutionLink:
@@ -892,12 +892,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "J1X01 java foundations build 12: Implementation Studio",
+			title: "J1X01 java foundations build 12: Implementation Lab",
 			curriculum: [
 				{
 					title: "J1X01 java foundations build 12: Core Concepts",
 					content:
-						"J1X01 java foundations build 12: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "J1X01 java foundations build 12: Guided Example",
@@ -907,7 +907,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "J1X01 java foundations build 12: Core Project",
 					content:
-						"J1X01 java foundations build 12: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/starter",
 					solutionLink:
@@ -916,32 +916,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "J1X01 java foundations build 12: Review and Reflection",
 					content:
-						"J1X01 java foundations build 12: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X01 java foundations build 12: Extension Challenge",
 					content:
-						"Extend the core build from J1X01 java foundations build 12: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/solution"
 				},
 				{
-					title: "J1X01 java foundations build 12 supplemental 2: Implementation Studio",
+					title: "J1X01 java foundations build 12 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X01 java foundations build 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-30-applied-studio-16-j1x01-java-foundations-build-12-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-30-applied-studio-16-j1x01-java-foundations-build-12-supplemental-2/solution"
 				},
 				{
-					title: "J1X01 java foundations build 12 supplemental 3: Implementation Studio",
+					title: "J1X01 java foundations build 12 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X01 java foundations build 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-31-applied-studio-16-j1x01-java-foundations-build-12-supplemental-3/starter",
 					solutionLink:
@@ -950,12 +950,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c foundations build 13: Implementation Studio",
+			title: "c foundations build 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "c foundations build 13: Core Concepts",
 					content:
-						"c foundations build 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c foundations build 13: Guided Example",
@@ -965,7 +965,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "c foundations build 13: Core Project",
 					content:
-						"c foundations build 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CF-01-c-foundations-build-13/starter",
 					solutionLink:
@@ -974,32 +974,32 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "c foundations build 13: Review and Reflection",
 					content:
-						"c foundations build 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c foundations build 13: Extension Challenge",
 					content:
-						"Extend the core build from c foundations build 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CF-01-c-foundations-build-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CF-01-c-foundations-build-13/solution"
 				},
 				{
-					title: "c foundations build 13 supplemental 2: Implementation Studio",
+					title: "c foundations build 13 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c foundations build 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-32-applied-studio-17-c-foundations-build-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-32-applied-studio-17-c-foundations-build-13-supplemental-2/solution"
 				},
 				{
-					title: "c foundations build 13 supplemental 3: Implementation Studio",
+					title: "c foundations build 13 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c foundations build 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-33-applied-studio-17-c-foundations-build-13-supplemental-3/starter",
 					solutionLink:

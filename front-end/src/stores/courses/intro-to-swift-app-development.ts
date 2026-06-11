@@ -44,14 +44,14 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Mod5Pro3",
 					content:
-						"Supplemental project connected to SAD1 Apple Developer Ecosystem Overview. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/Mod5Pro3"
 				},
 				{
 					title: "Apple Developer Ecosystem Overview supplemental 3",
 					content:
-						"Supplemental project connected to SAD1 Apple Developer Ecosystem Overview. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-01-sad1-apple-developer-ecosystem-overview-supplemental-3/starter",
 					solutionLink:
@@ -100,7 +100,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Mac Setup and Project Tooling supplemental 2",
 					content:
-						"Supplemental project connected to SAD2 Mac Setup and Project Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-02-sad2-mac-setup-and-project-tooling-supplemental-2/starter",
 					solutionLink:
@@ -109,7 +109,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Mac Setup and Project Tooling supplemental 3",
 					content:
-						"Supplemental project connected to SAD2 Mac Setup and Project Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-03-sad2-mac-setup-and-project-tooling-supplemental-3/starter",
 					solutionLink:
@@ -158,7 +158,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Certificates, Signing, and Bundle IDs supplemental 2",
 					content:
-						"Supplemental project connected to SAD3 Certificates, Signing, and Bundle IDs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-04-sad3-certificates-signing-and-bundle-ids-supplemental-2/starter",
 					solutionLink:
@@ -167,7 +167,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Certificates, Signing, and Bundle IDs supplemental 3",
 					content:
-						"Supplemental project connected to SAD3 Certificates, Signing, and Bundle IDs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-05-sad3-certificates-signing-and-bundle-ids-supplemental-3/starter",
 					solutionLink:
@@ -216,7 +216,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Running on Simulator and Device supplemental 2",
 					content:
-						"Supplemental project connected to SAD4 Running on Simulator and Device. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-06-sad4-running-on-simulator-and-device-supplemental-2/starter",
 					solutionLink:
@@ -225,7 +225,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Running on Simulator and Device supplemental 3",
 					content:
-						"Supplemental project connected to SAD4 Running on Simulator and Device. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-07-sad4-running-on-simulator-and-device-supplemental-3/starter",
 					solutionLink:
@@ -274,7 +274,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Store Connect and TestFlight Workflow supplemental 2",
 					content:
-						"Supplemental project connected to SAD5 App Store Connect and TestFlight Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-08-sad5-app-store-connect-and-testflight-workflow-supplemental-2/starter",
 					solutionLink:
@@ -283,7 +283,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Store Connect and TestFlight Workflow supplemental 3",
 					content:
-						"Supplemental project connected to SAD5 App Store Connect and TestFlight Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-09-sad5-app-store-connect-and-testflight-workflow-supplemental-3/starter",
 					solutionLink:
@@ -332,7 +332,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "What an App Is Structurally supplemental 2",
 					content:
-						"Supplemental project connected to SAD6 What an App Is Structurally. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-10-sad6-what-an-app-is-structurally-supplemental-2/starter",
 					solutionLink:
@@ -341,7 +341,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "What an App Is Structurally supplemental 3",
 					content:
-						"Supplemental project connected to SAD6 What an App Is Structurally. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-11-sad6-what-an-app-is-structurally-supplemental-3/starter",
 					solutionLink:
@@ -390,7 +390,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Xcode Project Anatomy supplemental 2",
 					content:
-						"Supplemental project connected to SAD7 Xcode Project Anatomy. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-12-sad7-xcode-project-anatomy-supplemental-2/starter",
 					solutionLink:
@@ -399,7 +399,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Xcode Project Anatomy supplemental 3",
 					content:
-						"Supplemental project connected to SAD7 Xcode Project Anatomy. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-13-sad7-xcode-project-anatomy-supplemental-3/starter",
 					solutionLink:
@@ -448,7 +448,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SwiftUI Mental Model supplemental 2",
 					content:
-						"Supplemental project connected to SAD8 SwiftUI Mental Model. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-14-sad8-swiftui-mental-model-supplemental-2/starter",
 					solutionLink:
@@ -457,7 +457,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SwiftUI Mental Model supplemental 3",
 					content:
-						"Supplemental project connected to SAD8 SwiftUI Mental Model. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-15-sad8-swiftui-mental-model-supplemental-3/starter",
 					solutionLink:
@@ -506,7 +506,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Swift Basics in App Context supplemental 2",
 					content:
-						"Supplemental project connected to SAD9 Swift Basics in App Context. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-16-sad9-swift-basics-in-app-context-supplemental-2/starter",
 					solutionLink:
@@ -515,7 +515,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Swift Basics in App Context supplemental 3",
 					content:
-						"Supplemental project connected to SAD9 Swift Basics in App Context. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-17-sad9-swift-basics-in-app-context-supplemental-3/starter",
 					solutionLink:
@@ -564,7 +564,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Functions, Structs, and Enums supplemental 2",
 					content:
-						"Supplemental project connected to SAD10 Functions, Structs, and Enums. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-18-sad10-functions-structs-and-enums-supplemental-2/starter",
 					solutionLink:
@@ -573,7 +573,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Functions, Structs, and Enums supplemental 3",
 					content:
-						"Supplemental project connected to SAD10 Functions, Structs, and Enums. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-19-sad10-functions-structs-and-enums-supplemental-3/starter",
 					solutionLink:
@@ -622,7 +622,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "State and Data Flow supplemental 2",
 					content:
-						"Supplemental project connected to SAD11 State and Data Flow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-20-sad11-state-and-data-flow-supplemental-2/starter",
 					solutionLink:
@@ -631,7 +631,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "State and Data Flow supplemental 3",
 					content:
-						"Supplemental project connected to SAD11 State and Data Flow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-21-sad11-state-and-data-flow-supplemental-3/starter",
 					solutionLink:
@@ -680,7 +680,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Navigation and Multi Screen Apps supplemental 2",
 					content:
-						"Supplemental project connected to SAD12 Navigation and Multi-Screen Apps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-22-sad12-navigation-and-multi-screen-apps-supplemental-2/starter",
 					solutionLink:
@@ -689,7 +689,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Navigation and Multi Screen Apps supplemental 3",
 					content:
-						"Supplemental project connected to SAD12 Navigation and Multi-Screen Apps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-23-sad12-navigation-and-multi-screen-apps-supplemental-3/starter",
 					solutionLink:
@@ -738,7 +738,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Lists, Forms, and CRUD Patterns supplemental 2",
 					content:
-						"Supplemental project connected to SAD13 Lists, Forms, and CRUD Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-24-sad13-lists-forms-and-crud-patterns-supplemental-2/starter",
 					solutionLink:
@@ -747,7 +747,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Lists, Forms, and CRUD Patterns supplemental 3",
 					content:
-						"Supplemental project connected to SAD13 Lists, Forms, and CRUD Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-25-sad13-lists-forms-and-crud-patterns-supplemental-3/starter",
 					solutionLink:
@@ -800,7 +800,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Media, Maps, and Device Features supplemental 2",
 					content:
-						"Supplemental project connected to SAD14 Media, Maps, and Device Features. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-26-sad14-media-maps-and-device-features-supplemental-2/starter",
 					solutionLink:
@@ -809,7 +809,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Media, Maps, and Device Features supplemental 3",
 					content:
-						"Supplemental project connected to SAD14 Media, Maps, and Device Features. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-27-sad14-media-maps-and-device-features-supplemental-3/starter",
 					solutionLink:
@@ -858,7 +858,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Networking and Data Loading supplemental 2",
 					content:
-						"Supplemental project connected to SAD15 Networking and Data Loading. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-28-sad15-networking-and-data-loading-supplemental-2/starter",
 					solutionLink:
@@ -867,7 +867,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Networking and Data Loading supplemental 3",
 					content:
-						"Supplemental project connected to SAD15 Networking and Data Loading. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-29-sad15-networking-and-data-loading-supplemental-3/starter",
 					solutionLink:
@@ -916,7 +916,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Persistence supplemental 2",
 					content:
-						"Supplemental project connected to SAD16 Persistence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-30-sad16-persistence-supplemental-2/starter",
 					solutionLink:
@@ -925,7 +925,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Persistence supplemental 3",
 					content:
-						"Supplemental project connected to SAD16 Persistence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-31-sad16-persistence-supplemental-3/starter",
 					solutionLink:
@@ -974,7 +974,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Debugging and Testing supplemental 2",
 					content:
-						"Supplemental project connected to SAD17 Debugging and Testing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-32-sad17-debugging-and-testing-supplemental-2/starter",
 					solutionLink:
@@ -983,7 +983,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Debugging and Testing supplemental 3",
 					content:
-						"Supplemental project connected to SAD17 Debugging and Testing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-33-sad17-debugging-and-testing-supplemental-3/starter",
 					solutionLink:
@@ -1032,7 +1032,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Design and Accessibility supplemental 2",
 					content:
-						"Supplemental project connected to SAD18 App Design and Accessibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-34-sad18-app-design-and-accessibility-supplemental-2/starter",
 					solutionLink:
@@ -1041,7 +1041,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "App Design and Accessibility supplemental 3",
 					content:
-						"Supplemental project connected to SAD18 App Design and Accessibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-35-sad18-app-design-and-accessibility-supplemental-3/starter",
 					solutionLink:
@@ -1090,7 +1090,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Final Publishing Walkthrough supplemental 2",
 					content:
-						"Supplemental project connected to SAD19 Final Publishing Walkthrough. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-36-sad19-final-publishing-walkthrough-supplemental-2/starter",
 					solutionLink:
@@ -1099,7 +1099,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Final Publishing Walkthrough supplemental 3",
 					content:
-						"Supplemental project connected to SAD19 Final Publishing Walkthrough. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-37-sad19-final-publishing-walkthrough-supplemental-3/starter",
 					solutionLink:
@@ -1148,7 +1148,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Capstone App supplemental 2",
 					content:
-						"Supplemental project connected to SAD20 Capstone App. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-38-sad20-capstone-app-supplemental-2/starter",
 					solutionLink:
@@ -1157,7 +1157,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Capstone App supplemental 3",
 					content:
-						"Supplemental project connected to SAD20 Capstone App. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-39-sad20-capstone-app-supplemental-3/starter",
 					solutionLink:
@@ -1210,7 +1210,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries supplemental 2",
 					content:
-						"Supplemental project connected to SADX Enrichment and Legacy Archive Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-40-sadx-enrichment-and-legacy-archive-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -1219,7 +1219,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries supplemental 3",
 					content:
-						"Supplemental project connected to SADX Enrichment and Legacy Archive Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD-41-sadx-enrichment-and-legacy-archive-boundaries-supplemental-3/starter",
 					solutionLink:

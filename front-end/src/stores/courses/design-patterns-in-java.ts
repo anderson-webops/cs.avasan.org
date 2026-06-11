@@ -58,7 +58,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "What Patterns Are and What They Are Not Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ1 What Patterns Are and What They Are Not. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-dpj1-what-patterns-are-and-what-they-are-not-supplemental-2/starter",
 					solutionLink:
@@ -67,7 +67,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "What Patterns Are and What They Are Not Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ1 What Patterns Are and What They Are Not. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-dpj1-what-patterns-are-and-what-they-are-not-supplemental-3/starter",
 					solutionLink:
@@ -130,7 +130,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Java Design Foundations Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ2 Java Design Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-03-dpj2-java-design-foundations-supplemental-2/starter",
 					solutionLink:
@@ -139,7 +139,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Java Design Foundations Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ2 Java Design Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-04-dpj2-java-design-foundations-supplemental-3/starter",
 					solutionLink:
@@ -202,7 +202,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Creational Patterns I Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ3 Creational Patterns I. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-05-dpj3-creational-patterns-i-supplemental-2/starter",
 					solutionLink:
@@ -211,7 +211,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Creational Patterns I Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ3 Creational Patterns I. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-06-dpj3-creational-patterns-i-supplemental-3/starter",
 					solutionLink:
@@ -274,7 +274,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Creational Patterns II and Boundary Patterns Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ4 Creational Patterns II and Boundary Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-07-dpj4-creational-patterns-ii-and-boundary-patterns-supplemental-2/starter",
 					solutionLink:
@@ -283,7 +283,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Creational Patterns II and Boundary Patterns Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ4 Creational Patterns II and Boundary Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-08-dpj4-creational-patterns-ii-and-boundary-patterns-supplemental-3/starter",
 					solutionLink:
@@ -346,7 +346,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Structural Patterns in Depth Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ5 Structural Patterns in Depth. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-09-dpj5-structural-patterns-in-depth-supplemental-2/starter",
 					solutionLink:
@@ -355,7 +355,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Structural Patterns in Depth Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ5 Structural Patterns in Depth. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-10-dpj5-structural-patterns-in-depth-supplemental-3/starter",
 					solutionLink:
@@ -418,7 +418,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Behavioral Patterns I Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ6 Behavioral Patterns I. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-11-dpj6-behavioral-patterns-i-supplemental-2/starter",
 					solutionLink:
@@ -427,7 +427,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Behavioral Patterns I Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ6 Behavioral Patterns I. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-12-dpj6-behavioral-patterns-i-supplemental-3/starter",
 					solutionLink:
@@ -490,7 +490,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Behavioral Patterns II Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ7 Behavioral Patterns II. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-13-dpj7-behavioral-patterns-ii-supplemental-2/starter",
 					solutionLink:
@@ -499,7 +499,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Behavioral Patterns II Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ7 Behavioral Patterns II. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-14-dpj7-behavioral-patterns-ii-supplemental-3/starter",
 					solutionLink:
@@ -562,7 +562,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Modern Extensions and Architecture Level Patterns Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ8 Modern Extensions and Architecture-Level Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-15-dpj8-modern-extensions-and-architecture-level-patterns-supplemental-2/starter",
 					solutionLink:
@@ -571,7 +571,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Modern Extensions and Architecture Level Patterns Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ8 Modern Extensions and Architecture-Level Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-16-dpj8-modern-extensions-and-architecture-level-patterns-supplemental-3/starter",
 					solutionLink:
@@ -634,7 +634,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Selection and Refactoring Judgment Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ9 Pattern Selection and Refactoring Judgment. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-17-dpj9-pattern-selection-and-refactoring-judgment-supplemental-2/starter",
 					solutionLink:
@@ -643,7 +643,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Selection and Refactoring Judgment Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ9 Pattern Selection and Refactoring Judgment. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-18-dpj9-pattern-selection-and-refactoring-judgment-supplemental-3/starter",
 					solutionLink:
@@ -706,7 +706,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Capstone Refactor Supplemental 2",
 					content:
-						"Supplemental project connected to DPJ10 Capstone Refactor. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-19-dpj10-capstone-refactor-supplemental-2/starter",
 					solutionLink:
@@ -715,7 +715,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Capstone Refactor Supplemental 3",
 					content:
-						"Supplemental project connected to DPJ10 Capstone Refactor. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-20-dpj10-capstone-refactor-supplemental-3/starter",
 					solutionLink:
@@ -724,12 +724,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Pattern Implementation Lab 15: Implementation Studio",
+			title: "Pattern Implementation Lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "Pattern Implementation Lab 15: Core Concepts",
 					content:
-						"pattern implementation lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Pattern Implementation Lab 15: Guided Example",
@@ -739,7 +739,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Implementation Lab 15: Core Project",
 					content:
-						"pattern implementation lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-pattern-implementation-lab-15/starter",
 					solutionLink:
@@ -748,32 +748,32 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Implementation Lab 15: Review and Reflection",
 					content:
-						"pattern implementation lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Pattern Implementation Lab 15: Extension Challenge",
 					content:
-						"Extend the core build from pattern implementation lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-pattern-implementation-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-pattern-implementation-lab-15/solution"
 				},
 				{
-					title: "Pattern Implementation Lab 15 Supplemental 2: Implementation Studio",
+					title: "Pattern Implementation Lab 15 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to pattern implementation lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-29-applied-studio-15-pattern-implementation-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-29-applied-studio-15-pattern-implementation-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Pattern Implementation Lab 15 Supplemental 3: Implementation Studio",
+					title: "Pattern Implementation Lab 15 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to pattern implementation lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-30-applied-studio-15-pattern-implementation-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -782,12 +782,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Pattern Implementation Lab 16: Implementation Studio",
+			title: "Pattern Implementation Lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "Pattern Implementation Lab 16: Core Concepts",
 					content:
-						"pattern implementation lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Pattern Implementation Lab 16: Guided Example",
@@ -797,7 +797,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Implementation Lab 16: Core Project",
 					content:
-						"pattern implementation lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-pattern-implementation-lab-16/starter",
 					solutionLink:
@@ -806,32 +806,32 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Implementation Lab 16: Review and Reflection",
 					content:
-						"pattern implementation lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Pattern Implementation Lab 16: Extension Challenge",
 					content:
-						"Extend the core build from pattern implementation lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-pattern-implementation-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-pattern-implementation-lab-16/solution"
 				},
 				{
-					title: "Pattern Implementation Lab 16 Supplemental 2: Implementation Studio",
+					title: "Pattern Implementation Lab 16 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to pattern implementation lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-31-applied-studio-16-pattern-implementation-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-31-applied-studio-16-pattern-implementation-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Pattern Implementation Lab 16 Supplemental 3: Implementation Studio",
+					title: "Pattern Implementation Lab 16 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to pattern implementation lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-32-applied-studio-16-pattern-implementation-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -840,12 +840,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Pattern Implementation Lab 17: Implementation Studio",
+			title: "Pattern Implementation Lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "Pattern Implementation Lab 17: Core Concepts",
 					content:
-						"pattern implementation lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Pattern Implementation Lab 17: Guided Example",
@@ -855,7 +855,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Implementation Lab 17: Core Project",
 					content:
-						"pattern implementation lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-03-pattern-implementation-lab-17/starter",
 					solutionLink:
@@ -864,32 +864,32 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Pattern Implementation Lab 17: Review and Reflection",
 					content:
-						"pattern implementation lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Pattern Implementation Lab 17: Extension Challenge",
 					content:
-						"Extend the core build from pattern implementation lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-03-pattern-implementation-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-03-pattern-implementation-lab-17/solution"
 				},
 				{
-					title: "Pattern Implementation Lab 17 Supplemental 2: Implementation Studio",
+					title: "Pattern Implementation Lab 17 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to pattern implementation lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-33-applied-studio-17-pattern-implementation-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-33-applied-studio-17-pattern-implementation-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Pattern Implementation Lab 17 Supplemental 3: Implementation Studio",
+					title: "Pattern Implementation Lab 17 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to pattern implementation lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-34-applied-studio-17-pattern-implementation-lab-17-supplemental-3/starter",
 					solutionLink:

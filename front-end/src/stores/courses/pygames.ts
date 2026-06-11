@@ -44,7 +44,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 2",
 					content:
-						"Supplemental project connected to PyG0 Setup, Editors, and Asset Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplemental-2/starter",
 					solutionLink:
@@ -53,7 +53,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 3",
 					content:
-						"Supplemental project connected to PyG0 Setup, Editors, and Asset Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplemental-3/starter",
 					solutionLink:
@@ -131,7 +131,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Actors supplemental 2",
 					content:
-						"Supplemental project connected to PyG1 Object-Oriented Programming: Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-supplemental-2/starter",
 					solutionLink:
@@ -140,7 +140,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Actors supplemental 3",
 					content:
-						"Supplemental project connected to PyG1 Object-Oriented Programming: Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-supplemental-3/starter",
 					solutionLink:
@@ -208,7 +208,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Event Handling supplemental 2",
 					content:
-						"Supplemental project connected to PyG2 Event Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-05-pyg2-event-handling-supplemental-2/starter",
 					solutionLink:
@@ -217,7 +217,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Event Handling supplemental 3",
 					content:
-						"Supplemental project connected to PyG2 Event Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-06-pyg2-event-handling-supplemental-3/starter",
 					solutionLink:
@@ -286,7 +286,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Advanced Actors supplemental 2",
 					content:
-						"Supplemental project connected to PyG3 Object-Oriented Programming: Advanced Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-07-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
@@ -295,7 +295,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Object Oriented Programming: Advanced Actors supplemental 3",
 					content:
-						"Supplemental project connected to PyG3 Object-Oriented Programming: Advanced Actors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-08-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
@@ -358,7 +358,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 2",
 					content:
-						"Supplemental project connected to PyG4 Managing Multiple Objects: Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supplemental-2/starter",
 					solutionLink:
@@ -367,7 +367,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 3",
 					content:
-						"Supplemental project connected to PyG4 Managing Multiple Objects: Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supplemental-3/starter",
 					solutionLink:
@@ -421,7 +421,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #1: Actors, Events, ZRects, Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-supplemental-2/starter",
 					solutionLink:
@@ -430,7 +430,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #1: Actors, Events, ZRects, Collectibles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-supplemental-3/starter",
 					solutionLink:
@@ -498,7 +498,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Physics supplemental 2",
 					content:
-						"Supplemental project connected to PyG5 Physics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-13-pyg5-physics-supplemental-2/starter",
 					solutionLink:
@@ -507,7 +507,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Physics supplemental 3",
 					content:
-						"Supplemental project connected to PyG5 Physics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-14-pyg5-physics-supplemental-3/starter",
 					solutionLink:
@@ -580,7 +580,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 2",
 					content:
-						"Supplemental project connected to PyG6 Managing Multiple Objects: Obstacles and Surfaces. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-2/starter",
 					solutionLink:
@@ -589,7 +589,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 3",
 					content:
-						"Supplemental project connected to PyG6 Managing Multiple Objects: Obstacles and Surfaces. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-3/starter",
 					solutionLink:
@@ -643,7 +643,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #2: Gravity, Friction, Platforms. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplemental-2/starter",
 					solutionLink:
@@ -652,7 +652,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #2: Gravity, Friction, Platforms. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplemental-3/starter",
 					solutionLink:
@@ -728,7 +728,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Levels and System Control supplemental 2",
 					content:
-						"Supplemental project connected to PyG7 Levels and System Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-19-pyg7-levels-and-system-control-supplemental-2/starter",
 					solutionLink:
@@ -737,7 +737,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Levels and System Control supplemental 3",
 					content:
-						"Supplemental project connected to PyG7 Levels and System Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-20-pyg7-levels-and-system-control-supplemental-3/starter",
 					solutionLink:
@@ -794,7 +794,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Projectiles supplemental 2",
 					content:
-						"Supplemental project connected to PyG8 Game Elements: Projectiles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-21-pyg8-game-elements-projectiles-supplemental-2/starter",
 					solutionLink:
@@ -803,7 +803,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Projectiles supplemental 3",
 					content:
-						"Supplemental project connected to PyG8 Game Elements: Projectiles. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-22-pyg8-game-elements-projectiles-supplemental-3/starter",
 					solutionLink:
@@ -860,7 +860,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Enemy AI supplemental 2",
 					content:
-						"Supplemental project connected to PyG9 Game Elements: Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-23-pyg9-game-elements-enemy-ai-supplemental-2/starter",
 					solutionLink:
@@ -869,7 +869,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Game Elements: Enemy AI supplemental 3",
 					content:
-						"Supplemental project connected to PyG9 Game Elements: Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-24-pyg9-game-elements-enemy-ai-supplemental-3/starter",
 					solutionLink:
@@ -918,7 +918,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #3: System Control, Projectiles, Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-supplemental-2/starter",
 					solutionLink:
@@ -927,7 +927,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #3: System Control, Projectiles, Enemy AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-supplemental-3/starter",
 					solutionLink:
@@ -978,7 +978,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Ninja Versus Alien supplemental 2",
 					content:
-						"Supplemental project connected to PyG10 Ninja Versus Alien. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-27-pyg10-ninja-versus-alien-supplemental-2/starter",
 					solutionLink:
@@ -987,7 +987,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Ninja Versus Alien supplemental 3",
 					content:
-						"Supplemental project connected to PyG10 Ninja Versus Alien. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-28-pyg10-ninja-versus-alien-supplemental-3/starter",
 					solutionLink:
@@ -1038,7 +1038,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Space Invaders supplemental 2",
 					content:
-						"Supplemental project connected to PyG11 Space Invaders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-29-pyg11-space-invaders-supplemental-2/starter",
 					solutionLink:
@@ -1047,7 +1047,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Space Invaders supplemental 3",
 					content:
-						"Supplemental project connected to PyG11 Space Invaders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-30-pyg11-space-invaders-supplemental-3/starter",
 					solutionLink:
@@ -1106,7 +1106,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Master Project supplemental 2",
 					content:
-						"Supplemental project connected to PyG12 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-31-pyg12-master-project-supplemental-2/starter",
 					solutionLink:
@@ -1115,7 +1115,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Master Project supplemental 3",
 					content:
-						"Supplemental project connected to PyG12 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-32-pyg12-master-project-supplemental-3/starter",
 					solutionLink:
@@ -1124,12 +1124,12 @@ export const pyGamesCourse: RawCourse = {
 			]
 		},
 		{
-			title: "images: Implementation Studio",
+			title: "images: Implementation Lab",
 			curriculum: [
 				{
 					title: "images: Core Concepts",
 					content:
-						"images: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "images: Guided Example",
@@ -1139,37 +1139,37 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "images: Core Project",
 					content:
-						"images: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/images"
 				},
 				{
 					title: "images: Review and Reflection",
 					content:
-						"images: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "images: Extension Challenge",
 					content:
-						"Extend the core build from images: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/images"
 				},
 				{
-					title: "images supplemental 2: Implementation Studio",
+					title: "images supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to images: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/solution"
 				},
 				{
-					title: "images supplemental 3: Implementation Studio",
+					title: "images supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to images: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-34-applied-studio-17-images-supplemental-3/starter",
 					solutionLink:

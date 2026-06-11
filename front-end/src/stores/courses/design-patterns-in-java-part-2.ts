@@ -58,7 +58,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow supplemental 2",
 					content:
-						"Supplemental project connected to DPR1 Code Smells and Safe Refactoring Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-dpr1-code-smells-and-safe-refactoring-workflow-supplemental-2/starter",
 					solutionLink:
@@ -67,7 +67,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow supplemental 3",
 					content:
-						"Supplemental project connected to DPR1 Code Smells and Safe Refactoring Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-dpr1-code-smells-and-safe-refactoring-workflow-supplemental-3/starter",
 					solutionLink:
@@ -130,7 +130,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods supplemental 2",
 					content:
-						"Supplemental project connected to DPR2 Composing Methods. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-dpr2-composing-methods-supplemental-2/starter",
 					solutionLink:
@@ -139,7 +139,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods supplemental 3",
 					content:
-						"Supplemental project connected to DPR2 Composing Methods. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-dpr2-composing-methods-supplemental-3/starter",
 					solutionLink:
@@ -202,7 +202,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects supplemental 2",
 					content:
-						"Supplemental project connected to DPR3 Moving Features Between Objects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplemental-2/starter",
 					solutionLink:
@@ -211,7 +211,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects supplemental 3",
 					content:
-						"Supplemental project connected to DPR3 Moving Features Between Objects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-dpr3-moving-features-between-objects-supplemental-3/starter",
 					solutionLink:
@@ -274,7 +274,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data supplemental 2",
 					content:
-						"Supplemental project connected to DPR4 Organizing Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-dpr4-organizing-data-supplemental-2/starter",
 					solutionLink:
@@ -283,7 +283,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data supplemental 3",
 					content:
-						"Supplemental project connected to DPR4 Organizing Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-08-dpr4-organizing-data-supplemental-3/starter",
 					solutionLink:
@@ -346,7 +346,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions supplemental 2",
 					content:
-						"Supplemental project connected to DPR5 Simplifying Conditional Expressions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr5-simplifying-conditional-expressions-supplemental-2/starter",
 					solutionLink:
@@ -355,7 +355,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions supplemental 3",
 					content:
-						"Supplemental project connected to DPR5 Simplifying Conditional Expressions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-10-dpr5-simplifying-conditional-expressions-supplemental-3/starter",
 					solutionLink:
@@ -418,7 +418,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls supplemental 2",
 					content:
-						"Supplemental project connected to DPR6 Simplifying Method Calls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr6-simplifying-method-calls-supplemental-2/starter",
 					solutionLink:
@@ -427,7 +427,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls supplemental 3",
 					content:
-						"Supplemental project connected to DPR6 Simplifying Method Calls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-12-dpr6-simplifying-method-calls-supplemental-3/starter",
 					solutionLink:
@@ -490,7 +490,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization supplemental 2",
 					content:
-						"Supplemental project connected to DPR7 Dealing with Generalization. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr7-dealing-with-generalization-supplemental-2/starter",
 					solutionLink:
@@ -499,7 +499,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization supplemental 3",
 					content:
-						"Supplemental project connected to DPR7 Dealing with Generalization. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-14-dpr7-dealing-with-generalization-supplemental-3/starter",
 					solutionLink:
@@ -562,7 +562,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns supplemental 2",
 					content:
-						"Supplemental project connected to DPR8 Refactoring Toward Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns-supplemental-2/starter",
 					solutionLink:
@@ -571,7 +571,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns supplemental 3",
 					content:
-						"Supplemental project connected to DPR8 Refactoring Toward Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-16-dpr8-refactoring-toward-patterns-supplemental-3/starter",
 					solutionLink:
@@ -634,7 +634,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence supplemental 2",
 					content:
-						"Supplemental project connected to DPR9 Testability, DI, and Refactoring with Confidence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr9-testability-di-and-refactoring-with-confidence-supplemental-2/starter",
 					solutionLink:
@@ -643,7 +643,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence supplemental 3",
 					content:
-						"Supplemental project connected to DPR9 Testability, DI, and Refactoring with Confidence. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-18-dpr9-testability-di-and-refactoring-with-confidence-supplemental-3/starter",
 					solutionLink:
@@ -706,7 +706,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio supplemental 2",
 					content:
-						"Supplemental project connected to DPR10 Capstone Refactoring Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-19-dpr10-capstone-refactoring-studio-supplemental-2/starter",
 					solutionLink:
@@ -715,7 +715,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio supplemental 3",
 					content:
-						"Supplemental project connected to DPR10 Capstone Refactoring Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-20-dpr10-capstone-refactoring-studio-supplemental-3/starter",
 					solutionLink:
@@ -724,12 +724,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 11: Implementation Studio",
+			title: "refactoring clinic 11: Implementation Lab",
 			curriculum: [
 				{
 					title: "refactoring clinic 11: Core Concepts",
 					content:
-						"refactoring clinic 11: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 11: Guided Example",
@@ -739,7 +739,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 11: Core Project",
 					content:
-						"refactoring clinic 11: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
@@ -748,32 +748,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 11: Review and Reflection",
 					content:
-						"refactoring clinic 11: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 11: Extension Challenge",
 					content:
-						"Extend the core build from refactoring clinic 11: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/solution"
 				},
 				{
-					title: "refactoring clinic 11 supplemental 2: Implementation Studio",
+					title: "refactoring clinic 11 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-21-applied-studio-11-refactoring-clinic-11-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-21-applied-studio-11-refactoring-clinic-11-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 11 supplemental 3: Implementation Studio",
+					title: "refactoring clinic 11 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-22-applied-studio-11-refactoring-clinic-11-supplemental-3/starter",
 					solutionLink:
@@ -782,12 +782,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 12: Implementation Studio",
+			title: "refactoring clinic 12: Implementation Lab",
 			curriculum: [
 				{
 					title: "refactoring clinic 12: Core Concepts",
 					content:
-						"refactoring clinic 12: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 12: Guided Example",
@@ -797,7 +797,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 12: Core Project",
 					content:
-						"refactoring clinic 12: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
@@ -806,32 +806,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 12: Review and Reflection",
 					content:
-						"refactoring clinic 12: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 12: Extension Challenge",
 					content:
-						"Extend the core build from refactoring clinic 12: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/solution"
 				},
 				{
-					title: "refactoring clinic 12 supplemental 2: Implementation Studio",
+					title: "refactoring clinic 12 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-23-applied-studio-12-refactoring-clinic-12-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-23-applied-studio-12-refactoring-clinic-12-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 12 supplemental 3: Implementation Studio",
+					title: "refactoring clinic 12 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-24-applied-studio-12-refactoring-clinic-12-supplemental-3/starter",
 					solutionLink:
@@ -840,12 +840,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 13: Implementation Studio",
+			title: "refactoring clinic 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "refactoring clinic 13: Core Concepts",
 					content:
-						"refactoring clinic 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 13: Guided Example",
@@ -855,7 +855,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 13: Core Project",
 					content:
-						"refactoring clinic 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
@@ -864,32 +864,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 13: Review and Reflection",
 					content:
-						"refactoring clinic 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 13: Extension Challenge",
 					content:
-						"Extend the core build from refactoring clinic 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/solution"
 				},
 				{
-					title: "refactoring clinic 13 supplemental 2: Implementation Studio",
+					title: "refactoring clinic 13 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-25-applied-studio-13-refactoring-clinic-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-25-applied-studio-13-refactoring-clinic-13-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 13 supplemental 3: Implementation Studio",
+					title: "refactoring clinic 13 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-26-applied-studio-13-refactoring-clinic-13-supplemental-3/starter",
 					solutionLink:
@@ -898,12 +898,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 14: Implementation Studio",
+			title: "refactoring clinic 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "refactoring clinic 14: Core Concepts",
 					content:
-						"refactoring clinic 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 14: Guided Example",
@@ -913,7 +913,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 14: Core Project",
 					content:
-						"refactoring clinic 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
@@ -922,32 +922,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 14: Review and Reflection",
 					content:
-						"refactoring clinic 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 14: Extension Challenge",
 					content:
-						"Extend the core build from refactoring clinic 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/solution"
 				},
 				{
-					title: "refactoring clinic 14 supplemental 2: Implementation Studio",
+					title: "refactoring clinic 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-27-applied-studio-14-refactoring-clinic-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-27-applied-studio-14-refactoring-clinic-14-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 14 supplemental 3: Implementation Studio",
+					title: "refactoring clinic 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-28-applied-studio-14-refactoring-clinic-14-supplemental-3/starter",
 					solutionLink:
@@ -956,12 +956,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 15: Implementation Studio",
+			title: "refactoring clinic 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "refactoring clinic 15: Core Concepts",
 					content:
-						"refactoring clinic 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 15: Guided Example",
@@ -971,7 +971,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 15: Core Project",
 					content:
-						"refactoring clinic 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
@@ -980,32 +980,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 15: Review and Reflection",
 					content:
-						"refactoring clinic 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 15: Extension Challenge",
 					content:
-						"Extend the core build from refactoring clinic 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/solution"
 				},
 				{
-					title: "refactoring clinic 15 supplemental 2: Implementation Studio",
+					title: "refactoring clinic 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-29-applied-studio-15-refactoring-clinic-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-29-applied-studio-15-refactoring-clinic-15-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 15 supplemental 3: Implementation Studio",
+					title: "refactoring clinic 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-30-applied-studio-15-refactoring-clinic-15-supplemental-3/starter",
 					solutionLink:
@@ -1014,12 +1014,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 16: Implementation Studio",
+			title: "refactoring clinic 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "refactoring clinic 16: Core Concepts",
 					content:
-						"refactoring clinic 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 16: Guided Example",
@@ -1029,7 +1029,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 16: Core Project",
 					content:
-						"refactoring clinic 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
@@ -1038,32 +1038,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 16: Review and Reflection",
 					content:
-						"refactoring clinic 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 16: Extension Challenge",
 					content:
-						"Extend the core build from refactoring clinic 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/solution"
 				},
 				{
-					title: "refactoring clinic 16 supplemental 2: Implementation Studio",
+					title: "refactoring clinic 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-31-applied-studio-16-refactoring-clinic-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-31-applied-studio-16-refactoring-clinic-16-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 16 supplemental 3: Implementation Studio",
+					title: "refactoring clinic 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-32-applied-studio-16-refactoring-clinic-16-supplemental-3/starter",
 					solutionLink:
@@ -1072,12 +1072,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 17: Implementation Studio",
+			title: "refactoring clinic 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "refactoring clinic 17: Core Concepts",
 					content:
-						"refactoring clinic 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "refactoring clinic 17: Guided Example",
@@ -1087,7 +1087,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 17: Core Project",
 					content:
-						"refactoring clinic 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:
@@ -1096,32 +1096,32 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 17: Review and Reflection",
 					content:
-						"refactoring clinic 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "refactoring clinic 17: Extension Challenge",
 					content:
-						"Extend the core build from refactoring clinic 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/solution"
 				},
 				{
-					title: "refactoring clinic 17 supplemental 2: Implementation Studio",
+					title: "refactoring clinic 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-33-applied-studio-17-refactoring-clinic-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-33-applied-studio-17-refactoring-clinic-17-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 17 supplemental 3: Implementation Studio",
+					title: "refactoring clinic 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to refactoring clinic 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-34-applied-studio-17-refactoring-clinic-17-supplemental-3/starter",
 					solutionLink:

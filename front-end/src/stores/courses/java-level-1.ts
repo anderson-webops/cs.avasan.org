@@ -74,7 +74,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Variable Types & Input/Output supplemental 3",
 					content:
-						"Supplemental project connected to JS1 Variable Types & Input/Output. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-js1-variable-types-input-output-supplemental-3/starter",
 					solutionLink:
@@ -136,7 +136,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Casting and Operators supplemental 3",
 					content:
-						"Supplemental project connected to JS2 Casting and Operators. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-js2-casting-and-operators-supplemental-3/starter",
 					solutionLink:
@@ -354,7 +354,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Practice with Loops & Conditionals supplemental 2",
 					content:
-						"Supplemental project connected to JS5 Practice with Loops & Conditionals. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplemental-2/starter",
 					solutionLink:
@@ -363,7 +363,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Practice with Loops & Conditionals supplemental 3",
 					content:
-						"Supplemental project connected to JS5 Practice with Loops & Conditionals. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplemental-3/starter",
 					solutionLink:
@@ -417,7 +417,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -426,7 +426,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -730,7 +730,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-07-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -739,7 +739,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-08-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -792,7 +792,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Master Project: Battleship supplemental 2",
 					content:
-						"Supplemental project connected to JS9 Master Project: Battleship. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-09-js9-master-project-battleship-supplemental-2/starter",
 					solutionLink:
@@ -801,7 +801,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Master Project: Battleship supplemental 3",
 					content:
-						"Supplemental project connected to JS9 Master Project: Battleship. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-10-js9-master-project-battleship-supplemental-3/starter",
 					solutionLink:
@@ -810,12 +810,12 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X02 java foundations build 13: Implementation Studio",
+			title: "J1X02 java foundations build 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "J1X02 java foundations build 13: Core Concepts",
 					content:
-						"J1X02 java foundations build 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "J1X02 java foundations build 13: Guided Example",
@@ -825,7 +825,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X02 java foundations build 13: Core Project",
 					content:
-						"J1X02 java foundations build 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
@@ -834,32 +834,32 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X02 java foundations build 13: Review and Reflection",
 					content:
-						"J1X02 java foundations build 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X02 java foundations build 13: Extension Challenge",
 					content:
-						"Extend the core build from J1X02 java foundations build 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/solution"
 				},
 				{
-					title: "J1X02 java foundations build 13 supplemental 2: Implementation Studio",
+					title: "J1X02 java foundations build 13 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X02 java foundations build 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-11-applied-studio-12-j1x02-java-foundations-build-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-11-applied-studio-12-j1x02-java-foundations-build-13-supplemental-2/solution"
 				},
 				{
-					title: "J1X02 java foundations build 13 supplemental 3: Implementation Studio",
+					title: "J1X02 java foundations build 13 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X02 java foundations build 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-12-applied-studio-12-j1x02-java-foundations-build-13-supplemental-3/starter",
 					solutionLink:
@@ -868,12 +868,12 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X03 java foundations build 14: Implementation Studio",
+			title: "J1X03 java foundations build 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "J1X03 java foundations build 14: Core Concepts",
 					content:
-						"J1X03 java foundations build 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "J1X03 java foundations build 14: Guided Example",
@@ -883,7 +883,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X03 java foundations build 14: Core Project",
 					content:
-						"J1X03 java foundations build 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
@@ -892,32 +892,32 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X03 java foundations build 14: Review and Reflection",
 					content:
-						"J1X03 java foundations build 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X03 java foundations build 14: Extension Challenge",
 					content:
-						"Extend the core build from J1X03 java foundations build 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/solution"
 				},
 				{
-					title: "J1X03 java foundations build 14 supplemental 2: Implementation Studio",
+					title: "J1X03 java foundations build 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X03 java foundations build 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-13-applied-studio-13-j1x03-java-foundations-build-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-13-applied-studio-13-j1x03-java-foundations-build-14-supplemental-2/solution"
 				},
 				{
-					title: "J1X03 java foundations build 14 supplemental 3: Implementation Studio",
+					title: "J1X03 java foundations build 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X03 java foundations build 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-14-applied-studio-13-j1x03-java-foundations-build-14-supplemental-3/starter",
 					solutionLink:
@@ -926,12 +926,12 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X04 java foundations build 15: Implementation Studio",
+			title: "J1X04 java foundations build 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "J1X04 java foundations build 15: Core Concepts",
 					content:
-						"J1X04 java foundations build 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "J1X04 java foundations build 15: Guided Example",
@@ -941,7 +941,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X04 java foundations build 15: Core Project",
 					content:
-						"J1X04 java foundations build 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
@@ -950,32 +950,32 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X04 java foundations build 15: Review and Reflection",
 					content:
-						"J1X04 java foundations build 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X04 java foundations build 15: Extension Challenge",
 					content:
-						"Extend the core build from J1X04 java foundations build 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/solution"
 				},
 				{
-					title: "J1X04 java foundations build 15 supplemental 2: Implementation Studio",
+					title: "J1X04 java foundations build 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X04 java foundations build 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-15-applied-studio-14-j1x04-java-foundations-build-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-15-applied-studio-14-j1x04-java-foundations-build-15-supplemental-2/solution"
 				},
 				{
-					title: "J1X04 java foundations build 15 supplemental 3: Implementation Studio",
+					title: "J1X04 java foundations build 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X04 java foundations build 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-16-applied-studio-14-j1x04-java-foundations-build-15-supplemental-3/starter",
 					solutionLink:
@@ -984,12 +984,12 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X05 java foundations build 16: Implementation Studio",
+			title: "J1X05 java foundations build 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "J1X05 java foundations build 16: Core Concepts",
 					content:
-						"J1X05 java foundations build 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "J1X05 java foundations build 16: Guided Example",
@@ -999,7 +999,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X05 java foundations build 16: Core Project",
 					content:
-						"J1X05 java foundations build 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
@@ -1008,32 +1008,32 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X05 java foundations build 16: Review and Reflection",
 					content:
-						"J1X05 java foundations build 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X05 java foundations build 16: Extension Challenge",
 					content:
-						"Extend the core build from J1X05 java foundations build 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/solution"
 				},
 				{
-					title: "J1X05 java foundations build 16 supplemental 2: Implementation Studio",
+					title: "J1X05 java foundations build 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X05 java foundations build 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-17-applied-studio-15-j1x05-java-foundations-build-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-17-applied-studio-15-j1x05-java-foundations-build-16-supplemental-2/solution"
 				},
 				{
-					title: "J1X05 java foundations build 16 supplemental 3: Implementation Studio",
+					title: "J1X05 java foundations build 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X05 java foundations build 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-18-applied-studio-15-j1x05-java-foundations-build-16-supplemental-3/starter",
 					solutionLink:
@@ -1042,12 +1042,12 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X06 java foundations build 17: Implementation Studio",
+			title: "J1X06 java foundations build 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "J1X06 java foundations build 17: Core Concepts",
 					content:
-						"J1X06 java foundations build 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "J1X06 java foundations build 17: Guided Example",
@@ -1057,7 +1057,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X06 java foundations build 17: Core Project",
 					content:
-						"J1X06 java foundations build 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
@@ -1066,32 +1066,32 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "J1X06 java foundations build 17: Review and Reflection",
 					content:
-						"J1X06 java foundations build 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "J1X06 java foundations build 17: Extension Challenge",
 					content:
-						"Extend the core build from J1X06 java foundations build 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/solution"
 				},
 				{
-					title: "J1X06 java foundations build 17 supplemental 2: Implementation Studio",
+					title: "J1X06 java foundations build 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X06 java foundations build 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-19-applied-studio-16-j1x06-java-foundations-build-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-19-applied-studio-16-j1x06-java-foundations-build-17-supplemental-2/solution"
 				},
 				{
-					title: "J1X06 java foundations build 17 supplemental 3: Implementation Studio",
+					title: "J1X06 java foundations build 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to J1X06 java foundations build 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-20-applied-studio-16-j1x06-java-foundations-build-17-supplemental-3/starter",
 					solutionLink:
@@ -1100,12 +1100,12 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "Temperature Converter: Implementation Studio",
+			title: "Temperature Converter: Implementation Lab",
 			curriculum: [
 				{
 					title: "Temperature Converter: Core Concepts",
 					content:
-						"Temperature Converter: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Temperature Converter: Guided Example",
@@ -1115,37 +1115,37 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "Temperature Converter: Core Project",
 					content:
-						"Temperature Converter: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS2-Temperature-Converter"
 				},
 				{
 					title: "Temperature Converter: Review and Reflection",
 					content:
-						"Temperature Converter: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Temperature Converter: Extension Challenge",
 					content:
-						"Extend the core build from Temperature Converter: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS2-Temperature-Converter"
 				},
 				{
-					title: "Temperature Converter supplemental 2: Implementation Studio",
+					title: "Temperature Converter supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Temperature Converter: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-21-applied-studio-17-temperature-converter-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-21-applied-studio-17-temperature-converter-supplemental-2/solution"
 				},
 				{
-					title: "Temperature Converter supplemental 3: Implementation Studio",
+					title: "Temperature Converter supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Temperature Converter: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-22-applied-studio-17-temperature-converter-supplemental-3/starter",
 					solutionLink:

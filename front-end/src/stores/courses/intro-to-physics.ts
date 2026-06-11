@@ -368,12 +368,12 @@ export const introToPhysicsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -383,39 +383,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -425,39 +425,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -467,39 +467,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -509,39 +509,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -551,39 +551,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -593,39 +593,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -635,39 +635,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -677,39 +677,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -719,39 +719,39 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Studio",
+			title: "physics lab: Implementation Lab",
 			curriculum: [
 				{
 					title: "physics lab: Core Concepts",
 					content:
-						"physics lab: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "physics lab: Guided Example",
@@ -761,29 +761,29 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "physics lab: Core Project",
 					content:
-						"physics lab: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "physics lab: Review and Reflection",
 					content:
-						"physics lab: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "physics lab: Extension Challenge",
 					content:
-						"Extend the core build from physics lab: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "physics lab: Open Practice",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Studio",
+					title: "physics lab: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		}

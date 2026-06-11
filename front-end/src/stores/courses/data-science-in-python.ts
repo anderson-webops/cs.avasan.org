@@ -44,7 +44,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Supplemental project connected to DSP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-dsp0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -53,7 +53,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Supplemental project connected to DSP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-dsp0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -106,7 +106,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 1: What Data Science Is supplemental 2",
 					content:
-						"Supplemental project connected to Module 1: What Data Science Is. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-module-1-what-data-science-is-supplemental-2/starter",
 					solutionLink:
@@ -115,7 +115,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 1: What Data Science Is supplemental 3",
 					content:
-						"Supplemental project connected to Module 1: What Data Science Is. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-module-1-what-data-science-is-supplemental-3/starter",
 					solutionLink:
@@ -168,7 +168,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility supplemental 2",
 					content:
-						"Supplemental project connected to Module 2: Notebook Workflow and Reproducibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-module-2-notebook-workflow-and-reproducibility-supplemental-2/starter",
 					solutionLink:
@@ -177,7 +177,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility supplemental 3",
 					content:
-						"Supplemental project connected to Module 2: Notebook Workflow and Reproducibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-module-2-notebook-workflow-and-reproducibility-supplemental-3/starter",
 					solutionLink:
@@ -230,7 +230,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 3: pandas Foundations supplemental 2",
 					content:
-						"Supplemental project connected to Module 3: pandas Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-module-3-pandas-foundations-supplemental-2/starter",
 					solutionLink:
@@ -239,7 +239,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 3: pandas Foundations supplemental 3",
 					content:
-						"Supplemental project connected to Module 3: pandas Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-08-module-3-pandas-foundations-supplemental-3/starter",
 					solutionLink:
@@ -292,7 +292,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 4: Cleaning and Validation supplemental 2",
 					content:
-						"Supplemental project connected to Module 4: Cleaning and Validation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-09-module-4-cleaning-and-validation-supplemental-2/starter",
 					solutionLink:
@@ -301,7 +301,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 4: Cleaning and Validation supplemental 3",
 					content:
-						"Supplemental project connected to Module 4: Cleaning and Validation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-10-module-4-cleaning-and-validation-supplemental-3/starter",
 					solutionLink:
@@ -361,7 +361,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 5: Visualization and Statistics in Context supplemental 3",
 					content:
-						"Supplemental project connected to Module 5: Visualization and Statistics in Context. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-11-module-5-visualization-and-statistics-in-context-supplemental-3/starter",
 					solutionLink:
@@ -414,7 +414,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 6: Storytelling with Data supplemental 2",
 					content:
-						"Supplemental project connected to Module 6: Storytelling with Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-12-module-6-storytelling-with-data-supplemental-2/starter",
 					solutionLink:
@@ -423,7 +423,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 6: Storytelling with Data supplemental 3",
 					content:
-						"Supplemental project connected to Module 6: Storytelling with Data. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-13-module-6-storytelling-with-data-supplemental-3/starter",
 					solutionLink:
@@ -476,7 +476,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit supplemental 2",
 					content:
-						"Supplemental project connected to Module 7: Dashboards with Altair and Streamlit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-14-module-7-dashboards-with-altair-and-streamlit-supplemental-2/starter",
 					solutionLink:
@@ -485,7 +485,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 7: Dashboards with Altair and Streamlit supplemental 3",
 					content:
-						"Supplemental project connected to Module 7: Dashboards with Altair and Streamlit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-15-module-7-dashboards-with-altair-and-streamlit-supplemental-3/starter",
 					solutionLink:
@@ -534,7 +534,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 8: Domain Projects supplemental 2",
 					content:
-						"Supplemental project connected to Module 8: Domain Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-16-module-8-domain-projects-supplemental-2/starter",
 					solutionLink:
@@ -543,7 +543,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 8: Domain Projects supplemental 3",
 					content:
-						"Supplemental project connected to Module 8: Domain Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-17-module-8-domain-projects-supplemental-3/starter",
 					solutionLink:
@@ -596,7 +596,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 9: Data Science Capstone supplemental 2",
 					content:
-						"Supplemental project connected to Module 9: Data Science Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-18-module-9-data-science-capstone-supplemental-2/starter",
 					solutionLink:
@@ -605,7 +605,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Module 9: Data Science Capstone supplemental 3",
 					content:
-						"Supplemental project connected to Module 9: Data Science Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-19-module-9-data-science-capstone-supplemental-3/starter",
 					solutionLink:
@@ -614,12 +614,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 11: Implementation Studio",
+			title: "data analysis lab 11: Implementation Lab",
 			curriculum: [
 				{
 					title: "data analysis lab 11: Core Concepts",
 					content:
-						"data analysis lab 11: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "data analysis lab 11: Guided Example",
@@ -629,7 +629,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 11: Core Project",
 					content:
-						"data analysis lab 11: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
@@ -638,32 +638,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 11: Review and Reflection",
 					content:
-						"data analysis lab 11: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 11: Extension Challenge",
 					content:
-						"Extend the core build from data analysis lab 11: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/solution"
 				},
 				{
-					title: "data analysis lab 11 supplemental 2: Implementation Studio",
+					title: "data analysis lab 11 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 11 supplemental 3: Implementation Studio",
+					title: "data analysis lab 11 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-21-applied-studio-11-data-analysis-lab-11-supplemental-3/starter",
 					solutionLink:
@@ -672,12 +672,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 12: Implementation Studio",
+			title: "data analysis lab 12: Implementation Lab",
 			curriculum: [
 				{
 					title: "data analysis lab 12: Core Concepts",
 					content:
-						"data analysis lab 12: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "data analysis lab 12: Guided Example",
@@ -687,7 +687,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 12: Core Project",
 					content:
-						"data analysis lab 12: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
@@ -696,32 +696,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 12: Review and Reflection",
 					content:
-						"data analysis lab 12: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 12: Extension Challenge",
 					content:
-						"Extend the core build from data analysis lab 12: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/solution"
 				},
 				{
-					title: "data analysis lab 12 supplemental 2: Implementation Studio",
+					title: "data analysis lab 12 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 12 supplemental 3: Implementation Studio",
+					title: "data analysis lab 12 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-23-applied-studio-12-data-analysis-lab-12-supplemental-3/starter",
 					solutionLink:
@@ -730,12 +730,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 13: Implementation Studio",
+			title: "data analysis lab 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "data analysis lab 13: Core Concepts",
 					content:
-						"data analysis lab 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "data analysis lab 13: Guided Example",
@@ -745,7 +745,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 13: Core Project",
 					content:
-						"data analysis lab 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
@@ -754,32 +754,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 13: Review and Reflection",
 					content:
-						"data analysis lab 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 13: Extension Challenge",
 					content:
-						"Extend the core build from data analysis lab 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/solution"
 				},
 				{
-					title: "data analysis lab 13 supplemental 2: Implementation Studio",
+					title: "data analysis lab 13 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 13 supplemental 3: Implementation Studio",
+					title: "data analysis lab 13 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-25-applied-studio-13-data-analysis-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -788,12 +788,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 14: Implementation Studio",
+			title: "data analysis lab 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "data analysis lab 14: Core Concepts",
 					content:
-						"data analysis lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "data analysis lab 14: Guided Example",
@@ -803,7 +803,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 14: Core Project",
 					content:
-						"data analysis lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
@@ -812,32 +812,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 14: Review and Reflection",
 					content:
-						"data analysis lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 14: Extension Challenge",
 					content:
-						"Extend the core build from data analysis lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/solution"
 				},
 				{
-					title: "data analysis lab 14 supplemental 2: Implementation Studio",
+					title: "data analysis lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 14 supplemental 3: Implementation Studio",
+					title: "data analysis lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-27-applied-studio-14-data-analysis-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -846,12 +846,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 15: Implementation Studio",
+			title: "data analysis lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "data analysis lab 15: Core Concepts",
 					content:
-						"data analysis lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "data analysis lab 15: Guided Example",
@@ -861,7 +861,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 15: Core Project",
 					content:
-						"data analysis lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
@@ -870,32 +870,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 15: Review and Reflection",
 					content:
-						"data analysis lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 15: Extension Challenge",
 					content:
-						"Extend the core build from data analysis lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/solution"
 				},
 				{
-					title: "data analysis lab 15 supplemental 2: Implementation Studio",
+					title: "data analysis lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 15 supplemental 3: Implementation Studio",
+					title: "data analysis lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-29-applied-studio-15-data-analysis-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -904,12 +904,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 16: Implementation Studio",
+			title: "data analysis lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "data analysis lab 16: Core Concepts",
 					content:
-						"data analysis lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "data analysis lab 16: Guided Example",
@@ -919,7 +919,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 16: Core Project",
 					content:
-						"data analysis lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
@@ -928,32 +928,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 16: Review and Reflection",
 					content:
-						"data analysis lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 16: Extension Challenge",
 					content:
-						"Extend the core build from data analysis lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/solution"
 				},
 				{
-					title: "data analysis lab 16 supplemental 2: Implementation Studio",
+					title: "data analysis lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 16 supplemental 3: Implementation Studio",
+					title: "data analysis lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-31-applied-studio-16-data-analysis-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -962,12 +962,12 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 17: Implementation Studio",
+			title: "data analysis lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "data analysis lab 17: Core Concepts",
 					content:
-						"data analysis lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "data analysis lab 17: Guided Example",
@@ -977,7 +977,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 17: Core Project",
 					content:
-						"data analysis lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
@@ -986,32 +986,32 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "data analysis lab 17: Review and Reflection",
 					content:
-						"data analysis lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "data analysis lab 17: Extension Challenge",
 					content:
-						"Extend the core build from data analysis lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/solution"
 				},
 				{
-					title: "data analysis lab 17 supplemental 2: Implementation Studio",
+					title: "data analysis lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 17 supplemental 3: Implementation Studio",
+					title: "data analysis lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to data analysis lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-33-applied-studio-17-data-analysis-lab-17-supplemental-3/starter",
 					solutionLink:

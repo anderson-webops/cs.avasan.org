@@ -58,7 +58,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "The Marble Game AI(COPY)",
 					content:
-						"Supplemental project connected to FAI0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI-Copy"
 				}
@@ -123,7 +123,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Unit 1: AI Landscape and State Representation supplemental 4",
 					content:
-						"Supplemental project connected to Unit 1: AI Landscape and State Representation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-unit-1-ai-landscape-and-state-representation-supplemental-4/starter",
 					solutionLink:
@@ -186,7 +186,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Unit 2: Stacks, Queues, and Traversal Intuition supplemental 4",
 					content:
-						"Supplemental project connected to Unit 2: Stacks, Queues, and Traversal Intuition. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-unit-2-stacks-queues-and-traversal-intuition-supplemental-4/starter",
 					solutionLink:
@@ -380,7 +380,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Unit 5: Rule Based Systems and Puzzle Framing supplemental 4",
 					content:
-						"Supplemental project connected to Unit 5: Rule-Based Systems and Puzzle Framing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-unit-5-rule-based-systems-and-puzzle-framing-supplemental-4/starter",
 					solutionLink:
@@ -497,7 +497,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Unit 7: Features, Evaluation, and Responsible AI supplemental 3",
 					content:
-						"Supplemental project connected to Unit 7: Features, Evaluation, and Responsible AI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-supplemental-3/starter",
 					solutionLink:
@@ -642,12 +642,12 @@ export const aiLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "ai search lab 13: Implementation Studio",
+			title: "ai search lab 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "ai search lab 13: Core Concepts",
 					content:
-						"ai search lab 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "ai search lab 13: Guided Example",
@@ -657,7 +657,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 13: Core Project",
 					content:
-						"ai search lab 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-ai-search-lab-13/starter",
 					solutionLink:
@@ -666,32 +666,32 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 13: Review and Reflection",
 					content:
-						"ai search lab 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "ai search lab 13: Extension Challenge",
 					content:
-						"Extend the core build from ai search lab 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-ai-search-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-ai-search-lab-13/solution"
 				},
 				{
-					title: "ai search lab 13 supplemental 2: Implementation Studio",
+					title: "ai search lab 13 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-applied-studio-11-ai-search-lab-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-applied-studio-11-ai-search-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "ai search lab 13 supplemental 3: Implementation Studio",
+					title: "ai search lab 13 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-06-applied-studio-11-ai-search-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -700,12 +700,12 @@ export const aiLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "ai search lab 14: Implementation Studio",
+			title: "ai search lab 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "ai search lab 14: Core Concepts",
 					content:
-						"ai search lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "ai search lab 14: Guided Example",
@@ -715,7 +715,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 14: Core Project",
 					content:
-						"ai search lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-ai-search-lab-14/starter",
 					solutionLink:
@@ -724,32 +724,32 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 14: Review and Reflection",
 					content:
-						"ai search lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "ai search lab 14: Extension Challenge",
 					content:
-						"Extend the core build from ai search lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-ai-search-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-ai-search-lab-14/solution"
 				},
 				{
-					title: "ai search lab 14 supplemental 2: Implementation Studio",
+					title: "ai search lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-07-applied-studio-12-ai-search-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-07-applied-studio-12-ai-search-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "ai search lab 14 supplemental 3: Implementation Studio",
+					title: "ai search lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-08-applied-studio-12-ai-search-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -758,12 +758,12 @@ export const aiLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "ai search lab 15: Implementation Studio",
+			title: "ai search lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "ai search lab 15: Core Concepts",
 					content:
-						"ai search lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "ai search lab 15: Guided Example",
@@ -773,7 +773,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 15: Core Project",
 					content:
-						"ai search lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-ai-search-lab-15/starter",
 					solutionLink:
@@ -782,32 +782,32 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 15: Review and Reflection",
 					content:
-						"ai search lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "ai search lab 15: Extension Challenge",
 					content:
-						"Extend the core build from ai search lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-ai-search-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-ai-search-lab-15/solution"
 				},
 				{
-					title: "ai search lab 15 supplemental 2: Implementation Studio",
+					title: "ai search lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-09-applied-studio-13-ai-search-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-09-applied-studio-13-ai-search-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "ai search lab 15 supplemental 3: Implementation Studio",
+					title: "ai search lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-10-applied-studio-13-ai-search-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -816,12 +816,12 @@ export const aiLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "ai search lab 16: Implementation Studio",
+			title: "ai search lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "ai search lab 16: Core Concepts",
 					content:
-						"ai search lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "ai search lab 16: Guided Example",
@@ -831,7 +831,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 16: Core Project",
 					content:
-						"ai search lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-ai-search-lab-16/starter",
 					solutionLink:
@@ -840,32 +840,32 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 16: Review and Reflection",
 					content:
-						"ai search lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "ai search lab 16: Extension Challenge",
 					content:
-						"Extend the core build from ai search lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-ai-search-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-ai-search-lab-16/solution"
 				},
 				{
-					title: "ai search lab 16 supplemental 2: Implementation Studio",
+					title: "ai search lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-11-applied-studio-14-ai-search-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-11-applied-studio-14-ai-search-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "ai search lab 16 supplemental 3: Implementation Studio",
+					title: "ai search lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-12-applied-studio-14-ai-search-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -874,12 +874,12 @@ export const aiLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "ai search lab 17: Implementation Studio",
+			title: "ai search lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "ai search lab 17: Core Concepts",
 					content:
-						"ai search lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "ai search lab 17: Guided Example",
@@ -889,7 +889,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 17: Core Project",
 					content:
-						"ai search lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-ai-search-lab-17/starter",
 					solutionLink:
@@ -898,32 +898,32 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "ai search lab 17: Review and Reflection",
 					content:
-						"ai search lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "ai search lab 17: Extension Challenge",
 					content:
-						"Extend the core build from ai search lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-ai-search-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-ai-search-lab-17/solution"
 				},
 				{
-					title: "ai search lab 17 supplemental 2: Implementation Studio",
+					title: "ai search lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-13-applied-studio-15-ai-search-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-13-applied-studio-15-ai-search-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "ai search lab 17 supplemental 3: Implementation Studio",
+					title: "ai search lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to ai search lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-14-applied-studio-15-ai-search-lab-17-supplemental-3/starter",
 					solutionLink:
@@ -932,12 +932,12 @@ export const aiLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "Unbeatable TicTacToe AI 1: Implementation Studio",
+			title: "Unbeatable TicTacToe AI 1: Implementation Lab",
 			curriculum: [
 				{
 					title: "Unbeatable TicTacToe AI 1: Core Concepts",
 					content:
-						"Unbeatable TicTacToe AI 1: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Unbeatable TicTacToe AI 1: Guided Example",
@@ -947,37 +947,37 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Unbeatable TicTacToe AI 1: Core Project",
 					content:
-						"Unbeatable TicTacToe AI 1: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-Tic-Tac-Toe-AI-1"
 				},
 				{
 					title: "Unbeatable TicTacToe AI 1: Review and Reflection",
 					content:
-						"Unbeatable TicTacToe AI 1: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Unbeatable TicTacToe AI 1: Extension Challenge",
 					content:
-						"Extend the core build from Unbeatable TicTacToe AI 1: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Unbeatable-Tic-Tac-Toe-AI-1"
 				},
 				{
-					title: "Unbeatable TicTacToe AI 1 supplemental 2: Implementation Studio",
+					title: "Unbeatable TicTacToe AI 1 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Unbeatable TicTacToe AI 1: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-15-applied-studio-16-unbeatable-tictactoe-ai-1-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-15-applied-studio-16-unbeatable-tictactoe-ai-1-supplemental-2/solution"
 				},
 				{
-					title: "Unbeatable TicTacToe AI 1 supplemental 3: Implementation Studio",
+					title: "Unbeatable TicTacToe AI 1 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Unbeatable TicTacToe AI 1: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-16-applied-studio-16-unbeatable-tictactoe-ai-1-supplemental-3/starter",
 					solutionLink:
@@ -986,12 +986,12 @@ export const aiLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "The Marble Game AI(COPY): Implementation Studio",
+			title: "The Marble Game AI(COPY): Implementation Lab",
 			curriculum: [
 				{
 					title: "The Marble Game AI(COPY): Core Concepts",
 					content:
-						"The Marble Game AI(COPY): Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "The Marble Game AI(COPY): Guided Example",
@@ -1001,37 +1001,37 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "The Marble Game AI(COPY): Core Project",
 					content:
-						"The Marble Game AI(COPY): Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI-Copy"
 				},
 				{
 					title: "The Marble Game AI(COPY): Review and Reflection",
 					content:
-						"The Marble Game AI(COPY): Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "The Marble Game AI(COPY): Extension Challenge",
 					content:
-						"Extend the core build from The Marble Game AI(COPY): Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI-Copy"
 				},
 				{
-					title: "The Marble Game AI(COPY) supplemental 2: Implementation Studio",
+					title: "The Marble Game AI(COPY) supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to The Marble Game AI(COPY): Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-17-applied-studio-17-the-marble-game-ai-copy-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-17-applied-studio-17-the-marble-game-ai-copy-supplemental-2/solution"
 				},
 				{
-					title: "The Marble Game AI(COPY) supplemental 3: Implementation Studio",
+					title: "The Marble Game AI(COPY) supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to The Marble Game AI(COPY): Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-18-applied-studio-17-the-marble-game-ai-copy-supplemental-3/starter",
 					solutionLink:

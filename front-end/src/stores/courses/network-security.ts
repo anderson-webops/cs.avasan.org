@@ -48,7 +48,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Supplemental project connected to NSEC0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-nsec0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +57,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Supplemental project connected to NSEC0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-nsec0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -110,7 +110,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 1: Security Model of Networked Systems supplemental 2",
 					content:
-						"Supplemental project connected to Unit 1: Security Model of Networked Systems. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-03-unit-1-security-model-of-networked-systems-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +119,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 1: Security Model of Networked Systems supplemental 3",
 					content:
-						"Supplemental project connected to Unit 1: Security Model of Networked Systems. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-04-unit-1-security-model-of-networked-systems-supplemental-3/starter",
 					solutionLink:
@@ -173,7 +173,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 2: Sockets, Ports, and Services supplemental 2",
 					content:
-						"Supplemental project connected to Unit 2: Sockets, Ports, and Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-05-unit-2-sockets-ports-and-services-supplemental-2/starter",
 					solutionLink:
@@ -182,7 +182,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 2: Sockets, Ports, and Services supplemental 3",
 					content:
-						"Supplemental project connected to Unit 2: Sockets, Ports, and Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-06-unit-2-sockets-ports-and-services-supplemental-3/starter",
 					solutionLink:
@@ -235,7 +235,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 3: HTTP and API Security Basics supplemental 2",
 					content:
-						"Supplemental project connected to Unit 3: HTTP and API Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-07-unit-3-http-and-api-security-basics-supplemental-2/starter",
 					solutionLink:
@@ -244,7 +244,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 3: HTTP and API Security Basics supplemental 3",
 					content:
-						"Supplemental project connected to Unit 3: HTTP and API Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-08-unit-3-http-and-api-security-basics-supplemental-3/starter",
 					solutionLink:
@@ -297,7 +297,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 4: TLS and Secure Transport supplemental 2",
 					content:
-						"Supplemental project connected to Unit 4: TLS and Secure Transport. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-4-tls-and-secure-transport-supplemental-2/starter",
 					solutionLink:
@@ -306,7 +306,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 4: TLS and Secure Transport supplemental 3",
 					content:
-						"Supplemental project connected to Unit 4: TLS and Secure Transport. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-10-unit-4-tls-and-secure-transport-supplemental-3/starter",
 					solutionLink:
@@ -360,7 +360,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 5: Input Validation on the Network Boundary supplemental 2",
 					content:
-						"Supplemental project connected to Unit 5: Input Validation on the Network Boundary. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-unit-5-input-validation-on-the-network-boundary-supplemental-2/starter",
 					solutionLink:
@@ -369,7 +369,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 5: Input Validation on the Network Boundary supplemental 3",
 					content:
-						"Supplemental project connected to Unit 5: Input Validation on the Network Boundary. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-12-unit-5-input-validation-on-the-network-boundary-supplemental-3/starter",
 					solutionLink:
@@ -423,7 +423,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 6: Logging, Monitoring, and Forensics supplemental 2",
 					content:
-						"Supplemental project connected to Unit 6: Logging, Monitoring, and Forensics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-13-unit-6-logging-monitoring-and-forensics-supplemental-2/starter",
 					solutionLink:
@@ -432,7 +432,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 6: Logging, Monitoring, and Forensics supplemental 3",
 					content:
-						"Supplemental project connected to Unit 6: Logging, Monitoring, and Forensics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-14-unit-6-logging-monitoring-and-forensics-supplemental-3/starter",
 					solutionLink:
@@ -486,7 +486,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 7: Firewalls, Proxies, and Exposure supplemental 2",
 					content:
-						"Supplemental project connected to Unit 7: Firewalls, Proxies, and Exposure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-15-unit-7-firewalls-proxies-and-exposure-supplemental-2/starter",
 					solutionLink:
@@ -495,7 +495,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 7: Firewalls, Proxies, and Exposure supplemental 3",
 					content:
-						"Supplemental project connected to Unit 7: Firewalls, Proxies, and Exposure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-16-unit-7-firewalls-proxies-and-exposure-supplemental-3/starter",
 					solutionLink:
@@ -548,7 +548,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 8: Secure Node/TypeScript Services supplemental 2",
 					content:
-						"Supplemental project connected to Unit 8: Secure Node/TypeScript Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-17-unit-8-secure-node-typescript-services-supplemental-2/starter",
 					solutionLink:
@@ -557,7 +557,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 8: Secure Node/TypeScript Services supplemental 3",
 					content:
-						"Supplemental project connected to Unit 8: Secure Node/TypeScript Services. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-18-unit-8-secure-node-typescript-services-supplemental-3/starter",
 					solutionLink:
@@ -611,7 +611,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 9: Defensive Network Tooling in TS supplemental 2",
 					content:
-						"Supplemental project connected to Unit 9: Defensive Network Tooling in TS. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-19-unit-9-defensive-network-tooling-in-ts-supplemental-2/starter",
 					solutionLink:
@@ -620,7 +620,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 9: Defensive Network Tooling in TS supplemental 3",
 					content:
-						"Supplemental project connected to Unit 9: Defensive Network Tooling in TS. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-20-unit-9-defensive-network-tooling-in-ts-supplemental-3/starter",
 					solutionLink:
@@ -674,7 +674,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 10: WebSockets and Real Time Security supplemental 2",
 					content:
-						"Supplemental project connected to Unit 10: WebSockets and Real-Time Security. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-21-unit-10-websockets-and-real-time-security-supplemental-2/starter",
 					solutionLink:
@@ -683,7 +683,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 10: WebSockets and Real Time Security supplemental 3",
 					content:
-						"Supplemental project connected to Unit 10: WebSockets and Real-Time Security. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-22-unit-10-websockets-and-real-time-security-supplemental-3/starter",
 					solutionLink:
@@ -736,7 +736,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 11: Deployment Security Basics supplemental 2",
 					content:
-						"Supplemental project connected to Unit 11: Deployment Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-23-unit-11-deployment-security-basics-supplemental-2/starter",
 					solutionLink:
@@ -745,7 +745,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 11: Deployment Security Basics supplemental 3",
 					content:
-						"Supplemental project connected to Unit 11: Deployment Security Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-24-unit-11-deployment-security-basics-supplemental-3/starter",
 					solutionLink:
@@ -798,7 +798,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 2",
 					content:
-						"Supplemental project connected to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-25-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-2/starter",
 					solutionLink:
@@ -807,7 +807,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 3",
 					content:
-						"Supplemental project connected to Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-26-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-3/starter",
 					solutionLink:
@@ -860,7 +860,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 13: Capstone supplemental 2",
 					content:
-						"Supplemental project connected to Unit 13: Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-27-unit-13-capstone-supplemental-2/starter",
 					solutionLink:
@@ -869,7 +869,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Unit 13: Capstone supplemental 3",
 					content:
-						"Supplemental project connected to Unit 13: Capstone. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-28-unit-13-capstone-supplemental-3/starter",
 					solutionLink:
@@ -922,7 +922,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Supplemental project connected to NSEC14 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-29-nsec14-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -931,7 +931,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Supplemental project connected to NSEC14 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-30-nsec14-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -940,12 +940,12 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "network security lab 16: Implementation Studio",
+			title: "network security lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "network security lab 16: Core Concepts",
 					content:
-						"network security lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "network security lab 16: Guided Example",
@@ -955,7 +955,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "network security lab 16: Core Project",
 					content:
-						"network security lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/starter",
 					solutionLink:
@@ -964,32 +964,32 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "network security lab 16: Review and Reflection",
 					content:
-						"network security lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "network security lab 16: Extension Challenge",
 					content:
-						"Extend the core build from network security lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/solution"
 				},
 				{
-					title: "network security lab 16 supplemental 2: Implementation Studio",
+					title: "network security lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to network security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-31-applied-studio-16-network-security-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-31-applied-studio-16-network-security-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "network security lab 16 supplemental 3: Implementation Studio",
+					title: "network security lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to network security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-32-applied-studio-16-network-security-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -998,12 +998,12 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "network security lab 17: Implementation Studio",
+			title: "network security lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "network security lab 17: Core Concepts",
 					content:
-						"network security lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "network security lab 17: Guided Example",
@@ -1013,7 +1013,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "network security lab 17: Core Project",
 					content:
-						"network security lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/starter",
 					solutionLink:
@@ -1022,32 +1022,32 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "network security lab 17: Review and Reflection",
 					content:
-						"network security lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "network security lab 17: Extension Challenge",
 					content:
-						"Extend the core build from network security lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/solution"
 				},
 				{
-					title: "network security lab 17 supplemental 2: Implementation Studio",
+					title: "network security lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to network security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-33-applied-studio-17-network-security-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-33-applied-studio-17-network-security-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "network security lab 17 supplemental 3: Implementation Studio",
+					title: "network security lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to network security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-34-applied-studio-17-network-security-lab-17-supplemental-3/starter",
 					solutionLink:

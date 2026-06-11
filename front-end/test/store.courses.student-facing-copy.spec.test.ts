@@ -69,6 +69,10 @@ const forbiddenStudentFacingPatterns = [
 ];
 
 const forbiddenRawGeneratedPatterns = [
+	/Implementation Studio/i,
+	/defines the target artifact, required behavior, and core concepts needed/i,
+	/linked starter provides the implementation artifact/i,
+	/Supplemental project connected to/i,
 	/Use the linked starter and solution/i,
 	/Have students finish the missing implementation/i,
 	/Anchor the lesson in one concrete example/i,
@@ -89,12 +93,7 @@ const forbiddenRawGeneratedPatterns = [
 const rawCourseFiles = readdirSync(coursesSourceDir)
 	.filter(file => file.endsWith(".ts"))
 	.filter(
-		file =>
-			![
-				"index.ts",
-				"normalization.ts",
-				"types.ts"
-			].includes(file)
+		file => !["index.ts", "normalization.ts", "types.ts"].includes(file)
 	)
 	.map(file => resolve(coursesSourceDir, file));
 
@@ -113,7 +112,10 @@ describe("student-facing course copy", () => {
 	it("keeps generated boilerplate and recovery notes out of raw course source", () => {
 		const files = [
 			...rawCourseFiles,
-			resolve(repoRoot, "front-end/scripts/materialize-course-expansions.ts")
+			resolve(
+				repoRoot,
+				"front-end/scripts/materialize-course-expansions.ts"
+			)
 		];
 		const failures: string[] = [];
 
@@ -139,63 +141,70 @@ describe("student-facing course copy", () => {
 				file.endsWith("-repo-alignment-plan.md") ||
 				file.endsWith("rework-plan.md")
 		);
-		const privatePlanningDir = resolve(repoRoot, "no-include/course-planning");
+		const privatePlanningDir = resolve(
+			repoRoot,
+			"no-include/course-planning"
+		);
 
 		expect(planningFiles).toEqual([]);
 		expect(existsSync(privatePlanningDir)).toBe(true);
 	});
 
-	it("keeps visible catalog lessons neutral instead of instructor-facing", async () => {
-		const failures: string[] = [];
+	it(
+		"keeps visible catalog lessons neutral instead of instructor-facing",
+		async () => {
+			const failures: string[] = [];
 
-		for (const entry of courseCatalog) {
-			const course = await loadRawCourse(entry.id);
+			for (const entry of courseCatalog) {
+				const course = await loadRawCourse(entry.id);
 
-			if (!course) {
-				failures.push(`${entry.id}: failed to load`);
-				continue;
-			}
+				if (!course) {
+					failures.push(`${entry.id}: failed to load`);
+					continue;
+				}
 
-			for (const module of course.modules) {
-				const fields = [
-					{
-						label: "module title",
-						value: module.title
-					},
-					...module.curriculum.flatMap(item => [
+				for (const module of course.modules) {
+					const fields = [
 						{
-							label: `curriculum title: ${item.title}`,
-							value: item.title
+							label: "module title",
+							value: module.title
 						},
-						{
-							label: `curriculum content: ${item.title}`,
-							value: item.content
-						}
-					]),
-					...module.supplementalProjects.flatMap(item => [
-						{
-							label: `supplemental title: ${item.title}`,
-							value: item.title
-						},
-						{
-							label: `supplemental content: ${item.title}`,
-							value: item.content
-						}
-					])
-				];
+						...module.curriculum.flatMap(item => [
+							{
+								label: `curriculum title: ${item.title}`,
+								value: item.title
+							},
+							{
+								label: `curriculum content: ${item.title}`,
+								value: item.content
+							}
+						]),
+						...module.supplementalProjects.flatMap(item => [
+							{
+								label: `supplemental title: ${item.title}`,
+								value: item.title
+							},
+							{
+								label: `supplemental content: ${item.title}`,
+								value: item.content
+							}
+						])
+					];
 
-				for (const field of fields) {
-					for (const pattern of forbiddenStudentFacingPatterns) {
-						if (!pattern.test(field.value)) continue;
+					for (const field of fields) {
+						for (const pattern of forbiddenStudentFacingPatterns) {
+							if (!pattern.test(field.value)) continue;
 
-						failures.push(
-							`${entry.id} / ${module.title} / ${field.label}: ${snippet(field.value, pattern)}`
-						);
+							failures.push(
+								`${entry.id} / ${module.title} / ${field.label}: ${snippet(field.value, pattern)}`
+							);
+						}
 					}
 				}
 			}
-		}
 
-		expect(failures).toEqual([]);
-	}, COURSE_SWEEP_TIMEOUT);
+			expect(failures).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 });

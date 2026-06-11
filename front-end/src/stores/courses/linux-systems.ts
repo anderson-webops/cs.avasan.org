@@ -49,7 +49,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Supplemental project connected to LS0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-ls0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +58,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Supplemental project connected to LS0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-ls0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -111,7 +111,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: Shell Foundations supplemental 2",
 					content:
-						"Supplemental project connected to Unit 1: Shell Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-unit-1-shell-foundations-supplemental-2/starter",
 					solutionLink:
@@ -120,7 +120,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: Shell Foundations supplemental 3",
 					content:
-						"Supplemental project connected to Unit 1: Shell Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-unit-1-shell-foundations-supplemental-3/starter",
 					solutionLink:
@@ -169,7 +169,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 2",
 					content:
-						"Supplemental project connected to Unit 2: Filesystem Hierarchy and Directory Purpose. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-2/starter",
 					solutionLink:
@@ -178,7 +178,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 3",
 					content:
-						"Supplemental project connected to Unit 2: Filesystem Hierarchy and Directory Purpose. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-3/starter",
 					solutionLink:
@@ -231,7 +231,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 2",
 					content:
-						"Supplemental project connected to Unit 3: Users, Groups, and Permissions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental-2/starter",
 					solutionLink:
@@ -240,7 +240,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 3",
 					content:
-						"Supplemental project connected to Unit 3: Users, Groups, and Permissions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental-3/starter",
 					solutionLink:
@@ -293,7 +293,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Editing and Configuration supplemental 2",
 					content:
-						"Supplemental project connected to Unit 4: Editing and Configuration. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-4-editing-and-configuration-supplemental-2/starter",
 					solutionLink:
@@ -302,7 +302,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Editing and Configuration supplemental 3",
 					content:
-						"Supplemental project connected to Unit 4: Editing and Configuration. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-4-editing-and-configuration-supplemental-3/starter",
 					solutionLink:
@@ -355,7 +355,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: Processes and Job Control supplemental 2",
 					content:
-						"Supplemental project connected to Unit 5: Processes and Job Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-5-processes-and-job-control-supplemental-2/starter",
 					solutionLink:
@@ -364,7 +364,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: Processes and Job Control supplemental 3",
 					content:
-						"Supplemental project connected to Unit 5: Processes and Job Control. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-5-processes-and-job-control-supplemental-3/starter",
 					solutionLink:
@@ -418,7 +418,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Services and systemd supplemental 2",
 					content:
-						"Supplemental project connected to Unit 6: Services and systemd. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-13-unit-6-services-and-systemd-supplemental-2/starter",
 					solutionLink:
@@ -427,7 +427,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Services and systemd supplemental 3",
 					content:
-						"Supplemental project connected to Unit 6: Services and systemd. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-14-unit-6-services-and-systemd-supplemental-3/starter",
 					solutionLink:
@@ -480,7 +480,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Logging and Observability supplemental 2",
 					content:
-						"Supplemental project connected to Unit 7: Logging and Observability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-15-unit-7-logging-and-observability-supplemental-2/starter",
 					solutionLink:
@@ -489,7 +489,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Logging and Observability supplemental 3",
 					content:
-						"Supplemental project connected to Unit 7: Logging and Observability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-16-unit-7-logging-and-observability-supplemental-3/starter",
 					solutionLink:
@@ -543,7 +543,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: Scheduling and Automation supplemental 2",
 					content:
-						"Supplemental project connected to Unit 8: Scheduling and Automation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-17-unit-8-scheduling-and-automation-supplemental-2/starter",
 					solutionLink:
@@ -552,7 +552,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: Scheduling and Automation supplemental 3",
 					content:
-						"Supplemental project connected to Unit 8: Scheduling and Automation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-18-unit-8-scheduling-and-automation-supplemental-3/starter",
 					solutionLink:
@@ -605,7 +605,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 2",
 					content:
-						"Supplemental project connected to Unit 9: Package Management and Software Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-supplemental-2/starter",
 					solutionLink:
@@ -614,7 +614,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 3",
 					content:
-						"Supplemental project connected to Unit 9: Package Management and Software Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-supplemental-3/starter",
 					solutionLink:
@@ -667,7 +667,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 2",
 					content:
-						"Supplemental project connected to Unit 10: Networking from a Systems View. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemental-2/starter",
 					solutionLink:
@@ -676,7 +676,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 3",
 					content:
-						"Supplemental project connected to Unit 10: Networking from a Systems View. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemental-3/starter",
 					solutionLink:
@@ -739,7 +739,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Web Servers supplemental 2",
 					content:
-						"Supplemental project connected to Unit 11: Web Servers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-23-unit-11-web-servers-supplemental-2/starter",
 					solutionLink:
@@ -748,7 +748,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Web Servers supplemental 3",
 					content:
-						"Supplemental project connected to Unit 11: Web Servers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-24-unit-11-web-servers-supplemental-3/starter",
 					solutionLink:
@@ -801,7 +801,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 2",
 					content:
-						"Supplemental project connected to Unit 12: Storage, Backups, and Reliability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-supplemental-2/starter",
 					solutionLink:
@@ -810,7 +810,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 3",
 					content:
-						"Supplemental project connected to Unit 12: Storage, Backups, and Reliability. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-supplemental-3/starter",
 					solutionLink:
@@ -819,12 +819,12 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "linux systems lab 14: Implementation Studio",
+			title: "linux systems lab 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "linux systems lab 14: Core Concepts",
 					content:
-						"linux systems lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "linux systems lab 14: Guided Example",
@@ -834,7 +834,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 14: Core Project",
 					content:
-						"linux systems lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/starter",
 					solutionLink:
@@ -843,32 +843,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 14: Review and Reflection",
 					content:
-						"linux systems lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 14: Extension Challenge",
 					content:
-						"Extend the core build from linux systems lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-linux-systems-lab-14/solution"
 				},
 				{
-					title: "linux systems lab 14 supplemental 2: Implementation Studio",
+					title: "linux systems lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "linux systems lab 14 supplemental 3: Implementation Studio",
+					title: "linux systems lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -877,12 +877,12 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "linux systems lab 15: Implementation Studio",
+			title: "linux systems lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "linux systems lab 15: Core Concepts",
 					content:
-						"linux systems lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "linux systems lab 15: Guided Example",
@@ -892,7 +892,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 15: Core Project",
 					content:
-						"linux systems lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/starter",
 					solutionLink:
@@ -901,32 +901,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 15: Review and Reflection",
 					content:
-						"linux systems lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 15: Extension Challenge",
 					content:
-						"Extend the core build from linux systems lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-linux-systems-lab-15/solution"
 				},
 				{
-					title: "linux systems lab 15 supplemental 2: Implementation Studio",
+					title: "linux systems lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "linux systems lab 15 supplemental 3: Implementation Studio",
+					title: "linux systems lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -935,12 +935,12 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "linux systems lab 16: Implementation Studio",
+			title: "linux systems lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "linux systems lab 16: Core Concepts",
 					content:
-						"linux systems lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "linux systems lab 16: Guided Example",
@@ -950,7 +950,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 16: Core Project",
 					content:
-						"linux systems lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/starter",
 					solutionLink:
@@ -959,32 +959,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 16: Review and Reflection",
 					content:
-						"linux systems lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 16: Extension Challenge",
 					content:
-						"Extend the core build from linux systems lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-linux-systems-lab-16/solution"
 				},
 				{
-					title: "linux systems lab 16 supplemental 2: Implementation Studio",
+					title: "linux systems lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "linux systems lab 16 supplemental 3: Implementation Studio",
+					title: "linux systems lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -993,12 +993,12 @@ export const linuxSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "linux systems lab 17: Implementation Studio",
+			title: "linux systems lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "linux systems lab 17: Core Concepts",
 					content:
-						"linux systems lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "linux systems lab 17: Guided Example",
@@ -1008,7 +1008,7 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 17: Core Project",
 					content:
-						"linux systems lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/starter",
 					solutionLink:
@@ -1017,32 +1017,32 @@ export const linuxSystemsCourse: RawCourse = {
 				{
 					title: "linux systems lab 17: Review and Reflection",
 					content:
-						"linux systems lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "linux systems lab 17: Extension Challenge",
 					content:
-						"Extend the core build from linux systems lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-linux-systems-lab-17/solution"
 				},
 				{
-					title: "linux systems lab 17 supplemental 2: Implementation Studio",
+					title: "linux systems lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "linux systems lab 17 supplemental 3: Implementation Studio",
+					title: "linux systems lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to linux systems lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemental-3/starter",
 					solutionLink:

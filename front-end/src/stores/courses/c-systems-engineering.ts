@@ -48,7 +48,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Supplemental project connected to CSE0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-cse0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +57,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Supplemental project connected to CSE0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-cse0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -110,7 +110,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 2",
 					content:
-						"Supplemental project connected to Unit 1: Why C for Systems Work. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-unit-1-why-c-for-systems-work-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +119,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 3",
 					content:
-						"Supplemental project connected to Unit 1: Why C for Systems Work. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-unit-1-why-c-for-systems-work-supplemental-3/starter",
 					solutionLink:
@@ -168,7 +168,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 2: Binary, Hex, and Number Representation supplemental 2",
 					content:
-						"Supplemental project connected to Unit 2: Binary, Hex, and Number Representation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-unit-2-binary-hex-and-number-representation-supplemental-2/starter",
 					solutionLink:
@@ -177,7 +177,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 2: Binary, Hex, and Number Representation supplemental 3",
 					content:
-						"Supplemental project connected to Unit 2: Binary, Hex, and Number Representation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-2-binary-hex-and-number-representation-supplemental-3/starter",
 					solutionLink:
@@ -235,7 +235,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 3: Bitwise Operations supplemental 2",
 					content:
-						"Supplemental project connected to Unit 3: Bitwise Operations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-3-bitwise-operations-supplemental-2/starter",
 					solutionLink:
@@ -244,7 +244,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 3: Bitwise Operations supplemental 3",
 					content:
-						"Supplemental project connected to Unit 3: Bitwise Operations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-3-bitwise-operations-supplemental-3/starter",
 					solutionLink:
@@ -293,7 +293,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 4: Memory and Layout supplemental 2",
 					content:
-						"Supplemental project connected to Unit 4: Memory and Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-4-memory-and-layout-supplemental-2/starter",
 					solutionLink:
@@ -302,7 +302,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 4: Memory and Layout supplemental 3",
 					content:
-						"Supplemental project connected to Unit 4: Memory and Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-10-unit-4-memory-and-layout-supplemental-3/starter",
 					solutionLink:
@@ -351,7 +351,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 5: Strings and Byte Buffers supplemental 2",
 					content:
-						"Supplemental project connected to Unit 5: Strings and Byte Buffers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-11-unit-5-strings-and-byte-buffers-supplemental-2/starter",
 					solutionLink:
@@ -360,7 +360,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 5: Strings and Byte Buffers supplemental 3",
 					content:
-						"Supplemental project connected to Unit 5: Strings and Byte Buffers. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-12-unit-5-strings-and-byte-buffers-supplemental-3/starter",
 					solutionLink:
@@ -418,7 +418,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 6: Files, Streams, and Parsing supplemental 2",
 					content:
-						"Supplemental project connected to Unit 6: Files, Streams, and Parsing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-13-unit-6-files-streams-and-parsing-supplemental-2/starter",
 					solutionLink:
@@ -427,7 +427,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 6: Files, Streams, and Parsing supplemental 3",
 					content:
-						"Supplemental project connected to Unit 6: Files, Streams, and Parsing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-14-unit-6-files-streams-and-parsing-supplemental-3/starter",
 					solutionLink:
@@ -476,7 +476,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 7: Dynamic Memory and Lifetime supplemental 2",
 					content:
-						"Supplemental project connected to Unit 7: Dynamic Memory and Lifetime. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-15-unit-7-dynamic-memory-and-lifetime-supplemental-2/starter",
 					solutionLink:
@@ -485,7 +485,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 7: Dynamic Memory and Lifetime supplemental 3",
 					content:
-						"Supplemental project connected to Unit 7: Dynamic Memory and Lifetime. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-16-unit-7-dynamic-memory-and-lifetime-supplemental-3/starter",
 					solutionLink:
@@ -538,7 +538,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 2",
 					content:
-						"Supplemental project connected to Unit 8: Function Pointers and Dispatch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplemental-2/starter",
 					solutionLink:
@@ -547,7 +547,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 3",
 					content:
-						"Supplemental project connected to Unit 8: Function Pointers and Dispatch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplemental-3/starter",
 					solutionLink:
@@ -596,7 +596,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 9: Data Structures in C supplemental 2",
 					content:
-						"Supplemental project connected to Unit 9: Data Structures in C. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-19-unit-9-data-structures-in-c-supplemental-2/starter",
 					solutionLink:
@@ -605,7 +605,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 9: Data Structures in C supplemental 3",
 					content:
-						"Supplemental project connected to Unit 9: Data Structures in C. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-20-unit-9-data-structures-in-c-supplemental-3/starter",
 					solutionLink:
@@ -658,7 +658,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 2",
 					content:
-						"Supplemental project connected to Unit 10: Engineering Math in Code. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-21-unit-10-engineering-math-in-code-supplemental-2/starter",
 					solutionLink:
@@ -667,7 +667,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 3",
 					content:
-						"Supplemental project connected to Unit 10: Engineering Math in Code. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-22-unit-10-engineering-math-in-code-supplemental-3/starter",
 					solutionLink:
@@ -720,7 +720,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 11: Systems Tooling supplemental 2",
 					content:
-						"Supplemental project connected to Unit 11: Systems Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-23-unit-11-systems-tooling-supplemental-2/starter",
 					solutionLink:
@@ -729,7 +729,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 11: Systems Tooling supplemental 3",
 					content:
-						"Supplemental project connected to Unit 11: Systems Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-24-unit-11-systems-tooling-supplemental-3/starter",
 					solutionLink:
@@ -778,7 +778,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 2",
 					content:
-						"Supplemental project connected to Unit 12: Capstone Engineering Utility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplemental-2/starter",
 					solutionLink:
@@ -787,7 +787,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 3",
 					content:
-						"Supplemental project connected to Unit 12: Capstone Engineering Utility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplemental-3/starter",
 					solutionLink:
@@ -796,12 +796,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 14: Implementation Studio",
+			title: "systems build 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "systems build 14: Core Concepts",
 					content:
-						"systems build 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "systems build 14: Guided Example",
@@ -811,7 +811,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 14: Core Project",
 					content:
-						"systems build 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
@@ -820,32 +820,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 14: Review and Reflection",
 					content:
-						"systems build 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 14: Extension Challenge",
 					content:
-						"Extend the core build from systems build 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/solution"
 				},
 				{
-					title: "systems build 14 supplemental 2: Implementation Studio",
+					title: "systems build 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-2/solution"
 				},
 				{
-					title: "systems build 14 supplemental 3: Implementation Studio",
+					title: "systems build 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-28-applied-studio-14-systems-build-14-supplemental-3/starter",
 					solutionLink:
@@ -854,12 +854,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 15: Implementation Studio",
+			title: "systems build 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "systems build 15: Core Concepts",
 					content:
-						"systems build 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "systems build 15: Guided Example",
@@ -869,7 +869,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 15: Core Project",
 					content:
-						"systems build 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
@@ -878,32 +878,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 15: Review and Reflection",
 					content:
-						"systems build 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 15: Extension Challenge",
 					content:
-						"Extend the core build from systems build 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/solution"
 				},
 				{
-					title: "systems build 15 supplemental 2: Implementation Studio",
+					title: "systems build 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-2/solution"
 				},
 				{
-					title: "systems build 15 supplemental 3: Implementation Studio",
+					title: "systems build 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-30-applied-studio-15-systems-build-15-supplemental-3/starter",
 					solutionLink:
@@ -912,12 +912,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 16: Implementation Studio",
+			title: "systems build 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "systems build 16: Core Concepts",
 					content:
-						"systems build 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "systems build 16: Guided Example",
@@ -927,7 +927,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 16: Core Project",
 					content:
-						"systems build 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
@@ -936,32 +936,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 16: Review and Reflection",
 					content:
-						"systems build 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 16: Extension Challenge",
 					content:
-						"Extend the core build from systems build 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/solution"
 				},
 				{
-					title: "systems build 16 supplemental 2: Implementation Studio",
+					title: "systems build 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-2/solution"
 				},
 				{
-					title: "systems build 16 supplemental 3: Implementation Studio",
+					title: "systems build 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-32-applied-studio-16-systems-build-16-supplemental-3/starter",
 					solutionLink:
@@ -970,12 +970,12 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 17: Implementation Studio",
+			title: "systems build 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "systems build 17: Core Concepts",
 					content:
-						"systems build 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "systems build 17: Guided Example",
@@ -985,7 +985,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 17: Core Project",
 					content:
-						"systems build 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
@@ -994,32 +994,32 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 17: Review and Reflection",
 					content:
-						"systems build 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "systems build 17: Extension Challenge",
 					content:
-						"Extend the core build from systems build 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/solution"
 				},
 				{
-					title: "systems build 17 supplemental 2: Implementation Studio",
+					title: "systems build 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-2/solution"
 				},
 				{
-					title: "systems build 17 supplemental 3: Implementation Studio",
+					title: "systems build 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to systems build 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-34-applied-studio-17-systems-build-17-supplemental-3/starter",
 					solutionLink:

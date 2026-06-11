@@ -44,14 +44,14 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road III",
 					content:
-						"Supplemental project connected to USG0 Setup and Gold Mindset. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG24-Why-Did-the-Cow-Cross-the-Road-III"
 				},
 				{
 					title: "Snow Boots",
 					content:
-						"Supplemental project connected to USG0 Setup and Gold Mindset. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG27-Snow-Boots"
 				}
@@ -173,7 +173,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road II",
 					content:
-						"Supplemental project connected to Unit 2: Shortest Paths and Weighted Graphs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG31-Why-Did-the-Cow-Cross-the-Road-II"
 				}
@@ -288,7 +288,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Circular Barn",
 					content:
-						"Supplemental project connected to Unit 4: Fenwick Trees, Ordering, and Range Structure. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG37-Circular-Barn"
 				}
@@ -457,7 +457,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Bovine Genomics",
 					content:
-						"Supplemental project connected to Unit 7: Gold Capstone Sets. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG38-Bovine-Genomics"
 				}
@@ -532,12 +532,12 @@ export const usacoGoldCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Dynamic Programming Practice: Implementation Studio",
+			title: "Dynamic Programming Practice: Implementation Lab",
 			curriculum: [
 				{
 					title: "Dynamic Programming Practice: Core Concepts",
 					content:
-						"Dynamic Programming Practice: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Dynamic Programming Practice: Guided Example",
@@ -547,47 +547,47 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Dynamic Programming Practice: Core Project",
 					content:
-						"Dynamic Programming Practice: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice"
 				},
 				{
 					title: "Dynamic Programming Practice: Review and Reflection",
 					content:
-						"Dynamic Programming Practice: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Dynamic Programming Practice: Extension Challenge",
 					content:
-						"Extend the core build from Dynamic Programming Practice: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-Practice"
 				},
 				{
 					title: "Cow Checklist",
 					content:
-						"Supplemental project connected to Dynamic Programming Practice: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG4-Cow-Checklist"
 				},
 				{
 					title: "Marathon",
 					content:
-						"Supplemental project connected to Dynamic Programming Practice: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG5-Marathon"
 				}
 			]
 		},
 		{
-			title: "Hoof Paper Scissors: Implementation Studio",
+			title: "Hoof Paper Scissors: Implementation Lab",
 			curriculum: [
 				{
 					title: "Hoof Paper Scissors: Core Concepts",
 					content:
-						"Hoof Paper Scissors: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Hoof Paper Scissors: Guided Example",
@@ -597,47 +597,47 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors: Core Project",
 					content:
-						"Hoof Paper Scissors: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors"
 				},
 				{
 					title: "Hoof Paper Scissors: Review and Reflection",
 					content:
-						"Hoof Paper Scissors: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Hoof Paper Scissors: Extension Challenge",
 					content:
-						"Extend the core build from Hoof Paper Scissors: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Hoof-Paper-Scissors"
 				},
 				{
 					title: "248",
 					content:
-						"Supplemental project connected to Hoof Paper Scissors: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG6-248"
 				},
 				{
 					title: "Treasure Chest",
 					content:
-						"Supplemental project connected to Hoof Paper Scissors: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG7-Treasure-Chest"
 				}
 			]
 		},
 		{
-			title: "Why Did the Cow Cross the Road: Implementation Studio",
+			title: "Why Did the Cow Cross the Road: Implementation Lab",
 			curriculum: [
 				{
 					title: "Why Did the Cow Cross the Road: Core Concepts",
 					content:
-						"Why Did the Cow Cross the Road: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Why Did the Cow Cross the Road: Guided Example",
@@ -647,47 +647,47 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road: Core Project",
 					content:
-						"Why Did the Cow Cross the Road: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
 					title: "Why Did the Cow Cross the Road: Review and Reflection",
 					content:
-						"Why Did the Cow Cross the Road: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Why Did the Cow Cross the Road: Extension Challenge",
 					content:
-						"Extend the core build from Why Did the Cow Cross the Road: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG12-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
 					title: "Bookshelf",
 					content:
-						"Supplemental project connected to Why Did the Cow Cross the Road: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG8-Bookshelf"
 				},
 				{
 					title: "Dijkstras Algorithm II",
 					content:
-						"Supplemental project connected to Why Did the Cow Cross the Road: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm-II"
 				}
 			]
 		},
 		{
-			title: "Cow Routing: Implementation Studio",
+			title: "Cow Routing: Implementation Lab",
 			curriculum: [
 				{
 					title: "Cow Routing: Core Concepts",
 					content:
-						"Cow Routing: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Cow Routing: Guided Example",
@@ -697,37 +697,37 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Cow Routing: Core Project",
 					content:
-						"Cow Routing: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing"
 				},
 				{
 					title: "Cow Routing: Review and Reflection",
 					content:
-						"Cow Routing: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Cow Routing: Extension Challenge",
 					content:
-						"Extend the core build from Cow Routing: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG13-Cow-Routing"
 				},
 				{
-					title: "Cow Routing supplemental 2: Implementation Studio",
+					title: "Cow Routing supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Cow Routing: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-01-applied-studio-13-cow-routing-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-01-applied-studio-13-cow-routing-supplemental-2/solution"
 				},
 				{
-					title: "Cow Routing supplemental 3: Implementation Studio",
+					title: "Cow Routing supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Cow Routing: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-02-applied-studio-13-cow-routing-supplemental-3/starter",
 					solutionLink:
@@ -736,12 +736,12 @@ export const usacoGoldCourse: RawCourse = {
 			]
 		},
 		{
-			title: "MST II: Implementation Studio",
+			title: "MST II: Implementation Lab",
 			curriculum: [
 				{
 					title: "MST II: Core Concepts",
 					content:
-						"MST II: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "MST II: Guided Example",
@@ -751,37 +751,37 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "MST II: Core Project",
 					content:
-						"MST II: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II"
 				},
 				{
 					title: "MST II: Review and Reflection",
 					content:
-						"MST II: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "MST II: Extension Challenge",
 					content:
-						"Extend the core build from MST II: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST-II"
 				},
 				{
-					title: "MST II supplemental 2: Implementation Studio",
+					title: "MST II supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to MST II: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-03-applied-studio-14-mst-ii-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-03-applied-studio-14-mst-ii-supplemental-2/solution"
 				},
 				{
-					title: "MST II supplemental 3: Implementation Studio",
+					title: "MST II supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to MST II: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-04-applied-studio-14-mst-ii-supplemental-3/starter",
 					solutionLink:
@@ -790,12 +790,12 @@ export const usacoGoldCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Watering the Fields: Implementation Studio",
+			title: "Watering the Fields: Implementation Lab",
 			curriculum: [
 				{
 					title: "Watering the Fields: Core Concepts",
 					content:
-						"Watering the Fields: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Watering the Fields: Guided Example",
@@ -805,37 +805,37 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Watering the Fields: Core Project",
 					content:
-						"Watering the Fields: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields"
 				},
 				{
 					title: "Watering the Fields: Review and Reflection",
 					content:
-						"Watering the Fields: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Watering the Fields: Extension Challenge",
 					content:
-						"Extend the core build from Watering the Fields: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG16-Watering-the-Fields"
 				},
 				{
-					title: "Watering the Fields supplemental 2: Implementation Studio",
+					title: "Watering the Fields supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Watering the Fields: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplemental-2/solution"
 				},
 				{
-					title: "Watering the Fields supplemental 3: Implementation Studio",
+					title: "Watering the Fields supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Watering the Fields: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplemental-3/starter",
 					solutionLink:
@@ -844,12 +844,12 @@ export const usacoGoldCourse: RawCourse = {
 			]
 		},
 		{
-			title: "I Would Walk 500 Miles: Implementation Studio",
+			title: "I Would Walk 500 Miles: Implementation Lab",
 			curriculum: [
 				{
 					title: "I Would Walk 500 Miles: Core Concepts",
 					content:
-						"I Would Walk 500 Miles: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "I Would Walk 500 Miles: Guided Example",
@@ -859,37 +859,37 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "I Would Walk 500 Miles: Core Project",
 					content:
-						"I Would Walk 500 Miles: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles"
 				},
 				{
 					title: "I Would Walk 500 Miles: Review and Reflection",
 					content:
-						"I Would Walk 500 Miles: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "I Would Walk 500 Miles: Extension Challenge",
 					content:
-						"Extend the core build from I Would Walk 500 Miles: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG18-I-Would-Walk-500-Miles"
 				},
 				{
-					title: "I Would Walk 500 Miles supplemental 2: Implementation Studio",
+					title: "I Would Walk 500 Miles supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to I Would Walk 500 Miles: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-07-applied-studio-16-i-would-walk-500-miles-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-07-applied-studio-16-i-would-walk-500-miles-supplemental-2/solution"
 				},
 				{
-					title: "I Would Walk 500 Miles supplemental 3: Implementation Studio",
+					title: "I Would Walk 500 Miles supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to I Would Walk 500 Miles: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-08-applied-studio-16-i-would-walk-500-miles-supplemental-3/starter",
 					solutionLink:
@@ -898,12 +898,12 @@ export const usacoGoldCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Talent Show: Implementation Studio",
+			title: "Talent Show: Implementation Lab",
 			curriculum: [
 				{
 					title: "Talent Show: Core Concepts",
 					content:
-						"Talent Show: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Talent Show: Guided Example",
@@ -913,37 +913,37 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Talent Show: Core Project",
 					content:
-						"Talent Show: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show"
 				},
 				{
 					title: "Talent Show: Review and Reflection",
 					content:
-						"Talent Show: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Talent Show: Extension Challenge",
 					content:
-						"Extend the core build from Talent Show: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG2-Talent-Show"
 				},
 				{
-					title: "Talent Show supplemental 2: Implementation Studio",
+					title: "Talent Show supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Talent Show: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-09-applied-studio-17-talent-show-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-09-applied-studio-17-talent-show-supplemental-2/solution"
 				},
 				{
-					title: "Talent Show supplemental 3: Implementation Studio",
+					title: "Talent Show supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Talent Show: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-10-applied-studio-17-talent-show-supplemental-3/starter",
 					solutionLink:

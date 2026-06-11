@@ -44,14 +44,14 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Pythonic Design Patterns",
 					content:
-						"Supplemental project connected to PDP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
 				},
 				{
 					title: "Pythonic Design Patterns",
 					content:
-						"Supplemental project connected to PDP0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main"
 				}
@@ -98,7 +98,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Why Python Changes the Design Patterns Conversation Supplemental 2",
 					content:
-						"Supplemental project connected to PDP1 Why Python Changes the Design-Patterns Conversation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-01-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-2/starter",
 					solutionLink:
@@ -107,7 +107,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Why Python Changes the Design Patterns Conversation Supplemental 3",
 					content:
-						"Supplemental project connected to PDP1 Why Python Changes the Design-Patterns Conversation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-02-pdp1-why-python-changes-the-design-patterns-conversation-supplemental-3/starter",
 					solutionLink:
@@ -156,7 +156,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Design Foundations in Python Supplemental 2",
 					content:
-						"Supplemental project connected to PDP2 Design Foundations in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-03-pdp2-design-foundations-in-python-supplemental-2/starter",
 					solutionLink:
@@ -165,7 +165,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Design Foundations in Python Supplemental 3",
 					content:
-						"Supplemental project connected to PDP2 Design Foundations in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-04-pdp2-design-foundations-in-python-supplemental-3/starter",
 					solutionLink:
@@ -218,7 +218,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Strategy Without Ceremony Supplemental 2",
 					content:
-						"Supplemental project connected to PDP3 Strategy Without Ceremony. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-05-pdp3-strategy-without-ceremony-supplemental-2/starter",
 					solutionLink:
@@ -227,7 +227,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Strategy Without Ceremony Supplemental 3",
 					content:
-						"Supplemental project connected to PDP3 Strategy Without Ceremony. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-06-pdp3-strategy-without-ceremony-supplemental-3/starter",
 					solutionLink:
@@ -280,7 +280,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Factory and Builder in Python Supplemental 2",
 					content:
-						"Supplemental project connected to PDP4 Factory and Builder in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-07-pdp4-factory-and-builder-in-python-supplemental-2/starter",
 					solutionLink:
@@ -289,7 +289,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Factory and Builder in Python Supplemental 3",
 					content:
-						"Supplemental project connected to PDP4 Factory and Builder in Python. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-08-pdp4-factory-and-builder-in-python-supplemental-3/starter",
 					solutionLink:
@@ -342,7 +342,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Observer, Events, and Callbacks Supplemental 2",
 					content:
-						"Supplemental project connected to PDP5 Observer, Events, and Callbacks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-09-pdp5-observer-events-and-callbacks-supplemental-2/starter",
 					solutionLink:
@@ -351,7 +351,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Observer, Events, and Callbacks Supplemental 3",
 					content:
-						"Supplemental project connected to PDP5 Observer, Events, and Callbacks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-10-pdp5-observer-events-and-callbacks-supplemental-3/starter",
 					solutionLink:
@@ -404,7 +404,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Decorator, Proxy, and Facade Supplemental 2",
 					content:
-						"Supplemental project connected to PDP6 Decorator, Proxy, and Facade. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-11-pdp6-decorator-proxy-and-facade-supplemental-2/starter",
 					solutionLink:
@@ -413,7 +413,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Decorator, Proxy, and Facade Supplemental 3",
 					content:
-						"Supplemental project connected to PDP6 Decorator, Proxy, and Facade. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-12-pdp6-decorator-proxy-and-facade-supplemental-3/starter",
 					solutionLink:
@@ -466,7 +466,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "State and Command Supplemental 2",
 					content:
-						"Supplemental project connected to PDP7 State and Command. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-13-pdp7-state-and-command-supplemental-2/starter",
 					solutionLink:
@@ -475,7 +475,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "State and Command Supplemental 3",
 					content:
-						"Supplemental project connected to PDP7 State and Command. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-14-pdp7-state-and-command-supplemental-3/starter",
 					solutionLink:
@@ -528,7 +528,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Adapter and Integration Boundaries Supplemental 2",
 					content:
-						"Supplemental project connected to PDP8 Adapter and Integration Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-15-pdp8-adapter-and-integration-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -537,7 +537,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Adapter and Integration Boundaries Supplemental 3",
 					content:
-						"Supplemental project connected to PDP8 Adapter and Integration Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-16-pdp8-adapter-and-integration-boundaries-supplemental-3/starter",
 					solutionLink:
@@ -590,7 +590,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Method versus Higher Order Functions Supplemental 2",
 					content:
-						"Supplemental project connected to PDP9 Template Method versus Higher-Order Functions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-17-pdp9-template-method-versus-higher-order-functions-supplemental-2/starter",
 					solutionLink:
@@ -599,7 +599,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Method versus Higher Order Functions Supplemental 3",
 					content:
-						"Supplemental project connected to PDP9 Template Method versus Higher-Order Functions. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-18-pdp9-template-method-versus-higher-order-functions-supplemental-3/starter",
 					solutionLink:
@@ -648,7 +648,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Singleton, Global State, and Module Patterns Supplemental 2",
 					content:
-						"Supplemental project connected to PDP10 Singleton, Global State, and Module Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-19-pdp10-singleton-global-state-and-module-patterns/starter",
 					solutionLink:
@@ -657,7 +657,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Singleton, Global State, and Module Patterns Supplemental 3",
 					content:
-						"Supplemental project connected to PDP10 Singleton, Global State, and Module Patterns. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-20-pdp10-singleton-global-state-and-module-patterns/starter",
 					solutionLink:
@@ -710,7 +710,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Refactoring Python Code Smells Supplemental 2",
 					content:
-						"Supplemental project connected to PDP11 Refactoring Python Code Smells. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-21-pdp11-refactoring-python-code-smells-supplemental-2/starter",
 					solutionLink:
@@ -719,7 +719,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Refactoring Python Code Smells Supplemental 3",
 					content:
-						"Supplemental project connected to PDP11 Refactoring Python Code Smells. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-22-pdp11-refactoring-python-code-smells-supplemental-3/starter",
 					solutionLink:
@@ -772,7 +772,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Capstone Pythonic Refactor Studio Supplemental 2",
 					content:
-						"Supplemental project connected to PDP12 Capstone Pythonic Refactor Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-23-pdp12-capstone-pythonic-refactor-studio-supplemental-2/starter",
 					solutionLink:
@@ -781,7 +781,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Capstone Pythonic Refactor Studio Supplemental 3",
 					content:
-						"Supplemental project connected to PDP12 Capstone Pythonic Refactor Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Pythonic-Design-Patterns/tree/main/PDP-24-pdp12-capstone-pythonic-refactor-studio-supplemental-3/starter",
 					solutionLink:

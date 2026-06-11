@@ -63,7 +63,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input supplemental 2",
 					content:
-						"Supplemental project connected to AJ1 Review: Variables, Strings, and Input. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-01-aj1-review-variables-strings-and-input-supplemental-2/starter",
 					solutionLink:
@@ -72,7 +72,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input supplemental 3",
 					content:
-						"Supplemental project connected to AJ1 Review: Variables, Strings, and Input. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-02-aj1-review-variables-strings-and-input-supplemental-3/starter",
 					solutionLink:
@@ -246,7 +246,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Objects and Classes supplemental 2",
 					content:
-						"Supplemental project connected to AJ3 Review: Objects and Classes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-03-aj3-review-objects-and-classes-supplemental-2/starter",
 					solutionLink:
@@ -255,7 +255,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Objects and Classes supplemental 3",
 					content:
-						"Supplemental project connected to AJ3 Review: Objects and Classes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-04-aj3-review-objects-and-classes-supplemental-3/starter",
 					solutionLink:
@@ -313,7 +313,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion supplemental 2",
 					content:
-						"Supplemental project connected to AJ4 Recursion. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-05-aj4-recursion-supplemental-2/starter",
 					solutionLink:
@@ -322,7 +322,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion supplemental 3",
 					content:
-						"Supplemental project connected to AJ4 Recursion. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-06-aj4-recursion-supplemental-3/starter",
 					solutionLink:
@@ -375,7 +375,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation supplemental 2",
 					content:
-						"Supplemental project connected to AJ5 Linear Search and Big-O Notation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-07-aj5-linear-search-and-big-o-notation-supplemental-2/starter",
 					solutionLink:
@@ -384,7 +384,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation supplemental 3",
 					content:
-						"Supplemental project connected to AJ5 Linear Search and Big-O Notation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-08-aj5-linear-search-and-big-o-notation-supplemental-3/starter",
 					solutionLink:
@@ -446,7 +446,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search supplemental 2",
 					content:
-						"Supplemental project connected to AJ6 Binary Search. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-09-aj6-binary-search-supplemental-2/starter",
 					solutionLink:
@@ -455,7 +455,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search supplemental 3",
 					content:
-						"Supplemental project connected to AJ6 Binary Search. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-10-aj6-binary-search-supplemental-3/starter",
 					solutionLink:
@@ -518,7 +518,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-11-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -527,7 +527,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-12-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -590,7 +590,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection and Insertion Sort supplemental 2",
 					content:
-						"Supplemental project connected to AJ7 Selection and Insertion Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-13-aj7-selection-and-insertion-sort-supplemental-2/starter",
 					solutionLink:
@@ -599,7 +599,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection and Insertion Sort supplemental 3",
 					content:
-						"Supplemental project connected to AJ7 Selection and Insertion Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-14-aj7-selection-and-insertion-sort-supplemental-3/starter",
 					solutionLink:
@@ -652,7 +652,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort supplemental 2",
 					content:
-						"Supplemental project connected to AJ8 Bubble Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-15-aj8-bubble-sort-supplemental-2/starter",
 					solutionLink:
@@ -661,7 +661,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort supplemental 3",
 					content:
-						"Supplemental project connected to AJ8 Bubble Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-16-aj8-bubble-sort-supplemental-3/starter",
 					solutionLink:
@@ -723,7 +723,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort supplemental 2",
 					content:
-						"Supplemental project connected to AJ9 Merge Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-17-aj9-merge-sort-supplemental-2/starter",
 					solutionLink:
@@ -732,7 +732,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort supplemental 3",
 					content:
-						"Supplemental project connected to AJ9 Merge Sort. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-18-aj9-merge-sort-supplemental-3/starter",
 					solutionLink:
@@ -795,7 +795,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-19-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -804,7 +804,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-20-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -871,7 +871,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming supplemental 2",
 					content:
-						"Supplemental project connected to AJ10 Sustainable Programming. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-21-aj10-sustainable-programming-supplemental-2/starter",
 					solutionLink:
@@ -880,7 +880,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming supplemental 3",
 					content:
-						"Supplemental project connected to AJ10 Sustainable Programming. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-22-aj10-sustainable-programming-supplemental-3/starter",
 					solutionLink:
@@ -938,7 +938,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists supplemental 2",
 					content:
-						"Supplemental project connected to AJ11 Linked Lists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-23-aj11-linked-lists-supplemental-2/starter",
 					solutionLink:
@@ -947,7 +947,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists supplemental 3",
 					content:
-						"Supplemental project connected to AJ11 Linked Lists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-24-aj11-linked-lists-supplemental-3/starter",
 					solutionLink:
@@ -1074,7 +1074,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues and Maps supplemental 2",
 					content:
-						"Supplemental project connected to AJ13 Priority Queues and Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-25-aj13-priority-queues-and-maps-supplemental-2/starter",
 					solutionLink:
@@ -1083,7 +1083,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues and Maps supplemental 3",
 					content:
-						"Supplemental project connected to AJ13 Priority Queues and Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-26-aj13-priority-queues-and-maps-supplemental-3/starter",
 					solutionLink:
@@ -1147,7 +1147,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #3 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #3. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-27-check-in-3-supplemental-2/starter",
 					solutionLink:
@@ -1156,7 +1156,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #3 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #3. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-28-check-in-3-supplemental-3/starter",
 					solutionLink:
@@ -1228,7 +1228,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 2",
 					content:
-						"Supplemental project connected to AJ14 Binary Search Trees. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-29-aj14-binary-search-trees-supplemental-2/starter",
 					solutionLink:
@@ -1237,7 +1237,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 3",
 					content:
-						"Supplemental project connected to AJ14 Binary Search Trees. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-30-aj14-binary-search-trees-supplemental-3/starter",
 					solutionLink:
@@ -1300,7 +1300,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables supplemental 2",
 					content:
-						"Supplemental project connected to AJ15 Hash Tables. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-31-aj15-hash-tables-supplemental-2/starter",
 					solutionLink:
@@ -1309,7 +1309,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables supplemental 3",
 					content:
-						"Supplemental project connected to AJ15 Hash Tables. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-32-aj15-hash-tables-supplemental-3/starter",
 					solutionLink:
@@ -1367,7 +1367,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Graphs supplemental 2",
 					content:
-						"Supplemental project connected to AJ16 Graphs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-33-aj16-graphs-supplemental-2/starter",
 					solutionLink:
@@ -1376,7 +1376,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Graphs supplemental 3",
 					content:
-						"Supplemental project connected to AJ16 Graphs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-34-aj16-graphs-supplemental-3/starter",
 					solutionLink:
@@ -1430,7 +1430,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #4 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #4. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-35-check-in-4-supplemental-2/starter",
 					solutionLink:
@@ -1439,7 +1439,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #4 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #4. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-36-check-in-4-supplemental-3/starter",
 					solutionLink:
@@ -1501,7 +1501,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps supplemental 2",
 					content:
-						"Supplemental project connected to AJ17 Master Project: Google Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-37-aj17-master-project-google-maps-supplemental-2/starter",
 					solutionLink:
@@ -1510,7 +1510,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps supplemental 3",
 					content:
-						"Supplemental project connected to AJ17 Master Project: Google Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/J3-38-aj17-master-project-google-maps-supplemental-3/starter",
 					solutionLink:

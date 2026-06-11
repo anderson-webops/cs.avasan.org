@@ -172,7 +172,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "K Nearest Neighbors supplemental 2",
 					content:
-						"Supplemental project connected to ML2 K-Nearest Neighbors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-01-ml2-k-nearest-neighbors-supplemental-2/starter",
 					solutionLink:
@@ -181,7 +181,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "K Nearest Neighbors supplemental 3",
 					content:
-						"Supplemental project connected to ML2 K-Nearest Neighbors. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-02-ml2-k-nearest-neighbors-supplemental-3/starter",
 					solutionLink:
@@ -240,7 +240,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Naive Bayes supplemental 2",
 					content:
-						"Supplemental project connected to ML3 Naive Bayes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-03-ml3-naive-bayes-supplemental-2/starter",
 					solutionLink:
@@ -249,7 +249,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Naive Bayes supplemental 3",
 					content:
-						"Supplemental project connected to ML3 Naive Bayes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-04-ml3-naive-bayes-supplemental-3/starter",
 					solutionLink:
@@ -298,7 +298,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML3.5 Decision Trees and Interpretable Models supplemental 2",
 					content:
-						"Supplemental project connected to ML3. The linked starter provides the implementation artifact, and the solution provides the reference state.5 Decision Trees and Interpretable Models.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.5 Decision Trees and Interpretable Models.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-05-ml3-5-decision-trees-and-interpretable-models-supplemental-2/starter",
 					solutionLink:
@@ -307,7 +307,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML3.5 Decision Trees and Interpretable Models supplemental 3",
 					content:
-						"Supplemental project connected to ML3. The linked starter provides the implementation artifact, and the solution provides the reference state.5 Decision Trees and Interpretable Models.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.5 Decision Trees and Interpretable Models.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-06-ml3-5-decision-trees-and-interpretable-models-supplemental-3/starter",
 					solutionLink:
@@ -382,7 +382,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Neural Networks supplemental 2",
 					content:
-						"Supplemental project connected to ML4 Neural Networks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-07-ml4-neural-networks-supplemental-2/starter",
 					solutionLink:
@@ -391,7 +391,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Neural Networks supplemental 3",
 					content:
-						"Supplemental project connected to ML4 Neural Networks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-08-ml4-neural-networks-supplemental-3/starter",
 					solutionLink:
@@ -464,7 +464,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Introduction to Regression supplemental 2",
 					content:
-						"Supplemental project connected to ML5 Introduction to Regression. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-09-ml5-introduction-to-regression-supplemental-2/starter",
 					solutionLink:
@@ -473,7 +473,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Introduction to Regression supplemental 3",
 					content:
-						"Supplemental project connected to ML5 Introduction to Regression. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-10-ml5-introduction-to-regression-supplemental-3/starter",
 					solutionLink:
@@ -522,7 +522,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Regression with Neural Networks supplemental 2",
 					content:
-						"Supplemental project connected to ML6 Regression with Neural Networks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-11-ml6-regression-with-neural-networks-supplemental-2/starter",
 					solutionLink:
@@ -531,7 +531,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Regression with Neural Networks supplemental 3",
 					content:
-						"Supplemental project connected to ML6 Regression with Neural Networks. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-12-ml6-regression-with-neural-networks-supplemental-3/starter",
 					solutionLink:
@@ -584,7 +584,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Image Classifier supplemental 2",
 					content:
-						"Supplemental project connected to ML7 Image Classifier. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-13-ml7-image-classifier-supplemental-2/starter",
 					solutionLink:
@@ -593,7 +593,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Image Classifier supplemental 3",
 					content:
-						"Supplemental project connected to ML7 Image Classifier. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-14-ml7-image-classifier-supplemental-3/starter",
 					solutionLink:
@@ -642,7 +642,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy supplemental 2",
 					content:
-						"Supplemental project connected to ML7. The linked starter provides the implementation artifact, and the solution provides the reference state.5 Model Evaluation, Comparison, and Dataset Strategy.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.5 Model Evaluation, Comparison, and Dataset Strategy.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-15-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-2/starter",
 					solutionLink:
@@ -651,7 +651,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy supplemental 3",
 					content:
-						"Supplemental project connected to ML7. The linked starter provides the implementation artifact, and the solution provides the reference state.5 Model Evaluation, Comparison, and Dataset Strategy.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.5 Model Evaluation, Comparison, and Dataset Strategy.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-16-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-3/starter",
 					solutionLink:
@@ -706,7 +706,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Master Project supplemental 2",
 					content:
-						"Supplemental project connected to ML8 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-17-ml8-master-project-supplemental-2/starter",
 					solutionLink:
@@ -715,7 +715,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Master Project supplemental 3",
 					content:
-						"Supplemental project connected to ML8 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-18-ml8-master-project-supplemental-3/starter",
 					solutionLink:
@@ -724,12 +724,12 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Customer Segmentation: Implementation Studio",
+			title: "Customer Segmentation: Implementation Lab",
 			curriculum: [
 				{
 					title: "Customer Segmentation: Core Concepts",
 					content:
-						"Customer Segmentation: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Customer Segmentation: Guided Example",
@@ -739,37 +739,37 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Customer Segmentation: Core Project",
 					content:
-						"Customer Segmentation: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
 					title: "Customer Segmentation: Review and Reflection",
 					content:
-						"Customer Segmentation: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Customer Segmentation: Extension Challenge",
 					content:
-						"Extend the core build from Customer Segmentation: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
-					title: "Customer Segmentation supplemental 2: Implementation Studio",
+					title: "Customer Segmentation supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Customer Segmentation: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-19-applied-studio-12-customer-segmentation-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-19-applied-studio-12-customer-segmentation-supplemental-2/solution"
 				},
 				{
-					title: "Customer Segmentation supplemental 3: Implementation Studio",
+					title: "Customer Segmentation supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Customer Segmentation: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-20-applied-studio-12-customer-segmentation-supplemental-3/starter",
 					solutionLink:
@@ -778,12 +778,12 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Customer Segmentation Interview: Implementation Studio",
+			title: "Customer Segmentation Interview: Implementation Lab",
 			curriculum: [
 				{
 					title: "Customer Segmentation Interview: Core Concepts",
 					content:
-						"Customer Segmentation Interview: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Customer Segmentation Interview: Guided Example",
@@ -793,37 +793,37 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Customer Segmentation Interview: Core Project",
 					content:
-						"Customer Segmentation Interview: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Interview-Starter"
 				},
 				{
 					title: "Customer Segmentation Interview: Review and Reflection",
 					content:
-						"Customer Segmentation Interview: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Customer Segmentation Interview: Extension Challenge",
 					content:
-						"Extend the core build from Customer Segmentation Interview: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Interview-Starter"
 				},
 				{
-					title: "Customer Segmentation Interview supplemental 2: Implementation Studio",
+					title: "Customer Segmentation Interview supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Customer Segmentation Interview: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-21-applied-studio-13-customer-segmentation-interview-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-21-applied-studio-13-customer-segmentation-interview-supplemental-2/solution"
 				},
 				{
-					title: "Customer Segmentation Interview supplemental 3: Implementation Studio",
+					title: "Customer Segmentation Interview supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Customer Segmentation Interview: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-22-applied-studio-13-customer-segmentation-interview-supplemental-3/starter",
 					solutionLink:
@@ -832,12 +832,12 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Customer Segmentation: Implementation Studio",
+			title: "Customer Segmentation: Implementation Lab",
 			curriculum: [
 				{
 					title: "Customer Segmentation: Core Concepts",
 					content:
-						"Customer Segmentation: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Customer Segmentation: Guided Example",
@@ -847,37 +847,37 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Customer Segmentation: Core Project",
 					content:
-						"Customer Segmentation: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter"
 				},
 				{
 					title: "Customer Segmentation: Review and Reflection",
 					content:
-						"Customer Segmentation: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Customer Segmentation: Extension Challenge",
 					content:
-						"Extend the core build from Customer Segmentation: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter"
 				},
 				{
-					title: "Customer Segmentation supplemental 2: Implementation Studio",
+					title: "Customer Segmentation supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Customer Segmentation: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-23-applied-studio-14-customer-segmentation-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-23-applied-studio-14-customer-segmentation-supplemental-2/solution"
 				},
 				{
-					title: "Customer Segmentation supplemental 3: Implementation Studio",
+					title: "Customer Segmentation supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Customer Segmentation: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-24-applied-studio-14-customer-segmentation-supplemental-3/starter",
 					solutionLink:
@@ -886,12 +886,12 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Disney Movie Clustering: Implementation Studio",
+			title: "Disney Movie Clustering: Implementation Lab",
 			curriculum: [
 				{
 					title: "Disney Movie Clustering: Core Concepts",
 					content:
-						"Disney Movie Clustering: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Disney Movie Clustering: Guided Example",
@@ -901,37 +901,37 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Disney Movie Clustering: Core Project",
 					content:
-						"Disney Movie Clustering: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{
 					title: "Disney Movie Clustering: Review and Reflection",
 					content:
-						"Disney Movie Clustering: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Disney Movie Clustering: Extension Challenge",
 					content:
-						"Extend the core build from Disney Movie Clustering: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{
-					title: "Disney Movie Clustering supplemental 2: Implementation Studio",
+					title: "Disney Movie Clustering supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Disney Movie Clustering: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-25-applied-studio-15-disney-movie-clustering-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-25-applied-studio-15-disney-movie-clustering-supplemental-2/solution"
 				},
 				{
-					title: "Disney Movie Clustering supplemental 3: Implementation Studio",
+					title: "Disney Movie Clustering supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Disney Movie Clustering: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-26-applied-studio-15-disney-movie-clustering-supplemental-3/starter",
 					solutionLink:
@@ -940,12 +940,12 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "Disney Movie Clustering: Implementation Studio",
+			title: "Disney Movie Clustering: Implementation Lab",
 			curriculum: [
 				{
 					title: "Disney Movie Clustering: Core Concepts",
 					content:
-						"Disney Movie Clustering: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Disney Movie Clustering: Guided Example",
@@ -955,37 +955,37 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Disney Movie Clustering: Core Project",
 					content:
-						"Disney Movie Clustering: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter"
 				},
 				{
 					title: "Disney Movie Clustering: Review and Reflection",
 					content:
-						"Disney Movie Clustering: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Disney Movie Clustering: Extension Challenge",
 					content:
-						"Extend the core build from Disney Movie Clustering: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter"
 				},
 				{
-					title: "Disney Movie Clustering supplemental 2: Implementation Studio",
+					title: "Disney Movie Clustering supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to Disney Movie Clustering: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-27-applied-studio-16-disney-movie-clustering-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-27-applied-studio-16-disney-movie-clustering-supplemental-2/solution"
 				},
 				{
-					title: "Disney Movie Clustering supplemental 3: Implementation Studio",
+					title: "Disney Movie Clustering supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to Disney Movie Clustering: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-28-applied-studio-16-disney-movie-clustering-supplemental-3/starter",
 					solutionLink:
@@ -994,12 +994,12 @@ export const machineLearningCourse: RawCourse = {
 			]
 		},
 		{
-			title: "KNN Car Classification: Implementation Studio",
+			title: "KNN Car Classification: Implementation Lab",
 			curriculum: [
 				{
 					title: "KNN Car Classification: Core Concepts",
 					content:
-						"KNN Car Classification: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "KNN Car Classification: Guided Example",
@@ -1009,37 +1009,37 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "KNN Car Classification: Core Project",
 					content:
-						"KNN Car Classification: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification-Updated"
 				},
 				{
 					title: "KNN Car Classification: Review and Reflection",
 					content:
-						"KNN Car Classification: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "KNN Car Classification: Extension Challenge",
 					content:
-						"Extend the core build from KNN Car Classification: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification-Updated"
 				},
 				{
-					title: "KNN Car Classification supplemental 2: Implementation Studio",
+					title: "KNN Car Classification supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to KNN Car Classification: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-29-applied-studio-17-knn-car-classification-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-29-applied-studio-17-knn-car-classification-supplemental-2/solution"
 				},
 				{
-					title: "KNN Car Classification supplemental 3: Implementation Studio",
+					title: "KNN Car Classification supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to KNN Car Classification: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-30-applied-studio-17-knn-car-classification-supplemental-3/starter",
 					solutionLink:

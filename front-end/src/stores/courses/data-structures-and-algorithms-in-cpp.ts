@@ -48,7 +48,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Setup and Positioning supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP0 Setup and Positioning. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-01-dscpp0-setup-and-positioning-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +57,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Setup and Positioning supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP0 Setup and Positioning. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-02-dscpp0-setup-and-positioning-supplemental-3/starter",
 					solutionLink:
@@ -110,7 +110,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Interfaces, Records, and a Task Manager CLI supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP1 Interfaces, Records, and a Task Manager CLI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-03-dscpp1-interfaces-records-and-a-task-manager-cli-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +119,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Interfaces, Records, and a Task Manager CLI supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP1 Interfaces, Records, and a Task Manager CLI. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-04-dscpp1-interfaces-records-and-a-task-manager-cli-supplemental-3/starter",
 					solutionLink:
@@ -172,7 +172,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Graphs and Shortest Paths supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP2 Graphs and Shortest Paths. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-05-dscpp2-graphs-and-shortest-paths-supplemental-2/starter",
 					solutionLink:
@@ -181,7 +181,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Graphs and Shortest Paths supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP2 Graphs and Shortest Paths. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-06-dscpp2-graphs-and-shortest-paths-supplemental-3/starter",
 					solutionLink:
@@ -234,7 +234,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "STL Containers and State Based Text Generation supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP3 STL Containers and State-Based Text Generation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-07-dscpp3-stl-containers-and-state-based-text-generation-supplemental-2/starter",
 					solutionLink:
@@ -243,7 +243,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "STL Containers and State Based Text Generation supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP3 STL Containers and State-Based Text Generation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-08-dscpp3-stl-containers-and-state-based-text-generation-supplemental-3/starter",
 					solutionLink:
@@ -296,7 +296,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursion and Backtracking in 3D Mazes supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP4 Recursion and Backtracking in 3D Mazes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-09-dscpp4-recursion-and-backtracking-in-3d-mazes-supplemental-2/starter",
 					solutionLink:
@@ -305,7 +305,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursion and Backtracking in 3D Mazes supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP4 Recursion and Backtracking in 3D Mazes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-10-dscpp4-recursion-and-backtracking-in-3d-mazes-supplemental-3/starter",
 					solutionLink:
@@ -358,7 +358,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Quicksort and Partitioning supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP5 Quicksort and Partitioning. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-11-dscpp5-quicksort-and-partitioning-supplemental-2/starter",
 					solutionLink:
@@ -367,7 +367,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Quicksort and Partitioning supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP5 Quicksort and Partitioning. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-12-dscpp5-quicksort-and-partitioning-supplemental-3/starter",
 					solutionLink:
@@ -420,7 +420,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Templates and Linked Structures supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP6 Templates and Linked Structures. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-13-dscpp6-templates-and-linked-structures-supplemental-2/starter",
 					solutionLink:
@@ -429,7 +429,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Templates and Linked Structures supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP6 Templates and Linked Structures. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-14-dscpp6-templates-and-linked-structures-supplemental-3/starter",
 					solutionLink:
@@ -482,7 +482,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP7 Binary Search Trees. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-15-dscpp7-binary-search-trees-supplemental-2/starter",
 					solutionLink:
@@ -491,7 +491,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP7 Binary Search Trees. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-16-dscpp7-binary-search-trees-supplemental-3/starter",
 					solutionLink:
@@ -544,7 +544,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "AVL Trees and Rebalancing supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP8 AVL Trees and Rebalancing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-17-dscpp8-avl-trees-and-rebalancing-supplemental-2/starter",
 					solutionLink:
@@ -553,7 +553,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "AVL Trees and Rebalancing supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP8 AVL Trees and Rebalancing. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-18-dscpp8-avl-trees-and-rebalancing-supplemental-3/starter",
 					solutionLink:
@@ -606,7 +606,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Benchmarking and Data Structure Tradeoffs supplemental 2",
 					content:
-						"Supplemental project connected to DSCPP9 Benchmarking and Data-Structure Tradeoffs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-19-dscpp9-benchmarking-and-data-structure-tradeoffs-supplemental-2/starter",
 					solutionLink:
@@ -615,7 +615,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Benchmarking and Data Structure Tradeoffs supplemental 3",
 					content:
-						"Supplemental project connected to DSCPP9 Benchmarking and Data-Structure Tradeoffs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-20-dscpp9-benchmarking-and-data-structure-tradeoffs-supplemental-3/starter",
 					solutionLink:
@@ -624,12 +624,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c algorithm lab 11: Implementation Studio",
+			title: "c algorithm lab 11: Implementation Lab",
 			curriculum: [
 				{
 					title: "c algorithm lab 11: Core Concepts",
 					content:
-						"c algorithm lab 11: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c algorithm lab 11: Guided Example",
@@ -639,7 +639,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 11: Core Project",
 					content:
-						"c algorithm lab 11: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-01-cpp-algorithm-lab-11/starter",
 					solutionLink:
@@ -648,32 +648,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 11: Review and Reflection",
 					content:
-						"c algorithm lab 11: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c algorithm lab 11: Extension Challenge",
 					content:
-						"Extend the core build from c algorithm lab 11: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-01-cpp-algorithm-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-01-cpp-algorithm-lab-11/solution"
 				},
 				{
-					title: "c algorithm lab 11 supplemental 2: Implementation Studio",
+					title: "c algorithm lab 11 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-21-applied-studio-11-c-algorithm-lab-11-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-21-applied-studio-11-c-algorithm-lab-11-supplemental-2/solution"
 				},
 				{
-					title: "c algorithm lab 11 supplemental 3: Implementation Studio",
+					title: "c algorithm lab 11 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 11: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-22-applied-studio-11-c-algorithm-lab-11-supplemental-3/starter",
 					solutionLink:
@@ -682,12 +682,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c algorithm lab 12: Implementation Studio",
+			title: "c algorithm lab 12: Implementation Lab",
 			curriculum: [
 				{
 					title: "c algorithm lab 12: Core Concepts",
 					content:
-						"c algorithm lab 12: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c algorithm lab 12: Guided Example",
@@ -697,7 +697,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 12: Core Project",
 					content:
-						"c algorithm lab 12: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-02-cpp-algorithm-lab-12/starter",
 					solutionLink:
@@ -706,32 +706,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 12: Review and Reflection",
 					content:
-						"c algorithm lab 12: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c algorithm lab 12: Extension Challenge",
 					content:
-						"Extend the core build from c algorithm lab 12: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-02-cpp-algorithm-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-02-cpp-algorithm-lab-12/solution"
 				},
 				{
-					title: "c algorithm lab 12 supplemental 2: Implementation Studio",
+					title: "c algorithm lab 12 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-23-applied-studio-12-c-algorithm-lab-12-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-23-applied-studio-12-c-algorithm-lab-12-supplemental-2/solution"
 				},
 				{
-					title: "c algorithm lab 12 supplemental 3: Implementation Studio",
+					title: "c algorithm lab 12 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 12: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-24-applied-studio-12-c-algorithm-lab-12-supplemental-3/starter",
 					solutionLink:
@@ -740,12 +740,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c algorithm lab 13: Implementation Studio",
+			title: "c algorithm lab 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "c algorithm lab 13: Core Concepts",
 					content:
-						"c algorithm lab 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c algorithm lab 13: Guided Example",
@@ -755,7 +755,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 13: Core Project",
 					content:
-						"c algorithm lab 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-03-cpp-algorithm-lab-13/starter",
 					solutionLink:
@@ -764,32 +764,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 13: Review and Reflection",
 					content:
-						"c algorithm lab 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c algorithm lab 13: Extension Challenge",
 					content:
-						"Extend the core build from c algorithm lab 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-03-cpp-algorithm-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-03-cpp-algorithm-lab-13/solution"
 				},
 				{
-					title: "c algorithm lab 13 supplemental 2: Implementation Studio",
+					title: "c algorithm lab 13 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-25-applied-studio-13-c-algorithm-lab-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-25-applied-studio-13-c-algorithm-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "c algorithm lab 13 supplemental 3: Implementation Studio",
+					title: "c algorithm lab 13 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-26-applied-studio-13-c-algorithm-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -798,12 +798,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c algorithm lab 14: Implementation Studio",
+			title: "c algorithm lab 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "c algorithm lab 14: Core Concepts",
 					content:
-						"c algorithm lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c algorithm lab 14: Guided Example",
@@ -813,7 +813,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 14: Core Project",
 					content:
-						"c algorithm lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-04-cpp-algorithm-lab-14/starter",
 					solutionLink:
@@ -822,32 +822,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 14: Review and Reflection",
 					content:
-						"c algorithm lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c algorithm lab 14: Extension Challenge",
 					content:
-						"Extend the core build from c algorithm lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-04-cpp-algorithm-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-04-cpp-algorithm-lab-14/solution"
 				},
 				{
-					title: "c algorithm lab 14 supplemental 2: Implementation Studio",
+					title: "c algorithm lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-27-applied-studio-14-c-algorithm-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-27-applied-studio-14-c-algorithm-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "c algorithm lab 14 supplemental 3: Implementation Studio",
+					title: "c algorithm lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-28-applied-studio-14-c-algorithm-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -856,12 +856,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c algorithm lab 15: Implementation Studio",
+			title: "c algorithm lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "c algorithm lab 15: Core Concepts",
 					content:
-						"c algorithm lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c algorithm lab 15: Guided Example",
@@ -871,7 +871,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 15: Core Project",
 					content:
-						"c algorithm lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-05-cpp-algorithm-lab-15/starter",
 					solutionLink:
@@ -880,32 +880,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 15: Review and Reflection",
 					content:
-						"c algorithm lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c algorithm lab 15: Extension Challenge",
 					content:
-						"Extend the core build from c algorithm lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-05-cpp-algorithm-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-05-cpp-algorithm-lab-15/solution"
 				},
 				{
-					title: "c algorithm lab 15 supplemental 2: Implementation Studio",
+					title: "c algorithm lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-29-applied-studio-15-c-algorithm-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-29-applied-studio-15-c-algorithm-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "c algorithm lab 15 supplemental 3: Implementation Studio",
+					title: "c algorithm lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-30-applied-studio-15-c-algorithm-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -914,12 +914,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c algorithm lab 16: Implementation Studio",
+			title: "c algorithm lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "c algorithm lab 16: Core Concepts",
 					content:
-						"c algorithm lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c algorithm lab 16: Guided Example",
@@ -929,7 +929,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 16: Core Project",
 					content:
-						"c algorithm lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-06-cpp-algorithm-lab-16/starter",
 					solutionLink:
@@ -938,32 +938,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 16: Review and Reflection",
 					content:
-						"c algorithm lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c algorithm lab 16: Extension Challenge",
 					content:
-						"Extend the core build from c algorithm lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-06-cpp-algorithm-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-06-cpp-algorithm-lab-16/solution"
 				},
 				{
-					title: "c algorithm lab 16 supplemental 2: Implementation Studio",
+					title: "c algorithm lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-31-applied-studio-16-c-algorithm-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-31-applied-studio-16-c-algorithm-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "c algorithm lab 16 supplemental 3: Implementation Studio",
+					title: "c algorithm lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-32-applied-studio-16-c-algorithm-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -972,12 +972,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 			]
 		},
 		{
-			title: "c algorithm lab 17: Implementation Studio",
+			title: "c algorithm lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "c algorithm lab 17: Core Concepts",
 					content:
-						"c algorithm lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "c algorithm lab 17: Guided Example",
@@ -987,7 +987,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 17: Core Project",
 					content:
-						"c algorithm lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-07-cpp-algorithm-lab-17/starter",
 					solutionLink:
@@ -996,32 +996,32 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 17: Review and Reflection",
 					content:
-						"c algorithm lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c algorithm lab 17: Extension Challenge",
 					content:
-						"Extend the core build from c algorithm lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-07-cpp-algorithm-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-07-cpp-algorithm-lab-17/solution"
 				},
 				{
-					title: "c algorithm lab 17 supplemental 2: Implementation Studio",
+					title: "c algorithm lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-33-applied-studio-17-c-algorithm-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-33-applied-studio-17-c-algorithm-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "c algorithm lab 17 supplemental 3: Implementation Studio",
+					title: "c algorithm lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to c algorithm lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-34-applied-studio-17-c-algorithm-lab-17-supplemental-3/starter",
 					solutionLink:

@@ -44,14 +44,14 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 23 Why Did the Cow Cross the Road II Java",
 					content:
-						"Supplemental project connected to USB0 Setup and Contest Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-23-Why-Did-the-Cow-Cross-the-Road-II-Java"
 				},
 				{
 					title: "UB 24 Why Did the Cow Cross the Road III Java",
 					content:
-						"Supplemental project connected to USB0 Setup and Contest Workflow. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-24-Why-Did-the-Cow-Cross-the-Road-III-Java"
 				}
@@ -112,7 +112,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Square Pasture Java",
 					content:
-						"Supplemental project connected to Unit 1: Simulation and Careful Translation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture-Java"
 				}
@@ -227,7 +227,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Transformations Java",
 					content:
-						"Supplemental project connected to Unit 3: Counting, Sorting, and Ranking. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations-Java"
 				}
@@ -342,7 +342,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Mixing Milk Java",
 					content:
-						"Supplemental project connected to Unit 5: Contest Sets and Tier Transition. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk-Java"
 				}
@@ -422,12 +422,12 @@ export const usacoBronzeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "UB 12 Barn Repair Java: Implementation Studio",
+			title: "UB 12 Barn Repair Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 12 Barn Repair Java: Core Concepts",
 					content:
-						"UB 12 Barn Repair Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 12 Barn Repair Java: Guided Example",
@@ -437,47 +437,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 12 Barn Repair Java: Core Project",
 					content:
-						"UB 12 Barn Repair Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
 				},
 				{
 					title: "UB 12 Barn Repair Java: Review and Reflection",
 					content:
-						"UB 12 Barn Repair Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 12 Barn Repair Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 12 Barn Repair Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
 				},
 				{
 					title: "Combination Lock",
 					content:
-						"Supplemental project connected to UB 12 Barn Repair Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB13-Combination-Lock"
 				},
 				{
 					title: "Prime Cryptarithm",
 					content:
-						"Supplemental project connected to UB 12 Barn Repair Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB14-Prime-Cryptarithm"
 				}
 			]
 		},
 		{
-			title: "UB 13 Combination Lock Java: Implementation Studio",
+			title: "UB 13 Combination Lock Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 13 Combination Lock Java: Core Concepts",
 					content:
-						"UB 13 Combination Lock Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 13 Combination Lock Java: Guided Example",
@@ -487,47 +487,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 13 Combination Lock Java: Core Project",
 					content:
-						"UB 13 Combination Lock Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
 				},
 				{
 					title: "UB 13 Combination Lock Java: Review and Reflection",
 					content:
-						"UB 13 Combination Lock Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 13 Combination Lock Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 13 Combination Lock Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
 				},
 				{
 					title: "Ski Course Design",
 					content:
-						"Supplemental project connected to UB 13 Combination Lock Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB15-Ski-Course-Design"
 				},
 				{
 					title: "Block Game",
 					content:
-						"Supplemental project connected to UB 13 Combination Lock Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB17-Block-Game"
 				}
 			]
 		},
 		{
-			title: "UB 14 Prime Cryptarithm Java: Implementation Studio",
+			title: "UB 14 Prime Cryptarithm Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 14 Prime Cryptarithm Java: Core Concepts",
 					content:
-						"UB 14 Prime Cryptarithm Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 14 Prime Cryptarithm Java: Guided Example",
@@ -537,47 +537,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 14 Prime Cryptarithm Java: Core Project",
 					content:
-						"UB 14 Prime Cryptarithm Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
 				},
 				{
 					title: "UB 14 Prime Cryptarithm Java: Review and Reflection",
 					content:
-						"UB 14 Prime Cryptarithm Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 14 Prime Cryptarithm Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 14 Prime Cryptarithm Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
 				},
 				{
 					title: "The Cow Signal",
 					content:
-						"Supplemental project connected to UB 14 Prime Cryptarithm Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB18-The-Cow-Signal"
 				},
 				{
 					title: "Dont Be Last",
 					content:
-						"Supplemental project connected to UB 14 Prime Cryptarithm Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB19-Dont-Be-Last"
 				}
 			]
 		},
 		{
-			title: "UB 15 Ski Course Design Java: Implementation Studio",
+			title: "UB 15 Ski Course Design Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 15 Ski Course Design Java: Core Concepts",
 					content:
-						"UB 15 Ski Course Design Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 15 Ski Course Design Java: Guided Example",
@@ -587,47 +587,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 15 Ski Course Design Java: Core Project",
 					content:
-						"UB 15 Ski Course Design Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
 				},
 				{
 					title: "UB 15 Ski Course Design Java: Review and Reflection",
 					content:
-						"UB 15 Ski Course Design Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 15 Ski Course Design Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 15 Ski Course Design Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
 				},
 				{
 					title: "Your Ride Is Here Java",
 					content:
-						"Supplemental project connected to UB 15 Ski Course Design Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here-Java"
 				},
 				{
 					title: "Cow Tipping",
 					content:
-						"Supplemental project connected to UB 15 Ski Course Design Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB21-Cow-Tipping"
 				}
 			]
 		},
 		{
-			title: "UB 16 Wormholes Java: Implementation Studio",
+			title: "UB 16 Wormholes Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 16 Wormholes Java: Core Concepts",
 					content:
-						"UB 16 Wormholes Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 16 Wormholes Java: Guided Example",
@@ -637,47 +637,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 16 Wormholes Java: Core Project",
 					content:
-						"UB 16 Wormholes Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
 				},
 				{
 					title: "UB 16 Wormholes Java: Review and Reflection",
 					content:
-						"UB 16 Wormholes Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 16 Wormholes Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 16 Wormholes Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
 				},
 				{
 					title: "Why Did the Cow Cross the Road",
 					content:
-						"Supplemental project connected to UB 16 Wormholes Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB22-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
 					title: "Why Did the Cow Cross the Road II",
 					content:
-						"Supplemental project connected to UB 16 Wormholes Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB23-Why-Did-the-Cow-Cross-the-Road-II"
 				}
 			]
 		},
 		{
-			title: "UB 17 Block Game Java: Implementation Studio",
+			title: "UB 17 Block Game Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 17 Block Game Java: Core Concepts",
 					content:
-						"UB 17 Block Game Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 17 Block Game Java: Guided Example",
@@ -687,47 +687,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 17 Block Game Java: Core Project",
 					content:
-						"UB 17 Block Game Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
 				},
 				{
 					title: "UB 17 Block Game Java: Review and Reflection",
 					content:
-						"UB 17 Block Game Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 17 Block Game Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 17 Block Game Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
 				},
 				{
 					title: "Why Did the Cow Cross the Road III",
 					content:
-						"Supplemental project connected to UB 17 Block Game Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB24-Why-Did-the-Cow-Cross-the-Road-III"
 				},
 				{
 					title: "The Lost Cow Java",
 					content:
-						"Supplemental project connected to UB 17 Block Game Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow-Java"
 				}
 			]
 		},
 		{
-			title: "UB 18 The Cow Signal Java: Implementation Studio",
+			title: "UB 18 The Cow Signal Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 18 The Cow Signal Java: Core Concepts",
 					content:
-						"UB 18 The Cow Signal Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 18 The Cow Signal Java: Guided Example",
@@ -737,47 +737,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 18 The Cow Signal Java: Core Project",
 					content:
-						"UB 18 The Cow Signal Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
 				},
 				{
 					title: "UB 18 The Cow Signal Java: Review and Reflection",
 					content:
-						"UB 18 The Cow Signal Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 18 The Cow Signal Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 18 The Cow Signal Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
 				},
 				{
 					title: "Bovine Genomics",
 					content:
-						"Supplemental project connected to UB 18 The Cow Signal Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics"
 				},
 				{
 					title: "Bovine Genomics Java",
 					content:
-						"Supplemental project connected to UB 18 The Cow Signal Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics-Java"
 				}
 			]
 		},
 		{
-			title: "UB 19 Dont Be Last Java: Implementation Studio",
+			title: "UB 19 Dont Be Last Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 19 Dont Be Last Java: Core Concepts",
 					content:
-						"UB 19 Dont Be Last Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 19 Dont Be Last Java: Guided Example",
@@ -787,47 +787,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 19 Dont Be Last Java: Core Project",
 					content:
-						"UB 19 Dont Be Last Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
 				},
 				{
 					title: "UB 19 Dont Be Last Java: Review and Reflection",
 					content:
-						"UB 19 Dont Be Last Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 19 Dont Be Last Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 19 Dont Be Last Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
 				},
 				{
 					title: "Modern Art",
 					content:
-						"Supplemental project connected to UB 19 Dont Be Last Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art"
 				},
 				{
 					title: "Modern Art Java",
 					content:
-						"Supplemental project connected to UB 19 Dont Be Last Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art-Java"
 				}
 			]
 		},
 		{
-			title: "UB 20 Hoof Paper Scissors Java: Implementation Studio",
+			title: "UB 20 Hoof Paper Scissors Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Core Concepts",
 					content:
-						"UB 20 Hoof Paper Scissors Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Guided Example",
@@ -837,47 +837,47 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Core Project",
 					content:
-						"UB 20 Hoof Paper Scissors Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
 				},
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Review and Reflection",
 					content:
-						"UB 20 Hoof Paper Scissors Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 20 Hoof Paper Scissors Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
 				},
 				{
 					title: "Fence Painting",
 					content:
-						"Supplemental project connected to UB 20 Hoof Paper Scissors Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting"
 				},
 				{
 					title: "Fence Painting Java",
 					content:
-						"Supplemental project connected to UB 20 Hoof Paper Scissors Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting-Java"
 				}
 			]
 		},
 		{
-			title: "UB 21 Cow Tipping Java: Implementation Studio",
+			title: "UB 21 Cow Tipping Java: Implementation Lab",
 			curriculum: [
 				{
 					title: "UB 21 Cow Tipping Java: Core Concepts",
 					content:
-						"UB 21 Cow Tipping Java: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "UB 21 Cow Tipping Java: Guided Example",
@@ -887,35 +887,35 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "UB 21 Cow Tipping Java: Core Project",
 					content:
-						"UB 21 Cow Tipping Java: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
 				},
 				{
 					title: "UB 21 Cow Tipping Java: Review and Reflection",
 					content:
-						"UB 21 Cow Tipping Java: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 21 Cow Tipping Java: Extension Challenge",
 					content:
-						"Extend the core build from UB 21 Cow Tipping Java: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
 				},
 				{
 					title: "Speeding Ticket Java",
 					content:
-						"Supplemental project connected to UB 21 Cow Tipping Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket-Java"
 				},
 				{
 					title: "Friday the Thirteenth",
 					content:
-						"Supplemental project connected to UB 21 Cow Tipping Java: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB3-Friday-the-Thirteenth"
 				}

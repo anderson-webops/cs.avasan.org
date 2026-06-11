@@ -48,7 +48,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Tooling, Cargo, and Why Rust Exists Supplemental 2",
 					content:
-						"Supplemental project connected to RSS0 Tooling, Cargo, and Why Rust Exists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +57,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Tooling, Cargo, and Why Rust Exists Supplemental 3",
 					content:
-						"Supplemental project connected to RSS0 Tooling, Cargo, and Why Rust Exists. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-02-rss0-tooling-cargo-and-why-rust-exists-supplemental-3/starter",
 					solutionLink:
@@ -110,7 +110,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Ownership, Moves, and Memory Responsibility Supplemental 2",
 					content:
-						"Supplemental project connected to RSS1 Ownership, Moves, and Memory Responsibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +119,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Ownership, Moves, and Memory Responsibility Supplemental 3",
 					content:
-						"Supplemental project connected to RSS1 Ownership, Moves, and Memory Responsibility. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-04-rss1-ownership-moves-and-memory-responsibility-supplemental-3/starter",
 					solutionLink:
@@ -172,7 +172,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Borrowing, Aliasing, and Lifetimes Supplemental 2",
 					content:
-						"Supplemental project connected to RSS2 Borrowing, Aliasing, and Lifetimes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
@@ -181,7 +181,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Borrowing, Aliasing, and Lifetimes Supplemental 3",
 					content:
-						"Supplemental project connected to RSS2 Borrowing, Aliasing, and Lifetimes. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rss2-borrowing-aliasing-and-lifetimes-supplemental-3/starter",
 					solutionLink:
@@ -234,7 +234,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option, Result, and Typed Error Paths Supplemental 2",
 					content:
-						"Supplemental project connected to RSS3 Option, Result, and Typed Error Paths. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
@@ -243,7 +243,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option, Result, and Typed Error Paths Supplemental 3",
 					content:
-						"Supplemental project connected to RSS3 Option, Result, and Typed Error Paths. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-08-rss3-option-result-and-typed-error-paths-supplemental-3/starter",
 					solutionLink:
@@ -296,7 +296,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 2",
 					content:
-						"Supplemental project connected to RSS4 Strings, Slices, Collections, and Bounds Safety. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
@@ -305,7 +305,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 3",
 					content:
-						"Supplemental project connected to RSS4 Strings, Slices, Collections, and Bounds Safety. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-10-rss4-strings-slices-collections-and-bounds-safety-supplemental-3/starter",
 					solutionLink:
@@ -358,7 +358,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs, Enums, and Safer State Models Supplemental 2",
 					content:
-						"Supplemental project connected to RSS5 Structs, Enums, and Safer State Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
@@ -367,7 +367,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs, Enums, and Safer State Models Supplemental 3",
 					content:
-						"Supplemental project connected to RSS5 Structs, Enums, and Safer State Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-12-rss5-structs-enums-and-safer-state-models-supplemental-3/starter",
 					solutionLink:
@@ -420,7 +420,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits, Iterators, and API Contracts Supplemental 2",
 					content:
-						"Supplemental project connected to RSS6 Traits, Iterators, and API Contracts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
@@ -429,7 +429,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits, Iterators, and API Contracts Supplemental 3",
 					content:
-						"Supplemental project connected to RSS6 Traits, Iterators, and API Contracts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-14-rss6-traits-iterators-and-api-contracts-supplemental-3/starter",
 					solutionLink:
@@ -482,7 +482,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Files, Parsers, and Secure CLI Design Supplemental 2",
 					content:
-						"Supplemental project connected to RSS7 Files, Parsers, and Secure CLI Design. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
@@ -491,7 +491,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Files, Parsers, and Secure CLI Design Supplemental 3",
 					content:
-						"Supplemental project connected to RSS7 Files, Parsers, and Secure CLI Design. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-16-rss7-files-parsers-and-secure-cli-design-supplemental-3/starter",
 					solutionLink:
@@ -544,7 +544,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Concurrency and Race Reduction Supplemental 2",
 					content:
-						"Supplemental project connected to RSS8 Concurrency and Race Reduction. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
@@ -553,7 +553,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Concurrency and Race Reduction Supplemental 3",
 					content:
-						"Supplemental project connected to RSS8 Concurrency and Race Reduction. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-18-rss8-concurrency-and-race-reduction-supplemental-3/starter",
 					solutionLink:
@@ -606,7 +606,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 2",
 					content:
-						"Supplemental project connected to RSS9 Unsafe, FFI, and Trusted Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -615,7 +615,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 3",
 					content:
-						"Supplemental project connected to RSS9 Unsafe, FFI, and Trusted Boundaries. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-20-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-3/starter",
 					solutionLink:
@@ -668,7 +668,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool Supplemental 2",
 					content:
-						"Supplemental project connected to RSS10 Capstone: Harden a Legacy Tool. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
@@ -677,7 +677,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool Supplemental 3",
 					content:
-						"Supplemental project connected to RSS10 Capstone: Harden a Legacy Tool. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-22-rss10-capstone-harden-a-legacy-tool-supplemental-3/starter",
 					solutionLink:

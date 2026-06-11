@@ -64,7 +64,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-01-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -73,7 +73,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-02-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -130,7 +130,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-03-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -139,7 +139,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-04-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -404,7 +404,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Combining Loops and Variables supplemental 2",
 					content:
-						"Supplemental project connected to JSS4 Combining Loops and Variables. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-05-jss4-combining-loops-and-variables-supplemental-2/starter",
 					solutionLink:
@@ -413,7 +413,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Combining Loops and Variables supplemental 3",
 					content:
-						"Supplemental project connected to JSS4 Combining Loops and Variables. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-06-jss4-combining-loops-and-variables-supplemental-3/starter",
 					solutionLink:
@@ -563,7 +563,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Advanced Conditionals supplemental 3",
 					content:
-						"Supplemental project connected to JSS6 Advanced Conditionals. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-07-jss6-advanced-conditionals-supplemental-3/starter",
 					solutionLink:
@@ -744,7 +744,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Introduction to HTML & CSS supplemental 3",
 					content:
-						"Supplemental project connected to JSS9 Introduction to HTML & CSS. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-08-jss9-introduction-to-html-and-css-supplemental-3/starter",
 					solutionLink:
@@ -817,7 +817,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Animations in JavaScript supplemental 3",
 					content:
-						"Supplemental project connected to JSS10 Animations in JavaScript. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-09-jss10-animations-in-javascript-supplemental-3/starter",
 					solutionLink:
@@ -872,7 +872,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "More HTML & CSS supplemental 2",
 					content:
-						"Supplemental project connected to JSS11 More HTML & CSS. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-10-jss11-more-html-and-css-supplemental-2/starter",
 					solutionLink:
@@ -881,7 +881,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "More HTML & CSS supplemental 3",
 					content:
-						"Supplemental project connected to JSS11 More HTML & CSS. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-11-jss11-more-html-and-css-supplemental-3/starter",
 					solutionLink:
@@ -952,7 +952,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Basic Website Layout supplemental 2",
 					content:
-						"Supplemental project connected to JSS12 Basic Website Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-12-jss12-basic-website-layout-supplemental-2/starter",
 					solutionLink:
@@ -961,7 +961,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Basic Website Layout supplemental 3",
 					content:
-						"Supplemental project connected to JSS12 Basic Website Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-13-jss12-basic-website-layout-supplemental-3/starter",
 					solutionLink:
@@ -1035,7 +1035,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "The Grid Layout supplemental 3",
 					content:
-						"Supplemental project connected to JSS13 The Grid Layout. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-14-jss13-the-grid-layout-supplemental-3/starter",
 					solutionLink:
@@ -1115,7 +1115,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Dynamic Websites with JavaScript supplemental 3",
 					content:
-						"Supplemental project connected to JSS14 Dynamic Websites with JavaScript. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-3/starter",
 					solutionLink:

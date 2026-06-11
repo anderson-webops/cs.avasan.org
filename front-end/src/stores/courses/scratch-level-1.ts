@@ -644,12 +644,12 @@ export const scratchLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Studio",
+			title: "Scratch studio: Implementation Lab",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
@@ -659,39 +659,39 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
+					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Studio",
+			title: "Scratch studio: Implementation Lab",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
@@ -701,39 +701,39 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
+					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Studio",
+			title: "Scratch studio: Implementation Lab",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
@@ -743,39 +743,39 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
+					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Studio",
+			title: "Scratch studio: Implementation Lab",
 			curriculum: [
 				{
 					title: "Scratch studio: Core Concepts",
 					content:
-						"Scratch studio: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Scratch studio: Guided Example",
@@ -785,29 +785,29 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Scratch studio: Core Project",
 					content:
-						"Scratch studio: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass."
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
 				},
 				{
 					title: "Scratch studio: Review and Reflection",
 					content:
-						"Scratch studio: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Scratch studio: Extension Challenge",
 					content:
-						"Extend the core build from Scratch studio: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
 				},
 				{
 					title: "Scratch studio: Open Practice",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Studio. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Studio",
+					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Studio. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
 				}
 			]
 		}

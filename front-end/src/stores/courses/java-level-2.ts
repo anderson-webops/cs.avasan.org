@@ -130,7 +130,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Static Variables & Methods Supplemental 3",
 					content:
-						"Supplemental project connected to JM3 Static Variables & Methods. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-01-jm3-static-variables-and-methods-supplemental-3/starter",
 					solutionLink:
@@ -189,7 +189,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-02-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -198,7 +198,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-03-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -264,7 +264,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Subclasses & Inheritance Supplemental 3",
 					content:
-						"Supplemental project connected to JM4 Subclasses & Inheritance. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-04-jm4-subclasses-and-inheritance-supplemental-3/starter",
 					solutionLink:
@@ -319,7 +319,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 2",
 					content:
-						"Supplemental project connected to JM5 Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-05-jm5-maps-supplemental-2/starter",
 					solutionLink:
@@ -328,7 +328,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 3",
 					content:
-						"Supplemental project connected to JM5 Maps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-06-jm5-maps-supplemental-3/starter",
 					solutionLink:
@@ -381,7 +381,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 2",
 					content:
-						"Supplemental project connected to JM6 Threading & Error Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-07-jm6-threading-and-error-handling-supplemental-2/starter",
 					solutionLink:
@@ -390,7 +390,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 3",
 					content:
-						"Supplemental project connected to JM6 Threading & Error Handling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-08-jm6-threading-and-error-handling-supplemental-3/starter",
 					solutionLink:
@@ -448,7 +448,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-09-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -457,7 +457,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-10-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -506,7 +506,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 2",
 					content:
-						"Supplemental project connected to JM7 Bank Account. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-11-jm7-bank-account-supplemental-2/starter",
 					solutionLink:
@@ -515,7 +515,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 3",
 					content:
-						"Supplemental project connected to JM7 Bank Account. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-12-jm7-bank-account-supplemental-3/starter",
 					solutionLink:
@@ -572,7 +572,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 2",
 					content:
-						"Supplemental project connected to JM8 File I/O. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-13-jm8-file-i-o-supplemental-2/starter",
 					solutionLink:
@@ -581,7 +581,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 3",
 					content:
-						"Supplemental project connected to JM8 File I/O. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-14-jm8-file-i-o-supplemental-3/starter",
 					solutionLink:
@@ -634,7 +634,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 2",
 					content:
-						"Supplemental project connected to JM9 Maze Runner. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-15-jm9-maze-runner-supplemental-2/starter",
 					solutionLink:
@@ -643,7 +643,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 3",
 					content:
-						"Supplemental project connected to JM9 Maze Runner. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-16-jm9-maze-runner-supplemental-3/starter",
 					solutionLink:
@@ -692,7 +692,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Master Project Supplemental 2",
 					content:
-						"Supplemental project connected to JM10 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-17-jm10-master-project-supplemental-2/starter",
 					solutionLink:
@@ -701,7 +701,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Master Project Supplemental 3",
 					content:
-						"Supplemental project connected to JM10 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-18-jm10-master-project-supplemental-3/starter",
 					solutionLink:
@@ -799,12 +799,12 @@ export const javaLevel2Course: RawCourse = {
 			]
 		},
 		{
-			title: "JM Master Project Example Quiz Game: Implementation Studio",
+			title: "JM Master Project Example Quiz Game: Implementation Lab",
 			curriculum: [
 				{
 					title: "JM Master Project Example Quiz Game: Core Concepts",
 					content:
-						"JM Master Project Example Quiz Game: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Guided Example",
@@ -814,37 +814,37 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game: Core Project",
 					content:
-						"JM Master Project Example Quiz Game: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Review and Reflection",
 					content:
-						"JM Master Project Example Quiz Game: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM Master Project Example Quiz Game: Extension Challenge",
 					content:
-						"Extend the core build from JM Master Project Example Quiz Game: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
 				{
-					title: "JM Master Project Example Quiz Game Supplemental 2: Implementation Studio",
+					title: "JM Master Project Example Quiz Game Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to JM Master Project Example Quiz Game: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz-game-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz-game-supplemental-2/solution"
 				},
 				{
-					title: "JM Master Project Example Quiz Game Supplemental 3: Implementation Studio",
+					title: "JM Master Project Example Quiz Game Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to JM Master Project Example Quiz Game: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-20-applied-studio-14-jm-master-project-example-quiz-game-supplemental-3/starter",
 					solutionLink:
@@ -853,12 +853,12 @@ export const javaLevel2Course: RawCourse = {
 			]
 		},
 		{
-			title: "JM Maze Runner Project: Implementation Studio",
+			title: "JM Maze Runner Project: Implementation Lab",
 			curriculum: [
 				{
 					title: "JM Maze Runner Project: Core Concepts",
 					content:
-						"JM Maze Runner Project: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "JM Maze Runner Project: Guided Example",
@@ -868,7 +868,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Core Project",
 					content:
-						"JM Maze Runner Project: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
 					solutionLink:
@@ -877,32 +877,32 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Review and Reflection",
 					content:
-						"JM Maze Runner Project: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM Maze Runner Project: Extension Challenge",
 					content:
-						"Extend the core build from JM Maze Runner Project: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Maze-Runner-Project-Solution"
 				},
 				{
-					title: "JM Maze Runner Project Supplemental 2: Implementation Studio",
+					title: "JM Maze Runner Project Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to JM Maze Runner Project: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-21-applied-studio-15-jm-maze-runner-project-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-21-applied-studio-15-jm-maze-runner-project-supplemental-2/solution"
 				},
 				{
-					title: "JM Maze Runner Project Supplemental 3: Implementation Studio",
+					title: "JM Maze Runner Project Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to JM Maze Runner Project: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-22-applied-studio-15-jm-maze-runner-project-supplemental-3/starter",
 					solutionLink:

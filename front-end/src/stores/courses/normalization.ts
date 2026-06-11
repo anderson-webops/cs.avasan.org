@@ -1324,7 +1324,7 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 }
 
 function normalizeImplementationLabLanguage(course: RawCourse) {
-	const titlePattern = /:\s*Implementation Studio\b/g;
+	const titlePattern = /:\s*Implementation (?:Studio|Lab)\b/g;
 	const labelPattern = /\bImplementation Studio\b/g;
 	const definesPattern =
 		/[^.!?\n]+: Implementation Lab defines the target artifact, required behavior, and core concepts needed for the build or problem set\./g;
@@ -1594,7 +1594,7 @@ function normalizeJavaLevel2(course: RawCourse) {
 		"Supplemental Project Bank Account",
 		"Master Project Example Quiz Game"
 	]);
-	const duplicateCheckIns = new Set(["JM Check in 2: Implementation Studio"]);
+	const duplicateCheckIns = new Set(["JM Check in 2: Implementation Lab"]);
 
 	removeSupplementals(
 		course,
@@ -1693,13 +1693,13 @@ function normalizeDataStructuresCpp(course: RawCourse) {
 		"DSCPP8 AVL Trees and Rebalancing",
 		"DSCPP2 Graphs and Shortest Paths",
 		"DSCPP9 Benchmarking and Data-Structure Tradeoffs",
-		"c algorithm lab 11: Implementation Studio",
-		"c algorithm lab 12: Implementation Studio",
-		"c algorithm lab 13: Implementation Studio",
-		"c algorithm lab 14: Implementation Studio",
-		"c algorithm lab 15: Implementation Studio",
-		"c algorithm lab 16: Implementation Studio",
-		"c algorithm lab 17: Implementation Studio"
+		"c algorithm lab 11: Implementation Lab",
+		"c algorithm lab 12: Implementation Lab",
+		"c algorithm lab 13: Implementation Lab",
+		"c algorithm lab 14: Implementation Lab",
+		"c algorithm lab 15: Implementation Lab",
+		"c algorithm lab 16: Implementation Lab",
+		"c algorithm lab 17: Implementation Lab"
 	]);
 }
 
@@ -1725,42 +1725,40 @@ function normalizeMachineLearning(course: RawCourse) {
 
 function normalizeDesignPatternsJava(course: RawCourse) {
 	const mixedJavaLevelModules = new Set([
-		"AJ Check In 3: Implementation Studio",
-		"AJ Check in 4: Implementation Studio",
-		"Flower Class: Implementation Studio",
-		"Sum of the First N: Implementation Studio"
+		"AJ Check In 3: Implementation Lab",
+		"AJ Check in 4: Implementation Lab",
+		"Flower Class: Implementation Lab",
+		"Sum of the First N: Implementation Lab"
 	]);
 
 	removeModules(course, module => mixedJavaLevelModules.has(module.title));
 	renameModule(
 		course,
-		"Pattern Implementation Lab 15: Implementation Studio",
-		"Pattern Implementation Lab 11: Implementation Studio"
+		"Pattern Implementation Lab 15: Implementation Lab",
+		"Pattern Implementation Lab 11: Implementation Lab"
 	);
 	renameModule(
 		course,
-		"Pattern Implementation Lab 16: Implementation Studio",
-		"Pattern Implementation Lab 12: Implementation Studio"
+		"Pattern Implementation Lab 16: Implementation Lab",
+		"Pattern Implementation Lab 12: Implementation Lab"
 	);
 	renameModule(
 		course,
-		"Pattern Implementation Lab 17: Implementation Studio",
-		"Pattern Implementation Lab 13: Implementation Studio"
+		"Pattern Implementation Lab 17: Implementation Lab",
+		"Pattern Implementation Lab 13: Implementation Lab"
 	);
 }
 
 function normalizePythonicDesignPatterns(course: RawCourse) {
 	const isImplementationStudio = (module: RawCourseModule) =>
-		module.title.endsWith(": Implementation Studio");
+		module.title.endsWith(": Implementation Lab");
 
 	removeModules(course, isImplementationStudio);
 }
 
 function normalizeLowLevelSecurity(course: RawCourse) {
 	const isOffensiveStudio = (module: RawCourseModule) =>
-		/^Offensive Security Lab \d+: Implementation Studio$/.test(
-			module.title
-		);
+		/^Offensive Security Lab \d+: Implementation Lab$/.test(module.title);
 
 	removeModules(course, isOffensiveStudio);
 }
@@ -1797,7 +1795,7 @@ function rustFolderForModule(title: string) {
 
 function normalizeRustSystemsSecurity(course: RawCourse) {
 	const isImplementationStudio = (module: RawCourseModule) =>
-		module.title.endsWith(": Implementation Studio");
+		module.title.endsWith(": Implementation Lab");
 
 	removeModules(course, isImplementationStudio);
 

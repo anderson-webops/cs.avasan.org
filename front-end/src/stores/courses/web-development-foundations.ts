@@ -53,7 +53,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Supplemental project connected to WDF0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-wdf0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -62,7 +62,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Supplemental project connected to WDF0 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-wdf0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -120,7 +120,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 2",
 					content:
-						"Supplemental project connected to WDF1 Positioning, Goals, and Suggested Course Family. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-wdf1-positioning-goals-and-suggested-course-family-supplemental-2/starter",
 					solutionLink:
@@ -129,7 +129,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 3",
 					content:
-						"Supplemental project connected to WDF1 Positioning, Goals, and Suggested Course Family. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-wdf1-positioning-goals-and-suggested-course-family-supplemental-3/starter",
 					solutionLink:
@@ -182,7 +182,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 2",
 					content:
-						"Supplemental project connected to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-2/starter",
 					solutionLink:
@@ -191,7 +191,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 3",
 					content:
-						"Supplemental project connected to WDF2 Stage 1: Strengthen the Existing JavaScript Courses. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-3/starter",
 					solutionLink:
@@ -244,7 +244,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 2: Web Development Foundations supplemental 2",
 					content:
-						"Supplemental project connected to WDF3 Stage 2: Web Development Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf3-stage-2-web-development-foundations-supplemental-2/starter",
 					solutionLink:
@@ -253,7 +253,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 2: Web Development Foundations supplemental 3",
 					content:
-						"Supplemental project connected to WDF3 Stage 2: Web Development Foundations. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf3-stage-2-web-development-foundations-supplemental-3/starter",
 					solutionLink:
@@ -306,7 +306,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 3: Front End Applications supplemental 2",
 					content:
-						"Supplemental project connected to WDF4 Stage 3: Front-End Applications. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf4-stage-3-front-end-applications-supplemental-2/starter",
 					solutionLink:
@@ -315,7 +315,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 3: Front End Applications supplemental 3",
 					content:
-						"Supplemental project connected to WDF4 Stage 3: Front-End Applications. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf4-stage-3-front-end-applications-supplemental-3/starter",
 					solutionLink:
@@ -368,7 +368,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 4: Back End Basics supplemental 2",
 					content:
-						"Supplemental project connected to WDF5 Stage 4: Back-End Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-11-wdf5-stage-4-back-end-basics-supplemental-2/starter",
 					solutionLink:
@@ -377,7 +377,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 4: Back End Basics supplemental 3",
 					content:
-						"Supplemental project connected to WDF5 Stage 4: Back-End Basics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-12-wdf5-stage-4-back-end-basics-supplemental-3/starter",
 					solutionLink:
@@ -430,7 +430,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 5: Databases and Data Models supplemental 2",
 					content:
-						"Supplemental project connected to WDF6 Stage 5: Databases and Data Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-13-wdf6-stage-5-databases-and-data-models-supplemental-2/starter",
 					solutionLink:
@@ -439,7 +439,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 5: Databases and Data Models supplemental 3",
 					content:
-						"Supplemental project connected to WDF6 Stage 5: Databases and Data Models. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-14-wdf6-stage-5-databases-and-data-models-supplemental-3/starter",
 					solutionLink:
@@ -492,7 +492,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 6: Hosting and Deployment supplemental 2",
 					content:
-						"Supplemental project connected to WDF7 Stage 6: Hosting and Deployment. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-15-wdf7-stage-6-hosting-and-deployment-supplemental-2/starter",
 					solutionLink:
@@ -501,7 +501,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Stage 6: Hosting and Deployment supplemental 3",
 					content:
-						"Supplemental project connected to WDF7 Stage 6: Hosting and Deployment. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-16-wdf7-stage-6-hosting-and-deployment-supplemental-3/starter",
 					solutionLink:
@@ -554,7 +554,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Hosting and Operations Topics to Add supplemental 2",
 					content:
-						"Supplemental project connected to WDF8 Hosting and Operations Topics to Add. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-17-wdf8-hosting-and-operations-topics-to-add-supplemental-2/starter",
 					solutionLink:
@@ -563,7 +563,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Hosting and Operations Topics to Add supplemental 3",
 					content:
-						"Supplemental project connected to WDF8 Hosting and Operations Topics to Add. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-18-wdf8-hosting-and-operations-topics-to-add-supplemental-3/starter",
 					solutionLink:
@@ -633,7 +633,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Good Practical Projects supplemental 2",
 					content:
-						"Supplemental project connected to WDF9 Good Practical Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-19-wdf9-good-practical-projects-supplemental-2/starter",
 					solutionLink:
@@ -642,7 +642,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Good Practical Projects supplemental 3",
 					content:
-						"Supplemental project connected to WDF9 Good Practical Projects. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-20-wdf9-good-practical-projects-supplemental-3/starter",
 					solutionLink:
@@ -695,7 +695,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Suggested Advanced Strand supplemental 2",
 					content:
-						"Supplemental project connected to WDF10 Suggested Advanced Strand. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-21-wdf10-suggested-advanced-strand-supplemental-2/starter",
 					solutionLink:
@@ -704,7 +704,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Suggested Advanced Strand supplemental 3",
 					content:
-						"Supplemental project connected to WDF10 Suggested Advanced Strand. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-22-wdf10-suggested-advanced-strand-supplemental-3/starter",
 					solutionLink:
@@ -757,7 +757,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Integration with Network Topics supplemental 2",
 					content:
-						"Supplemental project connected to WDF11 Integration with Network Topics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-23-wdf11-integration-with-network-topics-supplemental-2/starter",
 					solutionLink:
@@ -766,7 +766,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Integration with Network Topics supplemental 3",
 					content:
-						"Supplemental project connected to WDF11 Integration with Network Topics. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-24-wdf11-integration-with-network-topics-supplemental-3/starter",
 					solutionLink:
@@ -819,7 +819,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Supplemental project connected to WDF12 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-25-wdf12-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -828,7 +828,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Supplemental project connected to WDF12 Expansion Ideas and Next Steps. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-26-wdf12-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -837,12 +837,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "full stack web lab 14: Implementation Studio",
+			title: "full stack web lab 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "full stack web lab 14: Core Concepts",
 					content:
-						"full stack web lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "full stack web lab 14: Guided Example",
@@ -852,7 +852,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 14: Core Project",
 					content:
-						"full stack web lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-full-stack-web-lab-14/starter",
 					solutionLink:
@@ -861,32 +861,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 14: Review and Reflection",
 					content:
-						"full stack web lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 14: Extension Challenge",
 					content:
-						"Extend the core build from full stack web lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-full-stack-web-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-full-stack-web-lab-14/solution"
 				},
 				{
-					title: "full stack web lab 14 supplemental 2: Implementation Studio",
+					title: "full stack web lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "full stack web lab 14 supplemental 3: Implementation Studio",
+					title: "full stack web lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-28-applied-studio-14-full-stack-web-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -895,12 +895,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "full stack web lab 15: Implementation Studio",
+			title: "full stack web lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "full stack web lab 15: Core Concepts",
 					content:
-						"full stack web lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "full stack web lab 15: Guided Example",
@@ -910,7 +910,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 15: Core Project",
 					content:
-						"full stack web lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-full-stack-web-lab-15/starter",
 					solutionLink:
@@ -919,32 +919,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 15: Review and Reflection",
 					content:
-						"full stack web lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 15: Extension Challenge",
 					content:
-						"Extend the core build from full stack web lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-full-stack-web-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-full-stack-web-lab-15/solution"
 				},
 				{
-					title: "full stack web lab 15 supplemental 2: Implementation Studio",
+					title: "full stack web lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "full stack web lab 15 supplemental 3: Implementation Studio",
+					title: "full stack web lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-30-applied-studio-15-full-stack-web-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -953,12 +953,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "full stack web lab 16: Implementation Studio",
+			title: "full stack web lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "full stack web lab 16: Core Concepts",
 					content:
-						"full stack web lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "full stack web lab 16: Guided Example",
@@ -968,7 +968,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 16: Core Project",
 					content:
-						"full stack web lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-full-stack-web-lab-16/starter",
 					solutionLink:
@@ -977,32 +977,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 16: Review and Reflection",
 					content:
-						"full stack web lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 16: Extension Challenge",
 					content:
-						"Extend the core build from full stack web lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-full-stack-web-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-full-stack-web-lab-16/solution"
 				},
 				{
-					title: "full stack web lab 16 supplemental 2: Implementation Studio",
+					title: "full stack web lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "full stack web lab 16 supplemental 3: Implementation Studio",
+					title: "full stack web lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-32-applied-studio-16-full-stack-web-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1011,12 +1011,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "full stack web lab 17: Implementation Studio",
+			title: "full stack web lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "full stack web lab 17: Core Concepts",
 					content:
-						"full stack web lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "full stack web lab 17: Guided Example",
@@ -1026,7 +1026,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 17: Core Project",
 					content:
-						"full stack web lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-full-stack-web-lab-17/starter",
 					solutionLink:
@@ -1035,32 +1035,32 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "full stack web lab 17: Review and Reflection",
 					content:
-						"full stack web lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "full stack web lab 17: Extension Challenge",
 					content:
-						"Extend the core build from full stack web lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-full-stack-web-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-full-stack-web-lab-17/solution"
 				},
 				{
-					title: "full stack web lab 17 supplemental 2: Implementation Studio",
+					title: "full stack web lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "full stack web lab 17 supplemental 3: Implementation Studio",
+					title: "full stack web lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to full stack web lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-34-applied-studio-17-full-stack-web-lab-17-supplemental-3/starter",
 					solutionLink:

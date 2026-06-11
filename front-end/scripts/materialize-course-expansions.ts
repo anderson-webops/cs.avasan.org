@@ -569,10 +569,10 @@ function buildSupplementalSupportItem(
 			title: `${focus}: Extension Challenge`,
 			content: `Extend the work from ${moduleTitle} with a tighter constraint, one extra feature, or a slightly more realistic input case.`
 		},
-			{
-				title: `${focus}: Fluency Drill`,
-				content: `Repeat the core ideas from ${moduleTitle} on a smaller problem to build speed, independence, and cleaner reasoning.`
-			},
+		{
+			title: `${focus}: Fluency Drill`,
+			content: `Repeat the core ideas from ${moduleTitle} on a smaller problem to build speed, independence, and cleaner reasoning.`
+		},
 		{
 			title: `${focus}: Open-Ended Variant`,
 			content: `Create an original variation inspired by ${moduleTitle}. Keep the scope small, but require one meaningful design or reasoning choice.`
@@ -595,7 +595,7 @@ function buildLinkedSupplementalProjectItem(
 
 	return {
 		title,
-		content: `Supplemental project connected to ${moduleTitle}. The linked starter provides the implementation artifact, and the solution provides the reference state.`,
+		content: `Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.`,
 		projectLink: resource.projectLink,
 		solutionLink: resource.solutionLink
 	};
@@ -1631,34 +1631,38 @@ async function main() {
 				`${config.moduleFocus} ${studioIndex}`,
 				studioIndex
 			);
-				const focus = nextFocusLabel(config.moduleFocus, resource, config);
-				const moduleTitle = `${focus}: Implementation Studio`;
-				const newModule: RawCourseModule = {
-					title: moduleTitle,
-					curriculum: [
-						{
-							title: `${focus}: Core Concepts`,
-							content: `${moduleTitle} defines the target artifact, required behavior, and core concepts needed for the build or problem set.`
-						},
-						{
-							title: `${focus}: Guided Example`,
-							content: `A representative example for ${moduleTitle} names the key inputs, expected outputs, and checkpoints worth verifying early.`
-						},
-						{
-							title: `${focus}: Core Project`,
-							content: `${moduleTitle} centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.`,
-							projectLink: resource?.projectLink,
-							solutionLink: resource?.solutionLink
-						},
-						{
-							title: `${focus}: Review and Reflection`,
-							content: `${moduleTitle} closes with the edge cases that matter most and one improvement that would make the next iteration cleaner or safer.`
-						}
-					],
+			const focus = nextFocusLabel(config.moduleFocus, resource, config);
+			const moduleTitle = `${focus}: Implementation Lab`;
+			const newModule: RawCourseModule = {
+				title: moduleTitle,
+				curriculum: [
+					{
+						title: `${focus}: Core Concepts`,
+						content:
+							"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					},
+					{
+						title: `${focus}: Guided Example`,
+						content: `A representative example for ${moduleTitle} names the key inputs, expected outputs, and checkpoints worth verifying early.`
+					},
+					{
+						title: `${focus}: Core Project`,
+						content:
+							"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+						projectLink: resource?.projectLink,
+						solutionLink: resource?.solutionLink
+					},
+					{
+						title: `${focus}: Review and Reflection`,
+						content:
+							"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					}
+				],
 				supplementalProjects: [
 					{
 						title: `${focus}: Extension Challenge`,
-						content: `Extend the core build from ${moduleTitle} with one extra requirement, stricter input handling, or a more realistic variation of the same task.`,
+						content:
+							"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 						projectLink: resource?.projectLink,
 						solutionLink: resource?.solutionLink
 					},
@@ -1668,7 +1672,7 @@ async function main() {
 					},
 					{
 						title: `${focus}: Integration Drill`,
-						content: `Rebuild one part of ${moduleTitle} under a slightly different constraint so students practice transfer instead of repeating the exact same steps.`
+						content: `Rebuild one part of ${moduleTitle} under a slightly different constraint so the work transfers beyond the exact same steps.`
 					}
 				]
 			};

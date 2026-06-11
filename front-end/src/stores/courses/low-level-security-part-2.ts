@@ -53,7 +53,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "LLS Part 2 Setup and Tooling Supplemental 2",
 					content:
-						"Supplemental project connected to LLS Part 2 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-01-lls-part-2-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -62,7 +62,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "LLS Part 2 Setup and Tooling Supplemental 3",
 					content:
-						"Supplemental project connected to LLS Part 2 Setup and Tooling. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-02-lls-part-2-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -111,7 +111,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 1: Exploitability Triage Supplemental 2",
 					content:
-						"Supplemental project connected to Module 1: Exploitability Triage. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-03-module-1-exploitability-triage-supplemental-2/starter",
 					solutionLink:
@@ -120,7 +120,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 1: Exploitability Triage Supplemental 3",
 					content:
-						"Supplemental project connected to Module 1: Exploitability Triage. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-04-module-1-exploitability-triage-supplemental-3/starter",
 					solutionLink:
@@ -169,7 +169,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 2: Stack Corruption in Toy Programs Supplemental 2",
 					content:
-						"Supplemental project connected to Module 2: Stack Corruption in Toy Programs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-05-module-2-stack-corruption-in-toy-programs-supplemental-2/starter",
 					solutionLink:
@@ -178,7 +178,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 2: Stack Corruption in Toy Programs Supplemental 3",
 					content:
-						"Supplemental project connected to Module 2: Stack Corruption in Toy Programs. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-06-module-2-stack-corruption-in-toy-programs-supplemental-3/starter",
 					solutionLink:
@@ -227,7 +227,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 3: Heap Lifetime and Heap Metadata Concepts Supplemental 2",
 					content:
-						"Supplemental project connected to Module 3: Heap Lifetime and Heap Metadata Concepts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-07-module-3-heap-lifetime-and-heap-metadata-concepts-supplemental-2/starter",
 					solutionLink:
@@ -236,7 +236,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 3: Heap Lifetime and Heap Metadata Concepts Supplemental 3",
 					content:
-						"Supplemental project connected to Module 3: Heap Lifetime and Heap Metadata Concepts. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-08-module-3-heap-lifetime-and-heap-metadata-concepts-supplemental-3/starter",
 					solutionLink:
@@ -289,7 +289,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 4: Information Disclosure and Memory Observation Supplemental 2",
 					content:
-						"Supplemental project connected to Module 4: Information Disclosure and Memory Observation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-09-module-4-information-disclosure-and-memory-observation-supplemental-2/starter",
 					solutionLink:
@@ -298,7 +298,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 4: Information Disclosure and Memory Observation Supplemental 3",
 					content:
-						"Supplemental project connected to Module 4: Information Disclosure and Memory Observation. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-10-module-4-information-disclosure-and-memory-observation-supplemental-3/starter",
 					solutionLink:
@@ -347,7 +347,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 5: Mitigation Aware Analysis Supplemental 2",
 					content:
-						"Supplemental project connected to Module 5: Mitigation-Aware Analysis. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-11-module-5-mitigation-aware-analysis-supplemental-2/starter",
 					solutionLink:
@@ -356,7 +356,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 5: Mitigation Aware Analysis Supplemental 3",
 					content:
-						"Supplemental project connected to Module 5: Mitigation-Aware Analysis. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-12-module-5-mitigation-aware-analysis-supplemental-3/starter",
 					solutionLink:
@@ -409,7 +409,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 6: Control Flow Thinking for Defenders Supplemental 2",
 					content:
-						"Supplemental project connected to Module 6: Control-Flow Thinking for Defenders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-13-module-6-control-flow-thinking-for-defenders-supplemental-2/starter",
 					solutionLink:
@@ -418,7 +418,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 6: Control Flow Thinking for Defenders Supplemental 3",
 					content:
-						"Supplemental project connected to Module 6: Control-Flow Thinking for Defenders. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-14-module-6-control-flow-thinking-for-defenders-supplemental-3/starter",
 					solutionLink:
@@ -472,7 +472,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 7: From Bug Report to Patch Supplemental 2",
 					content:
-						"Supplemental project connected to Module 7: From Bug Report to Patch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-15-module-7-from-bug-report-to-patch-supplemental-2/starter",
 					solutionLink:
@@ -481,7 +481,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 7: From Bug Report to Patch Supplemental 3",
 					content:
-						"Supplemental project connected to Module 7: From Bug Report to Patch. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-16-module-7-from-bug-report-to-patch-supplemental-3/starter",
 					solutionLink:
@@ -530,7 +530,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 8: Capstone Audit Supplemental 2",
 					content:
-						"Supplemental project connected to Module 8: Capstone Audit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-17-module-8-capstone-audit-supplemental-2/starter",
 					solutionLink:
@@ -539,7 +539,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Module 8: Capstone Audit Supplemental 3",
 					content:
-						"Supplemental project connected to Module 8: Capstone Audit. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-18-module-8-capstone-audit-supplemental-3/starter",
 					solutionLink:
@@ -548,12 +548,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Low-Level Security Lab 13: Implementation Studio",
+			title: "Low-Level Security Lab 13: Implementation Lab",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 13: Core Concepts",
 					content:
-						"low level security lab 13: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 13: Guided Example",
@@ -563,7 +563,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 13: Core Project",
 					content:
-						"low level security lab 13: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/starter",
 					solutionLink:
@@ -572,32 +572,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 13: Review and Reflection",
 					content:
-						"low level security lab 13: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 13: Extension Challenge",
 					content:
-						"Extend the core build from low level security lab 13: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/solution"
 				},
 				{
-					title: "Low-Level Security Lab 13 Supplemental 2: Implementation Studio",
+					title: "Low-Level Security Lab 13 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-19-applied-studio-10-low-level-security-lab-13-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-19-applied-studio-10-low-level-security-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "Low-Level Security Lab 13 Supplemental 3: Implementation Studio",
+					title: "Low-Level Security Lab 13 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 13: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-20-applied-studio-10-low-level-security-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -606,12 +606,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Low-Level Security Lab 14: Implementation Studio",
+			title: "Low-Level Security Lab 14: Implementation Lab",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 14: Core Concepts",
 					content:
-						"low level security lab 14: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 14: Guided Example",
@@ -621,7 +621,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 14: Core Project",
 					content:
-						"low level security lab 14: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/starter",
 					solutionLink:
@@ -630,32 +630,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 14: Review and Reflection",
 					content:
-						"low level security lab 14: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 14: Extension Challenge",
 					content:
-						"Extend the core build from low level security lab 14: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/solution"
 				},
 				{
-					title: "Low-Level Security Lab 14 Supplemental 2: Implementation Studio",
+					title: "Low-Level Security Lab 14 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-21-applied-studio-11-low-level-security-lab-14-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-21-applied-studio-11-low-level-security-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "Low-Level Security Lab 14 Supplemental 3: Implementation Studio",
+					title: "Low-Level Security Lab 14 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 14: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-22-applied-studio-11-low-level-security-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -664,12 +664,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Low-Level Security Lab 15: Implementation Studio",
+			title: "Low-Level Security Lab 15: Implementation Lab",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 15: Core Concepts",
 					content:
-						"low level security lab 15: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 15: Guided Example",
@@ -679,7 +679,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 15: Core Project",
 					content:
-						"low level security lab 15: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/starter",
 					solutionLink:
@@ -688,32 +688,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 15: Review and Reflection",
 					content:
-						"low level security lab 15: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 15: Extension Challenge",
 					content:
-						"Extend the core build from low level security lab 15: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/solution"
 				},
 				{
-					title: "Low-Level Security Lab 15 Supplemental 2: Implementation Studio",
+					title: "Low-Level Security Lab 15 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-23-applied-studio-12-low-level-security-lab-15-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-23-applied-studio-12-low-level-security-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "Low-Level Security Lab 15 Supplemental 3: Implementation Studio",
+					title: "Low-Level Security Lab 15 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 15: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-24-applied-studio-12-low-level-security-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -722,12 +722,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Low-Level Security Lab 16: Implementation Studio",
+			title: "Low-Level Security Lab 16: Implementation Lab",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 16: Core Concepts",
 					content:
-						"low level security lab 16: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 16: Guided Example",
@@ -737,7 +737,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 16: Core Project",
 					content:
-						"low level security lab 16: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/starter",
 					solutionLink:
@@ -746,32 +746,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 16: Review and Reflection",
 					content:
-						"low level security lab 16: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 16: Extension Challenge",
 					content:
-						"Extend the core build from low level security lab 16: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/solution"
 				},
 				{
-					title: "Low-Level Security Lab 16 Supplemental 2: Implementation Studio",
+					title: "Low-Level Security Lab 16 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-25-applied-studio-13-low-level-security-lab-16-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-25-applied-studio-13-low-level-security-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "Low-Level Security Lab 16 Supplemental 3: Implementation Studio",
+					title: "Low-Level Security Lab 16 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 16: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-26-applied-studio-13-low-level-security-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -780,12 +780,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "Low-Level Security Lab 17: Implementation Studio",
+			title: "Low-Level Security Lab 17: Implementation Lab",
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 17: Core Concepts",
 					content:
-						"low level security lab 17: Implementation Studio defines the target artifact, required behavior, and core concepts needed for the build or problem set."
+						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
 				},
 				{
 					title: "Low-Level Security Lab 17: Guided Example",
@@ -795,7 +795,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 17: Core Project",
 					content:
-						"low level security lab 17: Implementation Studio centers on one complete artifact. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass.",
+						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/starter",
 					solutionLink:
@@ -804,32 +804,32 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Low-Level Security Lab 17: Review and Reflection",
 					content:
-						"low level security lab 17: Implementation Studio closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration."
+						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 17: Extension Challenge",
 					content:
-						"Extend the core build from low level security lab 17: Implementation Studio with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/solution"
 				},
 				{
-					title: "Low-Level Security Lab 17 Supplemental 2: Implementation Studio",
+					title: "Low-Level Security Lab 17 Supplemental 2: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-27-applied-studio-14-low-level-security-lab-17-supplemental-2/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-27-applied-studio-14-low-level-security-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "Low-Level Security Lab 17 Supplemental 3: Implementation Studio",
+					title: "Low-Level Security Lab 17 Supplemental 3: Implementation Lab",
 					content:
-						"Supplemental project connected to low level security lab 17: Implementation Studio. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS2-28-applied-studio-14-low-level-security-lab-17-supplemental-3/starter",
 					solutionLink:

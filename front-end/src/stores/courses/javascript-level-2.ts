@@ -49,7 +49,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -58,7 +58,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #1. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-02-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -114,7 +114,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 2",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-03-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -123,7 +123,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content:
-						"Supplemental project connected to Check-In #2. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-04-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -225,7 +225,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Fundamentals Review supplemental 2",
 					content:
-						"Supplemental project connected to JSM1 Fundamentals Review. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-05-jsm1-fundamentals-review-supplemental-2/starter",
 					solutionLink:
@@ -234,7 +234,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Fundamentals Review supplemental 3",
 					content:
-						"Supplemental project connected to JSM1 Fundamentals Review. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-06-jsm1-fundamentals-review-supplemental-3/starter",
 					solutionLink:
@@ -378,7 +378,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Complex Conditionals supplemental 2",
 					content:
-						"Supplemental project connected to JSM3 Complex Conditionals. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-07-jsm3-complex-conditionals-supplemental-2/starter",
 					solutionLink:
@@ -387,7 +387,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Complex Conditionals supplemental 3",
 					content:
-						"Supplemental project connected to JSM3 Complex Conditionals. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-08-jsm3-complex-conditionals-supplemental-3/starter",
 					solutionLink:
@@ -453,7 +453,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Canvas supplemental 3",
 					content:
-						"Supplemental project connected to JSM4 Canvas. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-09-jsm4-canvas-supplemental-3/starter",
 					solutionLink:
@@ -543,7 +543,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Arrays and Iterators supplemental 3",
 					content:
-						"Supplemental project connected to JSM5 Arrays and Iterators. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-10-jsm5-arrays-and-iterators-supplemental-3/starter",
 					solutionLink:
@@ -620,7 +620,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Objects and Properties supplemental 3",
 					content:
-						"Supplemental project connected to JSM6 Objects and Properties. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-11-jsm6-objects-and-properties-supplemental-3/starter",
 					solutionLink:
@@ -696,7 +696,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Helper Functions and Event Listeners supplemental 3",
 					content:
-						"Supplemental project connected to JSM7 Helper Functions and Event Listeners. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-12-jsm7-helper-functions-and-event-listeners-supplemental-3/starter",
 					solutionLink:
@@ -753,7 +753,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Collisions and Controls supplemental 2",
 					content:
-						"Supplemental project connected to JSM8 Collisions and Controls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-13-jsm8-collisions-and-controls-supplemental-2/starter",
 					solutionLink:
@@ -762,7 +762,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Collisions and Controls supplemental 3",
 					content:
-						"Supplemental project connected to JSM8 Collisions and Controls. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-14-jsm8-collisions-and-controls-supplemental-3/starter",
 					solutionLink:
@@ -828,7 +828,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Games in the Canvas supplemental 2",
 					content:
-						"Supplemental project connected to JSM9 Games in the Canvas. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-15-jsm9-games-in-the-canvas-supplemental-2/starter",
 					solutionLink:
@@ -837,7 +837,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Games in the Canvas supplemental 3",
 					content:
-						"Supplemental project connected to JSM9 Games in the Canvas. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-16-jsm9-games-in-the-canvas-supplemental-3/starter",
 					solutionLink:
@@ -894,7 +894,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "APIs and Requests supplemental 2",
 					content:
-						"Supplemental project connected to JSM10 APIs and Requests. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-17-jsm10-apis-and-requests-supplemental-2/starter",
 					solutionLink:
@@ -903,7 +903,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "APIs and Requests supplemental 3",
 					content:
-						"Supplemental project connected to JSM10 APIs and Requests. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-18-jsm10-apis-and-requests-supplemental-3/starter",
 					solutionLink:
@@ -1028,7 +1028,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "NoSQL and CRUD supplemental 2",
 					content:
-						"Supplemental project connected to JSM12 NoSQL and CRUD. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-19-jsm12-nosql-and-crud-supplemental-2/starter",
 					solutionLink:
@@ -1037,7 +1037,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "NoSQL and CRUD supplemental 3",
 					content:
-						"Supplemental project connected to JSM12 NoSQL and CRUD. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-20-jsm12-nosql-and-crud-supplemental-3/starter",
 					solutionLink:
@@ -1085,7 +1085,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Message Board supplemental 2",
 					content:
-						"Supplemental project connected to JSM13 Message Board. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-21-jsm13-message-board-supplemental-2/starter",
 					solutionLink:
@@ -1094,7 +1094,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Message Board supplemental 3",
 					content:
-						"Supplemental project connected to JSM13 Message Board. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-22-jsm13-message-board-supplemental-3/starter",
 					solutionLink:
@@ -1145,7 +1145,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Quiz Game supplemental 2",
 					content:
-						"Supplemental project connected to JSM14 Quiz Game. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-23-jsm14-quiz-game-supplemental-2/starter",
 					solutionLink:
@@ -1154,7 +1154,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Quiz Game supplemental 3",
 					content:
-						"Supplemental project connected to JSM14 Quiz Game. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-24-jsm14-quiz-game-supplemental-3/starter",
 					solutionLink:
@@ -1207,7 +1207,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Master Project supplemental 2",
 					content:
-						"Supplemental project connected to JSM15 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-25-jsm15-master-project-supplemental-2/starter",
 					solutionLink:
@@ -1216,7 +1216,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Master Project supplemental 3",
 					content:
-						"Supplemental project connected to JSM15 Master Project. The linked starter provides the implementation artifact, and the solution provides the reference state.",
+						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-26-jsm15-master-project-supplemental-3/starter",
 					solutionLink:
