@@ -73,7 +73,7 @@ export const apComputerScienceACourse: RawCourse = {
 						"AP Computer Science A is a Java course built around problem solving, object-oriented design, arrays, ArrayLists, inheritance, recursion, and exam-style tracing. The course should be treated as both a real programming class and a specific AP exam prep track."
 				},
 				{
-					title: "Pacing Tracks and Acceleration Guide",
+					title: "Track Guide",
 					content: [
 						"Use the APCS track guide when the full sequence would move too slowly or when a learner needs a more supported route. The guide separates the course into Slow/Supported, Medium/Standard, Fast/Quick, Hard/Challenge, and Exam-focused tracks, with concrete module decisions for each route.",
 						"Use the placement checkpoints in the guide to choose the route from evidence: recent code, Java-specific mistakes, hand tracing, object-state explanations, and AP-style written reasoning.",
@@ -102,7 +102,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Reference Pack",
 					content:
-						"Start the course with the repo-backed reference projects for variables, strings, and casting so students build a clean notes-and-sandbox workflow from day one.",
+						"Start the course with the repo-backed reference projects for variables, strings, and casting so learners build a clean notes-and-sandbox workflow from day one.",
 					projectLink: repo("APCS1-Variables-Reference/solution")
 				}
 			],
@@ -118,7 +118,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Casting Reference",
 					content:
-						"Use this reference build when students need a tighter review of integer division, explicit casts, and loss-of-precision reasoning.",
+						"Use this reference build when learners need a tighter review of integer division, explicit casts, and loss-of-precision reasoning.",
 					projectLink: repo("APCS1-Casting-Reference/solution")
 				},
 				{
@@ -153,7 +153,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Additional Practice: FizzBuzz",
 					content:
-						"Use the additional practice project after the check-in when the student needs one more pass through divisibility checks, ordering conditionals, and loop tracing.",
+						"Use the additional practice project after the check-in when divisibility checks, ordered conditionals, and loop tracing need one more pass.",
 					projectLink: repo(
 						"APCS-Check-in-1-Additional-Practice-Project/solution"
 					),
@@ -162,7 +162,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Variables Reference",
 					content:
-						"Return to the variables reference when the student still hesitates on types, assignment, or `Math.random()` range construction.",
+						"Return to the variables reference when types, assignment, or `Math.random()` range construction are still hesitant.",
 					projectLink: repo("APCS1-Variables-Reference/solution")
 				},
 				{
@@ -179,12 +179,12 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Variables, Primitive Types, and Strings",
 					content:
-						"Teach `int`, `double`, `boolean`, and `String` as the basic vocabulary of Java programs. Skill target: Declare, initialize, print, and update values without syntax friction."
+						"`int`, `double`, `boolean`, and `String` are the basic vocabulary of Java programs. Skill target: declare, initialize, print, and update values without syntax friction."
 				},
 				{
 					title: "Scanners, Formatting, and Casting",
 					content:
-						"Use `Scanner`-based input and explicit casting to make students reason about what the program stores and why an expression evaluates the way it does."
+						"`Scanner`-based input and explicit casting make the stored values and expression results visible enough to reason about precisely."
 				},
 				{
 					title: "Core Project: Mad Libs",
@@ -211,7 +211,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Hospital Survey",
 					content:
-						"Use this project when students need one more structured pass through typed input, variable naming, and console formatting.",
+						"Use this project when learners need one more structured pass through typed input, variable naming, and console formatting.",
 					projectLink: repo("APCS1-Hospital-Survey/solution"),
 					mediaLink: media("apcs1-project-3-hospital-survey.mp4")
 				},
@@ -231,7 +231,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Arithmetic and Update Operators",
 					content:
-						"Teach arithmetic expressions, operator precedence, `%`, and update patterns like `+=`, `++`, and `--` as the basic mechanics for manipulating numeric state."
+						"Arithmetic expressions, operator precedence, `%`, and update patterns like `+=`, `++`, and `--` are the basic mechanics for manipulating numeric state."
 				},
 				{
 					title: "Relational and Logical Operators",
@@ -248,7 +248,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Chapter 2 Multiple Choice Focus",
 					content:
-						"Barron's Chapter 2 work belongs here because this is where students learn to justify integer division, casting, precedence, and boolean logic without running code."
+						"Barron's Chapter 2 work belongs here because integer division, casting, precedence, and boolean logic should be justified without running code."
 				}
 			],
 			supplementalProjects: [
@@ -264,7 +264,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Too Chicken to Cross the Road",
 					content:
-						"Use the boolean-only version first so students learn to encode logic cleanly before adding conditionals in APCS3.",
+						"Use the boolean-only version first so logic is encoded cleanly before conditionals are added in APCS3.",
 					projectLink: repo(
 						"APCS2-Too-Chicken-To-Cross-The-Road/solution"
 					),
@@ -287,12 +287,12 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Conditionals, Scope, and Nesting",
 					content:
-						"Teach `if`, `else if`, and `else` as precise control-flow tools. Skill target: Explain which branch runs and why, especially in nested cases."
+						"`if`, `else if`, and `else` are precise control-flow tools. Skill target: explain which branch runs and why, especially in nested cases."
 				},
 				{
 					title: "Packages, Math, and Randomness",
 					content:
-						"Introduce package imports, `Math` methods, and `Math.random()` so students can use library code while still tracing their own control flow carefully."
+						"Package imports, `Math` methods, and `Math.random()` introduce library code while preserving careful tracing of local control flow."
 				},
 				{
 					title: "Core Project: Elevator Warning",
@@ -319,7 +319,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Reference: Math Package",
 					content:
-						"Use this repo reference when students need to revisit `abs`, `pow`, `sqrt`, and round-off behavior.",
+						"Use this repo reference when `abs`, `pow`, `sqrt`, and round-off behavior need a focused review.",
 					projectLink: repo("APCS3-Math-Package-Reference/solution")
 				},
 				{
@@ -343,7 +343,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "For Loops, While Loops, and Infinite Loop Risk",
 					content:
-						"Teach counted loops and condition-driven loops as separate tools with separate failure modes. Key idea: When a loop terminates and what state changes make that possible."
+						"Counted loops and condition-driven loops are separate tools with separate failure modes. Key idea: when a loop terminates and what state changes make that possible."
 				},
 				{
 					title: "Nested Loops and Early Exception Reasoning",
@@ -387,7 +387,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Reference: While Loops and Nested Loops",
 					content:
-						"Use the reference pack when students need one more clean example of nested iteration before arrays arrive.",
+						"Use the reference pack when nested iteration needs one more clean example before arrays arrive.",
 					projectLink: repo(
 						"APCS4-While-Loops-and-Nested-Loops-Reference/solution"
 					)
@@ -418,7 +418,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Additional Practice: Animal Kingdom",
 					content:
-						"Use the taxonomy inheritance project after the check-in when the student needs one more structured inheritance build.",
+						"Use the taxonomy inheritance project after the check-in when inheritance needs one more structured build.",
 					projectLink: repo(
 						"APCS-Check-in-2-Additional-Practice-Project/solution"
 					)
@@ -432,7 +432,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "This Reference",
 					content:
-						"Use the `this` reference pack when students can write a constructor but still cannot explain why `this.field` matters.",
+						"Use the `this` reference pack when constructor syntax works but `this.field` still needs a clearer explanation.",
 					projectLink: repo("APCS6-This-Reference/solution")
 				}
 			]
@@ -460,7 +460,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Free Response Prep",
 					content:
-						"Start free-response style writing here so students can explain how a small class should behave before inheritance and polymorphism raise the difficulty.",
+						"Start free-response style writing here so small-class behavior can be explained before inheritance and polymorphism raise the difficulty.",
 					projectLink: repo("APCS5-Free-Response-Practice/solution")
 				}
 			],
@@ -475,14 +475,14 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Store Class",
 					content:
-						"Use Store Class when the student needs another object model with a small but meaningful state transition.",
+						"Use Store Class when another object model with a small but meaningful state transition would help.",
 					projectLink: repo("APCS5-Store-Class/solution"),
 					mediaLink: media("apcs5-project-3-store-class.mp4")
 				},
 				{
 					title: "Supplemental: Spreadsheet Width",
 					content:
-						"Use this supplemental build when a student needs more practice turning a precise method spec into code.",
+						"Use this supplemental build when precise method specs need more implementation practice.",
 					projectLink: repo("APCS5-Spreadsheet-Width/solution"),
 					mediaLink: media(
 						"apcs5-supplemental-project-1-spreadsheet-width.mp4"
@@ -496,7 +496,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "State Mutation and Reference Semantics",
 					content:
-						"Continue class work by making students reason about object references, side effects, and how methods mutate encapsulated state."
+						"Continue class work with object references, side effects, and method calls that mutate encapsulated state."
 				},
 				{
 					title: "Getters, Setters, `this`, and Primitive vs. Reference",
@@ -515,7 +515,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Free Response and Multiple Choice Support",
 					content:
-						"Keep the APCS6 free-response and multiple-choice references available here because this is where students start making subtle object-state mistakes.",
+						"Keep the APCS6 free-response and multiple-choice references available here because subtle object-state mistakes become common at this point.",
 					projectLink: repo("APCS6-Free-Response-Practice/solution")
 				}
 			],
@@ -530,7 +530,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Farm Class",
 					content:
-						"Use the starter-and-solution pair when the student needs one more class-based build with simpler domain language.",
+						"Use the starter-and-solution pair when another class-based build with simpler domain language would help.",
 					projectLink: repo("APCS6-Farm-Class/starter"),
 					solutionLink: repo("APCS6-Farm-Class/solution"),
 					mediaLink: media("apcs6-project-1-farm-class.mp4")
@@ -551,7 +551,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Superclass and Subclass Design",
 					content:
-						"Teach inheritance as a way to capture shared state and behavior without copy-pasting class logic. Skill target: Justify why a subclass relationship is appropriate."
+						"Inheritance captures shared state and behavior without copy-pasting class logic. Skill target: justify why a subclass relationship is appropriate."
 				},
 				{
 					title: "Constructors, `super`, and Overriding",
@@ -606,7 +606,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Superclass References and Dynamic Dispatch",
 					content:
-						"Teach polymorphism as the combination of shared method contracts and runtime method selection based on the actual object type."
+						"Polymorphism combines shared method contracts with runtime method selection based on the actual object type."
 				},
 				{
 					title: "Type Reasoning and Invalid Calls",
@@ -632,7 +632,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Multiple Choice Reference",
 					content:
-						"Use the APCS8 multiple-choice reference when students can code a polymorphic model but still struggle to trace one.",
+						"Use the APCS8 multiple-choice reference when a polymorphic model is easier to code than to trace.",
 					projectLink: repo(
 						"APCS8-Multiple-Choice-Reference/solution"
 					)
@@ -690,13 +690,13 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Specifications, Design, and Testability",
 					content:
-						"Use APCS9 to teach students how to read a spec, identify missing requirements, and design code that can be tested cleanly instead of guessed into existence.",
+						"Use APCS9 for reading a spec, identifying missing requirements, and designing code that can be tested cleanly instead of guessed into existence.",
 					mediaLink: media("apcs9-software-development-lifecycle.png")
 				},
 				{
 					title: "Robust Input and Failure Handling",
 					content:
-						"Strengthen input handling and validation so students stop treating malformed input as a separate concern from core program correctness."
+						"Strengthen input handling and validation so malformed input is treated as part of core program correctness."
 				},
 				{
 					title: "Core Project: Robust Input Practice",
@@ -719,7 +719,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Robust Input Solution Build",
 					content:
-						"Use the completed robust-input build when the student needs to compare their input-validation structure against a reference implementation.",
+						"Use the completed robust-input build to compare an input-validation structure against a reference implementation.",
 					projectLink: repo("APCS9-Robust-Input-Practice/solution")
 				}
 			]
@@ -730,7 +730,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Arrays, Indexing, and Fixed Size",
 					content:
-						"Teach one-dimensional arrays as fixed-size ordered collections with constant-time indexed access and strict bounds."
+						"One-dimensional arrays are fixed-size ordered collections with constant-time indexed access and strict bounds."
 				},
 				{
 					title: "Pass-by-Reference Effects and 2D Arrays",
@@ -782,7 +782,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Free Response Practice",
 					content:
-						"The source module points students at the 2022 AP CS A FRQ set and scoring guidelines for Problem 4. Keep both resources directly linked here.",
+						"The source module uses the 2022 AP CS A FRQ set and scoring guidelines for Problem 4. Keep both resources directly linked here.",
 					projectLink: AP_2022_FRQ,
 					solutionLink: AP_2022_FRQ_SCORING
 				}
@@ -794,7 +794,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "ArrayLists, Wrapper Constraints, and Core Methods",
 					content:
-						"Teach `ArrayList` as a resizable ordered collection with method-based access, dynamic size, and object-only storage."
+						"`ArrayList` is a resizable ordered collection with method-based access, dynamic size, and object-only storage."
 				},
 				{
 					title: "Mutation, Traversal, and Removal Rules",
@@ -844,7 +844,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Card and Deck Classes",
 					content:
-						"Use the card-and-deck classes as a bridge build when the student needs more object-list modeling before APCS12 and APCS17.",
+						"Use the card-and-deck classes as a bridge build when object-list modeling needs more practice before APCS12 and APCS17.",
 					projectLink: repo("APCS11-Card-and-Deck-Classes/solution")
 				}
 			]
@@ -874,7 +874,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Additional Practice: Inversion Counting",
 					content:
-						"Use inversion counting after the check-in when the student needs one more applied problem tying together sorting and runtime ideas.",
+						"Use inversion counting after the check-in when one more applied problem should connect sorting and runtime ideas.",
 					projectLink: repo(
 						"APCS-Check-in-4-Additional-Practice-Project/solution"
 					)
@@ -900,7 +900,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Wrapper Types, Autoboxing, and Unboxing",
 					content:
-						"Teach wrapper classes as the object form of primitive values, with attention to why collections use them and how autoboxing and unboxing hide conversions."
+						"Wrapper classes are the object form of primitive values, with attention to why collections use them and how autoboxing and unboxing hide conversions."
 				},
 				{
 					title: "Static Constants and Search Initialization",
@@ -929,7 +929,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Project: Deck Class",
 					content:
-						"Use Deck Class when the student needs another wrapper-style object around a collection before APCS17.",
+						"Use Deck Class when another wrapper-style object around a collection would help before APCS17.",
 					projectLink: repo("APCS12-Deck-Class/solution")
 				}
 			]
@@ -940,7 +940,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Runtime by Step Counting",
 					content:
-						"Teach runtime in terms of operations rather than wall-clock time so students can compare algorithms independent of machine speed."
+						"Runtime should be measured in operations rather than wall-clock time so algorithms can be compared independent of machine speed."
 				},
 				{
 					title: "Best, Average, and Worst Case",
@@ -973,12 +973,12 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Selection Sort",
 					content:
-						"Teach selection sort as the repeated process of finding the next extreme element and moving it into the sorted section."
+						"Selection sort is the repeated process of finding the next extreme element and moving it into the sorted section."
 				},
 				{
 					title: "Insertion Sort",
 					content:
-						"Teach insertion sort as repeated local insertion into an already sorted prefix, with special attention to best-case and worst-case inputs."
+						"Insertion sort uses repeated local insertion into an already sorted prefix, with special attention to best-case and worst-case inputs."
 				},
 				{
 					title: "Core Project: Selection Sort",
@@ -1004,7 +1004,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Base Cases, Recursive Steps, and Stack Frames",
 					content:
-						"Teach recursion by making students name the base case, describe the smaller subproblem, and trace the call stack on paper.",
+						"Recursion depends on naming the base case, describing the smaller subproblem, and tracing the call stack on paper.",
 					mediaLink: media("apcs15-recursion-1.png")
 				},
 				{
@@ -1045,7 +1045,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Reference: Stack Overflow",
 					content:
-						"Use this reference when students can write a recursive call but still cannot explain why the recursion stops.",
+						"Use this reference when a recursive call is easy to write but the stopping condition is still hard to explain.",
 					projectLink: repo(
 						"APCS15-Stack-Overflow-Reference/solution"
 					)
@@ -1058,12 +1058,12 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Binary Search Preconditions",
 					content:
-						"Teach binary search as a fast search that only works because the data is sorted. Skill target: Explain how each comparison halves the remaining search space."
+						"Binary search is a fast search that only works because the data is sorted. Skill target: explain how each comparison halves the remaining search space."
 				},
 				{
 					title: "Merge Sort and Divide-and-Conquer",
 					content:
-						"Teach merge sort as recursive splitting followed by deterministic merging of sorted halves. The merge step should be traced explicitly, not hand-waved."
+						"Merge sort uses recursive splitting followed by deterministic merging of sorted halves. The merge step should be traced explicitly, not hand-waved."
 				},
 				{
 					title: "Core Project: Binary Search",
@@ -1075,7 +1075,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Merge Step Visual",
 					content:
-						"Use the merge visual together with the repo merge-sort project so students can separate the recursive split from the actual merge operation.",
+						"Use the merge visual together with the repo merge-sort project to separate the recursive split from the actual merge operation.",
 					projectLink: repo("APCS16-Merge-Sort/solution"),
 					mediaLink: media("am_10_merge.mp4")
 				}
@@ -1101,7 +1101,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Next Course Positioning",
 					content:
-						"Use the end of the course to direct students toward the right next step: more advanced Java, C++, Python Level 2, or USACO depending on readiness and goals."
+						"Use the end of the course to identify the right next step: more advanced Java, C++, Python Level 2, or USACO depending on readiness and goals."
 				},
 				{
 					title: "Core Project: Spaceships",
@@ -1113,7 +1113,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Past FRQ Archive",
 					content:
-						"Keep the official College Board FRQ archive available throughout APCS17 so students can cycle through multiple years of real prompts.",
+						"Keep the official College Board FRQ archive available throughout APCS17 for cycling through multiple years of real prompts.",
 					projectLink: AP_FRQ_ARCHIVE
 				}
 			],
@@ -1121,7 +1121,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Master Project: Elevens",
 					content:
-						"Use Elevens as the card-game capstone for students who want more stateful gameplay logic and collection updates.",
+						"Use Elevens as the card-game capstone when the next challenge should involve stateful gameplay logic and collection updates.",
 					projectLink: repo("APCS17-Elevens/solution"),
 					mediaLink: media("apcs17-master-project-2-elevens.mp4")
 				},

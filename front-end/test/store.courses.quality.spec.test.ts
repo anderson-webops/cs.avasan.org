@@ -182,10 +182,7 @@ describe("course text quality normalization", () => {
 		const course = await loadRawCourse("ap-computer-science-a");
 		expect(course).not.toBeNull();
 
-		const guideItem = findItem(
-			course!,
-			/Pacing Tracks and Acceleration Guide/
-		);
+		const guideItem = findItem(course!, /Track Guide/);
 		const guidePath = "public/course-assets/apcs/apcs-pacing-tracks.md";
 		const guide = fs.readFileSync(guidePath, "utf8");
 
@@ -203,6 +200,9 @@ describe("course text quality normalization", () => {
 		expect(guide).toMatch(/\|\s*Hard\s*\|\s*Challenge Track\s*\|/);
 		expect(guide).toContain("How To Use This Guide");
 		expect(guide).toContain("Track Labels At A Glance");
+		expect(guide).toContain("Track Recipes");
+		expect(guide).toContain("Module Decisions By Track");
+		expect(guide).toContain("Quick Route For A Strong Python/C++ Learner");
 		expect(guide).toContain("Fast Placement Decision");
 		expect(guide).toContain("Placement Checkpoints");
 		expect(guide).toContain("The track can change during the course");
