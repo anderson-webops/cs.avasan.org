@@ -1,5 +1,25 @@
 import type { RawCourse } from "./types";
 
+const STATIC_MEDIA = "https://static.classes.jacobdanderson.net";
+
+const SORT_ANIMATIONS = {
+	bubble: `${STATIC_MEDIA}/py3_bubble_sort_wikimedia.gif`,
+	insertion: `${STATIC_MEDIA}/py3_insertion_sort_wikimedia.gif`,
+	merge: `${STATIC_MEDIA}/py3_merge_sort_wikimedia.gif`,
+	quick: `${STATIC_MEDIA}/py3_quicksort_wikimedia.gif`,
+	selection: `${STATIC_MEDIA}/py3_selection_sort_wikimedia.gif`
+} as const;
+
+const SORT_ANIMATION_SOURCES = {
+	bubble: "**Animation source:** [Bubble-sort-example-300px.gif](https://commons.wikimedia.org/wiki/File:Bubble-sort-example-300px.gif), Swfung8 via Wikimedia Commons, CC BY-SA 3.0.",
+	insertion:
+		"**Animation source:** [Insertion-sort-example-300px.gif](https://commons.wikimedia.org/wiki/File:Insertion-sort-example-300px.gif), Swfung8 via Wikimedia Commons, CC BY-SA 3.0.",
+	merge: "**Animation source:** [Merge-sort-example-300px.gif](https://commons.wikimedia.org/wiki/File:Merge-sort-example-300px.gif), Swfung8 via Wikimedia Commons, CC BY-SA 3.0.",
+	quick: "**Animation source:** [Sorting quicksort anim.gif](https://commons.wikimedia.org/wiki/File:Sorting_quicksort_anim.gif), RolandH via Wikimedia Commons, CC BY-SA 3.0.",
+	selection:
+		"**Animation source:** [Selection-Sort-Animation.gif](https://commons.wikimedia.org/wiki/File:Selection-Sort-Animation.gif), Joestape89 via Wikimedia Commons, CC BY-SA 3.0."
+} as const;
+
 export const pythonLevel3Course: RawCourse = {
 	name: "Python Level 3",
 	modules: [
@@ -318,8 +338,12 @@ export const pythonLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Selection Sort Introduction",
-					content:
-						"Selection sort repeatedly finds the smallest item in the unsorted portion of a list and places it into the next position of the sorted portion. It is a straightforward first sorting algorithm and leads naturally into runtime analysis."
+					content: [
+						"Selection sort repeatedly finds the smallest item in the unsorted portion of a list and places it into the next position of the sorted portion. It is a straightforward first sorting algorithm and leads naturally into runtime analysis.",
+						"The animation traces how the smallest remaining value is selected and moved into the next sorted position.",
+						SORT_ANIMATION_SOURCES.selection
+					].join("\n\n"),
+					mediaLink: SORT_ANIMATIONS.selection
 				},
 				{
 					title: "AM8 Project 1: Selection Sort",
@@ -335,8 +359,12 @@ export const pythonLevel3Course: RawCourse = {
 				},
 				{
 					title: "Insertion Sort Introduction",
-					content:
-						"Insertion sort builds a sorted list one item at a time. Each new value is inserted into its proper location among the values already processed, often by swapping backward until the new value is in the correct place."
+					content: [
+						"Insertion sort builds a sorted list one item at a time. Each new value is inserted into its proper location among the values already processed, often by swapping backward until the new value is in the correct place.",
+						"The animation follows each new value moving left through the already sorted prefix until the prefix is ordered again.",
+						SORT_ANIMATION_SOURCES.insertion
+					].join("\n\n"),
+					mediaLink: SORT_ANIMATIONS.insertion
 				},
 				{
 					title: "AM8 Project 2: Insertion Sort",
@@ -401,8 +429,12 @@ export const pythonLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Bubble Sort Introduction",
-					content:
-						"Bubble sort repeatedly walks through a list, compares adjacent items, and swaps them when they are out of order. One full pass moves a large value toward the end of the list, and repeated passes eventually sort the entire list."
+					content: [
+						"Bubble sort repeatedly walks through a list, compares adjacent items, and swaps them when they are out of order. One full pass moves a large value toward the end of the list, and repeated passes eventually sort the entire list.",
+						"The animation tracks adjacent comparisons and swaps as larger values move toward the end of the list.",
+						SORT_ANIMATION_SOURCES.bubble
+					].join("\n\n"),
+					mediaLink: SORT_ANIMATIONS.bubble
 				},
 				{
 					title: "AM9 Project 1: Bubble Sort",
@@ -433,8 +465,12 @@ export const pythonLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Merge Sort Introduction",
-					content:
-						"Merge sort uses divide and conquer. Split a list into two halves, recursively sort each half, and then merge the two sorted halves back together. The key insight is that merging sorted lists is much faster than sorting from scratch."
+					content: [
+						"Merge sort uses divide and conquer. Split a list into two halves, recursively sort each half, and then merge the two sorted halves back together. The key insight is that merging sorted lists is much faster than sorting from scratch.",
+						"The animation separates the two phases: repeated splitting into small pieces, then merging those pieces back into sorted order.",
+						SORT_ANIMATION_SOURCES.merge
+					].join("\n\n"),
+					mediaLink: SORT_ANIMATIONS.merge
 				},
 				{
 					title: "AM10 Project 1: Merge",
@@ -470,8 +506,12 @@ export const pythonLevel3Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Quicksort Introduction",
-					content:
-						"Quicksort chooses a pivot value, partitions the list into values less than, equal to, and greater than the pivot, then recursively sorts the outer partitions. It is another divide-and-conquer algorithm, but unlike merge sort it relies on partitioning rather than merging."
+					content: [
+						"Quicksort chooses a pivot value, partitions the list into values less than, equal to, and greater than the pivot, then recursively sorts the outer partitions. It is another divide-and-conquer algorithm, but unlike merge sort it relies on partitioning rather than merging.",
+						"The animation tracks the pivot-driven partition steps and the smaller recursive sorting regions that follow.",
+						SORT_ANIMATION_SOURCES.quick
+					].join("\n\n"),
+					mediaLink: SORT_ANIMATIONS.quick
 				},
 				{
 					title: "AM11 Project 1: Partition",
