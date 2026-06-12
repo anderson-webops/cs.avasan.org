@@ -43,6 +43,18 @@ function familyFocus(courseFamily: string) {
 		return "page structure, user input, browser state, API boundaries, validation, accessibility, error handling, and deployment assumptions";
 	}
 
+	if (family.includes("machine learning")) {
+		return "dataset inspection, feature choices, train/test separation, baseline comparison, model behavior, evaluation metrics, and limits of the conclusion";
+	}
+
+	if (family.includes("data science") || family.includes("data analysis")) {
+		return "data source assumptions, column meaning, cleaning decisions, missing values, transformations, visual evidence, and a reproducible analysis note";
+	}
+
+	if (family.includes("ai")) {
+		return "state representation, actions, goal tests, search strategy, heuristic or scoring behavior, experiment logs, and evidence that the agent improves or behaves intentionally";
+	}
+
 	return "inputs, state changes, system boundaries, observable behavior, edge cases, and verification evidence";
 }
 

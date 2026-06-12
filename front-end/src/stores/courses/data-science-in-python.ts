@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const dataScienceInPythonCourse: RawCourse = {
@@ -749,48 +750,63 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 11: Implementation Lab",
+			title: "Data Analysis Lab 11: Implementation Lab",
 			curriculum: [
 				{
-					title: "data analysis lab 11: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Data Analysis Lab 11: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 11: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "data analysis lab 11: Guided Example",
-					content:
-						"A representative data analysis lab 11 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Data Analysis Lab 11: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 11: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "data analysis lab 11: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Data Analysis Lab 11: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 11: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/solution"
 				},
 				{
-					title: "data analysis lab 11: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Data Analysis Lab 11: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 11: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "data analysis lab 11: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Data Analysis Lab 11: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 11: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-01-data-analysis-lab-11/solution"
 				},
 				{
-					title: "data analysis lab 11 supplemental 2: Implementation Lab",
+					title: "Data Analysis Lab 11 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 11: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 11: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -800,10 +816,10 @@ export const dataScienceInPythonCourse: RawCourse = {
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-20-applied-studio-11-data-analysis-lab-11-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 11 supplemental 3: Implementation Lab",
+					title: "Data Analysis Lab 11 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 11: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 11: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -815,48 +831,63 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 12: Implementation Lab",
+			title: "Data Analysis Lab 12: Implementation Lab",
 			curriculum: [
 				{
-					title: "data analysis lab 12: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Data Analysis Lab 12: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 12: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "data analysis lab 12: Guided Example",
-					content:
-						"A representative data analysis lab 12 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Data Analysis Lab 12: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 12: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "data analysis lab 12: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Data Analysis Lab 12: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 12: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/solution"
 				},
 				{
-					title: "data analysis lab 12: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Data Analysis Lab 12: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 12: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "data analysis lab 12: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Data Analysis Lab 12: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 12: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-02-data-analysis-lab-12/solution"
 				},
 				{
-					title: "data analysis lab 12 supplemental 2: Implementation Lab",
+					title: "Data Analysis Lab 12 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 12: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -866,10 +897,10 @@ export const dataScienceInPythonCourse: RawCourse = {
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-22-applied-studio-12-data-analysis-lab-12-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 12 supplemental 3: Implementation Lab",
+					title: "Data Analysis Lab 12 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 12: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -881,48 +912,63 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 13: Implementation Lab",
+			title: "Data Analysis Lab 13: Implementation Lab",
 			curriculum: [
 				{
-					title: "data analysis lab 13: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Data Analysis Lab 13: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 13: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "data analysis lab 13: Guided Example",
-					content:
-						"A representative data analysis lab 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Data Analysis Lab 13: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 13: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "data analysis lab 13: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Data Analysis Lab 13: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 13: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/solution"
 				},
 				{
-					title: "data analysis lab 13: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Data Analysis Lab 13: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 13: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "data analysis lab 13: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Data Analysis Lab 13: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 13: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-03-data-analysis-lab-13/solution"
 				},
 				{
-					title: "data analysis lab 13 supplemental 2: Implementation Lab",
+					title: "Data Analysis Lab 13 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 13: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -932,10 +978,10 @@ export const dataScienceInPythonCourse: RawCourse = {
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-24-applied-studio-13-data-analysis-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 13 supplemental 3: Implementation Lab",
+					title: "Data Analysis Lab 13 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 13: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -947,48 +993,63 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 14: Implementation Lab",
+			title: "Data Analysis Lab 14: Implementation Lab",
 			curriculum: [
 				{
-					title: "data analysis lab 14: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Data Analysis Lab 14: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 14: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "data analysis lab 14: Guided Example",
-					content:
-						"A representative data analysis lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Data Analysis Lab 14: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 14: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "data analysis lab 14: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Data Analysis Lab 14: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 14: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/solution"
 				},
 				{
-					title: "data analysis lab 14: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Data Analysis Lab 14: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 14: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "data analysis lab 14: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Data Analysis Lab 14: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 14: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-04-data-analysis-lab-14/solution"
 				},
 				{
-					title: "data analysis lab 14 supplemental 2: Implementation Lab",
+					title: "Data Analysis Lab 14 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 14: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -998,10 +1059,10 @@ export const dataScienceInPythonCourse: RawCourse = {
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-26-applied-studio-14-data-analysis-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 14 supplemental 3: Implementation Lab",
+					title: "Data Analysis Lab 14 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 14: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1013,48 +1074,63 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 15: Implementation Lab",
+			title: "Data Analysis Lab 15: Implementation Lab",
 			curriculum: [
 				{
-					title: "data analysis lab 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Data Analysis Lab 15: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 15: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "data analysis lab 15: Guided Example",
-					content:
-						"A representative data analysis lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Data Analysis Lab 15: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 15: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "data analysis lab 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Data Analysis Lab 15: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 15: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/solution"
 				},
 				{
-					title: "data analysis lab 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Data Analysis Lab 15: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 15: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "data analysis lab 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Data Analysis Lab 15: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 15: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-05-data-analysis-lab-15/solution"
 				},
 				{
-					title: "data analysis lab 15 supplemental 2: Implementation Lab",
+					title: "Data Analysis Lab 15 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 15: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1064,10 +1140,10 @@ export const dataScienceInPythonCourse: RawCourse = {
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-28-applied-studio-15-data-analysis-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 15 supplemental 3: Implementation Lab",
+					title: "Data Analysis Lab 15 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 15: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1079,48 +1155,63 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 16: Implementation Lab",
+			title: "Data Analysis Lab 16: Implementation Lab",
 			curriculum: [
 				{
-					title: "data analysis lab 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Data Analysis Lab 16: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "data analysis lab 16: Guided Example",
-					content:
-						"A representative data analysis lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Data Analysis Lab 16: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "data analysis lab 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Data Analysis Lab 16: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/solution"
 				},
 				{
-					title: "data analysis lab 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Data Analysis Lab 16: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "data analysis lab 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Data Analysis Lab 16: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-06-data-analysis-lab-16/solution"
 				},
 				{
-					title: "data analysis lab 16 supplemental 2: Implementation Lab",
+					title: "Data Analysis Lab 16 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 16: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1130,10 +1221,10 @@ export const dataScienceInPythonCourse: RawCourse = {
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-30-applied-studio-16-data-analysis-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 16 supplemental 3: Implementation Lab",
+					title: "Data Analysis Lab 16 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 16: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1145,48 +1236,63 @@ export const dataScienceInPythonCourse: RawCourse = {
 			]
 		},
 		{
-			title: "data analysis lab 17: Implementation Lab",
+			title: "Data Analysis Lab 17: Implementation Lab",
 			curriculum: [
 				{
-					title: "data analysis lab 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Data Analysis Lab 17: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "data analysis lab 17: Guided Example",
-					content:
-						"A representative data analysis lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Data Analysis Lab 17: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "data analysis lab 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Data Analysis Lab 17: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/solution"
 				},
 				{
-					title: "data analysis lab 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Data Analysis Lab 17: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "data analysis lab 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Data Analysis Lab 17: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "data science in Python",
+						moduleTitle: "Data Analysis Lab 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-07-data-analysis-lab-17/solution"
 				},
 				{
-					title: "data analysis lab 17 supplemental 2: Implementation Lab",
+					title: "Data Analysis Lab 17 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 17: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1196,10 +1302,10 @@ export const dataScienceInPythonCourse: RawCourse = {
 						"https://github.com/instruction-material/Data-Science/tree/main/DSP-32-applied-studio-17-data-analysis-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "data analysis lab 17 supplemental 3: Implementation Lab",
+					title: "Data Analysis Lab 17 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "data science in Python",
-						moduleTitle: "data analysis lab 17: Implementation Lab",
+						moduleTitle: "Data Analysis Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

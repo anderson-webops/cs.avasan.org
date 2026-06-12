@@ -438,6 +438,34 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("Full Stack Web Lab 14: Implementation Lab");
 	});
 
+	it("keeps AI, data, and machine learning implementation labs from regressing to generated filler", () => {
+		const sourcePaths = [
+			"src/stores/courses/ai-level-1.ts",
+			"src/stores/courses/data-science-in-python.ts",
+			"src/stores/courses/machine-learning.ts"
+		];
+		const corpus = sourcePaths
+			.map(path => fs.readFileSync(path, "utf8"))
+			.join("\n");
+
+		expect(corpus).not.toMatch(/This lab states the target artifact/i);
+		expect(corpus).not.toMatch(
+			/A representative .* example names the key inputs/i
+		);
+		expect(corpus).not.toMatch(/Build one complete artifact first/i);
+		expect(corpus).not.toMatch(
+			/Extend the core build with one extra requirement/i
+		);
+		expect(corpus).not.toMatch(/\(COPY\)/i);
+		expect(corpus).not.toContain("ai search lab");
+		expect(corpus).not.toContain("data analysis lab");
+		expect(corpus).toContain("AI Search Lab 13: Implementation Lab");
+		expect(corpus).toContain("Data Analysis Lab 11: Implementation Lab");
+		expect(corpus).toContain("The Marble Game AI: Implementation Lab");
+		expect(corpus).toContain("KNN Car Classification: Implementation Lab");
+		expect(corpus).toContain("buildImplementationLabGuidance");
+	});
+
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {

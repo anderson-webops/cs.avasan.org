@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const machineLearningCourse: RawCourse = {
@@ -822,32 +823,54 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Customer Segmentation: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Customer Segmentation: Guided Example",
-					content:
-						"A representative Customer Segmentation example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Customer Segmentation: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
 				{
 					title: "Customer Segmentation: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Customer Segmentation: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation"
 				},
@@ -886,32 +909,54 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Customer Segmentation Interview: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation Interview: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Customer Segmentation Interview: Guided Example",
-					content:
-						"A representative Customer Segmentation Interview example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation Interview: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Customer Segmentation Interview: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation Interview: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Interview-Starter"
 				},
 				{
 					title: "Customer Segmentation Interview: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation Interview: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Customer Segmentation Interview: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation Interview: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Interview-Starter"
 				},
@@ -950,32 +995,54 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Customer Segmentation: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Customer Segmentation: Guided Example",
-					content:
-						"A representative Customer Segmentation example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Customer Segmentation: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter"
 				},
 				{
 					title: "Customer Segmentation: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Customer Segmentation: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Customer-Segmentation-Starter"
 				},
@@ -1014,32 +1081,54 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Disney Movie Clustering: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Disney Movie Clustering: Guided Example",
-					content:
-						"A representative Disney Movie Clustering example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Disney Movie Clustering: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
 				{
 					title: "Disney Movie Clustering: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Disney Movie Clustering: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering"
 				},
@@ -1078,32 +1167,54 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Disney Movie Clustering: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Disney Movie Clustering: Guided Example",
-					content:
-						"A representative Disney Movie Clustering example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Disney Movie Clustering: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter"
 				},
 				{
 					title: "Disney Movie Clustering: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Disney Movie Clustering: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML1-Disney-Movie-Clustering-Starter"
 				},
@@ -1142,32 +1253,54 @@ export const machineLearningCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "KNN Car Classification: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"KNN Car Classification: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "KNN Car Classification: Guided Example",
-					content:
-						"A representative KNN Car Classification example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"KNN Car Classification: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "KNN Car Classification: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"KNN Car Classification: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification-Updated"
 				},
 				{
 					title: "KNN Car Classification: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"KNN Car Classification: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "KNN Car Classification: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"KNN Car Classification: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Car-Classification-Updated"
 				},
