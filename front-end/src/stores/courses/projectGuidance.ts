@@ -77,11 +77,20 @@ function projectGoal(
 	return `**Project goal:** Create the ${courseFamily} ${artifact} for **${moduleTitle}** with an observable result, a checked boundary case, and a short reasoning note.`;
 }
 
-function familyFocus(courseFamily: string) {
+function familyFocus(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"]
+) {
 	const family = courseFamily.toLowerCase();
 
 	if (family.includes("usaco")) {
-		return "Translate the problem statement into inputs, state, invariants, and output before optimizing. Sample tests should be supplemented with at least one tiny custom case and one edge case that targets bounds, ordering, or off-by-one behavior";
+		return [
+			`Translate ${moduleTitle} into inputs, state, invariants, and output before optimizing; add one tiny custom case and one bounds, ordering, or off-by-one case beyond the sample`,
+			`Use ${moduleTitle} to practice contest discipline: restate the constraints, trace the invariant on a hand-built case, then test a sample and a custom edge case`,
+			`For ${moduleTitle}, prove the idea before coding by writing a smallest-case trace, then confirm the implementation against sample output and one adversarial boundary case`,
+			`Keep ${moduleTitle} grounded in the official input/output contract, the preserved invariant, the expected complexity, and at least one non-sample case that could expose a wrong assumption`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
@@ -101,7 +110,12 @@ function familyFocus(courseFamily: string) {
 	}
 
 	if (family.includes("security") || family.includes("network")) {
-		return "Work only inside the provided local or owned lab boundary. The finished artifact should include defensive evidence such as logs, traces, validation results, or a short risk note";
+		return [
+			`Work on ${moduleTitle} only inside the provided local or owned lab boundary; the finished artifact should include defensive evidence such as logs, traces, validation results, or a short risk note`,
+			`Keep ${moduleTitle} scoped to approved local systems and include concrete defensive evidence, rollback notes, or validation results in the finished artifact`,
+			`Treat ${moduleTitle} as a defensive evidence exercise: name the allowed boundary, capture the relevant logs or traces, and finish with a risk or hardening note`,
+			`For ${moduleTitle}, connect every security or networking claim to owned-lab evidence such as configuration, packet, log, validation, or mitigation output`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (
@@ -165,7 +179,7 @@ function focusFor(
 		return systemsFamilyFocus(courseFamily, moduleTitle, kind);
 	}
 
-	return familyFocus(courseFamily);
+	return familyFocus(courseFamily, moduleTitle, kind);
 }
 
 function requiredWorkSteps(

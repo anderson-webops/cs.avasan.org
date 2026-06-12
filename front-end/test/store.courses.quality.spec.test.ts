@@ -407,7 +407,7 @@ describe("course text quality normalization", () => {
 		const corpus = courses.map(allCourseText).join("\n");
 
 		expect(corpus).toContain("Scratch game design");
-		expect(corpus).toContain("green flag starts");
+		expect(corpus).toContain("green-flag state");
 		expect(corpus).toContain("event or state logic");
 		expect(corpus).not.toMatch(/module's core concept, a concrete worked example, and a testable artifact/i);
 		expect(corpus).not.toMatch(/expected file format/i);
@@ -842,7 +842,7 @@ describe("course text quality normalization", () => {
 			"produces defensive evidence, not just a passing program"
 		);
 		expect(corpus).toContain("**Focus:**");
-		expect(corpus).toContain("State the local lab boundary");
+		expect(corpus).toContain("local lab boundary");
 		expect(corpus).toContain("does not target public systems");
 		expect(corpus).toContain("reachability, attacker-controlled input");
 		expect(corpus).toContain("sanitizer output");
@@ -1325,7 +1325,7 @@ describe("course text quality normalization", () => {
 		expect(binarySearch.content).toContain(
 			"State the sorted-data precondition"
 		);
-		expect(binarySearch.content).toContain("Trace at least one search");
+		expect(binarySearch.content).toContain("Trace at least one APCS16 Binary Search");
 	});
 
 	it("adds an AP Computer Science A pacing track guide", async () => {

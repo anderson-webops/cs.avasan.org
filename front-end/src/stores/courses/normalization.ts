@@ -1598,53 +1598,53 @@ function projectExpectations(context: CourseTextContext) {
 		)
 	) {
 		return [
-			"- Define what each sprite controls, senses, changes, or broadcasts.",
-			"- Test the green-flag start, the main controls or events, and the win, loss, score, or reset condition.",
-			"- Keep the project explainable by naming the event blocks, variables, and state changes that drive the behavior."
+			`- Define what each ${subject} sprite controls, senses, changes, or broadcasts.`,
+			`- Test ${subject} from the green-flag start through the main controls or events and the win, loss, score, or reset condition.`,
+			`- Keep ${subject} explainable by naming the event blocks, variables, and state changes that drive the behavior.`
 		];
 	}
 	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
 		return [
-			"- Define the game state, actor responsibilities, input events, collision rules, and frame-by-frame update loop.",
-			"- Test startup, player controls, collision/no-collision cases, scoring or health changes, and reset or end-state behavior.",
-			"- Keep drawing, updating, event handling, and game-state changes separated enough to debug one layer at a time."
+			`- Define the ${subject} game state, actor responsibilities, input events, collision rules, and frame-by-frame update loop.`,
+			`- Test ${subject} startup, player controls, collision/no-collision cases, scoring or health changes, and reset or end-state behavior.`,
+			`- Keep ${subject} drawing, updating, event handling, and game-state changes separated enough to debug one layer at a time.`
 		];
 	}
 	if (isUnityContext(context)) {
 		return [
-			"- Define the scene, player action, object responsibilities, state changes, win/loss or completion condition, and visible feedback.",
-			"- Playtest startup, normal controls, one collision or interaction edge case, and the reset or replay path.",
-			"- Keep scripts, prefabs, scene setup, and inspector configuration documented enough that the behavior can be reproduced."
+			`- Define the ${subject} scene, player action, object responsibilities, state changes, win/loss or completion condition, and visible feedback.`,
+			`- Playtest ${subject} startup, normal controls, one collision or interaction edge case, and the reset or replay path.`,
+			`- Keep ${subject} scripts, prefabs, scene setup, and inspector configuration documented enough that the behavior can be reproduced.`
 		];
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
 		return [
-			"- Define the screen, state owner, data flow, build target, and simulator or device behavior before implementation.",
-			"- Test a fresh launch, one normal interaction, one empty/error state when relevant, and one layout or accessibility check.",
-			"- Record the Xcode, signing, preview, simulator, or TestFlight evidence that proves the app state is understood."
+			`- Define the ${subject} screen, state owner, data flow, build target, and simulator or device behavior before implementation.`,
+			`- Test ${subject} with a fresh launch, one normal interaction, one empty/error state when relevant, and one layout or accessibility check.`,
+			`- Record the ${subject} Xcode, signing, preview, simulator, or TestFlight evidence that proves the app state is understood.`
 		];
 	}
 	if (isDataAiMlContext(context)) {
 		return [
-			"- Define the state, data, features, actions, model, or search space before implementation.",
-			"- Test a tiny traceable case, a normal case, and one boundary or failure case that challenges the algorithm or interpretation.",
-			"- Record the evidence used to judge the result: trace, metric, sanity check, baseline, visualization, or limitation."
+			`- Define the ${subject} state, data, features, actions, model, or search space before implementation.`,
+			`- Test ${subject} with a tiny traceable case, a normal case, and one boundary or failure case that challenges the algorithm or interpretation.`,
+			`- Record the ${subject} evidence used to judge the result: trace, metric, sanity check, baseline, visualization, or limitation.`
 		];
 	}
 	if (isCompetitiveProgrammingContext(context)) {
 		return [
-			"- State the input format, output format, constraints, and algorithm idea before coding.",
-			"- Test the sample exactly, then add a smallest case, a boundary case, and a duplicate, tie, or adversarial case when relevant.",
-			"- Record the time and memory complexity and why those bounds fit the problem constraints."
+			`- State the ${subject} input format, output format, constraints, and algorithm idea before coding.`,
+			`- Test the ${subject} sample exactly, then add a smallest case, a boundary case, and a duplicate, tie, or adversarial case when relevant.`,
+			`- Record the ${subject} time and memory complexity and why those bounds fit the problem constraints.`
 		];
 	}
 	if (
 		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
 	) {
 		return [
-			"- State the command, file path, service, permission, process, or log being inspected before making changes.",
-			"- Verify the normal path and one failure or rollback path using command output, logs, status checks, or file metadata.",
-			"- Keep a short operations note with the exact commands used and the evidence that the system reached the intended state."
+			`- State the ${subject} command, file path, service, permission, process, or log being inspected before making changes.`,
+			`- Verify the ${subject} normal path and one failure or rollback path using command output, logs, status checks, or file metadata.`,
+			`- Keep a short ${subject} operations note with the exact commands used and the evidence that the system reached the intended state.`
 		];
 	}
 	if (
@@ -1658,9 +1658,9 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (isLowLevelSystemsContext(context)) {
 		return [
-			"- Define the build command, source/header boundary, runtime input, memory assumption, or observable machine behavior before implementation.",
-			"- Verify normal behavior and one failure path with compiler output, sanitizer output, return codes, register or memory traces, logs, or command-line output.",
-			"- Record the exact command and evidence so the systems behavior can be reproduced from a clean checkout or shell."
+			`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable machine behavior before implementation.`,
+			`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, register or memory traces, logs, or command-line output.`,
+			`- Record the exact ${subject} command and evidence so the systems behavior can be reproduced from a clean checkout or shell.`
 		];
 	}
 	if (
@@ -1675,9 +1675,9 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (/c systems|systems build|assembly/.test(source)) {
 		return [
-			"- Define the build command, source/header boundary, runtime input, memory assumption, or observable system behavior before implementation.",
-			"- Verify normal behavior and one failure path with compiler output, sanitizer output, return codes, logs, or command-line output.",
-			"- Record the exact command and evidence so the systems behavior can be reproduced from a clean checkout or shell."
+			`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable system behavior before implementation.`,
+			`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, logs, or command-line output.`,
+			`- Record the exact ${subject} command and evidence so the systems behavior can be reproduced from a clean checkout or shell.`
 		];
 	}
 	if (/\b(?:multi-file|source files?|headers?)\b/.test(source)) {
@@ -1696,16 +1696,16 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (/security|offensive|threat|network/.test(source)) {
 		return [
-			"- Work only against local fixtures, intentionally vulnerable examples, or owned test data.",
-			"- Write the threat model or failure mode before running the lab.",
-			"- Finish with evidence, impact, and a defensive mitigation or hardening step."
+			`- Work on ${subject} only against local fixtures, intentionally vulnerable examples, or owned test data.`,
+			`- Write the ${subject} threat model or failure mode before running the lab.`,
+			`- Finish ${subject} with evidence, impact, and a defensive mitigation or hardening step.`
 		];
 	}
 	if (/binary search/.test(source)) {
 		return [
 			"- State the sorted-data precondition before coding.",
-			"- Implement the search so found, missing, first-half, and second-half targets are handled correctly.",
-			"- Trace at least one search by recording the low, high, and middle indices at each step."
+			`- Implement ${subject} so found, missing, first-half, and second-half targets are handled correctly.`,
+			`- Trace at least one ${subject} search by recording the low, high, and middle indices at each step.`
 		];
 	}
 	if (/linear search|sequential search/.test(source)) {
@@ -1752,9 +1752,9 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (/\b(?:file|files|parser|csv|json|io|i\/o)\b/.test(source)) {
 		return [
-			"- Identify the expected file format and how malformed or missing data will be handled.",
-			"- Test at least one normal file and one awkward file with an empty line or incomplete record.",
-			"- Keep parsing, validation, and output formatting separated enough to debug each part."
+			`- Identify the expected ${subject} file format and how malformed or missing data will be handled.`,
+			`- Test ${subject} with at least one normal file and one awkward file with an empty line or incomplete record.`,
+			`- Keep ${subject} parsing, validation, and output formatting separated enough to debug each part.`
 		];
 	}
 	if (/pointer|address|dynamic memory|raw array|memory/.test(source)) {
@@ -1766,9 +1766,9 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (isApcsContext(context)) {
 		return [
-			"- Identify the Java concept being practiced, the relevant variables or object state, and the expected output or method result.",
-			"- Compile and run the code, then test a normal AP-style case plus one edge case involving a boundary value, empty collection, null-risk, or branch change when relevant.",
-			"- Include a short trace, state table, or explanation of why the selected Java construct behaves that way."
+			`- Identify the ${subject} Java concept being practiced, the relevant variables or object state, and the expected output or method result.`,
+			`- Compile and run ${subject}, then test a normal AP-style case plus one edge case involving a boundary value, empty collection, null-risk, or branch change when relevant.`,
+			`- Include a short ${subject} trace, state table, or explanation of why the selected Java construct behaves that way.`
 		];
 	}
 	if (/python/.test(source)) {
@@ -1780,18 +1780,18 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- For ${subject}, identify the input surface, transformation step, helper boundary, collection or file shape, and expected output.`,
-				"- Run a typical case, a smallest or empty case, and one awkward input that can be traced by hand.",
-				"- Keep input parsing, core logic, and final formatting separate enough to debug one layer at a time."
+				`- Run ${subject} with a typical case, a smallest or empty case, and one awkward input that can be traced by hand.`,
+				`- Keep ${subject} input parsing, core logic, and final formatting separate enough to debug one layer at a time.`
 			],
 			subject => [
 				`- Turn ${subject} into a small Python data-flow plan: input, stored values, loop or function, output, and evidence.`,
-				"- Check a normal path, a boundary path, and one surprising input such as punctuation, casing, duplicates, or missing data.",
-				"- Keep the final explanation tied to the function, loop, list, dictionary, file, or algorithm that drives the result."
+				`- Check ${subject} with a normal path, a boundary path, and one surprising input such as punctuation, casing, duplicates, or missing data.`,
+				`- Keep the final ${subject} explanation tied to the function, loop, list, dictionary, file, or algorithm that drives the result.`
 			],
 			subject => [
 				`- Before coding ${subject}, write the expected input, intermediate state, helper function role, and final printed or saved result.`,
-				"- Use a tiny traceable case first, then add one ordinary case and one awkward or invalid case.",
-				"- Keep the implementation readable enough that the data flow can be followed without rereading every line."
+				`- Use a tiny ${subject} traceable case first, then add one ordinary case and one awkward or invalid case.`,
+				`- Keep the ${subject} implementation readable enough that the data flow can be followed without rereading every line.`
 			]
 		]);
 	}
@@ -1800,7 +1800,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- Define the classes, object state, method inputs, return values, and expected console or test output for ${subject}.`,
 				`- Compile and run ${subject} after meaningful class or method changes, then test one normal case and one edge case.`,
-				"- Keep a short note naming the class responsibility, verified method, and important object-state change."
+				`- Keep a short ${subject} note naming the class responsibility, verified method, and important object-state change.`
 			],
 			subject => [
 				`- Map ${subject} to Java types, fields, methods, parameters, return values, and visible output before coding.`,
@@ -1821,9 +1821,9 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (/c\+\+|cpp/.test(source)) {
 		return [
-			"- Define the data representation, ownership or lifetime assumptions, compile command, and expected output.",
-			"- Build with warnings enabled when possible and test one normal case, one boundary case, and one malformed or awkward input.",
-			"- Record the container, pointer/reference, or memory decision that most affects correctness."
+			`- Define the ${subject} data representation, ownership or lifetime assumptions, compile command, and expected output.`,
+			`- Build ${subject} with warnings enabled when possible and test one normal case, one boundary case, and one malformed or awkward input.`,
+			`- Record the ${subject} container, pointer/reference, or memory decision that most affects correctness.`
 		];
 	}
 	if (isMathContext(context)) {
@@ -1854,37 +1854,37 @@ function completionChecks(context: CourseTextContext) {
 
 	if (isCompetitiveProgrammingContext(context)) {
 		return [
-			"- The solution passes the sample input/output exactly.",
-			"- Test a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.",
-			"- State the time complexity and why it fits the expected constraints."
+			`- The ${subject} solution passes the sample input/output exactly.`,
+			`- Test ${subject} with a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.`,
+			`- State the ${subject} time complexity and why it fits the expected constraints.`
 		];
 	}
 	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
 		return [
-			"- The green flag starts the project from a predictable state.",
-			"- Controls, events, broadcasts, variables, and sprite interactions behave as intended.",
-			"- A short explanation names the main state change and one edge case tested during play."
+			`- ${subject} starts from a predictable green-flag state.`,
+			`- ${subject} controls, events, broadcasts, variables, and sprite interactions behave as intended.`,
+			`- The ${subject} explanation names the main state change and one edge case tested during play.`
 		];
 	}
 	if (isUnityContext(context)) {
 		return [
-			"- The scene starts from a predictable state and the main interaction is visible during play mode.",
-			"- Controls, collisions or interactions, scoring/progress, and reset or completion behavior are checked.",
-			"- The final note names the script, prefab, or scene setting that most directly controls the behavior."
+			`- The ${subject} scene starts from a predictable state and the main interaction is visible during play mode.`,
+			`- ${subject} controls, collisions or interactions, scoring/progress, and reset or completion behavior are checked.`,
+			`- The final ${subject} note names the script, prefab, or scene setting that most directly controls the behavior.`
 		];
 	}
 	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
 		return [
-			"- The game starts from a predictable state and can be restarted or ended intentionally.",
-			"- Actor updates, input events, collisions, score/health changes, and draw order are verified with at least one normal and boundary case.",
-			"- The final explanation names the game loop, the most important state variable, and one bug or edge case found during playtesting."
+			`- ${subject} starts from a predictable game state and can be restarted or ended intentionally.`,
+			`- ${subject} actor updates, input events, collisions, score/health changes, and draw order are verified with at least one normal and boundary case.`,
+			`- The final ${subject} explanation names the game loop, the most important state variable, and one bug or edge case found during playtesting.`
 		];
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
 		return [
-			"- The app builds and launches on the intended simulator or device target.",
-			"- State changes, navigation, layout, loading/error behavior, signing, or release workflow evidence is captured as appropriate.",
-			"- The final note separates code behavior from Xcode/project configuration behavior."
+			`- ${subject} builds and launches on the intended simulator or device target.`,
+			`- ${subject} state changes, navigation, layout, loading/error behavior, signing, or release workflow evidence is captured as appropriate.`,
+			`- The final ${subject} note separates code behavior from Xcode/project configuration behavior.`
 		];
 	}
 	if (
@@ -1892,15 +1892,15 @@ function completionChecks(context: CourseTextContext) {
 	) {
 		return [
 			"- Commands are repeatable from a fresh shell or documented starting state.",
-			"- File, permission, process, service, timer, network, or log evidence confirms the intended system state.",
-			"- The final note includes one failure mode, rollback step, or diagnostic command that would help future troubleshooting."
+			`- ${subject} file, permission, process, service, timer, network, or log evidence confirms the intended system state.`,
+			`- The final ${subject} note includes one failure mode, rollback step, or diagnostic command that would help future troubleshooting.`
 		];
 	}
 	if (isLowLevelSystemsContext(context)) {
 		return [
-			"- The project builds from the documented command or toolchain setting.",
-			"- Compiler output, sanitizer output, register or memory evidence, return codes, logs, or command-line output confirms the intended behavior.",
-			"- The final note includes one failure mode, debugging command, or reproducibility detail that would help future troubleshooting."
+			`- ${subject} builds from the documented command or toolchain setting.`,
+			`- ${subject} compiler output, sanitizer output, register or memory evidence, return codes, logs, or command-line output confirms the intended behavior.`,
+			`- The final ${subject} note includes one failure mode, debugging command, or reproducibility detail that would help future troubleshooting.`
 		];
 	}
 	if (
@@ -1921,18 +1921,18 @@ function completionChecks(context: CourseTextContext) {
 			],
 			subject => [
 				`- ${subject} identifies what was observed, what was inferred, and which model or evidence source supports the claim.`,
-				"- The vocabulary is used to explain the evidence rather than only label it.",
-				"- The final response connects claim, evidence, and reasoning in a complete sentence or labeled diagram."
+				`- The ${subject} vocabulary is used to explain the evidence rather than only label it.`,
+				`- The final ${subject} response connects claim, evidence, and reasoning in a complete sentence or labeled diagram.`
 			],
 			subject => [
 				`- The ${subject} response names the data, simulation, image, reading, or graph used as evidence.`,
-				"- Observations, patterns, and explanations are kept distinct.",
-				"- The reasoning explains why the evidence supports the claim and where the model may be limited."
+				`- ${subject} observations, patterns, and explanations are kept distinct.`,
+				`- The ${subject} reasoning explains why the evidence supports the claim and where the model may be limited.`
 			],
 			subject => [
 				`- ${subject} includes a clear phenomenon, a relevant model or data source, and one target term used correctly.`,
-				"- At least one observation is separated from the conclusion drawn from it.",
-				"- The final answer states the claim, cites evidence, and explains the scientific connection."
+				`- At least one ${subject} observation is separated from the conclusion drawn from it.`,
+				`- The final ${subject} answer states the claim, cites evidence, and explains the scientific connection.`
 			]
 		]);
 	}
@@ -1945,16 +1945,16 @@ function completionChecks(context: CourseTextContext) {
 	}
 	if (isDataAiMlContext(context)) {
 		return [
-			"- The result is checked against a small trace, baseline, metric, visualization, or sanity check.",
-			"- A normal case and a boundary or failure case are tested or explained.",
-			"- The explanation states what the evidence supports and one limitation of the result."
+			`- The ${subject} result is checked against a small trace, baseline, metric, visualization, or sanity check.`,
+			`- ${subject} includes a normal case and a boundary or failure case that is tested or explained.`,
+			`- The ${subject} explanation states what the evidence supports and one limitation of the result.`
 		];
 	}
 	if (isApcsContext(context)) {
 		return [
-			"- The Java code compiles and the target behavior is visible in output, tests, or a completed trace.",
-			"- A normal case and an edge case are checked for the relevant branch, loop, method, class, array, or list behavior.",
-			"- The explanation uses precise Java vocabulary instead of only describing what the program appears to print."
+			`- The ${subject} Java code compiles and the target behavior is visible in output, tests, or a completed trace.`,
+			`- ${subject} checks a normal case and an edge case for the relevant branch, loop, method, class, array, or list behavior.`,
+			`- The ${subject} explanation uses precise Java vocabulary instead of only describing what the program appears to print.`
 		];
 	}
 	if (isWebContext(context)) {
@@ -1973,18 +1973,18 @@ function completionChecks(context: CourseTextContext) {
 			],
 			subject => [
 				`- ${subject} produces the expected output from a fresh run, not from hidden interpreter state.`,
-				"- A typical case, a smallest or empty case, and one awkward input are checked.",
-				"- The explanation names the input handling, helper function, loop, collection, or file step that controls the result."
+				`- ${subject} checks a typical case, a smallest or empty case, and one awkward input.`,
+				`- The ${subject} explanation names the input handling, helper function, loop, collection, or file step that controls the result.`
 			],
 			subject => [
 				`- ${subject} includes enough output, trace, test, or saved data to verify the result.`,
-				"- Normal behavior and one boundary or malformed-input behavior are checked.",
-				"- The explanation separates data flow from formatting or display choices."
+				`- ${subject} checks normal behavior and one boundary or malformed-input behavior.`,
+				`- The ${subject} explanation separates data flow from formatting or display choices.`
 			],
 			subject => [
 				`- ${subject} runs from a clean start and the result can be reproduced with the recorded inputs.`,
-				"- At least one ordinary input, one minimal input, and one awkward input are tested or explained.",
-				"- The final note names the function, loop, data structure, or algorithm decision that mattered."
+				`- ${subject} tests or explains at least one ordinary input, one minimal input, and one awkward input.`,
+				`- The final ${subject} note names the function, loop, data structure, or algorithm decision that mattered.`
 			]
 		]);
 	}
@@ -1992,38 +1992,38 @@ function completionChecks(context: CourseTextContext) {
 		return variantLines(context, [
 			subject => [
 				`- ${subject} compiles from a clean run and shows the intended behavior through output, tests, or method calls.`,
-				"- Object construction, method behavior, and at least one edge case are checked.",
+				`- ${subject} checks object construction, method behavior, and at least one edge case.`,
 				`- The ${subject} explanation names the class or interface boundary that keeps the design understandable.`
 			],
 			subject => [
 				`- ${subject} has a fresh compile/run check with the expected output or test result recorded.`,
-				"- A normal case, edge case, and object-state or method-dispatch case are checked.",
+				`- ${subject} checks a normal case, edge case, and object-state or method-dispatch case.`,
 				`- The ${subject} explanation identifies which class, method, interface, or record owns the key responsibility.`
 			],
 			subject => [
 				`- ${subject} demonstrates the target Java behavior from a clean start, not only from an already-warmed session.`,
-				"- Constructor behavior, method return values, and one boundary condition are verified.",
+				`- ${subject} verifies constructor behavior, method return values, and one boundary condition.`,
 				`- The ${subject} explanation connects the result to a specific type, object, collection, or access-boundary choice.`
 			],
 			subject => [
 				`- ${subject} includes current compile evidence and one visible output, trace, assertion, or test result.`,
-				"- A typical path and a deliberately awkward or boundary path are checked.",
-				"- The explanation separates syntax, object state, and public API behavior."
+				`- ${subject} checks a typical path and a deliberately awkward or boundary path.`,
+				`- The ${subject} explanation separates syntax, object state, and public API behavior.`
 			]
 		]);
 	}
 	if (/c\+\+|cpp/.test(source)) {
 		return [
-			"- The project builds from the documented command or IDE target.",
-			"- Normal, boundary, and invalid or awkward inputs are checked with visible output or tests.",
-			"- The explanation names the relevant container, pointer/reference, ownership, or algorithm choice."
+			`- ${subject} builds from the documented command or IDE target.`,
+			`- ${subject} checks normal, boundary, and invalid or awkward inputs with visible output or tests.`,
+			`- The ${subject} explanation names the relevant container, pointer/reference, ownership, or algorithm choice.`
 		];
 	}
 	if (/security|offensive|low-level security|network security/.test(source)) {
 		return [
-			"- The lab uses only approved local or owned targets.",
-			"- Findings are written as evidence plus impact, not as vague observations.",
-			"- The final work includes a safe remediation, detection, or hardening step."
+			`- The ${subject} lab uses only approved local or owned targets.`,
+			`- ${subject} findings are written as evidence plus impact, not as vague observations.`,
+			`- The final ${subject} work includes a safe remediation, detection, or hardening step.`
 		];
 	}
 
@@ -2250,11 +2250,11 @@ function diagnosticSupport(context: CourseTextContext) {
 function scienceSupport(context: CourseTextContext) {
 	const remoteInvestigation = variantPrompt(context, [
 		subject =>
-			`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. No beakers, kits, or required household materials are needed; any physical demonstration can be replaced with a diagram or data table.`,
+			`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. ${subject} does not require beakers, kits, or household materials; any physical demonstration can be replaced with a diagram or data table.`,
 		subject =>
-			`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. Physical supplies are optional only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
+			`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. ${subject} treats physical supplies as optional context only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
 		subject =>
-			`${subject} can be completed with a notebook, pencil, and shared digital resources. If a physical example is mentioned, treat it as optional context and keep the required investigation tied to data, diagrams, models, or simulations.`,
+			`${subject} can be completed with a notebook, pencil, and shared digital resources. If ${subject} mentions a physical example, treat it as optional context and keep the required investigation tied to data, diagrams, models, or simulations.`,
 		subject =>
 			`${subject} should rely on accessible remote evidence: images, short videos, graphs, public datasets, simulations, or structured discussion notes. Any hands-on observation must be safe, simple, and replaceable.`
 	]);
@@ -2270,7 +2270,7 @@ function scienceSupport(context: CourseTextContext) {
 	]);
 	const scienceExplanation = variantPrompt(context, [
 		subject =>
-			`Anchor ${subject} in ${subjectFocus(context)}. Record observations first, then build or annotate a model, and only then write the explanation.`,
+			`Anchor ${subject} in ${subjectFocus(context)}. For ${subject}, record observations first, then build or annotate a model, and only then write the explanation.`,
 		subject =>
 			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary before writing the final claim.`,
 		subject =>

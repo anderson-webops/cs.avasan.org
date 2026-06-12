@@ -48,6 +48,14 @@ const sourceLinks: Record<string, string> = {
 	"pandas Documentation": "https://pandas.pydata.org/docs/"
 };
 
+function isScienceFamily(family: string) {
+	return (
+		family.includes("chemistry") ||
+		family.includes("physics") ||
+		(/\bscience\b/.test(family) && !family.includes("computer science"))
+	);
+}
+
 function bullets(items: string[]) {
 	return items.map(item => `- ${item}`).join("\n");
 }
@@ -140,11 +148,7 @@ function projectOptionGoal(
 	if (family.includes("usaco")) {
 		return `**Project goal:** Solve ${description} as a ${courseLabel} contest problem with exact input/output behavior, constraints, invariants, and complexity reasoning.`;
 	}
-	if (
-		family.includes("science") ||
-		family.includes("chemistry") ||
-		family.includes("physics")
-	) {
+	if (isScienceFamily(family)) {
 		return `**Project goal:** Investigate ${description} as a ${courseLabel} model, data, or explanation task that connects a claim to evidence and reasoning.`;
 	}
 	if (
@@ -186,11 +190,7 @@ function projectOptionRequiredOutcome(
 	if (family.includes("algebra")) {
 		return `**Required outcome:**\n- Show the rule, equation, graph, table, or transformation being used.\n- Include one ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the result is known to be reasonable.`;
 	}
-	if (
-		family.includes("science") ||
-		family.includes("chemistry") ||
-		family.includes("physics")
-	) {
+	if (isScienceFamily(family)) {
 		return `**Required outcome:**\n- State the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate observation, pattern, and explanation.\n- Connect evidence to the claim and name one model limitation or uncertainty.`;
 	}
 	if (
@@ -199,13 +199,13 @@ function projectOptionRequiredOutcome(
 		family.includes("linux") ||
 		family.includes("network")
 	) {
-		return `**Required outcome:**\n- State the local scope, target, starting state, allowed tools, and stop condition.\n- Record command, configuration, trace, or log evidence before and after the change.\n- Explain the impact and the rollback, mitigation, or verification step.`;
+		return `**Required outcome:**\n- State the ${courseLabel} local scope, target, starting state, allowed tools, and stop condition.\n- Record ${courseLabel} command, configuration, trace, or log evidence before and after the change.\n- Explain the ${courseLabel} impact and the rollback, mitigation, or verification step.`;
 	}
 	if (family.includes("usaco")) {
 		return `**Required outcome:**\n- Translate the prompt into input format, output format, constraints, and invariant.\n- Pass the sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the time and memory complexity in relation to the constraints.`;
 	}
 	if (family.includes("java")) {
-		return `**Required outcome:**\n- Identify the classes, fields, method contracts, and object-state changes.\n- Compile and run one normal case and one boundary or awkward case.\n- Explain the main type, inheritance, interface, collection, or record decision.`;
+		return `**Required outcome:**\n- Identify the ${courseLabel} classes, fields, method contracts, and object-state changes.\n- Compile and run one normal ${courseLabel} case and one boundary or awkward case.\n- Explain the main ${courseLabel} type, inheritance, interface, collection, or record decision.`;
 	}
 	if (family.includes("c++")) {
 		return `**Required outcome:**\n- Name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build with warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the relevant container, pointer/reference, memory, or algorithm decision.`;
@@ -228,11 +228,7 @@ function projectOptionExtension(
 	if (family.includes("security") || family.includes("systems")) {
 		return `**Extension:** Add one ${courseLabel} rollback, monitoring, hardening, or reproducibility check to ${description}.`;
 	}
-	if (
-		family.includes("science") ||
-		family.includes("chemistry") ||
-		family.includes("physics")
-	) {
+	if (isScienceFamily(family)) {
 		return `**Extension:** Change one variable, data source, scale, or model assumption in ${description} and predict how the claim should change.`;
 	}
 	if (
@@ -321,7 +317,7 @@ function buildStandardsModule(
 				title: `${courseLabel} Standards Checkpoint`,
 				content: [
 					`**Readiness check:** Build a one-page map for ${profile.family} that lists prerequisites, target standards or docs, and the first observable readiness skill.`,
-					`**Completion checks:**\n- The ${courseLabel} map names at least three prerequisites.\n- Each planned module cites a standard, official document, or deliberate toolchain target.\n- The evidence for ${profile.family} readiness is explicit.`
+					`**Completion checks:**\n- The ${courseLabel} map names at least three prerequisites.\n- Each planned ${courseLabel} module cites a standard, official document, or deliberate toolchain target.\n- The evidence for ${profile.family} readiness is explicit.`
 				].join("\n\n")
 			},
 			{
@@ -379,7 +375,7 @@ function buildSequencingModule(
 			{
 				title: `${courseLabel} Dependency Graph`,
 				content: [
-					`**Project goal:** Draw or write a dependency graph for ${profile.family}. Show which modules unlock later projects and which topics work as optional enrichment.`,
+					`**Project goal:** Draw or write a dependency graph for ${profile.family}. Show which ${courseLabel} modules unlock later projects and which topics work as optional enrichment.`,
 					`**Completion checks:**\n- At least five ${courseLabel} modules or topic clusters are included.\n- Every edge explains the prerequisite relationship.\n- One risky ${profile.family} ordering decision is identified and revised.`
 				].join("\n\n")
 			},
