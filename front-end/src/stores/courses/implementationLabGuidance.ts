@@ -125,9 +125,10 @@ export function buildImplementationLabGuidance({
 		section === "coreProject"
 			? "core build checkpoint"
 			: "extension build checkpoint";
+	const artifactArticle = artifact.startsWith("extension") ? "an" : "a";
 
 	return [
-		`**Project goal:** Build **${label}** as a ${artifact} with runnable behavior, inspectable evidence, and a clear boundary case.`,
+		`**Project goal:** Build **${label}** as ${artifactArticle} ${artifact} with runnable behavior, inspectable evidence, and a clear boundary case.`,
 		`**Focus:** ${focus}.`,
 		"**Required work:**",
 		`1. For the **${label}** ${artifact}, identify the concrete inputs, outputs, state changes, files, commands, services, or system boundaries involved.`,

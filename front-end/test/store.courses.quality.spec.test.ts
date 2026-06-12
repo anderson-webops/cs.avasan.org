@@ -1112,14 +1112,28 @@ describe("course text quality normalization", () => {
 			"towards the mouse.\n\n**Project goal:**"
 		);
 		expect(spinner.content).toContain(
-			"evidence, or explanation.\n\n**Required outcome:**"
+			"one boundary or reasoning check tied to Scratch game design"
 		);
+		expect(spinner.content).toContain("\n\n**Required outcome:**");
+		expect(spinner.content).not.toContain("Build a working result for");
 
 		const wheel = findItem(scratchLevel2!, /Wheel of Fortune/);
 		expect(wheel.content).toContain(
 			"secret word.\n\n1. Construct a word bank"
 		);
 		expect(wheel.content).not.toMatch(/\band and\b/i);
+	});
+
+	it("keeps generated project support from using robotic or malformed goal text", async () => {
+		for (const { id } of courseCatalog) {
+			const course = await loadRawCourse(id);
+			expect(course).not.toBeNull();
+			const text = allCourseText(course);
+
+			expect(text).not.toContain("Build a working result for");
+			expect(text).not.toMatch(/\ba extension\b/i);
+			expect(text).not.toMatch(/that shows .* through Java/i);
+		}
 	});
 
 	it("neutralizes repetitive generated supplemental project wording", async () => {

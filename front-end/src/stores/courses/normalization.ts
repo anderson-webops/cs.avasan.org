@@ -484,6 +484,10 @@ function capitalizeFirstLetter(value: string) {
 	return `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
 }
 
+function indefiniteArticleFor(value: string) {
+	return /^[aeiou]/i.test(value.trim()) ? "an" : "a";
+}
+
 function capitalizeMatchedFirstLetter(_match: string, first: string) {
 	return capitalizeFirstLetter(first);
 }
@@ -1395,14 +1399,14 @@ function subjectFocus(context: CourseTextContext) {
 	}
 	if (isJavaContext(context)) {
 		return variantPrompt(context, [
-			subject =>
-				`${subject} through object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests`,
-			subject =>
-				`${subject} through Java type design: objects, fields, methods, collection choices, public APIs, and compile-run feedback`,
-			subject =>
-				`${subject} through Java program structure: constructors, object state, method behavior, access boundaries, and testable cases`,
-			subject =>
-				`${subject} through Java reasoning: values versus references, class responsibilities, interfaces or records when useful, and visible verification`
+			() =>
+				"object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests",
+			() =>
+				"Java type design: objects, fields, methods, collection choices, public APIs, and compile-run feedback",
+			() =>
+				"Java program structure: constructors, object state, method behavior, access boundaries, and testable cases",
+			() =>
+				"Java reasoning: values versus references, class responsibilities, interfaces or records when useful, and visible verification"
 		]);
 	}
 	if (/c\+\+|cpp|c level|data structures.*cpp|algorithm lab/.test(source)) {
@@ -2121,7 +2125,7 @@ function projectExpectations(context: CourseTextContext) {
 			subject => [
 				`- For ${subject}, name the owning class, stored state, public method behavior, and expected output or assertion.`,
 				`- Add one ${subject} constructor, branch, method, or collection operation at a time, compiling between meaningful changes.`,
-				`- Keep a ${subject} note on the object-state change, equality check, access boundary, or dispatch rule that matters most.`
+				`- Keep ${indefiniteArticleFor(subject)} ${subject} note on the object-state change, equality check, access boundary, or dispatch rule that matters most.`
 			],
 			subject => [
 				`- Turn ${subject} into a concrete Java contract: inputs, object state, return values, side effects, and evidence.`,
@@ -2591,9 +2595,19 @@ function extensionPrompt(context: CourseTextContext) {
 }
 
 function projectSupport(context: CourseTextContext) {
-	const subject = extensionSubject(context);
+	const goal = variantPrompt(context, [
+		subject =>
+			`**Project goal:** Complete **${subject}** as a focused checkpoint for ${subjectFocus(context)}. The finished **${subject}** work should include an observable result and evidence from at least one checked case.`,
+		subject =>
+			`**Project goal:** Use **${subject}** to practice ${subjectFocus(context)}. The **${subject}** result should be visible, testable, and specific enough to explain without rereading every step.`,
+		subject =>
+			`**Project goal:** Turn **${subject}** into a finished artifact with clear requirements, a normal-case check, and one boundary or reasoning check tied to ${subjectFocus(context)}.`,
+		subject =>
+			`**Project goal:** Build **${subject}** around a concrete behavior, output, model, or analysis. The final **${subject}** explanation should connect the result to ${subjectFocus(context)}.`
+	]);
+
 	return [
-		`**Project goal:** Build a working result for **${subject}** that shows ${subjectFocus(context)} through behavior, output, evidence, or explanation.`,
+		goal,
 		`**Required outcome:**\n${projectExpectations(context).join("\n")}`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`
