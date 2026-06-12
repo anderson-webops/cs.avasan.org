@@ -361,8 +361,20 @@ describe("course text quality normalization", () => {
 
 		const checks = [
 			{
+				title: /^GrS1 Supplemental Project 1: Turtle Recap$/,
+				required: ["personal study guide", "filled shape", "uses a comment"]
+			},
+			{
 				title: /Open Ended Project - Create a Drawing/,
 				required: ["Plan the drawing", "`goto()`", "comments naming each part"]
+			},
+			{
+				title: /^GrS2 Supplemental Project 7: Loops Recap$/,
+				required: ["side count", "turn angle", "traced example"]
+			},
+			{
+				title: /^GrS3 Supplemental Project 2: Debugging Practice$/,
+				required: ["first error message", "rerun the program", "several things at once"]
 			},
 			{
 				title: /Practice Project/,
@@ -377,8 +389,16 @@ describe("course text quality normalization", () => {
 				required: ["outer loop", "inner loop", "comments naming"]
 			},
 			{
+				title: /^GrS7 Project 1: Build a Neighborhood$/,
+				required: ["drawHouse()", "different positions or sizes", "without duplicating"]
+			},
+			{
 				title: /Make Your Own Function/,
 				required: ["descriptive name", "call it more than once"]
+			},
+			{
+				title: /^GrS8 Project 1: Event Listener Discovery$/,
+				required: ["screen.onkey()", "screen.listen()", "callback"]
 			},
 			{
 				title: /Fruit Stand/,
@@ -389,6 +409,46 @@ describe("course text quality normalization", () => {
 		for (const { title, required } of checks) {
 			const item = findItem(course!, title);
 			expect(item.content.length, item.title).toBeGreaterThan(180);
+			for (const phrase of required) {
+				expect(item.content, item.title).toContain(phrase);
+			}
+		}
+	});
+
+	it("keeps later Python Turtle game prompts structured around state and verification", async () => {
+		const course = await loadRawCourse("python-level-1");
+		expect(course).not.toBeNull();
+
+		const checks = [
+			{
+				title: /^GrS9 Project 2: More Functions$/,
+				required: ["parameter values", "different sizes", "Verify the design"]
+			},
+			{
+				title: /^GrS9 Project 3: Polka Dots$/,
+				required: ["mouse clicks", "click coordinates", "edges, and corners"]
+			},
+			{
+				title: /^GrS13 Project 3: Fluid Motion$/,
+				required: ["screen.tracer(0)", "screen.update()", "animation loop"]
+			},
+			{
+				title: /^GrS13 Project 5: Turtle Collision$/,
+				required: ["hitbox", "boundary cases", "barely touching"]
+			},
+			{
+				title: /^GrS14 Supplemental Project 3: Pong$/,
+				required: ["two paddles", "scoring", "reset after each point"]
+			},
+			{
+				title: /^GrS14 Supplemental Project 5: Snake$/,
+				required: ["body list", "self-collision", "game-over conditions"]
+			}
+		];
+
+		for (const { title, required } of checks) {
+			const item = findItem(course!, title);
+			expect(item.content.length, item.title).toBeGreaterThan(220);
 			for (const phrase of required) {
 				expect(item.content, item.title).toContain(phrase);
 			}
