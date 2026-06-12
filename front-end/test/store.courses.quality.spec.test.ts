@@ -1001,22 +1001,30 @@ describe("course text quality normalization", () => {
 				/syntax, design, or test coverage/i
 			);
 			expect(mathScienceCorpus).not.toMatch(/authorized scope/i);
+			expect(mathScienceCorpus).not.toMatch(/input shape/i);
 			expect(mathScienceCorpus).toContain(
 				"vocabulary, representation choice, algebraic procedure"
 			);
 
-			const nonSecurityCourses = await Promise.all(
-				courseCatalog
-					.filter(
-						entry =>
-							![
-								"network-security",
-								"low-level-security",
-								"low-level-security-part-2",
-								"rust-systems-security"
-							].includes(entry.id)
-					)
-					.map(entry => loadRawCourse(entry.id))
+			const allCourses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const allCorpus = allCourses.map(allCourseText).join("\n");
+			expect(allCorpus).not.toMatch(
+				/Common pitfalls:\*\* Common mistakes include/i
+			);
+			expect(allCorpus).not.toMatch(
+				/Modify the prompt so it still uses the same concept/i
+			);
+
+			const nonSecurityCourses = allCourses.filter(
+				(_course, index) =>
+					![
+						"network-security",
+						"low-level-security",
+						"low-level-security-part-2",
+						"rust-systems-security"
+					].includes(courseCatalog[index].id)
 			);
 			expect(nonSecurityCourses.map(allCourseText).join("\n")).not.toMatch(
 				/authorized scope/i
@@ -1025,7 +1033,10 @@ describe("course text quality normalization", () => {
 			const swift = await loadRawCourse("intro-to-swift-app-development");
 			expect(swift).not.toBeNull();
 			const swiftCorpus = allCourseText(swift);
-			expect(swiftCorpus).toContain("unclear state ownership");
+			expect(swiftCorpus).toMatch(/unclear state ownership/i);
+			expect(swiftCorpus).not.toMatch(/Remote investigation/i);
+			expect(swiftCorpus).not.toMatch(/Science explanation/i);
+			expect(swiftCorpus).not.toMatch(/CER checkpoint/i);
 			expect(swiftCorpus).not.toMatch(/wrong loop condition/i);
 		},
 		COURSE_SWEEP_TIMEOUT

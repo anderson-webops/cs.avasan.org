@@ -935,13 +935,13 @@ function isCheckInContext(context: CourseTextContext) {
 }
 
 function isScienceContext(context: CourseTextContext) {
-	const source = contextText(context);
-
-	if (/computer science|data science/i.test(source)) return false;
-
-	return /elementary[- ]science|middle[- ]school[- ]integrated[- ]science|middle[- ]school[- ]science|physics|chemistry|biology|earth|ecosystem|motion|matter|weather|energy/i.test(
-		source
-	);
+	return [
+		"elementary-science",
+		"middle-school-integrated-science",
+		"intro-to-chemistry",
+		"intro-to-physics",
+		"physics-level-2"
+	].includes(context.courseId);
 }
 
 function isAppliedStudioContext(context: CourseTextContext) {
@@ -1093,31 +1093,31 @@ function commonPitfalls(context: CourseTextContext) {
 	const source = contextText(context);
 
 	if (isScienceContext(context)) {
-		return "Common mistakes include treating observations as conclusions, using vocabulary loosely, ignoring units or scale, or claiming that a model proves more than it actually shows.";
+		return "Treating observations as conclusions, using vocabulary loosely, ignoring units or scale, or claiming that a model proves more than it actually shows.";
 	}
 	if (isMathContext(context)) {
-		return "Common mistakes include dropping negative signs or units, skipping the reason for an algebraic step, reading graph or table labels too quickly, or giving an answer without a context check.";
+		return "Dropping negative signs or units, skipping the reason for an algebraic step, reading graph or table labels too quickly, or giving an answer without a context check.";
 	}
 	if (isDataAiMlContext(context)) {
-		return "Common mistakes include assuming a dataset is complete or neutral, confusing correlation with explanation, trusting one metric without a baseline, or omitting limitations and responsible-use boundaries.";
+		return "Assuming a dataset is complete or neutral, confusing correlation with explanation, trusting one metric without a baseline, or omitting limitations and responsible-use boundaries.";
 	}
 	if (isSwiftAppContext(context)) {
-		return "Common mistakes include unclear state ownership, treating previews as full tests, overlooking empty or error states, skipping accessibility and layout checks, or confusing Xcode configuration issues with app behavior.";
+		return "Unclear state ownership, treating previews as full tests, overlooking empty or error states, skipping accessibility and layout checks, or confusing Xcode configuration issues with app behavior.";
 	}
 	if (isSecurityContext(context)) {
-		return "Common mistakes include blurring the authorized scope, changing a system before recording the baseline, trusting command output without interpretation, or skipping rollback, mitigation, and verification evidence.";
+		return "Blurring the authorized scope, changing a system before recording the baseline, trusting command output without interpretation, or skipping rollback, mitigation, and verification evidence.";
 	}
 	if (isSystemsContext(context)) {
-		return "Common mistakes include changing a toolchain or system state before recording the baseline, using commands whose effects are unclear, trusting output without interpretation, or skipping rollback and reproducibility evidence.";
+		return "Changing a toolchain or system state before recording the baseline, using commands whose effects are unclear, trusting output without interpretation, or skipping rollback and reproducibility evidence.";
 	}
 	if (isGameContext(context)) {
-		return "Common mistakes include unclear start or reset state, event order bugs, collision or score changes that are hard to trace, and feedback that does not show the player what changed.";
+		return "Unclear start or reset state, event order bugs, collision or score changes that are hard to trace, and feedback that does not show the player what changed.";
 	}
 	if (/design pattern|refactoring|pattern implementation/.test(source)) {
-		return "Common mistakes include adding abstraction before there is a real variation, changing behavior during refactoring, hiding responsibilities behind vague names, or skipping before-and-after tests.";
+		return "Adding abstraction before there is a real variation, changing behavior during refactoring, hiding responsibilities behind vague names, or skipping before-and-after tests.";
 	}
 
-	return "Common mistakes include mixing up values, references, and state; using the wrong loop condition or boundary; skipping edge cases; or leaving the result untested.";
+	return "Mixing up values, references, and state; using the wrong loop condition or boundary; skipping edge cases; or leaving the result untested.";
 }
 
 function diagnosticCategories(context: CourseTextContext) {
@@ -1182,6 +1182,32 @@ function remediationPrompt(context: CourseTextContext) {
 		return "Name the event, state, or feedback issue, test it in the smallest possible scene, and verify the reset or replay path before adding features.";
 
 	return "Record the specific misconception, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.";
+}
+
+function diagnosticExtensionPrompt(context: CourseTextContext) {
+	if (isScienceContext(context)) {
+		return "Change one variable, phenomenon, unit, model limit, or evidence source while keeping the same core question.";
+	}
+	if (isMathContext(context)) {
+		return "Change one value, representation, constraint, or error pattern while preserving the same underlying rule.";
+	}
+	if (isDataAiMlContext(context)) {
+		return "Change one data slice, metric, baseline, visualization, or limitation statement while preserving the same analysis question.";
+	}
+	if (isSwiftAppContext(context)) {
+		return "Change one state, screen size, navigation path, empty state, or accessibility requirement while preserving the same app behavior.";
+	}
+	if (isSecurityContext(context)) {
+		return "Change one authorized scenario, baseline artifact, configuration, mitigation, or verification step while preserving safe scope.";
+	}
+	if (isSystemsContext(context)) {
+		return "Change one environment assumption, command option, configuration, rollback path, or reproducibility check while preserving the same system goal.";
+	}
+	if (isGameContext(context)) {
+		return "Change one rule, control, state transition, collision case, scoring rule, or player-feedback requirement while preserving the same play goal.";
+	}
+
+	return "Change one constraint, case, representation, or requirement while preserving the same core concept.";
 }
 
 function projectExpectations(context: CourseTextContext) {
@@ -1482,7 +1508,7 @@ function lessonSupport(context: CourseTextContext) {
 	return [
 		`**Learning sequence:** This lesson introduces ${subjectFocus(context)}. The sequence moves from vocabulary to one concrete example, then to a prediction, explanation, or small transfer task connected to the module project.`,
 		`**Common pitfalls:** ${commonPitfalls(context)}`,
-		"**Mastery check:** Explain the idea in your own words and complete one small transfer task independently."
+		`**Mastery check:** ${proficiencyEvidence(context)}`
 	].join("\n\n");
 }
 
@@ -1491,7 +1517,7 @@ function diagnosticSupport(context: CourseTextContext) {
 		`**Readiness check:** This is a formative check of ${subjectFocus(context)}, not a pass/fail quiz. Attempt the prompt independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
 		`**Evidence of proficiency:** ${proficiencyEvidence(context)}`,
 		`**If this is difficult:** ${remediationPrompt(context)}`,
-		`**Extension:** Modify the prompt so it still uses the same concept but changes one constraint, input shape, or edge case.`
+		`**Extension:** ${diagnosticExtensionPrompt(context)}`
 	].join("\n\n");
 }
 
