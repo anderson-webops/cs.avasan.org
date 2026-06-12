@@ -172,10 +172,12 @@ function dataScienceStudioContent(
 	sectionTitle: string,
 	body: string
 ) {
+	const focus = lab.focus.replace(/[.!?]\s*$/, "");
+
 	return [
 		body,
-		`**Verification focus:** ${lab.focus} The ${lab.title} ${sectionTitle.toLowerCase()} should include one small hand-checkable case before any larger dataset result is accepted.`,
-		"**Readable output:** The final artifact should make the question, input data, calculation or transformation, result, and limitation visible without requiring someone to infer the reasoning from code alone."
+		`**Verification focus:** The ${lab.title} ${sectionTitle.toLowerCase()} focuses on ${focus} and should include one small hand-checkable case before any larger dataset result is accepted.`,
+		`**Readable output:** The ${lab.title} ${sectionTitle.toLowerCase()} artifact should make the question, input data, calculation or transformation, result, and limitation visible without requiring someone to infer the reasoning from code alone.`
 	].join("\n\n");
 }
 
@@ -197,7 +199,7 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 					[
 						`**Focus:** ${lab.focus}`,
 						lab.coreConcepts,
-						"**Expected outcome:** A runnable analysis artifact plus a short written explanation that names the data source, the calculation or transformation, one verification case, and one limitation."
+						`**Expected outcome:** A runnable ${lab.title} artifact plus a short written explanation that names the data source, the calculation or transformation, one verification case, and one limitation.`
 					].join("\n\n")
 				)
 			},

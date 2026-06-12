@@ -293,7 +293,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Core Skills`,
 				content: [
-					`**Course focus:** These skills benefit from focused review, clear examples, and explicit prerequisite connections before larger ${profile.family} projects.`,
+					`**Course focus:** ${courseLabel} skills benefit from focused review, clear examples, and explicit prerequisite connections before larger projects.`,
 					`**Core skills:**\n${bullets(profile.gaps.map(gap => `${courseLabel} focus: ${gap}`))}`,
 					`**Completion check:** A ${courseLabel} lesson or project is ready when it includes a concrete explanation, worked example, practice task, and completion check for one of these skills.`
 				].join("\n\n")
@@ -309,7 +309,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Boundaries`,
 				content: [
-					`**Course focus:** The priority and expansion topics clarify what belongs in ${profile.family} and what should move to a prerequisite, follow-up, or separate course. This keeps the course coherent instead of absorbing every adjacent topic.`,
+					`**Course focus:** The priority and expansion topics clarify what belongs in ${courseLabel} and what should move to a prerequisite, follow-up, or separate course. This keeps the course coherent instead of absorbing every adjacent topic.`,
 					`**Completion check:** The ${courseLabel} boundary, one near-term addition, and one intentionally deferred topic are explicit.`
 				].join("\n\n")
 			}
@@ -318,7 +318,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Standards Checkpoint`,
 				content: [
-					`**Readiness check:** Build a one-page map for ${profile.family} that lists prerequisites, target standards or docs, and the first observable readiness skill.`,
+					`**Readiness check:** Build a one-page map for ${courseLabel} that lists prerequisites, target standards or docs, and the first observable readiness skill.`,
 					`**Completion checks:**\n- The ${courseLabel} map names at least three prerequisites.\n- Each planned ${courseLabel} module cites a standard, official document, or deliberate toolchain target.\n- The evidence for ${profile.family} readiness is explicit.`
 				].join("\n\n")
 			},
@@ -351,7 +351,7 @@ function buildSequencingModule(
 			{
 				title: `${courseLabel} Resources`,
 				content: [
-					`**Resource guide:** These materials support ${profile.family} modules by making source code, datasets, simulations, version choices, and reference materials explicit.`,
+					`**Resource guide:** These materials support ${courseLabel} modules by making source code, datasets, simulations, version choices, and reference materials explicit.`,
 					`**Materials and tools:**\n${bullets(profile.materials)}`,
 					profile.safety
 						? `**Safety or delivery boundary:** ${profile.safety}`
@@ -361,14 +361,14 @@ function buildSequencingModule(
 			{
 				title: `${courseLabel} Readiness Checklist`,
 				content: [
-					`**Course focus:** This checklist keeps ${profile.family} modules concrete, sequenced, and assessable.`,
+					`**Course focus:** This checklist keeps ${courseLabel} modules concrete, sequenced, and assessable.`,
 					`**Completion checks:**\n- Each ${courseLabel} module has a named prerequisite and observable outcome.\n- Each ${courseLabel} project has required behavior, test cases, and an extension.\n- The ${courseLabel} assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any ${courseLabel} toolchain, dataset, simulation, or source-code dependency is linked and version-aware.`
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Reference Refresh`,
 				content: [
-					`**Resource guide:** ${profile.family} references should stay current when the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
+					`**Resource guide:** ${courseLabel} references should stay current when the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
 					`**Completion check:** The ${courseLabel} note states what must be refreshed each term, which links or versions are stable, and which materials are reference-only rather than assignments.`
 				].join("\n\n")
 			}
@@ -384,7 +384,7 @@ function buildSequencingModule(
 			{
 				title: `${courseLabel} Materials Readiness`,
 				content: [
-					`**Project goal:** Create a materials checklist for ${profile.family}: source code, starter/reference files, datasets, simulations, diagrams, rubrics, and tool versions.`,
+					`**Project goal:** Create a materials checklist for ${courseLabel}: source code, starter/reference files, datasets, simulations, diagrams, rubrics, and tool versions.`,
 					`**Completion checks:**\n- Every required ${courseLabel} project has a starter state or equivalent handout.\n- Every ${profile.family} assessment has a rubric or answer-check method.\n- Any external ${courseLabel} tool or source is documented with a stable URL.`
 				].join("\n\n")
 			}
@@ -415,7 +415,7 @@ function buildProjectModule(
 			{
 				title: `${courseLabel} Checkpoints`,
 				content: [
-					`**Readiness check:** These checks identify whether ${profile.family} concepts are ready for the next module.`,
+					`**Readiness check:** These checks identify whether ${courseLabel} concepts are ready for the next module.`,
 					`**Assessment ideas:**\n${bullets(profile.assessments)}`,
 					`**Evidence of proficiency:** ${courseLabel} work demonstrates the ability to transfer the same idea to a new example, explain why the result is valid, and identify one limitation or edge case.`
 				].join("\n\n")
@@ -430,7 +430,7 @@ function buildProjectModule(
 			{
 				title: `${courseLabel} Capstone Gate`,
 				content: [
-					`**Readiness check:** Before a ${profile.family} capstone begins, the prerequisite modules, project ladder, and assessment model should already be practiced on smaller artifacts.`,
+					`**Readiness check:** Before a ${courseLabel} capstone begins, the prerequisite modules, project ladder, and assessment model should already be practiced on smaller artifacts.`,
 					`**Evidence of proficiency:** ${courseLabel} capstone work demonstrates the ability to state the goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version.`
 				].join("\n\n")
 			}

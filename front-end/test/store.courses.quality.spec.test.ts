@@ -1107,13 +1107,98 @@ describe("course text quality normalization", () => {
 		expect(scratchStudio!.content).toContain(
 			"\n   **Completion checks:**\n   -"
 		);
-		expect(scratchStudio!.content).toContain("\n   **Extension:** Add");
+		expect(scratchStudio!.content).toContain(
+			"\n   **Extension:** For Debugging and Remix Studio concept path"
+		);
 		expect(scratchStudio!.content).toContain("\n\n2. **Design and Planning Map**");
 		expect(scratchStudio!.content).not.toContain(
 			"Concept Path (GS16 Debugging and Remix Studio)"
 		);
 		expect(scratchStudio!.content).not.toMatch(
 			/\n \n\n\*\*Completion checks:\*\*/
+		);
+	});
+
+	it("contextualizes generated studio support without repeated generic scaffolding", async () => {
+		const [
+			dataScience,
+			scratchLevel1,
+			webDevelopment,
+			lowLevelSecurity
+		] = await Promise.all([
+			loadRawCourse("data-science-in-python"),
+			loadRawCourse("scratch-level-1"),
+			loadRawCourse("web-development-foundations"),
+			loadRawCourse("low-level-security")
+		]);
+		expect(dataScience).not.toBeNull();
+		expect(scratchLevel1).not.toBeNull();
+		expect(webDevelopment).not.toBeNull();
+		expect(lowLevelSecurity).not.toBeNull();
+
+		const csvStudio = findItem(
+			dataScience!,
+			/^Concept Path$/,
+			/CSV loading, numeric summaries/
+		);
+		expect(csvStudio.content).toContain(
+			"before interpreting the average.\n\n**Expected outcome:**"
+		);
+		expect(csvStudio.content).toContain(
+			"any larger dataset result is accepted.\n\n**Readable output:**"
+		);
+		expect(csvStudio.content).toContain(
+			"- Define the CSV Summaries and Sanity Checks concept path question"
+		);
+		expect(csvStudio.content).not.toContain(
+			"Define the Concept Path for DSP10"
+		);
+
+		const scratchStudio = findItem(
+			scratchLevel1!,
+			/^Core Concepts$/,
+			/Debugging and Remix Studio concept path/
+		);
+		expect(scratchStudio.content).toContain(
+			"Debugging and Remix Studio concept path starts from a predictable green-flag state"
+		);
+		expect(scratchStudio.content).toContain(
+			"Check Debugging and Remix Studio concept path against the stated success criteria"
+		);
+		expect(scratchStudio.content).not.toContain(
+			"Check Concept Path against the stated success criteria"
+		);
+
+		const webStudio = findItem(
+			webDevelopment!,
+			/Full-Stack Web Lab 15: Core Concepts/
+		);
+		expect(webStudio.content).toContain(
+			"Name the Full-Stack Web Lab 15 Core Concepts route or component"
+		);
+		expect(webStudio.content).not.toContain(
+			"Name the route or component, user action, state update"
+		);
+
+		const securityStudio = findItem(
+			lowLevelSecurity!,
+			/Low-Level Security Lab 9: Core Concepts/
+		);
+		expect(securityStudio.content).toContain(
+			"For Low-Level Security Lab 9 Core Concepts, state the authorized local lab boundary"
+		);
+
+		const corpus = [
+			allCourseText(dataScience),
+			allCourseText(scratchLevel1),
+			allCourseText(webDevelopment),
+			allCourseText(lowLevelSecurity)
+		].join("\n");
+		expect(corpus).not.toContain(
+			"- Requirements, evidence, and success criteria are specific enough to review later."
+		);
+		expect(corpus).not.toContain(
+			"- The final note explains what changed, what was proven, and what limitation remains."
 		);
 	});
 

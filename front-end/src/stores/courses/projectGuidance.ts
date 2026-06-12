@@ -188,7 +188,12 @@ function familyFocus(
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
-		return "Connect browser behavior to state changes, event handling, DOM or canvas output, and user input. The result should be inspectable in the page, not only in source code";
+		return [
+			`Connect ${moduleTitle} browser behavior to state changes, event handling, DOM or canvas output, and user input; the result should be inspectable in the page, not only in source code`,
+			`For ${moduleTitle}, make the browser evidence visible through a user action, a state or data change, rendered output, and one failure or empty-state check`,
+			`Use ${moduleTitle} to tie the code to the page: event listener, state update, DOM or canvas result, and keyboard or responsive-layout behavior should be observable`,
+			`Keep ${moduleTitle} grounded in the actual user flow, with source code, browser output, console or network evidence, and one edge interaction all agreeing`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (
@@ -196,11 +201,21 @@ function familyFocus(
 		family.includes("machine learning") ||
 		family.includes("ai")
 	) {
-		return "Connect the code to evidence: inspect the input data, describe the transformation or model behavior, and verify the result with a small sanity check before treating the output as meaningful";
+		return [
+			`For ${moduleTitle}, connect the code to evidence: inspect the input data, describe the transformation or model behavior, and verify the result with a small sanity check before treating the output as meaningful`,
+			`Use ${moduleTitle} to make the evidence path visible: name the source, expose an intermediate result, compare against a baseline or expectation, and state one limitation`,
+			`Keep ${moduleTitle} grounded in data quality, transformation steps, measured output, and an interpretation that does not overclaim beyond the evidence`,
+			`For ${moduleTitle}, show how the dataset or state space becomes a result by documenting the assumptions, calculation or model behavior, sanity check, and caveat`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("python")) {
-		return "Keep the Python implementation readable and testable by separating input handling, data transformation, helper functions, and output. Boundary cases should be small enough to trace by hand";
+		return [
+			`Keep the ${moduleTitle} Python implementation readable and testable by separating input handling, data transformation, helper functions, and output; boundary cases should be small enough to trace by hand`,
+			`Use ${moduleTitle} to practice Python structure: isolate the calculation, name the data shape, run one normal case, and run one boundary case without hiding logic in input prompts`,
+			`For ${moduleTitle}, make the Python data flow visible from input or setup through transformation to output, with one small traceable case proving the main branch or loop`,
+			`Build ${moduleTitle} as readable Python first: clear names, narrow helper functions when useful, predictable output, and a test case that catches more than syntax errors`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("security") || family.includes("network")) {
@@ -218,11 +233,21 @@ function familyFocus(
 		family.includes("rust") ||
 		family.includes("c++")
 	) {
-		return "Make the system boundary explicit: inputs, memory ownership, resource lifetime, build settings, and diagnostic output should be easy to inspect and reproduce";
+		return [
+			`For ${moduleTitle}, make the system boundary explicit: inputs, memory ownership, resource lifetime, build settings, and diagnostic output should be easy to inspect and reproduce`,
+			`Use ${moduleTitle} to connect representation, ownership or resource lifetime, build evidence, and one diagnostic output that confirms behavior`,
+			`Keep ${moduleTitle} reproducible by naming the compile or run command, the resource boundary, the expected output, and one failure or edge case`,
+			`For ${moduleTitle}, show how the low-level representation or system state changes, then verify it with concrete terminal, debugger, sanitizer, or log evidence`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("swift")) {
-		return "Connect the implementation to app behavior: state, view updates, user interaction, and a small verification path should be clear from the running project";
+		return [
+			`Connect ${moduleTitle} to app behavior: state ownership, view updates, user interaction, and a simulator verification path should be clear from the running project`,
+			`For ${moduleTitle}, make the SwiftUI behavior visible through the state owner, the screen update, one user action, and one empty, error, layout, or accessibility check`,
+			`Use ${moduleTitle} to separate model state from view behavior, then verify the normal interaction and one edge state in the simulator or preview data`,
+			`Keep ${moduleTitle} app-focused by showing launch state, the target interaction, the UI response, and the evidence that Xcode configuration is not hiding behavior`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	return "Connect the implementation to the module concept through observable behavior, a clear test path, and a short explanation of the reasoning behind the final design";

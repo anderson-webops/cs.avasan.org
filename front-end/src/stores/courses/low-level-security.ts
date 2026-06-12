@@ -27,7 +27,7 @@ function securityLabFocus(topic: string) {
 		return "defensive interpretation of the lab behavior, strict local scope, mitigation notes, and a hardening-oriented conclusion";
 	}
 
-	return "local-only security evidence, clear assumptions, tool output, a patch or hardening decision, and a regression check";
+	return `${securityLabLabel(topic)} local-only security evidence, clear assumptions, tool output, a patch or hardening decision, and a regression check`;
 }
 
 function securityLabProjectContent(topic: string, mode: SecurityLabMode) {

@@ -14,66 +14,98 @@ function normalizedTitle(moduleTitle: string) {
 	return moduleTitle.replace(/: Implementation Lab$/, "");
 }
 
-function familyFocus(courseFamily: string) {
+function familyFocus(courseFamily: string, moduleTitle: string) {
 	const family = courseFamily.toLowerCase();
+	const label = normalizedTitle(moduleTitle);
+	const focusFor = (focus: string) => `${label} focus: ${focus}`;
 
 	if (family.includes("scratch")) {
-		return "sprite roles, event timing, broadcasts, clones, variables, stage behavior, and the playable feedback loop";
+		return focusFor(
+			"sprite roles, event timing, broadcasts, clones, variables, stage behavior, and the playable feedback loop"
+		);
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
-		return "DOM or canvas state, event flow, data structures, browser console evidence, user input, and API or storage boundaries";
+		return focusFor(
+			"DOM or canvas state, event flow, data structures, browser console evidence, user input, and API or storage boundaries"
+		);
 	}
 
 	if (family.includes("pygame")) {
-		return "game-loop state, events, actors, collisions, asset names, timing, and frame-by-frame playable behavior";
+		return focusFor(
+			"game-loop state, events, actors, collisions, asset names, timing, and frame-by-frame playable behavior"
+		);
 	}
 
 	if (family.includes("machine learning")) {
-		return "data assumptions, feature choices, baseline behavior, train/test separation, metric interpretation, and limits of the model claim";
+		return focusFor(
+			"data assumptions, feature choices, baseline behavior, train/test separation, metric interpretation, and limits of the model claim"
+		);
 	}
 
 	if (family.includes("ai")) {
-		return "state representation, action choices, goal tests, heuristic or scoring behavior, logs, and evidence of intentional agent behavior";
+		return focusFor(
+			"state representation, action choices, goal tests, heuristic or scoring behavior, logs, and evidence of intentional agent behavior"
+		);
 	}
 
 	if (family.includes("usaco")) {
-		return "input parsing, constraints, sample traces, brute-force baselines, complexity, and contest-output discipline";
+		return focusFor(
+			"input parsing, constraints, sample traces, brute-force baselines, complexity, and contest-output discipline"
+		);
 	}
 
 	if (family.includes("security")) {
-		return "local lab boundaries, attacker-controlled input, validation, logs, sanitizer or trace evidence, and defensive interpretation";
+		return focusFor(
+			"local lab boundaries, attacker-controlled input, validation, logs, sanitizer or trace evidence, and defensive interpretation"
+		);
 	}
 
 	if (family.includes("rust")) {
-		return "ownership, borrowing, typed errors, trait boundaries, unsafe boundaries, compiler diagnostics, and runtime evidence";
+		return focusFor(
+			"ownership, borrowing, typed errors, trait boundaries, unsafe boundaries, compiler diagnostics, and runtime evidence"
+		);
 	}
 
 	if (family.includes("design pattern")) {
-		return "object roles, collaboration boundaries, coupling before and after the change, extensibility, and behavior-level tests";
+		return focusFor(
+			"object roles, collaboration boundaries, coupling before and after the change, extensibility, and behavior-level tests"
+		);
 	}
 
 	if (family.includes("data structures") || family.includes("algorithm")) {
-		return "invariants, constraints, state transitions, complexity, memory behavior, and edge-case traces";
+		return focusFor(
+			"invariants, constraints, state transitions, complexity, memory behavior, and edge-case traces"
+		);
 	}
 
 	if (family.includes("language bridge")) {
-		return "syntax translation, type differences, object or memory model differences, build workflow, and equivalent behavior across languages";
+		return focusFor(
+			"syntax translation, type differences, object or memory model differences, build workflow, and equivalent behavior across languages"
+		);
 	}
 
 	if (family.includes("swift")) {
-		return "state, view updates, user interaction, preview or simulator behavior, and a small verification path through the app";
+		return focusFor(
+			"state, view updates, user interaction, preview or simulator behavior, and a small verification path through the app"
+		);
 	}
 
 	if (family.includes("java")) {
-		return "class contracts, object state, method signatures, package or import boundaries, exceptions, and testable console behavior";
+		return focusFor(
+			"class contracts, object state, method signatures, package or import boundaries, exceptions, and testable console behavior"
+		);
 	}
 
 	if (family.includes("c++")) {
-		return "types, ownership, resource lifetime, containers, build output, diagnostics, and behavior that can be traced from input to output";
+		return focusFor(
+			"types, ownership, resource lifetime, containers, build output, diagnostics, and behavior that can be traced from input to output"
+		);
 	}
 
-	return "inputs, state changes, boundaries, observable behavior, edge cases, and verification evidence";
+	return focusFor(
+		"inputs, state changes, boundaries, observable behavior, edge cases, and verification evidence"
+	);
 }
 
 export function buildSupportSectionGuidance({
@@ -82,7 +114,7 @@ export function buildSupportSectionGuidance({
 	section
 }: SupportSectionGuidanceOptions) {
 	const title = normalizedTitle(moduleTitle);
-	const focus = familyFocus(courseFamily);
+	const focus = familyFocus(courseFamily, moduleTitle);
 
 	if (section === "debugging") {
 		return [

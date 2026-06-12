@@ -37,7 +37,7 @@ function securityLabFocus(topic: string) {
 		return "finding ranking, attacker assumptions, patch justification, mitigation summaries, and regression evidence across multiple bug classes";
 	}
 
-	return "local-only security evidence, clear assumptions, tool output, a patch or hardening decision, and a regression check";
+	return `${securityLabLabel(topic)} local-only security evidence, clear assumptions, tool output, a patch or hardening decision, and a regression check`;
 }
 
 function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
