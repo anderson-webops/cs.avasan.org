@@ -154,6 +154,26 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it(
+		"uses course-family support text instead of the generic fallback",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const corpus = courses.map(allCourseText).join("\n");
+
+			expect(corpus).not.toMatch(
+				/module's core concept, a concrete worked example, and a testable artifact/i
+			);
+			expect(corpus).not.toMatch(/the work should be able to describe/i);
+			expect(corpus).toContain("PyGame development");
+			expect(corpus).toContain("Swift app development");
+			expect(corpus).toContain("Linux systems practice");
+			expect(corpus).toContain("network systems practice");
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("keeps expanded physics and Scratch modules specific instead of duplicated filler", async () => {
 		const courseIds = [
 			"intro-to-physics",
@@ -177,6 +197,21 @@ describe("course text quality normalization", () => {
 				/This lab states the target artifact|A representative .* example names the key inputs|Create an original variation inspired by .*Implementation Lab/i
 			);
 		}
+	});
+
+	it("keeps Scratch support text focused on playable projects instead of generic file or lab wording", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("scratch-level-1"),
+			loadRawCourse("scratch-level-2")
+		]);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).toContain("Scratch game design");
+		expect(corpus).toContain("green flag starts");
+		expect(corpus).toContain("event/state logic");
+		expect(corpus).not.toMatch(/module's core concept, a concrete worked example, and a testable artifact/i);
+		expect(corpus).not.toMatch(/expected file format/i);
+		expect(corpus).not.toMatch(/malformed or missing data/i);
 	});
 
 	it("guards against raw generated grammar artifacts in course sources", () => {

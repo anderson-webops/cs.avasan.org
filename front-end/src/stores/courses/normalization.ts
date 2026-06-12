@@ -987,6 +987,20 @@ function subjectFocus(context: CourseTextContext) {
 	if (/python level 3|advanced python|am\d/.test(source)) {
 		return "advanced Python decomposition, algorithmic reasoning, file/data handling, and clear testing habits";
 	}
+	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
+		return "Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback";
+	}
+	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+		return "PyGame development: game-loop state, actors, events, collisions, timing, assets, and playable feedback";
+	}
+	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
+		return "Swift app development: project structure, SwiftUI views, state flow, signing, simulator/device testing, and release readiness";
+	}
+	if (
+		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
+	) {
+		return "Linux systems practice: shell commands, filesystems, users and permissions, services, logs, automation, and repeatable troubleshooting evidence";
+	}
 	if (isScienceContext(context)) {
 		return "scientific explanation: observable phenomena, models, data, vocabulary, and claim-evidence-reasoning";
 	}
@@ -1013,6 +1027,11 @@ function subjectFocus(context: CourseTextContext) {
 		return "safe security analysis: local-only test fixtures, threat modeling, evidence collection, and defensive remediation";
 	}
 	if (
+		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
+	) {
+		return "network systems practice: addressing, routing, ports, DNS, packet evidence, service exposure, and diagnostic reasoning";
+	}
+	if (
 		/data science|data analysis|machine learning|ai search|ai level|model/.test(
 			source
 		)
@@ -1035,6 +1054,49 @@ function subjectFocus(context: CourseTextContext) {
 function projectExpectations(context: CourseTextContext) {
 	const source = contextText(context);
 
+	if (
+		/scratch|sprite|broadcast|clone|backdrop|green flag|pen extension/.test(
+			source
+		)
+	) {
+		return [
+			"- Define what each sprite controls, senses, changes, or broadcasts.",
+			"- Test the green-flag start, the main controls or events, and the win, loss, score, or reset condition.",
+			"- Keep the project explainable by naming the event blocks, variables, and state changes that drive the behavior."
+		];
+	}
+	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+		return [
+			"- Define the game state, actor responsibilities, input events, collision rules, and frame-by-frame update loop.",
+			"- Test startup, player controls, collision/no-collision cases, scoring or health changes, and reset or end-state behavior.",
+			"- Keep drawing, updating, event handling, and game-state changes separated enough to debug one layer at a time."
+		];
+	}
+	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
+		return [
+			"- Define the screen, state owner, data flow, build target, and simulator or device behavior before implementation.",
+			"- Test a fresh launch, one normal interaction, one empty/error state when relevant, and one layout or accessibility check.",
+			"- Record the Xcode, signing, preview, simulator, or TestFlight evidence that proves the app state is understood."
+		];
+	}
+	if (
+		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
+	) {
+		return [
+			"- State the command, file path, service, permission, process, or log being inspected before making changes.",
+			"- Verify the normal path and one failure or rollback path using command output, logs, status checks, or file metadata.",
+			"- Keep a short operations note with the exact commands used and the evidence that the system reached the intended state."
+		];
+	}
+	if (
+		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
+	) {
+		return [
+			"- Define the hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics.",
+			"- Test local behavior, remote or cross-host behavior, and one failure case using command output or packet/service evidence.",
+			"- Record the observed symptom, the diagnostic command, the interpretation, and the configuration or topology fact it proves."
+		];
+	}
 	if (/binary search/.test(source)) {
 		return [
 			"- State the sorted-data precondition before coding.",
@@ -1084,7 +1146,9 @@ function projectExpectations(context: CourseTextContext) {
 			"- Include one encode/decode round trip that returns the original message."
 		];
 	}
-	if (/file|parser|csv|json|io|input.*output/.test(source)) {
+	if (
+		/\b(?:file|files|parser|csv|json|io|i\/o|input\/output)\b/.test(source)
+	) {
 		return [
 			"- Identify the expected file format and how malformed or missing data will be handled.",
 			"- Test at least one normal file and one awkward file with an empty line or incomplete record.",
@@ -1127,7 +1191,7 @@ function projectExpectations(context: CourseTextContext) {
 	return [
 		"- Restate the prompt as a short checklist before coding or building.",
 		"- Implement the base behavior first, then test a normal case and an edge case.",
-		"- Keep the final result explainable: the work should be able to describe the main design choice and one bug they fixed."
+		"- Keep the final result explainable: the final note should describe the main design choice and one bug that was fixed."
 	];
 }
 
@@ -1139,6 +1203,45 @@ function completionChecks(context: CourseTextContext) {
 			"- The solution passes the sample input/output exactly.",
 			"- Test a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.",
 			"- State the time complexity and why it fits the expected constraints."
+		];
+	}
+	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
+		return [
+			"- The green flag starts the project from a predictable state.",
+			"- Controls, events, broadcasts, variables, and sprite interactions behave as intended.",
+			"- A short explanation names the main state change and one edge case tested during play."
+		];
+	}
+	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+		return [
+			"- The game starts from a predictable state and can be restarted or ended intentionally.",
+			"- Actor updates, input events, collisions, score/health changes, and draw order are verified with at least one normal and boundary case.",
+			"- The final explanation names the game loop, the most important state variable, and one bug or edge case found during playtesting."
+		];
+	}
+	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
+		return [
+			"- The app builds and launches on the intended simulator or device target.",
+			"- State changes, navigation, layout, loading/error behavior, signing, or release workflow evidence is captured as appropriate.",
+			"- The final note separates code behavior from Xcode/project configuration behavior."
+		];
+	}
+	if (
+		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
+	) {
+		return [
+			"- Commands are repeatable from a fresh shell or documented starting state.",
+			"- File, permission, process, service, timer, network, or log evidence confirms the intended system state.",
+			"- The final note includes one failure mode, rollback step, or diagnostic command that would help future troubleshooting."
+		];
+	}
+	if (
+		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
+	) {
+		return [
+			"- The topology, host roles, addresses, ports, protocols, or firewall boundaries are named explicitly.",
+			"- Diagnostic evidence shows both expected behavior and at least one failure or blocked-path condition.",
+			"- The final explanation connects the observed packet, port, DNS, route, or service result to the network model."
 		];
 	}
 	if (/science|physics|chemistry|biology|earth|ecosystem/.test(source)) {
@@ -1178,6 +1281,25 @@ function extensionPrompt(context: CourseTextContext) {
 	}
 	if (/python level 1|python level 2/.test(source)) {
 		return "Add input validation or one extra mode so the program handles an unexpected user response gracefully.";
+	}
+	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
+		return "Add one new sprite interaction, broadcast, level change, or difficulty option that reuses the same event/state logic.";
+	}
+	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+		return "Add one new actor, collision rule, input mode, level state, or difficulty curve while keeping the game loop understandable.";
+	}
+	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
+		return "Add one small screen, state transition, persistence point, accessibility improvement, or release-readiness check.";
+	}
+	if (
+		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
+	) {
+		return "Add one diagnostic, rollback, automation, logging, or permission-hardening step that can be verified with a command.";
+	}
+	if (
+		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
+	) {
+		return "Add one diagnostic variation involving a different host, port, route, DNS answer, packet trace, or firewall rule.";
 	}
 	if (/java/.test(source)) {
 		return "Add one additional method, test, or subclass/record use case while preserving the public behavior already built.";
@@ -1234,6 +1356,25 @@ function scienceEvidenceCheckpoint() {
 function studioArtifact(context: CourseTextContext) {
 	const source = contextText(context);
 
+	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
+		return "a playable Scratch project with clear event flow, sprite state, and feedback";
+	}
+	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+		return "a playable PyGame checkpoint with clear loop state, actors, events, collisions, and feedback";
+	}
+	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
+		return "a Swift app checkpoint with visible UI behavior, state flow, build evidence, and release-readiness notes";
+	}
+	if (
+		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
+	) {
+		return "a repeatable Linux systems checkpoint with commands, evidence, logs, and troubleshooting notes";
+	}
+	if (
+		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
+	) {
+		return "a network systems checkpoint with topology, commands, packet or service evidence, and interpretation";
+	}
 	if (/assembly/.test(source)) {
 		return "an annotated assembly trace or small program that proves register, stack, and memory behavior";
 	}
