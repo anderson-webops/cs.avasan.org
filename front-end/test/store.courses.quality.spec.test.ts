@@ -145,6 +145,9 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/Test a normal path, a boundary or failure path, and one case tied directly to the module's main concept/
 			);
+			expect(corpus).not.toMatch(
+				/Check the draft against the expected behavior after a working version exists; record one difference that affects correctness, readability, robustness, or design/
+			);
 			expect(corpus).toContain(
 				"Identify the user interaction, state change, DOM/canvas/API output, and visible error or empty state"
 			);
@@ -153,6 +156,18 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).toContain(
 				"State the local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix"
+			);
+			expect(corpus).toContain(
+				"After the page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling"
+			);
+			expect(corpus).toContain(
+				"After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage"
+			);
+			expect(corpus).toContain(
+				"After samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
+			);
+			expect(corpus).toContain(
+				"After the local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path"
 			);
 			expect(corpus).toContain(
 				"The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result"

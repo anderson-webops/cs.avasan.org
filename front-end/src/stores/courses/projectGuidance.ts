@@ -139,6 +139,69 @@ function requiredWorkSteps(courseFamily: string) {
 	];
 }
 
+function referenceReviewStep(courseFamily: string, hasReference: boolean) {
+	const family = courseFamily.toLowerCase();
+
+	if (!hasReference) {
+		if (
+			family.includes("data") ||
+			family.includes("machine learning") ||
+			family.includes("ai")
+		) {
+			return "Write a verification note that names the evidence, sanity check, and limitation used to interpret the result.";
+		}
+
+		if (family.includes("security") || family.includes("network")) {
+			return "Write a verification note that records the local boundary, evidence captured, and remediation or hardening result.";
+		}
+
+		return "Write a verification note that identifies the tests, traces, logs, or observations used as evidence.";
+	}
+
+	if (family.includes("usaco")) {
+		return "After samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.";
+	}
+
+	if (family.includes("web") || family.includes("javascript")) {
+		return "After the page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling.";
+	}
+
+	if (
+		family.includes("data") ||
+		family.includes("machine learning") ||
+		family.includes("ai")
+	) {
+		return "After the pipeline or model runs, compare against the reference and record one difference in data assumptions, metric behavior, model behavior, or stated limitation.";
+	}
+
+	if (family.includes("java")) {
+		return "After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage.";
+	}
+
+	if (family.includes("python")) {
+		return "After the program runs, compare against the reference and record one difference in helper boundaries, data handling, input validation, or output formatting.";
+	}
+
+	if (family.includes("security") || family.includes("network")) {
+		return "After the local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path.";
+	}
+
+	if (
+		family.includes("systems") ||
+		family.includes("assembly") ||
+		family.includes("rust") ||
+		family.includes("c++")
+	) {
+		return "After the build and run checks pass, compare against the reference and record one difference in ownership, memory behavior, diagnostics, or performance evidence.";
+	}
+
+	if (family.includes("swift")) {
+		return "After the simulator path works, compare against the reference and record one difference in view state, navigation, persistence, or accessibility behavior.";
+	}
+
+	return "After the artifact works, compare against the reference and record one meaningful difference in behavior, robustness, readability, or design.";
+}
+
 export function buildProjectGuidance({
 	courseFamily,
 	moduleTitle,
@@ -146,9 +209,6 @@ export function buildProjectGuidance({
 	hasReference
 }: ProjectGuidanceOptions) {
 	const artifact = projectArtifact(projectKind);
-	const comparisonStep = hasReference
-		? "Check the draft against the expected behavior after a working version exists; record one difference that affects correctness, readability, robustness, or design."
-		: "Write a short verification note that includes the tests or traces used as evidence.";
 
 	return [
 		`**Project goal:** Complete the linked ${courseFamily} ${artifact} for **${moduleTitle}** with visible behavior and verification evidence.`,
@@ -157,7 +217,7 @@ export function buildProjectGuidance({
 		...requiredWorkSteps(courseFamily).map(
 			(step, index) => `${index + 1}. ${step}`
 		),
-		`4. ${comparisonStep}`,
+		`4. ${referenceReviewStep(courseFamily, hasReference)}`,
 		"**Completion checks:**",
 		"- The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result.",
 		"- The boundary case is named explicitly and is not only the provided sample.",
