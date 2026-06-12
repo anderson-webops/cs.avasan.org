@@ -9,6 +9,22 @@ function projectArtifact(kind: ProjectGuidanceOptions["projectKind"]) {
 	return kind === "core" ? "implementation checkpoint" : "applied challenge";
 }
 
+function variantIndex(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"],
+	count: number
+) {
+	const seed = `${courseFamily}|${moduleTitle}|${kind}`;
+	let hash = 0;
+
+	for (const character of seed) {
+		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+	}
+
+	return hash % count;
+}
+
 function projectGoal(
 	courseFamily: string,
 	moduleTitle: string,
@@ -80,10 +96,6 @@ function familyFocus(courseFamily: string) {
 		return "Connect the code to evidence: inspect the input data, describe the transformation or model behavior, and verify the result with a small sanity check before treating the output as meaningful";
 	}
 
-	if (family.includes("java")) {
-		return "Use Java syntax and object boundaries deliberately: method contracts, object state, collection choices, and compile-run feedback should all be visible in the finished artifact";
-	}
-
 	if (family.includes("python")) {
 		return "Keep the Python implementation readable and testable by separating input handling, data transformation, helper functions, and output. Boundary cases should be small enough to trace by hand";
 	}
@@ -108,7 +120,59 @@ function familyFocus(courseFamily: string) {
 	return "Connect the implementation to the module concept through observable behavior, a clear test path, and a short explanation of the reasoning behind the final design";
 }
 
-function requiredWorkSteps(courseFamily: string) {
+function javaFamilyFocus(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"]
+) {
+	return [
+		`Use Java syntax and object boundaries deliberately in ${moduleTitle}: method contracts, object state, collection choices, and compile-run feedback should all be visible in the finished artifact`,
+		`Make ${moduleTitle} show how Java responsibilities are divided across classes, methods, records, interfaces, collections, or tests instead of hiding everything in one procedure`,
+		`Connect ${moduleTitle} to concrete Java behavior: object construction, method calls, state changes, access boundaries, and one edge case should be easy to inspect`,
+		`Keep ${moduleTitle} structured enough to explain: name the owning type, the public behavior, the state or data representation, and the compile/run evidence that proves it`
+	][variantIndex(courseFamily, moduleTitle, kind, 4)];
+}
+
+function systemsFamilyFocus(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"]
+) {
+	return [
+		`Make ${moduleTitle} inspectable from the command line: inputs, ownership or resource boundaries, build settings, and diagnostic output should be easy to reproduce`,
+		`Use ${moduleTitle} to expose the system boundary directly: command, file, memory, lifetime, process, register, or runtime evidence should be visible`,
+		`Keep ${moduleTitle} reproducible by naming the build/run command, the relevant boundary, and the trace, log, sanitizer, debugger, or performance evidence`,
+		`Treat ${moduleTitle} as a systems checkpoint: the artifact should show what was built, what resource or memory assumption matters, and how the result was verified`
+	][variantIndex(courseFamily, moduleTitle, kind, 4)];
+}
+
+function focusFor(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"]
+) {
+	const family = courseFamily.toLowerCase();
+
+	if (family.includes("java")) {
+		return javaFamilyFocus(courseFamily, moduleTitle, kind);
+	}
+	if (
+		family.includes("systems") ||
+		family.includes("assembly") ||
+		family.includes("rust") ||
+		family.includes("c++")
+	) {
+		return systemsFamilyFocus(courseFamily, moduleTitle, kind);
+	}
+
+	return familyFocus(courseFamily);
+}
+
+function requiredWorkSteps(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"]
+) {
 	const family = courseFamily.toLowerCase();
 
 	if (family.includes("usaco")) {
@@ -141,10 +205,27 @@ function requiredWorkSteps(courseFamily: string) {
 
 	if (family.includes("java")) {
 		return [
-			"Sketch the classes, methods, records, interfaces, or collections that own the main responsibilities.",
-			"Implement one constructor, method, branch, or test at a time, compiling after each meaningful change.",
-			"Check a normal case, an edge case, and one object-state or method-dispatch case tied to the module concept."
-		];
+			[
+				`Sketch the classes, methods, records, interfaces, or collections that own the main responsibilities in ${moduleTitle}.`,
+				"Implement one constructor, method, branch, or test at a time, compiling after each meaningful change.",
+				"Check a normal case, an edge case, and one object-state or method-dispatch case tied to the module concept."
+			],
+			[
+				`For ${moduleTitle}, identify which type owns the state, which method exposes behavior, and which test or console trace proves it.`,
+				"Build the smallest compiling version first, then add one behavior or branch at a time.",
+				"Verify a standard case, a boundary case, and one case involving object identity, equality, inheritance, records, or collections when relevant."
+			],
+			[
+				`Map ${moduleTitle} into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape.`,
+				"Compile after each meaningful signature, field, branch, or loop change so errors stay local.",
+				"Check one ordinary path, one awkward or invalid input path, and one state transition or method-call sequence."
+			],
+			[
+				`Name the public behavior for ${moduleTitle}, then decide which class, helper method, interface, record, or collection should carry it.`,
+				"Implement the behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.",
+				"Verify one happy path, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation."
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("python")) {
@@ -170,10 +251,27 @@ function requiredWorkSteps(courseFamily: string) {
 		family.includes("c++")
 	) {
 		return [
-			"Identify the inputs, ownership or lifetime boundary, build command, runtime behavior, and diagnostic output.",
-			"Implement or instrument one boundary at a time, rebuilding and rerunning after each meaningful change.",
-			"Verify a normal case, a boundary or failure case, and one trace, sanitizer, debugger, memory, or performance observation."
-		];
+			[
+				`Identify the inputs, ownership or lifetime boundary, build command, runtime behavior, and diagnostic output for ${moduleTitle}.`,
+				`Implement or instrument ${moduleTitle} one boundary at a time, rebuilding and rerunning after each meaningful change.`,
+				"Verify a normal case, a boundary or failure case, and one trace, sanitizer, debugger, memory, or performance observation."
+			],
+			[
+				`For ${moduleTitle}, name the command, file or memory boundary, expected runtime behavior, and evidence source before changing code.`,
+				"Build the smallest reproducible run first, then add one diagnostic, data-structure, resource, or control-flow change at a time.",
+				"Check a typical run, a smallest or failing run, and one observation from logs, debugger state, sanitizer output, timing, or memory state."
+			],
+			[
+				`Map ${moduleTitle} to its low-level contract: inputs, outputs, ownership, lifetime, build mode, and observable machine or runtime state.`,
+				"Change one boundary at a time and keep the build/run command close enough to rerun immediately.",
+				"Verify ordinary behavior, a boundary or invalid case, and one diagnostic trace tied to the systems concept."
+			],
+			[
+				`Start ${moduleTitle} by recording the starting state, command path, resource boundary, and expected observable result.`,
+				"Implement in short compile/run/debug cycles so failures point to a specific boundary or assumption.",
+				"Check one normal path, one failure or edge path, and one memory, lifetime, performance, register, or process-state detail."
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("swift")) {
@@ -191,7 +289,12 @@ function requiredWorkSteps(courseFamily: string) {
 	];
 }
 
-function referenceReviewStep(courseFamily: string, hasReference: boolean) {
+function referenceReviewStep(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"],
+	hasReference: boolean
+) {
 	const family = courseFamily.toLowerCase();
 
 	if (!hasReference) {
@@ -227,7 +330,12 @@ function referenceReviewStep(courseFamily: string, hasReference: boolean) {
 	}
 
 	if (family.includes("java")) {
-		return "After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage.";
+		return [
+			`After ${moduleTitle} compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage.`,
+			`After the ${moduleTitle} behavior works, compare against the reference and note one difference in type design, public API, object state, or test coverage.`,
+			`Use the ${moduleTitle} reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling.`,
+			`Compare ${moduleTitle} with the reference after the compile/run path is clean, then identify one design or robustness difference that matters.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("python")) {
@@ -244,7 +352,12 @@ function referenceReviewStep(courseFamily: string, hasReference: boolean) {
 		family.includes("rust") ||
 		family.includes("c++")
 	) {
-		return "After the build and run checks pass, compare against the reference and record one difference in ownership, memory behavior, diagnostics, or performance evidence.";
+		return [
+			`After ${moduleTitle} builds and runs, compare against the reference and record one difference in ownership, memory behavior, diagnostics, or performance evidence.`,
+			`Compare ${moduleTitle} with the reference only after the local command path is reproducible; note one difference in resource lifetime, trace output, or failure handling.`,
+			`Use the ${moduleTitle} reference to check one systems assumption after the build is clean: ownership, layout, timing, command behavior, or diagnostic evidence.`,
+			`After the ${moduleTitle} runtime evidence is captured, compare against the reference and name one boundary or tooling difference that affects confidence.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("swift")) {
@@ -254,7 +367,11 @@ function referenceReviewStep(courseFamily: string, hasReference: boolean) {
 	return "After the artifact works, compare against the reference and record one meaningful difference in behavior, robustness, readability, or design.";
 }
 
-function completionCheckSteps(courseFamily: string) {
+function completionCheckSteps(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"]
+) {
 	const family = courseFamily.toLowerCase();
 
 	if (family.includes("usaco")) {
@@ -287,10 +404,27 @@ function completionCheckSteps(courseFamily: string) {
 
 	if (family.includes("java")) {
 		return [
-			"The Java code compiles cleanly and the expected behavior is visible through output, tests, or method calls.",
-			"A normal case, an edge case, and one object-state, inheritance, interface, record, or collection case are checked.",
-			"The final note names the class boundary, method contract, or data representation choice that mattered."
-		];
+			[
+				`${moduleTitle} compiles cleanly and the expected behavior is visible through output, tests, or method calls.`,
+				"A normal case, an edge case, and one object-state, inheritance, interface, record, or collection case are checked.",
+				"The final note names the class boundary, method contract, or data representation choice that mattered."
+			],
+			[
+				`${moduleTitle} has a fresh compile/run result and at least one concrete output, assertion, or trace.`,
+				`The ${moduleTitle} checked cases include ordinary behavior, boundary behavior, and one object or collection interaction.`,
+				`The final ${moduleTitle} note explains which Java type owns the behavior and why that boundary is useful.`
+			],
+			[
+				`${moduleTitle} demonstrates the required Java behavior without relying on stale build output or hidden IDE state.`,
+				`Constructor, method, branch, and data-representation behavior are checked for ${moduleTitle} where relevant.`,
+				`The final ${moduleTitle} note names the API, state, equality, inheritance, interface, record, or collection decision that affected correctness.`
+			],
+			[
+				`${moduleTitle} can be rebuilt and rerun with current evidence for the target behavior.`,
+				"A typical path, an awkward path, and one stateful or polymorphic path are checked when relevant.",
+				"The final note separates syntax fixes from design choices such as encapsulation, method contracts, or data ownership."
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("python")) {
@@ -316,10 +450,27 @@ function completionCheckSteps(courseFamily: string) {
 		family.includes("c++")
 	) {
 		return [
-			"The artifact builds from a clean command and produces inspectable runtime behavior.",
-			"A normal case, a boundary or failure case, and one memory, lifetime, trace, debugger, or performance check are recorded.",
-			"The final note names the ownership, resource, ABI, build, diagnostic, or complexity decision that mattered."
-		];
+			[
+				`${moduleTitle} builds from a clean command and produces inspectable runtime behavior.`,
+				"A normal case, a boundary or failure case, and one memory, lifetime, trace, debugger, or performance check are recorded.",
+				"The final note names the ownership, resource, ABI, build, diagnostic, or complexity decision that mattered."
+			],
+			[
+				`${moduleTitle} has a reproducible build/run command and current evidence for the expected behavior.`,
+				"Ordinary behavior, edge or failure behavior, and one diagnostic observation are checked.",
+				"The final note identifies the resource, ownership, lifetime, layout, command, or performance assumption that shaped the result."
+			],
+			[
+				`${moduleTitle} can be rebuilt from a clean starting point and inspected through output, logs, traces, debugger state, or sanitizer evidence.`,
+				"A typical input, a boundary or invalid input, and one low-level observation are recorded.",
+				"The final note separates the algorithm or API behavior from the system-level evidence."
+			],
+			[
+				`${moduleTitle} includes the command, expected output, and evidence needed to reproduce the result.`,
+				"At least one normal path, one failure or edge path, and one memory, process, register, or timing detail are checked.",
+				"The final note explains the most important ownership, build, diagnostic, or complexity choice."
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("swift")) {
@@ -345,13 +496,15 @@ export function buildProjectGuidance({
 }: ProjectGuidanceOptions) {
 	return [
 		projectGoal(courseFamily, moduleTitle, projectKind),
-		`**Focus:** ${familyFocus(courseFamily)}.`,
+		`**Focus:** ${focusFor(courseFamily, moduleTitle, projectKind)}.`,
 		"**Required work:**",
-		...requiredWorkSteps(courseFamily).map(
+		...requiredWorkSteps(courseFamily, moduleTitle, projectKind).map(
 			(step, index) => `${index + 1}. ${step}`
 		),
-		`4. ${referenceReviewStep(courseFamily, hasReference)}`,
+		`4. ${referenceReviewStep(courseFamily, moduleTitle, projectKind, hasReference)}`,
 		"**Completion checks:**",
-		...completionCheckSteps(courseFamily).map(step => `- ${step}`)
+		...completionCheckSteps(courseFamily, moduleTitle, projectKind).map(
+			step => `- ${step}`
+		)
 	].join("\n\n");
 }

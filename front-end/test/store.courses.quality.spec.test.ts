@@ -173,8 +173,11 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"After the page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling"
 			);
+			expect(corpus).not.toMatch(
+				/After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage/
+			);
 			expect(corpus).toContain(
-				"After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage"
+				"After PTJ0 Positioning and Workflow Translation compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage"
 			);
 			expect(corpus).toContain(
 				"After samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
@@ -215,8 +218,56 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/Change one environment assumption, command option, configuration, rollback path, or reproducibility check while preserving the same system goal/
 			);
+			expect(corpus).not.toMatch(
+				/The Java code compiles cleanly and the expected behavior is visible through output, tests, or method calls/
+			);
+			expect(corpus).not.toMatch(
+				/The code compiles from a clean run and the expected behavior is visible in output or tests/
+			);
+			expect(corpus).not.toMatch(
+				/Use Java syntax and object boundaries deliberately: method contracts, object state, collection choices, and compile-run feedback should all be visible in the finished artifact/
+			);
+			expect(corpus).not.toMatch(
+				/Sketch the classes, methods, records, interfaces, or collections that own the main responsibilities\./
+			);
+			expect(corpus).not.toMatch(
+				/Define the classes, object state, method inputs, return values, and expected console or test output\./
+			);
+			expect(corpus).not.toMatch(
+				/Key terms, a worked example, and one quick transfer check connect this idea to the module project/
+			);
+			expect(corpus).not.toMatch(
+				/The build should make clear what is being created, what constraints matter, and what evidence will prove the work is correct/
+			);
+			expect(corpus).not.toMatch(
+				/Review the result against the original goal and record at least one improvement or bug fix/
+			);
+			expect(corpus).not.toMatch(
+				/Attempt the prompt independently first, then use the result to identify whether the issue is vocabulary, tracing, syntax, design, or test coverage/
+			);
+			expect(corpus).not.toMatch(
+				/Record the specific misconception, complete one focused remediation problem, and revisit the same skill before moving to a more complex project/
+			);
+			expect(corpus).not.toMatch(
+				/Science explanation: Anchor the activity in scientific explanation: observable phenomena, models, data, vocabulary, and claim-evidence-reasoning/
+			);
+			expect(corpus).not.toMatch(
+				/The explanation names the phenomenon, the model or data source, and the target vocabulary/
+			);
+			expect(corpus).not.toMatch(
+				/The explanation identifies the main function, loop, or data structure that drives the result/
+			);
+			expect(corpus).not.toMatch(
+				/Name the input values, helper functions or loops, data structures, and printed output before coding/
+			);
 			expect(corpus).toContain(
-				"The Java code compiles cleanly and the expected behavior is visible through output, tests, or method calls"
+				"PTJ0 Positioning and Workflow Translation compiles cleanly and the expected behavior is visible through output, tests, or method calls"
+			);
+			expect(corpus).toContain(
+				"Map PTJ0 Positioning and Workflow Translation into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape"
+			);
+			expect(corpus).toContain(
+				"JS1 Variable Types & Input/Output demonstrates the target Java behavior from a clean start"
 			);
 			expect(corpus).toContain(
 				"The page or app shows the expected state change, output, validation, or canvas behavior"
@@ -1335,8 +1386,14 @@ describe("course text quality normalization", () => {
 			const corpus = courses.map(allCourseText).join("\n");
 
 			expect(corpus).toContain("**Remote investigation:**");
-			expect(corpus).toContain(
-				"The activity does not require beakers, kits, or household materials"
+			expect(corpus).not.toContain(
+				"The activity does not require beakers, kits, or household materials; any physical demonstration is optional and replaceable with a diagram or data table"
+			);
+			expect(corpus).not.toContain(
+				"**Output:** Complete a claim-evidence-reasoning response, a labeled diagram or data table, and one prediction about a changed condition"
+			);
+			expect(corpus).toMatch(
+				/No beakers, kits, or required household materials are needed|Physical supplies are optional only|shared digital resources|accessible remote evidence/
 			);
 			expect(corpus).toContain("claim-evidence-reasoning");
 			expect(corpus).not.toContain(

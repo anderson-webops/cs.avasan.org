@@ -295,12 +295,34 @@ function lessonArcContent(items: RawCourseModuleItem[]) {
 	return ["Core topics in this module:", "", ...points].join("\n");
 }
 
-function enrichBriefConceptLesson(item: RawCourseModuleItem) {
+function briefConceptAddendum(
+	module: RawCourseModule,
+	item: RawCourseModuleItem
+) {
+	const seed = `${module.title}|${item.title}`;
+	let hash = 0;
+
+	for (const character of seed) {
+		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+	}
+
+	return [
+		`${item.title} connects the key vocabulary to ${module.title} through a compact example and one transfer check.`,
+		`${item.title} works as a short reference for ${module.title}: define the terms, trace one example, and check the idea in a nearby case.`,
+		`${item.title} should make the ${module.title} idea concrete with vocabulary, a small example, and one way to verify understanding.`,
+		`${item.title} links ${module.title} to the module project by naming the core terms, showing one example, and checking one changed condition.`
+	][hash % 4];
+}
+
+function enrichBriefConceptLesson(
+	module: RawCourseModule,
+	item: RawCourseModuleItem
+) {
 	if (compactWhitespace(item.content).length >= 220) return item;
 
 	return {
 		...item,
-		content: `${compactWhitespace(item.content)} Key terms, a worked example, and one quick transfer check connect this idea to the module project.`
+		content: `${compactWhitespace(item.content)} ${briefConceptAddendum(module, item)}`
 	};
 }
 
@@ -346,14 +368,18 @@ function normalizeModuleLessonShape(course: RawCourse) {
 
 		if (conceptItems.length <= 2) {
 			module.curriculum = module.curriculum.map(item =>
-				isProjectLikeItem(item) ? item : enrichBriefConceptLesson(item)
+				isProjectLikeItem(item)
+					? item
+					: enrichBriefConceptLesson(module, item)
 			);
 			continue;
 		}
 
 		if (conceptItems.some(hasAttachedResource)) {
 			module.curriculum = module.curriculum.map(item =>
-				isProjectLikeItem(item) ? item : enrichBriefConceptLesson(item)
+				isProjectLikeItem(item)
+					? item
+					: enrichBriefConceptLesson(module, item)
 			);
 			continue;
 		}
@@ -1139,7 +1165,16 @@ function subjectFocus(context: CourseTextContext) {
 		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
 	}
 	if (/java/.test(source)) {
-		return "object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests";
+		return variantPrompt(context, [
+			subject =>
+				`${subject} through object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests`,
+			subject =>
+				`${subject} through Java type design: objects, fields, methods, collection choices, public APIs, and compile-run feedback`,
+			subject =>
+				`${subject} through Java program structure: constructors, object state, method behavior, access boundaries, and testable cases`,
+			subject =>
+				`${subject} through Java reasoning: values versus references, class responsibilities, interfaces or records when useful, and visible verification`
+		]);
 	}
 	if (/c\+\+|cpp|c level|data structures.*cpp|algorithm lab/.test(source)) {
 		return "C++ engineering: types, memory ownership, containers, algorithms, command-line behavior, and repeatable tests";
@@ -1284,7 +1319,16 @@ function commonPitfalls(context: CourseTextContext) {
 		return "Mixing input, calculation, and output in one hard-to-test block; mutating a list while looping; missing a return value; or only testing the happy path.";
 	}
 	if (/java/.test(source)) {
-		return "Confusing class and object responsibilities, using static state when instance state is needed, comparing objects incorrectly, or skipping compile/run feedback after a small change.";
+		return variantPrompt(context, [
+			subject =>
+				`In ${subject}, common mistakes include confusing class and object responsibilities, using static state when instance state is needed, comparing objects incorrectly, or skipping compile/run feedback after a small change.`,
+			subject =>
+				`In ${subject}, check for unclear ownership of state, public methods that do too much, equality checks that compare the wrong thing, or tests that only cover the sample path.`,
+			subject =>
+				`For ${subject}, likely mistakes include mixing constructor setup with behavior, hiding state changes, overusing static helpers, or changing several methods before compiling.`,
+			subject =>
+				`For ${subject}, check for mismatched types, object-reference assumptions, incomplete edge cases, and method boundaries that make the class harder to test.`
+		]);
 	}
 	if (/c\+\+|cpp/.test(source)) {
 		return "Losing track of ownership or lifetime, mixing indices with values, ignoring compiler warnings, or testing only the case that appears in the prompt.";
@@ -1350,7 +1394,16 @@ function proficiencyEvidence(context: CourseTextContext) {
 		return "Explain the data flow, run a normal case and an edge case, and point to the function or loop where the main transformation happens.";
 	}
 	if (/java/.test(contextText(context))) {
-		return "Explain the object roles, show the method call or test that proves the behavior, and identify one state or type decision that matters.";
+		return variantPrompt(context, [
+			subject =>
+				`Explain the object roles in ${subject}, show the method call or test that proves the behavior, and identify one state or type decision that matters.`,
+			subject =>
+				`For ${subject}, name the responsible class or record, demonstrate the public behavior, and explain one edge case tied to object state or type choice.`,
+			subject =>
+				`Use ${subject} to show how the constructor, method, field, interface, or collection choice affects the result, then verify it with a small run or test.`,
+			subject =>
+				`Summarize ${subject} by naming the API boundary, the data it protects or exposes, and the evidence that the behavior works.`
+		]);
 	}
 	if (/c\+\+|cpp/.test(contextText(context))) {
 		return "Explain the data representation, show the compile/run or test evidence, and identify one ownership, lifetime, or container choice that matters.";
@@ -1375,7 +1428,16 @@ function remediationPrompt(context: CourseTextContext) {
 	if (isGameContext(context))
 		return "Name the event, state, or feedback issue, test it in the smallest possible scene, and verify the reset or replay path before adding features.";
 
-	return "Record the specific misconception, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.";
+	return variantPrompt(context, [
+		subject =>
+			`Record the specific misconception in ${subject}, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.`,
+		subject =>
+			`For ${subject}, identify the missing vocabulary, tracing step, syntax habit, design choice, or test case, then retry a smaller version.`,
+		subject =>
+			`Use ${subject} to name the blocker, solve one narrower practice case, and return to the original prompt with the corrected idea.`,
+		subject =>
+			`If ${subject} is difficult, isolate the smallest failing step, correct it with one focused example, and record what changed.`
+	]);
 }
 
 function diagnosticExtensionPrompt(context: CourseTextContext) {
@@ -1659,18 +1721,52 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (/python/.test(source)) {
-		return [
-			"- Name the input values, helper functions or loops, data structures, and printed output before coding.",
-			"- Test one normal case, one empty or smallest case, and one awkward input such as extra spaces, casing, duplicates, or invalid data when relevant.",
-			"- Keep the result explainable by separating input handling, core logic, and output formatting."
-		];
+		return variantLines(context, [
+			subject => [
+				`- Name the input values, helper functions or loops, data structures, and printed output for ${subject} before coding.`,
+				`- Test ${subject} with one normal case, one empty or smallest case, and one awkward input such as extra spaces, casing, duplicates, or invalid data when relevant.`,
+				`- Keep ${subject} explainable by separating input handling, core logic, and output formatting.`
+			],
+			subject => [
+				`- For ${subject}, identify the input surface, transformation step, helper boundary, collection or file shape, and expected output.`,
+				"- Run a typical case, a smallest or empty case, and one awkward input that can be traced by hand.",
+				"- Keep input parsing, core logic, and final formatting separate enough to debug one layer at a time."
+			],
+			subject => [
+				`- Turn ${subject} into a small Python data-flow plan: input, stored values, loop or function, output, and evidence.`,
+				"- Check a normal path, a boundary path, and one surprising input such as punctuation, casing, duplicates, or missing data.",
+				"- Keep the final explanation tied to the function, loop, list, dictionary, file, or algorithm that drives the result."
+			],
+			subject => [
+				`- Before coding ${subject}, write the expected input, intermediate state, helper function role, and final printed or saved result.`,
+				"- Use a tiny traceable case first, then add one ordinary case and one awkward or invalid case.",
+				"- Keep the implementation readable enough that the data flow can be followed without rereading every line."
+			]
+		]);
 	}
 	if (/java/.test(source)) {
-		return [
-			"- Define the classes, object state, method inputs, return values, and expected console or test output.",
-			"- Compile and run after each meaningful class or method change, then test one normal case and one edge case.",
-			"- Keep a short note naming the class responsibility, the method being verified, and any object-state change."
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define the classes, object state, method inputs, return values, and expected console or test output for ${subject}.`,
+				`- Compile and run ${subject} after meaningful class or method changes, then test one normal case and one edge case.`,
+				"- Keep a short note naming the class responsibility, verified method, and important object-state change."
+			],
+			subject => [
+				`- Map ${subject} to Java types, fields, methods, parameters, return values, and visible output before coding.`,
+				`- Use short compile/run cycles in ${subject} so syntax, type, and object-state errors stay easy to isolate.`,
+				`- Record the ${subject} normal case, edge case, and class or method responsibility being verified.`
+			],
+			subject => [
+				`- For ${subject}, name the owning class, stored state, public method behavior, and expected output or assertion.`,
+				`- Add one ${subject} constructor, branch, method, or collection operation at a time, compiling between meaningful changes.`,
+				`- Keep a ${subject} note on the object-state change, equality check, access boundary, or dispatch rule that matters most.`
+			],
+			subject => [
+				`- Turn ${subject} into a concrete Java contract: inputs, object state, return values, side effects, and evidence.`,
+				`- Build ${subject} in small runnable slices and check output, tests, or traces before adding the next behavior.`,
+				`- Include one ${subject} normal path, one awkward path, and one note about the relevant type or API boundary.`
+			]
+		]);
 	}
 	if (/c\+\+|cpp/.test(source)) {
 		return [
@@ -1765,11 +1861,28 @@ function completionChecks(context: CourseTextContext) {
 		];
 	}
 	if (isScienceContext(context)) {
-		return [
-			"- The explanation names the phenomenon, the model or data source, and the target vocabulary.",
-			"- Separate observation from inference.",
-			"- The final answer includes a claim, evidence, and reasoning connection."
-		];
+		return variantLines(context, [
+			subject => [
+				`- The ${subject} explanation names the phenomenon, model or data source, and target vocabulary.`,
+				"- Separate observation from inference.",
+				"- The final answer includes a claim, evidence, and reasoning connection."
+			],
+			subject => [
+				`- ${subject} identifies what was observed, what was inferred, and which model or evidence source supports the claim.`,
+				"- The vocabulary is used to explain the evidence rather than only label it.",
+				"- The final response connects claim, evidence, and reasoning in a complete sentence or labeled diagram."
+			],
+			subject => [
+				`- The ${subject} response names the data, simulation, image, reading, or graph used as evidence.`,
+				"- Observations, patterns, and explanations are kept distinct.",
+				"- The reasoning explains why the evidence supports the claim and where the model may be limited."
+			],
+			subject => [
+				`- ${subject} includes a clear phenomenon, a relevant model or data source, and one target term used correctly.`,
+				"- At least one observation is separated from the conclusion drawn from it.",
+				"- The final answer states the claim, cites evidence, and explains the scientific connection."
+			]
+		]);
 	}
 	if (isMathContext(context)) {
 		return [
@@ -1800,18 +1913,52 @@ function completionChecks(context: CourseTextContext) {
 		];
 	}
 	if (/python/.test(source)) {
-		return [
-			"- The program can be rerun cleanly with predictable output.",
-			"- Normal, empty or smallest, and awkward inputs are tested or justified.",
-			"- The explanation identifies the main function, loop, or data structure that drives the result."
-		];
+		return variantLines(context, [
+			subject => [
+				`- ${subject} can be rerun cleanly with predictable output.`,
+				`- ${subject} has normal, empty or smallest, and awkward inputs tested or justified.`,
+				`- The ${subject} explanation identifies the main function, loop, or data structure that drives the result.`
+			],
+			subject => [
+				`- ${subject} produces the expected output from a fresh run, not from hidden interpreter state.`,
+				"- A typical case, a smallest or empty case, and one awkward input are checked.",
+				"- The explanation names the input handling, helper function, loop, collection, or file step that controls the result."
+			],
+			subject => [
+				`- ${subject} includes enough output, trace, test, or saved data to verify the result.`,
+				"- Normal behavior and one boundary or malformed-input behavior are checked.",
+				"- The explanation separates data flow from formatting or display choices."
+			],
+			subject => [
+				`- ${subject} runs from a clean start and the result can be reproduced with the recorded inputs.`,
+				"- At least one ordinary input, one minimal input, and one awkward input are tested or explained.",
+				"- The final note names the function, loop, data structure, or algorithm decision that mattered."
+			]
+		]);
 	}
 	if (/java/.test(source)) {
-		return [
-			"- The code compiles from a clean run and the expected behavior is visible in output or tests.",
-			"- Object construction, method behavior, and at least one edge case are checked.",
-			"- The explanation names the class or interface boundary that keeps the design understandable."
-		];
+		return variantLines(context, [
+			subject => [
+				`- ${subject} compiles from a clean run and shows the intended behavior through output, tests, or method calls.`,
+				"- Object construction, method behavior, and at least one edge case are checked.",
+				`- The ${subject} explanation names the class or interface boundary that keeps the design understandable.`
+			],
+			subject => [
+				`- ${subject} has a fresh compile/run check with the expected output or test result recorded.`,
+				"- A normal case, edge case, and object-state or method-dispatch case are checked.",
+				`- The ${subject} explanation identifies which class, method, interface, or record owns the key responsibility.`
+			],
+			subject => [
+				`- ${subject} demonstrates the target Java behavior from a clean start, not only from an already-warmed session.`,
+				"- Constructor behavior, method return values, and one boundary condition are verified.",
+				`- The ${subject} explanation connects the result to a specific type, object, collection, or access-boundary choice.`
+			],
+			subject => [
+				`- ${subject} includes current compile evidence and one visible output, trace, assertion, or test result.`,
+				"- A typical path and a deliberately awkward or boundary path are checked.",
+				"- The explanation separates syntax, object state, and public API behavior."
+			]
+		]);
 	}
 	if (/c\+\+|cpp/.test(source)) {
 		return [
@@ -1842,6 +1989,20 @@ function extensionSubject(context: CourseTextContext) {
 function variantPrompt(
 	context: CourseTextContext,
 	templates: Array<(subject: string) => string>
+) {
+	const seed = `${context.courseId}|${context.module.title}|${context.item.title}`;
+	let hash = 0;
+
+	for (const character of seed) {
+		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+	}
+
+	return templates[hash % templates.length](extensionSubject(context));
+}
+
+function variantLines(
+	context: CourseTextContext,
+	templates: Array<(subject: string) => string[]>
 ) {
 	const seed = `${context.courseId}|${context.module.title}|${context.item.title}`;
 	let hash = 0;
@@ -2011,8 +2172,19 @@ function lessonSupport(context: CourseTextContext) {
 }
 
 function diagnosticSupport(context: CourseTextContext) {
+	const readiness = variantPrompt(context, [
+		subject =>
+			`This is a formative check of ${subjectFocus(context)}, not a pass/fail quiz. Attempt ${subject} independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
+		subject =>
+			`Use ${subject} as a readiness check for ${subjectFocus(context)}. First try the prompt without hints, then classify any gap as ${diagnosticCategories(context)}.`,
+		subject =>
+			`${subject} checks whether the core idea is ready for transfer. Start with an independent attempt, then use the evidence to decide whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
+		subject =>
+			`Treat ${subject} as a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before moving to harder work.`
+	]);
+
 	return [
-		`**Readiness check:** This is a formative check of ${subjectFocus(context)}, not a pass/fail quiz. Attempt the prompt independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
+		`**Readiness check:** ${readiness}`,
 		`**Evidence of proficiency:** ${proficiencyEvidence(context)}`,
 		`**If this is difficult:** ${remediationPrompt(context)}`,
 		`**Extension:** ${diagnosticExtensionPrompt(context)}`
@@ -2020,16 +2192,56 @@ function diagnosticSupport(context: CourseTextContext) {
 }
 
 function scienceSupport(context: CourseTextContext) {
+	const remoteInvestigation = variantPrompt(context, [
+		subject =>
+			`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. No beakers, kits, or required household materials are needed; any physical demonstration can be replaced with a diagram or data table.`,
+		subject =>
+			`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. Physical supplies are optional only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
+		subject =>
+			`${subject} can be completed with a notebook, pencil, and shared digital resources. If a physical example is mentioned, treat it as optional context and keep the required investigation tied to data, diagrams, models, or simulations.`,
+		subject =>
+			`${subject} should rely on accessible remote evidence: images, short videos, graphs, public datasets, simulations, or structured discussion notes. Any hands-on observation must be safe, simple, and replaceable.`
+	]);
+	const output = variantPrompt(context, [
+		subject =>
+			`Complete a claim-evidence-reasoning response for ${subject}, plus a labeled diagram or data table and one prediction about a changed condition.`,
+		subject =>
+			`Finish ${subject} with a labeled model or table, a short CER response, and one comparison between observation and inference.`,
+		subject =>
+			`Record the evidence for ${subject}, annotate the model or data display, and write one claim that explains what the evidence supports.`,
+		subject =>
+			`For ${subject}, produce a concise explanation that includes target vocabulary, evidence from the resource, and one limit or next-test idea.`
+	]);
+	const scienceExplanation = variantPrompt(context, [
+		subject =>
+			`Anchor ${subject} in ${subjectFocus(context)}. Record observations first, then build or annotate a model, and only then write the explanation.`,
+		subject =>
+			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary before writing the final claim.`,
+		subject =>
+			`For ${subject}, separate what is directly observed from what the model explains, then use the evidence to support the claim.`,
+		subject =>
+			`Ground ${subject} in the provided data, visual, simulation, or reading, and make the model limitation visible when the explanation is written.`
+	]);
+
 	return [
-		"**Remote investigation:** The activity uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. The activity does not require beakers, kits, or household materials; any physical demonstration is optional and replaceable with a diagram or data table.",
-		`**Science explanation:** Anchor the activity in ${subjectFocus(context)}. Record observations first, then build or annotate a model, and only then write the explanation.`,
-		"**Output:** Complete a claim-evidence-reasoning response, a labeled diagram or data table, and one prediction about a changed condition.",
+		`**Remote investigation:** ${remoteInvestigation}`,
+		`**Science explanation:** ${scienceExplanation}`,
+		`**Output:** ${output}`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`
 	].join("\n\n");
 }
 
-function scienceEvidenceCheckpoint() {
-	return "**CER checkpoint:** End with a claim, evidence, and reasoning response. The claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why the evidence supports the claim.";
+function scienceEvidenceCheckpoint(context: CourseTextContext) {
+	return variantPrompt(context, [
+		subject =>
+			`**CER checkpoint:** End ${subject} with a claim, evidence, and reasoning response. The claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why the evidence supports the claim.`,
+		subject =>
+			`**CER checkpoint:** For ${subject}, write one claim, cite the specific evidence source, and explain the connection with the target vocabulary rather than only naming the topic.`,
+		subject =>
+			`**CER checkpoint:** Finish ${subject} by separating the claim, the evidence, and the reasoning. The evidence should point to the resource used, and the reasoning should explain why it supports the claim.`,
+		subject =>
+			`**CER checkpoint:** Connect ${subject} to a clear claim, a resource-based evidence statement, and reasoning that names the scientific idea or model being used.`
+	]);
 }
 
 function studioArtifact(context: CourseTextContext) {
@@ -2080,10 +2292,31 @@ function studioArtifact(context: CourseTextContext) {
 }
 
 function studioSupport(context: CourseTextContext) {
+	const studioFocus = variantPrompt(context, [
+		subject =>
+			`Define the problem, prerequisite concepts, and success criteria for ${subject}. The artifact should identify what is being created, which constraints matter, and which evidence proves the work is correct.`,
+		subject =>
+			`Use ${subject} to name the artifact, core requirement, constraint, and verification evidence before adding polish.`,
+		subject =>
+			`For ${subject}, separate the minimum working version from extensions so the required behavior can be tested first.`,
+		subject =>
+			`Frame ${subject} around one observable result, the constraints that shape it, and the evidence that proves it works.`
+	]);
+	const reviewStep = variantPrompt(context, [
+		subject =>
+			`Review ${subject} against the original goal and record at least one improvement or bug fix.`,
+		subject =>
+			`Compare ${subject} with the stated success criteria and note one revision that improves correctness, clarity, or robustness.`,
+		subject =>
+			`After ${subject} works, record one mismatch, limitation, or design choice that would guide a later revision.`,
+		subject =>
+			`Finish ${subject} by naming one test result, one improvement made, and one remaining constraint.`
+	]);
+
 	return [
 		`**Applied studio:** **${context.item.title}** produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
-		"**Studio focus:** Define the problem, prerequisite concepts, and success criteria. The build should make clear what is being created, what constraints matter, and what evidence will prove the work is correct.",
-		`**Build sequence:**\n${projectExpectations(context).join("\n")}\n- Review the result against the original goal and record at least one improvement or bug fix.`,
+		`**Studio focus:** ${studioFocus}`,
+		`**Build sequence:**\n${projectExpectations(context).join("\n")}\n- ${reviewStep}`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`
 	].join("\n\n");
@@ -2140,7 +2373,7 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 					isScienceContext(context) &&
 					!scienceEvidencePattern.test(item.content)
 				) {
-					item.content = `${supportBaseContent(item.content)}\n\n${scienceEvidenceCheckpoint()}`;
+					item.content = `${supportBaseContent(item.content)}\n\n${scienceEvidenceCheckpoint(context)}`;
 				}
 			}
 		}
