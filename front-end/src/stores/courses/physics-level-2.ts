@@ -312,7 +312,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Mini Lab or Simulation: Series-Parallel Circuit Build",
 					content:
-						"Build or simulate a series-parallel circuit and compare predictions with measured or observed results. Keep a circuit diagram, note where potential drops occur, and explain how current splits or recombines at junctions."
+						"Create or simulate a series-parallel circuit and compare predictions with measured or observed results. Keep a circuit diagram, note where potential drops occur, and explain how current splits or recombines at junctions."
 				},
 				{
 					title: "Reflection Question: What Does Voltage Explain Better Than Current Alone?",

@@ -592,7 +592,7 @@ Those same ideas carry over into later modules on exponential, absolute-value, a
 			createLesson(
 				"Composition",
 				`
-Composition applies one function to the output of another.
+Function composition applies one function to the output of another.
 
 **Coupon and sale example**
 

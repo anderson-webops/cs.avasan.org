@@ -189,7 +189,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Core Project: Mad Libs",
 					content:
-						"Mad Libs is the right first build for APCS1 because it combines variables, strings, scanner input, and formatted output without introducing structural overhead.",
+						"This first APCS1 build combines variables, strings, scanner input, and formatted output without introducing structural overhead.",
 					projectLink: repo("APCS1-Mad-Libs/starter"),
 					solutionLink: repo("APCS1-Mad-Libs/solution"),
 					mediaLink: media("apcs1-project-1-mad-libs.mp4")

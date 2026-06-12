@@ -451,7 +451,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Project: State Machine Refactor",
 					content:
-						"Refactor a fragile status-code workflow into structs and enums so the compiler helps enforce legal transitions.",
+						"Convert a fragile status-code workflow into structs and enums so the compiler helps enforce legal transitions.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:

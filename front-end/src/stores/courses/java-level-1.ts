@@ -271,7 +271,7 @@ export const javaLevel1Course: RawCourse = {
 				{
 					title: "JS4 Project 1: Loops Practice",
 					content:
-						"Practice printing ranges of numbers, even numbers, countdowns, and the sum of 1 through 100 with both `for` loops and `while` loops.",
+						"Use loops to print ranges of numbers, even numbers, countdowns, and the sum of 1 through 100 with both `for` loops and `while` loops.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS4-Loop-Practice",
 					solutionLink:

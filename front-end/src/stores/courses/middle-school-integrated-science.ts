@@ -332,7 +332,7 @@ export const middleSchoolIntegratedScienceCourse: RawCourse = {
 				{
 					title: "Project: Wave Communication Design",
 					content:
-						"Design a communication system that uses light, sound, radio, or another wave. Explain the source, signal, receiver, possible interference, and one design improvement."
+						"Create a communication system that uses light, sound, radio, or another wave. Explain the source, signal, receiver, possible interference, and one design improvement."
 				}
 			]
 		},

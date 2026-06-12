@@ -277,7 +277,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Check-in #1: Cloning",
 					content:
-						"Cloning-1: How can we duplicate sprites and make the duplicates do different things?\nCloning-2,3: Move your drawing code so that when the green flag is clicked, the parent sprite makes clones of itself every 2 seconds and the clones go to a random position and draw the hexagon shape.\nCloning-4: Make sure to show the clones when they are created and then delete them when they're done. What should we do with the sprite that isn't doing anything?",
+						"Practice prompts:\n1. How can Scratch duplicate sprites and make the duplicates do different things?\n2. Move the drawing code so that when the green flag is clicked, the parent sprite makes clones of itself every 2 seconds and the clones go to a random position and draw the hexagon shape.\n3. Make sure the clones show when they are created and then delete themselves when they are done. What should happen to the original sprite if it is not drawing?",
 					solutionLink: "https://scratch.mit.edu/projects/341945558/"
 				},
 				{
@@ -545,13 +545,13 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Check-in #2: Lists",
 					content:
-						"Lists-1: What do you use lists for in Scratch?\nLists-2,3: Change the name of each of Andie's costumes to match the action that each costume is performing (\"pass\", \"shoot\", etc). Can you create a list called “actions” and add each of the names of Andie's different costumes to it when the 3 key is pressed?\nLists-4: Make Andie say the second thing in the list.\nLists-5: Tell the user what actions Andie can perform by looping through the list.\nLists-6: Once you've reported all of Andie's actions to the user, ask which action they would like to see and switch his costume to this action! If you haven't already, how do we make sure the list is cleared so we don't add duplicate items to the list when the 3 key is pressed?",
+						'Practice prompts:\n1. What are lists useful for in Scratch?\n2. Change the name of each of Andie\'s costumes to match the action that each costume is performing ("pass", "shoot", etc.). Create a list called “actions” and add each costume name when the 3 key is pressed.\n3. Make Andie say the second item in the list.\n4. Report the actions Andie can perform by looping through the list.\n5. After reporting all actions, ask which action should appear and switch the costume to that action. Clear the list first so the 3 key does not add duplicate items.',
 					solutionLink: "https://scratch.mit.edu/projects/342645999/"
 				},
 				{
 					title: "Check-in #2: Functions",
 					content:
-						"Functions-1: What are functions in Scratch? Where can we create our own blocks in scratch?\nFunctions-2: Create a function called “Score!”, which changes Andie's costume, makes him say “Woohoo!” and play a clapping sound.\nFunctions-3: Make Andie score when the spacebar is pressed.\nFunctions-4: Create another function called “Find Multiples” that takes one number input and says the first 10 multiples of that number for one second each.\nFunctions-5: When the spacebar is pressed, make Andie say the multiples of a random number from 1 to 10.",
+						"Practice prompts:\n1. What are functions in Scratch, and where can custom blocks be created?\n2. Create a function called “Score!” that changes Andie's costume, makes him say “Woohoo!”, and plays a clapping sound.\n3. Make Andie score when the spacebar is pressed.\n4. Create another function called “Find Multiples” that takes one number input and says the first 10 multiples of that number for one second each.\n5. When the spacebar is pressed, make Andie say the multiples of a random number from 1 to 10.",
 					solutionLink: "https://scratch.mit.edu/projects/342645999/"
 				},
 				{

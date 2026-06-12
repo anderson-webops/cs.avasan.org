@@ -301,7 +301,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Next Topics`,
 				content: [
-					`**Course focus:** These ${courseLabel} topics mark the next areas where ${profile.family} can become more complete. Introduce each ${courseLabel} topic in prerequisite order and tie it to a concrete project or checkpoint.`,
+					`**Course focus:** These ${courseLabel} topics mark the next areas where ${profile.family} can become more complete. Each ${courseLabel} topic should appear in prerequisite order and connect to a concrete project or checkpoint.`,
 					`**Expansion topics:**\n${bullets(profile.topics.map(topic => `${courseLabel} expansion: ${topic}`))}`,
 					`**Common pitfalls:** Each ${courseLabel} topic should connect to a real project. If a ${courseLabel} connection is unclear, add a smaller bridge lesson before the major project.`
 				].join("\n\n")

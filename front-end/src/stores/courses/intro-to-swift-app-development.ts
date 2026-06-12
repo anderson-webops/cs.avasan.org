@@ -1272,7 +1272,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Build Metadata and Preflight Review",
 					content:
-						"Review version/build numbers, screenshots, descriptions, icons, support information, and tester notes as one preflight package. Connect this directly to what students will need for the capstone even if they only simulate the publishing path."
+						"Check version/build numbers, screenshots, descriptions, icons, support information, and tester notes as one preflight package. Connect this directly to capstone needs even if the publishing path is simulated."
 				},
 				{
 					title: "Practical Walkthrough: TestFlight and Submission Basics",

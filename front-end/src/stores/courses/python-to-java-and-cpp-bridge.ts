@@ -461,7 +461,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Project: Python to C++ Console Port",
 					content:
-						"Port a small Python console game into C++ and use it as the last transition exercise before entering the main `C++ Level 1` path.",
+						"Convert a small Python console game into C++ and use it as the last transition exercise before entering the main `C++ Level 1` path.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/starter",
 					solutionLink:

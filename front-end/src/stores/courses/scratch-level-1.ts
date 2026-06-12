@@ -183,7 +183,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Project 2 – Hot Cross Buns",
 					content:
-						'This project uses the Music extension. When the green flag is clicked, play the song "Hot Cross Buns" twice:\n\nE D C E D C C C C C D D D D E D C.\n\nUse loops for repeated sections. Compose other songs as an extension.',
+						'This project uses the Music extension. When the green flag is clicked, play the song "Hot Cross Buns" twice:\n\nE-D-C, E-D-C, C-C-C-C, D-D-D-D, E-D-C.\n\nUse loops for repeated sections. Compose other songs as an extension.',
 					projectLink: "https://scratch.mit.edu/projects/291117784/",
 					solutionLink: "https://scratch.mit.edu/projects/291115434/"
 				},

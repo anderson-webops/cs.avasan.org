@@ -816,6 +816,7 @@ function neutralizeLessonDirectiveText(text: string) {
 
 function normalizeDuplicateArticles(text: string) {
 	return text
+		.replace(/\bthe\s+the\s+/gi, "the ")
 		.replace(/\bThe\s+(The|A|An)\s+/g, "$1 ")
 		.replace(/\bthe\s+(The|A|An)\s+/g, "$1 ")
 		.replace(/\bA\s+(The|A|An)\s+/g, "$1 ")
@@ -824,8 +825,126 @@ function normalizeDuplicateArticles(text: string) {
 		.replace(/\ban\s+(The|A|An)\s+/g, "$1 ");
 }
 
+const sectionActionVerbs: Record<string, string> = {
+	add: "adds",
+	build: "builds",
+	calculate: "calculates",
+	choose: "chooses",
+	compare: "compares",
+	complete: "completes",
+	compute: "computes",
+	connect: "connects",
+	consider: "considers",
+	control: "controls",
+	create: "creates",
+	define: "defines",
+	describe: "describes",
+	discuss: "discusses",
+	draw: "draws",
+	explain: "explains",
+	finish: "finishes",
+	identify: "identifies",
+	keep: "keeps",
+	make: "makes",
+	move: "moves",
+	practice: "practices",
+	record: "records",
+	run: "runs",
+	show: "shows",
+	test: "tests",
+	trace: "traces",
+	use: "uses",
+	verify: "verifies",
+	write: "writes"
+};
+
+function sectionActionPattern(prefix: string) {
+	return new RegExp(
+		`${prefix}(${Object.keys(sectionActionVerbs).join("|")})\\b`,
+		"gi"
+	);
+}
+
+function normalizeSectionActionAgreement(text: string) {
+	const commaPattern = sectionActionPattern("([,;]\\s+)");
+	const commaAndPattern = sectionActionPattern("(,\\s+and\\s+)");
+	const andPattern = sectionActionPattern("(\\s+and\\s+)");
+
+	return text.replace(/\bThis section [^.]+\./g, sentence => {
+		if (
+			/\bThis section introduces each [^.]* topic in prerequisite order and tie it to\b/i.test(
+				sentence
+			)
+		) {
+			return sentence.replace(
+				/\bThis section introduces each ([^.]*) topic in prerequisite order and tie it to\b/i,
+				"Each $1 topic is introduced in prerequisite order and tied to"
+			);
+		}
+
+		if (
+			/\bThis section reviews what [^.]* and identify\b/i.test(sentence)
+		) {
+			return sentence.replace(
+				/\bThis section reviews what ([^.]*) and identify\b/i,
+				"This section reviews what $1 and identifies"
+			);
+		}
+
+		if (
+			/\bThis section explains what [^.]* is and identify\b/i.test(
+				sentence
+			)
+		) {
+			return sentence.replace(
+				/\bThis section explains what ([^.]*) is and identify\b/i,
+				"This section explains what $1 is and identifies"
+			);
+		}
+
+		if (
+			/\bThis section explains how [^,.]* works, when [^,.]* can be used, complete [^,.]*, and identify\b/i.test(
+				sentence
+			)
+		) {
+			return sentence.replace(
+				/\bThis section explains how ([^,.]*) works, when ([^,.]*) can be used, complete ([^,.]*), and identify\b/i,
+				"This section explains how $1 works, when $2 can be used, completes $3, and identifies"
+			);
+		}
+
+		if (
+			/\bThis section explains how [^,.]* work, compute [^,.]*, compare [^,.]*, and identify\b/i.test(
+				sentence
+			)
+		) {
+			return sentence.replace(
+				/\bThis section explains how ([^,.]*) work, compute ([^,.]*), compare ([^,.]*), and identify\b/i,
+				"This section explains how $1 work, computes $2, compares $3, and identifies"
+			);
+		}
+
+		const firstComma = sentence.indexOf(",");
+		const opening =
+			firstComma >= 0 ? sentence.slice(0, firstComma) : sentence;
+		if (/\b(?:how|to)\b/i.test(opening)) return sentence;
+
+		return sentence
+			.replace(/,\s+then\s+add\b/gi, ", then adds")
+			.replace(commaAndPattern, (_match, prefix, verb: string) => {
+				return `${prefix}${sectionActionVerbs[verb.toLowerCase()]}`;
+			})
+			.replace(commaPattern, (_match, prefix, verb: string) => {
+				return `${prefix}${sectionActionVerbs[verb.toLowerCase()]}`;
+			})
+			.replace(andPattern, (_match, prefix, verb: string) => {
+				return `${prefix}${sectionActionVerbs[verb.toLowerCase()]}`;
+			});
+	});
+}
+
 function neutralizeStudentFacingText(text: string) {
-	return normalizeDuplicateArticles(
+	const neutralized = normalizeDuplicateArticles(
 		neutralizeLessonDirectiveText(text)
 			.replace(/\bCore Concepts and Teaching Flow\b/g, "Core Concepts")
 			.replace(/\*\*Teaching flow:\*\*/gi, "**Concept path:**")
@@ -1138,6 +1257,7 @@ function neutralizeStudentFacingText(text: string) {
 			.replace(/\bthe student includes\b/g, "the final work includes")
 			.replace(/\bstudent suggests\b/g, "response suggests")
 			.replace(/\bstudent answers\b/g, "response answers")
+			.replace(/\bbefore the student enters\b/gi, "before entering")
 			.replace(/\bstudent enters\b/g, "the entry uses")
 			.replace(/\bThe learner should\b/g, "The goal is to")
 			.replace(/\bLearners should\b/g, "The goal is to")
@@ -1162,6 +1282,8 @@ function neutralizeStudentFacingText(text: string) {
 			.replace(/\bThe student can ([a-z])/g, capitalizeMatchedFirstLetter)
 			.replace(/\bthe student can ([a-z])/g, keepMatchedFirstLetter)
 	);
+
+	return normalizeSectionActionAgreement(neutralized);
 }
 
 function neutralizeStudentFacingCourseText(course: RawCourse) {
