@@ -88,7 +88,7 @@ describe("implemented course development artifacts", () => {
 			expect(text).toContain(
 				"Algebra Project Taxonomy and Assessment Implementation"
 			);
-			expect(text).toContain("Portal Structure Decision");
+			expect(text).toContain("Course Structure Decision");
 			expect(
 				course.modules.every(
 					module => module.supplementalProjects.length >= 2
@@ -303,7 +303,7 @@ describe("implemented course development artifacts", () => {
 			expect(text, courseId).toContain(
 				"Standards-Mapped Algebra Architecture"
 			);
-			expect(text, courseId).toContain("Course Object Labels");
+			expect(text, courseId).toContain("Course Item Labels");
 			expect(text, courseId).toContain(
 				"Required Anchor and Extension Projects"
 			);

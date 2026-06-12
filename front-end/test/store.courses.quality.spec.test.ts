@@ -944,6 +944,39 @@ describe("course text quality normalization", () => {
 		expect(elementaryCorpus).toContain("shared online material");
 	});
 
+	it(
+		"keeps generated architecture modules reader-facing",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const corpus = courses.map(allCourseText).join("\n");
+
+			const internalPhrases = [
+				/\binstructor\b/i,
+				/\byour student\b/i,
+				/\bask the student\b/i,
+				/\bhave the student\b/i,
+				/\bsession notes?\b/i,
+				/\bHQ Support\b/i,
+				/\bSlack\b/i,
+				/\bJuni whiteboard\b/i,
+				/\bRecording Studio\b/i,
+				/\bteacher\b/i,
+				/\bportal\b/i,
+				/This lesson arc covers/i,
+				/Use this as one/i,
+				/Treat this as/i,
+				/\bfuture lesson writing\b/i,
+				/\bfamily can tell\b/i
+			];
+
+			for (const phrase of internalPhrases)
+				expect(corpus).not.toMatch(phrase);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("formats authored lesson setup text as neutral student-readable sections", async () => {
 		const course = await loadRawCourse("c-level-1");
 		expect(course).not.toBeNull();

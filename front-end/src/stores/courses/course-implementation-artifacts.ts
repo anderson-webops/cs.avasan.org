@@ -46,13 +46,13 @@ export const courseImplementationSourceRepos: Record<string, string> = {
 
 export const courseContentOnlySourcePolicies: Record<string, string> = {
 	"algebra-1a":
-		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+		"Content-only math course. Use course modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
 	"algebra-1b":
-		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+		"Content-only math course. Use course modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
 	"algebra-2a":
-		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+		"Content-only math course. Use course modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
 	"algebra-2b":
-		"Content-only math course. Use portal modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
+		"Content-only math course. Use course modules plus generated practice, modeling, and error-analysis tasks; worksheets or Desmos links should be added as media assets when created.",
 	"design-patterns-in-java":
 		"Catalog-owned course. Keep source snippets embedded until a dedicated Java design-patterns repo is created.",
 	"design-patterns-in-java-part-2":
@@ -803,7 +803,7 @@ function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 		title: "Algebra Project Taxonomy and Assessment Implementation",
 		curriculum: [
 			{
-				title: "Portal Structure Decision",
+				title: "Course Structure Decision",
 				content:
 					"**Learning sequence:** Use `supplementalProjects` for explicit practice sets, application/modeling projects, error-analysis tasks, and enrichment. Keep core curriculum items for concept instruction, worked examples, and guided practice. Existing imported module projects can remain in curriculum for continuity, but every module should also expose at least two explicit project/practice options in the project area.\n\n**Completion check:** The course makes it possible to distinguish required concept instruction from optional/remedial/enrichment project work without reading the entire module."
 			},
@@ -847,7 +847,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Decision: Keep One Course with K-2 and 3-5 Paths",
 				content:
-					"**Learning sequence:** Keep Elementary Science as one course for scheduling simplicity, but label each activity with a K-2 path and a 3-5 path during future lesson writing. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Completion check:** Every future elementary science module should name the simpler path, the advanced path, and the shared phenomenon."
+					"**Learning sequence:** Elementary Science stays as one course, with each activity labeled by a K-2 path and a 3-5 path during activity design. K-2 emphasizes observation, drawing, sorting, oral explanation, and sentence frames. Grades 3-5 add data tables, simple graphs, variables, model critique, and fuller CER writing.\n\n**Completion check:** Every elementary science module should name the simpler path, the advanced path, and the shared phenomenon."
 			},
 			{
 				title: "K-2 Path",
@@ -1354,7 +1354,7 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: "Pinned Setup Assumptions",
 				content: [
-					"**Learning sequence:** Treat setup and version expectations as part of the course material. Before a project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any deviation in the session notes.",
+					"**Learning sequence:** Treat setup and version expectations as part of the course material. Before a project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any version-specific deviation in the reproducibility notes.",
 					`**Assumptions:**\n${bullets(assumptions)}`,
 					"**Completion check:** The project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters."
 				].join("\n\n")
@@ -1384,7 +1384,7 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: "Toolchain Project: Version Drift Review",
 				content:
-					"**Project goal:** Compare the current course assumption against the installed or recommended version and document whether the course needs an update.\n\n**Completion checks:**\n- Current installed/recommended version is named.\n- Any breaking UI/API/build difference is recorded.\n- the course notes show whether to proceed, update, or use a fallback."
+					"**Project goal:** Compare the current course assumption against the installed or recommended version and document whether the course needs an update.\n\n**Completion checks:**\n- Current installed/recommended version is named.\n- Any breaking UI/API/build difference is recorded.\n- The version-drift note shows whether to proceed, update, or use a fallback."
 			}
 		]
 	});
@@ -1439,9 +1439,9 @@ function addAlgebraStandardsArchitectureModule(
 				].join("\n\n")
 			},
 			{
-				title: "Course Object Labels",
+				title: "Course Item Labels",
 				content:
-					"**Learning sequence:** Label every future artifact as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. This keeps live instruction, homework, optional extension, and mastery checks from blurring together.\n\n**Completion check:** A family can tell which items teach, which items practice, which items assess, and which items extend."
+					"**Learning sequence:** Use clear labels such as Lesson, Practice, Check-in, Project, Remediation, Enrichment, or Assessment. The label should make the purpose of each item obvious: introducing a concept, practicing a skill, checking mastery, repairing a gap, or extending the idea.\n\n**Completion check:** A reader can tell which items teach, which items practice, which items assess, and which items extend."
 			},
 			{
 				title: "Required Anchor and Extension Projects",
@@ -1996,7 +1996,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Starter and Solution Tag Model",
 				content:
-					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-solution` in starter/solution repos. Keep solution links solution-visible where the portal supports that distinction.\n\n**Completion check:** The course makes it possible to compare starter and solution states without guessing which folder is current."
+					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-solution` in starter/solution repos. Keep solution links restricted to staff-facing resource areas where visibility controls support that distinction.\n\n**Completion check:** The course makes it possible to compare starter and solution states without guessing which folder is current."
 			},
 			{
 				title: "Capstone Options",
