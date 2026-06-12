@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const networkSystemsCourse: RawCourse = {
@@ -1002,49 +1003,69 @@ export const networkSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "network systems lab 15: Implementation Lab",
+			title: "Network Systems Lab 15: Implementation Lab",
 			curriculum: [
 				{
-					title: "network systems lab 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Network Systems Lab 15: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 15: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "network systems lab 15: Guided Example",
-					content:
-						"A representative network systems lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Network Systems Lab 15: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 15: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "network systems lab 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Network Systems Lab 15: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 15: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/solution"
 				},
 				{
-					title: "network systems lab 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Network Systems Lab 15: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 15: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "network systems lab 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Network Systems Lab 15: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 15: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-network-systems-lab-15/solution"
 				},
 				{
-					title: "network systems lab 15 supplemental 2: Implementation Lab",
+					title: "Network Systems Lab 15 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle:
-							"network systems lab 15: Implementation Lab",
+							"Network Systems Lab 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1054,11 +1075,11 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-29-applied-studio-15-network-systems-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "network systems lab 15 supplemental 3: Implementation Lab",
+					title: "Network Systems Lab 15 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle:
-							"network systems lab 15: Implementation Lab",
+							"Network Systems Lab 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1070,49 +1091,69 @@ export const networkSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "network systems lab 16: Implementation Lab",
+			title: "Network Systems Lab 16: Implementation Lab",
 			curriculum: [
 				{
-					title: "network systems lab 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Network Systems Lab 16: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "network systems lab 16: Guided Example",
-					content:
-						"A representative network systems lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Network Systems Lab 16: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "network systems lab 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Network Systems Lab 16: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/solution"
 				},
 				{
-					title: "network systems lab 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Network Systems Lab 16: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "network systems lab 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Network Systems Lab 16: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-network-systems-lab-16/solution"
 				},
 				{
-					title: "network systems lab 16 supplemental 2: Implementation Lab",
+					title: "Network Systems Lab 16 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle:
-							"network systems lab 16: Implementation Lab",
+							"Network Systems Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1122,11 +1163,11 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-31-applied-studio-16-network-systems-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "network systems lab 16 supplemental 3: Implementation Lab",
+					title: "Network Systems Lab 16 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle:
-							"network systems lab 16: Implementation Lab",
+							"Network Systems Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1138,49 +1179,69 @@ export const networkSystemsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "network systems lab 17: Implementation Lab",
+			title: "Network Systems Lab 17: Implementation Lab",
 			curriculum: [
 				{
-					title: "network systems lab 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Network Systems Lab 17: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "network systems lab 17: Guided Example",
-					content:
-						"A representative network systems lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Network Systems Lab 17: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "network systems lab 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Network Systems Lab 17: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/solution"
 				},
 				{
-					title: "network systems lab 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Network Systems Lab 17: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "network systems lab 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Network Systems Lab 17: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network systems",
+						moduleTitle:
+							"Network Systems Lab 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-network-systems-lab-17/solution"
 				},
 				{
-					title: "network systems lab 17 supplemental 2: Implementation Lab",
+					title: "Network Systems Lab 17 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle:
-							"network systems lab 17: Implementation Lab",
+							"Network Systems Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1190,11 +1251,11 @@ export const networkSystemsCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-33-applied-studio-17-network-systems-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "network systems lab 17 supplemental 3: Implementation Lab",
+					title: "Network Systems Lab 17 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network systems",
 						moduleTitle:
-							"network systems lab 17: Implementation Lab",
+							"Network Systems Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

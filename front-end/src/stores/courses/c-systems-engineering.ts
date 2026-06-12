@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const cSystemsEngineeringCourse: RawCourse = {
@@ -928,48 +929,63 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 14: Implementation Lab",
+			title: "Systems Build 14: Implementation Lab",
 			curriculum: [
 				{
-					title: "systems build 14: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Systems Build 14: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 14: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "systems build 14: Guided Example",
-					content:
-						"A representative systems build 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Systems Build 14: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 14: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "systems build 14: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Systems Build 14: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 14: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/solution"
 				},
 				{
-					title: "systems build 14: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Systems Build 14: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 14: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "systems build 14: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Systems Build 14: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 14: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-systems-build-14/solution"
 				},
 				{
-					title: "systems build 14 supplemental 2: Implementation Lab",
+					title: "Systems Build 14 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 14: Implementation Lab",
+						moduleTitle: "Systems Build 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -979,10 +995,10 @@ export const cSystemsEngineeringCourse: RawCourse = {
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-2/solution"
 				},
 				{
-					title: "systems build 14 supplemental 3: Implementation Lab",
+					title: "Systems Build 14 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 14: Implementation Lab",
+						moduleTitle: "Systems Build 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -994,48 +1010,63 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 15: Implementation Lab",
+			title: "Systems Build 15: Implementation Lab",
 			curriculum: [
 				{
-					title: "systems build 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Systems Build 15: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 15: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "systems build 15: Guided Example",
-					content:
-						"A representative systems build 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Systems Build 15: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 15: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "systems build 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Systems Build 15: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 15: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/solution"
 				},
 				{
-					title: "systems build 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Systems Build 15: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 15: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "systems build 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Systems Build 15: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 15: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-systems-build-15/solution"
 				},
 				{
-					title: "systems build 15 supplemental 2: Implementation Lab",
+					title: "Systems Build 15 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 15: Implementation Lab",
+						moduleTitle: "Systems Build 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1045,10 +1076,10 @@ export const cSystemsEngineeringCourse: RawCourse = {
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-2/solution"
 				},
 				{
-					title: "systems build 15 supplemental 3: Implementation Lab",
+					title: "Systems Build 15 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 15: Implementation Lab",
+						moduleTitle: "Systems Build 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1060,48 +1091,63 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 16: Implementation Lab",
+			title: "Systems Build 16: Implementation Lab",
 			curriculum: [
 				{
-					title: "systems build 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Systems Build 16: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "systems build 16: Guided Example",
-					content:
-						"A representative systems build 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Systems Build 16: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "systems build 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Systems Build 16: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/solution"
 				},
 				{
-					title: "systems build 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Systems Build 16: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "systems build 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Systems Build 16: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-systems-build-16/solution"
 				},
 				{
-					title: "systems build 16 supplemental 2: Implementation Lab",
+					title: "Systems Build 16 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 16: Implementation Lab",
+						moduleTitle: "Systems Build 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1111,10 +1157,10 @@ export const cSystemsEngineeringCourse: RawCourse = {
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-2/solution"
 				},
 				{
-					title: "systems build 16 supplemental 3: Implementation Lab",
+					title: "Systems Build 16 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 16: Implementation Lab",
+						moduleTitle: "Systems Build 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1126,48 +1172,63 @@ export const cSystemsEngineeringCourse: RawCourse = {
 			]
 		},
 		{
-			title: "systems build 17: Implementation Lab",
+			title: "Systems Build 17: Implementation Lab",
 			curriculum: [
 				{
-					title: "systems build 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Systems Build 17: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "systems build 17: Guided Example",
-					content:
-						"A representative systems build 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Systems Build 17: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "systems build 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Systems Build 17: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/solution"
 				},
 				{
-					title: "systems build 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Systems Build 17: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "systems build 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Systems Build 17: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "C systems",
+						moduleTitle: "Systems Build 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-systems-build-17/solution"
 				},
 				{
-					title: "systems build 17 supplemental 2: Implementation Lab",
+					title: "Systems Build 17 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 17: Implementation Lab",
+						moduleTitle: "Systems Build 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1177,10 +1238,10 @@ export const cSystemsEngineeringCourse: RawCourse = {
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-2/solution"
 				},
 				{
-					title: "systems build 17 supplemental 3: Implementation Lab",
+					title: "Systems Build 17 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "C systems",
-						moduleTitle: "systems build 17: Implementation Lab",
+						moduleTitle: "Systems Build 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const networkSecurityCourse: RawCourse = {
@@ -1118,49 +1119,69 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "network security lab 16: Implementation Lab",
+			title: "Network Security Lab 16: Implementation Lab",
 			curriculum: [
 				{
-					title: "network security lab 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Network Security Lab 16: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "network security lab 16: Guided Example",
-					content:
-						"A representative network security lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Network Security Lab 16: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "network security lab 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Network Security Lab 16: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/solution"
 				},
 				{
-					title: "network security lab 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Network Security Lab 16: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "network security lab 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Network Security Lab 16: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-network-security-lab-16/solution"
 				},
 				{
-					title: "network security lab 16 supplemental 2: Implementation Lab",
+					title: "Network Security Lab 16 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network security",
 						moduleTitle:
-							"network security lab 16: Implementation Lab",
+							"Network Security Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1170,11 +1191,11 @@ export const networkSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-31-applied-studio-16-network-security-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "network security lab 16 supplemental 3: Implementation Lab",
+					title: "Network Security Lab 16 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network security",
 						moduleTitle:
-							"network security lab 16: Implementation Lab",
+							"Network Security Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1186,49 +1207,69 @@ export const networkSecurityCourse: RawCourse = {
 			]
 		},
 		{
-			title: "network security lab 17: Implementation Lab",
+			title: "Network Security Lab 17: Implementation Lab",
 			curriculum: [
 				{
-					title: "network security lab 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Network Security Lab 17: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "network security lab 17: Guided Example",
-					content:
-						"A representative network security lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Network Security Lab 17: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "network security lab 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Network Security Lab 17: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/solution"
 				},
 				{
-					title: "network security lab 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Network Security Lab 17: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "network security lab 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Network Security Lab 17: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Network Security Lab 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-network-security-lab-17/solution"
 				},
 				{
-					title: "network security lab 17 supplemental 2: Implementation Lab",
+					title: "Network Security Lab 17 supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network security",
 						moduleTitle:
-							"network security lab 17: Implementation Lab",
+							"Network Security Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1238,11 +1279,11 @@ export const networkSecurityCourse: RawCourse = {
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-33-applied-studio-17-network-security-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "network security lab 17 supplemental 3: Implementation Lab",
+					title: "Network Security Lab 17 supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "network security",
 						moduleTitle:
-							"network security lab 17: Implementation Lab",
+							"Network Security Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

@@ -411,6 +411,33 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("securityLabReviewContent");
 	});
 
+	it("keeps systems and web implementation labs from regressing to generated filler", () => {
+		const sourcePaths = [
+			"src/stores/courses/assembly.ts",
+			"src/stores/courses/c-systems-engineering.ts",
+			"src/stores/courses/linux-systems.ts",
+			"src/stores/courses/network-security.ts",
+			"src/stores/courses/network-systems.ts",
+			"src/stores/courses/web-development-foundations.ts"
+		];
+		const corpus = sourcePaths
+			.map(path => fs.readFileSync(path, "utf8"))
+			.join("\n");
+
+		expect(corpus).not.toMatch(/This lab states the target artifact/i);
+		expect(corpus).not.toMatch(
+			/A representative .* example names the key inputs/i
+		);
+		expect(corpus).not.toMatch(/Build one complete artifact first/i);
+		expect(corpus).not.toMatch(
+			/Extend the core build with one extra requirement/i
+		);
+		expect(corpus).toContain("buildImplementationLabGuidance");
+		expect(corpus).toContain("Assembly Lab 15: Implementation Lab");
+		expect(corpus).toContain("Systems Build 14: Implementation Lab");
+		expect(corpus).toContain("Full Stack Web Lab 14: Implementation Lab");
+	});
+
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {
