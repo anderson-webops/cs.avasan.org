@@ -300,7 +300,7 @@ function enrichBriefConceptLesson(item: RawCourseModuleItem) {
 
 	return {
 		...item,
-		content: `${compactWhitespace(item.content)} The core vocabulary, one concrete example, one prediction or explanation, and one small transfer task connect this idea to the module project.`
+		content: `${compactWhitespace(item.content)} Key terms, a worked example, and one quick transfer check connect this idea to the module project.`
 	};
 }
 
@@ -544,7 +544,7 @@ function neutralizeLessonDirectiveText(text: string) {
 		.replace(/\bCover:\s*/g, "Key topics include ")
 		.replace(
 			/\bStart with vocabulary, work through one concrete example, predict the next step, and connect the example back to the project or practice task in this module\./gi,
-			"Vocabulary, one concrete example, a next-step prediction, and a project connection form the core sequence for this module."
+			"Key terms, a worked example, and a transfer check form the core sequence for this module."
 		)
 		.replace(
 			/\bStart with ([^.]+)\./g,
@@ -1067,8 +1067,32 @@ function isDataAiMlContext(context: CourseTextContext) {
 	);
 }
 
+function isApcsContext(context: CourseTextContext) {
+	return context.courseId === "ap-computer-science-a";
+}
+
+function isCompetitiveProgrammingContext(context: CourseTextContext) {
+	return (
+		context.courseId.startsWith("usaco-") ||
+		/competitive programming|competitive-programming/.test(
+			contextText(context)
+		)
+	);
+}
+
 function isSwiftAppContext(context: CourseTextContext) {
 	return context.courseId === "intro-to-swift-app-development";
+}
+
+function isUnityContext(context: CourseTextContext) {
+	return context.courseId === "unity-game-development";
+}
+
+function isWebContext(context: CourseTextContext) {
+	return (
+		context.courseId === "web-development-foundations" ||
+		/web|html|css|api|database|full-stack/.test(contextText(context))
+	);
 }
 
 function isGameContext(context: CourseTextContext) {
@@ -1089,6 +1113,10 @@ function isSystemsContext(context: CourseTextContext) {
 	);
 }
 
+function isLowLevelSystemsContext(context: CourseTextContext) {
+	return /^(?:c-systems-engineering|assembly)$/.test(context.courseId);
+}
+
 function commonPitfalls(context: CourseTextContext) {
 	const source = contextText(context);
 
@@ -1100,6 +1128,12 @@ function commonPitfalls(context: CourseTextContext) {
 	}
 	if (isDataAiMlContext(context)) {
 		return "Assuming a dataset is complete or neutral, confusing correlation with explanation, trusting one metric without a baseline, or omitting limitations and responsible-use boundaries.";
+	}
+	if (isApcsContext(context)) {
+		return "Rushing past Java's exact syntax, confusing primitive values with object references, skipping trace tables, or testing only the example from the prompt.";
+	}
+	if (isCompetitiveProgrammingContext(context)) {
+		return "Matching the sample without proving the general case, missing boundary sizes, using an algorithm that is too slow for the constraints, or overlooking duplicate and tie cases.";
 	}
 	if (isSwiftAppContext(context)) {
 		return "Unclear state ownership, treating previews as full tests, overlooking empty or error states, skipping accessibility and layout checks, or confusing Xcode configuration issues with app behavior.";
@@ -1113,11 +1147,23 @@ function commonPitfalls(context: CourseTextContext) {
 	if (isGameContext(context)) {
 		return "Unclear start or reset state, event order bugs, collision or score changes that are hard to trace, and feedback that does not show the player what changed.";
 	}
+	if (isWebContext(context)) {
+		return "Building only the happy path, hiding loading or error states, ignoring keyboard and screen-size behavior, or letting UI state drift away from the data source.";
+	}
+	if (/python/.test(source)) {
+		return "Mixing input, calculation, and output in one hard-to-test block; mutating a list while looping; missing a return value; or only testing the happy path.";
+	}
+	if (/java/.test(source)) {
+		return "Confusing class and object responsibilities, using static state when instance state is needed, comparing objects incorrectly, or skipping compile/run feedback after a small change.";
+	}
+	if (/c\+\+|cpp/.test(source)) {
+		return "Losing track of ownership or lifetime, mixing indices with values, ignoring compiler warnings, or testing only the case that appears in the prompt.";
+	}
 	if (/design pattern|refactoring|pattern implementation/.test(source)) {
 		return "Adding abstraction before there is a real variation, changing behavior during refactoring, hiding responsibilities behind vague names, or skipping before-and-after tests.";
 	}
 
-	return "Mixing up values, references, and state; using the wrong loop condition or boundary; skipping edge cases; or leaving the result untested.";
+	return "Confusing the example with the general rule, skipping a boundary condition, leaving assumptions unstated, or accepting a result without evidence.";
 }
 
 function diagnosticCategories(context: CourseTextContext) {
@@ -1149,6 +1195,12 @@ function proficiencyEvidence(context: CourseTextContext) {
 	if (isDataAiMlContext(context)) {
 		return "Name the question, inspect the evidence, compare against a baseline or sanity check, and state one limitation of the result.";
 	}
+	if (isApcsContext(context)) {
+		return "Trace the Java state, compile or run the target method, test a normal case and an edge case, and explain the AP-style reasoning in precise vocabulary.";
+	}
+	if (isCompetitiveProgrammingContext(context)) {
+		return "Pass the samples, explain the invariant or algorithm idea, test a smallest and largest relevant case, and justify the time and memory complexity.";
+	}
 	if (isSwiftAppContext(context)) {
 		return "Explain the state flow, show the normal interaction, verify one empty or error case, and separate app behavior from Xcode or simulator configuration.";
 	}
@@ -1160,6 +1212,18 @@ function proficiencyEvidence(context: CourseTextContext) {
 	}
 	if (isGameContext(context)) {
 		return "Explain the main state change, show the normal play path, test one edge case, and describe how the player can tell the result worked.";
+	}
+	if (isWebContext(context)) {
+		return "Explain the user flow, show the data or state transition, verify loading/success/error behavior, and check the layout at a narrow and wide width.";
+	}
+	if (/python/.test(contextText(context))) {
+		return "Explain the data flow, run a normal case and an edge case, and point to the function or loop where the main transformation happens.";
+	}
+	if (/java/.test(contextText(context))) {
+		return "Explain the object roles, show the method call or test that proves the behavior, and identify one state or type decision that matters.";
+	}
+	if (/c\+\+|cpp/.test(contextText(context))) {
+		return "Explain the data representation, show the compile/run or test evidence, and identify one ownership, lifetime, or container choice that matters.";
 	}
 
 	return "Explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be correct.";
@@ -1231,11 +1295,32 @@ function projectExpectations(context: CourseTextContext) {
 			"- Keep drawing, updating, event handling, and game-state changes separated enough to debug one layer at a time."
 		];
 	}
+	if (isUnityContext(context)) {
+		return [
+			"- Define the scene, player action, object responsibilities, state changes, win/loss or completion condition, and visible feedback.",
+			"- Playtest startup, normal controls, one collision or interaction edge case, and the reset or replay path.",
+			"- Keep scripts, prefabs, scene setup, and inspector configuration documented enough that the behavior can be reproduced."
+		];
+	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
 		return [
 			"- Define the screen, state owner, data flow, build target, and simulator or device behavior before implementation.",
 			"- Test a fresh launch, one normal interaction, one empty/error state when relevant, and one layout or accessibility check.",
 			"- Record the Xcode, signing, preview, simulator, or TestFlight evidence that proves the app state is understood."
+		];
+	}
+	if (isDataAiMlContext(context)) {
+		return [
+			"- Define the state, data, features, actions, model, or search space before implementation.",
+			"- Test a tiny traceable case, a normal case, and one boundary or failure case that challenges the algorithm or interpretation.",
+			"- Record the evidence used to judge the result: trace, metric, sanity check, baseline, visualization, or limitation."
+		];
+	}
+	if (isCompetitiveProgrammingContext(context)) {
+		return [
+			"- State the input format, output format, constraints, and algorithm idea before coding.",
+			"- Test the sample exactly, then add a smallest case, a boundary case, and a duplicate, tie, or adversarial case when relevant.",
+			"- Record the time and memory complexity and why those bounds fit the problem constraints."
 		];
 	}
 	if (
@@ -1254,6 +1339,13 @@ function projectExpectations(context: CourseTextContext) {
 			"- Define the hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics.",
 			"- Test local behavior, remote or cross-host behavior, and one failure case using command output or packet/service evidence.",
 			"- Record the observed symptom, the diagnostic command, the interpretation, and the configuration or topology fact it proves."
+		];
+	}
+	if (isLowLevelSystemsContext(context)) {
+		return [
+			"- Define the build command, source/header boundary, runtime input, memory assumption, or observable machine behavior before implementation.",
+			"- Verify normal behavior and one failure path with compiler output, sanitizer output, return codes, register or memory traces, logs, or command-line output.",
+			"- Record the exact command and evidence so the systems behavior can be reproduced from a clean checkout or shell."
 		];
 	}
 	if (
@@ -1280,7 +1372,7 @@ function projectExpectations(context: CourseTextContext) {
 			"- Keep a short note naming one organization choice that made the program easier to extend or debug."
 		];
 	}
-	if (/web|html|css|api|database|full-stack/.test(source)) {
+	if (isWebContext(context)) {
 		return [
 			"- Define the visible user flow and the data flow before implementation.",
 			"- Verify the feature in the browser at desktop and narrow widths.",
@@ -1357,11 +1449,42 @@ function projectExpectations(context: CourseTextContext) {
 			"- Explain which object owns each resource and when that resource is released."
 		];
 	}
-	if (
-		/physics|chemistry|science|biology|earth|ecosystem|weather|motion/.test(
-			source
-		)
-	) {
+	if (isApcsContext(context)) {
+		return [
+			"- Identify the Java concept being practiced, the relevant variables or object state, and the expected output or method result.",
+			"- Compile and run the code, then test a normal AP-style case plus one edge case involving a boundary value, empty collection, null-risk, or branch change when relevant.",
+			"- Include a short trace, state table, or explanation of why the selected Java construct behaves that way."
+		];
+	}
+	if (/python/.test(source)) {
+		return [
+			"- Name the input values, helper functions or loops, data structures, and printed output before coding.",
+			"- Test one normal case, one empty or smallest case, and one awkward input such as extra spaces, casing, duplicates, or invalid data when relevant.",
+			"- Keep the result explainable by separating input handling, core logic, and output formatting."
+		];
+	}
+	if (/java/.test(source)) {
+		return [
+			"- Define the classes, object state, method inputs, return values, and expected console or test output.",
+			"- Compile and run after each meaningful class or method change, then test one normal case and one edge case.",
+			"- Keep a short note naming the class responsibility, the method being verified, and any object-state change."
+		];
+	}
+	if (/c\+\+|cpp/.test(source)) {
+		return [
+			"- Define the data representation, ownership or lifetime assumptions, compile command, and expected output.",
+			"- Build with warnings enabled when possible and test one normal case, one boundary case, and one malformed or awkward input.",
+			"- Record the container, pointer/reference, or memory decision that most affects correctness."
+		];
+	}
+	if (isMathContext(context)) {
+		return [
+			"- State the givens, target quantity, representation, and rule or theorem before solving.",
+			"- Work a typical example, then check a boundary, sign, unit, graph, or table case that could change the interpretation.",
+			"- Keep each algebraic or representational step justified so the final answer can be checked for reasonableness."
+		];
+	}
+	if (isScienceContext(context)) {
 		return [
 			"- Use a provided image, graph, data table, short video, or simulation rather than required physical supplies.",
 			"- Record observations before explaining them.",
@@ -1370,16 +1493,16 @@ function projectExpectations(context: CourseTextContext) {
 	}
 
 	return [
-		"- Restate the prompt as a short checklist before coding or building.",
-		"- Implement the base behavior first, then test a normal case and an edge case.",
-		"- Keep the final result explainable: the final note should describe the main design choice and one bug that was fixed."
+		"- Define the intended result, inputs or materials, and success criteria before starting.",
+		"- Complete the smallest working version first, then check a typical case and one boundary or unusual case.",
+		"- Keep the final result explainable by naming the main reasoning or design choice and the evidence that supports it."
 	];
 }
 
 function completionChecks(context: CourseTextContext) {
 	const source = contextText(context);
 
-	if (/usaco|competitive/.test(source)) {
+	if (isCompetitiveProgrammingContext(context)) {
 		return [
 			"- The solution passes the sample input/output exactly.",
 			"- Test a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.",
@@ -1391,6 +1514,13 @@ function completionChecks(context: CourseTextContext) {
 			"- The green flag starts the project from a predictable state.",
 			"- Controls, events, broadcasts, variables, and sprite interactions behave as intended.",
 			"- A short explanation names the main state change and one edge case tested during play."
+		];
+	}
+	if (isUnityContext(context)) {
+		return [
+			"- The scene starts from a predictable state and the main interaction is visible during play mode.",
+			"- Controls, collisions or interactions, scoring/progress, and reset or completion behavior are checked.",
+			"- The final note names the script, prefab, or scene setting that most directly controls the behavior."
 		];
 	}
 	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
@@ -1416,6 +1546,13 @@ function completionChecks(context: CourseTextContext) {
 			"- The final note includes one failure mode, rollback step, or diagnostic command that would help future troubleshooting."
 		];
 	}
+	if (isLowLevelSystemsContext(context)) {
+		return [
+			"- The project builds from the documented command or toolchain setting.",
+			"- Compiler output, sanitizer output, register or memory evidence, return codes, logs, or command-line output confirms the intended behavior.",
+			"- The final note includes one failure mode, debugging command, or reproducibility detail that would help future troubleshooting."
+		];
+	}
 	if (
 		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
 	) {
@@ -1425,18 +1562,60 @@ function completionChecks(context: CourseTextContext) {
 			"- The final explanation connects the observed packet, port, DNS, route, or service result to the network model."
 		];
 	}
-	if (/science|physics|chemistry|biology|earth|ecosystem/.test(source)) {
+	if (isScienceContext(context)) {
 		return [
 			"- The explanation names the phenomenon, the model or data source, and the target vocabulary.",
 			"- Separate observation from inference.",
 			"- The final answer includes a claim, evidence, and reasoning connection."
 		];
 	}
-	if (/web|html|css|api|database|full-stack/.test(source)) {
+	if (isMathContext(context)) {
+		return [
+			"- The solution shows the rule, representation, or theorem used.",
+			"- A typical case and a sign, unit, graph, table, or boundary check are included when relevant.",
+			"- The final answer is checked for reasonableness in context."
+		];
+	}
+	if (isDataAiMlContext(context)) {
+		return [
+			"- The result is checked against a small trace, baseline, metric, visualization, or sanity check.",
+			"- A normal case and a boundary or failure case are tested or explained.",
+			"- The explanation states what the evidence supports and one limitation of the result."
+		];
+	}
+	if (isApcsContext(context)) {
+		return [
+			"- The Java code compiles and the target behavior is visible in output, tests, or a completed trace.",
+			"- A normal case and an edge case are checked for the relevant branch, loop, method, class, array, or list behavior.",
+			"- The explanation uses precise Java vocabulary instead of only describing what the program appears to print."
+		];
+	}
+	if (isWebContext(context)) {
 		return [
 			"- The feature works from a fresh page load without relying on hidden state.",
 			"- Empty, loading, success, and failure states are visible or intentionally handled.",
 			"- The page remains readable and usable on mobile and desktop widths."
+		];
+	}
+	if (/python/.test(source)) {
+		return [
+			"- The program can be rerun from a fresh start with predictable output.",
+			"- Normal, empty or smallest, and awkward inputs are tested or justified.",
+			"- The explanation identifies the main function, loop, or data structure that drives the result."
+		];
+	}
+	if (/java/.test(source)) {
+		return [
+			"- The code compiles from a clean run and the expected behavior is visible in output or tests.",
+			"- Object construction, method behavior, and at least one edge case are checked.",
+			"- The explanation names the class or interface boundary that keeps the design understandable."
+		];
+	}
+	if (/c\+\+|cpp/.test(source)) {
+		return [
+			"- The project builds from the documented command or IDE target.",
+			"- Normal, boundary, and invalid or awkward inputs are checked with visible output or tests.",
+			"- The explanation names the relevant container, pointer/reference, ownership, or algorithm choice."
 		];
 	}
 	if (/security|offensive|low-level security|network security/.test(source)) {
@@ -1448,9 +1627,9 @@ function completionChecks(context: CourseTextContext) {
 	}
 
 	return [
-		"- The work runs or presents cleanly from a fresh start.",
-		"- Normal, boundary, and awkward cases have been checked.",
-		"- Explain the main logic, data structure, or design decision without reading the code line by line."
+		"- The result can be reproduced from a clean start.",
+		"- A typical case and one boundary or unusual case are checked.",
+		"- The explanation names the main reasoning or design choice without restating every step line by line."
 	];
 }
 
@@ -1497,7 +1676,7 @@ function extensionPrompt(context: CourseTextContext) {
 
 function projectSupport(context: CourseTextContext) {
 	return [
-		`**Project goal:** Use this build to turn the prompt into a concrete artifact that demonstrates ${subjectFocus(context)}. Before starting, restate the requirements, identify the expected inputs or state, and name what the finished output should show.`,
+		`**Project goal:** Build a working result for **${context.module.title}** that shows ${subjectFocus(context)} through behavior, output, evidence, or explanation.`,
 		`**Required outcome:**\n${projectExpectations(context).join("\n")}`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`
@@ -1506,7 +1685,7 @@ function projectSupport(context: CourseTextContext) {
 
 function lessonSupport(context: CourseTextContext) {
 	return [
-		`**Learning sequence:** This lesson introduces ${subjectFocus(context)}. The sequence moves from vocabulary to one concrete example, then to a prediction, explanation, or small transfer task connected to the module project.`,
+		`**Concept path:** This lesson introduces ${subjectFocus(context)} through key terms, a worked example, and a transfer check tied to the module project.`,
 		`**Common pitfalls:** ${commonPitfalls(context)}`,
 		`**Mastery check:** ${proficiencyEvidence(context)}`
 	].join("\n\n");

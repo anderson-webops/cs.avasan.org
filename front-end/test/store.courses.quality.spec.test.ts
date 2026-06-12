@@ -191,10 +191,23 @@ describe("course text quality normalization", () => {
 				/module's core concept, a concrete worked example, and a testable artifact/i
 			);
 			expect(corpus).not.toMatch(/the work should be able to describe/i);
+			expect(corpus).not.toMatch(/turn the prompt into a concrete artifact/i);
+			expect(corpus).not.toMatch(/The core vocabulary, one concrete example/i);
+			expect(corpus).not.toMatch(/The sequence moves from vocabulary/i);
+			expect(corpus).not.toMatch(/Restate the prompt as a short checklist/i);
+			expect(corpus).not.toMatch(
+				/Normal, boundary, and awkward cases have been checked/i
+			);
+			expect(corpus).not.toMatch(
+				/Mixing up values, references, and state; using the wrong loop condition/i
+			);
 			expect(corpus).toContain("PyGame development");
 			expect(corpus).toContain("Swift app development");
 			expect(corpus).toContain("Linux systems practice");
 			expect(corpus).toContain("network systems practice");
+			expect(corpus).toContain("AP CSA Java reasoning");
+			expect(corpus).toContain("competitive-programming discipline");
+			expect(corpus).toContain("mathematical reasoning");
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
