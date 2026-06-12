@@ -389,6 +389,28 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("sanitizer output");
 	});
 
+	it("keeps low-level security implementation labs from regressing to generated filler", () => {
+		const sourcePaths = [
+			"src/stores/courses/low-level-security.ts",
+			"src/stores/courses/low-level-security-part-2.ts"
+		];
+		const corpus = sourcePaths
+			.map(path => fs.readFileSync(path, "utf8"))
+			.join("\n");
+
+		expect(corpus).not.toMatch(/This lab states the target artifact/i);
+		expect(corpus).not.toMatch(
+			/A representative .* example names the key inputs/i
+		);
+		expect(corpus).not.toMatch(/Build one complete artifact first/i);
+		expect(corpus).not.toMatch(
+			/Extend the core build with one extra requirement/i
+		);
+		expect(corpus).toContain("securityLabConceptContent");
+		expect(corpus).toContain("securityLabExampleContent");
+		expect(corpus).toContain("securityLabReviewContent");
+	});
+
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {

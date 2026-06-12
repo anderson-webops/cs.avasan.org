@@ -40,11 +40,12 @@ function securityLabFocus(topic: string) {
 }
 
 function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
+	const label = securityLabLabel(topic);
 	const artifact =
 		mode === "core" ? "core security lab" : "security extension lab";
 
 	return [
-		`**Project goal:** Complete a ${artifact} for **${topic}** that produces defensive evidence, not just a passing program.`,
+		`**Project goal:** Complete a ${artifact} for **${label}** that produces defensive evidence, not just a passing program.`,
 		`**Focus:** ${securityLabFocus(topic)}.`,
 		"**Required work:**",
 		"1. State the local lab boundary and the exact toy target or starter being inspected.",
@@ -55,6 +56,40 @@ function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
 		"- The work stays inside the provided local lab and does not target public systems.",
 		"- Security claims are backed by local build, runtime, sanitizer, debugger, or test evidence.",
 		"- The final note explains the bug class or invariant well enough for a maintainer to reproduce and verify the result."
+	].join("\n\n");
+}
+
+function securityLabLabel(topic: string) {
+	return topic.replace(/: Implementation Lab$/, "");
+}
+
+function securityLabConceptContent(topic: string) {
+	const label = securityLabLabel(topic);
+
+	return [
+		`Use **${label}** to connect the lab artifact to ${securityLabFocus(topic)}.`,
+		"Start by naming the asset being protected, the trust boundary, the unsafe assumption, and the invariant that should stay true.",
+		"Keep the discussion defensive and local: the goal is to understand the bug class, harden the program, and explain the evidence that proves the final behavior."
+	].join("\n\n");
+}
+
+function securityLabExampleContent(topic: string) {
+	const label = securityLabLabel(topic);
+
+	return [
+		`Trace one small local example for **${label}** before changing the implementation.`,
+		"Record the exact input, command, expected behavior, observed behavior, and relevant warning, sanitizer, debugger, or log output.",
+		"Then identify which assumption the example checks so the later project has a concrete normal case, boundary case, and regression case to compare against."
+	].join("\n\n");
+}
+
+function securityLabReviewContent(topic: string) {
+	const label = securityLabLabel(topic);
+
+	return [
+		`Close **${label}** with a maintainer-facing audit note rather than a vague reflection.`,
+		"Summarize the root cause, the security or reliability boundary involved, the patch or hardening choice, and the normal, malformed, and regression evidence that supports the conclusion.",
+		"Name one remaining limitation without expanding beyond the provided local lab."
 	].join("\n\n");
 }
 
@@ -655,18 +690,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 13: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: securityLabConceptContent(
+						"Low-Level Security Lab 13: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 13: Guided Example",
-					content:
-						"A representative low level security lab 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: securityLabExampleContent(
+						"Low-Level Security Lab 13: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 13: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 13: Implementation Lab",
+						"core"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/starter",
 					solutionLink:
@@ -674,15 +713,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 13: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: securityLabReviewContent(
+						"Low-Level Security Lab 13: Implementation Lab"
+					)
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 13: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 13: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-low-level-security-lab-13/starter",
 					solutionLink:
@@ -717,18 +759,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 14: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: securityLabConceptContent(
+						"Low-Level Security Lab 14: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 14: Guided Example",
-					content:
-						"A representative low level security lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: securityLabExampleContent(
+						"Low-Level Security Lab 14: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 14: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 14: Implementation Lab",
+						"core"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/starter",
 					solutionLink:
@@ -736,15 +782,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 14: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: securityLabReviewContent(
+						"Low-Level Security Lab 14: Implementation Lab"
+					)
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 14: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 14: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-low-level-security-lab-14/starter",
 					solutionLink:
@@ -779,18 +828,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: securityLabConceptContent(
+						"Low-Level Security Lab 15: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 15: Guided Example",
-					content:
-						"A representative low level security lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: securityLabExampleContent(
+						"Low-Level Security Lab 15: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 15: Implementation Lab",
+						"core"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/starter",
 					solutionLink:
@@ -798,15 +851,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: securityLabReviewContent(
+						"Low-Level Security Lab 15: Implementation Lab"
+					)
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 15: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-low-level-security-lab-15/starter",
 					solutionLink:
@@ -841,18 +897,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: securityLabConceptContent(
+						"Low-Level Security Lab 16: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 16: Guided Example",
-					content:
-						"A representative low level security lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: securityLabExampleContent(
+						"Low-Level Security Lab 16: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 16: Implementation Lab",
+						"core"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/starter",
 					solutionLink:
@@ -860,15 +920,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: securityLabReviewContent(
+						"Low-Level Security Lab 16: Implementation Lab"
+					)
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 16: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-low-level-security-lab-16/starter",
 					solutionLink:
@@ -903,18 +966,22 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Low-Level Security Lab 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: securityLabConceptContent(
+						"Low-Level Security Lab 17: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 17: Guided Example",
-					content:
-						"A representative low level security lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: securityLabExampleContent(
+						"Low-Level Security Lab 17: Implementation Lab"
+					)
 				},
 				{
 					title: "Low-Level Security Lab 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 17: Implementation Lab",
+						"core"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/starter",
 					solutionLink:
@@ -922,15 +989,18 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: securityLabReviewContent(
+						"Low-Level Security Lab 17: Implementation Lab"
+					)
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Low-Level Security Lab 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 17: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-low-level-security-lab-17/starter",
 					solutionLink:
