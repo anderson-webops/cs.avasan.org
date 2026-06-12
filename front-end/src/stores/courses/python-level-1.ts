@@ -297,7 +297,8 @@ export const pythonLevel1Course: RawCourse = {
 				},
 				{
 					title: "GrS5 Supplemental Project 2: Into the Void",
-					content: "Draw a growing sequence of rotated squares.",
+					content:
+						"Draw a growing sequence of rotated squares using a loop that changes size and rotation in a predictable pattern. The final drawing should make the growth rule visible, and the code should keep the repeated drawing steps inside the loop rather than manually duplicating square commands.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS5-Into-the-Void"
 				},
@@ -638,7 +639,8 @@ export const pythonLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GrS10 Supplemental Project 1: Spiral Staircase",
-					content: "Draw a staircase pattern that spirals outward.",
+					content:
+						"Draw a staircase pattern that spirals outward by combining movement, turns, and a changing step length. Keep the rule for changing the step size explicit in the loop, and verify that the final image shows a consistent outward spiral rather than disconnected line segments.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-1/tree/main/GrS6-Spiral-Staircase"
 				},

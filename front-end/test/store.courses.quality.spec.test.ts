@@ -199,6 +199,72 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/content:\s*""/);
 	});
 
+	it("keeps JavaScript course project copy labeled as web development", () => {
+		const corpus = [
+			"src/stores/courses/javascript-level-1.ts",
+			"src/stores/courses/javascript-level-2.ts"
+		]
+			.map(path => fs.readFileSync(path, "utf8"))
+			.join("\n");
+
+		expect(corpus).not.toMatch(/linked Java (?:core|transfer)/i);
+		expect(corpus).toMatch(/linked web development (?:core|transfer)/i);
+	});
+
+	it("keeps older JavaScript and Python project prompts from collapsing to one-line tasks", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("javascript-level-1-javascript-superstar"),
+			loadRawCourse("javascript-level-2-javascript-master"),
+			loadRawCourse("python-level-1")
+		]);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).not.toMatch(/Fix code solving a math problem\./);
+		expect(corpus).not.toMatch(/Fix a simulated race that uses loops\./);
+		expect(corpus).not.toMatch(/Fix code simulating a football drive\./);
+		expect(corpus).not.toMatch(/Use a switch to map animals to sounds\./);
+		expect(corpus).not.toMatch(/Fix code so a star appears on a snowman\./);
+		expect(corpus).not.toMatch(
+			/Fix output order of a stacked shield pattern\./
+		);
+		expect(corpus).not.toMatch(
+			/Draw a car with D3 using rectangles and circles\./
+		);
+		expect(corpus).not.toMatch(/Build a chessboard with CSS Grid\./);
+		expect(corpus).not.toMatch(
+			/Complete SQLBolt lessons 1(?:-|–)4 on SELECT queries\./
+		);
+		expect(corpus).not.toMatch(
+			/Complete SQLBolt lessons 6(?:-|–)7 on JOINs\./
+		);
+		expect(corpus).not.toMatch(
+			/Complete SQLBolt lessons 8(?:-|–)12 \(nulls and more\)\./
+		);
+		expect(corpus).not.toMatch(
+			/Complete SQLBolt lessons 13(?:-|–)18 on inserting and altering tables\./
+		);
+		expect(corpus).not.toMatch(
+			/Draw a growing sequence of rotated squares\./
+		);
+		expect(corpus).not.toMatch(
+			/Draw a staircase pattern that spirals outward\./
+		);
+		expect(corpus).toContain("query examples");
+		expect(corpus).toContain("loop that changes size and rotation");
+	});
+
+	it("keeps JavaScript normalization focused on web development instead of Java", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("javascript-level-1-javascript-superstar"),
+			loadRawCourse("javascript-level-2-javascript-master")
+		]);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).toContain("web development workflow");
+		expect(corpus).not.toContain("object-oriented Java design");
+		expect(corpus).not.toContain("classes, method contracts, object state");
+	});
+
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {
@@ -342,12 +408,19 @@ describe("course text quality normalization", () => {
 		expect(guide).toMatch(/\|\s*Hard\s*\|\s*Challenge Track\s*\|/);
 		expect(guide).toContain("How To Use This Guide");
 		expect(guide).toContain("Track Labels At A Glance");
+		expect(guide).toContain("Course Track Cards");
 		expect(guide).toContain("Track Recipes");
 		expect(guide).toContain("Module Decisions By Track");
 		expect(guide).toContain("Quick Route For A Strong Python/C++ Learner");
 		expect(guide).toContain("Fast Placement Decision");
 		expect(guide).toContain("Placement Checkpoints");
 		expect(guide).toContain("The track can change during the course");
+		expect(guide).toContain("Supported / Slow Track");
+		expect(guide).toContain("Quick / Fast Track");
+		expect(guide).toContain("Challenge / Hard Track");
+		expect(guide).toContain("Exam / Score Track");
+		expect(guide).toContain("Default sequence:");
+		expect(guide).toContain("Advancement rule:");
 		expect(guide).toContain("Today-Ready Recommendation");
 		expect(guide).toContain("APCS5/APCS6");
 		expect(guide).toContain("Generics, interfaces, records");

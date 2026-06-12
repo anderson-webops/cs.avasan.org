@@ -14,12 +14,12 @@ The track can change during the course. A learner might use the Quick Track for 
 
 ## Track Labels At A Glance
 
-| Informal Choice | Course Track    | Best Use Case                                                                                          |
-| --------------- | --------------- | ------------------------------------------------------------------------------------------------------ |
-| Slow / Easy     | Supported Track | The learner needs smaller steps, more worked examples, and confidence before independent projects.     |
-| Medium          | Standard Track  | The learner is comfortable with programming but still benefits from the normal APCS concept sequence.  |
-| Fast / Quick    | Quick Track     | The learner already knows Python, C++, or another language well and only needs Java/AP-specific gaps.  |
-| Hard            | Challenge Track | The learner can finish normal APCS work quickly and needs deeper Java builds, tests, and edge cases.   |
+| Informal Choice | Course Track    | Best Use Case                                                                                           |
+| --------------- | --------------- | ------------------------------------------------------------------------------------------------------- |
+| Slow / Easy     | Supported Track | The learner needs smaller steps, more worked examples, and confidence before independent projects.      |
+| Medium          | Standard Track  | The learner is comfortable with programming but still benefits from the normal APCS concept sequence.   |
+| Fast / Quick    | Quick Track     | The learner already knows Python, C++, or another language well and only needs Java/AP-specific gaps.   |
+| Hard            | Challenge Track | The learner can finish normal APCS work quickly and needs deeper Java builds, tests, and edge cases.    |
 | Exam-Focused    | Exam Track      | The AP test is close, or the main goal is timed practice, scoring-guideline use, and weak-topic repair. |
 
 ## Fast Placement Decision
@@ -31,6 +31,70 @@ Use this quick chooser when a class needs an immediate route decision.
 3. Choose **Quick Track** when Python/C++ knowledge transfers cleanly and Java-specific gaps are narrow.
 4. Choose **Challenge Track** when the base project is correct quickly enough that repetition would waste time.
 5. Choose **Exam Track** when AP-style timing, scoring language, and weak-topic repair matter more than another full build.
+
+## Course Track Cards
+
+These cards are designed for quick placement. Choose the closest fit, then adjust after the next visible artifact: a runnable program, a hand trace, a written explanation, or an AP-style response.
+
+### Supported / Slow Track
+
+**Use when:** Java syntax, debugging flow, or hand tracing still needs repeated guided practice.
+
+**Default sequence:** APCS1 -> APCS2 -> APCS3 -> APCS4 -> Check-In #1 -> APCS5 -> APCS6, then continue in order.
+
+**Class rhythm:** One concept target, one small project or project slice, one trace or explanation checkpoint.
+
+**Project load:** Complete the core project and assign supplemental practice only for the specific skill that is still weak.
+
+**Advancement rule:** Move on when the learner can explain the code, correct one mistake, and complete a small transfer task without copying the previous example.
+
+### Standard / Medium Track
+
+**Use when:** The learner is comfortable programming but still benefits from the AP CSA order and Java-specific reinforcement.
+
+**Default sequence:** Complete the modules in order, but reduce repeated drill projects when one representative project and one AP-style check already demonstrate mastery.
+
+**Class rhythm:** One representative build, one AP trace or written explanation, and one short correction pass.
+
+**Project load:** One core project per module, plus selected supplemental work for weak areas.
+
+**Advancement rule:** Move on when the learner can name the concept, identify one edge case, and connect the project to the AP skill being tested.
+
+### Quick / Fast Track
+
+**Use when:** The learner already knows Python, C++, or another language well and transfers syntax quickly.
+
+**Default sequence:** Diagnose APCS1-4 quickly, backfill only Java-specific gaps, then spend most time on APCS5-8, APCS10-12, and APCS13-16.
+
+**Class rhythm:** Short diagnostic first, direct jump to the highest-value AP Java concept, then one upgraded project or trace.
+
+**Project load:** Skip near-duplicate beginner projects after the diagnostic is clean; keep arrays, `ArrayList`, recursion, sorting, searching, and FRQ practice.
+
+**Advancement rule:** Move on when the learner can trace object state and collection mutation by hand, not merely when the program runs.
+
+### Challenge / Hard Track
+
+**Use when:** The normal APCS project is correct too quickly and repetition would reduce engagement.
+
+**Default sequence:** Keep the same AP concept sequence, but upgrade each artifact into a more realistic Java build.
+
+**Class rhythm:** Start with the AP concept, add a design constraint, test an edge case, then write a trace or justification.
+
+**Project load:** Fewer duplicate projects; deeper projects with validation, multiple classes, command loops, deterministic tests, or written invariants.
+
+**Advancement rule:** Move on when the learner can defend design choices, handle edge cases, and still satisfy the AP subset and tracing expectations.
+
+### Exam / Score Track
+
+**Use when:** The AP exam is close or the main goal is repairing weak areas under test conditions.
+
+**Default sequence:** Rotate through official FRQs, timed multiple choice, scoring guideline review, and weak-topic repair.
+
+**Class rhythm:** Timed practice, correction notes, targeted mini-lesson, and a second attempt or parallel problem.
+
+**Project load:** Large builds only when they directly repair a weak AP topic; otherwise prioritize official-style questions.
+
+**Advancement rule:** Move on when the missed concept can be named, corrected, and explained in partial-credit-friendly language.
 
 ## Placement Checkpoints
 
@@ -46,44 +110,44 @@ Before choosing a track, check these five signals.
 
 | Track           | Pace   | Best Fit                                                               | Main Strategy                                                                                         | What Not To Skip                                                                                                                  |
 | --------------- | ------ | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Supported Track | Slow   | Newer programmers or unstable Java/debugging habits                    | Use check-ins, references, small projects, and one explanation checkpoint before advancing.            | Concept checks, short traces, and targeted practice on weak skills.                                                               |
+| Supported Track | Slow   | Newer programmers or unstable Java/debugging habits                    | Use check-ins, references, small projects, and one explanation checkpoint before advancing.           | Concept checks, short traces, and targeted practice on weak skills.                                                               |
 | Standard Track  | Medium | Solid programming background with a need for a predictable sequence    | Complete one strong project per module and replace duplicate drills with AP-style checks.             | Classes, inheritance, arrays, `ArrayList`, recursion, sorting, searching, and exam practice.                                      |
-| Quick Track     | Fast   | Strong Python/C++ background, high independence, quick syntax transfer | Treat APCS1-4 as diagnostics, then focus on Java OOP, collections, algorithms, and FRQs.               | `.equals()` vs `==`, integer division, casting, `Scanner`, AP tracing, constructors, inheritance, recursion, arrays, `ArrayList`. |
-| Challenge Track | Hard   | Regular APCS projects are correct too quickly                          | Keep the AP concept but upgrade the artifact with validation, tests, larger designs, and edge cases.   | AP constraints, hand tracing, written explanations, and official FRQ practice.                                                    |
+| Quick Track     | Fast   | Strong Python/C++ background, high independence, quick syntax transfer | Treat APCS1-4 as diagnostics, then focus on Java OOP, collections, algorithms, and FRQs.              | `.equals()` vs `==`, integer division, casting, `Scanner`, AP tracing, constructors, inheritance, recursion, arrays, `ArrayList`. |
+| Challenge Track | Hard   | Regular APCS projects are correct too quickly                          | Keep the AP concept but upgrade the artifact with validation, tests, larger designs, and edge cases.  | AP constraints, hand tracing, written explanations, and official FRQ practice.                                                    |
 | Exam Track      | Focus  | AP test preparation or score repair                                    | Prioritize official FRQs, multiple-choice tracing, scoring-guideline review, and weak-topic practice. | Timed practice, correction notes, and partial-credit-friendly explanations.                                                       |
 
 ## Track Recipes
 
-| Route     | Compress                                                   | Slow Down For                                                        | Project Pattern                                                          | Checkpoint Before Advancing                                                                   |
-| --------- | ---------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| Supported | Nothing by default. Use the normal sequence.               | APCS1-4 syntax, APCS5-6 classes, APCS10-11 collections.              | One small project plus one explanation checkpoint per module.            | The learner can run, explain, and correct the project without copying the previous example.   |
-| Standard  | Duplicate drills and extra near-identical projects.        | Classes, inheritance, arrays, `ArrayList`, recursion, and sorting.   | One representative project per module plus a short FRQ or trace.         | The learner can state the AP concept, one edge case, and one likely scoring detail.           |
-| Quick     | Most APCS1-4 repetition after diagnostics.                 | APCS5-8, APCS10-12, APCS13-16.                                       | One strong Java build per major concept area.                            | The learner passes the Java-specific diagnostic and can trace object/collection state by hand. |
-| Challenge | Basic repetition once the concept is demonstrated.         | Design quality, invariants, testing, edge cases, and AP explanations. | Upgrade base projects into multi-class builds with validation and tests. | The learner can justify design choices and produce a trace or FRQ-style explanation.          |
-| Exam      | Large new builds unless they directly repair a weak topic. | FRQs, multiple choice, scoring guidelines, timing, and corrections.  | Timed official practice followed by targeted repair.                     | Missed work can be revised using scoring language and the missed concept can be named.        |
+| Route     | Compress                                                   | Slow Down For                                                         | Project Pattern                                                          | Checkpoint Before Advancing                                                                    |
+| --------- | ---------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| Supported | Nothing by default. Use the normal sequence.               | APCS1-4 syntax, APCS5-6 classes, APCS10-11 collections.               | One small project plus one explanation checkpoint per module.            | The learner can run, explain, and correct the project without copying the previous example.    |
+| Standard  | Duplicate drills and extra near-identical projects.        | Classes, inheritance, arrays, `ArrayList`, recursion, and sorting.    | One representative project per module plus a short FRQ or trace.         | The learner can state the AP concept, one edge case, and one likely scoring detail.            |
+| Quick     | Most APCS1-4 repetition after diagnostics.                 | APCS5-8, APCS10-12, APCS13-16.                                        | One strong Java build per major concept area.                            | The learner passes the Java-specific diagnostic and can trace object/collection state by hand. |
+| Challenge | Basic repetition once the concept is demonstrated.         | Design quality, invariants, testing, edge cases, and AP explanations. | Upgrade base projects into multi-class builds with validation and tests. | The learner can justify design choices and produce a trace or FRQ-style explanation.           |
+| Exam      | Large new builds unless they directly repair a weak topic. | FRQs, multiple choice, scoring guidelines, timing, and corrections.   | Timed official practice followed by targeted repair.                     | Missed work can be revised using scoring language and the missed concept can be named.         |
 
 ## Module Decisions By Track
 
 "Diagnostic" means a short prompt, trace, or compact project proves the skill before deciding whether to backfill.
 
-| Segment                          | Supported                                                   | Standard                                    | Quick                                                        | Challenge                                                              | Exam                                                |
-| -------------------------------- | ----------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------- | --------------------------------------------------- |
-| General setup                    | Use the setup checklist slowly and verify compile-run steps. | Verify Java and repo workflow.              | Confirm Java setup, then move on.                            | Add terminal compile-run fluency and troubleshoot one deliberate error. | Confirm setup only if it affects timed practice.    |
-| APCS1 Variables/Input            | Full module plus reference projects.                         | One main project plus expression tracing.   | Diagnostic only unless Java syntax fails.                    | Add input validation and clearer output formatting.                    | Use only expression and casting questions.          |
-| APCS2 Operators                  | Full module with boolean practice.                           | One boolean/arithmetic project.             | Diagnostic for integer division, casting, and booleans.      | Add edge-case tests and write expected outputs before running.         | Multiple choice on expressions and operators.       |
-| APCS3 Conditionals               | Full conditionals module.                                    | One threshold or branching project.         | Diagnostic for `.equals()`, `if`/`else`, and packages.       | Add nested conditions, validation, and branch coverage.                | Trace conditionals and justify branch outcomes.     |
-| APCS4 Loops                      | Full loops module.                                           | One loop translation or nested-loop project. | Diagnostic for counted loops, while loops, and nested traces. | Add menu loops or robust input loops.                                  | Trace loops and count iterations.                   |
-| APCS5-6 Classes                  | Slow down and build confidence.                              | Required core.                              | Required core.                                               | Upgrade to a multi-class CLI model.                                    | Practice class-writing FRQ parts.                   |
-| APCS7-8 Inheritance/Polymorphism | Use diagrams and declared/actual type traces.                | Required core.                              | Required core.                                               | Build a small polymorphic simulation.                                  | Trace dynamic dispatch and overriding.              |
-| APCS9 Specs                      | Translate requirements into test cases.                      | One robust-input or spec project.           | Short spec-reading checkpoint.                               | Add acceptance criteria and manual tests.                              | Use requirements language in FRQ explanations.      |
-| APCS10 Arrays                    | Full traversal and mutation practice.                        | Required core.                              | Required core.                                               | Add helper methods and edge-case arrays.                               | Trace array loops and 2D indexing.                  |
-| APCS11 ArrayLists                | Full insertion/removal practice.                             | Required core.                              | Required core.                                               | Build object collections with safe mutation.                           | Trace list mutation and index shifts.               |
-| APCS12 Wrappers                  | Separate primitives, wrappers, and references carefully.     | One deck/card model.                        | Required if wrapper behavior is weak.                        | Extend card/deck design with comparison helpers.                       | Review wrapper and collection questions.            |
-| APCS13 Runtime/Search            | Trace first, then implement.                                 | Required core.                              | Required core.                                               | Add runtime comparisons and written complexity notes.                  | Multiple choice on runtime and search.              |
-| APCS14 Sorting                   | Trace selection and insertion sort before coding.            | Required core.                              | Required core.                                               | Add instrumentation and compare passes.                                | Trace sorting states by pass.                       |
-| APCS15 Recursion                 | Use stack-frame diagrams before code.                        | Required core.                              | Required core.                                               | Add grid or tree recursion variants.                                   | FRQ-style recursion tracing.                        |
-| APCS16 Binary Search/Merge Sort  | Trace halving and merge steps before coding.                 | Required core.                              | Required core.                                               | Add precondition checks and complexity notes.                          | Timed algorithm traces.                             |
-| APCS17 Capstone/Test Prep        | One smaller capstone plus guided FRQs.                       | Capstone plus exam practice.                | One capstone or official FRQ cycle.                          | Capstone with written design notes and edge cases.                     | Official FRQs, scoring guidelines, and timed review. |
+| Segment                          | Supported                                                    | Standard                                     | Quick                                                         | Challenge                                                               | Exam                                                 |
+| -------------------------------- | ------------------------------------------------------------ | -------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------- |
+| General setup                    | Use the setup checklist slowly and verify compile-run steps. | Verify Java and repo workflow.               | Confirm Java setup, then move on.                             | Add terminal compile-run fluency and troubleshoot one deliberate error. | Confirm setup only if it affects timed practice.     |
+| APCS1 Variables/Input            | Full module plus reference projects.                         | One main project plus expression tracing.    | Diagnostic only unless Java syntax fails.                     | Add input validation and clearer output formatting.                     | Use only expression and casting questions.           |
+| APCS2 Operators                  | Full module with boolean practice.                           | One boolean/arithmetic project.              | Diagnostic for integer division, casting, and booleans.       | Add edge-case tests and write expected outputs before running.          | Multiple choice on expressions and operators.        |
+| APCS3 Conditionals               | Full conditionals module.                                    | One threshold or branching project.          | Diagnostic for `.equals()`, `if`/`else`, and packages.        | Add nested conditions, validation, and branch coverage.                 | Trace conditionals and justify branch outcomes.      |
+| APCS4 Loops                      | Full loops module.                                           | One loop translation or nested-loop project. | Diagnostic for counted loops, while loops, and nested traces. | Add menu loops or robust input loops.                                   | Trace loops and count iterations.                    |
+| APCS5-6 Classes                  | Slow down and build confidence.                              | Required core.                               | Required core.                                                | Upgrade to a multi-class CLI model.                                     | Practice class-writing FRQ parts.                    |
+| APCS7-8 Inheritance/Polymorphism | Use diagrams and declared/actual type traces.                | Required core.                               | Required core.                                                | Build a small polymorphic simulation.                                   | Trace dynamic dispatch and overriding.               |
+| APCS9 Specs                      | Translate requirements into test cases.                      | One robust-input or spec project.            | Short spec-reading checkpoint.                                | Add acceptance criteria and manual tests.                               | Use requirements language in FRQ explanations.       |
+| APCS10 Arrays                    | Full traversal and mutation practice.                        | Required core.                               | Required core.                                                | Add helper methods and edge-case arrays.                                | Trace array loops and 2D indexing.                   |
+| APCS11 ArrayLists                | Full insertion/removal practice.                             | Required core.                               | Required core.                                                | Build object collections with safe mutation.                            | Trace list mutation and index shifts.                |
+| APCS12 Wrappers                  | Separate primitives, wrappers, and references carefully.     | One deck/card model.                         | Required if wrapper behavior is weak.                         | Extend card/deck design with comparison helpers.                        | Review wrapper and collection questions.             |
+| APCS13 Runtime/Search            | Trace first, then implement.                                 | Required core.                               | Required core.                                                | Add runtime comparisons and written complexity notes.                   | Multiple choice on runtime and search.               |
+| APCS14 Sorting                   | Trace selection and insertion sort before coding.            | Required core.                               | Required core.                                                | Add instrumentation and compare passes.                                 | Trace sorting states by pass.                        |
+| APCS15 Recursion                 | Use stack-frame diagrams before code.                        | Required core.                               | Required core.                                                | Add grid or tree recursion variants.                                    | FRQ-style recursion tracing.                         |
+| APCS16 Binary Search/Merge Sort  | Trace halving and merge steps before coding.                 | Required core.                               | Required core.                                                | Add precondition checks and complexity notes.                           | Timed algorithm traces.                              |
+| APCS17 Capstone/Test Prep        | One smaller capstone plus guided FRQs.                       | Capstone plus exam practice.                 | One capstone or official FRQ cycle.                           | Capstone with written design notes and edge cases.                      | Official FRQs, scoring guidelines, and timed review. |
 
 ## Quick Route For A Strong Python/C++ Learner
 
@@ -199,12 +263,12 @@ Every track should check these skills.
 
 ## Project Upgrade Menu
 
-| Need                     | Base Project                                  | Upgrade                                                                    |
-| ------------------------ | --------------------------------------------- | -------------------------------------------------------------------------- |
-| Java object state        | `Vending Machine Class` or `Bank Account`     | Private fields, constructor validation, edge-case tests, written invariant. |
-| Stronger class design    | Custom `Gradebook CLI`                        | Multiple objects, averages, invalid input handling, and a menu loop.       |
-| Inheritance and dispatch | `Book/PictureBook` or `Many Shapes`           | Trace declared type versus actual method dispatch.                         |
-| Collection mutation      | `Card Shuffler` or `Suits, Decks, and Hands`  | Safe removal, deterministic tests, and object-reference tracing.           |
-| Recursion                | `Blob Erase`                                  | Stack-frame trace and base-case explanation.                               |
-| Algorithms               | `Binary Search` and `Merge Sort`              | Preconditions, pass-by-pass trace, and runtime comparison.                 |
-| Capstone                 | `Elevens`, `Spaceships`, or `Decode`          | Written design notes, edge cases, and one FRQ-style explanation.           |
+| Need                     | Base Project                                 | Upgrade                                                                     |
+| ------------------------ | -------------------------------------------- | --------------------------------------------------------------------------- |
+| Java object state        | `Vending Machine Class` or `Bank Account`    | Private fields, constructor validation, edge-case tests, written invariant. |
+| Stronger class design    | Custom `Gradebook CLI`                       | Multiple objects, averages, invalid input handling, and a menu loop.        |
+| Inheritance and dispatch | `Book/PictureBook` or `Many Shapes`          | Trace declared type versus actual method dispatch.                          |
+| Collection mutation      | `Card Shuffler` or `Suits, Decks, and Hands` | Safe removal, deterministic tests, and object-reference tracing.            |
+| Recursion                | `Blob Erase`                                 | Stack-frame trace and base-case explanation.                                |
+| Algorithms               | `Binary Search` and `Merge Sort`             | Preconditions, pass-by-pass trace, and runtime comparison.                  |
+| Capstone                 | `Elevens`, `Spaceships`, or `Decode`         | Written design notes, edge cases, and one FRQ-style explanation.            |

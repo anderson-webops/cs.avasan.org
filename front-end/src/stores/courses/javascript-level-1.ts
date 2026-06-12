@@ -64,7 +64,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 2",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-01-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -73,7 +73,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-02-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -130,7 +130,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 2",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-03-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -139,7 +139,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-04-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -284,7 +284,8 @@ export const javascriptLevel1Course: RawCourse = {
 				},
 				{
 					title: "JSS2 Supplemental Project 4: Debugging Math Homework",
-					content: "Fix code solving a math problem.",
+					content:
+						"Debug the math-homework program by first identifying the expected numeric result, then tracing each arithmetic step in the existing code. Fix one error at a time, rerun after each change, and leave the final version readable enough that the order of operations, rounding behavior, and printed answer are easy to verify.",
 					projectLink: "https://codepen.io/junilearning/pen/VwexoVL",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/f90710cc7e05de72ea7ff2b8b05a32bd"
@@ -348,7 +349,8 @@ export const javascriptLevel1Course: RawCourse = {
 				},
 				{
 					title: "JSS3 Supplemental Project 3: Debugging Loops",
-					content: "Fix a simulated race that uses loops.",
+					content:
+						"Repair the race simulation by tracing how each loop changes racer position over time. Verify that the loop starts at the right value, updates on every iteration, stops at the correct finish condition, and prints a final result that matches the simulated race state.",
 					projectLink: "https://codepen.io/junilearning/pen/KKVGBWx",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/d56a9a00a8022b7f85434f295cc0dbec"
@@ -396,7 +398,8 @@ export const javascriptLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "JSS4 Supplemental Project 1: Debugging Football",
-					content: "Fix code simulating a football drive.",
+					content:
+						"Debug the football-drive simulation by tracking yards, downs, and stopping conditions. The final program should update the drive state consistently, avoid off-by-one loop mistakes, and print enough information to tell whether the drive ends by scoring, failing, or reaching the intended limit.",
 					projectLink: "https://codepen.io/junilearning/pen/gOPRqPr",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/eb1d816cbecce4d20944284fc085ae36"
@@ -404,7 +407,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Combining Loops and Variables supplemental 2",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS4 Combining Loops and Variables. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS4 Combining Loops and Variables. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-05-jss4-combining-loops-and-variables-supplemental-2/starter",
 					solutionLink:
@@ -413,7 +416,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Combining Loops and Variables supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS4 Combining Loops and Variables. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS4 Combining Loops and Variables. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-06-jss4-combining-loops-and-variables-supplemental-3/starter",
 					solutionLink:
@@ -547,7 +550,8 @@ export const javascriptLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "JSS6 Supplemental Project 1: What Does the _ Say?",
-					content: "Use a switch to map animals to sounds.",
+					content:
+						"Use a `switch` statement to map several animal names to the sounds they make. Include a `default` case for unknown animals, check that every case ends correctly with `break`, and test at least one recognized animal plus one unrecognized input.",
 					projectLink: "https://codepen.io/junilearning/pen/NWxaJgy",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/5b0bdb527344a081c9abf91138ce5f4a"
@@ -563,7 +567,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Advanced Conditionals supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS6 Advanced Conditionals. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS6 Advanced Conditionals. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-07-jss6-advanced-conditionals-supplemental-3/starter",
 					solutionLink:
@@ -628,7 +632,8 @@ export const javascriptLevel1Course: RawCourse = {
 				},
 				{
 					title: "JSS7 Supplemental Project 3: Debugging Olaf's Star",
-					content: "Fix code so a star appears on a snowman.",
+					content:
+						"Repair the D3 drawing so the star appears in the intended position on the snowman. Trace the shape creation, fill/stroke settings, and transform coordinates, then confirm the final drawing still preserves the rest of the snowman while adding the missing star.",
 					projectLink: "https://codepen.io/junilearning/pen/rNxZJdQ",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/20aeca54176134a3397922a9e98f3564"
@@ -687,7 +692,8 @@ export const javascriptLevel1Course: RawCourse = {
 				},
 				{
 					title: "JSS8 Supplemental Project 3: Shield Debugging",
-					content: "Fix output order of a stacked shield pattern.",
+					content:
+						"Debug the stacked shield pattern by checking the order of nested-loop output. The final result should print or draw each layer in the correct sequence, with loop counters controlling rows and columns clearly enough to explain why the shield stacks correctly.",
 					projectLink: "https://codepen.io/junilearning/pen/pogyeaj",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/1ac928d6d9d777928c4439b4262310a3"
@@ -744,7 +750,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Introduction to HTML & CSS supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS9 Introduction to HTML & CSS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS9 Introduction to HTML & CSS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-08-jss9-introduction-to-html-and-css-supplemental-3/starter",
 					solutionLink:
@@ -757,7 +763,8 @@ export const javascriptLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "JSS10 Project 1: Car",
-					content: "Draw a car with D3 using rectangles and circles.",
+					content:
+						"Draw a car using D3 rectangles and circles, with each visible part created intentionally rather than as a single copied shape. Include a body, wheels, and at least one detail such as windows or lights, then adjust coordinates so the pieces align as one coherent object.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/38ef977913b6ce7e1a913883f984a4e5",
 					solutionLink:
@@ -817,7 +824,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Animations in JavaScript supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS10 Animations in JavaScript. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS10 Animations in JavaScript. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-09-jss10-animations-in-javascript-supplemental-3/starter",
 					solutionLink:
@@ -872,7 +879,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "More HTML & CSS supplemental 2",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS11 More HTML & CSS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS11 More HTML & CSS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-10-jss11-more-html-and-css-supplemental-2/starter",
 					solutionLink:
@@ -881,7 +888,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "More HTML & CSS supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS11 More HTML & CSS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS11 More HTML & CSS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-11-jss11-more-html-and-css-supplemental-3/starter",
 					solutionLink:
@@ -952,7 +959,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Basic Website Layout supplemental 2",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS12 Basic Website Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS12 Basic Website Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-12-jss12-basic-website-layout-supplemental-2/starter",
 					solutionLink:
@@ -961,7 +968,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Basic Website Layout supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS12 Basic Website Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS12 Basic Website Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-13-jss12-basic-website-layout-supplemental-3/starter",
 					solutionLink:
@@ -979,7 +986,8 @@ export const javascriptLevel1Course: RawCourse = {
 				},
 				{
 					title: "JSS13 Project 1: Chessboard",
-					content: "Build a chessboard with CSS Grid.",
+					content:
+						"Build an 8-by-8 chessboard with CSS Grid. Use a repeatable grid structure, alternate square colors accurately by row and column, and verify that the board stays square and readable when the browser width changes.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/2573f4cfc9cb525b5940f500fd22dc79",
 					solutionLink:
@@ -1035,7 +1043,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "The Grid Layout supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS13 The Grid Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS13 The Grid Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-14-jss13-the-grid-layout-supplemental-3/starter",
 					solutionLink:
@@ -1115,7 +1123,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Dynamic Websites with JavaScript supplemental 3",
 					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JSS14 Dynamic Websites with JavaScript. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+						"**Project goal:** Complete the linked web development transfer or extension project for JSS14 Dynamic Websites with JavaScript. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSS-15-jss14-dynamic-websites-with-javascript-supplemental-3/starter",
 					solutionLink:

@@ -24,6 +24,8 @@ function inferProjectKind(courseId: string, courseName: string) {
 	const source = `${courseId} ${courseName}`.toLowerCase();
 
 	if (source.includes("swift")) return "Swift app";
+	if (source.includes("web") || source.includes("javascript"))
+		return "web development";
 	if (source.includes("java") || source.includes("ap computer science"))
 		return "Java";
 	if (
@@ -46,9 +48,6 @@ function inferProjectKind(courseId: string, courseName: string) {
 	) {
 		return "Python";
 	}
-	if (source.includes("web") || source.includes("javascript"))
-		return "web development";
-
 	return "implementation";
 }
 

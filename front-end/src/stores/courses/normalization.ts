@@ -987,6 +987,16 @@ function subjectFocus(context: CourseTextContext) {
 	if (/python level 3|advanced python|am\d/.test(source)) {
 		return "advanced Python decomposition, algorithmic reasoning, file/data handling, and clear testing habits";
 	}
+	if (isScienceContext(context)) {
+		return "scientific explanation: observable phenomena, models, data, vocabulary, and claim-evidence-reasoning";
+	}
+	if (
+		/javascript|jss\d|jsm\d|web|html|css|full-stack|api|database/.test(
+			source
+		)
+	) {
+		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
+	}
 	if (/java/.test(source)) {
 		return "object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests";
 	}
@@ -1001,12 +1011,6 @@ function subjectFocus(context: CourseTextContext) {
 	}
 	if (/security|offensive|low-level security|network security/.test(source)) {
 		return "safe security analysis: local-only test fixtures, threat modeling, evidence collection, and defensive remediation";
-	}
-	if (isScienceContext(context)) {
-		return "scientific explanation: observable phenomena, models, data, vocabulary, and claim-evidence-reasoning";
-	}
-	if (/web|html|css|full-stack|api|database/.test(source)) {
-		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
 	}
 	if (
 		/data science|data analysis|machine learning|ai search|ai level|model/.test(
