@@ -486,6 +486,27 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/PyGames\/tree\/main\/[^"\n]* /);
 	});
 
+	it("keeps visible support sections from regressing to generic filler", () => {
+		const corpus = visibleCourseSourceCorpus();
+
+		expect(corpus).not.toMatch(
+			/Focus on common mistakes (?:that appear )?in? ?[^.]+\. Diagnose a broken attempt, repair it, and explain why the fix works\./
+		);
+		expect(corpus).not.toMatch(
+			/Break [^.]+ into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built\./
+		);
+		expect(corpus).not.toMatch(
+			/Finish [^.]+ with a concise review of the required output, one alternate approach, and one specific improvement for a later revision\./
+		);
+		expect(corpus).not.toMatch(
+			/Extend the work from [^.]+ with a tighter constraint, one extra feature, or a slightly more realistic input case\./
+		);
+		expect(corpus).toContain("buildSupportSectionGuidance");
+		expect(corpus).toContain("Plan **");
+		expect(corpus).toContain("Finish **");
+		expect(corpus).toContain("Extend **");
+	});
+
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {

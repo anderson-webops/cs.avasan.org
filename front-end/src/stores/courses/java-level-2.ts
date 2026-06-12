@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const javaLevel2Course: RawCourse = {
 	name: "Java Level 2",
@@ -71,8 +72,12 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "Overloaded Constructors & Comparison Methods: Verification and Reflection",
-					content:
-						"Finish JM2 Overloaded Constructors & Comparison Methods with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Overloaded Constructors & Comparison Methods",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -187,8 +192,11 @@ export const javaLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check-In #1: Extension Challenge",
-					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check-In #1",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-1"
 				},
@@ -472,8 +480,11 @@ export const javaLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check-In #2: Extension Challenge",
-					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check-In #2",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Check-in-2-Starter-Updated",
 					solutionLink:
@@ -521,18 +532,27 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "Bank Account: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes that appear in JM7 Bank Account. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Bank Account",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Bank Account: Planning and Architecture",
-					content:
-						"Break JM7 Bank Account into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Bank Account",
+						section: "planning"
+					})
 				},
 				{
 					title: "Bank Account: Verification and Reflection",
-					content:
-						"Finish JM7 Bank Account with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Bank Account",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -670,13 +690,19 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "Maze Runner: Planning and Architecture",
-					content:
-						"Break JM9 Maze Runner into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Maze Runner",
+						section: "planning"
+					})
 				},
 				{
 					title: "Maze Runner: Verification and Reflection",
-					content:
-						"Finish JM9 Maze Runner with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Maze Runner",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -755,8 +781,11 @@ export const javaLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "JM10 Master Project: Extension Challenge",
-					content:
-						"Extend the work from JM10 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "JM10 Master Project",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM7-Calculator"
 				},
@@ -808,8 +837,11 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "Repo Extension and Reference Library: Verification and Reflection",
-					content:
-						"Finish JM11 Repo Extension and Reference Library with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Repo Extension and Reference Library",
+						section: "verification"
+					})
 				},
 				{
 					title: "JM11 Repo Extension and Reference Library: Core Project",

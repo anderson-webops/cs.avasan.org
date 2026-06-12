@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const scratchLevel2Course: RawCourse = {
 	name: "Scratch Level 2",
@@ -84,8 +85,12 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Review: Events, Loops, Conditionals, & Broadcasting: Extension Challenge",
-					content:
-						"Extend the work from GM1 Review: Events, Loops, Conditionals, & Broadcasting with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle:
+							"Review: Events, Loops, Conditionals, & Broadcasting",
+						section: "extension"
+					}),
 					projectLink: "https://scratch.mit.edu/projects/287707460/",
 					solutionLink: "https://scratch.mit.edu/projects/284408078/"
 				},
@@ -125,8 +130,11 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Nested Loops: Verification and Reflection",
-					content:
-						"Finish GM2 Nested Loops with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Nested Loops",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -177,8 +185,11 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Complex Conditionals: Verification and Reflection",
-					content:
-						"Finish GM3 Complex Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Complex Conditionals",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -227,8 +238,11 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Cloning: Verification and Reflection",
-					content:
-						"Finish GM4 Cloning with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Cloning",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -283,8 +297,11 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check in #1: Extension Challenge",
-					content:
-						"Extend the work from Check-in #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Check in #1",
+						section: "extension"
+					}),
 					solutionLink: "https://scratch.mit.edu/projects/341945558/"
 				},
 				{
@@ -323,8 +340,11 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Strings: Verification and Reflection",
-					content:
-						"Finish GM5 Strings with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Strings",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -373,8 +393,11 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Mathematical Operators: Verification and Reflection",
-					content:
-						"Finish GM6 Mathematical Operators with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Mathematical Operators",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -475,8 +498,11 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Functions: Verification and Reflection",
-					content:
-						"Finish GM8 Functions with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Functions",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -539,8 +565,11 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check in #2: Extension Challenge",
-					content:
-						"Extend the work from Check-in #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Check in #2",
+						section: "extension"
+					}),
 					solutionLink: "https://scratch.mit.edu/projects/342645999/"
 				},
 				{
@@ -567,18 +596,27 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Fish Food: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes in GM9 Fish Food. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Fish Food",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Fish Food: Planning and Architecture",
-					content:
-						"Break GM9 Fish Food into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Fish Food",
+						section: "planning"
+					})
 				},
 				{
 					title: "Fish Food: Verification and Reflection",
-					content:
-						"Finish GM9 Fish Food with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Fish Food",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -613,18 +651,27 @@ export const scratchLevel2Course: RawCourse = {
 				},
 				{
 					title: "Treasure Cave: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes in GM10 Treasure Cave. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Treasure Cave",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Treasure Cave: Planning and Architecture",
-					content:
-						"Break GM10 Treasure Cave into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Treasure Cave",
+						section: "planning"
+					})
 				},
 				{
 					title: "Treasure Cave: Verification and Reflection",
-					content:
-						"Finish GM10 Treasure Cave with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Treasure Cave",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -674,8 +721,11 @@ export const scratchLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GM11 Master Project: Extension Challenge",
-					content:
-						"Extend the work from GM11 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "GM11 Master Project",
+						section: "extension"
+					})
 				},
 				{
 					title: "GM11 Master Project: Fluency Drill",

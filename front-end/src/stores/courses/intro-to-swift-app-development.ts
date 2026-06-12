@@ -1,5 +1,6 @@
 import type { RawCourse } from "./types";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const introToSwiftAppDevelopmentCourse: RawCourse = {
 	name: "Intro to Swift App Development",
@@ -1417,8 +1418,12 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				},
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries: Verification and Reflection",
-					content:
-						"Finish SADX Enrichment and Legacy Archive Boundaries with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Swift",
+						moduleTitle:
+							"SADX Enrichment and Legacy Archive Boundaries",
+						section: "verification"
+					})
 				},
 				{
 					title: "SADX Enrichment and Legacy Archive Boundaries: Core Project",

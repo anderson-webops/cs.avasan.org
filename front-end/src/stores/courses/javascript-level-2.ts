@@ -1,5 +1,6 @@
 import type { RawCourse } from "./types";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const javascriptLevel2Course: RawCourse = {
 	name: "JavaScript Level 2: JavaScript Master",
@@ -42,8 +43,11 @@ export const javascriptLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #1: Extension Challenge",
-					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Check In #1",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://codepen.io/junilearning/pen/bbb5cce14f0a1bc5c5c4b5582da67750"
 				},
@@ -115,8 +119,11 @@ export const javascriptLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #2: Extension Challenge",
-					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Check In #2",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://codepen.io/junilearning/pen/7b72b5cd25d5372e9097f68de4b66db6"
 				},
@@ -232,8 +239,11 @@ export const javascriptLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Fundamentals Review: Extension Challenge",
-					content:
-						"Extend the work from JSM1 Fundamentals Review with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Fundamentals Review",
+						section: "extension"
+					}),
 					projectLink:
 						"https://codepen.io/junilearning/pen/2d400625754c49aedbb72402eed3ba8f",
 					solutionLink:
@@ -793,8 +803,11 @@ export const javascriptLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Collisions and Controls: Extension Challenge",
-					content:
-						"Extend the work from JSM8 Collisions and Controls with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Collisions and Controls",
+						section: "extension"
+					}),
 					projectLink:
 						"https://codepen.io/junilearning/pen/d4a36001e0d9b6e58c640ca0f280284a",
 					solutionLink:
@@ -876,8 +889,11 @@ export const javascriptLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Games in the Canvas: Extension Challenge",
-					content:
-						"Extend the work from JSM9 Games in the Canvas with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Games in the Canvas",
+						section: "extension"
+					}),
 					projectLink:
 						"https://codepen.io/junilearning/pen/8d640d76fa709de228ec6303625663e3",
 					solutionLink:
@@ -1143,18 +1159,27 @@ export const javascriptLevel2Course: RawCourse = {
 				},
 				{
 					title: "Message Board: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes that appear in JSM13 Message Board. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Message Board",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Message Board: Planning and Architecture",
-					content:
-						"Break JSM13 Message Board into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Message Board",
+						section: "planning"
+					})
 				},
 				{
 					title: "Message Board: Verification and Reflection",
-					content:
-						"Finish JSM13 Message Board with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Message Board",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -1211,25 +1236,37 @@ export const javascriptLevel2Course: RawCourse = {
 				},
 				{
 					title: "Quiz Game: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes that appear in JSM14 Quiz Game. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Quiz Game",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Quiz Game: Planning and Architecture",
-					content:
-						"Break JSM14 Quiz Game into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Quiz Game",
+						section: "planning"
+					})
 				},
 				{
 					title: "Quiz Game: Verification and Reflection",
-					content:
-						"Finish JSM14 Quiz Game with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Quiz Game",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Quiz Game: Extension Challenge",
-					content:
-						"Extend the work from JSM14 Quiz Game with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Quiz Game",
+						section: "extension"
+					}),
 					projectLink:
 						"https://codepen.io/junilearning/pen/f8ec7312634d2011e58c44d691d1da13",
 					solutionLink:
@@ -1283,8 +1320,11 @@ export const javascriptLevel2Course: RawCourse = {
 				},
 				{
 					title: "JSM15 Master Project: Verification and Reflection",
-					content:
-						"Finish JSM15 Master Project with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "JSM15 Master Project",
+						section: "verification"
+					})
 				},
 				{
 					title: "JSM15 Master Project: Core Project",
@@ -1303,8 +1343,11 @@ export const javascriptLevel2Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "JSM15 Master Project: Extension Challenge",
-					content:
-						"Extend the work from JSM15 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "JSM15 Master Project",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/JSM-01-jsm15-master-project/starter",
 					solutionLink:

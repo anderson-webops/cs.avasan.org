@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 	name: "Data Structures and Algorithms in C++",
@@ -100,8 +101,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Interfaces, Records, and a Task Manager CLI: Verification and Reflection",
-					content:
-						"Finish DSCPP1 Interfaces, Records, and a Task Manager CLI with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle:
+							"Interfaces, Records, and a Task Manager CLI",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP1 Interfaces, Records, and a Task Manager CLI: Core Project",
@@ -178,8 +183,11 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Graphs and Shortest Paths: Verification and Reflection",
-					content:
-						"Finish DSCPP2 Graphs and Shortest Paths with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle: "Graphs and Shortest Paths",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP2 Graphs and Shortest Paths: Core Project",
@@ -253,8 +261,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "STL Containers and State Based Text Generation: Verification and Reflection",
-					content:
-						"Finish DSCPP3 STL Containers and State-Based Text Generation with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle:
+							"STL Containers and State Based Text Generation",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP3 STL Containers and State-Based Text Generation: Core Project",
@@ -331,8 +343,11 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Recursion and Backtracking in 3D Mazes: Verification and Reflection",
-					content:
-						"Finish DSCPP4 Recursion and Backtracking in 3D Mazes with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle: "Recursion and Backtracking in 3D Mazes",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP4 Recursion and Backtracking in 3D Mazes: Core Project",
@@ -409,8 +424,11 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Quicksort and Partitioning: Verification and Reflection",
-					content:
-						"Finish DSCPP5 Quicksort and Partitioning with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle: "Quicksort and Partitioning",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP5 Quicksort and Partitioning: Core Project",
@@ -484,8 +502,11 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Templates and Linked Structures: Verification and Reflection",
-					content:
-						"Finish DSCPP6 Templates and Linked Structures with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle: "Templates and Linked Structures",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP6 Templates and Linked Structures: Core Project",
@@ -559,8 +580,11 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Binary Search Trees: Verification and Reflection",
-					content:
-						"Finish DSCPP7 Binary Search Trees with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle: "Binary Search Trees",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP7 Binary Search Trees: Core Project",
@@ -634,8 +658,11 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "AVL Trees and Rebalancing: Verification and Reflection",
-					content:
-						"Finish DSCPP8 AVL Trees and Rebalancing with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle: "AVL Trees and Rebalancing",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP8 AVL Trees and Rebalancing: Core Project",
@@ -709,8 +736,12 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Benchmarking and Data Structure Tradeoffs: Verification and Reflection",
-					content:
-						"Finish DSCPP9 Benchmarking and Data-Structure Tradeoffs with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "C++ data structures and algorithms",
+						moduleTitle:
+							"Benchmarking and Data Structure Tradeoffs",
+						section: "verification"
+					})
 				},
 				{
 					title: "DSCPP9 Benchmarking and Data-Structure Tradeoffs: Core Project",

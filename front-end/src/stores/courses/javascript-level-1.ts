@@ -1,5 +1,6 @@
 import type { RawCourse } from "./types";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const javascriptLevel1Course: RawCourse = {
 	name: "JavaScript Level 1: JavaScript Superstar",
@@ -57,8 +58,11 @@ export const javascriptLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #1: Extension Challenge",
-					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Check In #1",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://codepen.io/junilearning/pen/9023ac5a2ab1213c64d59d7b864aef8d"
 				},
@@ -131,8 +135,11 @@ export const javascriptLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #2: Extension Challenge",
-					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Check In #2",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://codepen.io/junilearning/pen/ce3da888e3e72bcaff1251f225b2f6fa"
 				},
@@ -1216,8 +1223,11 @@ export const javascriptLevel1Course: RawCourse = {
 				},
 				{
 					title: "Master Project: Verification and Reflection",
-					content:
-						"Finish JSS15 Master Project with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "JavaScript",
+						moduleTitle: "Master Project",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [

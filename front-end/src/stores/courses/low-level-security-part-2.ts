@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 type SecurityLabMode = "core" | "extension";
 
@@ -376,8 +377,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Module 4: Information Disclosure and Memory Observation: Verification and Reflection",
-					content:
-						"Finish Module 4: Information Disclosure and Memory Observation with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "security",
+						moduleTitle:
+							"Module 4: Information Disclosure and Memory Observation",
+						section: "verification"
+					})
 				},
 				{
 					title: "Module 4: Information Disclosure and Memory Observation: Core Project",
@@ -507,8 +512,12 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				},
 				{
 					title: "Module 6: Control-Flow Thinking for Defenders: Verification and Reflection",
-					content:
-						"Finish Module 6: Control-Flow Thinking for Defenders with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "security",
+						moduleTitle:
+							"Module 6: Control-Flow Thinking for Defenders",
+						section: "verification"
+					})
 				},
 				{
 					title: "Module 6: Control-Flow Thinking for Defenders: Core Project",

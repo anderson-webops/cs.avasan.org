@@ -1,5 +1,6 @@
 import type { RawCourse } from "./types";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const javaLevel3Course: RawCourse = {
 	name: "Java Level 3",
@@ -54,8 +55,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Review: Variables, Strings, and Input: Extension Challenge",
-					content:
-						"Extend the work from AJ1 Review: Variables, Strings, and Input with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Review: Variables, Strings, and Input",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ1-Mad-Lib",
 					solutionLink:
@@ -247,8 +251,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Review: Objects and Classes: Extension Challenge",
-					content:
-						"Extend the work from AJ3 Review: Objects and Classes with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Review: Objects and Classes",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ3-Student-Class",
 					solutionLink:
@@ -322,8 +329,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Recursion: Extension Challenge",
-					content:
-						"Extend the work from AJ4 Recursion with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Recursion",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ4-Recursion-Practice",
 					solutionLink:
@@ -392,8 +402,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Linear Search and Big O Notation: Extension Challenge",
-					content:
-						"Extend the work from AJ5 Linear Search and Big-O Notation with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Linear Search and Big O Notation",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ5-Linear-Search",
 					solutionLink:
@@ -471,8 +484,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Binary Search: Extension Challenge",
-					content:
-						"Extend the work from AJ6 Binary Search with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Binary Search",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ6-Binary-Search-with-Iteration",
 					solutionLink:
@@ -551,8 +567,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #1: Extension Challenge",
-					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check In #1",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-1-Starter",
 					solutionLink:
@@ -701,8 +720,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Bubble Sort: Extension Challenge",
-					content:
-						"Extend the work from AJ8 Bubble Sort with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Bubble Sort",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ8-Bubble-Sort",
 					solutionLink:
@@ -780,8 +802,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Merge Sort: Extension Challenge",
-					content:
-						"Extend the work from AJ9 Merge Sort with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Merge Sort",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ9-Merge",
 					solutionLink:
@@ -860,8 +885,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #2: Extension Challenge",
-					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check In #2",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-2-Starter",
 					solutionLink:
@@ -944,8 +972,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Sustainable Programming: Extension Challenge",
-					content:
-						"Extend the work from AJ10 Sustainable Programming with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Sustainable Programming",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ10-Juni-Bakery-Starter",
 					solutionLink:
@@ -1019,8 +1050,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Linked Lists: Extension Challenge",
-					content:
-						"Extend the work from AJ11 Linked Lists with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Linked Lists",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ11-Linked-List-Starter",
 					solutionLink:
@@ -1165,8 +1199,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Priority Queues and Maps: Extension Challenge",
-					content:
-						"Extend the work from AJ13 Priority Queues and Maps with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Priority Queues and Maps",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM13-Priority-Queue"
 				},
@@ -1246,8 +1283,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #3: Extension Challenge",
-					content:
-						"Extend the work from Check-In #3 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check In #3",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-3"
 				},
@@ -1333,8 +1373,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Binary Search Trees: Extension Challenge",
-					content:
-						"Extend the work from AJ14 Binary Search Trees with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Binary Search Trees",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ14-BST-Starter",
 					solutionLink:
@@ -1413,8 +1456,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Hash Tables: Extension Challenge",
-					content:
-						"Extend the work from AJ15 Hash Tables with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Hash Tables",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ15-Hash-Map-Starter",
 					solutionLink:
@@ -1561,8 +1607,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #4: Extension Challenge",
-					content:
-						"Extend the work from Check-In #4 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check In #4",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ-Check-In-4"
 				},
@@ -1638,8 +1687,11 @@ export const javaLevel3Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Master Project: Google Maps: Extension Challenge",
-					content:
-						"Extend the work from AJ17 Master Project: Google Maps with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Master Project: Google Maps",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Weighted-Graph-Starter",
 					solutionLink:
@@ -1693,8 +1745,12 @@ export const javaLevel3Course: RawCourse = {
 				},
 				{
 					title: "Repo Extension, Starter, and Capstone Library: Verification and Reflection",
-					content:
-						"Finish AJ18 Repo Extension, Starter, and Capstone Library with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Repo Extension, Starter, and Capstone Library",
+						section: "verification"
+					})
 				},
 				{
 					title: "AJ18 Repo Extension, Starter, and Capstone Library: Core Project",

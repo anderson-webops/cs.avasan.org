@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const machineLearningCourse: RawCourse = {
 	name: "Machine Learning",
@@ -43,8 +44,11 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "ML0 Setup, Tooling, and Data Workflow: Extension Challenge",
-					content:
-						"Extend the work from ML0 Setup, Tooling, and Data Workflow with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML0 Setup, Tooling, and Data Workflow",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification"
 				}
@@ -169,8 +173,11 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "K Nearest Neighbors: Extension Challenge",
-					content:
-						"Extend the work from ML2 K-Nearest Neighbors with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "K Nearest Neighbors",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification-Updated",
 					solutionLink:
@@ -245,8 +252,11 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Naive Bayes: Extension Challenge",
-					content:
-						"Extend the work from ML3 Naive Bayes with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Naive Bayes",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML3-Naive-Bayes-Iris-Flowers-Classification",
 					solutionLink:
@@ -319,8 +329,12 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "ML3.5 Decision Trees and Interpretable Models: Extension Challenge",
-					content:
-						"Extend the work from ML3.5 Decision Trees and Interpretable Models with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML3.5 Decision Trees and Interpretable Models",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Diabetes-Diagnosis-With-Neural-Networks"
 				},
@@ -411,8 +425,11 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Neural Networks: Extension Challenge",
-					content:
-						"Extend the work from ML4 Neural Networks with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Neural Networks",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Neuron-Implementation",
 					solutionLink:
@@ -501,8 +518,11 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Introduction to Regression: Extension Challenge",
-					content:
-						"Extend the work from ML5 Introduction to Regression with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Introduction to Regression",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
 					solutionLink:
@@ -562,15 +582,21 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Regression with Neural Networks: Verification and Reflection",
-					content:
-						"Finish ML6 Regression with Neural Networks with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Regression with Neural Networks",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Regression with Neural Networks: Extension Challenge",
-					content:
-						"Extend the work from ML6 Regression with Neural Networks with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Regression with Neural Networks",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML6-Predicting-House-Prices"
 				},
@@ -630,15 +656,21 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Image Classifier: Verification and Reflection",
-					content:
-						"Finish ML7 Image Classifier with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Image Classifier",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Image Classifier: Extension Challenge",
-					content:
-						"Extend the work from ML7 Image Classifier with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Image Classifier",
+						section: "extension"
+					}),
 					projectLink:
 						"https://colab.research.google.com/drive/12HpOOjmQgf5sLmrTgknSFX24aSln6rT6?usp=sharing",
 					solutionLink:
@@ -711,8 +743,12 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy: Extension Challenge",
-					content:
-						"Extend the work from ML7.5 Model Evaluation, Comparison, and Dataset Strategy with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML7.5 Model Evaluation, Comparison, and Dataset Strategy",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression"
 				},
@@ -785,8 +821,11 @@ export const machineLearningCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Master Project: Extension Challenge",
-					content:
-						"Extend the work from ML8 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "Master Project",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML8-Master-Project"
 				},

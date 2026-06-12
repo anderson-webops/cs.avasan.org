@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const pyGamesCourse: RawCourse = {
 	name: "PyGames",
@@ -43,8 +44,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "PyG0 Setup, Editors, and Asset Workflow: Extension Challenge",
-					content:
-						"Extend the work from PyG0 Setup, Editors, and Asset Workflow with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "PyG0 Setup, Editors, and Asset Workflow",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/music"
 				},
@@ -136,8 +140,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Object Oriented Programming: Actors: Extension Challenge",
-					content:
-						"Extend the work from PyG1 Object-Oriented Programming: Actors with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Object Oriented Programming: Actors",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -221,8 +228,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Event Handling: Extension Challenge",
-					content:
-						"Extend the work from PyG2 Event Handling with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Event Handling",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -389,8 +399,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Managing Multiple Objects: Collectibles: Extension Challenge",
-					content:
-						"Extend the work from PyG4 Managing Multiple Objects: Collectibles with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Managing Multiple Objects: Collectibles",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -462,8 +475,12 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles: Extension Challenge",
-					content:
-						"Extend the work from Check-In #1: Actors, Events, ZRects, Collectibles with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle:
+							"Check In #1: Actors, Events, ZRects, Collectibles",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -549,8 +566,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Physics: Extension Challenge",
-					content:
-						"Extend the work from PyG5 Physics with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Physics",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -639,8 +659,12 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces: Extension Challenge",
-					content:
-						"Extend the work from PyG6 Managing Multiple Objects: Obstacles and Surfaces with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle:
+							"Managing Multiple Objects: Obstacles and Surfaces",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -712,8 +736,12 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #2: Gravity, Friction, Platforms: Extension Challenge",
-					content:
-						"Extend the work from Check-In #2: Gravity, Friction, Platforms with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle:
+							"Check In #2: Gravity, Friction, Platforms",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -807,8 +835,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Levels and System Control: Extension Challenge",
-					content:
-						"Extend the work from PyG7 Levels and System Control with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Levels and System Control",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -881,8 +912,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Game Elements: Projectiles: Extension Challenge",
-					content:
-						"Extend the work from PyG8 Game Elements: Projectiles with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Game Elements: Projectiles",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -943,20 +977,29 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Game Elements: Enemy AI: Planning and Architecture",
-					content:
-						"Break PyG9 Game Elements: Enemy AI into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Game Elements: Enemy AI",
+						section: "planning"
+					})
 				},
 				{
 					title: "Game Elements: Enemy AI: Verification and Reflection",
-					content:
-						"Finish PyG9 Game Elements: Enemy AI with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Game Elements: Enemy AI",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Game Elements: Enemy AI: Extension Challenge",
-					content:
-						"Extend the work from PyG9 Game Elements: Enemy AI with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Game Elements: Enemy AI",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -1014,15 +1057,23 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI: Verification and Reflection",
-					content:
-						"Finish Check-In #3: System Control, Projectiles, Enemy AI with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle:
+							"Check In #3: System Control, Projectiles, Enemy AI",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI: Extension Challenge",
-					content:
-						"Extend the work from Check-In #3: System Control, Projectiles, Enemy AI with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle:
+							"Check In #3: System Control, Projectiles, Enemy AI",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -1074,25 +1125,37 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Ninja Versus Alien: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes that appear in PyG10 Ninja Versus Alien. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Ninja Versus Alien",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Ninja Versus Alien: Planning and Architecture",
-					content:
-						"Break PyG10 Ninja Versus Alien into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Ninja Versus Alien",
+						section: "planning"
+					})
 				},
 				{
 					title: "Ninja Versus Alien: Verification and Reflection",
-					content:
-						"Finish PyG10 Ninja Versus Alien with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Ninja Versus Alien",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Ninja Versus Alien: Extension Challenge",
-					content:
-						"Extend the work from PyG10 Ninja Versus Alien with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Ninja Versus Alien",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -1142,25 +1205,37 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Space Invaders: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes that appear in PyG11 Space Invaders. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Space Invaders",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Space Invaders: Planning and Architecture",
-					content:
-						"Break PyG11 Space Invaders into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Space Invaders",
+						section: "planning"
+					})
 				},
 				{
 					title: "Space Invaders: Verification and Reflection",
-					content:
-						"Finish PyG11 Space Invaders with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Space Invaders",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Space Invaders: Extension Challenge",
-					content:
-						"Extend the work from PyG11 Space Invaders with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "Space Invaders",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:
@@ -1242,8 +1317,11 @@ export const pyGamesCourse: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "PyG12 Master Project: Extension Challenge",
-					content:
-						"Extend the work from PyG12 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "PyGame",
+						moduleTitle: "PyG12 Master Project",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/sounds"
 				},

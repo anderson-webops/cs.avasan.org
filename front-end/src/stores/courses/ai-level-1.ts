@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const aiLevel1Course: RawCourse = {
 	name: "AI Level 1",
@@ -654,8 +655,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 9: Repo Extension Bank and Canonical Variants: Verification and Reflection",
-					content:
-						"Finish Unit 9: Repo Extension Bank and Canonical Variants with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "AI",
+						moduleTitle:
+							"Unit 9: Repo Extension Bank and Canonical Variants",
+						section: "verification"
+					})
 				},
 				{
 					title: "Unit 9: Repo Extension Bank and Canonical Variants: Core Project",

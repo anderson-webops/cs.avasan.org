@@ -1,5 +1,6 @@
 import type { RawCourse } from "./types";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const rustSystemsSecurityCourse: RawCourse = {
 	name: "Rust Systems Security",
@@ -24,8 +25,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Tooling, Cargo, and Why Rust Exists: Verification and Reflection",
-					content:
-						"Finish RSS0 Tooling, Cargo, and Why Rust Exists with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Tooling, Cargo, and Why Rust Exists",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS0 Tooling, Cargo, and Why Rust Exists: Core Project",
@@ -99,8 +103,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Ownership, Moves, and Memory Responsibility: Verification and Reflection",
-					content:
-						"Finish RSS1 Ownership, Moves, and Memory Responsibility with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle:
+							"Ownership, Moves, and Memory Responsibility",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS1 Ownership, Moves, and Memory Responsibility: Core Project",
@@ -177,8 +185,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Borrowing, Aliasing, and Lifetimes: Verification and Reflection",
-					content:
-						"Finish RSS2 Borrowing, Aliasing, and Lifetimes with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Borrowing, Aliasing, and Lifetimes",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS2 Borrowing, Aliasing, and Lifetimes: Core Project",
@@ -252,8 +263,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Option, Result, and Typed Error Paths: Verification and Reflection",
-					content:
-						"Finish RSS3 Option, Result, and Typed Error Paths with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Option, Result, and Typed Error Paths",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS3 Option, Result, and Typed Error Paths: Core Project",
@@ -330,8 +344,12 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety: Verification and Reflection",
-					content:
-						"Finish RSS4 Strings, Slices, Collections, and Bounds Safety with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle:
+							"Strings, Slices, Collections, and Bounds Safety",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS4 Strings, Slices, Collections, and Bounds Safety: Core Project",
@@ -408,8 +426,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Structs, Enums, and Safer State Models: Verification and Reflection",
-					content:
-						"Finish RSS5 Structs, Enums, and Safer State Models with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Structs, Enums, and Safer State Models",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS5 Structs, Enums, and Safer State Models: Core Project",
@@ -486,8 +507,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Traits, Iterators, and API Contracts: Verification and Reflection",
-					content:
-						"Finish RSS6 Traits, Iterators, and API Contracts with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Traits, Iterators, and API Contracts",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS6 Traits, Iterators, and API Contracts: Core Project",
@@ -564,8 +588,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Files, Parsers, and Secure CLI Design: Verification and Reflection",
-					content:
-						"Finish RSS7 Files, Parsers, and Secure CLI Design with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Files, Parsers, and Secure CLI Design",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS7 Files, Parsers, and Secure CLI Design: Core Project",
@@ -642,8 +669,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Concurrency and Race Reduction: Verification and Reflection",
-					content:
-						"Finish RSS8 Concurrency and Race Reduction with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Concurrency and Race Reduction",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS8 Concurrency and Race Reduction: Core Project",
@@ -717,8 +747,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries: Verification and Reflection",
-					content:
-						"Finish RSS9 Unsafe, FFI, and Trusted Boundaries with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Unsafe, FFI, and Trusted Boundaries",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS9 Unsafe, FFI, and Trusted Boundaries: Core Project",
@@ -792,8 +825,11 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Capstone: Harden a Legacy Tool: Verification and Reflection",
-					content:
-						"Finish RSS10 Capstone: Harden a Legacy Tool with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Rust systems security",
+						moduleTitle: "Capstone: Harden a Legacy Tool",
+						section: "verification"
+					})
 				},
 				{
 					title: "RSS10 Capstone: Harden a Legacy Tool: Core Project",

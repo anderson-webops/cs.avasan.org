@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const scratchLevel1Course: RawCourse = {
 	name: "Scratch Level 1",
@@ -20,20 +21,29 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Starting in Scratch: Planning and Architecture",
-					content:
-						"Break GS1 Starting in Scratch into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Starting in Scratch",
+						section: "planning"
+					})
 				},
 				{
 					title: "Starting in Scratch: Verification and Reflection",
-					content:
-						"Finish GS1 Starting in Scratch with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Starting in Scratch",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Starting in Scratch: Extension Challenge",
-					content:
-						"Extend the work from GS1 Starting in Scratch with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Starting in Scratch",
+						section: "extension"
+					}),
 					projectLink: "https://scratch.mit.edu/projects/304003593/",
 					solutionLink: "https://scratch.mit.edu/projects/313184786/"
 				},
@@ -82,8 +92,11 @@ export const scratchLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Event Listeners: Extension Challenge",
-					content:
-						"Extend the work from GS2 Event Listeners with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Event Listeners",
+						section: "extension"
+					}),
 					projectLink: "https://scratch.mit.edu/projects/287920173/",
 					solutionLink: "https://scratch.mit.edu/projects/287887351/"
 				},
@@ -132,8 +145,11 @@ export const scratchLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Pen with Event Listeners: Extension Challenge",
-					content:
-						"Extend the work from GS3 Pen with Event Listeners with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Pen with Event Listeners",
+						section: "extension"
+					}),
 					projectLink: "https://scratch.mit.edu/projects/313084455/",
 					solutionLink: "https://scratch.mit.edu/projects/287952358/"
 				},
@@ -277,8 +293,11 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Advanced Conditionals: Verification and Reflection",
-					content:
-						"Finish GS6 Advanced Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Advanced Conditionals",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -431,8 +450,11 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Variables: Verification and Reflection",
-					content:
-						"Finish GS9 Variables with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Variables",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -483,8 +505,11 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Message Broadcasting: Verification and Reflection",
-					content:
-						"Finish GS10 Message Broadcasting with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Message Broadcasting",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -521,18 +546,27 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Hedgehog Race: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes in GS11 Hedgehog Race. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Hedgehog Race",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Hedgehog Race: Planning and Architecture",
-					content:
-						"Break GS11 Hedgehog Race into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Hedgehog Race",
+						section: "planning"
+					})
 				},
 				{
 					title: "Hedgehog Race: Verification and Reflection",
-					content:
-						"Finish GS11 Hedgehog Race with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Hedgehog Race",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -567,25 +601,37 @@ export const scratchLevel1Course: RawCourse = {
 				},
 				{
 					title: "Asteroid Dodge: Debugging and Failure Modes",
-					content:
-						"Focus on common mistakes in GS12 Asteroid Dodge. Diagnose a broken attempt, repair it, and explain why the fix works."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Asteroid Dodge",
+						section: "debugging"
+					})
 				},
 				{
 					title: "Asteroid Dodge: Planning and Architecture",
-					content:
-						"Break GS12 Asteroid Dodge into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Asteroid Dodge",
+						section: "planning"
+					})
 				},
 				{
 					title: "Asteroid Dodge: Verification and Reflection",
-					content:
-						"Finish GS12 Asteroid Dodge with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Asteroid Dodge",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Asteroid Dodge: Extension Challenge",
-					content:
-						"Extend the work from GS12 Asteroid Dodge with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "Asteroid Dodge",
+						section: "extension"
+					}),
 					projectLink: "https://scratch.mit.edu/projects/303001451/",
 					solutionLink: "https://scratch.mit.edu/projects/302948550/"
 				},
@@ -628,8 +674,11 @@ export const scratchLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "GS13 Master Project: Extension Challenge",
-					content:
-						"Extend the work from GS13 Master Project with a tighter constraint, one extra feature, or a slightly more realistic input case."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Scratch",
+						moduleTitle: "GS13 Master Project",
+						section: "extension"
+					})
 				},
 				{
 					title: "GS13 Master Project: Fluency Drill",

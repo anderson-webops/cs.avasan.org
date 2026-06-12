@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
+import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 export const javaLevel1Course: RawCourse = {
 	name: "Java Level 1",
@@ -116,8 +117,11 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Casting and Operators: Verification and Reflection",
-					content:
-						"Finish JS2 Casting and Operators with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Casting and Operators",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -196,8 +200,11 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Conditionals: Verification and Reflection",
-					content:
-						"Finish JS3 Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Conditionals",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -347,8 +354,11 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Practice with Loops & Conditionals: Verification and Reflection",
-					content:
-						"Finish JS5 Practice with Loops & Conditionals with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Practice with Loops & Conditionals",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -427,8 +437,11 @@ export const javaLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #1: Extension Challenge",
-					content:
-						"Extend the work from Check-In #1 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check In #1",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
 				},
@@ -479,13 +492,19 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Methods: Planning and Architecture",
-					content:
-						"Break JS6 Methods into smaller steps, name the moving pieces, and justify the order in which a clean implementation or solution should be built."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Methods",
+						section: "planning"
+					})
 				},
 				{
 					title: "Methods: Verification and Reflection",
-					content:
-						"Finish JS6 Methods with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Methods",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -671,8 +690,11 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Two Dimensional Arrays: Verification and Reflection",
-					content:
-						"Finish JS8 Two-Dimensional Arrays with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Two Dimensional Arrays",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
@@ -748,8 +770,11 @@ export const javaLevel1Course: RawCourse = {
 			supplementalProjects: [
 				{
 					title: "Check In #2: Extension Challenge",
-					content:
-						"Extend the work from Check-In #2 with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check In #2",
+						section: "extension"
+					}),
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1"
 				},
@@ -809,15 +834,21 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Master Project: Battleship: Verification and Reflection",
-					content:
-						"Finish JS9 Master Project: Battleship with a concise review of the required output, one alternate approach, and one specific improvement for a later revision."
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Master Project: Battleship",
+						section: "verification"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Master Project: Battleship: Extension Challenge",
-					content:
-						"Extend the work from JS9 Master Project: Battleship with a tighter constraint, one extra feature, or a slightly more realistic input case.",
+					content: buildSupportSectionGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Master Project: Battleship",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS9-Simple-Battleship",
 					solutionLink:
