@@ -70,14 +70,14 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM1 Project 6: Hedgehog Race",
 					content:
-						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.",
+						"Plan Hedgehog Race around the racer controls, starting positions, finish condition, winner announcement, and any variables or broadcasts that coordinate the race.\nAdd a project comment that lists the implementation steps. The starter project can be used as a base, or the race can be rebuilt from a blank project with original sprites, costumes, and backdrops.",
 					projectLink: "https://scratch.mit.edu/projects/304551665/",
 					solutionLink: "https://scratch.mit.edu/projects/305082197/"
 				},
 				{
 					title: "GM1 Project 7: Asteroid Dodge",
 					content:
-						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.",
+						"Plan Asteroid Dodge around the player movement, asteroid spawn or reset rules, collision response, score or survival state, and replay behavior.\nAdd a project comment that lists the implementation steps. The starter project can be used as a base, or the dodge game can be rebuilt from a blank project with original sprites, costumes, and backdrops.",
 					projectLink: "https://scratch.mit.edu/projects/303001451/",
 					solutionLink: "https://scratch.mit.edu/projects/302948550/"
 				}
@@ -590,7 +590,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM9 Project 1: Fish Food",
 					content:
-						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nCreate a blank Scratch project and add a project comment that lists the implementation steps. Build Fish Food with custom sprites and backdrops as preparation for the master project.\nFinally, share the project!",
+						"Plan Fish Food around the fish controls, food movement, scoring, hazards or missed-food behavior, and the condition that ends or resets the game.\nCreate a blank Scratch project and add a project comment that lists the implementation steps. Build Fish Food with custom sprites and backdrops as preparation for the master project.\nTest that food appears predictably, score changes only when intended, and the game can be replayed from a clean state. Finally, share the project!",
 					projectLink: "https://scratch.mit.edu/projects/468227197",
 					solutionLink: "https://scratch.mit.edu/projects/468227197"
 				},
@@ -645,7 +645,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM10 Project 1: Treasure Cave",
 					content:
-						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.\nFinally, share the project!",
+						"Plan Treasure Cave around the explorer controls, treasure collection rules, obstacle or enemy behavior, level progress, and the win or restart condition.\nAdd a project comment that lists the implementation steps. The starter project can be used as a base, or the cave adventure can be rebuilt from a blank project with original sprites, costumes, and backdrops.\nTest that each treasure or obstacle changes game state only once and that the end condition is visible. Finally, share the project!",
 					projectLink: "https://scratch.mit.edu/projects/315336651/",
 					solutionLink: "https://scratch.mit.edu/projects/309661591/"
 				},
@@ -678,7 +678,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM10 Supplemental Project 1: Fruit Ninja",
 					content:
-						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\nAdd a project comment that lists the implementation steps.",
+						"Plan Fruit Ninja around the slicing control, fruit spawn timing, score changes, missed-fruit or hazard rules, and the condition that ends the round.\nAdd a project comment that lists the implementation steps. Test repeated slices, missed targets, and restart behavior so the score does not carry stale state between rounds.",
 					projectLink: "https://scratch.mit.edu/projects/346953687/",
 					solutionLink: "https://scratch.mit.edu/projects/348994271/"
 				},

@@ -25,6 +25,10 @@ function variantIndex(
 	return hash % count;
 }
 
+function guidanceSubject(courseFamily: string, moduleTitle: string) {
+	return `${courseFamily} ${moduleTitle}`;
+}
+
 function projectGoal(
 	courseFamily: string,
 	moduleTitle: string,
@@ -218,26 +222,28 @@ function requiredWorkSteps(
 	}
 
 	if (family.includes("java")) {
+		const subject = guidanceSubject(courseFamily, moduleTitle);
+
 		return [
 			[
-				`Sketch the classes, methods, records, interfaces, or collections that own the main responsibilities in ${moduleTitle}.`,
-				`Implement one ${moduleTitle} constructor, method, branch, or test at a time, compiling after each meaningful change.`,
-				`Check ${moduleTitle} with a normal case, an edge case, and one object-state or method-dispatch case tied to the module concept.`
+				`Sketch the classes, methods, records, interfaces, or collections that own the main responsibilities in ${subject}.`,
+				`Implement one ${subject} constructor, method, branch, or test at a time, compiling after each meaningful change.`,
+				`Check ${subject} with a normal case, an edge case, and one object-state or method-dispatch case tied to the module concept.`
 			],
 			[
-				`For ${moduleTitle}, identify which type owns the state, which method exposes behavior, and which test or console trace proves it.`,
-				`Build the smallest compiling ${moduleTitle} version first, then add one behavior or branch at a time.`,
-				`Verify ${moduleTitle} with a standard case, a boundary case, and one case involving object identity, equality, inheritance, records, or collections when relevant.`
+				`For ${subject}, identify which type owns the state, which method exposes behavior, and which test or console trace proves it.`,
+				`Build the smallest compiling ${subject} version first, then add one behavior or branch at a time.`,
+				`Verify ${subject} with a standard case, a boundary case, and one case involving object identity, equality, inheritance, records, or collections when relevant.`
 			],
 			[
-				`Map ${moduleTitle} into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape.`,
-				`Compile ${moduleTitle} after each meaningful signature, field, branch, or loop change so errors stay local.`,
-				`Check ${moduleTitle} with one ordinary path, one awkward or invalid input path, and one state transition or method-call sequence.`
+				`Map ${subject} into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape.`,
+				`Compile ${subject} after each meaningful signature, field, branch, or loop change so errors stay local.`,
+				`Check ${subject} with one ordinary path, one awkward or invalid input path, and one state transition or method-call sequence.`
 			],
 			[
-				`Name the public behavior for ${moduleTitle}, then decide which class, helper method, interface, record, or collection should carry it.`,
-				`Implement the ${moduleTitle} behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.`,
-				`Verify ${moduleTitle} with one happy path, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation.`
+				`Name the public behavior for ${subject}, then decide which class, helper method, interface, record, or collection should carry it.`,
+				`Implement the ${subject} behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.`,
+				`Verify ${subject} with one happy path, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
@@ -344,11 +350,13 @@ function referenceReviewStep(
 	}
 
 	if (family.includes("java")) {
+		const subject = guidanceSubject(courseFamily, moduleTitle);
+
 		return [
-			`After ${moduleTitle} compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage.`,
-			`After the ${moduleTitle} behavior works, compare against the reference and note one difference in type design, public API, object state, or test coverage.`,
-			`Use the ${moduleTitle} reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling.`,
-			`Compare ${moduleTitle} with the reference after the compile/run path is clean, then identify one design or robustness difference that matters.`
+			`After ${subject} compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage.`,
+			`After the ${subject} behavior works, compare against the reference and note one difference in type design, public API, object state, or test coverage.`,
+			`Use the ${subject} reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling.`,
+			`Compare ${subject} with the reference after the compile/run path is clean, then identify one design or robustness difference that matters.`
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 

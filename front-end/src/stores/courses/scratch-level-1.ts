@@ -595,7 +595,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS12 Project 1 – Asteroid Dodge",
 					content:
-						"Play through the demo and identify the game elements that need to be programmed. Useful planning questions include: what does each sprite do, how is it controlled, how does it react to events, what variables track game state, and how does the game end?\n\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.\n\nFinally, share the project!",
+						"Build Asteroid Dodge by identifying the player controls, asteroid movement, collision rules, score or survival timer, and restart behavior before programming.\n\nAdd a project comment that lists the implementation steps. The starter project can be used as a base, or the same mechanics can be rebuilt from a blank project with original sprites, costumes, and backdrops.\n\nTest that the player can move, asteroids reset cleanly, collisions are detected reliably, and the game has a clear ending or replay path. Finally, share the project!",
 					projectLink: "https://scratch.mit.edu/projects/303001451/",
 					solutionLink: "https://scratch.mit.edu/projects/302948550/"
 				},

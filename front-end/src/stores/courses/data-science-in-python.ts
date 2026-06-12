@@ -167,10 +167,14 @@ function dataScienceAppliedSupplementUrl(
 	}-data-analysis-lab-${lab.number}-supplemental-${supplementNumber}/${kind}`;
 }
 
-function dataScienceStudioContent(lab: AppliedDataScienceLab, body: string) {
+function dataScienceStudioContent(
+	lab: AppliedDataScienceLab,
+	sectionTitle: string,
+	body: string
+) {
 	return [
 		body,
-		`**Verification focus:** ${lab.focus} The ${lab.title} work should include one small hand-checkable case before any larger dataset result is accepted.`,
+		`**Verification focus:** ${lab.focus} The ${lab.title} ${sectionTitle.toLowerCase()} should include one small hand-checkable case before any larger dataset result is accepted.`,
 		"**Readable output:** The final artifact should make the question, input data, calculation or transformation, result, and limitation visible without requiring someone to infer the reasoning from code alone."
 	].join("\n\n");
 }
@@ -189,6 +193,7 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 				title: "Concept Path",
 				content: dataScienceStudioContent(
 					lab,
+					"Concept Path",
 					[
 						`**Focus:** ${lab.focus}`,
 						lab.coreConcepts,
@@ -198,29 +203,49 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 			},
 			{
 				title: "Worked Example",
-				content: dataScienceStudioContent(lab, lab.example)
+				content: dataScienceStudioContent(
+					lab,
+					"Worked Example",
+					lab.example
+				)
 			},
 			{
 				title: "Core Project",
-				content: dataScienceStudioContent(lab, lab.project),
+				content: dataScienceStudioContent(
+					lab,
+					"Core Project",
+					lab.project
+				),
 				projectLink: dataScienceAppliedStudioUrl(lab, "starter"),
 				solutionLink: dataScienceAppliedStudioUrl(lab, "solution")
 			},
 			{
 				title: "Review and Reflection",
-				content: dataScienceStudioContent(lab, lab.review)
+				content: dataScienceStudioContent(
+					lab,
+					"Review and Reflection",
+					lab.review
+				)
 			}
 		];
 		module.supplementalProjects = [
 			{
 				title: "Extension Challenge",
-				content: dataScienceStudioContent(lab, lab.extension),
+				content: dataScienceStudioContent(
+					lab,
+					"Extension Challenge",
+					lab.extension
+				),
 				projectLink: dataScienceAppliedStudioUrl(lab, "starter"),
 				solutionLink: dataScienceAppliedStudioUrl(lab, "solution")
 			},
 			{
 				title: "Supplemental Project 2",
-				content: dataScienceStudioContent(lab, lab.supplemental2),
+				content: dataScienceStudioContent(
+					lab,
+					"Supplemental Project 2",
+					lab.supplemental2
+				),
 				projectLink: dataScienceAppliedSupplementUrl(lab, 2, "starter"),
 				solutionLink: dataScienceAppliedSupplementUrl(
 					lab,
@@ -230,7 +255,11 @@ function applyDataScienceAppliedLabs(course: RawCourse) {
 			},
 			{
 				title: "Supplemental Project 3",
-				content: dataScienceStudioContent(lab, lab.supplemental3),
+				content: dataScienceStudioContent(
+					lab,
+					"Supplemental Project 3",
+					lab.supplemental3
+				),
 				projectLink: dataScienceAppliedSupplementUrl(lab, 3, "starter"),
 				solutionLink: dataScienceAppliedSupplementUrl(
 					lab,

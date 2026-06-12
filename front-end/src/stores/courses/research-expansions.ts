@@ -201,7 +201,7 @@ function projectOptionRequiredOutcome(
 		family.includes("linux") ||
 		family.includes("network")
 	) {
-		return `**Required outcome:**\n- State the ${courseLabel} local scope, target, starting state, allowed tools, and stop condition.\n- Record ${courseLabel} command, configuration, trace, or log evidence before and after the change.\n- Explain the ${courseLabel} impact and the rollback, mitigation, or verification step.`;
+		return `**Required outcome:**\n- For ${optionTitle}, state the ${courseLabel} local scope, target, starting state, allowed tools, and stop condition.\n- Record ${optionTitle} command, configuration, trace, or log evidence before and after the change.\n- Explain the ${optionTitle} impact and the ${courseLabel} rollback, mitigation, or verification step.`;
 	}
 	if (family.includes("usaco")) {
 		return `**Required outcome:**\n- For ${optionTitle}, translate the prompt into input format, output format, constraints, and invariant.\n- Pass the ${courseLabel} sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the ${optionTitle} time and memory complexity in relation to the constraints.`;
@@ -210,7 +210,7 @@ function projectOptionRequiredOutcome(
 		return `**Required outcome:**\n- Identify the ${courseLabel} classes, fields, method contracts, and object-state changes.\n- Compile and run one normal ${courseLabel} case and one boundary or awkward case.\n- Explain the main ${courseLabel} type, inheritance, interface, collection, or record decision.`;
 	}
 	if (family.includes("c++")) {
-		return `**Required outcome:**\n- For ${optionTitle}, name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build the ${courseLabel} option with warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the ${optionTitle} container, pointer/reference, memory, or algorithm decision.`;
+		return `**Required outcome:**\n- For ${optionTitle}, name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build ${optionTitle} with ${courseLabel} warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the ${optionTitle} container, pointer/reference, memory, or algorithm decision.`;
 	}
 	if (family.includes("javascript") || family.includes("web")) {
 		return `**Required outcome:**\n- Identify the UI state, event handler, data flow, validation path, and visible output.\n- Test a fresh load, normal action, empty or error case, and responsive layout when relevant.\n- Explain the main DOM, API, state, or accessibility decision.`;

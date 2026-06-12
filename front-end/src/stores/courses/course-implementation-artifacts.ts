@@ -1446,7 +1446,7 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 			},
 			{
 				title: `${courseLabel} Evidence and Remediation Format`,
-				content: `**Concept path:** ${courseLabel} findings use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. The observation describes what happened; the impact explains why it matters; the fix is narrow enough to retest.\n\n**Completion check:** A ${courseLabel} lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere.`
+				content: `**Concept path:** ${courseLabel} findings use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. In ${courseLabel}, the observation describes what happened; the impact explains why it matters; the fix is narrow enough to retest.\n\n**Completion check:** A ${courseLabel} lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere.`
 			},
 			{
 				title: `${courseLabel} Tooling Setup and Recovery`,
@@ -1456,11 +1456,11 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 		supplementalProjects: [
 			{
 				title: `${courseLabel} Safety Project: Threat Model and Scope Sheet`,
-				content: `**Project goal:** Write a scope sheet for one ${courseLabel} lab before running commands. The sheet makes the allowed target, evidence, and stopping conditions explicit so the activity stays local, reversible, and defensive.\n\n**Required fields:** lab target, authorization boundary, allowed tools, disallowed actions, data that may be observed, stop conditions, reset path, and intended defensive outcome.\n\n**Completion checks:**\n- The ${courseLabel} target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named.\n- The ${courseLabel} reset path is specific enough to repeat after a failed run.`
+				content: `**Project goal:** Write a scope sheet for one ${courseLabel} lab before running commands. The ${courseLabel} sheet makes the allowed target, evidence, and stopping conditions explicit so the activity stays local, reversible, and defensive.\n\n**Required fields:** lab target, authorization boundary, allowed tools, disallowed actions, data that may be observed, stop conditions, reset path, and intended defensive outcome.\n\n**Completion checks:**\n- The ${courseLabel} target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named.\n- The ${courseLabel} reset path is specific enough to repeat after a failed run.`
 			},
 			{
 				title: `${courseLabel} Safety Project: Patch and Evidence Report`,
-				content: `**Project goal:** Fix one local toy vulnerability or unsafe systems bug in ${courseLabel} and write an evidence report. The report shows the before state, the smallest useful fix, and the verification that proves the unsafe behavior no longer occurs.\n\n**Required fields:** vulnerable behavior, reproduction command or trace, impact, patch summary, retest evidence, and prevention note.\n\n**Completion checks:**\n- The ${courseLabel} before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention.\n- The ${courseLabel} retest uses the same scenario that exposed the original bug.`
+				content: `**Project goal:** Fix one local toy vulnerability or unsafe systems bug in ${courseLabel} and write an evidence report. The ${courseLabel} report shows the before state, the smallest useful fix, and the verification that proves the unsafe behavior no longer occurs.\n\n**Required fields:** vulnerable behavior, reproduction command or trace, impact, patch summary, retest evidence, and prevention note.\n\n**Completion checks:**\n- The ${courseLabel} before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention.\n- The ${courseLabel} retest uses the same scenario that exposed the original bug.`
 			}
 		]
 	});
@@ -2151,7 +2151,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} Environment and Tooling Baseline`,
 				content: [
-					`**Concept path:** Use this ${courseLabel} baseline before starting systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
+					`**Concept path:** Use this ${courseLabel} baseline before starting systems or security work. For ${courseLabel}, setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
 					`**Environment:**\n${bullets(config.environment)}`,
 					`**Completion check:** The ${courseLabel} work demonstrates the ability to name the lab boundary, setup path, and recovery method.`
 				].join("\n\n")
@@ -2166,7 +2166,7 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			},
 			{
 				title: `${courseLabel} Signature Project`,
-				content: `**Project goal:** ${config.project}\n\n**Completion checks:**\n- ${courseLabel} scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- Evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
+				content: `**Project goal:** ${config.project}\n\n**Completion checks:**\n- ${courseLabel} scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- ${courseLabel} evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
 			},
 			{
 				title: `${courseLabel} Evidence Rubric`,
@@ -2176,11 +2176,11 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 		supplementalProjects: [
 			{
 				title: `${courseLabel} Defensive Lab: Scope and Reset Drill`,
-				content: `**Project goal:** Before running a ${courseLabel} lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path. The drill should be specific enough that the lab can be repeated safely and stopped cleanly if the result is unexpected.\n\n**Required fields:** lab boundary, allowed target, allowed tools, evidence to collect, stop condition, reset command or recovery step, and one disallowed action.\n\n**Completion checks:**\n- ${courseLabel} scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named.\n- The expected evidence is tied to the ${courseLabel} toolchain.`
+				content: `**Project goal:** Before running a ${courseLabel} lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path. The ${courseLabel} drill should be specific enough that the lab can be repeated safely and stopped cleanly if the result is unexpected.\n\n**Required fields:** lab boundary, allowed target, allowed tools, evidence to collect, stop condition, reset command or recovery step, and one disallowed action.\n\n**Completion checks:**\n- ${courseLabel} scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named.\n- The expected evidence is tied to the ${courseLabel} toolchain.`
 			},
 			{
 				title: `${courseLabel} Defensive Lab: Evidence-to-Remediation Report`,
-				content: `**Project goal:** Convert one ${courseLabel} lab observation into a short remediation report. The report separates what was observed from why it matters, then describes a fix or hardening step that can be tested.\n\n**Required fields:** observation, reproduction evidence, impact, remediation, verification step, prevention or monitoring note, and one remaining limitation.\n\n**Completion checks:**\n- ${courseLabel} observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance.\n- Verification evidence is specific enough to reproduce the ${courseLabel} finding.`
+				content: `**Project goal:** Convert one ${courseLabel} lab observation into a short remediation report. The ${courseLabel} report separates what was observed from why it matters, then describes a fix or hardening step that can be tested.\n\n**Required fields:** observation, reproduction evidence, impact, remediation, verification step, prevention or monitoring note, and one remaining limitation.\n\n**Completion checks:**\n- ${courseLabel} observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance.\n- Verification evidence is specific enough to reproduce the ${courseLabel} finding.`
 			}
 		]
 	});

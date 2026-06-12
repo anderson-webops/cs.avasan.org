@@ -111,6 +111,6 @@ export function buildSupportSectionGuidance({
 	return [
 		`Extend **${title}** in ${courseFamily} by changing one meaningful constraint rather than adding unrelated features.`,
 		`The ${title} extension should stress ${focus}.`,
-		`Keep the new ${title} requirement testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
+		`Keep the new ${courseFamily} ${title} requirement testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
 	].join("\n\n");
 }

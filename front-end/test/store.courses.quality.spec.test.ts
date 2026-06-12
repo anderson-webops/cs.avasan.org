@@ -177,7 +177,7 @@ describe("course text quality normalization", () => {
 				/After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage/
 			);
 			expect(corpus).toContain(
-				"After PTJ0 Positioning and Workflow Translation compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage"
+				"After Java/C++ bridge PTJ0 Positioning and Workflow Translation compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage"
 			);
 			expect(corpus).toContain(
 				"After Healthy Holsteins: Applied Lab samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
@@ -264,7 +264,7 @@ describe("course text quality normalization", () => {
 				"PTJ0 Positioning and Workflow Translation compiles cleanly and the expected behavior is visible through output, tests, or method calls"
 			);
 			expect(corpus).toContain(
-				"Map PTJ0 Positioning and Workflow Translation into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape"
+				"Map Java/C++ bridge PTJ0 Positioning and Workflow Translation into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape"
 			);
 			expect(corpus).toContain(
 				"JS1 Variable Types & Input/Output demonstrates the target Java behavior from a clean start"

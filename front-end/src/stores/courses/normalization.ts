@@ -1238,9 +1238,7 @@ function subjectFocus(context: CourseTextContext) {
 	if (/security|offensive|low-level security|network security/.test(source)) {
 		return "safe security analysis: local-only test fixtures, threat modeling, evidence collection, and defensive remediation";
 	}
-	if (
-		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
-	) {
+	if (isNetworkSystemsSource(source)) {
 		return "network systems practice: addressing, routing, ports, DNS, packet evidence, service exposure, and diagnostic reasoning";
 	}
 	if (
@@ -1265,6 +1263,12 @@ function subjectFocus(context: CourseTextContext) {
 
 function isMathContext(context: CourseTextContext) {
 	return /algebra|geometry|calculus|math/.test(contextText(context));
+}
+
+function isNetworkSystemsSource(source: string) {
+	return /\b(?:network systems|dns|ports?|routing|packets?|tcpdump|ipv6|nat)\b/.test(
+		source
+	);
 }
 
 function isDataAiMlContext(context: CourseTextContext) {
@@ -1637,11 +1641,23 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (isDataAiMlContext(context)) {
-		return [
-			`- Define the ${subject} state, data, features, actions, model, or search space before implementation.`,
-			`- Test ${subject} with a tiny traceable case, a normal case, and one boundary or failure case that challenges the algorithm or interpretation.`,
-			`- Record the ${subject} evidence used to judge the result: trace, metric, sanity check, baseline, visualization, or limitation.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define the ${subject} state, data, features, actions, model, or search space before implementation.`,
+				`- Test ${subject} with a tiny traceable case, a normal case, and one boundary or failure case that challenges the algorithm or interpretation.`,
+				`- Record the ${subject} evidence used to judge the result: trace, metric, sanity check, baseline, visualization, or limitation.`
+			],
+			subject => [
+				`- State the ${subject} input representation, expected behavior, and evaluation signal before building.`,
+				`- Test ${subject} with a hand-checkable case, a representative case, and one case where the result should be uncertain or limited.`,
+				`- Explain which ${subject} trace, score, comparison, or visualization supports the conclusion.`
+			],
+			subject => [
+				`- Identify the ${subject} assumptions about data, state, actions, search, rules, or scoring before implementation.`,
+				`- Compare ${subject} against a baseline, simple trace, or known-answer example before accepting a larger result.`,
+				`- Record one ${subject} limitation that would change the interpretation or next experiment.`
+			]
+		]);
 	}
 	if (isCompetitiveProgrammingContext(context)) {
 		return [
@@ -1659,9 +1675,7 @@ function projectExpectations(context: CourseTextContext) {
 			`- Keep a short ${subject} operations note with the exact commands used and the evidence that the system reached the intended state.`
 		];
 	}
-	if (
-		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
-	) {
+	if (isNetworkSystemsSource(source)) {
 		return [
 			`- Define the ${subject} hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics.`,
 			`- Test ${subject} local behavior, remote or cross-host behavior, and one failure case using command output or packet/service evidence.`,
@@ -1820,7 +1834,7 @@ function projectExpectations(context: CourseTextContext) {
 			]
 		]);
 	}
-	if (/calendar machine|date|time/.test(source)) {
+	if (/\b(?:calendar machine|date|dates|time|times)\b/.test(source)) {
 		return [
 			"- Define the conversion assumptions clearly before coding.",
 			"- Print the result in labeled units so the output is not ambiguous.",
@@ -1854,11 +1868,23 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (/pointer|address|dynamic memory|raw array|memory/.test(source)) {
-		return [
-			"- Draw or annotate the relationship between values, addresses, and ownership before coding.",
-			"- Test allocation, access, resizing or cleanup behavior, and an empty or one-element case.",
-			"- Explain which object owns each resource and when that resource is released."
-		];
+		return variantLines(context, [
+			subject => [
+				`- Draw or annotate the ${subject} relationship between values, addresses, and ownership before coding.`,
+				`- Test ${subject} allocation, access, resizing or cleanup behavior, and an empty or one-element case.`,
+				`- Explain which ${subject} object owns each resource and when that resource is released.`
+			],
+			subject => [
+				`- State the ${subject} owner, borrowed reference, pointer target, or array extent before writing memory-sensitive code.`,
+				`- Test ${subject} with null or empty state, one element, normal size, and cleanup or transfer behavior where relevant.`,
+				`- Explain how ${subject} avoids leaks, dangling access, out-of-bounds access, or unclear ownership.`
+			],
+			subject => [
+				`- Sketch the ${subject} stack/heap or object-lifetime picture before changing pointer or allocation logic.`,
+				`- Test ${subject} construction, mutation, copy or move behavior, and destruction or reset behavior when relevant.`,
+				`- Record the ${subject} lifetime rule that determines when a value remains valid.`
+			]
+		]);
 	}
 	if (isApcsContext(context)) {
 		return [
@@ -2023,9 +2049,7 @@ function completionChecks(context: CourseTextContext) {
 			`- The final ${subject} note includes one failure mode, debugging command, or reproducibility detail that would help future troubleshooting.`
 		];
 	}
-	if (
-		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
-	) {
+	if (isNetworkSystemsSource(source)) {
 		return [
 			`- The ${subject} topology, host roles, addresses, ports, protocols, or firewall boundaries are named explicitly.`,
 			`- ${subject} diagnostic evidence shows both expected behavior and at least one failure or blocked-path condition.`,
@@ -2057,18 +2081,42 @@ function completionChecks(context: CourseTextContext) {
 		]);
 	}
 	if (isMathContext(context)) {
-		return [
-			`- The ${subject} solution shows the rule, representation, or theorem used.`,
-			`- A typical ${subject} case and a sign, unit, graph, table, or boundary check are included when relevant.`,
-			`- The final ${subject} answer is checked for reasonableness in context.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- The ${subject} solution shows the rule, representation, or theorem used.`,
+				`- A typical ${subject} case and a sign, unit, graph, table, or boundary check are included when relevant.`,
+				`- The final ${subject} answer is checked for reasonableness in context.`
+			],
+			subject => [
+				`- ${subject} includes the formula, operator rule, geometric relationship, or algebraic move that justifies the result.`,
+				`- ${subject} is checked with one ordinary input and one edge case involving sign, rounding, units, graph shape, or table values.`,
+				`- The final ${subject} explanation states why the numerical result makes sense for the situation.`
+			],
+			subject => [
+				`- ${subject} separates setup, computation, and interpretation so a reader can trace the reasoning.`,
+				`- ${subject} includes at least one verification check such as substitution, estimation, inverse operation, graph/table comparison, or unit analysis.`,
+				`- The final ${subject} note names the condition that would make the answer invalid or incomplete.`
+			]
+		]);
 	}
 	if (isDataAiMlContext(context)) {
-		return [
-			`- The ${subject} result is checked against a small trace, baseline, metric, visualization, or sanity check.`,
-			`- ${subject} includes a normal case and a boundary or failure case that is tested or explained.`,
-			`- The ${subject} explanation states what the evidence supports and one limitation of the result.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- The ${subject} result is checked against a small trace, baseline, metric, visualization, or sanity check.`,
+				`- ${subject} includes a normal case and a boundary or failure case that is tested or explained.`,
+				`- The ${subject} explanation states what the evidence supports and one limitation of the result.`
+			],
+			subject => [
+				`- ${subject} has an explicit success signal, comparison point, or expected trace.`,
+				`- ${subject} is tested on a hand-checkable input and a realistic input before conclusions are accepted.`,
+				`- The final ${subject} note separates observed behavior from interpretation and limitation.`
+			],
+			subject => [
+				`- ${subject} evidence includes either a trace, metric, baseline, visualization, or reasoned counterexample.`,
+				`- ${subject} explains one case where the method works and one case where it could fail or mislead.`,
+				`- The ${subject} conclusion is limited to what the evidence actually supports.`
+			]
+		]);
 	}
 	if (isApcsContext(context)) {
 		return [
@@ -2155,7 +2203,11 @@ function completionChecks(context: CourseTextContext) {
 }
 
 function extensionSubject(context: CourseTextContext) {
-	if (isCheckInContext(context)) {
+	if (
+		isCheckInContext(context) ||
+		context.courseId === "java-without-graphics" ||
+		context.courseId === "java-with-graphics"
+	) {
 		return withCourseContext(context.course.name, context.module.title);
 	}
 
@@ -2267,9 +2319,7 @@ function extensionPrompt(context: CourseTextContext) {
 				`Add one failure-mode check to ${subject} and record the command that distinguishes it from the healthy state.`
 		]);
 	}
-	if (
-		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
-	) {
+	if (isNetworkSystemsSource(source)) {
 		return variantPrompt(context, [
 			subject =>
 				`Extend ${subject} with one diagnostic variation using a different host, port, route, or DNS answer.`,
@@ -2441,9 +2491,7 @@ function studioArtifact(context: CourseTextContext) {
 	) {
 		return "a repeatable Linux systems checkpoint with commands, evidence, logs, and troubleshooting notes";
 	}
-	if (
-		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
-	) {
+	if (isNetworkSystemsSource(source)) {
 		return "a network systems checkpoint with topology, commands, packet or service evidence, and interpretation";
 	}
 	if (/assembly/.test(source)) {
