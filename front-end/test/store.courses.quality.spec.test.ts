@@ -186,13 +186,49 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(
 			/If (?:a|the) student (?:gets stuck|stalls)/i
 		);
-		expect(corpus).not.toMatch(
-			/\bwhile the student (?:explains|talks)\b/i
-		);
+		expect(corpus).not.toMatch(/\bwhile the student (?:explains|talks)\b/i);
 		expect(corpus).not.toMatch(
 			/\bstudents (?:trace|identify|distinguish|draw|describe|choose|see)\b/i
 		);
+		expect(corpus).not.toMatch(
+			/Use the linked starter as a starting point/i
+		);
+		expect(corpus).not.toMatch(
+			/same core idea with a different input, constraint, or edge case/i
+		);
+		expect(corpus).not.toMatch(/content:\s*""/);
 	});
+
+	it(
+		"keeps linked course projects from loading as blank placeholder cards",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const linkedItems = courses.flatMap(course =>
+				course
+					? course.modules.flatMap(module =>
+							[
+								...module.curriculum,
+								...module.supplementalProjects
+							].filter(
+								item => item.projectLink || item.solutionLink
+							)
+						)
+					: []
+			);
+
+			expect(linkedItems.length).toBeGreaterThan(0);
+
+			for (const item of linkedItems) {
+				expect(item.content.trim(), item.title).not.toBe("");
+				expect(item.content, item.title).not.toMatch(
+					/Use the linked starter as a starting point/i
+				);
+			}
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("keeps course expansion templates from regenerating instructor-action copy", () => {
 		const corpus = [

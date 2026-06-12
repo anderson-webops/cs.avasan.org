@@ -130,7 +130,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Static Variables & Methods Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM3 Static Variables & Methods. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-01-jm3-static-variables-and-methods-supplemental-3/starter",
 					solutionLink:
@@ -189,7 +189,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-02-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -198,7 +198,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-03-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -264,7 +264,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Subclasses & Inheritance Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM4 Subclasses & Inheritance. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-04-jm4-subclasses-and-inheritance-supplemental-3/starter",
 					solutionLink:
@@ -319,7 +319,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM5 Maps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-05-jm5-maps-supplemental-2/starter",
 					solutionLink:
@@ -328,7 +328,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM5 Maps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-06-jm5-maps-supplemental-3/starter",
 					solutionLink:
@@ -381,7 +381,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM6 Threading & Error Handling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-07-jm6-threading-and-error-handling-supplemental-2/starter",
 					solutionLink:
@@ -390,7 +390,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM6 Threading & Error Handling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-08-jm6-threading-and-error-handling-supplemental-3/starter",
 					solutionLink:
@@ -448,7 +448,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-09-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -457,7 +457,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-10-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -506,7 +506,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM7 Bank Account. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-11-jm7-bank-account-supplemental-2/starter",
 					solutionLink:
@@ -515,7 +515,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM7 Bank Account. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-12-jm7-bank-account-supplemental-3/starter",
 					solutionLink:
@@ -572,7 +572,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM8 File I/O. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-13-jm8-file-i-o-supplemental-2/starter",
 					solutionLink:
@@ -581,7 +581,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM8 File I/O. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-14-jm8-file-i-o-supplemental-3/starter",
 					solutionLink:
@@ -634,7 +634,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM9 Maze Runner. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-15-jm9-maze-runner-supplemental-2/starter",
 					solutionLink:
@@ -643,7 +643,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM9 Maze Runner. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-16-jm9-maze-runner-supplemental-3/starter",
 					solutionLink:
@@ -676,7 +676,8 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "JM10 Master Project: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for JM10 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM7-Calculator"
 				}
@@ -692,7 +693,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Master Project Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM10 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-17-jm10-master-project-supplemental-2/starter",
 					solutionLink:
@@ -701,7 +702,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Master Project Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM10 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-18-jm10-master-project-supplemental-3/starter",
 					solutionLink:
@@ -734,7 +735,8 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "JM11 Repo Extension and Reference Library: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java transfer or extension project for JM11 Repo Extension and Reference Library. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-stdinstdout"
 				}
@@ -835,7 +837,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game Supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM Master Project Example Quiz Game: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-19-applied-studio-14-jm-master-project-example-quiz-game-supplemental-2/starter",
 					solutionLink:
@@ -844,7 +846,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game Supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM Master Project Example Quiz Game: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-20-applied-studio-14-jm-master-project-example-quiz-game-supplemental-3/starter",
 					solutionLink:
@@ -893,7 +895,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project Supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM Maze Runner Project: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-21-applied-studio-15-jm-maze-runner-project-supplemental-2/starter",
 					solutionLink:
@@ -902,7 +904,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project Supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for JM Maze Runner Project: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/J2-22-applied-studio-15-jm-maze-runner-project-supplemental-3/starter",
 					solutionLink:

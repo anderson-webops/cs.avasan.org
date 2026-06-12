@@ -28,7 +28,8 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "NS0 Setup and Tooling: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked network systems core implementation checkpoint for NS0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-ns0-setup-and-tooling/starter",
 					solutionLink:
@@ -48,7 +49,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for NS0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-01-ns0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +58,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for NS0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-02-ns0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -90,7 +91,8 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: The Network Stack in Plain English: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 1: The Network Stack in Plain English. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-1-the-network-stack-in-plain-english/starter",
 					solutionLink:
@@ -110,7 +112,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: The Network Stack in Plain English supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 1: The Network Stack in Plain English. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-03-unit-1-the-network-stack-in-plain-english-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +121,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 1: The Network Stack in Plain English supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 1: The Network Stack in Plain English. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-unit-1-the-network-stack-in-plain-english-supplemental-3/starter",
 					solutionLink:
@@ -152,7 +154,8 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Addresses and Naming: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 2: Addresses and Naming. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming/starter",
 					solutionLink:
@@ -172,7 +175,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Addresses and Naming supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 2: Addresses and Naming. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-2-addresses-and-naming-supplemental-2/starter",
 					solutionLink:
@@ -181,7 +184,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 2: Addresses and Naming supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 2: Addresses and Naming. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming-supplemental-3/starter",
 					solutionLink:
@@ -214,7 +217,8 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 3: Switches, Routers, NAT, and the Internet Edge. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edge/starter",
 					solutionLink:
@@ -234,7 +238,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 3: Switches, Routers, NAT, and the Internet Edge. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edge-supplemental-2/starter",
 					solutionLink:
@@ -243,7 +247,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 3: Switches, Routers, NAT, and the Internet Edge supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 3: Switches, Routers, NAT, and the Internet Edge. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-3-switches-routers-nat-and-the-internet-edge-supplemental-3/starter",
 					solutionLink:
@@ -292,7 +296,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Ports and Listening Services supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 4: Ports and Listening Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-4-ports-and-listening-services-supplemental-2/starter",
 					solutionLink:
@@ -301,7 +305,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 4: Ports and Listening Services supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 4: Ports and Listening Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-unit-4-ports-and-listening-services-supplemental-3/starter",
 					solutionLink:
@@ -350,7 +354,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: DNS and Name Resolution supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 5: DNS and Name Resolution. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-11-unit-5-dns-and-name-resolution-supplemental-2/starter",
 					solutionLink:
@@ -359,7 +363,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 5: DNS and Name Resolution supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 5: DNS and Name Resolution. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-12-unit-5-dns-and-name-resolution-supplemental-3/starter",
 					solutionLink:
@@ -408,7 +412,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Core Diagnostics supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 6: Core Diagnostics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-13-unit-6-core-diagnostics-supplemental-2/starter",
 					solutionLink:
@@ -417,7 +421,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 6: Core Diagnostics supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 6: Core Diagnostics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-14-unit-6-core-diagnostics-supplemental-3/starter",
 					solutionLink:
@@ -466,7 +470,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Linux Interface and Route Management supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 7: Linux Interface and Route Management. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-15-unit-7-linux-interface-and-route-management-supplemental-2/starter",
 					solutionLink:
@@ -475,7 +479,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 7: Linux Interface and Route Management supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 7: Linux Interface and Route Management. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-16-unit-7-linux-interface-and-route-management-supplemental-3/starter",
 					solutionLink:
@@ -508,7 +512,8 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: IPv6 in Practice: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 8: IPv6 in Practice. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/starter",
 					solutionLink:
@@ -528,7 +533,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: IPv6 in Practice supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 8: IPv6 in Practice. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-17-unit-8-ipv6-in-practice-supplemental-2/starter",
 					solutionLink:
@@ -537,7 +542,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 8: IPv6 in Practice supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 8: IPv6 in Practice. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-18-unit-8-ipv6-in-practice-supplemental-3/starter",
 					solutionLink:
@@ -586,7 +591,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Firewalls and Host Policy supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 9: Firewalls and Host Policy. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-19-unit-9-firewalls-and-host-policy-supplemental-2/starter",
 					solutionLink:
@@ -595,7 +600,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 9: Firewalls and Host Policy supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 9: Firewalls and Host Policy. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-20-unit-9-firewalls-and-host-policy-supplemental-3/starter",
 					solutionLink:
@@ -644,7 +649,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Packet Capture and Deep Inspection supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 10: Packet Capture and Deep Inspection. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-21-unit-10-packet-capture-and-deep-inspection-supplemental-2/starter",
 					solutionLink:
@@ -653,7 +658,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 10: Packet Capture and Deep Inspection supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 10: Packet Capture and Deep Inspection. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-22-unit-10-packet-capture-and-deep-inspection-supplemental-3/starter",
 					solutionLink:
@@ -686,7 +691,8 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Common Application Protocols: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 11: Common Application Protocols. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-11-common-application-protocols/starter",
 					solutionLink:
@@ -706,7 +712,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Common Application Protocols supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 11: Common Application Protocols. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-23-unit-11-common-application-protocols-supplemental-2/starter",
 					solutionLink:
@@ -715,7 +721,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 11: Common Application Protocols supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 11: Common Application Protocols. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-24-unit-11-common-application-protocols-supplemental-3/starter",
 					solutionLink:
@@ -764,7 +770,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Secure Exposure of Services supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 12: Secure Exposure of Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-25-unit-12-secure-exposure-of-services-supplemental-2/starter",
 					solutionLink:
@@ -773,7 +779,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Unit 12: Secure Exposure of Services supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 12: Secure Exposure of Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-26-unit-12-secure-exposure-of-services-supplemental-3/starter",
 					solutionLink:
@@ -806,7 +812,8 @@ export const networkSystemsCourse: RawCourse = {
 				},
 				{
 					title: "NS13 Expansion Ideas and Next Steps: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked network systems core implementation checkpoint for NS13 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-ns13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -826,7 +833,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for NS13 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-27-ns13-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -835,7 +842,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for NS13 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-28-ns13-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -884,7 +891,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for network systems lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-29-applied-studio-15-network-systems-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -893,7 +900,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for network systems lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-30-applied-studio-15-network-systems-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -942,7 +949,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for network systems lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-31-applied-studio-16-network-systems-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -951,7 +958,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for network systems lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-32-applied-studio-16-network-systems-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1000,7 +1007,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for network systems lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-33-applied-studio-17-network-systems-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1009,7 +1016,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "network systems lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked network systems transfer or extension project for network systems lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-34-applied-studio-17-network-systems-lab-17-supplemental-3/starter",
 					solutionLink:

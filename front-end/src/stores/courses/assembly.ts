@@ -28,7 +28,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "ASM0 Setup and Tooling: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for ASM0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-asm0-setup-and-tooling/starter",
 					solutionLink:
@@ -48,7 +49,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for ASM0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-01-asm0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +58,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for ASM0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-02-asm0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -90,7 +91,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Machine Model and Toolchain: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for Unit 1: Machine Model and Toolchain. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-1-machine-model-and-toolchain/starter",
 					solutionLink:
@@ -110,7 +112,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 1: Machine Model and Toolchain supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 1: Machine Model and Toolchain. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-03-unit-1-machine-model-and-toolchain-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +121,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 1: Machine Model and Toolchain supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 1: Machine Model and Toolchain. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-unit-1-machine-model-and-toolchain-supplemental-3/starter",
 					solutionLink:
@@ -168,7 +170,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 2: Registers and Data Movement supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 2: Registers and Data Movement. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-2-registers-and-data-movement-supplemental-2/starter",
 					solutionLink:
@@ -177,7 +179,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 2: Registers and Data Movement supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 2: Registers and Data Movement. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-2-registers-and-data-movement-supplemental-3/starter",
 					solutionLink:
@@ -210,7 +212,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Arithmetic and Logic: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for Unit 3: Arithmetic and Logic. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-3-arithmetic-and-logic/starter",
 					solutionLink:
@@ -230,7 +233,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 3: Arithmetic and Logic supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 3: Arithmetic and Logic. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-3-arithmetic-and-logic-supplemental-2/starter",
 					solutionLink:
@@ -239,7 +242,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 3: Arithmetic and Logic supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 3: Arithmetic and Logic. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-3-arithmetic-and-logic-supplemental-3/starter",
 					solutionLink:
@@ -288,7 +291,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 4: Branching and Loops supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 4: Branching and Loops. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-4-branching-and-loops-supplemental-2/starter",
 					solutionLink:
@@ -297,7 +300,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 4: Branching and Loops supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 4: Branching and Loops. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-4-branching-and-loops-supplemental-3/starter",
 					solutionLink:
@@ -330,7 +333,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: The Stack and Function Calls: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for Unit 5: The Stack and Function Calls. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-5-the-stack-and-function-calls/starter",
 					solutionLink:
@@ -350,7 +354,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 5: The Stack and Function Calls supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 5: The Stack and Function Calls. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-unit-5-the-stack-and-function-calls-supplemental-2/starter",
 					solutionLink:
@@ -359,7 +363,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 5: The Stack and Function Calls supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 5: The Stack and Function Calls. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-12-unit-5-the-stack-and-function-calls-supplemental-3/starter",
 					solutionLink:
@@ -408,7 +412,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 6: Calling Conventions and ABI supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 6: Calling Conventions and ABI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-13-unit-6-calling-conventions-and-abi-supplemental-2/starter",
 					solutionLink:
@@ -417,7 +421,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 6: Calling Conventions and ABI supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 6: Calling Conventions and ABI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-14-unit-6-calling-conventions-and-abi-supplemental-3/starter",
 					solutionLink:
@@ -466,7 +470,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 7: Memory Addressing and Data Structures supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 7: Memory Addressing and Data Structures. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-15-unit-7-memory-addressing-and-data-structures-supplemental-2/starter",
 					solutionLink:
@@ -475,7 +479,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 7: Memory Addressing and Data Structures supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 7: Memory Addressing and Data Structures. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-16-unit-7-memory-addressing-and-data-structures-supplemental-3/starter",
 					solutionLink:
@@ -524,7 +528,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 8: System Calls and Runtime Interaction supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 8: System Calls and Runtime Interaction. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-17-unit-8-system-calls-and-runtime-interaction-supplemental-2/starter",
 					solutionLink:
@@ -533,7 +537,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 8: System Calls and Runtime Interaction supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 8: System Calls and Runtime Interaction. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-18-unit-8-system-calls-and-runtime-interaction-supplemental-3/starter",
 					solutionLink:
@@ -566,7 +570,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 9: Reading Compiler Output: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for Unit 9: Reading Compiler Output. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-9-reading-compiler-output/starter",
 					solutionLink:
@@ -586,7 +591,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 9: Reading Compiler Output supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 9: Reading Compiler Output. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-19-unit-9-reading-compiler-output-supplemental-2/starter",
 					solutionLink:
@@ -595,7 +600,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 9: Reading Compiler Output supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 9: Reading Compiler Output. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-20-unit-9-reading-compiler-output-supplemental-3/starter",
 					solutionLink:
@@ -628,7 +633,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: Debugging at Instruction Level: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for Unit 10: Debugging at Instruction Level. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-10-debugging-at-instruction-level/starter",
 					solutionLink:
@@ -648,7 +654,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 10: Debugging at Instruction Level supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 10: Debugging at Instruction Level. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-21-unit-10-debugging-at-instruction-level-supplemental-2/starter",
 					solutionLink:
@@ -657,7 +663,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 10: Debugging at Instruction Level supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 10: Debugging at Instruction Level. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-22-unit-10-debugging-at-instruction-level-supplemental-3/starter",
 					solutionLink:
@@ -690,7 +696,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Performance and Code Shape: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for Unit 11: Performance and Code Shape. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-11-performance-and-code-shape/starter",
 					solutionLink:
@@ -710,7 +717,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 11: Performance and Code Shape supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 11: Performance and Code Shape. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-23-unit-11-performance-and-code-shape-supplemental-2/starter",
 					solutionLink:
@@ -719,7 +726,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 11: Performance and Code Shape supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 11: Performance and Code Shape. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-24-unit-11-performance-and-code-shape-supplemental-3/starter",
 					solutionLink:
@@ -768,7 +775,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 12: Security and Reliability Visibility supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 12: Security and Reliability Visibility. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-25-unit-12-security-and-reliability-visibility-supplemental-2/starter",
 					solutionLink:
@@ -777,7 +784,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Unit 12: Security and Reliability Visibility supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for Unit 12: Security and Reliability Visibility. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-26-unit-12-security-and-reliability-visibility-supplemental-3/starter",
 					solutionLink:
@@ -810,7 +817,8 @@ export const assemblyCourse: RawCourse = {
 				},
 				{
 					title: "ASM13 Expansion Ideas and Next Steps: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked assembly core implementation checkpoint for ASM13 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-asm13-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -830,7 +838,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for ASM13 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-27-asm13-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -839,7 +847,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for ASM13 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-28-asm13-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -888,7 +896,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for assembly lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-29-applied-studio-15-assembly-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -897,7 +905,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for assembly lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-30-applied-studio-15-assembly-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -946,7 +954,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for assembly lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-31-applied-studio-16-assembly-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -955,7 +963,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for assembly lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-32-applied-studio-16-assembly-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1004,7 +1012,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for assembly lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-33-applied-studio-17-assembly-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1013,7 +1021,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "assembly lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked assembly transfer or extension project for assembly lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-34-applied-studio-17-assembly-lab-17-supplemental-3/starter",
 					solutionLink:

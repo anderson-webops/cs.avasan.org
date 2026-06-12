@@ -38,7 +38,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR1 Code Smells and Safe Refactoring Workflow: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR1 Code Smells and Safe Refactoring Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-08-dpr1-code-smells-and-safe-refactoring-workflow/starter",
 					solutionLink:
@@ -58,7 +59,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR1 Code Smells and Safe Refactoring Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-dpr1-code-smells-and-safe-refactoring-workflow-supplemental-2/starter",
 					solutionLink:
@@ -67,7 +68,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR1 Code Smells and Safe Refactoring Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-dpr1-code-smells-and-safe-refactoring-workflow-supplemental-3/starter",
 					solutionLink:
@@ -110,7 +111,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR2 Composing Methods: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR2 Composing Methods. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr2-composing-methods/starter",
 					solutionLink:
@@ -130,7 +132,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR2 Composing Methods. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-dpr2-composing-methods-supplemental-2/starter",
 					solutionLink:
@@ -139,7 +141,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR2 Composing Methods. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-dpr2-composing-methods-supplemental-3/starter",
 					solutionLink:
@@ -182,7 +184,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR3 Moving Features Between Objects: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR3 Moving Features Between Objects. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-10-dpr3-moving-features-between-objects/starter",
 					solutionLink:
@@ -202,7 +205,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR3 Moving Features Between Objects. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplemental-2/starter",
 					solutionLink:
@@ -211,7 +214,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR3 Moving Features Between Objects. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-dpr3-moving-features-between-objects-supplemental-3/starter",
 					solutionLink:
@@ -254,7 +257,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR4 Organizing Data: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR4 Organizing Data. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr4-organizing-data/starter",
 					solutionLink:
@@ -274,7 +278,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR4 Organizing Data. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-dpr4-organizing-data-supplemental-2/starter",
 					solutionLink:
@@ -283,7 +287,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR4 Organizing Data. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-08-dpr4-organizing-data-supplemental-3/starter",
 					solutionLink:
@@ -326,7 +330,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR5 Simplifying Conditional Expressions: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR5 Simplifying Conditional Expressions. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-12-dpr5-simplifying-conditional-expressions/starter",
 					solutionLink:
@@ -346,7 +351,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR5 Simplifying Conditional Expressions. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr5-simplifying-conditional-expressions-supplemental-2/starter",
 					solutionLink:
@@ -355,7 +360,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR5 Simplifying Conditional Expressions. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-10-dpr5-simplifying-conditional-expressions-supplemental-3/starter",
 					solutionLink:
@@ -398,7 +403,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR6 Simplifying Method Calls: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR6 Simplifying Method Calls. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr6-simplifying-method-calls/starter",
 					solutionLink:
@@ -418,7 +424,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR6 Simplifying Method Calls. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr6-simplifying-method-calls-supplemental-2/starter",
 					solutionLink:
@@ -427,7 +433,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR6 Simplifying Method Calls. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-12-dpr6-simplifying-method-calls-supplemental-3/starter",
 					solutionLink:
@@ -470,7 +476,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR7 Dealing with Generalization: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR7 Dealing with Generalization. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-14-dpr7-dealing-with-generalization/starter",
 					solutionLink:
@@ -490,7 +497,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR7 Dealing with Generalization. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr7-dealing-with-generalization-supplemental-2/starter",
 					solutionLink:
@@ -499,7 +506,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR7 Dealing with Generalization. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-14-dpr7-dealing-with-generalization-supplemental-3/starter",
 					solutionLink:
@@ -542,7 +549,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR8 Refactoring Toward Patterns: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR8 Refactoring Toward Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns/starter",
 					solutionLink:
@@ -562,7 +570,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR8 Refactoring Toward Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns-supplemental-2/starter",
 					solutionLink:
@@ -571,7 +579,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR8 Refactoring Toward Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-16-dpr8-refactoring-toward-patterns-supplemental-3/starter",
 					solutionLink:
@@ -614,7 +622,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR9 Testability, DI, and Refactoring with Confidence: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR9 Testability, DI, and Refactoring with Confidence. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-16-dpr9-testability-di-and-refactoring-with-confidence/starter",
 					solutionLink:
@@ -634,7 +643,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR9 Testability, DI, and Refactoring with Confidence. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr9-testability-di-and-refactoring-with-confidence-supplemental-2/starter",
 					solutionLink:
@@ -643,7 +652,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR9 Testability, DI, and Refactoring with Confidence. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-18-dpr9-testability-di-and-refactoring-with-confidence-supplemental-3/starter",
 					solutionLink:
@@ -686,7 +695,8 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				},
 				{
 					title: "DPR10 Capstone Refactoring Studio: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for DPR10 Capstone Refactoring Studio. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr10-capstone-refactoring-studio/starter",
 					solutionLink:
@@ -706,7 +716,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR10 Capstone Refactoring Studio. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-19-dpr10-capstone-refactoring-studio-supplemental-2/starter",
 					solutionLink:
@@ -715,7 +725,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for DPR10 Capstone Refactoring Studio. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-20-dpr10-capstone-refactoring-studio-supplemental-3/starter",
 					solutionLink:
@@ -764,7 +774,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 11 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-21-applied-studio-11-refactoring-clinic-11-supplemental-2/starter",
 					solutionLink:
@@ -773,7 +783,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 11 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-22-applied-studio-11-refactoring-clinic-11-supplemental-3/starter",
 					solutionLink:
@@ -822,7 +832,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 12 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-23-applied-studio-12-refactoring-clinic-12-supplemental-2/starter",
 					solutionLink:
@@ -831,7 +841,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 12 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-24-applied-studio-12-refactoring-clinic-12-supplemental-3/starter",
 					solutionLink:
@@ -880,7 +890,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 13 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-25-applied-studio-13-refactoring-clinic-13-supplemental-2/starter",
 					solutionLink:
@@ -889,7 +899,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 13 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-26-applied-studio-13-refactoring-clinic-13-supplemental-3/starter",
 					solutionLink:
@@ -938,7 +948,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 14 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-27-applied-studio-14-refactoring-clinic-14-supplemental-2/starter",
 					solutionLink:
@@ -947,7 +957,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 14 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-28-applied-studio-14-refactoring-clinic-14-supplemental-3/starter",
 					solutionLink:
@@ -996,7 +1006,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 15 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-29-applied-studio-15-refactoring-clinic-15-supplemental-2/starter",
 					solutionLink:
@@ -1005,7 +1015,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 15 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-30-applied-studio-15-refactoring-clinic-15-supplemental-3/starter",
 					solutionLink:
@@ -1054,7 +1064,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 16 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-31-applied-studio-16-refactoring-clinic-16-supplemental-2/starter",
 					solutionLink:
@@ -1063,7 +1073,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 16 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-32-applied-studio-16-refactoring-clinic-16-supplemental-3/starter",
 					solutionLink:
@@ -1112,7 +1122,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 17 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-33-applied-studio-17-refactoring-clinic-17-supplemental-2/starter",
 					solutionLink:
@@ -1121,7 +1131,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "refactoring clinic 17 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for refactoring clinic 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-34-applied-studio-17-refactoring-clinic-17-supplemental-3/starter",
 					solutionLink:

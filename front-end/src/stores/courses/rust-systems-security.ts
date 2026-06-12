@@ -28,7 +28,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS0 Tooling, Cargo, and Why Rust Exists: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS0 Tooling, Cargo, and Why Rust Exists. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
@@ -48,7 +49,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Tooling, Cargo, and Why Rust Exists Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS0 Tooling, Cargo, and Why Rust Exists. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-01-rss0-tooling-cargo-and-why-rust-exists-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +58,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Tooling, Cargo, and Why Rust Exists Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS0 Tooling, Cargo, and Why Rust Exists. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-02-rss0-tooling-cargo-and-why-rust-exists-supplemental-3/starter",
 					solutionLink:
@@ -90,7 +91,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS1 Ownership, Moves, and Memory Responsibility: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS1 Ownership, Moves, and Memory Responsibility. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
@@ -110,7 +112,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Ownership, Moves, and Memory Responsibility Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS1 Ownership, Moves, and Memory Responsibility. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-03-rss1-ownership-moves-and-memory-responsibility-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +121,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Ownership, Moves, and Memory Responsibility Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS1 Ownership, Moves, and Memory Responsibility. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-04-rss1-ownership-moves-and-memory-responsibility-supplemental-3/starter",
 					solutionLink:
@@ -152,7 +154,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS2 Borrowing, Aliasing, and Lifetimes: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS2 Borrowing, Aliasing, and Lifetimes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
@@ -172,7 +175,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Borrowing, Aliasing, and Lifetimes Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS2 Borrowing, Aliasing, and Lifetimes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rss2-borrowing-aliasing-and-lifetimes-supplemental-2/starter",
 					solutionLink:
@@ -181,7 +184,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Borrowing, Aliasing, and Lifetimes Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS2 Borrowing, Aliasing, and Lifetimes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rss2-borrowing-aliasing-and-lifetimes-supplemental-3/starter",
 					solutionLink:
@@ -214,7 +217,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS3 Option, Result, and Typed Error Paths: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS3 Option, Result, and Typed Error Paths. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
@@ -234,7 +238,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option, Result, and Typed Error Paths Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS3 Option, Result, and Typed Error Paths. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-07-rss3-option-result-and-typed-error-paths-supplemental-2/starter",
 					solutionLink:
@@ -243,7 +247,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Option, Result, and Typed Error Paths Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS3 Option, Result, and Typed Error Paths. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-08-rss3-option-result-and-typed-error-paths-supplemental-3/starter",
 					solutionLink:
@@ -276,7 +280,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS4 Strings, Slices, Collections, and Bounds Safety: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS4 Strings, Slices, Collections, and Bounds Safety. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
@@ -296,7 +301,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS4 Strings, Slices, Collections, and Bounds Safety. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-09-rss4-strings-slices-collections-and-bounds-safety-supplemental-2/starter",
 					solutionLink:
@@ -305,7 +310,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Strings, Slices, Collections, and Bounds Safety Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS4 Strings, Slices, Collections, and Bounds Safety. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-10-rss4-strings-slices-collections-and-bounds-safety-supplemental-3/starter",
 					solutionLink:
@@ -338,7 +343,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS5 Structs, Enums, and Safer State Models: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS5 Structs, Enums, and Safer State Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
@@ -358,7 +364,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs, Enums, and Safer State Models Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS5 Structs, Enums, and Safer State Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-11-rss5-structs-enums-and-safer-state-models-supplemental-2/starter",
 					solutionLink:
@@ -367,7 +373,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Structs, Enums, and Safer State Models Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS5 Structs, Enums, and Safer State Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-12-rss5-structs-enums-and-safer-state-models-supplemental-3/starter",
 					solutionLink:
@@ -400,7 +406,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS6 Traits, Iterators, and API Contracts: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS6 Traits, Iterators, and API Contracts. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
@@ -420,7 +427,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits, Iterators, and API Contracts Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS6 Traits, Iterators, and API Contracts. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-13-rss6-traits-iterators-and-api-contracts-supplemental-2/starter",
 					solutionLink:
@@ -429,7 +436,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Traits, Iterators, and API Contracts Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS6 Traits, Iterators, and API Contracts. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-14-rss6-traits-iterators-and-api-contracts-supplemental-3/starter",
 					solutionLink:
@@ -462,7 +469,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS7 Files, Parsers, and Secure CLI Design: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS7 Files, Parsers, and Secure CLI Design. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
@@ -482,7 +490,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Files, Parsers, and Secure CLI Design Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS7 Files, Parsers, and Secure CLI Design. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-15-rss7-files-parsers-and-secure-cli-design-supplemental-2/starter",
 					solutionLink:
@@ -491,7 +499,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Files, Parsers, and Secure CLI Design Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS7 Files, Parsers, and Secure CLI Design. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-16-rss7-files-parsers-and-secure-cli-design-supplemental-3/starter",
 					solutionLink:
@@ -524,7 +532,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS8 Concurrency and Race Reduction: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS8 Concurrency and Race Reduction. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
@@ -544,7 +553,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Concurrency and Race Reduction Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS8 Concurrency and Race Reduction. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-17-rss8-concurrency-and-race-reduction-supplemental-2/starter",
 					solutionLink:
@@ -553,7 +562,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Concurrency and Race Reduction Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS8 Concurrency and Race Reduction. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-18-rss8-concurrency-and-race-reduction-supplemental-3/starter",
 					solutionLink:
@@ -586,7 +595,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS9 Unsafe, FFI, and Trusted Boundaries: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS9 Unsafe, FFI, and Trusted Boundaries. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -606,7 +616,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS9 Unsafe, FFI, and Trusted Boundaries. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-19-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-2/starter",
 					solutionLink:
@@ -615,7 +625,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS9 Unsafe, FFI, and Trusted Boundaries. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-20-rss9-unsafe-ffi-and-trusted-boundaries-supplemental-3/starter",
 					solutionLink:
@@ -648,7 +658,8 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				},
 				{
 					title: "RSS10 Capstone: Harden a Legacy Tool: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Rust systems core implementation checkpoint for RSS10 Capstone: Harden a Legacy Tool. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
@@ -668,7 +679,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool Supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS10 Capstone: Harden a Legacy Tool. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-21-rss10-capstone-harden-a-legacy-tool-supplemental-2/starter",
 					solutionLink:
@@ -677,7 +688,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Capstone: Harden a Legacy Tool Supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Rust systems transfer or extension project for RSS10 Capstone: Harden a Legacy Tool. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-22-rss10-capstone-harden-a-legacy-tool-supplemental-3/starter",
 					solutionLink:

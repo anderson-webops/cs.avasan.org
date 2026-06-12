@@ -28,7 +28,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "USS0 Setup and Silver Transition: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for USS0 Setup and Silver Transition. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US25-Why-Did-the-Cow-Cross-the-Road-II"
 				}
@@ -44,14 +45,14 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road III",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for USS0 Setup and Silver Transition. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US26-Why-Did-the-Cow-Cross-the-Road-III"
 				},
 				{
 					title: "Paired Up",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for USS0 Setup and Silver Transition. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US27-Paired-Up"
 				}
@@ -82,7 +83,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Data Structures and Problem Modeling: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 1: Data Structures and Problem Modeling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US4-Exam-and-Bank-Account-Classes"
 				}
@@ -112,7 +114,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Bovine Genomics",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 1: Data Structures and Problem Modeling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US28-Bovine-Genomics"
 				}
@@ -143,7 +145,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: DFS, BFS, and Graph Traversal: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 2: DFS, BFS, and Graph Traversal. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Mothers-Milk"
 				}
@@ -197,7 +200,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Sorting, Searching, and Binary Search: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 3: Sorting, Searching, and Binary Search. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US10-Prime-Palindromes"
 				}
@@ -258,7 +262,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: Prefix Sums, Ranges, and Counting: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 4: Prefix Sums, Ranges, and Counting. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US18-Counting-Haybales"
 				}
@@ -288,7 +293,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Dance Mooves",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 4: Prefix Sums, Ranges, and Counting. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US34-Dance-Mooves"
 				}
@@ -319,7 +324,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Greedy and Structured Simulation: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 5: Greedy and Structured Simulation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Cow-Dance-Show"
 				}
@@ -373,7 +379,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "Unit 6: Silver Capstone Sets: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 6: Silver Capstone Sets. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US38-Redistributing-Gifts"
 				}
@@ -396,7 +403,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Stuck in a Rut Silver",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 6: Silver Capstone Sets. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US35-Stuck-in-a-Rut-Silver"
 				}
@@ -427,7 +434,8 @@ export const usacoSilverCourse: RawCourse = {
 				},
 				{
 					title: "Unit 7: Optional Silver Problem Bank: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 7: Optional Silver Problem Bank. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main"
 				}
@@ -507,14 +515,14 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Subset Equality",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for US Berry Picking: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US37-Subset-Equality"
 				},
 				{
 					title: "Closest Cow Wins",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for US Berry Picking: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US39-Closest-Cow-Wins"
 				}
@@ -557,14 +565,14 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Custom Classes with HashSets and HashMaps",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Superprime Rib: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US5-Custom-Classes-with-Hash-Sets-and-Hash-Maps"
 				},
 				{
 					title: "DFS",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Superprime Rib: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-DFS"
 				}
@@ -607,14 +615,14 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Stacks",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for The Castle: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US6-Stacks"
 				},
 				{
 					title: "BFS",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for The Castle: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-BFS"
 				}
@@ -657,14 +665,14 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Queues",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Sorting a Three Valued Sequence: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US7-Queues"
 				},
 				{
 					title: "Arithmetic Progressions",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Sorting a Three Valued Sequence: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US8-Arithmetic-Progressions"
 				}
@@ -707,14 +715,14 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Number Triangles",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for Healthy Holsteins: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US9-Number-Triangles"
 				},
 				{
 					title: "Healthy Holsteins supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Healthy Holsteins: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-01-applied-studio-13-healthy-holsteins-supplemental-3/starter",
 					solutionLink:
@@ -759,7 +767,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Hamming Codes: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-02-applied-studio-14-hamming-codes-supplemental-2/starter",
 					solutionLink:
@@ -768,7 +776,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hamming Codes supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Hamming Codes: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-03-applied-studio-14-hamming-codes-supplemental-3/starter",
 					solutionLink:
@@ -813,7 +821,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Priority Queues: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-04-applied-studio-15-priority-queues-supplemental-2/starter",
 					solutionLink:
@@ -822,7 +830,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Priority Queues supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Priority Queues: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-05-applied-studio-15-priority-queues-supplemental-3/starter",
 					solutionLink:
@@ -867,7 +875,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Hoof Paper Scissors: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplemental-2/starter",
 					solutionLink:
@@ -876,7 +884,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Hoof Paper Scissors supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Hoof Paper Scissors: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-07-applied-studio-16-hoof-paper-scissors-supplemental-3/starter",
 					solutionLink:
@@ -921,7 +929,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Why Did the Cow Cross the Road: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-08-applied-studio-17-why-did-the-cow-cross-the-road/starter",
 					solutionLink:
@@ -930,7 +938,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Why Did the Cow Cross the Road supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for Why Did the Cow Cross the Road: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-09-applied-studio-17-why-did-the-cow-cross-the-road/starter",
 					solutionLink:

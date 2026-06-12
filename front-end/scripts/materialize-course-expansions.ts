@@ -592,10 +592,14 @@ function buildLinkedSupplementalProjectItem(
 		resourceLabel && slugify(resourceLabel) !== slugify(focus)
 			? `${focus}: ${resourceLabel}`
 			: `${focus}: Supplemental Project ${index}`;
+	const variant =
+		index % 2 === 0
+			? "a transfer practice build that changes one input, constraint, or data shape from the core project"
+			: "an extension build that adds one robustness, edge-case, or design-quality requirement";
 
 	return {
 		title,
-		content: `Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.`,
+		content: `**Project goal:** Use this linked project as ${variant} for ${moduleTitle}. The purpose is to prove that the main concept transfers beyond the exact walkthrough.\n\n**Required work:**\n1. Read the starter and identify the expected inputs, outputs, and state changes.\n2. Implement the missing behavior without copying from the reference solution first.\n3. Add at least one normal case and one awkward or boundary case.\n4. Compare against the reference solution only after a working draft exists.\n\n**Completion checks:**\n- The changed constraint or edge case is named explicitly.\n- The implementation still satisfies the original module concept.\n- The final note explains one decision that would not be obvious from the starter alone.`,
 		projectLink: resource.projectLink,
 		solutionLink: resource.solutionLink
 	};
@@ -716,13 +720,13 @@ function buildReadme(
 Course: ${courseName}
 Module: ${moduleTitle}
 
-Use the starter folder first. The starter is intentionally incomplete, and the solution shows one clean way to finish the same build after the student has worked through it.
+Use the starter folder first. The starter is intentionally incomplete, and the solution shows one clean way to finish the same build after a working draft exists.
 
 Suggested flow:
 - Read the module brief and identify the core requirement.
 - Complete the TODO markers in the starter implementation.
 - Test at least one custom case beyond the default example.
-- Compare against the solution only after the student has a working draft.
+- Compare against the solution only after the starter has a working draft.
 
 Quick run hint: ${runLine}
 `;
@@ -1861,6 +1865,7 @@ export const ${exportName}: RawCourse = ${JSON.stringify(nextCourse, null, "\t")
 `;
 
 		const formattedFile = await prettier.format(nextFile, {
+			...((await prettier.resolveConfig(filePath)) ?? {}),
 			filepath: filePath
 		});
 

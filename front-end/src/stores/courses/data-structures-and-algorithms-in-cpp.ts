@@ -28,7 +28,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP0 Setup and Positioning: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP0 Setup and Positioning. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-08-dscpp0-setup-and-positioning/starter",
 					solutionLink:
@@ -48,7 +49,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Setup and Positioning supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP0 Setup and Positioning. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-01-dscpp0-setup-and-positioning-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +58,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Setup and Positioning supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP0 Setup and Positioning. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-02-dscpp0-setup-and-positioning-supplemental-3/starter",
 					solutionLink:
@@ -90,7 +91,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP1 Interfaces, Records, and a Task Manager CLI: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP1 Interfaces, Records, and a Task Manager CLI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP1-Task-Manager-CLI/starter",
 					solutionLink:
@@ -110,7 +112,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Interfaces, Records, and a Task Manager CLI supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP1 Interfaces, Records, and a Task Manager CLI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-03-dscpp1-interfaces-records-and-a-task-manager-cli-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +121,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Interfaces, Records, and a Task Manager CLI supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP1 Interfaces, Records, and a Task Manager CLI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-04-dscpp1-interfaces-records-and-a-task-manager-cli-supplemental-3/starter",
 					solutionLink:
@@ -152,7 +154,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP2 Graphs and Shortest Paths: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP2 Graphs and Shortest Paths. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP2-Graph-Navigation/starter",
 					solutionLink:
@@ -172,7 +175,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Graphs and Shortest Paths supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP2 Graphs and Shortest Paths. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-05-dscpp2-graphs-and-shortest-paths-supplemental-2/starter",
 					solutionLink:
@@ -181,7 +184,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Graphs and Shortest Paths supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP2 Graphs and Shortest Paths. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-06-dscpp2-graphs-and-shortest-paths-supplemental-3/starter",
 					solutionLink:
@@ -214,7 +217,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP3 STL Containers and State-Based Text Generation: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP3 STL Containers and State-Based Text Generation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP3-Markov-Text-Generator/starter",
 					solutionLink:
@@ -234,7 +238,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "STL Containers and State Based Text Generation supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP3 STL Containers and State-Based Text Generation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-07-dscpp3-stl-containers-and-state-based-text-generation-supplemental-2/starter",
 					solutionLink:
@@ -243,7 +247,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "STL Containers and State Based Text Generation supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP3 STL Containers and State-Based Text Generation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-08-dscpp3-stl-containers-and-state-based-text-generation-supplemental-3/starter",
 					solutionLink:
@@ -276,7 +280,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP4 Recursion and Backtracking in 3D Mazes: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP4 Recursion and Backtracking in 3D Mazes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP4-Recursive-Maze-Pathfinder/starter",
 					solutionLink:
@@ -296,7 +301,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursion and Backtracking in 3D Mazes supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP4 Recursion and Backtracking in 3D Mazes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-09-dscpp4-recursion-and-backtracking-in-3d-mazes-supplemental-2/starter",
 					solutionLink:
@@ -305,7 +310,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursion and Backtracking in 3D Mazes supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP4 Recursion and Backtracking in 3D Mazes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-10-dscpp4-recursion-and-backtracking-in-3d-mazes-supplemental-3/starter",
 					solutionLink:
@@ -338,7 +343,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP5 Quicksort and Partitioning: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP5 Quicksort and Partitioning. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP5-Quicksort-Toolkit/starter",
 					solutionLink:
@@ -358,7 +364,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Quicksort and Partitioning supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP5 Quicksort and Partitioning. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-11-dscpp5-quicksort-and-partitioning-supplemental-2/starter",
 					solutionLink:
@@ -367,7 +373,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Quicksort and Partitioning supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP5 Quicksort and Partitioning. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-12-dscpp5-quicksort-and-partitioning-supplemental-3/starter",
 					solutionLink:
@@ -400,7 +406,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP6 Templates and Linked Structures: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP6 Templates and Linked Structures. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP6-Template-Linked-List/starter",
 					solutionLink:
@@ -420,7 +427,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Templates and Linked Structures supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP6 Templates and Linked Structures. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-13-dscpp6-templates-and-linked-structures-supplemental-2/starter",
 					solutionLink:
@@ -429,7 +436,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Templates and Linked Structures supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP6 Templates and Linked Structures. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-14-dscpp6-templates-and-linked-structures-supplemental-3/starter",
 					solutionLink:
@@ -462,7 +469,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP7 Binary Search Trees: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP7 Binary Search Trees. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP7-Binary-Search-Tree/starter",
 					solutionLink:
@@ -482,7 +490,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP7 Binary Search Trees. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-15-dscpp7-binary-search-trees-supplemental-2/starter",
 					solutionLink:
@@ -491,7 +499,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP7 Binary Search Trees. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-16-dscpp7-binary-search-trees-supplemental-3/starter",
 					solutionLink:
@@ -524,7 +532,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP8 AVL Trees and Rebalancing: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP8 AVL Trees and Rebalancing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP8-AVL-Tree/starter",
 					solutionLink:
@@ -544,7 +553,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "AVL Trees and Rebalancing supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP8 AVL Trees and Rebalancing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-17-dscpp8-avl-trees-and-rebalancing-supplemental-2/starter",
 					solutionLink:
@@ -553,7 +562,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "AVL Trees and Rebalancing supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP8 AVL Trees and Rebalancing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-18-dscpp8-avl-trees-and-rebalancing-supplemental-3/starter",
 					solutionLink:
@@ -586,7 +595,8 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DSCPP9 Benchmarking and Data-Structure Tradeoffs: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked C++ core implementation checkpoint for DSCPP9 Benchmarking and Data-Structure Tradeoffs. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP9-Performance-Benchmarks/starter",
 					solutionLink:
@@ -606,7 +616,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Benchmarking and Data Structure Tradeoffs supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP9 Benchmarking and Data-Structure Tradeoffs. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-19-dscpp9-benchmarking-and-data-structure-tradeoffs-supplemental-2/starter",
 					solutionLink:
@@ -615,7 +625,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Benchmarking and Data Structure Tradeoffs supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for DSCPP9 Benchmarking and Data-Structure Tradeoffs. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-20-dscpp9-benchmarking-and-data-structure-tradeoffs-supplemental-3/starter",
 					solutionLink:
@@ -664,7 +674,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 11 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-21-applied-studio-11-c-algorithm-lab-11-supplemental-2/starter",
 					solutionLink:
@@ -673,7 +683,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 11 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-22-applied-studio-11-c-algorithm-lab-11-supplemental-3/starter",
 					solutionLink:
@@ -722,7 +732,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 12 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-23-applied-studio-12-c-algorithm-lab-12-supplemental-2/starter",
 					solutionLink:
@@ -731,7 +741,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 12 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-24-applied-studio-12-c-algorithm-lab-12-supplemental-3/starter",
 					solutionLink:
@@ -780,7 +790,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 13 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-25-applied-studio-13-c-algorithm-lab-13-supplemental-2/starter",
 					solutionLink:
@@ -789,7 +799,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 13 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-26-applied-studio-13-c-algorithm-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -838,7 +848,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-27-applied-studio-14-c-algorithm-lab-14-supplemental-2/starter",
 					solutionLink:
@@ -847,7 +857,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-28-applied-studio-14-c-algorithm-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -896,7 +906,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-29-applied-studio-15-c-algorithm-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -905,7 +915,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-30-applied-studio-15-c-algorithm-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -954,7 +964,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-31-applied-studio-16-c-algorithm-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -963,7 +973,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-32-applied-studio-16-c-algorithm-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1012,7 +1022,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-33-applied-studio-17-c-algorithm-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1021,7 +1031,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "c algorithm lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked C++ transfer or extension project for c algorithm lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSA-34-applied-studio-17-c-algorithm-lab-17-supplemental-3/starter",
 					solutionLink:

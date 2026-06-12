@@ -28,7 +28,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "PTJ0 Positioning and Workflow Translation: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for PTJ0 Positioning and Workflow Translation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter",
 					solutionLink:
@@ -48,14 +49,14 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "src",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java core implementation checkpoint for PTJ0 Positioning and Workflow Translation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter"
 				},
 				{
 					title: "Positioning and Workflow Translation supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ0 Positioning and Workflow Translation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-ptj0-positioning-and-workflow-translation-supplemental-3/starter",
 					solutionLink:
@@ -88,7 +89,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "PTJ1 Functions, Parameters, and Return Types: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for PTJ1 Functions, Parameters, and Return Types. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ2-Function-Port-Pack/starter",
 					solutionLink:
@@ -108,7 +110,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Functions, Parameters, and Return Types supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ1 Functions, Parameters, and Return Types. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-ptj1-functions-parameters-and-return-types-supplemental-2/starter",
 					solutionLink:
@@ -117,7 +119,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Functions, Parameters, and Return Types supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ1 Functions, Parameters, and Return Types. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-ptj1-functions-parameters-and-return-types-supplemental-3/starter",
 					solutionLink:
@@ -150,7 +152,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "PTJ2 Collections, Strings, and Indexing: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for PTJ2 Collections, Strings, and Indexing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ3-Text-and-Collection-Port-Lab/starter",
 					solutionLink:
@@ -170,7 +173,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Collections, Strings, and Indexing supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ2 Collections, Strings, and Indexing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplemental-2/starter",
 					solutionLink:
@@ -179,7 +182,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Collections, Strings, and Indexing supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ2 Collections, Strings, and Indexing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-ptj2-collections-strings-and-indexing-supplemental-3/starter",
 					solutionLink:
@@ -212,7 +215,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "PTJ3 Classes and Objects across Languages: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for PTJ3 Classes and Objects across Languages. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ4-Shared-Class-Port/starter",
 					solutionLink:
@@ -232,7 +236,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Classes and Objects across Languages supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ3 Classes and Objects across Languages. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-ptj3-classes-and-objects-across-languages-supplemental-2/starter",
 					solutionLink:
@@ -241,7 +245,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Classes and Objects across Languages supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ3 Classes and Objects across Languages. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-ptj3-classes-and-objects-across-languages-supplemental-3/starter",
 					solutionLink:
@@ -274,7 +278,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "PTJ4 Java-Specific Adaptation: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for PTJ4 Java-Specific Adaptation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ5-Python-to-Java-Quiz-Game/starter",
 					solutionLink:
@@ -294,7 +299,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Java Specific Adaptation supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ4 Java-Specific Adaptation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-08-ptj4-java-specific-adaptation-supplemental-2/starter",
 					solutionLink:
@@ -303,7 +308,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Java Specific Adaptation supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ4 Java-Specific Adaptation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-09-ptj4-java-specific-adaptation-supplemental-3/starter",
 					solutionLink:
@@ -336,7 +341,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "PTJ5 C++-Specific Adaptation: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked Java core implementation checkpoint for PTJ5 C++-Specific Adaptation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/starter",
 					solutionLink:
@@ -356,7 +362,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "C++ Specific Adaptation supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ5 C++-Specific Adaptation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-cpp-specific-adaptation-supplemental-2/starter",
 					solutionLink:
@@ -365,7 +371,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "C++ Specific Adaptation supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for PTJ5 C++-Specific Adaptation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-11-ptj5-cpp-specific-adaptation-supplemental-3/starter",
 					solutionLink:
@@ -414,7 +420,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 11 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-12-applied-studio-7-language-bridge-lab-11-supplemental-2/starter",
 					solutionLink:
@@ -423,7 +429,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 11 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-13-applied-studio-7-language-bridge-lab-11-supplemental-3/starter",
 					solutionLink:
@@ -472,7 +478,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 12 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-14-applied-studio-8-language-bridge-lab-12-supplemental-2/starter",
 					solutionLink:
@@ -481,7 +487,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 12 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-15-applied-studio-8-language-bridge-lab-12-supplemental-3/starter",
 					solutionLink:
@@ -530,7 +536,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 13 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-16-applied-studio-9-language-bridge-lab-13-supplemental-2/starter",
 					solutionLink:
@@ -539,7 +545,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 13 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-17-applied-studio-9-language-bridge-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -588,7 +594,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 14 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-18-applied-studio-10-language-bridge-lab-14-supplemental-2/starter",
 					solutionLink:
@@ -597,7 +603,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 14 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-19-applied-studio-10-language-bridge-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -646,7 +652,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 15 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-20-applied-studio-11-language-bridge-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -655,7 +661,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 15 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-21-applied-studio-11-language-bridge-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -704,7 +710,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 16 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-22-applied-studio-12-language-bridge-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -713,7 +719,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 16 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-23-applied-studio-12-language-bridge-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -762,7 +768,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 17 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-24-applied-studio-13-language-bridge-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -771,7 +777,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "language bridge lab 17 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for language bridge lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-25-applied-studio-13-language-bridge-lab-17-supplemental-3/starter",
 					solutionLink:
@@ -816,7 +822,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "graphics supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for graphics: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-26-applied-studio-14-graphics-supplemental-2/starter",
 					solutionLink:
@@ -825,7 +831,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "graphics supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for graphics: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-27-applied-studio-14-graphics-supplemental-3/starter",
 					solutionLink:
@@ -874,7 +880,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "CPP practice supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for CPP practice: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-28-applied-studio-15-cpp-practice-supplemental-2/starter",
 					solutionLink:
@@ -883,7 +889,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "CPP practice supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for CPP practice: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-29-applied-studio-15-cpp-practice-supplemental-3/starter",
 					solutionLink:
@@ -932,7 +938,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "J1X01 java foundations build 12 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for J1X01 java foundations build 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-30-applied-studio-16-j1x01-java-foundations-build-12-supplemental-2/starter",
 					solutionLink:
@@ -941,7 +947,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "J1X01 java foundations build 12 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for J1X01 java foundations build 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-31-applied-studio-16-j1x01-java-foundations-build-12-supplemental-3/starter",
 					solutionLink:
@@ -990,7 +996,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "c foundations build 13 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for c foundations build 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-32-applied-studio-17-c-foundations-build-13-supplemental-2/starter",
 					solutionLink:
@@ -999,7 +1005,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "c foundations build 13 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked Java transfer or extension project for c foundations build 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-33-applied-studio-17-c-foundations-build-13-supplemental-3/starter",
 					solutionLink:

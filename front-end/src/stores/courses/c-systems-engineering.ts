@@ -28,7 +28,8 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "CSE0 Setup and Tooling: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked implementation core implementation checkpoint for CSE0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-cse0-setup-and-tooling/starter",
 					solutionLink:
@@ -48,7 +49,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for CSE0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-01-cse0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,7 +58,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Setup and Tooling supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for CSE0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-02-cse0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -90,7 +91,8 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Why C for Systems Work: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked implementation core implementation checkpoint for Unit 1: Why C for Systems Work. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-1-why-c-for-systems-work/starter",
 					solutionLink:
@@ -110,7 +112,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 1: Why C for Systems Work. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-03-unit-1-why-c-for-systems-work-supplemental-2/starter",
 					solutionLink:
@@ -119,7 +121,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 1: Why C for Systems Work supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 1: Why C for Systems Work. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-04-unit-1-why-c-for-systems-work-supplemental-3/starter",
 					solutionLink:
@@ -168,7 +170,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 2: Binary, Hex, and Number Representation supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 2: Binary, Hex, and Number Representation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-05-unit-2-binary-hex-and-number-representation-supplemental-2/starter",
 					solutionLink:
@@ -177,7 +179,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 2: Binary, Hex, and Number Representation supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 2: Binary, Hex, and Number Representation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-06-unit-2-binary-hex-and-number-representation-supplemental-3/starter",
 					solutionLink:
@@ -235,7 +237,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 3: Bitwise Operations supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 3: Bitwise Operations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-3-bitwise-operations-supplemental-2/starter",
 					solutionLink:
@@ -244,7 +246,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 3: Bitwise Operations supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 3: Bitwise Operations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-3-bitwise-operations-supplemental-3/starter",
 					solutionLink:
@@ -293,7 +295,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 4: Memory and Layout supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 4: Memory and Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-4-memory-and-layout-supplemental-2/starter",
 					solutionLink:
@@ -302,7 +304,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 4: Memory and Layout supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 4: Memory and Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-10-unit-4-memory-and-layout-supplemental-3/starter",
 					solutionLink:
@@ -351,7 +353,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 5: Strings and Byte Buffers supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 5: Strings and Byte Buffers. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-11-unit-5-strings-and-byte-buffers-supplemental-2/starter",
 					solutionLink:
@@ -360,7 +362,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 5: Strings and Byte Buffers supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 5: Strings and Byte Buffers. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-12-unit-5-strings-and-byte-buffers-supplemental-3/starter",
 					solutionLink:
@@ -418,7 +420,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 6: Files, Streams, and Parsing supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 6: Files, Streams, and Parsing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-13-unit-6-files-streams-and-parsing-supplemental-2/starter",
 					solutionLink:
@@ -427,7 +429,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 6: Files, Streams, and Parsing supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 6: Files, Streams, and Parsing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-14-unit-6-files-streams-and-parsing-supplemental-3/starter",
 					solutionLink:
@@ -476,7 +478,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 7: Dynamic Memory and Lifetime supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 7: Dynamic Memory and Lifetime. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-15-unit-7-dynamic-memory-and-lifetime-supplemental-2/starter",
 					solutionLink:
@@ -485,7 +487,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 7: Dynamic Memory and Lifetime supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 7: Dynamic Memory and Lifetime. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-16-unit-7-dynamic-memory-and-lifetime-supplemental-3/starter",
 					solutionLink:
@@ -518,7 +520,8 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Function Pointers and Dispatch: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked implementation core implementation checkpoint for Unit 8: Function Pointers and Dispatch. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-07-unit-8-function-pointers-and-dispatch/starter",
 					solutionLink:
@@ -538,7 +541,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 8: Function Pointers and Dispatch. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-17-unit-8-function-pointers-and-dispatch-supplemental-2/starter",
 					solutionLink:
@@ -547,7 +550,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 8: Function Pointers and Dispatch supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 8: Function Pointers and Dispatch. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-18-unit-8-function-pointers-and-dispatch-supplemental-3/starter",
 					solutionLink:
@@ -596,7 +599,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 9: Data Structures in C supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 9: Data Structures in C. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-19-unit-9-data-structures-in-c-supplemental-2/starter",
 					solutionLink:
@@ -605,7 +608,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 9: Data Structures in C supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 9: Data Structures in C. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-20-unit-9-data-structures-in-c-supplemental-3/starter",
 					solutionLink:
@@ -638,7 +641,8 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: Engineering Math in Code: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked implementation core implementation checkpoint for Unit 10: Engineering Math in Code. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-08-unit-10-engineering-math-in-code/starter",
 					solutionLink:
@@ -658,7 +662,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 10: Engineering Math in Code. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-21-unit-10-engineering-math-in-code-supplemental-2/starter",
 					solutionLink:
@@ -667,7 +671,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 10: Engineering Math in Code supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 10: Engineering Math in Code. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-22-unit-10-engineering-math-in-code-supplemental-3/starter",
 					solutionLink:
@@ -700,7 +704,8 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Systems Tooling: Core Project",
-					content: "",
+					content:
+						"**Project goal:** Complete the linked implementation core implementation checkpoint for Unit 11: Systems Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-09-unit-11-systems-tooling/starter",
 					solutionLink:
@@ -720,7 +725,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 11: Systems Tooling supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 11: Systems Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-23-unit-11-systems-tooling-supplemental-2/starter",
 					solutionLink:
@@ -729,7 +734,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 11: Systems Tooling supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 11: Systems Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-24-unit-11-systems-tooling-supplemental-3/starter",
 					solutionLink:
@@ -778,7 +783,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 2",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 12: Capstone Engineering Utility. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-25-unit-12-capstone-engineering-utility-supplemental-2/starter",
 					solutionLink:
@@ -787,7 +792,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "Unit 12: Capstone Engineering Utility supplemental 3",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for Unit 12: Capstone Engineering Utility. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-26-unit-12-capstone-engineering-utility-supplemental-3/starter",
 					solutionLink:
@@ -836,7 +841,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 14 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-27-applied-studio-14-systems-build-14-supplemental-2/starter",
 					solutionLink:
@@ -845,7 +850,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 14 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-28-applied-studio-14-systems-build-14-supplemental-3/starter",
 					solutionLink:
@@ -894,7 +899,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 15 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-29-applied-studio-15-systems-build-15-supplemental-2/starter",
 					solutionLink:
@@ -903,7 +908,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 15 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-30-applied-studio-15-systems-build-15-supplemental-3/starter",
 					solutionLink:
@@ -952,7 +957,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 16 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-31-applied-studio-16-systems-build-16-supplemental-2/starter",
 					solutionLink:
@@ -961,7 +966,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 16 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-32-applied-studio-16-systems-build-16-supplemental-3/starter",
 					solutionLink:
@@ -1010,7 +1015,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 17 supplemental 2: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-33-applied-studio-17-systems-build-17-supplemental-2/starter",
 					solutionLink:
@@ -1019,7 +1024,7 @@ export const cSystemsEngineeringCourse: RawCourse = {
 				{
 					title: "systems build 17 supplemental 3: Implementation Lab",
 					content:
-						"Use the linked starter as a starting point and the reference link for comparison after the attempt. Focus on the same core idea with a different input, constraint, or edge case.",
+						"**Project goal:** Complete the linked implementation transfer or extension project for systems build 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
 					projectLink:
 						"https://github.com/instruction-material/C-Systems-Engineering/tree/main/CSE-34-applied-studio-17-systems-build-17-supplemental-3/starter",
 					solutionLink:
