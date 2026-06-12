@@ -138,16 +138,16 @@ describe("course text quality normalization", () => {
 				/with visible behavior and verification evidence/i
 			);
 			expect(corpus).toContain(
-				"Implement the Java/C++ bridge implementation checkpoint for **PTJ0 Positioning and Workflow Translation** with compiling Java code, clear object boundaries, and checks for normal and edge behavior"
+				"Build **PTJ0 Positioning and Workflow Translation** through short compile/run cycles, then verify the relevant object state, method contract, or collection behavior"
 			);
 			expect(corpus).toContain(
-				"Build the web development applied challenge for **JSM1 Fundamentals Review** as a browser-visible feature with clear state, interaction, and error-handling evidence"
+				"Produce **JSM1 Fundamentals Review** as a user-facing web development applied challenge with interaction, validation, and accessibility or layout evidence"
 			);
 			expect(corpus).toContain(
-				"Solve the USACO implementation checkpoint for **USB0 Setup and Contest Workflow** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases"
+				"Turn **USB0 Setup and Contest Workflow** into a contest-ready USACO implementation checkpoint with a proved idea, matching samples, and at least one custom edge case"
 			);
 			expect(corpus).toContain(
-				"Build **Images and Sprites** as a core build checkpoint with runnable behavior, inspectable evidence, and a clear boundary case"
+				"Turn **Images and Sprites** into a core build checkpoint with a reproducible run, visible diagnostics, and a named success condition"
 			);
 			expect(corpus).not.toMatch(
 				/Open the starter and name the concrete inputs, outputs, state changes, data structures, or system boundaries involved/
@@ -1097,12 +1097,14 @@ describe("course text quality normalization", () => {
 	});
 
 	it("formats inline project steps and support labels as readable markdown blocks", async () => {
-		const [scratchLevel1, scratchLevel2] = await Promise.all([
+		const [scratchLevel1, scratchLevel2, pygames] = await Promise.all([
 			loadRawCourse("scratch-level-1"),
-			loadRawCourse("scratch-level-2")
+			loadRawCourse("scratch-level-2"),
+			loadRawCourse("pygames")
 		]);
 		expect(scratchLevel1).not.toBeNull();
 		expect(scratchLevel2).not.toBeNull();
+		expect(pygames).not.toBeNull();
 
 		const spinner = findItem(scratchLevel1!, /Spinner/);
 		expect(spinner.content).toContain(
@@ -1112,10 +1114,16 @@ describe("course text quality normalization", () => {
 			"towards the mouse.\n\n**Project goal:**"
 		);
 		expect(spinner.content).toContain(
-			"one boundary or reasoning check tied to Scratch game design"
+			"testable artifact connected to Scratch game design"
 		);
 		expect(spinner.content).toContain("\n\n**Required outcome:**");
 		expect(spinner.content).not.toContain("Build a working result for");
+
+		const imagesReview = findItem(pygames!, /Images and Sprites: Review/);
+		expect(imagesReview.content).toContain(
+			"PyGame development: game-loop state, actors, events, collisions, timing, assets, and playable feedback"
+		);
+		expect(imagesReview.content).not.toContain("Scratch game design");
 
 		const wheel = findItem(scratchLevel2!, /Wheel of Fortune/);
 		expect(wheel.content).toContain(

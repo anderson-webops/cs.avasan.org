@@ -88,6 +88,22 @@ function referenceStep(label: string, artifact: string, hasReference = true) {
 		: `Write a ${label} ${artifact} verification note that identifies the evidence used to confirm the result.`;
 }
 
+function variantIndex(
+	courseFamily: string,
+	moduleTitle: string,
+	section: ImplementationLabSection,
+	count: number
+) {
+	const seed = `${courseFamily}|${moduleTitle}|${section}`;
+	let hash = 0;
+
+	for (const character of seed) {
+		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+	}
+
+	return hash % count;
+}
+
 export function buildImplementationLabGuidance({
 	courseFamily,
 	moduleTitle,
@@ -126,9 +142,15 @@ export function buildImplementationLabGuidance({
 			? "core build checkpoint"
 			: "extension build checkpoint";
 	const artifactArticle = artifact.startsWith("extension") ? "an" : "a";
+	const projectGoal = [
+		`**Project goal:** Build **${label}** as ${artifactArticle} ${artifact} with runnable behavior, inspectable evidence, and a clear boundary case.`,
+		`**Project goal:** Complete **${label}** as ${artifactArticle} ${artifact} that exposes the lab concept through a working run and one protected edge case.`,
+		`**Project goal:** Turn **${label}** into ${artifactArticle} ${artifact} with a reproducible run, visible diagnostics, and a named success condition.`,
+		`**Project goal:** Produce **${label}** as ${artifactArticle} ${artifact} whose normal path and failure or boundary path can both be inspected.`
+	][variantIndex(courseFamily, moduleTitle, section, 4)];
 
 	return [
-		`**Project goal:** Build **${label}** as ${artifactArticle} ${artifact} with runnable behavior, inspectable evidence, and a clear boundary case.`,
+		projectGoal,
 		`**Focus:** ${focus}.`,
 		"**Required work:**",
 		`1. For the **${label}** ${artifact}, identify the concrete inputs, outputs, state changes, files, commands, services, or system boundaries involved.`,

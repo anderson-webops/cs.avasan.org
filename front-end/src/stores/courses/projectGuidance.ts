@@ -80,13 +80,24 @@ function projectGoal(
 ) {
 	const family = courseFamily.toLowerCase();
 	const artifact = projectArtifact(kind);
+	const index = variantIndex(courseFamily, moduleTitle, kind, 4);
 
 	if (family.includes("usaco")) {
-		return `**Project goal:** Solve the ${courseFamily} ${artifact} for **${moduleTitle}** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases.`;
+		return [
+			`**Project goal:** Solve the ${courseFamily} ${artifact} for **${moduleTitle}** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases.`,
+			`**Project goal:** Turn **${moduleTitle}** into a contest-ready ${courseFamily} ${artifact} with a proved idea, matching samples, and at least one custom edge case.`,
+			`**Project goal:** Complete **${moduleTitle}** as a ${courseFamily} ${artifact} that states the constraints, preserves an invariant, and justifies complexity.`,
+			`**Project goal:** Implement **${moduleTitle}** with strict USACO input/output discipline, then verify the algorithm against samples and a hand-built boundary case.`
+		][index];
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
-		return `**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** as a browser-visible feature with clear state, interaction, and error-handling evidence.`;
+		return [
+			`**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** as a browser-visible feature with clear state, interaction, and error-handling evidence.`,
+			`**Project goal:** Complete **${moduleTitle}** as a ${courseFamily} ${artifact} that connects user input, page state, and visible output.`,
+			`**Project goal:** Implement **${moduleTitle}** with a normal browser path, an invalid or empty path, and evidence from the page, console, or network flow.`,
+			`**Project goal:** Produce **${moduleTitle}** as a user-facing ${courseFamily} ${artifact} with interaction, validation, and accessibility or layout evidence.`
+		][index];
 	}
 
 	if (
@@ -94,19 +105,39 @@ function projectGoal(
 		family.includes("machine learning") ||
 		family.includes("ai")
 	) {
-		return `**Project goal:** Produce the ${courseFamily} ${artifact} for **${moduleTitle}** as an evidence-backed analysis, model, or search result with a stated limitation.`;
+		return [
+			`**Project goal:** Produce the ${courseFamily} ${artifact} for **${moduleTitle}** as an evidence-backed analysis, model, or search result with a stated limitation.`,
+			`**Project goal:** Complete **${moduleTitle}** as a ${courseFamily} ${artifact} that inspects inputs, records assumptions, and verifies the output with a sanity check.`,
+			`**Project goal:** Build **${moduleTitle}** around a clear question, measurable result, baseline or trace, and limitation that affects interpretation.`,
+			`**Project goal:** Turn **${moduleTitle}** into a reproducible data/model checkpoint with visible intermediate evidence and a cautious conclusion.`
+		][index];
 	}
 
 	if (family.includes("java")) {
-		return `**Project goal:** Implement the ${courseFamily} ${artifact} for **${moduleTitle}** with compiling Java code, clear object boundaries, and checks for normal and edge behavior.`;
+		return [
+			`**Project goal:** Implement the ${courseFamily} ${artifact} for **${moduleTitle}** with compiling Java code, clear object boundaries, and checks for normal and edge behavior.`,
+			`**Project goal:** Complete **${moduleTitle}** as a Java ${artifact} that exposes class responsibilities, public behavior, and one edge case.`,
+			`**Project goal:** Build **${moduleTitle}** through short compile/run cycles, then verify the relevant object state, method contract, or collection behavior.`,
+			`**Project goal:** Produce **${moduleTitle}** with a named Java type boundary, observable behavior, and evidence from a normal case plus a boundary case.`
+		][index];
 	}
 
 	if (family.includes("python")) {
-		return `**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** as a runnable Python program with readable data flow and traceable boundary cases.`;
+		return [
+			`**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** as a runnable Python program with readable data flow and traceable boundary cases.`,
+			`**Project goal:** Complete **${moduleTitle}** as a Python ${artifact} with separated input, transformation, and output behavior.`,
+			`**Project goal:** Implement **${moduleTitle}** with a hand-checkable normal case, an awkward input or boundary case, and readable helper boundaries.`,
+			`**Project goal:** Produce **${moduleTitle}** as a runnable program whose data flow can be traced without guessing hidden state.`
+		][index];
 	}
 
 	if (family.includes("security") || family.includes("network")) {
-		return `**Project goal:** Complete the ${courseFamily} ${artifact} for **${moduleTitle}** inside the approved local boundary, with defensive evidence and a rollback or hardening note.`;
+		return [
+			`**Project goal:** Complete the ${courseFamily} ${artifact} for **${moduleTitle}** inside the approved local boundary, with defensive evidence and a rollback or hardening note.`,
+			`**Project goal:** Turn **${moduleTitle}** into a scoped defensive checkpoint with captured evidence, interpretation, and mitigation or rollback notes.`,
+			`**Project goal:** Build **${moduleTitle}** around an owned-lab symptom, diagnostic command, observed result, and hardening or validation step.`,
+			`**Project goal:** Produce **${moduleTitle}** with explicit scope, safe test evidence, and a final state that can be verified.`
+		][index];
 	}
 
 	if (
@@ -115,14 +146,29 @@ function projectGoal(
 		family.includes("rust") ||
 		family.includes("c++")
 	) {
-		return `**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** with a reproducible command, inspectable runtime behavior, and memory or diagnostic evidence.`;
+		return [
+			`**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** with a reproducible command, inspectable runtime behavior, and memory or diagnostic evidence.`,
+			`**Project goal:** Complete **${moduleTitle}** as a systems ${artifact} that names the command path, resource boundary, and diagnostic evidence.`,
+			`**Project goal:** Implement **${moduleTitle}** in short build/run/debug cycles, then verify one normal path and one boundary or failure path.`,
+			`**Project goal:** Produce **${moduleTitle}** with visible low-level evidence such as compiler output, sanitizer output, logs, traces, timing, or memory state.`
+		][index];
 	}
 
 	if (family.includes("swift")) {
-		return `**Project goal:** Implement the ${courseFamily} ${artifact} for **${moduleTitle}** as a simulator-verified app path with visible state, navigation, or persistence behavior.`;
+		return [
+			`**Project goal:** Implement the ${courseFamily} ${artifact} for **${moduleTitle}** as a simulator-verified app path with visible state, navigation, or persistence behavior.`,
+			`**Project goal:** Complete **${moduleTitle}** as a Swift app checkpoint with a visible screen state and one verified interaction path.`,
+			`**Project goal:** Build **${moduleTitle}** with a clear state owner, simulator evidence, and one empty, error, layout, or accessibility check.`,
+			`**Project goal:** Produce **${moduleTitle}** as a runnable app slice whose behavior can be demonstrated from launch through the target interaction.`
+		][index];
 	}
 
-	return `**Project goal:** Create the ${courseFamily} ${artifact} for **${moduleTitle}** with an observable result, a checked boundary case, and a short reasoning note.`;
+	return [
+		`**Project goal:** Create the ${courseFamily} ${artifact} for **${moduleTitle}** with an observable result, a checked boundary case, and a short reasoning note.`,
+		`**Project goal:** Complete **${moduleTitle}** as a ${courseFamily} ${artifact} with a clear success condition and evidence that the result works.`,
+		`**Project goal:** Build **${moduleTitle}** in small verifiable steps, then compare the expected result with the observed result.`,
+		`**Project goal:** Produce **${moduleTitle}** as a focused artifact that demonstrates the module concept and one important edge case.`
+	][index];
 }
 
 function familyFocus(

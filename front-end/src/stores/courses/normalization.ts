@@ -1377,11 +1377,11 @@ function subjectFocus(context: CourseTextContext) {
 	if (/python level 3|advanced python|am\d/.test(source)) {
 		return "advanced Python decomposition, algorithmic reasoning, file/data handling, and clear testing habits";
 	}
-	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
-		return "Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback";
-	}
-	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+	if (isPygameSource(source)) {
 		return "PyGame development: game-loop state, actors, events, collisions, timing, assets, and playable feedback";
+	}
+	if (isScratchSource(source)) {
+		return "Scratch game design: sprites, event blocks, broadcasts, variables, costumes or backdrops, loops, and playable feedback";
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
 		return "Swift app development: project structure, SwiftUI views, state flow, signing, simulator/device testing, and release readiness";
@@ -1451,6 +1451,19 @@ function isMathContext(context: CourseTextContext) {
 function isNetworkSystemsSource(source: string) {
 	return /\b(?:network systems|dns|routing|packets?|tcpdump|ipv6|nat)\b/.test(
 		source
+	);
+}
+
+function isPygameSource(source: string) {
+	return /pygames?|zrect|projectile|enemy ai|game loop/.test(source);
+}
+
+function isScratchSource(source: string) {
+	return (
+		!isPygameSource(source) &&
+		/scratch|sprite|broadcast|clone|backdrop|green flag|pen extension/.test(
+			source
+		)
 	);
 }
 
@@ -1525,8 +1538,12 @@ function isJavaContext(context: CourseTextContext) {
 }
 
 function isGameContext(context: CourseTextContext) {
-	return /scratch|sprite|broadcast|clone|backdrop|green flag|pygames?|zrect|projectile|enemy ai|game loop|unity|game development|game-mechanics/.test(
-		contextText(context)
+	const source = contextText(context);
+
+	return (
+		isScratchSource(source) ||
+		isPygameSource(source) ||
+		/unity|game development|game-mechanics/.test(source)
 	);
 }
 
@@ -1806,11 +1823,14 @@ function projectExpectations(context: CourseTextContext) {
 	const source = contextText(context);
 	const subject = extensionSubject(context);
 
-	if (
-		/scratch|sprite|broadcast|clone|backdrop|green flag|pen extension/.test(
-			source
-		)
-	) {
+	if (isPygameSource(source)) {
+		return [
+			`- Define the ${subject} game state, actor responsibilities, input events, collision rules, and frame-by-frame update loop.`,
+			`- Test ${subject} startup, player controls, collision/no-collision cases, scoring or health changes, and reset or end-state behavior.`,
+			`- Keep ${subject} drawing, updating, event handling, and game-state changes separated enough to debug one layer at a time.`
+		];
+	}
+	if (isScratchSource(source)) {
 		return variantLines(context, [
 			subject => [
 				`- Define what each ${subject} sprite controls, senses, changes, or broadcasts.`,
@@ -1828,13 +1848,6 @@ function projectExpectations(context: CourseTextContext) {
 				`- Keep ${subject} logic traceable from event block to state change to visible stage behavior.`
 			]
 		]);
-	}
-	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
-		return [
-			`- Define the ${subject} game state, actor responsibilities, input events, collision rules, and frame-by-frame update loop.`,
-			`- Test ${subject} startup, player controls, collision/no-collision cases, scoring or health changes, and reset or end-state behavior.`,
-			`- Keep ${subject} drawing, updating, event handling, and game-state changes separated enough to debug one layer at a time.`
-		];
 	}
 	if (isUnityContext(context)) {
 		return [
@@ -2203,7 +2216,7 @@ function completionChecks(context: CourseTextContext) {
 			`- State the ${subject} time complexity and why it fits the expected constraints.`
 		];
 	}
-	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
+	if (isScratchSource(source)) {
 		return variantLines(context, [
 			subject => [
 				`- ${subject} starts from a predictable green-flag state.`,
@@ -2229,7 +2242,7 @@ function completionChecks(context: CourseTextContext) {
 			`- The final ${subject} note names the script, prefab, or scene setting that most directly controls the behavior.`
 		];
 	}
-	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+	if (isPygameSource(source)) {
 		return [
 			`- ${subject} starts from a predictable game state and can be restarted or ended intentionally.`,
 			`- ${subject} actor updates, input events, collisions, score/health changes, and draw order are verified with at least one normal and boundary case.`,
@@ -2500,7 +2513,7 @@ function extensionPrompt(context: CourseTextContext) {
 				`Create one alternate output path for ${subject} and test it with a small hand-traced input.`
 		]);
 	}
-	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
+	if (isScratchSource(source)) {
 		return variantPrompt(context, [
 			subject =>
 				`Extend ${subject} with a new sprite interaction that reuses the same event or state logic.`,
@@ -2512,7 +2525,7 @@ function extensionPrompt(context: CourseTextContext) {
 				`Add one feedback cue to ${subject} so the player can tell what state changed.`
 		]);
 	}
-	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+	if (isPygameSource(source)) {
 		return variantPrompt(context, [
 			subject =>
 				`Extend ${subject} with one actor or level state while keeping the game loop readable.`,
@@ -2612,15 +2625,32 @@ function extensionPrompt(context: CourseTextContext) {
 }
 
 function projectSupport(context: CourseTextContext) {
+	const focus = subjectFocus(context);
 	const goal = variantPrompt(context, [
 		subject =>
-			`**Project goal:** Complete **${subject}** as a focused checkpoint for ${subjectFocus(context)}. The finished **${subject}** work should include an observable result and evidence from at least one checked case.`,
+			`**Project goal:** Complete **${subject}** as a focused checkpoint in ${focus}, with a visible result and one checked boundary case.`,
 		subject =>
-			`**Project goal:** Use **${subject}** to practice ${subjectFocus(context)}. The **${subject}** result should be visible, testable, and specific enough to explain without rereading every step.`,
+			`**Project goal:** Produce **${subject}** with clear requirements, observable behavior, and evidence tied to ${focus}.`,
 		subject =>
-			`**Project goal:** Turn **${subject}** into a finished artifact with clear requirements, a normal-case check, and one boundary or reasoning check tied to ${subjectFocus(context)}.`,
+			`**Project goal:** Use **${subject}** to turn the module concept into a testable artifact connected to ${focus}.`,
 		subject =>
-			`**Project goal:** Build **${subject}** around a concrete behavior, output, model, or analysis. The final **${subject}** explanation should connect the result to ${subjectFocus(context)}.`
+			`**Project goal:** Build **${subject}** around one concrete behavior, model, output, or analysis that demonstrates ${focus}.`,
+		subject =>
+			`**Project goal:** Implement **${subject}** so the focus on ${focus} is visible in the output, trace, model, or user flow rather than only described.`,
+		subject =>
+			`**Project goal:** Develop **${subject}** from a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
+		subject =>
+			`**Project goal:** Create **${subject}** as a practical application of ${focus}, then compare expected behavior with the observed result.`,
+		subject =>
+			`**Project goal:** Finish **${subject}** with enough structure, naming, and evidence to support ${focus} without relying on memory.`,
+		subject =>
+			`**Project goal:** Refine **${subject}** until the central decision for ${focus} is explicit, tested, and visible in the final artifact.`,
+		subject =>
+			`**Project goal:** Turn **${subject}** into a compact demonstration of ${focus}, including one ordinary case and one case that could fail if the idea is misunderstood.`,
+		subject =>
+			`**Project goal:** Use **${subject}** to connect the prompt requirements to ${focus}, then document the evidence that proves the connection works.`,
+		subject =>
+			`**Project goal:** Complete **${subject}** with a clear input, process, and output path that makes ${focus} easier to inspect.`
 	]);
 
 	return [
@@ -2719,10 +2749,10 @@ function scienceEvidenceCheckpoint(context: CourseTextContext) {
 function studioArtifact(context: CourseTextContext) {
 	const source = contextText(context);
 
-	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
+	if (isScratchSource(source)) {
 		return "a playable Scratch project with clear event flow, sprite state, and feedback";
 	}
-	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
+	if (isPygameSource(source)) {
 		return "a playable PyGame checkpoint with clear loop state, actors, events, collisions, and feedback";
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
