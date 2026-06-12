@@ -181,19 +181,19 @@ function projectOptionRequiredOutcome(
 	const optionTitle = projectTitle(project);
 
 	if (family.includes("scratch")) {
-		return `**Required outcome:**\n- For ${optionTitle}, name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one ${courseLabel} normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main ${optionTitle} Scratch state or event-flow decision.`;
+		return `**Required outcome:**\n- For ${optionTitle}, name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one ${optionTitle} normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main ${optionTitle} Scratch state or event-flow decision in the ${courseLabel} context.`;
 	}
 	if (family.includes("data") || family.includes("machine learning")) {
-		return `**Required outcome:**\n- For ${optionTitle}, state the question, dataset, key columns or features, and cleaning or modeling choice.\n- Include a ${courseLabel} baseline, sanity check, metric, visualization, or small trace.\n- Explain what the ${optionTitle} evidence supports and one limitation of the result.`;
+		return `**Required outcome:**\n- For ${optionTitle}, state the question, dataset, key columns or features, and cleaning or modeling choice.\n- Include a ${optionTitle} baseline, sanity check, metric, visualization, or small trace.\n- Explain what the ${optionTitle} evidence supports and one limitation of the result.`;
 	}
 	if (family.includes("ai")) {
-		return `**Required outcome:**\n- For ${optionTitle}, define the state representation, action space, rule, search, or scoring method.\n- Trace one ${courseLabel} ordinary case and one case where the strategy behaves poorly or ambiguously.\n- Explain why the ${optionTitle} strategy is reasonable and where it is limited.`;
+		return `**Required outcome:**\n- For ${optionTitle}, define the state representation, action space, rule, search, or scoring method.\n- Trace one ${optionTitle} ordinary case and one case where the strategy behaves poorly or ambiguously.\n- Explain why the ${optionTitle} strategy is reasonable and where it is limited.`;
 	}
 	if (family.includes("algebra")) {
-		return `**Required outcome:**\n- For ${optionTitle}, show the rule, equation, graph, table, or transformation being used.\n- Include one ${courseLabel} ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the ${optionTitle} result is known to be reasonable.`;
+		return `**Required outcome:**\n- For ${optionTitle}, show the rule, equation, graph, table, or transformation being used.\n- Include one ${optionTitle} ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the ${optionTitle} result is known to be reasonable.`;
 	}
 	if (isScienceFamily(family)) {
-		return `**Required outcome:**\n- For ${optionTitle}, state the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate the ${courseLabel} observation, pattern, and explanation.\n- Connect evidence to the ${optionTitle} claim and name one model limitation or uncertainty.`;
+		return `**Required outcome:**\n- For ${optionTitle}, state the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate the ${optionTitle} observation, pattern, and explanation.\n- Connect evidence to the ${optionTitle} claim and name one model limitation or uncertainty.`;
 	}
 	if (
 		family.includes("security") ||
@@ -204,19 +204,19 @@ function projectOptionRequiredOutcome(
 		return `**Required outcome:**\n- For ${optionTitle}, state the ${courseLabel} local scope, target, starting state, allowed tools, and stop condition.\n- Record ${optionTitle} command, configuration, trace, or log evidence before and after the change.\n- Explain the ${optionTitle} impact and the ${courseLabel} rollback, mitigation, or verification step.`;
 	}
 	if (family.includes("usaco")) {
-		return `**Required outcome:**\n- For ${optionTitle}, translate the prompt into input format, output format, constraints, and invariant.\n- Pass the ${courseLabel} sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the ${optionTitle} time and memory complexity in relation to the constraints.`;
+		return `**Required outcome:**\n- For ${optionTitle}, translate the prompt into input format, output format, constraints, and invariant.\n- Pass the ${optionTitle} sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the ${optionTitle} time and memory complexity in relation to the constraints.`;
 	}
 	if (family.includes("java")) {
-		return `**Required outcome:**\n- Identify the ${courseLabel} classes, fields, method contracts, and object-state changes.\n- Compile and run one normal ${courseLabel} case and one boundary or awkward case.\n- Explain the main ${courseLabel} type, inheritance, interface, collection, or record decision.`;
+		return `**Required outcome:**\n- For the ${optionTitle} option in ${courseLabel}, identify the classes, fields, method contracts, and object-state changes.\n- Compile and run one normal ${optionTitle} case for ${courseLabel} and one boundary or awkward case.\n- Explain the main ${optionTitle} type, inheritance, interface, collection, or record decision in the ${courseLabel} context.`;
 	}
 	if (family.includes("c++")) {
 		return `**Required outcome:**\n- For ${optionTitle}, name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build ${optionTitle} with ${courseLabel} warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the ${optionTitle} container, pointer/reference, memory, or algorithm decision.`;
 	}
 	if (family.includes("javascript") || family.includes("web")) {
-		return `**Required outcome:**\n- Identify the UI state, event handler, data flow, validation path, and visible output.\n- Test a fresh load, normal action, empty or error case, and responsive layout when relevant.\n- Explain the main DOM, API, state, or accessibility decision.`;
+		return `**Required outcome:**\n- For ${optionTitle}, identify the UI state, event handler, data flow, validation path, and visible output.\n- Test ${optionTitle} with a fresh load, normal action, empty or error case, and responsive layout when relevant.\n- Explain the main ${optionTitle} DOM, API, state, or accessibility decision.`;
 	}
 
-	return `**Required outcome:**\n- Define the ${courseLabel} inputs, output or artifact, success condition, and evidence source.\n- Include a normal case, a boundary case, and one awkward or failure case.\n- Explain the main design, model, proof, or reasoning decision.`;
+	return `**Required outcome:**\n- Define the ${optionTitle} inputs, output or artifact, success condition, and evidence source.\n- Include one ${optionTitle} normal case, a boundary case, and one awkward or failure case.\n- Explain the main ${optionTitle} design, model, proof, or reasoning decision in the ${courseLabel} context.`;
 }
 
 function projectOptionExtension(
@@ -294,7 +294,7 @@ function buildStandardsModule(
 				title: `${courseLabel} Core Skills`,
 				content: [
 					`**Course focus:** These skills benefit from focused review, clear examples, and explicit prerequisite connections before larger ${profile.family} projects.`,
-					`**Core skills:**\n${bullets(profile.gaps)}`,
+					`**Core skills:**\n${bullets(profile.gaps.map(gap => `${courseLabel} focus: ${gap}`))}`,
 					`**Completion check:** A ${courseLabel} lesson or project is ready when it includes a concrete explanation, worked example, practice task, and completion check for one of these skills.`
 				].join("\n\n")
 			},
@@ -302,7 +302,7 @@ function buildStandardsModule(
 				title: `${courseLabel} Next Topics`,
 				content: [
 					`**Course focus:** These ${courseLabel} topics mark the next areas where ${profile.family} can become more complete. Introduce each ${courseLabel} topic in prerequisite order and tie it to a concrete project or checkpoint.`,
-					`**Expansion topics:**\n${bullets(profile.topics)}`,
+					`**Expansion topics:**\n${bullets(profile.topics.map(topic => `${courseLabel} expansion: ${topic}`))}`,
 					`**Common pitfalls:** Each ${courseLabel} topic should connect to a real project. If a ${courseLabel} connection is unclear, add a smaller bridge lesson before the major project.`
 				].join("\n\n")
 			},
@@ -362,7 +362,7 @@ function buildSequencingModule(
 				title: `${courseLabel} Readiness Checklist`,
 				content: [
 					`**Course focus:** This checklist keeps ${profile.family} modules concrete, sequenced, and assessable.`,
-					`**Completion checks:**\n- Each ${courseLabel} module has a named prerequisite and observable outcome.\n- Each ${profile.family} project has required behavior, test cases, and an extension.\n- The ${courseLabel} assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any ${profile.family} toolchain, dataset, simulation, or source-code dependency is linked and version-aware.`
+					`**Completion checks:**\n- Each ${courseLabel} module has a named prerequisite and observable outcome.\n- Each ${courseLabel} project has required behavior, test cases, and an extension.\n- The ${courseLabel} assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any ${courseLabel} toolchain, dataset, simulation, or source-code dependency is linked and version-aware.`
 				].join("\n\n")
 			},
 			{
@@ -424,7 +424,7 @@ function buildProjectModule(
 				title: `${courseLabel} Rubric`,
 				content: [
 					`**Project reflection:** Every major ${courseLabel} project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.`,
-					`**Completion checks:**\n- The ${courseLabel} deliverable is visible, runnable, or inspectable.\n- A normal case and an edge case are tested or justified.\n- The ${profile.family} explanation does not depend on reading every line or step from notes.`
+					`**Completion checks:**\n- The ${courseLabel} deliverable is visible, runnable, or inspectable.\n- A normal case and an edge case are tested or justified.\n- The ${courseLabel} explanation does not depend on reading every line or step from notes.`
 				].join("\n\n")
 			},
 			{

@@ -376,6 +376,8 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "JS5 Practice with Loops & Conditionals",
+						itemTitle:
+							"Practice with Loops & Conditionals Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -389,6 +391,8 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "JS5 Practice with Loops & Conditionals",
+						itemTitle:
+							"Practice with Loops & Conditionals Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -450,6 +454,7 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "Check-In #1",
+						itemTitle: "Check In #1 Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -463,6 +468,7 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "Check-In #1",
+						itemTitle: "Check In #1 Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -783,6 +789,7 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "Check-In #2",
+						itemTitle: "Check In #2 Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -796,6 +803,7 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "Check-In #2",
+						itemTitle: "Check In #2 Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -859,6 +867,7 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "JS9 Master Project: Battleship",
+						itemTitle: "Master Project: Battleship Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -872,6 +881,7 @@ export const javaLevel1Course: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java Level 1",
 						moduleTitle: "JS9 Master Project: Battleship",
+						itemTitle: "Master Project: Battleship Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -946,6 +956,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X02 Java Foundations Build 13: Implementation Lab",
+						itemTitle:
+							"J1X02 Java Foundations Build 13 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -960,6 +972,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X02 Java Foundations Build 13: Implementation Lab",
+						itemTitle:
+							"J1X02 Java Foundations Build 13 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1034,6 +1048,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X03 Java Foundations Build 14: Implementation Lab",
+						itemTitle:
+							"J1X03 Java Foundations Build 14 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1048,6 +1064,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X03 Java Foundations Build 14: Implementation Lab",
+						itemTitle:
+							"J1X03 Java Foundations Build 14 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1122,6 +1140,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X04 Java Foundations Build 15: Implementation Lab",
+						itemTitle:
+							"J1X04 Java Foundations Build 15 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1136,6 +1156,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X04 Java Foundations Build 15: Implementation Lab",
+						itemTitle:
+							"J1X04 Java Foundations Build 15 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1210,6 +1232,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X05 Java Foundations Build 16: Implementation Lab",
+						itemTitle:
+							"J1X05 Java Foundations Build 16 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1224,6 +1248,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X05 Java Foundations Build 16: Implementation Lab",
+						itemTitle:
+							"J1X05 Java Foundations Build 16 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1298,6 +1324,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X06 Java Foundations Build 17: Implementation Lab",
+						itemTitle:
+							"J1X06 Java Foundations Build 17 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1312,6 +1340,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"J1X06 Java Foundations Build 17: Implementation Lab",
+						itemTitle:
+							"J1X06 Java Foundations Build 17 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1384,6 +1414,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"Temperature Converter: Implementation Lab",
+						itemTitle:
+							"Temperature Converter Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1398,6 +1430,8 @@ export const javaLevel1Course: RawCourse = {
 						courseFamily: "Java Level 1",
 						moduleTitle:
 							"Temperature Converter: Implementation Lab",
+						itemTitle:
+							"Temperature Converter Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

@@ -1,6 +1,7 @@
 export interface ProjectGuidanceOptions {
 	courseFamily: string;
 	moduleTitle: string;
+	itemTitle?: string;
 	projectKind: "core" | "extension";
 	hasReference: boolean;
 }
@@ -27,6 +28,49 @@ function variantIndex(
 
 function guidanceSubject(courseFamily: string, moduleTitle: string) {
 	return `${courseFamily} ${moduleTitle}`;
+}
+
+function checkInDetails(moduleTitle: string) {
+	const trimmedTitle = moduleTitle.trim();
+	const prefix = "Check-In #";
+	if (!trimmedTitle.toLowerCase().startsWith(prefix.toLowerCase())) {
+		return { isCheckIn: false, topic: "" };
+	}
+
+	let cursor = prefix.length;
+	while (cursor < trimmedTitle.length && /\d/.test(trimmedTitle[cursor])) {
+		cursor++;
+	}
+
+	const remainder = trimmedTitle.slice(cursor).trim();
+	const topic = remainder.startsWith(":")
+		? remainder.slice(1).trim()
+		: remainder;
+
+	return { isCheckIn: true, topic };
+}
+
+function guidanceModuleTitle(moduleTitle: string, itemTitle?: string) {
+	if (!itemTitle) return moduleTitle;
+
+	const { isCheckIn, topic: checkInTopic } = checkInDetails(moduleTitle);
+	const supplementalMatch = itemTitle.match(/\bsupplemental\s+(\d+)\b/i);
+	if (supplementalMatch) {
+		if (checkInTopic) {
+			return `${checkInTopic} Supplemental ${supplementalMatch[1]}`;
+		}
+		if (isCheckIn) {
+			return `${moduleTitle.replace(/^Check-In/i, "Checkpoint")} Supplemental ${supplementalMatch[1]}`;
+		}
+		return `${moduleTitle} Supplemental ${supplementalMatch[1]}`;
+	}
+
+	const extensionMatch = itemTitle.match(/\bextension challenge\b/i);
+	if (extensionMatch) {
+		return `${moduleTitle} Extension Challenge`;
+	}
+
+	return moduleTitle;
 }
 
 function projectGoal(
@@ -513,20 +557,25 @@ function completionCheckSteps(
 export function buildProjectGuidance({
 	courseFamily,
 	moduleTitle,
+	itemTitle,
 	projectKind,
 	hasReference
 }: ProjectGuidanceOptions) {
+	const scopedModuleTitle = guidanceModuleTitle(moduleTitle, itemTitle);
+
 	return [
-		projectGoal(courseFamily, moduleTitle, projectKind),
-		`**Focus:** ${focusFor(courseFamily, moduleTitle, projectKind)}.`,
+		projectGoal(courseFamily, scopedModuleTitle, projectKind),
+		`**Focus:** ${focusFor(courseFamily, scopedModuleTitle, projectKind)}.`,
 		"**Required work:**",
-		...requiredWorkSteps(courseFamily, moduleTitle, projectKind).map(
+		...requiredWorkSteps(courseFamily, scopedModuleTitle, projectKind).map(
 			(step, index) => `${index + 1}. ${step}`
 		),
-		`4. ${referenceReviewStep(courseFamily, moduleTitle, projectKind, hasReference)}`,
+		`4. ${referenceReviewStep(courseFamily, scopedModuleTitle, projectKind, hasReference)}`,
 		"**Completion checks:**",
-		...completionCheckSteps(courseFamily, moduleTitle, projectKind).map(
-			step => `- ${step}`
-		)
+		...completionCheckSteps(
+			courseFamily,
+			scopedModuleTitle,
+			projectKind
+		).map(step => `- ${step}`)
 	].join("\n\n");
 }

@@ -177,7 +177,7 @@ describe("course text quality normalization", () => {
 				/After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage/
 			);
 			expect(corpus).toContain(
-				"After Java/C++ bridge PTJ0 Positioning and Workflow Translation compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage"
+				"Use the Java/C++ bridge PTJ0 Positioning and Workflow Translation reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling"
 			);
 			expect(corpus).toContain(
 				"After Healthy Holsteins: Applied Lab samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
@@ -261,13 +261,13 @@ describe("course text quality normalization", () => {
 				/Name the input values, helper functions or loops, data structures, and printed output before coding/
 			);
 			expect(corpus).toContain(
-				"PTJ0 Positioning and Workflow Translation compiles cleanly and the expected behavior is visible through output, tests, or method calls"
+				"PTJ0 Positioning and Workflow Translation demonstrates the required Java behavior without relying on stale build output or hidden IDE state"
 			);
 			expect(corpus).toContain(
 				"Map Java/C++ bridge PTJ0 Positioning and Workflow Translation into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape"
 			);
 			expect(corpus).toContain(
-				"JS1 Variable Types & Input/Output demonstrates the target Java behavior from a clean start"
+				"The JSS4 Combining Loops and Variables page or app shows the expected state change, output, validation, or canvas behavior"
 			);
 			expect(corpus).toContain(
 				"The JSM1 Fundamentals Review page or app shows the expected state change, output, validation, or canvas behavior"
@@ -279,13 +279,16 @@ describe("course text quality normalization", () => {
 				"The NSEC0 Setup and Tooling lab boundary, target behavior, and evidence source are explicit"
 			);
 			expect(corpus).toContain(
-				"Extend PTJ0 Positioning and Workflow Translation with one additional method and a test or console trace that proves its contract"
+				"Extend Project: Syntax Translation Warmup (PTJ0 Positioning and Workflow Translation) with one additional method and a test or console trace that proves its contract"
 			);
 			expect(corpus).toContain(
-				"Add a subclass, interface, or record variation to PTJ1 Functions, Parameters, and Return Types without changing the existing public behavior"
+				"PTJ1 Functions, Parameters, and Return Types Supplemental 2 demonstrates the required Java behavior without relying on stale build output or hidden IDE state"
+			);
+			expect(corpus).not.toContain(
+				"Define the Project: Function Port Pack (PTJ1 Functions, Parameters, and Return Types) hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics"
 			);
 			expect(corpus).toContain(
-				"Add one transfer case to AM2 Review: Functions & Lists that changes the input, representation, or success condition"
+				"Add one transfer case to AM2 Project 1: Functions Practice (AM2 Review: Functions & Lists) that changes the input, representation, or success condition"
 			);
 			expect(corpus).toContain(
 				"Add one rule, control, level, reset, or feedback variation to Maze with timer and collectibles while preserving the main play goal"
@@ -294,7 +297,7 @@ describe("course text quality normalization", () => {
 				"Change one rule or control in Scratch Level 2: Project and Assessment Practice while preserving the same play goal"
 			);
 			expect(corpus).toContain(
-				"Change one constraint or case in Python Level 1: Check-In #1 while preserving the same core concept"
+				"Change one success condition in Python Level 1: Check-In #1 and compare it with the original version"
 			);
 		},
 		COURSE_SWEEP_TIMEOUT
@@ -1325,7 +1328,9 @@ describe("course text quality normalization", () => {
 		expect(binarySearch.content).toContain(
 			"State the sorted-data precondition"
 		);
-		expect(binarySearch.content).toContain("Trace at least one APCS16 Binary Search");
+		expect(binarySearch.content).toContain(
+			"Trace at least one Core Project: Binary Search (APCS16 Binary Search and Merge Sort)"
+		);
 	});
 
 	it("adds an AP Computer Science A pacing track guide", async () => {

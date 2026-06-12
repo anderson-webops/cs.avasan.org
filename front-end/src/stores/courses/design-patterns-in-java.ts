@@ -194,7 +194,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Builder",
 					content:
-						"Builder responds to large object setup, optional configuration, and unreadable telescoping constructors. Compare a fluent builder with static factories and plain constructors so the tradeoff is concrete."
+						"Use a builder when large object setup, optional configuration, and unreadable telescoping constructors make direct construction hard to follow. Compare a fluent builder with static factories and plain constructors so the tradeoff is concrete."
 				},
 				{
 					title: "Worked Example Set: Duplicated Creation Logic in a Java App",

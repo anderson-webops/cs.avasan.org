@@ -249,7 +249,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Introduction to Operators",
 					content:
-						"Operators change or combine values. Practice `+`, `-`, `*`, `/`, and `%`, then compare those arithmetic operators with the assignment operator `=`, which stores a value. Use compound assignment such as `+=` and `*=` when updating an existing variable, and test `++` or `--` only when the one-step change is clear."
+						"An operator changes or combines values. Practice `+`, `-`, `*`, `/`, and `%`, then compare those arithmetic operators with the assignment operator `=`, which stores a value. Use compound assignment such as `+=` and `*=` when updating an existing variable, and test `++` or `--` only when the one-step change is clear."
 				},
 				{
 					title: "Math Methods",
@@ -408,7 +408,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "ASCII",
 					content:
-						"ASCII codes represent characters as numbers, which makes it possible to shift or generate characters with arithmetic. Use `char.charCodeAt()` to inspect a character's numeric code and `String.fromCharCode()` to convert a number back into a character. Test uppercase letters, lowercase letters, digits, and punctuation so the ranges are not treated as one continuous alphabet."
+						"Character codes represent text characters as numbers, which makes it possible to shift or generate characters with arithmetic. Use `char.charCodeAt()` to inspect a character's numeric code and `String.fromCharCode()` to convert a number back into a character. Test uppercase letters, lowercase letters, digits, and punctuation so the ranges are not treated as one continuous alphabet."
 				},
 				{
 					title: "JSS4 Project 3: Random Password",
@@ -742,7 +742,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Introduction to HTML",
 					content:
-						"HTML describes the structure of a webpage with tags. Practice headings, `div`, `span`, line breaks, links, and images in CodePen, then inspect how nesting creates parent and child elements. The goal is to read a small HTML snippet and explain which elements contain which other elements."
+						"A webpage's structure comes from HTML tags. Practice headings, `div`, `span`, line breaks, links, and images in CodePen, then inspect how nesting creates parent and child elements. The goal is to read a small HTML snippet and explain which elements contain which other elements."
 				},
 				{
 					title: "Document Object Model (DOM)",
@@ -752,7 +752,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Introduction to CSS",
 					content:
-						"CSS changes how HTML elements look. Use selectors to style text alignment, color, background color, font size, and font weight. Compare tag selectors, class selectors, and id selectors by creating a `div` with class `box`, styling it, and explaining why classes are usually better for reusable styles.",
+						"Page presentation comes from CSS rules. Use selectors to style text alignment, color, background color, font size, and font weight. Compare tag selectors, class selectors, and id selectors by creating a `div` with class `box`, styling it, and explaining why classes are usually better for reusable styles.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/a4555b19dc5183859c0a6956be1f6c0a",
 					solutionLink:
@@ -1042,7 +1042,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Introduction to CSS Grid",
 					content:
-						"CSS Grid is used for two-dimensional layout: rows and columns at the same time. Practice grid terminology with the starter CodePen and Grid Garden, then identify the container, grid tracks, and grid items in a small example. The key skill is predicting where an item will land before checking the browser."
+						"Two-dimensional page layout uses rows and columns at the same time. Practice grid terminology with the starter CodePen and Grid Garden, then identify the container, grid tracks, and grid items in a small example. The key skill is predicting where an item will land before checking the browser."
 				},
 				{
 					title: "JSS13 Project 1: Chessboard",
@@ -1214,12 +1214,12 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Recommended Next Course Path",
 					content:
-						"`JavaScript Level 2` should be the normal next step after this course. Students who finish JavaScript Level 1 comfortably should continue into deeper functions, arrays, objects, events, APIs, and data work in JavaScript Level 2 before moving into `Web Development Foundations`, which assumes stronger JavaScript fluency and shifts the emphasis from browser-only projects toward local project structure, Git, npm, servers, databases, and deployment."
+						"`JavaScript Level 2` should be the normal next step after this course. A comfortable JavaScript Level 1 finish should lead into deeper functions, arrays, objects, events, APIs, and data work in JavaScript Level 2 before moving into `Web Development Foundations`, which assumes stronger JavaScript fluency and shifts the emphasis from browser-only projects toward local project structure, Git, npm, servers, databases, and deployment."
 				},
 				{
 					title: "Course Recap",
 					content:
-						"Summarize the main skills from JavaScript Level 1: variables, strings, input, math, loops, conditionals, D3/SVG drawing, HTML, CSS, responsive layout, DOM events, and Materialize components. Identify one project that best demonstrates programming logic and one project that best demonstrates page layout."
+						"Review the main skills from JavaScript Level 1: variables, strings, input, math, loops, conditionals, D3/SVG drawing, HTML, CSS, responsive layout, DOM events, and Materialize components. Identify one project that best demonstrates programming logic and one project that best demonstrates page layout."
 				},
 				{
 					title: "Master Project: Verification and Reflection",

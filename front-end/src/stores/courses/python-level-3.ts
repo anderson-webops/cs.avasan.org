@@ -95,7 +95,7 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "AM2 Project 2: Lists Practice",
 					content:
-						"Practice building and using lists without hard-coding results. Create the numbers 1 through 20, the first 20 even numbers, and the first 10 perfect squares. Then write functions that sum lists, return minimum and maximum values, flatten a list of lists, and return the maximum value from each inner list.",
+						"Build and use lists without hard-coding results. Create the numbers 1 through 20, the first 20 even numbers, and the first 10 perfect squares. Then write functions that sum lists, return minimum and maximum values, flatten a list of lists, and return the maximum value from each inner list.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM2-Lists-Practice/starter",
 					solutionLink:

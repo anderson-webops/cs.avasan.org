@@ -492,6 +492,8 @@ export const pyGamesCourse: RawCourse = {
 						courseFamily: "Python/PyGame",
 						moduleTitle:
 							"Check-In #1: Actors, Events, ZRects, Collectibles",
+						itemTitle:
+							"Check In #1: Actors, Events, ZRects, Collectibles Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -506,6 +508,8 @@ export const pyGamesCourse: RawCourse = {
 						courseFamily: "Python/PyGame",
 						moduleTitle:
 							"Check-In #1: Actors, Events, ZRects, Collectibles",
+						itemTitle:
+							"Check In #1: Actors, Events, ZRects, Collectibles Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -753,6 +757,8 @@ export const pyGamesCourse: RawCourse = {
 						courseFamily: "Python/PyGame",
 						moduleTitle:
 							"Check-In #2: Gravity, Friction, Platforms",
+						itemTitle:
+							"Check In #2: Gravity, Friction, Platforms Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -767,6 +773,8 @@ export const pyGamesCourse: RawCourse = {
 						courseFamily: "Python/PyGame",
 						moduleTitle:
 							"Check-In #2: Gravity, Friction, Platforms",
+						itemTitle:
+							"Check In #2: Gravity, Friction, Platforms Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1039,7 +1047,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check-In #3: System Control",
 					content:
-						"System Control-setup: Start from the rocket-and-targets starter code (check_in_3_starter.py) where the rocket moves left and right with arrow keys. System Control-1/2: Add a start screen so the game only begins when the user presses Enter; before that, draw a start message and ignore normal game updates. System Control-3: Ask what tool is used to schedule events in the future (PyGame Zero's clock or timers). System Control-4/5: Use a scheduled event to move the targets to new random positions every 5 seconds. System Control-6: Add logic that can cancel or stop this repeating movement when needed (for example, after a win condition)."
+						"Start from the rocket-and-targets starter code (check_in_3_starter.py) where the rocket moves left and right with arrow keys. Steps 1/2 add a start screen so the game only begins when Enter is pressed; before that, draw a start message and ignore normal game updates. Step 3 identifies the tool used to schedule future events, such as PyGame Zero's clock or timers. Steps 4/5 use a scheduled event to move the targets to new random positions every 5 seconds. Step 6 adds logic that can cancel or stop this repeating movement when needed, such as after a win condition."
 				},
 				{
 					title: "Check-In #3: Projectiles and Enemy AI",
@@ -1085,6 +1093,8 @@ export const pyGamesCourse: RawCourse = {
 						courseFamily: "Python/PyGame",
 						moduleTitle:
 							"Check-In #3: System Control, Projectiles, Enemy AI",
+						itemTitle:
+							"Check In #3: System Control, Projectiles, Enemy AI Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1099,6 +1109,8 @@ export const pyGamesCourse: RawCourse = {
 						courseFamily: "Python/PyGame",
 						moduleTitle:
 							"Check-In #3: System Control, Projectiles, Enemy AI",
+						itemTitle:
+							"Check In #3: System Control, Projectiles, Enemy AI Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),

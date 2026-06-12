@@ -101,7 +101,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "C-to-Assembly Compare: Hello Function",
 					content:
-						"Put a short C function and its generated assembly side by side before rewriting anything. Take a simple C helper, compile it with and without optimization, and identify the arguments, return value, and where the function begins and ends in the disassembly."
+						"Start with a short C helper and its generated assembly before rewriting anything. Compile it with and without optimization, then identify the arguments, return value, and where the function begins and ends in the disassembly."
 				},
 				{
 					title: "Unit 1: Machine Model and Toolchain: Core Project",
@@ -242,7 +242,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "C-to-Assembly Compare: Arithmetic Helper",
 					content:
-						"Put a short C function and its generated assembly side by side before rewriting anything. Take one arithmetic C function, inspect the generated assembly, and ask students why the compiler chose that instruction sequence instead of a more literal source-level translation."
+						"Compare one arithmetic C function with the instruction sequence the compiler produced. Inspect the generated assembly, then explain why the compiler chose that sequence instead of a more literal source-level translation."
 				},
 				{
 					title: "Unit 3: Arithmetic and Logic: Core Project",
@@ -378,12 +378,12 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Saved Registers and Stack Alignment",
 					content:
-						"Explain why some registers must be preserved across calls and why stack alignment matters before calling into another function. This is the point where Learn to treat calls as ABI obligations, not just as jumps with a convenient return."
+						"Explain why some registers must be preserved across calls and why stack alignment matters before calling into another function. This is the point where calls become ABI obligations, not just jumps with a convenient return."
 				},
 				{
 					title: "C-to-Assembly Compare: Stack Frame Walkthrough",
 					content:
-						"Put a short C function and its generated assembly side by side before rewriting anything. Use a tiny C function with one local variable and one nested call, then map the assembly frame adjustments back to the source-level intent."
+						"Use a tiny C function with one local variable and one nested call to make the stack frame concrete. Map each assembly frame adjustment back to the source-level intent before changing the code."
 				},
 				{
 					title: "Unit 5: The Stack and Function Calls: Core Project",
@@ -660,7 +660,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "C-to-Assembly Compare: Loop at O0 and O2",
 					content:
-						"Put a short C function and its generated assembly side by side before rewriting anything. Compile the same small loop twice and have students explain which parts got shorter, which parts moved into registers, and which source-level intent remained unchanged."
+						"Compile the same small loop with two optimization levels and compare the resulting assembly. Identify which parts got shorter, which values moved into registers, and which source-level intent remained unchanged."
 				},
 				{
 					title: "Unit 9: Reading Compiler Output: Core Project",
@@ -810,7 +810,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "C-to-Assembly Compare: Loop Shape versus Loop Cost",
 					content:
-						"Put a short C function and its generated assembly side by side before rewriting anything. Compare two small versions of an array routine and ask students whether the visible instruction count alone tells the whole performance story."
+						"Compare two small assembly listings from alternate versions of an array routine. Decide whether visible instruction count alone tells the whole performance story, then name the missing evidence such as memory access, branching, or cache behavior."
 				},
 				{
 					title: "Unit 11: Performance and Code Shape: Core Project",

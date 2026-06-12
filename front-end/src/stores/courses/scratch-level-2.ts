@@ -112,7 +112,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Nested loops",
 					content:
-						"Nested loops are loops placed inside other loops. The idea is similar to Russian nesting dolls: one structure sits inside another structure.\nA nested loop is useful when a repeated action itself contains another repeated action, such as drawing several rows of shapes, building grids, or repeating an animation pattern multiple times."
+						"A nested-loop pattern places one loop inside another loop. The idea is similar to Russian nesting dolls: one structure sits inside another structure.\nThis pattern is useful when a repeated action itself contains another repeated action, such as drawing several rows of shapes, building grids, or repeating an animation pattern multiple times."
 				},
 				{
 					title: "GM2 Project 1: Square Inception",
@@ -167,7 +167,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Complex conditionals",
 					content:
-						"Complex conditionals combine more than one condition. The `and` block requires both conditions to be true, the `or` block requires at least one condition to be true, and the `not` block reverses true and false.\nPractice by making a sprite respond differently when it touches multiple colors, either one of two colors, or none of the target colors."
+						"A complex conditional combines more than one condition. The `and` block requires both conditions to be true, the `or` block requires at least one condition to be true, and the `not` block reverses true and false.\nPractice by making a sprite respond differently when it touches multiple colors, either one of two colors, or none of the target colors."
 				},
 				{
 					title: "GM3 Project 1: Color Spotter",
@@ -220,7 +220,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Cloning",
 					content:
-						"Cloning creates temporary copies of a sprite while the project runs. This is useful when many similar objects should appear on screen, such as raindrops, paint marks, enemies, stars, or collectibles.\nThe main Scratch blocks are `create clone of myself`, `when I start as a clone`, and `delete this clone`. Most clone-based projects hide the original parent sprite and show only the clones, because the clones are the objects that move, collide, and disappear."
+						"A clone is a temporary copy of a sprite while the project runs. This is useful when many similar objects should appear on screen, such as raindrops, paint marks, enemies, stars, or collectibles.\nThe main Scratch blocks are `create clone of myself`, `when I start as a clone`, and `delete this clone`. Most clone-based projects hide the original parent sprite and show only the clones, because the clones are the objects that move, collide, and disappear."
 				},
 				{
 					title: "GM4 Project 1: Jackson Pollock Clones",
@@ -428,7 +428,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "Lists",
 					content:
-						"Lists store many related values in one variable-like structure. A list can hold items such as groceries, favorite sports, places, names, scores, or words.\nIn programming, lists make it easier to store, inspect, add, remove, and count related items without creating a separate variable for each one.\nPractice by creating a list, adding elements, reading the list length, and deleting all items from the list."
+						"A list stores many related values in one variable-like structure. A list can hold items such as groceries, favorite sports, places, names, scores, or words.\nIn programming, lists make it easier to store, inspect, add, remove, and count related items without creating a separate variable for each one.\nPractice by creating a list, adding elements, reading the list length, and deleting all items from the list."
 				},
 				{
 					title: "GM7 Project 1: Bucket List",

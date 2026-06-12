@@ -797,7 +797,7 @@ export const pythonLevel2Course: RawCourse = {
 				{
 					title: "PS10 Supplemental Project 1: US Capitals Quiz",
 					content:
-						"Quiz the user on state capitals until an incorrect answer is given, then print the final score.",
+						"Run a state-capitals quiz until an incorrect answer is given, then print the final score.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-US-Capitals-Quiz/starter",
 					solutionLink:

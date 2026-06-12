@@ -1311,12 +1311,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Handoff to Web Development Foundations",
 					content:
-						"`Web Development Foundations` should be the default follow-on course for students who complete JavaScript Level 2 successfully. Be reasonably comfortable with functions, conditionals, arrays, objects, events, APIs, and basic data modeling before starting it. The goal of that next course is not to reteach core syntax, but to move into file-based local projects, Git and GitHub, npm, dev servers, back-end basics, databases, and deployment. Students who are still shaky in the `JSM10` through `JSM13` range should review those units before making the jump."
+						"`Web Development Foundations` should be the default follow-on course after JavaScript Level 2. Be reasonably comfortable with functions, conditionals, arrays, objects, events, APIs, and basic data modeling before starting it. The goal of that next course is not to reteach core syntax, but to move into file-based local projects, Git and GitHub, npm, dev servers, back-end basics, databases, and deployment. If the `JSM10` through `JSM13` range still feels shaky, review those units before making the jump."
 				},
 				{
 					title: "Course Recap",
 					content:
-						"Recap course concepts and discuss the next course."
+						"Review the main JavaScript Level 2 skills: helper functions, events, canvas drawing, collision logic, arrays, objects, API requests, SQL and NoSQL data models, CRUD flows, and full project planning. Choose one project that best demonstrates interactive browser logic and one project that best demonstrates data flow or persistence."
 				},
 				{
 					title: "JSM15 Master Project: Verification and Reflection",

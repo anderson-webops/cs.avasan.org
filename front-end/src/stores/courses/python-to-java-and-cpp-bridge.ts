@@ -55,11 +55,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/solution"
 				},
 				{
-					title: "src",
+					title: "Project: Starter Source Review",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"PTJ0 Positioning and Workflow Translation",
+						itemTitle: "Project: Starter Source Review",
 						projectKind: "core",
 						hasReference: false
 					}),
@@ -72,6 +73,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"PTJ0 Positioning and Workflow Translation",
+						itemTitle:
+							"Positioning and Workflow Translation Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -139,6 +142,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"PTJ1 Functions, Parameters, and Return Types",
+						itemTitle:
+							"Functions, Parameters, and Return Types Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -153,6 +158,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"PTJ1 Functions, Parameters, and Return Types",
+						itemTitle:
+							"Functions, Parameters, and Return Types Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -218,6 +225,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ2 Collections, Strings, and Indexing",
+						itemTitle:
+							"Collections, Strings, and Indexing Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -231,6 +240,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ2 Collections, Strings, and Indexing",
+						itemTitle:
+							"Collections, Strings, and Indexing Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -298,6 +309,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"PTJ3 Classes and Objects across Languages",
+						itemTitle:
+							"Classes and Objects across Languages Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -312,6 +325,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"PTJ3 Classes and Objects across Languages",
+						itemTitle:
+							"Classes and Objects across Languages Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -377,6 +392,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ4 Java-Specific Adaptation",
+						itemTitle: "Java Specific Adaptation Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -390,6 +406,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ4 Java-Specific Adaptation",
+						itemTitle: "Java Specific Adaptation Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -455,6 +472,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ5 C++-Specific Adaptation",
+						itemTitle: "C++ Specific Adaptation Supplemental 2",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -468,6 +486,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ5 C++-Specific Adaptation",
+						itemTitle: "C++ Specific Adaptation Supplemental 3",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -542,6 +561,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 11: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 11 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -556,6 +577,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 11: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 11 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -630,6 +653,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 12: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 12 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -644,6 +669,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 12: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 12 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -718,6 +745,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 13: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 13 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -732,6 +761,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 13: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 13 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -806,6 +837,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 14: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 14 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -820,6 +853,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 14: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 14 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -894,6 +929,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 15: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 15 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -908,6 +945,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 15: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 15 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -982,6 +1021,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 16: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 16 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -996,6 +1037,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 16: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 16 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1070,6 +1113,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 17: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 17 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1084,6 +1129,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"Language Bridge Lab 17: Implementation Lab",
+						itemTitle:
+							"Language Bridge Lab 17 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1150,6 +1197,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "graphics: Implementation Lab",
+						itemTitle:
+							"Graphics Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1163,6 +1212,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "graphics: Implementation Lab",
+						itemTitle:
+							"Graphics Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1231,6 +1282,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "CPP practice: Implementation Lab",
+						itemTitle:
+							"CPP Practice Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1244,6 +1297,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "CPP practice: Implementation Lab",
+						itemTitle:
+							"CPP Practice Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1318,6 +1373,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"J1X01 Java Foundations Build 12: Implementation Lab",
+						itemTitle:
+							"J1X01 Java Foundations Build 12 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1332,6 +1389,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"J1X01 Java Foundations Build 12: Implementation Lab",
+						itemTitle:
+							"J1X01 Java Foundations Build 12 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1406,6 +1465,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"c foundations build 13: Implementation Lab",
+						itemTitle:
+							"c foundations build 13 Supplemental 2: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1420,6 +1481,8 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
 							"c foundations build 13: Implementation Lab",
+						itemTitle:
+							"c foundations build 13 Supplemental 3: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

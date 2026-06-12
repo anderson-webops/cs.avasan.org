@@ -814,297 +814,354 @@ function neutralizeLessonDirectiveText(text: string) {
 		);
 }
 
+function normalizeDuplicateArticles(text: string) {
+	return text
+		.replace(/\bThe\s+(The|A|An)\s+/g, "$1 ")
+		.replace(/\bthe\s+(The|A|An)\s+/g, "$1 ")
+		.replace(/\bA\s+(The|A|An)\s+/g, "$1 ")
+		.replace(/\ba\s+(The|A|An)\s+/g, "$1 ")
+		.replace(/\bAn\s+(The|A|An)\s+/g, "$1 ")
+		.replace(/\ban\s+(The|A|An)\s+/g, "$1 ");
+}
+
 function neutralizeStudentFacingText(text: string) {
-	return neutralizeLessonDirectiveText(text)
-		.replace(/\bCore Concepts and Teaching Flow\b/g, "Core Concepts")
-		.replace(/\*\*Teaching flow:\*\*/gi, "**Concept path:**")
-		.replace(/\*\*Learning sequence:\*\*/gi, "**Concept path:**")
-		.replace(/(\*\*Concept path:\*\*\s+)Teach\b/g, "$1This section covers")
-		.replace(
-			/(\*\*Concept path:\*\*\s+)Introduce\b/g,
-			"$1This section introduces"
-		)
-		.replace(/(\*\*Concept path:\*\*\s+)Cover\b/g, "$1This section covers")
-		.replace(
-			/(\*\*Concept path:\*\*\s+)Set expectations for\b/g,
-			"$1This section establishes"
-		)
-		.replace(
-			/(\*\*Concept path:\*\*\s+)Set expectations\b/g,
-			"$1Clear expectations are established"
-		)
-		.replace(/\*\*Diagnostic guidance:\*\*/gi, "**Readiness check:**")
-		.replace(/\*\*Misconception check:\*\*/gi, "**Common pitfalls:**")
-		.replace(/\*\*Exit check:\*\*/gi, "**Mastery check:**")
-		.replace(
-			/Use this as one guided lesson arc covering these sections in sequence:/gi,
-			"Core topics in this module:"
-		)
-		.replace(
-			/This lesson arc covers these sections in sequence:/gi,
-			"Core topics in this module:"
-		)
-		.replace(
-			/Treat this as an guided explanation of ([^.]+)\./gi,
-			"This lesson introduces $1."
-		)
-		.replace(/\bTreat this module as\b/gi, "This module functions as")
-		.replace(/\bTreat this as the anchor for\b/gi, "This is the anchor for")
-		.replace(/\bTreat this as\b/gi, "Use this as")
-		.replace(/\binstructor-provided\b/gi, "provided")
-		.replace(/\binstructor-approved\b/gi, "approved")
-		.replace(/\binstructor-authored\b/gi, "authored")
-		.replace(/\binstructor references\b/gi, "internal references")
-		.replace(/\bteacher-provided\b/gi, "provided")
-		.replace(/\bteacher requirement\b/gi, "course requirement")
-		.replace(/\bstudent-facing course\b/gi, "visible course")
-		.replace(/\bstudent-facing\b/gi, "visible")
-		.replace(/\bStudents\b/g, "Learners")
-		.replace(/\bstudents\b/g, "learners")
-		.replace(/\bA student\b/g, "A learner")
-		.replace(/\ba student\b/g, "a learner")
-		.replace(
-			/\bthe tutor should know whether\b/gi,
-			"the priority indicates whether"
-		)
-		.replace(
-			/\bthe tutor should be able to\b/gi,
-			"the course should make it possible to"
-		)
-		.replace(
-			/\bThe tutor should be able to\b/g,
-			"The course should make it possible to"
-		)
-		.replace(/\bA future tutor can\b/g, "A future reviewer can")
-		.replace(/\bA tutor can\b/g, "The course makes it possible to")
-		.replace(/\ba tutor can\b/g, "the course makes it possible to")
-		.replace(/\btutor-ready\b/gi, "review-ready")
-		.replace(/\btutor-visible\b/gi, "solution-visible")
-		.replace(/\btutor notes\b/gi, "review notes")
-		.replace(
-			/\bso the tutor is not forced to improvise\b/gi,
-			"so the materials are not improvised"
-		)
-		.replace(
-			/\bBefore starting, have the student ([a-z])/g,
-			beforeStartingMatchedFirstLetter
-		)
-		.replace(/\bHave the student ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bHave students ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bAsk the student to ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bAsk students to ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bAsk them to ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bAsk them whether\b/g, "Evaluate whether")
-		.replace(/\bAsk them where\b/g, "Identify where")
-		.replace(/\bAsk them what\b/g, "Describe what")
-		.replace(/\bAsk them why\b/g, "Explain why")
-		.replace(/\bAsk what\b/g, "Analyze what")
-		.replace(/\bAsk why\b/g, "Analyze why")
-		.replace(/\bAsk how\b/g, "Analyze how")
-		.replace(/\bConsider why\b/g, "Consider why")
-		.replace(/\bAsk the student\b/g, "Consider")
-		.replace(/\bIf the struggles with\b/g, "If this term is difficult,")
-		.replace(/\byou can have them visualize\b/g, "it may help to visualize")
-		.replace(/\bshow them how to\b/gi, "practice how to")
-		.replace(/\bshow them how\b/gi, "practice")
-		.replace(/\bguide them through\b/gi, "practice")
-		.replace(/\bDiscuss with the why\b/g, "Explain why")
-		.replace(/\bDiscuss with the about\b/g, "Discuss")
-		.replace(/\bDiscuss with the\b/g, "Discuss")
-		.replace(/\bHave click on\b/g, "Click on")
-		.replace(
-			/\bIf this term is difficult, the terminology of ([^,]+), it may help\b/g,
-			"If the term $1 is difficult, it may help"
-		)
-		.replace(/\bTalk about how\b/gi, "Notice how")
-		.replace(/\bPoint out that\b/gi, "Note that")
-		.replace(/\bMake sure to explain that\b/gi, "Remember that")
-		.replace(/\bMake sure\b/gi, "Ensure")
-		.replace(/,\s+Ensure\b/g, ", ensure")
-		.replace(/\bto Ensure\b/g, "to ensure")
-		.replace(/\bBroadcast messages between\b/g, "Use broadcasts between")
-		.replace(/\bShow how to\b/gi, "Practice how to")
-		.replace(/\bShow how\b/gi, "Notice how")
-		.replace(/\bShow where\b/g, "Identify where")
-		.replace(/\bShow the difference between\b/g, "Compare")
-		.replace(/\bShow the an example of\b/g, "Review an example of")
-		.replace(/\bGuide learners to\b/g, "This section guides the process of")
-		.replace(/\bguide learners to\b/g, "guides the process of")
-		.replace(/\bEncourage projects that\b/g, "Strong projects")
-		.replace(/\bencourage projects that\b/g, "strong projects")
-		.replace(/\bHelp compile\b/g, "Compile")
-		.replace(/\bhelp compile\b/g, "compile")
-		.replace(/\bshow the the\b/gi, "open the")
-		.replace(
-			/\bTake the time to introduce the to the various\b/g,
-			"Explore the"
-		)
-		.replace(
-			/\bHere are some rough projects you can use as guidance:/g,
-			"Useful practice ideas:"
-		)
-		.replace(/\bask the student to ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bask them to ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bask them whether\b/g, "evaluate whether")
-		.replace(/\bask them where\b/g, "identify where")
-		.replace(/\bask them what\b/g, "describe what")
-		.replace(/\bask them why\b/g, "explain why")
-		.replace(/\bhave them ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bHave learners trace\b/g, "Trace")
-		.replace(/\bhave learners trace\b/g, "trace")
-		.replace(
-			/\bCreate a new Scratch project\. Using this project as (?:a )?rough guide, introduce the ([^.]+)\./gi,
-			"A Scratch project can be used to practice the $1."
-		)
-		.replace(
-			/\bso the work can work faster, with less prompting, and with cleaner reasoning\b/gi,
-			"to build speed, independence, and cleaner reasoning"
-		)
-		.replace(/\bso the work can ([a-z])/g, toMatchedFirstLetter)
-		.replace(
-			/\benough that the work can ([a-z])/g,
-			enoughToMatchedFirstLetter
-		)
-		.replace(
-			/\bThe course should repeatedly ask students to ([a-z])/g,
-			repeatedlyMatchedFirstLetter
-		)
-		.replace(
-			/\bthe course should repeatedly ask students to ([a-z])/g,
-			lowercaseRepeatedlyMatchedFirstLetter
-		)
-		.replace(/\bConsider why\b/g, "Explain why")
-		.replace(/\bask students why\b/g, "explain why")
-		.replace(/\bConsider what\b/g, "Consider what")
-		.replace(/\bask students what\b/g, "consider what")
-		.replace(/\bthen ask them to\b/gi, "then add")
-		.replace(/\bthen ask them\b/gi, "then include")
-		.replace(/\bAsk students whether\b/g, "Evaluate whether")
-		.replace(/\bask students whether\b/g, "evaluate whether")
-		.replace(/\bAsk students to ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bask students to ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bhave students ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bLet the student ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\blet the student ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bThe student should be able to\b/g, "Be able to")
-		.replace(/\bBe able to\b/g, "Be able to")
-		.replace(/\bthe student should be able to\b/g, "be able to")
-		.replace(/\bBe able to\b/g, "be able to")
-		.replace(/\bThe student should explain\b/g, "Explain")
-		.replace(/\bExplain\b/g, "Explain")
-		.replace(/\bthe student should explain\b/g, "explain")
-		.replace(/\bExplain\b/g, "Explain")
-		.replace(/\bThe student should identify\b/g, "Identify")
-		.replace(/\bIdentify\b/g, "Identify")
-		.replace(/\bthe student should identify\b/g, "identify")
-		.replace(/\bIdentify\b/g, "Identify")
-		.replace(/\bThe student should\b/g, "The goal is to")
-		.replace(/\bStudents should\b/g, "The goal is to")
-		.replace(/\bthe student should\b/g, "the goal is to")
-		.replace(/\bstudents should\b/g, "the goal is to")
-		.replace(/\bwhen the student needs one more\b/gi, "for one more")
-		.replace(/\bwhen the student needs another\b/gi, "for another")
-		.replace(/\bwhen the student needs a cleaner\b/gi, "for a cleaner")
-		.replace(/\bwhen the student needs a\b/gi, "for a")
-		.replace(/\bwhen the student needs more\b/gi, "for more")
-		.replace(/\bwhen the student needs to\b/gi, "to")
-		.replace(/\bwhen the student still\b/gi, "when more practice still")
-		.replace(/\bwhen the student is ready for\b/gi, "when ready for")
-		.replace(/\bonce the student is comfortable\b/gi, "once comfortable")
-		.replace(
-			/\bwhether the student is ready to move on\b/gi,
-			"whether moving on is appropriate"
-		)
-		.replace(
-			/\bdeepen the student's understanding\b/gi,
-			"deepen understanding"
-		)
-		.replace(/\bthe student's current strengths\b/gi, "current strengths")
-		.replace(/\bthe student’s current strengths\b/gi, "current strengths")
-		.replace(/\bthe student's real shell\b/gi, "the real shell")
-		.replace(/\bthe student's host machine\b/gi, "the real host machine")
-		.replace(/\bthe student’s host machine\b/gi, "the real host machine")
-		.replace(/\bthe student's future self\b/gi, "future maintenance")
-		.replace(/\bthe student's map\b/gi, "the course map")
-		.replace(/\bthe student's goals\b/gi, "the learning goals")
-		.replace(
-			/\bonce the student builds the habit\b/gi,
-			"once this debugging habit is built"
-		)
-		.replace(/\bUse the Student Class build\b/g, "Use Student Class")
-		.replace(/\bthe student-class build\b/gi, "the Student Class build")
-		.replace(/\bthe Student Class build\b/g, "Student Class")
-		.replace(
-			/\bfits the student's interests\b/gi,
-			"fits personal interests"
-		)
-		.replace(
-			/\bIdentify whether the student still struggles most with\b/g,
-			"Identify remaining struggle areas across"
-		)
-		.replace(/\bpositioning the student for\b/gi, "preparing for")
-		.replace(/\bso the student practices\b/gi, "to practice")
-		.replace(
-			/\bwhere the student now has\b/gi,
-			"where the course now provides"
-		)
-		.replace(/\bwhere the student documents\b/gi, "that documents")
-		.replace(
-			/\bwhere the student chooses\b/gi,
-			"where a real dataset is chosen"
-		)
-		.replace(
-			/\bwhile the student explains how they found each answer\b/gi,
-			"with an explanation of how each answer was found"
-		)
-		.replace(
-			/\bwhile the student explains each step aloud\b/gi,
-			"with a spoken explanation of each step"
-		)
-		.replace(
-			/\bwhile the student talks through each answer\b/gi,
-			"with an explanation of each answer"
-		)
-		.replace(
-			/\bRecord where the student stopped\b/gi,
-			"Record the stopping point"
-		)
-		.replace(/\bIf the student stalls\b/g, "If work stalls")
-		.replace(/\bif the student stalls\b/g, "if work stalls")
-		.replace(
-			/\bPause whenever the student gets stuck\b/g,
-			"Pause on stuck points"
-		)
-		.replace(
-			/\bpause whenever the student gets stuck\b/g,
-			"pause on stuck points"
-		)
-		.replace(/\bthe student gets stuck\b/g, "work gets stuck")
-		.replace(/\bThe student solves\b/g, "A complete response solves")
-		.replace(/\bthe student solves\b/g, "a complete response solves")
-		.replace(/\bThe student keeps\b/g, "The error log keeps")
-		.replace(/\bthe student keeps\b/g, "the error log keeps")
-		.replace(/\bThe student includes\b/g, "The final work includes")
-		.replace(/\bthe student includes\b/g, "the final work includes")
-		.replace(/\bstudent suggests\b/g, "response suggests")
-		.replace(/\bstudent answers\b/g, "response answers")
-		.replace(/\bstudent enters\b/g, "the entry uses")
-		.replace(/\bThe learner should\b/g, "The goal is to")
-		.replace(/\bLearners should\b/g, "The goal is to")
-		.replace(/\bthe learner should\b/g, "the goal is to")
-		.replace(/\blearners should\b/g, "the goal is to")
-		.replace(/\bThe learner can ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bthe learner can ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bthe learner's\b/g, "the work's")
-		.replace(/\bthe learner\b/g, "the work")
-		.replace(/\blearner suggests\b/g, "the response suggests")
-		.replace(/\blearner answers\b/g, "the response answers")
-		.replace(/\bThe student has tested or justified\b/g, "Test or justify")
-		.replace(/\bthe student has tested or justified\b/g, "test or justify")
-		.replace(/\bThe student tests\b/g, "Test")
-		.replace(/\bthe student tests\b/g, "test")
-		.replace(/\bThe student can ([a-z])/g, capitalizeMatchedFirstLetter)
-		.replace(/\bthe student can ([a-z])/g, keepMatchedFirstLetter);
+	return normalizeDuplicateArticles(
+		neutralizeLessonDirectiveText(text)
+			.replace(/\bCore Concepts and Teaching Flow\b/g, "Core Concepts")
+			.replace(/\*\*Teaching flow:\*\*/gi, "**Concept path:**")
+			.replace(/\*\*Learning sequence:\*\*/gi, "**Concept path:**")
+			.replace(
+				/(\*\*Concept path:\*\*\s+)Teach\b/g,
+				"$1This section covers"
+			)
+			.replace(
+				/(\*\*Concept path:\*\*\s+)Introduce\b/g,
+				"$1This section introduces"
+			)
+			.replace(
+				/(\*\*Concept path:\*\*\s+)Cover\b/g,
+				"$1This section covers"
+			)
+			.replace(
+				/(\*\*Concept path:\*\*\s+)Set expectations for\b/g,
+				"$1This section establishes"
+			)
+			.replace(
+				/(\*\*Concept path:\*\*\s+)Set expectations\b/g,
+				"$1Clear expectations are established"
+			)
+			.replace(/\*\*Diagnostic guidance:\*\*/gi, "**Readiness check:**")
+			.replace(/\*\*Misconception check:\*\*/gi, "**Common pitfalls:**")
+			.replace(/\*\*Exit check:\*\*/gi, "**Mastery check:**")
+			.replace(
+				/Use this as one guided lesson arc covering these sections in sequence:/gi,
+				"Core topics in this module:"
+			)
+			.replace(
+				/This lesson arc covers these sections in sequence:/gi,
+				"Core topics in this module:"
+			)
+			.replace(
+				/Treat this as an guided explanation of ([^.]+)\./gi,
+				"This lesson introduces $1."
+			)
+			.replace(/\bTreat this module as\b/gi, "This module functions as")
+			.replace(
+				/\bTreat this as the anchor for\b/gi,
+				"This is the anchor for"
+			)
+			.replace(/\bTreat this as\b/gi, "Use this as")
+			.replace(/\binstructor-provided\b/gi, "provided")
+			.replace(/\binstructor-approved\b/gi, "approved")
+			.replace(/\binstructor-authored\b/gi, "authored")
+			.replace(/\binstructor references\b/gi, "internal references")
+			.replace(/\bteacher-provided\b/gi, "provided")
+			.replace(/\bteacher requirement\b/gi, "course requirement")
+			.replace(/\bstudent-facing course\b/gi, "visible course")
+			.replace(/\bstudent-facing\b/gi, "visible")
+			.replace(/\bStudents\b/g, "Learners")
+			.replace(/\bstudents\b/g, "learners")
+			.replace(/\bA student\b/g, "A learner")
+			.replace(/\ba student\b/g, "a learner")
+			.replace(
+				/\bthe tutor should know whether\b/gi,
+				"the priority indicates whether"
+			)
+			.replace(
+				/\bthe tutor should be able to\b/gi,
+				"the course should make it possible to"
+			)
+			.replace(
+				/\bThe tutor should be able to\b/g,
+				"The course should make it possible to"
+			)
+			.replace(/\bA future tutor can\b/g, "A future reviewer can")
+			.replace(/\bA tutor can\b/g, "The course makes it possible to")
+			.replace(/\ba tutor can\b/g, "the course makes it possible to")
+			.replace(/\btutor-ready\b/gi, "review-ready")
+			.replace(/\btutor-visible\b/gi, "solution-visible")
+			.replace(/\btutor notes\b/gi, "review notes")
+			.replace(
+				/\bso the tutor is not forced to improvise\b/gi,
+				"so the materials are not improvised"
+			)
+			.replace(
+				/\bBefore starting, have the student ([a-z])/g,
+				beforeStartingMatchedFirstLetter
+			)
+			.replace(
+				/\bHave the student ([a-z])/g,
+				capitalizeMatchedFirstLetter
+			)
+			.replace(/\bHave students ([a-z])/g, capitalizeMatchedFirstLetter)
+			.replace(
+				/\bAsk the student to ([a-z])/g,
+				capitalizeMatchedFirstLetter
+			)
+			.replace(/\bAsk students to ([a-z])/g, capitalizeMatchedFirstLetter)
+			.replace(/\bAsk them to ([a-z])/g, capitalizeMatchedFirstLetter)
+			.replace(/\bAsk them whether\b/g, "Evaluate whether")
+			.replace(/\bAsk them where\b/g, "Identify where")
+			.replace(/\bAsk them what\b/g, "Describe what")
+			.replace(/\bAsk them why\b/g, "Explain why")
+			.replace(/\bAsk what\b/g, "Analyze what")
+			.replace(/\bAsk why\b/g, "Analyze why")
+			.replace(/\bAsk how\b/g, "Analyze how")
+			.replace(/\bConsider why\b/g, "Consider why")
+			.replace(/\bAsk the student\b/g, "Consider")
+			.replace(/\bIf the struggles with\b/g, "If this term is difficult,")
+			.replace(
+				/\byou can have them visualize\b/g,
+				"it may help to visualize"
+			)
+			.replace(/\bshow them how to\b/gi, "practice how to")
+			.replace(/\bshow them how\b/gi, "practice")
+			.replace(/\bguide them through\b/gi, "practice")
+			.replace(/\bDiscuss with the why\b/g, "Explain why")
+			.replace(/\bDiscuss with the about\b/g, "Discuss")
+			.replace(/\bDiscuss with the\b/g, "Discuss")
+			.replace(/\bHave click on\b/g, "Click on")
+			.replace(
+				/\bIf this term is difficult, the terminology of ([^,]+), it may help\b/g,
+				"If the term $1 is difficult, it may help"
+			)
+			.replace(/\bTalk about how\b/gi, "Notice how")
+			.replace(/\bPoint out that\b/gi, "Note that")
+			.replace(/\bMake sure to explain that\b/gi, "Remember that")
+			.replace(/\bMake sure\b/gi, "Ensure")
+			.replace(/,\s+Ensure\b/g, ", ensure")
+			.replace(/\bto Ensure\b/g, "to ensure")
+			.replace(
+				/\bBroadcast messages between\b/g,
+				"Use broadcasts between"
+			)
+			.replace(/\bShow how to\b/gi, "Practice how to")
+			.replace(/\bShow how\b/gi, "Notice how")
+			.replace(/\bShow where\b/g, "Identify where")
+			.replace(/\bShow the difference between\b/g, "Compare")
+			.replace(/\bShow the an example of\b/g, "Review an example of")
+			.replace(
+				/\bGuide learners to\b/g,
+				"This section guides the process of"
+			)
+			.replace(/\bguide learners to\b/g, "guides the process of")
+			.replace(/\bEncourage projects that\b/g, "Strong projects")
+			.replace(/\bencourage projects that\b/g, "strong projects")
+			.replace(/\bHelp compile\b/g, "Compile")
+			.replace(/\bhelp compile\b/g, "compile")
+			.replace(/\bshow the the\b/gi, "open the")
+			.replace(
+				/\bTake the time to introduce the to the various\b/g,
+				"Explore the"
+			)
+			.replace(
+				/\bHere are some rough projects you can use as guidance:/g,
+				"Useful practice ideas:"
+			)
+			.replace(/\bask the student to ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bask them to ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bask them whether\b/g, "evaluate whether")
+			.replace(/\bask them where\b/g, "identify where")
+			.replace(/\bask them what\b/g, "describe what")
+			.replace(/\bask them why\b/g, "explain why")
+			.replace(/\bhave them ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bHave learners trace\b/g, "Trace")
+			.replace(/\bhave learners trace\b/g, "trace")
+			.replace(
+				/\bCreate a new Scratch project\. Using this project as (?:a )?rough guide, introduce the ([^.]+)\./gi,
+				"A Scratch project can be used to practice the $1."
+			)
+			.replace(
+				/\bso the work can work faster, with less prompting, and with cleaner reasoning\b/gi,
+				"to build speed, independence, and cleaner reasoning"
+			)
+			.replace(/\bso the work can ([a-z])/g, toMatchedFirstLetter)
+			.replace(
+				/\benough that the work can ([a-z])/g,
+				enoughToMatchedFirstLetter
+			)
+			.replace(
+				/\bThe course should repeatedly ask students to ([a-z])/g,
+				repeatedlyMatchedFirstLetter
+			)
+			.replace(
+				/\bthe course should repeatedly ask students to ([a-z])/g,
+				lowercaseRepeatedlyMatchedFirstLetter
+			)
+			.replace(/\bConsider why\b/g, "Explain why")
+			.replace(/\bask students why\b/g, "explain why")
+			.replace(/\bConsider what\b/g, "Consider what")
+			.replace(/\bask students what\b/g, "consider what")
+			.replace(/\bthen ask them to\b/gi, "then add")
+			.replace(/\bthen ask them\b/gi, "then include")
+			.replace(/\bAsk students whether\b/g, "Evaluate whether")
+			.replace(/\bask students whether\b/g, "evaluate whether")
+			.replace(/\bAsk students to ([a-z])/g, capitalizeMatchedFirstLetter)
+			.replace(/\bask students to ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bhave students ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bLet the student ([a-z])/g, capitalizeMatchedFirstLetter)
+			.replace(/\blet the student ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bThe student should be able to\b/g, "Be able to")
+			.replace(/\bBe able to\b/g, "Be able to")
+			.replace(/\bthe student should be able to\b/g, "be able to")
+			.replace(/\bBe able to\b/g, "be able to")
+			.replace(/\bThe student should explain\b/g, "Explain")
+			.replace(/\bExplain\b/g, "Explain")
+			.replace(/\bthe student should explain\b/g, "explain")
+			.replace(/\bExplain\b/g, "Explain")
+			.replace(/\bThe student should identify\b/g, "Identify")
+			.replace(/\bIdentify\b/g, "Identify")
+			.replace(/\bthe student should identify\b/g, "identify")
+			.replace(/\bIdentify\b/g, "Identify")
+			.replace(/\bThe student should\b/g, "The goal is to")
+			.replace(/\bStudents should\b/g, "The goal is to")
+			.replace(/\bthe student should\b/g, "the goal is to")
+			.replace(/\bstudents should\b/g, "the goal is to")
+			.replace(/\bwhen the student needs one more\b/gi, "for one more")
+			.replace(/\bwhen the student needs another\b/gi, "for another")
+			.replace(/\bwhen the student needs a cleaner\b/gi, "for a cleaner")
+			.replace(/\bwhen the student needs a\b/gi, "for a")
+			.replace(/\bwhen the student needs more\b/gi, "for more")
+			.replace(/\bwhen the student needs to\b/gi, "to")
+			.replace(/\bwhen the student still\b/gi, "when more practice still")
+			.replace(/\bwhen the student is ready for\b/gi, "when ready for")
+			.replace(
+				/\bonce the student is comfortable\b/gi,
+				"once comfortable"
+			)
+			.replace(
+				/\bwhether the student is ready to move on\b/gi,
+				"whether moving on is appropriate"
+			)
+			.replace(
+				/\bdeepen the student's understanding\b/gi,
+				"deepen understanding"
+			)
+			.replace(
+				/\bthe student's current strengths\b/gi,
+				"current strengths"
+			)
+			.replace(
+				/\bthe student’s current strengths\b/gi,
+				"current strengths"
+			)
+			.replace(/\bthe student's real shell\b/gi, "the real shell")
+			.replace(
+				/\bthe student's host machine\b/gi,
+				"the real host machine"
+			)
+			.replace(
+				/\bthe student’s host machine\b/gi,
+				"the real host machine"
+			)
+			.replace(/\bthe student's future self\b/gi, "future maintenance")
+			.replace(/\bthe student's map\b/gi, "the course map")
+			.replace(/\bthe student's goals\b/gi, "the learning goals")
+			.replace(
+				/\bonce the student builds the habit\b/gi,
+				"once this debugging habit is built"
+			)
+			.replace(/\bUse the Student Class build\b/g, "Use Student Class")
+			.replace(/\bthe student-class build\b/gi, "the Student Class build")
+			.replace(/\bthe Student Class build\b/g, "Student Class")
+			.replace(
+				/\bfits the student's interests\b/gi,
+				"fits personal interests"
+			)
+			.replace(
+				/\bIdentify whether the student still struggles most with\b/g,
+				"Identify remaining struggle areas across"
+			)
+			.replace(/\bpositioning the student for\b/gi, "preparing for")
+			.replace(/\bso the student practices\b/gi, "to practice")
+			.replace(
+				/\bwhere the student now has\b/gi,
+				"where the course now provides"
+			)
+			.replace(/\bwhere the student documents\b/gi, "that documents")
+			.replace(
+				/\bwhere the student chooses\b/gi,
+				"where a real dataset is chosen"
+			)
+			.replace(
+				/\bwhile the student explains how they found each answer\b/gi,
+				"with an explanation of how each answer was found"
+			)
+			.replace(
+				/\bwhile the student explains each step aloud\b/gi,
+				"with a spoken explanation of each step"
+			)
+			.replace(
+				/\bwhile the student talks through each answer\b/gi,
+				"with an explanation of each answer"
+			)
+			.replace(
+				/\bRecord where the student stopped\b/gi,
+				"Record the stopping point"
+			)
+			.replace(/\bIf the student stalls\b/g, "If work stalls")
+			.replace(/\bif the student stalls\b/g, "if work stalls")
+			.replace(
+				/\bPause whenever the student gets stuck\b/g,
+				"Pause on stuck points"
+			)
+			.replace(
+				/\bpause whenever the student gets stuck\b/g,
+				"pause on stuck points"
+			)
+			.replace(/\bthe student gets stuck\b/g, "work gets stuck")
+			.replace(/\bThe student solves\b/g, "A complete response solves")
+			.replace(/\bthe student solves\b/g, "a complete response solves")
+			.replace(/\bThe student keeps\b/g, "The error log keeps")
+			.replace(/\bthe student keeps\b/g, "the error log keeps")
+			.replace(/\bThe student includes\b/g, "The final work includes")
+			.replace(/\bthe student includes\b/g, "the final work includes")
+			.replace(/\bstudent suggests\b/g, "response suggests")
+			.replace(/\bstudent answers\b/g, "response answers")
+			.replace(/\bstudent enters\b/g, "the entry uses")
+			.replace(/\bThe learner should\b/g, "The goal is to")
+			.replace(/\bLearners should\b/g, "The goal is to")
+			.replace(/\bthe learner should\b/g, "the goal is to")
+			.replace(/\blearners should\b/g, "the goal is to")
+			.replace(/\bThe learner can ([a-z])/g, capitalizeMatchedFirstLetter)
+			.replace(/\bthe learner can ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bthe learner's\b/g, "the work's")
+			.replace(/\bthe learner\b/g, "the work")
+			.replace(/\blearner suggests\b/g, "the response suggests")
+			.replace(/\blearner answers\b/g, "the response answers")
+			.replace(
+				/\bThe student has tested or justified\b/g,
+				"Test or justify"
+			)
+			.replace(
+				/\bthe student has tested or justified\b/g,
+				"test or justify"
+			)
+			.replace(/\bThe student tests\b/g, "Test")
+			.replace(/\bthe student tests\b/g, "test")
+			.replace(/\bThe student can ([a-z])/g, capitalizeMatchedFirstLetter)
+			.replace(/\bthe student can ([a-z])/g, keepMatchedFirstLetter)
+	);
 }
 
 function neutralizeStudentFacingCourseText(course: RawCourse) {
@@ -1214,7 +1271,7 @@ function subjectFocus(context: CourseTextContext) {
 	) {
 		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
 	}
-	if (/java/.test(source)) {
+	if (isJavaContext(context)) {
 		return variantPrompt(context, [
 			subject =>
 				`${subject} through object-oriented Java design: classes, method contracts, object state, inheritance, interfaces, records, and tests`,
@@ -1266,7 +1323,7 @@ function isMathContext(context: CourseTextContext) {
 }
 
 function isNetworkSystemsSource(source: string) {
-	return /\b(?:network systems|dns|ports?|routing|packets?|tcpdump|ipv6|nat)\b/.test(
+	return /\b(?:network systems|dns|routing|packets?|tcpdump|ipv6|nat)\b/.test(
 		source
 	);
 }
@@ -1310,7 +1367,17 @@ function isUnityContext(context: CourseTextContext) {
 function isWebContext(context: CourseTextContext) {
 	return (
 		context.courseId === "web-development-foundations" ||
-		/web|html|css|api|database|full-stack/.test(contextText(context))
+		/javascript|jss\d|jsm\d|web|html|css|api|database|full-stack/.test(
+			contextText(context)
+		)
+	);
+}
+
+function isJavaContext(context: CourseTextContext) {
+	return (
+		isApcsContext(context) ||
+		context.courseId.startsWith("java-") ||
+		/\bjava\b/.test(contextText(context))
 	);
 }
 
@@ -1372,7 +1439,7 @@ function commonPitfalls(context: CourseTextContext) {
 	if (/python/.test(source)) {
 		return "Mixing input, calculation, and output in one hard-to-test block; mutating a list while looping; missing a return value; or only testing the happy path.";
 	}
-	if (/java/.test(source)) {
+	if (isJavaContext(context)) {
 		return variantPrompt(context, [
 			subject =>
 				`In ${subject}, common mistakes include confusing class and object responsibilities, using static state when instance state is needed, comparing objects incorrectly, or skipping compile/run feedback after a small change.`,
@@ -1447,7 +1514,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 	if (/python/.test(contextText(context))) {
 		return "Explain the data flow, run a normal case and an edge case, and point to the function or loop where the main transformation happens.";
 	}
-	if (/java/.test(contextText(context))) {
+	if (isJavaContext(context)) {
 		return variantPrompt(context, [
 			subject =>
 				`Explain the object roles in ${subject}, show the method call or test that proves the behavior, and identify one state or type decision that matters.`,
@@ -1917,7 +1984,7 @@ function projectExpectations(context: CourseTextContext) {
 			]
 		]);
 	}
-	if (/java/.test(source)) {
+	if (isJavaContext(context)) {
 		return variantLines(context, [
 			subject => [
 				`- Define the classes, object state, method inputs, return values, and expected console or test output for ${subject}.`,
@@ -2156,7 +2223,7 @@ function completionChecks(context: CourseTextContext) {
 			]
 		]);
 	}
-	if (/java/.test(source)) {
+	if (isJavaContext(context)) {
 		return variantLines(context, [
 			subject => [
 				`- ${subject} compiles from a clean run and shows the intended behavior through output, tests, or method calls.`,
@@ -2203,6 +2270,16 @@ function completionChecks(context: CourseTextContext) {
 }
 
 function extensionSubject(context: CourseTextContext) {
+	const itemSubject = scopedItemSubject(context);
+	if (
+		itemSubject &&
+		(isProjectLikeItem(context.item) ||
+			isAppliedStudioContext(context) ||
+			isScienceContext(context))
+	) {
+		return itemSubject;
+	}
+
 	if (
 		isCheckInContext(context) ||
 		context.courseId === "java-without-graphics" ||
@@ -2212,6 +2289,17 @@ function extensionSubject(context: CourseTextContext) {
 	}
 
 	return context.module.title;
+}
+
+function scopedItemSubject(context: CourseTextContext) {
+	const itemTitle = compactWhitespace(context.item.title);
+	const moduleTitle = compactWhitespace(context.module.title);
+	if (!itemTitle || itemTitle === moduleTitle) return "";
+	if (itemTitle.includes(moduleTitle) || moduleTitle.includes(itemTitle)) {
+		return itemTitle;
+	}
+
+	return `${itemTitle} (${moduleTitle})`;
 }
 
 function variantPrompt(
@@ -2331,7 +2419,7 @@ function extensionPrompt(context: CourseTextContext) {
 				`Add a topology or address change to ${subject} and predict the command output before running it.`
 		]);
 	}
-	if (/java/.test(source)) {
+	if (isJavaContext(context)) {
 		return variantPrompt(context, [
 			subject =>
 				`Extend ${subject} with one additional method and a test or console trace that proves its contract.`,
@@ -2381,8 +2469,9 @@ function extensionPrompt(context: CourseTextContext) {
 }
 
 function projectSupport(context: CourseTextContext) {
+	const subject = extensionSubject(context);
 	return [
-		`**Project goal:** Build a working result for **${context.module.title}** that shows ${subjectFocus(context)} through behavior, output, evidence, or explanation.`,
+		`**Project goal:** Build a working result for **${subject}** that shows ${subjectFocus(context)} through behavior, output, evidence, or explanation.`,
 		`**Required outcome:**\n${projectExpectations(context).join("\n")}`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`
@@ -2532,7 +2621,9 @@ function studioSupport(context: CourseTextContext) {
 	]);
 	const reviewStep = variantPrompt(context, [
 		subject =>
-			`Review ${subject} against the original goal and record at least one improvement or bug fix.`,
+			/^review\b/i.test(subject)
+				? `Use ${subject} to compare the finished work against the original goal and record at least one improvement or bug fix.`
+				: `Review ${subject} against the original goal and record at least one improvement or bug fix.`,
 		subject =>
 			`Compare ${subject} with the stated success criteria and note one revision that improves correctness, clarity, or robustness.`,
 		subject =>
