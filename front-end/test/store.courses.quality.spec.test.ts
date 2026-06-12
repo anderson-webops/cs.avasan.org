@@ -505,6 +505,64 @@ describe("course text quality normalization", () => {
 		);
 	});
 
+	it("keeps JavaScript Level 1 prompts student-readable and concrete", async () => {
+		const course = await loadRawCourse("javascript-level-1-javascript-superstar");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+
+		expect(corpus).not.toMatch(/Let the learner/i);
+		expect(corpus).not.toMatch(/guide with questions/i);
+		expect(corpus).not.toMatch(/Another review checkpoint/i);
+		expect(corpus).not.toMatch(/Optional .* idea/i);
+
+		const checks = [
+			{
+				title: /^Check-In #1 Overview$/,
+				required: ["runnable example", "which fundamentals are fluent"]
+			},
+			{
+				title: /^JSS1 Project 1: Welcome Survey$/,
+				required: ["convert the numeric inputs", "one-letter food"]
+			},
+			{
+				title: /^JSS2 Project 1: Tips and Taxes$/,
+				required: ["intermediate tax and tip values", "decimal meal cost"]
+			},
+			{
+				title: /^JSS3 Supplemental Project 2: Forgotten Math$/,
+				required: ["without using `*`", "multiplying by 0"]
+			},
+			{
+				title: /^JSS6 Project 2: FizzBuzz$/,
+				required: ["combined 3-and-5 condition", "too early"]
+			},
+			{
+				title: /^JSS7 Project 3: Pac-Man$/,
+				required: ["missing slice", "wider and narrower mouth"]
+			},
+			{
+				title: /^JSS12 Project 2: My Hobby Table$/,
+				required: ["thead", "readable without relying only on color"]
+			},
+			{
+				title: /^JSS14 Project 3: Dynamic Components$/,
+				required: ["three Materialize JavaScript components", "after a page refresh"]
+			},
+			{
+				title: /^JSS15 Supplemental Project 3: Jun-E-Commerce$/,
+				required: ["featured products", "call-to-action", "narrow screen"]
+			}
+		];
+
+		for (const { title, required } of checks) {
+			const item = findItem(course!, title);
+			expect(item.content.length, item.title).toBeGreaterThan(180);
+			for (const phrase of required) {
+				expect(item.content, item.title).toContain(phrase);
+			}
+		}
+	});
+
 	it("keeps low-level security projects evidence-based instead of generic starter boilerplate", async () => {
 		const courses = await Promise.all([
 			loadRawCourse("low-level-security"),
