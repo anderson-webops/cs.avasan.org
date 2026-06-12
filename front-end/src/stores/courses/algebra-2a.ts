@@ -214,7 +214,7 @@ Graphing is fastest when you recognize the form of the equation.
 - Standard form: \`y = ax^2 + bx + c\`
 - Intercept form: \`y = a(x - r)(x - s)\`
 
-**Recovered feature checks**
+**Feature checks**
 
 - \`y = 2(x + 5)^2 - 4\` -> vertex \`(-5, -4)\`
 - \`y = -(x - 7)^2 + 5\` -> vertex \`(7, 5)\`
@@ -359,7 +359,7 @@ The main upgrade here is organization: sort terms, factor out a greatest common 
 				`
 Higher-degree polynomial graphs still respond predictably to shifts, reflections, and scaling.
 
-**Recovered transformations**
+**Transformation checks**
 
 - Reflect \`f(x) = x^5 - 2x^2 + 3\` across the y-axis:
   - \`g(x) = -x^5 - 2x^2 + 3\`
@@ -383,9 +383,9 @@ there is at least one real root between \`x = 1\` and \`x = 2\` because the sign
 			createLesson(
 				"Long Division and Synthetic Division",
 				`
-Polynomial division works best when every degree is represented, even if that means adding zero-coefficient placeholder terms.
+Polynomial division works best when every degree is represented, even if that means writing missing degrees as zero-coefficient terms.
 
-**Recovered examples**
+**Worked examples**
 
 - \`(-9x^4 - 6x^3 + x^2 + 2) / (x + 1) = -9x^3 + 3x^2 - 2x + 2\`
 - \`(x^3 + 6x^2 + 9x + 2) / (x + 2) = x^2 + 4x + 1\`

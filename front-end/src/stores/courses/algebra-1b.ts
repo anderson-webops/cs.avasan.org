@@ -977,7 +977,7 @@ This check-in reviews graphing quadratics, transformations, functions, inverse f
 			createLesson(
 				"Function and Transformation Review",
 				`
-**Recovered answer key highlights**
+**Answer key highlights**
 
 - Translate \`y = x^2\` up \`3\` and left \`6\`:
   - \`y = (x + 6)^2 + 3\`

@@ -201,6 +201,12 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/Mixing up values, references, and state; using the wrong loop condition/i
 			);
+			expect(corpus).not.toMatch(/fresh the starting point is/i);
+			expect(corpus).not.toMatch(/\bRecovered\b/);
+			expect(corpus).not.toMatch(
+				/recovered (?:course|lesson|applications|results|examples)/i
+			);
+			expect(corpus).toContain("rerun cleanly with predictable output");
 			expect(corpus).toContain("PyGame development");
 			expect(corpus).toContain("Swift app development");
 			expect(corpus).toContain("Linux systems practice");

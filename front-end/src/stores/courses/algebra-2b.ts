@@ -168,13 +168,13 @@ The parent logarithmic family is \`y = log_b(x)\`. It is the inverse of \`y = b^
 - Exponential growth: \`f(t) = a(1 + r)^t\`
 - Continuous growth: \`P = P_0 e^(rt)\`
 
-Representative recovered applications:
+Representative applications:
 
 - \`10000 = 40e^(0.35t)\` -> \`t = ln(250) / 0.35 approx 16\`
 - \`1800 = 300e^(0.18t)\` -> \`ln(6) = 0.18t\`
 - \`2.3 = 0.7(1.1)^t\` -> \`t = log_1.1(2.3 / 0.7)\`
 
-Several original graph-reading prompts survived only as captions. When a specific screenshot cannot be reconstructed from the text, rebuild the graph from the available equation, table, or transformation description instead of showing a blank visual.
+Some graph-reading prompts are easier to rebuild directly from the available equation, table, or transformation description.
 				`.trim()
 			)
 		]),
@@ -410,7 +410,7 @@ Probability measures how likely an event is, on a scale from \`0\` to \`1\`.
 - or: add probabilities when the events are disjoint
 - not: subtract from \`1\`
 
-**Recovered examples**
+**Worked examples**
 
 - Even number on a die: \`3/6 = 1/2\`
 - Blue marble from a bag with \`4\` red, \`7\` blue, \`8\` green, \`2\` purple:
@@ -476,7 +476,7 @@ Statistics helps you summarize data, notice trends, and decide how trustworthy a
 - A perfect line gives \`r = 1\` or \`r = -1\`
 - A curved data set can still have \`r approx 0\` even though a non-linear pattern is visible
 
-**Recovered hand-calculation examples**
+**Hand-calculation examples**
 
 - For \`(1, 2), (2, 4), (3, 3), (4, 5)\`, \`r approx 0.8\`
 - For \`(1, 3), (4, 0), (5, 5), (8, 1)\`, \`r approx -0.23\`
@@ -496,7 +496,7 @@ The regression line \`y = mx + b\` is the line of best fit. The slope \`m\` esti
 - \`r\` tells you direction and strength
 - \`r^2\` tells you how much of the variation in the data is explained by the regression line
 
-**Representative recovered results**
+**Representative results**
 
 - Estimated line close to \`y = 0.62x + 1.4\` for a positive-trend scatter plot
 - Estimated line close to \`y = -2x + 11\` for a negative-trend scatter plot
@@ -557,7 +557,7 @@ The generated unit-circle graphic replaces the original diagram links, triangle 
 			createLesson(
 				"Trig Identities and Function Values",
 				`
-Useful identities from the recovered course:
+Useful identities:
 
 - \`csc(theta) = 1 / sin(theta)\`
 - \`sec(theta) = 1 / cos(theta)\`
@@ -628,7 +628,7 @@ For \`y = cos(x)\` at the same x-values:
 - local min of \`cos(x)\`: \`(pi, -1)\`
 - roots of \`tan(x)\`: integer multiples of \`pi\`
 
-The generated graph pack replaces the original sine, cosine, and tangent screenshots and the tan-table explanation that Teddy needed in the recovered lesson.
+The generated graph pack provides clean sine, cosine, tangent, and tangent-table references.
 				`.trim(),
 				media.trigGraphs
 			),
@@ -647,7 +647,7 @@ For \`y = a tan(bx) + d\`:
 - midline = \`y = d\`
 - there is no amplitude
 
-**Recovered examples**
+**Worked examples**
 
 - \`-5sin(x) + 3\` -> max \`8\`, min \`-2\`
 - \`4cos(x/3)\` -> amplitude \`4\`, period \`6pi\`

@@ -547,14 +547,37 @@ function neutralizeLessonDirectiveText(text: string) {
 			"Key terms, a worked example, and a transfer check form the core sequence for this module."
 		)
 		.replace(
-			/\bStart with ([^.]+)\./g,
+			/(^|[.!?]\s+|:\s+|\n\s*(?:[-*]\s+)?)Start with ([^.]+)\./g,
+			(_match, prefix, topic) =>
+				`${prefix}The sequence begins with ${stripTrailingSentencePunctuation(topic).replace(/\band get\b/g, "and getting")}.`
+		)
+		.replace(
+			/(^|[.!?]\s+|:\s+|\n\s*(?:[-*]\s+)?)start with ([^.]+)\./g,
+			(_match, prefix, topic) =>
+				`${prefix}the sequence begins with ${stripTrailingSentencePunctuation(topic).replace(/\band get\b/g, "and getting")}.`
+		)
+		.replace(
+			/\bfresh the starting point is ([^.]+)\./g,
+			(_match, topic) =>
+				`rerun cleanly with ${stripTrailingSentencePunctuation(topic)}.`
+		)
+		.replace(
+			/\bFresh the starting point is ([^.]+)\./g,
 			(_match, topic) =>
 				`The starting point is ${stripTrailingSentencePunctuation(topic).replace(/\band get\b/g, "and getting")}.`
 		)
 		.replace(
-			/\bstart with ([^.]+)\./g,
-			(_match, topic) =>
-				`the starting point is ${stripTrailingSentencePunctuation(topic).replace(/\band get\b/g, "and getting")}.`
+			/\bstudents start with manageable organization\b/g,
+			"project organization stays manageable"
+		)
+		.replace(
+			/\blearners start with manageable organization\b/g,
+			"project organization stays manageable"
+		)
+		.replace(/\bshould start with\b/g, "should begin with")
+		.replace(
+			/\bdeployment bugs start with services not listening\b/g,
+			"deployment bugs begin when services are not listening"
 		)
 		.replace(
 			/\bWatch for the idea that\b/g,
@@ -1599,7 +1622,7 @@ function completionChecks(context: CourseTextContext) {
 	}
 	if (/python/.test(source)) {
 		return [
-			"- The program can be rerun from a fresh start with predictable output.",
+			"- The program can be rerun cleanly with predictable output.",
 			"- Normal, empty or smallest, and awkward inputs are tested or justified.",
 			"- The explanation identifies the main function, loop, or data structure that drives the result."
 		];
