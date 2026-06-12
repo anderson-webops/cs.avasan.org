@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const pythonToJavaAndCppBridgeCourse: RawCourse = {
@@ -65,7 +66,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ1-Syntax-Translation-Warmup/starter"
 				},
 				{
-					title: "Positioning and Workflow Translation supplemental 3",
+					title: "Positioning and Workflow Translation Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
@@ -129,7 +130,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ2-Function-Port-Pack/solution"
 				},
 				{
-					title: "Functions, Parameters, and Return Types supplemental 2",
+					title: "Functions, Parameters, and Return Types Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
@@ -143,7 +144,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-ptj1-functions-parameters-and-return-types-supplemental-2/solution"
 				},
 				{
-					title: "Functions, Parameters, and Return Types supplemental 3",
+					title: "Functions, Parameters, and Return Types Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
@@ -206,7 +207,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ3-Text-and-Collection-Port-Lab/solution"
 				},
 				{
-					title: "Collections, Strings, and Indexing supplemental 2",
+					title: "Collections, Strings, and Indexing Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ2 Collections, Strings, and Indexing",
@@ -219,7 +220,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-ptj2-collections-strings-and-indexing-supplemental-2/solution"
 				},
 				{
-					title: "Collections, Strings, and Indexing supplemental 3",
+					title: "Collections, Strings, and Indexing Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ2 Collections, Strings, and Indexing",
@@ -282,7 +283,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ4-Shared-Class-Port/solution"
 				},
 				{
-					title: "Classes and Objects across Languages supplemental 2",
+					title: "Classes and Objects across Languages Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
@@ -296,7 +297,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-ptj3-classes-and-objects-across-languages-supplemental-2/solution"
 				},
 				{
-					title: "Classes and Objects across Languages supplemental 3",
+					title: "Classes and Objects across Languages Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
@@ -359,7 +360,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ5-Python-to-Java-Quiz-Game/solution"
 				},
 				{
-					title: "Java Specific Adaptation supplemental 2",
+					title: "Java Specific Adaptation Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ4 Java-Specific Adaptation",
@@ -372,7 +373,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-08-ptj4-java-specific-adaptation-supplemental-2/solution"
 				},
 				{
-					title: "Java Specific Adaptation supplemental 3",
+					title: "Java Specific Adaptation Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ4 Java-Specific Adaptation",
@@ -434,7 +435,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/solution"
 				},
 				{
-					title: "C++ Specific Adaptation supplemental 2",
+					title: "C++ Specific Adaptation Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ5 C++-Specific Adaptation",
@@ -447,7 +448,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-10-ptj5-cpp-specific-adaptation-supplemental-2/solution"
 				},
 				{
-					title: "C++ Specific Adaptation supplemental 3",
+					title: "C++ Specific Adaptation Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "PTJ5 C++-Specific Adaptation",
@@ -462,49 +463,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 11: Implementation Lab",
+			title: "Language Bridge Lab 11: Implementation Lab",
 			curriculum: [
 				{
-					title: "language bridge lab 11: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Language Bridge Lab 11: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 11: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "language bridge lab 11: Guided Example",
-					content:
-						"A representative language bridge lab 11 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Language Bridge Lab 11: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 11: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "language bridge lab 11: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Language Bridge Lab 11: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 11: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/solution"
 				},
 				{
-					title: "language bridge lab 11: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Language Bridge Lab 11: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 11: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "language bridge lab 11: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Language Bridge Lab 11: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 11: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-01-language-bridge-lab-11/solution"
 				},
 				{
-					title: "language bridge lab 11 supplemental 2: Implementation Lab",
+					title: "Language Bridge Lab 11 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 11: Implementation Lab",
+							"Language Bridge Lab 11: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -514,11 +535,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-12-applied-studio-7-language-bridge-lab-11-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 11 supplemental 3: Implementation Lab",
+					title: "Language Bridge Lab 11 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 11: Implementation Lab",
+							"Language Bridge Lab 11: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -530,49 +551,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 12: Implementation Lab",
+			title: "Language Bridge Lab 12: Implementation Lab",
 			curriculum: [
 				{
-					title: "language bridge lab 12: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Language Bridge Lab 12: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 12: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "language bridge lab 12: Guided Example",
-					content:
-						"A representative language bridge lab 12 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Language Bridge Lab 12: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 12: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "language bridge lab 12: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Language Bridge Lab 12: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 12: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/solution"
 				},
 				{
-					title: "language bridge lab 12: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Language Bridge Lab 12: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 12: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "language bridge lab 12: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Language Bridge Lab 12: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 12: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-02-language-bridge-lab-12/solution"
 				},
 				{
-					title: "language bridge lab 12 supplemental 2: Implementation Lab",
+					title: "Language Bridge Lab 12 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 12: Implementation Lab",
+							"Language Bridge Lab 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -582,11 +623,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-14-applied-studio-8-language-bridge-lab-12-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 12 supplemental 3: Implementation Lab",
+					title: "Language Bridge Lab 12 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 12: Implementation Lab",
+							"Language Bridge Lab 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -598,49 +639,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 13: Implementation Lab",
+			title: "Language Bridge Lab 13: Implementation Lab",
 			curriculum: [
 				{
-					title: "language bridge lab 13: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Language Bridge Lab 13: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 13: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "language bridge lab 13: Guided Example",
-					content:
-						"A representative language bridge lab 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Language Bridge Lab 13: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 13: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "language bridge lab 13: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Language Bridge Lab 13: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 13: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/solution"
 				},
 				{
-					title: "language bridge lab 13: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Language Bridge Lab 13: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 13: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "language bridge lab 13: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Language Bridge Lab 13: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 13: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-03-language-bridge-lab-13/solution"
 				},
 				{
-					title: "language bridge lab 13 supplemental 2: Implementation Lab",
+					title: "Language Bridge Lab 13 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 13: Implementation Lab",
+							"Language Bridge Lab 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -650,11 +711,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-16-applied-studio-9-language-bridge-lab-13-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 13 supplemental 3: Implementation Lab",
+					title: "Language Bridge Lab 13 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 13: Implementation Lab",
+							"Language Bridge Lab 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -666,49 +727,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 14: Implementation Lab",
+			title: "Language Bridge Lab 14: Implementation Lab",
 			curriculum: [
 				{
-					title: "language bridge lab 14: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Language Bridge Lab 14: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 14: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "language bridge lab 14: Guided Example",
-					content:
-						"A representative language bridge lab 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Language Bridge Lab 14: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 14: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "language bridge lab 14: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Language Bridge Lab 14: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 14: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/solution"
 				},
 				{
-					title: "language bridge lab 14: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Language Bridge Lab 14: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 14: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "language bridge lab 14: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Language Bridge Lab 14: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 14: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-04-language-bridge-lab-14/solution"
 				},
 				{
-					title: "language bridge lab 14 supplemental 2: Implementation Lab",
+					title: "Language Bridge Lab 14 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 14: Implementation Lab",
+							"Language Bridge Lab 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -718,11 +799,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-18-applied-studio-10-language-bridge-lab-14-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 14 supplemental 3: Implementation Lab",
+					title: "Language Bridge Lab 14 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 14: Implementation Lab",
+							"Language Bridge Lab 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -734,49 +815,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 15: Implementation Lab",
+			title: "Language Bridge Lab 15: Implementation Lab",
 			curriculum: [
 				{
-					title: "language bridge lab 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Language Bridge Lab 15: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 15: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "language bridge lab 15: Guided Example",
-					content:
-						"A representative language bridge lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Language Bridge Lab 15: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 15: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "language bridge lab 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Language Bridge Lab 15: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 15: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/solution"
 				},
 				{
-					title: "language bridge lab 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Language Bridge Lab 15: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 15: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "language bridge lab 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Language Bridge Lab 15: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 15: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-05-language-bridge-lab-15/solution"
 				},
 				{
-					title: "language bridge lab 15 supplemental 2: Implementation Lab",
+					title: "Language Bridge Lab 15 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 15: Implementation Lab",
+							"Language Bridge Lab 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -786,11 +887,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-20-applied-studio-11-language-bridge-lab-15-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 15 supplemental 3: Implementation Lab",
+					title: "Language Bridge Lab 15 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 15: Implementation Lab",
+							"Language Bridge Lab 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -802,49 +903,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 16: Implementation Lab",
+			title: "Language Bridge Lab 16: Implementation Lab",
 			curriculum: [
 				{
-					title: "language bridge lab 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Language Bridge Lab 16: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "language bridge lab 16: Guided Example",
-					content:
-						"A representative language bridge lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Language Bridge Lab 16: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "language bridge lab 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Language Bridge Lab 16: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/solution"
 				},
 				{
-					title: "language bridge lab 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Language Bridge Lab 16: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "language bridge lab 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Language Bridge Lab 16: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-06-language-bridge-lab-16/solution"
 				},
 				{
-					title: "language bridge lab 16 supplemental 2: Implementation Lab",
+					title: "Language Bridge Lab 16 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 16: Implementation Lab",
+							"Language Bridge Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -854,11 +975,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-22-applied-studio-12-language-bridge-lab-16-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 16 supplemental 3: Implementation Lab",
+					title: "Language Bridge Lab 16 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 16: Implementation Lab",
+							"Language Bridge Lab 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -870,49 +991,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "language bridge lab 17: Implementation Lab",
+			title: "Language Bridge Lab 17: Implementation Lab",
 			curriculum: [
 				{
-					title: "language bridge lab 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Language Bridge Lab 17: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "language bridge lab 17: Guided Example",
-					content:
-						"A representative language bridge lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Language Bridge Lab 17: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "language bridge lab 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Language Bridge Lab 17: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/solution"
 				},
 				{
-					title: "language bridge lab 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Language Bridge Lab 17: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "language bridge lab 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Language Bridge Lab 17: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"Language Bridge Lab 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-07-language-bridge-lab-17/solution"
 				},
 				{
-					title: "language bridge lab 17 supplemental 2: Implementation Lab",
+					title: "Language Bridge Lab 17 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 17: Implementation Lab",
+							"Language Bridge Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -922,11 +1063,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-24-applied-studio-13-language-bridge-lab-17-supplemental-2/solution"
 				},
 				{
-					title: "language bridge lab 17 supplemental 3: Implementation Lab",
+					title: "Language Bridge Lab 17 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"language bridge lab 17: Implementation Lab",
+							"Language Bridge Lab 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -942,37 +1083,54 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "graphics: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "graphics: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "graphics: Guided Example",
-					content:
-						"A representative graphics example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "graphics: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "graphics: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "graphics: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/graphics"
 				},
 				{
 					title: "graphics: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "graphics: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "graphics: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "graphics: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/graphics"
 				},
 				{
-					title: "graphics supplemental 2: Implementation Lab",
+					title: "Graphics Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "graphics: Implementation Lab",
@@ -985,7 +1143,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-26-applied-studio-14-graphics-supplemental-2/solution"
 				},
 				{
-					title: "graphics supplemental 3: Implementation Lab",
+					title: "Graphics Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "graphics: Implementation Lab",
@@ -1004,18 +1162,27 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "CPP practice: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "CPP practice: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "CPP practice: Guided Example",
-					content:
-						"A representative CPP practice example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "CPP practice: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "CPP practice: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "CPP practice: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/starter",
 					solutionLink:
@@ -1023,22 +1190,28 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "CPP practice: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "CPP practice: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "CPP practice: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle: "CPP practice: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/PTJ6-Python-to-CPP-Console-Port/solution"
 				},
 				{
-					title: "CPP practice supplemental 2: Implementation Lab",
+					title: "CPP Practice Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "CPP practice: Implementation Lab",
@@ -1051,7 +1224,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-28-applied-studio-15-cpp-practice-supplemental-2/solution"
 				},
 				{
-					title: "CPP practice supplemental 3: Implementation Lab",
+					title: "CPP Practice Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle: "CPP practice: Implementation Lab",
@@ -1066,49 +1239,69 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "J1X01 java foundations build 12: Implementation Lab",
+			title: "J1X01 Java Foundations Build 12: Implementation Lab",
 			curriculum: [
 				{
-					title: "J1X01 java foundations build 12: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "J1X01 Java Foundations Build 12: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"J1X01 Java Foundations Build 12: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "J1X01 java foundations build 12: Guided Example",
-					content:
-						"A representative J1X01 java foundations build 12 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "J1X01 Java Foundations Build 12: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"J1X01 Java Foundations Build 12: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "J1X01 java foundations build 12: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "J1X01 Java Foundations Build 12: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"J1X01 Java Foundations Build 12: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/solution"
 				},
 				{
-					title: "J1X01 java foundations build 12: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "J1X01 Java Foundations Build 12: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"J1X01 Java Foundations Build 12: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "J1X01 java foundations build 12: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "J1X01 Java Foundations Build 12: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"J1X01 Java Foundations Build 12: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-java-foundations-build-12/solution"
 				},
 				{
-					title: "J1X01 java foundations build 12 supplemental 2: Implementation Lab",
+					title: "J1X01 Java Foundations Build 12 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"J1X01 java foundations build 12: Implementation Lab",
+							"J1X01 Java Foundations Build 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1118,11 +1311,11 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-30-applied-studio-16-j1x01-java-foundations-build-12-supplemental-2/solution"
 				},
 				{
-					title: "J1X01 java foundations build 12 supplemental 3: Implementation Lab",
+					title: "J1X01 Java Foundations Build 12 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
-							"J1X01 java foundations build 12: Implementation Lab",
+							"J1X01 Java Foundations Build 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1138,18 +1331,30 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "c foundations build 13: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"c foundations build 13: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "c foundations build 13: Guided Example",
-					content:
-						"A representative c foundations build 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"c foundations build 13: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "c foundations build 13: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"c foundations build 13: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CF-01-c-foundations-build-13/starter",
 					solutionLink:
@@ -1157,22 +1362,30 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				},
 				{
 					title: "c foundations build 13: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"c foundations build 13: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "c foundations build 13: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "language bridge",
+						moduleTitle:
+							"c foundations build 13: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CF-01-c-foundations-build-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/C-Level-1-C-Fundamentals/tree/main/CF-01-c-foundations-build-13/solution"
 				},
 				{
-					title: "c foundations build 13 supplemental 2: Implementation Lab",
+					title: "c foundations build 13 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:
@@ -1186,7 +1399,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 						"https://github.com/instruction-material/Python-to-Java-and-CPP-Bridge/tree/main/BRG-32-applied-studio-17-c-foundations-build-13-supplemental-2/solution"
 				},
 				{
-					title: "c foundations build 13 supplemental 3: Implementation Lab",
+					title: "c foundations build 13 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java/C++ bridge",
 						moduleTitle:

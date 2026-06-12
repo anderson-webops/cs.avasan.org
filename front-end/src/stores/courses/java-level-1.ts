@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const javaLevel1Course: RawCourse = {
@@ -73,7 +74,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS1-Division-Facts"
 				},
 				{
-					title: "Variable Types & Input/Output supplemental 3",
+					title: "Variable Types & Input/Output Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "JS1 Variable Types & Input/Output",
@@ -139,7 +140,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS2-Snowman"
 				},
 				{
-					title: "Casting and Operators supplemental 3",
+					title: "Casting and Operators Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "JS2 Casting and Operators",
@@ -361,7 +362,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS5-Random-Number-Guesser"
 				},
 				{
-					title: "Practice with Loops & Conditionals supplemental 2",
+					title: "Practice with Loops & Conditionals Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "JS5 Practice with Loops & Conditionals",
@@ -374,7 +375,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplemental-2/solution"
 				},
 				{
-					title: "Practice with Loops & Conditionals supplemental 3",
+					title: "Practice with Loops & Conditionals Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "JS5 Practice with Loops & Conditionals",
@@ -432,7 +433,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/APCS/tree/main/APCS-Check-in-1"
 				},
 				{
-					title: "Check In #1 supplemental 2",
+					title: "Check In #1 Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "Check-In #1",
@@ -445,7 +446,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-check-in-1-supplemental-2/solution"
 				},
 				{
-					title: "Check In #1 supplemental 3",
+					title: "Check In #1 Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "Check-In #1",
@@ -753,7 +754,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1"
 				},
 				{
-					title: "Check In #2 supplemental 2",
+					title: "Check In #2 Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "Check-In #2",
@@ -766,7 +767,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-07-check-in-2-supplemental-2/solution"
 				},
 				{
-					title: "Check In #2 supplemental 3",
+					title: "Check In #2 Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "Check-In #2",
@@ -823,7 +824,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS9-Simple-Battleship"
 				},
 				{
-					title: "Master Project: Battleship supplemental 2",
+					title: "Master Project: Battleship Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "JS9 Master Project: Battleship",
@@ -836,7 +837,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-09-js9-master-project-battleship-supplemental-2/solution"
 				},
 				{
-					title: "Master Project: Battleship supplemental 3",
+					title: "Master Project: Battleship Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "JS9 Master Project: Battleship",
@@ -851,49 +852,69 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X02 java foundations build 13: Implementation Lab",
+			title: "J1X02 Java Foundations Build 13: Implementation Lab",
 			curriculum: [
 				{
-					title: "J1X02 java foundations build 13: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "J1X02 Java Foundations Build 13: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X02 Java Foundations Build 13: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "J1X02 java foundations build 13: Guided Example",
-					content:
-						"A representative J1X02 java foundations build 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "J1X02 Java Foundations Build 13: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X02 Java Foundations Build 13: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "J1X02 java foundations build 13: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "J1X02 Java Foundations Build 13: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X02 Java Foundations Build 13: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/solution"
 				},
 				{
-					title: "J1X02 java foundations build 13: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "J1X02 Java Foundations Build 13: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X02 Java Foundations Build 13: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "J1X02 java foundations build 13: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "J1X02 Java Foundations Build 13: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X02 Java Foundations Build 13: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-java-foundations-build-13/solution"
 				},
 				{
-					title: "J1X02 java foundations build 13 supplemental 2: Implementation Lab",
+					title: "J1X02 Java Foundations Build 13 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X02 java foundations build 13: Implementation Lab",
+							"J1X02 Java Foundations Build 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -903,11 +924,11 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-11-applied-studio-12-j1x02-java-foundations-build-13-supplemental-2/solution"
 				},
 				{
-					title: "J1X02 java foundations build 13 supplemental 3: Implementation Lab",
+					title: "J1X02 Java Foundations Build 13 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X02 java foundations build 13: Implementation Lab",
+							"J1X02 Java Foundations Build 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -919,49 +940,69 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X03 java foundations build 14: Implementation Lab",
+			title: "J1X03 Java Foundations Build 14: Implementation Lab",
 			curriculum: [
 				{
-					title: "J1X03 java foundations build 14: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "J1X03 Java Foundations Build 14: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X03 Java Foundations Build 14: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "J1X03 java foundations build 14: Guided Example",
-					content:
-						"A representative J1X03 java foundations build 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "J1X03 Java Foundations Build 14: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X03 Java Foundations Build 14: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "J1X03 java foundations build 14: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "J1X03 Java Foundations Build 14: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X03 Java Foundations Build 14: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/solution"
 				},
 				{
-					title: "J1X03 java foundations build 14: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "J1X03 Java Foundations Build 14: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X03 Java Foundations Build 14: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "J1X03 java foundations build 14: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "J1X03 Java Foundations Build 14: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X03 Java Foundations Build 14: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-java-foundations-build-14/solution"
 				},
 				{
-					title: "J1X03 java foundations build 14 supplemental 2: Implementation Lab",
+					title: "J1X03 Java Foundations Build 14 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X03 java foundations build 14: Implementation Lab",
+							"J1X03 Java Foundations Build 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -971,11 +1012,11 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-13-applied-studio-13-j1x03-java-foundations-build-14-supplemental-2/solution"
 				},
 				{
-					title: "J1X03 java foundations build 14 supplemental 3: Implementation Lab",
+					title: "J1X03 Java Foundations Build 14 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X03 java foundations build 14: Implementation Lab",
+							"J1X03 Java Foundations Build 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -987,49 +1028,69 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X04 java foundations build 15: Implementation Lab",
+			title: "J1X04 Java Foundations Build 15: Implementation Lab",
 			curriculum: [
 				{
-					title: "J1X04 java foundations build 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "J1X04 Java Foundations Build 15: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X04 Java Foundations Build 15: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "J1X04 java foundations build 15: Guided Example",
-					content:
-						"A representative J1X04 java foundations build 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "J1X04 Java Foundations Build 15: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X04 Java Foundations Build 15: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "J1X04 java foundations build 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "J1X04 Java Foundations Build 15: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X04 Java Foundations Build 15: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/solution"
 				},
 				{
-					title: "J1X04 java foundations build 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "J1X04 Java Foundations Build 15: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X04 Java Foundations Build 15: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "J1X04 java foundations build 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "J1X04 Java Foundations Build 15: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X04 Java Foundations Build 15: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-java-foundations-build-15/solution"
 				},
 				{
-					title: "J1X04 java foundations build 15 supplemental 2: Implementation Lab",
+					title: "J1X04 Java Foundations Build 15 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X04 java foundations build 15: Implementation Lab",
+							"J1X04 Java Foundations Build 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1039,11 +1100,11 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-15-applied-studio-14-j1x04-java-foundations-build-15-supplemental-2/solution"
 				},
 				{
-					title: "J1X04 java foundations build 15 supplemental 3: Implementation Lab",
+					title: "J1X04 Java Foundations Build 15 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X04 java foundations build 15: Implementation Lab",
+							"J1X04 Java Foundations Build 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1055,49 +1116,69 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X05 java foundations build 16: Implementation Lab",
+			title: "J1X05 Java Foundations Build 16: Implementation Lab",
 			curriculum: [
 				{
-					title: "J1X05 java foundations build 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "J1X05 Java Foundations Build 16: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X05 Java Foundations Build 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "J1X05 java foundations build 16: Guided Example",
-					content:
-						"A representative J1X05 java foundations build 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "J1X05 Java Foundations Build 16: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X05 Java Foundations Build 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "J1X05 java foundations build 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "J1X05 Java Foundations Build 16: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X05 Java Foundations Build 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/solution"
 				},
 				{
-					title: "J1X05 java foundations build 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "J1X05 Java Foundations Build 16: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X05 Java Foundations Build 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "J1X05 java foundations build 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "J1X05 Java Foundations Build 16: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X05 Java Foundations Build 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-java-foundations-build-16/solution"
 				},
 				{
-					title: "J1X05 java foundations build 16 supplemental 2: Implementation Lab",
+					title: "J1X05 Java Foundations Build 16 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X05 java foundations build 16: Implementation Lab",
+							"J1X05 Java Foundations Build 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1107,11 +1188,11 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-17-applied-studio-15-j1x05-java-foundations-build-16-supplemental-2/solution"
 				},
 				{
-					title: "J1X05 java foundations build 16 supplemental 3: Implementation Lab",
+					title: "J1X05 Java Foundations Build 16 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X05 java foundations build 16: Implementation Lab",
+							"J1X05 Java Foundations Build 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1123,49 +1204,69 @@ export const javaLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "J1X06 java foundations build 17: Implementation Lab",
+			title: "J1X06 Java Foundations Build 17: Implementation Lab",
 			curriculum: [
 				{
-					title: "J1X06 java foundations build 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "J1X06 Java Foundations Build 17: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X06 Java Foundations Build 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "J1X06 java foundations build 17: Guided Example",
-					content:
-						"A representative J1X06 java foundations build 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "J1X06 Java Foundations Build 17: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X06 Java Foundations Build 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "J1X06 java foundations build 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "J1X06 Java Foundations Build 17: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X06 Java Foundations Build 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/solution"
 				},
 				{
-					title: "J1X06 java foundations build 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "J1X06 Java Foundations Build 17: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X06 Java Foundations Build 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "J1X06 java foundations build 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "J1X06 Java Foundations Build 17: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X06 Java Foundations Build 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-java-foundations-build-17/solution"
 				},
 				{
-					title: "J1X06 java foundations build 17 supplemental 2: Implementation Lab",
+					title: "J1X06 Java Foundations Build 17 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X06 java foundations build 17: Implementation Lab",
+							"J1X06 Java Foundations Build 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1175,11 +1276,11 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-19-applied-studio-16-j1x06-java-foundations-build-17-supplemental-2/solution"
 				},
 				{
-					title: "J1X06 java foundations build 17 supplemental 3: Implementation Lab",
+					title: "J1X06 Java Foundations Build 17 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"J1X06 java foundations build 17: Implementation Lab",
+							"J1X06 Java Foundations Build 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1195,37 +1296,59 @@ export const javaLevel1Course: RawCourse = {
 			curriculum: [
 				{
 					title: "Temperature Converter: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Temperature Converter: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Temperature Converter: Guided Example",
-					content:
-						"A representative Temperature Converter example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Temperature Converter: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Temperature Converter: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Temperature Converter: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS2-Temperature-Converter"
 				},
 				{
 					title: "Temperature Converter: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Temperature Converter: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Temperature Converter: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Temperature Converter: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/JS2-Temperature-Converter"
 				},
 				{
-					title: "Temperature Converter supplemental 2: Implementation Lab",
+					title: "Temperature Converter Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
@@ -1239,7 +1362,7 @@ export const javaLevel1Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-21-applied-studio-17-temperature-converter-supplemental-2/solution"
 				},
 				{
-					title: "Temperature Converter supplemental 3: Implementation Lab",
+					title: "Temperature Converter Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:

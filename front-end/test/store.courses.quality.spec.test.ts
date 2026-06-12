@@ -466,6 +466,26 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("buildImplementationLabGuidance");
 	});
 
+	it("keeps visible implementation-lab course sources free of generated filler", () => {
+		const corpus = visibleCourseSourceCorpus();
+
+		expect(corpus).not.toMatch(/This lab states the target artifact/i);
+		expect(corpus).not.toMatch(
+			/A representative .* example names the key inputs/i
+		);
+		expect(corpus).not.toMatch(/Build one complete artifact first/i);
+		expect(corpus).not.toMatch(
+			/Extend the core build with one extra requirement/i
+		);
+		expect(corpus).not.toMatch(/java foundations build/);
+		expect(corpus).not.toMatch(/c algorithm lab/);
+		expect(corpus).not.toMatch(/pattern implementation lab/);
+		expect(corpus).not.toMatch(/refactoring clinic/);
+		expect(corpus).not.toMatch(/language bridge lab/);
+		expect(corpus).not.toMatch(/title:\s*"images:/);
+		expect(corpus).not.toMatch(/PyGames\/tree\/main\/[^"\n]* /);
+	});
+
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {

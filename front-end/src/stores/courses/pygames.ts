@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const pyGamesCourse: RawCourse = {
@@ -48,7 +49,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/music"
 				},
 				{
-					title: "Setup, Editors, and Asset Workflow supplemental 2",
+					title: "Setup, Editors, and Asset Workflow Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG0 Setup, Editors, and Asset Workflow",
@@ -61,7 +62,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplemental-2/solution"
 				},
 				{
-					title: "Setup, Editors, and Asset Workflow supplemental 3",
+					title: "Setup, Editors, and Asset Workflow Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG0 Setup, Editors, and Asset Workflow",
@@ -143,7 +144,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Object Oriented Programming: Actors supplemental 2",
+					title: "Object Oriented Programming: Actors Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG1 Object-Oriented Programming: Actors",
@@ -156,7 +157,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-supplemental-2/solution"
 				},
 				{
-					title: "Object Oriented Programming: Actors supplemental 3",
+					title: "Object Oriented Programming: Actors Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG1 Object-Oriented Programming: Actors",
@@ -228,7 +229,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Event Handling supplemental 2",
+					title: "Event Handling Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG2 Event Handling",
@@ -241,7 +242,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-05-pyg2-event-handling-supplemental-2/solution"
 				},
 				{
-					title: "Event Handling supplemental 3",
+					title: "Event Handling Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG2 Event Handling",
@@ -314,7 +315,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Object Oriented Programming: Advanced Actors supplemental 2",
+					title: "Object Oriented Programming: Advanced Actors Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -328,7 +329,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-07-pyg3-object-oriented-programming-advanced-actors/solution"
 				},
 				{
-					title: "Object Oriented Programming: Advanced Actors supplemental 3",
+					title: "Object Oriented Programming: Advanced Actors Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -396,7 +397,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Managing Multiple Objects: Collectibles supplemental 2",
+					title: "Managing Multiple Objects: Collectibles Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -410,7 +411,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supplemental-2/solution"
 				},
 				{
-					title: "Managing Multiple Objects: Collectibles supplemental 3",
+					title: "Managing Multiple Objects: Collectibles Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -469,7 +470,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 2",
+					title: "Check In #1: Actors, Events, ZRects, Collectibles Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -483,7 +484,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-supplemental-2/solution"
 				},
 				{
-					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 3",
+					title: "Check In #1: Actors, Events, ZRects, Collectibles Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -556,7 +557,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Physics supplemental 2",
+					title: "Physics Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG5 Physics",
@@ -569,7 +570,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-13-pyg5-physics-supplemental-2/solution"
 				},
 				{
-					title: "Physics supplemental 3",
+					title: "Physics Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG5 Physics",
@@ -646,7 +647,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 2",
+					title: "Managing Multiple Objects: Obstacles and Surfaces Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -660,7 +661,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-2/solution"
 				},
 				{
-					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 3",
+					title: "Managing Multiple Objects: Obstacles and Surfaces Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -719,7 +720,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Check In #2: Gravity, Friction, Platforms supplemental 2",
+					title: "Check In #2: Gravity, Friction, Platforms Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -733,7 +734,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplemental-2/solution"
 				},
 				{
-					title: "Check In #2: Gravity, Friction, Platforms supplemental 3",
+					title: "Check In #2: Gravity, Friction, Platforms Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -814,7 +815,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Levels and System Control supplemental 2",
+					title: "Levels and System Control Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG7 Levels and System Control",
@@ -827,7 +828,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-19-pyg7-levels-and-system-control-supplemental-2/solution"
 				},
 				{
-					title: "Levels and System Control supplemental 3",
+					title: "Levels and System Control Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG7 Levels and System Control",
@@ -888,7 +889,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Game Elements: Projectiles supplemental 2",
+					title: "Game Elements: Projectiles Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG8 Game Elements: Projectiles",
@@ -901,7 +902,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-21-pyg8-game-elements-projectiles-supplemental-2/solution"
 				},
 				{
-					title: "Game Elements: Projectiles supplemental 3",
+					title: "Game Elements: Projectiles Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG8 Game Elements: Projectiles",
@@ -962,7 +963,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Game Elements: Enemy AI supplemental 2",
+					title: "Game Elements: Enemy AI Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG9 Game Elements: Enemy AI",
@@ -975,7 +976,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-23-pyg9-game-elements-enemy-ai-supplemental-2/solution"
 				},
 				{
-					title: "Game Elements: Enemy AI supplemental 3",
+					title: "Game Elements: Enemy AI Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG9 Game Elements: Enemy AI",
@@ -1028,7 +1029,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 2",
+					title: "Check In #3: System Control, Projectiles, Enemy AI Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -1042,7 +1043,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-supplemental-2/solution"
 				},
 				{
-					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 3",
+					title: "Check In #3: System Control, Projectiles, Enemy AI Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle:
@@ -1098,7 +1099,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Ninja Versus Alien supplemental 2",
+					title: "Ninja Versus Alien Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG10 Ninja Versus Alien",
@@ -1111,7 +1112,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-27-pyg10-ninja-versus-alien-supplemental-2/solution"
 				},
 				{
-					title: "Ninja Versus Alien supplemental 3",
+					title: "Ninja Versus Alien Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG10 Ninja Versus Alien",
@@ -1166,7 +1167,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main"
 				},
 				{
-					title: "Space Invaders supplemental 2",
+					title: "Space Invaders Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG11 Space Invaders",
@@ -1179,7 +1180,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-29-pyg11-space-invaders-supplemental-2/solution"
 				},
 				{
-					title: "Space Invaders supplemental 3",
+					title: "Space Invaders Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG11 Space Invaders",
@@ -1209,7 +1210,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Bonus Concepts for Assets",
 					content:
-						"If the project uses images or sounds outside the provided asset bank, prototype with temporary assets first and then replace them with final files later. Resize images so they match practical sprite sizes, crop or normalize sounds when needed, and explore the PyGame Zero documentation for ideas such as more advanced input, music control, and simple particle effects that can make the Master Project feel more polished."
+						"If the project uses images or sounds outside the provided asset bank, prototype with temporary assets first and then replace them with final files later. Resize image files so they match practical sprite sizes, crop or normalize sounds when needed, and explore the PyGame Zero documentation for ideas such as more advanced input, music control, and simple particle effects that can make the Master Project feel more polished."
 				},
 				{
 					title: "Master Project Presentation",
@@ -1247,7 +1248,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/sounds"
 				},
 				{
-					title: "Master Project supplemental 2",
+					title: "Master Project Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG12 Master Project",
@@ -1260,7 +1261,7 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-31-pyg12-master-project-supplemental-2/solution"
 				},
 				{
-					title: "Master Project supplemental 3",
+					title: "Master Project Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
 						moduleTitle: "PyG12 Master Project",
@@ -1275,44 +1276,61 @@ export const pyGamesCourse: RawCourse = {
 			]
 		},
 		{
-			title: "images: Implementation Lab",
+			title: "Images and Sprites: Implementation Lab",
 			curriculum: [
 				{
-					title: "images: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Images and Sprites: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "Images and Sprites: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "images: Guided Example",
-					content:
-						"A representative images example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Images and Sprites: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "Images and Sprites: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "images: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Images and Sprites: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "Images and Sprites: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/images"
 				},
 				{
-					title: "images: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Images and Sprites: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "Images and Sprites: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "images: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Images and Sprites: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "Images and Sprites: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/images"
 				},
 				{
-					title: "images supplemental 2: Implementation Lab",
+					title: "Images and Sprites Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
-						moduleTitle: "images: Implementation Lab",
+						moduleTitle: "Images and Sprites: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1322,10 +1340,10 @@ export const pyGamesCourse: RawCourse = {
 						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/solution"
 				},
 				{
-					title: "images supplemental 3: Implementation Lab",
+					title: "Images and Sprites Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Python/PyGame",
-						moduleTitle: "images: Implementation Lab",
+						moduleTitle: "Images and Sprites: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

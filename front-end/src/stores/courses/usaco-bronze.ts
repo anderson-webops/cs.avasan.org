@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const usacoBronzeCourse: RawCourse = {
@@ -485,32 +486,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 12 Barn Repair Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 12 Barn Repair Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 12 Barn Repair Java: Guided Example",
-					content:
-						"A representative UB 12 Barn Repair Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 12 Barn Repair Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 12 Barn Repair Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 12 Barn Repair Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
 				},
 				{
 					title: "UB 12 Barn Repair Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 12 Barn Repair Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 12 Barn Repair Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 12 Barn Repair Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-12-Barn-Repair-Java"
 				},
@@ -545,32 +568,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 13 Combination Lock Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 13 Combination Lock Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 13 Combination Lock Java: Guided Example",
-					content:
-						"A representative UB 13 Combination Lock Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 13 Combination Lock Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 13 Combination Lock Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 13 Combination Lock Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
 				},
 				{
 					title: "UB 13 Combination Lock Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 13 Combination Lock Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 13 Combination Lock Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 13 Combination Lock Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-13-Combination-Lock-Java"
 				},
@@ -605,32 +650,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 14 Prime Cryptarithm Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 14 Prime Cryptarithm Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 14 Prime Cryptarithm Java: Guided Example",
-					content:
-						"A representative UB 14 Prime Cryptarithm Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 14 Prime Cryptarithm Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 14 Prime Cryptarithm Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 14 Prime Cryptarithm Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
 				},
 				{
 					title: "UB 14 Prime Cryptarithm Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 14 Prime Cryptarithm Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 14 Prime Cryptarithm Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 14 Prime Cryptarithm Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-14-Prime-Cryptarithm-Java"
 				},
@@ -647,7 +714,7 @@ export const usacoBronzeCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB18-The-Cow-Signal"
 				},
 				{
-					title: "Dont Be Last",
+					title: "Don't Be Last",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle:
@@ -665,32 +732,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 15 Ski Course Design Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 15 Ski Course Design Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 15 Ski Course Design Java: Guided Example",
-					content:
-						"A representative UB 15 Ski Course Design Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 15 Ski Course Design Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 15 Ski Course Design Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 15 Ski Course Design Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
 				},
 				{
 					title: "UB 15 Ski Course Design Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 15 Ski Course Design Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 15 Ski Course Design Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 15 Ski Course Design Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-15-Ski-Course-Design-Java"
 				},
@@ -725,32 +814,49 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 16 Wormholes Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 16 Wormholes Java: Guided Example",
-					content:
-						"A representative UB 16 Wormholes Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 16 Wormholes Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
 				},
 				{
 					title: "UB 16 Wormholes Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 16 Wormholes Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-16-Wormholes-Java"
 				},
@@ -783,32 +889,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 17 Block Game Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 17 Block Game Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 17 Block Game Java: Guided Example",
-					content:
-						"A representative UB 17 Block Game Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 17 Block Game Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 17 Block Game Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 17 Block Game Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
 				},
 				{
 					title: "UB 17 Block Game Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 17 Block Game Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 17 Block Game Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 17 Block Game Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-17-Block-Game-Java"
 				},
@@ -843,32 +971,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 18 The Cow Signal Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 18 The Cow Signal Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 18 The Cow Signal Java: Guided Example",
-					content:
-						"A representative UB 18 The Cow Signal Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 18 The Cow Signal Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 18 The Cow Signal Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 18 The Cow Signal Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
 				},
 				{
 					title: "UB 18 The Cow Signal Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 18 The Cow Signal Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 18 The Cow Signal Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 18 The Cow Signal Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-18-The-Cow-Signal-Java"
 				},
@@ -899,36 +1049,58 @@ export const usacoBronzeCourse: RawCourse = {
 			]
 		},
 		{
-			title: "UB 19 Dont Be Last Java: Implementation Lab",
+			title: "UB 19 Don't Be Last Java: Implementation Lab",
 			curriculum: [
 				{
-					title: "UB 19 Dont Be Last Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "UB 19 Don't Be Last Java: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 19 Don't Be Last Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "UB 19 Dont Be Last Java: Guided Example",
-					content:
-						"A representative UB 19 Dont Be Last Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "UB 19 Don't Be Last Java: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 19 Don't Be Last Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "UB 19 Dont Be Last Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "UB 19 Don't Be Last Java: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 19 Don't Be Last Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
 				},
 				{
-					title: "UB 19 Dont Be Last Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "UB 19 Don't Be Last Java: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 19 Don't Be Last Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "UB 19 Dont Be Last Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "UB 19 Don't Be Last Java: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 19 Don't Be Last Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-19-Dont-Be-Last-Java"
 				},
@@ -937,7 +1109,7 @@ export const usacoBronzeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle:
-							"UB 19 Dont Be Last Java: Implementation Lab",
+							"UB 19 Don't Be Last Java: Implementation Lab",
 						projectKind: "core",
 						hasReference: false
 					}),
@@ -949,7 +1121,7 @@ export const usacoBronzeCourse: RawCourse = {
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle:
-							"UB 19 Dont Be Last Java: Implementation Lab",
+							"UB 19 Don't Be Last Java: Implementation Lab",
 						projectKind: "core",
 						hasReference: false
 					}),
@@ -963,32 +1135,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Guided Example",
-					content:
-						"A representative UB 20 Hoof Paper Scissors Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
 				},
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 20 Hoof Paper Scissors Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-20-Hoof-Paper-Scissors-Java"
 				},
@@ -1023,32 +1217,54 @@ export const usacoBronzeCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "UB 21 Cow Tipping Java: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 21 Cow Tipping Java: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "UB 21 Cow Tipping Java: Guided Example",
-					content:
-						"A representative UB 21 Cow Tipping Java example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 21 Cow Tipping Java: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "UB 21 Cow Tipping Java: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 21 Cow Tipping Java: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
 				},
 				{
 					title: "UB 21 Cow Tipping Java: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 21 Cow Tipping Java: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "UB 21 Cow Tipping Java: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 21 Cow Tipping Java: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-21-Cow-Tipping-Java"
 				},

@@ -55,6 +55,30 @@ function familyFocus(courseFamily: string) {
 		return "state representation, actions, goal tests, search strategy, heuristic or scoring behavior, experiment logs, and evidence that the agent improves or behaves intentionally";
 	}
 
+	if (family.includes("usaco")) {
+		return "input format, constraints, a brute-force baseline, the chosen algorithm, complexity, sample traces, hidden edge cases, and contest-style output discipline";
+	}
+
+	if (family.includes("design pattern")) {
+		return "object roles, collaboration boundaries, before-and-after coupling, extensibility tradeoffs, and tests that prove the pattern changes behavior rather than only class names";
+	}
+
+	if (family.includes("data structures") || family.includes("algorithm")) {
+		return "data-structure invariants, input constraints, algorithm state, asymptotic complexity, memory behavior, and edge-case traces";
+	}
+
+	if (family.includes("language bridge")) {
+		return "syntax translation, type differences, object and memory model differences, build/run workflow, and equivalent behavior across languages";
+	}
+
+	if (family.includes("pygame")) {
+		return "game-loop state, event handling, sprites or assets, collision/timing behavior, frame-by-frame debugging, and playable feedback";
+	}
+
+	if (family.includes("java")) {
+		return "Java syntax, class design, object state, method contracts, package or import boundaries, exceptions, tests, and command-line runtime behavior";
+	}
+
 	return "inputs, state changes, system boundaries, observable behavior, edge cases, and verification evidence";
 }
 

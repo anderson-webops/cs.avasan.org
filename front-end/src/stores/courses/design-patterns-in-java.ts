@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const designPatternsInJavaCourse: RawCourse = {
@@ -871,18 +872,30 @@ export const designPatternsInJavaCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Pattern Implementation Lab 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 15: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Pattern Implementation Lab 15: Guided Example",
-					content:
-						"A representative pattern implementation lab 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 15: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Pattern Implementation Lab 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 15: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-pattern-implementation-lab-15/starter",
 					solutionLink:
@@ -890,15 +903,23 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 15: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Pattern Implementation Lab 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 15: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-pattern-implementation-lab-15/starter",
 					solutionLink:
@@ -939,18 +960,30 @@ export const designPatternsInJavaCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Pattern Implementation Lab 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Pattern Implementation Lab 16: Guided Example",
-					content:
-						"A representative pattern implementation lab 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Pattern Implementation Lab 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-pattern-implementation-lab-16/starter",
 					solutionLink:
@@ -958,15 +991,23 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Pattern Implementation Lab 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-pattern-implementation-lab-16/starter",
 					solutionLink:
@@ -1007,18 +1048,30 @@ export const designPatternsInJavaCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Pattern Implementation Lab 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Pattern Implementation Lab 17: Guided Example",
-					content:
-						"A representative pattern implementation lab 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Pattern Implementation Lab 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-03-pattern-implementation-lab-17/starter",
 					solutionLink:
@@ -1026,15 +1079,23 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Pattern Implementation Lab 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Pattern Implementation Lab 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-03-pattern-implementation-lab-17/starter",
 					solutionLink:

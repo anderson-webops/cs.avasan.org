@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const designPatternsInJavaPart2Course: RawCourse = {
@@ -63,7 +64,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-08-dpr1-code-smells-and-safe-refactoring-workflow/solution"
 				},
 				{
-					title: "Code Smells and Safe Refactoring Workflow supplemental 2",
+					title: "Code Smells and Safe Refactoring Workflow Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
@@ -77,7 +78,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-dpr1-code-smells-and-safe-refactoring-workflow-supplemental-2/solution"
 				},
 				{
-					title: "Code Smells and Safe Refactoring Workflow supplemental 3",
+					title: "Code Smells and Safe Refactoring Workflow Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
@@ -150,7 +151,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr2-composing-methods/solution"
 				},
 				{
-					title: "Composing Methods supplemental 2",
+					title: "Composing Methods Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR2 Composing Methods",
@@ -163,7 +164,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-dpr2-composing-methods-supplemental-2/solution"
 				},
 				{
-					title: "Composing Methods supplemental 3",
+					title: "Composing Methods Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR2 Composing Methods",
@@ -235,7 +236,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-10-dpr3-moving-features-between-objects/solution"
 				},
 				{
-					title: "Moving Features Between Objects supplemental 2",
+					title: "Moving Features Between Objects Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR3 Moving Features Between Objects",
@@ -248,7 +249,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-dpr3-moving-features-between-objects-supplemental-2/solution"
 				},
 				{
-					title: "Moving Features Between Objects supplemental 3",
+					title: "Moving Features Between Objects Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR3 Moving Features Between Objects",
@@ -320,7 +321,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr4-organizing-data/solution"
 				},
 				{
-					title: "Organizing Data supplemental 2",
+					title: "Organizing Data Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR4 Organizing Data",
@@ -333,7 +334,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-dpr4-organizing-data-supplemental-2/solution"
 				},
 				{
-					title: "Organizing Data supplemental 3",
+					title: "Organizing Data Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR4 Organizing Data",
@@ -405,7 +406,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-12-dpr5-simplifying-conditional-expressions/solution"
 				},
 				{
-					title: "Simplifying Conditional Expressions supplemental 2",
+					title: "Simplifying Conditional Expressions Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR5 Simplifying Conditional Expressions",
@@ -418,7 +419,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-09-dpr5-simplifying-conditional-expressions-supplemental-2/solution"
 				},
 				{
-					title: "Simplifying Conditional Expressions supplemental 3",
+					title: "Simplifying Conditional Expressions Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR5 Simplifying Conditional Expressions",
@@ -490,7 +491,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr6-simplifying-method-calls/solution"
 				},
 				{
-					title: "Simplifying Method Calls supplemental 2",
+					title: "Simplifying Method Calls Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR6 Simplifying Method Calls",
@@ -503,7 +504,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-11-dpr6-simplifying-method-calls-supplemental-2/solution"
 				},
 				{
-					title: "Simplifying Method Calls supplemental 3",
+					title: "Simplifying Method Calls Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR6 Simplifying Method Calls",
@@ -575,7 +576,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-14-dpr7-dealing-with-generalization/solution"
 				},
 				{
-					title: "Dealing with Generalization supplemental 2",
+					title: "Dealing with Generalization Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR7 Dealing with Generalization",
@@ -588,7 +589,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-13-dpr7-dealing-with-generalization-supplemental-2/solution"
 				},
 				{
-					title: "Dealing with Generalization supplemental 3",
+					title: "Dealing with Generalization Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR7 Dealing with Generalization",
@@ -660,7 +661,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns/solution"
 				},
 				{
-					title: "Refactoring Toward Patterns supplemental 2",
+					title: "Refactoring Toward Patterns Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR8 Refactoring Toward Patterns",
@@ -673,7 +674,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-15-dpr8-refactoring-toward-patterns-supplemental-2/solution"
 				},
 				{
-					title: "Refactoring Toward Patterns supplemental 3",
+					title: "Refactoring Toward Patterns Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR8 Refactoring Toward Patterns",
@@ -746,7 +747,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-16-dpr9-testability-di-and-refactoring-with-confidence/solution"
 				},
 				{
-					title: "Testability, DI, and Refactoring with Confidence supplemental 2",
+					title: "Testability, DI, and Refactoring with Confidence Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
@@ -760,7 +761,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr9-testability-di-and-refactoring-with-confidence-supplemental-2/solution"
 				},
 				{
-					title: "Testability, DI, and Refactoring with Confidence supplemental 3",
+					title: "Testability, DI, and Refactoring with Confidence Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
@@ -833,7 +834,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-17-dpr10-capstone-refactoring-studio/solution"
 				},
 				{
-					title: "Capstone Refactoring Studio supplemental 2",
+					title: "Capstone Refactoring Studio Supplemental 2",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR10 Capstone Refactoring Studio",
@@ -846,7 +847,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-19-dpr10-capstone-refactoring-studio-supplemental-2/solution"
 				},
 				{
-					title: "Capstone Refactoring Studio supplemental 3",
+					title: "Capstone Refactoring Studio Supplemental 3",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle: "DPR10 Capstone Refactoring Studio",
@@ -861,49 +862,69 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 11: Implementation Lab",
+			title: "Refactoring Clinic 11: Implementation Lab",
 			curriculum: [
 				{
-					title: "refactoring clinic 11: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Refactoring Clinic 11: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 11: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "refactoring clinic 11: Guided Example",
-					content:
-						"A representative refactoring clinic 11 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Refactoring Clinic 11: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 11: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "refactoring clinic 11: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Refactoring Clinic 11: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 11: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/solution"
 				},
 				{
-					title: "refactoring clinic 11: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Refactoring Clinic 11: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 11: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "refactoring clinic 11: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Refactoring Clinic 11: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 11: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-01-refactoring-clinic-11/solution"
 				},
 				{
-					title: "refactoring clinic 11 supplemental 2: Implementation Lab",
+					title: "Refactoring Clinic 11 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 11: Implementation Lab",
+							"Refactoring Clinic 11: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -913,11 +934,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-21-applied-studio-11-refactoring-clinic-11-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 11 supplemental 3: Implementation Lab",
+					title: "Refactoring Clinic 11 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 11: Implementation Lab",
+							"Refactoring Clinic 11: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -929,49 +950,69 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 12: Implementation Lab",
+			title: "Refactoring Clinic 12: Implementation Lab",
 			curriculum: [
 				{
-					title: "refactoring clinic 12: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Refactoring Clinic 12: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 12: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "refactoring clinic 12: Guided Example",
-					content:
-						"A representative refactoring clinic 12 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Refactoring Clinic 12: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 12: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "refactoring clinic 12: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Refactoring Clinic 12: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 12: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/solution"
 				},
 				{
-					title: "refactoring clinic 12: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Refactoring Clinic 12: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 12: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "refactoring clinic 12: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Refactoring Clinic 12: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 12: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-02-refactoring-clinic-12/solution"
 				},
 				{
-					title: "refactoring clinic 12 supplemental 2: Implementation Lab",
+					title: "Refactoring Clinic 12 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 12: Implementation Lab",
+							"Refactoring Clinic 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -981,11 +1022,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-23-applied-studio-12-refactoring-clinic-12-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 12 supplemental 3: Implementation Lab",
+					title: "Refactoring Clinic 12 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 12: Implementation Lab",
+							"Refactoring Clinic 12: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -997,49 +1038,69 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 13: Implementation Lab",
+			title: "Refactoring Clinic 13: Implementation Lab",
 			curriculum: [
 				{
-					title: "refactoring clinic 13: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Refactoring Clinic 13: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 13: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "refactoring clinic 13: Guided Example",
-					content:
-						"A representative refactoring clinic 13 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Refactoring Clinic 13: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 13: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "refactoring clinic 13: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Refactoring Clinic 13: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 13: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/solution"
 				},
 				{
-					title: "refactoring clinic 13: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Refactoring Clinic 13: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 13: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "refactoring clinic 13: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Refactoring Clinic 13: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 13: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-03-refactoring-clinic-13/solution"
 				},
 				{
-					title: "refactoring clinic 13 supplemental 2: Implementation Lab",
+					title: "Refactoring Clinic 13 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 13: Implementation Lab",
+							"Refactoring Clinic 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1049,11 +1110,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-25-applied-studio-13-refactoring-clinic-13-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 13 supplemental 3: Implementation Lab",
+					title: "Refactoring Clinic 13 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 13: Implementation Lab",
+							"Refactoring Clinic 13: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1065,49 +1126,69 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 14: Implementation Lab",
+			title: "Refactoring Clinic 14: Implementation Lab",
 			curriculum: [
 				{
-					title: "refactoring clinic 14: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Refactoring Clinic 14: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 14: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "refactoring clinic 14: Guided Example",
-					content:
-						"A representative refactoring clinic 14 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Refactoring Clinic 14: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 14: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "refactoring clinic 14: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Refactoring Clinic 14: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 14: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/solution"
 				},
 				{
-					title: "refactoring clinic 14: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Refactoring Clinic 14: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 14: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "refactoring clinic 14: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Refactoring Clinic 14: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 14: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-04-refactoring-clinic-14/solution"
 				},
 				{
-					title: "refactoring clinic 14 supplemental 2: Implementation Lab",
+					title: "Refactoring Clinic 14 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 14: Implementation Lab",
+							"Refactoring Clinic 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1117,11 +1198,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-27-applied-studio-14-refactoring-clinic-14-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 14 supplemental 3: Implementation Lab",
+					title: "Refactoring Clinic 14 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 14: Implementation Lab",
+							"Refactoring Clinic 14: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1133,49 +1214,69 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 15: Implementation Lab",
+			title: "Refactoring Clinic 15: Implementation Lab",
 			curriculum: [
 				{
-					title: "refactoring clinic 15: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Refactoring Clinic 15: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 15: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "refactoring clinic 15: Guided Example",
-					content:
-						"A representative refactoring clinic 15 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Refactoring Clinic 15: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 15: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "refactoring clinic 15: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Refactoring Clinic 15: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 15: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/solution"
 				},
 				{
-					title: "refactoring clinic 15: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Refactoring Clinic 15: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 15: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "refactoring clinic 15: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Refactoring Clinic 15: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 15: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-05-refactoring-clinic-15/solution"
 				},
 				{
-					title: "refactoring clinic 15 supplemental 2: Implementation Lab",
+					title: "Refactoring Clinic 15 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 15: Implementation Lab",
+							"Refactoring Clinic 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1185,11 +1286,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-29-applied-studio-15-refactoring-clinic-15-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 15 supplemental 3: Implementation Lab",
+					title: "Refactoring Clinic 15 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 15: Implementation Lab",
+							"Refactoring Clinic 15: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1201,49 +1302,69 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 16: Implementation Lab",
+			title: "Refactoring Clinic 16: Implementation Lab",
 			curriculum: [
 				{
-					title: "refactoring clinic 16: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Refactoring Clinic 16: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 16: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "refactoring clinic 16: Guided Example",
-					content:
-						"A representative refactoring clinic 16 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Refactoring Clinic 16: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 16: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "refactoring clinic 16: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Refactoring Clinic 16: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 16: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/solution"
 				},
 				{
-					title: "refactoring clinic 16: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Refactoring Clinic 16: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 16: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "refactoring clinic 16: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Refactoring Clinic 16: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 16: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-06-refactoring-clinic-16/solution"
 				},
 				{
-					title: "refactoring clinic 16 supplemental 2: Implementation Lab",
+					title: "Refactoring Clinic 16 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 16: Implementation Lab",
+							"Refactoring Clinic 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1253,11 +1374,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-31-applied-studio-16-refactoring-clinic-16-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 16 supplemental 3: Implementation Lab",
+					title: "Refactoring Clinic 16 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 16: Implementation Lab",
+							"Refactoring Clinic 16: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1269,49 +1390,69 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 			]
 		},
 		{
-			title: "refactoring clinic 17: Implementation Lab",
+			title: "Refactoring Clinic 17: Implementation Lab",
 			curriculum: [
 				{
-					title: "refactoring clinic 17: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					title: "Refactoring Clinic 17: Core Concepts",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 17: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
-					title: "refactoring clinic 17: Guided Example",
-					content:
-						"A representative refactoring clinic 17 example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					title: "Refactoring Clinic 17: Guided Example",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 17: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
-					title: "refactoring clinic 17: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					title: "Refactoring Clinic 17: Core Project",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 17: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/solution"
 				},
 				{
-					title: "refactoring clinic 17: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					title: "Refactoring Clinic 17: Review and Reflection",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 17: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "refactoring clinic 17: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					title: "Refactoring Clinic 17: Extension Challenge",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java design patterns",
+						moduleTitle:
+							"Refactoring Clinic 17: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/starter",
 					solutionLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-07-refactoring-clinic-17/solution"
 				},
 				{
-					title: "refactoring clinic 17 supplemental 2: Implementation Lab",
+					title: "Refactoring Clinic 17 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 17: Implementation Lab",
+							"Refactoring Clinic 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),
@@ -1321,11 +1462,11 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPR-33-applied-studio-17-refactoring-clinic-17-supplemental-2/solution"
 				},
 				{
-					title: "refactoring clinic 17 supplemental 3: Implementation Lab",
+					title: "Refactoring Clinic 17 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "Java",
 						moduleTitle:
-							"refactoring clinic 17: Implementation Lab",
+							"Refactoring Clinic 17: Implementation Lab",
 						projectKind: "extension",
 						hasReference: true
 					}),

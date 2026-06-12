@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const javaLevel2Course: RawCourse = {
@@ -887,32 +888,54 @@ export const javaLevel2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "JM Master Project Example Quiz Game: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Master Project Example Quiz Game: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Guided Example",
-					content:
-						"A representative JM Master Project Example Quiz Game example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Master Project Example Quiz Game: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Master Project Example Quiz Game: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
 				{
 					title: "JM Master Project Example Quiz Game: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Master Project Example Quiz Game: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM Master Project Example Quiz Game: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Master Project Example Quiz Game: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/JM-Master-Project-Example-Quiz-Game"
 				},
@@ -951,18 +974,30 @@ export const javaLevel2Course: RawCourse = {
 			curriculum: [
 				{
 					title: "JM Maze Runner Project: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Maze Runner Project: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "JM Maze Runner Project: Guided Example",
-					content:
-						"A representative JM Maze Runner Project example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Maze Runner Project: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "JM Maze Runner Project: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Maze Runner Project: Implementation Lab",
+						section: "coreProject"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
 					solutionLink:
@@ -970,15 +1005,23 @@ export const javaLevel2Course: RawCourse = {
 				},
 				{
 					title: "JM Maze Runner Project: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Maze Runner Project: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "JM Maze Runner Project: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"JM Maze Runner Project: Implementation Lab",
+						section: "extension"
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-2/tree/main/Maze-Runner-Part-3",
 					solutionLink:

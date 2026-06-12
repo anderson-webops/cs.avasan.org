@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
 export const usacoSilverCourse: RawCourse = {
@@ -541,32 +542,49 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "US Berry Picking: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "US Berry Picking: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "US Berry Picking: Guided Example",
-					content:
-						"A representative US Berry Picking example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "US Berry Picking: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "US Berry Picking: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "US Berry Picking: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking"
 				},
 				{
 					title: "US Berry Picking: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "US Berry Picking: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "US Berry Picking: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "US Berry Picking: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-Berry-Picking"
 				},
@@ -599,32 +617,49 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Superprime Rib: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Superprime Rib: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Superprime Rib: Guided Example",
-					content:
-						"A representative Superprime Rib example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Superprime Rib: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Superprime Rib: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Superprime Rib: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib"
 				},
 				{
 					title: "Superprime Rib: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Superprime Rib: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Superprime Rib: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Superprime Rib: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US11-Superprime-Rib"
 				},
@@ -657,32 +692,49 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "The Castle: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "The Castle: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "The Castle: Guided Example",
-					content:
-						"A representative The Castle example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "The Castle: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "The Castle: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "The Castle: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle"
 				},
 				{
 					title: "The Castle: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "The Castle: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "The Castle: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "The Castle: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US13-The-Castle"
 				},
@@ -715,32 +767,54 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Sorting a Three Valued Sequence: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Sorting a Three Valued Sequence: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Sorting a Three Valued Sequence: Guided Example",
-					content:
-						"A representative Sorting a Three Valued Sequence example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Sorting a Three Valued Sequence: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Sorting a Three Valued Sequence: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Sorting a Three Valued Sequence: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence"
 				},
 				{
 					title: "Sorting a Three Valued Sequence: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Sorting a Three Valued Sequence: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Sorting a Three Valued Sequence: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Sorting a Three Valued Sequence: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US15-Sorting-a-Three-Valued-Sequence"
 				},
@@ -775,32 +849,49 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Healthy Holsteins: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Healthy Holsteins: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Healthy Holsteins: Guided Example",
-					content:
-						"A representative Healthy Holsteins example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Healthy Holsteins: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Healthy Holsteins: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Healthy Holsteins: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins"
 				},
 				{
 					title: "Healthy Holsteins: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Healthy Holsteins: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Healthy Holsteins: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Healthy Holsteins: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US16-Healthy-Holsteins"
 				},
@@ -816,7 +907,7 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US9-Number-Triangles"
 				},
 				{
-					title: "Healthy Holsteins supplemental 3: Implementation Lab",
+					title: "Healthy Holsteins Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle: "Healthy Holsteins: Implementation Lab",
@@ -835,37 +926,54 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Hamming Codes: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hamming Codes: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Hamming Codes: Guided Example",
-					content:
-						"A representative Hamming Codes example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hamming Codes: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Hamming Codes: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hamming Codes: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes"
 				},
 				{
 					title: "Hamming Codes: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hamming Codes: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Hamming Codes: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hamming Codes: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US17-Hamming-Codes"
 				},
 				{
-					title: "Hamming Codes supplemental 2: Implementation Lab",
+					title: "Hamming Codes Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
@@ -878,7 +986,7 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-02-applied-studio-14-hamming-codes-supplemental-2/solution"
 				},
 				{
-					title: "Hamming Codes supplemental 3: Implementation Lab",
+					title: "Hamming Codes Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle: "Hamming Codes: Implementation Lab",
@@ -897,37 +1005,54 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Priority Queues: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Priority Queues: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Priority Queues: Guided Example",
-					content:
-						"A representative Priority Queues example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Priority Queues: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Priority Queues: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Priority Queues: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues"
 				},
 				{
 					title: "Priority Queues: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Priority Queues: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Priority Queues: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Priority Queues: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US21-Priority-Queues"
 				},
 				{
-					title: "Priority Queues supplemental 2: Implementation Lab",
+					title: "Priority Queues Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
@@ -940,7 +1065,7 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-04-applied-studio-15-priority-queues-supplemental-2/solution"
 				},
 				{
-					title: "Priority Queues supplemental 3: Implementation Lab",
+					title: "Priority Queues Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle: "Priority Queues: Implementation Lab",
@@ -959,37 +1084,54 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Hoof Paper Scissors: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Hoof Paper Scissors: Guided Example",
-					content:
-						"A representative Hoof Paper Scissors example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Hoof Paper Scissors: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors"
 				},
 				{
 					title: "Hoof Paper Scissors: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Hoof Paper Scissors: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US22-Hoof-Paper-Scissors"
 				},
 				{
-					title: "Hoof Paper Scissors supplemental 2: Implementation Lab",
+					title: "Hoof Paper Scissors Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
@@ -1002,7 +1144,7 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-06-applied-studio-16-hoof-paper-scissors-supplemental-2/solution"
 				},
 				{
-					title: "Hoof Paper Scissors supplemental 3: Implementation Lab",
+					title: "Hoof Paper Scissors Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
@@ -1021,37 +1163,59 @@ export const usacoSilverCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Why Did the Cow Cross the Road: Core Concepts",
-					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Why Did the Cow Cross the Road: Implementation Lab",
+						section: "concepts"
+					})
 				},
 				{
 					title: "Why Did the Cow Cross the Road: Guided Example",
-					content:
-						"A representative Why Did the Cow Cross the Road example names the key inputs, expected outputs, and checkpoints worth verifying early."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Why Did the Cow Cross the Road: Implementation Lab",
+						section: "example"
+					})
 				},
 				{
 					title: "Why Did the Cow Cross the Road: Core Project",
-					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Why Did the Cow Cross the Road: Implementation Lab",
+						section: "coreProject",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
 					title: "Why Did the Cow Cross the Road: Review and Reflection",
-					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Why Did the Cow Cross the Road: Implementation Lab",
+						section: "review"
+					})
 				}
 			],
 			supplementalProjects: [
 				{
 					title: "Why Did the Cow Cross the Road: Extension Challenge",
-					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task.",
+					content: buildImplementationLabGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Why Did the Cow Cross the Road: Implementation Lab",
+						section: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US24-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
-					title: "Why Did the Cow Cross the Road supplemental 2: Implementation Lab",
+					title: "Why Did the Cow Cross the Road Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle:
@@ -1065,7 +1229,7 @@ export const usacoSilverCourse: RawCourse = {
 						"https://github.com/instruction-material/USACO-Silver/tree/main/US-08-applied-studio-17-why-did-the-cow-cross-the-road/solution"
 				},
 				{
-					title: "Why Did the Cow Cross the Road supplemental 3: Implementation Lab",
+					title: "Why Did the Cow Cross the Road Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
 						courseFamily: "USACO",
 						moduleTitle:
