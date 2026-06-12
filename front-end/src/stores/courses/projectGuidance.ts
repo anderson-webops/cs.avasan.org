@@ -202,6 +202,89 @@ function referenceReviewStep(courseFamily: string, hasReference: boolean) {
 	return "After the artifact works, compare against the reference and record one meaningful difference in behavior, robustness, readability, or design.";
 }
 
+function completionCheckSteps(courseFamily: string) {
+	const family = courseFamily.toLowerCase();
+
+	if (family.includes("usaco")) {
+		return [
+			"The submitted program matches the required input/output format exactly.",
+			"A tiny hand-traced case, the sample case, and one boundary or ordering case have matching results.",
+			"The final note names the invariant, complexity target, and one edge case that shaped the solution."
+		];
+	}
+
+	if (family.includes("web") || family.includes("javascript")) {
+		return [
+			"The page or app shows the expected state change, output, validation, or canvas behavior.",
+			"A normal interaction, an empty or invalid interaction, and one layout or accessibility check have been exercised.",
+			"The final note names the event, state, DOM/canvas/API, or user-flow decision that mattered."
+		];
+	}
+
+	if (
+		family.includes("data") ||
+		family.includes("machine learning") ||
+		family.includes("ai")
+	) {
+		return [
+			"The result is tied to inspected input data, model/search behavior, or an explicit transformation.",
+			"A normal case, a sanity check, and one limitation or failure mode are recorded.",
+			"The final note separates what the evidence supports from what remains uncertain."
+		];
+	}
+
+	if (family.includes("java")) {
+		return [
+			"The Java code compiles cleanly and the expected behavior is visible through output, tests, or method calls.",
+			"A normal case, an edge case, and one object-state, inheritance, interface, record, or collection case are checked.",
+			"The final note names the class boundary, method contract, or data representation choice that mattered."
+		];
+	}
+
+	if (family.includes("python")) {
+		return [
+			"The program can be rerun cleanly and the expected output or data change is visible.",
+			"A normal input, a boundary input, and one awkward input or data shape are tested or traced.",
+			"The final note names the helper, loop, collection, file, or algorithm decision that mattered."
+		];
+	}
+
+	if (family.includes("security") || family.includes("network")) {
+		return [
+			"The lab boundary, target behavior, and evidence source are explicit.",
+			"Normal traffic or behavior, failure or attack-shaped behavior, and a mitigation or diagnostic result are checked.",
+			"The final note names the risk, control, trace, log, request, response, or rollback decision that mattered."
+		];
+	}
+
+	if (
+		family.includes("systems") ||
+		family.includes("assembly") ||
+		family.includes("rust") ||
+		family.includes("c++")
+	) {
+		return [
+			"The artifact builds from a clean command and produces inspectable runtime behavior.",
+			"A normal case, a boundary or failure case, and one memory, lifetime, trace, debugger, or performance check are recorded.",
+			"The final note names the ownership, resource, ABI, build, diagnostic, or complexity decision that mattered."
+		];
+	}
+
+	if (family.includes("swift")) {
+		return [
+			"The app path runs in the simulator or preview and shows the expected view/state behavior.",
+			"A normal interaction, an empty or invalid state, and one navigation, persistence, or accessibility check are exercised.",
+			"The final note names the view, model, state, data-flow, or platform decision that mattered."
+		];
+	}
+
+	return [
+		"The finished artifact has an observable result tied to the module concept.",
+		"A normal case, a boundary or failure case, and one transfer case have been checked.",
+		"The final note names one design, debugging, or reasoning decision that affected the outcome."
+	];
+}
+
 export function buildProjectGuidance({
 	courseFamily,
 	moduleTitle,
@@ -219,8 +302,6 @@ export function buildProjectGuidance({
 		),
 		`4. ${referenceReviewStep(courseFamily, hasReference)}`,
 		"**Completion checks:**",
-		"- The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result.",
-		"- The boundary case is named explicitly and is not only the provided sample.",
-		"- The final note identifies one implementation, debugging, or reasoning choice that mattered."
+		...completionCheckSteps(courseFamily).map(step => `- ${step}`)
 	].join("\n\n");
 }

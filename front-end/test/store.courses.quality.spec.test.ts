@@ -169,8 +169,26 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"After the local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path"
 			);
+			expect(corpus).not.toMatch(
+				/The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result/
+			);
+			expect(corpus).not.toMatch(
+				/The boundary case is named explicitly and is not only the provided sample/
+			);
+			expect(corpus).not.toMatch(
+				/The final note identifies one implementation, debugging, or reasoning choice that mattered/
+			);
 			expect(corpus).toContain(
-				"The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result"
+				"The Java code compiles cleanly and the expected behavior is visible through output, tests, or method calls"
+			);
+			expect(corpus).toContain(
+				"The page or app shows the expected state change, output, validation, or canvas behavior"
+			);
+			expect(corpus).toContain(
+				"The submitted program matches the required input/output format exactly"
+			);
+			expect(corpus).toContain(
+				"The lab boundary, target behavior, and evidence source are explicit"
 			);
 		},
 		COURSE_SWEEP_TIMEOUT
