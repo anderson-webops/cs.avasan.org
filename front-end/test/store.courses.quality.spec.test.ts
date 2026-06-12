@@ -977,6 +977,60 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it(
+		"keeps generated support text aligned to the course domain",
+		async () => {
+			const mathAndScienceCourses = await Promise.all([
+				loadRawCourse("algebra-1a"),
+				loadRawCourse("algebra-1b"),
+				loadRawCourse("algebra-2a"),
+				loadRawCourse("algebra-2b"),
+				loadRawCourse("elementary-science"),
+				loadRawCourse("middle-school-integrated-science"),
+				loadRawCourse("intro-to-chemistry"),
+				loadRawCourse("intro-to-physics"),
+				loadRawCourse("physics-level-2")
+			]);
+			const mathScienceCorpus = mathAndScienceCourses
+				.map(allCourseText)
+				.join("\n");
+
+			expect(mathScienceCorpus).not.toMatch(/wrong loop or condition/i);
+			expect(mathScienceCorpus).not.toMatch(/assuming hidden state/i);
+			expect(mathScienceCorpus).not.toMatch(
+				/syntax, design, or test coverage/i
+			);
+			expect(mathScienceCorpus).not.toMatch(/authorized scope/i);
+			expect(mathScienceCorpus).toContain(
+				"vocabulary, representation choice, algebraic procedure"
+			);
+
+			const nonSecurityCourses = await Promise.all(
+				courseCatalog
+					.filter(
+						entry =>
+							![
+								"network-security",
+								"low-level-security",
+								"low-level-security-part-2",
+								"rust-systems-security"
+							].includes(entry.id)
+					)
+					.map(entry => loadRawCourse(entry.id))
+			);
+			expect(nonSecurityCourses.map(allCourseText).join("\n")).not.toMatch(
+				/authorized scope/i
+			);
+
+			const swift = await loadRawCourse("intro-to-swift-app-development");
+			expect(swift).not.toBeNull();
+			const swiftCorpus = allCourseText(swift);
+			expect(swiftCorpus).toContain("unclear state ownership");
+			expect(swiftCorpus).not.toMatch(/wrong loop condition/i);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
 	it("formats authored lesson setup text as neutral student-readable sections", async () => {
 		const course = await loadRawCourse("c-level-1");
 		expect(course).not.toBeNull();

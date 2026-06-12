@@ -1048,6 +1048,142 @@ function subjectFocus(context: CourseTextContext) {
 	return "the module's core concept, a concrete worked example, and a testable artifact";
 }
 
+function isMathContext(context: CourseTextContext) {
+	return /algebra|geometry|calculus|math/.test(contextText(context));
+}
+
+function isDataAiMlContext(context: CourseTextContext) {
+	const courseId = context.courseId;
+	if (
+		/^(?:data-science-in-python|machine-learning|ai-level-1)$/.test(
+			courseId
+		)
+	) {
+		return true;
+	}
+
+	return /data science|data analysis|machine learning|ai search|ai level|dataset|model evaluation/.test(
+		contextText(context)
+	);
+}
+
+function isSwiftAppContext(context: CourseTextContext) {
+	return context.courseId === "intro-to-swift-app-development";
+}
+
+function isGameContext(context: CourseTextContext) {
+	return /scratch|sprite|broadcast|clone|backdrop|green flag|pygames?|zrect|projectile|enemy ai|game loop|unity|game development|game-mechanics/.test(
+		contextText(context)
+	);
+}
+
+function isSecurityContext(context: CourseTextContext) {
+	return /^(?:network-security|low-level-security|low-level-security-part-2|rust-systems-security)$/.test(
+		context.courseId
+	);
+}
+
+function isSystemsContext(context: CourseTextContext) {
+	return /^(?:linux-systems|network-systems|c-systems-engineering|assembly)$/.test(
+		context.courseId
+	);
+}
+
+function commonPitfalls(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (isScienceContext(context)) {
+		return "Common mistakes include treating observations as conclusions, using vocabulary loosely, ignoring units or scale, or claiming that a model proves more than it actually shows.";
+	}
+	if (isMathContext(context)) {
+		return "Common mistakes include dropping negative signs or units, skipping the reason for an algebraic step, reading graph or table labels too quickly, or giving an answer without a context check.";
+	}
+	if (isDataAiMlContext(context)) {
+		return "Common mistakes include assuming a dataset is complete or neutral, confusing correlation with explanation, trusting one metric without a baseline, or omitting limitations and responsible-use boundaries.";
+	}
+	if (isSwiftAppContext(context)) {
+		return "Common mistakes include unclear state ownership, treating previews as full tests, overlooking empty or error states, skipping accessibility and layout checks, or confusing Xcode configuration issues with app behavior.";
+	}
+	if (isSecurityContext(context)) {
+		return "Common mistakes include blurring the authorized scope, changing a system before recording the baseline, trusting command output without interpretation, or skipping rollback, mitigation, and verification evidence.";
+	}
+	if (isSystemsContext(context)) {
+		return "Common mistakes include changing a toolchain or system state before recording the baseline, using commands whose effects are unclear, trusting output without interpretation, or skipping rollback and reproducibility evidence.";
+	}
+	if (isGameContext(context)) {
+		return "Common mistakes include unclear start or reset state, event order bugs, collision or score changes that are hard to trace, and feedback that does not show the player what changed.";
+	}
+	if (/design pattern|refactoring|pattern implementation/.test(source)) {
+		return "Common mistakes include adding abstraction before there is a real variation, changing behavior during refactoring, hiding responsibilities behind vague names, or skipping before-and-after tests.";
+	}
+
+	return "Common mistakes include mixing up values, references, and state; using the wrong loop condition or boundary; skipping edge cases; or leaving the result untested.";
+}
+
+function diagnosticCategories(context: CourseTextContext) {
+	if (isScienceContext(context))
+		return "vocabulary, observation quality, model choice, evidence, reasoning, or units and scale";
+	if (isMathContext(context))
+		return "vocabulary, representation choice, algebraic procedure, graph or table reading, or reasonableness";
+	if (isDataAiMlContext(context))
+		return "data quality, feature or metric choice, interpretation, limitation, or responsible-use boundary";
+	if (isSwiftAppContext(context))
+		return "state ownership, view structure, navigation, layout, accessibility, build configuration, or simulator behavior";
+	if (isSecurityContext(context))
+		return "scope, command syntax, configuration, evidence interpretation, rollback, or mitigation";
+	if (isSystemsContext(context))
+		return "toolchain setup, command syntax, configuration, evidence interpretation, rollback, or reproducibility";
+	if (isGameContext(context))
+		return "event timing, state reset, controls, collision logic, scoring, or player feedback";
+
+	return "vocabulary, tracing, syntax, design, or test coverage";
+}
+
+function proficiencyEvidence(context: CourseTextContext) {
+	if (isScienceContext(context)) {
+		return "Name the model, cite the evidence, explain the vocabulary, and describe how the conclusion would change under one new condition.";
+	}
+	if (isMathContext(context)) {
+		return "Explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be reasonable.";
+	}
+	if (isDataAiMlContext(context)) {
+		return "Name the question, inspect the evidence, compare against a baseline or sanity check, and state one limitation of the result.";
+	}
+	if (isSwiftAppContext(context)) {
+		return "Explain the state flow, show the normal interaction, verify one empty or error case, and separate app behavior from Xcode or simulator configuration.";
+	}
+	if (isSecurityContext(context)) {
+		return "State the scope, show the command or configuration evidence, explain the impact, and verify the rollback, mitigation, or final state.";
+	}
+	if (isSystemsContext(context)) {
+		return "State the starting environment, show the command or configuration evidence, explain the result, and verify rollback or reproducibility.";
+	}
+	if (isGameContext(context)) {
+		return "Explain the main state change, show the normal play path, test one edge case, and describe how the player can tell the result worked.";
+	}
+
+	return "Explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be correct.";
+}
+
+function remediationPrompt(context: CourseTextContext) {
+	if (isScienceContext(context))
+		return "Name the specific misconception, revise one evidence sentence, and revisit the same vocabulary in a second phenomenon.";
+	if (isMathContext(context))
+		return "Name the exact step that broke down, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.";
+	if (isDataAiMlContext(context))
+		return "Name the data or interpretation issue, run one smaller sanity check, and revise the limitation statement before extending the project.";
+	if (isSwiftAppContext(context))
+		return "Name the state, layout, navigation, or build issue, reproduce it in the smallest screen, and verify the simulator or preview path before adding features.";
+	if (isSecurityContext(context))
+		return "Name the missing evidence or unsafe assumption, repeat the smallest safe diagnostic, and document the rollback or mitigation before continuing.";
+	if (isSystemsContext(context))
+		return "Name the missing evidence or environment assumption, repeat the smallest safe diagnostic, and document rollback or reproducibility before continuing.";
+	if (isGameContext(context))
+		return "Name the event, state, or feedback issue, test it in the smallest possible scene, and verify the reset or replay path before adding features.";
+
+	return "Record the specific misconception, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.";
+}
+
 function projectExpectations(context: CourseTextContext) {
 	const source = contextText(context);
 
@@ -1345,16 +1481,16 @@ function projectSupport(context: CourseTextContext) {
 function lessonSupport(context: CourseTextContext) {
 	return [
 		`**Learning sequence:** This lesson introduces ${subjectFocus(context)}. The sequence moves from vocabulary to one concrete example, then to a prediction, explanation, or small transfer task connected to the module project.`,
-		"**Common pitfalls:** Common mistakes include mixing up a value with its representation, using the wrong loop or condition, assuming hidden state, or skipping the reason a step is valid.",
+		`**Common pitfalls:** ${commonPitfalls(context)}`,
 		"**Mastery check:** Explain the idea in your own words and complete one small transfer task independently."
 	].join("\n\n");
 }
 
 function diagnosticSupport(context: CourseTextContext) {
 	return [
-		`**Readiness check:** This is a formative check of ${subjectFocus(context)}, not a pass/fail quiz. Attempt the prompt independently first, then use the result to identify whether the issue is vocabulary, tracing, syntax, design, or test coverage.`,
-		"**Evidence of proficiency:** Explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be correct.",
-		"**If this is difficult:** Record the specific misconception, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.",
+		`**Readiness check:** This is a formative check of ${subjectFocus(context)}, not a pass/fail quiz. Attempt the prompt independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
+		`**Evidence of proficiency:** ${proficiencyEvidence(context)}`,
+		`**If this is difficult:** ${remediationPrompt(context)}`,
 		`**Extension:** Modify the prompt so it still uses the same concept but changes one constraint, input shape, or edge case.`
 	].join("\n\n");
 }
