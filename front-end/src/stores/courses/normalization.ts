@@ -557,6 +557,16 @@ function lessonOpening(label: string, description: string, topics: string) {
 function neutralizeLessonDirectiveText(text: string) {
 	return text
 		.replace(
+			/\bRepeat the core ideas from ([^.]+) on a smaller problem to build speed, independence, and cleaner reasoning\./g,
+			(_match, topic) =>
+				`Practice ${stripTrailingSentencePunctuation(topic)} on a focused smaller problem to build speed, independence, and cleaner reasoning.`
+		)
+		.replace(
+			/\bCreate an original variation inspired by ([^.]+)\. Keep the scope small, but require one meaningful design or reasoning choice\./g,
+			(_match, topic) =>
+				`Design a small original variation of ${stripTrailingSentencePunctuation(topic)} with one meaningful design or reasoning choice.`
+		)
+		.replace(
 			/(^|\n\s*|[.!?]\s+|:\s+)Teach students to\b/g,
 			"$1This section covers how to"
 		)

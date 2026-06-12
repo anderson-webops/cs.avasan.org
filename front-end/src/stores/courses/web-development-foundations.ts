@@ -91,7 +91,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Why the JavaScript Path Should Expand into Web Development",
 					content:
-						"Position this course as the bridge from browser-focused JavaScript to full web-development fluency. The current JavaScript courses are still valuable for programming, DOM work, and browser APIs, but Now learn how those skills connect to project structure, back-end services, databases, deployment, hosting, and operations."
+						"Position this course as the bridge from browser-focused JavaScript to full web-development fluency. The current JavaScript courses are still valuable for programming, DOM work, and browser APIs, and now those skills connect to project structure, back-end services, databases, deployment, hosting, and operations."
 				},
 				{
 					title: "Main Goals of the Expanded Path",

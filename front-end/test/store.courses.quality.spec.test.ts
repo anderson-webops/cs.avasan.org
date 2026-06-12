@@ -965,6 +965,35 @@ describe("course text quality normalization", () => {
 		expect(wheel.content).not.toMatch(/\band and\b/i);
 	});
 
+	it("neutralizes repetitive generated supplemental project wording", async () => {
+		const [scratchLevel1, scratchLevel2, webDevelopment] =
+			await Promise.all([
+				loadRawCourse("scratch-level-1"),
+				loadRawCourse("scratch-level-2"),
+				loadRawCourse("web-development-foundations")
+			]);
+		expect(scratchLevel1).not.toBeNull();
+		expect(scratchLevel2).not.toBeNull();
+		expect(webDevelopment).not.toBeNull();
+
+		const scratchCorpus = [
+			allCourseText(scratchLevel1),
+			allCourseText(scratchLevel2)
+		].join("\n");
+
+		expect(scratchCorpus).not.toMatch(/Repeat the core ideas from/i);
+		expect(scratchCorpus).not.toMatch(
+			/Create an original variation inspired by/i
+		);
+		expect(scratchCorpus).toContain(
+			"Practice GS1 Starting in Scratch on a focused smaller problem"
+		);
+		expect(scratchCorpus).toContain(
+			"Design a small original variation of GS1 Starting in Scratch"
+		);
+		expect(allCourseText(webDevelopment)).not.toMatch(/\bbut Now\b/);
+	});
+
 	it("keeps generated concept and supplemental titles concise", async () => {
 		const course = await loadRawCourse("python-level-3");
 		expect(course).not.toBeNull();
