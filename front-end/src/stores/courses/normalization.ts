@@ -1317,6 +1317,10 @@ function contextText(context: CourseTextContext) {
 	return `${context.courseId} ${context.course.name} ${context.module.title} ${context.item.title}`.toLowerCase();
 }
 
+function moduleItemText(context: CourseTextContext) {
+	return `${context.module.title} ${context.item.title}`.toLowerCase();
+}
+
 function isCheckInContext(context: CourseTextContext) {
 	return /\bcheck[- ]?in\b|practice exam|assessment/i.test(
 		`${context.module.title} ${context.item.title}`
@@ -1390,12 +1394,11 @@ function subjectFocus(context: CourseTextContext) {
 	if (isScienceContext(context)) {
 		return "scientific explanation: observable phenomena, models, data, vocabulary, and claim-evidence-reasoning";
 	}
-	if (
-		/javascript|jss\d|jsm\d|web|html|css|full-stack|api|database/.test(
-			source
-		)
-	) {
-		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
+	if (isCppContext(context)) {
+		return "C++ engineering: types, memory ownership, containers, algorithms, command-line behavior, and repeatable tests";
+	}
+	if (/c systems|systems build|assembly/.test(source)) {
+		return "systems programming: machine representation, memory layout, build tooling, low-level debugging, and safe constraints";
 	}
 	if (isJavaContext(context)) {
 		return variantPrompt(context, [
@@ -1408,12 +1411,6 @@ function subjectFocus(context: CourseTextContext) {
 			() =>
 				"Java reasoning: values versus references, class responsibilities, interfaces or records when useful, and visible verification"
 		]);
-	}
-	if (/c\+\+|cpp|c level|data structures.*cpp|algorithm lab/.test(source)) {
-		return "C++ engineering: types, memory ownership, containers, algorithms, command-line behavior, and repeatable tests";
-	}
-	if (/c systems|systems build|assembly/.test(source)) {
-		return "systems programming: machine representation, memory layout, build tooling, low-level debugging, and safe constraints";
 	}
 	if (/usaco|competitive/.test(source)) {
 		return "competitive-programming discipline: input parsing, sample verification, edge cases, and complexity reasoning";
@@ -1433,6 +1430,9 @@ function subjectFocus(context: CourseTextContext) {
 	}
 	if (/unity|game development|game-mechanics/.test(source)) {
 		return "game development: scene setup, state changes, player feedback, playtesting, and a clear completion loop";
+	}
+	if (isWebContext(context)) {
+		return "web development workflow: user-facing behavior, browser checks, API/data flow, accessibility, and deployment readiness";
 	}
 	if (/design pattern|refactoring|pattern implementation/.test(source)) {
 		return "software design tradeoffs: naming, responsibilities, coupling, refactoring safety, and behavior-preserving tests";
@@ -1490,10 +1490,27 @@ function isUnityContext(context: CourseTextContext) {
 	return context.courseId === "unity-game-development";
 }
 
+function isCppContext(context: CourseTextContext) {
+	if (
+		/^(?:c-level-1|cpp-level-[123]|data-structures-and-algorithms-in-cpp|design-patterns-in-cpp)$/.test(
+			context.courseId
+		)
+	) {
+		return true;
+	}
+
+	if (context.courseId === "python-to-java-and-cpp-bridge") {
+		return /c\+\+|cpp/.test(moduleItemText(context));
+	}
+
+	return /c\+\+|cpp|algorithm lab/.test(moduleItemText(context));
+}
+
 function isWebContext(context: CourseTextContext) {
 	return (
 		context.courseId === "web-development-foundations" ||
-		/javascript|jss\d|jsm\d|web|html|css|api|database|full-stack/.test(
+		context.courseId.startsWith("javascript-level-") ||
+		/\b(?:web development|browser|dom|html|css|canvas|full-stack)\b/.test(
 			contextText(context)
 		)
 	);
