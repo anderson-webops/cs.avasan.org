@@ -495,7 +495,7 @@ const nextWorkByKind: Record<keyof typeof familyAssessmentCadence, string[]> = {
 		"Review public wording for defensive scope before release."
 	],
 	game: [
-		"Maintain full Unity starter and staff-review project baselines with tags.",
+		"Maintain full Unity starter and review project baselines with tags.",
 		"Keep Git LFS, package locks, test framework, build profiles, and attribution files current.",
 		"Promote script-snapshot links to full-project links as each module reaches project-repo readiness."
 	]
@@ -1223,7 +1223,7 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 			{
 				title: "Answer-Check Remediation Rule",
 				content:
-					"**Learning sequence:** Any AP CSA project without an answer-check path should be paired with local review material, marked as discussion-only, or added to the source-parity remediation list.\n\n**Completion check:** the course notes show whether a project is expected to be independently checked, discussed orally, or reviewed against expected behavior."
+					"**Learning sequence:** Any AP CSA project without an answer-check path should be paired with local review material or marked as discussion-only.\n\n**Completion check:** Each project states whether the work is checked by tests, discussion, or expected-output comparison."
 			}
 		],
 		supplementalProjects: [
@@ -1991,12 +1991,12 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "Repository Shape",
 				content:
-					"**Learning sequence:** Unity modules should move toward full starter and staff-review project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Completion check:** The linked starter state can be cloned, opened, played, tested, and built."
+					"**Learning sequence:** Unity modules should move toward full starter and review project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Completion check:** The linked starter state can be cloned, opened, played, tested, and built."
 			},
 			{
 				title: "Starter and Review Tag Model",
 				content:
-					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-review` in starter and staff-review repos. Keep completed-state links restricted to staff-facing resource areas where visibility controls support that distinction.\n\n**Completion check:** The course makes it possible to compare starter and completed states without guessing which folder is current."
+					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-review` in starter and review repos. Separate starter, checkpoint, and completed states so the project history stays easy to inspect.\n\n**Completion check:** The course makes it possible to compare starter and completed states without guessing which folder is current."
 			},
 			{
 				title: "Capstone Options",

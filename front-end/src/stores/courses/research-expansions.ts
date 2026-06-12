@@ -331,7 +331,7 @@ const pythonProfile: ResearchExpansionProfile = {
 	gaps: [
 		"Strengthen Python Level 1 and 2 project prompts with concrete inputs, outputs, tests, and extensions.",
 		"Build Python Level 3 into a serious algorithms, data, and object-design ladder.",
-		"Audit starter and staff-review parity for all Python source folders."
+		"Audit starter and review parity for all Python source folders."
 	],
 	topics: [
 		"Testing small functions, debugging with trace output, files, exceptions, modules, command-line programs, APIs, and virtual environments.",
@@ -360,7 +360,7 @@ const pythonProfile: ResearchExpansionProfile = {
 		"Review capstones for requirements, test cases, organization, and explanation."
 	],
 	materials: [
-		"Starter repos and staff-review materials for each project.",
+		"Starter repos and review materials for each project.",
 		"pytest or lightweight assertion examples.",
 		"CSV and JSON fixtures with normal and malformed records."
 	]
@@ -577,7 +577,7 @@ const cppProfile: ResearchExpansionProfile = {
 	],
 	materials: [
 		"Compiler setup notes and sanitizer commands.",
-		"Starter repos and staff-review materials for every new project.",
+		"Starter repos and review materials for every new project.",
 		"Design-review rubric for ownership, tests, and architecture."
 	]
 };

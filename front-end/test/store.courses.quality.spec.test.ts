@@ -120,6 +120,12 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/starter\/solution/i);
 			expect(corpus).not.toMatch(/finished solution/i);
 			expect(corpus).not.toMatch(/same learning goal/i);
+			expect(corpus).not.toMatch(/staff[- ]review/i);
+			expect(corpus).not.toMatch(/staff-facing/i);
+			expect(corpus).not.toMatch(/source-parity/i);
+			expect(corpus).not.toMatch(/remediation list/i);
+			expect(corpus).not.toMatch(/course notes show/i);
+			expect(corpus).not.toMatch(/where visibility controls support/i);
 			expect(corpus).toContain(
 				"as a working artifact with visible behavior and verification evidence"
 			);
