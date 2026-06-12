@@ -368,422 +368,522 @@ export const introToPhysicsCourse: RawCourse = {
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY8 Momentum, Impulse, and Collisions",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops momentum as mass in motion, impulse as force over time, and conservation in short interactions. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from collisions, recoil, impact safety, and force-time graphs. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: helmet, bumper, or sports-impact safety brief. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY9 Rotational Motion and Torque Basics",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops angular motion, pivots, lever arms, clockwise torque, and counterclockwise torque. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from doors, wrenches, seesaws, balance beams, and rotating tools. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: everyday rotation audit with a pivot and torque diagram. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY10 Fluids, Pressure, and Buoyancy",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops pressure as force over area, density as mass per volume, and buoyancy as displaced-fluid reasoning. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from snowshoes, hydraulic lifts, boats, submarines, and sink-float data. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: boat-shape design with density and displacement explanation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY11 Heat, Temperature, and Thermal Energy",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops temperature, total thermal energy, heat transfer, specific heat, and phase-change behavior. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from insulation, cooling curves, heating curves, cooking, climate, and electronics. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: thermal design memo for cooling, warming, or reducing heat loss. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY12 Optics, Mirrors, Lenses, and Images",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops ray models for reflection, refraction, focal points, real images, and virtual images. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from mirrors, eyeglasses, cameras, projectors, telescopes, and lens simulations. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: optical-device explainer with ray diagram and design constraint. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY13 Magnetism and Electromagnetic Induction",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops magnetic fields, current-created fields, coils, motors, generators, and changing-field effects. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from electromagnets, speakers, relays, generators, wireless charging, and field diagrams. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: electromagnetic device brief with energy transformation. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY14 Simple Harmonic Motion and Resonance",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops oscillation around equilibrium, amplitude, period, frequency, damping, and resonance. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from springs, pendulums, swings, instruments, bridges, and resonance graphs. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: resonance case study from music, engineering, medicine, or electronics. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY15 Astronomy, Gravity, and Orbits",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops gravity as a universal interaction, orbital motion as falling around, and frame-aware space reasoning. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from planetary data, satellite orbits, weight on other worlds, and orbit simulations. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: mission-planning sketch with gravity and orbit constraints. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY16 Modern Physics and Model Limits",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops model domains, spectra, photons, quantized energy, and evidence that pushes beyond classical models. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from emission spectra, absorption, solar panels, lasers, semiconductors, and GPS timing. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: modern-physics explainer that names the old model and its limit. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		},
 		{
-			title: "physics lab: Implementation Lab",
+			title: "PHY17 Engineering Design and Physics Portfolio",
 			curriculum: [
 				{
-					title: "physics lab: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module develops physics claims supported by models, diagrams, calculations, graphs, uncertainty, and design tradeoffs. The goal is to connect vocabulary, diagrams, calculations, and plain-language reasoning so the topic works as a usable physics model rather than a memorized list."
 				},
 				{
-					title: "physics lab: Guided Example",
+					title: "Model and Reasoning Toolkit",
 					content:
-						"A representative physics lab example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Build the model by first naming the system, quantities, assumptions, and expected direction of change. Then use formulas only after the physical relationship is clear, with units and limitations stated explicitly."
 				},
 				{
-					title: "physics lab: Core Project",
+					title: "Worked Example Set",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Use examples from portfolio artifacts from motion, forces, circuits, collisions, waves, thermal systems, or space. Each example should include a diagram or table, a prediction before calculation, the calculation or qualitative model, and a reasonableness check after the result."
 				},
 				{
-					title: "physics lab: Review and Reflection",
+					title: "Graph, Diagram, or Data Exercise",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Represent the module with at least one graph, diagram sequence, or data table. The representation should make a physical relationship visible, such as a slope, area, trend, conservation pattern, equilibrium condition, or model breakdown."
+				},
+				{
+					title: "Mini Lab, Simulation, or Case Study",
+					content:
+						"Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case. The final explanation should state the claim, evidence, model used, and one uncertainty or simplifying assumption."
+				},
+				{
+					title: "Reflection and Transfer Practice",
+					content:
+						"Finish the module by translating the model into a new situation. State what stays the same, what changes, which assumption is most fragile, and what evidence would make the conclusion stronger."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "physics lab: Extension Challenge",
+					title: "Diagnostic Checkpoint",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Check whether the core quantities, system boundary, and model assumption are identified before calculations begin. A strong checkpoint can explain why the chosen model fits this situation and where it would stop fitting."
 				},
 				{
-					title: "physics lab: Open Practice",
+					title: "Misconception Watchlist",
 					content:
-						"Create a compact variant inspired by physics lab: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Watch for formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system. The correction should replace the shortcut with a specific introductory physics model."
 				},
 				{
-					title: "physics lab: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by physics lab: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: final physics design portfolio with revision based on evidence. Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note."
 				}
 			]
 		}

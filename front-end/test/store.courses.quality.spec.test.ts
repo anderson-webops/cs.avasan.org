@@ -153,6 +153,31 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it("keeps expanded physics and Scratch modules specific instead of duplicated filler", async () => {
+		const courseIds = [
+			"intro-to-physics",
+			"physics-level-2",
+			"scratch-level-1",
+			"scratch-level-2"
+		];
+		const courses = await Promise.all(
+			courseIds.map(id => loadRawCourse(id))
+		);
+
+		for (const [index, course] of courses.entries()) {
+			expect(course, courseIds[index]).not.toBeNull();
+			if (!course) continue;
+
+			const moduleTitles = course.modules.map(module => module.title);
+			expect(new Set(moduleTitles).size, courseIds[index]).toBe(
+				moduleTitles.length
+			);
+			expect(allCourseText(course), courseIds[index]).not.toMatch(
+				/This lab states the target artifact|A representative .* example names the key inputs|Create an original variation inspired by .*Implementation Lab/i
+			);
+		}
+	});
+
 	it("guards against raw generated grammar artifacts in course sources", () => {
 		const sourcePaths = [
 			"src/stores/courses/java-level-3.ts",

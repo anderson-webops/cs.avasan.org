@@ -644,170 +644,190 @@ export const scratchLevel1Course: RawCourse = {
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Lab",
+			title: "GS14 Mini Game Polish Studio",
 			curriculum: [
 				{
-					title: "Scratch studio: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module focuses on turn a working Scratch game into a more finished experience by improving instructions, scoring, difficulty, sound, and ending screens. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
-					title: "Scratch studio: Guided Example",
+					title: "Design and Planning Map",
 					content:
-						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Plan the project by listing the sprites, backdrops, variables, messages, custom blocks, controls, and end conditions. A clear map prevents a large Scratch project from becoming a collection of disconnected scripts."
 				},
 				{
-					title: "Scratch studio: Core Project",
+					title: "Build Requirements",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Build around a title screen, clear controls, score feedback, timer or lives, win/loss messages, and a replay path. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
 				},
 				{
-					title: "Scratch studio: Review and Reflection",
+					title: "Debugging and Test Pass",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Test the start state, normal play path, boundary case, and ending state. Record at least one bug or confusing behavior, the likely cause, and the exact Scratch block or script change that fixed it."
+				},
+				{
+					title: "Share and Explain",
+					content:
+						"Prepare a short explanation of how the project works. Name the most important event, variable, loop, conditional, and message or custom block, then explain how those pieces cooperate."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "Scratch studio: Extension Challenge",
+					title: "Checkpoint: Trace the Project State",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Pick one moment during the project and name the current sprite positions, visible variables, active loops, and next event. This checks whether the project is understood as a system rather than as scattered blocks."
 				},
 				{
-					title: "Scratch studio: Open Practice",
+					title: "Common Bug Patterns",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: polished version of Bug Eater, Cake Chaser, Hedgehog Race, or Asteroid Dodge. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Lab",
+			title: "GS15 Interactive Story Studio",
 			curriculum: [
 				{
-					title: "Scratch studio: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module focuses on use events, broadcasts, costumes, backdrops, and variables to build a story that changes based on choices. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
-					title: "Scratch studio: Guided Example",
+					title: "Design and Planning Map",
 					content:
-						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Plan the project by listing the sprites, backdrops, variables, messages, custom blocks, controls, and end conditions. A clear map prevents a large Scratch project from becoming a collection of disconnected scripts."
 				},
 				{
-					title: "Scratch studio: Core Project",
+					title: "Build Requirements",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Build around scene transitions, dialogue timing, character reactions, choice variables, and alternate endings. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
 				},
 				{
-					title: "Scratch studio: Review and Reflection",
+					title: "Debugging and Test Pass",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Test the start state, normal play path, boundary case, and ending state. Record at least one bug or confusing behavior, the likely cause, and the exact Scratch block or script change that fixed it."
+				},
+				{
+					title: "Share and Explain",
+					content:
+						"Prepare a short explanation of how the project works. Name the most important event, variable, loop, conditional, and message or custom block, then explain how those pieces cooperate."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "Scratch studio: Extension Challenge",
+					title: "Checkpoint: Trace the Project State",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Pick one moment during the project and name the current sprite positions, visible variables, active loops, and next event. This checks whether the project is understood as a system rather than as scattered blocks."
 				},
 				{
-					title: "Scratch studio: Open Practice",
+					title: "Common Bug Patterns",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: branching story with at least two meaningful choices and two endings. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Lab",
+			title: "GS16 Debugging and Remix Studio",
 			curriculum: [
 				{
-					title: "Scratch studio: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module focuses on diagnose Scratch projects by checking event starts, forever loops, sprite visibility, variable reset, coordinate mistakes, and broadcast timing. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
-					title: "Scratch studio: Guided Example",
+					title: "Design and Planning Map",
 					content:
-						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Plan the project by listing the sprites, backdrops, variables, messages, custom blocks, controls, and end conditions. A clear map prevents a large Scratch project from becoming a collection of disconnected scripts."
 				},
 				{
-					title: "Scratch studio: Core Project",
+					title: "Build Requirements",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Build around broken controls, missing score updates, sprites hidden at start, scripts running in the wrong order, and games that never end. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
 				},
 				{
-					title: "Scratch studio: Review and Reflection",
+					title: "Debugging and Test Pass",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Test the start state, normal play path, boundary case, and ending state. Record at least one bug or confusing behavior, the likely cause, and the exact Scratch block or script change that fixed it."
+				},
+				{
+					title: "Share and Explain",
+					content:
+						"Prepare a short explanation of how the project works. Name the most important event, variable, loop, conditional, and message or custom block, then explain how those pieces cooperate."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "Scratch studio: Extension Challenge",
+					title: "Checkpoint: Trace the Project State",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Pick one moment during the project and name the current sprite positions, visible variables, active loops, and next event. This checks whether the project is understood as a system rather than as scattered blocks."
 				},
 				{
-					title: "Scratch studio: Open Practice",
+					title: "Common Bug Patterns",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: debug log plus repaired remix of a small broken project. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
 			]
 		},
 		{
-			title: "Scratch studio: Implementation Lab",
+			title: "GS17 Text-Based Programming Bridge",
 			curriculum: [
 				{
-					title: "Scratch studio: Core Concepts",
+					title: "Concept Path",
 					content:
-						"This lab states the target artifact, required behavior, and core concepts for the build or problem set."
+						"This module focuses on connect Scratch blocks to text-code ideas such as events, loops, if statements, variables, functions, input, and coordinates. The work should make the program structure visible: what starts the project, what changes state, what repeats, what responds to events, and what condition ends or advances the experience."
 				},
 				{
-					title: "Scratch studio: Guided Example",
+					title: "Design and Planning Map",
 					content:
-						"A representative Scratch studio example names the key inputs, expected outputs, and checkpoints worth verifying early."
+						"Plan the project by listing the sprites, backdrops, variables, messages, custom blocks, controls, and end conditions. A clear map prevents a large Scratch project from becoming a collection of disconnected scripts."
 				},
 				{
-					title: "Scratch studio: Core Project",
+					title: "Build Requirements",
 					content:
-						"Build one complete artifact first, then add one targeted improvement or edge-case pass."
+						"Build around Scratch block screenshots or descriptions translated into pseudocode and then into simple Python-style statements. The finished project should have visible behavior that can be tested from the green flag, not only isolated scripts that work one at a time."
 				},
 				{
-					title: "Scratch studio: Review and Reflection",
+					title: "Debugging and Test Pass",
 					content:
-						"Finish by reviewing the most important edge cases, naming one bug or limitation, and choosing one improvement for the next iteration."
+						"Test the start state, normal play path, boundary case, and ending state. Record at least one bug or confusing behavior, the likely cause, and the exact Scratch block or script change that fixed it."
+				},
+				{
+					title: "Share and Explain",
+					content:
+						"Prepare a short explanation of how the project works. Name the most important event, variable, loop, conditional, and message or custom block, then explain how those pieces cooperate."
 				}
 			],
 			supplementalProjects: [
 				{
-					title: "Scratch studio: Extension Challenge",
+					title: "Checkpoint: Trace the Project State",
 					content:
-						"Extend the core build with one extra requirement, stricter input handling, or a more realistic variation of the same task."
+						"Pick one moment during the project and name the current sprite positions, visible variables, active loops, and next event. This checks whether the project is understood as a system rather than as scattered blocks."
 				},
 				{
-					title: "Scratch studio: Open Practice",
+					title: "Common Bug Patterns",
 					content:
-						"Create a compact variant inspired by Scratch studio: Implementation Lab. Keep the scope tight, but require one meaningful design or reasoning decision."
+						"Look for scripts that do not reset on the green flag, messages that fire too early, variables that keep old values, clones that never delete, and forever loops that prevent the ending from appearing."
 				},
 				{
-					title: "Scratch studio: Open-Ended Variant: Implementation Lab",
+					title: "Extension Project",
 					content:
-						"Create an original variation inspired by Scratch studio: Implementation Lab. Keep the scope small, but require one meaningful design or reasoning choice."
+						"Complete an extension project: Scratch-to-Python readiness portfolio with three translated scripts. Include one new feature, one cleanup/refactor step, and one explanation of why the added behavior fits the original project."
 				}
 			]
 		}
