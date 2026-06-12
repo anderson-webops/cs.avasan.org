@@ -367,6 +367,44 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toContain("classes, method contracts, object state");
 	});
 
+	it("keeps legacy JavaScript web prompts specific enough to stand alone", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("javascript-level-1-javascript-superstar"),
+			loadRawCourse("javascript-level-2-javascript-master")
+		]);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).not.toMatch(
+			/Practice selectors at https:\/\/flukeout\.github\.io\./
+		);
+		expect(corpus).not.toMatch(
+			/Work through https:\/\/flexboxfroggy\.com\/ to learn flexbox\./
+		);
+		expect(corpus).not.toMatch(
+			/Replicate the Berkshire Hathaway page using learned HTML\/CSS\./
+		);
+		expect(corpus).not.toMatch(
+			/Add Material icons via dependency and use icons as scalable SVGs\./
+		);
+		expect(corpus).not.toMatch(
+			/Use Materialize helpers to hide\/show content by screen size\./
+		);
+		expect(corpus).not.toMatch(
+			/Build a message board storing posts as JSON, with inputs for URL, image, and title; render posts above the form\./
+		);
+		expect(corpus).not.toMatch(
+			/Allow users to add comments to each post and display them beneath posts\./
+		);
+		expect(corpus).toContain("Use CSS Diner to practice selector precision");
+		expect(corpus).toContain("Use Flexbox Froggy as a layout reasoning drill");
+		expect(corpus).toContain(
+			"The key skill is separating local page state from persisted remote state"
+		);
+		expect(corpus).toContain(
+			"comments do not accidentally attach to the wrong item"
+		);
+	});
+
 	it("keeps low-level security projects evidence-based instead of generic starter boilerplate", async () => {
 		const courses = await Promise.all([
 			loadRawCourse("low-level-security"),

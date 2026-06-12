@@ -1087,12 +1087,12 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSONBin Setup",
 					content:
-						'Create a public bin, store `{"notes": ["my first message"]}`, note GET latest endpoint and PUT endpoint, and practice GET/PUT requests.'
+						'Create a public JSONBin record with a small starter object such as `{"notes": ["my first message"]}`. Identify the latest-record GET endpoint and the PUT endpoint, then test both requests before building UI around them. The key skill is separating local page state from persisted remote state: after a refresh, the saved data should still be recoverable from the bin.'
 				},
 				{
 					title: "JSM12 Project 1: Todo List",
 					content:
-						"Use async/await to GET the bin, render notes, and add notes with PUT; build getDB, renderDB, and addNote functions.",
+						"Build a persistent todo list by loading the current bin with `async`/`await`, rendering the notes, adding a new note from user input, and saving the updated array with PUT. Keep the workflow split into `getDB`, `renderDB`, and `addNote` so fetching, drawing, and mutation can be tested separately. Verify persistence by adding a note, refreshing the page, and confirming the note still appears.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1f218d8aafbcc33fd6409a8ab1616e29",
 					solutionLink: "https://codepen.io/junilearning/pen/MWZzbmK",
@@ -1102,7 +1102,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM12 Project 2: Deleting Notes",
 					content:
-						"Add deleteNote to remove items by index with splice, update renderDB to include delete buttons, and persist via PUT.",
+						"Extend the todo list with a `deleteNote` function that removes the selected note by index, re-renders the list, and persists the changed array with PUT. Include a delete button beside each rendered note and verify that deleting the first, last, and only remaining note all produce the expected saved state.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f8f84204c272d2a6449cda485cbe7736",
 					solutionLink: "https://codepen.io/junilearning/pen/BavGpyN"
@@ -1112,7 +1112,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM12 Supplemental Project 1: Checking Notes",
 					content:
-						"Extend the Todo List to mark todos as completed with checkmarks or strike-through styling.",
+						"Extend the todo list so each item can be marked complete without deleting it. Store completion state in the saved data, render completed notes with a visible checkmark or strike-through style, and verify that completed/uncompleted status survives a page refresh. This turns the data model from plain strings into objects with both text and state.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/ab6bf77b9d85e1b9a7452d5a307b6b7f",
 					solutionLink:
@@ -1152,7 +1152,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM13 Project 1: Message Board",
 					content:
-						"Build a message board storing posts as JSON, with inputs for URL, image, and title; render posts above the form.",
+						"Build a message board that stores posts as JSON objects with at least a title, URL, and image URL. The form should create a new post, save it to the remote data store, clear or reset the inputs, and render the newest posts in a readable order above the form. Verify the board by adding multiple posts and refreshing to confirm that the saved posts return.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/6c0b3c5a207fc24b58c44a5f481922e3",
 					solutionLink: "https://codepen.io/junilearning/pen/GRPwwOg"
@@ -1186,7 +1186,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM13 Supplemental Project 1: Adding Comments",
 					content:
-						"Allow users to add comments to each post and display them beneath posts.",
+						"Add comments as nested data under each message-board post. Each rendered post should show its existing comments, provide an input for a new comment, update only the intended post, and persist the changed board back to the data store. Test with at least two posts so comments do not accidentally attach to the wrong item.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f40d31ed70aef27cee691e91d947ef14",
 					solutionLink:

@@ -772,14 +772,14 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "JSS9 Supplemental Project 1: Practice with CSS Selectors",
 					content:
-						"Practice selectors at https://flukeout.github.io/.",
+						"Use CSS Diner to practice selector precision, not just clicking through the levels. Track examples of tag, class, id, descendant, child, adjacent-sibling, attribute, and pseudo-class selectors. After the practice, write three original selectors for a small HTML snippet and explain which elements each selector should match before testing it.",
 					projectLink: "https://flukeout.github.io/",
 					solutionLink: "https://flukeout.github.io/"
 				},
 				{
 					title: "JSS9 Supplemental Project 2: Practice with Flexbox",
 					content:
-						"Work through https://flexboxfroggy.com/ to learn flexbox.",
+						"Use Flexbox Froggy as a layout reasoning drill. For each new property, record what changed about the main axis, cross axis, spacing, wrapping, or item order. Finish by building a small three-card layout in CodePen that uses at least `display: flex`, `justify-content`, `align-items`, `gap`, and one responsive wrapping behavior.",
 					projectLink: "https://flexboxfroggy.com/",
 					solutionLink: "https://flexboxfroggy.com/"
 				},
@@ -813,14 +813,14 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Moving Your Car",
 					content:
-						"Use d3.select/selectAll and transitions with duration and transform translate to animate the car.",
+						"Animate the car by selecting the correct SVG group or shape, applying a D3 transition, setting a readable duration, and moving it with a `transform: translate(...)` value. Keep the original drawing code separate from the animation code so it is clear what creates the car and what changes its position over time.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/46c3f402eb4100c983f22bbbb3f4cede"
 				},
 				{
 					title: "JSS10 Project 2: Bouncing Ball",
 					content:
-						"Animate a ball across the screen and back; adjust duration and easing.",
+						"Create a ball that travels across the screen, returns, and visibly changes speed or feel through duration and easing choices. Verify the starting position, ending position, and return motion separately, then adjust one timing value and describe how the animation changed.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/6a90681824ce331a3533469f911e2497",
 					solutionLink:
@@ -829,13 +829,13 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "DOM Events",
 					content:
-						"Explain events like click; use d3.on() with a callback to respond to clicks.",
+						"Connect browser events to visible page behavior. Use `d3.on()` with a callback, identify which element receives the event, and make the callback change something observable such as text, color, size, or position. Test at least two clicks so the event-response pattern is clearly repeatable.",
 					projectLink: "https://codepen.io/junilearning/pen/BajVdPQ"
 				},
 				{
 					title: "JSS10 Project 3: Growing Ball",
 					content:
-						"Use mouseover and mouseout events to change a circle’s size.",
+						"Use `mouseover` and `mouseout` events to change a circle's size without losing track of its center point. The ball should grow when hovered, shrink when the pointer leaves, and use transitions smooth enough that the event behavior is easy to see and debug.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/ff4f98a080f26536a286835de4b1b9a2",
 					solutionLink:
@@ -855,7 +855,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "JSS10 Supplemental Project 2: Rainbow",
 					content:
-						"Draw a rainbow with D3 arcs that animate from outside in.",
+						"Draw the rainbow as a set of D3 arcs with consistent center points and decreasing radii. Animate the arcs from the outside inward so the timing makes the layer order obvious. Include enough color and spacing choices that each band is readable rather than overlapping into one shape.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/36846ad022b36b072833ace22a9edbef",
 					solutionLink:
@@ -882,7 +882,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "The Box Model",
 					content:
-						"Explain margin, border, padding, and content; demonstrate in CodePen."
+						"Use one visible box to separate the four box-model layers: content, padding, border, and margin. Change one layer at a time and predict whether the visible box, its internal spacing, or its distance from neighboring elements should change. This keeps layout debugging concrete instead of memorizing definitions."
 				},
 				{
 					title: "The Position Property",
@@ -914,7 +914,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "JSS11 Supplemental Project 1: Berkshire Hathaway",
 					content:
-						"Replicate the Berkshire Hathaway page using learned HTML/CSS.",
+						"Recreate the basic structure of the Berkshire Hathaway page with semantic HTML, simple typography, links, spacing, and a readable layout. The goal is not pixel-perfect design; it is practicing how a plain information-heavy page is built from headings, lists, links, containers, and consistent CSS rules.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/b24ef5d48d5f8e0fbcafee18631d0336",
 					solutionLink:
@@ -977,12 +977,12 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Material Icons",
 					content:
-						"Add Material icons via dependency and use icons as scalable SVGs."
+						"Add the Material Icons dependency, place icons using the documented markup, and treat each icon as a scalable visual label rather than a bitmap image. Verify that icon names render correctly, that icon size/color can be controlled with CSS or Materialize helpers, and that surrounding text still explains the action for readability."
 				},
 				{
 					title: "Mobile Wrappers",
 					content:
-						"Use Materialize helpers to hide/show content by screen size.",
+						"Use Materialize responsive helper classes to show, hide, or rearrange content for small, medium, and large screens. Test the same page at multiple viewport widths and record which content should remain visible, which content should collapse or disappear, and why that choice improves the layout.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/ab476697ba2b3957601555751bda65fb",
 					solutionLink:
