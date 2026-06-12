@@ -1380,28 +1380,100 @@ function remediationPrompt(context: CourseTextContext) {
 
 function diagnosticExtensionPrompt(context: CourseTextContext) {
 	if (isScienceContext(context)) {
-		return "Change one variable, phenomenon, unit, model limit, or evidence source while keeping the same core question.";
+		return variantPrompt(context, [
+			subject =>
+				`Change one variable, phenomenon, or evidence source in ${subject} while keeping the same scientific question.`,
+			subject =>
+				`Add a second model or dataset to ${subject} and explain what stays consistent.`,
+			subject =>
+				`Change one unit, scale, or model limit in ${subject} and predict how the claim should change.`,
+			subject =>
+				`Apply the ${subject} question to a related phenomenon and name the evidence needed to compare it.`
+		]);
 	}
 	if (isMathContext(context)) {
-		return "Change one value, representation, constraint, or error pattern while preserving the same underlying rule.";
+		return variantPrompt(context, [
+			subject =>
+				`Change one value or constraint in ${subject} while preserving the same underlying rule.`,
+			subject =>
+				`Represent ${subject} a second way and explain why the two forms agree.`,
+			subject =>
+				`Add one error pattern to ${subject} and correct it using the same rule.`,
+			subject =>
+				`Change the context or units in ${subject} and check whether the result remains reasonable.`
+		]);
 	}
 	if (isDataAiMlContext(context)) {
-		return "Change one data slice, metric, baseline, visualization, or limitation statement while preserving the same analysis question.";
+		return variantPrompt(context, [
+			subject =>
+				`Change one data slice or metric in ${subject} while preserving the same analysis question.`,
+			subject =>
+				`Add a baseline or sanity check to ${subject} and compare how the interpretation changes.`,
+			subject =>
+				`Change one visualization or feature choice in ${subject} and record the limitation it exposes.`,
+			subject =>
+				`Add one failure-mode check to ${subject} and separate evidence from speculation.`
+		]);
 	}
 	if (isSwiftAppContext(context)) {
-		return "Change one state, screen size, navigation path, empty state, or accessibility requirement while preserving the same app behavior.";
+		return variantPrompt(context, [
+			subject =>
+				`Change one state or navigation path in ${subject} while preserving the intended app behavior.`,
+			subject =>
+				`Add an empty, loading, or error state to ${subject} and verify it in the simulator.`,
+			subject =>
+				`Check ${subject} at a different screen size or Dynamic Type setting and record one UI adjustment.`,
+			subject =>
+				`Add one accessibility requirement to ${subject} and explain how the app exposes it.`
+		]);
 	}
 	if (isSecurityContext(context)) {
-		return "Change one authorized scenario, baseline artifact, configuration, mitigation, or verification step while preserving safe scope.";
+		return variantPrompt(context, [
+			subject =>
+				`Change one authorized scenario or baseline artifact in ${subject} while preserving safe scope.`,
+			subject =>
+				`Add a mitigation or verification step to ${subject} and capture the before/after evidence.`,
+			subject =>
+				`Change one configuration in ${subject} and document the rollback path before testing.`,
+			subject =>
+				`Add one detection or hardening check to ${subject} and explain what risk it addresses.`
+		]);
 	}
 	if (isSystemsContext(context)) {
-		return "Change one environment assumption, command option, configuration, rollback path, or reproducibility check while preserving the same system goal.";
+		return variantPrompt(context, [
+			subject =>
+				`Change one environment assumption or command option in ${subject} while preserving the same system goal.`,
+			subject =>
+				`Add a configuration or rollback check to ${subject} and verify it from a clean shell.`,
+			subject =>
+				`Add one reproducibility check to ${subject} that records command, output, and starting state.`,
+			subject =>
+				`Change one file, process, service, or permission detail in ${subject} and record the diagnostic evidence.`
+		]);
 	}
 	if (isGameContext(context)) {
-		return "Change one rule, control, state transition, collision case, scoring rule, or player-feedback requirement while preserving the same play goal.";
+		return variantPrompt(context, [
+			subject =>
+				`Change one rule or control in ${subject} while preserving the same play goal.`,
+			subject =>
+				`Add a state transition, collision case, or scoring rule to ${subject} and test the replay path.`,
+			subject =>
+				`Change one player-feedback requirement in ${subject} and explain how the player notices the result.`,
+			subject =>
+				`Add one difficulty or reset variation to ${subject} and keep the win/loss condition clear.`
+		]);
 	}
 
-	return "Change one constraint, case, representation, or requirement while preserving the same core concept.";
+	return variantPrompt(context, [
+		subject =>
+			`Change one constraint or case in ${subject} while preserving the same core concept.`,
+		subject =>
+			`Represent ${subject} a second way and explain what stays equivalent.`,
+		subject =>
+			`Add one edge case to ${subject} and identify which requirement it tests.`,
+		subject =>
+			`Change one success condition in ${subject} and compare it with the original version.`
+	]);
 }
 
 function projectExpectations(context: CourseTextContext) {
@@ -1763,45 +1835,162 @@ function completionChecks(context: CourseTextContext) {
 	];
 }
 
+function extensionSubject(context: CourseTextContext) {
+	return context.module.title;
+}
+
+function variantPrompt(
+	context: CourseTextContext,
+	templates: Array<(subject: string) => string>
+) {
+	const seed = `${context.courseId}|${context.module.title}|${context.item.title}`;
+	let hash = 0;
+
+	for (const character of seed) {
+		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+	}
+
+	return templates[hash % templates.length](extensionSubject(context));
+}
+
 function extensionPrompt(context: CourseTextContext) {
 	const source = contextText(context);
 
 	if (/ap computer science|apcs/.test(source)) {
-		return "Add a short tracing table or AP-style follow-up question that changes one condition, loop bound, or method call.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with a short trace that changes one loop bound, branch condition, or method call.`,
+			subject =>
+				`Add an AP-style follow-up for ${subject} that asks how one changed precondition affects the result.`,
+			subject =>
+				`Create a compact scoring or reasoning note for ${subject} that targets one likely AP point loss.`,
+			subject =>
+				`Add one alternate input for ${subject} and explain which Java statement or method behavior controls the outcome.`
+		]);
 	}
 	if (/python level 1|python level 2/.test(source)) {
-		return "Add input validation or one extra mode so the program handles an unexpected user response gracefully.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with input validation for one unexpected or blank response.`,
+			subject =>
+				`Add one extra mode to ${subject} that reuses the same variables, loops, or helper functions.`,
+			subject =>
+				`Add a retry or recovery path to ${subject} so an awkward input does not stop the program.`,
+			subject =>
+				`Create one alternate output path for ${subject} and test it with a small hand-traced input.`
+		]);
 	}
 	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
-		return "Add one new sprite interaction, broadcast, level change, or difficulty option that reuses the same event/state logic.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with a new sprite interaction that reuses the same event or state logic.`,
+			subject =>
+				`Add a broadcast or backdrop change to ${subject} and explain what triggers it.`,
+			subject =>
+				`Add a difficulty option to ${subject} by changing a timer, score, speed, or clone rule.`,
+			subject =>
+				`Add one feedback cue to ${subject} so the player can tell what state changed.`
+		]);
 	}
 	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
-		return "Add one new actor, collision rule, input mode, level state, or difficulty curve while keeping the game loop understandable.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with one actor or level state while keeping the game loop readable.`,
+			subject =>
+				`Add a collision, scoring, or failure rule to ${subject} and test the boundary case.`,
+			subject =>
+				`Add one input mode or difficulty curve to ${subject} without hiding the main state updates.`,
+			subject =>
+				`Instrument ${subject} with one debug display that exposes position, velocity, collision, or game-state data.`
+		]);
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
-		return "Add one small screen, state transition, persistence point, accessibility improvement, or release-readiness check.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with one small view, state transition, or navigation path.`,
+			subject =>
+				`Add a persistence or loading-state check to ${subject} and verify it in the simulator.`,
+			subject =>
+				`Add one accessibility improvement to ${subject}, such as a label, trait, contrast check, or Dynamic Type check.`,
+			subject =>
+				`Add a release-readiness check to ${subject} that records build, signing, asset, or preview evidence.`
+		]);
 	}
 	if (
 		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
 	) {
-		return "Add one diagnostic, rollback, automation, logging, or permission-hardening step that can be verified with a command.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with one diagnostic command and the expected output that confirms the system state.`,
+			subject =>
+				`Add a rollback or recovery step to ${subject} and document when it should be used.`,
+			subject =>
+				`Add a logging, permission, service, or automation check to ${subject} that can be rerun from a clean shell.`,
+			subject =>
+				`Add one failure-mode check to ${subject} and record the command that distinguishes it from the healthy state.`
+		]);
 	}
 	if (
 		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
 	) {
-		return "Add one diagnostic variation involving a different host, port, route, DNS answer, packet trace, or firewall rule.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with one diagnostic variation using a different host, port, route, or DNS answer.`,
+			subject =>
+				`Add a packet, service, or firewall comparison to ${subject} and explain the observed difference.`,
+			subject =>
+				`Add one blocked-path or failure-path test to ${subject} and identify the layer where it appears.`,
+			subject =>
+				`Add a topology or address change to ${subject} and predict the command output before running it.`
+		]);
 	}
 	if (/java/.test(source)) {
-		return "Add one additional method, test, or subclass/record use case while preserving the public behavior already built.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with one additional method and a test or console trace that proves its contract.`,
+			subject =>
+				`Add a subclass, interface, or record variation to ${subject} without changing the existing public behavior.`,
+			subject =>
+				`Add one collection, object-state, or method-overload case to ${subject} and document the expected output.`,
+			subject =>
+				`Add a small negative or edge-case test to ${subject} that protects the class boundary already built.`
+		]);
 	}
 	if (/c\+\+|cpp|systems|assembly/.test(source)) {
-		return "Add a debug or benchmark mode that exposes an internal state, memory decision, or performance tradeoff.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} with a debug mode that exposes one internal state, pointer, register, or ownership decision.`,
+			subject =>
+				`Add a tiny benchmark or trace to ${subject} that makes the performance or memory tradeoff visible.`,
+			subject =>
+				`Add one invalid-input or lifetime-boundary test to ${subject} and record the diagnostic evidence.`,
+			subject =>
+				`Add a build, sanitizer, debugger, or logging check to ${subject} that confirms the low-level behavior.`
+		]);
 	}
 	if (/science|physics|chemistry|biology|earth|ecosystem/.test(source)) {
-		return "Apply the same model to a new example and explain what would change if one variable were different.";
+		return variantPrompt(context, [
+			subject =>
+				`Extend ${subject} by applying the same model to a new example and naming what changes.`,
+			subject =>
+				`Add a changed-variable prediction to ${subject} and connect it to the model or data source.`,
+			subject =>
+				`Add a second phenomenon or dataset to ${subject} and compare the evidence that supports the claim.`,
+			subject =>
+				`Add one model limitation to ${subject} and explain what evidence would make the explanation stronger.`
+		]);
 	}
 
-	return "Add one small feature that requires reusing the same concept in a new situation rather than only decorating the output.";
+	return variantPrompt(context, [
+		subject =>
+			`Extend ${subject} with one changed constraint that still uses the same core idea.`,
+		subject =>
+			`Add one transfer case to ${subject} that changes the input, representation, or success condition.`,
+		subject =>
+			`Add one verification example to ${subject} that would catch a different mistake than the original case.`,
+		subject =>
+			`Add one small feature to ${subject} and explain which concept it reuses rather than only decorating the output.`
+	]);
 }
 
 function projectSupport(context: CourseTextContext) {

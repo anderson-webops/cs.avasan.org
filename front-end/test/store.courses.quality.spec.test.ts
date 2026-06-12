@@ -133,8 +133,21 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/before starting a module/i);
 			expect(corpus).not.toMatch(/Tooling, Materials, and Source Preparation/i);
 			expect(corpus).not.toMatch(/Learning Roadmap and Sequencing/i);
+			expect(corpus).not.toMatch(/Complete the linked/i);
+			expect(corpus).not.toMatch(
+				/with visible behavior and verification evidence/i
+			);
 			expect(corpus).toContain(
-				"as a working artifact with visible behavior and verification evidence"
+				"Implement the Java/C++ bridge implementation checkpoint for **PTJ0 Positioning and Workflow Translation** with compiling Java code, clear object boundaries, and checks for normal and edge behavior"
+			);
+			expect(corpus).toContain(
+				"Build the web development applied challenge for **JSM1 Fundamentals Review** as a browser-visible feature with clear state, interaction, and error-handling evidence"
+			);
+			expect(corpus).toContain(
+				"Solve the USACO implementation checkpoint for **USB0 Setup and Contest Workflow** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases"
+			);
+			expect(corpus).toContain(
+				"Build **Images and Sprites** as a core build checkpoint with runnable behavior, inspectable evidence, and a clear boundary case"
 			);
 			expect(corpus).not.toMatch(
 				/Open the starter and name the concrete inputs, outputs, state changes, data structures, or system boundaries involved/
@@ -178,6 +191,30 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/The final note identifies one implementation, debugging, or reasoning choice that mattered/
 			);
+			expect(corpus).not.toMatch(
+				/Add one additional method, test, or subclass\/record use case while preserving the public behavior already built/
+			);
+			expect(corpus).not.toMatch(
+				/Add a debug or benchmark mode that exposes an internal state, memory decision, or performance tradeoff/
+			);
+			expect(corpus).not.toMatch(
+				/Add one small feature that requires reusing the same concept in a new situation rather than only decorating the output/
+			);
+			expect(corpus).not.toMatch(
+				/Add one variant that changes a constraint without changing the core concept/
+			);
+			expect(corpus).not.toMatch(
+				/Change one constraint, case, representation, or requirement while preserving the same core concept/
+			);
+			expect(corpus).not.toMatch(
+				/Change one value, representation, constraint, or error pattern while preserving the same underlying rule/
+			);
+			expect(corpus).not.toMatch(
+				/Change one rule, control, state transition, collision case, scoring rule, or player-feedback requirement while preserving the same play goal/
+			);
+			expect(corpus).not.toMatch(
+				/Change one environment assumption, command option, configuration, rollback path, or reproducibility check while preserving the same system goal/
+			);
 			expect(corpus).toContain(
 				"The Java code compiles cleanly and the expected behavior is visible through output, tests, or method calls"
 			);
@@ -189,6 +226,24 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).toContain(
 				"The lab boundary, target behavior, and evidence source are explicit"
+			);
+			expect(corpus).toContain(
+				"Extend PTJ0 Positioning and Workflow Translation with one additional method and a test or console trace that proves its contract"
+			);
+			expect(corpus).toContain(
+				"Add a subclass, interface, or record variation to PTJ1 Functions, Parameters, and Return Types without changing the existing public behavior"
+			);
+			expect(corpus).toContain(
+				"Add one transfer case to AM2 Review: Functions & Lists that changes the input, representation, or success condition"
+			);
+			expect(corpus).toContain(
+				"Add one Scratch variant for Maze with timer and collectibles that changes a constraint, input, representation, or success condition without changing the core concept"
+			);
+			expect(corpus).toContain(
+				"Change one rule or control in Scratch: Project and Assessment Practice while preserving the same play goal"
+			);
+			expect(corpus).toContain(
+				"Change one constraint or case in Check-In #1 while preserving the same core concept"
 			);
 		},
 		COURSE_SWEEP_TIMEOUT
@@ -302,7 +357,7 @@ describe("course text quality normalization", () => {
 
 		expect(corpus).toContain("Scratch game design");
 		expect(corpus).toContain("green flag starts");
-		expect(corpus).toContain("event/state logic");
+		expect(corpus).toContain("event or state logic");
 		expect(corpus).not.toMatch(/module's core concept, a concrete worked example, and a testable artifact/i);
 		expect(corpus).not.toMatch(/expected file format/i);
 		expect(corpus).not.toMatch(/malformed or missing data/i);

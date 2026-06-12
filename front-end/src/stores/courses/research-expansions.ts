@@ -268,7 +268,7 @@ function buildProjectModule(
 				`**Project goal:** Create this ${profile.family} practice artifact: ${projectDescription(project)}. The result should include a visible product, model, result, or explanation.`,
 				`**Required outcome:**\n- Define the artifact and expected inputs, outputs, data, or model.\n- Include one normal case, one boundary case, and one awkward or failure case.\n- Write a short explanation of the main design or reasoning decision.`,
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
-				"**Extension:** Add one variant that changes a constraint without changing the core concept."
+				`**Extension:** Add one ${profile.family} variant for ${projectDescription(project)} that changes a constraint, input, representation, or success condition without changing the core concept.`
 			].join("\n\n")
 		}))
 	};

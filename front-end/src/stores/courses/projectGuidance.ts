@@ -9,6 +9,58 @@ function projectArtifact(kind: ProjectGuidanceOptions["projectKind"]) {
 	return kind === "core" ? "implementation checkpoint" : "applied challenge";
 }
 
+function projectGoal(
+	courseFamily: string,
+	moduleTitle: string,
+	kind: ProjectGuidanceOptions["projectKind"]
+) {
+	const family = courseFamily.toLowerCase();
+	const artifact = projectArtifact(kind);
+
+	if (family.includes("usaco")) {
+		return `**Project goal:** Solve the ${courseFamily} ${artifact} for **${moduleTitle}** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases.`;
+	}
+
+	if (family.includes("web") || family.includes("javascript")) {
+		return `**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** as a browser-visible feature with clear state, interaction, and error-handling evidence.`;
+	}
+
+	if (
+		family.includes("data") ||
+		family.includes("machine learning") ||
+		family.includes("ai")
+	) {
+		return `**Project goal:** Produce the ${courseFamily} ${artifact} for **${moduleTitle}** as an evidence-backed analysis, model, or search result with a stated limitation.`;
+	}
+
+	if (family.includes("java")) {
+		return `**Project goal:** Implement the ${courseFamily} ${artifact} for **${moduleTitle}** with compiling Java code, clear object boundaries, and checks for normal and edge behavior.`;
+	}
+
+	if (family.includes("python")) {
+		return `**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** as a runnable Python program with readable data flow and traceable boundary cases.`;
+	}
+
+	if (family.includes("security") || family.includes("network")) {
+		return `**Project goal:** Complete the ${courseFamily} ${artifact} for **${moduleTitle}** inside the approved local boundary, with defensive evidence and a rollback or hardening note.`;
+	}
+
+	if (
+		family.includes("systems") ||
+		family.includes("assembly") ||
+		family.includes("rust") ||
+		family.includes("c++")
+	) {
+		return `**Project goal:** Build the ${courseFamily} ${artifact} for **${moduleTitle}** with a reproducible command, inspectable runtime behavior, and memory or diagnostic evidence.`;
+	}
+
+	if (family.includes("swift")) {
+		return `**Project goal:** Implement the ${courseFamily} ${artifact} for **${moduleTitle}** as a simulator-verified app path with visible state, navigation, or persistence behavior.`;
+	}
+
+	return `**Project goal:** Create the ${courseFamily} ${artifact} for **${moduleTitle}** with an observable result, a checked boundary case, and a short reasoning note.`;
+}
+
 function familyFocus(courseFamily: string) {
 	const family = courseFamily.toLowerCase();
 
@@ -291,10 +343,8 @@ export function buildProjectGuidance({
 	projectKind,
 	hasReference
 }: ProjectGuidanceOptions) {
-	const artifact = projectArtifact(projectKind);
-
 	return [
-		`**Project goal:** Complete the linked ${courseFamily} ${artifact} for **${moduleTitle}** with visible behavior and verification evidence.`,
+		projectGoal(courseFamily, moduleTitle, projectKind),
 		`**Focus:** ${familyFocus(courseFamily)}.`,
 		"**Required work:**",
 		...requiredWorkSteps(courseFamily).map(

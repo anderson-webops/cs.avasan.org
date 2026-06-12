@@ -82,10 +82,10 @@ function familyFocus(courseFamily: string) {
 	return "inputs, state changes, system boundaries, observable behavior, edge cases, and verification evidence";
 }
 
-function referenceStep(hasReference = true) {
+function referenceStep(label: string, hasReference = true) {
 	return hasReference
-		? "Compare the finished draft with the reference only after the artifact works; record one meaningful difference in behavior, robustness, readability, or design."
-		: "Write a verification note that identifies the evidence used to confirm the result.";
+		? `Compare the finished ${label} draft with the reference only after the artifact works; record one meaningful difference in behavior, robustness, readability, or design.`
+		: `Write a ${label} verification note that identifies the evidence used to confirm the result.`;
 }
 
 export function buildImplementationLabGuidance({
@@ -127,16 +127,16 @@ export function buildImplementationLabGuidance({
 			: "extension build checkpoint";
 
 	return [
-		`**Project goal:** Build the **${label}** ${artifact} as a working artifact with visible behavior and verification evidence.`,
+		`**Project goal:** Build **${label}** as a ${artifact} with runnable behavior, inspectable evidence, and a clear boundary case.`,
 		`**Focus:** ${focus}.`,
 		"**Required work:**",
-		"1. Open the starter and name the concrete inputs, outputs, state changes, files, commands, services, or system boundaries involved.",
-		"2. Implement the behavior in small runnable steps, checking output, logs, traces, tests, or browser/runtime behavior after each meaningful change.",
-		"3. Verify one normal path, one boundary or failure path, and one case tied directly to the lab's main concept.",
-		`4. ${referenceStep(hasReference)}`,
+		`1. For **${label}**, identify the concrete inputs, outputs, state changes, files, commands, services, or system boundaries involved.`,
+		`2. Build **${label}** in small runnable steps, checking output, logs, traces, tests, or browser/runtime behavior after each meaningful change.`,
+		`3. Check **${label}** with one normal path, one boundary or failure path, and one case tied directly to the lab's main concept.`,
+		`4. ${referenceStep(label, hasReference)}`,
 		"**Completion checks:**",
-		"- The artifact demonstrates the lab concept through runnable behavior, output, tests, traces, logs, or another concrete result.",
-		"- The boundary or failure case is named explicitly and is not only the provided sample.",
-		"- The final note identifies one implementation, debugging, or reasoning choice that materially affected the result."
+		`- **${label}** demonstrates the lab concept through runnable behavior, output, tests, traces, logs, or another concrete result.`,
+		`- The protected boundary or failure case for **${label}** is named explicitly and is not only the provided sample.`,
+		`- The final **${label}** note identifies one implementation, debugging, or reasoning choice that materially affected the result.`
 	].join("\n\n");
 }
