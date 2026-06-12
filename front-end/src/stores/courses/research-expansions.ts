@@ -109,28 +109,28 @@ function buildStandardsModule(
 	profile: ResearchExpansionProfile
 ): RawCourseModule {
 	return {
-		title: `${profile.family}: Standards and Learning Scope`,
+		title: `${profile.family}: Standards and Course Map`,
 		curriculum: [
 			{
 				title: "Priority and Authoritative Source Map",
 				content: [
-					`**Learning scope:** This section identifies the standards, documentation, and tooling references that keep ${profile.family} aligned with current expectations. Priority is **${profile.priority}**, which means these items should shape pacing and practice before lower-priority enrichment.`,
+					`**Course focus:** This section identifies the standards, documentation, and tooling references that keep ${profile.family} aligned with current expectations. Priority is **${profile.priority}**, which means these items shape pacing and practice before lower-priority enrichment.`,
 					`**Authoritative sources to use:**\n${sourceBullets(profile.sources)}`,
 					"**Completion check:** The visible course is traceable to these standards, docs, or tooling references rather than only to inherited project names."
 				].join("\n\n")
 			},
 			{
-				title: "Skills to Strengthen",
+				title: "Core Skills to Build",
 				content: [
-					`**Learning scope:** These gaps identify the skills or explanations that most need reinforcement in ${profile.family}. Each section should make the prerequisite knowledge explicit before moving into larger projects.`,
-					`**Skills to strengthen:**\n${bullets(profile.gaps)}`,
+					`**Course focus:** These skills benefit from focused review, clear examples, and explicit prerequisite connections before larger ${profile.family} projects.`,
+					`**Core skills:**\n${bullets(profile.gaps)}`,
 					"**Completion check:** A lesson or project is ready when it includes a concrete explanation, worked example, practice task, and completion check for one of these skills."
 				].join("\n\n")
 			},
 			{
-				title: "Topics to Expand",
+				title: "Next Topics",
 				content: [
-					`**Learning scope:** These topics mark the next areas where ${profile.family} can become more complete. They should be introduced in prerequisite order and tied to a concrete project or checkpoint.`,
+					`**Course focus:** These topics mark the next areas where ${profile.family} can become more complete. Introduce them in prerequisite order and tie each one to a concrete project or checkpoint.`,
 					`**Expansion topics:**\n${bullets(profile.topics)}`,
 					"**Common pitfalls:** Each topic should connect to a real project. If the connection is unclear, add a smaller bridge lesson before the major project."
 				].join("\n\n")
@@ -138,7 +138,7 @@ function buildStandardsModule(
 			{
 				title: "Course Boundaries and Next Steps",
 				content: [
-					`**Learning scope:** The priority and expansion topics clarify what belongs in ${profile.family} and what should move to a prerequisite, follow-up, or separate course. This prevents one course from absorbing every interesting adjacent topic.`,
+					`**Course focus:** The priority and expansion topics clarify what belongs in ${profile.family} and what should move to a prerequisite, follow-up, or separate course. This keeps the course coherent instead of absorbing every adjacent topic.`,
 					"**Completion check:** The course boundary, one near-term addition, and one intentionally deferred topic are explicit."
 				].join("\n\n")
 			}
@@ -166,37 +166,37 @@ function buildSequencingModule(
 	profile: ResearchExpansionProfile
 ): RawCourseModule {
 	return {
-		title: `${profile.family}: Learning Roadmap and Sequencing`,
+		title: `${profile.family}: Course Roadmap`,
 		curriculum: [
 			{
-				title: "Suggested Learning Extensions",
+				title: "Next Module Options",
 				content: [
-					`**Learning scope:** These additions can become full modules after the source material, examples, and assessments are clear. The order should follow prerequisite dependency, not just topic popularity.`,
+					`**Course focus:** These additions can become full modules after the source material, examples, and assessments are clear. The order follows prerequisite dependency, not just topic popularity.`,
 					`**Suggested additions:**\n${bullets(profile.moduleAdditions)}`,
 					"**Completion check:** Every module states the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension."
 				].join("\n\n")
 			},
 			{
-				title: "Tooling, Materials, and Source Preparation",
+				title: "Tools, Materials, and Resources",
 				content: [
-					`**Learning scope:** Prepare materials before starting a module so source code, datasets, simulations, and version choices are explicit.`,
-					`**Materials to prepare:**\n${bullets(profile.materials)}`,
+					`**Resource guide:** These materials support ${profile.family} modules by making source code, datasets, simulations, version choices, and reference materials explicit.`,
+					`**Materials and tools:**\n${bullets(profile.materials)}`,
 					profile.safety
 						? `**Safety or delivery boundary:** ${profile.safety}`
 						: "**Safety or delivery boundary:** Use age-appropriate examples, cite source material, and keep project scope small enough for an online lesson."
 				].join("\n\n")
 			},
 			{
-				title: "Module Readiness Checklist",
+				title: "Readiness Checklist",
 				content: [
-					`**Learning scope:** Use this checklist before expanding ${profile.family} with a new lesson, project, or assessment.`,
+					`**Course focus:** This checklist keeps ${profile.family} modules concrete, sequenced, and assessable.`,
 					"**Completion checks:**\n- The module has a named prerequisite and observable outcome.\n- The project has required behavior, test cases, and an extension.\n- The assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any toolchain, dataset, simulation, or source-code dependency is linked and version-aware."
 				].join("\n\n")
 			},
 			{
-				title: "Source Refresh Notes",
+				title: "Reference Refresh Notes",
 				content: [
-					`**Learning scope:** Keep a short refresh note for ${profile.family} whenever the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
+					`**Resource guide:** ${profile.family} references should stay current when the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
 					"**Completion check:** The note states what must be refreshed each term, which links or versions are stable, and which materials are reference-only rather than assignments."
 				].join("\n\n")
 			}
@@ -234,7 +234,7 @@ function buildProjectModule(
 			{
 				title: "Project Ladder",
 				content: [
-					`**Learning scope:** These project types create a progression from guided practice to independent capstone work. Every project should name the artifact, required behavior, evidence of correctness, and one extension path.`,
+					`**Course focus:** These project types create a progression from guided practice to independent capstone work. Every project names the artifact, required behavior, evidence of correctness, and one extension path.`,
 					`**Project ladder:**\n${bullets(profile.projectTypes)}`,
 					"**Completion check:** A project is complete when the main design, model, proof, or reasoning choice is explained, not only when it runs or produces an answer."
 				].join("\n\n")
@@ -250,7 +250,7 @@ function buildProjectModule(
 			{
 				title: "Rubric and Reflection Expectations",
 				content: [
-					"**Learning scope:** Every major project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.",
+					"**Project reflection:** Every major project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.",
 					"**Completion checks:**\n- The deliverable is visible, runnable, or inspectable.\n- A normal case and an edge case are tested or justified.\n- The explanation does not depend on reading every line or step from notes."
 				].join("\n\n")
 			},

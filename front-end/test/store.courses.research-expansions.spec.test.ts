@@ -36,8 +36,8 @@ describe("research-backed course family expansions", () => {
 				expect(profile, courseId).toBeDefined();
 
 				const coreExpansionTitles = [
-					`${profile.family}: Standards and Learning Scope`,
-					`${profile.family}: Learning Roadmap and Sequencing`,
+					`${profile.family}: Standards and Course Map`,
+					`${profile.family}: Course Roadmap`,
 					`${profile.family}: Project and Assessment Practice`
 				];
 				const titles = course!.modules.map(module => module.title);

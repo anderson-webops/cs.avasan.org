@@ -126,6 +126,13 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/remediation list/i);
 			expect(corpus).not.toMatch(/course notes show/i);
 			expect(corpus).not.toMatch(/where visibility controls support/i);
+			expect(corpus).not.toMatch(/\*\*Learning scope:\*\*/i);
+			expect(corpus).not.toMatch(/These gaps identify/i);
+			expect(corpus).not.toMatch(/\*\*Skills to strengthen:\*\*/i);
+			expect(corpus).not.toMatch(/\*\*Materials to prepare:\*\*/i);
+			expect(corpus).not.toMatch(/before starting a module/i);
+			expect(corpus).not.toMatch(/Tooling, Materials, and Source Preparation/i);
+			expect(corpus).not.toMatch(/Learning Roadmap and Sequencing/i);
 			expect(corpus).toContain(
 				"as a working artifact with visible behavior and verification evidence"
 			);
@@ -167,7 +174,7 @@ describe("course text quality normalization", () => {
 			);
 			expect(corpus).not.toMatch(/Implementation Lab/i);
 			expect(corpus).toContain("Applied Lab");
-			expect(corpus).toContain("Learning Roadmap and Sequencing");
+			expect(corpus).toContain("Course Roadmap");
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
