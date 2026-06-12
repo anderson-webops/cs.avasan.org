@@ -355,6 +355,46 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("loop that changes size and rotation");
 	});
 
+	it("keeps early Python Turtle prompts structured around planning and verification", async () => {
+		const course = await loadRawCourse("python-level-1");
+		expect(course).not.toBeNull();
+
+		const checks = [
+			{
+				title: /Open Ended Project - Create a Drawing/,
+				required: ["Plan the drawing", "`goto()`", "comments naming each part"]
+			},
+			{
+				title: /Practice Project/,
+				required: ["turn amount", "step length", "connected intentionally"]
+			},
+			{
+				title: /Rainbow Ninja Star/,
+				required: ["reassignment inside the loop", "color progression"]
+			},
+			{
+				title: /Nested Loop Pattern/,
+				required: ["outer loop", "inner loop", "comments naming"]
+			},
+			{
+				title: /Make Your Own Function/,
+				required: ["descriptive name", "call it more than once"]
+			},
+			{
+				title: /Fruit Stand/,
+				required: ["own function", "Test every number key"]
+			}
+		];
+
+		for (const { title, required } of checks) {
+			const item = findItem(course!, title);
+			expect(item.content.length, item.title).toBeGreaterThan(180);
+			for (const phrase of required) {
+				expect(item.content, item.title).toContain(phrase);
+			}
+		}
+	});
+
 	it("keeps JavaScript normalization focused on web development instead of Java", async () => {
 		const courses = await Promise.all([
 			loadRawCourse("javascript-level-1-javascript-superstar"),
