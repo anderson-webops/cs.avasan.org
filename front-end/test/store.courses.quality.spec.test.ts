@@ -662,6 +662,46 @@ describe("course text quality normalization", () => {
 		expect(corpus).toContain("buildImplementationLabGuidance");
 	});
 
+	it("keeps Data Science applied studios named and distinct in the loaded course", async () => {
+		const course = await loadRawCourse("data-science-in-python");
+		expect(course).not.toBeNull();
+		const corpus = allCourseText(course);
+
+		expect(corpus).not.toMatch(/Data Analysis Lab 1[1-7]: Implementation Lab/);
+		expect(corpus).not.toMatch(/complete build-and-review sequence/i);
+		expect(corpus).not.toMatch(/open-ended placeholder/i);
+		expect(corpus).not.toMatch(/vague enrichment/i);
+
+		const expectedModules = [
+			"CSV Summaries and Sanity Checks",
+			"Cleaning Missing and Invalid Rows",
+			"Grouped Summaries by Category",
+			"Visualization Choice and Chart Integrity",
+			"Reproducible Mini Reports",
+			"Lightweight Dashboards and Filters",
+			"Capstone Data Story Readiness"
+		];
+
+		for (const expectedModule of expectedModules) {
+			expect(
+				course!.modules.some(module => module.title.includes(expectedModule)),
+				expectedModule
+			).toBe(true);
+		}
+
+		for (const phrase of [
+			"empty-dataset behavior",
+			"Cleaning is an analytical decision",
+			"Grouped summaries answer different questions",
+			"A chart is an argument",
+			"rerun the analysis",
+			"A dashboard is useful",
+			"A capstone data story begins"
+		]) {
+			expect(corpus).toContain(phrase);
+		}
+	});
+
 	it("keeps visible implementation-lab course sources free of generated filler", () => {
 		const corpus = visibleCourseSourceCorpus();
 

@@ -2,6 +2,246 @@ import type { RawCourse } from "./types";
 import { buildImplementationLabGuidance } from "./implementationLabGuidance";
 import { buildProjectGuidance } from "./projectGuidance";
 
+interface AppliedDataScienceLab {
+	number: number;
+	title: string;
+	focus: string;
+	coreConcepts: string;
+	example: string;
+	project: string;
+	review: string;
+	extension: string;
+	supplemental2: string;
+	supplemental3: string;
+}
+
+const appliedDataScienceLabs: AppliedDataScienceLab[] = [
+	{
+		number: 11,
+		title: "DSP10 Applied Studio: CSV Summaries and Sanity Checks",
+		focus: "CSV loading, numeric summaries, empty-dataset behavior, and sanity checks before a result is trusted.",
+		coreConcepts:
+			"Use this studio to make the smallest useful data pipeline explicit: load rows, convert text values into numbers, compute count, total, and mean, then verify that each number has the expected meaning. A summary is not just a calculator result; it is a claim about the rows that were actually read. Check the file path, column name, type conversion, row count, and empty-input behavior before interpreting the average.",
+		example:
+			"Trace a three-row CSV by hand before running the code. Write the expected list of values, expected total, expected count, and expected average, then compare that hand trace to the program output. Add one custom CSV with no rows or one row so the difference between normal data and boundary data is visible.",
+		project:
+			"Complete the CSV summary program so it returns accurate count, total, and average values for the provided data. The finished artifact should also handle an empty list without crashing and should include one short verification note explaining how the expected output was checked.",
+		review: "Review the result by naming the exact file, column, values used, output dictionary, and boundary case. A strong review explains why the average is valid for the loaded rows and what would need to change if the CSV column name or units changed.",
+		extension:
+			"Extend the summary with minimum, maximum, and range. Then add one intentionally surprising value and explain whether it is a valid outlier, a data-entry error, or a value that requires more context before removal.",
+		supplemental2:
+			"Create a second summary function for median and mode using the same loaded values. Compare mean and median on a balanced dataset and on a dataset with one extreme value.",
+		supplemental3:
+			"Create a small command-line report that prints the summary in readable sentences instead of a raw dictionary. Include the file name, row count, and one caution about interpreting the result."
+	},
+	{
+		number: 12,
+		title: "DSP11 Applied Studio: Cleaning Missing and Invalid Rows",
+		focus: "Data validation, missing values, invalid numeric fields, cleaning logs, and the difference between dropping and repairing records.",
+		coreConcepts:
+			"Cleaning is an analytical decision, not a cosmetic step. Each missing or invalid value should be classified before it is removed, replaced, or preserved. Track how many rows are affected and why the chosen cleaning rule is reasonable for the question being asked.",
+		example:
+			"Start with a small table containing one blank value, one nonnumeric value, one negative value, and several valid values. Predict which rows should be accepted, rejected, or flagged, then run the cleaning code and compare the counts.",
+		project:
+			"Adapt the CSV starter into a cleaner that returns valid numeric values plus a short cleaning report. The report should include rows loaded, rows accepted, rows rejected, and at least one reason for rejection.",
+		review: "Review the cleaning rule by explaining what it protects against and what it might accidentally remove. The conclusion should mention whether the cleaned dataset is still large and representative enough for the original question.",
+		extension:
+			"Add a repair rule for one safe case, such as trimming whitespace or converting commas in numbers, while still rejecting values that cannot be justified.",
+		supplemental2:
+			"Build a data-quality checklist for a CSV before analysis begins. Include schema, units, missing values, duplicates, impossible values, and date or category consistency.",
+		supplemental3:
+			"Write a before-and-after cleaning summary that compares the original and cleaned datasets and identifies one conclusion that would change if invalid rows were kept."
+	},
+	{
+		number: 13,
+		title: "DSP12 Applied Studio: Grouped Summaries by Category",
+		focus: "Grouping rows, category labels, per-group counts, per-group averages, and comparisons that avoid mixing unlike cases.",
+		coreConcepts:
+			"Grouped summaries answer different questions than whole-dataset summaries. Before comparing groups, verify the category column, group sizes, and whether each group has enough data to support a claim. A large difference in averages is less persuasive when one group contains only one row.",
+		example:
+			"Use a table with categories such as region, class period, product type, or team. Compute one overall average and then per-category averages. Compare the two outputs and identify what the overall average hides.",
+		project:
+			"Extend the starter so values can be grouped by a category column and summarized per group. Each group should report count, total, and average, and the output should be sorted or formatted so comparisons are easy to read.",
+		review: "Review the grouping by naming the strongest comparison and the weakest comparison. The strongest comparison has enough rows and a clear category meaning; the weakest may be distorted by small sample size or inconsistent labels.",
+		extension:
+			"Add a normalization step that merges inconsistent labels such as `north`, `North`, and `NORTH`, then explain how label cleanup changes the grouped result.",
+		supplemental2:
+			"Create a grouped-summary notebook cell that displays the same result as both a table and a short written interpretation.",
+		supplemental3:
+			"Add a second metric, such as median or maximum, and explain when that metric tells a better story than average."
+	},
+	{
+		number: 14,
+		title: "DSP13 Applied Studio: Visualization Choice and Chart Integrity",
+		focus: "Selecting chart types, encoding variables honestly, labeling axes, avoiding misleading scales, and connecting visuals to a specific question.",
+		coreConcepts:
+			"A chart is an argument about what should be compared. Choose bar charts for category comparison, line charts for ordered time-like trends, scatterplots for relationships between two numeric variables, and tables when exact values matter more than visual pattern. Every chart needs labels, units, and a sentence explaining the intended comparison.",
+		example:
+			"Create two possible charts for the same small dataset and decide which one better answers the question. Then intentionally remove an axis label or change the scale to see how quickly a technically correct chart can become misleading.",
+		project:
+			"Turn the summary output into one clear visualization with a title, labeled axes, and a short interpretation. The project is complete when the chart answers a named question and the explanation states one limitation of the visual.",
+		review: "Review the visualization by checking whether the chart type matches the data types, whether labels and units are present, and whether the conclusion overstates what the chart proves.",
+		extension:
+			"Create a second chart that answers a different question from the same data, then compare which chart is better for exploration and which is better for presentation.",
+		supplemental2:
+			"Redesign a weak chart by improving labels, scale, color, ordering, or annotation while keeping the underlying data unchanged.",
+		supplemental3:
+			"Write a chart critique that identifies the intended audience, the visual claim, the evidence, and one way the chart could mislead a reader."
+	},
+	{
+		number: 15,
+		title: "DSP14 Applied Studio: Reproducible Mini Reports",
+		focus: "Combining code, tables, charts, markdown conclusions, file paths, and rerun discipline into one reproducible analysis artifact.",
+		coreConcepts:
+			"A data report should let another reader rerun the analysis and understand the reasoning without asking what happened off screen. Keep imports visible, load data from a documented path, state the question, show the cleaned or summarized output, include one chart or table, and end with a conclusion plus limitation.",
+		example:
+			"Take a short analysis that only prints a dictionary and convert it into a mini report: question, data source, method, result table, interpretation, limitation, and next question. Restart and rerun to confirm there is no hidden state.",
+		project:
+			"Create a mini report around the CSV starter. The report should include a question, a reproducible run path, the computed summary, one visual or formatted table, and a conclusion that does not exceed the evidence.",
+		review: "Review the report by checking whether a reader can identify the data source, rerun the code, find the main result, and understand one important caveat.",
+		extension:
+			"Add a small appendix that records package versions, file names, or command-line run instructions so the analysis can be repeated later.",
+		supplemental2:
+			"Convert a notebook-style analysis into a script plus a short markdown report, preserving the same result while improving organization.",
+		supplemental3:
+			"Create a peer-review checklist for mini reports and apply it to one previous project."
+	},
+	{
+		number: 16,
+		title: "DSP15 Applied Studio: Lightweight Dashboards and Filters",
+		focus: "Turning analysis outputs into a small interactive view with filtering, summary cards, and user-facing explanations.",
+		coreConcepts:
+			"A dashboard is useful when it helps a reader ask a focused follow-up question without editing the code. Keep the first version small: one dataset, one filter, one summary table or chart, and one explanation of what changes when the filter changes.",
+		example:
+			"Start with a printed summary, then add a simple filter such as category, date range, or minimum value. Compare the all-data result to the filtered result and explain what changed.",
+		project:
+			"Build a lightweight dashboard or console menu around the CSV analysis. The artifact should let the user choose at least one filter and should update the summary output in a way that can be checked by hand on a small dataset.",
+		review: "Review the dashboard by naming the user question it supports, the filter behavior, the default state, and one case where the interface should warn that too little data remains.",
+		extension:
+			"Add a second filter or a summary card that updates with the selected data. Keep the explanation close to the output so the interface does not become a pile of disconnected widgets.",
+		supplemental2:
+			"Create a dashboard test plan with three scenarios: default data, a normal filter, and a filter that leaves no matching rows.",
+		supplemental3:
+			"Add export behavior that writes the filtered summary to a small text or CSV report and verify the exported result."
+	},
+	{
+		number: 17,
+		title: "DSP16 Applied Studio: Capstone Data Story Readiness",
+		focus: "Project scoping, dataset readiness, analysis question design, evidence selection, limitations, and presentation planning.",
+		coreConcepts:
+			"A capstone data story begins with a question that can be answered with available evidence. Before building the final artifact, confirm the dataset source, column meanings, cleaning needs, expected analysis steps, chart candidates, and likely limitations. A narrow, well-supported question is stronger than a broad claim with weak evidence.",
+		example:
+			"Compare two possible capstone questions for the same dataset. Identify which one has clearer columns, a better analysis path, fewer hidden assumptions, and a more realistic final output.",
+		project:
+			"Create a capstone readiness brief that defines the question, dataset, columns, cleaning plan, summary or visualization plan, evidence of correctness, and final presentation format. The brief should be detailed enough to start the capstone without redesigning the whole project.",
+		review: "Review the brief by checking whether the proposed claim can actually be supported by the dataset. If the question is too broad, revise it into a narrower comparison, trend, or relationship.",
+		extension:
+			"Build a tiny prototype using five to ten rows or a filtered slice of the dataset to prove the full capstone path is feasible.",
+		supplemental2:
+			"Create a risk register for the capstone with likely data problems, interpretation risks, and fallback plans.",
+		supplemental3:
+			"Create the first slide or README section for the capstone, including the question, why it matters, and what evidence will be shown."
+	}
+];
+
+function dataScienceLabFolder(lab: AppliedDataScienceLab) {
+	const labNumber = String(lab.number - 10).padStart(2, "0");
+	return `DSP-${labNumber}-data-analysis-lab-${lab.number}`;
+}
+
+function dataScienceAppliedStudioUrl(
+	lab: AppliedDataScienceLab,
+	kind: "starter" | "solution"
+) {
+	return `https://github.com/instruction-material/Data-Science/tree/main/${dataScienceLabFolder(lab)}/${kind}`;
+}
+
+function dataScienceAppliedSupplementUrl(
+	lab: AppliedDataScienceLab,
+	supplementNumber: 2 | 3,
+	kind: "starter" | "solution"
+) {
+	const baseNumber = 20 + (lab.number - 11) * 2 + (supplementNumber - 2);
+	return `https://github.com/instruction-material/Data-Science/tree/main/DSP-${baseNumber}-applied-studio-${
+		lab.number
+	}-data-analysis-lab-${lab.number}-supplemental-${supplementNumber}/${kind}`;
+}
+
+function dataScienceStudioContent(lab: AppliedDataScienceLab, body: string) {
+	return [
+		body,
+		`**Verification focus:** ${lab.focus} The work should include one small hand-checkable case before any larger dataset result is accepted.`,
+		"**Readable output:** The final artifact should make the question, input data, calculation or transformation, result, and limitation visible without requiring someone to infer the reasoning from code alone."
+	].join("\n\n");
+}
+
+function applyDataScienceAppliedLabs(course: RawCourse) {
+	for (const lab of appliedDataScienceLabs) {
+		const module = course.modules.find(
+			({ title }) =>
+				title === `Data Analysis Lab ${lab.number}: Implementation Lab`
+		);
+		if (!module) continue;
+
+		module.title = lab.title;
+		module.curriculum = [
+			{
+				title: "Concept Path",
+				content: dataScienceStudioContent(
+					lab,
+					[
+						`**Focus:** ${lab.focus}`,
+						lab.coreConcepts,
+						"**Expected outcome:** A runnable analysis artifact plus a short written explanation that names the data source, the calculation or transformation, one verification case, and one limitation."
+					].join("\n\n")
+				)
+			},
+			{
+				title: "Worked Example",
+				content: dataScienceStudioContent(lab, lab.example)
+			},
+			{
+				title: "Core Project",
+				content: dataScienceStudioContent(lab, lab.project),
+				projectLink: dataScienceAppliedStudioUrl(lab, "starter"),
+				solutionLink: dataScienceAppliedStudioUrl(lab, "solution")
+			},
+			{
+				title: "Review and Reflection",
+				content: dataScienceStudioContent(lab, lab.review)
+			}
+		];
+		module.supplementalProjects = [
+			{
+				title: "Extension Challenge",
+				content: dataScienceStudioContent(lab, lab.extension),
+				projectLink: dataScienceAppliedStudioUrl(lab, "starter"),
+				solutionLink: dataScienceAppliedStudioUrl(lab, "solution")
+			},
+			{
+				title: "Supplemental Project 2",
+				content: dataScienceStudioContent(lab, lab.supplemental2),
+				projectLink: dataScienceAppliedSupplementUrl(lab, 2, "starter"),
+				solutionLink: dataScienceAppliedSupplementUrl(
+					lab,
+					2,
+					"solution"
+				)
+			},
+			{
+				title: "Supplemental Project 3",
+				content: dataScienceStudioContent(lab, lab.supplemental3),
+				projectLink: dataScienceAppliedSupplementUrl(lab, 3, "starter"),
+				solutionLink: dataScienceAppliedSupplementUrl(
+					lab,
+					3,
+					"solution"
+				)
+			}
+		];
+	}
+}
+
 export const dataScienceInPythonCourse: RawCourse = {
 	name: "Data Science in Python",
 	modules: [
@@ -1318,3 +1558,5 @@ export const dataScienceInPythonCourse: RawCourse = {
 		}
 	]
 };
+
+applyDataScienceAppliedLabs(dataScienceInPythonCourse);

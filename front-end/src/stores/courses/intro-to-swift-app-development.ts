@@ -522,7 +522,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Project: Welcome Profile App",
 					content:
-						"Build a welcome/profile app that turns a simple static screen into a real SwiftUI starter project. Use this as the first applied project for reading a view tree, customizing hierarchy, and practicing navigation between a landing screen and a detail screen.",
+						"Build a welcome/profile app that turns a simple static screen into a real SwiftUI starter project. The project introduces reading a view tree, customizing hierarchy, and practicing navigation between a landing screen and a detail screen.",
 					projectLink:
 						"https://github.com/instruction-material/Swift/tree/main/SAD1-Welcome-Profile-App/starter",
 					solutionLink:

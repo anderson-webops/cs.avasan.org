@@ -224,7 +224,7 @@ function buildProjectModule(
 		supplementalProjects: projects.map(project => ({
 			title: `Project Option: ${projectTitle(project)}`,
 			content: [
-				`**Project goal:** Build or plan ${project}. Treat this as a concrete practice option for ${profile.family}, not a vague enrichment idea.`,
+				`**Project goal:** Create ${project} as a concrete ${profile.family} practice artifact with a visible product, model, result, or explanation.`,
 				`**Required outcome:**\n- Define the artifact and expected inputs, outputs, data, or model.\n- Include one normal case, one boundary case, and one awkward or failure case.\n- Write a short explanation of the main design or reasoning decision.`,
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
 				"**Extension:** Add one variant that changes a constraint without changing the core concept."

@@ -85,7 +85,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Overview",
 					content:
-						"Second review checkpoint; let the learner drive, guide with questions, and adjust pacing.",
+						"Second review checkpoint covering helper functions, event listeners, DOM updates, arrays, objects, and project organization. Each prompt should produce a small working example plus a short explanation of what changed in the page or program state.",
 					solutionLink:
 						"https://codepen.io/junilearning/pen/7b72b5cd25d5372e9097f68de4b66db6"
 				},

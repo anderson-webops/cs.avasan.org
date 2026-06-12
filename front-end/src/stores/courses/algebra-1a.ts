@@ -387,7 +387,7 @@ This rebuilt review keeps the same skill focus from AA1 through AA5: balanced eq
 - Word problem: \`29 + 3p = 74\` -> \`p = 15\`
 - Word problem: \`3c + 0.75c - 25 = 50\` -> \`c = 20\`
 
-Use this as a placement checkpoint rather than a timed exam.
+This review is a placement checkpoint rather than a timed exam.
 				`.trim()
 			)
 		]),

@@ -1433,7 +1433,7 @@ function addAlgebraStandardsArchitectureModule(
 			{
 				title: "Course Scope Map",
 				content: [
-					"**Learning sequence:** Use this as the standards-facing course spine. Lessons should build from concept explanation to worked example, guided practice, mixed practice, project application, and assessment rather than appearing as a flat worksheet list.",
+					"**Learning sequence:** This standards-facing course spine builds from concept explanation to worked example, guided practice, mixed practice, project application, and assessment rather than appearing as a flat worksheet list.",
 					`**Scope:**\n${bullets(scope)}`,
 					"**Completion check:** The course makes it possible to point to the topic family, representation type, and modeling role for each major module."
 				].join("\n\n")

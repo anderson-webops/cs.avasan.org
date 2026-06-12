@@ -1261,8 +1261,8 @@ function studioArtifact(context: CourseTextContext) {
 
 function studioSupport(context: CourseTextContext) {
 	return [
-		`This studio is a complete build-and-review sequence for **${context.item.title}**. The expected artifact is ${studioArtifact(context)}, anchored in ${subjectFocus(context)} rather than left as an open-ended placeholder.`,
-		"**Studio focus:** Name the problem, prerequisite concepts, and success criteria. The build should make clear what is being created, what constraints matter, and what evidence will prove the work is correct.",
+		`**Applied studio:** **${context.item.title}** produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
+		"**Studio focus:** Define the problem, prerequisite concepts, and success criteria. The build should make clear what is being created, what constraints matter, and what evidence will prove the work is correct.",
 		`**Build sequence:**\n${projectExpectations(context).join("\n")}\n- Review the result against the original goal and record at least one improvement or bug fix.`,
 		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
 		`**Extension:** ${extensionPrompt(context)}`

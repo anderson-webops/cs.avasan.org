@@ -658,7 +658,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Master Project Presentation",
 					content:
-						"Once it's complete, prepare a simple project summary explaining how the game was programmed, which sprites and variables were used, and what problems were solved along the way.\n\nTreat this as a short reflection on the design process and the finished result."
+						"Once it's complete, prepare a simple project summary explaining how the game was programmed, which sprites and variables were used, and what problems were solved along the way.\n\nThe summary should reflect on the design process, the finished result, and one improvement that would make the game stronger."
 				},
 				{
 					title: "Course recap",

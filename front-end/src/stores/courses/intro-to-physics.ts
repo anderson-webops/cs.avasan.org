@@ -24,7 +24,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Walking Trial Table",
 					content:
-						"Collect simple position-versus-time data from walking at different speeds across a room or hallway. Build a data table, choose axes carefully, graph the results, and interpret the slope as speed. Use this as the first full data-analysis strand: table to graph, graph to meaning, and meaning back to the original motion."
+						"Use provided or safely observed position-versus-time data from walking at different speeds. Build a data table, choose axes carefully, graph the results, and interpret the slope as speed. This is the first full data-analysis strand: table to graph, graph to meaning, and meaning back to the original motion."
 				},
 				{
 					title: "Mini Lab: Reaction-Time Ruler Drop",
