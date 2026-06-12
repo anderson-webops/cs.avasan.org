@@ -1079,8 +1079,12 @@ describe("course text quality normalization", () => {
 
 	it("formats grouped lesson arcs as readable ordered markdown lists", async () => {
 		const store = useCoursesStore();
-		const course = await store.loadCourseById("python-level-3");
+		const [course, scratchCourse] = await Promise.all([
+			store.loadCourseById("python-level-3"),
+			loadRawCourse("scratch-level-1")
+		]);
 		expect(course).not.toBeNull();
+		expect(scratchCourse).not.toBeNull();
 
 		const lessonArc = findItem(
 			course!,
@@ -1094,6 +1098,23 @@ describe("course text quality normalization", () => {
 		expect(lessonArc.content).toMatch(/\n2\. \*\*.+\*\*\n\s+/);
 		expect(lessonArc.content).not.toMatch(/1\) .+; 2\)/s);
 		expect(lessonArc.content).not.toMatch(/This lesson arc covers/i);
+
+		const scratchStudio = scratchCourse!.modules
+			.find(module => module.title === "GS16 Debugging and Remix Studio")
+			?.curriculum.find(item => item.title === "Core Concepts");
+
+		expect(scratchStudio).toBeDefined();
+		expect(scratchStudio!.content).toContain(
+			"\n   **Completion checks:**\n   -"
+		);
+		expect(scratchStudio!.content).toContain("\n   **Extension:** Add");
+		expect(scratchStudio!.content).toContain("\n\n2. **Design and Planning Map**");
+		expect(scratchStudio!.content).not.toContain(
+			"Concept Path (GS16 Debugging and Remix Studio)"
+		);
+		expect(scratchStudio!.content).not.toMatch(
+			/\n \n\n\*\*Completion checks:\*\*/
+		);
 	});
 
 	it("formats inline project steps and support labels as readable markdown blocks", async () => {
@@ -1588,8 +1609,7 @@ describe("course text quality normalization", () => {
 
 		expect(studioItem?.content).toContain("**Build sequence:**");
 		expect(studioItem?.content).toContain("**Completion checks:**");
-		expect(studioItem?.content).toContain(
-			"approved local or owned targets"
-		);
+		expect(studioItem?.content).toMatch(/authorization|authorized/i);
+		expect(studioItem?.content).toMatch(/local (lab|evidence|target)/i);
 	});
 });

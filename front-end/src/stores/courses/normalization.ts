@@ -316,7 +316,16 @@ function stripLessonTitlePrefix(title: string) {
 }
 
 function neutralizeLessonPointText(text: string) {
-	return compactWhitespace(text)
+	const hasSupportLabel =
+		/\*\*(?:Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Remote investigation|Science explanation|Studio focus|Build sequence|Completion checks|Extension):?\*\*/i.test(
+			text
+		);
+	const source =
+		preservesBlockStructure(text) || hasSupportLabel
+			? formatVisibleMarkdownStructure(text)
+			: compactWhitespace(text);
+
+	return source
 		.replace(/^Set expectations for\b/i, "This section establishes")
 		.replace(/^Teach students to\b/i, "This section covers how to")
 		.replace(/^Show students\b/i, "This section shows")
@@ -342,10 +351,15 @@ function lessonArcContent(items: RawCourseModuleItem[]) {
 	const points = items.map((item, index) => {
 		const title = stripLessonTitlePrefix(item.title);
 		const content = neutralizeLessonPointText(item.content);
-		return `${index + 1}. **${title}**\n   ${content}`;
+		const indentedContent = content
+			.split("\n")
+			.map(line => (line.trim() ? `   ${line}` : ""))
+			.join("\n");
+
+		return `${index + 1}. **${title}**\n${indentedContent}`;
 	});
 
-	return ["Core topics in this module:", "", ...points].join("\n");
+	return ["Core topics in this module:", "", points.join("\n\n")].join("\n");
 }
 
 function briefConceptAddendum(
@@ -595,7 +609,7 @@ function formatInlineNumberedLists(text: string) {
 
 function formatSupportLabels(text: string) {
 	return text.replace(
-		/([^\n])\s+(\*\*(?:Project goal|Required outcome|Completion checks|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output):\*\*)/g,
+		/(\S)[ \t]+(\*\*(?:Project goal|Required outcome|Completion checks|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output):\*\*)/g,
 		"$1\n\n$2"
 	);
 }
@@ -2791,36 +2805,489 @@ function studioArtifact(context: CourseTextContext) {
 	return "a working artifact with explicit requirements, test cases, and a short explanation";
 }
 
+function studioBuildSequence(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (isScratchSource(source)) {
+		return variantLines(context, [
+			() => [
+				"- Define the sprites, controls, variables, broadcasts, costumes, or backdrops that control the main behavior.",
+				"- Test the green-flag start, one normal play path, one reset path, and one score, collision, timing, or input boundary.",
+				"- Keep the event flow traceable from player action to block sequence to visible stage feedback."
+			],
+			() => [
+				"- Name the starting stage state, player input, sprite response, scoring or timing rule, and reset behavior.",
+				"- Run the project from the green flag through a normal play path and one repeated-input or missed-input case.",
+				"- Trace the visible result back to the event blocks, broadcasts, variables, or costume changes that caused it."
+			],
+			() => [
+				"- Identify each sprite's job, the event that starts it, and the variable or broadcast that connects it to the game.",
+				"- Check startup, the main interaction, a boundary case, and a restart or cleanup path before adding polish.",
+				"- Use the stage behavior to verify the script order rather than relying only on reading the block stack."
+			]
+		]);
+	}
+	if (isPygameSource(source)) {
+		return variantLines(context, [
+			() => [
+				"- Define the game state, actor responsibilities, input events, collision rules, timing, and frame-by-frame update loop.",
+				"- Test startup, player controls, collision/no-collision behavior, scoring or health changes, and reset or end-state behavior.",
+				"- Keep drawing, updating, event handling, and game-state changes separated enough to debug one layer at a time."
+			],
+			() => [
+				"- Name the loop state, event inputs, actor updates, collision checks, draw order, and finish condition.",
+				"- Verify one clean start, one normal play interaction, one collision or no-collision case, and one reset path.",
+				"- Keep a small debug output or visual cue available until the state transitions are easy to explain."
+			],
+			() => [
+				"- Separate event handling, state updates, collision decisions, rendering, and scoring before adding complexity.",
+				"- Test the first frame, repeated controls, a boundary interaction, and the win, loss, pause, or restart state.",
+				"- Use a visible trace, log, or temporary overlay to confirm which state variable changed."
+			]
+		]);
+	}
+	if (isSwiftAppContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- Define the screen, state owner, user action, data flow, and expected simulator behavior.",
+				"- Build one view, model, state transition, navigation path, or persistence path at a time.",
+				"- Verify a normal interaction, one empty or invalid state, and one layout, accessibility, or navigation check."
+			],
+			() => [
+				"- Name the view responsibility, model data, user event, state mutation, and visible simulator result.",
+				"- Add the smallest view or state change first, then test navigation, persistence, loading, or error behavior.",
+				"- Check at least one layout, accessibility, preview, or device-size condition before treating the task as done."
+			],
+			() => [
+				"- Sketch the UI state, action path, data boundary, and feedback shown after the action completes.",
+				"- Implement the view/model/persistence path in small simulator-tested steps.",
+				"- Verify the expected path plus one empty, invalid, inaccessible, or awkward screen state."
+			]
+		]);
+	}
+	if (isSecurityContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- State the authorized local lab boundary, protected asset, unsafe assumption, and evidence needed.",
+				"- Capture logs, traces, requests, responses, configuration, or sanitizer output before and after the change.",
+				"- Verify normal behavior, failure or attack-shaped behavior, and one remediation, detection, or hardening result."
+			],
+			() => [
+				"- Name the allowed target, disallowed actions, evidence source, stop condition, and defensive purpose.",
+				"- Record the baseline behavior, the controlled test, the observed result, and the smallest useful fix.",
+				"- Retest the same scenario after mitigation and note what evidence proves the risk was reduced."
+			],
+			() => [
+				"- Define scope, authorization, reset path, expected signal, and what would count as unsafe escalation.",
+				"- Collect before/after evidence from the same local fixture, command, request, or configuration.",
+				"- Connect the observation to mitigation, hardening, monitoring, or a clear reason no action is needed."
+			]
+		]);
+	}
+	if (isSystemsContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- Record the starting environment, command path, resource boundary, and expected observable result.",
+				"- Work in short build, run, debug, or shell cycles so failures point to a specific boundary or assumption.",
+				"- Verify a normal path, a failure or edge path, and one log, trace, sanitizer, memory, process, register, or timing detail."
+			],
+			() => [
+				"- Name the file, process, command, memory, register, service, or permission boundary being inspected.",
+				"- Change one variable at a time and keep the reproduce, observe, fix, and retest commands visible.",
+				"- Capture one successful output and one diagnostic output that explains a boundary or failure condition."
+			],
+			() => [
+				"- Describe the initial state, expected state transition, observable output, and cleanup or rollback path.",
+				"- Use small command/build/debug cycles so the first failing step has a narrow cause.",
+				"- Verify both the intended behavior and one edge case with concrete terminal, trace, log, or debugger evidence."
+			]
+		]);
+	}
+	if (isWebContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- Identify the user interaction, state change, DOM/canvas/API output, and visible loading, empty, or error state.",
+				"- Implement one visible behavior at a time and inspect the page, console, network panel, or local server after each change.",
+				"- Verify a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check."
+			],
+			() => [
+				"- Name the route or component, user action, state update, data/API boundary, and visible feedback.",
+				"- Build the smallest browser-visible path first, then add validation, loading, empty, or failure behavior.",
+				"- Check the result in the rendered page plus one console, network, responsive, or accessibility condition."
+			],
+			() => [
+				"- Map the UI event to state, rendering, data flow, and the message shown when something goes wrong.",
+				"- Test one happy path, one invalid input or empty state, and one narrow/wide layout or keyboard path.",
+				"- Keep the browser, console, and request/response evidence aligned with the stated requirement."
+			]
+		]);
+	}
+	if (isDataAiMlContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- Define the question, input data or state space, baseline, metric, and expected evidence before building.",
+				"- Expose intermediate results so the transformation, search, model, or visualization can be inspected.",
+				"- Verify a small hand-checkable case, a representative case, and one limitation that affects interpretation."
+			],
+			() => [
+				"- Name the dataset or search space, target question, feature or column choices, and comparison point.",
+				"- Show at least one intermediate table, statistic, state, plot, or trace before presenting the final result.",
+				"- Check a toy example, a realistic example, and a caveat about sampling, labels, leakage, or assumptions."
+			],
+			() => [
+				"- State the hypothesis, evidence source, baseline, metric, and what result would count as meaningful.",
+				"- Make cleaning, transformation, search, modeling, or visualization steps inspectable before summarizing.",
+				"- Include one sanity check and one limitation so the conclusion does not overclaim."
+			]
+		]);
+	}
+	if (isJavaContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- Assign each responsibility to a Java type, method contract, record, interface, or collection boundary.",
+				"- Compile after each meaningful constructor, method, branch, loop, field, or test change.",
+				"- Verify a normal case, a boundary case, and one object-state or method-dispatch case tied to the concept."
+			],
+			() => [
+				"- Name the class or record data, public behavior, method inputs, return values, and expected output.",
+				"- Add fields, constructors, methods, loops, branches, and tests in compile-checked increments.",
+				"- Trace one ordinary object state, one boundary input, and one polymorphism, interface, or collection case."
+			],
+			() => [
+				"- Separate model responsibilities from console, file, UI, or runner code before adding extra features.",
+				"- Recompile after each contract change and keep the smallest runnable example available.",
+				"- Check constructor state, method behavior, invalid or edge input, and one Java-specific design choice."
+			]
+		]);
+	}
+	if (isCppContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- Name the build command, data representation, ownership or lifetime boundary, and expected runtime behavior.",
+				"- Change one boundary at a time and keep the compile/run/debug command easy to repeat.",
+				"- Verify ordinary behavior, a boundary or invalid case, and one diagnostic trace tied to the C++ concept."
+			],
+			() => [
+				"- Identify the compile command, object lifetime, container or pointer boundary, and output to inspect.",
+				"- Keep each edit small enough that a compiler, sanitizer, debugger, or log points to the changed assumption.",
+				"- Check a normal input, an invalid or edge input, and one memory, ownership, or performance observation."
+			],
+			() => [
+				"- State the representation, invariants, resource ownership, and command needed to reproduce the run.",
+				"- Build and test after each API, allocation, loop, branch, or data-structure change.",
+				"- Record one successful trace and one diagnostic trace tied to lifetime, bounds, copying, or complexity."
+			]
+		]);
+	}
+
+	return variantLines(context, [
+		() => [
+			"- Name the artifact, input surface, output surface, state change, and success condition before building.",
+			"- Build in small observable steps, checking the result after each meaningful change.",
+			"- Verify a normal path, a boundary or failure path, and one case tied directly to the module concept."
+		],
+		() => [
+			"- Define the starting state, action, expected result, evidence source, and failure or edge condition.",
+			"- Complete the smallest inspectable version first, then add one requirement at a time.",
+			"- Check the main case, one changed condition, and one explanation that links the result to the concept."
+		],
+		() => [
+			"- Separate setup, core behavior, verification evidence, and the final explanation before expanding scope.",
+			"- Keep every build step observable through output, trace, notes, screenshots, tests, or another concrete signal.",
+			"- Verify the expected result plus one condition that would expose a misunderstanding."
+		]
+	]);
+}
+
+function studioCompletionChecks(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (isScratchSource(source)) {
+		return variantLines(context, [
+			() => [
+				"- The project starts from a predictable green-flag state.",
+				"- Controls, events, broadcasts, variables, sprite interactions, and reset behavior are checked where they apply.",
+				"- The final note names the Scratch state variable or event chain most responsible for correctness."
+			],
+			() => [
+				"- Starting position, visible state, score or timer, and reset behavior are predictable.",
+				"- At least one normal play path and one awkward input or boundary case are tested.",
+				"- The explanation connects a player action to the blocks that change the stage."
+			],
+			() => [
+				"- Sprites, variables, broadcasts, costumes, sounds, or clones are checked where the project uses them.",
+				"- The game can be replayed without stale state from the previous run.",
+				"- The review note identifies the event chain that controls the most important behavior."
+			]
+		]);
+	}
+	if (isPygameSource(source)) {
+		return variantLines(context, [
+			() => [
+				"- The game starts from a predictable state and can be restarted or ended intentionally.",
+				"- Actor updates, input events, collisions, score/health changes, and draw order are verified.",
+				"- The final note names the game loop, the most important state variable, and one bug or edge case found during playtesting."
+			],
+			() => [
+				"- The first frame, input response, collision path, score or health update, and end state are tested.",
+				"- Draw order and state updates remain understandable when the game is replayed.",
+				"- The review identifies one state variable or loop branch that caused a visible behavior."
+			],
+			() => [
+				"- Normal play, missed input, collision or no-collision, and reset behavior all have defined results.",
+				"- Temporary debug output or a visible indicator confirms the important state transition.",
+				"- The final explanation separates event handling, updating, collision logic, and rendering."
+			]
+		]);
+	}
+	if (isSecurityContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- Scope, authorization, allowed tools, and stop conditions are explicit.",
+				"- Evidence is interpreted rather than pasted without explanation.",
+				"- The final state includes mitigation, hardening, rollback, or verification evidence."
+			],
+			() => [
+				"- The allowed local target, disallowed actions, reset path, and defensive goal are named.",
+				"- Before/after evidence shows what changed and why the change matters.",
+				"- The conclusion distinguishes observation, risk, remediation, and remaining limitation."
+			],
+			() => [
+				"- The lab stays inside the stated authorization boundary and uses only approved local evidence.",
+				"- The result explains impact rather than only listing tool output.",
+				"- Retest evidence, monitoring, hardening, or rollback notes close the loop."
+			]
+		]);
+	}
+	if (isSystemsContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- The command, environment, file, process, memory, register, or service boundary is named.",
+				"- Normal behavior and one failure or edge path are verified with concrete output.",
+				"- The final note is reproducible from a clean shell or checkout."
+			],
+			() => [
+				"- Setup, run, observe, cleanup, and retest commands are specific enough to repeat.",
+				"- At least one healthy output and one diagnostic output are captured.",
+				"- The explanation names the boundary or assumption that controlled the result."
+			],
+			() => [
+				"- Environment assumptions, resource boundaries, expected output, and failure behavior are visible.",
+				"- Terminal, trace, debugger, sanitizer, or log evidence supports the result.",
+				"- The final state includes a reproducible command path and any required cleanup."
+			]
+		]);
+	}
+	if (isWebContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- The visible user flow, state transition, and data/API behavior work in the browser.",
+				"- Loading, empty, invalid, or error behavior is checked where relevant.",
+				"- A narrow and wide layout or accessibility check is included."
+			],
+			() => [
+				"- The page shows the expected result for a normal action and an invalid, empty, or failed action.",
+				"- State, rendering, and request or persistence behavior agree with the requirement.",
+				"- Browser evidence includes at least one responsive, keyboard, console, network, or accessibility check."
+			],
+			() => [
+				"- User input, state update, rendered output, and error messaging are all inspectable.",
+				"- The implementation handles at least one loading, empty, validation, or server-response edge case.",
+				"- The review includes a layout or accessibility note, not only a happy-path screenshot."
+			]
+		]);
+	}
+	if (isDataAiMlContext(context)) {
+		return variantLines(context, [
+			() => [
+				"- The question, dataset or state-space assumptions, and metric or evidence source are explicit.",
+				"- A baseline, sanity check, or small hand-checkable example supports the result.",
+				"- The final interpretation includes at least one limitation."
+			],
+			() => [
+				"- The source data or state space, target question, comparison point, and metric are named.",
+				"- An intermediate table, statistic, trace, or visualization is checked before the conclusion.",
+				"- The writeup names one caveat about sampling, labels, assumptions, leakage, or measurement."
+			],
+			() => [
+				"- The result is compared with a baseline, toy case, or expectation that can be inspected.",
+				"- Transformations, model/search behavior, or visual encodings are not hidden behind the final answer.",
+				"- The conclusion separates measured evidence from interpretation and future work."
+			]
+		]);
+	}
+
+	return variantLines(context, [
+		() => [
+			"- The artifact demonstrates the module concept through observable behavior, output, tests, traces, logs, or another concrete result.",
+			"- The protected boundary or failure case is named explicitly and is not only the provided sample.",
+			"- The final note identifies one implementation, debugging, or reasoning choice that materially affected the result."
+		],
+		() => [
+			"- The result is visible, runnable, inspectable, or supported by concrete evidence.",
+			"- A normal case and a changed, edge, or failure case are both checked.",
+			"- The explanation names one decision that affected correctness, clarity, robustness, or interpretation."
+		],
+		() => [
+			"- Requirements, evidence, and success criteria are specific enough to review later.",
+			"- The work includes at least one verification case beyond the provided sample.",
+			"- The final note explains what changed, what was proven, and what limitation remains."
+		]
+	]);
+}
+
+function studioExtensionPrompt(context: CourseTextContext) {
+	const source = contextText(context);
+
+	if (isScratchSource(source)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one feedback cue so the player can tell which state changed.",
+			() =>
+				"Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic.",
+			() =>
+				"Add one difficulty option by changing a timer, score, speed, clone rule, or reset condition.",
+			() =>
+				"Add one extra play path and explain which variable, broadcast, or event block controls it."
+		]);
+	}
+	if (isPygameSource(source)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one actor, level state, collision rule, or scoring rule while keeping the game loop readable.",
+			() =>
+				"Add a debug display that exposes position, velocity, collision, score, health, or state data.",
+			() =>
+				"Add one input mode or difficulty curve without hiding the main state updates.",
+			() =>
+				"Add one boundary test for startup, controls, collision, scoring, reset, or end-state behavior."
+		]);
+	}
+	if (isSwiftAppContext(context)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one small view, state transition, navigation path, or persistence check.",
+			() =>
+				"Add one loading, empty, invalid, or offline state and verify the simulator behavior.",
+			() =>
+				"Add one accessibility improvement such as a label, trait, contrast check, or Dynamic Type check.",
+			() =>
+				"Add one release-readiness check that records build, signing, asset, or preview evidence."
+		]);
+	}
+	if (isSecurityContext(context)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one defensive verification step that proves the mitigation or hardening change works.",
+			() =>
+				"Add one allowed failure-path test and document the evidence without expanding the lab scope.",
+			() =>
+				"Add a rollback, reset, detection, or monitoring step tied to the same local scenario.",
+			() =>
+				"Add one scope note that states what is intentionally not tested and why."
+		]);
+	}
+	if (isSystemsContext(context)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one diagnostic command and the expected output that confirms the system state.",
+			() =>
+				"Add one failure-mode check and record the command that separates it from the healthy state.",
+			() =>
+				"Add a rollback, cleanup, logging, permission, service, memory, or process check.",
+			() =>
+				"Add one trace or sanitizer-style check that can be rerun from a clean shell."
+		]);
+	}
+	if (isWebContext(context)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one loading, empty, invalid, or error state and verify it in the browser.",
+			() =>
+				"Add one responsive layout or accessibility check that changes the visible result.",
+			() =>
+				"Add one user-flow variation that changes input, state, API behavior, or persistence.",
+			() =>
+				"Add one console, network, or server-side verification step for the same user action."
+		]);
+	}
+	if (isDataAiMlContext(context)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one baseline, sanity check, hand-checkable example, or limitation note.",
+			() =>
+				"Add a second metric, comparison, or visualization and explain what it changes.",
+			() =>
+				"Add one data-quality check for missing values, outliers, labels, leakage, or sampling bias.",
+			() =>
+				"Add one interpretation note that separates evidence from speculation."
+		]);
+	}
+	if (isJavaContext(context)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one method, subclass, interface, record, collection case, or edge-case test.",
+			() =>
+				"Add one object-state or method-dispatch trace that proves the intended behavior.",
+			() =>
+				"Add one invalid-input, boundary, or overload case that protects the class contract.",
+			() =>
+				"Add one small refactor that improves responsibility boundaries without changing public behavior."
+		]);
+	}
+	if (isCppContext(context)) {
+		return variantPrompt(context, [
+			() =>
+				"Add one debug mode, benchmark, sanitizer check, lifetime-boundary test, or invalid-input case.",
+			() =>
+				"Add one trace that exposes a pointer, reference, ownership, memory, or performance decision.",
+			() =>
+				"Add one build, debugger, logging, or test command that confirms the low-level behavior.",
+			() =>
+				"Add one resource-boundary check and record the diagnostic evidence."
+		]);
+	}
+
+	return variantPrompt(context, [
+		() => "Add one changed constraint that still uses the same core idea.",
+		() =>
+			"Add one transfer case that changes the input, representation, or success condition.",
+		() =>
+			"Add one verification example that would catch a different mistake than the original case.",
+		() =>
+			"Add one small feature and explain which concept it reuses rather than only decorating the output."
+	]);
+}
+
 function studioSupport(context: CourseTextContext) {
 	const studioFocus = variantPrompt(context, [
-		subject =>
-			`Define the problem, prerequisite concepts, and success criteria for ${subject}. The ${subject} artifact should identify what is being created, which constraints matter, and which evidence proves the work is correct.`,
-		subject =>
-			`Use ${subject} to name the artifact, core requirement, constraint, and verification evidence before adding polish.`,
-		subject =>
-			`For ${subject}, separate the minimum working version from extensions so the required behavior can be tested first.`,
-		subject =>
-			`Frame ${subject} around one observable result, the constraints that shape it, and the evidence that proves it works.`
+		() =>
+			"Define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.",
+		() =>
+			"Name the minimum working version first, then add extensions only after the required behavior is testable.",
+		() =>
+			"Frame the studio around one observable result, the constraints that shape it, and the evidence that proves it works.",
+		() =>
+			"Separate setup, core behavior, edge cases, and review notes so the finished artifact can be inspected later."
 	]);
+	const reviewTarget = stripLessonTitlePrefix(context.item.title);
 	const reviewStep = variantPrompt(context, [
-		subject =>
-			/^review\b/i.test(subject)
-				? `Use ${subject} to compare the finished work against the original goal and record at least one improvement or bug fix.`
-				: `Review ${subject} against the original goal and record at least one improvement or bug fix.`,
-		subject =>
-			`Compare ${subject} with the stated success criteria and note one revision that improves correctness, clarity, or robustness.`,
-		subject =>
-			`After ${subject} works, record one mismatch, limitation, or design choice that would guide a later revision.`,
-		subject =>
-			`Finish ${subject} by naming one test result, one improvement made, and one remaining constraint.`
+		() =>
+			`Compare ${reviewTarget} against the original goal and record at least one improvement or bug fix.`,
+		() =>
+			`Check ${reviewTarget} against the stated success criteria and note one revision that improves correctness, clarity, or robustness.`,
+		() =>
+			`After ${reviewTarget} works, record one mismatch, limitation, or design choice that would guide a later revision.`,
+		() =>
+			`Finish ${reviewTarget} by naming one test result, one improvement made, and one remaining constraint.`
 	]);
 
 	return [
 		`**Applied studio:** **${context.item.title}** produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
 		`**Studio focus:** ${studioFocus}`,
-		`**Build sequence:**\n${projectExpectations(context).join("\n")}\n- ${reviewStep}`,
-		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
-		`**Extension:** ${extensionPrompt(context)}`
+		`**Build sequence:**\n${studioBuildSequence(context).join("\n")}\n- ${reviewStep}`,
+		`**Completion checks:**\n${studioCompletionChecks(context).join("\n")}`,
+		`**Extension:** ${studioExtensionPrompt(context)}`
 	].join("\n\n");
 }
 
