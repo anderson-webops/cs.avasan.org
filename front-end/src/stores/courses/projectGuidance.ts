@@ -64,8 +64,8 @@ export function buildProjectGuidance({
 }: ProjectGuidanceOptions) {
 	const artifact = projectArtifact(projectKind);
 	const comparisonStep = hasReference
-		? "Compare with the reference solution after a working draft exists; record one difference that affects correctness, readability, robustness, or design."
-		: "Write a short verification note because no separate solution link is available yet; include the tests or traces used as evidence.";
+		? "Check the draft against the expected behavior after a working version exists; record one difference that affects correctness, readability, robustness, or design."
+		: "Write a short verification note that includes the tests or traces used as evidence.";
 
 	return [
 		`**Project goal:** Complete the linked ${courseFamily} ${artifact} for **${moduleTitle}** with visible behavior and verification evidence.`,

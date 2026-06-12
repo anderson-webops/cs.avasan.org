@@ -1811,7 +1811,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Starter: Street Searcher",
 					content:
-						"Expose the starter variant so students can re-enter the capstone path from a scaffold instead of only from the finished solution.",
+						"Expose the starter variant so students can re-enter the capstone path from a scaffold instead of only from the completed version.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher-Starter"
 				},

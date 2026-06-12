@@ -97,7 +97,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Review capstones for requirements, organization, input/output behavior, and explanation quality."
 		],
 		sourceAndTooling: [
-			"Standardize starter and solution parity across the Python source repos.",
+			"Standardize starter and staff-review parity across the Python source repos.",
 			"Use Python 3, optional pytest examples, and small CSV/JSON fixtures.",
 			"Keep bridge projects explicit about what changes when the same idea is written in Java or C++."
 		],
@@ -133,7 +133,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		projectExpectations: [
 			"PyGame arcade project with menu, score, collision, restart, and a playtest log.",
-			"Unity full-project starter and solution with scene setup, scripts, tests, asset attribution, and Git LFS rules.",
+			"Unity full-project starter and staff-review state with scene setup, scripts, tests, asset attribution, and Git LFS rules.",
 			"Capstone prototype that includes controls, win/loss loop, feedback, one polish pass, and a written bug-fix record."
 		],
 		assessmentStyle: [
@@ -144,8 +144,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		sourceAndTooling: [
 			"Use PyGame documentation for Python game-loop material.",
 			"Use Unity Learn, Unity Manual, Build Profiles, Input System, Test Framework, package locks, and Git LFS for Unity projects.",
-			"Keep THIRD_PARTY_ASSETS notes and engine version files with each Unity starter and solution.",
-			"Treat current Unity starter/solution source folders as the baseline; future mature modules should use checkpoint tags or equivalent history so game-growth history can be inspected over time.",
+			"Keep THIRD_PARTY_ASSETS notes and engine version files with each Unity starter and review state.",
+			"Treat current Unity starter and staff-review source folders as the baseline; future mature modules should use checkpoint tags or equivalent history so game-growth history can be inspected over time.",
 			"Unity source packages should document editor version, package baseline, Build Profiles, Input System setup, Edit Mode or Play Mode smoke tests, and asset-license provenance."
 		],
 		safetyAndAccess: [
@@ -292,7 +292,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sourceAndTooling: [
 			"Use ISO C++ Core Guidelines, local Makefile or CMake workflows, and source folders under Instruction-Material.",
-			"Keep starter/solution naming consistent across CPP Level 1-3 and DS&A repos.",
+			"Keep starter and staff-review naming consistent across CPP Level 1-3 and DS&A repos.",
 			"Use CS235/CS236-inspired concepts only after rewriting them into original course projects."
 		],
 		safetyAndAccess: [
@@ -395,7 +395,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Include unit tests or small driver programs for normal, empty, duplicate, invalid, and boundary cases."
 		],
 		sourceAndTooling: [
-			"Use JDK tooling, simple command-line builds or IDE projects, and explicit starter/solution source folders.",
+			"Use JDK tooling, simple command-line builds or IDE projects, and explicit starter plus staff-review source folders.",
 			"Keep Java records covered as immutable data carriers, not as a replacement for every class.",
 			"Maintain separate source links for graphics and non-graphics tracks."
 		],
@@ -442,12 +442,12 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sourceAndTooling: [
 			"Use College Board AP CSA course and exam documentation as the authority.",
-			"Link AP project starter/solution folders in the instruction-material source repo when available.",
+			"Link AP project starter folders and staff-review folders in the instruction-material source repo when available.",
 			"Keep downloaded AP media in the static classes media repo, not in Downloads.",
 			"Guardrails to refresh each cycle: official Java subset, Bluebook-style typed and uncompiled practice, four FRQ families, AP Lab Quartet references, data ethics, text-file/dataset practice, wrapper parsing, recursion, ArrayList analysis, and 2D arrays."
 		],
 		safetyAndAccess: [
-			"Do not expose solution links to students where they should only see starters.",
+			"Do not expose completed-state links to students where they should only see starters.",
 			"Avoid copying proprietary textbook material into course text.",
 			"Use practice problems in a way that respects source and licensing boundaries."
 		],
@@ -540,7 +540,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Use design tradeoff prompts, not just vocabulary quizzes."
 		],
 		sourceAndTooling: [
-			"Use language-specific source folders and starter/solution pairs.",
+			"Use language-specific source folders with starter and staff-review pairs.",
 			"Prefer small runnable examples over framework-heavy demos.",
 			"Keep cross-language comparisons explicit when a course borrows an idea from another language."
 		],
@@ -641,7 +641,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sourceAndTooling: [
 			"Use Apple's App Dev Training and current SwiftUI documentation as the authority.",
-			"Use Xcode, SwiftUI previews, local assets, and starter/solution projects where available.",
+			"Use Xcode, SwiftUI previews, local assets, and starter plus staff-review projects where available.",
 			"Keep simulator/device requirements explicit."
 		],
 		safetyAndAccess: [
@@ -692,7 +692,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		sourceAndTooling: [
 			"Use MDN JavaScript, RFC 9110 HTTP Semantics, OWASP Web Security Testing Guide, browser devtools, Git, npm, and deployment docs as anchors.",
-			"Keep starter/solution source folders in the Web Development Foundations and JavaScript repos.",
+			"Keep starter and staff-review source folders in the Web Development Foundations and JavaScript repos.",
 			"Use linting/formatting and simple local dev server scripts before frameworks.",
 			"Core topic checklist: semantic HTML, forms and labels, responsive CSS, DOM events, modules, promises, async/await, fetch, JSON, HTTP status codes, local storage, deployment, performance basics, and OWASP-informed validation."
 		],

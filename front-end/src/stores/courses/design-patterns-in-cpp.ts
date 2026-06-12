@@ -26,7 +26,7 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Why CMake Matters Here",
 					content:
-						"Use `CMake` to normalize repeatable builds across starter and solution projects. The goal is to make medium-sized C++ structure feel normal so patterns are learned in realistic code rather than isolated snippets."
+						"Use `CMake` to normalize repeatable builds across starter and review projects. The goal is to make medium-sized C++ structure feel normal so patterns are learned in realistic code rather than isolated snippets."
 				},
 				{
 					title: "DPC0 Setup and Tooling: Core Project",

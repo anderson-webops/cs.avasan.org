@@ -375,7 +375,7 @@ describe("implemented course development artifacts", () => {
 			"UGD7 Testing, Profiling, Builds, CI, and Asset Pipeline"
 		);
 		expect(unityText).toContain(
-			"UGD8 Full-Project Starter and Solution Repository Plan"
+			"UGD8 Full-Project Starter and Review Repository Plan"
 		);
 		expect(unityText).toContain("current full-project baseline");
 	}, 30000);

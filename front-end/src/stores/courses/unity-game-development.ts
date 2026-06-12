@@ -33,7 +33,7 @@ export const unityGameDevelopmentCourse: RawCourse = {
 				{
 					title: "Module 3 Supplemental 1",
 					content:
-						"Use the paired starter and solution snapshots as extra collision and object-state practice before moving into UI text work.",
+						"Use the paired starter and review snapshots as extra collision and object-state practice before moving into UI text work.",
 					projectLink: repo("UGD-03-supplemental-1-starter"),
 					solutionLink: repo("UGD-03-supplemental-1-solution")
 				},

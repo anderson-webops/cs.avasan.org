@@ -85,7 +85,7 @@ function familyFocus(courseFamily: string) {
 function referenceStep(hasReference = true) {
 	return hasReference
 		? "Compare the finished draft with the reference only after the artifact works; record one meaningful difference in behavior, robustness, readability, or design."
-		: "Write a verification note that identifies the evidence used because no separate reference solution is available.";
+		: "Write a verification note that identifies the evidence used to confirm the result.";
 }
 
 export function buildImplementationLabGuidance({

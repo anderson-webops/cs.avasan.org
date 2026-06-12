@@ -137,7 +137,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "Functions: Extension Challenge",
 					content:
-						"Use a focused starter/solution pair when function design and testing need one more pass.",
+						"Use a focused starter and review pair when function design and testing need one more pass.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF3-Functions-Supplemental-2/starter",
 					solutionLink:

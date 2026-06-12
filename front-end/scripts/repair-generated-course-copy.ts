@@ -66,8 +66,8 @@ function linkedProjectSpec(
 		? "transfer or extension project"
 		: "core implementation checkpoint";
 	const solutionNote = item.solutionLink
-		? "Compare with the reference solution only after a working draft exists."
-		: "Write a short verification note because no separate solution link is available yet.";
+		? "Check the draft against the expected behavior only after a working version exists."
+		: "Write a short verification note with the tests or traces used as evidence.";
 
 	return [
 		`**Project goal:** Complete the linked ${projectKind} ${projectRole} for ${moduleTitle}. The project should prove the module concept through a working artifact, not only through reading the repository link.`,

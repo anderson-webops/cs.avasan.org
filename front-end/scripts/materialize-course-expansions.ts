@@ -599,7 +599,7 @@ function buildLinkedSupplementalProjectItem(
 
 	return {
 		title,
-		content: `**Project goal:** Use this linked project as ${variant} for ${moduleTitle}. The purpose is to prove that the main concept transfers beyond the exact walkthrough.\n\n**Required work:**\n1. Read the starter and identify the expected inputs, outputs, and state changes.\n2. Implement the missing behavior without copying from the reference solution first.\n3. Add at least one normal case and one awkward or boundary case.\n4. Compare against the reference solution only after a working draft exists.\n\n**Completion checks:**\n- The changed constraint or edge case is named explicitly.\n- The implementation still satisfies the original module concept.\n- The final note explains one decision that would not be obvious from the starter alone.`,
+		content: `**Project goal:** Use this linked project as ${variant} for ${moduleTitle}. The purpose is to prove that the main concept transfers beyond the exact walkthrough.\n\n**Required work:**\n1. Read the starter and identify the expected inputs, outputs, and state changes.\n2. Implement the missing behavior without copying from a completed version first.\n3. Add at least one normal case and one awkward or boundary case.\n4. Check the draft against the expected behavior only after a working version exists.\n\n**Completion checks:**\n- The changed constraint or edge case is named explicitly.\n- The implementation still satisfies the original module concept.\n- The final note explains one decision that would not be obvious from the starter alone.`,
 		projectLink: resource.projectLink,
 		solutionLink: resource.solutionLink
 	};
@@ -1803,7 +1803,7 @@ async function main() {
 			) {
 				module.curriculum.push({
 					title: `${module.title}: Core Project`,
-					content: `Core implementation project for ${module.title}. The starter provides the working artifact, and the reference solution provides one complete implementation path with at least one custom verification case.`,
+					content: `Core implementation project for ${module.title}. The starter provides the working artifact, and the completed review path includes at least one custom verification case.`,
 					projectLink: resource.projectLink,
 					solutionLink: resource.solutionLink
 				});

@@ -495,7 +495,7 @@ const nextWorkByKind: Record<keyof typeof familyAssessmentCadence, string[]> = {
 		"Review public wording for defensive scope before release."
 	],
 	game: [
-		"Maintain full Unity starter/solution project baselines with tags.",
+		"Maintain full Unity starter and staff-review project baselines with tags.",
 		"Keep Git LFS, package locks, test framework, build profiles, and attribution files current.",
 		"Promote script-snapshot links to full-project links as each module reaches project-repo readiness."
 	]
@@ -862,7 +862,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Shared Zoom Constraint",
 				content:
-					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Completion check:** The same learning goal can be completed through the shared online material even when no household observation is available."
+					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Completion check:** The core objective can be completed through the shared online material even when no household observation is available."
 			}
 		],
 		supplementalProjects: [
@@ -1221,9 +1221,9 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 					"**Readiness check:** After each MCQ practice set, classify missed questions by distractor type: off-by-one, reference vs value, integer division, boolean logic, object state, array bounds, or method dispatch.\n\n**Completion check:** The student keeps an error log and repeats a targeted remediation problem."
 			},
 			{
-				title: "Solution-Link Remediation Rule",
+				title: "Answer-Check Remediation Rule",
 				content:
-					"**Learning sequence:** Any AP CSA project without a solution link should be either paired with a local source solution, marked as discussion-only, or added to the source-parity remediation list.\n\n**Completion check:** the course notes show whether a project is expected to be independently checked, discussed orally, or compared against a reference solution."
+					"**Learning sequence:** Any AP CSA project without an answer-check path should be paired with local review material, marked as discussion-only, or added to the source-parity remediation list.\n\n**Completion check:** the course notes show whether a project is expected to be independently checked, discussed orally, or reviewed against expected behavior."
 			}
 		],
 		supplementalProjects: [
@@ -1492,7 +1492,7 @@ function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 				{
 					title: "Physical-Material Boundary",
 					content:
-						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Completion check:** The same learning goal can be completed with only paper, notes, and browser/shared-screen access."
+						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Completion check:** The core objective can be completed with only paper, notes, and browser/shared-screen access."
 				}
 			],
 			supplementalProjects: [
@@ -1986,17 +1986,17 @@ function addUnityFullProjectWorkflowModules(
 	});
 
 	appendModule(course, {
-		title: "UGD8 Full-Project Starter and Solution Repository Plan",
+		title: "UGD8 Full-Project Starter and Review Repository Plan",
 		curriculum: [
 			{
 				title: "Repository Shape",
 				content:
-					"**Learning sequence:** Unity modules should move toward full starter and solution project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Completion check:** The linked starter state can be cloned, opened, played, tested, and built."
+					"**Learning sequence:** Unity modules should move toward full starter and staff-review project repositories or tags instead of script-only snapshots. Preserve the stable course ID `unity-game-development`; the current full-project baseline is linked from this module and is the standard shape for later full-project checkpoints.\n\n**Completion check:** The linked starter state can be cloned, opened, played, tested, and built."
 			},
 			{
-				title: "Starter and Solution Tag Model",
+				title: "Starter and Review Tag Model",
 				content:
-					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-solution` in starter/solution repos. Keep solution links restricted to staff-facing resource areas where visibility controls support that distinction.\n\n**Completion check:** The course makes it possible to compare starter and solution states without guessing which folder is current."
+					"**Learning sequence:** Use module tags such as `m01-start`, `m01-checkpoint`, and `m01-review` in starter and staff-review repos. Keep completed-state links restricted to staff-facing resource areas where visibility controls support that distinction.\n\n**Completion check:** The course makes it possible to compare starter and completed states without guessing which folder is current."
 			},
 			{
 				title: "Capstone Options",
@@ -2013,7 +2013,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "UGD8 Project 1: Starter Repo Specification",
 				content:
-					"**Project goal:** Inspect and extend the full starter project baseline for one Unity module: scenes, scripts, prefabs, tests, packages, project settings, docs, LFS rules, and attribution file.\n\n**Completion checks:**\n- The starter state is cloneable and playable.\n- Hidden solution work is not included.\n- Validation steps are documented.",
+					"**Project goal:** Inspect and extend the full starter project baseline for one Unity module: scenes, scripts, prefabs, tests, packages, project settings, docs, LFS rules, and attribution file.\n\n**Completion checks:**\n- The starter state is cloneable and playable.\n- Completed review work is not included in the starter state.\n- Validation steps are documented.",
 				projectLink: repoFolderUrl(
 					courseId,
 					"UGD-full-project-starter"
@@ -2055,9 +2055,6 @@ function backfillReferenceSolutionLinks(courseId: string, course: RawCourse) {
 				!item.solutionLink
 			) {
 				item.solutionLink = item.projectLink;
-				if (!/reference solution link/i.test(item.content)) {
-					item.content = `${item.content}\n\n**Reference solution link:** Until this project is split into separate starter and solution folders, the linked instruction-material folder is the canonical reference/source location for review. If a future starter-only folder is created, update this item to point project and solution links separately.`;
-				}
 			}
 		}
 	}

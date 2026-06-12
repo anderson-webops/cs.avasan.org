@@ -108,6 +108,18 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/Compare with the reference solution only after a working draft exists/i
 			);
+			expect(corpus).not.toMatch(/Reference solution link/i);
+			expect(corpus).not.toMatch(/Solution-Link/i);
+			expect(corpus).not.toMatch(/reference solution/i);
+			expect(corpus).not.toMatch(
+				/Until this project is split into separate starter and solution folders/i
+			);
+			expect(corpus).not.toMatch(/no separate solution link/i);
+			expect(corpus).not.toMatch(/canonical reference\/source location/i);
+			expect(corpus).not.toMatch(/starter[-/ ]and[-/ ]solution/i);
+			expect(corpus).not.toMatch(/starter\/solution/i);
+			expect(corpus).not.toMatch(/finished solution/i);
+			expect(corpus).not.toMatch(/same learning goal/i);
 			expect(corpus).toContain(
 				"as a working artifact with visible behavior and verification evidence"
 			);
