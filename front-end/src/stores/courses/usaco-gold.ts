@@ -310,7 +310,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Problem: Binary Indexed Tree / Fenwick Tree",
 					content:
-						"Use a direct Fenwick implementation lab to connect the data structure to concrete prefix-query behavior.",
+						"Build a direct Fenwick tree checkpoint that connects the data structure to concrete prefix-query behavior.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree"
 				},

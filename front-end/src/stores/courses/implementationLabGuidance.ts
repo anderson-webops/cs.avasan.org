@@ -13,7 +13,7 @@ export interface ImplementationLabGuidanceOptions {
 }
 
 function labLabel(moduleTitle: string) {
-	return moduleTitle.replace(/: Implementation Lab$/, "");
+	return moduleTitle.replace(/: (?:Implementation|Applied) Lab$/, "");
 }
 
 function familyFocus(courseFamily: string) {
@@ -99,7 +99,7 @@ export function buildImplementationLabGuidance({
 
 	if (section === "concepts") {
 		return [
-			`Use **${label}** to connect the implementation target to ${focus}.`,
+			`Use **${label}** to connect the build target to ${focus}.`,
 			"Define the artifact, the minimum working behavior, the input and output surfaces, and the invariant that should stay true as features are added.",
 			"Keep the scope concrete: the concept is not complete until the result can be run, inspected, and explained with evidence rather than only described in source code."
 		].join("\n\n");
@@ -123,8 +123,8 @@ export function buildImplementationLabGuidance({
 
 	const artifact =
 		section === "coreProject"
-			? "core implementation checkpoint"
-			: "extension implementation checkpoint";
+			? "core build checkpoint"
+			: "extension build checkpoint";
 
 	return [
 		`**Project goal:** Build the **${label}** ${artifact} as a working artifact with visible behavior and verification evidence.`,

@@ -1329,33 +1329,42 @@ function normalizeCourseTextQuality(course: RawCourse, courseId: string) {
 
 function normalizeImplementationLabLanguage(course: RawCourse) {
 	const titlePattern = /:\s*Implementation (?:Studio|Lab)\b/g;
-	const labelPattern = /\bImplementation Studio\b/g;
+	const implementationLabelPattern = /\bImplementation (?:Studio|Lab)\b/g;
+	const patternImplementationTitlePattern = /\bPattern Implementation Lab\b/g;
 	const definesPattern =
-		/[^.!?\n]+: Implementation Lab defines the target artifact, required behavior, and core concepts needed for the build or problem set\./g;
+		/[^.!?\n]+: (?:Implementation|Applied) Lab defines the target artifact, required behavior, and core concepts needed for the build or problem set\./g;
 	const centersPattern =
-		/[^.!?\n]+: Implementation Lab centers on one complete artifact\. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass\./g;
+		/[^.!?\n]+: (?:Implementation|Applied) Lab centers on one complete artifact\. The build sequence moves from a minimal working version to one targeted improvement or edge-case pass\./g;
 	const closesPattern =
-		/[^.!?\n]+: Implementation Lab closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration\./g;
+		/[^.!?\n]+: (?:Implementation|Applied) Lab closes with the edge cases that matter most and one improvement for a cleaner or safer next iteration\./g;
 	const extensionPattern =
-		/Extend the core build from [^.!?\n]+: Implementation Lab with/g;
+		/Extend the core build from [^.!?\n]+: (?:Implementation|Applied) Lab with/g;
 	const supplementalPattern =
-		/Supplemental project connected to [^.!?\n]+: Implementation Lab\. The linked starter provides the implementation artifact, and the solution provides the reference state\./g;
+		/Supplemental project connected to [^.!?\n]+: (?:Implementation|Applied) Lab\. The linked starter provides the implementation artifact, and the solution provides the reference state\./g;
 	const genericSupplementalPattern =
 		/Supplemental project connected to [^.!?\n]+\. The linked starter provides the implementation artifact, and the solution provides the reference state\./g;
 
 	for (const module of course.modules) {
-		module.title = module.title.replace(
-			titlePattern,
-			": Implementation Lab"
-		);
+		module.title = module.title
+			.replace(patternImplementationTitlePattern, "Pattern Applied Lab")
+			.replace(titlePattern, ": Applied Lab");
 
 		for (const section of ["curriculum", "supplementalProjects"] as const) {
 			for (const item of module[section]) {
 				item.title = item.title
-					.replace(titlePattern, ": Implementation Lab")
-					.replace(labelPattern, "Implementation Lab");
+					.replace(
+						patternImplementationTitlePattern,
+						"Pattern Applied Lab"
+					)
+					.replace(titlePattern, ": Applied Lab")
+					.replace(implementationLabelPattern, "Applied Lab");
 				item.content = item.content
-					.replace(labelPattern, "Implementation Lab")
+					.replace(
+						patternImplementationTitlePattern,
+						"Pattern Applied Lab"
+					)
+					.replace(titlePattern, ": Applied Lab")
+					.replace(implementationLabelPattern, "Applied Lab")
 					.replace(
 						definesPattern,
 						"This lab defines the artifact, required behavior, and core concepts for the project or problem set. Use it to name the inputs, outputs, constraints, and evidence of correctness before implementation begins."

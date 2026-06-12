@@ -147,7 +147,8 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/linked starter provides the implementation artifact/i
 			);
-			expect(corpus).toContain("Implementation Lab");
+			expect(corpus).not.toMatch(/Implementation Lab/i);
+			expect(corpus).toContain("Applied Lab");
 			expect(corpus).toContain("Learning Roadmap and Sequencing");
 		},
 		COURSE_SWEEP_TIMEOUT
