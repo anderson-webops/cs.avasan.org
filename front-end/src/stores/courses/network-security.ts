@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const networkSecurityCourse: RawCourse = {
 	name: "Network Security",
@@ -28,8 +29,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "NSEC0 Setup and Tooling: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for NSEC0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "NSEC0 Setup and Tooling",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-03-nsec0-setup-and-tooling/starter",
 					solutionLink:
@@ -48,8 +53,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for NSEC0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "NSEC0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-01-nsec0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,8 +66,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for NSEC0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "NSEC0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-02-nsec0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -91,8 +104,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Security Model of Networked Systems: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 1: Security Model of Networked Systems. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 1: Security Model of Networked Systems",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-04-unit-1-security-model-of-networked-systems/starter",
 					solutionLink:
@@ -111,8 +129,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Security Model of Networked Systems supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 1: Security Model of Networked Systems. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 1: Security Model of Networked Systems",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-03-unit-1-security-model-of-networked-systems-supplemental-2/starter",
 					solutionLink:
@@ -120,8 +143,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Security Model of Networked Systems supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 1: Security Model of Networked Systems. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 1: Security Model of Networked Systems",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-04-unit-1-security-model-of-networked-systems-supplemental-3/starter",
 					solutionLink:
@@ -174,8 +202,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Sockets, Ports, and Services supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 2: Sockets, Ports, and Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 2: Sockets, Ports, and Services",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-05-unit-2-sockets-ports-and-services-supplemental-2/starter",
 					solutionLink:
@@ -183,8 +215,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Sockets, Ports, and Services supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 2: Sockets, Ports, and Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 2: Sockets, Ports, and Services",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-06-unit-2-sockets-ports-and-services-supplemental-3/starter",
 					solutionLink:
@@ -217,8 +253,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: HTTP and API Security Basics: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 3: HTTP and API Security Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 3: HTTP and API Security Basics",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-05-unit-3-http-and-api-security-basics/starter",
 					solutionLink:
@@ -237,8 +277,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: HTTP and API Security Basics supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 3: HTTP and API Security Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 3: HTTP and API Security Basics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-07-unit-3-http-and-api-security-basics-supplemental-2/starter",
 					solutionLink:
@@ -246,8 +290,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: HTTP and API Security Basics supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 3: HTTP and API Security Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 3: HTTP and API Security Basics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-08-unit-3-http-and-api-security-basics-supplemental-3/starter",
 					solutionLink:
@@ -280,8 +328,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: TLS and Secure Transport: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 4: TLS and Secure Transport. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 4: TLS and Secure Transport",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-06-unit-4-tls-and-secure-transport/starter",
 					solutionLink:
@@ -300,8 +352,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: TLS and Secure Transport supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 4: TLS and Secure Transport. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 4: TLS and Secure Transport",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-4-tls-and-secure-transport-supplemental-2/starter",
 					solutionLink:
@@ -309,8 +365,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: TLS and Secure Transport supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 4: TLS and Secure Transport. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 4: TLS and Secure Transport",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-10-unit-4-tls-and-secure-transport-supplemental-3/starter",
 					solutionLink:
@@ -363,8 +423,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Input Validation on the Network Boundary supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 5: Input Validation on the Network Boundary. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 5: Input Validation on the Network Boundary",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-unit-5-input-validation-on-the-network-boundary-supplemental-2/starter",
 					solutionLink:
@@ -372,8 +437,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Input Validation on the Network Boundary supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 5: Input Validation on the Network Boundary. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 5: Input Validation on the Network Boundary",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-12-unit-5-input-validation-on-the-network-boundary-supplemental-3/starter",
 					solutionLink:
@@ -426,8 +496,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 6: Logging, Monitoring, and Forensics supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 6: Logging, Monitoring, and Forensics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 6: Logging, Monitoring, and Forensics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-13-unit-6-logging-monitoring-and-forensics-supplemental-2/starter",
 					solutionLink:
@@ -435,8 +510,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 6: Logging, Monitoring, and Forensics supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 6: Logging, Monitoring, and Forensics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 6: Logging, Monitoring, and Forensics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-14-unit-6-logging-monitoring-and-forensics-supplemental-3/starter",
 					solutionLink:
@@ -489,8 +569,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 7: Firewalls, Proxies, and Exposure supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 7: Firewalls, Proxies, and Exposure. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 7: Firewalls, Proxies, and Exposure",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-15-unit-7-firewalls-proxies-and-exposure-supplemental-2/starter",
 					solutionLink:
@@ -498,8 +582,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 7: Firewalls, Proxies, and Exposure supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 7: Firewalls, Proxies, and Exposure. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 7: Firewalls, Proxies, and Exposure",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-16-unit-7-firewalls-proxies-and-exposure-supplemental-3/starter",
 					solutionLink:
@@ -532,8 +620,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Secure Node/TypeScript Services: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 8: Secure Node/TypeScript Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 8: Secure Node/TypeScript Services",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-07-unit-8-secure-node-typescript-services/starter",
 					solutionLink:
@@ -552,8 +644,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Secure Node/TypeScript Services supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 8: Secure Node/TypeScript Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 8: Secure Node/TypeScript Services",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-17-unit-8-secure-node-typescript-services-supplemental-2/starter",
 					solutionLink:
@@ -561,8 +657,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Secure Node/TypeScript Services supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 8: Secure Node/TypeScript Services. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 8: Secure Node/TypeScript Services",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-18-unit-8-secure-node-typescript-services-supplemental-3/starter",
 					solutionLink:
@@ -615,8 +715,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 9: Defensive Network Tooling in TS supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 9: Defensive Network Tooling in TS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 9: Defensive Network Tooling in TS",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-19-unit-9-defensive-network-tooling-in-ts-supplemental-2/starter",
 					solutionLink:
@@ -624,8 +728,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 9: Defensive Network Tooling in TS supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 9: Defensive Network Tooling in TS. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 9: Defensive Network Tooling in TS",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-20-unit-9-defensive-network-tooling-in-ts-supplemental-3/starter",
 					solutionLink:
@@ -678,8 +786,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: WebSockets and Real Time Security supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 10: WebSockets and Real-Time Security. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 10: WebSockets and Real-Time Security",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-21-unit-10-websockets-and-real-time-security-supplemental-2/starter",
 					solutionLink:
@@ -687,8 +800,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: WebSockets and Real Time Security supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 10: WebSockets and Real-Time Security. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 10: WebSockets and Real-Time Security",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-22-unit-10-websockets-and-real-time-security-supplemental-3/starter",
 					solutionLink:
@@ -721,8 +839,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Deployment Security Basics: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 11: Deployment Security Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 11: Deployment Security Basics",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-08-unit-11-deployment-security-basics/starter",
 					solutionLink:
@@ -741,8 +863,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Deployment Security Basics supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 11: Deployment Security Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 11: Deployment Security Basics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-23-unit-11-deployment-security-basics-supplemental-2/starter",
 					solutionLink:
@@ -750,8 +876,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Deployment Security Basics supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 11: Deployment Security Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 11: Deployment Security Basics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-24-unit-11-deployment-security-basics-supplemental-3/starter",
 					solutionLink:
@@ -784,8 +914,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-09-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure/starter",
 					solutionLink:
@@ -804,8 +939,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-25-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-2/starter",
 					solutionLink:
@@ -813,8 +953,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 12: Authorized Penetration Testing, AI Assisted Workflow, and Disclosure supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"Unit 12: Authorized Penetration Testing, AI-Assisted Workflow, and Disclosure",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-26-unit-12-authorized-penetration-testing-ai-assisted-workflow-and-disclosure-supplemental-3/starter",
 					solutionLink:
@@ -847,8 +992,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 13: Capstone: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for Unit 13: Capstone. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 13: Capstone",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-10-unit-13-capstone/starter",
 					solutionLink:
@@ -867,8 +1016,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 13: Capstone supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 13: Capstone. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 13: Capstone",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-27-unit-13-capstone-supplemental-2/starter",
 					solutionLink:
@@ -876,8 +1029,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Unit 13: Capstone supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for Unit 13: Capstone. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "Unit 13: Capstone",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-28-unit-13-capstone-supplemental-3/starter",
 					solutionLink:
@@ -910,8 +1067,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "NSEC14 Expansion Ideas and Next Steps: Core Project",
-					content:
-						"**Project goal:** Complete the linked network systems core implementation checkpoint for NSEC14 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "NSEC14 Expansion Ideas and Next Steps",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-11-nsec14-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -930,8 +1091,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for NSEC14 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "NSEC14 Expansion Ideas and Next Steps",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-29-nsec14-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -939,8 +1104,12 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for NSEC14 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle: "NSEC14 Expansion Ideas and Next Steps",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-30-nsec14-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -988,8 +1157,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "network security lab 16 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for network security lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"network security lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-31-applied-studio-16-network-security-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -997,8 +1171,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "network security lab 16 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for network security lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"network security lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-32-applied-studio-16-network-security-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1046,8 +1225,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "network security lab 17 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for network security lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"network security lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-33-applied-studio-17-network-security-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1055,8 +1239,13 @@ export const networkSecurityCourse: RawCourse = {
 				},
 				{
 					title: "network security lab 17 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked network systems transfer or extension project for network security lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "network security",
+						moduleTitle:
+							"network security lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Network-Security/tree/main/NSEC-34-applied-studio-17-network-security-lab-17-supplemental-3/starter",
 					solutionLink:

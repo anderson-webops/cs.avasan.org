@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const aiLevel1Course: RawCourse = {
 	name: "AI Level 1",
@@ -28,8 +29,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "FAI0 Setup and Tooling: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for FAI0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "FAI0 Setup and Tooling",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main"
 				}
@@ -58,8 +63,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "The Marble Game AI(COPY)",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for FAI0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "FAI0 Setup and Tooling",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI8-The-Marble-Game-AI-Copy"
 				}
@@ -90,8 +99,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 1: AI Landscape and State Representation: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 1: AI Landscape and State Representation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 1: AI Landscape and State Representation",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Node-and-Graph-Class-Starter",
 					solutionLink:
@@ -124,8 +138,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 1: AI Landscape and State Representation supplemental 4",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Unit 1: AI Landscape and State Representation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 1: AI Landscape and State Representation",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-01-unit-1-ai-landscape-and-state-representation-supplemental-4/starter",
 					solutionLink:
@@ -158,8 +177,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 2: Stacks, Queues, and Traversal Intuition: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 2: Stacks, Queues, and Traversal Intuition. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 2: Stacks, Queues, and Traversal Intuition",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI4-Practice-with-Stacks"
 				}
@@ -188,8 +212,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 2: Stacks, Queues, and Traversal Intuition supplemental 4",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Unit 2: Stacks, Queues, and Traversal Intuition. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 2: Stacks, Queues, and Traversal Intuition",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-02-unit-2-stacks-queues-and-traversal-intuition-supplemental-4/starter",
 					solutionLink:
@@ -222,8 +251,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 3: DFS, BFS, and Reachability: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 3: DFS, BFS, and Reachability. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "Unit 3: DFS, BFS, and Reachability",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI5-Implement-DFS"
 				}
@@ -286,8 +319,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 4: Informed and Bounded Search: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 4: Informed and Bounded Search. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "Unit 4: Informed and Bounded Search",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI9-Implement-DLS"
 				}
@@ -355,8 +392,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 5: Rule-Based Systems and Puzzle Framing: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 5: Rule-Based Systems and Puzzle Framing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 5: Rule-Based Systems and Puzzle Framing",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI2-Adventure-Game"
 				}
@@ -385,8 +427,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 5: Rule Based Systems and Puzzle Framing supplemental 4",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Unit 5: Rule-Based Systems and Puzzle Framing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 5: Rule-Based Systems and Puzzle Framing",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-03-unit-5-rule-based-systems-and-puzzle-framing-supplemental-4/starter",
 					solutionLink:
@@ -419,8 +466,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 6: Heuristics and Game AI: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 6: Heuristics and Game AI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "Unit 6: Heuristics and Game AI",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI7-Tic-Tac-Toe-Tree-Node"
 				}
@@ -481,8 +532,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 7: Features, Evaluation, and Responsible AI: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 7: Features, Evaluation, and Responsible AI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 7: Features, Evaluation, and Responsible AI",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI10-Implement-Greedy-Search"
 				}
@@ -504,8 +560,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 7: Features, Evaluation, and Responsible AI supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Unit 7: Features, Evaluation, and Responsible AI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 7: Features, Evaluation, and Responsible AI",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-04-unit-7-features-evaluation-and-responsible-ai-supplemental-3/starter",
 					solutionLink:
@@ -538,8 +599,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 8: Capstone and Portfolio Build: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for Unit 8: Capstone and Portfolio Build. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "Unit 8: Capstone and Portfolio Build",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI11-8-Puzzle-Solver"
 				}
@@ -593,8 +658,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unit 9: Repo Extension Bank and Canonical Variants: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Unit 9: Repo Extension Bank and Canonical Variants. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unit 9: Repo Extension Bank and Canonical Variants",
+						projectKind: "extension",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/FAI-Special-Graphs"
 				}
@@ -691,8 +761,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 13 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 13: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-05-applied-studio-11-ai-search-lab-13-supplemental-2/starter",
 					solutionLink:
@@ -700,8 +774,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 13 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 13: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-06-applied-studio-11-ai-search-lab-13-supplemental-3/starter",
 					solutionLink:
@@ -749,8 +827,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 14 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-07-applied-studio-12-ai-search-lab-14-supplemental-2/starter",
 					solutionLink:
@@ -758,8 +840,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 14 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-08-applied-studio-12-ai-search-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -807,8 +893,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 15 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-09-applied-studio-13-ai-search-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -816,8 +906,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 15 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-10-applied-studio-13-ai-search-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -865,8 +959,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 16 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-11-applied-studio-14-ai-search-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -874,8 +972,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 16 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-12-applied-studio-14-ai-search-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -923,8 +1025,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 17 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-13-applied-studio-15-ai-search-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -932,8 +1038,12 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "ai search lab 17 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ai search lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle: "ai search lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-14-applied-studio-15-ai-search-lab-17-supplemental-3/starter",
 					solutionLink:
@@ -977,8 +1087,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unbeatable TicTacToe AI 1 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Unbeatable TicTacToe AI 1: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unbeatable TicTacToe AI 1: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-15-applied-studio-16-unbeatable-tictactoe-ai-1-supplemental-2/starter",
 					solutionLink:
@@ -986,8 +1101,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "Unbeatable TicTacToe AI 1 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Unbeatable TicTacToe AI 1: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"Unbeatable TicTacToe AI 1: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-16-applied-studio-16-unbeatable-tictactoe-ai-1-supplemental-3/starter",
 					solutionLink:
@@ -1031,8 +1151,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "The Marble Game AI(COPY) supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for The Marble Game AI(COPY): Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"The Marble Game AI(COPY): Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-17-applied-studio-17-the-marble-game-ai-copy-supplemental-2/starter",
 					solutionLink:
@@ -1040,8 +1165,13 @@ export const aiLevel1Course: RawCourse = {
 				},
 				{
 					title: "The Marble Game AI(COPY) supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for The Marble Game AI(COPY): Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "AI/Python",
+						moduleTitle:
+							"The Marble Game AI(COPY): Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-1/tree/main/AI-18-applied-studio-17-the-marble-game-ai-copy-supplemental-3/starter",
 					solutionLink:

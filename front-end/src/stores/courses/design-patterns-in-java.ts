@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const designPatternsInJavaCourse: RawCourse = {
 	name: "Design Patterns in Java",
@@ -38,8 +39,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ1 What Patterns Are and What They Are Not: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ1 What Patterns Are and What They Are Not. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ1 What Patterns Are and What They Are Not",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-04-dpj1-what-patterns-are-and-what-they-are-not/starter",
 					solutionLink:
@@ -58,8 +64,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "What Patterns Are and What They Are Not Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ1 What Patterns Are and What They Are Not. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ1 What Patterns Are and What They Are Not",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-01-dpj1-what-patterns-are-and-what-they-are-not-supplemental-2/starter",
 					solutionLink:
@@ -67,8 +78,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "What Patterns Are and What They Are Not Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ1 What Patterns Are and What They Are Not. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ1 What Patterns Are and What They Are Not",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-02-dpj1-what-patterns-are-and-what-they-are-not-supplemental-3/starter",
 					solutionLink:
@@ -111,8 +127,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ2 Java Design Foundations: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ2 Java Design Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ2 Java Design Foundations",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-05-dpj2-java-design-foundations/starter",
 					solutionLink:
@@ -131,8 +151,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Java Design Foundations Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ2 Java Design Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ2 Java Design Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-03-dpj2-java-design-foundations-supplemental-2/starter",
 					solutionLink:
@@ -140,8 +164,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Java Design Foundations Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ2 Java Design Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ2 Java Design Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-04-dpj2-java-design-foundations-supplemental-3/starter",
 					solutionLink:
@@ -184,8 +212,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ3 Creational Patterns I: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ3 Creational Patterns I. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ3 Creational Patterns I",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-06-dpj3-creational-patterns-i/starter",
 					solutionLink:
@@ -204,8 +236,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Creational Patterns I Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ3 Creational Patterns I. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ3 Creational Patterns I",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-05-dpj3-creational-patterns-i-supplemental-2/starter",
 					solutionLink:
@@ -213,8 +249,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Creational Patterns I Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ3 Creational Patterns I. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ3 Creational Patterns I",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-06-dpj3-creational-patterns-i-supplemental-3/starter",
 					solutionLink:
@@ -257,8 +297,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ4 Creational Patterns II and Boundary Patterns: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ4 Creational Patterns II and Boundary Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ4 Creational Patterns II and Boundary Patterns",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-07-dpj4-creational-patterns-ii-and-boundary-patterns/starter",
 					solutionLink:
@@ -277,8 +322,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Creational Patterns II and Boundary Patterns Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ4 Creational Patterns II and Boundary Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ4 Creational Patterns II and Boundary Patterns",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-07-dpj4-creational-patterns-ii-and-boundary-patterns-supplemental-2/starter",
 					solutionLink:
@@ -286,8 +336,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Creational Patterns II and Boundary Patterns Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ4 Creational Patterns II and Boundary Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ4 Creational Patterns II and Boundary Patterns",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-08-dpj4-creational-patterns-ii-and-boundary-patterns-supplemental-3/starter",
 					solutionLink:
@@ -330,8 +385,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ5 Structural Patterns in Depth: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ5 Structural Patterns in Depth. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ5 Structural Patterns in Depth",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-08-dpj5-structural-patterns-in-depth/starter",
 					solutionLink:
@@ -350,8 +409,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Structural Patterns in Depth Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ5 Structural Patterns in Depth. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ5 Structural Patterns in Depth",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-09-dpj5-structural-patterns-in-depth-supplemental-2/starter",
 					solutionLink:
@@ -359,8 +422,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Structural Patterns in Depth Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ5 Structural Patterns in Depth. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ5 Structural Patterns in Depth",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-10-dpj5-structural-patterns-in-depth-supplemental-3/starter",
 					solutionLink:
@@ -403,8 +470,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ6 Behavioral Patterns I: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ6 Behavioral Patterns I. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ6 Behavioral Patterns I",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-09-dpj6-behavioral-patterns-i/starter",
 					solutionLink:
@@ -423,8 +494,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Behavioral Patterns I Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ6 Behavioral Patterns I. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ6 Behavioral Patterns I",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-11-dpj6-behavioral-patterns-i-supplemental-2/starter",
 					solutionLink:
@@ -432,8 +507,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Behavioral Patterns I Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ6 Behavioral Patterns I. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ6 Behavioral Patterns I",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-12-dpj6-behavioral-patterns-i-supplemental-3/starter",
 					solutionLink:
@@ -476,8 +555,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ7 Behavioral Patterns II: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ7 Behavioral Patterns II. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ7 Behavioral Patterns II",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-10-dpj7-behavioral-patterns-ii/starter",
 					solutionLink:
@@ -496,8 +579,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Behavioral Patterns II Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ7 Behavioral Patterns II. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ7 Behavioral Patterns II",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-13-dpj7-behavioral-patterns-ii-supplemental-2/starter",
 					solutionLink:
@@ -505,8 +592,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Behavioral Patterns II Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ7 Behavioral Patterns II. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ7 Behavioral Patterns II",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-14-dpj7-behavioral-patterns-ii-supplemental-3/starter",
 					solutionLink:
@@ -549,8 +640,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ8 Modern Extensions and Architecture-Level Patterns: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ8 Modern Extensions and Architecture-Level Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ8 Modern Extensions and Architecture-Level Patterns",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-11-dpj8-modern-extensions-and-architecture-level-patterns/starter",
 					solutionLink:
@@ -569,8 +665,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Modern Extensions and Architecture Level Patterns Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ8 Modern Extensions and Architecture-Level Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ8 Modern Extensions and Architecture-Level Patterns",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-15-dpj8-modern-extensions-and-architecture-level-patterns-supplemental-2/starter",
 					solutionLink:
@@ -578,8 +679,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Modern Extensions and Architecture Level Patterns Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ8 Modern Extensions and Architecture-Level Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ8 Modern Extensions and Architecture-Level Patterns",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-16-dpj8-modern-extensions-and-architecture-level-patterns-supplemental-3/starter",
 					solutionLink:
@@ -622,8 +728,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ9 Pattern Selection and Refactoring Judgment: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ9 Pattern Selection and Refactoring Judgment. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ9 Pattern Selection and Refactoring Judgment",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-12-dpj9-pattern-selection-and-refactoring-judgment/starter",
 					solutionLink:
@@ -642,8 +753,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Selection and Refactoring Judgment Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ9 Pattern Selection and Refactoring Judgment. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ9 Pattern Selection and Refactoring Judgment",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-17-dpj9-pattern-selection-and-refactoring-judgment-supplemental-2/starter",
 					solutionLink:
@@ -651,8 +767,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Selection and Refactoring Judgment Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ9 Pattern Selection and Refactoring Judgment. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"DPJ9 Pattern Selection and Refactoring Judgment",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-18-dpj9-pattern-selection-and-refactoring-judgment-supplemental-3/starter",
 					solutionLink:
@@ -695,8 +816,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "DPJ10 Capstone Refactor: Core Project",
-					content:
-						"**Project goal:** Complete the linked Java core implementation checkpoint for DPJ10 Capstone Refactor. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ10 Capstone Refactor",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-13-dpj10-capstone-refactor/starter",
 					solutionLink:
@@ -715,8 +840,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Capstone Refactor Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ10 Capstone Refactor. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ10 Capstone Refactor",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-19-dpj10-capstone-refactor-supplemental-2/starter",
 					solutionLink:
@@ -724,8 +853,12 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Capstone Refactor Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for DPJ10 Capstone Refactor. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "DPJ10 Capstone Refactor",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-20-dpj10-capstone-refactor-supplemental-3/starter",
 					solutionLink:
@@ -773,8 +906,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 15 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Pattern Implementation Lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Pattern Implementation Lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-29-applied-studio-15-pattern-implementation-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -782,8 +920,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 15 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Pattern Implementation Lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Pattern Implementation Lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-30-applied-studio-15-pattern-implementation-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -831,8 +974,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 16 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Pattern Implementation Lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Pattern Implementation Lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-31-applied-studio-16-pattern-implementation-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -840,8 +988,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 16 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Pattern Implementation Lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Pattern Implementation Lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-32-applied-studio-16-pattern-implementation-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -889,8 +1042,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 17 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Pattern Implementation Lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Pattern Implementation Lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-33-applied-studio-17-pattern-implementation-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -898,8 +1056,13 @@ export const designPatternsInJavaCourse: RawCourse = {
 				},
 				{
 					title: "Pattern Implementation Lab 17 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Pattern Implementation Lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Pattern Implementation Lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/DPJ-34-applied-studio-17-pattern-implementation-lab-17-supplemental-3/starter",
 					solutionLink:

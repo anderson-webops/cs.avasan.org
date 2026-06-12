@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const webDevelopmentFoundationsCourse: RawCourse = {
 	name: "Web Development Foundations",
@@ -33,8 +34,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF0 Setup and Tooling: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF0 Setup and Tooling",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf0-setup-and-tooling/starter",
 					solutionLink:
@@ -53,8 +58,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-01-wdf0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -62,8 +71,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-02-wdf0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -101,8 +114,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF1 Positioning, Goals, and Suggested Course Family: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF1 Positioning, Goals, and Suggested Course Family. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF1 Positioning, Goals, and Suggested Course Family",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf1-positioning-goals-and-suggested-course-family/starter",
 					solutionLink:
@@ -121,8 +139,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF1 Positioning, Goals, and Suggested Course Family. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF1 Positioning, Goals, and Suggested Course Family",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-03-wdf1-positioning-goals-and-suggested-course-family-supplemental-2/starter",
 					solutionLink:
@@ -130,8 +153,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Positioning, Goals, and Suggested Course Family supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF1 Positioning, Goals, and Suggested Course Family. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF1 Positioning, Goals, and Suggested Course Family",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-04-wdf1-positioning-goals-and-suggested-course-family-supplemental-3/starter",
 					solutionLink:
@@ -164,8 +192,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF2 Stage 1: Strengthen the Existing JavaScript Courses: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF2 Stage 1: Strengthen the Existing JavaScript Courses. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF2 Stage 1: Strengthen the Existing JavaScript Courses",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf2-stage-1-strengthen-the-existing-javascript-courses/starter",
 					solutionLink:
@@ -184,8 +217,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF2 Stage 1: Strengthen the Existing JavaScript Courses. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF2 Stage 1: Strengthen the Existing JavaScript Courses",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-05-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-2/starter",
 					solutionLink:
@@ -193,8 +231,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 1: Strengthen the Existing JavaScript Courses supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF2 Stage 1: Strengthen the Existing JavaScript Courses. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF2 Stage 1: Strengthen the Existing JavaScript Courses",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-06-wdf2-stage-1-strengthen-the-existing-javascript-courses-supplemental-3/starter",
 					solutionLink:
@@ -227,8 +270,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF3 Stage 2: Web Development Foundations: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF3 Stage 2: Web Development Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF3 Stage 2: Web Development Foundations",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF1-Portfolio-Custom-Domain/starter",
 					solutionLink:
@@ -247,8 +295,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 2: Web Development Foundations supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF3 Stage 2: Web Development Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF3 Stage 2: Web Development Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-07-wdf3-stage-2-web-development-foundations-supplemental-2/starter",
 					solutionLink:
@@ -256,8 +309,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 2: Web Development Foundations supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF3 Stage 2: Web Development Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF3 Stage 2: Web Development Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf3-stage-2-web-development-foundations-supplemental-3/starter",
 					solutionLink:
@@ -290,8 +348,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF4 Stage 3: Front-End Applications: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF4 Stage 3: Front-End Applications. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF4 Stage 3: Front-End Applications",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF4-Realtime-Chat-App/starter",
 					solutionLink:
@@ -310,8 +372,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 3: Front End Applications supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF4 Stage 3: Front-End Applications. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF4 Stage 3: Front-End Applications",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf4-stage-3-front-end-applications-supplemental-2/starter",
 					solutionLink:
@@ -319,8 +385,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 3: Front End Applications supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF4 Stage 3: Front-End Applications. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF4 Stage 3: Front-End Applications",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf4-stage-3-front-end-applications-supplemental-3/starter",
 					solutionLink:
@@ -353,8 +423,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF5 Stage 4: Back-End Basics: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF5 Stage 4: Back-End Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF5 Stage 4: Back-End Basics",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF3-Booking-Contact-App/starter",
 					solutionLink:
@@ -373,8 +447,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 4: Back End Basics supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF5 Stage 4: Back-End Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF5 Stage 4: Back-End Basics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-11-wdf5-stage-4-back-end-basics-supplemental-2/starter",
 					solutionLink:
@@ -382,8 +460,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 4: Back End Basics supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF5 Stage 4: Back-End Basics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF5 Stage 4: Back-End Basics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-12-wdf5-stage-4-back-end-basics-supplemental-3/starter",
 					solutionLink:
@@ -416,8 +498,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF6 Stage 5: Databases and Data Models: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF6 Stage 5: Databases and Data Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF6 Stage 5: Databases and Data Models",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF2-Notes-App-with-MongoDB/starter",
 					solutionLink:
@@ -436,8 +522,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 5: Databases and Data Models supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF6 Stage 5: Databases and Data Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF6 Stage 5: Databases and Data Models",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-13-wdf6-stage-5-databases-and-data-models-supplemental-2/starter",
 					solutionLink:
@@ -445,8 +535,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 5: Databases and Data Models supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF6 Stage 5: Databases and Data Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF6 Stage 5: Databases and Data Models",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-14-wdf6-stage-5-databases-and-data-models-supplemental-3/starter",
 					solutionLink:
@@ -479,8 +573,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF7 Stage 6: Hosting and Deployment: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF7 Stage 6: Hosting and Deployment. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF7 Stage 6: Hosting and Deployment",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF5-Separate-Deployment-Lab/starter",
 					solutionLink:
@@ -499,8 +597,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 6: Hosting and Deployment supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF7 Stage 6: Hosting and Deployment. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF7 Stage 6: Hosting and Deployment",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-15-wdf7-stage-6-hosting-and-deployment-supplemental-2/starter",
 					solutionLink:
@@ -508,8 +610,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Stage 6: Hosting and Deployment supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF7 Stage 6: Hosting and Deployment. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF7 Stage 6: Hosting and Deployment",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-16-wdf7-stage-6-hosting-and-deployment-supplemental-3/starter",
 					solutionLink:
@@ -542,8 +648,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF8 Hosting and Operations Topics to Add: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF8 Hosting and Operations Topics to Add. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF8 Hosting and Operations Topics to Add",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-08-wdf8-hosting-and-operations-topics-to-add/starter",
 					solutionLink:
@@ -562,8 +673,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Hosting and Operations Topics to Add supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF8 Hosting and Operations Topics to Add. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF8 Hosting and Operations Topics to Add",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-17-wdf8-hosting-and-operations-topics-to-add-supplemental-2/starter",
 					solutionLink:
@@ -571,8 +687,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Hosting and Operations Topics to Add supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF8 Hosting and Operations Topics to Add. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"WDF8 Hosting and Operations Topics to Add",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-18-wdf8-hosting-and-operations-topics-to-add-supplemental-3/starter",
 					solutionLink:
@@ -641,8 +762,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Good Practical Projects supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF9 Good Practical Projects. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF9 Good Practical Projects",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-19-wdf9-good-practical-projects-supplemental-2/starter",
 					solutionLink:
@@ -650,8 +775,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Good Practical Projects supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF9 Good Practical Projects. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF9 Good Practical Projects",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-20-wdf9-good-practical-projects-supplemental-3/starter",
 					solutionLink:
@@ -684,8 +813,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF10 Suggested Advanced Strand: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF10 Suggested Advanced Strand. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF10 Suggested Advanced Strand",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-09-wdf10-suggested-advanced-strand/starter",
 					solutionLink:
@@ -704,8 +837,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Suggested Advanced Strand supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF10 Suggested Advanced Strand. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF10 Suggested Advanced Strand",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-21-wdf10-suggested-advanced-strand-supplemental-2/starter",
 					solutionLink:
@@ -713,8 +850,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Suggested Advanced Strand supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF10 Suggested Advanced Strand. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF10 Suggested Advanced Strand",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-22-wdf10-suggested-advanced-strand-supplemental-3/starter",
 					solutionLink:
@@ -747,8 +888,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF11 Integration with Network Topics: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF11 Integration with Network Topics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF11 Integration with Network Topics",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-10-wdf11-integration-with-network-topics/starter",
 					solutionLink:
@@ -767,8 +912,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Integration with Network Topics supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF11 Integration with Network Topics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF11 Integration with Network Topics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-23-wdf11-integration-with-network-topics-supplemental-2/starter",
 					solutionLink:
@@ -776,8 +925,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Integration with Network Topics supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF11 Integration with Network Topics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF11 Integration with Network Topics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-24-wdf11-integration-with-network-topics-supplemental-3/starter",
 					solutionLink:
@@ -810,8 +963,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "WDF12 Expansion Ideas and Next Steps: Core Project",
-					content:
-						"**Project goal:** Complete the linked web development core implementation checkpoint for WDF12 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF12 Expansion Ideas and Next Steps",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-11-wdf12-expansion-ideas-and-next-steps/starter",
 					solutionLink:
@@ -830,8 +987,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 2",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF12 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF12 Expansion Ideas and Next Steps",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-25-wdf12-expansion-ideas-and-next-steps-supplemental-2/starter",
 					solutionLink:
@@ -839,8 +1000,12 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "Expansion Ideas and Next Steps supplemental 3",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for WDF12 Expansion Ideas and Next Steps. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle: "WDF12 Expansion Ideas and Next Steps",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-26-wdf12-expansion-ideas-and-next-steps-supplemental-3/starter",
 					solutionLink:
@@ -888,8 +1053,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 14 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-27-applied-studio-14-full-stack-web-lab-14-supplemental-2/starter",
 					solutionLink:
@@ -897,8 +1067,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 14 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-28-applied-studio-14-full-stack-web-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -946,8 +1121,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 15 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-29-applied-studio-15-full-stack-web-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -955,8 +1135,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 15 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-30-applied-studio-15-full-stack-web-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -1004,8 +1189,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 16 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-31-applied-studio-16-full-stack-web-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -1013,8 +1203,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 16 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-32-applied-studio-16-full-stack-web-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1062,8 +1257,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 17 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-33-applied-studio-17-full-stack-web-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1071,8 +1271,13 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				},
 				{
 					title: "full stack web lab 17 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked web development transfer or extension project for full stack web lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "web development",
+						moduleTitle:
+							"full stack web lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Web-Development-Foundations/tree/main/WDF-34-applied-studio-17-full-stack-web-lab-17-supplemental-3/starter",
 					solutionLink:

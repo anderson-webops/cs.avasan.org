@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const linuxSystemsCourse: RawCourse = {
 	name: "Linux Systems",
@@ -48,8 +49,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for LS0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "LS0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-01-ls0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,8 +62,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for LS0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "LS0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-02-ls0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -91,8 +100,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Shell Foundations: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 1: Shell Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 1: Shell Foundations",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-1-shell-foundations/starter",
 					solutionLink:
@@ -111,8 +124,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Shell Foundations supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 1: Shell Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 1: Shell Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-03-unit-1-shell-foundations-supplemental-2/starter",
 					solutionLink:
@@ -120,8 +137,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Shell Foundations supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 1: Shell Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 1: Shell Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-04-unit-1-shell-foundations-supplemental-3/starter",
 					solutionLink:
@@ -169,8 +190,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 2: Filesystem Hierarchy and Directory Purpose. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 2: Filesystem Hierarchy and Directory Purpose",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-05-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-2/starter",
 					solutionLink:
@@ -178,8 +204,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Filesystem Hierarchy and Directory Purpose supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 2: Filesystem Hierarchy and Directory Purpose. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 2: Filesystem Hierarchy and Directory Purpose",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-2-filesystem-hierarchy-and-directory-purpose-supplemental-3/starter",
 					solutionLink:
@@ -212,8 +243,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Users, Groups, and Permissions: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 3: Users, Groups, and Permissions. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 3: Users, Groups, and Permissions",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-06-unit-3-users-groups-and-permissions/starter",
 					solutionLink:
@@ -232,8 +267,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 3: Users, Groups, and Permissions. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 3: Users, Groups, and Permissions",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-3-users-groups-and-permissions-supplemental-2/starter",
 					solutionLink:
@@ -241,8 +280,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Users, Groups, and Permissions supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 3: Users, Groups, and Permissions. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 3: Users, Groups, and Permissions",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-3-users-groups-and-permissions-supplemental-3/starter",
 					solutionLink:
@@ -275,8 +318,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: Editing and Configuration: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 4: Editing and Configuration. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 4: Editing and Configuration",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-07-unit-4-editing-and-configuration/starter",
 					solutionLink:
@@ -295,8 +342,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: Editing and Configuration supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 4: Editing and Configuration. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 4: Editing and Configuration",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-4-editing-and-configuration-supplemental-2/starter",
 					solutionLink:
@@ -304,8 +355,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: Editing and Configuration supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 4: Editing and Configuration. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 4: Editing and Configuration",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-4-editing-and-configuration-supplemental-3/starter",
 					solutionLink:
@@ -338,8 +393,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Processes and Job Control: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 5: Processes and Job Control. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 5: Processes and Job Control",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-08-unit-5-processes-and-job-control/starter",
 					solutionLink:
@@ -358,8 +417,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Processes and Job Control supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 5: Processes and Job Control. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 5: Processes and Job Control",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-5-processes-and-job-control-supplemental-2/starter",
 					solutionLink:
@@ -367,8 +430,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Processes and Job Control supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 5: Processes and Job Control. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 5: Processes and Job Control",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-5-processes-and-job-control-supplemental-3/starter",
 					solutionLink:
@@ -421,8 +488,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 6: Services and systemd supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 6: Services and systemd. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 6: Services and systemd",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-13-unit-6-services-and-systemd-supplemental-2/starter",
 					solutionLink:
@@ -430,8 +501,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 6: Services and systemd supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 6: Services and systemd. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 6: Services and systemd",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-14-unit-6-services-and-systemd-supplemental-3/starter",
 					solutionLink:
@@ -464,8 +539,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 7: Logging and Observability: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 7: Logging and Observability. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 7: Logging and Observability",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-09-unit-7-logging-and-observability/starter",
 					solutionLink:
@@ -484,8 +563,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 7: Logging and Observability supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 7: Logging and Observability. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 7: Logging and Observability",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-15-unit-7-logging-and-observability-supplemental-2/starter",
 					solutionLink:
@@ -493,8 +576,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 7: Logging and Observability supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 7: Logging and Observability. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 7: Logging and Observability",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-16-unit-7-logging-and-observability-supplemental-3/starter",
 					solutionLink:
@@ -547,8 +634,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Scheduling and Automation supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 8: Scheduling and Automation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 8: Scheduling and Automation",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-17-unit-8-scheduling-and-automation-supplemental-2/starter",
 					solutionLink:
@@ -556,8 +647,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Scheduling and Automation supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 8: Scheduling and Automation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 8: Scheduling and Automation",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-18-unit-8-scheduling-and-automation-supplemental-3/starter",
 					solutionLink:
@@ -590,8 +685,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 9: Package Management and Software Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 9: Package Management and Software Layout",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-10-unit-9-package-management-and-software-layout/starter",
 					solutionLink:
@@ -610,8 +710,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 9: Package Management and Software Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 9: Package Management and Software Layout",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-19-unit-9-package-management-and-software-layout-supplemental-2/starter",
 					solutionLink:
@@ -619,8 +724,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 9: Package Management and Software Layout supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 9: Package Management and Software Layout. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 9: Package Management and Software Layout",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-20-unit-9-package-management-and-software-layout-supplemental-3/starter",
 					solutionLink:
@@ -653,8 +763,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: Networking from a Systems View: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 10: Networking from a Systems View. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 10: Networking from a Systems View",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-11-unit-10-networking-from-a-systems-view/starter",
 					solutionLink:
@@ -673,8 +787,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 10: Networking from a Systems View. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 10: Networking from a Systems View",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-21-unit-10-networking-from-a-systems-view-supplemental-2/starter",
 					solutionLink:
@@ -682,8 +800,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 10: Networking from a Systems View supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 10: Networking from a Systems View. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 10: Networking from a Systems View",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-22-unit-10-networking-from-a-systems-view-supplemental-3/starter",
 					solutionLink:
@@ -745,8 +867,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Web Servers supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 11: Web Servers. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 11: Web Servers",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-23-unit-11-web-servers-supplemental-2/starter",
 					solutionLink:
@@ -754,8 +880,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 11: Web Servers supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 11: Web Servers. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "Unit 11: Web Servers",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-24-unit-11-web-servers-supplemental-3/starter",
 					solutionLink:
@@ -788,8 +918,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 12: Storage, Backups, and Reliability: Core Project",
-					content:
-						"**Project goal:** Complete the linked Linux systems core implementation checkpoint for Unit 12: Storage, Backups, and Reliability. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 12: Storage, Backups, and Reliability",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-12-unit-12-storage-backups-and-reliability/starter",
 					solutionLink:
@@ -808,8 +943,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 12: Storage, Backups, and Reliability. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 12: Storage, Backups, and Reliability",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-25-unit-12-storage-backups-and-reliability-supplemental-2/starter",
 					solutionLink:
@@ -817,8 +957,13 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "Unit 12: Storage, Backups, and Reliability supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for Unit 12: Storage, Backups, and Reliability. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle:
+							"Unit 12: Storage, Backups, and Reliability",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-26-unit-12-storage-backups-and-reliability-supplemental-3/starter",
 					solutionLink:
@@ -866,8 +1011,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 14 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-27-applied-studio-14-linux-systems-lab-14-supplemental-2/starter",
 					solutionLink:
@@ -875,8 +1024,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 14 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-28-applied-studio-14-linux-systems-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -924,8 +1077,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 15 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-29-applied-studio-15-linux-systems-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -933,8 +1090,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 15 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-30-applied-studio-15-linux-systems-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -982,8 +1143,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 16 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-31-applied-studio-16-linux-systems-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -991,8 +1156,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 16 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-32-applied-studio-16-linux-systems-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1040,8 +1209,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 17 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-33-applied-studio-17-linux-systems-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1049,8 +1222,12 @@ export const linuxSystemsCourse: RawCourse = {
 				},
 				{
 					title: "linux systems lab 17 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Linux systems transfer or extension project for linux systems lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Linux systems",
+						moduleTitle: "linux systems lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Linux-Systems/tree/main/LS-34-applied-studio-17-linux-systems-lab-17-supplemental-3/starter",
 					solutionLink:

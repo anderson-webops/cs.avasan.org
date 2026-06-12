@@ -92,6 +92,36 @@ describe("course text quality normalization", () => {
 	);
 
 	it(
+		"replaces generic linked-project boilerplate with concrete project guidance",
+		async () => {
+			const courses = await Promise.all(
+				courseCatalog.map(entry => loadRawCourse(entry.id))
+			);
+			const corpus = courses.map(allCourseText).join("\n");
+
+			expect(corpus).not.toMatch(
+				/The project should prove the module concept/i
+			);
+			expect(corpus).not.toMatch(
+				/Read the starter and identify the expected inputs/i
+			);
+			expect(corpus).not.toMatch(
+				/Compare with the reference solution only after a working draft exists/i
+			);
+			expect(corpus).toContain(
+				"as a working artifact with visible behavior and verification evidence"
+			);
+			expect(corpus).toContain(
+				"Test a normal path, a boundary or failure path"
+			);
+			expect(corpus).toContain(
+				"The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result"
+			);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
 		"keeps internal implementation-planning scaffolds out of visible course text",
 		async () => {
 			const courses = await Promise.all(
@@ -208,7 +238,50 @@ describe("course text quality normalization", () => {
 			.join("\n");
 
 		expect(corpus).not.toMatch(/linked Java (?:core|transfer)/i);
-		expect(corpus).toMatch(/linked web development (?:core|transfer)/i);
+		expect(corpus).not.toMatch(/courseFamily: "Java"/i);
+		expect(corpus).toContain('courseFamily: "web development"');
+	});
+
+	it("keeps generated project guidance labels aligned to course families", () => {
+		const courseFamilies = new Map([
+			["src/stores/courses/ai-level-1.ts", "AI/Python"],
+			["src/stores/courses/c-systems-engineering.ts", "C systems"],
+			[
+				"src/stores/courses/data-science-in-python.ts",
+				"data science in Python"
+			],
+			["src/stores/courses/machine-learning.ts", "machine learning"],
+			["src/stores/courses/network-security.ts", "network security"],
+			["src/stores/courses/pygames.ts", "Python/PyGame"],
+			[
+				"src/stores/courses/python-to-java-and-cpp-bridge.ts",
+				"Java/C++ bridge"
+			],
+			["src/stores/courses/usaco-bronze.ts", "USACO"],
+			["src/stores/courses/usaco-silver.ts", "USACO"],
+			["src/stores/courses/usaco-gold.ts", "USACO"]
+		]);
+
+		for (const [path, family] of courseFamilies) {
+			const source = fs.readFileSync(path, "utf8");
+			expect(source, path).toContain(`courseFamily: "${family}"`);
+		}
+
+		for (const path of [
+			"src/stores/courses/usaco-bronze.ts",
+			"src/stores/courses/usaco-silver.ts",
+			"src/stores/courses/usaco-gold.ts"
+		]) {
+			const source = fs.readFileSync(path, "utf8");
+			expect(source, path).not.toContain('courseFamily: "C++"');
+		}
+
+		expect(
+			fs.readFileSync(
+				"src/stores/courses/c-systems-engineering.ts",
+				"utf8"
+			)
+		).not.toContain('courseFamily: "implementation"');
 	});
 
 	it("keeps older JavaScript and Python project prompts from collapsing to one-line tasks", async () => {

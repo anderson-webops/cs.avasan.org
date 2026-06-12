@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const javaLevel1Course: RawCourse = {
 	name: "Java Level 1",
@@ -73,8 +74,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Variable Types & Input/Output supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JS1 Variable Types & Input/Output. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "JS1 Variable Types & Input/Output",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-01-js1-variable-types-input-output-supplemental-3/starter",
 					solutionLink:
@@ -135,8 +140,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Casting and Operators supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JS2 Casting and Operators. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "JS2 Casting and Operators",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-02-js2-casting-and-operators-supplemental-3/starter",
 					solutionLink:
@@ -353,8 +362,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Practice with Loops & Conditionals supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JS5 Practice with Loops & Conditionals. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "JS5 Practice with Loops & Conditionals",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-03-js5-practice-with-loops-conditionals-supplemental-2/starter",
 					solutionLink:
@@ -362,8 +375,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Practice with Loops & Conditionals supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JS5 Practice with Loops & Conditionals. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "JS5 Practice with Loops & Conditionals",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-04-js5-practice-with-loops-conditionals-supplemental-3/starter",
 					solutionLink:
@@ -416,8 +433,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Check In #1 supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check-In #1",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-05-check-in-1-supplemental-2/starter",
 					solutionLink:
@@ -425,8 +446,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Check In #1 supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #1. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check-In #1",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-06-check-in-1-supplemental-3/starter",
 					solutionLink:
@@ -729,8 +754,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Check In #2 supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check-In #2",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-07-check-in-2-supplemental-2/starter",
 					solutionLink:
@@ -738,8 +767,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Check In #2 supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Check-In #2. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "Check-In #2",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-08-check-in-2-supplemental-3/starter",
 					solutionLink:
@@ -791,8 +824,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Master Project: Battleship supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JS9 Master Project: Battleship. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "JS9 Master Project: Battleship",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-09-js9-master-project-battleship-supplemental-2/starter",
 					solutionLink:
@@ -800,8 +837,12 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Master Project: Battleship supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for JS9 Master Project: Battleship. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle: "JS9 Master Project: Battleship",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-10-js9-master-project-battleship-supplemental-3/starter",
 					solutionLink:
@@ -849,8 +890,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X02 java foundations build 13 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X02 java foundations build 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X02 java foundations build 13: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-11-applied-studio-12-j1x02-java-foundations-build-13-supplemental-2/starter",
 					solutionLink:
@@ -858,8 +904,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X02 java foundations build 13 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X02 java foundations build 13: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X02 java foundations build 13: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-12-applied-studio-12-j1x02-java-foundations-build-13-supplemental-3/starter",
 					solutionLink:
@@ -907,8 +958,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X03 java foundations build 14 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X03 java foundations build 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X03 java foundations build 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-13-applied-studio-13-j1x03-java-foundations-build-14-supplemental-2/starter",
 					solutionLink:
@@ -916,8 +972,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X03 java foundations build 14 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X03 java foundations build 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X03 java foundations build 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-14-applied-studio-13-j1x03-java-foundations-build-14-supplemental-3/starter",
 					solutionLink:
@@ -965,8 +1026,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X04 java foundations build 15 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X04 java foundations build 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X04 java foundations build 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-15-applied-studio-14-j1x04-java-foundations-build-15-supplemental-2/starter",
 					solutionLink:
@@ -974,8 +1040,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X04 java foundations build 15 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X04 java foundations build 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X04 java foundations build 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-16-applied-studio-14-j1x04-java-foundations-build-15-supplemental-3/starter",
 					solutionLink:
@@ -1023,8 +1094,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X05 java foundations build 16 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X05 java foundations build 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X05 java foundations build 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-17-applied-studio-15-j1x05-java-foundations-build-16-supplemental-2/starter",
 					solutionLink:
@@ -1032,8 +1108,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X05 java foundations build 16 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X05 java foundations build 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X05 java foundations build 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-18-applied-studio-15-j1x05-java-foundations-build-16-supplemental-3/starter",
 					solutionLink:
@@ -1081,8 +1162,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X06 java foundations build 17 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X06 java foundations build 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X06 java foundations build 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-19-applied-studio-16-j1x06-java-foundations-build-17-supplemental-2/starter",
 					solutionLink:
@@ -1090,8 +1176,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "J1X06 java foundations build 17 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for J1X06 java foundations build 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"J1X06 java foundations build 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-20-applied-studio-16-j1x06-java-foundations-build-17-supplemental-3/starter",
 					solutionLink:
@@ -1135,8 +1226,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Temperature Converter supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Temperature Converter: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Temperature Converter: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-21-applied-studio-17-temperature-converter-supplemental-2/starter",
 					solutionLink:
@@ -1144,8 +1240,13 @@ export const javaLevel1Course: RawCourse = {
 				},
 				{
 					title: "Temperature Converter supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Java transfer or extension project for Temperature Converter: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Java",
+						moduleTitle:
+							"Temperature Converter: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-1/tree/main/J1-22-applied-studio-17-temperature-converter-supplemental-3/starter",
 					solutionLink:

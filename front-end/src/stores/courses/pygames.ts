@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const pyGamesCourse: RawCourse = {
 	name: "PyGames",
@@ -28,8 +29,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG0 Setup, Editors, and Asset Workflow: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for PyG0 Setup, Editors, and Asset Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG0 Setup, Editors, and Asset Workflow",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/music"
 				}
@@ -44,8 +49,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG0 Setup, Editors, and Asset Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG0 Setup, Editors, and Asset Workflow",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-01-pyg0-setup-editors-and-asset-workflow-supplemental-2/starter",
 					solutionLink:
@@ -53,8 +62,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Setup, Editors, and Asset Workflow supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG0 Setup, Editors, and Asset Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG0 Setup, Editors, and Asset Workflow",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-02-pyg0-setup-editors-and-asset-workflow-supplemental-3/starter",
 					solutionLink:
@@ -131,8 +144,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Object Oriented Programming: Actors supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG1 Object-Oriented Programming: Actors. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG1 Object-Oriented Programming: Actors",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-03-pyg1-object-oriented-programming-actors-supplemental-2/starter",
 					solutionLink:
@@ -140,8 +157,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Object Oriented Programming: Actors supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG1 Object-Oriented Programming: Actors. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG1 Object-Oriented Programming: Actors",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-04-pyg1-object-oriented-programming-actors-supplemental-3/starter",
 					solutionLink:
@@ -208,8 +229,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Event Handling supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG2 Event Handling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG2 Event Handling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-05-pyg2-event-handling-supplemental-2/starter",
 					solutionLink:
@@ -217,8 +242,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Event Handling supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG2 Event Handling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG2 Event Handling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-06-pyg2-event-handling-supplemental-3/starter",
 					solutionLink:
@@ -286,8 +315,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Object Oriented Programming: Advanced Actors supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG3 Object-Oriented Programming: Advanced Actors. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"PyG3 Object-Oriented Programming: Advanced Actors",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-07-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
@@ -295,8 +329,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Object Oriented Programming: Advanced Actors supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG3 Object-Oriented Programming: Advanced Actors. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"PyG3 Object-Oriented Programming: Advanced Actors",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-08-pyg3-object-oriented-programming-advanced-actors/starter",
 					solutionLink:
@@ -358,8 +397,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG4 Managing Multiple Objects: Collectibles. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"PyG4 Managing Multiple Objects: Collectibles",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-09-pyg4-managing-multiple-objects-collectibles-supplemental-2/starter",
 					solutionLink:
@@ -367,8 +411,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Managing Multiple Objects: Collectibles supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG4 Managing Multiple Objects: Collectibles. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"PyG4 Managing Multiple Objects: Collectibles",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-10-pyg4-managing-multiple-objects-collectibles-supplemental-3/starter",
 					solutionLink:
@@ -421,8 +470,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Check-In #1: Actors, Events, ZRects, Collectibles. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"Check-In #1: Actors, Events, ZRects, Collectibles",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-11-check-in-1-actors-events-zrects-collectibles-supplemental-2/starter",
 					solutionLink:
@@ -430,8 +484,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Check In #1: Actors, Events, ZRects, Collectibles supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Check-In #1: Actors, Events, ZRects, Collectibles. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"Check-In #1: Actors, Events, ZRects, Collectibles",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-12-check-in-1-actors-events-zrects-collectibles-supplemental-3/starter",
 					solutionLink:
@@ -498,8 +557,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Physics supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG5 Physics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG5 Physics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-13-pyg5-physics-supplemental-2/starter",
 					solutionLink:
@@ -507,8 +570,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Physics supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG5 Physics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG5 Physics",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-14-pyg5-physics-supplemental-3/starter",
 					solutionLink:
@@ -580,8 +647,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG6 Managing Multiple Objects: Obstacles and Surfaces. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"PyG6 Managing Multiple Objects: Obstacles and Surfaces",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-15-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-2/starter",
 					solutionLink:
@@ -589,8 +661,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Managing Multiple Objects: Obstacles and Surfaces supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG6 Managing Multiple Objects: Obstacles and Surfaces. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"PyG6 Managing Multiple Objects: Obstacles and Surfaces",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-16-pyg6-managing-multiple-objects-obstacles-and-surfaces-supplemental-3/starter",
 					solutionLink:
@@ -643,8 +720,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Check-In #2: Gravity, Friction, Platforms. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"Check-In #2: Gravity, Friction, Platforms",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-17-check-in-2-gravity-friction-platforms-supplemental-2/starter",
 					solutionLink:
@@ -652,8 +734,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Check In #2: Gravity, Friction, Platforms supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Check-In #2: Gravity, Friction, Platforms. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"Check-In #2: Gravity, Friction, Platforms",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-18-check-in-2-gravity-friction-platforms-supplemental-3/starter",
 					solutionLink:
@@ -728,8 +815,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Levels and System Control supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG7 Levels and System Control. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG7 Levels and System Control",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-19-pyg7-levels-and-system-control-supplemental-2/starter",
 					solutionLink:
@@ -737,8 +828,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Levels and System Control supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG7 Levels and System Control. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG7 Levels and System Control",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-20-pyg7-levels-and-system-control-supplemental-3/starter",
 					solutionLink:
@@ -794,8 +889,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Game Elements: Projectiles supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG8 Game Elements: Projectiles. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG8 Game Elements: Projectiles",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-21-pyg8-game-elements-projectiles-supplemental-2/starter",
 					solutionLink:
@@ -803,8 +902,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Game Elements: Projectiles supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG8 Game Elements: Projectiles. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG8 Game Elements: Projectiles",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-22-pyg8-game-elements-projectiles-supplemental-3/starter",
 					solutionLink:
@@ -860,8 +963,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Game Elements: Enemy AI supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG9 Game Elements: Enemy AI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG9 Game Elements: Enemy AI",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-23-pyg9-game-elements-enemy-ai-supplemental-2/starter",
 					solutionLink:
@@ -869,8 +976,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Game Elements: Enemy AI supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG9 Game Elements: Enemy AI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG9 Game Elements: Enemy AI",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-24-pyg9-game-elements-enemy-ai-supplemental-3/starter",
 					solutionLink:
@@ -918,8 +1029,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Check-In #3: System Control, Projectiles, Enemy AI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"Check-In #3: System Control, Projectiles, Enemy AI",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-25-check-in-3-system-control-projectiles-enemy-ai-supplemental-2/starter",
 					solutionLink:
@@ -927,8 +1043,13 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Check In #3: System Control, Projectiles, Enemy AI supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Check-In #3: System Control, Projectiles, Enemy AI. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle:
+							"Check-In #3: System Control, Projectiles, Enemy AI",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-26-check-in-3-system-control-projectiles-enemy-ai-supplemental-3/starter",
 					solutionLink:
@@ -978,8 +1099,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Ninja Versus Alien supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG10 Ninja Versus Alien. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG10 Ninja Versus Alien",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-27-pyg10-ninja-versus-alien-supplemental-2/starter",
 					solutionLink:
@@ -987,8 +1112,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Ninja Versus Alien supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG10 Ninja Versus Alien. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG10 Ninja Versus Alien",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-28-pyg10-ninja-versus-alien-supplemental-3/starter",
 					solutionLink:
@@ -1038,8 +1167,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Space Invaders supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG11 Space Invaders. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG11 Space Invaders",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-29-pyg11-space-invaders-supplemental-2/starter",
 					solutionLink:
@@ -1047,8 +1180,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Space Invaders supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG11 Space Invaders. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG11 Space Invaders",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-30-pyg11-space-invaders-supplemental-3/starter",
 					solutionLink:
@@ -1091,8 +1228,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "PyG12 Master Project: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for PyG12 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG12 Master Project",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/sounds"
 				}
@@ -1107,8 +1248,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Master Project supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG12 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG12 Master Project",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-31-pyg12-master-project-supplemental-2/starter",
 					solutionLink:
@@ -1116,8 +1261,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Master Project supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for PyG12 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "PyG12 Master Project",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-32-pyg12-master-project-supplemental-3/starter",
 					solutionLink:
@@ -1161,8 +1310,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "images supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for images: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "images: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-33-applied-studio-17-images-supplemental-2/starter",
 					solutionLink:
@@ -1170,8 +1323,12 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "images supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for images: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "Python/PyGame",
+						moduleTitle: "images: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main/PG-34-applied-studio-17-images-supplemental-3/starter",
 					solutionLink:

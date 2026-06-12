@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const usacoGoldCourse: RawCourse = {
 	name: "USACO Gold",
@@ -28,8 +29,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "USG0 Setup and Gold Mindset: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for USG0 Setup and Gold Mindset. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "USG0 Setup and Gold Mindset",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG21-Moo-Tube"
 				}
@@ -44,15 +49,23 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Why Did the Cow Cross the Road III",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for USG0 Setup and Gold Mindset. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "USG0 Setup and Gold Mindset",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG24-Why-Did-the-Cow-Cross-the-Road-III"
 				},
 				{
 					title: "Snow Boots",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for USG0 Setup and Gold Mindset. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "USG0 Setup and Gold Mindset",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG27-Snow-Boots"
 				}
@@ -83,8 +96,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Dynamic Programming Foundations: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 1: Dynamic Programming Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 1: Dynamic Programming Foundations",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG1-Dynamic-Programming-with-Fibonacci"
 				}
@@ -145,8 +162,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Shortest Paths and Weighted Graphs: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 2: Shortest Paths and Weighted Graphs. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 2: Shortest Paths and Weighted Graphs",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm"
 				}
@@ -175,8 +197,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Why Did the Cow Cross the Road II",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 2: Shortest Paths and Weighted Graphs. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 2: Shortest Paths and Weighted Graphs",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG31-Why-Did-the-Cow-Cross-the-Road-II"
 				}
@@ -207,8 +234,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: MSTs, DSU, and Connectivity Optimization: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 3: MSTs, DSU, and Connectivity Optimization. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 3: MSTs, DSU, and Connectivity Optimization",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG14-MST"
 				}
@@ -262,8 +294,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: Fenwick Trees, Ordering, and Range Structure: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 4: Fenwick Trees, Ordering, and Range Structure. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 4: Fenwick Trees, Ordering, and Range Structure",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG22-Binary-Indexed-Tree-Fenwick-Tree"
 				}
@@ -292,8 +329,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Circular Barn",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 4: Fenwick Trees, Ordering, and Range Structure. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 4: Fenwick Trees, Ordering, and Range Structure",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG37-Circular-Barn"
 				}
@@ -324,8 +366,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Advanced Graph Modeling and Geometry-Flavored Problems: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 5: Advanced Graph Modeling and Geometry-Flavored Problems. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 5: Advanced Graph Modeling and Geometry-Flavored Problems",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG33-Lasers-and-Mirrors"
 				}
@@ -379,8 +426,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 6: Advanced DP and Combinatorics: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 6: Advanced DP and Combinatorics. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 6: Advanced DP and Combinatorics",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG28-Cow-Poetry"
 				}
@@ -441,8 +492,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 7: Gold Capstone Sets: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 7: Gold Capstone Sets. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 7: Gold Capstone Sets",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG34-Radio-Contact"
 				}
@@ -464,8 +519,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Bovine Genomics",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 7: Gold Capstone Sets. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 7: Gold Capstone Sets",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG38-Bovine-Genomics"
 				}
@@ -496,8 +555,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Unit 8: Optional Gold Problem Bank: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 8: Optional Gold Problem Bank. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 8: Optional Gold Problem Bank",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main"
 				}
@@ -576,15 +639,25 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Cow Checklist",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Dynamic Programming Practice: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Dynamic Programming Practice: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG4-Cow-Checklist"
 				},
 				{
 					title: "Marathon",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Dynamic Programming Practice: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Dynamic Programming Practice: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG5-Marathon"
 				}
@@ -626,15 +699,23 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "248",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Hoof Paper Scissors: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG6-248"
 				},
 				{
 					title: "Treasure Chest",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Hoof Paper Scissors: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Hoof Paper Scissors: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG7-Treasure-Chest"
 				}
@@ -676,15 +757,25 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Bookshelf",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Why Did the Cow Cross the Road: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Why Did the Cow Cross the Road: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG8-Bookshelf"
 				},
 				{
 					title: "Dijkstras Algorithm II",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Why Did the Cow Cross the Road: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Why Did the Cow Cross the Road: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG9-Dijkstras-Algorithm-II"
 				}
@@ -726,8 +817,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Cow Routing supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for Cow Routing: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Cow Routing: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-01-applied-studio-13-cow-routing-supplemental-2/starter",
 					solutionLink:
@@ -735,8 +830,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Cow Routing supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for Cow Routing: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Cow Routing: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-02-applied-studio-13-cow-routing-supplemental-3/starter",
 					solutionLink:
@@ -780,8 +879,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "MST II supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for MST II: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "MST II: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-03-applied-studio-14-mst-ii-supplemental-2/starter",
 					solutionLink:
@@ -789,8 +892,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "MST II supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for MST II: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "MST II: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-04-applied-studio-14-mst-ii-supplemental-3/starter",
 					solutionLink:
@@ -834,8 +941,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Watering the Fields supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for Watering the Fields: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Watering the Fields: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-05-applied-studio-15-watering-the-fields-supplemental-2/starter",
 					solutionLink:
@@ -843,8 +954,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Watering the Fields supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for Watering the Fields: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Watering the Fields: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-06-applied-studio-15-watering-the-fields-supplemental-3/starter",
 					solutionLink:
@@ -888,8 +1003,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "I Would Walk 500 Miles supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for I Would Walk 500 Miles: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"I Would Walk 500 Miles: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-07-applied-studio-16-i-would-walk-500-miles-supplemental-2/starter",
 					solutionLink:
@@ -897,8 +1017,13 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "I Would Walk 500 Miles supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for I Would Walk 500 Miles: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"I Would Walk 500 Miles: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-08-applied-studio-16-i-would-walk-500-miles-supplemental-3/starter",
 					solutionLink:
@@ -942,8 +1067,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Talent Show supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for Talent Show: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Talent Show: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-09-applied-studio-17-talent-show-supplemental-2/starter",
 					solutionLink:
@@ -951,8 +1080,12 @@ export const usacoGoldCourse: RawCourse = {
 				},
 				{
 					title: "Talent Show supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for Talent Show: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Talent Show: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG-10-applied-studio-17-talent-show-supplemental-3/starter",
 					solutionLink:

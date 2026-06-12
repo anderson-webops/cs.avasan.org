@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const usacoBronzeCourse: RawCourse = {
 	name: "USACO Bronze",
@@ -28,8 +29,12 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "USB0 Setup and Contest Workflow: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for USB0 Setup and Contest Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "USB0 Setup and Contest Workflow",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-22-Why-Did-the-Cow-Cross-the-Road-Java"
 				}
@@ -44,15 +49,23 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "UB 23 Why Did the Cow Cross the Road II Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for USB0 Setup and Contest Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "USB0 Setup and Contest Workflow",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-23-Why-Did-the-Cow-Cross-the-Road-II-Java"
 				},
 				{
 					title: "UB 24 Why Did the Cow Cross the Road III Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for USB0 Setup and Contest Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "USB0 Setup and Contest Workflow",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB-24-Why-Did-the-Cow-Cross-the-Road-III-Java"
 				}
@@ -83,8 +96,13 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Unit 1: Simulation and Careful Translation: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 1: Simulation and Careful Translation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 1: Simulation and Careful Translation",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture"
 				}
@@ -113,8 +131,13 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Square Pasture Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 1: Simulation and Careful Translation. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 1: Simulation and Careful Translation",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB1-Square-Pasture-Java"
 				}
@@ -145,8 +168,13 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Unit 2: Intervals, Arrays, and Greedy Warmups: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 2: Intervals, Arrays, and Greedy Warmups. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"Unit 2: Intervals, Arrays, and Greedy Warmups",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB6-Milking-Cows"
 				}
@@ -200,8 +228,12 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Unit 3: Counting, Sorting, and Ranking: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 3: Counting, Sorting, and Ranking. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 3: Counting, Sorting, and Ranking",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB37-Diamond-Collector"
 				}
@@ -230,8 +262,12 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Transformations Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 3: Counting, Sorting, and Ranking. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 3: Counting, Sorting, and Ranking",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB10-Transformations-Java"
 				}
@@ -262,8 +298,12 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Unit 4: Search-Flavored Bronze Problems: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 4: Search-Flavored Bronze Problems. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 4: Search-Flavored Bronze Problems",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow"
 				}
@@ -317,8 +357,12 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Unit 5: Contest Sets and Tier Transition: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 5: Contest Sets and Tier Transition. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 5: Contest Sets and Tier Transition",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB50-Milking-Order"
 				}
@@ -347,8 +391,12 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Mixing Milk Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 5: Contest Sets and Tier Transition. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 5: Contest Sets and Tier Transition",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB11-Mixing-Milk-Java"
 				}
@@ -384,8 +432,12 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Unit 6: Optional Bronze Problem Bank: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for Unit 6: Optional Bronze Problem Bank. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "Unit 6: Optional Bronze Problem Bank",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main"
 				}
@@ -464,15 +516,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Combination Lock",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 12 Barn Repair Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 12 Barn Repair Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB13-Combination-Lock"
 				},
 				{
 					title: "Prime Cryptarithm",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 12 Barn Repair Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 12 Barn Repair Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB14-Prime-Cryptarithm"
 				}
@@ -514,15 +576,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Ski Course Design",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 13 Combination Lock Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 13 Combination Lock Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB15-Ski-Course-Design"
 				},
 				{
 					title: "Block Game",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 13 Combination Lock Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 13 Combination Lock Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB17-Block-Game"
 				}
@@ -564,15 +636,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "The Cow Signal",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 14 Prime Cryptarithm Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 14 Prime Cryptarithm Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB18-The-Cow-Signal"
 				},
 				{
 					title: "Dont Be Last",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 14 Prime Cryptarithm Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 14 Prime Cryptarithm Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB19-Dont-Be-Last"
 				}
@@ -614,15 +696,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Your Ride Is Here Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 15 Ski Course Design Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 15 Ski Course Design Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB2-Your-Ride-Is-Here-Java"
 				},
 				{
 					title: "Cow Tipping",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 15 Ski Course Design Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 15 Ski Course Design Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB21-Cow-Tipping"
 				}
@@ -664,15 +756,23 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Why Did the Cow Cross the Road",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 16 Wormholes Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB22-Why-Did-the-Cow-Cross-the-Road"
 				},
 				{
 					title: "Why Did the Cow Cross the Road II",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 16 Wormholes Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle: "UB 16 Wormholes Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB23-Why-Did-the-Cow-Cross-the-Road-II"
 				}
@@ -714,15 +814,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Why Did the Cow Cross the Road III",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 17 Block Game Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 17 Block Game Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB24-Why-Did-the-Cow-Cross-the-Road-III"
 				},
 				{
 					title: "The Lost Cow Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 17 Block Game Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 17 Block Game Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB25-The-Lost-Cow-Java"
 				}
@@ -764,15 +874,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Bovine Genomics",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 18 The Cow Signal Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 18 The Cow Signal Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics"
 				},
 				{
 					title: "Bovine Genomics Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 18 The Cow Signal Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 18 The Cow Signal Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB26-Bovine-Genomics-Java"
 				}
@@ -814,15 +934,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Modern Art",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 19 Dont Be Last Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 19 Dont Be Last Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art"
 				},
 				{
 					title: "Modern Art Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 19 Dont Be Last Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 19 Dont Be Last Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB27-Modern-Art-Java"
 				}
@@ -864,15 +994,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Fence Painting",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 20 Hoof Paper Scissors Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting"
 				},
 				{
 					title: "Fence Painting Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 20 Hoof Paper Scissors Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 20 Hoof Paper Scissors Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB28-Fence-Painting-Java"
 				}
@@ -914,15 +1054,25 @@ export const usacoBronzeCourse: RawCourse = {
 				},
 				{
 					title: "Speeding Ticket Java",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 21 Cow Tipping Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 21 Cow Tipping Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB29-Speeding-Ticket-Java"
 				},
 				{
 					title: "Friday the Thirteenth",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for UB 21 Cow Tipping Java: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "USACO",
+						moduleTitle:
+							"UB 21 Cow Tipping Java: Implementation Lab",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/USACO-Bronze/tree/main/UB3-Friday-the-Thirteenth"
 				}

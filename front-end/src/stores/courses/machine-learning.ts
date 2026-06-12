@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const machineLearningCourse: RawCourse = {
 	name: "Machine Learning",
@@ -28,8 +29,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML0 Setup, Tooling, and Data Workflow: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for ML0 Setup, Tooling, and Data Workflow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML0 Setup, Tooling, and Data Workflow",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML2-KNN-Customer-Segmentation-Classification"
 				}
@@ -172,8 +177,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "K Nearest Neighbors supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML2 K-Nearest Neighbors. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML2 K-Nearest Neighbors",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-01-ml2-k-nearest-neighbors-supplemental-2/starter",
 					solutionLink:
@@ -181,8 +190,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "K Nearest Neighbors supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML2 K-Nearest Neighbors. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML2 K-Nearest Neighbors",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-02-ml2-k-nearest-neighbors-supplemental-3/starter",
 					solutionLink:
@@ -240,8 +253,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Naive Bayes supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML3 Naive Bayes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML3 Naive Bayes",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-03-ml3-naive-bayes-supplemental-2/starter",
 					solutionLink:
@@ -249,8 +266,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Naive Bayes supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML3 Naive Bayes. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML3 Naive Bayes",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-04-ml3-naive-bayes-supplemental-3/starter",
 					solutionLink:
@@ -283,8 +304,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML3.5 Decision Trees and Interpretable Models: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for ML3.5 Decision Trees and Interpretable Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML3.5 Decision Trees and Interpretable Models",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML4-Diabetes-Diagnosis-With-Neural-Networks"
 				}
@@ -299,8 +325,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML3.5 Decision Trees and Interpretable Models supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML3.5 Decision Trees and Interpretable Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML3.5 Decision Trees and Interpretable Models",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-05-ml3-5-decision-trees-and-interpretable-models-supplemental-2/starter",
 					solutionLink:
@@ -308,8 +339,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML3.5 Decision Trees and Interpretable Models supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML3.5 Decision Trees and Interpretable Models. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML3.5 Decision Trees and Interpretable Models",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-06-ml3-5-decision-trees-and-interpretable-models-supplemental-3/starter",
 					solutionLink:
@@ -383,8 +419,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Neural Networks supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML4 Neural Networks. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML4 Neural Networks",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-07-ml4-neural-networks-supplemental-2/starter",
 					solutionLink:
@@ -392,8 +432,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Neural Networks supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML4 Neural Networks. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML4 Neural Networks",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-08-ml4-neural-networks-supplemental-3/starter",
 					solutionLink:
@@ -465,8 +509,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Introduction to Regression supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML5 Introduction to Regression. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML5 Introduction to Regression",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-09-ml5-introduction-to-regression-supplemental-2/starter",
 					solutionLink:
@@ -474,8 +522,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Introduction to Regression supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML5 Introduction to Regression. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML5 Introduction to Regression",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-10-ml5-introduction-to-regression-supplemental-3/starter",
 					solutionLink:
@@ -523,8 +575,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Regression with Neural Networks supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML6 Regression with Neural Networks. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML6 Regression with Neural Networks",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-11-ml6-regression-with-neural-networks-supplemental-2/starter",
 					solutionLink:
@@ -532,8 +588,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Regression with Neural Networks supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML6 Regression with Neural Networks. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML6 Regression with Neural Networks",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-12-ml6-regression-with-neural-networks-supplemental-3/starter",
 					solutionLink:
@@ -585,8 +645,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Image Classifier supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML7 Image Classifier. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML7 Image Classifier",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-13-ml7-image-classifier-supplemental-2/starter",
 					solutionLink:
@@ -594,8 +658,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Image Classifier supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML7 Image Classifier. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML7 Image Classifier",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-14-ml7-image-classifier-supplemental-3/starter",
 					solutionLink:
@@ -628,8 +696,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy: Core Project",
-					content:
-						"**Project goal:** Complete the linked Python core implementation checkpoint for ML7.5 Model Evaluation, Comparison, and Dataset Strategy. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Write a short verification note because no separate solution link is available yet.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML7.5 Model Evaluation, Comparison, and Dataset Strategy",
+						projectKind: "core",
+						hasReference: false
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression"
 				}
@@ -644,8 +717,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML7.5 Model Evaluation, Comparison, and Dataset Strategy. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML7.5 Model Evaluation, Comparison, and Dataset Strategy",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-15-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-2/starter",
 					solutionLink:
@@ -653,8 +731,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML7.5 Model Evaluation, Comparison, and Dataset Strategy. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"ML7.5 Model Evaluation, Comparison, and Dataset Strategy",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-16-ml7-5-model-evaluation-comparison-and-dataset-strategy-supplemental-3/starter",
 					solutionLink:
@@ -708,8 +791,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Master Project supplemental 2",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML8 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML8 Master Project",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-17-ml8-master-project-supplemental-2/starter",
 					solutionLink:
@@ -717,8 +804,12 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Master Project supplemental 3",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for ML8 Master Project. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle: "ML8 Master Project",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-18-ml8-master-project-supplemental-3/starter",
 					solutionLink:
@@ -762,8 +853,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Customer Segmentation supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Customer Segmentation: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-19-applied-studio-12-customer-segmentation-supplemental-2/starter",
 					solutionLink:
@@ -771,8 +867,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Customer Segmentation supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Customer Segmentation: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-20-applied-studio-12-customer-segmentation-supplemental-3/starter",
 					solutionLink:
@@ -816,8 +917,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Customer Segmentation Interview supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Customer Segmentation Interview: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation Interview: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-21-applied-studio-13-customer-segmentation-interview-supplemental-2/starter",
 					solutionLink:
@@ -825,8 +931,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Customer Segmentation Interview supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Customer Segmentation Interview: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation Interview: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-22-applied-studio-13-customer-segmentation-interview-supplemental-3/starter",
 					solutionLink:
@@ -870,8 +981,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Customer Segmentation supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Customer Segmentation: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-23-applied-studio-14-customer-segmentation-supplemental-2/starter",
 					solutionLink:
@@ -879,8 +995,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Customer Segmentation supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Customer Segmentation: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Customer Segmentation: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-24-applied-studio-14-customer-segmentation-supplemental-3/starter",
 					solutionLink:
@@ -924,8 +1045,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Disney Movie Clustering supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Disney Movie Clustering: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-25-applied-studio-15-disney-movie-clustering-supplemental-2/starter",
 					solutionLink:
@@ -933,8 +1059,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Disney Movie Clustering supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Disney Movie Clustering: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-26-applied-studio-15-disney-movie-clustering-supplemental-3/starter",
 					solutionLink:
@@ -978,8 +1109,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Disney Movie Clustering supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Disney Movie Clustering: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-27-applied-studio-16-disney-movie-clustering-supplemental-2/starter",
 					solutionLink:
@@ -987,8 +1123,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "Disney Movie Clustering supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for Disney Movie Clustering: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"Disney Movie Clustering: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-28-applied-studio-16-disney-movie-clustering-supplemental-3/starter",
 					solutionLink:
@@ -1032,8 +1173,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "KNN Car Classification supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for KNN Car Classification: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"KNN Car Classification: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-29-applied-studio-17-knn-car-classification-supplemental-2/starter",
 					solutionLink:
@@ -1041,8 +1187,13 @@ export const machineLearningCourse: RawCourse = {
 				},
 				{
 					title: "KNN Car Classification supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked Python transfer or extension project for KNN Car Classification: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "machine learning",
+						moduleTitle:
+							"KNN Car Classification: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML-30-applied-studio-17-knn-car-classification-supplemental-3/starter",
 					solutionLink:

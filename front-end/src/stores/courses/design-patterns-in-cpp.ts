@@ -1,4 +1,5 @@
 import type { RawCourse } from "./types";
+import { buildProjectGuidance } from "./projectGuidance";
 
 export const designPatternsInCppCourse: RawCourse = {
 	name: "Design Patterns in C++",
@@ -28,8 +29,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC0 Setup and Tooling: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC0 Setup and Tooling",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-05-dpc0-setup-and-tooling/starter",
 					solutionLink:
@@ -48,8 +53,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-01-dpc0-setup-and-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,8 +66,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Setup and Tooling supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC0 Setup and Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC0 Setup and Tooling",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-02-dpc0-setup-and-tooling-supplemental-3/starter",
 					solutionLink:
@@ -91,8 +104,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC1 Why Patterns Look Different in Modern C++: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC1 Why Patterns Look Different in Modern C++. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC1 Why Patterns Look Different in Modern C++",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-06-dpc1-why-patterns-look-different-in-modern-cpp/starter",
 					solutionLink:
@@ -111,8 +129,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Why Patterns Look Different in Modern C++ supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC1 Why Patterns Look Different in Modern C++. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC1 Why Patterns Look Different in Modern C++",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-03-dpc1-why-patterns-look-different-in-modern-cpp-supplemental-2/starter",
 					solutionLink:
@@ -120,8 +143,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Why Patterns Look Different in Modern C++ supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC1 Why Patterns Look Different in Modern C++. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC1 Why Patterns Look Different in Modern C++",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-04-dpc1-why-patterns-look-different-in-modern-cpp-supplemental-3/starter",
 					solutionLink:
@@ -154,8 +182,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC2 Design Foundations: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC2 Design Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC2 Design Foundations",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-07-dpc2-design-foundations/starter",
 					solutionLink:
@@ -174,8 +206,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Design Foundations supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC2 Design Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC2 Design Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-05-dpc2-design-foundations-supplemental-2/starter",
 					solutionLink:
@@ -183,8 +219,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Design Foundations supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC2 Design Foundations. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC2 Design Foundations",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-06-dpc2-design-foundations-supplemental-3/starter",
 					solutionLink:
@@ -217,8 +257,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC3 Factory Method, Abstract Factory, and Builder: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC3 Factory Method, Abstract Factory, and Builder. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC3 Factory Method, Abstract Factory, and Builder",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC1-Factories-and-Builders-Workshop/starter",
 					solutionLink:
@@ -237,8 +282,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Factory Method, Abstract Factory, and Builder supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC3 Factory Method, Abstract Factory, and Builder. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC3 Factory Method, Abstract Factory, and Builder",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-07-dpc3-factory-method-abstract-factory-and-builder-supplemental-2/starter",
 					solutionLink:
@@ -246,8 +296,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Factory Method, Abstract Factory, and Builder supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC3 Factory Method, Abstract Factory, and Builder. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC3 Factory Method, Abstract Factory, and Builder",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-08-dpc3-factory-method-abstract-factory-and-builder-supplemental-3/starter",
 					solutionLink:
@@ -280,8 +335,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC4 Strategy and Policy-Based Design: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC4 Strategy and Policy-Based Design. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC4 Strategy and Policy-Based Design",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC2-Strategy-and-Policy-Simulator/starter",
 					solutionLink:
@@ -300,8 +359,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Strategy and Policy Based Design supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC4 Strategy and Policy-Based Design. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC4 Strategy and Policy-Based Design",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc4-strategy-and-policy-based-design-supplemental-2/starter",
 					solutionLink:
@@ -309,8 +372,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Strategy and Policy Based Design supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC4 Strategy and Policy-Based Design. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC4 Strategy and Policy-Based Design",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-10-dpc4-strategy-and-policy-based-design-supplemental-3/starter",
 					solutionLink:
@@ -343,8 +410,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC5 Observer and Event Flow: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC5 Observer and Event Flow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC5 Observer and Event Flow",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC3-Observer-Event-Hub/starter",
 					solutionLink:
@@ -363,8 +434,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Observer and Event Flow supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC5 Observer and Event Flow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC5 Observer and Event Flow",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-11-dpc5-observer-and-event-flow-supplemental-2/starter",
 					solutionLink:
@@ -372,8 +447,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Observer and Event Flow supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC5 Observer and Event Flow. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC5 Observer and Event Flow",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-12-dpc5-observer-and-event-flow-supplemental-3/starter",
 					solutionLink:
@@ -406,8 +485,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC6 Decorator, Adapter, and Facade: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC6 Decorator, Adapter, and Facade. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC6 Decorator, Adapter, and Facade",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC4-Facade-Adapter-Import-Tool/starter",
 					solutionLink:
@@ -426,8 +509,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Decorator, Adapter, and Facade supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC6 Decorator, Adapter, and Facade. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC6 Decorator, Adapter, and Facade",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-13-dpc6-decorator-adapter-and-facade-supplemental-2/starter",
 					solutionLink:
@@ -435,8 +522,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Decorator, Adapter, and Facade supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC6 Decorator, Adapter, and Facade. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC6 Decorator, Adapter, and Facade",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-14-dpc6-decorator-adapter-and-facade-supplemental-3/starter",
 					solutionLink:
@@ -494,8 +585,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Command and State supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC7 Command and State. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC7 Command and State",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-15-dpc7-command-and-state-supplemental-2/starter",
 					solutionLink:
@@ -503,8 +598,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Command and State supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC7 Command and State. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC7 Command and State",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-16-dpc7-command-and-state-supplemental-3/starter",
 					solutionLink:
@@ -537,8 +636,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC8 Composite and Iterator: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC8 Composite and Iterator. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC8 Composite and Iterator",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC6-Composite-Scene-Tree/starter",
 					solutionLink:
@@ -557,8 +660,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Composite and Iterator supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC8 Composite and Iterator. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC8 Composite and Iterator",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-17-dpc8-composite-and-iterator-supplemental-2/starter",
 					solutionLink:
@@ -566,8 +673,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Composite and Iterator supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC8 Composite and Iterator. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC8 Composite and Iterator",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-18-dpc8-composite-and-iterator-supplemental-3/starter",
 					solutionLink:
@@ -600,8 +711,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC9 Singleton, Global State, and Dependency Injection: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC9 Singleton, Global State, and Dependency Injection. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC9 Singleton, Global State, and Dependency Injection",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-08-dpc9-singleton-global-state-and-dependency-injection/starter",
 					solutionLink:
@@ -620,8 +736,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Singleton, Global State, and Dependency Injection supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC9 Singleton, Global State, and Dependency Injection. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC9 Singleton, Global State, and Dependency Injection",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-19-dpc9-singleton-global-state-and-dependency-injection-supplemental-2/starter",
 					solutionLink:
@@ -629,8 +750,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Singleton, Global State, and Dependency Injection supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC9 Singleton, Global State, and Dependency Injection. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"DPC9 Singleton, Global State, and Dependency Injection",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-20-dpc9-singleton-global-state-and-dependency-injection-supplemental-3/starter",
 					solutionLink:
@@ -663,8 +789,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC10 Patterns for Resource Management: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC10 Patterns for Resource Management. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC10 Patterns for Resource Management",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC7-RAII-Resource-Manager/starter",
 					solutionLink:
@@ -683,8 +813,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Patterns for Resource Management supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC10 Patterns for Resource Management. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC10 Patterns for Resource Management",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-21-dpc10-patterns-for-resource-management-supplemental-2/starter",
 					solutionLink:
@@ -692,8 +826,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Patterns for Resource Management supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC10 Patterns for Resource Management. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC10 Patterns for Resource Management",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-22-dpc10-patterns-for-resource-management-supplemental-3/starter",
 					solutionLink:
@@ -726,8 +864,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC11 Legacy Refactoring Lab: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC11 Legacy Refactoring Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC11 Legacy Refactoring Lab",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC8-Legacy-Refactor-Capstone/starter",
 					solutionLink:
@@ -746,8 +888,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Legacy Refactoring Lab supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC11 Legacy Refactoring Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC11 Legacy Refactoring Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-23-dpc11-legacy-refactoring-lab-supplemental-2/starter",
 					solutionLink:
@@ -755,8 +901,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Legacy Refactoring Lab supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC11 Legacy Refactoring Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC11 Legacy Refactoring Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-24-dpc11-legacy-refactoring-lab-supplemental-3/starter",
 					solutionLink:
@@ -789,8 +939,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "DPC12 Capstone Studio: Core Project",
-					content:
-						"**Project goal:** Complete the linked C++ core implementation checkpoint for DPC12 Capstone Studio. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC12 Capstone Studio",
+						projectKind: "core",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-09-dpc12-capstone-studio/starter",
 					solutionLink:
@@ -809,8 +963,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Capstone Studio supplemental 2",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC12 Capstone Studio. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC12 Capstone Studio",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-25-dpc12-capstone-studio-supplemental-2/starter",
 					solutionLink:
@@ -818,8 +976,12 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "Capstone Studio supplemental 3",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for DPC12 Capstone Studio. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle: "DPC12 Capstone Studio",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-26-dpc12-capstone-studio-supplemental-3/starter",
 					solutionLink:
@@ -867,8 +1029,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 14 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-27-applied-studio-14-pattern-implementation-lab-14-supplemental-2/starter",
 					solutionLink:
@@ -876,8 +1043,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 14 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 14: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 14: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-28-applied-studio-14-pattern-implementation-lab-14-supplemental-3/starter",
 					solutionLink:
@@ -925,8 +1097,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 15 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-29-applied-studio-15-pattern-implementation-lab-15-supplemental-2/starter",
 					solutionLink:
@@ -934,8 +1111,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 15 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 15: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 15: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-30-applied-studio-15-pattern-implementation-lab-15-supplemental-3/starter",
 					solutionLink:
@@ -983,8 +1165,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 16 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-31-applied-studio-16-pattern-implementation-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -992,8 +1179,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 16 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 16: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-32-applied-studio-16-pattern-implementation-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -1041,8 +1233,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 17 supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-33-applied-studio-17-pattern-implementation-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -1050,8 +1247,13 @@ export const designPatternsInCppCourse: RawCourse = {
 				},
 				{
 					title: "pattern implementation lab 17 supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked C++ transfer or extension project for pattern implementation lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: buildProjectGuidance({
+						courseFamily: "C++",
+						moduleTitle:
+							"pattern implementation lab 17: Implementation Lab",
+						projectKind: "extension",
+						hasReference: true
+					}),
 					projectLink:
 						"https://github.com/instruction-material/Design-Patterns-in-CPP/tree/main/DPC-34-applied-studio-17-pattern-implementation-lab-17-supplemental-3/starter",
 					solutionLink:
