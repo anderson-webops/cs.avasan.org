@@ -1,5 +1,54 @@
 import type { RawCourse } from "./types";
 
+type SecurityLabMode = "core" | "extension";
+
+function securityLabFocus(topic: string) {
+	const source = topic.toLowerCase();
+
+	if (source.includes("memory layout")) {
+		return "memory-region observation, address comparison, compiler-warning hygiene, and a short explanation of what changes between runs";
+	}
+	if (source.includes("bounds") || source.includes("copy")) {
+		return "capacity checks, terminator handling, exact-fit inputs, oversized inputs, and explicit status reporting";
+	}
+	if (source.includes("parser") || source.includes("binary input")) {
+		return "trust-boundary parsing, length validation, malformed-input rejection, and named negative tests";
+	}
+	if (source.includes("integer") || source.includes("ring")) {
+		return "range validation, overflow-aware arithmetic, state invariants, and failed-operation behavior";
+	}
+	if (source.includes("sanitizer") || source.includes("fuzz")) {
+		return "reproduction commands, sanitizer output, seed corpus management, crash triage, and regression preservation";
+	}
+	if (source.includes("patching") || source.includes("responsible")) {
+		return "root-cause notes, narrow patch reasoning, regression checks, and responsible local-only research boundaries";
+	}
+	if (source.includes("offensive")) {
+		return "defensive interpretation of the lab behavior, strict local scope, mitigation notes, and a hardening-oriented conclusion";
+	}
+
+	return "local-only security evidence, clear assumptions, tool output, a patch or hardening decision, and a regression check";
+}
+
+function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
+	const artifact =
+		mode === "core" ? "core security lab" : "security extension lab";
+
+	return [
+		`**Project goal:** Complete a ${artifact} for **${topic}** that produces defensive evidence, not just a passing program.`,
+		`**Focus:** ${securityLabFocus(topic)}.`,
+		"**Required work:**",
+		"1. State the local lab boundary and the exact toy target or starter being inspected.",
+		"2. Build and run the starter with the expected defensive tooling, such as warnings, sanitizers, debugger output, or structured trace logs where relevant.",
+		"3. Test one normal case, one malformed or boundary case, and one regression case that proves the final behavior is intentional.",
+		"4. Write a short audit note naming the violated assumption, the fix or hardening choice, and the evidence that supports the conclusion.",
+		"**Completion checks:**",
+		"- The work stays inside the provided local lab and does not target public systems.",
+		"- Security claims are backed by local build, runtime, sanitizer, debugger, or test evidence.",
+		"- The final note explains the bug class or invariant well enough for a maintainer to reproduce and verify the result."
+	].join("\n\n");
+}
+
 export const lowLevelSecurityCourse: RawCourse = {
 	name: "Low Level Security",
 	modules: [
@@ -48,8 +97,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Memory Layout and Security Tooling Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS1 Memory Layout and Security Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS1 Memory Layout and Security Tooling",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-01-lls1-memory-layout-and-security-tooling-supplemental-2/starter",
 					solutionLink:
@@ -57,8 +108,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Memory Layout and Security Tooling Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS1 Memory Layout and Security Tooling. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS1 Memory Layout and Security Tooling",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-02-lls1-memory-layout-and-security-tooling-supplemental-3/starter",
 					solutionLink:
@@ -111,8 +164,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Bounds, Arrays, and Safer Copy Patterns Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS2 Bounds, Arrays, and Safer Copy Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS2 Bounds, Arrays, and Safer Copy Patterns",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-03-lls2-bounds-arrays-and-safer-copy-patterns-supplemental-2/starter",
 					solutionLink:
@@ -120,8 +175,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Bounds, Arrays, and Safer Copy Patterns Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS2 Bounds, Arrays, and Safer Copy Patterns. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS2 Bounds, Arrays, and Safer Copy Patterns",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-04-lls2-bounds-arrays-and-safer-copy-patterns-supplemental-3/starter",
 					solutionLink:
@@ -174,8 +231,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Defensive Parsers and Binary Input Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS3 Defensive Parsers and Binary Input. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS3 Defensive Parsers and Binary Input",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-05-lls3-defensive-parsers-and-binary-input-supplemental-2/starter",
 					solutionLink:
@@ -183,8 +242,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Defensive Parsers and Binary Input Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS3 Defensive Parsers and Binary Input. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS3 Defensive Parsers and Binary Input",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-06-lls3-defensive-parsers-and-binary-input-supplemental-3/starter",
 					solutionLink:
@@ -237,8 +298,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Integer Safety, State, and Defensive Data Structures Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS4 Integer Safety, State, and Defensive Data Structures. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS4 Integer Safety, State, and Defensive Data Structures",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-07-lls4-integer-safety-state-and-defensive-data-structures-supplemental-2/starter",
 					solutionLink:
@@ -246,8 +309,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Integer Safety, State, and Defensive Data Structures Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS4 Integer Safety, State, and Defensive Data Structures. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS4 Integer Safety, State, and Defensive Data Structures",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-08-lls4-integer-safety-state-and-defensive-data-structures-supplemental-3/starter",
 					solutionLink:
@@ -300,8 +365,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Bug Hunting with Sanitizers and Fuzzing Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS5 Bug Hunting with Sanitizers and Fuzzing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS5 Bug Hunting with Sanitizers and Fuzzing",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-09-lls5-bug-hunting-with-sanitizers-and-fuzzing-supplemental-2/starter",
 					solutionLink:
@@ -309,8 +376,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Bug Hunting with Sanitizers and Fuzzing Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS5 Bug Hunting with Sanitizers and Fuzzing. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS5 Bug Hunting with Sanitizers and Fuzzing",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-10-lls5-bug-hunting-with-sanitizers-and-fuzzing-supplemental-3/starter",
 					solutionLink:
@@ -363,8 +432,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Patching, Review, and Responsible Research Supplemental 2",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS6 Patching, Review, and Responsible Research. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS6 Patching, Review, and Responsible Research",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-11-lls6-patching-review-and-responsible-research-supplemental-2/starter",
 					solutionLink:
@@ -372,8 +443,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Patching, Review, and Responsible Research Supplemental 3",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for LLS6 Patching, Review, and Responsible Research. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"LLS6 Patching, Review, and Responsible Research",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-12-lls6-patching-review-and-responsible-research-supplemental-3/starter",
 					solutionLink:
@@ -421,8 +494,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Offensive Security Lab 16 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Offensive Security Lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Offensive Security Lab 16: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-13-applied-studio-7-offensive-security-lab-16-supplemental-2/starter",
 					solutionLink:
@@ -430,8 +505,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Offensive Security Lab 16 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Offensive Security Lab 16: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Offensive Security Lab 16: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-14-applied-studio-7-offensive-security-lab-16-supplemental-3/starter",
 					solutionLink:
@@ -479,8 +556,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Offensive Security Lab 17 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Offensive Security Lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Offensive Security Lab 17: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-15-applied-studio-8-offensive-security-lab-17-supplemental-2/starter",
 					solutionLink:
@@ -488,8 +567,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Offensive Security Lab 17 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Offensive Security Lab 17: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Offensive Security Lab 17: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-16-applied-studio-8-offensive-security-lab-17-supplemental-3/starter",
 					solutionLink:
@@ -537,8 +618,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 7 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 7: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 7: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-23-applied-studio-12-low-level-security-lab-7-supplemental-2/starter",
 					solutionLink:
@@ -546,8 +629,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 7 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 7: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 7: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-24-applied-studio-12-low-level-security-lab-7-supplemental-3/starter",
 					solutionLink:
@@ -595,8 +680,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 8 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 8: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 8: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-25-applied-studio-13-low-level-security-lab-8-supplemental-2/starter",
 					solutionLink:
@@ -604,8 +691,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 8 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 8: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 8: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-26-applied-studio-13-low-level-security-lab-8-supplemental-3/starter",
 					solutionLink:
@@ -653,8 +742,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 9 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 9: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 9: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-27-applied-studio-14-low-level-security-lab-9-supplemental-2/starter",
 					solutionLink:
@@ -662,8 +753,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 9 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 9: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 9: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-28-applied-studio-14-low-level-security-lab-9-supplemental-3/starter",
 					solutionLink:
@@ -711,8 +804,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 10 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 10: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 10: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-29-applied-studio-15-low-level-security-lab-10-supplemental-2/starter",
 					solutionLink:
@@ -720,8 +815,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 10 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 10: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 10: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-30-applied-studio-15-low-level-security-lab-10-supplemental-3/starter",
 					solutionLink:
@@ -769,8 +866,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 11 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 11: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-31-applied-studio-16-low-level-security-lab-11-supplemental-2/starter",
 					solutionLink:
@@ -778,8 +877,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 11 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 11: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 11: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-32-applied-studio-16-low-level-security-lab-11-supplemental-3/starter",
 					solutionLink:
@@ -827,8 +928,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 12 Supplemental 2: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 12: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-33-applied-studio-17-low-level-security-lab-12-supplemental-2/starter",
 					solutionLink:
@@ -836,8 +939,10 @@ export const lowLevelSecurityCourse: RawCourse = {
 				},
 				{
 					title: "Low-Level Security Lab 12 Supplemental 3: Implementation Lab",
-					content:
-						"**Project goal:** Complete the linked security lab transfer or extension project for Low-Level Security Lab 12: Implementation Lab. The project should prove the module concept through a working artifact, not only through reading the repository link.\n\n**Required work:**\n\n1. Read the starter and identify the expected inputs, outputs, state changes, and constraints.\n\n2. Implement the missing behavior in the smallest clear steps.\n\n3. Test one normal case and one awkward or boundary case.\n\n4. Compare with the reference solution only after a working draft exists.\n\n**Completion checks:**\n\n- The implemented behavior matches the module concept.\n\n- The changed or awkward case is named explicitly.\n\n- The final explanation identifies one design, debugging, or reasoning choice that mattered.",
+					content: securityLabProjectContent(
+						"Low-Level Security Lab 12: Implementation Lab",
+						"extension"
+					),
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS-34-applied-studio-17-low-level-security-lab-12-supplemental-3/starter",
 					solutionLink:

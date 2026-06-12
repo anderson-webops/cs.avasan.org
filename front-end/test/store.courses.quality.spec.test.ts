@@ -265,6 +265,28 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toContain("classes, method contracts, object state");
 	});
 
+	it("keeps low-level security projects evidence-based instead of generic starter boilerplate", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("low-level-security"),
+			loadRawCourse("low-level-security-part-2")
+		]);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).not.toMatch(/Complete the linked security lab/i);
+		expect(corpus).not.toMatch(
+			/The project should prove the module concept/i
+		);
+		expect(corpus).not.toMatch(/Read the starter and identify/i);
+		expect(corpus).toContain(
+			"produces defensive evidence, not just a passing program"
+		);
+		expect(corpus).toContain("**Focus:**");
+		expect(corpus).toContain("State the local lab boundary");
+		expect(corpus).toContain("does not target public systems");
+		expect(corpus).toContain("reachability, attacker-controlled input");
+		expect(corpus).toContain("sanitizer output");
+	});
+
 	it(
 		"keeps linked course projects from loading as blank placeholder cards",
 		async () => {
