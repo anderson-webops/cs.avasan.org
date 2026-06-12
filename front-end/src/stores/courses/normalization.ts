@@ -437,6 +437,90 @@ function stripTrailingSentencePunctuation(value: string) {
 	return value.trim().replace(/[.!?]+$/g, "");
 }
 
+function formatInlineNumberedLists(text: string) {
+	const markerPattern = /(^|\n|[^\S\n])(\d{1,2})\.\s+(?=(?:\*\*)?[A-Z"`])/g;
+	const markers: {
+		number: number;
+		start: number;
+	}[] = [];
+
+	for (const match of text.matchAll(markerPattern)) {
+		const start = (match.index ?? 0) + match[1].length;
+		const previous = start > 0 ? text[start - 1] : "";
+
+		if (/[\d.]/.test(previous)) continue;
+
+		markers.push({
+			number: Number(match[2]),
+			start
+		});
+	}
+
+	const splitStarts = new Map<number, number>();
+
+	for (let index = 0; index < markers.length; index++) {
+		const marker = markers[index];
+
+		if (marker.number !== 1) continue;
+
+		const sequence = [marker];
+		let expected = 2;
+
+		for (
+			let nextIndex = index + 1;
+			nextIndex < markers.length;
+			nextIndex++
+		) {
+			const next = markers[nextIndex];
+
+			if (next.number === expected) {
+				sequence.push(next);
+				expected++;
+				continue;
+			}
+
+			break;
+		}
+
+		if (sequence.length < 2) continue;
+
+		for (const item of sequence) {
+			splitStarts.set(item.start, item.number);
+		}
+	}
+
+	if (splitStarts.size === 0) return text;
+
+	let result = "";
+	let cursor = 0;
+
+	for (const start of [...splitStarts.keys()].sort((a, b) => a - b)) {
+		const markerNumber = splitStarts.get(start) ?? 1;
+		result += text.slice(cursor, start).replace(/[ \t]+$/g, "");
+
+		if (result && markerNumber === 1 && !result.endsWith("\n\n")) {
+			result += result.endsWith("\n") ? "\n" : "\n\n";
+		} else if (result && !result.endsWith("\n")) {
+			result += "\n";
+		}
+
+		cursor = start;
+	}
+
+	return `${result}${text.slice(cursor)}`;
+}
+
+function formatSupportLabels(text: string) {
+	return text.replace(
+		/([^\n])\s+(\*\*(?:Project goal|Required outcome|Completion checks|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output):\*\*)/g,
+		"$1\n\n$2"
+	);
+}
+
+function formatVisibleMarkdownStructure(text: string) {
+	return formatSupportLabels(formatInlineNumberedLists(text));
+}
+
 function listifyInlineTopics(value: string) {
 	const normalized = stripTrailingSentencePunctuation(value)
 		.replace(/;\s*/g, ", ")
@@ -747,6 +831,9 @@ function neutralizeStudentFacingText(text: string) {
 		.replace(/\bPoint out that\b/gi, "Note that")
 		.replace(/\bMake sure to explain that\b/gi, "Remember that")
 		.replace(/\bMake sure\b/gi, "Ensure")
+		.replace(/,\s+Ensure\b/g, ", ensure")
+		.replace(/\bto Ensure\b/g, "to ensure")
+		.replace(/\bBroadcast messages between\b/g, "Use broadcasts between")
 		.replace(/\bShow how to\b/gi, "Practice how to")
 		.replace(/\bShow how\b/gi, "Notice how")
 		.replace(/\bShow where\b/g, "Identify where")
@@ -942,6 +1029,16 @@ function neutralizeStudentFacingCourseText(course: RawCourse) {
 			for (const item of module[section]) {
 				item.title = neutralizeStudentFacingText(item.title);
 				item.content = neutralizeStudentFacingText(item.content);
+			}
+		}
+	}
+}
+
+function formatVisibleCourseMarkdown(course: RawCourse) {
+	for (const module of course.modules) {
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				item.content = formatVisibleMarkdownStructure(item.content);
 			}
 		}
 	}
@@ -2381,5 +2478,6 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	normalizeImplementationLabLanguage(course);
 	normalizeCourseTextQuality(course, id);
 	neutralizeStudentFacingCourseText(course);
+	formatVisibleCourseMarkdown(course);
 	return course;
 }

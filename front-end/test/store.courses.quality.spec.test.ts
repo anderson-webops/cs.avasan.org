@@ -939,6 +939,32 @@ describe("course text quality normalization", () => {
 		expect(lessonArc.content).not.toMatch(/This lesson arc covers/i);
 	});
 
+	it("formats inline project steps and support labels as readable markdown blocks", async () => {
+		const [scratchLevel1, scratchLevel2] = await Promise.all([
+			loadRawCourse("scratch-level-1"),
+			loadRawCourse("scratch-level-2")
+		]);
+		expect(scratchLevel1).not.toBeNull();
+		expect(scratchLevel2).not.toBeNull();
+
+		const spinner = findItem(scratchLevel1!, /Spinner/);
+		expect(spinner.content).toContain(
+			"It's time to build a fun spinner:\n\n1. When the green flag is clicked"
+		);
+		expect(spinner.content).toContain(
+			"towards the mouse.\n\n**Project goal:**"
+		);
+		expect(spinner.content).toContain(
+			"evidence, or explanation.\n\n**Required outcome:**"
+		);
+
+		const wheel = findItem(scratchLevel2!, /Wheel of Fortune/);
+		expect(wheel.content).toContain(
+			"secret word.\n\n1. Construct a word bank"
+		);
+		expect(wheel.content).not.toMatch(/\band and\b/i);
+	});
+
 	it("keeps generated concept and supplemental titles concise", async () => {
 		const course = await loadRawCourse("python-level-3");
 		expect(course).not.toBeNull();
