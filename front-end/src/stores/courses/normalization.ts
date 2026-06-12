@@ -1097,6 +1097,44 @@ function projectExpectations(context: CourseTextContext) {
 			"- Record the observed symptom, the diagnostic command, the interpretation, and the configuration or topology fact it proves."
 		];
 	}
+	if (
+		/\binput\/output\b/.test(source) &&
+		!/\b(?:file|files|csv|parser|streams?|pipelines?)\b/.test(source)
+	) {
+		return [
+			"- Define which values are typed by the user, which values are stored, and which values are printed.",
+			"- Test typical input, awkward input such as extra spaces or decimals when relevant, and output labels that make the result unambiguous.",
+			"- Keep input collection, calculation, and printed output separated enough to debug each step."
+		];
+	}
+	if (/c systems|systems build|assembly/.test(source)) {
+		return [
+			"- Define the build command, source/header boundary, runtime input, memory assumption, or observable system behavior before implementation.",
+			"- Verify normal behavior and one failure path with compiler output, sanitizer output, return codes, logs, or command-line output.",
+			"- Record the exact command and evidence so the systems behavior can be reproduced from a clean checkout or shell."
+		];
+	}
+	if (/\b(?:multi-file|source files?|headers?)\b/.test(source)) {
+		return [
+			"- Define which declarations belong in headers, which definitions belong in source files, and which file contains the runnable entry point.",
+			"- Build from a clean compile command and verify that include paths, class boundaries, and linker behavior are understood.",
+			"- Keep a short note naming one organization choice that made the program easier to extend or debug."
+		];
+	}
+	if (/web|html|css|api|database|full-stack/.test(source)) {
+		return [
+			"- Define the visible user flow and the data flow before implementation.",
+			"- Verify the feature in the browser at desktop and narrow widths.",
+			"- Check loading, empty, success, and error states instead of only the happy path."
+		];
+	}
+	if (/security|offensive|threat|network/.test(source)) {
+		return [
+			"- Work only against local fixtures, intentionally vulnerable examples, or owned test data.",
+			"- Write the threat model or failure mode before running the lab.",
+			"- Finish with evidence, impact, and a defensive mitigation or hardening step."
+		];
+	}
 	if (/binary search/.test(source)) {
 		return [
 			"- State the sorted-data precondition before coding.",
@@ -1146,9 +1184,7 @@ function projectExpectations(context: CourseTextContext) {
 			"- Include one encode/decode round trip that returns the original message."
 		];
 	}
-	if (
-		/\b(?:file|files|parser|csv|json|io|i\/o|input\/output)\b/.test(source)
-	) {
+	if (/\b(?:file|files|parser|csv|json|io|i\/o)\b/.test(source)) {
 		return [
 			"- Identify the expected file format and how malformed or missing data will be handled.",
 			"- Test at least one normal file and one awkward file with an empty line or incomplete record.",
@@ -1160,20 +1196,6 @@ function projectExpectations(context: CourseTextContext) {
 			"- Draw or annotate the relationship between values, addresses, and ownership before coding.",
 			"- Test allocation, access, resizing or cleanup behavior, and an empty or one-element case.",
 			"- Explain which object owns each resource and when that resource is released."
-		];
-	}
-	if (/web|html|css|api|database|full-stack/.test(source)) {
-		return [
-			"- Define the visible user flow and the data flow before implementation.",
-			"- Verify the feature in the browser at desktop and narrow widths.",
-			"- Check loading, empty, success, and error states instead of only the happy path."
-		];
-	}
-	if (/security|offensive|threat|network/.test(source)) {
-		return [
-			"- Work only against local fixtures, intentionally vulnerable examples, or owned test data.",
-			"- Write the threat model or failure mode before running the lab.",
-			"- Finish with evidence, impact, and a defensive mitigation or hardening step."
 		];
 	}
 	if (

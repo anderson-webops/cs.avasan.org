@@ -214,6 +214,33 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/malformed or missing data/i);
 	});
 
+	it("does not treat console input/output lessons as file parsing work", async () => {
+		const courses = await Promise.all([
+			loadRawCourse("java-level-1-java-superstar"),
+			loadRawCourse("ap-computer-science-a"),
+			loadRawCourse("c-level-1")
+		]);
+		const corpus = courses.map(allCourseText).join("\n");
+
+		expect(corpus).toContain("values are typed by the user");
+		expect(corpus).not.toMatch(
+			/Variables(?:, Types, Strings, and Input\/Output| and Input\/Output)[\s\S]{0,2500}expected file format/i
+		);
+		expect(corpus).not.toMatch(
+			/APCS1 Variables and Input\/Output[\s\S]{0,2500}expected file format/i
+		);
+	});
+
+	it("does not treat multi-file source organization as data-file parsing", async () => {
+		const course = await loadRawCourse("c-level-1");
+		expect(course).not.toBeNull();
+
+		const item = findItem(course!, /Multi-File Class Implementation/);
+		expect(item.content).toContain("declarations belong in headers");
+		expect(item.content).toContain("linker behavior");
+		expect(item.content).not.toMatch(/expected file format/i);
+	});
+
 	it("guards against raw generated grammar artifacts in course sources", () => {
 		const sourcePaths = [
 			"src/stores/courses/java-level-3.ts",
