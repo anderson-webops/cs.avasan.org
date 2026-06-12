@@ -20,7 +20,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Architecture Choice and Syntax Policy",
 					content:
-						"Use `x86-64 assembly` first because the debugger support, desktop relevance, and reverse-engineering value are stronger for a first course than jumping immediately into other architectures. Pick one syntax for active writing, and this course standardizes on Intel syntax while still teaching students how to recognize AT&T syntax in compiler output and external references."
+						"Use `x86-64 assembly` first because the debugger support, desktop relevance, and reverse-engineering value are stronger for a first course than jumping immediately into other architectures. Pick one syntax for active writing, and this course standardizes on Intel syntax while still showing how to recognize AT&T syntax in compiler output and external references."
 				},
 				{
 					title: "Audience, Prerequisites, and Core Outcomes",
@@ -100,7 +100,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "C-to-Assembly Compare: Hello Function",
 					content:
-						"Put a short C function and its generated assembly side by side before rewriting anything. Take a simple C helper, compile it with and without optimization, and Identify the arguments, return value, and where the function begins and ends in the disassembly."
+						"Put a short C function and its generated assembly side by side before rewriting anything. Take a simple C helper, compile it with and without optimization, and identify the arguments, return value, and where the function begins and ends in the disassembly."
 				},
 				{
 					title: "Unit 1: Machine Model and Toolchain: Core Project",
@@ -644,7 +644,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Compile C to Assembly on Purpose",
 					content:
-						"Make compiler output a first-class teaching tool. Repeatedly compile small C helpers to assembly so they can compare their manual code shape to the compiler's choices instead of imagining the compiler as an opaque black box."
+						"Make compiler output a first-class learning tool. Repeatedly compile small C helpers to assembly so manual code shape can be compared to the compiler's choices instead of imagining the compiler as an opaque black box."
 				},
 				{
 					title: "Map Source Lines to Instructions",

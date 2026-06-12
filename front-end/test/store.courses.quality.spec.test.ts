@@ -196,6 +196,8 @@ describe("course text quality normalization", () => {
 		const corpus = visibleCourseSourceCorpus();
 
 		expect(corpus).not.toMatch(/\bTeach\b/);
+		expect(corpus).not.toMatch(/\bRequire\b/);
+		expect(corpus).not.toMatch(/\bEncourage\b/);
 		expect(corpus).not.toMatch(/This section covers students/);
 		expect(corpus).not.toMatch(/\bUnderstand why/);
 		expect(corpus).not.toMatch(
@@ -220,6 +222,8 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(
 			/\bstudents (?:trace|identify|distinguish|draw|describe|choose|see)\b/i
 		);
+		expect(corpus).not.toMatch(/\bLet students\b/i);
+		expect(corpus).not.toMatch(/\bwith your instructor\b/i);
 		expect(corpus).not.toMatch(
 			/Use the linked starter as a starting point/i
 		);
@@ -520,6 +524,7 @@ describe("course text quality normalization", () => {
 		expect(guide).toContain("APCS5/APCS6");
 		expect(guide).toContain("Generics, interfaces, records");
 		expect(guide).not.toMatch(/Instructor Note|HQ Support|Slack|Juni/i);
+		expect(guide).not.toMatch(/\bRequire\b|\bEncourage\b|\binstructor\b/i);
 	});
 
 	it(

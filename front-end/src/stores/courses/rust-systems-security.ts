@@ -713,7 +713,7 @@ export const rustSystemsSecurityCourse: RawCourse = {
 				{
 					title: "Auditing Unsafe Blocks",
 					content:
-						"Require comments and reasoning around every unsafe block so students treat each one as an audit target."
+						"Include comments and reasoning around every unsafe block so each one is treated as an audit target."
 				},
 				{
 					title: "Unsafe, FFI, and Trusted Boundaries: Verification and Reflection",

@@ -15,7 +15,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Stronger Debugging under Time Pressure",
 					content:
-						"Require custom tests, reasoning about invariants, and quick rejection of bad approaches. In Silver, debugging means finding bugs and diagnosing whether the entire strategy is wrong before wasting time polishing it."
+						"Use custom tests, reasoning about invariants, and quick rejection of bad approaches. In Silver, debugging means finding bugs and diagnosing whether the entire strategy is wrong before wasting time polishing it."
 				},
 				{
 					title: "Comfort with Java or Another Strong Contest Language",
@@ -411,7 +411,7 @@ export const usacoSilverCourse: RawCourse = {
 				{
 					title: "Write Cleaner Contest Explanations",
 					content:
-						"Require a one-paragraph explanation for each finished problem that names the pattern, the key data structure, and the reason the approach fits the constraints. This is how students build a reusable mental library."
+						"Include a one-paragraph explanation for each finished problem that names the pattern, the key data structure, and the reason the approach fits the constraints. This is how students build a reusable mental library."
 				},
 				{
 					title: "Find the Gaps before Gold",

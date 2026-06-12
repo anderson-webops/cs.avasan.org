@@ -15,7 +15,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Linux-Friendly Lab Environment",
 					content:
-						"Require a Linux shell for the networking and service labs, whether through WSL2, a VM, Docker, or a remote host. Firewall, proxy, socket, and service exposure behavior is easier to reason about when students are not fighting an OS mismatch."
+						"A Linux shell is expected for the networking and service labs, whether through WSL2, a VM, Docker, or a remote host. Firewall, proxy, socket, and service exposure behavior is easier to reason about when the operating environment is consistent."
 				},
 				{
 					title: "Workspace Layout for Security Labs",
@@ -616,7 +616,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Route-Level Authentication and Authorization",
 					content:
-						"Require explicit route guards, ownership checks, and admin boundaries on top of authentication. The course should keep reinforcing that each sensitive route needs a defensible authorization story."
+						"Include explicit route guards, ownership checks, and admin boundaries on top of authentication. The course should keep reinforcing that each sensitive route needs a defensible authorization story."
 				},
 				{
 					title: "Unit 8: Secure Node/TypeScript Services: Core Project",
@@ -752,7 +752,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Event Validation and Message Contracts",
 					content:
-						"Require strict event schemas, allowed event names, payload limits, and per-event authorization checks. The course should show how real-time protocols become risky when they skip the structure that HTTP handlers usually make more obvious."
+						"Include strict event schemas, allowed event names, payload limits, and per-event authorization checks. The course should show how real-time protocols become risky when they skip the structure that HTTP handlers usually make more obvious."
 				},
 				{
 					title: "Abuse Handling, Backpressure, and Disconnect Policy",
@@ -978,7 +978,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Implement Controls and Observability Together",
 					content:
-						"Require validation, auth, authorization, rate limits, structured logs, and deployment notes as part of the same deliverable. Not treat security and monitoring as separate post-build tasks."
+						"Include validation, auth, authorization, rate limits, structured logs, and deployment notes as part of the same deliverable. Not treat security and monitoring as separate post-build tasks."
 				},
 				{
 					title: "Audit the Service with an Authorized Test Playbook",

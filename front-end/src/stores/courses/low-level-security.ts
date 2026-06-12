@@ -125,7 +125,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Fixed-Size Storage and Why Bounds Matter",
 					content:
-						"Review arrays, character buffers, and small structs that store a limited amount of data. Show how every fixed-size object creates an implicit contract: only read initialized bytes, only write within capacity, and always preserve a valid terminator if the data is string-like. Connect off-by-one mistakes and unchecked copies to the much broader idea of memory corruption without teaching weaponization."
+						"Review arrays, character buffers, and small structs that store a limited amount of data. Show how every fixed-size object creates an implicit contract: only read initialized bytes, only write within capacity, and always preserve a valid terminator if the data is string-like. Connect off-by-one mistakes and unchecked copies to the much broader idea of memory corruption without describing weaponization."
 				},
 				{
 					title: "Off-by-One Errors and Truncation Rules",
@@ -207,7 +207,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Negative Tests for Malformed Inputs",
 					content:
-						"This section covers bug-finding by creating test inputs that should be rejected: too short, too long, wrong declared length, unknown opcode, invalid characters, or missing body bytes. Encourage naming each test after the assumption it challenges so the debugging story stays clear."
+						"This section covers bug-finding by creating test inputs that should be rejected: too short, too long, wrong declared length, unknown opcode, invalid characters, or missing body bytes. Name each test after the assumption it challenges so the debugging story stays clear."
 				},
 				{
 					title: "LLS3 Project 3: Length-Prefixed Parser",
@@ -259,7 +259,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Integer Overflow, Underflow, and Type Mismatch",
 					content:
-						"Explain why sizes, indexes, and counters deserve the same attention as raw memory access. Review signed vs. unsigned values, wraparound, narrowing conversions, and the danger of using a computed size before checking it. Encourage a habit of validating ranges before arithmetic rather than after."
+						"Explain why sizes, indexes, and counters deserve the same attention as raw memory access. Review signed vs. unsigned values, wraparound, narrowing conversions, and the danger of using a computed size before checking it. Build the habit of validating ranges before arithmetic rather than after."
 				},
 				{
 					title: "State Machines Keep Parsers Honest",
@@ -398,7 +398,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Code Review Heuristics for Low-Level Safety",
 					content:
-						"This section covers a short review checklist: unchecked lengths, copies into fixed buffers, stale references after ownership changes, arithmetic on untrusted sizes, silent truncation, and missing failure paths. Encourage reviewers to leave comments that name the violated invariant rather than only pointing at syntax."
+						"This section covers a short review checklist: unchecked lengths, copies into fixed buffers, stale references after ownership changes, arithmetic on untrusted sizes, silent truncation, and missing failure paths. Review comments should name the violated invariant rather than only pointing at syntax."
 				},
 				{
 					title: "Documenting a Vulnerability Clearly",

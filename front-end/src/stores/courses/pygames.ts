@@ -294,7 +294,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG3 Project 3: Beach Ball Chase",
 					content:
-						"Create an alien actor (controlled by the player) and a ball actor with random position and random xspeed and yspeed dynamic attributes. In update(), move the alien with arrow keys (up/down/left/right) and move the ball by its speeds, bouncing it off the walls. When the alien collides with the ball, increase a score variable and move the ball to a new random position. In draw(), draw both actors and display the score at the top-left using screen.draw.text(str(score), (10, 10)). Encourage breaking logic into helper functions for keyboard input, ball movement, and collision checks.",
+						"Create an alien actor (controlled by the player) and a ball actor with random position and random xspeed and yspeed dynamic attributes. In update(), move the alien with arrow keys (up/down/left/right) and move the ball by its speeds, bouncing it off the walls. When the alien collides with the ball, increase a score variable and move the ball to a new random position. In draw(), draw both actors and display the score at the top-left using screen.draw.text(str(score), (10, 10)). Break logic into helper functions for keyboard input, ball movement, and collision checks.",
 					projectLink:
 						"https://github.com/instruction-material/PyGames/tree/main",
 					solutionLink:

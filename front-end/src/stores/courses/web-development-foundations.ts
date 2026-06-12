@@ -569,7 +569,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Deployment as a Repeatable Process",
 					content:
-						"Make deployment repeatable by teaching build scripts, environment-specific configuration, domain verification, and post-deploy checks. End this stage able to describe what they would test immediately after shipping a site or app and what evidence they would collect if something broke."
+						"Make deployment repeatable through build scripts, environment-specific configuration, domain verification, and post-deploy checks. End this stage able to describe what they would test immediately after shipping a site or app and what evidence they would collect if something broke."
 				},
 				{
 					title: "WDF7 Stage 6: Hosting and Deployment: Core Project",
@@ -869,7 +869,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Ports and Listening Services",
 					content:
-						"Cross-link this course with networking by teaching ports and listening services as concrete operational facts. Key idea: Browsers, APIs, databases, and reverse proxies all communicate through explicit ports and that many deployment bugs start with services not listening where the rest of the system expects them to be."
+						"Cross-link this course with networking by treating ports and listening services as concrete operational facts. Key idea: Browsers, APIs, databases, and reverse proxies all communicate through explicit ports and that many deployment bugs start with services not listening where the rest of the system expects them to be."
 				},
 				{
 					title: "DNS and Domain Routing",

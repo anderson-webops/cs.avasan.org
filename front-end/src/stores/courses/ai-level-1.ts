@@ -25,7 +25,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Experiment Logging and Reflection",
 					content:
-						"Require short written notes after each search or game AI lab: what representation was used, what strategy was tried, what failed, and what evidence supports the next revision. Leave the course able to explain why an algorithm behaved the way it did."
+						"Include short written notes after each search or game AI lab: what representation was used, what strategy was tried, what failed, and what evidence supports the next revision. Leave the course able to explain why an algorithm behaved the way it did."
 				},
 				{
 					title: "FAI0 Setup and Tooling: Core Project",
@@ -173,7 +173,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Tracing Traversals by Hand",
 					content:
-						"Require whiteboard or notebook traces before implementation. Skill target: Follow push, pop, enqueue, dequeue, and visited-set changes step by step instead of treating search as magic recursion or copy-pasted code."
+						"Use whiteboard or notebook traces before implementation. Skill target: Follow push, pop, enqueue, dequeue, and visited-set changes step by step instead of treating search as magic recursion or copy-pasted code."
 				},
 				{
 					title: "Unit 2: Stacks, Queues, and Traversal Intuition: Core Project",
@@ -462,7 +462,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Debugging a Game AI",
 					content:
-						"Require concrete debugging methods: inspect candidate moves, print evaluation scores, compare turns against human reasoning, and capture failure positions. Learn that AI bugs are often representation bugs or scoring bugs."
+						"Use concrete debugging methods: inspect candidate moves, print evaluation scores, compare turns against human reasoning, and capture failure positions. Learn that AI bugs are often representation bugs or scoring bugs."
 				},
 				{
 					title: "Unit 6: Heuristics and Game AI: Core Project",
@@ -585,7 +585,7 @@ export const aiLevel1Course: RawCourse = {
 				{
 					title: "Build for Explanation, Not Just Output",
 					content:
-						"Require the capstone to expose its logic through traces, notes, diagrams, or evaluation summaries. The expected outcome is an explanation of why the system made a choice and how it would fail, not just a demonstration that it runs."
+						"The capstone should expose its logic through traces, notes, diagrams, or evaluation summaries. The expected outcome is an explanation of why the system made a choice and how it would fail, not just a demonstration that it runs."
 				},
 				{
 					title: "Measure Improvement over a Baseline",

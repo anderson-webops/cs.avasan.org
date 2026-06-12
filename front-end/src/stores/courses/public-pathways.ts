@@ -44,7 +44,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Explain one event chain from input to visible result.",
 			"Use broken-script debugging checkpoints that require prediction, repair, and retest.",
-			"Require a brief project presentation that names the goal, the main blocks used, and one improvement after playtesting."
+			"Include a brief project presentation that names the goal, the main blocks used, and one improvement after playtesting."
 		],
 		sourceAndTooling: [
 			"Use Scratch educator references and stable project examples.",
@@ -188,8 +188,8 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Explain what each row, feature, label, and metric means.",
 			"Use interpretation questions that separate correlation, prediction, and causation.",
-			"Require limitations, dataset assumptions, and responsible-use notes in final projects.",
-			"Require an experiment log for ML projects: baseline, model choice, split method, metric, failed attempt, and one next improvement."
+			"Include limitations, dataset assumptions, and responsible-use notes in final projects.",
+			"Include an experiment log for ML projects: baseline, model choice, split method, metric, failed attempt, and one next improvement."
 		],
 		sourceAndTooling: [
 			"Use pandas, matplotlib or seaborn, scikit-learn, and small pinned CSV fixtures.",
@@ -288,7 +288,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Trace memory ownership, object lifetime, and copy/move expectations before and after code runs.",
 			"Use compile/run tests for empty, one-element, duplicate, invalid-input, and large-enough cases.",
-			"Require runtime and data-structure tradeoff explanations for DS&A projects."
+			"Include runtime and data-structure tradeoff explanations for DS&A projects."
 		],
 		sourceAndTooling: [
 			"Use ISO C++ Core Guidelines, local Makefile or CMake workflows, and source folders under Instruction-Material.",
@@ -337,7 +337,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Network diagnostic lab with topology diagram, packet capture or traceroute evidence, and explanation of which hop or layer matters."
 		],
 		assessmentStyle: [
-			"Require command transcripts, annotated outputs, and short evidence-to-claim explanations.",
+			"Include command transcripts, annotated outputs, and short evidence-to-claim explanations.",
 			"Use checklists for setup, verification, rollback, and failure-mode diagnosis.",
 			"Distinguish observation from inference in system and network troubleshooting."
 		],
@@ -392,7 +392,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Trace object state before and after method calls.",
 			"Ask when to use a class, record, interface, abstract class, extension, or composition.",
-			"Require unit tests or small driver programs for normal, empty, duplicate, invalid, and boundary cases."
+			"Include unit tests or small driver programs for normal, empty, duplicate, invalid, and boundary cases."
 		],
 		sourceAndTooling: [
 			"Use JDK tooling, simple command-line builds or IDE projects, and explicit starter/solution source folders.",
@@ -485,7 +485,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Check exact sample input/output, smallest case, largest reasonable case, ties, duplicates, and impossible cases.",
-			"Require time complexity, memory complexity, and proof of why the algorithm matches constraints.",
+			"Include time complexity, memory complexity, and proof of why the algorithm matches constraints.",
 			"Use timed practice only after the student has a repeatable untimed solution process.",
 			"Every assigned official problem should include brute-force idea, target complexity, invariant or proof note, common wrong turns, and postmortem."
 		],
@@ -536,7 +536,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Identify the responsibility that moved during refactoring.",
-			"Require behavior-preserving tests before and after a refactor.",
+			"Include behavior-preserving tests before and after a refactor.",
 			"Use design tradeoff prompts, not just vocabulary quizzes."
 		],
 		sourceAndTooling: [
@@ -637,7 +637,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Label app entry point, scene, view hierarchy, navigation model, and data model responsibilities.",
 			"Use UI behavior checks plus code explanations.",
-			"Require one accessibility or usability improvement in major projects."
+			"Include one accessibility or usability improvement in major projects."
 		],
 		sourceAndTooling: [
 			"Use Apple's App Dev Training and current SwiftUI documentation as the authority.",
@@ -688,7 +688,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Verify projects in the browser at desktop and narrow widths.",
 			"Check keyboard navigation, labels, contrast, loading/error states, and network tab behavior.",
 			"Explain the request/response flow and where data lives.",
-			"Require one accessibility fix, one async/loading/error-state fix, and one safe-input or output-escaping explanation in substantial web projects."
+			"Include one accessibility fix, one async/loading/error-state fix, and one safe-input or output-escaping explanation in substantial web projects."
 		],
 		sourceAndTooling: [
 			"Use MDN JavaScript, RFC 9110 HTTP Semantics, OWASP Web Security Testing Guide, browser devtools, Git, npm, and deployment docs as anchors.",
@@ -738,7 +738,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		assessmentStyle: [
 			"Grade evidence quality, impact explanation, remediation, and ethical boundary compliance.",
 			"Distinguish vulnerability, exploitability, impact, and fix.",
-			"Require a short report rather than only screenshots or command output."
+			"Include a short report rather than only screenshots or command output."
 		],
 		sourceAndTooling: [
 			"Use OWASP, RFCs, local VMs/containers, provided captures, and intentionally vulnerable toy fixtures.",

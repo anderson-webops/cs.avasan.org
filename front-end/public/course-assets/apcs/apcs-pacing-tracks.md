@@ -169,7 +169,7 @@ Recommended next session:
 
 1. Spend 10-15 minutes on integer division, casting, `.equals()` versus `==`, boolean chains, `Scanner`, and one loop trace.
 2. If the diagnostic is clean, move directly into **APCS5/APCS6** class design with `Bank Account`, `Vending Machine`, or a custom `Gradebook CLI`.
-3. Require private fields, constructors, validation rules, instance methods, a small menu loop, and at least three manual test cases.
+3. Include private fields, constructors, validation rules, instance methods, a small menu loop, and at least three manual test cases.
 4. Add one AP-style written explanation: object state before and after two method calls, one invariant, and one edge case.
 5. Use the following session for inheritance/polymorphism if the object model is stable, or arrays/`ArrayList` if references and mutation need more practice.
 
@@ -226,7 +226,7 @@ Upgrade the artifact while keeping the AP concept:
 3. Add a menu loop or command parser.
 4. Add deterministic manual tests or a lightweight test harness.
 5. Add file input/output only after the AP concept is stable.
-6. Require one written trace of an edge case.
+6. Include one written trace of an edge case.
 7. End with one AP-style explanation or FRQ-style response.
 
 ### Exam Track

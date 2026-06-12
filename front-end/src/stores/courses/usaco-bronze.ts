@@ -20,12 +20,12 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Trace First, Optimize Second",
 					content:
-						"Require handwritten traces and small custom tests before students worry about speed. Bronze work usually fails because of overlooked cases or incorrect translation, not because the code is too slow."
+						"Use handwritten traces and small custom tests before speed becomes the focus. Bronze work usually fails because of overlooked cases or incorrect translation, not because the code is too slow."
 				},
 				{
 					title: "Language Strategy",
 					content:
-						"Let students work in the language that supports their current growth best, but keep problem-solving habits language-agnostic. Python is often enough for Bronze, while Java versions in the repo are useful for students preparing for later tiers."
+						"Choose the language that best supports current growth, while keeping problem-solving habits language-agnostic. Python is often enough for Bronze, while Java versions in the repo are useful for learners preparing for later tiers."
 				},
 				{
 					title: "USB0 Setup and Contest Workflow: Core Project",
@@ -92,7 +92,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Use Tables and Traces",
 					content:
-						"Encourage tables of values, timeline traces, and manual updates. Bronze-level debugging becomes much easier when the evolving state is visible on paper."
+						"Use tables of values, timeline traces, and manual updates. Bronze-level debugging becomes much easier when the evolving state is visible on paper."
 				},
 				{
 					title: "Unit 1: Simulation and Careful Translation: Core Project",
@@ -284,7 +284,7 @@ export const usacoBronzeCourse: RawCourse = {
 				{
 					title: "Track Structure Explicitly",
 					content:
-						"Encourage tables, parent relationships, or step histories when the problem involves movement, ancestry, or repeated transitions. Explicit structure prevents guessing."
+						"Use tables, parent relationships, or step histories when the problem involves movement, ancestry, or repeated transitions. Explicit structure prevents guessing."
 				},
 				{
 					title: "Separate Representation from Process",

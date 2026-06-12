@@ -337,7 +337,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS7 Supplemental Project 1 – Animal Crossing",
 					content:
-						"1. Ask the user if they want to build a shop, plant a tree or explore the island.\n2. Use the answer to determine which event occurs.\n3. Ask the user yes/no questions to further customize the experience.\n4. Use variables to store items collected or tasks completed.\n5. Encourage the user to explore and discover secrets.",
+						"1. Ask the user if they want to build a shop, plant a tree or explore the island.\n2. Use the answer to determine which event occurs.\n3. Ask the user yes/no questions to further customize the experience.\n4. Use variables to store items collected or tasks completed.\n5. Add prompts or rewards that make exploration and hidden secrets clear.",
 					projectLink: "https://scratch.mit.edu/projects/330320360/",
 					solutionLink: "https://scratch.mit.edu/projects/330316142/"
 				},
@@ -396,7 +396,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS8 Supplemental Project 2 – Coordinate Drawings",
 					content:
-						"1. Using the Pen extension, draw a picture by moving the sprite to various X and Y coordinates.\n2. Allow the user to enter coordinates to draw their own shapes.\n3. Encourage drawing initials or simple pictures.",
+						"1. Using the Pen extension, draw a picture by moving the sprite to various X and Y coordinates.\n2. Allow the user to enter coordinates to draw their own shapes.\n3. Include example coordinate sets for initials or simple pictures.",
 					projectLink: "https://scratch.mit.edu/projects/330291711/",
 					solutionLink: "https://scratch.mit.edu/projects/330288612/"
 				},

@@ -461,7 +461,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "ML5 Project 1: Simple Linear Regression",
 					content:
-						"In Colab, open the starter code for simple linear regression. Plot the given x and y data as a scatterplot and ask whether the data appears to follow a roughly straight-line trend. Use scikit-learn's LinearRegression class to fit a model to the data. Show how to extract and print the slope, y-intercept, correlation (R^2 score), and use the model to predict y for a given x. Plot the line of best fit on top of the scatterplot to visually confirm that it matches the trend. Describe whether the relationship is positive or negative and whether it appears strong, weak, or moderate based on both the graph and R^2 value. Encourage trying predictions for x values not in the original dataset and discuss whether those predictions seem reasonable.",
+						"In Colab, open the starter code for simple linear regression. Plot the given x and y data as a scatterplot and ask whether the data appears to follow a roughly straight-line trend. Use scikit-learn's LinearRegression class to fit a model to the data. Show how to extract and print the slope, y-intercept, correlation (R^2 score), and use the model to predict y for a given x. Plot the line of best fit on top of the scatterplot to visually confirm that it matches the trend. Describe whether the relationship is positive or negative and whether it appears strong, weak, or moderate based on both the graph and R^2 value. Try predictions for x values not in the original dataset and discuss whether those predictions seem reasonable.",
 					projectLink:
 						"https://github.com/instruction-material/AI-Level-2/tree/main/ML5-Simple-Linear-Regression-Starter",
 					solutionLink:
@@ -692,7 +692,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Compare at Least Two Models per Serious Project",
 					content:
-						"Require a short comparison note whenever two plausible models can be tried on the same problem. This is the habit that turns the course from a sequence of demos into real machine-learning thinking."
+						"Include a short comparison note whenever two plausible models can be tried on the same problem. This is the habit that turns the course from a sequence of demos into real machine-learning thinking."
 				},
 				{
 					title: "ML7.5 Model Evaluation, Comparison, and Dataset Strategy: Core Project",
@@ -756,7 +756,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Master Project Implementation",
 					content:
-						"Once the topic and dataset are chosen, scope the project. Identify the input features, target labels or regression outputs, and evaluation metrics. Decide which two algorithms to compare: for classification, perhaps Naive Bayes vs. a neural network; for regression, maybe linear/polynomial regression vs. a neural network. Set up a new Colab notebook, upload or connect to the dataset, and perform standard steps: data cleaning, feature engineering, train–test split, model training, evaluation, and comparison. Encourage writing clear code cells and explanatory text cells documenting the process. Aim for a project that spans about two weeks, with substantial implementation and debugging done independently while you provide guidance and code reviews."
+						"Once the topic and dataset are chosen, scope the project. Identify the input features, target labels or regression outputs, and evaluation metrics. Decide which two algorithms to compare: for classification, perhaps Naive Bayes vs. a neural network; for regression, maybe linear/polynomial regression vs. a neural network. Set up a new Colab notebook, upload or connect to the dataset, and perform standard steps: data cleaning, feature engineering, train–test split, model training, evaluation, and comparison. Use clear code cells and explanatory text cells to document the process. Aim for a project that spans about two weeks, with substantial implementation and debugging done independently with periodic review checkpoints."
 				},
 				{
 					title: "ML8 Project 1: Master Project Workspace",

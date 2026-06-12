@@ -24,7 +24,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Motion Graph Detective 2D",
 					content:
-						"Extend the motion-graph strand by combining graph interpretation with vector reasoning. Compare horizontal and vertical component graphs, estimate turning points, and decide when acceleration changes only one part of the motion. Require them to justify each conclusion with slope, area, or vector language."
+						"Extend the motion-graph strand by combining graph interpretation with vector reasoning. Compare horizontal and vertical component graphs, estimate turning points, and decide when acceleration changes only one part of the motion. Justify each conclusion with slope, area, or vector language."
 				},
 				{
 					title: "Mini Lab or Simulation: Ballistics Model Comparison",
@@ -390,7 +390,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Building a Defensible Physics Model",
 					content:
-						"Bring the course together by focusing on assumptions, approximations, uncertainty, and communication. Explain that a strong capstone does not need to be huge; it needs to be coherent, testable, and honest about limits. Encourage projects that combine at least two major themes, such as vectors with forces, collisions with momentum, or circuits with power and heat."
+						"Bring the course together by focusing on assumptions, approximations, uncertainty, and communication. Explain that a strong capstone does not need to be huge; it needs to be coherent, testable, and honest about limits. Prefer projects that combine at least two major themes, such as vectors with forces, collisions with momentum, or circuits with power and heat."
 				},
 				{
 					title: "Worked Example Set: From Physical Situation to Model",
@@ -400,7 +400,7 @@ export const physicsLevel2Course: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Prediction Versus Observation",
 					content:
-						"Compare an experimental or simulated dataset to a model prediction and Separate random error, systematic error, and model breakdown. Require a graph that makes the comparison visible rather than hiding it inside paragraphs."
+						"Compare an experimental or simulated dataset to a model prediction, then separate random error, systematic error, and model breakdown. Include a graph that makes the comparison visible rather than hiding it inside paragraphs."
 				},
 				{
 					title: "Mini Lab or Simulation: Engineering Modeling Challenge",

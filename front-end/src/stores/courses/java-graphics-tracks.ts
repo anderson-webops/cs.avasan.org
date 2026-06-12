@@ -202,7 +202,7 @@ const graphicsBranchModules: RawCourseModule[] = [
 			{
 				title: "Java Graphics Project 3: Scene Composer",
 				content:
-					"Combine at least three helper methods into one original scene. Require a short written plan that names each helper and explains what visual responsibility it owns."
+					"Combine at least three helper methods into one original scene. Include a short written plan that names each helper and explains what visual responsibility it owns."
 			}
 		]
 	}

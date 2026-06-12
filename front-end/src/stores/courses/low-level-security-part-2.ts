@@ -82,7 +82,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Ethics Statement and Defensive Scope",
 					content:
-						"This course follows `Low Level Security Part 1` and uses tightly controlled toy programs to teach how a defensive engineer evaluates risk, not how to deploy offensive techniques. Require an explicit ethics statement at the start: local targets only, no public services, no real-world payloads, and every risky concept ends with a patch, mitigation summary, or regression case. If AI is used anywhere in the workflow, it must stay within that same defensive scope and every suggestion must be verified locally before it enters a report or patch discussion."
+						"This course follows `Low Level Security Part 1` and uses tightly controlled toy programs to show how a defensive engineer evaluates risk, not how to deploy offensive techniques. The opening ethics statement should make the boundary explicit: local targets only, no public services, no real-world payloads, and every risky concept ends with a patch, mitigation summary, or regression case. If AI is used anywhere in the workflow, it must stay within that same defensive scope and every suggestion must be verified locally before it enters a report or patch discussion."
 				},
 				{
 					title: "Core Outcomes for Part 2",

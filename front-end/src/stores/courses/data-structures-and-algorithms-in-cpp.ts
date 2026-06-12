@@ -404,7 +404,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Recursive Boundaries and Base Cases",
 					content:
-						"Require proof of where the recursion stops and why the subranges shrink. Quicksort bugs often come from boundary confusion rather than from misunderstanding the big idea."
+						"Include proof of where the recursion stops and why the subranges shrink. Quicksort bugs often come from boundary confusion rather than from misunderstanding the big idea."
 				},
 				{
 					title: "Quicksort and Partitioning: Verification and Reflection",
@@ -479,7 +479,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Index Access and Structural Tradeoffs",
 					content:
-						"Use index-based access mainly as a teaching contrast: linked lists are good at local insertion patterns and poor at random access. Connect that tradeoff to later tree and array conversations."
+						"Use index-based access mainly as a learning contrast: linked lists are good at local insertion patterns and poor at random access. Connect that tradeoff to later tree and array conversations."
 				},
 				{
 					title: "Templates and Linked Structures: Verification and Reflection",

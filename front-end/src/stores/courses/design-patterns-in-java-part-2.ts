@@ -791,7 +791,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Execution Pass: Small Safe Transformations",
 					content:
-						"Perform the refactor as a sequence of readable changes rather than a single giant rewrite. Require validation after each meaningful stage."
+						"Perform the refactor as a sequence of readable changes rather than a single giant rewrite. Include validation after each meaningful stage."
 				},
 				{
 					title: "Pattern Arrival Review",

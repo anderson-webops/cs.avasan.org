@@ -34,7 +34,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Makes Evidence Trustworthy?",
 					content:
-						"Explain when a small dataset is still useful, when more trials are needed, and how a graph can strengthen or weaken an argument. Require a short reflection that distinguishes between a bad experiment, a noisy experiment, and a careful experiment with honest uncertainty."
+						"Explain when a small dataset is still useful, when more trials are needed, and how a graph can strengthen or weaken an argument. Include a short reflection that distinguishes between a bad experiment, a noisy experiment, and a careful experiment with honest uncertainty."
 				}
 			],
 			supplementalProjects: [
@@ -86,7 +86,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Reflection Question: Which Representation Helped Most?",
 					content:
-						"Explain whether a diagram, graph, table, or equation was most helpful for one motion problem and why. Require them to name one place where they changed their mind after converting the same motion into a different representation."
+						"Explain whether a diagram, graph, table, or equation was most helpful for one motion problem and why. Name one place where the conclusion changed after converting the same motion into a different representation."
 				}
 			],
 			supplementalProjects: [
@@ -138,7 +138,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Reflection Question: When Does 'No Motion' Still Mean Forces Matter?",
 					content:
-						"Explain why a motionless object can still be a rich force-analysis problem. Require an answer that mentions balanced forces, not the incorrect claim that 'there are no forces because nothing is moving.'"
+						"Explain why a motionless object can still be a rich force-analysis problem. Include an answer that mentions balanced forces, not the incorrect claim that 'there are no forces because nothing is moving.'"
 				}
 			],
 			supplementalProjects: [
@@ -294,7 +294,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Are Waves So Good for Modeling Patterns?",
 					content:
-						"Explain how the same wave vocabulary helps describe music, water patterns, and light behavior. Require at least one comparison between a sound example and a light example."
+						"Explain how the same wave vocabulary helps describe music, water patterns, and light behavior. Include at least one comparison between a sound example and a light example."
 				}
 			],
 			supplementalProjects: [
@@ -311,7 +311,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Extension Project: Sound Wave or Resonance Demo",
 					content:
-						"Design a demonstration that shows standing waves, resonance, or frequency changes clearly enough for another student to explain it back. Require a prediction, an observation, and a short explanation of what the wave model gets right."
+						"Design a demonstration that shows standing waves, resonance, or frequency changes clearly enough for another learner to explain it back. Include a prediction, an observation, and a short explanation of what the wave model gets right."
 				}
 			]
 		},
@@ -331,7 +331,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Choosing the Best Representation",
 					content:
-						"Give a small capstone-style dataset and Decide whether a line graph, scatterplot, bar chart, or energy storyboard communicates the result best. Require them to justify the choice in terms of the question being answered, not just visual preference."
+						"Give a small capstone-style dataset, then decide whether a line graph, scatterplot, bar chart, or energy storyboard communicates the result best. Justify the choice in terms of the question being answered, not just visual preference."
 				},
 				{
 					title: "Mini Lab: Grand Experiment Proposal",
@@ -341,7 +341,7 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Communication and Defense of Results",
 					content:
-						"Require a short report, slideshow, poster, or recorded explanation that includes the question, setup, graph or table, claim, and evidence. Also explain one limitation of their investigation and one improvement they would make with more time."
+						"Include a short report, slideshow, poster, or recorded explanation that includes the question, setup, graph or table, claim, and evidence. Also explain one limitation of their investigation and one improvement they would make with more time."
 				},
 				{
 					title: "Reflection Question: How Has Your Physics Thinking Changed?",

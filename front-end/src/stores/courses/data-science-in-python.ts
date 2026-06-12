@@ -25,7 +25,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Analysis Habits and Reproducibility",
 					content:
-						"Require clear file naming, saved notebooks, lightweight markdown explanations, and explicit notes about assumptions. Reproducibility should feel like part of data science itself, not an extra external requirement."
+						"Use clear file naming, saved notebooks, lightweight markdown explanations, and explicit notes about assumptions. Reproducibility should feel like part of data science itself, not an extra external requirement."
 				},
 				{
 					title: "DSP0 Setup and Tooling: Core Project",
@@ -171,7 +171,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Versioning Small Analyses",
 					content:
-						"Require lightweight Git use or at least dated checkpoints for notebooks and datasets. Build the habit of saving iterations instead of overwriting analytical work with no trail."
+						"Use lightweight Git or at least dated checkpoints for notebooks and datasets. Build the habit of saving iterations instead of overwriting analytical work with no trail."
 				},
 				{
 					title: "Module 2: Notebook Workflow and Reproducibility: Core Project",
@@ -319,7 +319,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Validation Checks and Sanity Tests",
 					content:
-						"Require quick checks such as row counts, range bounds, category totals, and spot inspections of suspicious records. This helps students catch silent errors before they become polished charts."
+						"Use quick checks such as row counts, range bounds, category totals, and spot inspections of suspicious records. This catches silent errors before they become polished charts."
 				},
 				{
 					title: "Documenting Cleaning Decisions",
@@ -618,7 +618,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Compare Multiple Analytical Angles",
 					content:
-						"Require at least two complementary views of the same dataset, such as a trend chart plus a grouped comparison or a distribution plus a ranking. Learn that one chart rarely answers the whole question."
+						"Include at least two complementary views of the same dataset, such as a trend chart plus a grouped comparison or a distribution plus a ranking. Learn that one chart rarely answers the whole question."
 				},
 				{
 					title: "Make the Work Portfolio-Ready",
@@ -684,7 +684,7 @@ export const dataScienceInPythonCourse: RawCourse = {
 				{
 					title: "Clean, Analyze, and Communicate",
 					content:
-						"Require the full pipeline: loading, cleaning, validation, analysis, visualization, and explanation. The capstone should feel like a small real project rather than a disconnected set of charts."
+						"Include the full pipeline: loading, cleaning, validation, analysis, visualization, and explanation. The capstone should feel like a small real project rather than a disconnected set of charts."
 				},
 				{
 					title: "Build a Dashboard or Narrative Notebook",

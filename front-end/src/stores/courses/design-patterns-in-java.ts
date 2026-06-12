@@ -719,7 +719,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Mini Lab: Improve a Brittle Object Model with Restraint",
 					content:
-						"Start from a messy Java design, identify only the highest-value improvements, and refactor toward a smaller justified set of patterns. Require a note about what was intentionally left alone."
+						"Start from a messy Java design, identify only the highest-value improvements, and refactor toward a smaller justified set of patterns. Include a note about what was intentionally left alone."
 				},
 				{
 					title: "Reflection Question: What Improvement Was Actually Measured?",
@@ -802,7 +802,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Implementation Pass: Preserve Behavior While Improving Structure",
 					content:
-						"Apply the refactor in disciplined steps, keeping the application runnable and reviewable throughout the process. Encourage the use of tests, debug checkpoints, or demo scripts to ensure behavior remains intact."
+						"Apply the refactor in disciplined steps, keeping the application runnable and reviewable throughout the process. Use tests, debug checkpoints, or demo scripts to ensure behavior remains intact."
 				},
 				{
 					title: "Architecture Review: Package Layout, Seams, and Testability",

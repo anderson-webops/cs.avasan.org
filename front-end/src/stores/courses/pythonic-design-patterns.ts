@@ -15,7 +15,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Packages, Virtual Environments, and Lightweight Testing",
 					content:
-						"Require a virtual environment, a simple `tests/` folder, and at least one repeatable run command before the first real pattern lab begins. Learn that safe refactoring depends on a stable workflow, not just on good intentions."
+						"Use a virtual environment, a simple `tests/` folder, and at least one repeatable run command before the first real pattern lab begins. Learn that safe refactoring depends on a stable workflow, not just on good intentions."
 				},
 				{
 					title: "Positioning against Python 2, Python 3, and the Java Track",
@@ -904,7 +904,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Refactor in Small, Defensible Steps",
 					content:
-						"Require a sequence of narrow changes with explanation after each one: what pressure was reduced, what stayed stable, and why the next move became clearer. This keeps the capstone centered on judgment rather than on code churn."
+						"Use a sequence of narrow changes with explanation after each one: what pressure was reduced, what stayed stable, and why the next move became clearer. This keeps the capstone centered on judgment rather than on code churn."
 				},
 				{
 					title: "Document Patterns Used and Patterns Avoided",

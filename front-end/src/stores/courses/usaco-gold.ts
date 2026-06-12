@@ -15,7 +15,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Implementation Discipline at Higher Complexity",
 					content:
-						"Require careful naming, helper methods, and meaningful intermediate checks. Gold problems often have an elegant core idea that becomes fragile if the implementation is rushed or opaque."
+						"Use careful naming, helper methods, and meaningful intermediate checks. Gold problems often have an elegant core idea that becomes fragile if the implementation is rushed or opaque."
 				},
 				{
 					title: "From Pattern Recognition to Proof Sketches",
@@ -478,7 +478,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Write Proof Sketches and Design Notes",
 					content:
-						"Require a short explanation of the invariant, recurrence, or greedy safety argument behind each serious Gold solution. This turns solved problems into reusable knowledge rather than isolated wins."
+						"Include a short explanation of the invariant, recurrence, or greedy safety argument behind each serious Gold solution. This turns solved problems into reusable knowledge rather than isolated wins."
 				},
 				{
 					title: "Identify Personal Strengths and Gaps",
