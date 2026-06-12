@@ -1,6 +1,7 @@
 import type { RawCourse } from "./types";
+import { contextualizePhysicsCourse } from "./physicsContentContext";
 
-export const introToPhysicsCourse: RawCourse = {
+export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 	name: "Intro to Physics",
 	modules: [
 		{
@@ -888,4 +889,4 @@ export const introToPhysicsCourse: RawCourse = {
 			]
 		}
 	]
-};
+});

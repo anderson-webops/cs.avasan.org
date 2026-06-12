@@ -1597,11 +1597,23 @@ function projectExpectations(context: CourseTextContext) {
 			source
 		)
 	) {
-		return [
-			`- Define what each ${subject} sprite controls, senses, changes, or broadcasts.`,
-			`- Test ${subject} from the green-flag start through the main controls or events and the win, loss, score, or reset condition.`,
-			`- Keep ${subject} explainable by naming the event blocks, variables, and state changes that drive the behavior.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define what each ${subject} sprite controls, senses, changes, or broadcasts.`,
+				`- Test ${subject} from the green-flag start through the main controls or events and the win, loss, score, or reset condition.`,
+				`- Keep ${subject} explainable by naming the event blocks, variables, and state changes that drive the behavior.`
+			],
+			subject => [
+				`- Map ${subject} sprites to events, variables, costumes, sounds, broadcasts, or clone behavior before adding polish.`,
+				`- Test ${subject} startup, one normal play path, one reset path, and one scoring or boundary case.`,
+				`- Explain which ${subject} block sequence controls the visible result.`
+			],
+			subject => [
+				`- Identify the ${subject} player action, sprite response, state variable, and feedback shown on the stage.`,
+				`- Test ${subject} with intended input, repeated input, and a case where nothing should happen.`,
+				`- Keep ${subject} logic traceable from event block to state change to visible stage behavior.`
+			]
+		]);
 	}
 	if (/pygames?|zrect|projectile|enemy ai|game loop/.test(source)) {
 		return [
@@ -1667,11 +1679,23 @@ function projectExpectations(context: CourseTextContext) {
 		/\binput\/output\b/.test(source) &&
 		!/\b(?:file|files|csv|parser|streams?|pipelines?)\b/.test(source)
 	) {
-		return [
-			"- Define which values are typed by the user, which values are stored, and which values are printed.",
-			"- Test typical input, awkward input such as extra spaces or decimals when relevant, and output labels that make the result unambiguous.",
-			"- Keep input collection, calculation, and printed output separated enough to debug each step."
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define which ${subject} values are typed by the user, which values are stored, and which values are printed.`,
+				`- Test ${subject} typical input, awkward input such as extra spaces or decimals when relevant, and output labels that make the result unambiguous.`,
+				`- Keep ${subject} input collection, calculation, and printed output separated enough to debug each step.`
+			],
+			subject => [
+				`- Map the ${subject} input prompt, stored variables, calculation step, and printed result before coding.`,
+				`- Test ${subject} with ordinary input, blank or awkward input when relevant, and labels that explain the answer.`,
+				`- Keep ${subject} prompts, conversions, calculations, and output formatting easy to inspect separately.`
+			],
+			subject => [
+				`- State the ${subject} input type, variable name, conversion rule, and expected output format.`,
+				`- Test ${subject} with one clean example and one example that could expose spacing, decimal, or type assumptions.`,
+				`- Explain how ${subject} moves from user input to stored value to final printed sentence.`
+			]
+		]);
 	}
 	if (/c systems|systems build|assembly/.test(source)) {
 		return [
@@ -1701,7 +1725,26 @@ function projectExpectations(context: CourseTextContext) {
 			`- Finish ${subject} with evidence, impact, and a defensive mitigation or hardening step.`
 		];
 	}
-	if (/binary search/.test(source)) {
+	if (/binary search tree|\bbst\b/.test(source)) {
+		return variantLines(context, [
+			subject => [
+				`- Define the ${subject} tree ordering invariant before implementing traversal or mutation.`,
+				`- Test ${subject} with empty tree, root-only tree, left-branch, right-branch, missing-value, and duplicate-policy cases.`,
+				`- Trace at least one ${subject} insert/search/remove path by recording each node comparison.`
+			],
+			subject => [
+				`- State the ${subject} rule for values less than, greater than, and equal to the current node.`,
+				`- Test ${subject} insertion, lookup, traversal order, and removal for leaf, one-child, and two-child cases when relevant.`,
+				`- Explain how ${subject} preserves the binary-search-tree invariant after each mutation.`
+			],
+			subject => [
+				`- Draw a small ${subject} tree before coding so parent, left child, and right child relationships are explicit.`,
+				`- Test ${subject} with balanced-looking data, sorted insertion data, a missing value, and the chosen duplicate behavior.`,
+				`- Record which ${subject} recursive or iterative branch is taken during one traced operation.`
+			]
+		]);
+	}
+	if (/\bbinary search\b/.test(source)) {
 		return [
 			"- State the sorted-data precondition before coding.",
 			`- Implement ${subject} so found, missing, first-half, and second-half targets are handled correctly.`,
@@ -1709,11 +1752,23 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (/linear search|sequential search/.test(source)) {
-		return [
-			"- Implement the search result in a way that clearly reports found versus not found.",
-			"- Test the first item, last item, middle item, and a missing target.",
-			"- If the data is sorted, explain when the search can stop early and why that is safe."
-		];
+		return variantLines(context, [
+			subject => [
+				`- Implement ${subject} so the result clearly reports found versus not found.`,
+				`- Test ${subject} with the first item, last item, middle item, and a missing target.`,
+				`- If the ${subject} data is sorted, explain when the search can stop early and why that is safe.`
+			],
+			subject => [
+				`- Decide whether ${subject} returns a boolean, index, object, or sentinel value before coding.`,
+				`- Test ${subject} with a target at the start, a target at the end, duplicates, and a value not present.`,
+				`- Explain whether ${subject} must inspect every item or can stop early because of sorted order.`
+			],
+			subject => [
+				`- Trace ${subject} by recording each compared element and the result returned.`,
+				`- Test ${subject} with one-element data, ordinary data, and data where the answer is missing.`,
+				`- Explain how ${subject} avoids confusing the value being searched for with its index.`
+			]
+		]);
 	}
 	if (/sort|selection|insertion|merge|quick/.test(source)) {
 		return [
@@ -1723,18 +1778,47 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (/array|matrix|grid|two-dimensional|2d/.test(source)) {
-		return [
-			`- Use a small visible ${subject} example so row and column positions can be traced.`,
-			`- Test ${subject} with first row, last row, first column, last column, and an interior position.`,
-			`- Explain how the ${subject} loop bounds prevent out-of-range indexing.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Use a small visible ${subject} example so row and column positions can be traced.`,
+				`- Test ${subject} with first row, last row, first column, last column, and an interior position.`,
+				`- Explain how the ${subject} loop bounds prevent out-of-range indexing.`
+			],
+			subject => [
+				`- Sketch the ${subject} indices before coding so row, column, and length relationships are explicit.`,
+				`- Test ${subject} with an empty or smallest useful structure, a full structure, and one middle position.`,
+				`- Explain which ${subject} loop variable controls rows, columns, or element positions.`
+			],
+			subject => [
+				`- Show the ${subject} data before and after the operation so changes are visible.`,
+				`- Test ${subject} at index 0, the final valid index, and one value that should not be accessed.`,
+				`- Explain how the ${subject} traversal avoids skipping elements or reading beyond the structure.`
+			],
+			subject => [
+				`- Choose a compact ${subject} sample that can be traced by hand.`,
+				`- Test ${subject} with duplicate values, a boundary position, and one case where no change should happen.`,
+				`- Explain whether ${subject} uses indices, enhanced iteration, nested loops, or helper methods and why.`
+			]
+		]);
 	}
 	if (/dictionary|map|hash|set/.test(source)) {
-		return [
-			`- Demonstrate ${subject} adding, reading, updating, and checking for a missing key or value.`,
-			`- Print or inspect the ${subject} data structure after each important change.`,
-			`- Explain why the chosen ${subject} structure is better than a plain list for this task.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Demonstrate ${subject} adding, reading, updating, and checking for a missing key or value.`,
+				`- Print or inspect the ${subject} data structure after each important change.`,
+				`- Explain why the chosen ${subject} structure is better than a plain list for this task.`
+			],
+			subject => [
+				`- Define the ${subject} keys or priority values before writing update logic.`,
+				`- Test ${subject} with a new entry, repeated entry, missing lookup, and changed value.`,
+				`- Explain how ${subject} lookup or ordering changes the algorithm compared with scanning a list.`
+			],
+			subject => [
+				`- Show the ${subject} structure before and after every operation that changes membership or priority.`,
+				`- Test ${subject} with duplicate data, absent data, and the smallest useful collection.`,
+				`- Explain which ${subject} operation controls correctness: insertion, lookup, update, removal, or ordering.`
+			]
+		]);
 	}
 	if (/calendar machine|date|time/.test(source)) {
 		return [
@@ -1744,11 +1828,23 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (/cipher|encode|decode|secret|message/.test(source)) {
-		return [
-			"- Preserve or intentionally transform spaces, punctuation, and letter case according to the spec.",
-			"- Test wraparound at the beginning and end of the alphabet.",
-			"- Include one encode/decode round trip that returns the original message."
-		];
+		return variantLines(context, [
+			subject => [
+				`- Preserve or intentionally transform ${subject} spaces, punctuation, and letter case according to the spec.`,
+				`- Test ${subject} wraparound at the beginning and end of the alphabet.`,
+				`- Include one ${subject} encode/decode round trip that returns the original message.`
+			],
+			subject => [
+				`- Define how ${subject} handles letters, nonletters, uppercase text, lowercase text, and empty input.`,
+				`- Test ${subject} with a normal word, a phrase with spaces, punctuation, and an alphabet boundary case.`,
+				`- Explain how ${subject} maps between characters, codes, or shifted positions.`
+			],
+			subject => [
+				`- State the ${subject} encoding rule before writing helper methods or loops.`,
+				`- Test ${subject} with lowercase, uppercase, symbols, and a message that should return unchanged.`,
+				`- Verify ${subject} by decoding an encoded message and comparing it with the starting text.`
+			]
+		]);
 	}
 	if (/\b(?:file|files|parser|csv|json|io|i\/o)\b/.test(source)) {
 		return [
@@ -1827,11 +1923,23 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (isMathContext(context)) {
-		return [
-			"- State the givens, target quantity, representation, and rule or theorem before solving.",
-			"- Work a typical example, then check a boundary, sign, unit, graph, or table case that could change the interpretation.",
-			"- Keep each algebraic or representational step justified so the final answer can be checked for reasonableness."
-		];
+		return variantLines(context, [
+			subject => [
+				`- State the ${subject} givens, target quantity, representation, and rule or theorem before solving.`,
+				`- Work a typical ${subject} example, then check a boundary, sign, unit, graph, or table case that could change the interpretation.`,
+				`- Keep each ${subject} algebraic or representational step justified so the final answer can be checked for reasonableness.`
+			],
+			subject => [
+				`- Identify the ${subject} known values, unknown value, and representation before choosing a method.`,
+				`- Test ${subject} with one ordinary case and one case involving sign, intercept, domain, unit, or graph behavior.`,
+				`- Explain how the ${subject} answer can be checked without simply repeating the same calculation.`
+			],
+			subject => [
+				`- Translate ${subject} into an equation, graph, table, diagram, or verbal model before solving.`,
+				`- Check ${subject} with a substitution, estimate, graph feature, boundary value, or unit/context test.`,
+				`- Record the ${subject} reason each transformation is valid so the result is auditable.`
+			]
+		]);
 	}
 	if (isScienceContext(context)) {
 		return [
@@ -1860,11 +1968,23 @@ function completionChecks(context: CourseTextContext) {
 		];
 	}
 	if (/scratch|sprite|broadcast|clone|backdrop|green flag/.test(source)) {
-		return [
-			`- ${subject} starts from a predictable green-flag state.`,
-			`- ${subject} controls, events, broadcasts, variables, and sprite interactions behave as intended.`,
-			`- The ${subject} explanation names the main state change and one edge case tested during play.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- ${subject} starts from a predictable green-flag state.`,
+				`- ${subject} controls, events, broadcasts, variables, and sprite interactions behave as intended.`,
+				`- The ${subject} explanation names the main state change and one edge case tested during play.`
+			],
+			subject => [
+				`- ${subject} has a clear start state, main interaction, feedback moment, and end or reset behavior.`,
+				`- ${subject} events, variables, costumes or backdrops, broadcasts, and clones are checked where they apply.`,
+				`- The ${subject} explanation connects one player action to the blocks that change the stage.`
+			],
+			subject => [
+				`- ${subject} can be replayed without stale score, position, costume, or clone state.`,
+				`- ${subject} handles normal play and one boundary case such as timer end, collision, missed input, or repeated click.`,
+				`- The ${subject} note names the Scratch state variable or event chain most responsible for correctness.`
+			]
+		]);
 	}
 	if (isUnityContext(context)) {
 		return [

@@ -170,7 +170,7 @@ function dataScienceAppliedSupplementUrl(
 function dataScienceStudioContent(lab: AppliedDataScienceLab, body: string) {
 	return [
 		body,
-		`**Verification focus:** ${lab.focus} The work should include one small hand-checkable case before any larger dataset result is accepted.`,
+		`**Verification focus:** ${lab.focus} The ${lab.title} work should include one small hand-checkable case before any larger dataset result is accepted.`,
 		"**Readable output:** The final artifact should make the question, input data, calculation or transformation, result, and limitation visible without requiring someone to infer the reasoning from code alone."
 	].join("\n\n");
 }

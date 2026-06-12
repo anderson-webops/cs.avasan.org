@@ -174,24 +174,26 @@ function projectOptionGoal(
 
 function projectOptionRequiredOutcome(
 	profile: ResearchExpansionProfile,
-	courseLabel: string
+	courseLabel: string,
+	project: string
 ) {
 	const family = profile.family.toLowerCase();
+	const optionTitle = projectTitle(project);
 
 	if (family.includes("scratch")) {
-		return `**Required outcome:**\n- Name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main Scratch state or event-flow decision.`;
+		return `**Required outcome:**\n- For ${optionTitle}, name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one ${courseLabel} normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main ${optionTitle} Scratch state or event-flow decision.`;
 	}
 	if (family.includes("data") || family.includes("machine learning")) {
-		return `**Required outcome:**\n- State the question, dataset, key columns or features, and cleaning or modeling choice.\n- Include a baseline, sanity check, metric, visualization, or small trace.\n- Explain what the evidence supports and one limitation of the result.`;
+		return `**Required outcome:**\n- For ${optionTitle}, state the question, dataset, key columns or features, and cleaning or modeling choice.\n- Include a ${courseLabel} baseline, sanity check, metric, visualization, or small trace.\n- Explain what the ${optionTitle} evidence supports and one limitation of the result.`;
 	}
 	if (family.includes("ai")) {
-		return `**Required outcome:**\n- Define the state representation, action space, rule, search, or scoring method.\n- Trace one ordinary case and one case where the strategy behaves poorly or ambiguously.\n- Explain why the chosen strategy is reasonable and where it is limited.`;
+		return `**Required outcome:**\n- For ${optionTitle}, define the state representation, action space, rule, search, or scoring method.\n- Trace one ${courseLabel} ordinary case and one case where the strategy behaves poorly or ambiguously.\n- Explain why the ${optionTitle} strategy is reasonable and where it is limited.`;
 	}
 	if (family.includes("algebra")) {
-		return `**Required outcome:**\n- Show the rule, equation, graph, table, or transformation being used.\n- Include one ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the result is known to be reasonable.`;
+		return `**Required outcome:**\n- For ${optionTitle}, show the rule, equation, graph, table, or transformation being used.\n- Include one ${courseLabel} ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the ${optionTitle} result is known to be reasonable.`;
 	}
 	if (isScienceFamily(family)) {
-		return `**Required outcome:**\n- State the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate observation, pattern, and explanation.\n- Connect evidence to the claim and name one model limitation or uncertainty.`;
+		return `**Required outcome:**\n- For ${optionTitle}, state the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate the ${courseLabel} observation, pattern, and explanation.\n- Connect evidence to the ${optionTitle} claim and name one model limitation or uncertainty.`;
 	}
 	if (
 		family.includes("security") ||
@@ -202,13 +204,13 @@ function projectOptionRequiredOutcome(
 		return `**Required outcome:**\n- State the ${courseLabel} local scope, target, starting state, allowed tools, and stop condition.\n- Record ${courseLabel} command, configuration, trace, or log evidence before and after the change.\n- Explain the ${courseLabel} impact and the rollback, mitigation, or verification step.`;
 	}
 	if (family.includes("usaco")) {
-		return `**Required outcome:**\n- Translate the prompt into input format, output format, constraints, and invariant.\n- Pass the sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the time and memory complexity in relation to the constraints.`;
+		return `**Required outcome:**\n- For ${optionTitle}, translate the prompt into input format, output format, constraints, and invariant.\n- Pass the ${courseLabel} sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the ${optionTitle} time and memory complexity in relation to the constraints.`;
 	}
 	if (family.includes("java")) {
 		return `**Required outcome:**\n- Identify the ${courseLabel} classes, fields, method contracts, and object-state changes.\n- Compile and run one normal ${courseLabel} case and one boundary or awkward case.\n- Explain the main ${courseLabel} type, inheritance, interface, collection, or record decision.`;
 	}
 	if (family.includes("c++")) {
-		return `**Required outcome:**\n- Name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build with warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the relevant container, pointer/reference, memory, or algorithm decision.`;
+		return `**Required outcome:**\n- For ${optionTitle}, name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build the ${courseLabel} option with warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the ${optionTitle} container, pointer/reference, memory, or algorithm decision.`;
 	}
 	if (family.includes("javascript") || family.includes("web")) {
 		return `**Required outcome:**\n- Identify the UI state, event handler, data flow, validation path, and visible output.\n- Test a fresh load, normal action, empty or error case, and responsive layout when relevant.\n- Explain the main DOM, API, state, or accessibility decision.`;
@@ -437,7 +439,7 @@ function buildProjectModule(
 			title: `Project Option: ${projectTitle(project)}`,
 			content: [
 				projectOptionGoal(profile, courseLabel, project),
-				projectOptionRequiredOutcome(profile, courseLabel),
+				projectOptionRequiredOutcome(profile, courseLabel, project),
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
 				projectOptionExtension(profile, courseLabel, project)
 			].join("\n\n")
@@ -488,7 +490,7 @@ const scratchProfile: ResearchExpansionProfile = {
 	assessments: [
 		"Explain one event chain from click or keypress to visual result.",
 		"Fix three intentionally broken scripts.",
-		"Use a rubric for controls, state, feedback, replayability, code organization, and explanation."
+		"Apply the Scratch project rubric."
 	],
 	materials: [
 		"Scratch educator references and sample projects.",

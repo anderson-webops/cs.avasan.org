@@ -104,7 +104,7 @@ export function buildSupportSectionGuidance({
 		return [
 			`Finish **${title}** with a concrete verification pass.`,
 			`Compare expected and observed ${title} behavior for ${focus}.`,
-			`The final ${courseFamily} note should name the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`
+			`The final ${title} note should name the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`
 		].join("\n\n");
 	}
 

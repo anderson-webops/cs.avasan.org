@@ -867,7 +867,7 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 			const content =
 				next === 1
 					? `**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. For ${module.title}, include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The ${module.title} work shows every algebraic or representational step.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- Review notes record one ${module.title} misconception to revisit before the next module.`
-					: `**Project goal:** Apply ${module.title} in a ${courseLabel} modeling, graphing, or error-analysis context. In ${module.title}, the work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The ${module.title} project contains a concrete scenario or flawed worked solution.\n- The ${courseLabel} work explains the choice of equation, graph, table, or verbal model.\n- The final ${module.title} answer includes a units/context check or corrected error statement.`;
+					: `**Project goal:** Apply ${module.title} in a ${courseLabel} modeling, graphing, or error-analysis context. In ${module.title}, the work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The ${module.title} project contains a concrete scenario or flawed worked solution.\n- The ${module.title} work explains the choice of equation, graph, table, or verbal model.\n- The final ${module.title} answer includes a units/context check or corrected error statement.`;
 
 			module.supplementalProjects.push(projectItem(title, content));
 		}
@@ -1487,7 +1487,7 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} Upgrade Rule`,
 				content: [
-					`**Learning sequence:** When the ${courseLabel} toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. Do not silently rely on a local machine that already has old dependencies installed.`,
+					`**Learning sequence:** When the ${courseLabel} toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. The ${courseLabel} setup should not silently rely on a local machine that already has old dependencies installed.`,
 					`**Completion checks:**\n- The current ${familyLabel} version is named.\n- The ${courseLabel} first-run verification step is still valid.\n- Any known ${courseLabel} version-specific exception is documented.`
 				].join("\n\n")
 			},
@@ -2312,7 +2312,7 @@ function supplementalProjectFor(
 	if (next === 1) {
 		return {
 			title: `${module.title}: Focused Practice`,
-			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The work completes one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The ${module.title} prerequisite concept is stated clearly.\n- The ${module.title} normal case is completed independently.\n- The ${module.title} explanation identifies one likely misconception or edge case.`
+			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The ${module.title} checkpoint completes one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The ${module.title} prerequisite concept is stated clearly.\n- The ${module.title} normal case is completed independently.\n- The ${module.title} explanation identifies one likely misconception or edge case.`
 		};
 	}
 
