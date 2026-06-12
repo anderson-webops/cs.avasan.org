@@ -136,8 +136,23 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"as a working artifact with visible behavior and verification evidence"
 			);
+			expect(corpus).not.toMatch(
+				/Open the starter and name the concrete inputs, outputs, state changes, data structures, or system boundaries involved/
+			);
+			expect(corpus).not.toMatch(
+				/Implement the missing behavior in small runnable steps, checking the result after each meaningful change/
+			);
+			expect(corpus).not.toMatch(
+				/Test a normal path, a boundary or failure path, and one case tied directly to the module's main concept/
+			);
 			expect(corpus).toContain(
-				"Test a normal path, a boundary or failure path"
+				"Identify the user interaction, state change, DOM/canvas/API output, and visible error or empty state"
+			);
+			expect(corpus).toContain(
+				"Translate the prompt into input format, output format, constraints, and the invariant the solution must preserve"
+			);
+			expect(corpus).toContain(
+				"State the local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix"
 			);
 			expect(corpus).toContain(
 				"The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result"
