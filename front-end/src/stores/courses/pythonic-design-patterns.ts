@@ -82,7 +82,7 @@ export const pythonicDesignPatternsCourse: RawCourse = {
 				{
 					title: "Functions, Closures, and Decorators as First-Class Design Tools",
 					content:
-						"Make functions and decorators part of the design-pattern conversation immediately. Many Strategy-, Command-, and Proxy-like needs can be met cleanly with callables before a student reaches for extra classes."
+						"Make functions and decorators part of the design-pattern conversation immediately. Many Strategy-, Command-, and Proxy-like needs can be met cleanly with callables before adding extra classes."
 				},
 				{
 					title: "Modules and Packages as Architectural Boundaries",

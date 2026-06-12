@@ -94,7 +94,7 @@ export const courseToolchainAssumptions: Record<string, string[]> = {
 	],
 	"c-level-1": [
 		"C++20-compatible compiler for introductory work unless a project explicitly needs newer features.",
-		"Warnings enabled for student builds.",
+		"Warnings enabled for local builds.",
 		"Use a consistent local build/run command before adding IDE-specific instructions."
 	],
 	"c-systems-engineering": [
@@ -999,7 +999,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Differentiation Project: Sentence Frame Bank",
 				content:
-					"**Project goal:** Create sentence frames for observation, inference, claim, evidence, reasoning, and changed-condition prediction.\n\n**Completion checks:**\n- Frames are age-appropriate.\n- Each frame can be used with a shared image or simulation.\n- At least one frame supports a student who struggles with writing."
+					"**Project goal:** Create sentence frames for observation, inference, claim, evidence, reasoning, and changed-condition prediction.\n\n**Completion checks:**\n- Frames are age-appropriate.\n- Each frame can be used with a shared image or simulation.\n- At least one frame supports short written responses when writing is difficult."
 			}
 		]
 	});
@@ -1308,9 +1308,9 @@ function addCppMatrixModule(courseId: string, course: RawCourse) {
 		],
 		supplementalProjects: [
 			{
-				title: "Matrix Project: Student Placement Evidence",
+				title: "Matrix Project: Placement Evidence",
 				content:
-					"**Project goal:** Create a placement evidence sheet for a C++ student. Include one example each for syntax/control flow, memory, containers, recursion, and architecture.\n\n**Completion checks:**\n- The sheet names strengths and gaps.\n- The recommended next module follows from evidence.\n- AI/ML topics are not used as C++ placement criteria."
+					"**Project goal:** Create a C++ placement evidence sheet. Include one example each for syntax/control flow, memory, containers, recursion, and architecture.\n\n**Completion checks:**\n- The sheet names strengths and gaps.\n- The recommended next module follows from evidence.\n- AI/ML topics are not used as C++ placement criteria."
 			},
 			{
 				title: "Matrix Project: CS235/CS236-Inspired Mini Build",
@@ -1343,7 +1343,7 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 			{
 				title: "MCQ Distractor Analysis",
 				content:
-					"**Readiness check:** After each MCQ practice set, classify missed questions by distractor type: off-by-one, reference vs value, integer division, boolean logic, object state, array bounds, or method dispatch.\n\n**Completion check:** The student keeps an error log and repeats a targeted remediation problem."
+					"**Readiness check:** After each MCQ practice set, classify missed questions by distractor type: off-by-one, reference vs value, integer division, boolean logic, object state, array bounds, or method dispatch.\n\n**Completion check:** The error log records each miss and repeats a targeted remediation problem."
 			},
 			{
 				title: "Answer-Check Remediation Rule",
@@ -1360,7 +1360,7 @@ function addApCsaAlignmentModule(courseId: string, course: RawCourse) {
 			{
 				title: "AP Alignment Project: Error Log Review",
 				content:
-					"**Project goal:** Build a student error log across one module of MCQ or FRQ practice.\n\n**Completion checks:**\n- Missed items are grouped by AP concept.\n- One remediation task is assigned per recurring issue.\n- The next check-in revisits the weakest skill."
+					"**Project goal:** Build an error log across one module of MCQ or FRQ practice.\n\n**Completion checks:**\n- Missed items are grouped by AP concept.\n- One remediation task is assigned per recurring issue.\n- The next check-in revisits the weakest skill."
 			}
 		]
 	});
@@ -1394,7 +1394,7 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 			{
 				title: "Responsible Use Check",
 				content:
-					"**Learning sequence:** Use NIST AI RMF language at a student-appropriate level: intended use, risk, harm, uncertainty, mitigation, and human oversight.\n\n**Completion check:** The work includes one limitation or risk statement for each major AI/ML/data project."
+					"**Learning sequence:** Use introductory NIST AI RMF language: intended use, risk, harm, uncertainty, mitigation, and human oversight.\n\n**Completion check:** The work includes one limitation or risk statement for each major AI/ML/data project."
 			}
 		],
 		supplementalProjects: [

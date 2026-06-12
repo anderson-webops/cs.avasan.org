@@ -851,7 +851,7 @@ This project connects linear models and systems of equations to research output.
 				`
 The master project closes the course with a short independent explanation.
 
-**Student task**
+**Reflection task**
 
 - Choose one concept from Algebra 1A that felt especially challenging or especially satisfying.
 - Explain what the concept is for.

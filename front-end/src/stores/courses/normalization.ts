@@ -1042,10 +1042,7 @@ function neutralizeStudentFacingText(text: string) {
 			/\bIdentify whether the student still struggles most with\b/g,
 			"Identify remaining struggle areas across"
 		)
-		.replace(
-			/\bpositioning the student for\b/gi,
-			"positioning the learner for"
-		)
+		.replace(/\bpositioning the student for\b/gi, "preparing for")
 		.replace(/\bso the student practices\b/gi, "to practice")
 		.replace(
 			/\bwhere the student now has\b/gi,
@@ -1091,15 +1088,15 @@ function neutralizeStudentFacingText(text: string) {
 		.replace(/\bthe student includes\b/g, "the final work includes")
 		.replace(/\bstudent suggests\b/g, "response suggests")
 		.replace(/\bstudent answers\b/g, "response answers")
-		.replace(/\bstudent enters\b/g, "learner enters")
+		.replace(/\bstudent enters\b/g, "the entry uses")
 		.replace(/\bThe learner should\b/g, "The goal is to")
 		.replace(/\bLearners should\b/g, "The goal is to")
 		.replace(/\bthe learner should\b/g, "the goal is to")
 		.replace(/\blearners should\b/g, "the goal is to")
 		.replace(/\bThe learner can ([a-z])/g, capitalizeMatchedFirstLetter)
 		.replace(/\bthe learner can ([a-z])/g, keepMatchedFirstLetter)
-		.replace(/\bthe learner's\b/g, "their")
-		.replace(/\bthe learner\b/g, "the learner")
+		.replace(/\bthe learner's\b/g, "the work's")
+		.replace(/\bthe learner\b/g, "the work")
 		.replace(/\blearner suggests\b/g, "the response suggests")
 		.replace(/\blearner answers\b/g, "the response answers")
 		.replace(/\bThe student has tested or justified\b/g, "Test or justify")

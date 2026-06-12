@@ -368,7 +368,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Project: Recursive Maze Pathfinder",
 					content:
-						"Import a 5x5x5 maze, validate the data, and recursively search for a path from the entrance to the exit without cycles. This keeps the original maze-lab spirit but removes the grading harness clutter from the learner-facing version.",
+						"Import a 5x5x5 maze, validate the data, and recursively search for a path from the entrance to the exit without cycles. This keeps the original maze-lab spirit while removing grading harness clutter from the visible project version.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP4-Recursive-Maze-Pathfinder/starter",
 					solutionLink:
@@ -604,7 +604,7 @@ export const dataStructuresAndAlgorithmsInCppCourse: RawCourse = {
 				{
 					title: "Project: Binary Search Tree",
 					content:
-						"Implement BST insertion, duplicate rejection, level-order debugging output, and removal using the in-order predecessor convention. This follows the structure of the source BST lab while cleaning up the learner-facing project surface.",
+						"Implement BST insertion, duplicate rejection, level-order debugging output, and removal using the in-order predecessor convention. This follows the structure of the source BST lab while cleaning up the visible project surface.",
 					projectLink:
 						"https://github.com/instruction-material/Data-Structures-and-Algorithms-in-CPP/tree/main/DSCPP7-Binary-Search-Tree/starter",
 					solutionLink:

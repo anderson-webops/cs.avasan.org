@@ -71,12 +71,12 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Graph and Data Exercise: Motion Graph Detective",
 					content:
-						"Give several graphs and Reconstruct what the object was doing during each interval. Then reverse the task: provide a story and have students sketch a graph that matches it. Include one graph with a common trap, such as a flat line on a position graph, and require them to explain why it means 'stopped' rather than 'at zero speed forever.'"
+						"Use several graphs and reconstruct what the object was doing during each interval. Then reverse the task: provide a story and sketch a graph that matches it. Include one graph with a common trap, such as a flat line on a position graph, and explain why it means 'stopped' rather than 'at zero speed forever.'"
 				},
 				{
 					title: "Mini Lab: Phone-Camera Motion Analysis",
 					content:
-						"Use a phone camera to record a rolling cart, bouncing ball, or walking student and extract simple frame-by-frame position data. Build a table, estimate velocity over intervals, and compare the graph with the original video. This lab should explicitly bridge intuition and mathematics by showing that graphs come from real measurements, not just textbook drawings."
+						"Use a phone camera to record a rolling cart, bouncing ball, or walking person and extract simple frame-by-frame position data. Build a table, estimate velocity over intervals, and compare the graph with the original video. This lab should explicitly bridge intuition and mathematics by showing that graphs come from real measurements, not just textbook drawings."
 				},
 				{
 					title: "Simulation Challenge: Bouncy Ball Toss and Air Traffic Control",
@@ -306,12 +306,12 @@ export const introToPhysicsCourse: RawCourse = {
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often mix up amplitude with frequency, or assume waves always transport matter forward rather than mainly transporting energy. Another common issue is thinking light needs a medium in the same way sound does."
+						"Common mistakes include mixing up amplitude with frequency, assuming waves always transport matter forward rather than mainly transporting energy, and thinking light needs a medium in the same way sound does."
 				},
 				{
 					title: "Extension Project: Sound Wave or Resonance Demo",
 					content:
-						"Design a demonstration that shows standing waves, resonance, or frequency changes clearly enough for another learner to explain it back. Include a prediction, an observation, and a short explanation of what the wave model gets right."
+						"Design a demonstration that shows standing waves, resonance, or frequency changes clearly enough to be explained back from the evidence. Include a prediction, an observation, and a short explanation of what the wave model gets right."
 				}
 			]
 		},

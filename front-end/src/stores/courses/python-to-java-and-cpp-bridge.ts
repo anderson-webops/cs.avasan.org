@@ -27,7 +27,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "What Transfers Cleanly from Python",
 					content:
-						"Make the transfer explicit: loops, conditionals, string processing, decomposition into helper functions, and object modeling still matter. The bridge should preserve student confidence by showing where the mental model still applies."
+						"Make the transfer explicit: loops, conditionals, string processing, decomposition into helper functions, and object modeling still matter. The bridge should preserve confidence by showing where the existing mental model still applies."
 				},
 				{
 					title: "PTJ0 Positioning and Workflow Translation: Core Project",
@@ -174,12 +174,12 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "String APIs and Slice Replacement",
 					content:
-						"Translate Python slicing habits into Java and C++ string methods. The bridge should make students slower but more deliberate about substring ranges, mutation rules, and off-by-one boundaries."
+						"Translate Python slicing habits into Java and C++ string methods. The bridge should slow the workflow just enough to make substring ranges, mutation rules, and off-by-one boundaries deliberate."
 				},
 				{
 					title: "Bounds and Loop Discipline",
 					content:
-						"Use list and string loops to reinforce boundary conditions in typed languages. This is where a Python student can quickly become a stronger debugger if the translation is handled carefully."
+						"Use list and string loops to reinforce boundary conditions in typed languages. This is where Python habits can translate into stronger debugging: predict the valid index range, trace the loop endpoint, then compare that prediction with compiler or runtime feedback."
 				},
 				{
 					title: "Collections, Strings, and Indexing: Verification and Reflection",

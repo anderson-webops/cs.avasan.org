@@ -459,7 +459,7 @@ export const lowLevelSecurityCourse: RawCourse = {
 				{
 					title: "Supplemental: Responsible Disclosure Roleplay",
 					content:
-						"Run a classroom exercise where one student writes a bug report and another acts as the maintainer responding with reproduction questions, risk assessment, and patch verification steps.",
+						"Run a responsible-disclosure roleplay: one side writes a bug report, and the maintainer side responds with reproduction questions, risk assessment, and patch verification steps.",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS6-Capstone-Audit/starter",
 					solutionLink:

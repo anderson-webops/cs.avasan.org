@@ -306,7 +306,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Practical Walkthrough: Version Numbers, Build Numbers, and Assets",
 					content:
-						"Review screenshots, app icons, version numbers, build numbers, descriptions, and support information. Connect each item to the learner-facing reality of uploading a build later in the course."
+						"Review screenshots, app icons, version numbers, build numbers, descriptions, and support information. Connect each item to the practical reality of uploading a build later in the course."
 				},
 				{
 					title: "Reflection Question: What Makes an App Feel Release-Ready?",

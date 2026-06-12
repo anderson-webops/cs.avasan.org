@@ -612,7 +612,7 @@ const dataScienceProfile: ResearchExpansionProfile = {
 		"Messy CSV cleaning challenge.",
 		"Visualization redesign project.",
 		"Weather, sports, transit, or education trend analysis.",
-		"Student-chosen final data story with conclusions and limitations."
+		"Self-directed final data story with conclusions and limitations."
 	],
 	assessments: [
 		"Create a data dictionary.",
@@ -1555,7 +1555,7 @@ const webProfile: ResearchExpansionProfile = {
 		"Personal site with accessibility checklist.",
 		"Form-backed contact or survey app.",
 		"CRUD app with database.",
-		"Authenticated student dashboard.",
+		"Authenticated course dashboard.",
 		"Deployed full-stack capstone with README and test plan."
 	],
 	assessments: [
@@ -1604,7 +1604,7 @@ const machineLearningProfile: ResearchExpansionProfile = {
 		"Regression with residual/error analysis.",
 		"Clustering exploration with limitations.",
 		"Compare baseline vs trained model.",
-		"Model card for a student-built classifier.",
+		"Model card for a self-built classifier.",
 		"Reproducible notebook capstone."
 	],
 	assessments: [

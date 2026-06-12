@@ -46,7 +46,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Setup and Tooling",
 					content:
-						"Keep a short worksheet for setup and tooling that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on toolchain identity, architecture choice, and why x86-64 is the starting point for the course so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for setup and tooling that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on toolchain identity, architecture choice, and why x86-64 is the starting point for the course so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-04-asm0-setup-and-tooling/starter",
 					solutionLink:
@@ -121,7 +121,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Machine Model and Toolchain",
 					content:
-						"Keep a short worksheet for machine model and toolchain that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on source-to-object boundaries, symbol names, and how the disassembler reveals structure so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for machine model and toolchain that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on source-to-object boundaries, symbol names, and how the disassembler reveals structure so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-05-unit-1-machine-model-and-toolchain/starter",
 					solutionLink:
@@ -187,7 +187,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Registers and Data Movement",
 					content:
-						"Keep a short worksheet for registers and data movement that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on which register holds each live value and how width changes alter the interpretation so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for registers and data movement that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on which register holds each live value and how width changes alter the interpretation so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM1-Integer-Calculator/starter",
 					solutionLink:
@@ -262,7 +262,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Arithmetic and Logic",
 					content:
-						"Keep a short worksheet for arithmetic and logic that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on flag changes, implicit register use, and the difference between value changes and status changes so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for arithmetic and logic that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on flag changes, implicit register use, and the difference between value changes and status changes so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-06-unit-3-arithmetic-and-logic/starter",
 					solutionLink:
@@ -328,7 +328,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Branching and Loops",
 					content:
-						"Keep a short worksheet for branching and loops that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on loop counters, branch conditions, and which instruction actually decides whether the next iteration runs so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for branching and loops that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on loop counters, branch conditions, and which instruction actually decides whether the next iteration runs so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM2-Array-Sum-and-Search/starter",
 					solutionLink:
@@ -403,7 +403,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: The Stack and Function Calls",
 					content:
-						"Keep a short worksheet for the stack and function calls that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on return addresses, saved registers, and why the stack pointer moves when a function prepares for another call so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for the stack and function calls that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on return addresses, saved registers, and why the stack pointer moves when a function prepares for another call so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-07-unit-5-the-stack-and-function-calls/starter",
 					solutionLink:
@@ -469,7 +469,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Calling Conventions and ABI",
 					content:
-						"Keep a short worksheet for calling conventions and abi that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on argument registers, preserved registers, and what must be restored before returning so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for calling conventions and abi that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on argument registers, preserved registers, and what must be restored before returning so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM4-Call-C-Helper-from-Assembly/starter",
 					solutionLink:
@@ -535,7 +535,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Memory Addressing and Data Structures",
 					content:
-						"Keep a short worksheet for memory addressing and data structures that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on address formulas, stop conditions, and where each byte load or store lands in memory so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for memory addressing and data structures that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on address formulas, stop conditions, and where each byte load or store lands in memory so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM3-String-Length-and-Copy/starter",
 					solutionLink:
@@ -603,7 +603,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: System Calls and Runtime Interaction",
 					content:
-						"Keep a short worksheet for system calls and runtime interaction that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on argument pointers, parse-state changes, and where invalid input should stop the flow so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for system calls and runtime interaction that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on argument pointers, parse-state changes, and where invalid input should stop the flow so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM5-Tiny-Command-Line-Parser/starter",
 					solutionLink:
@@ -680,7 +680,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Reading Compiler Output",
 					content:
-						"Keep a short worksheet for reading compiler output that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on source-to-instruction mapping, optimization differences, and what evidence proves two versions still implement the same logic so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for reading compiler output that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on source-to-instruction mapping, optimization differences, and what evidence proves two versions still implement the same logic so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-08-unit-9-reading-compiler-output/starter",
 					solutionLink:
@@ -755,7 +755,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Debugging at Instruction Level",
 					content:
-						"Keep a short worksheet for debugging at instruction level that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on where execution stopped, which machine state changed next, and what the next branch decision depends on so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for debugging at instruction level that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on where execution stopped, which machine state changed next, and what the next branch decision depends on so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-09-unit-10-debugging-at-instruction-level/starter",
 					solutionLink:
@@ -830,7 +830,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Performance and Code Shape",
 					content:
-						"Keep a short worksheet for performance and code shape that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on branch frequency, memory-access patterns, and which cost assumptions came from evidence versus guesswork so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for performance and code shape that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on branch frequency, memory-access patterns, and which cost assumptions came from evidence versus guesswork so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-10-unit-11-performance-and-code-shape/starter",
 					solutionLink:
@@ -896,7 +896,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Security and Reliability Visibility",
 					content:
-						"Keep a short worksheet for security and reliability visibility that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on where the hardening or bug evidence appears around the function and what that reveals about runtime behavior so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for security and reliability visibility that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on where the hardening or bug evidence appears around the function and what that reveals about runtime behavior so the worksheet narrates instruction flow rather than only skimming mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM6-Reverse-Engineering-Toy-Program/starter",
 					solutionLink:
@@ -973,7 +973,7 @@ export const assemblyCourse: RawCourse = {
 				{
 					title: "Register-Trace Worksheet: Expansion Ideas and Next Steps",
 					content:
-						"Keep a short worksheet for expansion ideas and next steps that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on which next specialization builds most naturally on the student’s current strengths and why so students learn to narrate instruction flow rather than only skim mnemonics.",
+						"Keep a short worksheet for expansion ideas and next steps that records the key registers, flag changes, memory addresses, and one plain-language explanation of why the control flow moved the way it did. Focus especially on which next specialization fits the current strengths and why; the worksheet should narrate instruction flow rather than only skim mnemonics.",
 					projectLink:
 						"https://github.com/instruction-material/Assembly/tree/main/ASM-11-asm13-expansion-ideas-and-next-steps/starter",
 					solutionLink:

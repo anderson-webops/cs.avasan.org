@@ -1168,7 +1168,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ13 Project 1: Class Rank",
 					content:
-						"Create a `Student` class and a comparator that orders students by GPA, then use a priority queue to print students from highest GPA to lowest.",
+						"Create a `Student` class and a comparator that orders `Student` objects by GPA, then use a priority queue to print the records from highest GPA to lowest.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ13-Class-Rank",
 					solutionLink:
@@ -1811,14 +1811,14 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Starter: Street Searcher",
 					content:
-						"Expose the starter variant so students can re-enter the capstone path from a scaffold instead of only from the completed version.",
+						"Expose the starter variant so the capstone path can be re-entered from a scaffold instead of only from the completed version.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Street-Searcher-Starter"
 				},
 				{
 					title: "Starter: Master Project",
 					content:
-						"Use the final master-project starter when a student wants an additional capstone scaffold beyond the main public sequence.",
+						"Use the final master-project starter as an additional capstone scaffold beyond the main public sequence.",
 					projectLink:
 						"https://github.com/instruction-material/Java-Level-3/tree/main/AJ17-Master-Project-Starter"
 				}

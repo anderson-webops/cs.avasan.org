@@ -141,7 +141,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Setup and Tooling",
 					content:
-						"Keep a written audit notebook for setup and tooling that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on sanitizer readiness, debugger verification, and ethics boundaries so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for setup and tooling that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on sanitizer readiness, debugger verification, and ethics boundaries so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-04-rust-systems-lab-15/starter",
 					solutionLink:
@@ -203,7 +203,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Exploitability Triage",
 					content:
-						"Keep a written audit notebook for exploitability triage that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on reachability, attacker control, and why a crash does or does not rise to security relevance so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for exploitability triage that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on reachability, attacker control, and why a crash does or does not rise to security relevance so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS13-Crash-Classification-Lab/starter",
 					solutionLink:
@@ -265,7 +265,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Stack Corruption in Toy Programs",
 					content:
-						"Keep a written audit notebook for stack corruption in toy programs that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on frame layout, overwrite reach, and which defensive change actually closes the risk so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for stack corruption in toy programs that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on frame layout, overwrite reach, and which defensive change actually closes the risk so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS14-Stack-Frame-Corruption-Demo-and-Fix/starter",
 					solutionLink:
@@ -400,7 +400,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Information Disclosure and Memory Observation",
 					content:
-						"Keep a written audit notebook for information disclosure and memory observation that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on what crossed the trust boundary, what leaked, and how to prove the leak is gone after the patch so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for information disclosure and memory observation that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on what crossed the trust boundary, what leaked, and how to prove the leak is gone after the patch so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-05-rust-systems-lab-16/starter",
 					solutionLink:
@@ -462,7 +462,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Mitigation-Aware Analysis",
 					content:
-						"Keep a written audit notebook for mitigation-aware analysis that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on which protections were actually observed and how they changed the maintainer-facing risk note so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for mitigation-aware analysis that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on which protections were actually observed and how they changed the maintainer-facing risk note so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS16-Mitigation-Comparison-Build-Matrix/starter",
 					solutionLink:
@@ -535,7 +535,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Control-Flow Thinking for Defenders",
 					content:
-						"Keep a written audit notebook for control-flow thinking for defenders that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on why control-relevant state changes the severity discussion even when the lab stays fully local so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for control-flow thinking for defenders that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on why control-relevant state changes the severity discussion even when the lab stays fully local so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/RUST-06-rust-systems-lab-17/starter",
 					solutionLink:
@@ -602,7 +602,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: From Bug Report to Patch",
 					content:
-						"Keep a written audit notebook for from bug report to patch that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on how the triage note, patch summary, and regression case reinforce each other so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for from bug report to patch that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on how the triage note, patch summary, and regression case reinforce each other so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS17-Disclosure-and-Triage-Report/starter",
 					solutionLink:
@@ -664,7 +664,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Audit Notebook: Capstone Audit",
 					content:
-						"Keep a written audit notebook for capstone audit that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on finding ranking, patch scope, mitigation notes, and regression proof so students learn to communicate security relevance clearly instead of stopping at “it crashed.”",
+						"Keep a written audit notebook for capstone audit that records the lab boundary, the reproducer, the attacker assumptions, the mitigations present, and the patch or verification result. Focus especially on finding ranking, patch scope, mitigation notes, and regression proof so security relevance is communicated clearly instead of stopping at “it crashed.”",
 					projectLink:
 						"https://github.com/instruction-material/Low-Level-Security/tree/main/LLS18-Exploit-Informed-Hardening-Capstone/starter",
 					solutionLink:

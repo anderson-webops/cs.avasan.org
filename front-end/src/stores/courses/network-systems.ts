@@ -46,7 +46,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Setup and Tooling",
 					content:
-						"Keep a short operations notebook for setup and tooling that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on remote access method, Linux lab environment, and the first verified command set so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for setup and tooling that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on remote access method, Linux lab environment, and the first verified command set so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-04-ns0-setup-and-tooling/starter",
 					solutionLink:
@@ -122,7 +122,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: The Network Stack in Plain English",
 					content:
-						"Keep a short operations notebook for the network stack in plain english that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on the path from one client request to one server response so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for the network stack in plain english that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on the path from one client request to one server response so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-05-unit-1-the-network-stack-in-plain-english/starter",
 					solutionLink:
@@ -199,7 +199,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Addresses and Naming",
 					content:
-						"Keep a short operations notebook for addresses and naming that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on how one hostname, one interface, and one observed IP address relate without meaning the same thing so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for addresses and naming that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on how one hostname, one interface, and one observed IP address relate without meaning the same thing so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-06-unit-2-addresses-and-naming/starter",
 					solutionLink:
@@ -275,7 +275,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Switches, Routers, NAT, and the Internet Edge",
 					content:
-						"Keep a short operations notebook for switches, routers, nat, and the internet edge that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on default gateways, local-subnet boundaries, and which hop is doing translation so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for switches, routers, nat, and the internet edge that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on default gateways, local-subnet boundaries, and which hop is doing translation so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-07-unit-3-switches-routers-nat-and-the-internet-edge/starter",
 					solutionLink:
@@ -343,7 +343,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Ports and Listening Services",
 					content:
-						"Keep a short operations notebook for ports and listening services that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on how local address, protocol, port, and process identity fit together in one socket listing so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for ports and listening services that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on how local address, protocol, port, and process identity fit together in one socket listing so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS1-Listening-Services-Map/starter",
 					solutionLink:
@@ -409,7 +409,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: DNS and Name Resolution",
 					content:
-						"Keep a short operations notebook for dns and name resolution that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on record types, resolver path, caching state, and local override behavior so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for dns and name resolution that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on record types, resolver path, caching state, and local override behavior so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS4-IPv4-vs-IPv6-Resolution-Comparison/starter",
 					solutionLink:
@@ -475,7 +475,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Core Diagnostics",
 					content:
-						"Keep a short operations notebook for core diagnostics that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which command answered which question and what the failure signature implied so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for core diagnostics that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which command answered which question and what the failure signature implied so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS2-Local-vs-Remote-Reachability-Diagnosis/starter",
 					solutionLink:
@@ -541,7 +541,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Linux Interface and Route Management",
 					content:
-						"Keep a short operations notebook for linux interface and route management that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on interface state, next-hop choice, and how a route becomes an actual neighbor-level destination so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for linux interface and route management that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on interface state, next-hop choice, and how a route becomes an actual neighbor-level destination so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS6-Router-NAT-Topology-Lab/starter",
 					solutionLink:
@@ -618,7 +618,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: IPv6 in Practice",
 					content:
-						"Keep a short operations notebook for ipv6 in practice that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on address family selection, scope behavior, and which rule sets apply to which traffic so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for ipv6 in practice that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on address family selection, scope behavior, and which rule sets apply to which traffic so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-08-unit-8-ipv6-in-practice/starter",
 					solutionLink:
@@ -684,7 +684,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Firewalls and Host Policy",
 					content:
-						"Keep a short operations notebook for firewalls and host policy that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on numbered rules, safe rollout order, and which evidence proves a rule change really took effect so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for firewalls and host policy that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on numbered rules, safe rollout order, and which evidence proves a rule change really took effect so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS3-UFW-Web-Server-Policy/starter",
 					solutionLink:
@@ -750,7 +750,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Packet Capture and Deep Inspection",
 					content:
-						"Keep a short operations notebook for packet capture and deep inspection that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on capture placement, filter choice, and which packets confirmed the hypothesis so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for packet capture and deep inspection that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on capture placement, filter choice, and which packets confirmed the hypothesis so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS5-Tcpdump-HTTP-Capture/starter",
 					solutionLink:
@@ -827,7 +827,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Common Application Protocols",
 					content:
-						"Keep a short operations notebook for common application protocols that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which parts of the exchange were visible at the transport layer and which parts moved behind TLS so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for common application protocols that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which parts of the exchange were visible at the transport layer and which parts moved behind TLS so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-09-unit-11-common-application-protocols/starter",
 					solutionLink:
@@ -893,7 +893,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Secure Exposure of Services",
 					content:
-						"Keep a short operations notebook for secure exposure of services that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on what is intentionally public, what stays private, and which external test proved the boundary so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for secure exposure of services that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on what is intentionally public, what stays private, and which external test proved the boundary so the explanation stays grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS6-Router-NAT-Topology-Lab/starter",
 					solutionLink:
@@ -968,7 +968,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Operations Notebook: Expansion Ideas and Next Steps",
 					content:
-						"Keep a short operations notebook for expansion ideas and next steps that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which advanced networking path fits the student's goals and why so students learn to explain network state from observation rather than from guesses.",
+						"Keep a short operations notebook for expansion ideas and next steps that records the commands run, key outputs, one network diagram, and one plain-language explanation of what the evidence proves. Focus especially on which advanced networking path fits the learning goals and why; the explanation should stay grounded in observed network state rather than guesses.",
 					projectLink:
 						"https://github.com/instruction-material/Network-Systems/tree/main/NS-10-ns13-expansion-ideas-and-next-steps/starter",
 					solutionLink:

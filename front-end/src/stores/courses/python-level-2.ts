@@ -692,7 +692,7 @@ export const pythonLevel2Course: RawCourse = {
 				{
 					title: "PS9 Supplemental Project 1: Class Registration",
 					content:
-						"Remove duplicate student names from class rosters and report the actual number of enrolled students in each course.",
+						"Remove duplicate names from class rosters and report the actual enrollment count in each course.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS9-Class-Registration/starter",
 					solutionLink:

@@ -306,7 +306,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Tree Models as a Bridge between Rules and Learned Models",
 					content:
-						"Use trees to connect early rule-based intuition with later statistical models. A tree is often easier to explain than a neural net, which makes it useful for comparison and for student confidence."
+						"Use trees to connect early rule-based intuition with later statistical models. A tree is often easier to explain than a neural net, which makes it useful for comparison and for building confidence in model behavior."
 				},
 				{
 					title: "Decision Tree Lab",

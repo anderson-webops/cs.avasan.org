@@ -109,7 +109,7 @@ const graphicsIntroModule: RawCourseModule = {
 		{
 			title: "Graphics Branch Positioning",
 			content:
-				"This branch keeps the same core Java foundations but preserves and highlights drawing-based projects. Use it when a student benefits from coordinates, color, visual feedback, and scene composition alongside console and data-structure work."
+				"This branch keeps the same core Java foundations but preserves and highlights drawing-based projects. Use it for work that benefits from coordinates, color, visual feedback, and scene composition alongside console and data-structure practice."
 		},
 		{
 			title: "Graphics Setup Expectations",
