@@ -6,9 +6,7 @@ export interface ProjectGuidanceOptions {
 }
 
 function projectArtifact(kind: ProjectGuidanceOptions["projectKind"]) {
-	return kind === "core"
-		? "core implementation checkpoint"
-		: "transfer or extension project";
+	return kind === "core" ? "implementation checkpoint" : "applied challenge";
 }
 
 function familyFocus(courseFamily: string) {
@@ -70,7 +68,7 @@ export function buildProjectGuidance({
 		: "Write a short verification note because no separate solution link is available yet; include the tests or traces used as evidence.";
 
 	return [
-		`**Project goal:** Build the linked ${courseFamily} ${artifact} for **${moduleTitle}** as a working artifact with visible behavior and verification evidence.`,
+		`**Project goal:** Complete the linked ${courseFamily} ${artifact} for **${moduleTitle}** with visible behavior and verification evidence.`,
 		`**Focus:** ${familyFocus(courseFamily)}.`,
 		"**Required work:**",
 		"1. Open the starter and name the concrete inputs, outputs, state changes, data structures, or system boundaries involved.",

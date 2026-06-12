@@ -122,6 +122,8 @@ function cleanTitleText(text: string) {
 
 function cleanDisplayTitle(text: string) {
 	return cleanTitleText(text)
+		.replace(/\bTodo\b/g, "To-Do")
+		.replace(/\bTo-do\b/g, "To-Do")
 		.replace(/\bCheck[ -]in\b/gi, "Check-In")
 		.replace(/ supplemental (\d+)/i, " Supplemental $1")
 		.replace(/^ai search lab (\d+):/i, "AI Search Lab $1:")
@@ -315,7 +317,7 @@ function groupConceptLessons(items: RawCourseModuleItem[]) {
 	if (items.length <= 4) {
 		return [
 			{
-				title: "Core Concepts and Learning Sequence",
+				title: "Core Concepts",
 				content: lessonArcContent(items)
 			}
 		];
@@ -324,11 +326,11 @@ function groupConceptLessons(items: RawCourseModuleItem[]) {
 	const midpoint = Math.ceil(items.length / 2);
 	return [
 		{
-			title: "Core Concepts and Learning Sequence",
+			title: "Core Concepts",
 			content: lessonArcContent(items.slice(0, midpoint))
 		},
 		{
-			title: "Application, Misconceptions, and Readiness Check",
+			title: "Application Check",
 			content: lessonArcContent(items.slice(midpoint))
 		}
 	];
@@ -618,10 +620,7 @@ function neutralizeLessonDirectiveText(text: string) {
 
 function neutralizeStudentFacingText(text: string) {
 	return neutralizeLessonDirectiveText(text)
-		.replace(
-			/\bCore Concepts and Teaching Flow\b/g,
-			"Core Concepts and Learning Sequence"
-		)
+		.replace(/\bCore Concepts and Teaching Flow\b/g, "Core Concepts")
 		.replace(/\*\*Teaching flow:\*\*/gi, "**Concept path:**")
 		.replace(/\*\*Learning sequence:\*\*/gi, "**Concept path:**")
 		.replace(/(\*\*Concept path:\*\*\s+)Teach\b/g, "$1This section covers")
@@ -963,9 +962,7 @@ function needsContentSupport(context: CourseTextContext) {
 	return (
 		placeholderContentPattern.test(content) ||
 		isBriefContent(content) ||
-		/Core Concepts and Learning Sequence|Application, Misconceptions, and Readiness Check/.test(
-			context.item.title
-		) ||
+		/Core Concepts|Application Check/.test(context.item.title) ||
 		isAppliedStudioContext(context) ||
 		(isProjectLikeItem(context.item) && wordCount(content) < 95) ||
 		(isCheckInContext(context) && wordCount(content) < 120)

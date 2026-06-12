@@ -781,12 +781,12 @@ export const pythonLevel2Course: RawCourse = {
 			supplementalProjects: []
 		},
 		{
-			title: "PS10 Todo List",
+			title: "PS10 To-Do List",
 			curriculum: [
 				{
-					title: "PS10 Project 1: Todo List",
+					title: "PS10 Project 1: To-Do List",
 					content:
-						"Build an interactive todo list that lets the user add tasks, remove tasks, display the numbered list, and optionally prioritize tasks or reject invalid removals.",
+						"Build an interactive to-do list that lets the user add tasks, remove tasks, display the numbered list, and optionally prioritize tasks or reject invalid removals.",
 					solutionLink:
 						"https://github.com/instruction-material/Python-Level-2/tree/main/PS10-Todo-List",
 					mediaLink:

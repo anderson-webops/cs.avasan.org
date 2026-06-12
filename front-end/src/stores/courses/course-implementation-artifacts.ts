@@ -2069,14 +2069,14 @@ function supplementalProjectFor(
 ): RawCourseModuleItem {
 	if (next === 1) {
 		return {
-			title: `${module.title}: Targeted Practice Checkpoint`,
+			title: `${module.title}: Focused Practice`,
 			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The work completes one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The prerequisite concept is stated clearly.\n- The normal case is completed independently.\n- The explanation identifies one likely misconception or edge case.`
 		};
 	}
 
 	return {
-		title: `${module.title}: Transfer or Extension Project`,
-		content: `**Project goal:** Apply ${module.title} in a transfer task that changes the input, context, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The work tests or explains both a normal case and an awkward case.\n- The final reflection names what had to be adapted from the original lesson.`
+		title: `${module.title}: Applied Challenge`,
+		content: `**Project goal:** Apply ${module.title} in a new context that changes the input, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The work tests or explains both a normal case and an awkward case.\n- The final reflection names what had to be adapted from the original lesson.`
 	};
 }
 

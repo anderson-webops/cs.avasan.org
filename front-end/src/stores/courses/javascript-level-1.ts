@@ -1234,7 +1234,7 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "JSS15 Supplemental Project 1: Juni Eatz",
 					content:
-						"Build a restaurant splash page with a menu preview, location or hours section, and at least one Materialize parallax or card layout. The page should communicate a clear restaurant identity through typography, color, images, and navigation rather than only placing placeholder sections.",
+						"Build a restaurant splash page with a menu preview, location or hours section, and at least one Materialize parallax or card layout. The page should communicate a clear restaurant identity through typography, color, images, and navigation rather than only placing empty starter sections.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/eb5dc79c245ab907ddd8f56853cb817a",
 					solutionLink:

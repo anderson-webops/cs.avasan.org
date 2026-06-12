@@ -60,8 +60,49 @@ function sourceBullets(names: string[]) {
 	);
 }
 
+function projectDescription(project: string) {
+	return project
+		.trim()
+		.replace(/[.!?]+$/g, "")
+		.replace(/\btodo\b/gi, "to-do");
+}
+
+function titleCaseProjectWord(word: string, index: number) {
+	const lower = word.toLowerCase();
+	const smallWords = new Set([
+		"a",
+		"an",
+		"and",
+		"as",
+		"by",
+		"for",
+		"in",
+		"of",
+		"or",
+		"the",
+		"to",
+		"with"
+	]);
+
+	if (index > 0 && smallWords.has(lower)) return lower;
+	if (word !== lower && word !== word.toUpperCase()) return word;
+	if (/^[A-Z0-9-]+$/.test(word)) return word;
+
+	return lower
+		.replace(/^[a-z]/, character => character.toUpperCase())
+		.replace(
+			/-([a-z])/g,
+			(_match, character: string) => `-${character.toUpperCase()}`
+		);
+}
+
 function projectTitle(project: string) {
-	return project.replace(/[:.].*$/, "").trim();
+	return projectDescription(project)
+		.replace(/:.*$/, "")
+		.split(/\s+/)
+		.map(titleCaseProjectWord)
+		.join(" ")
+		.replace(/\bTo-do\b/g, "To-Do");
 }
 
 function buildStandardsModule(
@@ -224,7 +265,7 @@ function buildProjectModule(
 		supplementalProjects: projects.map(project => ({
 			title: `Project Option: ${projectTitle(project)}`,
 			content: [
-				`**Project goal:** Create ${project} as a concrete ${profile.family} practice artifact with a visible product, model, result, or explanation.`,
+				`**Project goal:** Create this ${profile.family} practice artifact: ${projectDescription(project)}. The result should include a visible product, model, result, or explanation.`,
 				`**Required outcome:**\n- Define the artifact and expected inputs, outputs, data, or model.\n- Include one normal case, one boundary case, and one awkward or failure case.\n- Write a short explanation of the main design or reasoning decision.`,
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
 				"**Extension:** Add one variant that changes a constraint without changing the core concept."
@@ -1294,7 +1335,7 @@ const javaScriptProfile: ResearchExpansionProfile = {
 		"Interactive quiz app.",
 		"API-backed dashboard with mock fallback.",
 		"Canvas arcade mini-game.",
-		"Todo app with localStorage.",
+		"To-do app with localStorage.",
 		"Accessibility fix-it project."
 	],
 	assessments: [

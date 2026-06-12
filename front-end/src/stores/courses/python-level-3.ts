@@ -397,7 +397,7 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "Check-In #2: Linear Search",
 					content:
-						"Explain how linear search works, when it can be used, fill in missing code for a linear search function, and identify its best and worst cases."
+						"Explain how linear search works, when it can be used, complete missing code for a linear search function, and identify its best and worst cases."
 				},
 				{
 					title: "Check-In #2: Binary Search",

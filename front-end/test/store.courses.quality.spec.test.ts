@@ -881,7 +881,7 @@ describe("course text quality normalization", () => {
 
 		const lessonArc = findItem(
 			course!,
-			/Core Concepts and Learning Sequence/,
+			/Core Concepts/,
 			/Core topics in this module:/
 		);
 
@@ -891,6 +891,21 @@ describe("course text quality normalization", () => {
 		expect(lessonArc.content).toMatch(/\n2\. \*\*.+\*\*\n\s+/);
 		expect(lessonArc.content).not.toMatch(/1\) .+; 2\)/s);
 		expect(lessonArc.content).not.toMatch(/This lesson arc covers/i);
+	});
+
+	it("keeps generated concept and supplemental titles concise", async () => {
+		const course = await loadRawCourse("python-level-3");
+		expect(course).not.toBeNull();
+
+		const corpus = allCourseText(course);
+
+		expect(corpus).toContain("Core Concepts");
+		expect(corpus).toContain("Applied Challenge");
+		expect(corpus).not.toMatch(/Core Concepts and Learning Sequence/i);
+		expect(corpus).not.toMatch(
+			/Application, Misconceptions, and Readiness Check/i
+		);
+		expect(corpus).not.toMatch(/Transfer or Extension Project/i);
 	});
 
 	it("formats authored lesson setup text as neutral student-readable sections", async () => {

@@ -1090,9 +1090,9 @@ export const javascriptLevel2Course: RawCourse = {
 						'Create a public JSONBin record with a small starter object such as `{"notes": ["my first message"]}`. Identify the latest-record GET endpoint and the PUT endpoint, then test both requests before building UI around them. The key skill is separating local page state from persisted remote state: after a refresh, the saved data should still be recoverable from the bin.'
 				},
 				{
-					title: "JSM12 Project 1: Todo List",
+					title: "JSM12 Project 1: To-Do List",
 					content:
-						"Build a persistent todo list by loading the current bin with `async`/`await`, rendering the notes, adding a new note from user input, and saving the updated array with PUT. Keep the workflow split into `getDB`, `renderDB`, and `addNote` so fetching, drawing, and mutation can be tested separately. Verify persistence by adding a note, refreshing the page, and confirming the note still appears.",
+						"Build a persistent to-do list by loading the current bin with `async`/`await`, rendering the notes, adding a new note from user input, and saving the updated array with PUT. Keep the workflow split into `getDB`, `renderDB`, and `addNote` so fetching, drawing, and mutation can be tested separately. Verify persistence by adding a note, refreshing the page, and confirming the note still appears.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/1f218d8aafbcc33fd6409a8ab1616e29",
 					solutionLink: "https://codepen.io/junilearning/pen/MWZzbmK",
@@ -1102,7 +1102,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM12 Project 2: Deleting Notes",
 					content:
-						"Extend the todo list with a `deleteNote` function that removes the selected note by index, re-renders the list, and persists the changed array with PUT. Include a delete button beside each rendered note and verify that deleting the first, last, and only remaining note all produce the expected saved state.",
+						"Extend the to-do list with a `deleteNote` function that removes the selected note by index, re-renders the list, and persists the changed array with PUT. Include a delete button beside each rendered note and verify that deleting the first, last, and only remaining note all produce the expected saved state.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/f8f84204c272d2a6449cda485cbe7736",
 					solutionLink: "https://codepen.io/junilearning/pen/BavGpyN"
@@ -1112,7 +1112,7 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "JSM12 Supplemental Project 1: Checking Notes",
 					content:
-						"Extend the todo list so each item can be marked complete without deleting it. Store completion state in the saved data, render completed notes with a visible checkmark or strike-through style, and verify that completed/uncompleted status survives a page refresh. This turns the data model from plain strings into objects with both text and state.",
+						"Extend the to-do list so each item can be marked complete without deleting it. Store completion state in the saved data, render completed notes with a visible checkmark or strike-through style, and verify that completed/uncompleted status survives a page refresh. This turns the data model from plain strings into objects with both text and state.",
 					projectLink:
 						"https://codepen.io/junilearning/pen/ab6bf77b9d85e1b9a7452d5a307b6b7f",
 					solutionLink:
