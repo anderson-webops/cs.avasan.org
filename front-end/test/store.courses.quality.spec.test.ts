@@ -908,6 +908,42 @@ describe("course text quality normalization", () => {
 		expect(corpus).not.toMatch(/Transfer or Extension Project/i);
 	});
 
+	it("keeps generated safety and resource cards substantive", async () => {
+		const [networkSecurity, dataScience, elementaryScience] =
+			await Promise.all([
+				loadRawCourse("network-security"),
+				loadRawCourse("data-science-in-python"),
+				loadRawCourse("elementary-science")
+			]);
+		expect(networkSecurity).not.toBeNull();
+		expect(dataScience).not.toBeNull();
+		expect(elementaryScience).not.toBeNull();
+
+		const scopeSheet = findItem(
+			networkSecurity!,
+			/Safety Project: Threat Model and Scope Sheet/
+		);
+		const responsibleUse = findItem(
+			dataScience!,
+			/Boundary Project: Responsible-Use Card/
+		);
+		const readinessCard = findItem(
+			dataScience!,
+			/Catalog Project: Dataset Readiness Card/
+		);
+		const elementaryCorpus = allCourseText(elementaryScience);
+
+		expect(scopeSheet.content).toContain("**Required fields:**");
+		expect(scopeSheet.content).toContain("reset path");
+		expect(responsibleUse.content).toContain("possible harm");
+		expect(responsibleUse.content).toContain("human review step");
+		expect(readinessCard.content).toMatch(/one sanity check/i);
+		expect(elementaryCorpus).not.toMatch(
+			/same learning goal[\s\S]{0,120}same learning goal/i
+		);
+		expect(elementaryCorpus).toContain("shared online material");
+	});
+
 	it("formats authored lesson setup text as neutral student-readable sections", async () => {
 		const course = await loadRawCourse("c-level-1");
 		expect(course).not.toBeNull();

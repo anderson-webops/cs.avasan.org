@@ -776,7 +776,7 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 			{
 				title: "Science Notebook Evidence Routine",
 				content:
-					"**Learning sequence:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction.\n\n**Completion check:** The work separates observation from inference and supports claims with visible evidence."
+					"**Learning sequence:** Use a consistent notebook structure: date, phenomenon, vocabulary, observations, model or graph, claim, evidence, reasoning, and changed-condition prediction. Observations should describe what is visible in the shared source; inferences should explain what the observation suggests and why.\n\n**Completion check:** The work separates observation from inference, supports claims with visible evidence, and includes one prediction about how the system would change if one variable or condition changed."
 			}
 		],
 		supplementalProjects: [
@@ -862,7 +862,7 @@ function addElementaryScienceDecision(courseId: string, course: RawCourse) {
 			{
 				title: "Shared Zoom Constraint",
 				content:
-					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Completion check:** The same learning goal can be completed the same learning goal."
+					"**Remote investigation:** Both paths remain Zoom-first and paper/browser based. Optional household observations may be allowed only when a fully equivalent image, simulation, or data table is provided.\n\n**Completion check:** The same learning goal can be completed through the shared online material even when no household observation is available."
 			}
 		],
 		supplementalProjects: [
@@ -1276,12 +1276,12 @@ function addDataCatalogModule(courseId: string, course: RawCourse) {
 			{
 				title: "Catalog Project: Dataset Readiness Card",
 				content:
-					"**Project goal:** Create a readiness card for one dataset or fixture.\n\n**Completion checks:**\n- Source and license/usage notes are recorded.\n- Target question and columns/features are named.\n- Known limitations or risks are documented."
+					"**Project goal:** Create a readiness card for one dataset or fixture before using it in an analysis, model, or AI behavior test. The card should make the source understandable without opening the notebook first.\n\n**Required fields:** source URL or origin, license or usage note, target question, relevant columns or features, expected row/item count when available, missing-value or quality caveats, and one reason the source is appropriate for the course level.\n\n**Completion checks:**\n- Source and license/usage notes are recorded.\n- Target question and columns/features are named.\n- Known limitations or risks are documented.\n- One sanity check is listed before analysis begins."
 			},
 			{
 				title: "Catalog Project: Evaluation Report",
 				content:
-					"**Project goal:** Write a short evaluation report for one AI, data, or ML artifact.\n\n**Completion checks:**\n- The report includes baseline or comparison.\n- The metric or evidence is justified.\n- The limitation statement is specific."
+					"**Project goal:** Write a short evaluation report for one AI, data, or ML artifact. The report should explain what the artifact was expected to do, what evidence was collected, and what would make the result stronger or less trustworthy.\n\n**Required fields:** task or question, baseline or comparison, metric or evidence source, result, interpretation, limitation, and one follow-up test.\n\n**Completion checks:**\n- The report includes baseline or comparison.\n- The metric or evidence is justified.\n- The limitation statement is specific.\n- The conclusion avoids claiming more than the evidence supports."
 			}
 		]
 	});
@@ -1321,7 +1321,7 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Evidence and Remediation Format",
 				content:
-					"**Learning sequence:** Findings should use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note.\n\n**Completion check:** A lab is incomplete without a mitigation or hardening step."
+					"**Learning sequence:** Findings should use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. The observation should describe what happened; the impact should explain why it matters; the fix should be narrow enough to retest.\n\n**Completion check:** A lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere."
 			},
 			{
 				title: "Tooling Setup and Recovery",
@@ -1333,12 +1333,12 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Safety Project: Threat Model and Scope Sheet",
 				content:
-					"**Project goal:** Write a scope sheet for one lab.\n\n**Completion checks:**\n- Target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named."
+					"**Project goal:** Write a scope sheet for one systems or security lab before running commands. The sheet should make the allowed target, evidence, and stopping conditions explicit so the activity stays local, reversible, and defensive.\n\n**Required fields:** lab target, authorization boundary, allowed tools, disallowed actions, data that may be observed, stop conditions, reset path, and intended defensive outcome.\n\n**Completion checks:**\n- Target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named.\n- The reset path is specific enough to repeat after a failed run."
 			},
 			{
 				title: "Safety Project: Patch and Evidence Report",
 				content:
-					"**Project goal:** Fix one local toy vulnerability or unsafe systems bug and write the evidence report.\n\n**Completion checks:**\n- The before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention."
+					"**Project goal:** Fix one local toy vulnerability or unsafe systems bug and write an evidence report. The report should show the before state, the smallest useful fix, and the verification that proves the unsafe behavior no longer occurs.\n\n**Required fields:** vulnerable behavior, reproduction command or trace, impact, patch summary, retest evidence, and prevention note.\n\n**Completion checks:**\n- The before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention.\n- The retest uses the same scenario that exposed the original bug."
 			}
 		]
 	});
@@ -1492,7 +1492,7 @@ function addScienceGradeBandScopeModule(courseId: string, course: RawCourse) {
 				{
 					title: "Physical-Material Boundary",
 					content:
-						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Completion check:** The same learning goal can be completed with only paper, notes, and browser/shared-screen access the same learning goal."
+						"**Remote investigation:** No activity requires beakers, chemicals, heat, food, kits, outdoor collection, or parent-supervised construction. Optional observations must have an equivalent image, simulation, or data table.\n\n**Completion check:** The same learning goal can be completed with only paper, notes, and browser/shared-screen access."
 				}
 			],
 			supplementalProjects: [
@@ -1608,7 +1608,7 @@ function addDataAiMlBoundaryModule(courseId: string, course: RawCourse) {
 			{
 				title: "Boundary Project: Responsible-Use Card",
 				content:
-					"**Project goal:** Create a responsible-use card for a dataset, solver, agent, or model.\n\n**Completion checks:**\n- Source and intended use are stated.\n- A limitation or risk is specific.\n- Human review or mitigation is named."
+					"**Project goal:** Create a responsible-use card for a dataset, solver, agent, or model before treating its output as reliable. The card should connect the artifact to a realistic user, a realistic failure mode, and a concrete mitigation.\n\n**Required fields:** source or system name, intended use, user or stakeholder, assumption, limitation, possible harm or misleading output, human review step, and mitigation.\n\n**Completion checks:**\n- Source and intended use are stated.\n- A limitation or risk is specific.\n- Human review or mitigation is named.\n- The card distinguishes uncertainty from a definite failure."
 			}
 		]
 	});
@@ -1930,12 +1930,12 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			{
 				title: "Defensive Lab Project: Scope and Reset Drill",
 				content:
-					"**Project goal:** Before running a lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path.\n\n**Completion checks:**\n- Scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named."
+					"**Project goal:** Before running a lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path. The drill should be specific enough that the lab can be repeated safely and stopped cleanly if the result is unexpected.\n\n**Required fields:** lab boundary, allowed target, allowed tools, evidence to collect, stop condition, reset command or recovery step, and one disallowed action.\n\n**Completion checks:**\n- Scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named.\n- The expected evidence is tied to the course-specific toolchain."
 			},
 			{
 				title: "Defensive Lab Project: Evidence-to-Remediation Report",
 				content:
-					"**Project goal:** Convert one lab observation into a short remediation report.\n\n**Completion checks:**\n- Observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance."
+					"**Project goal:** Convert one lab observation into a short remediation report. The report should separate what was observed from why it matters, then describe a fix or hardening step that can be tested.\n\n**Required fields:** observation, reproduction evidence, impact, remediation, verification step, prevention or monitoring note, and one remaining limitation.\n\n**Completion checks:**\n- Observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance.\n- Verification evidence is specific enough to reproduce."
 			}
 		]
 	});
@@ -1980,7 +1980,7 @@ function addUnityFullProjectWorkflowModules(
 			{
 				title: "UGD7 Project 2: Asset Pipeline Review",
 				content:
-					"**Project goal:** Audit project assets for provenance, Git LFS needs, package lock status, and attribution completeness.\n\n**Completion checks:**\n- Attribution file is present.\n- Large source binaries are tracked or intentionally excluded.\n- Package versions are reproducible."
+					"**Project goal:** Audit project assets for provenance, Git LFS needs, package lock status, and attribution completeness before a Unity project is treated as ready to share or rebuild from a clean clone.\n\n**Required fields:** asset name, source or author, license, date imported, modification note, whether the asset belongs in Git LFS, package or dependency version, and any file intentionally excluded from the repo.\n\n**Completion checks:**\n- Attribution file is present.\n- Large source binaries are tracked or intentionally excluded.\n- Package versions are reproducible.\n- A clean-clone note explains how another machine can restore the same project state."
 			}
 		]
 	});
