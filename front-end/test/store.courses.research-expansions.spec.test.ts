@@ -35,10 +35,11 @@ describe("research-backed course family expansions", () => {
 				expect(course, courseId).not.toBeNull();
 				expect(profile, courseId).toBeDefined();
 
+				const expansionLabel = course!.name.trim() || profile.family;
 				const coreExpansionTitles = [
-					`${profile.family}: Standards and Course Map`,
-					`${profile.family}: Course Roadmap`,
-					`${profile.family}: Project and Assessment Practice`
+					`${expansionLabel}: Standards and Course Map`,
+					`${expansionLabel}: Course Roadmap`,
+					`${expansionLabel}: Project and Assessment Practice`
 				];
 				const titles = course!.modules.map(module => module.title);
 				for (const title of coreExpansionTitles) {
@@ -95,6 +96,6 @@ describe("research-backed course family expansions", () => {
 		expect(corpus).toContain("Unity Learn");
 		expect(corpus).toContain("No physical supplies beyond paper");
 		expect(corpus).toContain("Project Option:");
-		expect(corpus).toContain("Assessment and Checkpoint Model");
+		expect(corpus).toContain("AI Level 1 Checkpoints");
 	});
 });

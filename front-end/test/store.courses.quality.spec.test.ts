@@ -162,16 +162,16 @@ describe("course text quality normalization", () => {
 				/Check the draft against the expected behavior after a working version exists; record one difference that affects correctness, readability, robustness, or design/
 			);
 			expect(corpus).toContain(
-				"Identify the user interaction, state change, DOM/canvas/API output, and visible error or empty state"
+				"Identify the JSM1 Fundamentals Review user interaction, state change, DOM/canvas/API output, and visible error or empty state"
 			);
 			expect(corpus).toContain(
-				"Translate the prompt into input format, output format, constraints, and the invariant the solution must preserve"
+				"Translate USB0 Setup and Contest Workflow into input format, output format, constraints, and the invariant the solution must preserve"
 			);
 			expect(corpus).toContain(
-				"State the local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix"
+				"State the NSEC0 Setup and Tooling local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix"
 			);
 			expect(corpus).toContain(
-				"After the page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling"
+				"After the JSM1 Fundamentals Review page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling"
 			);
 			expect(corpus).not.toMatch(
 				/After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage/
@@ -180,10 +180,10 @@ describe("course text quality normalization", () => {
 				"After PTJ0 Positioning and Workflow Translation compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage"
 			);
 			expect(corpus).toContain(
-				"After samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
+				"After Healthy Holsteins: Applied Lab samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
 			);
 			expect(corpus).toContain(
-				"After the local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path"
+				"After the NSEC0 Setup and Tooling local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path"
 			);
 			expect(corpus).not.toMatch(
 				/The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result/
@@ -270,13 +270,13 @@ describe("course text quality normalization", () => {
 				"JS1 Variable Types & Input/Output demonstrates the target Java behavior from a clean start"
 			);
 			expect(corpus).toContain(
-				"The page or app shows the expected state change, output, validation, or canvas behavior"
+				"The JSM1 Fundamentals Review page or app shows the expected state change, output, validation, or canvas behavior"
 			);
 			expect(corpus).toContain(
-				"The submitted program matches the required input/output format exactly"
+				"The USB0 Setup and Contest Workflow submitted program matches the required input/output format exactly"
 			);
 			expect(corpus).toContain(
-				"The lab boundary, target behavior, and evidence source are explicit"
+				"The NSEC0 Setup and Tooling lab boundary, target behavior, and evidence source are explicit"
 			);
 			expect(corpus).toContain(
 				"Extend PTJ0 Positioning and Workflow Translation with one additional method and a test or console trace that proves its contract"
@@ -291,10 +291,10 @@ describe("course text quality normalization", () => {
 				"Add one Scratch variant for Maze with timer and collectibles that changes a constraint, input, representation, or success condition without changing the core concept"
 			);
 			expect(corpus).toContain(
-				"Change one rule or control in Scratch: Project and Assessment Practice while preserving the same play goal"
+				"Change one rule or control in Scratch Level 2: Project and Assessment Practice while preserving the same play goal"
 			);
 			expect(corpus).toContain(
-				"Change one constraint or case in Check-In #1 while preserving the same core concept"
+				"Change one constraint or case in Python Level 1: Check-In #1 while preserving the same core concept"
 			);
 		},
 		COURSE_SWEEP_TIMEOUT

@@ -86,9 +86,9 @@ describe("implemented course development artifacts", () => {
 			const text = allText(course);
 
 			expect(text).toContain(
-				"Algebra Project Taxonomy and Assessment Implementation"
+				"Project Taxonomy and Assessment Implementation"
 			);
-			expect(text).toContain("Course Structure Decision");
+			expect(text).toContain("Structure Decision");
 			expect(
 				course.modules.every(
 					module => module.supplementalProjects.length >= 2
@@ -231,7 +231,7 @@ describe("implemented course development artifacts", () => {
 			expect(text, courseId).toContain(
 				"Toolchain and Version Assumptions"
 			);
-			expect(text, courseId).toContain("Pinned Setup Assumptions");
+			expect(text, courseId).toContain("Setup Assumptions");
 		}
 	});
 
@@ -331,7 +331,7 @@ describe("implemented course development artifacts", () => {
 			"java-with-graphics"
 		]) {
 			expect(allText(await requireCourse(courseId)), courseId).toContain(
-				"Modern Java and C++-to-Java Accelerated Path"
+				"Bridge"
 			);
 		}
 
@@ -361,11 +361,11 @@ describe("implemented course development artifacts", () => {
 			"low-level-security",
 			"low-level-security-part-2",
 			"rust-systems-security"
-		]) {
-			expect(allText(await requireCourse(courseId)), courseId).toContain(
-				"Course-Specific Defensive Lab Contract"
-			);
-		}
+			]) {
+				expect(allText(await requireCourse(courseId)), courseId).toContain(
+					"Defensive Lab Contract"
+				);
+			}
 
 		const unityText = allText(
 			await requireCourse("unity-game-development")

@@ -73,7 +73,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Overloaded Constructors & Comparison Methods: Verification and Reflection",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"Overloaded Constructors & Comparison Methods",
 						section: "verification"
@@ -137,7 +137,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Static Variables & Methods Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM3 Static Variables & Methods",
 						projectKind: "extension",
 						hasReference: true
@@ -193,7 +193,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Check-In #1",
 						section: "extension"
 					}),
@@ -203,7 +203,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Check-In #1",
 						projectKind: "extension",
 						hasReference: true
@@ -216,7 +216,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1 Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Check-In #1",
 						projectKind: "extension",
 						hasReference: true
@@ -286,7 +286,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Subclasses & Inheritance Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM4 Subclasses & Inheritance",
 						projectKind: "extension",
 						hasReference: true
@@ -345,7 +345,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM5 Maps",
 						projectKind: "extension",
 						hasReference: true
@@ -358,7 +358,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maps Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM5 Maps",
 						projectKind: "extension",
 						hasReference: true
@@ -415,7 +415,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM6 Threading & Error Handling",
 						projectKind: "extension",
 						hasReference: true
@@ -428,7 +428,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Threading & Error Handling Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM6 Threading & Error Handling",
 						projectKind: "extension",
 						hasReference: true
@@ -481,7 +481,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Check-In #2",
 						section: "extension"
 					}),
@@ -493,7 +493,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Check-In #2",
 						projectKind: "extension",
 						hasReference: true
@@ -506,7 +506,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Check-In #2 Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Check-In #2",
 						projectKind: "extension",
 						hasReference: true
@@ -533,7 +533,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account: Debugging and Failure Modes",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Bank Account",
 						section: "debugging"
 					})
@@ -541,7 +541,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account: Planning and Architecture",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Bank Account",
 						section: "planning"
 					})
@@ -549,7 +549,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account: Verification and Reflection",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Bank Account",
 						section: "verification"
 					})
@@ -568,7 +568,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM7 Bank Account",
 						projectKind: "extension",
 						hasReference: true
@@ -581,7 +581,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Bank Account Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM7 Bank Account",
 						projectKind: "extension",
 						hasReference: true
@@ -642,7 +642,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM8 File I/O",
 						projectKind: "extension",
 						hasReference: true
@@ -655,7 +655,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "File I/O Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM8 File I/O",
 						projectKind: "extension",
 						hasReference: true
@@ -691,7 +691,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner: Planning and Architecture",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Maze Runner",
 						section: "planning"
 					})
@@ -699,7 +699,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner: Verification and Reflection",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Maze Runner",
 						section: "verification"
 					})
@@ -718,7 +718,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM9 Maze Runner",
 						projectKind: "extension",
 						hasReference: true
@@ -731,7 +731,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Maze Runner Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM9 Maze Runner",
 						projectKind: "extension",
 						hasReference: true
@@ -769,7 +769,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM10 Master Project: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM10 Master Project",
 						projectKind: "core",
 						hasReference: false
@@ -782,7 +782,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM10 Master Project: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM10 Master Project",
 						section: "extension"
 					}),
@@ -792,7 +792,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Master Project Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM10 Master Project",
 						projectKind: "extension",
 						hasReference: true
@@ -805,7 +805,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Master Project Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "JM10 Master Project",
 						projectKind: "extension",
 						hasReference: true
@@ -838,7 +838,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "Repo Extension and Reference Library: Verification and Reflection",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle: "Repo Extension and Reference Library",
 						section: "verification"
 					})
@@ -846,7 +846,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM11 Repo Extension and Reference Library: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM11 Repo Extension and Reference Library",
 						projectKind: "extension",
@@ -921,7 +921,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Master Project Example Quiz Game: Implementation Lab",
 						section: "concepts"
@@ -930,7 +930,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Master Project Example Quiz Game: Implementation Lab",
 						section: "example"
@@ -939,7 +939,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Master Project Example Quiz Game: Implementation Lab",
 						section: "coreProject",
@@ -951,7 +951,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Master Project Example Quiz Game: Implementation Lab",
 						section: "review"
@@ -962,7 +962,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Master Project Example Quiz Game: Implementation Lab",
 						section: "extension",
@@ -974,7 +974,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Master Project Example Quiz Game: Implementation Lab",
 						projectKind: "extension",
@@ -988,7 +988,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Master Project Example Quiz Game Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Master Project Example Quiz Game: Implementation Lab",
 						projectKind: "extension",
@@ -1007,7 +1007,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Core Concepts",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Maze Runner Project: Implementation Lab",
 						section: "concepts"
@@ -1016,7 +1016,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Guided Example",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Maze Runner Project: Implementation Lab",
 						section: "example"
@@ -1025,7 +1025,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Core Project",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Maze Runner Project: Implementation Lab",
 						section: "coreProject"
@@ -1038,7 +1038,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Review and Reflection",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Maze Runner Project: Implementation Lab",
 						section: "review"
@@ -1049,7 +1049,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project: Extension Challenge",
 					content: buildImplementationLabGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Maze Runner Project: Implementation Lab",
 						section: "extension"
@@ -1062,7 +1062,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Maze Runner Project: Implementation Lab",
 						projectKind: "extension",
@@ -1076,7 +1076,7 @@ export const javaLevel2Course: RawCourse = {
 				{
 					title: "JM Maze Runner Project Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 2",
 						moduleTitle:
 							"JM Maze Runner Project: Implementation Lab",
 						projectKind: "extension",

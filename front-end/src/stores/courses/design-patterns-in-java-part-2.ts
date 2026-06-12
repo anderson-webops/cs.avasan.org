@@ -41,7 +41,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR1 Code Smells and Safe Refactoring Workflow: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"DPR1 Code Smells and Safe Refactoring Workflow",
 						projectKind: "core",
@@ -66,7 +66,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"DPR1 Code Smells and Safe Refactoring Workflow",
 						projectKind: "extension",
@@ -80,7 +80,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Code Smells and Safe Refactoring Workflow Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"DPR1 Code Smells and Safe Refactoring Workflow",
 						projectKind: "extension",
@@ -129,7 +129,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR2 Composing Methods: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR2 Composing Methods",
 						projectKind: "core",
 						hasReference: true
@@ -153,7 +153,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR2 Composing Methods",
 						projectKind: "extension",
 						hasReference: true
@@ -166,7 +166,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Composing Methods Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR2 Composing Methods",
 						projectKind: "extension",
 						hasReference: true
@@ -214,7 +214,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR3 Moving Features Between Objects: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR3 Moving Features Between Objects",
 						projectKind: "core",
 						hasReference: true
@@ -238,7 +238,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR3 Moving Features Between Objects",
 						projectKind: "extension",
 						hasReference: true
@@ -251,7 +251,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Moving Features Between Objects Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR3 Moving Features Between Objects",
 						projectKind: "extension",
 						hasReference: true
@@ -299,7 +299,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR4 Organizing Data: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR4 Organizing Data",
 						projectKind: "core",
 						hasReference: true
@@ -323,7 +323,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR4 Organizing Data",
 						projectKind: "extension",
 						hasReference: true
@@ -336,7 +336,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Organizing Data Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR4 Organizing Data",
 						projectKind: "extension",
 						hasReference: true
@@ -384,7 +384,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR5 Simplifying Conditional Expressions: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR5 Simplifying Conditional Expressions",
 						projectKind: "core",
 						hasReference: true
@@ -408,7 +408,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR5 Simplifying Conditional Expressions",
 						projectKind: "extension",
 						hasReference: true
@@ -421,7 +421,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Conditional Expressions Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR5 Simplifying Conditional Expressions",
 						projectKind: "extension",
 						hasReference: true
@@ -469,7 +469,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR6 Simplifying Method Calls: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR6 Simplifying Method Calls",
 						projectKind: "core",
 						hasReference: true
@@ -493,7 +493,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR6 Simplifying Method Calls",
 						projectKind: "extension",
 						hasReference: true
@@ -506,7 +506,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Simplifying Method Calls Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR6 Simplifying Method Calls",
 						projectKind: "extension",
 						hasReference: true
@@ -554,7 +554,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR7 Dealing with Generalization: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR7 Dealing with Generalization",
 						projectKind: "core",
 						hasReference: true
@@ -578,7 +578,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR7 Dealing with Generalization",
 						projectKind: "extension",
 						hasReference: true
@@ -591,7 +591,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Dealing with Generalization Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR7 Dealing with Generalization",
 						projectKind: "extension",
 						hasReference: true
@@ -639,7 +639,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR8 Refactoring Toward Patterns: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR8 Refactoring Toward Patterns",
 						projectKind: "core",
 						hasReference: true
@@ -663,7 +663,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR8 Refactoring Toward Patterns",
 						projectKind: "extension",
 						hasReference: true
@@ -676,7 +676,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Toward Patterns Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR8 Refactoring Toward Patterns",
 						projectKind: "extension",
 						hasReference: true
@@ -724,7 +724,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR9 Testability, DI, and Refactoring with Confidence: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"DPR9 Testability, DI, and Refactoring with Confidence",
 						projectKind: "core",
@@ -749,7 +749,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"DPR9 Testability, DI, and Refactoring with Confidence",
 						projectKind: "extension",
@@ -763,7 +763,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Testability, DI, and Refactoring with Confidence Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"DPR9 Testability, DI, and Refactoring with Confidence",
 						projectKind: "extension",
@@ -812,7 +812,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "DPR10 Capstone Refactoring Studio: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR10 Capstone Refactoring Studio",
 						projectKind: "core",
 						hasReference: true
@@ -836,7 +836,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio Supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR10 Capstone Refactoring Studio",
 						projectKind: "extension",
 						hasReference: true
@@ -849,7 +849,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Capstone Refactoring Studio Supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle: "DPR10 Capstone Refactoring Studio",
 						projectKind: "extension",
 						hasReference: true
@@ -922,7 +922,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 11 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 11: Implementation Lab",
 						projectKind: "extension",
@@ -936,7 +936,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 11 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 11: Implementation Lab",
 						projectKind: "extension",
@@ -1010,7 +1010,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 12 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 12: Implementation Lab",
 						projectKind: "extension",
@@ -1024,7 +1024,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 12 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 12: Implementation Lab",
 						projectKind: "extension",
@@ -1098,7 +1098,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 13 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 13: Implementation Lab",
 						projectKind: "extension",
@@ -1112,7 +1112,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 13 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 13: Implementation Lab",
 						projectKind: "extension",
@@ -1186,7 +1186,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 14 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 14: Implementation Lab",
 						projectKind: "extension",
@@ -1200,7 +1200,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 14 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 14: Implementation Lab",
 						projectKind: "extension",
@@ -1274,7 +1274,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 15 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 15: Implementation Lab",
 						projectKind: "extension",
@@ -1288,7 +1288,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 15 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 15: Implementation Lab",
 						projectKind: "extension",
@@ -1362,7 +1362,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 16 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 16: Implementation Lab",
 						projectKind: "extension",
@@ -1376,7 +1376,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 16 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 16: Implementation Lab",
 						projectKind: "extension",
@@ -1450,7 +1450,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 17 Supplemental 2: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 17: Implementation Lab",
 						projectKind: "extension",
@@ -1464,7 +1464,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Refactoring Clinic 17 Supplemental 3: Implementation Lab",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Design Patterns in Java Part 2",
 						moduleTitle:
 							"Refactoring Clinic 17: Implementation Lab",
 						projectKind: "extension",

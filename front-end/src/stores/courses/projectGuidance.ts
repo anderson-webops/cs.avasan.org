@@ -177,17 +177,17 @@ function requiredWorkSteps(
 
 	if (family.includes("usaco")) {
 		return [
-			"Translate the prompt into input format, output format, constraints, and the invariant the solution must preserve.",
-			"Solve one tiny hand-built case before coding so the algorithm has a traceable target.",
-			"Implement the approach incrementally, checking the sample, a custom edge case, and one bounds or ordering case."
+			`Translate ${moduleTitle} into input format, output format, constraints, and the invariant the solution must preserve.`,
+			`Solve one tiny ${moduleTitle} hand-built case before coding so the algorithm has a traceable target.`,
+			`Implement the ${moduleTitle} approach incrementally, checking the sample, a custom edge case, and one bounds or ordering case.`
 		];
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
 		return [
-			"Identify the user interaction, state change, DOM/canvas/API output, and visible error or empty state.",
-			"Implement one visible behavior at a time, inspecting the page, console, network panel, or local server after each change.",
-			"Verify a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check."
+			`Identify the ${moduleTitle} user interaction, state change, DOM/canvas/API output, and visible error or empty state.`,
+			`Implement one ${moduleTitle} visible behavior at a time, inspecting the page, console, network panel, or local server after each change.`,
+			`Verify ${moduleTitle} with a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check.`
 		];
 	}
 
@@ -197,9 +197,9 @@ function requiredWorkSteps(
 		family.includes("ai")
 	) {
 		return [
-			"Inspect the input data, state space, features, labels, or rules before deciding what result would count as evidence.",
-			"Implement the transformation, model, search, or scoring step in small checks that expose intermediate results.",
-			"Verify a normal case, a boundary or failure case, and one limitation that affects how confidently the output can be interpreted."
+			`Inspect the ${moduleTitle} input data, state space, features, labels, or rules before deciding what result would count as evidence.`,
+			`Implement the ${moduleTitle} transformation, model, search, or scoring step in small checks that expose intermediate results.`,
+			`Verify ${moduleTitle} with a normal case, a boundary or failure case, and one limitation that affects how confidently the output can be interpreted.`
 		];
 	}
 
@@ -207,40 +207,40 @@ function requiredWorkSteps(
 		return [
 			[
 				`Sketch the classes, methods, records, interfaces, or collections that own the main responsibilities in ${moduleTitle}.`,
-				"Implement one constructor, method, branch, or test at a time, compiling after each meaningful change.",
-				"Check a normal case, an edge case, and one object-state or method-dispatch case tied to the module concept."
+				`Implement one ${moduleTitle} constructor, method, branch, or test at a time, compiling after each meaningful change.`,
+				`Check ${moduleTitle} with a normal case, an edge case, and one object-state or method-dispatch case tied to the module concept.`
 			],
 			[
 				`For ${moduleTitle}, identify which type owns the state, which method exposes behavior, and which test or console trace proves it.`,
-				"Build the smallest compiling version first, then add one behavior or branch at a time.",
-				"Verify a standard case, a boundary case, and one case involving object identity, equality, inheritance, records, or collections when relevant."
+				`Build the smallest compiling ${moduleTitle} version first, then add one behavior or branch at a time.`,
+				`Verify ${moduleTitle} with a standard case, a boundary case, and one case involving object identity, equality, inheritance, records, or collections when relevant.`
 			],
 			[
 				`Map ${moduleTitle} into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape.`,
-				"Compile after each meaningful signature, field, branch, or loop change so errors stay local.",
-				"Check one ordinary path, one awkward or invalid input path, and one state transition or method-call sequence."
+				`Compile ${moduleTitle} after each meaningful signature, field, branch, or loop change so errors stay local.`,
+				`Check ${moduleTitle} with one ordinary path, one awkward or invalid input path, and one state transition or method-call sequence.`
 			],
 			[
 				`Name the public behavior for ${moduleTitle}, then decide which class, helper method, interface, record, or collection should carry it.`,
-				"Implement the behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.",
-				"Verify one happy path, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation."
+				`Implement the ${moduleTitle} behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.`,
+				`Verify ${moduleTitle} with one happy path, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("python")) {
 		return [
-			"Name the input, transformation, helper function boundary, data structure, and expected output before coding.",
-			"Implement the behavior in small runnable pieces, keeping input handling, transformation, and output easy to inspect.",
-			"Check a normal case, a boundary case, and one unexpected or awkward input that can be traced by hand."
+			`Name the ${moduleTitle} input, transformation, helper function boundary, data structure, and expected output before coding.`,
+			`Implement ${moduleTitle} in small runnable pieces, keeping input handling, transformation, and output easy to inspect.`,
+			`Check ${moduleTitle} with a normal case, a boundary case, and one unexpected or awkward input that can be traced by hand.`
 		];
 	}
 
 	if (family.includes("security") || family.includes("network")) {
 		return [
-			"State the local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix.",
-			"Run or modify the fixture in small steps while capturing logs, traces, requests, responses, or configuration changes.",
-			"Verify normal behavior, failure or attack-shaped behavior, and one remediation, detection, or hardening result."
+			`State the ${moduleTitle} local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix.`,
+			`Run or modify the ${moduleTitle} fixture in small steps while capturing logs, traces, requests, responses, or configuration changes.`,
+			`Verify ${moduleTitle} normal behavior, failure or attack-shaped behavior, and one remediation, detection, or hardening result.`
 		];
 	}
 
@@ -254,38 +254,38 @@ function requiredWorkSteps(
 			[
 				`Identify the inputs, ownership or lifetime boundary, build command, runtime behavior, and diagnostic output for ${moduleTitle}.`,
 				`Implement or instrument ${moduleTitle} one boundary at a time, rebuilding and rerunning after each meaningful change.`,
-				"Verify a normal case, a boundary or failure case, and one trace, sanitizer, debugger, memory, or performance observation."
+				`Verify ${moduleTitle} with a normal case, a boundary or failure case, and one trace, sanitizer, debugger, memory, or performance observation.`
 			],
 			[
 				`For ${moduleTitle}, name the command, file or memory boundary, expected runtime behavior, and evidence source before changing code.`,
-				"Build the smallest reproducible run first, then add one diagnostic, data-structure, resource, or control-flow change at a time.",
-				"Check a typical run, a smallest or failing run, and one observation from logs, debugger state, sanitizer output, timing, or memory state."
+				`Build the smallest reproducible ${moduleTitle} run first, then add one diagnostic, data-structure, resource, or control-flow change at a time.`,
+				`Check ${moduleTitle} with a typical run, a smallest or failing run, and one observation from logs, debugger state, sanitizer output, timing, or memory state.`
 			],
 			[
 				`Map ${moduleTitle} to its low-level contract: inputs, outputs, ownership, lifetime, build mode, and observable machine or runtime state.`,
-				"Change one boundary at a time and keep the build/run command close enough to rerun immediately.",
-				"Verify ordinary behavior, a boundary or invalid case, and one diagnostic trace tied to the systems concept."
+				`Change one ${moduleTitle} boundary at a time and keep the build/run command close enough to rerun immediately.`,
+				`Verify ${moduleTitle} ordinary behavior, a boundary or invalid case, and one diagnostic trace tied to the systems concept.`
 			],
 			[
 				`Start ${moduleTitle} by recording the starting state, command path, resource boundary, and expected observable result.`,
-				"Implement in short compile/run/debug cycles so failures point to a specific boundary or assumption.",
-				"Check one normal path, one failure or edge path, and one memory, lifetime, performance, register, or process-state detail."
+				`Implement ${moduleTitle} in short compile/run/debug cycles so failures point to a specific boundary or assumption.`,
+				`Check ${moduleTitle} with one normal path, one failure or edge path, and one memory, lifetime, performance, register, or process-state detail.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("swift")) {
 		return [
-			"Identify the screen, state, user action, data flow, and expected app behavior before changing the project.",
-			"Implement one view, model, state transition, or persistence path at a time and run it in the simulator.",
-			"Verify a normal interaction, an empty or invalid state, and one accessibility or navigation check."
+			`Identify the ${moduleTitle} screen, state, user action, data flow, and expected app behavior before changing the project.`,
+			`Implement one ${moduleTitle} view, model, state transition, or persistence path at a time and run it in the simulator.`,
+			`Verify ${moduleTitle} with a normal interaction, an empty or invalid state, and one accessibility or navigation check.`
 		];
 	}
 
 	return [
-		"Name the artifact, input surface, output surface, state change, and success condition before building.",
-		"Build the behavior in small observable steps, checking the result after each meaningful change.",
-		"Verify a normal path, a boundary or failure path, and one case tied directly to the module concept."
+		`Name the ${moduleTitle} artifact, input surface, output surface, state change, and success condition before building.`,
+		`Build the ${moduleTitle} behavior in small observable steps, checking the result after each meaningful change.`,
+		`Verify ${moduleTitle} with a normal path, a boundary or failure path, and one case tied directly to the module concept.`
 	];
 }
 
@@ -303,22 +303,22 @@ function referenceReviewStep(
 			family.includes("machine learning") ||
 			family.includes("ai")
 		) {
-			return "Write a verification note that names the evidence, sanity check, and limitation used to interpret the result.";
+			return `Write a ${moduleTitle} verification note that names the evidence, sanity check, and limitation used to interpret the result.`;
 		}
 
 		if (family.includes("security") || family.includes("network")) {
-			return "Write a verification note that records the local boundary, evidence captured, and remediation or hardening result.";
+			return `Write a ${moduleTitle} verification note that records the local boundary, evidence captured, and remediation or hardening result.`;
 		}
 
-		return "Write a verification note that identifies the tests, traces, logs, or observations used as evidence.";
+		return `Write a ${moduleTitle} verification note that identifies the tests, traces, logs, or observations used as evidence.`;
 	}
 
 	if (family.includes("usaco")) {
-		return "After samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.";
+		return `After ${moduleTitle} samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.`;
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
-		return "After the page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling.";
+		return `After the ${moduleTitle} page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling.`;
 	}
 
 	if (
@@ -326,7 +326,7 @@ function referenceReviewStep(
 		family.includes("machine learning") ||
 		family.includes("ai")
 	) {
-		return "After the pipeline or model runs, compare against the reference and record one difference in data assumptions, metric behavior, model behavior, or stated limitation.";
+		return `After the ${moduleTitle} pipeline or model runs, compare against the reference and record one difference in data assumptions, metric behavior, model behavior, or stated limitation.`;
 	}
 
 	if (family.includes("java")) {
@@ -339,11 +339,11 @@ function referenceReviewStep(
 	}
 
 	if (family.includes("python")) {
-		return "After the program runs, compare against the reference and record one difference in helper boundaries, data handling, input validation, or output formatting.";
+		return `After the ${moduleTitle} program runs, compare against the reference and record one difference in helper boundaries, data handling, input validation, or output formatting.`;
 	}
 
 	if (family.includes("security") || family.includes("network")) {
-		return "After the local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path.";
+		return `After the ${moduleTitle} local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path.`;
 	}
 
 	if (
@@ -361,10 +361,10 @@ function referenceReviewStep(
 	}
 
 	if (family.includes("swift")) {
-		return "After the simulator path works, compare against the reference and record one difference in view state, navigation, persistence, or accessibility behavior.";
+		return `After the ${moduleTitle} simulator path works, compare against the reference and record one difference in view state, navigation, persistence, or accessibility behavior.`;
 	}
 
-	return "After the artifact works, compare against the reference and record one meaningful difference in behavior, robustness, readability, or design.";
+	return `After the ${moduleTitle} artifact works, compare against the reference and record one meaningful difference in behavior, robustness, readability, or design.`;
 }
 
 function completionCheckSteps(
@@ -376,17 +376,17 @@ function completionCheckSteps(
 
 	if (family.includes("usaco")) {
 		return [
-			"The submitted program matches the required input/output format exactly.",
-			"A tiny hand-traced case, the sample case, and one boundary or ordering case have matching results.",
-			"The final note names the invariant, complexity target, and one edge case that shaped the solution."
+			`The ${moduleTitle} submitted program matches the required input/output format exactly.`,
+			`A tiny hand-traced ${moduleTitle} case, the sample case, and one boundary or ordering case have matching results.`,
+			`The final ${moduleTitle} note names the invariant, complexity target, and one edge case that shaped the solution.`
 		];
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
 		return [
-			"The page or app shows the expected state change, output, validation, or canvas behavior.",
-			"A normal interaction, an empty or invalid interaction, and one layout or accessibility check have been exercised.",
-			"The final note names the event, state, DOM/canvas/API, or user-flow decision that mattered."
+			`The ${moduleTitle} page or app shows the expected state change, output, validation, or canvas behavior.`,
+			`A normal ${moduleTitle} interaction, an empty or invalid interaction, and one layout or accessibility check have been exercised.`,
+			`The final ${moduleTitle} note names the event, state, DOM/canvas/API, or user-flow decision that mattered.`
 		];
 	}
 
@@ -396,9 +396,9 @@ function completionCheckSteps(
 		family.includes("ai")
 	) {
 		return [
-			"The result is tied to inspected input data, model/search behavior, or an explicit transformation.",
-			"A normal case, a sanity check, and one limitation or failure mode are recorded.",
-			"The final note separates what the evidence supports from what remains uncertain."
+			`The ${moduleTitle} result is tied to inspected input data, model/search behavior, or an explicit transformation.`,
+			`A normal ${moduleTitle} case, a sanity check, and one limitation or failure mode are recorded.`,
+			`The final ${moduleTitle} note separates what the evidence supports from what remains uncertain.`
 		];
 	}
 
@@ -406,8 +406,8 @@ function completionCheckSteps(
 		return [
 			[
 				`${moduleTitle} compiles cleanly and the expected behavior is visible through output, tests, or method calls.`,
-				"A normal case, an edge case, and one object-state, inheritance, interface, record, or collection case are checked.",
-				"The final note names the class boundary, method contract, or data representation choice that mattered."
+				`A normal ${moduleTitle} case, an edge case, and one object-state, inheritance, interface, record, or collection case are checked.`,
+				`The final ${moduleTitle} note names the class boundary, method contract, or data representation choice that mattered.`
 			],
 			[
 				`${moduleTitle} has a fresh compile/run result and at least one concrete output, assertion, or trace.`,
@@ -421,25 +421,25 @@ function completionCheckSteps(
 			],
 			[
 				`${moduleTitle} can be rebuilt and rerun with current evidence for the target behavior.`,
-				"A typical path, an awkward path, and one stateful or polymorphic path are checked when relevant.",
-				"The final note separates syntax fixes from design choices such as encapsulation, method contracts, or data ownership."
+				`A typical ${moduleTitle} path, an awkward path, and one stateful or polymorphic path are checked when relevant.`,
+				`The final ${moduleTitle} note separates syntax fixes from design choices such as encapsulation, method contracts, or data ownership.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("python")) {
 		return [
-			"The program can be rerun cleanly and the expected output or data change is visible.",
-			"A normal input, a boundary input, and one awkward input or data shape are tested or traced.",
-			"The final note names the helper, loop, collection, file, or algorithm decision that mattered."
+			`The ${moduleTitle} program can be rerun cleanly and the expected output or data change is visible.`,
+			`A normal ${moduleTitle} input, a boundary input, and one awkward input or data shape are tested or traced.`,
+			`The final ${moduleTitle} note names the helper, loop, collection, file, or algorithm decision that mattered.`
 		];
 	}
 
 	if (family.includes("security") || family.includes("network")) {
 		return [
-			"The lab boundary, target behavior, and evidence source are explicit.",
-			"Normal traffic or behavior, failure or attack-shaped behavior, and a mitigation or diagnostic result are checked.",
-			"The final note names the risk, control, trace, log, request, response, or rollback decision that mattered."
+			`The ${moduleTitle} lab boundary, target behavior, and evidence source are explicit.`,
+			`${moduleTitle} normal traffic or behavior, failure or attack-shaped behavior, and a mitigation or diagnostic result are checked.`,
+			`The final ${moduleTitle} note names the risk, control, trace, log, request, response, or rollback decision that mattered.`
 		];
 	}
 
@@ -452,39 +452,39 @@ function completionCheckSteps(
 		return [
 			[
 				`${moduleTitle} builds from a clean command and produces inspectable runtime behavior.`,
-				"A normal case, a boundary or failure case, and one memory, lifetime, trace, debugger, or performance check are recorded.",
-				"The final note names the ownership, resource, ABI, build, diagnostic, or complexity decision that mattered."
+				`A normal ${moduleTitle} case, a boundary or failure case, and one memory, lifetime, trace, debugger, or performance check are recorded.`,
+				`The final ${moduleTitle} note names the ownership, resource, ABI, build, diagnostic, or complexity decision that mattered.`
 			],
 			[
 				`${moduleTitle} has a reproducible build/run command and current evidence for the expected behavior.`,
-				"Ordinary behavior, edge or failure behavior, and one diagnostic observation are checked.",
-				"The final note identifies the resource, ownership, lifetime, layout, command, or performance assumption that shaped the result."
+				`${moduleTitle} ordinary behavior, edge or failure behavior, and one diagnostic observation are checked.`,
+				`The final ${moduleTitle} note identifies the resource, ownership, lifetime, layout, command, or performance assumption that shaped the result.`
 			],
 			[
 				`${moduleTitle} can be rebuilt from a clean starting point and inspected through output, logs, traces, debugger state, or sanitizer evidence.`,
-				"A typical input, a boundary or invalid input, and one low-level observation are recorded.",
-				"The final note separates the algorithm or API behavior from the system-level evidence."
+				`A typical ${moduleTitle} input, a boundary or invalid input, and one low-level observation are recorded.`,
+				`The final ${moduleTitle} note separates the algorithm or API behavior from the system-level evidence.`
 			],
 			[
 				`${moduleTitle} includes the command, expected output, and evidence needed to reproduce the result.`,
-				"At least one normal path, one failure or edge path, and one memory, process, register, or timing detail are checked.",
-				"The final note explains the most important ownership, build, diagnostic, or complexity choice."
+				`At least one ${moduleTitle} normal path, one failure or edge path, and one memory, process, register, or timing detail are checked.`,
+				`The final ${moduleTitle} note explains the most important ownership, build, diagnostic, or complexity choice.`
 			]
 		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("swift")) {
 		return [
-			"The app path runs in the simulator or preview and shows the expected view/state behavior.",
-			"A normal interaction, an empty or invalid state, and one navigation, persistence, or accessibility check are exercised.",
-			"The final note names the view, model, state, data-flow, or platform decision that mattered."
+			`The ${moduleTitle} app path runs in the simulator or preview and shows the expected view/state behavior.`,
+			`A normal ${moduleTitle} interaction, an empty or invalid state, and one navigation, persistence, or accessibility check are exercised.`,
+			`The final ${moduleTitle} note names the view, model, state, data-flow, or platform decision that mattered.`
 		];
 	}
 
 	return [
-		"The finished artifact has an observable result tied to the module concept.",
-		"A normal case, a boundary or failure case, and one transfer case have been checked.",
-		"The final note names one design, debugging, or reasoning decision that affected the outcome."
+		`The finished ${moduleTitle} artifact has an observable result tied to the module concept.`,
+		`A normal ${moduleTitle} case, a boundary or failure case, and one transfer case have been checked.`,
+		`The final ${moduleTitle} note names one design, debugging, or reasoning decision that affected the outcome.`
 	];
 }
 

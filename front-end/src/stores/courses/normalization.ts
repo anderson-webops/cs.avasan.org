@@ -196,6 +196,54 @@ function cleanDisplayTitle(text: string) {
 		.replace(/: systems build (\d+)/i, ": Systems Build $1");
 }
 
+function sameTitle(left: string, right: string) {
+	return (
+		left.localeCompare(right, undefined, { sensitivity: "accent" }) === 0
+	);
+}
+
+function withCourseContext(courseTitle: string, moduleTitle: string) {
+	const normalizedCourse = courseTitle.trim().toLowerCase();
+	const normalizedModule = moduleTitle.trim().toLowerCase();
+
+	if (!normalizedCourse || normalizedModule.startsWith(normalizedCourse)) {
+		return moduleTitle;
+	}
+
+	return `${courseTitle}: ${moduleTitle}`;
+}
+
+function genericSupplementalNeedsCourseContext(moduleTitle: string) {
+	return /^(?:Check-In #\d+|Master Project|Setup and Tooling)$/i.test(
+		moduleTitle
+	);
+}
+
+function contextualizeGenericItemTitle(
+	courseTitle: string,
+	moduleTitle: string,
+	itemTitle: string
+) {
+	if (itemTitle === "Diagnostic Checkpoint") {
+		return `${moduleTitle}: Diagnostic Checkpoint`;
+	}
+
+	const supplementalMatch = itemTitle.match(/^(.+?) Supplemental ([23])$/i);
+	if (!supplementalMatch) return itemTitle;
+
+	const baseTitle = cleanDisplayTitle(supplementalMatch[1]);
+	const number = supplementalMatch[2];
+
+	if (
+		sameTitle(baseTitle, moduleTitle) ||
+		genericSupplementalNeedsCourseContext(moduleTitle)
+	) {
+		return `${withCourseContext(courseTitle, moduleTitle)} Supplemental ${number}`;
+	}
+
+	return `${moduleTitle}: Supplemental ${number}`;
+}
+
 function normalizeDisplayTitles(course: RawCourse) {
 	for (const module of course.modules) {
 		module.title = cleanDisplayTitle(module.title);
@@ -204,6 +252,11 @@ function normalizeDisplayTitles(course: RawCourse) {
 			...module.supplementalProjects
 		]) {
 			item.title = cleanDisplayTitle(item.title);
+			item.title = contextualizeGenericItemTitle(
+				course.name,
+				module.title,
+				item.title
+			);
 		}
 	}
 }
@@ -1289,7 +1342,7 @@ function commonPitfalls(context: CourseTextContext) {
 		return "Treating observations as conclusions, using vocabulary loosely, ignoring units or scale, or claiming that a model proves more than it actually shows.";
 	}
 	if (isMathContext(context)) {
-		return "Dropping negative signs or units, skipping the reason for an algebraic step, reading graph or table labels too quickly, or giving an answer without a context check.";
+		return `In ${context.module.title}, common mistakes include dropping negative signs or units, skipping the reason for an algebraic step, reading graph or table labels too quickly, or giving an answer without a context check.`;
 	}
 	if (isDataAiMlContext(context)) {
 		return "Assuming a dataset is complete or neutral, confusing correlation with explanation, trusting one metric without a baseline, or omitting limitations and responsible-use boundaries.";
@@ -1364,7 +1417,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 		return "Name the model, cite the evidence, explain the vocabulary, and describe how the conclusion would change under one new condition.";
 	}
 	if (isMathContext(context)) {
-		return "Explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be reasonable.";
+		return `For ${context.module.title}, explain the rule, apply it to a new example, correct a small mistake, and describe how the result is known to be reasonable.`;
 	}
 	if (isDataAiMlContext(context)) {
 		return "Name the question, inspect the evidence, compare against a baseline or sanity check, and state one limitation of the result.";
@@ -1540,6 +1593,7 @@ function diagnosticExtensionPrompt(context: CourseTextContext) {
 
 function projectExpectations(context: CourseTextContext) {
 	const source = contextText(context);
+	const subject = extensionSubject(context);
 
 	if (
 		/scratch|sprite|broadcast|clone|backdrop|green flag|pen extension/.test(
@@ -1600,9 +1654,9 @@ function projectExpectations(context: CourseTextContext) {
 		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
 	) {
 		return [
-			"- Define the hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics.",
-			"- Test local behavior, remote or cross-host behavior, and one failure case using command output or packet/service evidence.",
-			"- Record the observed symptom, the diagnostic command, the interpretation, and the configuration or topology fact it proves."
+			`- Define the ${subject} hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics.`,
+			`- Test ${subject} local behavior, remote or cross-host behavior, and one failure case using command output or packet/service evidence.`,
+			`- Record the ${subject} observed symptom, diagnostic command, interpretation, and configuration or topology fact it proves.`
 		];
 	}
 	if (isLowLevelSystemsContext(context)) {
@@ -1638,9 +1692,9 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (isWebContext(context)) {
 		return [
-			"- Define the visible user flow and the data flow before implementation.",
-			"- Verify the feature in the browser at desktop and narrow widths.",
-			"- Check loading, empty, success, and error states instead of only the happy path."
+			`- Define the visible ${subject} user flow and data flow before implementation.`,
+			`- Verify ${subject} in the browser at desktop and narrow widths.`,
+			`- Check ${subject} loading, empty, success, and error states instead of only the happy path.`
 		];
 	}
 	if (/security|offensive|threat|network/.test(source)) {
@@ -1666,23 +1720,23 @@ function projectExpectations(context: CourseTextContext) {
 	}
 	if (/sort|selection|insertion|merge|quick/.test(source)) {
 		return [
-			"- Show the array or list before and after the algorithm runs.",
-			"- Test already-sorted, reverse-sorted, duplicate-value, and small-size inputs.",
-			"- Explain which comparisons or swaps dominate the runtime."
+			`- Show the ${subject} array or list before and after the algorithm runs.`,
+			`- Test ${subject} with already-sorted, reverse-sorted, duplicate-value, and small-size inputs.`,
+			`- Explain which ${subject} comparisons or swaps dominate the runtime.`
 		];
 	}
 	if (/array|matrix|grid|two-dimensional|2d/.test(source)) {
 		return [
-			"- Use a small visible example so row and column positions can be traced.",
-			"- Test first row, last row, first column, last column, and an interior position.",
-			"- Explain how the loop bounds prevent out-of-range indexing."
+			`- Use a small visible ${subject} example so row and column positions can be traced.`,
+			`- Test ${subject} with first row, last row, first column, last column, and an interior position.`,
+			`- Explain how the ${subject} loop bounds prevent out-of-range indexing.`
 		];
 	}
 	if (/dictionary|map|hash|set/.test(source)) {
 		return [
-			"- Demonstrate adding, reading, updating, and checking for a missing key or value.",
-			"- Print or inspect the data structure after each important change.",
-			"- Explain why the chosen structure is better than a plain list for this task."
+			`- Demonstrate ${subject} adding, reading, updating, and checking for a missing key or value.`,
+			`- Print or inspect the ${subject} data structure after each important change.`,
+			`- Explain why the chosen ${subject} structure is better than a plain list for this task.`
 		];
 	}
 	if (/calendar machine|date|time/.test(source)) {
@@ -1799,6 +1853,7 @@ function projectExpectations(context: CourseTextContext) {
 
 function completionChecks(context: CourseTextContext) {
 	const source = contextText(context);
+	const subject = extensionSubject(context);
 
 	if (isCompetitiveProgrammingContext(context)) {
 		return [
@@ -1855,9 +1910,9 @@ function completionChecks(context: CourseTextContext) {
 		/network systems|dns|ports|routing|packet|tcpdump|ipv6|nat/.test(source)
 	) {
 		return [
-			"- The topology, host roles, addresses, ports, protocols, or firewall boundaries are named explicitly.",
-			"- Diagnostic evidence shows both expected behavior and at least one failure or blocked-path condition.",
-			"- The final explanation connects the observed packet, port, DNS, route, or service result to the network model."
+			`- The ${subject} topology, host roles, addresses, ports, protocols, or firewall boundaries are named explicitly.`,
+			`- ${subject} diagnostic evidence shows both expected behavior and at least one failure or blocked-path condition.`,
+			`- The final ${subject} explanation connects the observed packet, port, DNS, route, or service result to the network model.`
 		];
 	}
 	if (isScienceContext(context)) {
@@ -1886,9 +1941,9 @@ function completionChecks(context: CourseTextContext) {
 	}
 	if (isMathContext(context)) {
 		return [
-			"- The solution shows the rule, representation, or theorem used.",
-			"- A typical case and a sign, unit, graph, table, or boundary check are included when relevant.",
-			"- The final answer is checked for reasonableness in context."
+			`- The ${subject} solution shows the rule, representation, or theorem used.`,
+			`- A typical ${subject} case and a sign, unit, graph, table, or boundary check are included when relevant.`,
+			`- The final ${subject} answer is checked for reasonableness in context.`
 		];
 	}
 	if (isDataAiMlContext(context)) {
@@ -1907,9 +1962,9 @@ function completionChecks(context: CourseTextContext) {
 	}
 	if (isWebContext(context)) {
 		return [
-			"- The feature works from a fresh page load without relying on hidden state.",
-			"- Empty, loading, success, and failure states are visible or intentionally handled.",
-			"- The page remains readable and usable on mobile and desktop widths."
+			`- The ${subject} feature works from a fresh page load without relying on hidden state.`,
+			`- ${subject} empty, loading, success, and failure states are visible or intentionally handled.`,
+			`- The ${subject} page remains readable and usable on mobile and desktop widths.`
 		];
 	}
 	if (/python/.test(source)) {
@@ -1983,6 +2038,10 @@ function completionChecks(context: CourseTextContext) {
 }
 
 function extensionSubject(context: CourseTextContext) {
+	if (isCheckInContext(context)) {
+		return withCourseContext(context.course.name, context.module.title);
+	}
+
 	return context.module.title;
 }
 
@@ -2165,7 +2224,7 @@ function projectSupport(context: CourseTextContext) {
 
 function lessonSupport(context: CourseTextContext) {
 	return [
-		`**Concept path:** This lesson introduces ${subjectFocus(context)} through key terms, a worked example, and a transfer check tied to the module project.`,
+		`**Concept path:** ${context.module.title} introduces ${subjectFocus(context)} through key terms, a worked example, and a transfer check tied to the module project.`,
 		`**Common pitfalls:** ${commonPitfalls(context)}`,
 		`**Mastery check:** ${proficiencyEvidence(context)}`
 	].join("\n\n");
@@ -2176,9 +2235,9 @@ function diagnosticSupport(context: CourseTextContext) {
 		subject =>
 			`This is a formative check of ${subjectFocus(context)}, not a pass/fail quiz. Attempt ${subject} independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
 		subject =>
-			`Use ${subject} as a readiness check for ${subjectFocus(context)}. First try the prompt without hints, then classify any gap as ${diagnosticCategories(context)}.`,
+			`Use ${subject} as a readiness check for ${subjectFocus(context)}. First try ${subject} without hints, then classify any gap as ${diagnosticCategories(context)}.`,
 		subject =>
-			`${subject} checks whether the core idea is ready for transfer. Start with an independent attempt, then use the evidence to decide whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
+			`${subject} checks whether the core idea is ready for transfer. Start ${subject} with an independent attempt, then use the evidence to decide whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
 		subject =>
 			`Treat ${subject} as a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before moving to harder work.`
 	]);
@@ -2234,13 +2293,17 @@ function scienceSupport(context: CourseTextContext) {
 function scienceEvidenceCheckpoint(context: CourseTextContext) {
 	return variantPrompt(context, [
 		subject =>
-			`**CER checkpoint:** End ${subject} with a claim, evidence, and reasoning response. The claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why the evidence supports the claim.`,
+			`**CER checkpoint:** End ${subject} with a claim, evidence, and reasoning response. The ${subject} claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why that evidence supports the claim.`,
 		subject =>
 			`**CER checkpoint:** For ${subject}, write one claim, cite the specific evidence source, and explain the connection with the target vocabulary rather than only naming the topic.`,
 		subject =>
-			`**CER checkpoint:** Finish ${subject} by separating the claim, the evidence, and the reasoning. The evidence should point to the resource used, and the reasoning should explain why it supports the claim.`,
+			`**CER checkpoint:** Finish ${subject} by separating the claim, the evidence, and the reasoning. The ${subject} evidence should point to the resource used, and the reasoning should explain why it supports the claim.`,
 		subject =>
-			`**CER checkpoint:** Connect ${subject} to a clear claim, a resource-based evidence statement, and reasoning that names the scientific idea or model being used.`
+			`**CER checkpoint:** Connect ${subject} to a clear claim, a resource-based evidence statement, and reasoning that names the scientific idea or model being used.`,
+		subject =>
+			`**CER checkpoint:** Use ${subject} to name the phenomenon, quote or describe the evidence source, and explain the scientific model that links the evidence to the claim.`,
+		subject =>
+			`**CER checkpoint:** A complete ${subject} response states the claim, identifies the observation or data behind it, and uses vocabulary from the module to justify the reasoning.`
 	]);
 }
 
@@ -2294,7 +2357,7 @@ function studioArtifact(context: CourseTextContext) {
 function studioSupport(context: CourseTextContext) {
 	const studioFocus = variantPrompt(context, [
 		subject =>
-			`Define the problem, prerequisite concepts, and success criteria for ${subject}. The artifact should identify what is being created, which constraints matter, and which evidence proves the work is correct.`,
+			`Define the problem, prerequisite concepts, and success criteria for ${subject}. The ${subject} artifact should identify what is being created, which constraints matter, and which evidence proves the work is correct.`,
 		subject =>
 			`Use ${subject} to name the artifact, core requirement, constraint, and verification evidence before adding polish.`,
 		subject =>

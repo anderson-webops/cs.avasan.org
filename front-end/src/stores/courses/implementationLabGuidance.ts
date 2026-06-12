@@ -100,24 +100,24 @@ export function buildImplementationLabGuidance({
 	if (section === "concepts") {
 		return [
 			`Use **${label}** to connect the build target to ${focus}.`,
-			"Define the artifact, the minimum working behavior, the input and output surfaces, and the invariant that should stay true as features are added.",
-			"Keep the scope concrete: the concept is not complete until the result can be run, inspected, and explained with evidence rather than only described in source code."
+			`Define the **${label}** artifact, minimum working behavior, input/output surfaces, and invariant that should stay true as features are added.`,
+			`Keep **${label}** concrete: the concept is not complete until the result can be run, inspected, and explained with evidence rather than only described in source code.`
 		].join("\n\n");
 	}
 
 	if (section === "example") {
 		return [
 			`Trace one representative case for **${label}** before expanding the implementation.`,
-			"Record the starting files or commands, the exact input, the expected result, the observed result, and the diagnostic checkpoint that proves the code is moving in the right direction.",
-			"Then add one boundary or failure case so the project has a clear comparison between normal behavior and the edge condition that most needs protection."
+			`For **${label}**, record the starting files or commands, exact input, expected result, observed result, and diagnostic checkpoint that proves the code is moving in the right direction.`,
+			`Then add one **${label}** boundary or failure case so the project has a clear comparison between normal behavior and the edge condition that most needs protection.`
 		].join("\n\n");
 	}
 
 	if (section === "review") {
 		return [
 			`Close **${label}** with an engineering note rather than a generic reflection.`,
-			"Summarize the final behavior, the most important edge case, the evidence used to verify the result, and one limitation or next improvement.",
-			"The note should be specific enough that the same artifact could be rerun or reviewed later without reconstructing the reasoning from memory."
+			`Summarize the final **${label}** behavior, the most important edge case, the evidence used to verify the result, and one limitation or next improvement.`,
+			`The **${label}** note should be specific enough that the same artifact could be rerun or reviewed later without reconstructing the reasoning from memory.`
 		].join("\n\n");
 	}
 

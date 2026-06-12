@@ -277,13 +277,15 @@ const cppConceptMatrix = [
 	"Explicit exclusion: AI and ML concepts stay in AI/Data Science/Machine Learning courses rather than the C++ pathway."
 ];
 
-const securityPolicy = [
-	"All security labs must use owned local fixtures, intentionally vulnerable toy apps, provided packet captures, or approved lab VMs.",
-	"Every lab starts with scope, authorization, target, allowed tools, and stop conditions.",
-	"Every finding is written as evidence plus impact, followed by defensive remediation, detection, or hardening.",
-	"Students do not scan, probe, exploit, or collect data from third-party systems.",
-	"Low-level exercises use sanitizers, fuzzers, and toy parsers to teach memory risk without weaponized targets."
-];
+function systemsSecurityPolicy(courseLabel: string) {
+	return [
+		`${courseLabel} labs use owned local fixtures, intentionally vulnerable toy apps, provided packet captures, or approved lab VMs.`,
+		`${courseLabel} lab records include scope, authorization, target, allowed tools, and stop conditions.`,
+		`${courseLabel} findings are written as evidence plus impact, followed by defensive remediation, detection, or hardening.`,
+		`${courseLabel} work never scans, probes, exploits, or collects data from third-party systems.`,
+		`${courseLabel} low-level exercises use sanitizers, fuzzers, and toy parsers to teach memory risk without weaponized targets.`
+	];
+}
 
 const familyAssessmentCadence: Record<string, string[]> = {
 	algebra: [
@@ -563,70 +565,76 @@ function sourcePolicyFor(courseId: string) {
 	);
 }
 
-function safetyPolicyFor(kind: keyof typeof familyAssessmentCadence) {
-	if (kind === "systems") return securityPolicy;
+function safetyPolicyFor(
+	kind: keyof typeof familyAssessmentCadence,
+	courseLabel: string,
+	familyLabel: string
+) {
+	if (kind === "systems") return systemsSecurityPolicy(courseLabel);
 	if (kind === "science") {
 		return [
-			"Zoom-safe by default: no required beakers, heat, chemicals, electricity kits, outdoor access, food, or parent-managed supplies.",
-			"Use shared simulations, curated media, public datasets, sketches, graphs, and paper notebooks.",
-			"Any optional household observation must have a fully equivalent provided-data or simulation alternative."
+			`${courseLabel} is Zoom-safe by default: no required beakers, heat, chemicals, electricity kits, outdoor access, food, or parent-managed supplies.`,
+			`${familyLabel} work uses shared simulations, curated media, public datasets, sketches, graphs, and paper notebooks.`,
+			`Any optional ${courseLabel} household observation must have a fully equivalent provided-data or simulation alternative.`
 		];
 	}
 	if (kind === "data-ai-ml") {
 		return [
-			"Use public, synthetic, or provided datasets only.",
-			"Record source, license or usage assumption, sensitive fields, limitations, and intended use before analysis or modeling.",
-			"Require human review and limitation notes for AI/ML outputs."
+			`${courseLabel} uses public, synthetic, or provided datasets only.`,
+			`Record ${familyLabel} source, license or usage assumption, sensitive fields, limitations, and intended use before analysis or modeling.`,
+			`Require human review and limitation notes for ${courseLabel} AI/ML/data outputs.`
 		];
 	}
 	if (kind === "game") {
 		return [
-			"Use only self-created or clearly licensed assets.",
-			"Keep projects small enough to build and recover during live sessions.",
-			"Record third-party asset provenance before capstone publication."
+			`${courseLabel} uses only self-created or clearly licensed assets.`,
+			`Keep ${familyLabel} projects small enough to build and recover during live sessions.`,
+			`Record ${courseLabel} third-party asset provenance before capstone publication.`
 		];
 	}
 
 	return [
-		"Use local projects, owned accounts, and approved source repositories.",
-		"Do not require credentials, paid services, or destructive machine changes unless explicitly documented.",
-		"Include a rollback, reset, or troubleshooting note for setup-heavy work."
+		`${courseLabel} uses local projects, owned accounts, and approved source repositories.`,
+		`${courseLabel} does not require credentials, paid services, or destructive machine changes unless explicitly documented.`,
+		`Include a rollback, reset, or troubleshooting note for setup-heavy ${familyLabel} work.`
 	];
 }
 
 function capstoneFor(
 	courseId: string,
-	kind: keyof typeof familyAssessmentCadence
+	kind: keyof typeof familyAssessmentCadence,
+	courseLabel: string,
+	familyLabel: string
 ) {
 	if (capstoneOverrides[courseId]) return capstoneOverrides[courseId];
 	if (kind === "algebra") {
 		return [
-			"One anchor modeling project that uses at least two representations.",
-			"One optional extension project for deeper transfer or enrichment."
+			`${courseLabel} ends with one anchor modeling project that uses at least two representations.`,
+			`${courseLabel} includes one optional extension project for deeper transfer or enrichment.`
 		];
 	}
 	if (kind === "ap") {
 		return [
-			"Timed digital AP practice set plus a row-scored FRQ family review.",
-			"Error log showing remediation by current AP CSA unit and question family."
+			`${courseLabel} includes a timed digital AP practice set plus a row-scored FRQ family review.`,
+			`${courseLabel} uses an error log showing remediation by current AP CSA unit and question family.`
 		];
 	}
 	if (kind === "science") {
 		return [
-			"Phenomenon-based notebook portfolio with model revision, graph/data evidence, and CER response.",
-			"Zoom-safe engineering or explanation task with no required physical lab materials."
+			`${courseLabel} ends with a phenomenon-based notebook portfolio with model revision, graph/data evidence, and CER response.`,
+			`${courseLabel} includes a Zoom-safe engineering or explanation task with no required physical lab materials.`
 		];
 	}
 	if (kind === "data-ai-ml") {
 		return [
-			"Reproducible notebook or solver/model artifact with source card, evaluation evidence, limitation note, and presentation.",
-			"Final reflection distinguishes data quality, algorithm behavior, and responsible-use risk."
+			`${courseLabel} ends with a reproducible notebook or solver/model artifact with source card, evaluation evidence, limitation note, and presentation.`,
+			`${courseLabel} final reflection distinguishes data quality, algorithm behavior, and responsible-use risk.`
 		];
 	}
 	if (kind === "systems") {
 		return [
-			"Scoped local lab or tool with setup notes, logs/traces, validation evidence, and defensive remediation or hardening result.",
-			"Oral or written defense of scope, recovery path, and risk boundary."
+			`${courseLabel} ends with a scoped local lab or tool with setup notes, logs/traces, validation evidence, and defensive remediation or hardening result.`,
+			`${courseLabel} includes an oral or written defense of scope, recovery path, and risk boundary.`
 		];
 	}
 	if (kind === "game") {
@@ -634,42 +642,161 @@ function capstoneFor(
 	}
 
 	return [
-		"Portfolio-grade project with clear spec, source link, verification path, edge-case evidence, and reflection.",
-		"Extension or refactor demonstrating transfer beyond the worked example."
+		`${courseLabel} ends with a portfolio-grade ${familyLabel} project with clear spec, source link, verification path, edge-case evidence, and reflection.`,
+		`${courseLabel} includes an extension or refactor demonstrating transfer beyond the worked example.`
 	];
+}
+
+function defaultToolchainFor(courseLabel: string, familyLabel: string) {
+	return [
+		`${courseLabel} uses the linked source repo, browser-based material, or provided artifacts as the setup baseline.`,
+		`Record any version-sensitive ${familyLabel} setup before starting reusable projects.`
+	];
+}
+
+function assessmentCadenceFor(
+	kind: keyof typeof familyAssessmentCadence,
+	courseLabel: string,
+	familyLabel: string
+) {
+	if (familyAssessmentCadence[kind].length === 0) return [];
+
+	if (kind === "algebra") {
+		return [
+			`${courseLabel} starts with a diagnostic launch for prerequisite arithmetic, graph reading, and notation.`,
+			`${courseLabel} uses a low-stakes check-in after every three to five lessons.`,
+			`${familyLabel} pacing includes a weekly retrieval spiral plus mixed practice from older skills.`,
+			`${courseLabel} includes one required anchor modeling project and one optional extension.`
+		];
+	}
+	if (kind === "ap") {
+		return [
+			`${courseLabel} uses daily or near-daily MCQ/code-trace warmups.`,
+			`${courseLabel} includes weekly partial FRQs typed without compiler support.`,
+			`${courseLabel} rotates biweekly full FRQs through the four current FRQ families.`,
+			`${courseLabel} includes monthly mixed digital practice with row-scored review.`
+		];
+	}
+	if (kind === "science") {
+		return [
+			`${courseLabel} uses a notebook check every lesson: question, observation, model or graph, claim, evidence, reasoning.`,
+			`${courseLabel} includes one CER or model-revision task per phenomenon sequence.`,
+			`${familyLabel} evidence comes from data, simulations, or curated media instead of required physical labs.`,
+			`${courseLabel} ends each unit cluster with a performance task.`
+		];
+	}
+	if (kind === "data-ai-ml") {
+		return [
+			`${courseLabel} uses a notebook or artifact check every module.`,
+			`${courseLabel} requires a dataset/source card before analysis or modeling.`,
+			`${courseLabel} includes an evaluation report for every data, AI, or ML artifact.`,
+			`${courseLabel} final deliverable includes limitations and responsible-use reflection.`
+		];
+	}
+	if (kind === "systems") {
+		return [
+			`${courseLabel} checks scope and rollback before every lab.`,
+			`${courseLabel} includes troubleshooting or trace review every module.`,
+			`${familyLabel} findings use evidence-plus-remediation reports.`,
+			`${courseLabel} final project includes reproducibility notes, logs, and defensive outcome.`
+		];
+	}
+	if (kind === "game") {
+		return [
+			`${courseLabel} uses a weekly playable milestone or scene smoke test.`,
+			`${courseLabel} keeps a playtest log with bug, reproduction step, fix, and retest.`,
+			`${courseLabel} checks build, profile, and test status before final capstone.`,
+			`${courseLabel} final demo includes architecture, state flow, and asset attribution.`
+		];
+	}
+
+	return [
+		`${courseLabel} includes a short code-tracing, debugging, or design check every module.`,
+		`${courseLabel} has at least one source-backed project milestone per major concept cluster.`,
+		`${courseLabel} project review includes a normal case, edge case, and written explanation.`,
+		`${courseLabel} capstone or transfer task requires tests, run instructions, and reflection.`
+	];
+}
+
+function recommendedNextWorkFor(
+	kind: keyof typeof familyAssessmentCadence,
+	courseLabel: string,
+	familyLabel: string
+) {
+	return nextWorkByKind[kind].map(item => {
+		if (item.startsWith("Update source repos")) {
+			return `Update ${courseLabel} source repos with starter and reference states.`;
+		}
+		if (item.startsWith("Add automated")) {
+			return `Add automated or documented verification for each reusable ${courseLabel} project.`;
+		}
+		if (item.startsWith("Keep naming")) {
+			return `Keep ${courseLabel} naming and supplemental project structure consistent across repos.`;
+		}
+		if (item.startsWith("Create worksheet")) {
+			return `Create ${courseLabel} worksheet or Desmos asset packs for anchor projects.`;
+		}
+		if (item.startsWith("Attach per-item")) {
+			return `Attach ${courseLabel} per-item standards tags when the schema supports item-level metadata.`;
+		}
+		if (item.startsWith("Add answer keys")) {
+			return `Add ${courseLabel} answer keys for error-analysis and mixed-practice checkpoints.`;
+		}
+		if (item.startsWith("Create current-family")) {
+			return `Create ${courseLabel} FRQ banks with row-scored rubrics.`;
+		}
+		if (item.startsWith("Add Bluebook")) {
+			return `Add ${courseLabel} Bluebook-style typed practice routines and no-compiler prompts.`;
+		}
+		if (item.startsWith("Map every project")) {
+			return `Map every ${courseLabel} project to one current AP CSA unit, practice, and FRQ/MCQ pattern.`;
+		}
+
+		return `${courseLabel} ${familyLabel.toLowerCase()} next work: ${item.replace(/^./, character => character.toLowerCase())}`;
+	});
 }
 
 function setCourseDevelopmentMetadata(courseId: string, course: RawCourse) {
 	const profile = profileFor(courseId);
 	const kind = kindForCourse(courseId);
+	const courseLabel = course.name.trim() || courseId;
+	const familyLabel = profile?.family ?? courseLabel;
 	const courseBoundaries = boundaryOverrides[courseId] ?? [
-		"Keep prerequisites, core lessons, projects, remediation, enrichment, and assessments labeled separately.",
-		"Do not add adjacent-topic enrichment until the required project and assessment evidence exists."
+		`${courseLabel} keeps prerequisites, core lessons, projects, remediation, enrichment, and assessments labeled separately.`,
+		`${courseLabel} does not add adjacent-topic enrichment until the required ${familyLabel} project and assessment evidence exists.`
 	];
-	const capstoneExpectations = capstoneFor(courseId, kind);
+	const capstoneExpectations = capstoneFor(
+		courseId,
+		kind,
+		courseLabel,
+		familyLabel
+	);
 	if (courseBoundaries.length < 2) {
 		courseBoundaries.push(
-			"Separate required course outcomes from optional enrichment before starting the next project."
+			`Separate required ${courseLabel} outcomes from optional enrichment before starting the next project.`
 		);
 	}
 	if (capstoneExpectations.length < 2) {
 		capstoneExpectations.push(
-			"Final work must include evidence of correctness, explanation, and a next-step reflection."
+			`${courseLabel} final work must include evidence of correctness, explanation, and a next-step reflection.`
 		);
 	}
 	const metadata: CourseDevelopmentMetadata = {
 		priority: profile?.priority ?? "soon",
 		standards: metadataStandards(courseId),
 		sourcePolicy: sourcePolicyFor(courseId),
-		assessmentCadence: familyAssessmentCadence[kind],
-		toolchain: courseToolchainAssumptions[courseId] ?? [
-			"Use the course's linked source repo, browser-based material, or provided artifacts as the setup baseline.",
-			"Record any version-sensitive setup before starting reusable projects."
-		],
-		safetyPolicy: safetyPolicyFor(kind),
+		assessmentCadence: assessmentCadenceFor(kind, courseLabel, familyLabel),
+		toolchain:
+			courseToolchainAssumptions[courseId] ??
+			defaultToolchainFor(courseLabel, familyLabel),
+		safetyPolicy: safetyPolicyFor(kind, courseLabel, familyLabel),
 		courseBoundaries,
 		capstoneExpectations,
-		recommendedNextWork: nextWorkByKind[kind]
+		recommendedNextWork: recommendedNextWorkFor(
+			kind,
+			courseLabel,
+			familyLabel
+		)
 	};
 
 	if (metadata.standards.length === 0) {
@@ -728,6 +855,8 @@ function profileFor(courseId: string) {
 function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 	if (!courseId.startsWith("algebra-")) return;
 
+	const courseLabel = course.name || courseId.replace(/-/g, " ");
+
 	for (const module of course.modules) {
 		while (module.supplementalProjects.length < 2) {
 			const next = module.supplementalProjects.length + 1;
@@ -737,8 +866,8 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 					: `${module.title}: Modeling or Error-Analysis Project`;
 			const content =
 				next === 1
-					? `**Project goal:** Convert ${module.title} into a short standards-aligned practice set. Include one worked example, three independent problems, one graph/table/verbal representation where appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The work shows every algebraic step.\n- At least one problem asks for a reason, not just an answer.\n- Review notes record one misconception to revisit before the next module.`
-					: `**Project goal:** Apply ${module.title} in a modeling, graphing, or error-analysis context. The work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The project contains a concrete scenario or flawed worked solution.\n- The work explains the choice of equation, graph, or table.\n- The final answer includes a units/context check or corrected error statement.`;
+					? `**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. Include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The ${module.title} work shows every algebraic or representational step.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- Review notes record one ${module.title} misconception to revisit before the next module.`
+					: `**Project goal:** Apply ${module.title} in a ${courseLabel} modeling, graphing, or error-analysis context. The work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The ${module.title} project contains a concrete scenario or flawed worked solution.\n- The ${courseLabel} work explains the choice of equation, graph, table, or verbal model.\n- The final ${module.title} answer includes a units/context check or corrected error statement.`;
 
 			module.supplementalProjects.push(projectItem(title, content));
 		}
@@ -799,40 +928,36 @@ function addScienceResourceModule(courseId: string, course: RawCourse) {
 function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 	if (!courseId.startsWith("algebra-")) return;
 
+	const courseLabel = course.name || courseId.replace(/-/g, " ");
+
 	appendModule(course, {
-		title: "Algebra Project Taxonomy and Assessment Implementation",
+		title: `${courseLabel}: Project Taxonomy and Assessment Implementation`,
 		curriculum: [
 			{
-				title: "Course Structure Decision",
-				content:
-					"**Learning sequence:** Use `supplementalProjects` for explicit practice sets, application/modeling projects, error-analysis tasks, and enrichment. Keep core curriculum items for concept instruction, worked examples, and guided practice. Existing imported module projects can remain in curriculum for continuity, but every module should also expose at least two explicit project/practice options in the project area.\n\n**Completion check:** The course makes it possible to distinguish required concept instruction from optional/remedial/enrichment project work without reading the entire module."
+				title: `${courseLabel} Structure Decision`,
+				content: `**Learning sequence:** Use ${courseLabel} supplemental projects for explicit practice sets, application/modeling projects, error-analysis tasks, and enrichment. Keep core curriculum items for concept instruction, worked examples, and guided practice. Existing imported module projects can remain in curriculum for continuity, but every module should also expose at least two explicit ${courseLabel} project/practice options in the project area.\n\n**Completion check:** ${courseLabel} makes it possible to distinguish required concept instruction from optional, remedial, and enrichment project work without reading the entire module.`
 			},
 			{
-				title: "Assessment Cadence",
-				content:
-					"**Readiness check:** Use a short formative check after each major topic, a cumulative mixed-practice check every few modules, and an error-analysis task before moving into a new representation type.\n\n**Evidence of proficiency:** The student solves, explains, checks reasonableness, and can identify a common algebraic error."
+				title: `${courseLabel} Assessment Cadence`,
+				content: `**Readiness check:** ${courseLabel} should use a short formative check after each major topic, a cumulative mixed-practice check every few modules, and an error-analysis task before moving into a new representation type.\n\n**Evidence of proficiency:** A complete ${courseLabel} response solves, explains, checks reasonableness, and identifies a common algebraic error.`
 			},
 			{
-				title: "Representation Balance",
-				content:
-					"**Learning sequence:** Each algebra project should include at least two representations when reasonable: equation, graph, table, verbal rule, diagram, or contextual model.\n\n**Completion check:** The work demonstrates the ability to translate between representations and explain what each one reveals."
+				title: `${courseLabel} Representation Balance`,
+				content: `**Learning sequence:** Each ${courseLabel} project should include at least two representations when reasonable: equation, graph, table, verbal rule, diagram, or contextual model.\n\n**Completion check:** The work demonstrates the ability to translate between ${courseLabel} representations and explain what each one reveals.`
 			},
 			{
-				title: "Worked Example Density",
-				content:
-					"**Learning sequence:** For each new algebra skill, provide one clean worked example, one flawed example to repair, and one transfer problem with changed numbers or context.\n\n**Completion check:** The work demonstrates the ability to explain the difference between procedure and reason."
+				title: `${courseLabel} Worked Example Density`,
+				content: `**Learning sequence:** For each new ${courseLabel} skill, provide one clean worked example, one flawed example to repair, and one transfer problem with changed numbers or context.\n\n**Completion check:** The work demonstrates the ability to explain the difference between ${courseLabel} procedure and reason.`
 			}
 		],
 		supplementalProjects: [
 			{
-				title: "Taxonomy Project: Practice Set Conversion",
-				content:
-					"**Project goal:** Convert one module's concept into a practice set with a worked example, three independent problems, one representation task, and one explanation prompt.\n\n**Completion checks:**\n- Problems are sequenced from direct to transfer.\n- One problem requires a graph/table/context interpretation.\n- The answer key includes reasoning, not just final answers."
+				title: `${courseLabel} Practice Set Conversion`,
+				content: `**Project goal:** Convert one ${courseLabel} module concept into a practice set with a worked example, three independent problems, one representation task, and one explanation prompt.\n\n**Completion checks:**\n- ${courseLabel} problems are sequenced from direct to transfer.\n- One problem requires a graph/table/context interpretation.\n- The ${courseLabel} answer key includes reasoning, not just final answers.`
 			},
 			{
-				title: "Taxonomy Project: Modeling or Error-Analysis Task",
-				content:
-					"**Project goal:** Build either a contextual model or an error-analysis task for one algebra topic.\n\n**Completion checks:**\n- The task asks why, not only what.\n- The work checks units or context.\n- A likely misconception is named in the review notes."
+				title: `${courseLabel} Modeling or Error-Analysis Task`,
+				content: `**Project goal:** Build either a contextual model or an error-analysis task for one ${courseLabel} topic.\n\n**Completion checks:**\n- The ${courseLabel} task asks why, not only what.\n- The work checks units or context.\n- A likely ${courseLabel} misconception is named in the review notes.`
 			}
 		]
 	});
@@ -1301,44 +1426,41 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 	) {
 		return;
 	}
+	const courseLabel = course.name.trim() || courseId;
+	const policy = systemsSecurityPolicy(courseLabel);
 
 	appendModule(course, {
-		title: "Systems and Security Lab Safety Policy",
+		title: `${courseLabel}: Systems and Security Lab Safety Policy`,
 		curriculum: [
 			{
-				title: "Allowed Lab Scope",
+				title: `${courseLabel} Allowed Lab Scope`,
 				content: [
-					"**Learning sequence:** Start every systems or security lab by naming scope, target, tools, and stop conditions.",
-					`**Policy:**\n${bullets(securityPolicy)}`,
-					"**Completion check:** The work demonstrates the ability to explain why the lab is authorized and what defensive outcome it produces."
+					`**Concept path:** Start every ${courseLabel} lab by naming scope, target, tools, and stop conditions.`,
+					`**Policy:**\n${bullets(policy)}`,
+					`**Completion check:** The ${courseLabel} work demonstrates the ability to explain why the lab is authorized and what defensive outcome it produces.`
 				].join("\n\n")
 			},
 			{
-				title: "Disallowed Work",
-				content:
-					"**Safety boundary:** Do not scan third-party systems, test credentials against real services, collect real user data, bypass access controls, run destructive host commands, or publish exploit steps detached from remediation.\n\n**Completion check:** Any unclear target is treated as out of scope until explicitly approved."
+				title: `${courseLabel} Disallowed Work`,
+				content: `**Safety boundary:** ${courseLabel} does not include scanning third-party systems, testing credentials against real services, collecting real user data, bypassing access controls, running destructive host commands, or publishing exploit steps detached from remediation.\n\n**Completion check:** Any unclear ${courseLabel} target is treated as out of scope until explicitly approved.`
 			},
 			{
-				title: "Evidence and Remediation Format",
-				content:
-					"**Learning sequence:** Findings should use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. The observation should describe what happened; the impact should explain why it matters; the fix should be narrow enough to retest.\n\n**Completion check:** A lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere."
+				title: `${courseLabel} Evidence and Remediation Format`,
+				content: `**Concept path:** ${courseLabel} findings use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. The observation describes what happened; the impact explains why it matters; the fix is narrow enough to retest.\n\n**Completion check:** A ${courseLabel} lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere.`
 			},
 			{
-				title: "Tooling Setup and Recovery",
-				content:
-					"**Learning sequence:** Prefer VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. Record how to reset the lab before starting.\n\n**Completion check:** The work demonstrates the ability to restore the lab to a known state."
+				title: `${courseLabel} Tooling Setup and Recovery`,
+				content: `**Concept path:** ${courseLabel} prefers VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. Record how to reset the lab before starting.\n\n**Completion check:** The ${courseLabel} work demonstrates the ability to restore the lab to a known state.`
 			}
 		],
 		supplementalProjects: [
 			{
-				title: "Safety Project: Threat Model and Scope Sheet",
-				content:
-					"**Project goal:** Write a scope sheet for one systems or security lab before running commands. The sheet should make the allowed target, evidence, and stopping conditions explicit so the activity stays local, reversible, and defensive.\n\n**Required fields:** lab target, authorization boundary, allowed tools, disallowed actions, data that may be observed, stop conditions, reset path, and intended defensive outcome.\n\n**Completion checks:**\n- Target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named.\n- The reset path is specific enough to repeat after a failed run."
+				title: `${courseLabel} Safety Project: Threat Model and Scope Sheet`,
+				content: `**Project goal:** Write a scope sheet for one ${courseLabel} lab before running commands. The sheet makes the allowed target, evidence, and stopping conditions explicit so the activity stays local, reversible, and defensive.\n\n**Required fields:** lab target, authorization boundary, allowed tools, disallowed actions, data that may be observed, stop conditions, reset path, and intended defensive outcome.\n\n**Completion checks:**\n- The ${courseLabel} target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named.\n- The ${courseLabel} reset path is specific enough to repeat after a failed run.`
 			},
 			{
-				title: "Safety Project: Patch and Evidence Report",
-				content:
-					"**Project goal:** Fix one local toy vulnerability or unsafe systems bug and write an evidence report. The report should show the before state, the smallest useful fix, and the verification that proves the unsafe behavior no longer occurs.\n\n**Required fields:** vulnerable behavior, reproduction command or trace, impact, patch summary, retest evidence, and prevention note.\n\n**Completion checks:**\n- The before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention.\n- The retest uses the same scenario that exposed the original bug."
+				title: `${courseLabel} Safety Project: Patch and Evidence Report`,
+				content: `**Project goal:** Fix one local toy vulnerability or unsafe systems bug in ${courseLabel} and write an evidence report. The report shows the before state, the smallest useful fix, and the verification that proves the unsafe behavior no longer occurs.\n\n**Required fields:** vulnerable behavior, reproduction command or trace, impact, patch summary, retest evidence, and prevention note.\n\n**Completion checks:**\n- The ${courseLabel} before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention.\n- The ${courseLabel} retest uses the same scenario that exposed the original bug.`
 			}
 		]
 	});
@@ -1347,44 +1469,57 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 	const assumptions = courseToolchainAssumptions[courseId];
 	if (!assumptions) return;
+	const courseLabel = course.name.trim() || courseId;
+	const profile = profileFor(courseId);
+	const familyLabel = profile?.family ?? courseLabel;
 
 	appendModule(course, {
-		title: "Toolchain and Version Assumptions",
+		title: `${courseLabel}: Toolchain and Version Assumptions`,
 		curriculum: [
 			{
-				title: "Pinned Setup Assumptions",
+				title: `${courseLabel} Setup Assumptions`,
 				content: [
-					"**Learning sequence:** Treat setup and version expectations as part of the course material. Before a project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any version-specific deviation in the reproducibility notes.",
+					`**Learning sequence:** Treat ${courseLabel} setup and version expectations as part of the course material. Before a ${courseLabel} project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any version-specific deviation in the reproducibility notes.`,
 					`**Assumptions:**\n${bullets(assumptions)}`,
-					"**Completion check:** The project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters."
+					`**Completion check:** Each ${courseLabel} project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters.`
 				].join("\n\n")
 			},
 			{
-				title: "Upgrade Review Rule",
-				content:
-					"**Learning sequence:** When a toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. Do not silently rely on a local machine that already has old dependencies installed.\n\n**Completion checks:**\n- The current version is named.\n- The first-run verification step is still valid.\n- Any known version-specific exception is documented."
+				title: `${courseLabel} Upgrade Rule`,
+				content: [
+					`**Learning sequence:** When the ${courseLabel} toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. Do not silently rely on a local machine that already has old dependencies installed.`,
+					`**Completion checks:**\n- The current ${familyLabel} version is named.\n- The ${courseLabel} first-run verification step is still valid.\n- Any known ${courseLabel} version-specific exception is documented.`
+				].join("\n\n")
 			},
 			{
-				title: "Cross-Platform Fallbacks",
-				content:
-					"**Learning sequence:** If a course can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite.\n\n**Completion check:** The setup notes identify whether the work requires macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation."
+				title: `${courseLabel} Platform Fallbacks`,
+				content: [
+					`**Learning sequence:** If ${courseLabel} can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite.`,
+					`**Completion check:** The ${courseLabel} setup notes identify whether the work requires macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation.`
+				].join("\n\n")
 			},
 			{
-				title: "Reproducibility Notes",
-				content:
-					"**Learning sequence:** Reusable projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work.\n\n**Completion check:** Re-running the project does not depend on hidden local state."
+				title: `${courseLabel} Reproducibility Notes`,
+				content: [
+					`**Learning sequence:** Reusable ${courseLabel} projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record ${courseLabel} package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work.`,
+					`**Completion check:** Re-running the ${courseLabel} project does not depend on hidden local state.`
+				].join("\n\n")
 			}
 		],
 		supplementalProjects: [
 			{
-				title: "Toolchain Project: First-Run Smoke Test",
-				content:
-					"**Project goal:** Create or run the smallest verification step that proves the course toolchain is ready.\n\n**Completion checks:**\n- The exact command, editor action, or simulation URL is recorded.\n- The expected success output is documented.\n- One common failure and recovery step is listed."
+				title: `${courseLabel} First-Run Smoke Test`,
+				content: [
+					`**Project goal:** Create or run the smallest verification step that proves the ${courseLabel} toolchain is ready.`,
+					`**Completion checks:**\n- The exact ${courseLabel} command, editor action, or simulation URL is recorded.\n- The expected success output is documented.\n- One common ${familyLabel} failure and recovery step is listed.`
+				].join("\n\n")
 			},
 			{
-				title: "Toolchain Project: Version Drift Review",
-				content:
-					"**Project goal:** Compare the current course assumption against the installed or recommended version and document whether the course needs an update.\n\n**Completion checks:**\n- Current installed/recommended version is named.\n- Any breaking UI/API/build difference is recorded.\n- The version-drift note shows whether to proceed, update, or use a fallback."
+				title: `${courseLabel} Version Drift Review`,
+				content: [
+					`**Project goal:** Compare the current ${courseLabel} assumption against the installed or recommended version and document whether the course needs an update.`,
+					`**Completion checks:**\n- Current installed/recommended ${familyLabel} version is named.\n- Any breaking UI/API/build difference is recorded.\n- The ${courseLabel} version-drift note shows whether to proceed, update, or use a fallback.`
+				].join("\n\n")
 			}
 		]
 	});
@@ -1657,54 +1792,166 @@ function addAdvancedPythonStudioModule(courseId: string, course: RawCourse) {
 }
 
 function addJavaBridgeModernModule(courseId: string, course: RawCourse) {
-	if (
-		![
-			"java-level-1",
-			"java-level-2",
-			"java-level-3",
-			"java-without-graphics",
-			"java-with-graphics"
-		].includes(courseId)
-	) {
-		return;
-	}
+	const tracks = {
+		"java-level-1": {
+			title: "Java Level 1: Accelerated Syntax and Class Bridge",
+			curriculum: [
+				{
+					title: "Placement Gate",
+					content:
+						"**Readiness check:** Java Level 1 can move quickly through variables, conditionals, loops, and console I/O when the same ideas are already fluent in Python or C++. The non-negotiable evidence is Java-specific: method signatures, class layout, package/import habits, primitive versus reference types, and compile/run troubleshooting.\n\n**Completion check:** A complete response explains what Java requires explicitly that Python hides and what Java hides compared with C++ memory management."
+				},
+				{
+					title: "Java Object Basics",
+					content:
+						"**Learning sequence:** Use small classes, constructors, fields, methods, records where appropriate, and ArrayList practice to make Java's object model concrete. The goal is not more syntax repetition; it is being able to decide where data lives and which method owns a behavior.\n\n**Completion check:** The work chooses between local variable, field, parameter, return value, class, and record intentionally."
+				},
+				{
+					title: "AP CSA Alignment",
+					content:
+						"**Learning sequence:** Preserve the AP CSA essentials: integer division, boolean logic, method calls, class design, arrays, ArrayLists, inheritance, recursion, and sorting/searching. Acceleration should shorten familiar fundamentals, not skip AP-specific conventions or tracing style.\n\n**Completion check:** A solution can be traced in AP style and still run cleanly in a local Java toolchain."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Java Level 1 Project: Console Object Model",
+					content:
+						"**Project goal:** Convert a small Python-style console program into Java classes with fields, constructors, methods, and a testable main flow.\n\n**Completion checks:**\n- Input, stored state, and output responsibilities are separated.\n- At least one invalid or awkward input path is handled.\n- The explanation identifies one Java-specific design choice that did not exist in the Python version."
+				},
+				{
+					title: "Java Level 1 Project: Record-backed Data Summary",
+					content:
+						"**Project goal:** Use a record or simple immutable class to represent rows of data, then summarize a small in-memory list using loops or ArrayList methods.\n\n**Completion checks:**\n- Empty, one-item, and normal lists are checked.\n- The data representation is immutable where practical.\n- The final note explains why the data model is cleaner than parallel arrays."
+				}
+			]
+		},
+		"java-level-2": {
+			title: "Java Level 2: Object Design and Collections Bridge",
+			curriculum: [
+				{
+					title: "Design Gate",
+					content:
+						"**Readiness check:** Java Level 2 assumes loops and basic classes are already comfortable. The next jump is object collaboration: interfaces, abstract classes, inheritance tradeoffs, wrapper classes, generics, ArrayLists, and predictable method contracts.\n\n**Completion check:** A complete design explains why a type is a class, record, interface, abstract class, or collection instead of using inheritance by habit."
+				},
+				{
+					title: "Collections and Contracts",
+					content:
+						"**Learning sequence:** Practice list and map-shaped problems with clear mutability rules, equality expectations, and edge cases. Strong work includes method-level tests or compact console traces rather than only manual inspection.\n\n**Completion check:** The implementation identifies who owns mutation, how invalid inputs are handled, and what behavior is guaranteed by each public method."
+				},
+				{
+					title: "AP and Beyond",
+					content:
+						"**Learning sequence:** Keep AP CSA class/inheritance expectations visible, then add more realistic collection-backed design. Use records for transparent data carriers and interfaces for replaceable behavior when the project has a real extension point.\n\n**Completion check:** The same project can be extended without rewriting the core loop."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Java Level 2 Project: Interface-driven Simulator",
+					content:
+						"**Project goal:** Build a small simulator with an interface for one replaceable behavior and at least two implementations.\n\n**Completion checks:**\n- The interface describes behavior, not storage details.\n- A new implementation can be added with minimal changes to the runner.\n- Tests or traces compare two implementations on the same scenario."
+				},
+				{
+					title: "Java Level 2 Project: Record-backed CSV Loader",
+					content:
+						"**Project goal:** Parse a small CSV-style text file into records or immutable objects, validate rows, and produce a summary.\n\n**Completion checks:**\n- Missing, malformed, and normal rows have defined behavior.\n- File and parsing errors are reported clearly.\n- The summary code does not depend on raw string positions after parsing."
+				}
+			]
+		},
+		"java-level-3": {
+			title: "Java Level 3: Platform Fluency Bridge",
+			curriculum: [
+				{
+					title: "Platform Gate",
+					content:
+						"**Readiness check:** Java Level 3 should feel like real application work: packages, NIO Path/Files, streams or well-structured loops, exceptions, tests, generics, simple concurrency boundaries, and maintainable command-line behavior.\n\n**Completion check:** A project demonstrates how Java organizes a medium-size program, not just how individual syntax features work."
+				},
+				{
+					title: "Files, Streams, and Tests",
+					content:
+						"**Learning sequence:** Use local files and deterministic fixtures to practice data loading, transformation, aggregation, and reporting. Streams are useful when they clarify the data pipeline; loops remain appropriate when they make state or error handling clearer.\n\n**Completion check:** The implementation covers empty input, malformed input, normal input, and one larger input without changing the public API."
+				},
+				{
+					title: "Extension Architecture",
+					content:
+						"**Learning sequence:** Introduce ServiceLoader, explicit factories, or plugin-style registries only when the project has multiple behaviors worth swapping. Architecture is justified by the change story, not by pattern vocabulary.\n\n**Completion check:** Adding a new processor, command, or report type does not require rewriting the application driver."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Java Level 3 Project: File Indexer or Log Analyzer",
+					content:
+						"**Project goal:** Build a Java application using records/classes, NIO file traversal, aggregation, and JUnit tests.\n\n**Completion checks:**\n- File errors are handled clearly.\n- Tests cover empty, small, malformed, and larger inputs.\n- The final note explains the data model, API boundary, and one performance tradeoff."
+				},
+				{
+					title: "Java Level 3 Project: Service Pipeline",
+					content:
+						"**Project goal:** Build a plugin-style processor using interfaces, packages, ServiceLoader or explicit factories, and tests.\n\n**Completion checks:**\n- Interface and implementation roles are separate.\n- Adding a new processor does not require rewriting the core loop.\n- The work explains why this is not just inheritance for its own sake."
+				}
+			]
+		},
+		"java-without-graphics": {
+			title: "Java Without Graphics: Application Services Track",
+			curriculum: [
+				{
+					title: "Service-First Scope",
+					content:
+						"**Learning sequence:** This track keeps the UI minimal and puts effort into model-layer design, command-line workflows, file I/O, validation, tests, and maintainable package boundaries. It is a better fit when the goal is backend, tools, data processing, or AP-plus Java depth.\n\n**Completion check:** The visible behavior can be tested without clicking through a graphical interface."
+				},
+				{
+					title: "Persistence and Validation",
+					content:
+						"**Learning sequence:** Use records/classes for data, services for behavior, repositories or loaders for persistence, and tests for expected behavior. Keep validation close to input boundaries so the rest of the program can rely on cleaner data.\n\n**Completion check:** The same model can be exercised by tests, a CLI, or a later UI without duplicating business logic."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "No-Graphics Java Project: CLI Inventory Service",
+					content:
+						"**Project goal:** Build a command-line inventory or library manager with records/classes, validation, file persistence, and tests.\n\n**Completion checks:**\n- Add, update, search, save, and load paths are covered.\n- Invalid commands and malformed saved data have defined outcomes.\n- The model layer can be tested without terminal input."
+				},
+				{
+					title: "No-Graphics Java Project: Batch Report Tool",
+					content:
+						"**Project goal:** Read one or more local files, validate records, compute summaries, and write a compact report.\n\n**Completion checks:**\n- Empty and malformed files are handled.\n- The report includes counts, warnings, and at least one derived metric.\n- Tests use deterministic fixtures instead of depending on manual input."
+				}
+			]
+		},
+		"java-with-graphics": {
+			title: "Java With Graphics: JavaFX Application Track",
+			curriculum: [
+				{
+					title: "UI Scope",
+					content:
+						"**Learning sequence:** This track keeps shared Java fundamentals intact, then adds JavaFX scenes, controls, layout, events, observable state, background work boundaries, and persistence. Graphics are used to practice architecture and feedback loops, not to avoid core Java design.\n\n**Completion check:** UI code delegates meaningful behavior to model or service classes that can be tested separately."
+				},
+				{
+					title: "Event-driven State",
+					content:
+						"**Learning sequence:** Treat each user action as a state transition. Define the starting state, user event, model change, rendered result, and error/empty state before adding visual polish.\n\n**Completion check:** A normal click path, an empty/invalid path, and one persistence or refresh path are verified."
+				}
+			],
+			supplementalProjects: [
+				{
+					title: "Graphics Java Project: JavaFX Tracker",
+					content:
+						"**Project goal:** Build a JavaFX task, habit, or inventory tracker backed by a model layer and local persistence.\n\n**Completion checks:**\n- Add, edit, delete, filter, and empty-state behavior are visible.\n- Model logic is separated from controller/view code.\n- Saved data reloads correctly after restart."
+				},
+				{
+					title: "Graphics Java Project: Event-driven Simulation",
+					content:
+						"**Project goal:** Build a small JavaFX simulation where controls change model state and the view updates predictably.\n\n**Completion checks:**\n- The simulation has pause/reset or equivalent state controls.\n- Invalid or extreme values are handled visibly.\n- The final note explains the event-to-state-to-render path."
+				}
+			]
+		}
+	} as const;
+
+	const track = tracks[courseId as keyof typeof tracks];
+	if (!track) return;
 
 	appendModule(course, {
-		title: "Modern Java and C++-to-Java Accelerated Path",
-		curriculum: [
-			{
-				title: "Accelerated Placement Rule",
-				content:
-					"**Readiness check:** Strong students coming from C++ should skip repetitive beginner syntax only after showing evidence with Java method signatures, classes, package layout, collections, exceptions, and tests. The bridge focuses on differences in practice, not re-teaching loops.\n\n**Completion check:** The work demonstrates the ability to explain what Java makes explicit, what it hides compared with C++, and what the compiler catches."
-			},
-			{
-				title: "Modern Java Core",
-				content:
-					"**Learning sequence:** Deepen Java around interfaces, abstract classes, records, enums, generics, package boundaries, exceptions, collections, sequenced collection ideas where available, streams, NIO Path/Files, and JUnit. Use Java 21 as a compatibility floor and Java 25 LTS as the modern target where tooling permits.\n\n**Completion check:** The work demonstrates the ability to choose class, record, interface, abstract class, enum, collection, or stream intentionally."
-			},
-			{
-				title: "Graphics and Non-Graphics Branches",
-				content:
-					"**Learning sequence:** Keep shared Java core unified, then branch. The non-graphics path emphasizes services, data/file pipelines, testing, concurrency, ServiceLoader, and optional Spring Boot. The graphics path emphasizes JavaFX, event-driven state, scene/UI architecture, background tasks, and local persistence.\n\n**Completion check:** The application model is the reason for the branch, not a workaround for missing core Java depth."
-			},
-			{
-				title: "Post-AP Difference",
-				content:
-					"**Learning sequence:** AP CSA remains the exam floor. Modern Java work should go beyond AP with records, richer collections, streams, NIO, tests, concurrency, plugin/service architecture, and refactoring.\n\n**Completion check:** A project demonstrates serious Java platform fluency rather than only AP-style fragments."
-			}
-		],
-		supplementalProjects: [
-			{
-				title: "Modern Java Project: File Indexer or Log Analyzer",
-				content:
-					"**Project goal:** Build a Java application using records/classes, collections, NIO file traversal, stream or loop-based aggregation, and JUnit tests.\n\n**Completion checks:**\n- File errors are handled clearly.\n- Tests cover empty, small, and malformed inputs.\n- The work explains the data model and API boundary."
-			},
-			{
-				title: "Modern Java Project: ServiceLoader Plugin Pipeline",
-				content:
-					"**Project goal:** Build a small plugin-style processor using interfaces, packages, ServiceLoader or explicit factories, and tests.\n\n**Completion checks:**\n- Interface and implementation roles are separate.\n- Adding a new plugin does not require rewriting the core loop.\n- The work explains why this is not just inheritance for its own sake."
-			}
-		]
+		title: track.title,
+		curriculum: [...track.curriculum],
+		supplementalProjects: [...track.supplementalProjects]
 	});
 }
 
@@ -1896,46 +2143,44 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 	};
 	const config = rows[courseId];
 	if (!config) return;
+	const courseLabel = course.name.trim() || courseId;
 
 	appendModule(course, {
-		title: "Course-Specific Defensive Lab Contract",
+		title: `${courseLabel}: Defensive Lab Contract`,
 		curriculum: [
 			{
-				title: "Environment and Tooling Baseline",
+				title: `${courseLabel} Environment and Tooling Baseline`,
 				content: [
-					"**Learning sequence:** Use this course-specific baseline before starting systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.",
+					`**Concept path:** Use this ${courseLabel} baseline before starting systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
 					`**Environment:**\n${bullets(config.environment)}`,
-					"**Completion check:** The work demonstrates the ability to name the lab boundary, setup path, and recovery method."
+					`**Completion check:** The ${courseLabel} work demonstrates the ability to name the lab boundary, setup path, and recovery method.`
 				].join("\n\n")
 			},
 			{
-				title: "Prohibited Activity",
+				title: `${courseLabel} Prohibited Activity`,
 				content: [
-					"**Safety boundary:** These activities are outside the course scope even if a student knows how to attempt them.",
+					`**Safety boundary:** These activities are outside ${courseLabel} scope even if they are technically possible.`,
 					`**Do not do:**\n${bullets(config.prohibited)}`,
-					"**Completion check:** Any ambiguous target or action is paused until scope is narrowed."
+					`**Completion check:** Any ambiguous ${courseLabel} target or action is paused until scope is narrowed.`
 				].join("\n\n")
 			},
 			{
-				title: "Signature Project",
-				content: `**Project goal:** ${config.project}\n\n**Completion checks:**\n- Scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- Evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
+				title: `${courseLabel} Signature Project`,
+				content: `**Project goal:** ${config.project}\n\n**Completion checks:**\n- ${courseLabel} scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- Evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
 			},
 			{
-				title: "Evidence Rubric",
-				content:
-					"**Readiness check:** Grade systems/security work on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe scope or missing mitigation.\n\n**Evidence of proficiency:** The work demonstrates the ability to show what happened, why it mattered, how it was fixed or constrained, and how the result was verified."
+				title: `${courseLabel} Evidence Rubric`,
+				content: `**Readiness check:** Evaluate ${courseLabel} systems/security work on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe ${courseLabel} scope or missing mitigation.\n\n**Evidence of proficiency:** ${courseLabel} work demonstrates the ability to show what happened, why it mattered, how it was fixed or constrained, and how the result was verified.`
 			}
 		],
 		supplementalProjects: [
 			{
-				title: "Defensive Lab Project: Scope and Reset Drill",
-				content:
-					"**Project goal:** Before running a lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path. The drill should be specific enough that the lab can be repeated safely and stopped cleanly if the result is unexpected.\n\n**Required fields:** lab boundary, allowed target, allowed tools, evidence to collect, stop condition, reset command or recovery step, and one disallowed action.\n\n**Completion checks:**\n- Scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named.\n- The expected evidence is tied to the course-specific toolchain."
+				title: `${courseLabel} Defensive Lab: Scope and Reset Drill`,
+				content: `**Project goal:** Before running a ${courseLabel} lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path. The drill should be specific enough that the lab can be repeated safely and stopped cleanly if the result is unexpected.\n\n**Required fields:** lab boundary, allowed target, allowed tools, evidence to collect, stop condition, reset command or recovery step, and one disallowed action.\n\n**Completion checks:**\n- ${courseLabel} scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named.\n- The expected evidence is tied to the ${courseLabel} toolchain.`
 			},
 			{
-				title: "Defensive Lab Project: Evidence-to-Remediation Report",
-				content:
-					"**Project goal:** Convert one lab observation into a short remediation report. The report should separate what was observed from why it matters, then describe a fix or hardening step that can be tested.\n\n**Required fields:** observation, reproduction evidence, impact, remediation, verification step, prevention or monitoring note, and one remaining limitation.\n\n**Completion checks:**\n- Observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance.\n- Verification evidence is specific enough to reproduce."
+				title: `${courseLabel} Defensive Lab: Evidence-to-Remediation Report`,
+				content: `**Project goal:** Convert one ${courseLabel} lab observation into a short remediation report. The report separates what was observed from why it matters, then describes a fix or hardening step that can be tested.\n\n**Required fields:** observation, reproduction evidence, impact, remediation, verification step, prevention or monitoring note, and one remaining limitation.\n\n**Completion checks:**\n- ${courseLabel} observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance.\n- Verification evidence is specific enough to reproduce the ${courseLabel} finding.`
 			}
 		]
 	});
@@ -2067,13 +2312,13 @@ function supplementalProjectFor(
 	if (next === 1) {
 		return {
 			title: `${module.title}: Focused Practice`,
-			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The work completes one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The prerequisite concept is stated clearly.\n- The normal case is completed independently.\n- The explanation identifies one likely misconception or edge case.`
+			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The work completes one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The ${module.title} prerequisite concept is stated clearly.\n- The ${module.title} normal case is completed independently.\n- The ${module.title} explanation identifies one likely misconception or edge case.`
 		};
 	}
 
 	return {
 		title: `${module.title}: Applied Challenge`,
-		content: `**Project goal:** Apply ${module.title} in a new context that changes the input, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The work tests or explains both a normal case and an awkward case.\n- The final reflection names what had to be adapted from the original lesson.`
+		content: `**Project goal:** Apply ${module.title} in a new context that changes the input, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The ${module.title} changed constraint is explicit.\n- The ${module.title} work tests or explains both a normal case and an awkward case.\n- The final ${module.title} reflection names what had to be adapted from the original lesson.`
 	};
 }
 

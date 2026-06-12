@@ -56,7 +56,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Review: Variables, Strings, and Input",
 						section: "extension"
 					}),
@@ -68,7 +68,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle:
 							"AJ1 Review: Variables, Strings, and Input",
 						projectKind: "extension",
@@ -82,7 +82,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Variables, Strings, and Input supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle:
 							"AJ1 Review: Variables, Strings, and Input",
 						projectKind: "extension",
@@ -252,7 +252,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Objects and Classes: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Review: Objects and Classes",
 						section: "extension"
 					}),
@@ -264,7 +264,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Objects and Classes supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ3 Review: Objects and Classes",
 						projectKind: "extension",
 						hasReference: true
@@ -277,7 +277,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Review: Objects and Classes supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ3 Review: Objects and Classes",
 						projectKind: "extension",
 						hasReference: true
@@ -330,7 +330,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Recursion",
 						section: "extension"
 					}),
@@ -342,7 +342,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ4 Recursion",
 						projectKind: "extension",
 						hasReference: true
@@ -355,7 +355,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Recursion supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ4 Recursion",
 						projectKind: "extension",
 						hasReference: true
@@ -403,7 +403,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Linear Search and Big O Notation",
 						section: "extension"
 					}),
@@ -415,7 +415,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ5 Linear Search and Big-O Notation",
 						projectKind: "extension",
 						hasReference: true
@@ -428,7 +428,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linear Search and Big O Notation supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ5 Linear Search and Big-O Notation",
 						projectKind: "extension",
 						hasReference: true
@@ -485,7 +485,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Binary Search",
 						section: "extension"
 					}),
@@ -497,7 +497,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ6 Binary Search",
 						projectKind: "extension",
 						hasReference: true
@@ -510,7 +510,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ6 Binary Search",
 						projectKind: "extension",
 						hasReference: true
@@ -568,7 +568,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check In #1",
 						section: "extension"
 					}),
@@ -580,7 +580,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #1",
 						projectKind: "extension",
 						hasReference: true
@@ -593,7 +593,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #1 supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #1",
 						projectKind: "extension",
 						hasReference: true
@@ -660,7 +660,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection and Insertion Sort supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ7 Selection and Insertion Sort",
 						projectKind: "extension",
 						hasReference: true
@@ -673,7 +673,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Selection and Insertion Sort supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ7 Selection and Insertion Sort",
 						projectKind: "extension",
 						hasReference: true
@@ -721,7 +721,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Bubble Sort",
 						section: "extension"
 					}),
@@ -733,7 +733,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ8 Bubble Sort",
 						projectKind: "extension",
 						hasReference: true
@@ -746,7 +746,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Bubble Sort supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ8 Bubble Sort",
 						projectKind: "extension",
 						hasReference: true
@@ -803,7 +803,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Merge Sort",
 						section: "extension"
 					}),
@@ -815,7 +815,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ9 Merge Sort",
 						projectKind: "extension",
 						hasReference: true
@@ -828,7 +828,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Merge Sort supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ9 Merge Sort",
 						projectKind: "extension",
 						hasReference: true
@@ -886,7 +886,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check In #2",
 						section: "extension"
 					}),
@@ -898,7 +898,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #2",
 						projectKind: "extension",
 						hasReference: true
@@ -911,7 +911,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #2 supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #2",
 						projectKind: "extension",
 						hasReference: true
@@ -973,7 +973,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Sustainable Programming",
 						section: "extension"
 					}),
@@ -985,7 +985,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ10 Sustainable Programming",
 						projectKind: "extension",
 						hasReference: true
@@ -998,7 +998,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Sustainable Programming supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ10 Sustainable Programming",
 						projectKind: "extension",
 						hasReference: true
@@ -1051,7 +1051,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Linked Lists",
 						section: "extension"
 					}),
@@ -1063,7 +1063,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ11 Linked Lists",
 						projectKind: "extension",
 						hasReference: true
@@ -1076,7 +1076,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Linked Lists supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ11 Linked Lists",
 						projectKind: "extension",
 						hasReference: true
@@ -1200,7 +1200,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues and Maps: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Priority Queues and Maps",
 						section: "extension"
 					}),
@@ -1210,7 +1210,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues and Maps supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ13 Priority Queues and Maps",
 						projectKind: "extension",
 						hasReference: true
@@ -1223,7 +1223,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Priority Queues and Maps supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ13 Priority Queues and Maps",
 						projectKind: "extension",
 						hasReference: true
@@ -1284,7 +1284,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #3: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check In #3",
 						section: "extension"
 					}),
@@ -1294,7 +1294,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #3 supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #3",
 						projectKind: "extension",
 						hasReference: true
@@ -1307,7 +1307,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #3 supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #3",
 						projectKind: "extension",
 						hasReference: true
@@ -1374,7 +1374,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Binary Search Trees",
 						section: "extension"
 					}),
@@ -1386,7 +1386,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ14 Binary Search Trees",
 						projectKind: "extension",
 						hasReference: true
@@ -1399,7 +1399,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Binary Search Trees supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ14 Binary Search Trees",
 						projectKind: "extension",
 						hasReference: true
@@ -1457,7 +1457,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Hash Tables",
 						section: "extension"
 					}),
@@ -1469,7 +1469,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ15 Hash Tables",
 						projectKind: "extension",
 						hasReference: true
@@ -1482,7 +1482,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Hash Tables supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ15 Hash Tables",
 						projectKind: "extension",
 						hasReference: true
@@ -1544,7 +1544,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Graphs supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ16 Graphs",
 						projectKind: "extension",
 						hasReference: true
@@ -1557,7 +1557,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Graphs supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ16 Graphs",
 						projectKind: "extension",
 						hasReference: true
@@ -1608,7 +1608,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #4: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check In #4",
 						section: "extension"
 					}),
@@ -1618,7 +1618,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #4 supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #4",
 						projectKind: "extension",
 						hasReference: true
@@ -1631,7 +1631,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Check In #4 supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Check-In #4",
 						projectKind: "extension",
 						hasReference: true
@@ -1688,7 +1688,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps: Extension Challenge",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "Master Project: Google Maps",
 						section: "extension"
 					}),
@@ -1700,7 +1700,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps supplemental 2",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ17 Master Project: Google Maps",
 						projectKind: "extension",
 						hasReference: true
@@ -1713,7 +1713,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Master Project: Google Maps supplemental 3",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle: "AJ17 Master Project: Google Maps",
 						projectKind: "extension",
 						hasReference: true
@@ -1746,7 +1746,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "Repo Extension, Starter, and Capstone Library: Verification and Reflection",
 					content: buildSupportSectionGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle:
 							"Repo Extension, Starter, and Capstone Library",
 						section: "verification"
@@ -1755,7 +1755,7 @@ export const javaLevel3Course: RawCourse = {
 				{
 					title: "AJ18 Repo Extension, Starter, and Capstone Library: Core Project",
 					content: buildProjectGuidance({
-						courseFamily: "Java",
+						courseFamily: "Java Level 3",
 						moduleTitle:
 							"AJ18 Repo Extension, Starter, and Capstone Library",
 						projectKind: "extension",
