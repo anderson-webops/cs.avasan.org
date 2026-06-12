@@ -105,6 +105,171 @@ function projectTitle(project: string) {
 		.replace(/\bTo-do\b/g, "To-Do");
 }
 
+function projectOptionGoal(
+	profile: ResearchExpansionProfile,
+	courseLabel: string,
+	project: string
+) {
+	const description = projectDescription(project);
+	const family = profile.family.toLowerCase();
+
+	if (family.includes("scratch")) {
+		return `**Project goal:** Build ${description} as a playable ${courseLabel} project with clear sprite roles, event flow, state changes, and end conditions.`;
+	}
+	if (family.includes("python")) {
+		return `**Project goal:** Implement ${description} as a ${courseLabel} program with named inputs, reusable functions or classes where helpful, and reproducible console or file output.`;
+	}
+	if (family.includes("pygame")) {
+		return `**Project goal:** Prototype ${description} as a game loop with actors, controls, collision or state rules, scoring or progress feedback, and a reset path.`;
+	}
+	if (family.includes("data") || family.includes("machine learning")) {
+		return `**Project goal:** Complete ${description} as a ${courseLabel} analysis artifact with a defined question, source data, cleaning or feature choices, evidence, and limitations.`;
+	}
+	if (family.includes("ai")) {
+		return `**Project goal:** Build ${description} as an ${courseLabel} reasoning artifact with an explicit state representation, decision rule or search strategy, traceable output, and limitation note.`;
+	}
+	if (family.includes("algebra")) {
+		return `**Project goal:** Use ${description} to model, solve, graph, or justify a ${courseLabel} relationship with visible steps and a reasonableness check.`;
+	}
+	if (family.includes("c++")) {
+		return `**Project goal:** Build ${description} as a ${courseLabel} program with a documented compile command, data representation, ownership or container decision, and test cases.`;
+	}
+	if (family.includes("java")) {
+		return `**Project goal:** Implement ${description} as a ${courseLabel} Java artifact with clear class responsibilities, method contracts, state changes, and compile/run evidence.`;
+	}
+	if (family.includes("usaco")) {
+		return `**Project goal:** Solve ${description} as a ${courseLabel} contest problem with exact input/output behavior, constraints, invariants, and complexity reasoning.`;
+	}
+	if (
+		family.includes("science") ||
+		family.includes("chemistry") ||
+		family.includes("physics")
+	) {
+		return `**Project goal:** Investigate ${description} as a ${courseLabel} model, data, or explanation task that connects a claim to evidence and reasoning.`;
+	}
+	if (
+		family.includes("security") ||
+		family.includes("systems") ||
+		family.includes("linux") ||
+		family.includes("network")
+	) {
+		return `**Project goal:** Complete ${description} as a ${courseLabel} local lab with explicit scope, allowed target, command evidence, interpretation, and rollback or remediation.`;
+	}
+	if (family.includes("swift")) {
+		return `**Project goal:** Build ${description} as a ${courseLabel} app feature with a defined screen, state owner, user flow, simulator evidence, and accessibility check.`;
+	}
+	if (family.includes("unity")) {
+		return `**Project goal:** Build ${description} as a ${courseLabel} Unity scene or mechanic with player action, state feedback, playtest evidence, and reset behavior.`;
+	}
+	if (family.includes("javascript") || family.includes("web")) {
+		return `**Project goal:** Build ${description} as a ${courseLabel} browser feature with visible UI state, event handling, validation, and responsive layout evidence.`;
+	}
+
+	return `**Project goal:** Complete ${description} as a ${courseLabel} artifact with named inputs, expected behavior, evidence of correctness, and one limitation or edge case.`;
+}
+
+function projectOptionRequiredOutcome(
+	profile: ResearchExpansionProfile,
+	courseLabel: string
+) {
+	const family = profile.family.toLowerCase();
+
+	if (family.includes("scratch")) {
+		return `**Required outcome:**\n- Name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main Scratch state or event-flow decision.`;
+	}
+	if (family.includes("data") || family.includes("machine learning")) {
+		return `**Required outcome:**\n- State the question, dataset, key columns or features, and cleaning or modeling choice.\n- Include a baseline, sanity check, metric, visualization, or small trace.\n- Explain what the evidence supports and one limitation of the result.`;
+	}
+	if (family.includes("ai")) {
+		return `**Required outcome:**\n- Define the state representation, action space, rule, search, or scoring method.\n- Trace one ordinary case and one case where the strategy behaves poorly or ambiguously.\n- Explain why the chosen strategy is reasonable and where it is limited.`;
+	}
+	if (family.includes("algebra")) {
+		return `**Required outcome:**\n- Show the rule, equation, graph, table, or transformation being used.\n- Include one ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the result is known to be reasonable.`;
+	}
+	if (
+		family.includes("science") ||
+		family.includes("chemistry") ||
+		family.includes("physics")
+	) {
+		return `**Required outcome:**\n- State the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate observation, pattern, and explanation.\n- Connect evidence to the claim and name one model limitation or uncertainty.`;
+	}
+	if (
+		family.includes("security") ||
+		family.includes("systems") ||
+		family.includes("linux") ||
+		family.includes("network")
+	) {
+		return `**Required outcome:**\n- State the local scope, target, starting state, allowed tools, and stop condition.\n- Record command, configuration, trace, or log evidence before and after the change.\n- Explain the impact and the rollback, mitigation, or verification step.`;
+	}
+	if (family.includes("usaco")) {
+		return `**Required outcome:**\n- Translate the prompt into input format, output format, constraints, and invariant.\n- Pass the sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the time and memory complexity in relation to the constraints.`;
+	}
+	if (family.includes("java")) {
+		return `**Required outcome:**\n- Identify the classes, fields, method contracts, and object-state changes.\n- Compile and run one normal case and one boundary or awkward case.\n- Explain the main type, inheritance, interface, collection, or record decision.`;
+	}
+	if (family.includes("c++")) {
+		return `**Required outcome:**\n- Name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build with warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the relevant container, pointer/reference, memory, or algorithm decision.`;
+	}
+	if (family.includes("javascript") || family.includes("web")) {
+		return `**Required outcome:**\n- Identify the UI state, event handler, data flow, validation path, and visible output.\n- Test a fresh load, normal action, empty or error case, and responsive layout when relevant.\n- Explain the main DOM, API, state, or accessibility decision.`;
+	}
+
+	return `**Required outcome:**\n- Define the ${courseLabel} inputs, output or artifact, success condition, and evidence source.\n- Include a normal case, a boundary case, and one awkward or failure case.\n- Explain the main design, model, proof, or reasoning decision.`;
+}
+
+function projectOptionExtension(
+	profile: ResearchExpansionProfile,
+	courseLabel: string,
+	project: string
+) {
+	const description = projectDescription(project);
+	const family = profile.family.toLowerCase();
+
+	if (family.includes("security") || family.includes("systems")) {
+		return `**Extension:** Add one ${courseLabel} rollback, monitoring, hardening, or reproducibility check to ${description}.`;
+	}
+	if (
+		family.includes("science") ||
+		family.includes("chemistry") ||
+		family.includes("physics")
+	) {
+		return `**Extension:** Change one variable, data source, scale, or model assumption in ${description} and predict how the claim should change.`;
+	}
+	if (
+		family.includes("data") ||
+		family.includes("ai") ||
+		family.includes("machine learning")
+	) {
+		return `**Extension:** Add a baseline, counterexample, alternate metric, or limitation check to ${description} and compare the interpretation.`;
+	}
+	if (
+		family.includes("scratch") ||
+		family.includes("pygame") ||
+		family.includes("unity")
+	) {
+		return `**Extension:** Add one rule, control, level, reset, or feedback variation to ${description} while preserving the main play goal.`;
+	}
+	if (family.includes("usaco")) {
+		return `**Extension:** Add one harder custom case to ${description}, then explain which invariant or complexity bound it stress-tests.`;
+	}
+	if (
+		family.includes("java") ||
+		family.includes("c++") ||
+		family.includes("python")
+	) {
+		return `**Extension:** Add one ${courseLabel} edge case, helper, refactor, or alternate representation to ${description} and explain which requirement it tests.`;
+	}
+	if (
+		family.includes("javascript") ||
+		family.includes("web") ||
+		family.includes("swift")
+	) {
+		return `**Extension:** Add one empty, error, accessibility, layout, or state-transition case to ${description} and verify the visible behavior.`;
+	}
+
+	return `**Extension:** Change one constraint, input, representation, or success condition in ${description} and explain what stayed equivalent.`;
+}
+
 function courseExpansionLabel(
 	course: RawCourse,
 	profile: ResearchExpansionProfile
@@ -275,10 +440,10 @@ function buildProjectModule(
 		supplementalProjects: projects.map(project => ({
 			title: `Project Option: ${projectTitle(project)}`,
 			content: [
-				`**Project goal:** Create this ${profile.family} practice artifact: ${projectDescription(project)}. The result should include a visible product, model, result, or explanation.`,
-				`**Required outcome:**\n- Define the ${courseLabel} artifact and expected inputs, outputs, data, or model.\n- Include one ${courseLabel} normal case, one boundary case, and one awkward or failure case.\n- Write a short explanation of the main ${profile.family} design or reasoning decision.`,
+				projectOptionGoal(profile, courseLabel, project),
+				projectOptionRequiredOutcome(profile, courseLabel),
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
-				`**Extension:** Add one ${profile.family} variant for ${projectDescription(project)} that changes a constraint, input, representation, or success condition without changing the core concept.`
+				projectOptionExtension(profile, courseLabel, project)
 			].join("\n\n")
 		}))
 	};

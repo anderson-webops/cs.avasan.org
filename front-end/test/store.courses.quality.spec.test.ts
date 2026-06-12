@@ -288,7 +288,7 @@ describe("course text quality normalization", () => {
 				"Add one transfer case to AM2 Review: Functions & Lists that changes the input, representation, or success condition"
 			);
 			expect(corpus).toContain(
-				"Add one Scratch variant for Maze with timer and collectibles that changes a constraint, input, representation, or success condition without changing the core concept"
+				"Add one rule, control, level, reset, or feedback variation to Maze with timer and collectibles while preserving the main play goal"
 			);
 			expect(corpus).toContain(
 				"Change one rule or control in Scratch Level 2: Project and Assessment Practice while preserving the same play goal"
