@@ -123,7 +123,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Core Outcomes for Part 2",
 					content:
-						"Set expectations clearly: Distinguish a crash from an exploitable condition, explain how bug classes can lead to control-flow or data corruption, evaluate mitigations such as ASLR, NX, canaries, RELRO, and allocator behavior, and produce patch notes plus regression checks that close the bug class rather than only describing it."
+						"The goal is precise vulnerability reasoning: distinguish a crash from an exploitable condition, explain how bug classes can lead to control-flow or data corruption, evaluate mitigations such as ASLR, NX, canaries, RELRO, and allocator behavior, and produce patch notes plus regression checks that close the bug class rather than only describing it."
 				},
 				{
 					title: "LLS Part 2 Setup and Tooling: Core Project",

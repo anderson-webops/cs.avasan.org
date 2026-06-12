@@ -80,7 +80,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Machine Requirements and Platform Reality",
 					content:
-						"Explain clearly that real iOS building, simulator use, signing, archiving, and App Store publishing require macOS and Xcode. Windows can support note-taking or light Swift syntax exploration, but it is not a complete replacement for the practical parts of the course. Set expectations early so students do not build a workflow that collapses later."
+						"Real iOS building, simulator use, signing, archiving, and App Store publishing require macOS and Xcode. Windows can support note-taking or light Swift syntax exploration, but it is not a complete replacement for the practical parts of the course. Establish this workflow boundary early so the project setup remains viable later."
 				},
 				{
 					title: "Practical Walkthrough: Installing Xcode and Simulators",

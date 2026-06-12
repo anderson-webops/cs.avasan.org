@@ -202,6 +202,8 @@ describe("course text quality normalization", () => {
 				/Mixing up values, references, and state; using the wrong loop condition/i
 			);
 			expect(corpus).not.toMatch(/fresh the starting point is/i);
+			expect(corpus).not.toMatch(/The sequence begins with/i);
+			expect(corpus).not.toMatch(/\band and\b/i);
 			expect(corpus).not.toMatch(/\bRecovered\b/);
 			expect(corpus).not.toMatch(
 				/recovered (?:course|lesson|applications|results|examples)/i

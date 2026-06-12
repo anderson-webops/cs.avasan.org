@@ -614,7 +614,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Pattern Entry Paths from Refactoring.Guru",
 					content:
-						"Show common journeys: Extract Method plus Move Method plus Extract Class toward clearer collaborators; Hide Delegate and Facade toward subsystem simplification; Introduce Local Extension plus Adapter toward boundary cleanup; and command-history refactors toward Command and Memento. The pattern should appear as the result of a sequence, not as the first move."
+						"Common refactoring journeys include Extract Method plus Move Method plus Extract Class toward clearer collaborators; Hide Delegate and Facade toward subsystem simplification; Introduce Local Extension plus Adapter toward boundary cleanup; and command-history refactors toward Command and Memento. The pattern should appear as the result of a sequence, not as the first move."
 				},
 				{
 					title: "Worked Example Set: One Smell, Several Possible Destinations",

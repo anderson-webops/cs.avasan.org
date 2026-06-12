@@ -549,12 +549,12 @@ function neutralizeLessonDirectiveText(text: string) {
 		.replace(
 			/(^|[.!?]\s+|:\s+|\n\s*(?:[-*]\s+)?)Start with ([^.]+)\./g,
 			(_match, prefix, topic) =>
-				`${prefix}The sequence begins with ${stripTrailingSentencePunctuation(topic).replace(/\band get\b/g, "and getting")}.`
+				`${prefix}Begin with ${stripTrailingSentencePunctuation(topic)}.`
 		)
 		.replace(
 			/(^|[.!?]\s+|:\s+|\n\s*(?:[-*]\s+)?)start with ([^.]+)\./g,
 			(_match, prefix, topic) =>
-				`${prefix}the sequence begins with ${stripTrailingSentencePunctuation(topic).replace(/\band get\b/g, "and getting")}.`
+				`${prefix}begin with ${stripTrailingSentencePunctuation(topic)}.`
 		)
 		.replace(
 			/\bfresh the starting point is ([^.]+)\./g,
