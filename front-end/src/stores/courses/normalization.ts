@@ -2091,7 +2091,7 @@ function diagnosticExtensionPrompt(context: CourseTextContext) {
 
 	return variantPrompt(context, [
 		subject =>
-			`Change one constraint or case in ${subject} while preserving the same core concept.`,
+			`Change one constraint or case in ${subject} while preserving the underlying rule or skill.`,
 		subject =>
 			`Represent ${subject} a second way and explain what stays equivalent.`,
 		subject =>
@@ -2443,6 +2443,26 @@ function projectExpectations(context: CourseTextContext) {
 				`- Turn ${subject} into a concrete Java contract: inputs, object state, return values, side effects, and evidence.`,
 				`- Build ${subject} in small runnable slices and check output, tests, or traces before adding the next behavior.`,
 				`- Include one ${subject} normal path, one awkward path, and one note about the relevant type or API boundary.`
+			],
+			subject => [
+				`- Start ${subject} by naming the class boundary, stored data, method contract, and expected result.`,
+				`- Compile after each field, constructor, branch, or collection change so type errors stay tied to the recent edit.`,
+				`- Record one ordinary run, one boundary run, and the Java rule that explains the outcome.`
+			],
+			subject => [
+				`- Describe ${subject} as a Java object model before coding: responsibilities, collaborators, public calls, and evidence.`,
+				`- Add behavior in compileable increments, checking constructor setup, method calls, and any collection mutation as they appear.`,
+				`- Keep the verification note focused on the design boundary that made the implementation easier to reason about.`
+			],
+			subject => [
+				`- Identify the ${subject} type choices, access levels, method signatures, and expected console or test evidence.`,
+				`- Build a minimal passing version first, then add the branch, overload, override, record, or list case that carries the concept.`,
+				`- Compare a typical case with a deliberately awkward case and state which Java feature handled the difference.`
+			],
+			subject => [
+				`- Before implementing ${subject}, write the object state, public behavior, and one example method call with its expected result.`,
+				`- Keep each compile/run cycle tied to one change in state, control flow, collection behavior, or method dispatch.`,
+				`- Finish with evidence that separates syntax correctness from the design decision being practiced.`
 			]
 		]);
 	}
@@ -2682,6 +2702,26 @@ function completionChecks(context: CourseTextContext) {
 				`- ${subject} includes current compile evidence and one visible output, trace, assertion, or test result.`,
 				`- ${subject} checks a typical path and a deliberately awkward or boundary path.`,
 				`- The ${subject} explanation separates syntax, object state, and public API behavior.`
+			],
+			subject => [
+				`- ${subject} rebuilds cleanly and shows the target behavior through a run, assertion, or trace.`,
+				`- The checked cases include constructor setup, one method result, and a boundary or invalid input when relevant.`,
+				`- The final note names the Java rule or type boundary that prevents the code from becoming ambiguous.`
+			],
+			subject => [
+				`- ${subject} has current evidence for the expected output or return value, not stale IDE state.`,
+				`- A normal case, a state-changing case, and one awkward case are checked where the prompt allows it.`,
+				`- The explanation identifies the field, method, class, interface, record, or collection that controls the behavior.`
+			],
+			subject => [
+				`- ${subject} compiles from a clean start and the important method calls can be traced.`,
+				`- The verification covers ordinary behavior, boundary behavior, and one ownership or dispatch decision.`,
+				`- The final explanation connects the code result to a specific Java vocabulary term.`
+			],
+			subject => [
+				`- ${subject} produces reproducible evidence for the required behavior through output, tests, or a trace table.`,
+				`- The checked cases include one expected path, one edge path, and one object or collection interaction.`,
+				`- The closing note states what responsibility each relevant class or method owns.`
 			]
 		]);
 	}
@@ -2912,13 +2952,13 @@ function projectSupport(context: CourseTextContext) {
 		subject =>
 			`**Project goal:** Complete **${subject}** as a focused checkpoint in ${focus}, with a visible result and one checked boundary case.`,
 		subject =>
-			`**Project goal:** Produce **${subject}** with clear requirements, observable behavior, and evidence tied to ${focus}.`,
+			`**Project goal:** Produce **${subject}** with a stated goal, an observable result, and evidence connected to ${focus}.`,
 		subject =>
 			`**Project goal:** Use **${subject}** to turn the module concept into a testable artifact connected to ${focus}.`,
 		subject =>
 			`**Project goal:** Build **${subject}** around one concrete behavior, model, output, or analysis that demonstrates ${focus}.`,
 		subject =>
-			`**Project goal:** Implement **${subject}** so the focus on ${focus} is visible in the output, trace, model, or user flow rather than only described.`,
+			`**Project goal:** Implement **${subject}** so ${focus} can be inspected through a run, trace, model, or user interaction.`,
 		subject =>
 			`**Project goal:** Develop **${subject}** from a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
 		subject =>
@@ -2960,8 +3000,25 @@ function projectSupportReference(context: CourseTextContext) {
 	}
 	if (isScienceContext(context)) return "the activity";
 	if (isMathContext(context)) return "the response";
-	if (isApcsContext(context) || isJavaContext(context))
-		return "the Java work";
+	if (isApcsContext(context)) {
+		return variantPrompt(context, [
+			() => "the AP Java task",
+			() => "the AP-style exercise",
+			() => "the Java checkpoint",
+			() => "the traced solution",
+			() => "the practice task"
+		]);
+	}
+	if (isJavaContext(context)) {
+		return variantPrompt(context, [
+			() => "the Java implementation",
+			() => "the class exercise",
+			() => "the project",
+			() => "the code checkpoint",
+			() => "the object-design task",
+			() => "the practice build"
+		]);
+	}
 	if (isWebContext(context)) return "the page";
 	if (/security|offensive|low-level security|network security/.test(source))
 		return "the lab";
@@ -3281,6 +3338,24 @@ function compactGeneratedProjectSupport(
 				`- ${capitalizedReference} `
 			)
 			.replace(
+				new RegExp(`(^|[.!?]\\s+)${escapedReference}\\b`, "g"),
+				(_match, prefix: string) => `${prefix}${capitalizedReference}`
+			)
+			.replace(
+				new RegExp(
+					`\\b(one|each|every|a|an) ${escapedReference} (insert\\/search\\/remove path|search)\\b`,
+					"g"
+				),
+				"$1 $2"
+			)
+			.replace(
+				new RegExp(
+					`\\b(one|each|every|a|an) ${escapedBareReference} (insert\\/search\\/remove path|search)\\b`,
+					"g"
+				),
+				"$1 $2"
+			)
+			.replace(
 				/\bfinal the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (note|explanation|response|answer|work)\b/g,
 				"final $1"
 			)
@@ -3314,8 +3389,20 @@ function compactGeneratedProjectSupport(
 }
 
 function lessonSupport(context: CourseTextContext) {
+	const focus = subjectFocus(context);
+	const conceptPath = variantPrompt(context, [
+		subject =>
+			`**Concept path:** This lesson develops ${focus} by defining the core vocabulary, tracing one concrete example, and applying the idea to ${subject}.`,
+		subject =>
+			`**Concept path:** Start from the ${focus} vocabulary, work through one representative example, then test the idea on a nearby variation in ${subject}.`,
+		subject =>
+			`**Concept path:** Connect ${focus} to ${subject} by naming the inputs or state, following one example step by step, and checking what changes in a second case.`,
+		subject =>
+			`**Concept path:** Use ${subject} to make ${focus} concrete: identify the rule or model, inspect one worked case, and finish with a small transfer check.`
+	]);
+
 	return [
-		`**Concept path:** This lesson introduces ${subjectFocus(context)} through key terms, a worked example, and a transfer check tied to the module project.`,
+		conceptPath,
 		`**Common pitfalls:** ${commonPitfalls(context)}`,
 		`**Mastery check:** ${proficiencyEvidence(context)}`
 	].join("\n\n");

@@ -166,7 +166,7 @@ export function buildImplementationLabGuidance({
 		return [
 			`Use **${label}** to connect the build target to ${focus}.`,
 			`Define the **${label}** artifact, minimum working behavior, input/output surfaces, and invariant that should stay true as features are added.`,
-			`Keep **${label}** concrete: the concept is not complete until the result can be run, inspected, and explained with evidence rather than only described in source code.`
+			`Keep **${label}** concrete: the concept is complete only when the result can be run, inspected, and explained with evidence from the artifact.`
 		].join("\n\n");
 	}
 

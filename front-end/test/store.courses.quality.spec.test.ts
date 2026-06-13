@@ -284,9 +284,12 @@ describe("course text quality normalization", () => {
 			expect(corpus).toContain(
 				"The lab boundary, target behavior, and evidence source are explicit"
 			);
-			expect(corpus).toContain(
-				"Extend the Java work with one additional method and a test or console trace that proves its contract"
-			);
+				expect(corpus).not.toContain(
+					"Extend the Java work with one additional method and a test or console trace that proves its contract"
+				);
+				expect(corpus).toContain(
+					"Extend the object-design task with one additional method and a test or console trace that proves its contract"
+				);
 			expect(corpus).toContain(
 				"Build **PTJ1 Functions, Parameters, and Return Types Supplemental 2** through short compile/run cycles"
 			);

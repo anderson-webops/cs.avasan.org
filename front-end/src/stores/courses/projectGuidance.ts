@@ -26,6 +26,21 @@ function variantIndex(
 	return hash % count;
 }
 
+function referenceVariantIndex(
+	courseFamily: string,
+	moduleTitle: string,
+	count: number
+) {
+	const seed = `${courseFamily}|${moduleTitle}|reference`;
+	let hash = 0;
+
+	for (const character of seed) {
+		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+	}
+
+	return hash % count;
+}
+
 function guidanceSubject(courseFamily: string, moduleTitle: string) {
 	return `${courseFamily} ${moduleTitle}`;
 }
@@ -38,7 +53,7 @@ function capitalizeSentence(value: string) {
 	return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
 }
 
-function guidanceReference(courseFamily: string) {
+function guidanceReference(courseFamily: string, moduleTitle: string) {
 	const family = courseFamily.toLowerCase();
 
 	if (family.includes("usaco")) return "the solution";
@@ -63,7 +78,20 @@ function guidanceReference(courseFamily: string) {
 		return "the program";
 	}
 	if (family.includes("swift")) return "the app path";
-	if (family.includes("java")) return "the Java work";
+	if (family.includes("java")) {
+		const references = [
+			"the Java implementation",
+			"the class exercise",
+			"the project",
+			"the code checkpoint",
+			"the object-design task",
+			"the practice build"
+		];
+
+		return references[
+			referenceVariantIndex(courseFamily, moduleTitle, references.length)
+		];
+	}
 
 	return "the project";
 }
@@ -74,7 +102,7 @@ function compactGuidanceBody(
 	body: string
 ) {
 	const escapedTitle = escapeStringForRegExp(moduleTitle);
-	const reference = guidanceReference(courseFamily);
+	const reference = guidanceReference(courseFamily, moduleTitle);
 	const capitalizedReference = capitalizeSentence(reference);
 	const bareReference = reference.replace(/^the\s+/i, "");
 	const escapedCourseFamily = escapeStringForRegExp(courseFamily);
@@ -155,7 +183,14 @@ function compactGuidanceBody(
 		)
 		.replace(
 			new RegExp(
-				`\\b${escapedTitle} (compiles|has|demonstrates|can|builds|includes|ordinary behavior|normal traffic|samples|findings)\\b`,
+				`\\b${escapedTitle} (ordinary behavior|normal traffic|samples|findings)\\b`,
+				"g"
+			),
+			(_match, phrase: string) => capitalizeSentence(phrase)
+		)
+		.replace(
+			new RegExp(
+				`\\b${escapedTitle} (compiles|has|demonstrates|can|builds|includes)\\b`,
 				"g"
 			),
 			`${capitalizedReference} $1`
@@ -231,6 +266,20 @@ function compactGuidanceBody(
 		.replace(
 			new RegExp(`\\bAfter ${escapedReference} simulator path\\b`, "g"),
 			"After the simulator path"
+		)
+		.replace(
+			new RegExp(
+				`\\bBuild the smallest reproducible ${escapedReference} run first\\b`,
+				"g"
+			),
+			"Build the smallest reproducible run first"
+		)
+		.replace(
+			new RegExp(
+				`\\bBuild the smallest reproducible ${escapedBareReference} run first\\b`,
+				"g"
+			),
+			"Build the smallest reproducible run first"
 		)
 		.replace(
 			new RegExp(`\\bImplement one ${escapedReference} `, "g"),
@@ -309,6 +358,11 @@ function compactGuidanceBody(
 		.replace(
 			/\*\*Focus:\*\* ([a-z])/g,
 			(_, first: string) => `**Focus:** ${first.toUpperCase()}`
+		)
+		.replace(
+			/(^|\n)(\d+\. )([a-z])/g,
+			(_match, prefix: string, marker: string, first: string) =>
+				`${prefix}${marker}${first.toUpperCase()}`
 		);
 }
 
@@ -641,8 +695,28 @@ function requiredWorkSteps(
 				`Name the public behavior for ${subject}, then decide which class, helper method, interface, record, or collection should carry it.`,
 				`Implement the ${subject} behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.`,
 				`Verify ${subject} with one happy path, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation.`
+			],
+			[
+				`Write the ${subject} object model first: type names, fields, public methods, and the evidence each method should produce.`,
+				`Compile after each constructor, method signature, branch, or collection change so the next error has a narrow cause.`,
+				`Check ${subject} with an ordinary call, a boundary call, and one state change that proves the object is not just storing data.`
+			],
+			[
+				`For ${subject}, separate syntax setup from design setup by naming the package, class boundary, state, and public contract.`,
+				`Build a minimal runnable version, then add one Java feature at a time: access control, overload, override, interface, record, or collection behavior.`,
+				`Verify ${subject} with a traceable example and one awkward case that would expose a weak method contract.`
+			],
+			[
+				`Start ${subject} with a concrete method-call example, including parameter values, expected return or output, and any state before and after the call.`,
+				`Keep compile/run cycles short enough that a type error, null risk, equality issue, or dispatch mistake points to one recent edit.`,
+				`Test ${subject} with a normal path, a boundary path, and one case that checks how classes collaborate.`
+			],
+			[
+				`Decide what ${subject} should make public, what should stay private, and what evidence will prove the boundary works.`,
+				`Implement one responsibility at a time and keep constructor setup, method behavior, and collection or inheritance logic separately testable.`,
+				`Compare ${subject} against one expected scenario and one failure-shaped scenario before using the reference.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (family.includes("python")) {
@@ -842,8 +916,28 @@ function completionCheckSteps(
 				`${moduleTitle} can be rebuilt and rerun with current evidence for the target behavior.`,
 				`A typical ${moduleTitle} path, an awkward path, and one stateful or polymorphic path are checked when relevant.`,
 				`The final ${moduleTitle} note separates syntax fixes from design choices such as encapsulation, method contracts, or data ownership.`
+			],
+			[
+				`${moduleTitle} has a current compile/run result and the important method calls are traceable.`,
+				`The checked cases include a typical call, a boundary call, and one state or collection interaction.`,
+				`The final ${moduleTitle} note names the Java construct that carried the main responsibility.`
+			],
+			[
+				`${moduleTitle} can be rebuilt from the documented files and still shows the expected behavior.`,
+				`Constructor setup, public method behavior, and one awkward input or state transition are checked where relevant.`,
+				`The final ${moduleTitle} note explains why the chosen class or interface boundary is useful.`
+			],
+			[
+				`${moduleTitle} includes reproducible evidence through output, assertions, traces, or method-call examples.`,
+				`A normal path, an edge path, and one object-collaboration path are verified when the prompt allows it.`,
+				`The final ${moduleTitle} note separates the Java syntax issue from the design or API issue.`
+			],
+			[
+				`${moduleTitle} demonstrates the target behavior after a clean compile, not just from previous run output.`,
+				`The checked cases cover expected behavior, boundary behavior, and one class, record, interface, or collection interaction.`,
+				`The final ${moduleTitle} note states which method contract or representation choice mattered most.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (family.includes("python")) {
