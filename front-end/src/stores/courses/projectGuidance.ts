@@ -694,7 +694,7 @@ function requiredWorkSteps(
 			[
 				`Name the public behavior for ${subject}, then decide which class, helper method, interface, record, or collection should carry it.`,
 				`Implement the ${subject} behavior in short compile/run cycles with a visible output, assertion, or trace after each stage.`,
-				`Verify ${subject} with one happy path, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation.`
+				`Verify ${subject} with one normal case, one edge path, and one design boundary such as encapsulation, overriding, overloading, or collection mutation.`
 			],
 			[
 				`Write the ${subject} object model first: type names, fields, public methods, and the evidence each method should produce.`,

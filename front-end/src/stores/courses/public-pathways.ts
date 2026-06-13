@@ -138,7 +138,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		assessmentStyle: [
 			"Explain update, draw, input, collision, and state-transition phases.",
-			"Run collision and restart edge-case tests rather than only testing one happy path.",
+			"Run collision and restart edge-case tests rather than only testing one normal case.",
 			"Use a rubric for controls, feedback, state, code organization, asset hygiene, and polish."
 		],
 		sourceAndTooling: [

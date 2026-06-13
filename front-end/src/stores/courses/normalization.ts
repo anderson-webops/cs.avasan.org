@@ -1673,7 +1673,7 @@ function commonPitfalls(context: CourseTextContext) {
 	if (isWebContext(context)) {
 		return variantPrompt(context, [
 			subject =>
-				`In ${subject}, common pitfalls include building only the happy path, hiding loading or error states, ignoring keyboard and screen-size behavior, or letting UI state drift away from the data source.`,
+				`In ${subject}, common pitfalls include building only the default interaction, hiding loading or error states, ignoring keyboard and screen-size behavior, or letting UI state drift away from the data source.`,
 			subject =>
 				`For ${subject}, watch for interactions that work only with perfect input, missing empty or failure states, inaccessible controls, and layouts that collapse on narrow screens.`,
 			subject =>
@@ -1685,7 +1685,7 @@ function commonPitfalls(context: CourseTextContext) {
 	if (/python/.test(source)) {
 		return variantPrompt(context, [
 			subject =>
-				`In ${subject}, common mistakes include mixing input, calculation, and output in one hard-to-test block; mutating a list while looping; missing a return value; or only testing the happy path.`,
+				`In ${subject}, common mistakes include mixing input, calculation, and output in one hard-to-test block; mutating a list while looping; missing a return value; or only testing the normal case.`,
 			subject =>
 				`For ${subject}, watch for helper functions that depend on hidden input, loops that skip or double-count values, unclear list mutation, and output that cannot be checked independently.`,
 			subject =>
@@ -2234,7 +2234,7 @@ function projectExpectations(context: CourseTextContext) {
 		return [
 			`- Define the visible ${subject} user flow and data flow before implementation.`,
 			`- Verify ${subject} in the browser at desktop and narrow widths.`,
-			`- Check ${subject} loading, empty, success, and error states instead of only the happy path.`
+			`- Check ${subject} loading, empty, success, and error states instead of only the normal case.`
 		];
 	}
 	if (/security|offensive|threat|network/.test(source)) {
@@ -2720,7 +2720,7 @@ function completionChecks(context: CourseTextContext) {
 			],
 			subject => [
 				`- ${subject} produces reproducible evidence for the required behavior through output, tests, or a trace table.`,
-				`- The checked cases include one expected path, one edge path, and one object or collection interaction.`,
+				`- The checked cases include one normal case, one edge path, and one object or collection interaction.`,
 				`- The closing note states what responsibility each relevant class or method owns.`
 			]
 		]);
@@ -3343,14 +3343,14 @@ function compactGeneratedProjectSupport(
 			)
 			.replace(
 				new RegExp(
-					`\\b(one|each|every|a|an) ${escapedReference} (insert\\/search\\/remove path|search)\\b`,
+					`\\b(one|each|every|a|an) ${escapedReference} (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path|insert\\/search\\/remove path|search|traceable case|sanity check|encode\\/decode round trip|limitation)\\b`,
 					"g"
 				),
 				"$1 $2"
 			)
 			.replace(
 				new RegExp(
-					`\\b(one|each|every|a|an) ${escapedBareReference} (insert\\/search\\/remove path|search)\\b`,
+					`\\b(one|each|every|a|an) ${escapedBareReference} (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path|insert\\/search\\/remove path|search|traceable case|sanity check|encode\\/decode round trip|limitation)\\b`,
 					"g"
 				),
 				"$1 $2"
@@ -3639,7 +3639,7 @@ function studioBuildSequence(context: CourseTextContext) {
 			() => [
 				"- Sketch the UI state, action path, data boundary, and feedback shown after the action completes.",
 				"- Implement the view/model/persistence path in small simulator-tested steps.",
-				"- Verify the expected path plus one empty, invalid, inaccessible, or awkward screen state."
+				"- Verify the normal case plus one empty, invalid, inaccessible, or awkward screen state."
 			]
 		]);
 	}
@@ -3695,7 +3695,7 @@ function studioBuildSequence(context: CourseTextContext) {
 			],
 			() => [
 				`- Map the ${studioLabel} UI event to state, rendering, data flow, and the message shown when something goes wrong.`,
-				`- Test ${studioLabel} with one happy path, one invalid input or empty state, and one narrow/wide layout or keyboard path.`,
+				`- Test ${studioLabel} with one normal case, one invalid input or empty state, and one narrow/wide layout or keyboard path.`,
 				`- Keep the ${studioLabel} browser, console, and request/response evidence aligned with the stated requirement.`
 			]
 		]);

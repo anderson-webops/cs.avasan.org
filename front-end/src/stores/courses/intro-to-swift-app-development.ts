@@ -1012,7 +1012,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Is the Loading State Part of the Product?",
 					content:
-						"Explain why the user experience of waiting, retrying, or failing to load is part of the app's design quality, not just an engineering detail. This helps prevent the common beginner habit of only building the happy path."
+						"Explain why the user experience of waiting, retrying, or failing to load is part of the app's design quality, not just an engineering detail. This helps prevent the common beginner habit of only building the default interaction."
 				}
 			],
 			supplementalProjects: [

@@ -118,7 +118,7 @@ export function buildSupportSectionGuidance({
 
 	if (section === "debugging") {
 		return [
-			`Use **${title}** to diagnose realistic failure modes instead of only rerunning the happy path.`,
+			`Use **${title}** to diagnose realistic failure modes instead of only rerunning the normal case.`,
 			`Check the work for ${focus}.`,
 			`Record the ${courseFamily} symptom, the smallest reproduction, the suspected cause, the fix, and the evidence that the fix changed the behavior.`
 		].join("\n\n");

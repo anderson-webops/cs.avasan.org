@@ -11,7 +11,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Preferred IDE and Real Linux Environment",
 					content:
-						"Standardize on `VS Code` and make the real requirement a usable Linux shell rather than the editor itself. This course is command-line and lab oriented, so Expect to run diagnostics and configuration changes on a Linux VM, remote server, WSL instance, or disposable cloud host rather than only from a local desktop shell."
+						"Standardize on `VS Code` and make the real requirement a usable Linux shell rather than the editor itself. This course is command-line and lab oriented, so expect to run diagnostics and configuration changes on a Linux VM, remote server, WSL instance, or disposable cloud host rather than only from a local desktop shell."
 				},
 				{
 					title: "macOS and Windows Walkthroughs",
