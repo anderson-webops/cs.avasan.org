@@ -1998,11 +1998,19 @@ function remediationPrompt(context: CourseTextContext) {
 		subject =>
 			`Record the specific misconception in ${subject}, complete one focused remediation problem, and revisit the same skill before moving to a more complex project.`,
 		subject =>
-			`For ${subject}, identify the missing vocabulary, tracing step, syntax habit, design choice, or test case, then retry a smaller version.`,
+			`For ${subject}, identify the missing vocabulary, trace step, syntax habit, design choice, or test case, then retry a smaller version.`,
 		subject =>
 			`Use ${subject} to name the blocker, solve one narrower practice case, and return to the original prompt with the corrected idea.`,
 		subject =>
-			`Isolate the smallest difficult step in ${subject}, correct it with one focused example, and record what changed.`
+			`Isolate the smallest difficult step in ${subject}, correct it with one focused example, and record what changed.`,
+		subject =>
+			`Turn ${subject} into a shorter rehearsal: name the uncertain idea, solve one minimal case, and then rebuild the original task.`,
+		subject =>
+			`For ${subject}, separate vocabulary confusion from process confusion, then repair the first step that fails.`,
+		subject =>
+			`Use ${subject} to create one simpler example that proves the missing rule before returning to the full checkpoint.`,
+		subject =>
+			`In ${subject}, write the expected result first, compare it with the attempted result, and revise the smallest mismatch.`
 	]);
 }
 
@@ -2100,7 +2108,15 @@ function diagnosticExtensionPrompt(context: CourseTextContext) {
 		subject =>
 			`Add one edge case to ${subject} and identify which requirement it tests.`,
 		subject =>
-			`Change one success condition in ${subject} and compare it with the original version.`
+			`Change one success condition in ${subject} and compare it with the original version.`,
+		subject =>
+			`Create a second version of ${subject} with a different input, representation, or explanation path.`,
+		subject =>
+			`Add a transfer example to ${subject} that uses the same idea in a new context.`,
+		subject =>
+			`Modify ${subject} so one assumption changes, then explain which part of the original reasoning still works.`,
+		subject =>
+			`Add one verification step to ${subject} that would catch a different mistake than the original check.`
 	]);
 }
 
@@ -2225,11 +2241,38 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (isLowLevelSystemsContext(context)) {
-		return [
-			`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable machine behavior before implementation.`,
-			`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, register or memory traces, logs, or command-line output.`,
-			`- Record the command and evidence for ${subject} so the systems behavior can be reproduced from a clean checkout or shell.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable machine behavior before implementation.`,
+				`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, register or memory traces, logs, or command-line output.`,
+				`- Record the command and evidence for ${subject} so the systems behavior can be reproduced from a clean checkout or shell.`
+			],
+			subject => [
+				`- State the ${subject} toolchain, source files, expected runtime signal, and resource or memory boundary before changing code.`,
+				`- Check ${subject} with one ordinary run and one diagnostic run using compiler warnings, return codes, debugger state, sanitizer output, or logs.`,
+				`- Keep the ${subject} reproduction note focused on the exact command, starting state, and observed low-level evidence.`
+			],
+			subject => [
+				`- Name the ${subject} entry point, headers or linked files, input fixture, and system assumption being tested.`,
+				`- Compare expected output with a boundary or fault-shaped case, then inspect one memory, register, process, or trace detail.`,
+				`- Record enough ${subject} terminal evidence that the result can be rerun without hidden IDE state.`
+			],
+			subject => [
+				`- Identify the ${subject} compile target, runtime setup, ownership or layout assumption, and success signal before implementation.`,
+				`- Use a small successful run, a failing or edge run, and one tool-backed observation to verify behavior.`,
+				`- Note which ${subject} command, diagnostic, or representation detail would matter most during troubleshooting.`
+			],
+			subject => [
+				`- Describe the ${subject} inputs, outputs, files, build flags, and cleanup or rollback path before running it.`,
+				`- Capture evidence from both the intended path and a path that stresses bounds, lifetime, permissions, or process state.`,
+				`- Explain the ${subject} result through the observed command output rather than only through source-code intent.`
+			],
+			subject => [
+				`- Set the ${subject} preconditions: command, environment, source boundary, runtime input, and low-level behavior to inspect.`,
+				`- Rerun after each meaningful change and keep one ordinary output plus one warning, trace, log, return code, or memory observation.`,
+				`- Close ${subject} with a reproducibility note naming the assumption that would fail first in a different environment.`
+			]
+		]);
 	}
 	if (
 		/\binput\/output\b/.test(source) &&
@@ -2254,11 +2297,28 @@ function projectExpectations(context: CourseTextContext) {
 		]);
 	}
 	if (/c systems|systems build|assembly/.test(source)) {
-		return [
-			`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable system behavior before implementation.`,
-			`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, logs, or command-line output.`,
-			`- Record the command and evidence for ${subject} so the systems behavior can be reproduced from a clean checkout or shell.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable system behavior before implementation.`,
+				`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, logs, or command-line output.`,
+				`- Record the command and evidence for ${subject} so the systems behavior can be reproduced from a clean checkout or shell.`
+			],
+			subject => [
+				`- Name the ${subject} source files, build flags, entry point, and runtime state that should be visible after the run.`,
+				`- Check one successful run and one failure-shaped run with terminal output, warning output, debugger output, or logs.`,
+				`- Keep the ${subject} final evidence tied to a repeatable command rather than an IDE-only observation.`
+			],
+			subject => [
+				`- State the ${subject} compile path, input fixture, memory or process assumption, and output that proves success.`,
+				`- Use compiler diagnostics, return codes, command output, traces, or sanitizer output to compare expected and edge behavior.`,
+				`- Record which ${subject} boundary was tested: header/source split, lifetime, layout, process state, or machine behavior.`
+			],
+			subject => [
+				`- Set up ${subject} with an explicit command, file boundary, expected output, and cleanup step if the run changes state.`,
+				`- Verify a normal case, a boundary or malformed case, and one low-level symptom from logs, traces, warnings, or return codes.`,
+				`- Explain how the ${subject} evidence supports the systems claim being practiced.`
+			]
+		]);
 	}
 	if (/\b(?:multi-file|source files?|headers?)\b/.test(source)) {
 		return [
@@ -2280,7 +2340,7 @@ function projectExpectations(context: CourseTextContext) {
 				`- Include ${subject} empty, loading, success, and failure behavior or explain why a state does not apply.`
 			],
 			subject => [
-				`- Name the ${subject} event, state update, rendering change, and data boundary before implementation.`,
+				`- Identify the ${subject} event, state update, rendering change, and data boundary before implementation.`,
 				`- Check ${subject} on mobile-width and desktop-width screens with current console output visible.`,
 				`- Verify ${subject} normal behavior plus one empty, error, validation, or slow-loading state.`
 			],
@@ -2288,6 +2348,26 @@ function projectExpectations(context: CourseTextContext) {
 				`- Map the ${subject} UI path from input or click through state, data, and rendered result.`,
 				`- Run ${subject} from a clean page load and resize the viewport before accepting the result.`,
 				`- Confirm ${subject} handles the ordinary case and at least one missing-data, invalid-input, or failed-request case.`
+			],
+			subject => [
+				`- Define the ${subject} route or component, user action, state owner, and visible response before coding.`,
+				`- Inspect browser output after a refresh and after one changed viewport or keyboard interaction.`,
+				`- Include one non-ideal state such as missing input, invalid data, loading delay, failed request, or empty content.`
+			],
+			subject => [
+				`- State how ${subject} moves from user input to state/data change to DOM, canvas, or API output.`,
+				`- Test the main interaction in the browser, then repeat with one layout, validation, console, or network concern.`,
+				`- Keep the final check tied to rendered behavior rather than only to code structure.`
+			],
+			subject => [
+				`- Sketch ${subject} as a user-flow checklist: trigger, state change, rendered feedback, and failure feedback.`,
+				`- Verify the clean-load path and one awkward path before adding polish.`,
+				`- Record the browser evidence that proves the behavior on the intended screen size or interaction mode.`
+			],
+			subject => [
+				`- Name the ${subject} visible requirement, the source of data or state, and the UI feedback expected when it succeeds or fails.`,
+				`- Use a current browser run to check ordinary behavior, an empty or invalid state, and one responsive or accessibility concern.`,
+				`- Explain which event handler, state update, DOM/canvas operation, or request boundary controls the result.`
 			]
 		]);
 	}
@@ -2463,11 +2543,33 @@ function projectExpectations(context: CourseTextContext) {
 		]);
 	}
 	if (isApcsContext(context)) {
-		return [
-			`- Identify the ${subject} Java concept being practiced, the relevant variables or object state, and the expected output or method result.`,
-			`- Compile and run ${subject}, then test a normal AP-style case plus one edge case involving a boundary value, empty collection, null-risk, or branch change when relevant.`,
-			`- Include a short ${subject} trace, state table, or explanation of why the selected Java construct behaves that way.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Identify the ${subject} Java concept being practiced, the relevant variables or object state, and the expected output or method result.`,
+				`- Compile and run ${subject}, then test a normal AP-style case plus one edge case involving a boundary value, empty collection, null-risk, or branch change when relevant.`,
+				`- Include a short ${subject} trace, state table, or explanation of why the selected Java construct behaves that way.`
+			],
+			subject => [
+				`- Name the ${subject} AP Java target: type behavior, expression evaluation, control flow, method call, class state, array, or list operation.`,
+				`- Check a routine case and one case shaped like an AP distractor, such as off-by-one indexing, integer division, equality, aliasing, or mutation.`,
+				`- Record the exact Java rule that justifies the result.`
+			],
+			subject => [
+				`- State the ${subject} preconditions, important variable values, object state, and expected console output or return value.`,
+				`- Run or trace one ordinary example and one boundary example before comparing with the solution.`,
+				`- Explain the answer using AP vocabulary such as primitive, reference, condition, loop invariant, parameter, or list index where relevant.`
+			],
+			subject => [
+				`- Map ${subject} to the AP concept being assessed and the smallest code fragment that proves it.`,
+				`- Verify the main path plus one changed value, branch condition, loop bound, method input, or collection size.`,
+				`- Keep the reasoning note focused on why Java produces that result, not only what the output is.`
+			],
+			subject => [
+				`- Identify which ${subject} statement, method, constructor, array access, list call, or class relationship controls the answer.`,
+				`- Test or trace a standard example, a boundary example, and one example likely to catch a common AP misconception.`,
+				`- Summarize the scoring-relevant reasoning in one compact explanation.`
+			]
+		]);
 	}
 	if (/python/.test(source)) {
 		return variantLines(context, [
@@ -2488,8 +2590,28 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Before coding ${subject}, write the expected input, intermediate state, helper function role, and final printed or saved result.`,
-				`- Use a tiny ${subject} traceable case first, then add one ordinary case and one awkward or invalid case.`,
+				`- Start with a tiny traceable case, then add one ordinary case and one awkward or invalid case.`,
 				`- Keep the ${subject} implementation readable enough that the data flow can be followed without rereading every line.`
+			],
+			subject => [
+				`- State the ${subject} input shape, output shape, important variables, and helper or loop responsibility before coding.`,
+				`- Run a compact hand-checkable case, then compare it with a representative case and one malformed or surprising case.`,
+				`- Explain which ${subject} branch, loop, helper, collection, or file step controls the result.`
+			],
+			subject => [
+				`- Break ${subject} into setup, input handling, core transformation, and visible output before implementation.`,
+				`- Test the smallest meaningful data, ordinary data, and one case involving missing values, duplicates, casing, or punctuation.`,
+				`- Keep the ${subject} explanation focused on how data moves through the program.`
+			],
+			subject => [
+				`- Write one ${subject} example with exact input, important intermediate values, and expected output before adding general logic.`,
+				`- Add one condition, loop, helper, list, dictionary, or file operation at a time and rerun with labeled evidence.`,
+				`- Record the ${subject} assumption most likely to fail when input format or data size changes.`
+			],
+			subject => [
+				`- Identify the ${subject} user input or file data, validation rule, processing step, and output format.`,
+				`- Compare a normal run with an empty, smallest, duplicate, messy, or invalid run that exercises a different path.`,
+				`- Keep parsing, computation, and presentation distinct enough that a bug can be isolated to one layer.`
 			]
 		]);
 	}
@@ -2506,8 +2628,8 @@ function projectExpectations(context: CourseTextContext) {
 				`- Record the ${subject} normal case, edge case, and class or method responsibility being verified.`
 			],
 			subject => [
-				`- For ${subject}, name the owning class, stored state, public method behavior, and expected output or assertion.`,
-				`- Add one ${subject} constructor, branch, method, or collection operation at a time, compiling between meaningful changes.`,
+				`- Identify the ${subject} class that owns the behavior, the stored state it uses, and the expected output or assertion.`,
+				`- Add one constructor, branch, method, or collection operation at a time, compiling between meaningful changes.`,
 				`- Keep ${indefiniteArticleFor(subject)} ${subject} note on the object-state change, equality check, access boundary, or dispatch rule that matters most.`
 			],
 			subject => [
@@ -2522,7 +2644,7 @@ function projectExpectations(context: CourseTextContext) {
 			],
 			subject => [
 				`- Describe ${subject} as a Java object model before coding: responsibilities, collaborators, public calls, and evidence.`,
-				`- Add behavior in compileable increments, checking constructor setup, method calls, and any collection mutation as they appear.`,
+				`- Add behavior in compilable increments, checking constructor setup, method calls, and any collection mutation as they appear.`,
 				`- Keep the verification note focused on the design boundary that made the implementation easier to reason about.`
 			],
 			subject => [
@@ -2534,15 +2656,67 @@ function projectExpectations(context: CourseTextContext) {
 				`- Before implementing ${subject}, write the object state, public behavior, and one example method call with its expected result.`,
 				`- Keep each compile/run cycle tied to one change in state, control flow, collection behavior, or method dispatch.`,
 				`- Finish with evidence that separates syntax correctness from the design decision being practiced.`
+			],
+			subject => [
+				`- Write the ${subject} class contract as state, public calls, return values, side effects, and expected evidence.`,
+				`- Implement fields, constructors, methods, branches, and collection changes in slices that compile independently.`,
+				`- Compare one routine object state with one boundary or awkward state and explain the Java rule involved.`
+			],
+			subject => [
+				`- Decide whether ${subject} belongs in a class, record, interface, helper method, or collection workflow before coding.`,
+				`- Keep a small driver, trace, or test available after every constructor, method, loop, or dispatch change.`,
+				`- Record the boundary between syntax issues and object-design issues in the final check.`
+			],
+			subject => [
+				`- Sketch the ${subject} object relationships, access levels, method signatures, and evidence needed for the result.`,
+				`- Build the core behavior first, then add the branch, overload, override, record, interface, or list behavior that carries the concept.`,
+				`- Check a typical case, an edge case, and one case that changes object state or collaboration.`
+			],
+			subject => [
+				`- Start ${subject} from a concrete example call or object diagram, then generalize the class behavior.`,
+				`- Compile after each public contract change and rerun the smallest example before adding another path.`,
+				`- State which type, method, or collection owns the most important responsibility.`
+			],
+			subject => [
+				`- Separate ${subject} model behavior from console, runner, or test harness behavior before adding extra features.`,
+				`- Verify constructor state, method output, and one awkward input or object transition while the code still compiles cleanly.`,
+				`- Explain which Java feature makes the final behavior reliable.`
 			]
 		]);
 	}
 	if (/c\+\+|cpp/.test(source)) {
-		return [
-			`- Define the ${subject} data representation, ownership or lifetime assumptions, compile command, and expected output.`,
-			`- Build ${subject} with warnings enabled when possible and test one normal case, one boundary case, and one malformed or awkward input.`,
-			`- Record the ${subject} container, pointer/reference, or memory decision that most affects correctness.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define the ${subject} data representation, ownership or lifetime assumptions, compile command, and expected output.`,
+				`- Build ${subject} with warnings enabled when possible and test one normal case, one boundary case, and one malformed or awkward input.`,
+				`- Record the ${subject} container, pointer/reference, or memory decision that most affects correctness.`
+			],
+			subject => [
+				`- State the ${subject} types, invariants, ownership rule, and command needed to reproduce the run.`,
+				`- Check ${subject} with a small ordinary input, an edge input, and one case that stresses copying, bounds, null state, or lifetime.`,
+				`- Keep the ${subject} verification note tied to compiler output, runtime output, sanitizer output, or a traceable data change.`
+			],
+			subject => [
+				`- Map ${subject} to its object, pointer, array, vector, or file representation before implementing behavior.`,
+				`- Rebuild after each API, allocation, loop, branch, or data-structure change so failures stay local.`,
+				`- Explain the ${subject} result through one concrete resource, container, reference, or complexity decision.`
+			],
+			subject => [
+				`- Identify the ${subject} input contract, output contract, build flags, and resource boundary before writing code.`,
+				`- Verify a clean run, a smallest or empty run, and one invalid or stress-shaped run with current output.`,
+				`- Record which ${subject} assumption would break first if the program became larger.`
+			],
+			subject => [
+				`- Separate ${subject} setup, data ownership, mutation behavior, and output formatting before adding extra features.`,
+				`- Run a representative case, a boundary case, and one diagnostic check such as warnings, debugger inspection, or sanitizer output.`,
+				`- Name the ${subject} decision that made the code safer or easier to reason about.`
+			],
+			subject => [
+				`- Write the ${subject} preconditions, postconditions, compile command, and relevant memory or container state before coding.`,
+				`- Build the smallest runnable path first, then add one behavior at a time with a rerun after each meaningful edit.`,
+				`- Close ${subject} by comparing expected state with observed state for a normal case and a deliberately awkward case.`
+			]
+		]);
 	}
 	if (isMathContext(context)) {
 		return variantLines(context, [
@@ -2708,7 +2882,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- The ${subject} explanation names the phenomenon, model or data source, and target vocabulary.`,
 				"- Separate observation from inference.",
-				"- The final answer includes a claim, evidence, and reasoning connection."
+				"- The final response connects the claim to evidence and explains the scientific reasoning."
 			],
 			subject => [
 				`- ${subject} identifies what was observed, what was inferred, and which model or evidence source supports the claim.`,
@@ -2724,6 +2898,46 @@ function completionChecks(context: CourseTextContext) {
 				`- ${subject} includes a clear phenomenon, a relevant model or data source, and one target term used correctly.`,
 				`- At least one ${subject} observation is separated from the conclusion drawn from it.`,
 				`- The final ${subject} answer states the claim, cites evidence, and explains the scientific connection.`
+			],
+			subject => [
+				`- ${subject} names the system being studied, the evidence source, and the vocabulary needed to describe it.`,
+				`- Observations, measurements, or patterns are recorded before the explanation is chosen.`,
+				`- The conclusion explains why the evidence supports the claim and what the model leaves out.`
+			],
+			subject => [
+				`- The ${subject} response distinguishes data, model, pattern, and interpretation.`,
+				`- Target vocabulary is used in context, with at least one sentence or diagram showing the relationship between ideas.`,
+				`- The answer includes a defensible claim plus evidence that can be pointed to in the image, graph, simulation, reading, or dataset.`
+			],
+			subject => [
+				`- ${subject} identifies the relevant variables, observable pattern, and model or diagram used to explain the pattern.`,
+				`- The response states what is directly observed and what is inferred from prior science knowledge.`,
+				`- The reasoning explains the connection between the evidence and the vocabulary, not just the final conclusion.`
+			],
+			subject => [
+				`- The ${subject} work uses a simulation, graph, image, reading, or dataset as evidence rather than unsupported opinion.`,
+				`- Include one limitation, uncertainty, or alternate explanation when the model is incomplete.`,
+				`- Make the final statement clear about the supported claim and the evidence behind it.`
+			],
+			subject => [
+				`- ${subject} points to a specific observation, measurement, diagram feature, graph pattern, or simulation result.`,
+				`- The claim avoids going beyond the evidence that was actually provided.`,
+				`- The reasoning explains how the science vocabulary links the evidence to the conclusion.`
+			],
+			subject => [
+				`- The ${subject} response names the source of evidence and the feature of that source that matters most.`,
+				`- A model limitation, uncertainty, or missing variable is stated when the evidence is incomplete.`,
+				`- The conclusion connects the observed pattern to the relevant concept in a way another reader can check.`
+			],
+			subject => [
+				`- ${subject} separates what the source shows from what the explanation claims.`,
+				`- The response includes at least one concrete evidence phrase from a graph, image, table, reading, or simulation.`,
+				`- The reasoning sentence explains why that evidence supports the claim instead of only restating the claim.`
+			],
+			subject => [
+				`- The ${subject} work identifies the phenomenon, evidence source, and target term before writing the claim.`,
+				`- The answer includes one check against overclaiming, such as a limitation, alternate cause, or missing measurement.`,
+				`- The final explanation links evidence, vocabulary, and model behavior in a reviewable way.`
 			]
 		]);
 	}
@@ -2810,6 +3024,26 @@ function completionChecks(context: CourseTextContext) {
 				`- ${subject} connects the user action, state/data update, and final screen feedback without hidden setup.`,
 				`- Missing data, invalid input, slow loading, or failed requests are handled intentionally when relevant.`,
 				`- The final check includes browser evidence at more than one screen width.`
+			],
+			subject => [
+				`- ${subject} demonstrates the required browser behavior after a refresh, not only in source code.`,
+				`- The check includes the ordinary interaction plus one empty, invalid, failed, or delayed state when relevant.`,
+				`- The page remains understandable with keyboard use and at a narrow or wide viewport.`
+			],
+			subject => [
+				`- ${subject} ties the event, state change, rendered output, and user feedback together in the page.`,
+				`- At least one non-happy path is exercised, such as missing input, invalid input, unavailable data, or a failed request.`,
+				`- Browser evidence includes layout, console, network, accessibility, or responsive behavior where it matters.`
+			],
+			subject => [
+				`- ${subject} reaches the expected visible result from a clean page load.`,
+				`- A changed input, empty state, validation path, or error path is checked before the task is complete.`,
+				`- The final review names the DOM, canvas, state, or API boundary that controlled the result.`
+			],
+			subject => [
+				`- ${subject} is verified through the rendered page with current browser evidence.`,
+				`- The result is checked at more than one screen width or interaction mode when layout or keyboard use matters.`,
+				`- The completion note separates event handling, data/state update, rendering, and error feedback.`
 			]
 		]);
 	}
@@ -3039,13 +3273,21 @@ function extensionPrompt(context: CourseTextContext) {
 	if (/python level 1|python level 2/.test(source)) {
 		return variantPrompt(context, [
 			subject =>
-				`Extend ${subject} with input validation for one unexpected or blank response.`,
+				`Add input validation to ${subject} for one unexpected, blank, or awkward response.`,
 			subject =>
 				`Add one extra mode to ${subject} that reuses the same variables, loops, or helper functions.`,
 			subject =>
-				`Add a retry or recovery path to ${subject} so an awkward input does not stop the program.`,
+				`Create a retry or recovery path in ${subject} so an awkward input does not stop the program.`,
 			subject =>
-				`Create one alternate output path for ${subject} and test it with a small hand-traced input.`
+				`Create one alternate output path for ${subject} and test it with a small hand-traced input.`,
+			subject =>
+				`Add one file, list, dictionary, loop, or helper-function variation to ${subject} while keeping the output traceable.`,
+			subject =>
+				`Change the input shape for ${subject} and record how the validation or parsing logic responds.`,
+			subject =>
+				`Add one edge case to ${subject} that exercises an empty value, duplicate value, casing issue, or punctuation issue.`,
+			subject =>
+				`Refactor one repeated step in ${subject} into a helper and test it with a compact example.`
 		]);
 	}
 	if (isScratchSource(source)) {
@@ -3110,6 +3352,22 @@ function extensionPrompt(context: CourseTextContext) {
 				`Add a topology or address change to ${subject} and predict the command output before running it.`
 		]);
 	}
+	if (isWebContext(context)) {
+		return variantPrompt(context, [
+			subject =>
+				`Add one loading, empty, invalid, or error state to ${subject} and verify it in the browser.`,
+			subject =>
+				`Add one responsive layout or keyboard path to ${subject} and record the visible result.`,
+			subject =>
+				`Add one user-flow variation to ${subject} that changes input, state, API behavior, or persistence.`,
+			subject =>
+				`Add one console, network, or server-side verification step for the same ${subject} user action.`,
+			subject =>
+				`Add one accessibility check to ${subject}, such as focus order, label clarity, contrast, or reduced-motion behavior.`,
+			subject =>
+				`Add one refresh or navigation test to ${subject} so the state does not depend on hidden setup.`
+		]);
+	}
 	if (isJavaContext(context)) {
 		return variantPrompt(context, [
 			subject =>
@@ -3139,7 +3397,15 @@ function extensionPrompt(context: CourseTextContext) {
 			subject =>
 				`Add one invalid-input or lifetime-boundary test to ${subject} and record the diagnostic evidence.`,
 			subject =>
-				`Add a build, sanitizer, debugger, or logging check to ${subject} that confirms the low-level behavior.`
+				`Add a build, sanitizer, debugger, or logging check to ${subject} that confirms the low-level behavior.`,
+			subject =>
+				`Add one ownership, cleanup, or resource-limit variation to ${subject} and compare the observed output with the expected state.`,
+			subject =>
+				`Add a command-line option, input fixture, or diagnostic flag to ${subject} and record how the evidence changes.`,
+			subject =>
+				`Add one stress or boundary run to ${subject} that targets allocation, indexing, lifetime, timing, or process behavior.`,
+			subject =>
+				`Add a reproducibility note to ${subject} with the exact command, expected output, and one tool-backed observation.`
 		]);
 	}
 	if (/science|physics|chemistry|biology|earth|ecosystem/.test(source)) {
@@ -3589,6 +3855,10 @@ function compactGeneratedProjectSupport(
 			.replace(
 				/\bfinal the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (note|explanation|response|answer|work)\b/g,
 				"final $1"
+			)
+			.replace(
+				/\bclosing the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (note|explanation|response|answer|work)\b/g,
+				"closing $1"
 			)
 			.replace(
 				/\bone the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (encode\/decode round trip|search|limitation|normal case|edge case|traceable case|sanity check)\b/g,
@@ -4288,10 +4558,6 @@ function compactStudioSupportText(studioLabel: string, text: string) {
 
 	return text
 		.replace(new RegExp(`\\bFor ${escapedLabel}, `, "g"), "")
-		.replace(
-			new RegExp(`\\bAfter ${escapedLabel} works\\b`, "g"),
-			"After it works"
-		)
 		.replace(
 			/(^|\n)- ([a-z])/g,
 			(_match, prefix: string, first: string) =>

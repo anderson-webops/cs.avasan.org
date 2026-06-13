@@ -196,6 +196,11 @@ function compactGuidanceBody(
 		)
 		.replace(new RegExp(escapedTitle, "g"), reference)
 		.replace(
+			/\b(After|after|Before|before|When|when|If|if|While|while|Once|once|Until|until|With|with|For|for|From|from|Against|against) The (program|project|artifact|app|lab|result|feature|pipeline)\b/g,
+			(_match: string, lead: string, item: string) =>
+				`${lead} the ${item}`
+		)
+		.replace(
 			new RegExp(
 				`\\b${escapedCourseFamily} ${escapedReference}\\b`,
 				"gi"
@@ -237,6 +242,14 @@ function compactGuidanceBody(
 			"Final note"
 		)
 		.replace(
+			new RegExp(`\\bclosing ${escapedReference} note\\b`, "g"),
+			"closing note"
+		)
+		.replace(
+			new RegExp(`\\bClosing ${escapedReference} note\\b`, "g"),
+			"Closing note"
+		)
+		.replace(
 			new RegExp(
 				`\\bAfter ${escapedReference} ${escapedBareReference}\\b`,
 				"g"
@@ -267,6 +280,11 @@ function compactGuidanceBody(
 		.replace(
 			new RegExp(`\\bAfter ${escapedReference} simulator path\\b`, "g"),
 			"After the simulator path"
+		)
+		.replace(
+			/(^|\n)- the (program|project|artifact|app|lab|result|feature|pipeline)\b/g,
+			(_match: string, prefix: string, item: string) =>
+				`${prefix}- The ${item}`
 		)
 		.replace(
 			new RegExp(
@@ -616,8 +634,12 @@ function systemsFamilyFocus(
 		`Use ${moduleTitle} to connect source code to runtime evidence: command line, build output, process state, memory layout, or diagnostic traces should agree`,
 		`Make ${moduleTitle} easy to rerun from scratch by recording setup assumptions, command sequence, expected output, and one low-level observation`,
 		`Keep ${moduleTitle} focused on the boundary between program design and machine behavior, with evidence from compilation, execution, or diagnostics`,
-		`Treat ${moduleTitle} as an engineering artifact: define the contract, run it from a clean command, and capture the evidence that proves the contract holds`
-	][variantIndex(courseFamily, moduleTitle, kind, 8)];
+		`Treat ${moduleTitle} as an engineering artifact: define the contract, run it from a clean command, and capture the evidence that proves the contract holds`,
+		`Use ${moduleTitle} to make one ownership, resource, process, or performance assumption visible through repeatable command evidence`,
+		`Frame ${moduleTitle} around the command path and the diagnostic signal that would reveal an incorrect systems assumption`,
+		`Make ${moduleTitle} show both the intended behavior and the evidence source used to distinguish it from a lucky run`,
+		`Keep ${moduleTitle} tied to concrete artifacts: source files, build flags, runtime input, output, and one diagnostic observation`
+	][variantIndex(courseFamily, moduleTitle, kind, 12)];
 }
 
 function focusFor(
@@ -771,8 +793,48 @@ function requiredWorkSteps(
 				`Decide what ${subject} should make public, what should stay private, and what evidence will prove the boundary works.`,
 				`Implement one responsibility at a time and keep constructor setup, method behavior, and collection or inheritance logic separately testable.`,
 				`Compare ${subject} against one expected scenario and one failure-shaped scenario before using the reference.`
+			],
+			[
+				`Write ${subject} as a small Java contract: visible behavior, stored state, input values, output values, and ownership of each rule.`,
+				`Add fields, constructors, methods, and tests in an order that keeps every compile error tied to a recent change.`,
+				`Check one straightforward scenario, one boundary scenario, and one scenario involving object identity, equality, or mutation.`
+			],
+			[
+				`Choose the ${subject} type structure before coding: class, record, interface, helper, collection, or inheritance relationship.`,
+				`Keep each implementation slice runnable, then expand only after the current method behavior is visible.`,
+				`Use the final check to show both the Java syntax rule and the design boundary being practiced.`
+			],
+			[
+				`Describe ${subject} with an example object or call sequence before implementing the general version.`,
+				`Keep one small driver example available while compiling after each state, branch, loop, or dispatch change.`,
+				`Check the expected path, a boundary path, and one case that would expose a vague method contract.`
+			],
+			[
+				`Separate ${subject} into model behavior, runner or console behavior, and any collection or inheritance behavior.`,
+				`Implement the smallest observable model behavior first, then add the extra path that carries the module concept.`,
+				`Confirm the result with a concrete output, assertion, or trace for a typical case and a deliberately awkward case.`
+			],
+			[
+				`Define ${subject} through one example object state, one public call, and one expected result before writing the general solution.`,
+				`Compile after each change to the public contract, then rerun the smallest example before expanding behavior.`,
+				`Use the final check to identify the class, method, record, interface, or collection choice that carried the design.`
+			],
+			[
+				`Start ${subject} by separating data representation, behavior, and driver code.`,
+				`Add implementation details in slices that keep errors tied to one field, constructor, method, branch, or list operation.`,
+				`Check a normal run, a boundary run, and one run that tests how Java references or objects behave.`
+			],
+			[
+				`Write the ${subject} API expectation first: what can be called, what changes state, and what should be returned or printed.`,
+				`Keep object creation, method calls, and collection changes independently inspectable while the program compiles.`,
+				`Compare the finished behavior with one example that should pass and one example that should reveal a weak contract.`
+			],
+			[
+				`Choose a narrow responsibility for each ${subject} Java type before adding optional behavior.`,
+				`Build the first runnable path around one constructor or method, then add edge behavior only after the main path is verified.`,
+				`Finish with evidence that names the relevant Java concept and the code boundary where it appears.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 8)];
+		][variantIndex(courseFamily, moduleTitle, kind, 16)];
 	}
 
 	if (family.includes("python")) {
@@ -873,7 +935,7 @@ function requiredWorkSteps(
 	) {
 		return [
 			[
-				`Identify the inputs, ownership or lifetime boundary, build command, runtime behavior, and diagnostic output for ${moduleTitle}.`,
+				`Identify the ${moduleTitle} inputs, ownership or lifetime boundary, build command, runtime behavior, and diagnostic output.`,
 				`Implement or instrument ${moduleTitle} one boundary at a time, rebuilding and rerunning after each meaningful change.`,
 				`Verify ${moduleTitle} with a normal case, a boundary or failure case, and one trace, sanitizer, debugger, memory, or performance observation.`
 			],
@@ -911,16 +973,63 @@ function requiredWorkSteps(
 				`Write down the ${moduleTitle} preconditions, command path, expected side effect or output, and the diagnostic signal to inspect.`,
 				`Implement the smallest runnable version first, then add resource, memory, performance, or control-flow detail in verifiable steps.`,
 				`Confirm the result with a clean rerun, a stress or invalid case, and one concrete machine- or tool-level observation.`
+			],
+			[
+				`State the ${moduleTitle} source files, command, input fixture, resource ownership, and expected output before implementation.`,
+				`Build the core run first, then add one diagnostic, error path, or data-structure detail at a time.`,
+				`Verify the intended behavior plus one boundary case using terminal, debugger, sanitizer, trace, or log evidence.`
+			],
+			[
+				`Describe the ${moduleTitle} runtime contract: what enters, what changes, what resource is owned, and what output proves success.`,
+				`Keep each build/run cycle tied to one ownership, lifetime, layout, complexity, or command assumption.`,
+				`Compare a representative run with a failure-shaped run and record the low-level evidence that explains the difference.`
+			],
+			[
+				`Name the ${moduleTitle} command path, toolchain flags, memory or process boundary, and observable result before coding.`,
+				`Change one API, allocation, loop, branch, build setting, or diagnostic hook at a time.`,
+				`Finish with a repeatable run plus one trace, warning, sanitizer result, debugger observation, or timing clue.`
+			],
+			[
+				`Frame ${moduleTitle} around the engineering question being tested: representation, ownership, lifetime, complexity, or system state.`,
+				`Use small command-line checks to keep source changes, build output, runtime behavior, and diagnostics aligned.`,
+				`Record evidence for the ordinary path and the path most likely to reveal a hidden systems assumption.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 8)];
+		][variantIndex(courseFamily, moduleTitle, kind, 12)];
 	}
 
 	if (family.includes("swift")) {
 		return [
-			`Identify the ${moduleTitle} screen, state, user action, data flow, and expected app behavior before changing the project.`,
-			`Implement one ${moduleTitle} view, model, state transition, or persistence path at a time and run it in the simulator.`,
-			`Verify ${moduleTitle} with a normal interaction, an empty or invalid state, and one accessibility or navigation check.`
-		];
+			[
+				`Identify the ${moduleTitle} screen, state, user action, data flow, and expected app behavior before changing the project.`,
+				`Implement one ${moduleTitle} view, model, state transition, or persistence path at a time and run it in the simulator.`,
+				`Verify ${moduleTitle} with a normal interaction, an empty or invalid state, and one accessibility or navigation check.`
+			],
+			[
+				`Map ${moduleTitle} from visible screen to state owner, user event, model data, and feedback before editing code.`,
+				`Build the smallest simulator-visible path first, then add navigation, persistence, validation, or loading behavior.`,
+				`Check the main interaction plus one empty, invalid, narrow-screen, or accessibility condition.`
+			],
+			[
+				`State the ${moduleTitle} app goal as a screen, action, state change, and success signal.`,
+				`Change one view, binding, model, or persistence boundary at a time and rerun the preview or simulator after meaningful steps.`,
+				`Confirm that a normal path and one awkward state both produce understandable UI feedback.`
+			],
+			[
+				`Name the ${moduleTitle} SwiftUI view, model data, navigation path, and project setting that could affect the result.`,
+				`Implement in small build/run slices so layout, state, and configuration problems do not blur together.`,
+				`Verify the target behavior with a successful action and one layout, accessibility, loading, or invalid-state check.`
+			],
+			[
+				`Describe the ${moduleTitle} user story, initial state, expected state transition, and final visible screen.`,
+				`Keep model changes, view changes, and project-configuration changes separately testable during implementation.`,
+				`Record evidence from one simulator or preview run plus one edge condition tied to navigation, persistence, or accessibility.`
+			],
+			[
+				`Decide what ${moduleTitle} should prove about state, data flow, user input, or platform behavior before adding features.`,
+				`Run the app after each important view, model, binding, or persistence change and inspect the visible result.`,
+				`Finish with one ordinary interaction and one condition that checks whether the app path remains understandable.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 6)];
 	}
 
 	return [
@@ -1045,12 +1154,23 @@ function referenceReviewStep(
 			`Use the reference after ${moduleTitle} has a clean command path, then compare one build, resource, memory, or diagnostic decision.`,
 			`Compare ${moduleTitle} with the reference by checking one assumption about lifetime, layout, command output, error handling, or tool evidence.`,
 			`After ${moduleTitle} can be reproduced from scratch, use the reference to find one difference in setup, traceability, or low-level reasoning.`,
-			`Review the reference only after ${moduleTitle} has local evidence, then record one difference that changes correctness, maintainability, or confidence.`
-		][variantIndex(courseFamily, moduleTitle, kind, 8)];
+			`Review the reference only after ${moduleTitle} has local evidence, then record one difference that changes correctness, maintainability, or confidence.`,
+			`Once ${moduleTitle} has repeatable command evidence, compare one resource, diagnostic, or complexity decision with the reference.`,
+			`Use the reference to audit ${moduleTitle} only after the local failure or boundary case has been tested.`,
+			`Compare the ${moduleTitle} command path, cleanup path, or diagnostic evidence with the reference and record the useful difference.`,
+			`After ${moduleTitle} is reproducible, use the reference to identify one missed edge case, tool setting, or ownership assumption.`
+		][variantIndex(courseFamily, moduleTitle, kind, 12)];
 	}
 
 	if (family.includes("swift")) {
-		return `After the ${moduleTitle} simulator path works, compare against the reference and record one difference in view state, navigation, persistence, or accessibility behavior.`;
+		return [
+			`After the ${moduleTitle} simulator path works, compare against the reference and record one difference in view state, navigation, persistence, or accessibility behavior.`,
+			`Use the ${moduleTitle} reference only after the local screen state is visible, then compare one view, model, navigation, or project-setting choice.`,
+			`Compare ${moduleTitle} with the reference by checking one state transition, data-flow choice, layout behavior, or accessibility concern.`,
+			`After ${moduleTitle} runs from a clean launch or preview, use the reference to identify one missed app-state or UI-feedback detail.`,
+			`Review the ${moduleTitle} reference after the main interaction is reproducible, then record one difference in persistence, validation, or navigation behavior.`,
+			`Once ${moduleTitle} has simulator or preview evidence, compare the reference for one platform, state, or layout decision that changes reliability.`
+		][variantIndex(courseFamily, moduleTitle, kind, 6)];
 	}
 
 	return `After the ${moduleTitle} artifact works, compare against the reference and record one meaningful difference in behavior, robustness, readability, or design.`;
@@ -1183,8 +1303,48 @@ function completionCheckSteps(
 				`${moduleTitle} demonstrates the target behavior after a clean compile, not just from previous run output.`,
 				`The checked cases cover expected behavior, boundary behavior, and one class, record, interface, or collection interaction.`,
 				`The final ${moduleTitle} note states which method contract or representation choice mattered most.`
+			],
+			[
+				`${moduleTitle} rebuilds from the current files and shows the expected console output, assertion, or method trace.`,
+				`Verification includes a routine call, a stress or boundary call, and one case involving stored state or collaboration between objects.`,
+				`The ${moduleTitle} review identifies the Java rule that explains the result.`
+			],
+			[
+				`${moduleTitle} has current compile evidence and a visible check for the main behavior.`,
+				`The checks exercise constructor setup, public method behavior, and one awkward condition such as null risk, equality, or collection mutation where relevant.`,
+				`The ${moduleTitle} summary separates syntax correctness from the API or object-design decision.`
+			],
+			[
+				`${moduleTitle} can be rerun without relying on stale IDE output, and the expected behavior is easy to inspect.`,
+				`Compare an ordinary example, an edge example, and one type-boundary example with the expected results.`,
+				`The ${moduleTitle} closing note names the responsibility that belongs in the class, record, interface, or helper method.`
+			],
+			[
+				`${moduleTitle} produces reproducible evidence through a run, unit-style check, trace, or small driver program.`,
+				`The verification distinguishes input handling, object state, and method return or side-effect behavior.`,
+				`The ${moduleTitle} review records the design choice that would be hardest to fix if it were wrong.`
+			],
+			[
+				`${moduleTitle} has a clean compile/run path and evidence tied to the current source files.`,
+				`The check covers the main method behavior, one boundary behavior, and one state or reference behavior where relevant.`,
+				`The ${moduleTitle} review names the Java construct that made the behavior possible.`
+			],
+			[
+				`${moduleTitle} demonstrates the intended behavior through a driver, test, trace, or recorded console output.`,
+				`Verification compares a typical example with one example involving invalid input, boundary state, or object collaboration.`,
+				`The ${moduleTitle} summary states the API, state, or representation decision that mattered.`
+			],
+			[
+				`${moduleTitle} can be rebuilt and explained from the current class, record, interface, or collection structure.`,
+				`The result is checked through object creation, method execution, and one awkward state transition where the prompt allows it.`,
+				`The closing ${moduleTitle} note identifies what belongs in the model code versus runner or console code.`
+			],
+			[
+				`${moduleTitle} shows current evidence for both syntax correctness and the intended object behavior.`,
+				`The verification includes one straightforward example and one example chosen to expose equality, aliasing, mutation, or dispatch mistakes.`,
+				`The final ${moduleTitle} review names the rule a reader should remember for the next Java task.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 8)];
+		][variantIndex(courseFamily, moduleTitle, kind, 16)];
 	}
 
 	if (family.includes("python")) {
@@ -1323,16 +1483,63 @@ function completionCheckSteps(
 				`${moduleTitle} has a documented rerun path and evidence from output, tests, logs, traces, or tooling.`,
 				`The verification includes a normal case, a problematic case, and one resource, lifetime, layout, timing, or process-state detail.`,
 				`The final ${moduleTitle} note identifies the assumption that would be easiest to break in a larger system.`
+			],
+			[
+				`${moduleTitle} has current evidence from a clean build/run command, not only from prior IDE output.`,
+				`The checks include the intended run, one boundary or failure-shaped run, and one warning, trace, log, sanitizer, or debugger observation.`,
+				`The ${moduleTitle} review names the resource, lifetime, layout, complexity, or command assumption that controlled the result.`
+			],
+			[
+				`${moduleTitle} can be rerun from documented source files, command flags, input state, and cleanup assumptions.`,
+				`Verification compares expected output with one stress, malformed, timing, memory, or process-state condition.`,
+				`The closing ${moduleTitle} note connects the diagnostic evidence to the systems concept being practiced.`
+			],
+			[
+				`${moduleTitle} records the build target, runtime input, observable output, and diagnostic source used for verification.`,
+				`At least one ordinary path and one edge path are checked with concrete terminal or tool evidence.`,
+				`The ${moduleTitle} summary separates program behavior from compiler, linker, debugger, sanitizer, or runtime-environment behavior.`
+			],
+			[
+				`${moduleTitle} shows the expected behavior through repeatable output, logs, traces, tests, or instrumentation.`,
+				`The verification includes a representative path, an awkward path, and one low-level clue tied to ownership, layout, or resource use.`,
+				`The final ${moduleTitle} review identifies the assumption that must stay true for the artifact to remain correct.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 8)];
+		][variantIndex(courseFamily, moduleTitle, kind, 12)];
 	}
 
 	if (family.includes("swift")) {
 		return [
-			`The ${moduleTitle} app path runs in the simulator or preview and shows the expected view/state behavior.`,
-			`A normal ${moduleTitle} interaction, an empty or invalid state, and one navigation, persistence, or accessibility check are exercised.`,
-			`The final ${moduleTitle} note names the view, model, state, data-flow, or platform decision that mattered.`
-		];
+			[
+				`The ${moduleTitle} app path runs in the simulator or preview and shows the expected view/state behavior.`,
+				`A normal ${moduleTitle} interaction, an empty or invalid state, and one navigation, persistence, or accessibility check are exercised.`,
+				`The final ${moduleTitle} note names the view, model, state, data-flow, or platform decision that mattered.`
+			],
+			[
+				`${moduleTitle} reaches the intended screen from a clean launch or preview state.`,
+				`The check covers a normal interaction, one empty or invalid state, and one layout, navigation, or accessibility condition.`,
+				`The ${moduleTitle} review identifies whether the important choice lived in the view, model, state owner, or project setup.`
+			],
+			[
+				`${moduleTitle} has current simulator, preview, or device evidence for the target app behavior.`,
+				`State changes, visible feedback, and one edge condition such as missing data, invalid input, or navigation reversal are checked.`,
+				`The ${moduleTitle} summary ties the result to a Swift, SwiftUI, persistence, or platform decision.`
+			],
+			[
+				`${moduleTitle} can be demonstrated after a fresh build/run cycle with the expected screen state visible.`,
+				`The app is checked for the main path plus one device-size, accessibility, loading, empty, or failed-state concern.`,
+				`The ${moduleTitle} note records the state transition or data-flow boundary that controlled the behavior.`
+			],
+			[
+				`${moduleTitle} shows the intended user path without relying only on source-code inspection.`,
+				`The verification includes a successful interaction and one condition that tests navigation, persistence, validation, or layout resilience.`,
+				`The ${moduleTitle} review names the app layer that made the result reliable.`
+			],
+			[
+				`${moduleTitle} has a repeatable preview or simulator path and clear evidence for the expected result.`,
+				`One ordinary action, one awkward state, and one accessibility or project-configuration check are included.`,
+				`The ${moduleTitle} closing note separates UI behavior from state, model, or configuration behavior.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 6)];
 	}
 
 	return [

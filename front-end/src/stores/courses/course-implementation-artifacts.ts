@@ -875,10 +875,32 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 				next === 1
 					? `${module.title}: Standards Practice Set`
 					: `${module.title}: Modeling or Error-Analysis Project`;
+			const standardsPracticeVariants = [
+				`**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. Include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- Each solution shows the algebraic move, representation, or rule used.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- The review note records one misconception or missing prerequisite to revisit before the next module.`,
+				`**Project goal:** Build a focused ${courseLabel} practice checkpoint for ${module.title}. Include a worked example, three independent attempts, and one representation change such as equation to graph, graph to table, or verbal model to equation.\n\n**Completion checks:**\n- The worked example names each transformation and why it is valid.\n- The independent problems include one routine case and one case with a sign, unit, graph, or context trap.\n- The reflection names one error pattern and the check that would catch it next time.`,
+				`**Project goal:** Turn ${module.title} into a compact standards-aligned practice set with a model problem, fluency problems, and one reasoning prompt.\n\n**Completion checks:**\n- The work makes setup, calculation, and interpretation visible instead of jumping to an answer.\n- One problem requires explaining the method choice in words or with a diagram/table/graph.\n- The final review identifies one skill that is secure and one skill that needs another example.`,
+				`**Project goal:** Create a ${courseLabel} skill-check for ${module.title} that mixes procedural practice with explanation. Include one solved model, three new problems, and one representation or justification task.\n\n**Completion checks:**\n- Solutions include enough intermediate work to locate an arithmetic, algebra, or representation mistake.\n- At least one prompt asks for a reasonableness check, substitution check, estimate, graph check, or unit/context check.\n- The closing note names the misconception most likely to affect the next module.`
+			];
+			const modelingProjectVariants = [
+				`**Project goal:** Apply ${module.title} in a ${courseLabel} modeling, graphing, or error-analysis context. The work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The project contains a concrete scenario or flawed worked solution.\n- The work explains the choice of equation, graph, table, or verbal model.\n- The final answer includes a units/context check or corrected error statement.`,
+				`**Project goal:** Use ${module.title} to analyze a realistic situation or repair a flawed solution. Choose the representation, solve carefully, and explain the meaning of the result.\n\n**Completion checks:**\n- The scenario states what each quantity represents and what the answer should describe.\n- The selected equation, graph, table, or diagram is justified before calculation begins.\n- The conclusion checks context, units, domain, or the corrected mistake rather than only reporting a number.`,
+				`**Project goal:** Connect ${module.title} to a modeling or error-analysis task where the setup matters as much as the computation.\n\n**Completion checks:**\n- The response distinguishes given information, chosen representation, operations, and interpretation.\n- A flawed step, unreasonable answer, or alternate representation is discussed explicitly.\n- The final statement explains why the answer is valid for the situation or why the original work failed.`,
+				`**Project goal:** Develop a ${courseLabel} application task for ${module.title} using a context, graph, table, equation, or incorrect sample solution.\n\n**Completion checks:**\n- The project includes a real constraint such as units, domain, scale, rate, intercept, or precision.\n- The representation choice is defended and compared with at least one other possible approach.\n- The closing explanation names the mathematical reason the answer or correction is trustworthy.`
+			];
 			const content =
 				next === 1
-					? `**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. Include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The work shows every algebraic or representational step.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- Review notes record one misconception to revisit before the next module.`
-					: `**Project goal:** Apply ${module.title} in a ${courseLabel} modeling, graphing, or error-analysis context. The work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The project contains a concrete scenario or flawed worked solution.\n- The work explains the choice of equation, graph, table, or verbal model.\n- The final answer includes a units/context check or corrected error statement.`;
+					? standardsPracticeVariants[
+							stableVariantIndex(
+								`${courseId}|${module.title}|standards`,
+								standardsPracticeVariants.length
+							)
+						]
+					: modelingProjectVariants[
+							stableVariantIndex(
+								`${courseId}|${module.title}|modeling`,
+								modelingProjectVariants.length
+							)
+						];
 
 			module.supplementalProjects.push(projectItem(title, content));
 		}
