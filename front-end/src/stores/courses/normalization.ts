@@ -3503,7 +3503,13 @@ function projectSupportReference(context: CourseTextContext) {
 			() => "the project",
 			() => "the code checkpoint",
 			() => "the object-design task",
-			() => "the practice build"
+			() => "the practice build",
+			() => "the type-model task",
+			() => "the method-contract exercise",
+			() => "the API checkpoint",
+			() => "the object-state build",
+			() => "the collection exercise",
+			() => "the Java design task"
 		]);
 	}
 	if (isWebContext(context)) return "the page";
@@ -3513,8 +3519,16 @@ function projectSupportReference(context: CourseTextContext) {
 		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
 	)
 		return "the system check";
-	if (isLowLevelSystemsContext(context) || /c\+\+|cpp/.test(source))
-		return "the program";
+	if (isLowLevelSystemsContext(context) || /c\+\+|cpp/.test(source)) {
+		return variantPrompt(context, [
+			() => "the program",
+			() => "the systems artifact",
+			() => "the command-line build",
+			() => "the runtime check",
+			() => "the diagnostic run",
+			() => "the low-level implementation"
+		]);
+	}
 	if (isDataAiMlContext(context)) return "the analysis";
 	if (/python/.test(source)) return "the program";
 
@@ -3548,6 +3562,37 @@ function compactGeneratedProjectSupport(
 	const compactableSubjectNouns = isJavaContext(context)
 		? "solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|response|answer|Java code"
 		: "solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|explanation|response|answer|Java code";
+	const supportReferenceCleanupNames = [
+		"program",
+		"analysis",
+		"response",
+		"project",
+		"activity",
+		"Java work",
+		"Java implementation",
+		"class exercise",
+		"code checkpoint",
+		"object-design task",
+		"practice build",
+		"type-model task",
+		"method-contract exercise",
+		"API checkpoint",
+		"object-state build",
+		"collection exercise",
+		"Java design task",
+		"systems artifact",
+		"command-line build",
+		"runtime check",
+		"diagnostic run",
+		"low-level implementation",
+		"system check",
+		"lab",
+		"solution",
+		"page",
+		"feature",
+		"app path",
+		"work"
+	].join("|");
 	const compactors: Array<[RegExp, string]> = [
 		[
 			new RegExp(
@@ -3835,6 +3880,18 @@ function compactGeneratedProjectSupport(
 				`- ${capitalizedReference} `
 			)
 			.replace(
+				new RegExp(`^- the ${escapedBareReference} `, "g"),
+				`- ${capitalizedReference} `
+			)
+			.replace(
+				new RegExp(`^- The the ${escapedBareReference} `, "g"),
+				`- ${capitalizedReference} `
+			)
+			.replace(
+				new RegExp(`^- the (${supportReferenceCleanupNames})\\b`, "g"),
+				(_match: string, item: string) => `- The ${item}`
+			)
+			.replace(
 				new RegExp(`(^|[.!?]\\s+)${escapedReference}\\b`, "g"),
 				(_match, prefix: string) => `${prefix}${capitalizedReference}`
 			)
@@ -3853,35 +3910,80 @@ function compactGeneratedProjectSupport(
 				"$1 $2"
 			)
 			.replace(
-				/\bfinal the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (note|explanation|response|answer|work)\b/g,
-				"final $1"
+				new RegExp(
+					`\\bfinal the (${supportReferenceCleanupNames}) (note|explanation|response|answer|work|review)\\b`,
+					"g"
+				),
+				"final $1 $2"
 			)
 			.replace(
-				/\bclosing the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (note|explanation|response|answer|work)\b/g,
-				"closing $1"
+				new RegExp(
+					`\\bclosing the (${supportReferenceCleanupNames}) (note|explanation|response|answer|work|review)\\b`,
+					"g"
+				),
+				"closing $1 $2"
 			)
 			.replace(
-				/\bone the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (encode\/decode round trip|search|limitation|normal case|edge case|traceable case|sanity check)\b/g,
+				new RegExp(
+					`\\bone the (?:${supportReferenceCleanupNames}) (encode\\/decode round trip|search|limitation|normal case|edge case|traceable case|sanity check)\\b`,
+					"g"
+				),
 				"one $1"
 			)
 			.replace(
-				/\b(one|each|every|a|an) the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path)\b/g,
+				new RegExp(
+					`\\b(one|each|every|a|an) the (?:${supportReferenceCleanupNames}) (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path)\\b`,
+					"g"
+				),
 				"$1 $2"
 			)
 			.replace(
-				/\b(one|each|every|a|an) the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (insert\/search\/remove path|search)\b/g,
+				new RegExp(
+					`\\b(one|each|every|a|an) the (?:${supportReferenceCleanupNames}) (insert\\/search\\/remove path|search)\\b`,
+					"g"
+				),
 				"$1 $2"
 			)
 			.replace(
-				/\blocal the (?:program|analysis|response|project|activity|Java work|lab|solution|page) version\b/g,
+				new RegExp(
+					`\\beach the (${supportReferenceCleanupNames}) Java type\\b`,
+					"g"
+				),
+				"each Java type in the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bwhich the (${supportReferenceCleanupNames}) (comparisons|swaps|keys|priority values)\\b`,
+					"g"
+				),
+				"which $1 $2"
+			)
+			.replace(
+				new RegExp(
+					`\\b(a compact|one|every|a|an) the (${supportReferenceCleanupNames}) (sample|Java type|comparisons|swaps|keys|priority values)\\b`,
+					"g"
+				),
+				"$1 $2 $3"
+			)
+			.replace(
+				new RegExp(
+					`\\blocal the (?:${supportReferenceCleanupNames}) version\\b`,
+					"g"
+				),
 				"local version"
 			)
 			.replace(
-				/\bVerify The (?:program|analysis|response|project|activity|Java work|lab|solution|page) (ordinary behavior|normal behavior|samples|findings|runtime evidence|page behavior|simulator path)\b/g,
+				new RegExp(
+					`\\bVerify The (?:${supportReferenceCleanupNames}) (ordinary behavior|normal behavior|samples|findings|runtime evidence|page behavior|simulator path)\\b`,
+					"g"
+				),
 				"Verify $1"
 			)
 			.replace(
-				/\beach the (?:program|analysis|response|project|activity|Java work|lab|solution|page) /g,
+				new RegExp(
+					`\\beach the (?:${supportReferenceCleanupNames}) `,
+					"g"
+				),
 				"each "
 			)
 			.replace(

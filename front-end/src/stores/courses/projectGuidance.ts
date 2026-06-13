@@ -74,7 +74,18 @@ function guidanceReference(courseFamily: string, moduleTitle: string) {
 		family.includes("rust") ||
 		family.includes("c++")
 	) {
-		return "the program";
+		const references = [
+			"the program",
+			"the systems artifact",
+			"the command-line build",
+			"the runtime check",
+			"the diagnostic run",
+			"the low-level implementation"
+		];
+
+		return references[
+			referenceVariantIndex(courseFamily, moduleTitle, references.length)
+		];
 	}
 	if (family.includes("swift")) return "the app path";
 	if (family.includes("java")) {
@@ -84,7 +95,13 @@ function guidanceReference(courseFamily: string, moduleTitle: string) {
 			"the project",
 			"the code checkpoint",
 			"the object-design task",
-			"the practice build"
+			"the practice build",
+			"the type-model task",
+			"the method-contract exercise",
+			"the API checkpoint",
+			"the object-state build",
+			"the collection exercise",
+			"the Java design task"
 		];
 
 		return references[
@@ -109,6 +126,36 @@ function compactGuidanceBody(
 	const escapedBareReference = escapeStringForRegExp(bareReference);
 	const escapedCapitalizedReference =
 		escapeStringForRegExp(capitalizedReference);
+
+	const cleanupReferenceNames = [
+		"program",
+		"analysis",
+		"response",
+		"project",
+		"activity",
+		"Java work",
+		"Java implementation",
+		"class exercise",
+		"code checkpoint",
+		"object-design task",
+		"practice build",
+		"type-model task",
+		"method-contract exercise",
+		"API checkpoint",
+		"object-state build",
+		"collection exercise",
+		"Java design task",
+		"systems artifact",
+		"command-line build",
+		"runtime check",
+		"diagnostic run",
+		"low-level implementation",
+		"lab",
+		"solution",
+		"page",
+		"feature",
+		"app path"
+	].join("|");
 
 	return body
 		.replace(new RegExp(`\\bFor ${escapedTitle}, `, "g"), "")
@@ -135,6 +182,27 @@ function compactGuidanceBody(
 		.replace(
 			new RegExp(`\\bAfter the ${escapedTitle}\\b`, "g"),
 			`After ${reference}`
+		)
+		.replace(
+			new RegExp(
+				`\\bThe ${escapedTitle} (review|summary|note|closing note)\\b`,
+				"g"
+			),
+			`The ${bareReference} $1`
+		)
+		.replace(
+			new RegExp(
+				`\\bThe final ${escapedTitle} (review|summary|note)\\b`,
+				"g"
+			),
+			`The final ${bareReference} $1`
+		)
+		.replace(
+			new RegExp(
+				`\\bThe closing ${escapedTitle} (review|summary|note)\\b`,
+				"g"
+			),
+			`The closing ${bareReference} $1`
 		)
 		.replace(
 			new RegExp(`\\bCompare ${escapedTitle}\\b`, "g"),
@@ -282,9 +350,66 @@ function compactGuidanceBody(
 			"After the simulator path"
 		)
 		.replace(
-			/(^|\n)- the (program|project|artifact|app|lab|result|feature|pipeline)\b/g,
+			new RegExp(`(^|\\n)- the (${cleanupReferenceNames})\\b`, "g"),
 			(_match: string, prefix: string, item: string) =>
 				`${prefix}- The ${item}`
+		)
+		.replace(
+			new RegExp(
+				`(^|\\n)- the (${cleanupReferenceNames}) (explanation|verification|summary|review|note|result|work)\\b`,
+				"g"
+			),
+			(_match: string, prefix: string, item: string, noun: string) =>
+				`${prefix}- The ${item} ${noun}`
+		)
+		.replace(
+			new RegExp(
+				`\\bfinal the (${cleanupReferenceNames}) (note|explanation|response|answer|work|review)\\b`,
+				"g"
+			),
+			"final $1 $2"
+		)
+		.replace(
+			new RegExp(
+				`\\bFinal the (${cleanupReferenceNames}) (note|explanation|response|answer|work|review)\\b`,
+				"g"
+			),
+			"Final $1 $2"
+		)
+		.replace(
+			new RegExp(
+				`\\bclosing the (${cleanupReferenceNames}) (note|explanation|response|answer|work|review)\\b`,
+				"g"
+			),
+			"closing $1 $2"
+		)
+		.replace(
+			new RegExp(
+				`\\bClosing the (${cleanupReferenceNames}) (note|explanation|response|answer|work|review)\\b`,
+				"g"
+			),
+			"Closing $1 $2"
+		)
+		.replace(
+			new RegExp(
+				`\\beach the (${cleanupReferenceNames}) Java type\\b`,
+				"g"
+			),
+			"each Java type in the $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bwhich the (${cleanupReferenceNames}) (comparisons|swaps|keys|priority values)\\b`,
+				"g"
+			),
+			"which $1 $2"
+		)
+		.replace(
+			new RegExp(
+				`\\b(a compact|one|every|a|an) the (${cleanupReferenceNames}) (sample|Java type|comparisons|swaps|keys|priority values)\\b`,
+				"g"
+			),
+			"$1 $2 $3"
 		)
 		.replace(
 			new RegExp(
@@ -377,6 +502,11 @@ function compactGuidanceBody(
 		.replace(
 			/\*\*Focus:\*\* ([a-z])/g,
 			(_, first: string) => `**Focus:** ${first.toUpperCase()}`
+		)
+		.replace(
+			/(^|\n)- ([a-z])/g,
+			(_match: string, prefix: string, first: string) =>
+				`${prefix}- ${first.toUpperCase()}`
 		)
 		.replace(
 			/(^|\n)(\d+\. )([a-z])/g,
