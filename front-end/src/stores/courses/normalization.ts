@@ -367,17 +367,20 @@ function briefConceptAddendum(
 	item: RawCourseModuleItem
 ) {
 	const seed = `${module.title}|${item.title}`;
-	let hash = 0;
+	const title = compactWhitespace(stripLessonTitlePrefix(item.title));
+	const topic = title || "this concept";
+	let hash = 2166136261;
 
 	for (const character of seed) {
-		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+		hash ^= character.charCodeAt(0);
+		hash = Math.imul(hash, 16777619) >>> 0;
 	}
 
 	return [
-		"Use this as a compact reference: define the key terms, trace one example, and finish with one nearby transfer check.",
-		"This concept note should connect vocabulary to a concrete example, then show how the same idea changes in a nearby case.",
-		"Make the idea concrete with precise vocabulary, a small example, and one way to verify understanding without repeating the same calculation or trace.",
-		"Link the concept to the module work by naming the core terms, showing one example, and checking one changed condition."
+		`For ${topic}, define the key terms, trace one example, and finish with one nearby transfer check.`,
+		`Use ${topic} to connect vocabulary to a concrete example, then show how the same idea changes in a nearby case.`,
+		`Make ${topic} concrete with precise vocabulary, a small example, and one way to verify understanding without repeating the same calculation or trace.`,
+		`Link ${topic} to the module work by naming the core terms, showing one example, and checking one changed condition.`
 	][hash % 4];
 }
 
@@ -2165,11 +2168,28 @@ function projectExpectations(context: CourseTextContext) {
 		]);
 	}
 	if (isCompetitiveProgrammingContext(context)) {
-		return [
-			`- State the ${subject} input format, output format, constraints, and algorithm idea before coding.`,
-			`- Test the ${subject} sample exactly, then add a smallest case, a boundary case, and a duplicate, tie, or adversarial case when relevant.`,
-			`- Record the ${subject} time and memory complexity and why those bounds fit the problem constraints.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- State the ${subject} input format, output format, constraints, and algorithm idea before coding.`,
+				`- Test the ${subject} sample exactly, then add a smallest case, a boundary case, and a duplicate, tie, or adversarial case when relevant.`,
+				`- Record the ${subject} time and memory complexity and why those bounds fit the problem constraints.`
+			],
+			subject => [
+				`- Translate ${subject} into variables, input contract, output contract, constraints, and the invariant the algorithm must preserve.`,
+				`- Check ${subject} with the official sample, a tiny hand-built case, and one case aimed at ordering, duplicates, ties, or bounds.`,
+				`- Write the ${subject} complexity target before coding and compare it with the largest allowed input.`
+			],
+			subject => [
+				`- Identify the ${subject} data shape, required output, constraint limits, and algorithm strategy before implementation.`,
+				`- Verify ${subject} against the sample plus one smallest case and one adversarial or boundary-shaped case.`,
+				`- Explain why the ${subject} runtime and memory use are safe for the stated limits.`
+			],
+			subject => [
+				`- Restate the ${subject} problem as exact input, exact output, preserved invariant, and complexity budget.`,
+				`- Trace one tiny ${subject} case before coding, then run the sample and one non-sample edge case.`,
+				`- Record the ${subject} algorithm idea, complexity class, and one assumption the tests are meant to challenge.`
+			]
+		]);
 	}
 	if (
 		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
@@ -2231,11 +2251,28 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (isWebContext(context)) {
-		return [
-			`- Define the visible ${subject} user flow and data flow before implementation.`,
-			`- Verify ${subject} in the browser at desktop and narrow widths.`,
-			`- Check ${subject} loading, empty, success, and error states instead of only the normal case.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define the visible ${subject} user flow and data flow before implementation.`,
+				`- Verify ${subject} in the browser at desktop and narrow widths.`,
+				`- Check ${subject} loading, empty, success, and error states instead of only the normal case.`
+			],
+			subject => [
+				`- Sketch the ${subject} screen state, user action, data source, and expected feedback before coding.`,
+				`- Test ${subject} with a fresh browser load, keyboard navigation, and both narrow and wide layouts.`,
+				`- Include ${subject} empty, loading, success, and failure behavior or explain why a state does not apply.`
+			],
+			subject => [
+				`- Name the ${subject} event, state update, rendering change, and data boundary before implementation.`,
+				`- Check ${subject} on mobile-width and desktop-width screens with current console output visible.`,
+				`- Verify ${subject} normal behavior plus one empty, error, validation, or slow-loading state.`
+			],
+			subject => [
+				`- Map the ${subject} UI path from input or click through state, data, and rendered result.`,
+				`- Run ${subject} from a clean page load and resize the viewport before accepting the result.`,
+				`- Confirm ${subject} handles the ordinary case and at least one missing-data, invalid-input, or failed-request case.`
+			]
+		]);
 	}
 	if (/security|offensive|threat|network/.test(source)) {
 		return [
@@ -2512,11 +2549,28 @@ function completionChecks(context: CourseTextContext) {
 	const subject = extensionSubject(context);
 
 	if (isCompetitiveProgrammingContext(context)) {
-		return [
-			`- The ${subject} solution passes the sample input/output exactly.`,
-			`- Test ${subject} with a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.`,
-			`- State the ${subject} time complexity and why it fits the expected constraints.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- The ${subject} solution passes the sample input/output exactly.`,
+				`- Test ${subject} with a smallest-case input, a largest-reasonable input, and a tie or duplicate case when relevant.`,
+				`- State the ${subject} time complexity and why it fits the expected constraints.`
+			],
+			subject => [
+				`- ${subject} matches the required input/output format and sample result without extra prompts or formatting.`,
+				`- A hand-traced ${subject} case, a boundary case, and a duplicate, tie, or ordering case are checked when relevant.`,
+				`- The final ${subject} note names the invariant and the complexity bound that makes the approach acceptable.`
+			],
+			subject => [
+				`- ${subject} produces exactly the expected output for the sample and for at least one custom test.`,
+				`- The checked ${subject} tests include a minimal case and one case shaped by the largest constraint or a tricky ordering condition.`,
+				`- The final ${subject} explanation connects the algorithm idea to its runtime and memory use.`
+			],
+			subject => [
+				`- ${subject} can be run with contest-style input and no manual interaction beyond the input file or stdin.`,
+				`- The sample, one tiny case, and one edge or adversarial case agree with the hand reasoning.`,
+				`- The closing ${subject} note records the invariant, complexity class, and the edge case most likely to break a weaker solution.`
+			]
+		]);
 	}
 	if (isScratchSource(source)) {
 		return variantLines(context, [
@@ -2568,11 +2622,28 @@ function completionChecks(context: CourseTextContext) {
 		];
 	}
 	if (isLowLevelSystemsContext(context)) {
-		return [
-			`- ${subject} builds from the documented command or toolchain setting.`,
-			`- ${subject} compiler output, sanitizer output, register or memory evidence, return codes, logs, or command-line output confirms the intended behavior.`,
-			`- The final ${subject} note includes one failure mode, debugging command, or reproducibility detail that would help future troubleshooting.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- ${subject} builds from the documented command or toolchain setting.`,
+				`- ${subject} compiler output, sanitizer output, register or memory evidence, return codes, logs, or command-line output confirms the intended behavior.`,
+				`- The final ${subject} note includes one failure mode, debugging command, or reproducibility detail that would help future troubleshooting.`
+			],
+			subject => [
+				`- ${subject} has a repeatable build/run command and a known starting state.`,
+				`- ${subject} evidence includes one relevant compiler, debugger, sanitizer, trace, log, register, memory, or return-code observation.`,
+				`- The final ${subject} note names the boundary or assumption that would be easiest to break.`
+			],
+			subject => [
+				`- ${subject} can be rebuilt from a clean checkout or shell without relying on hidden IDE state.`,
+				`- ${subject} confirms behavior with terminal output plus one low-level observation such as memory layout, register state, sanitizer output, or logs.`,
+				`- The final ${subject} note records the command and one troubleshooting clue for a future rerun.`
+			],
+			subject => [
+				`- ${subject} documents the exact command, toolchain, target, or simulator state used for verification.`,
+				`- ${subject} checks expected behavior and one failure-shaped behavior with concrete output or diagnostic evidence.`,
+				`- The final ${subject} note identifies the resource, lifetime, representation, or command assumption that mattered.`
+			]
+		]);
 	}
 	if (isNetworkSystemsSource(source)) {
 		return [
@@ -2651,11 +2722,28 @@ function completionChecks(context: CourseTextContext) {
 		];
 	}
 	if (isWebContext(context)) {
-		return [
-			`- The ${subject} feature works from a fresh page load without relying on hidden state.`,
-			`- ${subject} empty, loading, success, and failure states are visible or intentionally handled.`,
-			`- The ${subject} page remains readable and usable on mobile and desktop widths.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- The ${subject} feature works from a fresh page load without relying on hidden state.`,
+				`- ${subject} empty, loading, success, and failure states are visible or intentionally handled.`,
+				`- The ${subject} page remains readable and usable on mobile and desktop widths.`
+			],
+			subject => [
+				`- ${subject} can be reproduced after refresh with the same visible result or clear error feedback.`,
+				`- ${subject} handles the ordinary state plus one empty, invalid, loading, or failed state.`,
+				`- The interface remains usable with keyboard focus and at both narrow and wide viewport sizes.`
+			],
+			subject => [
+				`- ${subject} shows the required state change, output, validation message, or rendered canvas behavior.`,
+				`- A clean-load check and one non-ideal state are recorded before the work is considered complete.`,
+				`- Layout, spacing, and interaction remain understandable on mobile and desktop screens.`
+			],
+			subject => [
+				`- ${subject} connects the user action, state/data update, and final screen feedback without hidden setup.`,
+				`- Missing data, invalid input, slow loading, or failed requests are handled intentionally when relevant.`,
+				`- The final check includes browser evidence at more than one screen width.`
+			]
+		]);
 	}
 	if (/python/.test(source)) {
 		return variantLines(context, [
@@ -2726,11 +2814,28 @@ function completionChecks(context: CourseTextContext) {
 		]);
 	}
 	if (/c\+\+|cpp/.test(source)) {
-		return [
-			`- ${subject} builds from the documented command or IDE target.`,
-			`- ${subject} checks normal, boundary, and invalid or awkward inputs with visible output or tests.`,
-			`- The ${subject} explanation names the relevant container, pointer/reference, ownership, or algorithm choice.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- ${subject} builds from the documented command or IDE target.`,
+				`- ${subject} checks normal, boundary, and invalid or awkward inputs with visible output or tests.`,
+				`- The ${subject} explanation names the relevant container, pointer/reference, ownership, or algorithm choice.`
+			],
+			subject => [
+				`- ${subject} compiles from a clean run and records the command, target, or project configuration used.`,
+				`- ${subject} verifies a typical case, a boundary case, and one invalid or awkward case when the prompt allows it.`,
+				`- The final ${subject} note names the type, container, memory, ownership, or algorithm decision that controlled correctness.`
+			],
+			subject => [
+				`- ${subject} has current compile/run evidence rather than relying on stale IDE output.`,
+				`- ${subject} checks the ordinary behavior and one case that could expose a pointer, reference, lifetime, or container mistake.`,
+				`- The ${subject} explanation separates language syntax from the design or data-structure choice.`
+			],
+			subject => [
+				`- ${subject} can be rebuilt and rerun with the same visible result from the documented setup.`,
+				`- ${subject} includes at least one normal case, one edge case, and one case tied to ownership, mutation, or algorithm behavior.`,
+				`- The final ${subject} note states why the selected abstraction or low-level mechanism fits the problem.`
+			]
+		]);
 	}
 	if (/security|offensive|low-level security|network security/.test(source)) {
 		return [
