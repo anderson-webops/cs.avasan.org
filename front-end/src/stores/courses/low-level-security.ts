@@ -39,14 +39,14 @@ function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
 		`**Project goal:** Complete a ${artifact} for **${label}** that produces defensive evidence, not just a passing program.`,
 		`**Focus:** ${securityLabFocus(topic)}.`,
 		"**Required work:**",
-		`1. State the **${label}** local lab boundary and the exact toy target or starter being inspected.`,
-		`2. Build and run **${label}** with the expected defensive tooling, such as warnings, sanitizers, debugger output, or structured trace logs where relevant.`,
-		`3. Test **${label}** with one normal case, one malformed or boundary case, and one regression case that proves the final behavior is intentional.`,
-		`4. Write a short **${label}** audit note naming the violated assumption, the fix or hardening choice, and the evidence that supports the conclusion.`,
+		"1. State the local lab boundary and the exact toy target or starter being inspected.",
+		"2. Build and run the lab with the expected defensive tooling, such as warnings, sanitizers, debugger output, or structured trace logs where relevant.",
+		"3. Test the lab with one normal case, one malformed or boundary case, and one regression case that proves the final behavior is intentional.",
+		"4. Write a short audit note naming the violated assumption, the fix or hardening choice, and the evidence that supports the conclusion.",
 		"**Completion checks:**",
-		`- The **${label}** work stays inside the provided local lab and does not target public systems.`,
-		`- **${label}** security claims are backed by local build, runtime, sanitizer, debugger, or test evidence.`,
-		`- The final **${label}** note explains the bug class or invariant well enough for a maintainer to reproduce and verify the result.`
+		"- The work stays inside the provided local lab and does not target public systems.",
+		"- Security claims are backed by local build, runtime, sanitizer, debugger, or test evidence.",
+		"- The final note explains the bug class or invariant well enough for a maintainer to reproduce and verify the result."
 	].join("\n\n");
 }
 

@@ -30,6 +30,288 @@ function guidanceSubject(courseFamily: string, moduleTitle: string) {
 	return `${courseFamily} ${moduleTitle}`;
 }
 
+function escapeStringForRegExp(value: string) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function capitalizeSentence(value: string) {
+	return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
+}
+
+function guidanceReference(courseFamily: string) {
+	const family = courseFamily.toLowerCase();
+
+	if (family.includes("usaco")) return "the solution";
+	if (family.includes("web") || family.includes("javascript"))
+		return "the feature";
+	if (
+		family.includes("data") ||
+		family.includes("machine learning") ||
+		family.includes("ai")
+	) {
+		return "the analysis";
+	}
+	if (family.includes("python")) return "the program";
+	if (family.includes("security") || family.includes("network"))
+		return "the lab";
+	if (
+		family.includes("systems") ||
+		family.includes("assembly") ||
+		family.includes("rust") ||
+		family.includes("c++")
+	) {
+		return "the program";
+	}
+	if (family.includes("swift")) return "the app path";
+	if (family.includes("java")) return "the Java work";
+
+	return "the project";
+}
+
+function compactGuidanceBody(
+	courseFamily: string,
+	moduleTitle: string,
+	body: string
+) {
+	const escapedTitle = escapeStringForRegExp(moduleTitle);
+	const reference = guidanceReference(courseFamily);
+	const capitalizedReference = capitalizeSentence(reference);
+	const bareReference = reference.replace(/^the\s+/i, "");
+	const escapedCourseFamily = escapeStringForRegExp(courseFamily);
+	const escapedReference = escapeStringForRegExp(reference);
+	const escapedBareReference = escapeStringForRegExp(bareReference);
+	const escapedCapitalizedReference =
+		escapeStringForRegExp(capitalizedReference);
+
+	return body
+		.replace(new RegExp(`\\bFor ${escapedTitle}, `, "g"), "")
+		.replace(
+			new RegExp(`\\bUse ${escapedTitle} to\\b`, "g"),
+			`Use ${reference} to`
+		)
+		.replace(
+			new RegExp(`\\bKeep ${escapedTitle}\\b`, "g"),
+			`Keep ${reference}`
+		)
+		.replace(
+			new RegExp(`\\bConnect ${escapedTitle}\\b`, "g"),
+			`Connect ${reference}`
+		)
+		.replace(
+			new RegExp(`\\bBuild ${escapedTitle}\\b`, "g"),
+			`Build ${reference}`
+		)
+		.replace(
+			new RegExp(`\\bAfter ${escapedTitle}\\b`, "g"),
+			`After ${reference}`
+		)
+		.replace(
+			new RegExp(`\\bAfter the ${escapedTitle}\\b`, "g"),
+			`After ${reference}`
+		)
+		.replace(
+			new RegExp(`\\bCompare ${escapedTitle}\\b`, "g"),
+			`Compare ${reference}`
+		)
+		.replace(
+			new RegExp(
+				`\\bThe ${escapedTitle} (page|app|program|result|lab|submitted program|artifact|feature|pipeline|checked cases)\\b`,
+				"g"
+			),
+			"The $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bthe ${escapedTitle} (page|app|program|result|lab|artifact|feature|pipeline|local lab|runtime evidence)\\b`,
+				"g"
+			),
+			"the $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bA normal ${escapedTitle} (interaction|case|input)\\b`,
+				"g"
+			),
+			"A normal $1"
+		)
+		.replace(
+			new RegExp(`\\bA tiny hand-traced ${escapedTitle} case\\b`, "g"),
+			"A tiny hand-traced case"
+		)
+		.replace(
+			new RegExp(`\\bA typical ${escapedTitle} (path|input)\\b`, "g"),
+			"A typical $1"
+		)
+		.replace(
+			new RegExp(`\\bAt least one ${escapedTitle} normal path\\b`, "g"),
+			"At least one normal path"
+		)
+		.replace(
+			new RegExp(
+				`\\bone ${escapedTitle} (visible behavior|normal case|diagnostic observation)\\b`,
+				"g"
+			),
+			"one $1"
+		)
+		.replace(
+			new RegExp(
+				`\\b${escapedTitle} (compiles|has|demonstrates|can|builds|includes|ordinary behavior|normal traffic|samples|findings)\\b`,
+				"g"
+			),
+			`${capitalizedReference} $1`
+		)
+		.replace(new RegExp(escapedTitle, "g"), reference)
+		.replace(
+			new RegExp(
+				`\\b${escapedCourseFamily} ${escapedReference}\\b`,
+				"gi"
+			),
+			reference
+		)
+		.replace(
+			new RegExp(
+				`\\b${escapedCourseFamily} ${escapedCapitalizedReference}\\b`,
+				"g"
+			),
+			capitalizedReference
+		)
+		.replace(
+			new RegExp(
+				`\\b${escapedCourseFamily} ${escapedBareReference}\\b`,
+				"gi"
+			),
+			reference
+		)
+		.replace(new RegExp(`\\bthe ${escapedReference}\\b`, "g"), reference)
+		.replace(
+			new RegExp(`\\bUse ${escapedReference} reference\\b`, "g"),
+			"Use the reference"
+		)
+		.replace(
+			new RegExp(
+				`\\bchecked for ${escapedReference} where relevant\\b`,
+				"g"
+			),
+			"checked where relevant"
+		)
+		.replace(
+			new RegExp(`\\bfinal ${escapedReference} note\\b`, "g"),
+			"final note"
+		)
+		.replace(
+			new RegExp(`\\bFinal ${escapedReference} note\\b`, "g"),
+			"Final note"
+		)
+		.replace(
+			new RegExp(
+				`\\bAfter ${escapedReference} ${escapedBareReference}\\b`,
+				"g"
+			),
+			`After ${reference}`
+		)
+		.replace(
+			new RegExp(`\\bAfter ${escapedCapitalizedReference}\\b`, "g"),
+			`After ${reference}`
+		)
+		.replace(
+			new RegExp(
+				`\\bBuild the smallest compiling ${escapedReference} version first\\b`,
+				"g"
+			),
+			`Build the smallest version of ${reference} that compiles first`
+		)
+		.replace(
+			new RegExp(`\\bAfter ${escapedReference} page behavior\\b`, "g"),
+			"After the page behavior"
+		)
+		.replace(
+			new RegExp(`\\bAfter ${escapedReference} local lab works\\b`, "g"),
+			"After the local lab works"
+		)
+		.replace(
+			new RegExp(`\\bAfter ${escapedReference} simulator path\\b`, "g"),
+			"After the simulator path"
+		)
+		.replace(
+			new RegExp(`\\bImplement one ${escapedReference} `, "g"),
+			"Implement one "
+		)
+		.replace(
+			new RegExp(
+				`\\b(one|each|every|a|an) ${escapedReference} (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path)\\b`,
+				"g"
+			),
+			"$1 $2"
+		)
+		.replace(
+			new RegExp(
+				`\\b(one|each|every|a|an) ${escapedBareReference} (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path)\\b`,
+				"g"
+			),
+			"$1 $2"
+		)
+		.replace(
+			new RegExp(
+				`\\bVerify ${capitalizeSentence(escapedReference)} (ordinary behavior|normal behavior|samples|findings|runtime evidence|page behavior|simulator path)\\b`,
+				"g"
+			),
+			"Verify $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bVerify ${capitalizeSentence(escapedBareReference)} (ordinary behavior|normal behavior|samples|findings|runtime evidence|page behavior|simulator path)\\b`,
+				"g"
+			),
+			"Verify $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bone tiny ${escapedReference} hand-built case\\b`,
+				"g"
+			),
+			"one tiny hand-built case"
+		)
+		.replace(
+			new RegExp(
+				`\\bSolve one tiny ${escapedReference} hand-built case\\b`,
+				"g"
+			),
+			"Solve one tiny hand-built case"
+		)
+		.replace(
+			new RegExp(
+				`\\bWrite a ${escapedReference} verification note\\b`,
+				"g"
+			),
+			"Write a verification note"
+		)
+		.replace(
+			new RegExp(
+				`\\bWrite a ${escapedBareReference} verification note\\b`,
+				"g"
+			),
+			"Write a verification note"
+		)
+		.replace(
+			new RegExp(
+				`\\bthe ${escapedReference} (behavior|runtime evidence|local lab|page behavior|program|simulator path)\\b`,
+				"g"
+			),
+			`the ${bareReference} $1`
+		)
+		.replace(
+			new RegExp(
+				`\\bthe ${escapedBareReference} (behavior|runtime evidence|local lab|page behavior|program|simulator path)\\b`,
+				"g"
+			),
+			`the ${bareReference} $1`
+		)
+		.replace(
+			/\*\*Focus:\*\* ([a-z])/g,
+			(_, first: string) => `**Focus:** ${first.toUpperCase()}`
+		);
+}
+
 function checkInDetails(moduleTitle: string) {
 	const trimmedTitle = moduleTitle.trim();
 	const prefix = "Check-In #";
@@ -347,7 +629,7 @@ function requiredWorkSteps(
 			],
 			[
 				`For ${subject}, identify which type owns the state, which method exposes behavior, and which test or console trace proves it.`,
-				`Build the smallest compiling ${subject} version first, then add one behavior or branch at a time.`,
+				`Build the smallest version of ${subject} that compiles first, then add one behavior or branch at a time.`,
 				`Verify ${subject} with a standard case, a boundary case, and one case involving object identity, equality, inheritance, records, or collections when relevant.`
 			],
 			[
@@ -633,9 +915,8 @@ export function buildProjectGuidance({
 	hasReference
 }: ProjectGuidanceOptions) {
 	const scopedModuleTitle = guidanceModuleTitle(moduleTitle, itemTitle);
-
-	return [
-		projectGoal(courseFamily, scopedModuleTitle, projectKind),
+	const goal = projectGoal(courseFamily, scopedModuleTitle, projectKind);
+	const body = [
 		`**Focus:** ${focusFor(courseFamily, scopedModuleTitle, projectKind)}.`,
 		"**Required work:**",
 		...requiredWorkSteps(courseFamily, scopedModuleTitle, projectKind).map(
@@ -648,5 +929,10 @@ export function buildProjectGuidance({
 			scopedModuleTitle,
 			projectKind
 		).map(step => `- ${step}`)
+	].join("\n\n");
+
+	return [
+		goal,
+		compactGuidanceBody(courseFamily, scopedModuleTitle, body)
 	].join("\n\n");
 }

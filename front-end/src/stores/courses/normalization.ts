@@ -296,12 +296,6 @@ function compactWhitespace(text: string) {
 	return text.replace(/\s+/g, " ").trim();
 }
 
-function lowercaseFirst(text: string) {
-	if (!text) return text;
-
-	return `${text[0].toLowerCase()}${text.slice(1)}`;
-}
-
 function preservesBlockStructure(text: string) {
 	return /(?:^|\n)\s*(?:[-*]|\d+\.)\s+\S/.test(text);
 }
@@ -380,10 +374,10 @@ function briefConceptAddendum(
 	}
 
 	return [
-		`${item.title} connects the key vocabulary to ${module.title} through a compact example and one transfer check.`,
-		`${item.title} works as a short reference for ${module.title}: define the terms, trace one example, and check the idea in a nearby case.`,
-		`${item.title} should make the ${module.title} idea concrete with vocabulary, a small example, and one way to verify understanding.`,
-		`${item.title} links ${module.title} to the module project by naming the core terms, showing one example, and checking one changed condition.`
+		"Use this as a compact reference: define the key terms, trace one example, and finish with one nearby transfer check.",
+		"This concept note should connect vocabulary to a concrete example, then show how the same idea changes in a nearby case.",
+		"Make the idea concrete with precise vocabulary, a small example, and one way to verify understanding without repeating the same calculation or trace.",
+		"Link the concept to the module work by naming the core terms, showing one example, and checking one changed condition."
 	][hash % 4];
 }
 
@@ -1099,7 +1093,7 @@ function neutralizeStudentFacingText(text: string) {
 				"Use broadcasts between"
 			)
 			.replace(/\bShow how to\b/gi, "Practice how to")
-			.replace(/\bShow how\b/gi, "Notice how")
+			.replace(/(^|[.!?]\s+)Show how\b/g, "$1Notice how")
 			.replace(/\bShow where\b/g, "Identify where")
 			.replace(/\bShow the difference between\b/g, "Compare")
 			.replace(/\bShow the an example of\b/g, "Review an example of")
@@ -2519,7 +2513,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} can be replayed without stale score, position, costume, or clone state.`,
 				`- ${subject} handles normal play and one boundary case such as timer end, collision, missed input, or repeated click.`,
-				`- The ${subject} note names the Scratch state variable or event chain most responsible for correctness.`
+				"- The final note names the Scratch state variable or event chain most responsible for correctness."
 			]
 		]);
 	}
@@ -2648,7 +2642,7 @@ function completionChecks(context: CourseTextContext) {
 			subject => [
 				`- ${subject} can be rerun cleanly with predictable output.`,
 				`- ${subject} has normal, empty or smallest, and awkward inputs tested or justified.`,
-				`- The ${subject} explanation identifies the main function, loop, or data structure that drives the result.`
+				`- The ${subject} explanation names the input path, helper function, loop, collection, or file step that controls the result.`
 			],
 			subject => [
 				`- ${subject} produces the expected output from a fresh run, not from hidden interpreter state.`,
@@ -2943,95 +2937,477 @@ function projectSupport(context: CourseTextContext) {
 
 	return [
 		goal,
-		`**Required outcome:**\n${projectExpectations(context).join("\n")}`,
-		`**Completion checks:**\n${completionChecks(context).join("\n")}`,
-		`**Extension:** ${extensionPrompt(context)}`
+		`**Required outcome:**\n${compactGeneratedProjectSupport(context, projectExpectations(context)).join("\n")}`,
+		`**Completion checks:**\n${compactGeneratedProjectSupport(context, completionChecks(context)).join("\n")}`,
+		`**Extension:** ${compactGeneratedProjectSupport(context, [extensionPrompt(context)])[0]}`
 	].join("\n\n");
+}
+
+function projectSupportReference(context: CourseTextContext) {
+	const source = contextText(context);
+	const title = context.item.title.toLowerCase();
+
+	if (/practice exam|multiple choice|frq|free response/.test(title))
+		return "the practice set";
+	if (isCheckInContext(context)) return "the checkpoint";
+	if (isCompetitiveProgrammingContext(context)) return "the solution";
+	if (
+		isScratchSource(source) ||
+		isPygameSource(source) ||
+		isUnityContext(context)
+	) {
+		return "the project";
+	}
+	if (isScienceContext(context)) return "the activity";
+	if (isMathContext(context)) return "the response";
+	if (isApcsContext(context) || isJavaContext(context))
+		return "the Java work";
+	if (isWebContext(context)) return "the page";
+	if (/security|offensive|low-level security|network security/.test(source))
+		return "the lab";
+	if (
+		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
+	)
+		return "the system check";
+	if (isLowLevelSystemsContext(context) || /c\+\+|cpp/.test(source))
+		return "the program";
+	if (isDataAiMlContext(context)) return "the analysis";
+	if (/python/.test(source)) return "the program";
+
+	return "the work";
+}
+
+function capitalizeSentence(value: string) {
+	return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
+}
+
+function escapeStringForRegExp(value: string) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function compactGeneratedProjectSupport(
+	context: CourseTextContext,
+	lines: string[]
+) {
+	const subject = extensionSubject(context);
+	if (!subject) return lines;
+
+	const escapedSubject = escapeStringForRegExp(subject);
+	const reference = projectSupportReference(context);
+	const capitalizedReference = capitalizeSentence(reference);
+	const bareReference = reference.replace(/^the\s+/i, "");
+	const escapedBareReference = escapeStringForRegExp(bareReference);
+	const escapedReference = escapeStringForRegExp(reference);
+	const compactors: Array<[RegExp, string]> = [
+		[
+			new RegExp(
+				`\\bThe final ${escapedSubject} (note|response|answer|explanation|work)\\b`,
+				"g"
+			),
+			"The final $1"
+		],
+		[
+			new RegExp(
+				`\\bThe ${escapedSubject} (solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|explanation|response|answer|Java code)\\b`,
+				"g"
+			),
+			"The $1"
+		],
+		[
+			new RegExp(
+				`\\bthe ${escapedSubject} (solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|explanation|response|answer|Java code)\\b`,
+				"g"
+			),
+			"the $1"
+		],
+		[
+			new RegExp(`\\bA typical ${escapedSubject} case\\b`, "g"),
+			"A typical case"
+		],
+		[
+			new RegExp(
+				`\\bone ${escapedSubject} (normal path|awkward path|normal case|edge case|observation)\\b`,
+				"g"
+			),
+			"one $1"
+		],
+		[
+			new RegExp(`\\bAt least one ${escapedSubject} observation\\b`, "g"),
+			"At least one observation"
+		],
+		[
+			new RegExp(`\\bone ${escapedSubject} traceable case\\b`, "g"),
+			"one traceable case"
+		],
+		[
+			new RegExp(`\\ba short ${escapedSubject} (trace|note)\\b`, "g"),
+			"a short $1"
+		],
+		[
+			new RegExp(
+				`\\b${indefiniteArticleFor(subject)} ${escapedSubject} note\\b`,
+				"g"
+			),
+			"a short note"
+		],
+		[new RegExp(`\\bFor ${escapedSubject}, `, "g"), ""],
+		[new RegExp(`\\bIn ${escapedSubject}, `, "g"), ""],
+		[
+			new RegExp(`\\bUse ${escapedSubject} to\\b`, "g"),
+			`Use ${reference} to`
+		],
+		[new RegExp(`\\bTest ${escapedSubject}\\b`, "g"), `Test ${reference}`],
+		[new RegExp(`\\bRun ${escapedSubject}\\b`, "g"), `Run ${reference}`],
+		[
+			new RegExp(`\\bBuild ${escapedSubject}\\b`, "g"),
+			`Build ${reference}`
+		],
+		[
+			new RegExp(`\\bComplete ${escapedSubject}\\b`, "g"),
+			`Complete ${reference}`
+		],
+		[
+			new RegExp(`\\bCompile and run ${escapedSubject}\\b`, "g"),
+			`Compile and run ${reference}`
+		],
+		[
+			new RegExp(`\\bbefore coding ${escapedSubject}\\b`, "g"),
+			`before coding ${reference}`
+		],
+		[
+			new RegExp(`\\bBefore coding ${escapedSubject}\\b`, "g"),
+			`Before coding ${reference}`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} can\\b`, "g"),
+			`${capitalizedReference} can`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} has\\b`, "g"),
+			`${capitalizedReference} has`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} is\\b`, "g"),
+			`${capitalizedReference} is`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} includes\\b`, "g"),
+			`${capitalizedReference} includes`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} produces\\b`, "g"),
+			`${capitalizedReference} produces`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} identifies\\b`, "g"),
+			`${capitalizedReference} identifies`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} empty, loading\\b`, "g"),
+			"Empty, loading"
+		],
+		[
+			new RegExp(`\\b${escapedSubject} observations\\b`, "g"),
+			"Observations"
+		],
+		[new RegExp(`\\b${escapedSubject} evidence\\b`, "g"), "Evidence"],
+		[new RegExp(`\\b${escapedSubject} findings\\b`, "g"), "Findings"],
+		[
+			new RegExp(`\\b${escapedSubject} checks\\b`, "g"),
+			`${capitalizedReference} checks`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} compiles\\b`, "g"),
+			`${capitalizedReference} compiles`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} builds\\b`, "g"),
+			`${capitalizedReference} builds`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} starts\\b`, "g"),
+			`${capitalizedReference} starts`
+		],
+		[
+			new RegExp(`\\b${escapedSubject} controls\\b`, "g"),
+			`${capitalizedReference} controls`
+		],
+		[new RegExp(`\\b${escapedSubject} events\\b`, "g"), "Events"],
+		[
+			new RegExp(`\\b${escapedSubject} actor updates\\b`, "g"),
+			"Actor updates"
+		],
+		[
+			new RegExp(`\\b${escapedSubject} state changes\\b`, "g"),
+			"State changes"
+		]
+	];
+
+	return lines.map(line => {
+		let compacted = line;
+		for (const [pattern, replacement] of compactors) {
+			compacted = compacted.replace(pattern, replacement);
+		}
+
+		compacted = compacted.replace(
+			new RegExp(escapedSubject, "g"),
+			reference
+		);
+
+		return compacted
+			.replace(
+				new RegExp(`\\bthe ${escapedReference}\\b`, "g"),
+				reference
+			)
+			.replace(
+				new RegExp(`\\bthe visible ${escapedReference}\\b`, "g"),
+				`the visible ${bareReference}`
+			)
+			.replace(
+				new RegExp(`\\bthe visible ${escapedBareReference}\\b`, "g"),
+				`the visible ${bareReference}`
+			)
+			.replace(
+				new RegExp(`\\beach ${escapedReference} sprite\\b`, "g"),
+				"each sprite"
+			)
+			.replace(
+				new RegExp(`\\beach ${escapedBareReference} sprite\\b`, "g"),
+				"each sprite"
+			)
+			.replace(
+				new RegExp(`\\bwhich ${escapedReference} object\\b`, "g"),
+				"which object"
+			)
+			.replace(
+				new RegExp(
+					`\\bwhich ${escapedReference} block sequence\\b`,
+					"g"
+				),
+				"which block sequence"
+			)
+			.replace(
+				new RegExp(`\\bwhich ${escapedBareReference} object\\b`, "g"),
+				"which object"
+			)
+			.replace(
+				new RegExp(
+					`\\bwhich ${escapedBareReference} block sequence\\b`,
+					"g"
+				),
+				"which block sequence"
+			)
+			.replace(
+				new RegExp(
+					`\\bTest ${escapedReference} (allocation|construction|mutation|copy|move|cleanup|state|file|permission|process|service|timer|network|log)\\b`,
+					"g"
+				),
+				"Test $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bTest ${escapedBareReference} (allocation|construction|mutation|copy|move|cleanup|state|file|permission|process|service|timer|network|log)\\b`,
+					"g"
+				),
+				"Test $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bState the ${escapedReference} (owner|known values|givens|data representation|input surface|input values|formula|topology)\\b`,
+					"g"
+				),
+				"State the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bState the ${escapedBareReference} (owner|known values|givens|data representation|input surface|input values|formula|topology)\\b`,
+					"g"
+				),
+				"State the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bSketch the ${escapedReference} (stack/heap|diagram|model)\\b`,
+					"g"
+				),
+				"Sketch the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bSketch the ${escapedBareReference} (stack/heap|diagram|model)\\b`,
+					"g"
+				),
+				"Sketch the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bRecord the ${escapedReference} (lifetime rule|normal case|reason|container|findings|evidence)\\b`,
+					"g"
+				),
+				"Record the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bRecord the ${escapedBareReference} (lifetime rule|normal case|reason|container|findings|evidence)\\b`,
+					"g"
+				),
+				"Record the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bthe ${escapedReference} (relationship|owner|known values|givens|data representation|input surface|input values|formula|topology|stack/heap|lifetime rule|normal case|reason|container|findings|evidence)\\b`,
+					"g"
+				),
+				"the $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bthe ${escapedBareReference} (relationship|owner|known values|givens|data representation|input surface|input values|formula|topology|stack/heap|lifetime rule|normal case|reason|container|findings|evidence)\\b`,
+					"g"
+				),
+				"the $1"
+			)
+			.replace(
+				new RegExp(`\\bMap ${escapedBareReference} to\\b`, "g"),
+				"Map the work to"
+			)
+			.replace(
+				new RegExp(`\\bTurn ${escapedBareReference} into\\b`, "g"),
+				"Turn the work into"
+			)
+			.replace(/\bThe Evidence\b/g, "The evidence")
+			.replace(
+				new RegExp(`^- ${escapedReference} `),
+				`- ${capitalizedReference} `
+			)
+			.replace(
+				/\bfinal the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (note|explanation|response|answer|work)\b/g,
+				"final $1"
+			)
+			.replace(
+				/\bone the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (encode\/decode round trip|search|limitation|normal case|edge case|traceable case|sanity check)\b/g,
+				"one $1"
+			)
+			.replace(
+				/\b(one|each|every|a|an) the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (boundary|behavior|constructor|branch|method|collection operation|diagnostic|data-structure|resource|control-flow change|variable|state transition|view|model|persistence path|normal case|edge case|ordinary behavior|runtime evidence|local lab|page behavior|simulator path)\b/g,
+				"$1 $2"
+			)
+			.replace(
+				/\b(one|each|every|a|an) the (?:program|analysis|response|project|activity|Java work|lab|solution|page) (insert\/search\/remove path|search)\b/g,
+				"$1 $2"
+			)
+			.replace(
+				/\bVerify The (?:program|analysis|response|project|activity|Java work|lab|solution|page) (ordinary behavior|normal behavior|samples|findings|runtime evidence|page behavior|simulator path)\b/g,
+				"Verify $1"
+			)
+			.replace(
+				/\beach the (?:program|analysis|response|project|activity|Java work|lab|solution|page) /g,
+				"each "
+			)
+			.replace(
+				/(^|\n)- ([a-z])/g,
+				(_match, prefix: string, first: string) =>
+					`${prefix}- ${first.toUpperCase()}`
+			)
+			.replace(/^[a-z]/, first => first.toUpperCase());
+	});
 }
 
 function lessonSupport(context: CourseTextContext) {
 	return [
-		`**Concept path:** ${context.module.title} introduces ${subjectFocus(context)} through key terms, a worked example, and a transfer check tied to the module project.`,
+		`**Concept path:** This lesson introduces ${subjectFocus(context)} through key terms, a worked example, and a transfer check tied to the module project.`,
 		`**Common pitfalls:** ${commonPitfalls(context)}`,
 		`**Mastery check:** ${proficiencyEvidence(context)}`
 	].join("\n\n");
 }
 
 function diagnosticSupport(context: CourseTextContext) {
-	const readiness = variantPrompt(context, [
-		subject =>
-			`This is a formative check for ${subject} in ${subjectFocus(context)}, not a pass/fail quiz; attempt ${subject} independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
-		subject =>
-			`Use ${subject} as a readiness check for ${subjectFocus(context)}. First try ${subject} without hints, then classify any gap as ${diagnosticCategories(context)}.`,
-		subject =>
-			`${subject} checks whether the core idea is ready for transfer. Start ${subject} with an independent attempt, then use the evidence to decide whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
-		subject =>
-			`Treat ${subject} as a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before moving to harder work.`
-	]);
+	const compact = (line: string) =>
+		compactGeneratedProjectSupport(context, [line])[0];
+	const readiness = compact(
+		variantPrompt(context, [
+			subject =>
+				`This is a formative check for ${subject} in ${subjectFocus(context)}, not a pass/fail quiz; attempt ${subject} independently first, then use the result to identify whether the issue is ${diagnosticCategories(context)}.`,
+			subject =>
+				`Use ${subject} as a readiness check for ${subjectFocus(context)}. First try ${subject} without hints, then classify any gap as ${diagnosticCategories(context)}.`,
+			subject =>
+				`${subject} checks whether the core idea is ready for transfer. Start ${subject} with an independent attempt, then use the evidence to decide whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
+			subject =>
+				`Treat ${subject} as a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before moving to harder work.`
+		])
+	);
 
 	return [
 		`**Readiness check:** ${readiness}`,
-		`**Evidence of proficiency:** ${proficiencyEvidence(context)}`,
-		`**If this is difficult:** ${remediationPrompt(context)}`,
-		`**Extension:** ${diagnosticExtensionPrompt(context)}`
+		`**Evidence of proficiency:** ${compact(proficiencyEvidence(context))}`,
+		`**If this is difficult:** ${compact(remediationPrompt(context))}`,
+		`**Extension:** ${compact(diagnosticExtensionPrompt(context))}`
 	].join("\n\n");
 }
 
 function scienceSupport(context: CourseTextContext) {
-	const remoteInvestigation = variantPrompt(context, [
-		subject =>
-			`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. ${subject} does not require beakers, kits, or household materials; any physical demonstration can be replaced with a diagram or data table.`,
-		subject =>
-			`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. ${subject} treats physical supplies as optional context only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
-		subject =>
-			`${subject} can be completed with a notebook, pencil, and shared digital resources. If ${subject} mentions a physical example, treat it as optional context and keep the required investigation tied to data, diagrams, models, or simulations.`,
-		subject =>
-			`${subject} should rely on accessible remote evidence: images, short videos, graphs, public datasets, simulations, or structured discussion notes. Any hands-on observation must be safe, simple, and replaceable.`
-	]);
-	const output = variantPrompt(context, [
-		subject =>
-			`Complete a claim-evidence-reasoning response for ${subject}, plus a labeled diagram or data table and one prediction about a changed condition.`,
-		subject =>
-			`Finish ${subject} with a labeled model or table, a short CER response, and one comparison between observation and inference.`,
-		subject =>
-			`Record the evidence for ${subject}, annotate the model or data display, and write one claim that explains what the evidence supports.`,
-		subject =>
-			`For ${subject}, produce a concise explanation that includes target vocabulary, evidence from the resource, and one limit or next-test idea.`
-	]);
-	const scienceExplanation = variantPrompt(context, [
-		subject =>
-			`Anchor ${subject} in ${subjectFocus(context)}. For ${subject}, record observations first, then build or annotate a model, and only then write the explanation.`,
-		subject =>
-			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary before writing the final claim.`,
-		subject =>
-			`For ${subject}, separate what is directly observed from what the model explains, then use the evidence to support the claim.`,
-		subject =>
-			`Ground ${subject} in the provided data, visual, simulation, or reading, and make the model limitation visible when the explanation is written.`
-	]);
+	const remoteInvestigation = compactGeneratedProjectSupport(context, [
+		variantPrompt(context, [
+			subject =>
+				`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. ${subject} does not require beakers, kits, or household materials; any physical demonstration can be replaced with a diagram or data table.`,
+			subject =>
+				`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. ${subject} treats physical supplies as optional context only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
+			subject =>
+				`${subject} can be completed with a notebook, pencil, and shared digital resources. If ${subject} mentions a physical example, treat it as optional context and keep the required investigation tied to data, diagrams, models, or simulations.`,
+			subject =>
+				`${subject} should rely on accessible remote evidence: images, short videos, graphs, public datasets, simulations, or structured discussion notes. Any hands-on observation must be safe, simple, and replaceable.`
+		])
+	])[0];
+	const output = compactGeneratedProjectSupport(context, [
+		variantPrompt(context, [
+			subject =>
+				`Complete a claim-evidence-reasoning response for ${subject}, plus a labeled diagram or data table and one prediction about a changed condition.`,
+			subject =>
+				`Finish ${subject} with a labeled model or table, a short CER response, and one comparison between observation and inference.`,
+			subject =>
+				`Record the evidence for ${subject}, annotate the model or data display, and write one claim that explains what the evidence supports.`,
+			subject =>
+				`For ${subject}, produce a concise explanation that includes target vocabulary, evidence from the resource, and one limit or next-test idea.`
+		])
+	])[0];
+	const scienceExplanation = compactGeneratedProjectSupport(context, [
+		variantPrompt(context, [
+			subject =>
+				`Anchor ${subject} in ${subjectFocus(context)}. For ${subject}, record observations first, then build or annotate a model, and only then write the explanation.`,
+			subject =>
+				`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary before writing the final claim.`,
+			subject =>
+				`For ${subject}, separate what is directly observed from what the model explains, then use the evidence to support the claim.`,
+			subject =>
+				`Ground ${subject} in the provided data, visual, simulation, or reading, and make the model limitation visible when the explanation is written.`
+		])
+	])[0];
 
 	return [
 		`**Remote investigation:** ${remoteInvestigation}`,
 		`**Science explanation:** ${scienceExplanation}`,
 		`**Output:** ${output}`,
-		`**Completion checks:**\n${completionChecks(context).join("\n")}`
+		`**Completion checks:**\n${compactGeneratedProjectSupport(context, completionChecks(context)).join("\n")}`
 	].join("\n\n");
 }
 
 function scienceEvidenceCheckpoint(context: CourseTextContext) {
-	return variantPrompt(context, [
-		subject =>
-			`**CER checkpoint:** End ${subject} with a claim, evidence, and reasoning response. The ${subject} claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why that evidence supports the claim.`,
-		subject =>
-			`**CER checkpoint:** For ${subject}, write one claim, cite the specific evidence source, and explain the connection with the target vocabulary rather than only naming the topic.`,
-		subject =>
-			`**CER checkpoint:** Finish ${subject} by separating the claim, the evidence, and the reasoning. The ${subject} evidence should point to the resource used, and the reasoning should explain why it supports the claim.`,
-		subject =>
-			`**CER checkpoint:** Connect ${subject} to a clear claim, a resource-based evidence statement, and reasoning that names the scientific idea or model being used.`,
-		subject =>
-			`**CER checkpoint:** Use ${subject} to name the phenomenon, quote or describe the evidence source, and explain the scientific model that links the evidence to the claim.`,
-		subject =>
-			`**CER checkpoint:** A complete ${subject} response states the claim, identifies the observation or data behind it, and uses vocabulary from the module to justify the reasoning.`
-	]);
+	return compactGeneratedProjectSupport(context, [
+		variantPrompt(context, [
+			subject =>
+				`**CER checkpoint:** End ${subject} with a claim, evidence, and reasoning response. The ${subject} claim answers the question, the evidence comes from the provided image, graph, dataset, reading, or simulation, and the reasoning uses the target vocabulary to explain why that evidence supports the claim.`,
+			subject =>
+				`**CER checkpoint:** For ${subject}, write one claim, cite the specific evidence source, and explain the connection with the target vocabulary rather than only naming the topic.`,
+			subject =>
+				`**CER checkpoint:** Finish ${subject} by separating the claim, the evidence, and the reasoning. The ${subject} evidence should point to the resource used, and the reasoning should explain why it supports the claim.`,
+			subject =>
+				`**CER checkpoint:** Connect ${subject} to a clear claim, a resource-based evidence statement, and reasoning that names the scientific idea or model being used.`,
+			subject =>
+				`**CER checkpoint:** Use ${subject} to name the phenomenon, quote or describe the evidence source, and explain the scientific model that links the evidence to the claim.`,
+			subject =>
+				`**CER checkpoint:** A complete ${subject} response states the claim, identifies the observation or data behind it, and uses vocabulary from the module to justify the reasoning.`
+		])
+	])[0];
 }
 
 function studioArtifact(context: CourseTextContext) {
@@ -3227,7 +3603,7 @@ function studioBuildSequence(context: CourseTextContext) {
 			],
 			() => [
 				`- Name the ${studioLabel} route or component, user action, state update, data/API boundary, and visible feedback.`,
-				`- Build the smallest ${studioLabel} browser-visible path first, then add validation, loading, empty, or failure behavior.`,
+				"- Build the smallest browser-visible path first, then add validation, loading, empty, or failure behavior.",
 				`- Check the ${studioLabel} result in the rendered page plus one console, network, responsive, or accessibility condition.`
 			],
 			() => [
@@ -3575,6 +3951,74 @@ function studioExtensionPrompt(context: CourseTextContext) {
 	]);
 }
 
+function compactStudioSupportText(studioLabel: string, text: string) {
+	const escapedLabel = escapeStringForRegExp(studioLabel);
+
+	return text
+		.replace(new RegExp(`\\bFor ${escapedLabel}, `, "g"), "")
+		.replace(new RegExp(`\\bName the ${escapedLabel} `, "g"), "Name the ")
+		.replace(
+			new RegExp(`\\bFrame ${escapedLabel}\\b`, "g"),
+			"Frame the studio artifact"
+		)
+		.replace(
+			new RegExp(`\\bSeparate ${escapedLabel}\\b`, "g"),
+			"Separate the studio artifact"
+		)
+		.replace(
+			new RegExp(`\\bCompare ${escapedLabel}\\b`, "g"),
+			"Compare the studio artifact"
+		)
+		.replace(
+			new RegExp(`\\bCheck ${escapedLabel}\\b`, "g"),
+			"Check the studio artifact"
+		)
+		.replace(
+			new RegExp(`\\bAfter ${escapedLabel} works\\b`, "g"),
+			"After it works"
+		)
+		.replace(
+			new RegExp(`\\bFinish ${escapedLabel} by\\b`, "g"),
+			"Finish by"
+		)
+		.replace(new RegExp(escapedLabel, "g"), "the studio artifact")
+		.replace(/\bthe the studio artifact\b/g, "the studio artifact")
+		.replace(/\bThe the studio artifact\b/g, "The studio artifact")
+		.replace(/\bA the studio artifact\b/g, "A studio artifact")
+		.replace(/\bone the studio artifact\b/g, "one")
+		.replace(/\beach the studio artifact\b/g, "each")
+		.replace(/\bevery the studio artifact\b/g, "every studio")
+		.replace(/\bFor the studio artifact, /g, "")
+		.replace(/\bfinal the studio artifact note\b/g, "final note")
+		.replace(/\bThe studio artifact final note\b/g, "The final note")
+		.replace(/\bThe studio artifact explanation\b/g, "The explanation")
+		.replace(/\bthe studio artifact explanation\b/g, "the explanation")
+		.replace(/\bThe studio artifact review note\b/g, "The review note")
+		.replace(/\bthe studio artifact result\b/g, "the result")
+		.replace(/\bthe studio artifact question\b/g, "the question")
+		.replace(/\bthe studio artifact browser\b/g, "the browser")
+		.replace(/\bthe studio artifact command\b/g, "the command")
+		.replace(/\bthe studio artifact app path\b/g, "the app path")
+		.replace(
+			/\bthe studio artifact expected result\b/g,
+			"the expected result"
+		)
+		.replace(
+			/(^|\n)- the studio artifact requirements\b/g,
+			"$1- The requirements"
+		)
+		.replace(
+			/(^|\n)- the studio artifact includes\b/g,
+			"$1- The studio artifact includes"
+		)
+		.replace(
+			/(^|\n)- ([a-z])/g,
+			(_match, prefix: string, first: string) =>
+				`${prefix}- ${first.toUpperCase()}`
+		)
+		.replace(/^[a-z]/, first => first.toUpperCase());
+}
+
 function studioSupport(context: CourseTextContext) {
 	const studioLabel = studioContextLabel(context);
 	const studioFocus = variantPrompt(context, [
@@ -3601,10 +4045,10 @@ function studioSupport(context: CourseTextContext) {
 
 	return [
 		`**Applied studio:** **${studioLabel}** produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
-		`**Studio focus:** ${studioFocus}`,
-		`**Build sequence:**\n${studioBuildSequence(context).join("\n")}\n- ${reviewStep}`,
-		`**Completion checks:**\n${studioCompletionChecks(context).join("\n")}`,
-		`**Extension:** For ${studioLabel}, ${lowercaseFirst(studioExtensionPrompt(context))}`
+		`**Studio focus:** ${compactStudioSupportText(studioLabel, studioFocus)}`,
+		`**Build sequence:**\n${compactStudioSupportText(studioLabel, studioBuildSequence(context).join("\n"))}\n- ${compactStudioSupportText(studioLabel, reviewStep)}`,
+		`**Completion checks:**\n${compactStudioSupportText(studioLabel, studioCompletionChecks(context).join("\n"))}`,
+		`**Extension:** ${compactStudioSupportText(studioLabel, studioExtensionPrompt(context))}`
 	].join("\n\n");
 }
 

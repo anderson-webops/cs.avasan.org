@@ -119,7 +119,7 @@ export function buildSupportSectionGuidance({
 	if (section === "debugging") {
 		return [
 			`Use **${title}** to diagnose realistic failure modes instead of only rerunning the happy path.`,
-			`Check ${title} for ${focus}.`,
+			`Check the work for ${focus}.`,
 			`Record the ${courseFamily} symptom, the smallest reproduction, the suspected cause, the fix, and the evidence that the fix changed the behavior.`
 		].join("\n\n");
 	}
@@ -127,22 +127,22 @@ export function buildSupportSectionGuidance({
 	if (section === "planning") {
 		return [
 			`Plan **${title}** as a sequence of runnable checkpoints.`,
-			`Name the ${title} core state, inputs, outputs, boundaries, and verification evidence connected to ${focus}.`,
-			`Choose a ${title} order that produces a small working version early, then add complexity only after the current checkpoint can be explained.`
+			`Name the core state, inputs, outputs, boundaries, and verification evidence connected to ${focus}.`,
+			"Choose an order that produces a small working version early, then add complexity only after the current checkpoint can be explained."
 		].join("\n\n");
 	}
 
 	if (section === "verification") {
 		return [
 			`Finish **${title}** with a concrete verification pass.`,
-			`Compare expected and observed ${title} behavior for ${focus}.`,
-			`The final ${title} note should name the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision.`
+			`Compare expected and observed behavior for ${focus}.`,
+			"The final note should name the main result, one meaningful edge case, one design or debugging decision, and one limitation that would guide a later revision."
 		].join("\n\n");
 	}
 
 	return [
 		`Extend **${title}** in ${courseFamily} by changing one meaningful constraint rather than adding unrelated features.`,
-		`The ${title} extension should stress ${focus} in the context of ${courseFamily}.`,
-		`Keep the new ${courseFamily} ${title} requirement testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
+		`The extension should stress ${focus} in the context of ${courseFamily}.`,
+		`Keep the new ${courseFamily} requirement testable: define the expected behavior, run one normal case and one boundary case, and record what changed from the base version.`
 	].join("\n\n");
 }

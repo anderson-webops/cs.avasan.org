@@ -162,28 +162,28 @@ describe("course text quality normalization", () => {
 				/Check the draft against the expected behavior after a working version exists; record one difference that affects correctness, readability, robustness, or design/
 			);
 			expect(corpus).toContain(
-				"Identify the JSM1 Fundamentals Review user interaction, state change, DOM/canvas/API output, and visible error or empty state"
+				"Identify the feature user interaction, state change, DOM/canvas/API output, and visible error or empty state"
 			);
 			expect(corpus).toContain(
-				"Translate USB0 Setup and Contest Workflow into input format, output format, constraints, and the invariant the solution must preserve"
+				"For this option, translate the prompt into input format, output format, constraints, and invariant"
 			);
 			expect(corpus).toContain(
-				"State the NSEC0 Setup and Tooling local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix"
+				"For this option, state the local scope, target, starting state, allowed tools, and stop condition"
 			);
 			expect(corpus).toContain(
-				"After the JSM1 Fundamentals Review page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling"
+				"After the page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling"
 			);
 			expect(corpus).not.toMatch(
 				/After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage/
 			);
 			expect(corpus).toContain(
-				"Use the Java/C++ bridge PTJ0 Positioning and Workflow Translation reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling"
+				"Use the reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling"
 			);
 			expect(corpus).toContain(
-				"After Healthy Holsteins: Applied Lab samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
+				"After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
 			);
 			expect(corpus).toContain(
-				"After the NSEC0 Setup and Tooling local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path"
+				"After the local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path"
 			);
 			expect(corpus).not.toMatch(
 				/The artifact demonstrates the module concept through behavior, output, tests, traces, or another concrete result/
@@ -261,43 +261,49 @@ describe("course text quality normalization", () => {
 				/Name the input values, helper functions or loops, data structures, and printed output before coding/
 			);
 			expect(corpus).toContain(
-				"PTJ0 Positioning and Workflow Translation demonstrates the required Java behavior without relying on stale build output or hidden IDE state"
+				"The program demonstrates the required Java behavior without relying on stale build output or hidden IDE state"
 			);
 			expect(corpus).toContain(
-				"Map Java/C++ bridge PTJ0 Positioning and Workflow Translation into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape"
+				"Map the program into Java responsibilities before coding: constructor data, method parameters, return values, stored state, and any collection shape"
+			);
+			expect(corpus).not.toContain(
+				"Map Java/C++ bridge PTJ0 Positioning and Workflow Translation into Java responsibilities before coding"
 			);
 			expect(corpus).toContain(
-				"The JSS4 Combining Loops and Variables page or app shows the expected state change, output, validation, or canvas behavior"
+				"The page or app shows the expected state change, output, validation, or canvas behavior"
+			);
+			expect(corpus).not.toContain(
+				"The JSS4 Combining Loops and Variables page or app shows the expected state change"
+			);
+			expect(corpus).not.toContain(
+				"The JSM1 Fundamentals Review page or app shows the expected state change"
 			);
 			expect(corpus).toContain(
-				"The JSM1 Fundamentals Review page or app shows the expected state change, output, validation, or canvas behavior"
+				"The submitted program matches the required input/output format exactly"
 			);
 			expect(corpus).toContain(
-				"The USB0 Setup and Contest Workflow submitted program matches the required input/output format exactly"
+				"The lab boundary, target behavior, and evidence source are explicit"
 			);
 			expect(corpus).toContain(
-				"The NSEC0 Setup and Tooling lab boundary, target behavior, and evidence source are explicit"
+				"Extend the Java work with one additional method and a test or console trace that proves its contract"
 			);
 			expect(corpus).toContain(
-				"Extend Project: Syntax Translation Warmup (PTJ0 Positioning and Workflow Translation) with one additional method and a test or console trace that proves its contract"
-			);
-			expect(corpus).toContain(
-				"PTJ1 Functions, Parameters, and Return Types Supplemental 2 demonstrates the required Java behavior without relying on stale build output or hidden IDE state"
+				"Build **PTJ1 Functions, Parameters, and Return Types Supplemental 2** through short compile/run cycles"
 			);
 			expect(corpus).not.toContain(
 				"Define the Project: Function Port Pack (PTJ1 Functions, Parameters, and Return Types) hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics"
 			);
 			expect(corpus).toContain(
-				"Add one transfer case to AM2 Project 1: Functions Practice (AM2 Review: Functions & Lists) that changes the input, representation, or success condition"
+				"Add one transfer case to the program that changes the input, representation, or success condition"
 			);
 			expect(corpus).toContain(
-				"Add one rule, control, level, reset, or feedback variation to Maze with timer and collectibles while preserving the main play goal"
+				"Add one rule, control, level, reset, or feedback variation while preserving the main play goal"
 			);
 			expect(corpus).toContain(
-				"Change one rule or control in Scratch Level 2: Project and Assessment Practice while preserving the same play goal"
+				"Change one rule or control in the checkpoint while preserving the same play goal"
 			);
 			expect(corpus).toContain(
-				"Change one success condition in Python Level 1: Check-In #1 and compare it with the original version"
+				"Change one success condition in the checkpoint and compare it with the original version"
 			);
 		},
 		COURSE_SWEEP_TIMEOUT
@@ -1108,7 +1114,7 @@ describe("course text quality normalization", () => {
 			"\n   **Completion checks:**\n   -"
 		);
 		expect(scratchStudio!.content).toContain(
-			"\n   **Extension:** For Debugging and Remix Studio concept path"
+			"\n   **Extension:** Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic."
 		);
 		expect(scratchStudio!.content).toContain("\n\n2. **Design and Planning Map**");
 		expect(scratchStudio!.content).not.toContain(
@@ -1148,7 +1154,7 @@ describe("course text quality normalization", () => {
 			"any larger dataset result is accepted.\n\n**Readable output:**"
 		);
 		expect(csvStudio.content).toContain(
-			"- Define the CSV Summaries and Sanity Checks concept path question"
+			"- Define the question, input data or state space, baseline, metric, and expected evidence before building."
 		);
 		expect(csvStudio.content).not.toContain(
 			"Define the Concept Path for DSP10"
@@ -1160,10 +1166,10 @@ describe("course text quality normalization", () => {
 			/Debugging and Remix Studio concept path/
 		);
 		expect(scratchStudio.content).toContain(
-			"Debugging and Remix Studio concept path starts from a predictable green-flag state"
+			"The studio artifact starts from a predictable green-flag state"
 		);
 		expect(scratchStudio.content).toContain(
-			"Check Debugging and Remix Studio concept path against the stated success criteria"
+			"Check the studio artifact against the stated success criteria"
 		);
 		expect(scratchStudio.content).not.toContain(
 			"Check Concept Path against the stated success criteria"
@@ -1174,10 +1180,14 @@ describe("course text quality normalization", () => {
 			/Full-Stack Web Lab 15: Core Concepts/
 		);
 		expect(webStudio.content).toContain(
-			"Name the Full-Stack Web Lab 15 Core Concepts route or component"
+			"Name the route or component, user action, state update, data/API boundary, and visible feedback"
 		);
+		expect(webStudio.content).toContain(
+			"Build the smallest browser-visible path first, then add validation, loading, empty, or failure behavior"
+		);
+		expect(webStudio.content).not.toContain("smallest the browser-visible path");
 		expect(webStudio.content).not.toContain(
-			"Name the route or component, user action, state update"
+			"Name the Full-Stack Web Lab 15 Core Concepts route or component"
 		);
 
 		const securityStudio = findItem(
@@ -1185,6 +1195,9 @@ describe("course text quality normalization", () => {
 			/Low-Level Security Lab 9: Core Concepts/
 		);
 		expect(securityStudio.content).toContain(
+			"State the authorized local lab boundary, protected asset, unsafe assumption, and evidence needed"
+		);
+		expect(securityStudio.content).not.toContain(
 			"For Low-Level Security Lab 9 Core Concepts, state the authorized local lab boundary"
 		);
 
@@ -1457,7 +1470,7 @@ describe("course text quality normalization", () => {
 			"State the sorted-data precondition"
 		);
 		expect(binarySearch.content).toContain(
-			"Trace at least one Core Project: Binary Search (APCS16 Binary Search and Merge Sort)"
+			"Trace at least one search by recording the low, high, and middle indices at each step"
 		);
 	});
 

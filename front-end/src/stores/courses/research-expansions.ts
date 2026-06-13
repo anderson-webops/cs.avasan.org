@@ -69,7 +69,7 @@ function sourceBullets(names: string[]) {
 }
 
 function courseUseNote(courseLabel: string, emphasis: string) {
-	return `**How to use this:** This ${courseLabel} section is a planning and review reference. For ${courseLabel}, read the explanation first, use the list to choose the next concrete lesson or project focus, and finish by checking whether the listed evidence is visible in the course artifact. For ${courseLabel}, ${emphasis}`;
+	return `**How to use this:** This ${courseLabel} section is a planning and review reference. Read the explanation first, use the list to choose the next concrete lesson or project focus, and finish by checking whether the listed evidence is visible in the course artifact. ${emphasis}`;
 }
 
 function standardsEvidenceNote(courseLabel: string) {
@@ -131,41 +131,42 @@ function projectTitle(project: string) {
 
 function projectOptionGoal(
 	profile: ResearchExpansionProfile,
-	courseLabel: string,
-	project: string
+	courseLabel: string
 ) {
-	const description = projectDescription(project);
 	const family = profile.family.toLowerCase();
 
 	if (family.includes("scratch")) {
-		return `**Project goal:** Build ${description} as a playable ${courseLabel} project with clear sprite roles, event flow, state changes, and end conditions.`;
+		return `**Project goal:** Build this as a playable ${courseLabel} project with clear sprite roles, event flow, state changes, and end conditions.`;
 	}
 	if (family.includes("python")) {
-		return `**Project goal:** Implement ${description} as a ${courseLabel} program with named inputs, reusable functions or classes where helpful, and reproducible console or file output.`;
+		return `**Project goal:** Implement this as a ${courseLabel} program with named inputs, reusable functions or classes where helpful, and reproducible console or file output.`;
 	}
 	if (family.includes("pygame")) {
-		return `**Project goal:** Prototype ${description} as a game loop with actors, controls, collision or state rules, scoring or progress feedback, and a reset path.`;
+		return "**Project goal:** Prototype this as a game loop with actors, controls, collision or state rules, scoring or progress feedback, and a reset path.";
 	}
 	if (family.includes("data") || family.includes("machine learning")) {
-		return `**Project goal:** Complete ${description} as a ${courseLabel} analysis artifact with a defined question, source data, cleaning or feature choices, evidence, and limitations.`;
+		return `**Project goal:** Complete this as a ${courseLabel} analysis artifact with a defined question, source data, cleaning or feature choices, evidence, and limitations.`;
 	}
 	if (family.includes("ai")) {
-		return `**Project goal:** Build ${description} as an ${courseLabel} reasoning artifact with an explicit state representation, decision rule or search strategy, traceable output, and limitation note.`;
+		return `**Project goal:** Build this as an ${courseLabel} reasoning artifact with an explicit state representation, decision rule or search strategy, traceable output, and limitation note.`;
 	}
 	if (family.includes("algebra")) {
-		return `**Project goal:** Use ${description} to model, solve, graph, or justify a ${courseLabel} relationship with visible steps and a reasonableness check.`;
+		return `**Project goal:** Use this project to model, solve, graph, or justify a ${courseLabel} relationship with visible steps and a reasonableness check.`;
 	}
 	if (family.includes("c++")) {
-		return `**Project goal:** Build ${description} as a ${courseLabel} program with a documented compile command, data representation, ownership or container decision, and test cases.`;
+		return `**Project goal:** Build this as a ${courseLabel} program with a documented compile command, data representation, ownership or container decision, and test cases.`;
+	}
+	if (family.includes("javascript") || family.includes("web")) {
+		return `**Project goal:** Build this as a ${courseLabel} browser feature with visible UI state, event handling, validation, and responsive layout evidence.`;
 	}
 	if (family.includes("java")) {
-		return `**Project goal:** Implement ${description} as a ${courseLabel} Java artifact with clear class responsibilities, method contracts, state changes, and compile/run evidence.`;
+		return `**Project goal:** Implement this as a ${courseLabel} Java artifact with clear class responsibilities, method contracts, state changes, and compile/run evidence.`;
 	}
 	if (family.includes("usaco")) {
-		return `**Project goal:** Solve ${description} as a ${courseLabel} contest problem with exact input/output behavior, constraints, invariants, and complexity reasoning.`;
+		return `**Project goal:** Solve this as a ${courseLabel} contest problem with exact input/output behavior, constraints, invariants, and complexity reasoning.`;
 	}
 	if (isScienceFamily(family)) {
-		return `**Project goal:** Investigate ${description} as a ${courseLabel} model, data, or explanation task that connects a claim to evidence and reasoning.`;
+		return `**Project goal:** Investigate this as a ${courseLabel} model, data, or explanation task that connects a claim to evidence and reasoning.`;
 	}
 	if (
 		family.includes("security") ||
@@ -173,43 +174,37 @@ function projectOptionGoal(
 		family.includes("linux") ||
 		family.includes("network")
 	) {
-		return `**Project goal:** Complete ${description} as a ${courseLabel} local lab with explicit scope, allowed target, command evidence, interpretation, and rollback or remediation.`;
+		return `**Project goal:** Complete this as a ${courseLabel} local lab with explicit scope, allowed target, command evidence, interpretation, and rollback or remediation.`;
 	}
 	if (family.includes("swift")) {
-		return `**Project goal:** Build ${description} as a ${courseLabel} app feature with a defined screen, state owner, user flow, simulator evidence, and accessibility check.`;
+		return `**Project goal:** Build this as a ${courseLabel} app feature with a defined screen, state owner, user flow, simulator evidence, and accessibility check.`;
 	}
 	if (family.includes("unity")) {
-		return `**Project goal:** Build ${description} as a ${courseLabel} Unity scene or mechanic with player action, state feedback, playtest evidence, and reset behavior.`;
+		return `**Project goal:** Build this as a ${courseLabel} Unity scene or mechanic with player action, state feedback, playtest evidence, and reset behavior.`;
 	}
-	if (family.includes("javascript") || family.includes("web")) {
-		return `**Project goal:** Build ${description} as a ${courseLabel} browser feature with visible UI state, event handling, validation, and responsive layout evidence.`;
-	}
-
-	return `**Project goal:** Complete ${description} as a ${courseLabel} artifact with named inputs, expected behavior, evidence of correctness, and one limitation or edge case.`;
+	return `**Project goal:** Complete this as a ${courseLabel} artifact with named inputs, expected behavior, evidence of correctness, and one limitation or edge case.`;
 }
 
 function projectOptionRequiredOutcome(
 	profile: ResearchExpansionProfile,
-	courseLabel: string,
-	project: string
+	courseLabel: string
 ) {
 	const family = profile.family.toLowerCase();
-	const optionTitle = projectTitle(project);
 
 	if (family.includes("scratch")) {
-		return `**Required outcome:**\n- For ${optionTitle}, name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one ${optionTitle} normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main ${optionTitle} Scratch state or event-flow decision in the ${courseLabel} context.`;
+		return `**Required outcome:**\n- For this option, name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main Scratch state or event-flow decision in the ${courseLabel} context.`;
 	}
 	if (family.includes("data") || family.includes("machine learning")) {
-		return `**Required outcome:**\n- For ${optionTitle}, state the question, dataset, key columns or features, and cleaning or modeling choice.\n- Include a ${optionTitle} baseline, sanity check, metric, visualization, or small trace.\n- Explain what the ${optionTitle} evidence supports and one limitation of the result.`;
+		return "**Required outcome:**\n- For this option, state the question, dataset, key columns or features, and cleaning or modeling choice.\n- Include a baseline, sanity check, metric, visualization, or small trace.\n- Explain what the evidence supports and one limitation of the result.";
 	}
 	if (family.includes("ai")) {
-		return `**Required outcome:**\n- For ${optionTitle}, define the state representation, action space, rule, search, or scoring method.\n- Trace one ${optionTitle} ordinary case and one case where the strategy behaves poorly or ambiguously.\n- Explain why the ${optionTitle} strategy is reasonable and where it is limited.`;
+		return "**Required outcome:**\n- For this option, define the state representation, action space, rule, search, or scoring method.\n- Trace one ordinary case and one case where the strategy behaves poorly or ambiguously.\n- Explain why the strategy is reasonable and where it is limited.";
 	}
 	if (family.includes("algebra")) {
-		return `**Required outcome:**\n- For ${optionTitle}, show the rule, equation, graph, table, or transformation being used.\n- Include one ${optionTitle} ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the ${optionTitle} result is known to be reasonable.`;
+		return "**Required outcome:**\n- For this option, show the rule, equation, graph, table, or transformation being used.\n- Include one ordinary case and one sign, unit, intercept, domain, or boundary check.\n- Explain how the result is known to be reasonable.";
 	}
 	if (isScienceFamily(family)) {
-		return `**Required outcome:**\n- For ${optionTitle}, state the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate the ${optionTitle} observation, pattern, and explanation.\n- Connect evidence to the ${optionTitle} claim and name one model limitation or uncertainty.`;
+		return "**Required outcome:**\n- For this option, state the phenomenon or question, model or data source, claim, and relevant vocabulary.\n- Separate the observation, pattern, and explanation.\n- Connect evidence to the claim and name one model limitation or uncertainty.";
 	}
 	if (
 		family.includes("security") ||
@@ -217,71 +212,66 @@ function projectOptionRequiredOutcome(
 		family.includes("linux") ||
 		family.includes("network")
 	) {
-		return `**Required outcome:**\n- For ${optionTitle}, state the ${courseLabel} local scope, target, starting state, allowed tools, and stop condition.\n- Record ${optionTitle} command, configuration, trace, or log evidence before and after the change.\n- Explain the ${optionTitle} impact and the ${courseLabel} rollback, mitigation, or verification step.`;
+		return `**Required outcome:**\n- For this option, state the local scope, target, starting state, allowed tools, and stop condition.\n- Record command, configuration, trace, or log evidence before and after the change.\n- Explain the impact and the ${courseLabel} rollback, mitigation, or verification step.`;
 	}
 	if (family.includes("usaco")) {
-		return `**Required outcome:**\n- For ${optionTitle}, translate the prompt into input format, output format, constraints, and invariant.\n- Pass the ${optionTitle} sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the ${optionTitle} time and memory complexity in relation to the constraints.`;
-	}
-	if (family.includes("java")) {
-		return `**Required outcome:**\n- For the ${optionTitle} option in ${courseLabel}, identify the classes, fields, method contracts, and object-state changes.\n- Compile and run one normal ${optionTitle} case for ${courseLabel} and one boundary or awkward case.\n- Explain the main ${optionTitle} type, inheritance, interface, collection, or record decision in the ${courseLabel} context.`;
-	}
-	if (family.includes("c++")) {
-		return `**Required outcome:**\n- For ${optionTitle}, name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build ${optionTitle} with ${courseLabel} warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the ${optionTitle} container, pointer/reference, memory, or algorithm decision.`;
+		return "**Required outcome:**\n- For this option, translate the prompt into input format, output format, constraints, and invariant.\n- Pass the sample and at least one tiny, boundary, duplicate, tie, or adversarial custom case.\n- State the time and memory complexity in relation to the constraints.";
 	}
 	if (family.includes("javascript") || family.includes("web")) {
-		return `**Required outcome:**\n- For ${optionTitle}, identify the UI state, event handler, data flow, validation path, and visible output.\n- Test ${optionTitle} with a fresh load, normal action, empty or error case, and responsive layout when relevant.\n- Explain the main ${optionTitle} DOM, API, state, or accessibility decision.`;
+		return "**Required outcome:**\n- For this option, identify the UI state, event handler, data flow, validation path, and visible output.\n- Test with a fresh load, normal action, empty or error case, and responsive layout when relevant.\n- Explain the main DOM, API, state, or accessibility decision.";
+	}
+	if (family.includes("java")) {
+		return `**Required outcome:**\n- For this option, identify the classes, fields, method contracts, and object-state changes.\n- Compile and run one normal case and one boundary or awkward case.\n- Explain the main type, inheritance, interface, collection, or record decision in the ${courseLabel} context.`;
+	}
+	if (family.includes("c++")) {
+		return `**Required outcome:**\n- For this option, name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build with ${courseLabel} warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the container, pointer/reference, memory, or algorithm decision.`;
 	}
 
-	return `**Required outcome:**\n- Define the ${optionTitle} inputs, output or artifact, success condition, and evidence source.\n- Include one ${optionTitle} normal case, a boundary case, and one awkward or failure case.\n- Explain the main ${optionTitle} design, model, proof, or reasoning decision in the ${courseLabel} context.`;
+	return `**Required outcome:**\n- For this option, define the inputs, output or artifact, success condition, and evidence source.\n- Include one normal case, a boundary case, and one awkward or failure case.\n- Explain the main design, model, proof, or reasoning decision in the ${courseLabel} context.`;
 }
 
-function projectOptionExtension(
-	profile: ResearchExpansionProfile,
-	courseLabel: string,
-	project: string
-) {
-	const description = projectDescription(project);
+function projectOptionExtension(profile: ResearchExpansionProfile) {
 	const family = profile.family.toLowerCase();
 
 	if (family.includes("security") || family.includes("systems")) {
-		return `**Extension:** Add one ${courseLabel} rollback, monitoring, hardening, or reproducibility check to ${description}.`;
+		return `**Extension:** Add one rollback, monitoring, hardening, or reproducibility check and explain how it changes the evidence.`;
 	}
 	if (isScienceFamily(family)) {
-		return `**Extension:** Change one variable, data source, scale, or model assumption in ${description} and predict how the claim should change.`;
+		return `**Extension:** Change one variable, data source, scale, or model assumption and predict how the claim should change.`;
 	}
 	if (
 		family.includes("data") ||
 		family.includes("ai") ||
 		family.includes("machine learning")
 	) {
-		return `**Extension:** Add a baseline, counterexample, alternate metric, or limitation check to ${description} and compare the interpretation.`;
+		return `**Extension:** Add a baseline, counterexample, alternate metric, or limitation check and compare the interpretation.`;
 	}
 	if (
 		family.includes("scratch") ||
 		family.includes("pygame") ||
 		family.includes("unity")
 	) {
-		return `**Extension:** Add one rule, control, level, reset, or feedback variation to ${description} while preserving the main play goal.`;
+		return `**Extension:** Add one rule, control, level, reset, or feedback variation while preserving the main play goal.`;
 	}
 	if (family.includes("usaco")) {
-		return `**Extension:** Add one harder custom case to ${description}, then explain which invariant or complexity bound it stress-tests.`;
-	}
-	if (
-		family.includes("java") ||
-		family.includes("c++") ||
-		family.includes("python")
-	) {
-		return `**Extension:** Add one ${courseLabel} edge case, helper, refactor, or alternate representation to ${description} and explain which requirement it tests.`;
+		return `**Extension:** Add one harder custom case, then explain which invariant or complexity bound it stress-tests.`;
 	}
 	if (
 		family.includes("javascript") ||
 		family.includes("web") ||
 		family.includes("swift")
 	) {
-		return `**Extension:** Add one empty, error, accessibility, layout, or state-transition case to ${description} and verify the visible behavior.`;
+		return `**Extension:** Add one empty, error, accessibility, layout, or state-transition case and verify the visible behavior.`;
+	}
+	if (
+		family.includes("java") ||
+		family.includes("c++") ||
+		family.includes("python")
+	) {
+		return `**Extension:** Add one edge case, helper, refactor, or alternate representation and explain which requirement it tests.`;
 	}
 
-	return `**Extension:** Change one constraint, input, representation, or success condition in ${description} and explain what stayed equivalent.`;
+	return `**Extension:** Change one constraint, input, representation, or success condition and explain what stayed equivalent.`;
 }
 
 function courseExpansionLabel(
@@ -301,42 +291,42 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Source Map`,
 				content: [
-					`**Course focus:** This ${courseLabel} section identifies the standards, documentation, and tooling references that keep ${profile.family} aligned with current expectations. For ${courseLabel}, priority is **${profile.priority}**, which means these items shape pacing and practice before lower-priority enrichment.`,
+					`**Course focus:** This ${courseLabel} section identifies the standards, documentation, and tooling references that keep the course aligned with current expectations. Priority is **${profile.priority}**, so these items shape pacing and practice before lower-priority enrichment.`,
 					`**Authoritative sources to use:**\n${sourceBullets(profile.sources)}`,
 					standardsEvidenceNote(courseLabel),
-					`**Completion check:** ${courseLabel} is traceable to these standards, docs, or tooling references rather than only to inherited project names.`
+					"**Completion check:** The course is traceable to these standards, docs, or tooling references rather than only to inherited project names."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Core Skills`,
 				content: [
 					`**Course focus:** ${courseLabel} skills benefit from focused review, clear examples, and explicit prerequisite connections before larger projects.`,
-					`**Core skills:**\n${bullets(profile.gaps.map(gap => `${courseLabel} focus: ${gap}`))}`,
+					`**Core skills:**\n${bullets(profile.gaps)}`,
 					courseUseNote(
 						courseLabel,
 						"One core-skill item can become a short lesson, a diagnostic checkpoint, or a remediation path depending on the course pacing."
 					),
-					`**Completion check:** A ${courseLabel} lesson or project is ready when it includes a concrete explanation, worked example, practice task, and completion check for one of these skills.`
+					"**Completion check:** A lesson or project is ready when it includes a concrete explanation, worked example, practice task, and completion check for one of these skills."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Next Topics`,
 				content: [
-					`**Course focus:** These ${courseLabel} topics mark the next areas where ${profile.family} can become more complete. Each ${courseLabel} topic should appear in prerequisite order and connect to a concrete project or checkpoint.`,
-					`**Expansion topics:**\n${bullets(profile.topics.map(topic => `${courseLabel} expansion: ${topic}`))}`,
+					`**Course focus:** These ${courseLabel} topics mark the next areas where the course can become more complete. Each topic should appear in prerequisite order and connect to a concrete project or checkpoint.`,
+					`**Expansion topics:**\n${bullets(profile.topics)}`,
 					courseUseNote(
 						courseLabel,
 						"Topic additions are strongest when they include vocabulary, one representative example, one misconception check, and one transfer task."
 					),
-					`**Common pitfalls:** Each ${courseLabel} topic should connect to a real project. If a ${courseLabel} connection is unclear, add a smaller bridge lesson before the major project.`
+					"**Common pitfalls:** Each topic should connect to a real project. If the connection is unclear, add a smaller bridge lesson before the major project."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Boundaries`,
 				content: [
 					`**Course focus:** The priority and expansion topics clarify what belongs in ${courseLabel} and what should move to a prerequisite, follow-up, or separate course. This keeps the course coherent instead of absorbing every adjacent topic.`,
-					`**Boundary rule:** Keep a topic inside ${courseLabel} when it directly supports the course's projects, assessments, and expected readiness level. In ${courseLabel}, move a topic elsewhere when it requires a different prerequisite chain, a different safety model, or a level of depth that would crowd out the core course purpose.`,
-					`**Completion check:** The ${courseLabel} boundary, one near-term addition, and one intentionally deferred topic are explicit.`
+					"**Boundary rule:** Keep a topic inside the course when it directly supports the projects, assessments, and expected readiness level. Move a topic elsewhere when it requires a different prerequisite chain, a different safety model, or a level of depth that would crowd out the core purpose.",
+					"**Completion check:** The boundary, one near-term addition, and one intentionally deferred topic are explicit."
 				].join("\n\n")
 			}
 		],
@@ -345,16 +335,16 @@ function buildStandardsModule(
 				title: `${courseLabel} Standards Checkpoint`,
 				content: [
 					`**Readiness check:** Build a one-page map for ${courseLabel} that lists prerequisites, target standards or docs, and the first observable readiness skill.`,
-					`**Map guidance:** The ${courseLabel} map should distinguish prerequisite knowledge, required course content, optional enrichment, and reference-only material. A useful ${courseLabel} map also records which project or assessment proves that a learner can use the mapped skill independently.`,
-					`**Completion checks:**\n- The ${courseLabel} map names at least three prerequisites.\n- Each planned ${courseLabel} module cites a standard, official document, or deliberate toolchain target.\n- The evidence for ${profile.family} readiness is explicit.`
+					"**Map guidance:** The map should distinguish prerequisite knowledge, required content, optional enrichment, and reference-only material. It should also record which project or assessment proves that a learner can use the mapped skill independently.",
+					`**Completion checks:**\n- The map names at least three prerequisites.\n- Each planned module cites a standard, official document, or deliberate toolchain target.\n- The evidence for ${profile.family} readiness is explicit.`
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Sequence Triage`,
 				content: [
 					`**Readiness check:** Review the current ${courseLabel} sequence and mark every gap as prerequisite, core lesson, project practice, assessment, enrichment, or optional reference.`,
-					`**Triage guidance:** ${courseLabel} sequence decisions should be based on dependency, not convenience. If a project expects a skill that has not appeared in a worked example or smaller practice task, the ${courseLabel} sequence needs a bridge item before that project.`,
-					`**Completion checks:**\n- No ${courseLabel} gap remains as a vague reminder without an owner.\n- Required ${profile.family} gaps appear before the project that depends on them.\n- Optional ${profile.family} enrichment is labeled separately from required pacing.`
+					"**Triage guidance:** Sequence decisions should be based on dependency, not convenience. If a project expects a skill that has not appeared in a worked example or smaller practice task, add a bridge item before that project.",
+					`**Completion checks:**\n- No gap remains as a vague reminder without an owner.\n- Required ${profile.family} gaps appear before the project that depends on them.\n- Optional enrichment is labeled separately from required pacing.`
 				].join("\n\n")
 			}
 		]
@@ -374,7 +364,7 @@ function buildSequencingModule(
 					`**Course focus:** These ${profile.family} additions can become full ${courseLabel} modules after the source material, examples, and assessments are clear. The order follows prerequisite dependency, not just topic popularity.`,
 					`**Suggested additions:**\n${bullets(profile.moduleAdditions)}`,
 					sequencingEvidenceNote(courseLabel),
-					`**Completion check:** Every ${courseLabel} module states the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension.`
+					"**Completion check:** Every module states the concept, why it matters, one worked example, one practice task, one assessment checkpoint, and one extension."
 				].join("\n\n")
 			},
 			{
@@ -382,7 +372,7 @@ function buildSequencingModule(
 				content: [
 					`**Resource guide:** These materials support ${courseLabel} modules by making source code, datasets, simulations, version choices, and reference materials explicit.`,
 					`**Materials and tools:**\n${bullets(profile.materials)}`,
-					`**Resource use:** Each ${courseLabel} resource should have a role: explanation, starter artifact, data source, simulation, rubric, answer check, or extension. In ${courseLabel}, links that are only background references should be labeled that way so they do not look like required assignments.`,
+					"**Resource use:** Each resource should have a role: explanation, starter artifact, data source, simulation, rubric, answer check, or extension. Links that are only background references should be labeled that way so they do not look like required assignments.",
 					profile.safety
 						? `**Safety or delivery boundary:** ${profile.safety}`
 						: `**Safety or delivery boundary:** ${courseLabel} uses age-appropriate examples, cited source material, and project scopes small enough for an online lesson.`
@@ -392,16 +382,16 @@ function buildSequencingModule(
 				title: `${courseLabel} Readiness Checklist`,
 				content: [
 					`**Course focus:** This checklist keeps ${courseLabel} modules concrete, sequenced, and assessable.`,
-					`**Review method:** For ${courseLabel}, read one module at a time and ask whether the concept, project, and assessment all measure the same skill. If the ${courseLabel} assessment checks a different skill than the project practices, revise the project or add a clearer checkpoint before the module is marked ready.`,
-					`**Completion checks:**\n- Each ${courseLabel} module has a named prerequisite and observable outcome.\n- Each ${courseLabel} project has required behavior, test cases, and an extension.\n- The ${courseLabel} assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any ${courseLabel} toolchain, dataset, simulation, or source-code dependency is linked and version-aware.`
+					"**Review method:** Read one module at a time and ask whether the concept, project, and assessment all measure the same skill. If the assessment checks a different skill than the project practices, revise the project or add a clearer checkpoint before the module is marked ready.",
+					"**Completion checks:**\n- Each module has a named prerequisite and observable outcome.\n- Each project has required behavior, test cases, and an extension.\n- The assessment matches the subject: code trace, rubric, CER response, math justification, security report, or model evaluation.\n- Any toolchain, dataset, simulation, or source-code dependency is linked and version-aware."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Reference Refresh`,
 				content: [
 					`**Resource guide:** ${courseLabel} references should stay current when the course depends on an external tool, source repository, dataset, simulation, exam standard, or official documentation page.`,
-					`**Refresh guidance:** Stable ${courseLabel} conceptual references can be reviewed less often, but tool versions, source-code repositories, exam links, data licenses, and simulation URLs need an explicit refresh cadence. If a ${courseLabel} link changes, update the course text and the project resource card together.`,
-					`**Completion check:** The ${courseLabel} note states what must be refreshed each term, which links or versions are stable, and which materials are reference-only rather than assignments.`
+					"**Refresh guidance:** Stable conceptual references can be reviewed less often, but tool versions, source-code repositories, exam links, data licenses, and simulation URLs need an explicit refresh cadence. If a link changes, update the course text and the project resource card together.",
+					"**Completion check:** The note states what must be refreshed each term, which links or versions are stable, and which materials are reference-only rather than assignments."
 				].join("\n\n")
 			}
 		],
@@ -410,16 +400,16 @@ function buildSequencingModule(
 				title: `${courseLabel} Dependency Graph`,
 				content: [
 					`**Project goal:** Draw or write a dependency graph for ${profile.family}. Show which ${courseLabel} modules unlock later projects and which topics work as optional enrichment.`,
-					`**Graph guidance:** Each ${courseLabel} node should be a concrete skill or module, not a broad course label. Each ${courseLabel} edge should explain the dependency in plain language, such as "requires arrays before 2D grids" or "requires variables before simulation state."`,
-					`**Completion checks:**\n- At least five ${courseLabel} modules or topic clusters are included.\n- Every edge explains the prerequisite relationship.\n- One risky ${profile.family} ordering decision is identified and revised.`
+					'**Graph guidance:** Each node should be a concrete skill or module, not a broad course label. Each edge should explain the dependency in plain language, such as "requires arrays before 2D grids" or "requires variables before simulation state."',
+					`**Completion checks:**\n- At least five modules or topic clusters are included.\n- Every edge explains the prerequisite relationship.\n- One risky ${profile.family} ordering decision is identified and revised.`
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Materials Readiness`,
 				content: [
 					`**Project goal:** Create a materials checklist for ${courseLabel}: source code, starter/reference files, datasets, simulations, diagrams, rubrics, and tool versions.`,
-					`**Checklist guidance:** A missing ${courseLabel} resource is not automatically a blocker, but it must be classified. Mark each ${courseLabel} item as required, replaceable, provided, learner-created, optional enrichment, or reference-only so the course does not depend on hidden materials.`,
-					`**Completion checks:**\n- Every required ${courseLabel} project has a starter state or equivalent handout.\n- Every ${profile.family} assessment has a rubric or answer-check method.\n- Any external ${courseLabel} tool or source is documented with a stable URL.`
+					"**Checklist guidance:** A missing resource is not automatically a blocker, but it must be classified. Mark each item as required, replaceable, provided, learner-created, optional enrichment, or reference-only so the course does not depend on hidden materials.",
+					`**Completion checks:**\n- Every required project has a starter state or equivalent handout.\n- Every ${profile.family} assessment has a rubric or answer-check method.\n- Any external tool or source is documented with a stable URL.`
 				].join("\n\n")
 			}
 		]
@@ -460,26 +450,26 @@ function buildProjectModule(
 				title: `${courseLabel} Rubric`,
 				content: [
 					`**Project reflection:** Every major ${courseLabel} project includes a short reflection naming the goal, approach, evidence, bug or misconception, and one next improvement.`,
-					`**Rubric use:** Score the artifact and the explanation separately. A ${courseLabel} project can produce the right output while still needing a stronger explanation, clearer evidence, better edge-case coverage, or a more maintainable structure.`,
-					`**Completion checks:**\n- The ${courseLabel} deliverable is visible, runnable, or inspectable.\n- A normal case and an edge case are tested or justified.\n- The ${courseLabel} explanation does not depend on reading every line or step from notes.`
+					"**Rubric use:** Score the artifact and the explanation separately. A project can produce the right output while still needing a stronger explanation, clearer evidence, better edge-case coverage, or a more maintainable structure.",
+					"**Completion checks:**\n- The deliverable is visible, runnable, or inspectable.\n- A normal case and an edge case are tested or justified.\n- The explanation does not depend on reading every line or step from notes."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Capstone Gate`,
 				content: [
 					`**Readiness check:** Before a ${courseLabel} capstone begins, the prerequisite modules, project ladder, and assessment model should already be practiced on smaller artifacts.`,
-					`**Gate guidance:** A ${courseLabel} capstone is ready when it combines known skills in a larger context rather than introducing several untested ideas at once. The first ${courseLabel} version should be narrow, demonstrable, and easy to verify before optional polish is added.`,
-					`**Evidence of proficiency:** ${courseLabel} capstone work demonstrates the ability to state the goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version.`
+					"**Gate guidance:** The capstone is ready when it combines known skills in a larger context rather than introducing several untested ideas at once. The first version should be narrow, demonstrable, and easy to verify before optional polish is added.",
+					"**Evidence of proficiency:** Capstone work demonstrates the ability to state the goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version."
 				].join("\n\n")
 			}
 		],
 		supplementalProjects: projects.map(project => ({
 			title: `Project Option: ${projectTitle(project)}`,
 			content: [
-				projectOptionGoal(profile, courseLabel, project),
-				projectOptionRequiredOutcome(profile, courseLabel, project),
+				projectOptionGoal(profile, courseLabel),
+				projectOptionRequiredOutcome(profile, courseLabel),
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
-				projectOptionExtension(profile, courseLabel, project)
+				projectOptionExtension(profile)
 			].join("\n\n")
 		}))
 	};

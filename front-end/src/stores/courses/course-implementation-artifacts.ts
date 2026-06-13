@@ -277,13 +277,13 @@ const cppConceptMatrix = [
 	"Explicit exclusion: AI and ML concepts stay in AI/Data Science/Machine Learning courses rather than the C++ pathway."
 ];
 
-function systemsSecurityPolicy(courseLabel: string) {
+function systemsSecurityPolicy() {
 	return [
-		`${courseLabel} labs use owned local fixtures, intentionally vulnerable toy apps, provided packet captures, or approved lab VMs.`,
-		`${courseLabel} lab records include scope, authorization, target, allowed tools, and stop conditions.`,
-		`${courseLabel} findings are written as evidence plus impact, followed by defensive remediation, detection, or hardening.`,
-		`${courseLabel} work never scans, probes, exploits, or collects data from third-party systems.`,
-		`${courseLabel} low-level exercises use sanitizers, fuzzers, and toy parsers to teach memory risk without weaponized targets.`
+		"Labs use owned local fixtures, intentionally vulnerable toy apps, provided packet captures, or approved lab VMs.",
+		"Lab records include scope, authorization, target, allowed tools, and stop conditions.",
+		"Findings are written as evidence plus impact, followed by defensive remediation, detection, or hardening.",
+		"Work never scans, probes, exploits, or collects data from third-party systems.",
+		"Low-level exercises use sanitizers, fuzzers, and toy parsers to teach memory risk without weaponized targets."
 	];
 }
 
@@ -570,7 +570,7 @@ function safetyPolicyFor(
 	courseLabel: string,
 	familyLabel: string
 ) {
-	if (kind === "systems") return systemsSecurityPolicy(courseLabel);
+	if (kind === "systems") return systemsSecurityPolicy();
 	if (kind === "science") {
 		return [
 			`${courseLabel} is Zoom-safe by default: no required beakers, heat, chemicals, electricity kits, outdoor access, food, or parent-managed supplies.`,
@@ -866,8 +866,8 @@ function addAlgebraSupplementalProjects(courseId: string, course: RawCourse) {
 					: `${module.title}: Modeling or Error-Analysis Project`;
 			const content =
 				next === 1
-					? `**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. For ${module.title}, include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The ${module.title} work shows every algebraic or representational step.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- Review notes record one ${module.title} misconception to revisit before the next module.`
-					: `**Project goal:** Apply ${module.title} in a ${courseLabel} modeling, graphing, or error-analysis context. In ${module.title}, the work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The ${module.title} project contains a concrete scenario or flawed worked solution.\n- The ${module.title} work explains the choice of equation, graph, table, or verbal model.\n- The final ${module.title} answer includes a units/context check or corrected error statement.`;
+					? `**Project goal:** Convert ${module.title} into a short ${courseLabel} practice set. Include one worked example, three independent problems, one graph/table/verbal representation when appropriate, and one explain-your-reasoning prompt.\n\n**Completion checks:**\n- The work shows every algebraic or representational step.\n- At least one ${courseLabel} problem asks for a reason, not just an answer.\n- Review notes record one misconception to revisit before the next module.`
+					: `**Project goal:** Apply ${module.title} in a ${courseLabel} modeling, graphing, or error-analysis context. The work interprets a situation, chooses a representation, solves, and explains whether the answer makes sense.\n\n**Completion checks:**\n- The project contains a concrete scenario or flawed worked solution.\n- The work explains the choice of equation, graph, table, or verbal model.\n- The final answer includes a units/context check or corrected error statement.`;
 
 			module.supplementalProjects.push(projectItem(title, content));
 		}
@@ -953,7 +953,7 @@ function addAlgebraTaxonomyModule(courseId: string, course: RawCourse) {
 		supplementalProjects: [
 			{
 				title: `${courseLabel} Practice Set Conversion`,
-				content: `**Project goal:** Convert one ${courseLabel} module concept into a practice set with a worked example, three independent problems, one representation task, and one explanation prompt.\n\n**Completion checks:**\n- ${courseLabel} problems are sequenced from direct to transfer.\n- One problem requires a graph/table/context interpretation.\n- The ${courseLabel} answer key includes reasoning, not just final answers.`
+				content: `**Project goal:** Convert one ${courseLabel} module concept into a practice set with a worked example, three independent problems, one representation task, and one explanation prompt. The set should make the skill teachable without turning into a list of disconnected exercises.\n\n**Practice-set structure:**\n1. Start with a worked example that shows the setup, the algebraic move, and a reasonableness check.\n2. Add one direct problem that follows the same structure so the core procedure is visible.\n3. Add one changed-number or changed-context problem that checks whether the method transfers.\n4. Add one graph, table, diagram, or verbal interpretation task so the relationship is not only symbolic.\n5. End with an explanation prompt asking why the method works or what common mistake it avoids.\n\n**Completion checks:**\n- Problems are sequenced from direct to transfer.\n- One problem requires graph, table, diagram, or context interpretation.\n- The answer key includes reasoning, not just final answers.`
 			},
 			{
 				title: `${courseLabel} Modeling or Error-Analysis Task`,
@@ -1427,7 +1427,7 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 		return;
 	}
 	const courseLabel = course.name.trim() || courseId;
-	const policy = systemsSecurityPolicy(courseLabel);
+	const policy = systemsSecurityPolicy();
 
 	appendModule(course, {
 		title: `${courseLabel}: Systems and Security Lab Safety Policy`,
@@ -1437,30 +1437,30 @@ function addSecurityPolicyModule(courseId: string, course: RawCourse) {
 				content: [
 					`**Concept path:** Start every ${courseLabel} lab by naming scope, target, tools, and stop conditions.`,
 					`**Policy:**\n${bullets(policy)}`,
-					`**Completion check:** The ${courseLabel} work demonstrates the ability to explain why the lab is authorized and what defensive outcome it produces.`
+					"**Completion check:** The work demonstrates the ability to explain why the lab is authorized and what defensive outcome it produces."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Disallowed Work`,
-				content: `**Safety boundary:** ${courseLabel} does not include scanning third-party systems, testing credentials against real services, collecting real user data, bypassing access controls, running destructive host commands, or publishing exploit steps detached from remediation. The ${courseLabel} boundary is part of the technical content: defensive work is only meaningful when the target, permission model, and recovery path are clear.\n\n**Completion check:** Any unclear ${courseLabel} target is treated as out of scope until explicitly approved, replaced with a local fixture, or rewritten as a paper analysis of an already documented vulnerability.`
+				content: `**Safety boundary:** ${courseLabel} does not include scanning third-party systems, testing credentials against real services, collecting real user data, bypassing access controls, running destructive host commands, or publishing exploit steps detached from remediation. The boundary is part of the technical content: defensive work is only meaningful when the target, permission model, and recovery path are clear.\n\n**Completion check:** Any unclear target is treated as out of scope until explicitly approved, replaced with a local fixture, or rewritten as a paper analysis of an already documented vulnerability.`
 			},
 			{
 				title: `${courseLabel} Evidence and Remediation Format`,
-				content: `**Concept path:** ${courseLabel} findings use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. In ${courseLabel}, the observation describes what happened; the impact explains why it matters; the fix is narrow enough to retest.\n\n**Completion check:** A ${courseLabel} lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere.`
+				content: `**Concept path:** ${courseLabel} findings use this format: scope, observation, reproduction in local lab, impact, fix, test proving the fix, and prevention note. The observation describes what happened; the impact explains why it matters; the fix is narrow enough to retest.\n\n**Completion check:** A lab is incomplete without a mitigation or hardening step, the command or evidence proving the fix, and a note explaining whether the same issue could reappear elsewhere.`
 			},
 			{
 				title: `${courseLabel} Tooling Setup and Recovery`,
-				content: `**Concept path:** ${courseLabel} prefers VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. In ${courseLabel}, recovery is not a footnote; it is the difference between a controlled lab and accidental host damage. Record the ${courseLabel} starting state, the reset command or snapshot, and which files or services can be safely changed before the lab begins.\n\n**Completion check:** The ${courseLabel} work demonstrates the ability to restore the lab to a known state and explain which evidence came from the controlled environment.`
+				content: `**Concept path:** ${courseLabel} prefers VMs, containers, local toy services, sample captures, compiler sanitizers, and reversible configuration. Recovery is not a footnote; it is the difference between a controlled lab and accidental host damage. Record the starting state, the reset command or snapshot, and which files or services can be safely changed before the lab begins.\n\n**Completion check:** The work demonstrates the ability to restore the lab to a known state and explain which evidence came from the controlled environment.`
 			}
 		],
 		supplementalProjects: [
 			{
 				title: `${courseLabel} Safety Project: Threat Model and Scope Sheet`,
-				content: `**Project goal:** Write a scope sheet for one ${courseLabel} lab before running commands. The ${courseLabel} sheet makes the allowed target, evidence, and stopping conditions explicit so the activity stays local, reversible, and defensive.\n\n**Required fields:** ${courseLabel} lab target, authorization boundary, allowed tools, disallowed actions, data that may be observed, stop conditions, reset path, and intended defensive outcome.\n\n**Completion checks:**\n- The ${courseLabel} target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named.\n- The ${courseLabel} reset path is specific enough to repeat after a failed run.`
+				content: `**Project goal:** Write a scope sheet for one ${courseLabel} lab before running commands. The sheet makes the allowed target, evidence, and stopping conditions explicit so the activity stays local, reversible, and defensive.\n\n**Required fields:** lab target, authorization boundary, allowed tools, disallowed actions, data that may be observed, stop conditions, reset path, and intended defensive outcome.\n\n**Completion checks:**\n- Target and authorization are explicit.\n- Allowed and disallowed actions are listed.\n- Defensive outcome is named.\n- The reset path is specific enough to repeat after a failed run.`
 			},
 			{
 				title: `${courseLabel} Safety Project: Patch and Evidence Report`,
-				content: `**Project goal:** Fix one local toy vulnerability or unsafe systems bug in ${courseLabel} and write an evidence report. The ${courseLabel} report shows the before state, the smallest useful fix, and the verification that proves the unsafe behavior no longer occurs.\n\n**Required fields:** ${courseLabel} vulnerable behavior, reproduction command or trace, impact, patch summary, retest evidence, and prevention note.\n\n**Completion checks:**\n- The ${courseLabel} before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention.\n- The ${courseLabel} retest uses the same scenario that exposed the original bug.`
+				content: `**Project goal:** Fix one local toy vulnerability or unsafe systems bug in ${courseLabel} and write an evidence report. The report shows the before state, the smallest useful fix, and the verification that proves the unsafe behavior no longer occurs.\n\n**Required fields:** vulnerable behavior, reproduction command or trace, impact, patch summary, retest evidence, and prevention note.\n\n**Completion checks:**\n- The before state is reproduced locally.\n- The patch is tested.\n- The report explains impact and prevention.\n- The retest uses the same scenario that exposed the original bug.`
 			}
 		]
 	});
@@ -1479,30 +1479,30 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} Setup Assumptions`,
 				content: [
-					`**Learning sequence:** Treat ${courseLabel} setup and version expectations as part of the course material. Before a ${courseLabel} project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any version-specific deviation in the reproducibility notes.`,
+					`**Learning sequence:** Treat ${courseLabel} setup and version expectations as part of the course material. Before a project begins, confirm the expected runtime, editor, compiler, simulator, or lab environment and record any version-specific deviation in the reproducibility notes.`,
 					`**Assumptions:**\n${bullets(assumptions)}`,
-					`**Completion check:** Each ${courseLabel} project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters.`
+					"**Completion check:** Each project opens with a clear expected toolchain, first verification command or smoke test, and any version-specific behavior that matters."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Upgrade Rule`,
 				content: [
-					`**Learning sequence:** When the ${courseLabel} toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. The ${courseLabel} setup should not silently rely on a local machine that already has old dependencies installed.`,
-					`**Completion checks:**\n- The current ${familyLabel} version is named.\n- The ${courseLabel} first-run verification step is still valid.\n- Any known ${courseLabel} version-specific exception is documented.`
+					`**Learning sequence:** When the ${courseLabel} toolchain changes, update starter files, screenshots, setup wording, and smoke tests together. The setup should not silently rely on a local machine that already has old dependencies installed.`,
+					`**Completion checks:**\n- The current ${familyLabel} version is named.\n- The first-run verification step is still valid.\n- Any known version-specific exception is documented.`
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Platform Fallbacks`,
 				content: [
-					`**Learning sequence:** If ${courseLabel} can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite. For ${courseLabel}, a fallback should preserve the learning objective even when the exact editor, compiler, simulator, operating system, or package version differs.`,
-					`**Completion check:** The ${courseLabel} setup notes identify whether the work requires macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation.`
+					`**Learning sequence:** If ${courseLabel} can run on multiple operating systems, name the primary path and at least one fallback. If it cannot, say so directly and explain the prerequisite. A fallback should preserve the learning objective even when the exact editor, compiler, simulator, operating system, or package version differs.`,
+					"**Completion check:** The setup notes identify whether the work requires macOS, Windows, Linux, a VM/container, browser-only tools, or an online simulation."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Reproducibility Notes`,
 				content: [
-					`**Learning sequence:** Reusable ${courseLabel} projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record ${courseLabel} package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work. The ${courseLabel} notes should identify what is required, what is optional, and what can be substituted without changing the target skill.`,
-					`**Completion check:** Re-running the ${courseLabel} project does not depend on hidden local state.`
+					`**Learning sequence:** Reusable ${courseLabel} projects should include enough setup notes that a fresh checkout or fresh browser session can reproduce the assignment. Record package versions, compiler flags, data paths, Unity/Xcode/editor versions, or lab VM assumptions when they affect the work. The notes should identify what is required, what is optional, and what can be substituted without changing the target skill.`,
+					"**Completion check:** Re-running the project does not depend on hidden local state."
 				].join("\n\n")
 			}
 		],
@@ -1510,15 +1510,15 @@ function addToolchainAssumptionsModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} First-Run Smoke Test`,
 				content: [
-					`**Project goal:** Create or run the smallest verification step that proves the ${courseLabel} toolchain is ready. A useful ${courseLabel} smoke test avoids full-project complexity and checks only the first thing that must work: compile and run, open the simulator, load the dataset, start the local server, or execute a minimal script.`,
-					`**Completion checks:**\n- The exact ${courseLabel} command, editor action, or simulation URL is recorded.\n- The expected success output is documented.\n- One common ${familyLabel} failure and recovery step is listed.\n- The ${courseLabel} smoke test is small enough to rerun after updates without masking setup problems inside unrelated project code.`
+					`**Project goal:** Create or run the smallest verification step that proves the ${courseLabel} toolchain is ready. A useful smoke test avoids full-project complexity and checks only the first thing that must work: compile and run, open the simulator, load the dataset, start the local server, or execute a minimal script.`,
+					`**Completion checks:**\n- The exact command, editor action, or simulation URL is recorded.\n- The expected success output is documented.\n- One common ${familyLabel} failure and recovery step is listed.\n- The smoke test is small enough to rerun after updates without masking setup problems inside unrelated project code.`
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Version Drift Review`,
 				content: [
-					`**Project goal:** Compare the current ${courseLabel} assumption against the installed or recommended version and document whether the course needs an update. ${courseLabel} version drift matters when screenshots no longer match, commands change, package APIs move, browser behavior changes, or a compiler/runtime emits different warnings than the lesson expects.`,
-					`**Completion checks:**\n- Current installed/recommended ${familyLabel} version is named.\n- Any breaking UI/API/build difference is recorded.\n- The ${courseLabel} version-drift note shows whether to proceed, update, or use a fallback.\n- The ${courseLabel} review distinguishes harmless cosmetic differences from changes that affect instructions, tests, or expected output.`
+					`**Project goal:** Compare the current ${courseLabel} assumption against the installed or recommended version and document whether the course needs an update. Version drift matters when screenshots no longer match, commands change, package APIs move, browser behavior changes, or a compiler/runtime emits different warnings than the lesson expects.`,
+					`**Completion checks:**\n- Current installed/recommended ${familyLabel} version is named.\n- Any breaking UI/API/build difference is recorded.\n- The version-drift note shows whether to proceed, update, or use a fallback.\n- The review distinguishes harmless cosmetic differences from changes that affect instructions, tests, or expected output.`
 				].join("\n\n")
 			}
 		]
@@ -2151,9 +2151,9 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 			{
 				title: `${courseLabel} Environment and Tooling Baseline`,
 				content: [
-					`**Concept path:** Use this ${courseLabel} baseline before starting systems or security work. For ${courseLabel}, setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
+					`**Concept path:** Use this ${courseLabel} baseline before starting systems or security work. Setup is part of the lesson because drift or unsafe host assumptions can invalidate the lab.`,
 					`**Environment:**\n${bullets(config.environment)}`,
-					`**Completion check:** The ${courseLabel} work demonstrates the ability to name the lab boundary, setup path, and recovery method.`
+					"**Completion check:** The work demonstrates the ability to name the lab boundary, setup path, and recovery method."
 				].join("\n\n")
 			},
 			{
@@ -2161,26 +2161,26 @@ function addSystemsSpecificSafetyModule(courseId: string, course: RawCourse) {
 				content: [
 					`**Safety boundary:** These activities are outside ${courseLabel} scope even if they are technically possible.`,
 					`**Do not do:**\n${bullets(config.prohibited)}`,
-					`**Completion check:** Any ambiguous ${courseLabel} target or action is paused until scope is narrowed.`
+					"**Completion check:** Any ambiguous target or action is paused until scope is narrowed."
 				].join("\n\n")
 			},
 			{
 				title: `${courseLabel} Signature Project`,
-				content: `**Project goal:** ${config.project} The ${courseLabel} signature project should combine setup, observation, interpretation, and remediation rather than ending at a tool output. The final ${courseLabel} artifact should make the environment, evidence, limitation, and defensive value clear enough to inspect later.\n\n**Completion checks:**\n- ${courseLabel} scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- ${courseLabel} evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
+				content: `**Project goal:** ${config.project} The signature project should combine setup, observation, interpretation, and remediation rather than ending at a tool output. The final artifact should make the environment, evidence, limitation, and defensive value clear enough to inspect later.\n\n**Completion checks:**\n- Scope and authorization are explicit.\n- Setup and reset instructions are documented.\n- Evidence leads to a defensive fix, monitoring improvement, or hardening recommendation.`
 			},
 			{
 				title: `${courseLabel} Evidence Rubric`,
-				content: `**Readiness check:** Evaluate ${courseLabel} systems/security work on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe ${courseLabel} scope or missing mitigation.\n\n**Evidence of proficiency:** ${courseLabel} work demonstrates the ability to show what happened, why it mattered, how it was fixed or constrained, and how the result was verified.`
+				content: `**Readiness check:** Evaluate ${courseLabel} systems/security work on correctness, scope discipline, reproducibility, evidence quality, remediation, and communication. Raw cleverness does not compensate for unsafe scope or missing mitigation.\n\n**Evidence of proficiency:** The work demonstrates the ability to show what happened, why it mattered, how it was fixed or constrained, and how the result was verified.`
 			}
 		],
 		supplementalProjects: [
 			{
 				title: `${courseLabel} Defensive Lab: Scope and Reset Drill`,
-				content: `**Project goal:** Before running a ${courseLabel} lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path. The ${courseLabel} drill should be specific enough that the lab can be repeated safely and stopped cleanly if the result is unexpected.\n\n**Required fields:** ${courseLabel} lab boundary, allowed target, allowed tools, evidence to collect, stop condition, reset command or recovery step, and one disallowed action.\n\n**Completion checks:**\n- ${courseLabel} scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named.\n- The expected evidence is tied to the ${courseLabel} toolchain.`
+				content: `**Project goal:** Before running a ${courseLabel} lab, write the scope, allowed tools, stop conditions, expected evidence, and reset path. The drill should be specific enough that the lab can be repeated safely and stopped cleanly if the result is unexpected.\n\n**Required fields:** lab boundary, allowed target, allowed tools, evidence to collect, stop condition, reset command or recovery step, and one disallowed action.\n\n**Completion checks:**\n- Scope is local and owned.\n- Reset path is specific.\n- Disallowed actions are named.\n- The expected evidence is tied to the toolchain.`
 			},
 			{
 				title: `${courseLabel} Defensive Lab: Evidence-to-Remediation Report`,
-				content: `**Project goal:** Convert one ${courseLabel} lab observation into a short remediation report. The ${courseLabel} report separates what was observed from why it matters, then describes a fix or hardening step that can be tested.\n\n**Required fields:** ${courseLabel} observation, reproduction evidence, impact, remediation, verification step, prevention or monitoring note, and one remaining limitation.\n\n**Completion checks:**\n- ${courseLabel} observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance.\n- Verification evidence is specific enough to reproduce the ${courseLabel} finding.`
+				content: `**Project goal:** Convert one ${courseLabel} lab observation into a short remediation report. The report separates what was observed from why it matters, then describes a fix or hardening step that can be tested.\n\n**Required fields:** observation, reproduction evidence, impact, remediation, verification step, prevention or monitoring note, and one remaining limitation.\n\n**Completion checks:**\n- Observation and impact are separated.\n- Fix or hardening step is testable.\n- The report includes prevention or monitoring guidance.\n- Verification evidence is specific enough to reproduce the finding.`
 			}
 		]
 	});
@@ -2312,13 +2312,13 @@ function supplementalProjectFor(
 	if (next === 1) {
 		return {
 			title: `${module.title}: Focused Practice`,
-			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. The ${module.title} checkpoint completes one direct example, one slightly changed example, and one written explanation of the main idea.\n\n**Completion checks:**\n- The ${module.title} prerequisite concept is stated clearly.\n- The ${module.title} normal case is completed independently.\n- The ${module.title} explanation identifies one likely misconception or edge case.`
+			content: `**Project goal:** Add a focused practice checkpoint for ${module.title}. Complete one direct example, one slightly changed example, and one written explanation of the main idea. Use the result as a quick readiness signal before moving into the larger module project.\n\n**Completion checks:**\n- The prerequisite concept is stated clearly.\n- The normal case is completed independently.\n- The explanation identifies one likely misconception or edge case.`
 		};
 	}
 
 	return {
 		title: `${module.title}: Applied Challenge`,
-		content: `**Project goal:** Apply ${module.title} in a new context that changes the input, representation, or design constraint from the lesson example.\n\n**Completion checks:**\n- The ${module.title} changed constraint is explicit.\n- The ${module.title} work tests or explains both a normal case and an awkward case.\n- The final ${module.title} reflection names what had to be adapted from the original lesson.`
+		content: `**Project goal:** Extend ${module.title} into a new context that changes the input, representation, or design constraint from the lesson example. State the changed requirement first, then build or solve a small version before completing the full variation.\n\n**Work sequence:**\n1. Identify the original idea being transferred.\n2. Name the one constraint, input shape, representation, or success condition that changed.\n3. Complete a normal case, then test an awkward or boundary case that the original example did not cover.\n4. Write a short reflection explaining what stayed the same, what had to change, and how the result proves the concept still works.\n\n**Completion checks:**\n- The changed constraint is explicit.\n- The work includes both a normal case and an awkward case.\n- The final reflection names the transferred concept and the adaptation that made it work.`
 	};
 }
 
