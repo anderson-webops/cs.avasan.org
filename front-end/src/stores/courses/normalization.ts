@@ -622,13 +622,26 @@ function formatInlineNumberedLists(text: string) {
 
 function formatSupportLabels(text: string) {
 	return text.replace(
-		/(\S)[ \t]+(\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Required outcome|Completion checks|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output):\*\*)/g,
-		"$1\n\n$2"
+		/(\S)[ \t]+(\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Required outcome|Completion checks|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+		(_match, prefix: string, label: string, offset: number) => {
+			const lineStart = text.lastIndexOf("\n", offset) + 1;
+			const indentation =
+				text.slice(lineStart, offset).match(/^[ \t]*/)?.[0] ?? "";
+
+			return `${prefix}\n\n${indentation}${label}`;
+		}
 	);
 }
 
 function formatVisibleMarkdownStructure(text: string) {
-	return formatSupportLabels(formatInlineNumberedLists(text));
+	const formatted = formatSupportLabels(formatInlineNumberedLists(text));
+
+	if (!formatted.includes("Core topics in this module:")) return formatted;
+
+	return formatted.replace(
+		/\n\n(\*\*(?:Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+		"\n\n   $1"
+	);
 }
 
 function listifyInlineTopics(value: string) {
@@ -662,6 +675,25 @@ function lessonOpening(label: string, description: string, topics: string) {
 		`${label} ${normalizedDescription}.`,
 		listifyInlineTopics(topics)
 	].join("\n\n");
+}
+
+function supportLabelParagraph(
+	label: string,
+	leadingWhitespace: string,
+	body: string,
+	sourceText: string,
+	matchOffset: number
+) {
+	const lineStart = sourceText.lastIndexOf("\n", matchOffset) + 1;
+	const linePrefix = sourceText.slice(lineStart, matchOffset);
+	const indentation =
+		linePrefix && /^[ \t]*$/.test(linePrefix)
+			? linePrefix
+			: leadingWhitespace.includes("\n")
+				? (leadingWhitespace.match(/(?:^|\n)([ \t]*)$/)?.[1] ?? "")
+				: "";
+
+	return `\n\n${indentation}**${label}:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(body))}.`;
 }
 
 function neutralizeLessonDirectiveText(text: string) {
@@ -829,19 +861,48 @@ function neutralizeLessonDirectiveText(text: string) {
 			"work as optional enrichment"
 		)
 		.replace(
-			/\s*\bPractice target: ([^.]+)\./g,
-			(_match, practice) =>
-				`\n\n**Practice target:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(practice))}.`
+			/(\s*)(?:\*\*)?\bPractice target:(?:\*\*)?([^\n.]+)\./g,
+			(_match, leadingWhitespace, practice, offset, sourceText) =>
+				supportLabelParagraph(
+					"Practice target",
+					leadingWhitespace,
+					practice,
+					sourceText,
+					offset
+				)
 		)
 		.replace(
-			/\s*\bVisible pattern: ([^.]+)\./g,
-			(_match, outcome) =>
-				`\n\n**Visible pattern:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(outcome))}.`
+			/(\s*)(?:\*\*)?\bVisible pattern:(?:\*\*)?([^\n.]+)\./g,
+			(_match, leadingWhitespace, outcome, offset, sourceText) =>
+				supportLabelParagraph(
+					"Visible pattern",
+					leadingWhitespace,
+					outcome,
+					sourceText,
+					offset
+				)
 		)
 		.replace(
-			/\s*\bKey idea: ([^.]+)\./g,
-			(_match, outcome) =>
-				`\n\n**Key idea:** ${capitalizeFirstLetter(stripTrailingSentencePunctuation(outcome))}.`
+			/(\s*)(?:\*\*)?\bKey idea:(?:\*\*)?([^\n.]+)\./g,
+			(_match, leadingWhitespace, outcome, offset, sourceText) =>
+				supportLabelParagraph(
+					"Key idea",
+					leadingWhitespace,
+					outcome,
+					sourceText,
+					offset
+				)
+		)
+		.replace(
+			/(\s*)(?:\*\*)?\bSkill target:(?:\*\*)?([^\n.]+)\./g,
+			(_match, leadingWhitespace, outcome, offset, sourceText) =>
+				supportLabelParagraph(
+					"Skill target",
+					leadingWhitespace,
+					outcome,
+					sourceText,
+					offset
+				)
 		);
 }
 
