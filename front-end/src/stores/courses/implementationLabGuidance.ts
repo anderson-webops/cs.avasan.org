@@ -16,6 +16,18 @@ function labLabel(moduleTitle: string) {
 	return moduleTitle.replace(/: (?:Implementation|Applied) Lab$/, "");
 }
 
+function articleSafeLabel(label: string) {
+	return label.replace(/^(?:the|a|an)\s+/i, "");
+}
+
+function definiteLabel(label: string) {
+	return `the **${articleSafeLabel(label)}**`;
+}
+
+function capitalizedDefiniteLabel(label: string) {
+	return `The **${articleSafeLabel(label)}**`;
+}
+
 function sectionLabel(section: ImplementationLabSection) {
 	return {
 		concepts: "concept path",
@@ -33,8 +45,9 @@ function familyFocus(
 ) {
 	const family = courseFamily.toLowerCase();
 	const label = labLabel(moduleTitle);
+	const focusLabel = articleSafeLabel(label);
 	const focusFor = (focus: string) =>
-		`${label} ${sectionLabel(section)} focus: ${focus}`;
+		`${focusLabel} ${sectionLabel(section)} focus: ${focus}`;
 
 	if (family.includes("assembly")) {
 		return focusFor(
@@ -132,9 +145,11 @@ function familyFocus(
 }
 
 function referenceStep(label: string, artifact: string, hasReference = true) {
+	const artifactLabel = definiteLabel(label);
+
 	return hasReference
-		? `Compare the finished ${label} ${artifact} draft with the reference only after the artifact works; record one meaningful difference in behavior, robustness, readability, or design.`
-		: `Write a ${label} ${artifact} verification note that identifies the evidence used to confirm the result.`;
+		? `Compare the finished **${label}** ${artifact} draft with the reference only after the artifact works; record one meaningful difference in behavior, robustness, readability, or design.`
+		: `Write a verification note for ${artifactLabel} ${artifact} that identifies the evidence used to confirm the result.`;
 }
 
 function variantIndex(
@@ -165,7 +180,7 @@ export function buildImplementationLabGuidance({
 	if (section === "concepts") {
 		return [
 			`Use **${label}** to connect the build target to ${focus}.`,
-			`Define the **${label}** artifact, minimum working behavior, input/output surfaces, and invariant that should stay true as features are added.`,
+			`Define ${definiteLabel(label)} artifact, minimum working behavior, input/output surfaces, and invariant that should stay true as features are added.`,
 			`Keep **${label}** concrete: the concept is complete only when the result can be run, inspected, and explained with evidence from the artifact.`
 		].join("\n\n");
 	}
@@ -182,7 +197,7 @@ export function buildImplementationLabGuidance({
 		return [
 			`Close **${label}** with an engineering note rather than a generic reflection.`,
 			`Summarize the final **${label}** behavior, the most important edge case, the evidence used to verify the result, and one limitation or next improvement.`,
-			`The **${label}** note should be specific enough that the same artifact could be rerun or reviewed later without reconstructing the reasoning from memory.`
+			`${capitalizedDefiniteLabel(label)} note should be specific enough that the same artifact could be rerun or reviewed later without reconstructing the reasoning from memory.`
 		].join("\n\n");
 	}
 
@@ -202,13 +217,13 @@ export function buildImplementationLabGuidance({
 		projectGoal,
 		`**Focus:** ${focus}.`,
 		"**Required work:**",
-		`1. For the **${label}** ${artifact}, identify the concrete inputs, outputs, state changes, files, commands, services, or system boundaries involved.`,
-		`2. Build the **${label}** ${artifact} in small runnable steps, checking output, logs, traces, tests, or browser/runtime behavior after each meaningful change.`,
-		`3. Check the **${label}** ${artifact} with one normal path, one boundary or failure path, and one case tied directly to the lab's main concept.`,
+		`1. For ${definiteLabel(label)} ${artifact}, identify the concrete inputs, outputs, state changes, files, commands, services, or system boundaries involved.`,
+		`2. Build ${definiteLabel(label)} ${artifact} in small runnable steps, checking output, logs, traces, tests, or browser/runtime behavior after each meaningful change.`,
+		`3. Check ${definiteLabel(label)} ${artifact} with one normal path, one boundary or failure path, and one case tied directly to the lab's main concept.`,
 		`4. ${referenceStep(label, artifact, hasReference)}`,
 		"**Completion checks:**",
-		`- The **${label}** ${artifact} demonstrates the lab concept through runnable behavior, output, tests, traces, logs, or another concrete result.`,
-		`- The protected boundary or failure case for the **${label}** ${artifact} is named explicitly and is not only the provided sample.`,
-		`- The final **${label}** ${artifact} note identifies one implementation, debugging, or reasoning choice that materially affected the result.`
+		`- ${capitalizedDefiniteLabel(label)} ${artifact} demonstrates the lab concept through runnable behavior, output, tests, traces, logs, or another concrete result.`,
+		`- The protected boundary or failure case for ${definiteLabel(label)} ${artifact} is named explicitly and is not only the provided sample.`,
+		`- The final **${articleSafeLabel(label)}** ${artifact} note identifies one implementation, debugging, or reasoning choice that materially affected the result.`
 	].join("\n\n");
 }

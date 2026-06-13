@@ -700,7 +700,7 @@ export const scratchLevel2Course: RawCourse = {
 				{
 					title: "GM11 Project 1: Master Project",
 					content:
-						"The master project is an original Scratch game that combines the course's major ideas. Brainstorm the game type, sprites, controls, rules, win/loss condition, variables, lists, and functions before building.\nCreate a new Scratch project and add a planning comment that lists the implementation steps. Build the game as independently as possible, revising the plan when the design changes. A complete project may take more than one class session."
+						"The master project is an original Scratch game that combines the course's major ideas. Brainstorm the game type, sprites, controls, rules, win/loss condition, variables, lists, and functions before building.\nCreate a new Scratch project and add a planning comment that lists the implementation steps. Build the game as independently as possible, revising the plan when the design changes. A complete project may take more than one work period."
 				},
 				{
 					title: "Master Project Presentation",

@@ -182,7 +182,8 @@ export const javascriptLevel1Course: RawCourse = {
 				{
 					title: "Variables and Data Types",
 					content:
-						'Project Link: https://codepen.io/junilearning/pen/eYpBWWX\nUse let and const for numbers, strings, booleans, null and undefined. Assign values, use printToScreen(), explain comments, and show converting string numbers with a leading +. Compare "1" + "1" to 1 + 1.'
+						'Use let and const for numbers, strings, booleans, null and undefined. Assign values, use printToScreen(), explain comments, and show converting string numbers with a leading +. Compare "1" + "1" to 1 + 1.',
+					projectLink: "https://codepen.io/junilearning/pen/eYpBWWX"
 				},
 				{
 					title: "User Input and Printing",

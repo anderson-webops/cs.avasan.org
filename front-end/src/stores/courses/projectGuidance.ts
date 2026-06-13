@@ -342,6 +342,13 @@ function compactGuidanceBody(
 			"After the page behavior"
 		)
 		.replace(
+			new RegExp(
+				`\\bone the (${cleanupReferenceNames}) (example|case|input|path|run|trace|observation)\\b`,
+				"g"
+			),
+			"one $2 for the $1"
+		)
+		.replace(
 			new RegExp(`\\bAfter ${escapedReference} local lab works\\b`, "g"),
 			"After the local lab works"
 		)
@@ -1117,7 +1124,7 @@ function requiredWorkSteps(
 			[
 				`Define the ${moduleTitle} contract in terms of inputs, outputs, resource ownership, and the command that proves it.`,
 				`Build or instrument ${moduleTitle} in slices, keeping each compile, run, or diagnostic result tied to one assumption.`,
-				`Check a representative run, a boundary or failure run, and one observable system detail such as logs, layout, timing, or sanitizer output.`
+				`Check ${moduleTitle} with a representative run, a boundary or failure run, and one observable system detail such as logs, layout, timing, or sanitizer output.`
 			],
 			[
 				`List the ${moduleTitle} files, build target, runtime setup, and memory or resource boundary before changing implementation code.`,
@@ -1626,7 +1633,7 @@ function completionCheckSteps(
 			],
 			[
 				`${moduleTitle} records the build/run command and the relevant environment, input, or fixture state.`,
-				`Expected behavior, boundary behavior, and one tool-backed diagnostic observation are checked.`,
+				`${moduleTitle} expected behavior, boundary behavior, and one tool-backed diagnostic observation are checked.`,
 				`The final ${moduleTitle} note explains the resource, representation, or tooling decision that made the result trustworthy.`
 			],
 			[

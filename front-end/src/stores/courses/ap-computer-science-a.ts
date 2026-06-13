@@ -145,7 +145,7 @@ export const apComputerScienceACourse: RawCourse = {
 				{
 					title: "Core Check-In Prompt Bank",
 					content:
-						"Run the verified check-in prompt bank from the APCS repo rather than the original Replit source. This is the direct GitHub-backed replacement for the check-in project link.",
+						"Run the verified check-in prompt bank from the APCS repo rather than the original Replit source. This is the direct GitHub-backed replacement for the original Replit reference.",
 					projectLink: repo("APCS-Check-in-1/solution")
 				}
 			],

@@ -18,7 +18,9 @@ export const javascriptLevel2Course: RawCourse = {
 				{
 					title: "Check-In #1: Functions & Complex Conditionals",
 					content:
-						"Project Link: https://codepen.io/junilearning/pen/f1b05b8f30ae178563d6ecd20e816e3f\nCreate rollDie(), track sixes over 100 rolls, build playJackpot() with ternary, a sum function, and an isOdd function."
+						"Create rollDie(), track sixes over 100 rolls, build playJackpot() with ternary, a sum function, and an isOdd function.",
+					projectLink:
+						"https://codepen.io/junilearning/pen/f1b05b8f30ae178563d6ecd20e816e3f"
 				},
 				{
 					title: "Check-In #1: Arrays",

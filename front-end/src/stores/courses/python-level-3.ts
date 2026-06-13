@@ -115,7 +115,7 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "AM3 Project 1: Python Fundamentals Problem Set",
 					content:
-						"Complete a fundamentals problem set that reviews the major ideas covered so far. The set includes list processing, counting, perfect squares, factorial sums, divisors, reverse strings, vowel counts, frequency analysis, and swapping values in a list. This module may take more than one class session, so focus on steady progress and clean solutions.",
+						"Complete a fundamentals problem set that reviews the major ideas covered so far. The set includes list processing, counting, perfect squares, factorial sums, divisors, reverse strings, vowel counts, frequency analysis, and swapping values in a list. This module may take more than one work period, so focus on steady progress and clean solutions.",
 					projectLink:
 						"https://github.com/instruction-material/Python-Level-3/tree/main/AM3-Python-Fundamentals-Problem-Set/starter",
 					solutionLink:

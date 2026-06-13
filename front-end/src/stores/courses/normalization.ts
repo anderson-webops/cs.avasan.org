@@ -2963,8 +2963,8 @@ function completionChecks(context: CourseTextContext) {
 			],
 			subject => [
 				`- The ${subject} work identifies the phenomenon, evidence source, and target term before writing the claim.`,
-				`- The answer includes one check against overclaiming, such as a limitation, alternate cause, or missing measurement.`,
-				`- The final explanation links evidence, vocabulary, and model behavior in a reviewable way.`
+				`- The ${subject} answer includes one check against overclaiming, such as a limitation, alternate cause, or missing measurement.`,
+				`- The final ${subject} explanation links evidence, vocabulary, and model behavior in a reviewable way.`
 			]
 		]);
 	}
@@ -3701,6 +3701,13 @@ function compactGeneratedProjectSupport(
 			"one $1"
 		],
 		[
+			new RegExp(
+				`\\bone the (${supportReferenceCleanupNames}) (example|case|input|path|run|trace|observation)\\b`,
+				"g"
+			),
+			"one $2 for the $1"
+		],
+		[
 			new RegExp(`\\bAt least one ${escapedSubject} observation\\b`, "g"),
 			"At least one observation"
 		],
@@ -3831,6 +3838,13 @@ function compactGeneratedProjectSupport(
 			.replace(
 				new RegExp(`\\bthe ${escapedReference}\\b`, "g"),
 				reference
+			)
+			.replace(
+				new RegExp(
+					`\\bone the (${supportReferenceCleanupNames}) (example|case|input|path|run|trace|observation)\\b`,
+					"g"
+				),
+				"one $2 for the $1"
 			)
 			.replace(
 				new RegExp(`\\bthe visible ${escapedReference}\\b`, "g"),
@@ -4748,6 +4762,13 @@ function studioExtensionPrompt(context: CourseTextContext) {
 
 function compactStudioSupportText(text: string) {
 	return text
+		.replace(/\b(the|a|an) The ([A-Z])/g, "$1 $2")
+		.replace(/\b(The|A|An) The ([A-Z])/g, "$1 $2")
+		.replace(/\b(one|each|every) The ([A-Z])/g, "$1 $2")
+		.replace(
+			/\b(For|After|Before|When|If|While|Once|Until|With|From|Against|Use|Frame|Separate|Start|Define|Keep|Expose|Verify|Compare|Check|Show|Name|State|Make|Include|Add|Trace|Record|Retest|Build|Test|Run|Compile|Collect|Connect) The ([A-Z])/g,
+			"$1 the $2"
+		)
 		.replace(
 			/(^|\n)- ([a-z])/g,
 			(_match, prefix: string, first: string) =>
