@@ -292,6 +292,9 @@ function isProjectLikeItem(item: RawCourseModuleItem) {
 	);
 }
 
+const genericSupportItemTitlePattern =
+	/^(?:Core Concepts|Concept Path|Design and Planning Map|Debugging and Test Pass|Share and Explain|Extension Project|Guided Example|Worked Example|Core Project|Review and Reflection|Extension Challenge|Build Requirements|Common Bug Patterns|Application Check|Verification and Reflection|Checkpoint: .+|Supplemental Project \d+)$/i;
+
 function compactWhitespace(text: string) {
 	return text.replace(/\s+/g, " ").trim();
 }
@@ -313,6 +316,13 @@ function stripLessonTitlePrefix(title: string) {
 			""
 		)
 		.replace(/:+$/g, "");
+}
+
+function compactAppliedLabTitle(title: string) {
+	return stripLessonTitlePrefix(title)
+		.replace(/\b(?:Applied|Implementation) (?:Lab|Studio):\s*/i, "")
+		.replace(/:\s*(?:(?:Applied|Implementation) Lab|Applied Studio)$/i, "")
+		.trim();
 }
 
 function neutralizeLessonPointText(text: string) {
@@ -1355,7 +1365,7 @@ function isScienceContext(context: CourseTextContext) {
 }
 
 function isAppliedStudioContext(context: CourseTextContext) {
-	return /applied studio|studio|lab \d+/i.test(
+	return /applied studio|applied lab|studio|lab \d+/i.test(
 		`${context.module.title} ${context.item.title}`
 	);
 }
@@ -2441,11 +2451,28 @@ function projectExpectations(context: CourseTextContext) {
 		]);
 	}
 	if (/sort|selection|insertion|merge|quick/.test(source)) {
-		return [
-			`- Show the ${subject} array or list before and after the algorithm runs.`,
-			`- Test ${subject} with already-sorted, reverse-sorted, duplicate-value, and small-size inputs.`,
-			`- Explain which ${subject} comparisons or swaps dominate the runtime.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Show the ${subject} array or list before and after the algorithm runs.`,
+				`- Test ${subject} with already-sorted, reverse-sorted, duplicate-value, and small-size inputs.`,
+				"- Explain whether comparisons, swaps, recursive splits, merges, or partitions account for most of the runtime."
+			],
+			subject => [
+				`- Trace ${subject} on a tiny list so every comparison and movement can be checked by hand.`,
+				`- Test ${subject} with sorted data, reverse-sorted data, duplicates, and a one-element or empty case where relevant.`,
+				"- Identify the operation that repeats most often and connect it to the expected time complexity."
+			],
+			subject => [
+				`- Record the ${subject} data before the run, after one important pass or recursive step, and after the final result.`,
+				`- Check ${subject} with duplicate values, nearly sorted data, and an input shape that stresses the algorithm.`,
+				"- Explain the best-case or worst-case input shape when the algorithm has one."
+			],
+			subject => [
+				`- Use ${subject} to make the algorithm state visible: current index, partition, sorted prefix, temporary array, or merge window.`,
+				`- Test ${subject} with small, ordinary, already-ordered, and reverse-ordered inputs.`,
+				"- Compare the number of passes, recursive levels, or element moves with the runtime claim."
+			]
+		]);
 	}
 	if (/array|matrix|grid|two-dimensional|2d/.test(source)) {
 		return variantLines(context, [
@@ -3217,6 +3244,53 @@ function scopedItemSubject(context: CourseTextContext) {
 	const itemTitle = compactWhitespace(context.item.title);
 	const moduleTitle = compactWhitespace(context.module.title);
 	if (!itemTitle || itemTitle === moduleTitle) return "";
+	const compactModuleTitle = compactAppliedLabTitle(moduleTitle);
+	const compactItemTitle = compactAppliedLabTitle(itemTitle);
+
+	if (isAppliedStudioContext(context)) {
+		if (genericSupportItemTitlePattern.test(itemTitle)) {
+			return compactModuleTitle;
+		}
+
+		if (
+			compactItemTitle
+				.toLowerCase()
+				.startsWith(`${compactModuleTitle.toLowerCase()}:`)
+		) {
+			const itemSuffix = compactItemTitle
+				.slice(compactModuleTitle.length + 1)
+				.trim();
+
+			if (genericSupportItemTitlePattern.test(itemSuffix)) {
+				return compactModuleTitle;
+			}
+			if (itemSuffix) {
+				return `${compactModuleTitle} ${itemSuffix}`;
+			}
+		}
+
+		if (
+			compactItemTitle
+				.toLowerCase()
+				.startsWith(`${compactModuleTitle.toLowerCase()} supplemental `)
+		) {
+			return compactItemTitle;
+		}
+
+		if (compactItemTitle.includes(":")) {
+			const itemSuffix = compactItemTitle.split(":").at(-1)?.trim() ?? "";
+			if (genericSupportItemTitlePattern.test(itemSuffix)) {
+				return compactItemTitle;
+			}
+		}
+	}
+	if (
+		/:\s+\S/.test(itemTitle) &&
+		projectLikeTitlePattern.test(itemTitle) &&
+		!genericSupportItemTitlePattern.test(itemTitle)
+	) {
+		return compactItemTitle;
+	}
 	if (itemTitle.includes(moduleTitle) || moduleTitle.includes(itemTitle)) {
 		return itemTitle;
 	}
@@ -3798,6 +3872,20 @@ function compactGeneratedProjectSupport(
 			)
 			.replace(
 				new RegExp(
+					`\\bwhich ${escapedReference} (branch|loop|helper|collection|file step|comparison|comparisons|swap|swaps|operation|rule|path|step|values)\\b`,
+					"g"
+				),
+				"which $1"
+			)
+			.replace(
+				new RegExp(
+					`\\bwhich ${escapedBareReference} (branch|loop|helper|collection|file step|comparison|comparisons|swap|swaps|operation|rule|path|step|values)\\b`,
+					"g"
+				),
+				"which $1"
+			)
+			.replace(
+				new RegExp(
 					`\\bTest ${escapedReference} (allocation|construction|mutation|copy|move|cleanup|state|file|permission|process|service|timer|network|log)\\b`,
 					"g"
 				),
@@ -4184,12 +4272,15 @@ function compactStudioContextTitle(title: string) {
 }
 
 function studioContextLabel(context: CourseTextContext) {
+	const scopedSubject = scopedItemSubject(context);
+	if (scopedSubject) {
+		return compactStudioContextTitle(scopedSubject);
+	}
+
 	const itemTitle = stripLessonTitlePrefix(context.item.title);
 	const moduleTitle = stripLessonTitlePrefix(context.module.title);
-	const genericTitlePattern =
-		/^(?:Core Concepts|Concept Path|Design and Planning Map|Debugging and Test Pass|Share and Explain|Extension Project|Guided Example|Worked Example|Core Project|Review and Reflection|Extension Challenge|Build Requirements|Common Bug Patterns|Checkpoint: .+|Supplemental Project \d+)$/i;
 
-	if (genericTitlePattern.test(itemTitle)) {
+	if (genericSupportItemTitlePattern.test(itemTitle)) {
 		const moduleLabel = compactStudioContextTitle(moduleTitle);
 		const itemLabel = compactStudioContextTitle(itemTitle).toLowerCase();
 
@@ -4655,11 +4746,8 @@ function studioExtensionPrompt(context: CourseTextContext) {
 	]);
 }
 
-function compactStudioSupportText(studioLabel: string, text: string) {
-	const escapedLabel = escapeStringForRegExp(studioLabel);
-
+function compactStudioSupportText(text: string) {
 	return text
-		.replace(new RegExp(`\\bFor ${escapedLabel}, `, "g"), "")
 		.replace(
 			/(^|\n)- ([a-z])/g,
 			(_match, prefix: string, first: string) =>
@@ -4670,6 +4758,11 @@ function compactStudioSupportText(studioLabel: string, text: string) {
 
 function studioSupport(context: CourseTextContext) {
 	const studioLabel = studioContextLabel(context);
+	const supportLabel = /applied lab|lab \d+/i.test(
+		`${context.module.title} ${context.item.title}`
+	)
+		? "Applied lab"
+		: "Applied studio";
 	const studioFocus = variantPrompt(context, [
 		() =>
 			`For ${studioLabel}, define the artifact, prerequisite concepts, success criteria, and evidence before adding polish.`,
@@ -4699,13 +4792,19 @@ function studioSupport(context: CourseTextContext) {
 		() =>
 			`Finish ${reviewTarget} by naming one test result, one improvement made, and one remaining constraint.`
 	]);
+	const compactExtension = compactStudioSupportText(
+		studioExtensionPrompt(context)
+	);
+	const extension = compactExtension.includes(studioLabel)
+		? compactExtension
+		: `${studioLabel}: ${compactExtension}`;
 
 	return [
-		`**Applied studio:** **${studioLabel}** produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
-		`**Studio focus:** ${compactStudioSupportText(studioLabel, studioFocus)}`,
-		`**Build sequence:**\n${compactStudioSupportText(studioLabel, studioBuildSequence(context).join("\n"))}\n- ${compactStudioSupportText(studioLabel, reviewStep)}`,
-		`**Completion checks:**\n${compactStudioSupportText(studioLabel, studioCompletionChecks(context).join("\n"))}`,
-		`**Extension:** ${compactStudioSupportText(studioLabel, studioExtensionPrompt(context))}`
+		`**${supportLabel}:** **${studioLabel}** produces ${studioArtifact(context)} connected to ${subjectFocus(context)}.`,
+		`**Studio focus:** ${compactStudioSupportText(studioFocus)}`,
+		`**Build sequence:**\n${compactStudioSupportText(studioBuildSequence(context).join("\n"))}\n- ${compactStudioSupportText(reviewStep)}`,
+		`**Completion checks:**\n${compactStudioSupportText(studioCompletionChecks(context).join("\n"))}`,
+		`**Extension:** ${extension}`
 	].join("\n\n");
 }
 

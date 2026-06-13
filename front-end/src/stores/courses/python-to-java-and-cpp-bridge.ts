@@ -353,7 +353,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Bridge Exit to Java Level 1",
 					content:
-						"By the end of the Java branch, Be ready to write simple typed methods, use `Scanner`, and build a small class without getting stuck on boilerplate."
+						"By the end of the Java branch, the target outcome is readiness to write simple typed methods, use `Scanner`, and build a small class without getting stuck on boilerplate."
 				},
 				{
 					title: "Java Specific Adaptation: Verification and Reflection",
@@ -433,7 +433,7 @@ export const pythonToJavaAndCppBridgeCourse: RawCourse = {
 				{
 					title: "Bridge Exit to C++ Level 1",
 					content:
-						"By the end of the C++ branch, Be ready to work with console I/O, typed functions, vectors, and small classes, with pointers still deferred to the normal C++ course sequence."
+						"By the end of the C++ branch, the target outcome is readiness to work with console I/O, typed functions, vectors, and small classes, with pointers still deferred to the normal C++ course sequence."
 				},
 				{
 					title: "C++ Specific Adaptation: Verification and Reflection",

@@ -406,6 +406,28 @@ function compactGuidanceBody(
 		)
 		.replace(
 			new RegExp(
+				`\\bwhich ${escapedReference} (branch|loop|helper|collection|file step|comparison|comparisons|swap|swaps|operation|rule|path|step)\\b`,
+				"g"
+			),
+			"which $1"
+		)
+		.replace(
+			new RegExp(
+				`\\bwhich ${escapedBareReference} (branch|loop|helper|collection|file step|comparison|comparisons|swap|swaps|operation|rule|path|step)\\b`,
+				"g"
+			),
+			"which $1"
+		)
+		.replace(
+			new RegExp(`\\bwhich ${escapedReference} values\\b`, "g"),
+			"which values"
+		)
+		.replace(
+			new RegExp(`\\bwhich ${escapedBareReference} values\\b`, "g"),
+			"which values"
+		)
+		.replace(
+			new RegExp(
 				`\\b(a compact|one|every|a|an) the (${cleanupReferenceNames}) (sample|Java type|comparisons|swaps|keys|priority values)\\b`,
 				"g"
 			),
@@ -535,10 +557,18 @@ function checkInDetails(moduleTitle: string) {
 	return { isCheckIn: true, topic };
 }
 
+function compactGuidanceModuleTitle(moduleTitle: string) {
+	return moduleTitle
+		.replace(/\b(?:Applied|Implementation) (?:Lab|Studio):\s*/i, "")
+		.replace(/:\s*(?:(?:Applied|Implementation) Lab|Applied Studio)$/i, "")
+		.trim();
+}
+
 function guidanceModuleTitle(moduleTitle: string, itemTitle?: string) {
 	if (!itemTitle) return moduleTitle;
 
 	const { isCheckIn, topic: checkInTopic } = checkInDetails(moduleTitle);
+	const compactModuleTitle = compactGuidanceModuleTitle(moduleTitle);
 	const supplementalMatch = itemTitle.match(/\bsupplemental\s+(\d+)\b/i);
 	if (supplementalMatch) {
 		if (checkInTopic) {
@@ -547,15 +577,15 @@ function guidanceModuleTitle(moduleTitle: string, itemTitle?: string) {
 		if (isCheckIn) {
 			return `${moduleTitle.replace(/^Check-In/i, "Checkpoint")} Supplemental ${supplementalMatch[1]}`;
 		}
-		return `${moduleTitle} Supplemental ${supplementalMatch[1]}`;
+		return `${compactModuleTitle} Supplemental ${supplementalMatch[1]}`;
 	}
 
 	const extensionMatch = itemTitle.match(/\bextension challenge\b/i);
 	if (extensionMatch) {
-		return `${moduleTitle} Extension Challenge`;
+		return `${compactModuleTitle} Extension Challenge`;
 	}
 
-	return moduleTitle;
+	return compactModuleTitle;
 }
 
 function projectGoal(

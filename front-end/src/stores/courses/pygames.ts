@@ -1292,7 +1292,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "PyG12 Project 1: Master Project",
 					content:
-						"Scope and build an original Master Project that showcases everything learned. Start by discussing favorite games and brainstorming ideas that fit within the course time frame. Once a concept is chosen, write out the steps needed to program the project, including actors, physics, projectiles, screens, levels, and any AI behaviors desired. Aim to implement the project as independently as possible, using class time for planning, debugging, and architectural decisions rather than typing every line. A focused project that spans about two weeks of work is usually a better fit than an oversized idea that cannot be finished cleanly."
+						"Scope and build an original Master Project that showcases everything learned. Start by identifying favorite game mechanics and brainstorming ideas that fit the available project window. Once a concept is chosen, write out the steps needed to program the project, including actors, physics, projectiles, screens, levels, and any AI behaviors desired. Aim for independent implementation with the shared work focused on planning, debugging, and architectural decisions rather than typing every line. A focused project that spans about two weeks of work is usually a better fit than an oversized idea that cannot be finished cleanly."
 				},
 				{
 					title: "Bonus Concepts for Assets",

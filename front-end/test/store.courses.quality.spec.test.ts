@@ -1117,7 +1117,7 @@ describe("course text quality normalization", () => {
 			"\n   **Completion checks:**\n   -"
 		);
 		expect(scratchStudio!.content).toContain(
-			"\n   **Extension:** Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic."
+			"**Extension:** Debugging and Remix Studio: Add a broadcast, backdrop change, or sprite interaction that reuses the same event logic."
 		);
 		expect(scratchStudio!.content).toContain("\n\n2. **Design and Planning Map**");
 		expect(scratchStudio!.content).not.toContain(
@@ -1157,7 +1157,7 @@ describe("course text quality normalization", () => {
 			"any larger dataset result is accepted.\n\n**Readable output:**"
 		);
 		expect(csvStudio.content).toContain(
-			"- Name the CSV Summaries and Sanity Checks concept path dataset or search space, target question, feature or column choices, and comparison point."
+			"- Name the CSV Summaries and Sanity Checks dataset or search space, target question, feature or column choices, and comparison point."
 		);
 		expect(csvStudio.content).not.toContain(
 			"Define the Concept Path for DSP10"
@@ -1166,13 +1166,13 @@ describe("course text quality normalization", () => {
 		const scratchStudio = findItem(
 			scratchLevel1!,
 			/^Core Concepts$/,
-			/Debugging and Remix Studio concept path/
+			/Debugging and Remix Studio/
 		);
 		expect(scratchStudio.content).toContain(
-			"Debugging and Remix Studio concept path starting position, visible state, score or timer, and reset behavior are predictable"
+			"Debugging and Remix Studio starting position, visible state, score or timer, and reset behavior are predictable"
 		);
 		expect(scratchStudio.content).toContain(
-			"Compare Debugging and Remix Studio concept path against the original goal and record at least one improvement or bug fix"
+			"Compare Debugging and Remix Studio against the original goal and record at least one improvement or bug fix"
 		);
 		expect(scratchStudio.content).not.toContain(
 			"Check Concept Path against the stated success criteria"
@@ -1183,10 +1183,10 @@ describe("course text quality normalization", () => {
 			/Full-Stack Web Lab 15: Core Concepts/
 		);
 		expect(webStudio.content).toContain(
-			"Identify the Full-Stack Web Lab 15 Core Concepts user interaction, state change, DOM/canvas/API output, and visible loading, empty, or error state."
+			"Identify the Full-Stack Web Lab 15 user interaction, state change, DOM/canvas/API output, and visible loading, empty, or error state."
 		);
 		expect(webStudio.content).toContain(
-			"Implement one Full-Stack Web Lab 15 Core Concepts visible behavior at a time and inspect the page, console, network panel, or local server after each change."
+			"Implement one Full-Stack Web Lab 15 visible behavior at a time and inspect the page, console, network panel, or local server after each change."
 		);
 		expect(webStudio.content).not.toContain("smallest the browser-visible path");
 		expect(webStudio.content).not.toContain(
@@ -1198,7 +1198,7 @@ describe("course text quality normalization", () => {
 			/Low-Level Security Lab 9: Core Concepts/
 		);
 		expect(securityStudio.content).toContain(
-			"Name the Low-Level Security Lab 9 Core Concepts allowed target, disallowed actions, evidence source, stop condition, and defensive purpose."
+			"Name the Low-Level Security Lab 9 allowed target, disallowed actions, evidence source, stop condition, and defensive purpose."
 		);
 		expect(securityStudio.content).not.toContain(
 			"For Low-Level Security Lab 9 Core Concepts, state the authorized local lab boundary"
