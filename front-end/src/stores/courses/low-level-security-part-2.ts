@@ -3,6 +3,17 @@ import { buildSupportSectionGuidance } from "./supportSectionGuidance";
 
 type SecurityLabMode = "core" | "extension";
 
+function stableVariantIndex(seed: string, count: number) {
+	let hash = 2166136261;
+
+	for (const character of seed) {
+		hash ^= character.charCodeAt(0);
+		hash = Math.imul(hash, 16777619) >>> 0;
+	}
+
+	return hash % count;
+}
+
 function securityLabFocus(topic: string) {
 	const source = topic.toLowerCase();
 
@@ -44,19 +55,63 @@ function securityLabProjectContent(topic: string, mode: SecurityLabMode) {
 	const label = securityLabLabel(topic);
 	const artifact =
 		mode === "core" ? "core security lab" : "security extension lab";
+	const variant = stableVariantIndex(`${label}|${mode}`, 4);
+	const requiredWork = [
+		[
+			"1. State the local lab boundary and the exact toy target or starter being inspected.",
+			"2. Build and run the lab with the expected defensive tooling, such as warnings, sanitizers, debugger output, or structured trace logs where relevant.",
+			"3. Test the lab with one normal case, one malformed or boundary case, and one regression case that proves the final behavior is intentional.",
+			"4. Write a short audit note naming the violated assumption, the fix or hardening choice, and the evidence that supports the conclusion."
+		],
+		[
+			"1. Define the advanced fixture, exploitability question, mitigation state, and evidence source before touching the code.",
+			"2. Reproduce the issue or risk classification with current sanitizer, debugger, hardening, or trace evidence.",
+			"3. Patch or constrain the behavior, then rerun the original case, a boundary case, and a regression case.",
+			"4. Write a maintainer-facing note that distinguishes reachability, impact, mitigation, and remaining uncertainty."
+		],
+		[
+			"1. Name the local target, controlled input, hardening or mitigation assumption, and rollback path.",
+			"2. Record baseline evidence before changing the fixture, build flags, parser logic, lifetime rule, or report format.",
+			"3. Verify normal behavior, failure-shaped behavior, and the final defensive result after the change.",
+			"4. Summarize the bug class, defensive value, and evidence that would let another maintainer reproduce the conclusion."
+		],
+		[
+			"1. Write the scope line first: authorized fixture, allowed tools, observed data, stop condition, and reset command.",
+			"2. Collect the smallest useful trace, crash, warning, log, or binary-hardening evidence for the question being studied.",
+			"3. Apply a narrow fix, configuration, or documentation change and retest the evidence path that exposed the issue.",
+			"4. Close with an audit note naming root cause, proof of fix, prevention idea, and one limitation."
+		]
+	][variant];
+	const completionChecks = [
+		[
+			"- The work stays inside the provided local lab and does not target public systems.",
+			"- Security claims are backed by local build, runtime, sanitizer, debugger, or test evidence.",
+			"- The final note explains the bug class or invariant well enough for a maintainer to reproduce and verify the result."
+		],
+		[
+			"- The fixture, toolchain, stop condition, and reset path are documented.",
+			"- The evidence separates observed behavior from exploitability, impact, and mitigation claims.",
+			"- The final note identifies what the patch or hardening step proves and what it does not prove."
+		],
+		[
+			"- Baseline, failure-shaped, and post-change evidence can be rerun in the local lab.",
+			"- The conclusion is supported by sanitizer, debugger, trace, log, build, or binary-hardening evidence.",
+			"- The final note states the remaining limitation without expanding beyond the approved target."
+		],
+		[
+			"- The lab remains local, reversible, and defensive in purpose.",
+			"- The same evidence path that exposed the problem is used to verify the fix or mitigation.",
+			"- The final note is written for a maintainer: root cause, impact, remediation, verification, and prevention."
+		]
+	][variant];
 
 	return [
 		`**Project goal:** Complete a ${artifact} for **${label}** that produces defensive evidence, not just a passing program.`,
 		`**Focus:** ${securityLabFocus(topic)}.`,
 		"**Required work:**",
-		"1. State the local lab boundary and the exact toy target or starter being inspected.",
-		"2. Build and run the lab with the expected defensive tooling, such as warnings, sanitizers, debugger output, or structured trace logs where relevant.",
-		"3. Test the lab with one normal case, one malformed or boundary case, and one regression case that proves the final behavior is intentional.",
-		"4. Write a short audit note naming the violated assumption, the fix or hardening choice, and the evidence that supports the conclusion.",
+		...requiredWork,
 		"**Completion checks:**",
-		"- The work stays inside the provided local lab and does not target public systems.",
-		"- Security claims are backed by local build, runtime, sanitizer, debugger, or test evidence.",
-		"- The final note explains the bug class or invariant well enough for a maintainer to reproduce and verify the result."
+		...completionChecks
 	].join("\n\n");
 }
 

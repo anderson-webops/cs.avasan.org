@@ -2002,7 +2002,7 @@ function remediationPrompt(context: CourseTextContext) {
 		subject =>
 			`Use ${subject} to name the blocker, solve one narrower practice case, and return to the original prompt with the corrected idea.`,
 		subject =>
-			`If ${subject} is difficult, isolate the smallest failing step, correct it with one focused example, and record what changed.`
+			`Isolate the smallest difficult step in ${subject}, correct it with one focused example, and record what changed.`
 	]);
 }
 
@@ -2142,11 +2142,28 @@ function projectExpectations(context: CourseTextContext) {
 		];
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
-		return [
-			`- Define the ${subject} screen, state owner, data flow, build target, and simulator or device behavior before implementation.`,
-			`- Test ${subject} with a fresh launch, one normal interaction, one empty/error state when relevant, and one layout or accessibility check.`,
-			`- Record the ${subject} Xcode, signing, preview, simulator, or TestFlight evidence that proves the app state is understood.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Define the ${subject} screen, state owner, data flow, build target, and simulator or device behavior before implementation.`,
+				`- Test ${subject} with a fresh launch, one normal interaction, one empty/error state when relevant, and one layout or accessibility check.`,
+				`- Record the ${subject} Xcode, signing, preview, simulator, or TestFlight evidence that proves the app state is understood.`
+			],
+			subject => [
+				`- Name the ${subject} view hierarchy, source of truth, user action, expected state change, and target simulator.`,
+				`- Check ${subject} after launch, after one normal interaction, and after one empty, invalid, or navigation edge case.`,
+				`- Keep ${subject} build, preview, simulator, signing, or release evidence visible enough to reproduce the result.`
+			],
+			subject => [
+				`- Map ${subject} from screen to model/state owner, data flow, user action, and observable app response.`,
+				`- Verify ${subject} on the intended target plus one layout, accessibility, loading, or error condition.`,
+				`- Record the ${subject} project setting, build result, preview, simulator, or device evidence that matters.`
+			],
+			subject => [
+				`- State the ${subject} app path, state transition, persistence or navigation boundary, and success signal before coding.`,
+				`- Run ${subject} from a clean launch and inspect one ordinary interaction plus one edge or accessibility case.`,
+				`- Note which ${subject} Swift, SwiftUI, Xcode, signing, or simulator detail controls the observed behavior.`
+			]
+		]);
 	}
 	if (isDataAiMlContext(context)) {
 		return variantLines(context, [
@@ -2211,7 +2228,7 @@ function projectExpectations(context: CourseTextContext) {
 		return [
 			`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable machine behavior before implementation.`,
 			`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, register or memory traces, logs, or command-line output.`,
-			`- Record the exact ${subject} command and evidence so the systems behavior can be reproduced from a clean checkout or shell.`
+			`- Record the command and evidence for ${subject} so the systems behavior can be reproduced from a clean checkout or shell.`
 		];
 	}
 	if (
@@ -2240,7 +2257,7 @@ function projectExpectations(context: CourseTextContext) {
 		return [
 			`- Define the ${subject} build command, source/header boundary, runtime input, memory assumption, or observable system behavior before implementation.`,
 			`- Verify ${subject} normal behavior and one failure path with compiler output, sanitizer output, return codes, logs, or command-line output.`,
-			`- Record the exact ${subject} command and evidence so the systems behavior can be reproduced from a clean checkout or shell.`
+			`- Record the command and evidence for ${subject} so the systems behavior can be reproduced from a clean checkout or shell.`
 		];
 	}
 	if (/\b(?:multi-file|source files?|headers?)\b/.test(source)) {
@@ -2275,11 +2292,28 @@ function projectExpectations(context: CourseTextContext) {
 		]);
 	}
 	if (/security|offensive|threat|network/.test(source)) {
-		return [
-			`- Work on ${subject} only against local fixtures, intentionally vulnerable examples, or owned test data.`,
-			`- Write the ${subject} threat model or failure mode before running the lab.`,
-			`- Finish ${subject} with evidence, impact, and a defensive mitigation or hardening step.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- Work on ${subject} only against local fixtures, intentionally vulnerable examples, or owned test data.`,
+				`- Write the ${subject} threat model or failure mode before running the lab.`,
+				`- Finish ${subject} with evidence, impact, and a defensive mitigation or hardening step.`
+			],
+			subject => [
+				`- Keep ${subject} inside the approved lab boundary: local services, provided fixtures, or systems you own and control.`,
+				`- Name the ${subject} asset, trust boundary, and expected failure mode before collecting evidence.`,
+				`- Close ${subject} with the captured evidence and one defensive action such as mitigation, detection, rollback, or hardening.`
+			],
+			subject => [
+				`- Scope ${subject} to safe targets only, and do not generalize beyond the local fixture or owned environment.`,
+				`- Capture ${subject} evidence from logs, requests, responses, traces, packets, configs, or command output before drawing a conclusion.`,
+				`- State the impact in defensive terms and verify a safer configuration, detection, or remediation step.`
+			],
+			subject => [
+				`- Define the allowed ${subject} target and stop condition before running commands or sending test traffic.`,
+				`- Record what changed, what evidence was observed, and which assumption the lab tested.`,
+				`- Finish with a concrete defensive result: a fixed setting, blocked path, alert, rollback plan, or verified no-regression check.`
+			]
+		]);
 	}
 	if (/binary search tree|\bbst\b/.test(source)) {
 		return variantLines(context, [
@@ -2606,11 +2640,28 @@ function completionChecks(context: CourseTextContext) {
 		];
 	}
 	if (/swift|xcode|testflight|app store|simulator|bundle id/.test(source)) {
-		return [
-			`- ${subject} builds and launches on the intended simulator or device target.`,
-			`- ${subject} state changes, navigation, layout, loading/error behavior, signing, or release workflow evidence is captured as appropriate.`,
-			`- The final ${subject} note separates code behavior from Xcode/project configuration behavior.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- ${subject} builds and launches on the intended simulator or device target.`,
+				`- ${subject} state changes, navigation, layout, loading/error behavior, signing, or release workflow evidence is captured as appropriate.`,
+				`- The final ${subject} note separates code behavior from Xcode/project configuration behavior.`
+			],
+			subject => [
+				`- ${subject} has current preview, simulator, build, or device evidence for the target app path.`,
+				`- ${subject} checks one normal interaction plus one empty, invalid, layout, navigation, or accessibility condition.`,
+				`- The final ${subject} note identifies whether the issue was view code, state flow, configuration, signing, or target setup.`
+			],
+			subject => [
+				`- ${subject} runs from a clean launch and reaches the expected screen or app state.`,
+				`- ${subject} verifies state, navigation, persistence, layout, loading, error, or accessibility behavior where relevant.`,
+				`- The closing ${subject} note names the Swift, SwiftUI, project, simulator, or release setting that mattered.`
+			],
+			subject => [
+				`- ${subject} records the target, build result, simulator or device state, and visible behavior used for verification.`,
+				`- ${subject} includes one ordinary path and one edge path such as empty data, invalid input, offline state, or layout stress.`,
+				`- The final ${subject} note connects the app behavior to the state owner or project configuration.`
+			]
+		]);
 	}
 	if (
 		/linux|systemd|shell|cron|permissions|processes|filesystem/.test(source)
@@ -2715,11 +2766,28 @@ function completionChecks(context: CourseTextContext) {
 		]);
 	}
 	if (isApcsContext(context)) {
-		return [
-			`- The ${subject} Java code compiles and the target behavior is visible in output, tests, or a completed trace.`,
-			`- ${subject} checks a normal case and an edge case for the relevant branch, loop, method, class, array, or list behavior.`,
-			`- The ${subject} explanation uses precise Java vocabulary instead of only describing what the program appears to print.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- The ${subject} Java code compiles and the target behavior is visible in output, tests, or a completed trace.`,
+				`- ${subject} checks a normal case and an edge case for the relevant branch, loop, method, class, array, or list behavior.`,
+				`- The ${subject} explanation uses precise Java vocabulary instead of only describing what the program appears to print.`
+			],
+			subject => [
+				`- ${subject} has a fresh compile/run result with the expected console output, method return value, or trace recorded.`,
+				`- ${subject} verifies the main AP Java construct plus one boundary case involving branches, loops, methods, arrays, lists, or objects.`,
+				`- The ${subject} note names the Java rule that explains the result, not just the visible output.`
+			],
+			subject => [
+				`- ${subject} can be rebuilt from a clean Java run and still shows the required behavior.`,
+				`- ${subject} includes a typical case, an edge case, and one traceable step tied to the AP concept.`,
+				`- The ${subject} explanation connects the result to the relevant type, control-flow, collection, class, or method vocabulary.`
+			],
+			subject => [
+				`- ${subject} records current evidence from compilation, output, tests, or a completed hand trace.`,
+				`- ${subject} checks ordinary behavior and one case likely to expose an AP-style off-by-one, equality, state, or indexing mistake.`,
+				`- The final ${subject} note states the vocabulary and reasoning needed to defend the answer.`
+			]
+		]);
 	}
 	if (isWebContext(context)) {
 		return variantLines(context, [
@@ -2766,6 +2834,26 @@ function completionChecks(context: CourseTextContext) {
 				`- ${subject} runs from a clean start and the result can be reproduced with the recorded inputs.`,
 				`- ${subject} tests or explains at least one ordinary input, one minimal input, and one awkward input.`,
 				`- The final ${subject} note names the function, loop, data structure, or algorithm decision that mattered.`
+			],
+			subject => [
+				`- ${subject} has a fresh run, trace, or test result for the current version of the code.`,
+				`- ${subject} is checked with representative data, smallest useful data, and one surprising or malformed input.`,
+				`- The final ${subject} note identifies the helper, branch, loop, collection, or file rule that controlled correctness.`
+			],
+			subject => [
+				`- ${subject} can be rerun from the documented input and produces the same observable result.`,
+				`- ${subject} covers an ordinary path, a boundary path, and one path involving missing, duplicate, or oddly formatted data.`,
+				`- The ${subject} explanation connects the output to a specific function, condition, loop, or data structure.`
+			],
+			subject => [
+				`- ${subject} includes enough labeled output or test evidence to follow the data flow.`,
+				`- ${subject} checks the intended case, a minimal case, and one case that challenges an input or state assumption.`,
+				`- The final ${subject} note names the Python construct that made the result easier to reason about.`
+			],
+			subject => [
+				`- ${subject} produces reproducible evidence from the current code, not a previous interpreter run.`,
+				`- ${subject} tests one clean input, one edge input, and one messy input such as spacing, casing, duplicates, or invalid data.`,
+				`- The closing ${subject} note separates parsing, computation, and formatting decisions.`
 			]
 		]);
 	}
@@ -2793,23 +2881,23 @@ function completionChecks(context: CourseTextContext) {
 			],
 			subject => [
 				`- ${subject} rebuilds cleanly and shows the target behavior through a run, assertion, or trace.`,
-				`- The checked cases include constructor setup, one method result, and a boundary or invalid input when relevant.`,
-				`- The final note names the Java rule or type boundary that prevents the code from becoming ambiguous.`
+				`- The ${subject} checked cases include constructor setup, one method result, and a boundary or invalid input when relevant.`,
+				`- The final ${subject} note names the Java rule or type boundary that prevents the code from becoming ambiguous.`
 			],
 			subject => [
 				`- ${subject} has current evidence for the expected output or return value, not stale IDE state.`,
-				`- A normal case, a state-changing case, and one awkward case are checked where the prompt allows it.`,
-				`- The explanation identifies the field, method, class, interface, record, or collection that controls the behavior.`
+				`- ${subject} checks a normal case, a state-changing case, and one awkward case where the prompt allows it.`,
+				`- The ${subject} explanation identifies the field, method, class, interface, record, or collection that controls the behavior.`
 			],
 			subject => [
 				`- ${subject} compiles from a clean start and the important method calls can be traced.`,
-				`- The verification covers ordinary behavior, boundary behavior, and one ownership or dispatch decision.`,
-				`- The final explanation connects the code result to a specific Java vocabulary term.`
+				`- The ${subject} verification covers ordinary behavior, boundary behavior, and one ownership or dispatch decision.`,
+				`- The final ${subject} explanation connects the code result to a specific Java vocabulary term.`
 			],
 			subject => [
 				`- ${subject} produces reproducible evidence for the required behavior through output, tests, or a trace table.`,
-				`- The checked cases include one normal case, one edge path, and one object or collection interaction.`,
-				`- The closing note states what responsibility each relevant class or method owns.`
+				`- The ${subject} checked cases include one normal case, one edge path, and one object or collection interaction.`,
+				`- The closing ${subject} note states what responsibility each relevant class or method owns.`
 			]
 		]);
 	}
@@ -2838,11 +2926,28 @@ function completionChecks(context: CourseTextContext) {
 		]);
 	}
 	if (/security|offensive|low-level security|network security/.test(source)) {
-		return [
-			`- The ${subject} lab uses only approved local or owned targets.`,
-			`- ${subject} findings are written as evidence plus impact, not as vague observations.`,
-			`- The final ${subject} work includes a safe remediation, detection, or hardening step.`
-		];
+		return variantLines(context, [
+			subject => [
+				`- The ${subject} lab uses only approved local or owned targets.`,
+				`- ${subject} findings are written as evidence plus impact, not as vague observations.`,
+				`- The final ${subject} work includes a safe remediation, detection, or hardening step.`
+			],
+			subject => [
+				`- ${subject} stays inside the stated authorization boundary and uses only approved local evidence.`,
+				`- The ${subject} result connects each finding to a log, trace, request, response, packet, config, or command output.`,
+				`- The final ${subject} note names the defensive control or rollback that reduces the risk.`
+			],
+			subject => [
+				`- ${subject} verifies the target is a provided fixture, intentionally vulnerable lab, or owned system.`,
+				`- ${subject} separates observed evidence from inferred impact so the conclusion can be reviewed safely.`,
+				`- The closing ${subject} check proves mitigation, detection, hardening, or no-regression behavior.`
+			],
+			subject => [
+				`- ${subject} documents the approved target, allowed traffic or inputs, and stop condition.`,
+				`- ${subject} includes enough evidence to reproduce the defensive finding without expanding the scope.`,
+				`- The final ${subject} result is framed as remediation, monitoring, safer configuration, or validated recovery.`
+			]
+		]);
 	}
 
 	return [
@@ -2885,18 +2990,25 @@ function scopedItemSubject(context: CourseTextContext) {
 	return `${itemTitle} (${moduleTitle})`;
 }
 
+function stableVariantIndex(seed: string, count: number) {
+	let hash = 2166136261;
+
+	for (const character of seed) {
+		hash ^= character.charCodeAt(0);
+		hash = Math.imul(hash, 16777619) >>> 0;
+	}
+
+	return hash % count;
+}
+
 function variantPrompt(
 	context: CourseTextContext,
 	templates: Array<(subject: string) => string>
 ) {
 	const seed = `${context.courseId}|${context.module.title}|${context.item.title}`;
-	let hash = 0;
-
-	for (const character of seed) {
-		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
-	}
-
-	return templates[hash % templates.length](extensionSubject(context));
+	return templates[stableVariantIndex(seed, templates.length)](
+		extensionSubject(context)
+	);
 }
 
 function variantLines(
@@ -2904,13 +3016,9 @@ function variantLines(
 	templates: Array<(subject: string) => string[]>
 ) {
 	const seed = `${context.courseId}|${context.module.title}|${context.item.title}`;
-	let hash = 0;
-
-	for (const character of seed) {
-		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
-	}
-
-	return templates[hash % templates.length](extensionSubject(context));
+	return templates[stableVariantIndex(seed, templates.length)](
+		extensionSubject(context)
+	);
 }
 
 function extensionPrompt(context: CourseTextContext) {
@@ -3011,7 +3119,15 @@ function extensionPrompt(context: CourseTextContext) {
 			subject =>
 				`Add one collection, object-state, or method-overload case to ${subject} and document the expected output.`,
 			subject =>
-				`Add a small negative or edge-case test to ${subject} that protects the class boundary already built.`
+				`Add a small negative or edge-case test to ${subject} that protects the class boundary already built.`,
+			subject =>
+				`Add one constructor, accessor, mutator, or helper-method variation to ${subject} and explain the contract it preserves.`,
+			subject =>
+				`Add one record, interface, inheritance, or collection example to ${subject} and compare it with the base version.`,
+			subject =>
+				`Add one awkward input or object-state transition to ${subject} and document the expected method result.`,
+			subject =>
+				`Refactor one responsibility in ${subject} into a clearer class or method boundary without changing public behavior.`
 		]);
 	}
 	if (/c\+\+|cpp|systems|assembly/.test(source)) {
@@ -3160,24 +3276,30 @@ function compactGeneratedProjectSupport(
 	const bareReference = reference.replace(/^the\s+/i, "");
 	const escapedBareReference = escapeStringForRegExp(bareReference);
 	const escapedReference = escapeStringForRegExp(reference);
+	const compactableFinalNouns = isJavaContext(context)
+		? "response|answer|work"
+		: "note|response|answer|explanation|work";
+	const compactableSubjectNouns = isJavaContext(context)
+		? "solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|response|answer|Java code"
+		: "solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|explanation|response|answer|Java code";
 	const compactors: Array<[RegExp, string]> = [
 		[
 			new RegExp(
-				`\\bThe final ${escapedSubject} (note|response|answer|explanation|work)\\b`,
+				`\\bThe final ${escapedSubject} (${compactableFinalNouns})\\b`,
 				"g"
 			),
 			"The final $1"
 		],
 		[
 			new RegExp(
-				`\\bThe ${escapedSubject} (solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|explanation|response|answer|Java code)\\b`,
+				`\\bThe ${escapedSubject} (${compactableSubjectNouns})\\b`,
 				"g"
 			),
 			"The $1"
 		],
 		[
 			new RegExp(
-				`\\bthe ${escapedSubject} (solution|result|feature|page|lab|work|topology|vocabulary|reasoning|conclusion|explanation|response|answer|Java code)\\b`,
+				`\\bthe ${escapedSubject} (${compactableSubjectNouns})\\b`,
 				"g"
 			),
 			"the $1"
@@ -3200,6 +3322,10 @@ function compactGeneratedProjectSupport(
 		[
 			new RegExp(`\\bone ${escapedSubject} traceable case\\b`, "g"),
 			"one traceable case"
+		],
+		[
+			new RegExp(`\\ba tiny ${escapedSubject} traceable case\\b`, "g"),
+			"a tiny traceable case"
 		],
 		[
 			new RegExp(`\\ba short ${escapedSubject} (trace|note)\\b`, "g"),
@@ -3477,6 +3603,10 @@ function compactGeneratedProjectSupport(
 				"$1 $2"
 			)
 			.replace(
+				/\blocal the (?:program|analysis|response|project|activity|Java work|lab|solution|page) version\b/g,
+				"local version"
+			)
+			.replace(
 				/\bVerify The (?:program|analysis|response|project|activity|Java work|lab|solution|page) (ordinary behavior|normal behavior|samples|findings|runtime evidence|page behavior|simulator path)\b/g,
 				"Verify $1"
 			)
@@ -3525,7 +3655,15 @@ function diagnosticSupport(context: CourseTextContext) {
 			subject =>
 				`${subject} checks whether the core idea is ready for transfer. Start ${subject} with an independent attempt, then use the evidence to decide whether the next step is vocabulary, tracing, syntax, design, or testing support.`,
 			subject =>
-				`Treat ${subject} as a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before moving to harder work.`
+				`Treat ${subject} as a low-stakes checkpoint: solve what is possible first, then identify the smallest missing piece before moving to harder work.`,
+			subject =>
+				`Use ${subject} to locate the current bottleneck: vocabulary, setup, tracing, syntax, design, testing, or explanation.`,
+			subject =>
+				`Start ${subject} with a short independent attempt, then compare the result with the target skill before adding support.`,
+			subject =>
+				`${subject} should reveal whether the next step is more practice, a smaller example, a concept review, or a transfer challenge.`,
+			subject =>
+				`Complete the easiest part of ${subject} first, then use the missing or uncertain step to choose the next review target.`
 		])
 	);
 
@@ -3538,48 +3676,42 @@ function diagnosticSupport(context: CourseTextContext) {
 }
 
 function scienceSupport(context: CourseTextContext) {
-	const remoteInvestigation = compactGeneratedProjectSupport(context, [
-		variantPrompt(context, [
-			subject =>
-				`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. ${subject} does not require beakers, kits, or household materials; any physical demonstration can be replaced with a diagram or data table.`,
-			subject =>
-				`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. ${subject} treats physical supplies as optional context only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
-			subject =>
-				`${subject} can be completed with a notebook, pencil, and shared digital resources. If ${subject} mentions a physical example, treat it as optional context and keep the required investigation tied to data, diagrams, models, or simulations.`,
-			subject =>
-				`${subject} should rely on accessible remote evidence: images, short videos, graphs, public datasets, simulations, or structured discussion notes. Any hands-on observation must be safe, simple, and replaceable.`
-		])
-	])[0];
-	const output = compactGeneratedProjectSupport(context, [
-		variantPrompt(context, [
-			subject =>
-				`Complete a claim-evidence-reasoning response for ${subject}, plus a labeled diagram or data table and one prediction about a changed condition.`,
-			subject =>
-				`Finish ${subject} with a labeled model or table, a short CER response, and one comparison between observation and inference.`,
-			subject =>
-				`Record the evidence for ${subject}, annotate the model or data display, and write one claim that explains what the evidence supports.`,
-			subject =>
-				`For ${subject}, produce a concise explanation that includes target vocabulary, evidence from the resource, and one limit or next-test idea.`
-		])
-	])[0];
-	const scienceExplanation = compactGeneratedProjectSupport(context, [
-		variantPrompt(context, [
-			subject =>
-				`Anchor ${subject} in ${subjectFocus(context)}. For ${subject}, record observations first, then build or annotate a model, and only then write the explanation.`,
-			subject =>
-				`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary before writing the final claim.`,
-			subject =>
-				`For ${subject}, separate what is directly observed from what the model explains, then use the evidence to support the claim.`,
-			subject =>
-				`Ground ${subject} in the provided data, visual, simulation, or reading, and make the model limitation visible when the explanation is written.`
-		])
-	])[0];
+	const remoteInvestigation = variantPrompt(context, [
+		subject =>
+			`${subject} uses shared-screen materials, notes, paper, pencil, and provided images, graphs, data, or simulations. ${subject} does not require beakers, kits, or household materials; any physical demonstration can be replaced with a diagram or data table.`,
+		subject =>
+			`${subject} is designed for a Zoom-safe workflow using provided visuals, readings, simulations, or datasets. ${subject} treats physical supplies as optional context only; the core evidence should be visible from notes, diagrams, tables, or screen-shared resources.`,
+		subject =>
+			`${subject} can be completed with a notebook, pencil, and shared digital resources. If ${subject} mentions a physical example, keep it optional and tie the required investigation to data, diagrams, models, or simulations.`,
+		subject =>
+			`${subject} should rely on accessible remote evidence: images, short videos, graphs, public datasets, simulations, or structured discussion notes. Any hands-on observation must be safe, simple, and replaceable.`
+	]);
+	const output = variantPrompt(context, [
+		subject =>
+			`Complete a claim-evidence-reasoning response for ${subject}, plus a labeled diagram or data table and one prediction about a changed condition.`,
+		subject =>
+			`Finish ${subject} with a labeled model or table, a short CER response, and one comparison between observation and inference.`,
+		subject =>
+			`Record the evidence for ${subject}, annotate the model or data display, and write one claim that explains what the evidence supports.`,
+		subject =>
+			`For ${subject}, produce a concise explanation that includes target vocabulary, evidence from the resource, and one limit or next-test idea.`
+	]);
+	const scienceExplanation = variantPrompt(context, [
+		subject =>
+			`Anchor ${subject} in ${subjectFocus(context)}. For ${subject}, record observations first, then build or annotate a model, and only then write the explanation.`,
+		subject =>
+			`Use ${subject} to connect the phenomenon, evidence source, model, and vocabulary before writing the final claim.`,
+		subject =>
+			`For ${subject}, separate what is directly observed from what the model explains, then use the evidence to support the claim.`,
+		subject =>
+			`Ground ${subject} in the provided data, visual, simulation, or reading, and make the model limitation visible when the explanation is written.`
+	]);
 
 	return [
 		`**Remote investigation:** ${remoteInvestigation}`,
 		`**Science explanation:** ${scienceExplanation}`,
 		`**Output:** ${output}`,
-		`**Completion checks:**\n${compactGeneratedProjectSupport(context, completionChecks(context)).join("\n")}`
+		`**Completion checks:**\n${completionChecks(context).join("\n")}`
 	].join("\n\n");
 }
 
@@ -3597,7 +3729,15 @@ function scienceEvidenceCheckpoint(context: CourseTextContext) {
 			subject =>
 				`**CER checkpoint:** Use ${subject} to name the phenomenon, quote or describe the evidence source, and explain the scientific model that links the evidence to the claim.`,
 			subject =>
-				`**CER checkpoint:** A complete ${subject} response states the claim, identifies the observation or data behind it, and uses vocabulary from the module to justify the reasoning.`
+				`**CER checkpoint:** A complete ${subject} response states the claim, identifies the observation or data behind it, and uses vocabulary from the module to justify the reasoning.`,
+			subject =>
+				`**CER checkpoint:** For ${subject}, write the claim first, then add one specific observation, measurement, graph feature, or simulation result as evidence.`,
+			subject =>
+				`**CER checkpoint:** Explain ${subject} with a claim, one cited piece of evidence, and a reasoning sentence that connects the evidence to the model.`,
+			subject =>
+				`**CER checkpoint:** Use ${subject} to separate what was observed from what was inferred, then connect both to the target science vocabulary.`,
+			subject =>
+				`**CER checkpoint:** Finish ${subject} by naming the evidence source, the claim it supports, and one limitation or alternate explanation.`
 		])
 	])[0];
 }
@@ -4148,60 +4288,9 @@ function compactStudioSupportText(studioLabel: string, text: string) {
 
 	return text
 		.replace(new RegExp(`\\bFor ${escapedLabel}, `, "g"), "")
-		.replace(new RegExp(`\\bName the ${escapedLabel} `, "g"), "Name the ")
-		.replace(
-			new RegExp(`\\bFrame ${escapedLabel}\\b`, "g"),
-			"Frame the studio artifact"
-		)
-		.replace(
-			new RegExp(`\\bSeparate ${escapedLabel}\\b`, "g"),
-			"Separate the studio artifact"
-		)
-		.replace(
-			new RegExp(`\\bCompare ${escapedLabel}\\b`, "g"),
-			"Compare the studio artifact"
-		)
-		.replace(
-			new RegExp(`\\bCheck ${escapedLabel}\\b`, "g"),
-			"Check the studio artifact"
-		)
 		.replace(
 			new RegExp(`\\bAfter ${escapedLabel} works\\b`, "g"),
 			"After it works"
-		)
-		.replace(
-			new RegExp(`\\bFinish ${escapedLabel} by\\b`, "g"),
-			"Finish by"
-		)
-		.replace(new RegExp(escapedLabel, "g"), "the studio artifact")
-		.replace(/\bthe the studio artifact\b/g, "the studio artifact")
-		.replace(/\bThe the studio artifact\b/g, "The studio artifact")
-		.replace(/\bA the studio artifact\b/g, "A studio artifact")
-		.replace(/\bone the studio artifact\b/g, "one")
-		.replace(/\beach the studio artifact\b/g, "each")
-		.replace(/\bevery the studio artifact\b/g, "every studio")
-		.replace(/\bFor the studio artifact, /g, "")
-		.replace(/\bfinal the studio artifact note\b/g, "final note")
-		.replace(/\bThe studio artifact final note\b/g, "The final note")
-		.replace(/\bThe studio artifact explanation\b/g, "The explanation")
-		.replace(/\bthe studio artifact explanation\b/g, "the explanation")
-		.replace(/\bThe studio artifact review note\b/g, "The review note")
-		.replace(/\bthe studio artifact result\b/g, "the result")
-		.replace(/\bthe studio artifact question\b/g, "the question")
-		.replace(/\bthe studio artifact browser\b/g, "the browser")
-		.replace(/\bthe studio artifact command\b/g, "the command")
-		.replace(/\bthe studio artifact app path\b/g, "the app path")
-		.replace(
-			/\bthe studio artifact expected result\b/g,
-			"the expected result"
-		)
-		.replace(
-			/(^|\n)- the studio artifact requirements\b/g,
-			"$1- The requirements"
-		)
-		.replace(
-			/(^|\n)- the studio artifact includes\b/g,
-			"$1- The studio artifact includes"
 		)
 		.replace(
 			/(^|\n)- ([a-z])/g,
@@ -4221,7 +4310,15 @@ function studioSupport(context: CourseTextContext) {
 		() =>
 			`Frame ${studioLabel} around one observable result, the constraints that shape it, and the evidence that proves it works.`,
 		() =>
-			`Separate ${studioLabel} setup, core behavior, edge cases, and review notes so the finished artifact can be inspected later.`
+			`Separate ${studioLabel} setup, core behavior, edge cases, and review notes so the finished artifact can be inspected later.`,
+		() =>
+			`Start ${studioLabel} with the smallest complete artifact, then record the evidence that shows it meets the module goal.`,
+		() =>
+			`Use ${studioLabel} to connect prerequisite ideas to a concrete result, a testable constraint, and a visible review point.`,
+		() =>
+			`Define ${studioLabel} by its required behavior, verification evidence, likely edge case, and final explanation target.`,
+		() =>
+			`Keep ${studioLabel} organized around setup, implementation, verification, and one improvement or limitation.`
 	]);
 	const reviewTarget = studioLabel;
 	const reviewStep = variantPrompt(context, [

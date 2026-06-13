@@ -138,13 +138,13 @@ describe("course text quality normalization", () => {
 				/with visible behavior and verification evidence/i
 			);
 			expect(corpus).toContain(
-				"Build **PTJ0 Positioning and Workflow Translation** through short compile/run cycles, then verify the relevant object state, method contract, or collection behavior"
+				"Complete **PTJ0 Positioning and Workflow Translation** as a Java implementation checkpoint that exposes class responsibilities, public behavior, and one edge case"
 			);
 			expect(corpus).toContain(
-				"Produce **JSM1 Fundamentals Review** as a user-facing web development applied challenge with interaction, validation, and accessibility or layout evidence"
+				"Build the web development applied challenge for **JSM1 Fundamentals Review** as a browser-visible feature with clear state, interaction, and error-handling evidence"
 			);
 			expect(corpus).toContain(
-				"Turn **USB0 Setup and Contest Workflow** into a contest-ready USACO implementation checkpoint with a proved idea, matching samples, and at least one custom edge case"
+				"Solve the USACO implementation checkpoint for **USB0 Setup and Contest Workflow** with exact input/output behavior, a traceable invariant, and evidence from sample plus custom cases"
 			);
 			expect(corpus).toContain(
 				"Turn **Images and Sprites** into a core build checkpoint with a reproducible run, visible diagnostics, and a named success condition"
@@ -177,7 +177,7 @@ describe("course text quality normalization", () => {
 				/After the code compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage/
 			);
 			expect(corpus).toContain(
-				"Use the reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling"
+				"Use the reference after the program has fresh compile/run evidence, then record one difference in class responsibility or API shape"
 			);
 			expect(corpus).toContain(
 				"After the solution samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling"
@@ -291,7 +291,7 @@ describe("course text quality normalization", () => {
 					"Extend the object-design task with one additional method and a test or console trace that proves its contract"
 				);
 			expect(corpus).toContain(
-				"Build **PTJ1 Functions, Parameters, and Return Types Supplemental 2** through short compile/run cycles"
+				"Produce **PTJ1 Functions, Parameters, and Return Types Supplemental 2** with a named Java type boundary, observable behavior, and evidence from a normal case plus a boundary case"
 			);
 			expect(corpus).not.toContain(
 				"Define the Project: Function Port Pack (PTJ1 Functions, Parameters, and Return Types) hosts, addresses, ports, routes, protocols, and trust boundaries before running diagnostics"
@@ -1157,7 +1157,7 @@ describe("course text quality normalization", () => {
 			"any larger dataset result is accepted.\n\n**Readable output:**"
 		);
 		expect(csvStudio.content).toContain(
-			"- Define the question, input data or state space, baseline, metric, and expected evidence before building."
+			"- Name the CSV Summaries and Sanity Checks concept path dataset or search space, target question, feature or column choices, and comparison point."
 		);
 		expect(csvStudio.content).not.toContain(
 			"Define the Concept Path for DSP10"
@@ -1169,10 +1169,10 @@ describe("course text quality normalization", () => {
 			/Debugging and Remix Studio concept path/
 		);
 		expect(scratchStudio.content).toContain(
-			"The studio artifact starts from a predictable green-flag state"
+			"Debugging and Remix Studio concept path starting position, visible state, score or timer, and reset behavior are predictable"
 		);
 		expect(scratchStudio.content).toContain(
-			"Check the studio artifact against the stated success criteria"
+			"Compare Debugging and Remix Studio concept path against the original goal and record at least one improvement or bug fix"
 		);
 		expect(scratchStudio.content).not.toContain(
 			"Check Concept Path against the stated success criteria"
@@ -1183,10 +1183,10 @@ describe("course text quality normalization", () => {
 			/Full-Stack Web Lab 15: Core Concepts/
 		);
 		expect(webStudio.content).toContain(
-			"Name the route or component, user action, state update, data/API boundary, and visible feedback"
+			"Identify the Full-Stack Web Lab 15 Core Concepts user interaction, state change, DOM/canvas/API output, and visible loading, empty, or error state."
 		);
 		expect(webStudio.content).toContain(
-			"Build the smallest browser-visible path first, then add validation, loading, empty, or failure behavior"
+			"Implement one Full-Stack Web Lab 15 Core Concepts visible behavior at a time and inspect the page, console, network panel, or local server after each change."
 		);
 		expect(webStudio.content).not.toContain("smallest the browser-visible path");
 		expect(webStudio.content).not.toContain(
@@ -1198,7 +1198,7 @@ describe("course text quality normalization", () => {
 			/Low-Level Security Lab 9: Core Concepts/
 		);
 		expect(securityStudio.content).toContain(
-			"State the authorized local lab boundary, protected asset, unsafe assumption, and evidence needed"
+			"Name the Low-Level Security Lab 9 Core Concepts allowed target, disallowed actions, evidence source, stop condition, and defensive purpose."
 		);
 		expect(securityStudio.content).not.toContain(
 			"For Low-Level Security Lab 9 Core Concepts, state the authorized local lab boundary"
@@ -1236,7 +1236,7 @@ describe("course text quality normalization", () => {
 			"towards the mouse.\n\n**Project goal:**"
 		);
 		expect(spinner.content).toContain(
-			"testable artifact connected to Scratch game design"
+			"enough structure, naming, and evidence to support Scratch game design"
 		);
 		expect(spinner.content).toContain("\n\n**Required outcome:**");
 		expect(spinner.content).not.toContain("Build a working result for");

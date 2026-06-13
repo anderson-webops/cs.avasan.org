@@ -10,6 +10,17 @@ function projectArtifact(kind: ProjectGuidanceOptions["projectKind"]) {
 	return kind === "core" ? "implementation checkpoint" : "applied challenge";
 }
 
+function stableVariantIndex(seed: string, count: number) {
+	let hash = 2166136261;
+
+	for (const character of seed) {
+		hash ^= character.charCodeAt(0);
+		hash = Math.imul(hash, 16777619) >>> 0;
+	}
+
+	return hash % count;
+}
+
 function variantIndex(
 	courseFamily: string,
 	moduleTitle: string,
@@ -17,13 +28,7 @@ function variantIndex(
 	count: number
 ) {
 	const seed = `${courseFamily}|${moduleTitle}|${kind}`;
-	let hash = 0;
-
-	for (const character of seed) {
-		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
-	}
-
-	return hash % count;
+	return stableVariantIndex(seed, count);
 }
 
 function referenceVariantIndex(
@@ -32,13 +37,7 @@ function referenceVariantIndex(
 	count: number
 ) {
 	const seed = `${courseFamily}|${moduleTitle}|reference`;
-	let hash = 0;
-
-	for (const character of seed) {
-		hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
-	}
-
-	return hash % count;
+	return stableVariantIndex(seed, count);
 }
 
 function guidanceSubject(courseFamily: string, moduleTitle: string) {
@@ -255,6 +254,8 @@ function compactGuidanceBody(
 			),
 			`Build the smallest version of ${reference} that compiles first`
 		)
+		.replace(/\blocal the program version\b/g, "local version")
+		.replace(/\blocal the project version\b/g, "local version")
 		.replace(
 			new RegExp(`\\bAfter ${escapedReference} page behavior\\b`, "g"),
 			"After the page behavior"
@@ -611,8 +612,12 @@ function systemsFamilyFocus(
 		`Make ${moduleTitle} inspectable from the command line: inputs, ownership or resource boundaries, build settings, and diagnostic output should be easy to reproduce`,
 		`Use ${moduleTitle} to expose the system boundary directly: command, file, memory, lifetime, process, register, or runtime evidence should be visible`,
 		`Keep ${moduleTitle} reproducible by naming the build/run command, the relevant boundary, and the trace, log, sanitizer, debugger, or performance evidence`,
-		`Treat ${moduleTitle} as a systems checkpoint: the artifact should show what was built, what resource or memory assumption matters, and how the result was verified`
-	][variantIndex(courseFamily, moduleTitle, kind, 4)];
+		`Treat ${moduleTitle} as a systems checkpoint: the artifact should show what was built, what resource or memory assumption matters, and how the result was verified`,
+		`Use ${moduleTitle} to connect source code to runtime evidence: command line, build output, process state, memory layout, or diagnostic traces should agree`,
+		`Make ${moduleTitle} easy to rerun from scratch by recording setup assumptions, command sequence, expected output, and one low-level observation`,
+		`Keep ${moduleTitle} focused on the boundary between program design and machine behavior, with evidence from compilation, execution, or diagnostics`,
+		`Treat ${moduleTitle} as an engineering artifact: define the contract, run it from a clean command, and capture the evidence that proves the contract holds`
+	][variantIndex(courseFamily, moduleTitle, kind, 8)];
 }
 
 function focusFor(
@@ -646,18 +651,52 @@ function requiredWorkSteps(
 
 	if (family.includes("usaco")) {
 		return [
-			`Translate ${moduleTitle} into input format, output format, constraints, and the invariant the solution must preserve.`,
-			`Solve one tiny ${moduleTitle} hand-built case before coding so the algorithm has a traceable target.`,
-			`Implement the ${moduleTitle} approach incrementally, checking the sample, a custom edge case, and one bounds or ordering case.`
-		];
+			[
+				`Translate ${moduleTitle} into input format, output format, constraints, and the invariant the solution must preserve.`,
+				`Solve one tiny ${moduleTitle} hand-built case before coding so the algorithm has a traceable target.`,
+				`Implement the ${moduleTitle} approach incrementally, checking the sample, a custom edge case, and one bounds or ordering case.`
+			],
+			[
+				`Restate ${moduleTitle} as a contest contract: input shape, output shape, constraints, and the property preserved by the algorithm.`,
+				`Trace a smallest useful ${moduleTitle} case by hand before coding so the implementation has a known target.`,
+				`Run the sample, one boundary case, and one duplicate, tie, ordering, or off-by-one case before comparing with the reference.`
+			],
+			[
+				`Identify the ${moduleTitle} variables, limits, invariant, and complexity budget before writing code.`,
+				`Use one tiny ${moduleTitle} trace to validate the idea, then implement in steps that keep input/output behavior exact.`,
+				`Check the official sample plus one non-sample case shaped by the hardest constraint or ordering assumption.`
+			],
+			[
+				`Convert ${moduleTitle} into precise stdin/stdout behavior, a maintained invariant, and a target runtime before coding.`,
+				`Build the solution around one hand-checkable case, then expand to the sample and one adversarial or boundary input.`,
+				`Record which constraint, edge case, or ordering detail most influenced the algorithm.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
 		return [
-			`Identify the ${moduleTitle} user interaction, state change, DOM/canvas/API output, and visible error or empty state.`,
-			`Implement one ${moduleTitle} visible behavior at a time, inspecting the page, console, network panel, or local server after each change.`,
-			`Verify ${moduleTitle} with a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check.`
-		];
+			[
+				`Identify the ${moduleTitle} user interaction, state change, DOM/canvas/API output, and visible error or empty state.`,
+				`Implement one ${moduleTitle} visible behavior at a time, inspecting the page, console, network panel, or local server after each change.`,
+				`Verify ${moduleTitle} with a normal interaction, an invalid or empty input, and one accessibility, layout, or deployment-readiness check.`
+			],
+			[
+				`Map ${moduleTitle} from user action to state, data, rendered output, and feedback before changing code.`,
+				`Build the feature in small browser-checked steps with console, network, DOM, or canvas evidence visible.`,
+				`Test a clean interaction, a missing or invalid input, and one keyboard, screen-size, or deployment-readiness concern.`
+			],
+			[
+				`Name the ${moduleTitle} event, data boundary, UI state, and expected page response before implementation.`,
+				`After each change, reload the page and inspect the relevant browser evidence rather than trusting source code alone.`,
+				`Exercise ordinary behavior plus one empty, failed, inaccessible, or awkward layout state.`
+			],
+			[
+				`Define how ${moduleTitle} should feel to a user: input path, visible response, error handling, and final screen state.`,
+				`Implement the smallest visible slice first, then add validation, layout, or persistence behavior with browser checks.`,
+				`Confirm the result after refresh, at another viewport width, and with one invalid or incomplete interaction.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (
@@ -666,10 +705,27 @@ function requiredWorkSteps(
 		family.includes("ai")
 	) {
 		return [
-			`Inspect the ${moduleTitle} input data, state space, features, labels, or rules before deciding what result would count as evidence.`,
-			`Implement the ${moduleTitle} transformation, model, search, or scoring step in small checks that expose intermediate results.`,
-			`Verify ${moduleTitle} with a normal case, a boundary or failure case, and one limitation that affects how confidently the output can be interpreted.`
-		];
+			[
+				`Inspect the ${moduleTitle} input data, state space, features, labels, or rules before deciding what result would count as evidence.`,
+				`Implement the ${moduleTitle} transformation, model, search, or scoring step in small checks that expose intermediate results.`,
+				`Verify ${moduleTitle} with a normal case, a boundary or failure case, and one limitation that affects how confidently the output can be interpreted.`
+			],
+			[
+				`State the ${moduleTitle} question, input source, success signal, and assumption most likely to affect interpretation.`,
+				`Expose one intermediate ${moduleTitle} table, trace, metric, baseline, or visualization before accepting the final output.`,
+				`Check a hand-verifiable case, a representative case, and one case where the method could fail or mislead.`
+			],
+			[
+				`Define what ${moduleTitle} should measure, predict, classify, search, or compare before implementation begins.`,
+				`Build the pipeline in inspectable stages so input quality, transformation behavior, and output evidence are visible.`,
+				`Record a normal result, a sanity check, and one caveat that limits the conclusion.`
+			],
+			[
+				`List the ${moduleTitle} data shape, model or algorithm behavior, comparison point, and interpretation boundary before coding.`,
+				`Run a small trace or baseline first, then add the larger analysis or model step only after the intermediate result makes sense.`,
+				`Verify the result with evidence and write one limitation before making a conclusion.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("java")) {
@@ -721,18 +777,92 @@ function requiredWorkSteps(
 
 	if (family.includes("python")) {
 		return [
-			`Name the ${moduleTitle} input, transformation, helper function boundary, data structure, and expected output before coding.`,
-			`Implement ${moduleTitle} in small runnable pieces, keeping input handling, transformation, and output easy to inspect.`,
-			`Check ${moduleTitle} with a normal case, a boundary case, and one unexpected or awkward input that can be traced by hand.`
-		];
+			[
+				`Name the ${moduleTitle} input, transformation, helper function boundary, data structure, and expected output before coding.`,
+				`Implement ${moduleTitle} in small runnable pieces, keeping input handling, transformation, and output easy to inspect.`,
+				`Check ${moduleTitle} with a normal case, a boundary case, and one unexpected or awkward input that can be traced by hand.`
+			],
+			[
+				`Sketch the ${moduleTitle} data flow from user input or file data through variables, loops, helpers, and printed or saved output.`,
+				`Build ${moduleTitle} one behavior at a time and run the program after each meaningful parsing, loop, or helper change.`,
+				`Test a typical input, a smallest useful input, and one messy input such as extra spaces, unusual casing, or duplicate data.`
+			],
+			[
+				`Define the ${moduleTitle} starting data, intermediate state, loop or function responsibility, and final result before writing code.`,
+				`Keep ${moduleTitle} runnable while adding logic so each error points to one recent branch, loop, helper, or collection change.`,
+				`Compare the output for one ordinary case, one boundary case, and one case that should be rejected or handled carefully.`
+			],
+			[
+				`Turn ${moduleTitle} into a Python plan: inputs, stored values, functions, collections, control flow, and visible evidence.`,
+				`Implement the smallest correct slice first, then add validation, iteration, file handling, or formatting only after it runs.`,
+				`Trace ${moduleTitle} by hand for one compact case, then confirm the program with a normal case and an awkward case.`
+			],
+			[
+				`Identify which ${moduleTitle} values are collected, transformed, stored, searched, counted, or printed before implementation begins.`,
+				`Add one helper, loop, conditional, or data-structure operation at a time and rerun ${moduleTitle} with labeled output.`,
+				`Use a clean input, an empty or minimal input, and a noisy input to check whether the data flow stays understandable.`
+			],
+			[
+				`Write the ${moduleTitle} expected behavior as a small input/output example before deciding on loops, functions, or collections.`,
+				`Keep ${moduleTitle} logic separated into input handling, core computation, and output formatting where the prompt allows it.`,
+				`Verify the result with one hand-checkable example, one boundary example, and one example that could expose hidden state.`
+			],
+			[
+				`List the ${moduleTitle} assumptions about input shape, types, ordering, duplicates, missing data, and output format.`,
+				`Implement ${moduleTitle} in short runs that expose the current variables, collection contents, or helper return values.`,
+				`Check the program with representative data, smallest useful data, and one malformed or surprising case.`
+			],
+			[
+				`Before coding ${moduleTitle}, name the main function or loop, the data it receives, the data it changes, and the result it should show.`,
+				`Build ${moduleTitle} from a tiny traceable case toward the full prompt, rerunning after each control-flow or data-structure change.`,
+				`Finish by testing one ordinary case, one edge case, and one case chosen because it might break the first design.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (family.includes("security") || family.includes("network")) {
 		return [
-			`State the ${moduleTitle} local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix.`,
-			`Run or modify the ${moduleTitle} fixture in small steps while capturing logs, traces, requests, responses, or configuration changes.`,
-			`Verify ${moduleTitle} normal behavior, failure or attack-shaped behavior, and one remediation, detection, or hardening result.`
-		];
+			[
+				`State the ${moduleTitle} local lab boundary, protected asset, unsafe assumption, and evidence that would prove the issue or fix.`,
+				`Run or modify the ${moduleTitle} fixture in small steps while capturing logs, traces, requests, responses, or configuration changes.`,
+				`Verify ${moduleTitle} normal behavior, failure or attack-shaped behavior, and one remediation, detection, or hardening result.`
+			],
+			[
+				`Define the approved ${moduleTitle} target, allowed traffic or inputs, expected safe behavior, and failure mode before running the lab.`,
+				`Capture one concrete ${moduleTitle} evidence source such as a log, packet, request, response, rule, or configuration diff at each major step.`,
+				`Finish with proof of normal operation plus one defensive validation, rollback, or hardening check.`
+			],
+			[
+				`Identify the ${moduleTitle} trust boundary, asset, threat or fault assumption, and evidence needed to support the finding.`,
+				`Work through the lab in reversible steps while recording command output, traces, logs, or service responses.`,
+				`Compare expected behavior, failure-shaped behavior, and the result after mitigation or configuration change.`
+			],
+			[
+				`Scope ${moduleTitle} to owned fixtures or local systems, then name the risk, control, and validation evidence before changing anything.`,
+				`Change one variable at a time and keep enough request, response, log, packet, or config evidence to reconstruct the lab.`,
+				`Close with a defensive result: detection, mitigation, rollback, safer configuration, or verified no-regression behavior.`
+			],
+			[
+				`Write the ${moduleTitle} scope line first: owned target, protected behavior, allowed tools, and the action that stops the lab.`,
+				`Collect baseline evidence before changing the fixture, then record the smallest request, packet, command, or config change that matters.`,
+				`Retest the baseline, the risky or malformed case, and the defensive fix or monitoring check.`
+			],
+			[
+				`Separate ${moduleTitle} into asset, entry point, trust boundary, observation method, and defensive success condition.`,
+				`Use reversible steps so every command, rule, request, or trace can be tied to one hypothesis about the system.`,
+				`Confirm normal behavior still works after the mitigation, alerting, rollback, or hardening step.`
+			],
+			[
+				`Name the ${moduleTitle} authorized fixture, the data that may be observed, and the evidence that would be out of scope.`,
+				`Run the lab with enough logging, capture, or configuration detail to explain both the starting state and the changed state.`,
+				`Compare a safe baseline, a failure-shaped case, and one defensive verification that proves the response is intentional.`
+			],
+			[
+				`Frame ${moduleTitle} as a defensive investigation: target, permission boundary, suspected weakness, and proof needed.`,
+				`Record the command, log, request, response, packet, or configuration evidence at the point where the behavior changes.`,
+				`Finish with a mitigation, rollback, detection, or hardening result plus one remaining limitation.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (
@@ -755,14 +885,34 @@ function requiredWorkSteps(
 			[
 				`Map ${moduleTitle} to its low-level contract: inputs, outputs, ownership, lifetime, build mode, and observable machine or runtime state.`,
 				`Change one ${moduleTitle} boundary at a time and keep the build/run command close enough to rerun immediately.`,
-				`Verify ${moduleTitle} ordinary behavior, a boundary or invalid case, and one diagnostic trace tied to the systems concept.`
+				`Check ordinary behavior for ${moduleTitle}, plus a boundary or invalid case and one diagnostic trace tied to the systems concept.`
 			],
 			[
 				`Start ${moduleTitle} by recording the starting state, command path, resource boundary, and expected observable result.`,
 				`Implement ${moduleTitle} in short compile/run/debug cycles so failures point to a specific boundary or assumption.`,
 				`Check ${moduleTitle} with one normal path, one failure or edge path, and one memory, lifetime, performance, register, or process-state detail.`
+			],
+			[
+				`Define the ${moduleTitle} contract in terms of inputs, outputs, resource ownership, and the command that proves it.`,
+				`Build or instrument ${moduleTitle} in slices, keeping each compile, run, or diagnostic result tied to one assumption.`,
+				`Check a representative run, a boundary or failure run, and one observable system detail such as logs, layout, timing, or sanitizer output.`
+			],
+			[
+				`List the ${moduleTitle} files, build target, runtime setup, and memory or resource boundary before changing implementation code.`,
+				`Make one change at a time and rerun the relevant command so the cause of each output or error remains visible.`,
+				`Verify the expected result, one edge condition, and one tool-backed observation from a debugger, trace, warning, sanitizer, or profiler.`
+			],
+			[
+				`Frame ${moduleTitle} around a clear systems question: what state changes, what resource is touched, and how the evidence will be captured.`,
+				`Use short command-line cycles to connect the source change to build output, runtime output, and diagnostic evidence.`,
+				`Record normal behavior, abnormal or boundary behavior, and the low-level clue that explains the difference.`
+			],
+			[
+				`Write down the ${moduleTitle} preconditions, command path, expected side effect or output, and the diagnostic signal to inspect.`,
+				`Implement the smallest runnable version first, then add resource, memory, performance, or control-flow detail in verifiable steps.`,
+				`Confirm the result with a clean rerun, a stress or invalid case, and one concrete machine- or tool-level observation.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (family.includes("swift")) {
@@ -794,22 +944,47 @@ function referenceReviewStep(
 			family.includes("machine learning") ||
 			family.includes("ai")
 		) {
-			return `Write a ${moduleTitle} verification note that names the evidence, sanity check, and limitation used to interpret the result.`;
+			return [
+				`Write a ${moduleTitle} verification note that names the evidence, sanity check, and limitation used to interpret the result.`,
+				`Close ${moduleTitle} with a short note separating the observed result, the supporting evidence, and the main caveat.`,
+				`Record the ${moduleTitle} input source, sanity check, and interpretation limit before treating the result as complete.`,
+				`Finish ${moduleTitle} by naming the metric, trace, visualization, or baseline that supports the conclusion.`
+			][variantIndex(courseFamily, moduleTitle, kind, 4)];
 		}
 
 		if (family.includes("security") || family.includes("network")) {
-			return `Write a ${moduleTitle} verification note that records the local boundary, evidence captured, and remediation or hardening result.`;
+			return [
+				`Write a ${moduleTitle} verification note that records the local boundary, evidence captured, and remediation or hardening result.`,
+				`Close ${moduleTitle} with the approved scope, captured evidence, and the defensive result that changed or confirmed the system state.`,
+				`Record the ${moduleTitle} boundary, diagnostic evidence, and rollback, mitigation, or hardening check.`,
+				`Finish ${moduleTitle} by connecting the local evidence to impact and a safe defensive action.`
+			][variantIndex(courseFamily, moduleTitle, kind, 4)];
 		}
 
-		return `Write a ${moduleTitle} verification note that identifies the tests, traces, logs, or observations used as evidence.`;
+		return [
+			`Write a ${moduleTitle} verification note that identifies the tests, traces, logs, or observations used as evidence.`,
+			`Close ${moduleTitle} with the specific evidence used to prove the behavior, not only a statement that it works.`,
+			`Record the ${moduleTitle} checks, observed result, and one boundary or troubleshooting detail for future review.`,
+			`Finish ${moduleTitle} with a short evidence note naming the test, trace, log, output, or observation that supports the result.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("usaco")) {
-		return `After ${moduleTitle} samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.`;
+		return [
+			`After ${moduleTitle} samples and custom cases pass, compare against the reference and record one difference in invariant, complexity, or edge-case handling.`,
+			`Use the ${moduleTitle} reference only after local tests pass, then note one difference in proof idea, bounds handling, or complexity.`,
+			`Compare ${moduleTitle} with the reference after the sample and edge case pass, focusing on invariant, implementation detail, or failure case.`,
+			`After ${moduleTitle} behaves like a contest submission, use the reference to check one missed edge case or alternate invariant.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
-		return `After the ${moduleTitle} page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling.`;
+		return [
+			`After the ${moduleTitle} page behavior works, compare against the reference and record one difference in UI state, validation, accessibility, or error handling.`,
+			`Use the ${moduleTitle} reference after the browser path works, then note one difference in state, layout, validation, or feedback.`,
+			`Compare ${moduleTitle} with the reference only after a clean browser reload succeeds, focusing on one UI or data-flow difference.`,
+			`After ${moduleTitle} passes the local browser checks, record one reference difference involving interaction, accessibility, error handling, or layout.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (
@@ -817,7 +992,12 @@ function referenceReviewStep(
 		family.includes("machine learning") ||
 		family.includes("ai")
 	) {
-		return `After the ${moduleTitle} pipeline or model runs, compare against the reference and record one difference in data assumptions, metric behavior, model behavior, or stated limitation.`;
+		return [
+			`After the ${moduleTitle} pipeline or model runs, compare against the reference and record one difference in data assumptions, metric behavior, model behavior, or stated limitation.`,
+			`Use the ${moduleTitle} reference after the local result has evidence, then note one difference in assumptions, baseline, metric, or caveat.`,
+			`Compare ${moduleTitle} with the reference by checking one data-quality choice, transformation step, score, or interpretation boundary.`,
+			`After ${moduleTitle} produces a traceable result, record one reference difference that changes confidence or interpretation.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("java")) {
@@ -826,17 +1006,29 @@ function referenceReviewStep(
 		return [
 			`After ${subject} compiles and tests run, compare against the reference and record one difference in class responsibility, method contract, state handling, or edge-case coverage.`,
 			`After the ${subject} behavior works, compare against the reference and note one difference in type design, public API, object state, or test coverage.`,
-			`Use the ${subject} reference only after the local version runs; record one difference in constructor behavior, method boundaries, records/interfaces, or edge-case handling.`,
-			`Compare ${subject} with the reference after the compile/run path is clean, then identify one design or robustness difference that matters.`
-		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+			`Run the local ${subject} version first, then use the reference to compare constructor behavior, method boundaries, records/interfaces, or edge-case handling.`,
+			`Compare ${subject} with the reference after the compile/run path is clean, then identify one design or robustness difference that matters.`,
+			`Use the reference after ${subject} has fresh compile/run evidence, then record one difference in class responsibility or API shape.`,
+			`Check ${subject} against the reference by focusing on one object-state, inheritance, interface, record, or collection decision.`
+		][variantIndex(courseFamily, moduleTitle, kind, 6)];
 	}
 
 	if (family.includes("python")) {
-		return `After the ${moduleTitle} program runs, compare against the reference and record one difference in helper boundaries, data handling, input validation, or output formatting.`;
+		return [
+			`After the ${moduleTitle} program runs, compare against the reference and record one difference in helper boundaries, data handling, input validation, or output formatting.`,
+			`Use the ${moduleTitle} reference after local output is reproducible, then note one difference in decomposition, data flow, or edge handling.`,
+			`Compare ${moduleTitle} with the reference by checking one helper, loop, collection, file, or formatting decision.`,
+			`After ${moduleTitle} works locally, record one reference difference that would affect readability, robustness, or testability.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("security") || family.includes("network")) {
-		return `After the ${moduleTitle} local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path.`;
+		return [
+			`After the ${moduleTitle} local lab works, compare against the reference and record one difference in evidence capture, boundary assumptions, defensive control, or rollback path.`,
+			`Use the ${moduleTitle} reference only after the local boundary and evidence are clear, then note one scope, mitigation, or diagnostic difference.`,
+			`Compare ${moduleTitle} with the reference by checking one log, trace, request, response, rule, control, or rollback detail.`,
+			`After ${moduleTitle} has local defensive evidence, record one reference difference that changes impact, mitigation, or recovery confidence.`
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (
@@ -849,8 +1041,12 @@ function referenceReviewStep(
 			`After ${moduleTitle} builds and runs, compare against the reference and record one difference in ownership, memory behavior, diagnostics, or performance evidence.`,
 			`Compare ${moduleTitle} with the reference only after the local command path is reproducible; note one difference in resource lifetime, trace output, or failure handling.`,
 			`Use the ${moduleTitle} reference to check one systems assumption after the build is clean: ownership, layout, timing, command behavior, or diagnostic evidence.`,
-			`After the ${moduleTitle} runtime evidence is captured, compare against the reference and name one boundary or tooling difference that affects confidence.`
-		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+			`After the ${moduleTitle} runtime evidence is captured, compare against the reference and name one boundary or tooling difference that affects confidence.`,
+			`Use the reference after ${moduleTitle} has a clean command path, then compare one build, resource, memory, or diagnostic decision.`,
+			`Compare ${moduleTitle} with the reference by checking one assumption about lifetime, layout, command output, error handling, or tool evidence.`,
+			`After ${moduleTitle} can be reproduced from scratch, use the reference to find one difference in setup, traceability, or low-level reasoning.`,
+			`Review the reference only after ${moduleTitle} has local evidence, then record one difference that changes correctness, maintainability, or confidence.`
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (family.includes("swift")) {
@@ -869,18 +1065,52 @@ function completionCheckSteps(
 
 	if (family.includes("usaco")) {
 		return [
-			`The ${moduleTitle} submitted program matches the required input/output format exactly.`,
-			`A tiny hand-traced ${moduleTitle} case, the sample case, and one boundary or ordering case have matching results.`,
-			`The final ${moduleTitle} note names the invariant, complexity target, and one edge case that shaped the solution.`
-		];
+			[
+				`The ${moduleTitle} submitted program matches the required input/output format exactly.`,
+				`A tiny hand-traced ${moduleTitle} case, the sample case, and one boundary or ordering case have matching results.`,
+				`The final ${moduleTitle} note names the invariant, complexity target, and one edge case that shaped the solution.`
+			],
+			[
+				`${moduleTitle} accepts contest-style input and prints exactly the expected output with no prompts or extra text.`,
+				`The sample, one hand-built tiny case, and one boundary, tie, duplicate, or ordering case agree with the trace.`,
+				`The final ${moduleTitle} note explains the invariant and why the complexity fits the largest input.`
+			],
+			[
+				`${moduleTitle} passes the official sample and preserves the required output format on custom tests.`,
+				`At least one minimal case and one adversarial or constraint-shaped case are checked against hand reasoning.`,
+				`The final ${moduleTitle} note names the algorithm idea, complexity, and edge case that mattered most.`
+			],
+			[
+				`${moduleTitle} runs through stdin/stdout or the expected file contract exactly as a contest submission would.`,
+				`The verification covers the sample, a traceable small case, and one non-sample case chosen to challenge the invariant.`,
+				`The closing ${moduleTitle} note states the runtime, memory expectation, and one assumption tested directly.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("web") || family.includes("javascript")) {
 		return [
-			`The ${moduleTitle} page or app shows the expected state change, output, validation, or canvas behavior.`,
-			`A normal ${moduleTitle} interaction, an empty or invalid interaction, and one layout or accessibility check have been exercised.`,
-			`The final ${moduleTitle} note names the event, state, DOM/canvas/API, or user-flow decision that mattered.`
-		];
+			[
+				`The ${moduleTitle} page or app shows the expected state change, output, validation, or canvas behavior.`,
+				`A normal ${moduleTitle} interaction, an empty or invalid interaction, and one layout or accessibility check have been exercised.`,
+				`The final ${moduleTitle} note names the event, state, DOM/canvas/API, or user-flow decision that mattered.`
+			],
+			[
+				`${moduleTitle} can be reproduced after a fresh browser reload with the same visible result or error feedback.`,
+				`Keyboard or screen-size behavior plus one invalid, empty, loading, or failed state has been checked.`,
+				`The final ${moduleTitle} note connects the user action to state, data, and rendered output.`
+			],
+			[
+				`${moduleTitle} demonstrates the intended user-facing behavior in the page, not only in source code.`,
+				`The result has been checked with ordinary input, one non-ideal state, and one viewport or accessibility concern.`,
+				`The final ${moduleTitle} note names the interaction, validation, rendering, or API decision that controlled the result.`
+			],
+			[
+				`${moduleTitle} works from a clean load and gives clear feedback for the target interaction.`,
+				`A normal path, a missing or invalid data path, and a responsive-layout or keyboard path have been exercised.`,
+				`The closing ${moduleTitle} note records the browser evidence and the UI state decision that mattered.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (
@@ -889,10 +1119,27 @@ function completionCheckSteps(
 		family.includes("ai")
 	) {
 		return [
-			`The ${moduleTitle} result is tied to inspected input data, model/search behavior, or an explicit transformation.`,
-			`A normal ${moduleTitle} case, a sanity check, and one limitation or failure mode are recorded.`,
-			`The final ${moduleTitle} note separates what the evidence supports from what remains uncertain.`
-		];
+			[
+				`The ${moduleTitle} result is tied to inspected input data, model/search behavior, or an explicit transformation.`,
+				`A normal ${moduleTitle} case, a sanity check, and one limitation or failure mode are recorded.`,
+				`The final ${moduleTitle} note separates what the evidence supports from what remains uncertain.`
+			],
+			[
+				`${moduleTitle} includes enough intermediate evidence to connect the input source to the output.`,
+				`The work checks a hand-verifiable case, a representative case, and one caveat or failure mode.`,
+				`The final ${moduleTitle} note distinguishes observed behavior from interpretation.`
+			],
+			[
+				`${moduleTitle} names the dataset, state space, features, rules, or model behavior behind the result.`,
+				`A baseline, trace, metric, visualization, or sanity check supports the conclusion.`,
+				`The final ${moduleTitle} note states one assumption or limitation that could change the answer.`
+			],
+			[
+				`${moduleTitle} shows the transformation, model, search, or scoring evidence used to judge success.`,
+				`The verification includes one ordinary case and one boundary, noisy, missing-data, or failure-shaped case.`,
+				`The closing ${moduleTitle} note limits the claim to what the evidence can support.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 4)];
 	}
 
 	if (family.includes("java")) {
@@ -942,18 +1189,92 @@ function completionCheckSteps(
 
 	if (family.includes("python")) {
 		return [
-			`The ${moduleTitle} program can be rerun cleanly and the expected output or data change is visible.`,
-			`A normal ${moduleTitle} input, a boundary input, and one awkward input or data shape are tested or traced.`,
-			`The final ${moduleTitle} note names the helper, loop, collection, file, or algorithm decision that mattered.`
-		];
+			[
+				`The ${moduleTitle} program can be rerun cleanly and the expected output or data change is visible.`,
+				`A normal ${moduleTitle} input, a boundary input, and one awkward input or data shape are tested or traced.`,
+				`The final ${moduleTitle} note names the helper, loop, collection, file, or algorithm decision that mattered.`
+			],
+			[
+				`${moduleTitle} has current run evidence for the intended output, not only code that appears plausible.`,
+				`The checks include typical data, smallest useful data, and one input with messy formatting, duplicates, or missing pieces.`,
+				`The closing ${moduleTitle} note explains which function, loop, collection, or parsing choice carried the result.`
+			],
+			[
+				`${moduleTitle} can be started from scratch and rerun with the same visible output or saved data result.`,
+				`A hand-checkable case, an empty or boundary case, and one surprising case have been compared with expectations.`,
+				`The final ${moduleTitle} note separates input handling, core logic, and output formatting decisions.`
+			],
+			[
+				`${moduleTitle} shows enough printed output, trace output, tests, or saved data to verify the behavior.`,
+				`The verification covers ordinary data plus one boundary, invalid, duplicate, missing, or oddly formatted input.`,
+				`The final ${moduleTitle} note names the data-flow step most responsible for correctness.`
+			],
+			[
+				`${moduleTitle} runs with the recorded inputs and produces a result that can be checked by hand or by a small trace.`,
+				`The tested cases include one standard case, one minimal case, and one case chosen to challenge an assumption.`,
+				`The closing ${moduleTitle} note identifies the helper, loop, condition, collection, or file decision that mattered.`
+			],
+			[
+				`${moduleTitle} keeps input, transformation, and output behavior inspectable in the final version.`,
+				`The program has evidence for a normal path, a smallest or empty path, and one awkward data shape.`,
+				`The final ${moduleTitle} note explains how the chosen Python structure made the behavior easier to verify.`
+			],
+			[
+				`${moduleTitle} includes a fresh run or test result for the current code.`,
+				`Representative, boundary, and malformed or surprising inputs are checked or traced.`,
+				`The final ${moduleTitle} note names the assumption that would be easiest to break in a larger version.`
+			],
+			[
+				`${moduleTitle} can be reproduced from a small documented input/output example.`,
+				`The work checks normal behavior, one edge or invalid behavior, and one case that stresses the selected data structure.`,
+				`The final ${moduleTitle} note connects the observed result to a specific helper, branch, loop, or collection operation.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (family.includes("security") || family.includes("network")) {
 		return [
-			`The ${moduleTitle} lab boundary, target behavior, and evidence source are explicit.`,
-			`${moduleTitle} normal traffic or behavior, failure or attack-shaped behavior, and a mitigation or diagnostic result are checked.`,
-			`The final ${moduleTitle} note names the risk, control, trace, log, request, response, or rollback decision that mattered.`
-		];
+			[
+				`The ${moduleTitle} lab boundary, target behavior, and evidence source are explicit.`,
+				`${moduleTitle} normal traffic or behavior, failure or attack-shaped behavior, and a mitigation or diagnostic result are checked.`,
+				`The final ${moduleTitle} note names the risk, control, trace, log, request, response, or rollback decision that mattered.`
+			],
+			[
+				`${moduleTitle} stays inside the approved local or owned boundary and records the evidence source used.`,
+				`Expected behavior, failure-shaped behavior, and one defensive validation or rollback path are checked.`,
+				`The final ${moduleTitle} note connects the evidence to impact and mitigation.`
+			],
+			[
+				`${moduleTitle} identifies the protected asset, trust boundary, and diagnostic or test evidence.`,
+				`The lab includes normal operation plus one blocked, malformed, risky, or failure-shaped scenario.`,
+				`The final ${moduleTitle} note names the defensive control or recovery decision that mattered.`
+			],
+			[
+				`${moduleTitle} has concrete local evidence such as logs, packets, requests, responses, traces, or configuration output.`,
+				`A safe baseline, a failure or attack-shaped case, and a verified mitigation or diagnostic result are recorded.`,
+				`The closing ${moduleTitle} note states the scope boundary and the hardening or validation result.`
+			],
+			[
+				`${moduleTitle} records the owned target, allowed tools, stop condition, and evidence source before interpreting results.`,
+				`Baseline behavior, malformed or risky behavior, and the defensive response are all checked with concrete evidence.`,
+				`The final ${moduleTitle} note separates observation, impact, mitigation, and remaining limitation.`
+			],
+			[
+				`${moduleTitle} stays within the named fixture or local system and avoids claims beyond the collected evidence.`,
+				`A normal run, a fault-shaped run, and a rollback, alerting, or hardening verification are present.`,
+				`The closing ${moduleTitle} note explains why the defensive control or recovery path is sufficient for the lab.`
+			],
+			[
+				`${moduleTitle} includes reproducible evidence from logs, traces, commands, requests, responses, packet captures, or configuration diffs.`,
+				`The evidence covers the starting state, the problem-shaped case, and the final verified state.`,
+				`The final ${moduleTitle} note names the trust boundary or assumption that mattered most.`
+			],
+			[
+				`${moduleTitle} documents the authorization boundary, data observed, and defensive goal of the lab.`,
+				`The checks prove normal behavior, the relevant unsafe or failure behavior, and the mitigation or monitoring result.`,
+				`The closing ${moduleTitle} note connects the evidence to a practical remediation or hardening choice.`
+			]
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (
@@ -982,8 +1303,28 @@ function completionCheckSteps(
 				`${moduleTitle} includes the command, expected output, and evidence needed to reproduce the result.`,
 				`At least one ${moduleTitle} normal path, one failure or edge path, and one memory, process, register, or timing detail are checked.`,
 				`The final ${moduleTitle} note explains the most important ownership, build, diagnostic, or complexity choice.`
+			],
+			[
+				`${moduleTitle} records the build/run command and the relevant environment, input, or fixture state.`,
+				`Expected behavior, boundary behavior, and one tool-backed diagnostic observation are checked.`,
+				`The final ${moduleTitle} note explains the resource, representation, or tooling decision that made the result trustworthy.`
+			],
+			[
+				`${moduleTitle} can be reproduced from a clean command path with current output or test evidence.`,
+				`One representative case, one invalid or stress case, and one compiler, debugger, sanitizer, log, or timing observation are included.`,
+				`The final ${moduleTitle} note connects the observed system behavior to the design choice under review.`
+			],
+			[
+				`${moduleTitle} names the source files, command, runtime state, and success signal used for verification.`,
+				`The checks cover ordinary output, a boundary or failure-shaped input, and one low-level observation.`,
+				`The closing ${moduleTitle} note separates what the program did from how the diagnostic evidence supports it.`
+			],
+			[
+				`${moduleTitle} has a documented rerun path and evidence from output, tests, logs, traces, or tooling.`,
+				`The verification includes a normal case, a problematic case, and one resource, lifetime, layout, timing, or process-state detail.`,
+				`The final ${moduleTitle} note identifies the assumption that would be easiest to break in a larger system.`
 			]
-		][variantIndex(courseFamily, moduleTitle, kind, 4)];
+		][variantIndex(courseFamily, moduleTitle, kind, 8)];
 	}
 
 	if (family.includes("swift")) {

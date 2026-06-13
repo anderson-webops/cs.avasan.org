@@ -15,6 +15,17 @@ interface ResearchExpansionProfile {
 	safety?: string;
 }
 
+function stableVariantIndex(seed: string, count: number) {
+	let hash = 2166136261;
+
+	for (const character of seed) {
+		hash ^= character.charCodeAt(0);
+		hash = Math.imul(hash, 16777619) >>> 0;
+	}
+
+	return hash % count;
+}
+
 const sourceLinks: Record<string, string> = {
 	"ACS Chemistry Guidelines":
 		"https://www.acs.org/education/policies/middle-and-high-school-chemistry.html",
@@ -187,9 +198,17 @@ function projectOptionGoal(
 
 function projectOptionRequiredOutcome(
 	profile: ResearchExpansionProfile,
-	courseLabel: string
+	courseLabel: string,
+	project: string
 ) {
 	const family = profile.family.toLowerCase();
+	const choose = (options: string[]) =>
+		options[
+			stableVariantIndex(
+				`${profile.family}|${project}|outcome`,
+				options.length
+			)
+		];
 
 	if (family.includes("scratch")) {
 		return `**Required outcome:**\n- For this option, name the sprites, events, variables, broadcasts, or clones that control the project.\n- Show one normal play path and one reset, win/loss, scoring, or boundary condition.\n- Explain the main Scratch state or event-flow decision in the ${courseLabel} context.`;
@@ -227,51 +246,95 @@ function projectOptionRequiredOutcome(
 		return `**Required outcome:**\n- For this option, name the data representation, ownership or lifetime assumption, compile command, and expected output.\n- Build with ${courseLabel} warnings when possible and test normal, boundary, and malformed or awkward input.\n- Explain the container, pointer/reference, memory, or algorithm decision.`;
 	}
 
-	return `**Required outcome:**\n- For this option, define the inputs, output or artifact, success condition, and evidence source.\n- Include one normal case, a boundary case, and one awkward or failure case.\n- Explain the main design, model, proof, or reasoning decision in the ${courseLabel} context.`;
+	return choose([
+		`**Required outcome:**\n- For this option, define the inputs, output or artifact, success condition, and evidence source.\n- Include one normal case, a boundary case, and one awkward or failure case.\n- Explain the main design, model, proof, or reasoning decision in the ${courseLabel} context.`,
+		`**Required outcome:**\n- For this option, state the starting context, target result, evidence source, and one assumption that could fail.\n- Check a representative case and one edge or transfer case.\n- Explain the reasoning choice that makes the ${courseLabel} result valid.`,
+		`**Required outcome:**\n- For this option, name the artifact, inputs, constraints, output, and verification evidence.\n- Test the ordinary path plus one boundary, exception, or changed-condition path.\n- Explain the main tradeoff or model decision in the ${courseLabel} context.`,
+		`**Required outcome:**\n- For this option, identify what is being built or solved, what counts as success, and how the result will be checked.\n- Include one small traceable case and one nontrivial case.\n- Explain which ${courseLabel} concept controls the final behavior.`
+	]);
 }
 
-function projectOptionExtension(profile: ResearchExpansionProfile) {
+function projectOptionExtension(
+	profile: ResearchExpansionProfile,
+	project: string
+) {
 	const family = profile.family.toLowerCase();
+	const choose = (options: string[]) =>
+		options[
+			stableVariantIndex(`${profile.family}|${project}`, options.length)
+		];
 
 	if (family.includes("security") || family.includes("systems")) {
-		return `**Extension:** Add one rollback, monitoring, hardening, or reproducibility check and explain how it changes the evidence.`;
+		return choose([
+			`**Extension:** Add one rollback, monitoring, hardening, or reproducibility check and explain how it changes the evidence.`,
+			`**Extension:** Add one failure-mode or recovery check and document the command, log, or trace that proves the result.`,
+			`**Extension:** Add a scope, reset, or defensive-control variation that keeps the lab local and reproducible.`
+		]);
 	}
 	if (isScienceFamily(family)) {
-		return `**Extension:** Change one variable, data source, scale, or model assumption and predict how the claim should change.`;
+		return choose([
+			`**Extension:** Change one variable, data source, scale, or model assumption and predict how the claim should change.`,
+			`**Extension:** Add a second evidence source or model limitation and explain whether it strengthens the claim.`,
+			`**Extension:** Compare the same phenomenon at another scale, system, or condition and revise the explanation.`
+		]);
 	}
 	if (
 		family.includes("data") ||
 		family.includes("ai") ||
 		family.includes("machine learning")
 	) {
-		return `**Extension:** Add a baseline, counterexample, alternate metric, or limitation check and compare the interpretation.`;
+		return choose([
+			`**Extension:** Add a baseline, counterexample, alternate metric, or limitation check and compare the interpretation.`,
+			`**Extension:** Add one data-quality, leakage, sampling, or evaluation check before trusting the result.`,
+			`**Extension:** Compare the result with a simpler method and name what the added complexity changes.`
+		]);
 	}
 	if (
 		family.includes("scratch") ||
 		family.includes("pygame") ||
 		family.includes("unity")
 	) {
-		return `**Extension:** Add one rule, control, level, reset, or feedback variation while preserving the main play goal.`;
+		return choose([
+			`**Extension:** Add one rule, control, level, reset, or feedback variation while preserving the main play goal.`,
+			`**Extension:** Add one replay, scoring, difficulty, or collision variation and test the changed game state.`,
+			`**Extension:** Add one player-feedback improvement and explain which event or state change triggers it.`
+		]);
 	}
 	if (family.includes("usaco")) {
-		return `**Extension:** Add one harder custom case, then explain which invariant or complexity bound it stress-tests.`;
+		return choose([
+			`**Extension:** Add one harder custom case, then explain which invariant or complexity bound it stress-tests.`,
+			`**Extension:** Add one tie, boundary, duplicate, or ordering case and trace why the algorithm still works.`,
+			`**Extension:** Compare two possible approaches and explain which constraint decides between them.`
+		]);
 	}
 	if (
 		family.includes("javascript") ||
 		family.includes("web") ||
 		family.includes("swift")
 	) {
-		return `**Extension:** Add one empty, error, accessibility, layout, or state-transition case and verify the visible behavior.`;
+		return choose([
+			`**Extension:** Add one empty, error, accessibility, layout, or state-transition case and verify the visible behavior.`,
+			`**Extension:** Add one reload, navigation, invalid-input, or responsive-state check and record the observed behavior.`,
+			`**Extension:** Add one user-flow variation that changes state or persistence without hiding the result.`
+		]);
 	}
 	if (
 		family.includes("java") ||
 		family.includes("c++") ||
 		family.includes("python")
 	) {
-		return `**Extension:** Add one edge case, helper, refactor, or alternate representation and explain which requirement it tests.`;
+		return choose([
+			`**Extension:** Add one edge case, helper, refactor, or alternate representation and explain which requirement it tests.`,
+			`**Extension:** Add one changed input, object state, data structure, or ownership case and compare the result.`,
+			`**Extension:** Add one small refactor plus a test or trace proving that behavior stayed equivalent.`
+		]);
 	}
 
-	return `**Extension:** Change one constraint, input, representation, or success condition and explain what stayed equivalent.`;
+	return choose([
+		`**Extension:** Change one constraint, input, representation, or success condition and explain what stayed equivalent.`,
+		`**Extension:** Add one transfer case with a changed assumption and document what still works.`,
+		`**Extension:** Add a second example that tests the same idea under a different boundary condition.`
+	]);
 }
 
 function courseExpansionLabel(
@@ -467,9 +530,9 @@ function buildProjectModule(
 			title: `Project Option: ${projectTitle(project)}`,
 			content: [
 				projectOptionGoal(profile, courseLabel),
-				projectOptionRequiredOutcome(profile, courseLabel),
+				projectOptionRequiredOutcome(profile, courseLabel, project),
 				`**Completion checks:**\n${bullets(profile.assessments.slice(0, 3))}`,
-				projectOptionExtension(profile)
+				projectOptionExtension(profile, project)
 			].join("\n\n")
 		}))
 	};
