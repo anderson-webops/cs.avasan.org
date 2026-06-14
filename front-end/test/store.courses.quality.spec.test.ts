@@ -1088,12 +1088,16 @@ describe("course text quality normalization", () => {
 
 	it("formats grouped lesson arcs as readable ordered markdown lists", async () => {
 		const store = useCoursesStore();
-		const [course, scratchCourse] = await Promise.all([
+		const [course, scratchCourse, machineLearning, aiLevel1] = await Promise.all([
 			store.loadCourseById("python-level-3"),
-			loadRawCourse("scratch-level-1")
+			loadRawCourse("scratch-level-1"),
+			loadRawCourse("machine-learning"),
+			loadRawCourse("ai-level-1")
 		]);
 		expect(course).not.toBeNull();
 		expect(scratchCourse).not.toBeNull();
+		expect(machineLearning).not.toBeNull();
+		expect(aiLevel1).not.toBeNull();
 
 		const lessonArc = findItem(
 			course!,
@@ -1126,6 +1130,29 @@ describe("course text quality normalization", () => {
 		expect(scratchStudio!.content).not.toMatch(
 			/\n \n\n\*\*Completion checks:\*\*/
 		);
+
+		const neuralNetworks = machineLearning!.modules
+			.find(module => module.title === "ML4 Neural Networks")
+			?.curriculum.find(item => item.title === "Core Concepts");
+		expect(neuralNetworks).toBeDefined();
+		expect(neuralNetworks!.content).toContain(
+			"A sigmoid graph is useful here because the sigmoid function always returns a value between 0 and 1."
+		);
+		expect(neuralNetworks!.content).toContain("**Details:**");
+		expect(neuralNetworks!.content).not.toMatch(
+			/value between 0 and\s+\n\s*\n\s*1\. Some common activation/
+		);
+
+		const aiLandscape = aiLevel1!.modules
+			.find(module => module.title === "Unit 1: AI Landscape and State Representation")
+			?.curriculum.find(item => item.title === "Core Concepts");
+		expect(aiLandscape).toBeDefined();
+		expect(aiLandscape!.content).toContain("The course emphasizes representations");
+		expect(aiLandscape!.content).toContain(
+			"once the structure's required information is identified"
+		);
+		expect(aiLandscape!.content).not.toMatch(/\bcourse should\b/i);
+		expect(aiLandscape!.content).not.toMatch(/\bShow why\b/);
 	});
 
 	it("contextualizes generated studio support without repeated generic scaffolding", async () => {
