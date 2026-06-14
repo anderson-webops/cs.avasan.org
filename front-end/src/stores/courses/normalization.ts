@@ -407,10 +407,10 @@ function briefConceptAddendum(
 	}
 
 	return [
-		`**Concept focus:** ${topic} connects the main terms to one traceable example and one small changed case.`,
-		`**Concept focus:** ${topic} is checked by explaining the terms, working one example, and changing one condition.`,
-		`**Concept focus:** ${topic} becomes useful when the vocabulary, example, and verification step all point to the same idea.`,
-		`**Concept focus:** ${topic} connects to the module work through clear terms, one worked example, and one changed condition.`
+		`**Concept focus:** ${topic} starts with the terms needed to describe a concrete example, then tests the idea with one nearby change.`,
+		`**Concept focus:** ${topic} needs one worked example, one changed condition, and a clear reason the result still follows from the idea.`,
+		`**Concept focus:** ${topic} links vocabulary to evidence by naming what happens in a concrete case and what changes in a second case.`,
+		`**Concept focus:** ${topic} links definitions to practice by naming the idea, tracing one example, and checking a changed condition.`
 	][hash % 4];
 }
 
@@ -2121,7 +2121,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to connect one observation, one model limitation, one vocabulary term, and one evidence-based conclusion.`,
 			subject =>
-				`Summarize ${subject} by naming the phenomenon, identifying the evidence, explaining the key term, and revising the claim for a changed condition.`,
+				`Evidence for ${subject} includes the phenomenon, supporting evidence, key term, and a revised claim for one changed condition.`,
 			subject =>
 				`For ${subject}, demonstrate that the model, data, units or scale, and conclusion are connected without claiming more than the evidence supports.`
 		]);
@@ -2133,7 +2133,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the representation, calculation step, reasonableness check, and one corrected error.`,
 			subject =>
-				`Summarize ${subject} by naming the target skill, solving a changed example, and explaining why the answer fits the context.`,
+				`Evidence for ${subject} includes the target skill, a changed example, and a reasonableness explanation tied to the context.`,
 			subject =>
 				`For ${subject}, demonstrate the procedure, justify the key step, and catch one common mistake before moving on.`
 		]);
@@ -2145,7 +2145,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the path from source data or state space to result, including one intermediate check and one caveat about interpretation.`,
 			subject =>
-				`Summarize ${subject} by naming the metric or evidence source, explaining what changed during processing, and separating measured evidence from conclusion.`,
+				`Evidence for ${subject} includes the metric or source, the processing change, and a clear separation between measured output and conclusion.`,
 			subject =>
 				`For ${subject}, demonstrate one small hand-checkable case, one representative result, and one reason the result should not be generalized too far.`
 		]);
@@ -2157,7 +2157,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the key Java syntax or API choice, the state trace, one successful run, and one boundary case tied to AP-style reasoning.`,
 			subject =>
-				`Summarize ${subject} by naming the Java concept, tracing the relevant values, checking a changed input, and explaining why the result follows from the code.`,
+				`Evidence for ${subject} includes the Java concept, a value trace, a changed input, and a reason the result follows from the code.`,
 			subject =>
 				`For ${subject}, demonstrate compile/run evidence, a trace table or equivalent state explanation, and one edge case that protects against a common AP mistake.`
 		]);
@@ -2169,7 +2169,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the input/output contract, a hand-traced case, the accepted sample behavior, and one boundary case that fits the constraints.`,
 			subject =>
-				`Summarize ${subject} by naming the invariant, explaining why it covers duplicates or ties, and checking that the complexity fits the largest input.`,
+				`Evidence for ${subject} includes the invariant, the duplicate or tie case, and a complexity check for the largest input.`,
 			subject =>
 				`For ${subject}, demonstrate sample correctness, one adversarial custom case, and a concise proof that the algorithm preserves the intended property.`
 		]);
@@ -2181,7 +2181,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to demonstrate the screen state, the user action that changes it, one simulator-verified path, and one layout or accessibility check.`,
 			subject =>
-				`Summarize ${subject} by naming the state owner, showing the interaction result, and identifying whether any issue comes from code, preview data, or project configuration.`,
+				`Evidence for ${subject} includes the state owner, interaction result, and whether any issue comes from code, preview data, or project configuration.`,
 			subject =>
 				`For ${subject}, verify launch behavior, one target interaction, one edge state, and the evidence that the SwiftUI view responds correctly.`
 		]);
@@ -2193,7 +2193,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to document the authorized boundary, baseline evidence, diagnostic output, and the mitigation or hardening check that proves the result.`,
 			subject =>
-				`Summarize ${subject} by naming the risk, showing the relevant log or configuration, and explaining how the final state reduces or contains it.`,
+				`Evidence for ${subject} includes the risk, relevant log or configuration, and how the final state reduces or contains it.`,
 			subject =>
 				`For ${subject}, demonstrate before-and-after evidence, the command path, the safe rollback or containment plan, and the final verification step.`
 		]);
@@ -2205,7 +2205,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to document setup, command path, observed output, diagnostic evidence, and the cleanup or rerun step that proves reproducibility.`,
 			subject =>
-				`Summarize ${subject} by naming the system boundary, showing one healthy output and one diagnostic output, and explaining what assumption controlled the result.`,
+				`Evidence for ${subject} includes the system boundary, one healthy output, one diagnostic output, and the assumption that controls the result.`,
 			subject =>
 				`For ${subject}, demonstrate the intended behavior, one failure or edge path, and the command sequence needed to repeat the result.`
 		]);
@@ -2217,7 +2217,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to trace one player action through events, variables, and visible feedback, then replay the project from a clean start.`,
 			subject =>
-				`Summarize ${subject} by naming the key state variable or event chain, demonstrating the expected play path, and checking one awkward input or boundary case.`,
+				`Evidence for ${subject} includes the key state variable or event chain, the expected play path, and one awkward input or boundary case.`,
 			subject =>
 				`For ${subject}, show the start state, the interaction that changes it, the feedback that confirms it, and one reset or replay check.`
 		]);
@@ -2229,7 +2229,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to demonstrate one visible interaction, the state or DOM change behind it, an empty or invalid input, and a keyboard or responsive-layout check.`,
 			subject =>
-				`Summarize ${subject} by naming the user goal, tracing the event through state and output, and confirming the page handles both normal and failure paths.`,
+				`Evidence for ${subject} includes the user goal, event-to-output trace, and confirmation that both normal and failure paths work.`,
 			subject =>
 				`For ${subject}, verify the browser behavior with a normal action, an edge input, visible feedback, and one accessibility or screen-size check.`
 		]);
@@ -2241,7 +2241,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to trace the input or setup value through the main branch, loop, or helper function, then verify the output with one changed input.`,
 			subject =>
-				`Summarize ${subject} by naming the data shape, the transformation step, the output evidence, and one boundary case that protects the logic.`,
+				`Evidence for ${subject} includes the data shape, transformation step, output evidence, and one boundary case that protects the logic.`,
 			subject =>
 				`For ${subject}, demonstrate that the Python code is readable, runnable, and testable by showing the main path plus one case that would catch a common mistake.`
 		]);
@@ -2255,7 +2255,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show how the constructor, method, field, interface, or collection choice affects the result, then verify it with a small run or test.`,
 			subject =>
-				`Summarize ${subject} by naming the API boundary, the data it protects or exposes, and the evidence that the behavior works.`
+				`Evidence for ${subject} includes the API boundary, the data it protects or exposes, and proof that the behavior works.`
 		]);
 	}
 	if (/c\+\+|cpp/.test(contextText(context))) {
@@ -2265,7 +2265,7 @@ function proficiencyEvidence(context: CourseTextContext) {
 			subject =>
 				`Use ${subject} to show the invariant, the command that proves behavior, and one bounds, copying, lifetime, or complexity decision.`,
 			subject =>
-				`Summarize ${subject} by naming the representation, tracing one normal case, and recording one diagnostic result tied to ownership or memory behavior.`,
+				`Evidence for ${subject} includes the representation, one normal trace, and one diagnostic result tied to ownership or memory behavior.`,
 			subject =>
 				`For ${subject}, demonstrate the public behavior, one edge input, and the C++ design choice that protects correctness or performance.`
 		]);
@@ -3867,29 +3867,29 @@ function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const goal = variantPrompt(context, [
 		subject =>
-			`**Project goal:** Complete **${subject}** as a focused checkpoint in ${focus}, with a visible result and one checked boundary case.`,
+			`**Project goal:** **${subject}** produces a visible result for ${focus}: one ordinary path, one boundary case, and one short explanation of the evidence.`,
 		subject =>
-			`**Project goal:** Produce **${subject}** with a stated goal, an observable result, and evidence connected to ${focus}.`,
+			`**Project goal:** **${subject}** ends with an observable result, a checked assumption, and evidence tied to ${focus}.`,
 		subject =>
-			`**Project goal:** Use **${subject}** to turn the module concept into a testable artifact connected to ${focus}.`,
+			`**Project goal:** **${subject}** turns ${focus} into something testable: run it, inspect the output, and record what proves the idea works.`,
 		subject =>
-			`**Project goal:** Build **${subject}** around one concrete behavior, model, output, or analysis that demonstrates ${focus}.`,
+			`**Project goal:** **${subject}** centers on one concrete behavior, model, output, or analysis that makes ${focus} visible.`,
 		subject =>
-			`**Project goal:** Implement **${subject}** so ${focus} can be inspected through a run, trace, model, or user interaction.`,
+			`**Project goal:** **${subject}** shows ${focus} through a run, trace, model, or user interaction.`,
 		subject =>
-			`**Project goal:** Develop **${subject}** from a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
+			`**Project goal:** **${subject}** grows from a small working case into a finished result that reflects ${focus}, with a documented assumption and a clear success check.`,
 		subject =>
-			`**Project goal:** Create **${subject}** as a practical application of ${focus}, then compare expected behavior with the observed result.`,
+			`**Project goal:** **${subject}** applies ${focus} in a practical artifact, then compares expected behavior with the observed result.`,
 		subject =>
-			`**Project goal:** Finish **${subject}** with enough structure, naming, and evidence to support ${focus} without relying on memory.`,
+			`**Project goal:** **${subject}** includes enough structure, naming, and evidence to support ${focus} without relying on memory.`,
 		subject =>
-			`**Project goal:** Refine **${subject}** until the central decision for ${focus} is explicit, tested, and visible in the final artifact.`,
+			`**Project goal:** **${subject}** makes the central decision for ${focus} explicit, tested, and visible in the final artifact.`,
 		subject =>
-			`**Project goal:** Turn **${subject}** into a compact demonstration of ${focus}, including one ordinary case and one case that could fail if the idea is misunderstood.`,
+			`**Project goal:** **${subject}** demonstrates ${focus} with one ordinary case and one case that could fail if the idea is misunderstood.`,
 		subject =>
-			`**Project goal:** Use **${subject}** to connect the prompt requirements to ${focus}, then document the evidence that proves the connection works.`,
+			`**Project goal:** **${subject}** connects the prompt requirements to ${focus}, then documents the evidence that proves the connection works.`,
 		subject =>
-			`**Project goal:** Complete **${subject}** with a clear input, process, and output path, then connect the result to ${focus}.`
+			`**Project goal:** **${subject}** documents the input, process, and output path, then connects the result to ${focus}.`
 	]);
 
 	return [
@@ -4457,13 +4457,13 @@ function lessonSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const conceptPath = variantPrompt(context, [
 		subject =>
-			`**Concept path:** The core vocabulary for ${focus}, one concrete example, and an application to ${subject} define this lesson.`,
+			`**Concept path:** ${subject} starts with the relevant parts of ${focus}, then follows one concrete example through a changed case.`,
 		subject =>
-			`**Concept path:** Define the terms that matter for ${subject}, trace one concrete example, then test a nearby variation in ${focus}.`,
+			`**Concept path:** ${subject} links the main terms in ${focus} to one traceable example and one nearby variation.`,
 		subject =>
-			`**Concept path:** ${subject} connects to ${focus} by naming the relevant state or representation, tracing one example, and checking a changed case.`,
+			`**Concept path:** ${subject} shows how ${focus} appears in a concrete task: identify the state or representation, trace the example, and check a changed case.`,
 		subject =>
-			`**Concept path:** ${subject} makes ${focus} concrete through a rule or model, one worked case, and a small transfer check.`
+			`**Concept path:** ${subject} turns ${focus} into a usable model by pairing the rule, one worked case, and a small transfer check.`
 	]);
 
 	return [

@@ -1418,6 +1418,24 @@ describe("course text quality normalization", () => {
 				/connects to .+ through named inputs or state, one step-by-step example, and one changed second case/i
 			);
 			expect(corpus).not.toMatch(/Summarize [^\n.]+ by naming/i);
+			expect(corpus).not.toMatch(
+				/A complete check for [^\n.]+ names [^\n.]+, (?:demonstrating|explaining|checking|separating|showing|identifying)/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Concept focus:\*\* [^\n.]+ (?:becomes useful when|is checked by|connects the main terms to)/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Project goal:\*\* (?:Use|Turn|Produce|Complete|Build|Implement|Develop|Create|Finish|Refine) \*\*[^*]+\*\* (?:to turn the module concept|with a stated goal|as a focused checkpoint|around one concrete behavior)/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Project goal:\*\* \*\*[^*]+\*\* (?:makes [^\n.]+ inspectable|needs an observable result|has a clear input, process, and output path)/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Concept path:\*\* (?:The core vocabulary for|Define the terms that matter for|[^\n.]+ makes [^\n.]+ concrete through a rule or model)/i
+			);
+			expect(corpus).not.toMatch(
+				/A complete response for [^\n.]+ names [^\n.]+, (?:identifies|explains|solves|traces|checks|shows|separates|demonstrates|records)/i
+			);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
