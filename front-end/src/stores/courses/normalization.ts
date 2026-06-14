@@ -407,10 +407,10 @@ function briefConceptAddendum(
 	}
 
 	return [
-		`${topic} is strongest when the key terms, one traced example, and one nearby transfer case are connected clearly.`,
-		`${topic} connects vocabulary to a concrete example, then shows how the same idea changes in a nearby case.`,
-		`${topic} becomes concrete through precise vocabulary, a small example, and one verification step that is not just a repeated calculation or trace.`,
-		`${topic} connects to the module work through core terms, one worked example, and one changed condition.`
+		`**Concept focus:** ${topic} connects the main terms to one traceable example and one small changed case.`,
+		`**Concept focus:** ${topic} is checked by explaining the terms, working one example, and changing one condition.`,
+		`**Concept focus:** ${topic} becomes useful when the vocabulary, example, and verification step all point to the same idea.`,
+		`**Concept focus:** ${topic} connects to the module work through clear terms, one worked example, and one changed condition.`
 	][hash % 4];
 }
 
@@ -1286,6 +1286,10 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bThe goal is to be able to\b/g, "The goal is to")
 				.replace(/\bthe goal is to be able to\b/g, "the goal is to")
 				.replace(
+					/\bSummarize ([^.]+?) by naming\b/g,
+					"A complete check for $1 names"
+				)
+				.replace(
 					/\bBroadcast messages between\b/g,
 					"Use broadcasts between"
 				)
@@ -2028,7 +2032,7 @@ function commonPitfalls(context: CourseTextContext) {
 			subject =>
 				`In ${subject}, common pitfalls include unclear start or reset state, event-order bugs, collision or score changes that are hard to trace, and feedback that does not show what changed.`,
 			subject =>
-				`For ${subject}, watch for scripts that depend on stale state, events that fire in the wrong order, scoring or timing updates that are hard to inspect, and player feedback that does not match the state.`,
+				`For ${subject}, check for stale state, event-order bugs, scoring or timing updates that are hard to inspect, and player feedback that does not match the state.`,
 			subject =>
 				`In ${subject}, likely issues include missing reset behavior, controls that work only once, collisions that update the wrong variable, or visual feedback that hides the cause of the result.`,
 			subject =>
@@ -4455,9 +4459,9 @@ function lessonSupport(context: CourseTextContext) {
 		subject =>
 			`**Concept path:** The core vocabulary for ${focus}, one concrete example, and an application to ${subject} define this lesson.`,
 		subject =>
-			`**Concept path:** Core vocabulary for ${focus}, one representative example, and a nearby variation in ${subject} form the learning sequence.`,
+			`**Concept path:** Define the terms that matter for ${subject}, trace one concrete example, then test a nearby variation in ${focus}.`,
 		subject =>
-			`**Concept path:** ${subject} connects to ${focus} through named inputs or state, one step-by-step example, and one changed second case.`,
+			`**Concept path:** ${subject} connects to ${focus} by naming the relevant state or representation, tracing one example, and checking a changed case.`,
 		subject =>
 			`**Concept path:** ${subject} makes ${focus} concrete through a rule or model, one worked case, and a small transfer check.`
 	]);

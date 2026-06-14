@@ -1408,6 +1408,16 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/with a clear input, process, and output path that makes .+ easier to inspect/i
 			);
+			expect(corpus).not.toMatch(
+				/is strongest when the key terms, one traced example, and one nearby transfer case are connected clearly/i
+			);
+			expect(corpus).not.toMatch(
+				/Core vocabulary for .+ one representative example, and a nearby variation/i
+			);
+			expect(corpus).not.toMatch(
+				/connects to .+ through named inputs or state, one step-by-step example, and one changed second case/i
+			);
+			expect(corpus).not.toMatch(/Summarize [^\n.]+ by naming/i);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
