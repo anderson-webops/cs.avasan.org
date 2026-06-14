@@ -1846,6 +1846,46 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
+	it("keeps physics addendum checkpoints and misconception watchlists topic-specific", async () => {
+		const courseIds = ["intro-to-physics", "physics-level-2"];
+		const repeatedTemplate =
+			/formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system/i;
+		const genericCheckpointTemplate =
+			/core quantities, system boundary, and model assumption are identified/i;
+
+		for (const courseId of courseIds) {
+			const course = await loadRawCourse(courseId);
+			expect(course).not.toBeNull();
+
+			const diagnostics = course!.modules.flatMap(module =>
+				module.supplementalProjects
+					.filter(item => item.title === "Diagnostic Checkpoint")
+					.map(item => item.content)
+			);
+			const misconceptions = course!.modules.flatMap(module =>
+				module.supplementalProjects
+					.filter(item => item.title === "Misconception Watchlist")
+					.map(item => item.content)
+			);
+			const combined = [...diagnostics, ...misconceptions].join("\n");
+
+			expect(combined).not.toMatch(repeatedTemplate);
+			expect(combined).not.toMatch(genericCheckpointTemplate);
+			expect(combined).not.toMatch(/\bWatch for\b/i);
+			expect(new Set(diagnostics).size).toBe(diagnostics.length);
+			expect(new Set(misconceptions).size).toBe(misconceptions.length);
+		}
+
+		const physics2 = await loadRawCourse("physics-level-2");
+		expect(
+			findItem(
+				physics2!,
+				/Misconception Watchlist/,
+				/Bernoulli-style reasoning/
+			).content
+		).toContain("continuum models break down");
+	});
+
 	it("turns applied studio labs into explicit studio specifications", async () => {
 		const course = await loadRawCourse("low-level-security");
 		expect(course).not.toBeNull();
