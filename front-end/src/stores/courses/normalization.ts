@@ -545,6 +545,10 @@ function thirdPersonVerb(value: string) {
 	return `${lower}s`;
 }
 
+function moduleFocusVerbReplacement(_match: string, verb: string) {
+	return `This module ${thirdPersonVerb(verb)}`;
+}
+
 function neutralizeCourseShouldPhrasing(text: string) {
 	return text.replace(
 		/\bcourse should (?:(already|now|repeatedly)\s+)?([A-Za-z]+)\b/g,
@@ -1194,8 +1198,32 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\binstructor references\b/gi, "internal references")
 				.replace(/\bteacher-provided\b/gi, "provided")
 				.replace(/\bteacher requirement\b/gi, "course requirement")
+				.replace(
+					/\bThis module focuses on ([a-z]+)\b/g,
+					moduleFocusVerbReplacement
+				)
 				.replace(/\bThe lesson should\b/g, "The focus is to")
 				.replace(/\bthe lesson should\b/g, "the focus is to")
+				.replace(/\bThe work should make\b/g, "The work makes")
+				.replace(/\bthe work should make\b/g, "the work makes")
+				.replace(
+					/\bThe finished project should have\b/g,
+					"The finished project has"
+				)
+				.replace(
+					/\bthe finished project should have\b/g,
+					"the finished project has"
+				)
+				.replace(
+					/\bThe finished code should have\b/g,
+					"The finished code has"
+				)
+				.replace(
+					/\bthe finished code should have\b/g,
+					"the finished code has"
+				)
+				.replace(/\bThe project should feel\b/g, "The project feels")
+				.replace(/\bthe project should feel\b/g, "the project feels")
 				.replace(/\bwork should emphasize\b/g, "work emphasizes")
 				.replace(/\bWork should emphasize\b/g, "Work emphasizes")
 				.replace(/\bstudent-facing course\b/gi, "visible course")
@@ -3867,7 +3895,7 @@ function projectSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const goal = variantPrompt(context, [
 		subject =>
-			`**Project goal:** **${subject}** produces a visible result for ${focus}: one ordinary path, one boundary case, and one short explanation of the evidence.`,
+			`**Project goal:** **${subject}** produces a visible result tied to ${focus}. Include a normal path, an edge case, and one sentence explaining the evidence.`,
 		subject =>
 			`**Project goal:** **${subject}** ends with an observable result, a checked assumption, and evidence tied to ${focus}.`,
 		subject =>
@@ -4457,13 +4485,13 @@ function lessonSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const conceptPath = variantPrompt(context, [
 		subject =>
-			`**Concept path:** ${subject} starts with the relevant parts of ${focus}, then follows one concrete example through a changed case.`,
+			`**Concept path:** ${subject} starts by identifying which part of ${focus} matters, then uses a specific example to test a nearby condition.`,
 		subject =>
-			`**Concept path:** ${subject} links the main terms in ${focus} to one traceable example and one nearby variation.`,
+			`**Concept path:** ${subject} links the main terms in ${focus} to a traceable example and a nearby variation.`,
 		subject =>
-			`**Concept path:** ${subject} shows how ${focus} appears in a concrete task: identify the state or representation, trace the example, and check a changed case.`,
+			`**Concept path:** ${subject} shows how ${focus} appears in a concrete task: identify the state or representation, trace the example, and test a variation.`,
 		subject =>
-			`**Concept path:** ${subject} turns ${focus} into a usable model by pairing the rule, one worked case, and a small transfer check.`
+			`**Concept path:** ${subject} turns ${focus} into a usable model by pairing the rule with a worked example and a transfer check.`
 	]);
 
 	return [

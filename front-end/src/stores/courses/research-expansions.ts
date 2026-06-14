@@ -520,8 +520,8 @@ function buildProjectModule(
 			{
 				title: `${courseLabel} Capstone Gate`,
 				content: [
-					`**Readiness check:** Before a ${courseLabel} capstone begins, the prerequisite modules, project ladder, and assessment model should already be practiced on smaller artifacts.`,
-					`**Gate guidance:** The ${courseLabel} capstone is ready when it combines known skills in a larger context rather than introducing several untested ideas at once. The first version should be narrow, demonstrable, and easy to verify before optional polish is added.`,
+					`**Readiness check:** Before a ${courseLabel} capstone begins, prerequisite modules, project ladder, and assessment model are practiced on smaller artifacts.`,
+					`**Gate guidance:** The ${courseLabel} capstone is ready when it combines known skills in a larger context rather than introducing several untested ideas at once. The first version stays narrow, demonstrable, and easy to verify before optional polish is added.`,
 					`**Evidence of proficiency:** ${courseLabel} capstone work demonstrates the ability to state the goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version.`
 				].join("\n\n")
 			}

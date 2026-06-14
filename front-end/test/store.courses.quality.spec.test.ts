@@ -1436,6 +1436,19 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(
 				/A complete response for [^\n.]+ names [^\n.]+, (?:identifies|explains|solves|traces|checks|shows|separates|demonstrates|records)/i
 			);
+			expect(corpus).not.toMatch(
+				/\*\*Project goal:\*\* \*\*[^*]+\*\* produces a visible result for [^\n.]+: one ordinary path/i
+			);
+			expect(corpus).not.toMatch(
+				/\*\*Concept path:\*\* [^\n.]+ starts with the relevant parts of [^\n.]+, then follows one concrete example through a changed case/i
+			);
+			expect(corpus).not.toMatch(
+				/\bThis module focuses on (?:turn|connect|use|map|combine|organize|diagnose)\b/i
+			);
+			expect(corpus).not.toMatch(/\bThe work should make\b/i);
+			expect(corpus).not.toMatch(
+				/\bprerequisite modules, project ladder, and assessment model should already be practiced\b/i
+			);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
