@@ -360,7 +360,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Lists of Actors",
 					content:
-						"Explain that lists let us manage many objects at once. Define WIDTH and HEIGHT, then create an empty list aliens = []. Use a loop to create 10 alien actors, give each xspeed = 5, and append them to the list. In draw(), use for alien in aliens: alien.draw(). In update(), move each alien with alien.x += alien.xspeed and reverse its direction when it hits a screen edge by flipping alien.xspeed. Emphasize the pattern of per-actor dynamic attributes plus list loops."
+						"Lists let us manage many objects at once. Define WIDTH and HEIGHT, then create an empty list aliens = []. Use a loop to create 10 alien actors, give each xspeed = 5, and append them to the list. In draw(), use for alien in aliens: alien.draw(). In update(), move each alien with alien.x += alien.xspeed and reverse its direction when it hits a screen edge by flipping alien.xspeed. Notice the pattern of per-actor dynamic attributes plus list loops."
 				},
 				{
 					title: "PyG4 Project 1: Bouncy Ball Room",
@@ -719,7 +719,7 @@ export const pyGamesCourse: RawCourse = {
 				{
 					title: "Check-In #2: Gravity (Bigfoot Game)",
 					content:
-						"Gravity-setup: Start from the Bigfoot starter game (check_in_2_starter.py) and walk through the code so the understands how Bigfoot moves left and right with the arrow keys. Gravity-1: Ask what global variables and dynamic attributes are needed to add gravity (a global gravity and a yspeed attribute on Bigfoot; xspeed is optional). Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
+						"Gravity-setup: Start from the Bigfoot starter game (check_in_2_starter.py) and inspect the code so the movement logic is clear before adding gravity. Gravity-1: Ask what global variables and dynamic attributes are needed to add gravity (a global gravity and a yspeed attribute on Bigfoot; xspeed is optional). Gravity-2: Add these variables to the game. Gravity-3: In update(), apply gravity to Bigfoot by increasing yspeed and updating his y position. Gravity-4: Add code to stop Bigfoot at the floor instead of letting him fall through. Gravity-5: Add an event listener so pressing the up arrow makes Bigfoot jump."
 				},
 				{
 					title: "Check-In #2: Friction (Shuffleboard Game)",

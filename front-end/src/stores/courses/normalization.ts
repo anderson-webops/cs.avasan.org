@@ -387,10 +387,10 @@ function briefConceptAddendum(
 	}
 
 	return [
-		`For ${topic}, define the key terms, trace one example, and finish with one nearby transfer check.`,
-		`Use ${topic} to connect vocabulary to a concrete example, then show how the same idea changes in a nearby case.`,
-		`Make ${topic} concrete with precise vocabulary, a small example, and one way to verify understanding without repeating the same calculation or trace.`,
-		`Link ${topic} to the module work by naming the core terms, showing one example, and checking one changed condition.`
+		`${topic} is strongest when the key terms, one traced example, and one nearby transfer case are connected clearly.`,
+		`${topic} connects vocabulary to a concrete example, then shows how the same idea changes in a nearby case.`,
+		`${topic} becomes concrete through precise vocabulary, a small example, and one verification step that is not just a repeated calculation or trace.`,
+		`${topic} connects to the module work through core terms, one worked example, and one changed condition.`
 	][hash % 4];
 }
 
@@ -734,6 +734,42 @@ function neutralizeLessonDirectiveText(text: string) {
 			/(^|\n\s*|[.!?]\s+|:\s+)Set expectations\b/g,
 			"$1Clear expectations are established"
 		)
+		.replace(
+			/(^|\n\s*|[.!?]\s+|:\s+)Explain that ([a-z])/g,
+			(_match, prefix, first) =>
+				`${prefix}${capitalizeFirstLetter(first)}`
+		)
+		.replace(/(^|\n\s*|[.!?]\s+|:\s+)Explain that (?=["“`])/g, "$1")
+		.replace(
+			/(^|\n\s*|[.!?]\s+|:\s+)Discuss real-life examples of ([^.]+)\./g,
+			"$1Real-life examples of $2 connect the idea to familiar situations."
+		)
+		.replace(/(^|\n\s*|[.!?]\s+|:\s+)Discuss how\b/g, "$1Analyze how")
+		.replace(
+			/(^|\n\s*|[.!?]\s+|:\s+)Discuss customizing ([^.]+)\./g,
+			"$1Practice customizing $2."
+		)
+		.replace(/(^|\n\s*|[.!?]\s+|:\s+)Show the ([^.]+)\./g, "$1Use the $2.")
+		.replace(/(^|\n\s*|[.!?]\s+|:\s+)Demonstrate how\b/g, "$1Practice how")
+		.replace(
+			/(^|\n\s*|[.!?]\s+|:\s+)Practice how to ([a-z])/g,
+			(_match, prefix, first) =>
+				`${prefix}${capitalizeFirstLetter(first)}`
+		)
+		.replace(
+			/(^|\n\s*|[.!?]\s+|:\s+)Practice how ([a-z])/g,
+			(_match, prefix, first) =>
+				`${prefix}${capitalizeFirstLetter(first)}`
+		)
+		.replace(/\bPractice how to ([a-z])/g, keepMatchedFirstLetter)
+		.replace(/\bPractice how ([a-z])/g, keepMatchedFirstLetter)
+		.replace(/\bpractice how to ([a-z])/g, keepMatchedFirstLetter)
+		.replace(/\band demonstrate how\b/g, "and shows how")
+		.replace(/\band demonstrate the\b/g, "and use the")
+		.replace(/\bEmphasize the\b/g, "Notice the")
+		.replace(/\bemphasize the\b/g, "notice the")
+		.replace(/(^|\n\s*|[.!?]\s+|:\s+)Emphasize that\b/g, "$1Note that")
+		.replace(/\bThen discuss\b/g, "Then compare")
 		.replace(
 			/(^|\n\s*|[.!?]\s+)Start the course by\b/g,
 			"$1The course begins by"
@@ -1096,6 +1132,8 @@ function neutralizeStudentFacingText(text: string) {
 			.replace(/\binstructor references\b/gi, "internal references")
 			.replace(/\bteacher-provided\b/gi, "provided")
 			.replace(/\bteacher requirement\b/gi, "course requirement")
+			.replace(/\bThe lesson should\b/g, "The focus is to")
+			.replace(/\bthe lesson should\b/g, "the focus is to")
 			.replace(/\bstudent-facing course\b/gi, "visible course")
 			.replace(/\bstudent-facing\b/gi, "visible")
 			.replace(/\bStudents\b/g, "Learners")
@@ -1175,6 +1213,19 @@ function neutralizeStudentFacingText(text: string) {
 				"Use broadcasts between"
 			)
 			.replace(/\bShow how to\b/gi, "Practice how to")
+			.replace(/\bpractice how to ([a-z])/g, keepMatchedFirstLetter)
+			.replace(
+				/(^|\n\s*|[.!?]\s+|:\s+)Practice how to ([a-z])/g,
+				(_match, prefix, first) =>
+					`${prefix}${capitalizeFirstLetter(first)}`
+			)
+			.replace(
+				/(^|\n\s*|[.!?]\s+|:\s+)Practice how ([a-z])/g,
+				(_match, prefix, first) =>
+					`${prefix}${capitalizeFirstLetter(first)}`
+			)
+			.replace(/\bPractice how to ([a-z])/g, keepMatchedFirstLetter)
+			.replace(/\bPractice how ([a-z])/g, keepMatchedFirstLetter)
 			.replace(/(^|[.!?]\s+)Show how\b/g, "$1Notice how")
 			.replace(/\bShow where\b/g, "Identify where")
 			.replace(/\bShow the difference between\b/g, "Compare")
@@ -4265,13 +4316,13 @@ function lessonSupport(context: CourseTextContext) {
 	const focus = subjectFocus(context);
 	const conceptPath = variantPrompt(context, [
 		subject =>
-			`**Concept path:** This lesson develops ${focus} by defining the core vocabulary, tracing one concrete example, and applying the idea to ${subject}.`,
+			`**Concept path:** The core vocabulary for ${focus}, one concrete example, and an application to ${subject} define this lesson.`,
 		subject =>
-			`**Concept path:** Start from the ${focus} vocabulary, work through one representative example, then test the idea on a nearby variation in ${subject}.`,
+			`**Concept path:** Core vocabulary for ${focus}, one representative example, and a nearby variation in ${subject} form the learning sequence.`,
 		subject =>
-			`**Concept path:** Connect ${focus} to ${subject} by naming the inputs or state, following one example step by step, and checking what changes in a second case.`,
+			`**Concept path:** ${subject} connects to ${focus} through named inputs or state, one step-by-step example, and one changed second case.`,
 		subject =>
-			`**Concept path:** Use ${subject} to make ${focus} concrete: identify the rule or model, inspect one worked case, and finish with a small transfer check.`
+			`**Concept path:** ${subject} makes ${focus} concrete through a rule or model, one worked case, and a small transfer check.`
 	]);
 
 	return [

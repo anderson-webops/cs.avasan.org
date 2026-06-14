@@ -695,7 +695,7 @@ export const pythonLevel3Course: RawCourse = {
 				{
 					title: "Course Recap",
 					content:
-						"Review the main ideas from the course: functions, lists, dictionaries, recursion, stacks, searching, sorting, Big-O notation, file input/output, simulations, and simple AI. Then discuss which next course best fits future goals and interests."
+						"Review the main ideas from the course: functions, lists, dictionaries, recursion, stacks, searching, sorting, Big-O notation, file input/output, simulations, and simple AI. Then compare which next course best fits future goals and interests."
 				}
 			],
 			supplementalProjects: []

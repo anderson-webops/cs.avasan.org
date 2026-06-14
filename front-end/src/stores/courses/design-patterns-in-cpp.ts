@@ -618,17 +618,17 @@ export const designPatternsInCppCourse: RawCourse = {
 				{
 					title: "Trees of Heterogeneous Objects",
 					content:
-						"Composite works well for scene graphs, widget trees, or editor hierarchies where leaf and container nodes must share a common interface. The lesson should make structural recursion feel useful rather than ornamental."
+						"Composite works well for scene graphs, widget trees, or editor hierarchies where leaf and container nodes must share a common interface. Structural recursion should feel useful rather than ornamental."
 				},
 				{
 					title: "Traversal without Leaking Storage Details",
 					content:
-						"Show how traversal helpers and iterator-style views can keep callers from depending on the exact child container structure. Learn that exposing raw containers too eagerly weakens the abstraction."
+						"Traversal helpers and iterator-style views can keep callers from depending on the exact child container structure. Learn that exposing raw containers too eagerly weakens the abstraction."
 				},
 				{
 					title: "Uniform Operations and Boundary Limits",
 					content:
-						"Use rendering, flattening, or inspection operations to show the upside of a unified interface. Then discuss the limit: not every operation belongs uniformly on both leaves and groups."
+						"Use rendering, flattening, or inspection operations to show the upside of a unified interface. Then compare the limit: not every operation belongs uniformly on both leaves and groups."
 				},
 				{
 					title: "Container Exposure Tradeoffs",

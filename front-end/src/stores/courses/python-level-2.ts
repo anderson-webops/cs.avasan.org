@@ -1005,7 +1005,7 @@ export const pythonLevel2Course: RawCourse = {
 				{
 					title: "Course Recap",
 					content:
-						"Review the major ideas from the course: variables, strings, input, loops, ASCII and ciphers, conditionals, functions, lists, dictionaries, sets, timing, and larger game structure. Then discuss the next course that best fits future goals, such as Python Level 3, Java Level 1, Data Science in Python, PyGame, or JavaScript Level 1."
+						"Review the major ideas from the course: variables, strings, input, loops, ASCII and ciphers, conditionals, functions, lists, dictionaries, sets, timing, and larger game structure. Then compare possible next courses based on future goals, such as Python Level 3, Java Level 1, Data Science in Python, PyGame, or JavaScript Level 1."
 				}
 			],
 			supplementalProjects: []
