@@ -633,8 +633,16 @@ function formatSupportLabels(text: string) {
 	);
 }
 
+function formatNamedCheckpointPrompts(text: string) {
+	return text
+		.replace(/\n([a-z][a-z ]*-\d+(?:,\d+)*:)\s*/gi, "\n\n- **$1** ")
+		.replace(/\nNote:\s*/g, "\n\n**Note:** ");
+}
+
 function formatVisibleMarkdownStructure(text: string) {
-	const formatted = formatSupportLabels(formatInlineNumberedLists(text));
+	const formatted = formatNamedCheckpointPrompts(
+		formatSupportLabels(formatInlineNumberedLists(text))
+	);
 
 	if (!formatted.includes("Core topics in this module:")) return formatted;
 
@@ -1448,6 +1456,101 @@ function needsContentSupport(context: CourseTextContext) {
 		(isProjectLikeItem(context.item) && wordCount(content) < 95) ||
 		(isCheckInContext(context) && wordCount(content) < 120)
 	);
+}
+
+const proceduralSentencePattern =
+	/^(?:Add|Begin|Build|Calculate|Choose|Compare|Connect|Convert|Create|Define|Design|Develop|Draw|Experiment|Give|Implement|Initialize|In |Make|Place|Program|Reuse|Run|Set|Start|Test|Then|Tweak|Use|Using|When|Write)\b/i;
+
+const projectGoalSentencePattern =
+	/^(?:Build|Create|Design|Develop|Implement|In Colab|Make|Program|Simulate|Use|Using|Write)\b/i;
+
+const conceptProcedureSentencePattern =
+	/^This section (?:builds|covers|introduces|practices|reviews|uses)\b/i;
+
+function splitSentenceList(text: string) {
+	const sentences: string[] = [];
+	let sentenceStart = 0;
+
+	for (let index = 0; index < text.length; index++) {
+		const character = text[index];
+		if (!/[.!?]/.test(character)) continue;
+
+		const nextCharacter = text[index + 1] ?? "";
+		if (nextCharacter && !/\s/.test(nextCharacter)) continue;
+
+		const sentence = text.slice(sentenceStart, index + 1).trim();
+		if (/\b(?:vs|e\.g|i\.e|ex)\.$/i.test(sentence)) continue;
+		if (sentence) sentences.push(sentence);
+		sentenceStart = index + 1;
+	}
+
+	const remainder = text.slice(sentenceStart).trim();
+	if (remainder) sentences.push(remainder);
+
+	return sentences;
+}
+
+function formatDenseProjectProcedure(content: string) {
+	const normalized = compactWhitespace(content);
+	if (!normalized || preservesBlockStructure(content)) return content;
+	if (structuredSupportPattern.test(content)) return content;
+
+	const sentences = splitSentenceList(normalized);
+	if (sentences.length < 4) return content;
+
+	const [goal, ...steps] = sentences;
+	if (!projectGoalSentencePattern.test(goal)) return content;
+
+	const successCriteria = /^The finished\b/i.test(steps[0] ?? "")
+		? steps.shift()
+		: undefined;
+
+	const proceduralSteps = steps.filter(step =>
+		proceduralSentencePattern.test(step)
+	);
+	if (proceduralSteps.length < 2) return content;
+
+	return [
+		`**Project goal:** ${goal}`,
+		successCriteria ? `**Success criteria:** ${successCriteria}` : "",
+		`**Implementation steps:**\n${steps.map(step => `- ${step}`).join("\n")}`
+	]
+		.filter(Boolean)
+		.join("\n\n");
+}
+
+function formatDenseConceptProcedure(content: string) {
+	const normalized = compactWhitespace(content);
+	if (!normalized || preservesBlockStructure(content)) return content;
+	if (structuredSupportPattern.test(content)) return content;
+
+	const sentences = splitSentenceList(normalized);
+	if (sentences.length < 5) return content;
+
+	const [focus, ...steps] = sentences;
+	if (!conceptProcedureSentencePattern.test(focus)) return content;
+
+	const proceduralSteps = steps.filter(step =>
+		proceduralSentencePattern.test(step)
+	);
+	if (proceduralSteps.length < 3) return content;
+
+	return [
+		`**Concept focus:** ${focus}`,
+		`**Practice sequence:**\n${steps.map(step => `- ${step}`).join("\n")}`
+	].join("\n\n");
+}
+
+function formatDenseProcedureInstructions(course: RawCourse) {
+	for (const module of course.modules) {
+		for (const section of ["curriculum", "supplementalProjects"] as const) {
+			for (const item of module[section]) {
+				item.content = isProjectLikeItem(item)
+					? formatDenseProjectProcedure(item.content)
+					: formatDenseConceptProcedure(item.content);
+			}
+		}
+	}
 }
 
 function subjectFocus(context: CourseTextContext) {
@@ -5476,6 +5579,7 @@ export function normalizeRawCourse(id: string, rawCourse: RawCourse) {
 	applyResearchBackedExpansions(id, course);
 	applyCourseImplementationArtifacts(id, course);
 	normalizeImplementationLabLanguage(course);
+	formatDenseProcedureInstructions(course);
 	normalizeCourseTextQuality(course, id);
 	neutralizeStudentFacingCourseText(course);
 	formatVisibleCourseMarkdown(course);

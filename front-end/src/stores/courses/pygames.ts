@@ -525,8 +525,17 @@ export const pyGamesCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Gravity and Wind",
-					content:
-						'Explain forces as changes in speed over time, focusing on gravity pulling objects downward and wind pushing sideways. Start a new project and create a ball Actor using the "beach_ball" image with dynamic attributes ball.xspeed and ball.yspeed, setting ball.yspeed = 3. Define draw() and update() so that ball.x and ball.y are updated each frame. Add a global GRAVITY = 0.1 and, at the top of update(), do ball.yspeed += GRAVITY before updating ball.y so the ball accelerates downward. Discuss what the ball\'s speed would be after 10 and 20 updates and experiment with different GRAVITY values. Then make the ball bounce off the floor by reversing yspeed when it goes off the bottom of the screen and clamping it back in with ball.bottom = HEIGHT. Introduce a WIND global (e.g., WIND = 0.05) and add ball.xspeed += WIND in update() to push the ball sideways; experiment with positive, negative, and zero WIND values and talk about how update order and rounding can cause bounce heights to drift over time.'
+					content: `**Concept focus:** Forces change speed over time. In this lesson, gravity pulls an object downward by increasing vertical speed, while wind pushes sideways by changing horizontal speed.
+
+**Practice sequence:**
+- Start a new project and create a ball Actor using the "beach_ball" image.
+- Add dynamic attributes \`ball.xspeed\` and \`ball.yspeed\`, starting with \`ball.yspeed = 3\`.
+- Define \`draw()\` and \`update()\` so \`ball.x\` and \`ball.y\` are updated every frame.
+- Add \`GRAVITY = 0.1\` and update vertical speed before changing position: \`ball.yspeed += GRAVITY\`.
+- Predict the ball's vertical speed after 10 and 20 updates, then test different gravity values.
+- Make the ball bounce off the floor by reversing \`yspeed\` when it passes the bottom and clamping it with \`ball.bottom = HEIGHT\`.
+- Add \`WIND = 0.05\` and update horizontal speed with \`ball.xspeed += WIND\`.
+- Compare positive, negative, and zero wind values, then notice how update order and rounding can make bounce heights drift over time.`
 				},
 				{
 					title: "PyG5 Project 1: Keep Up",
@@ -886,8 +895,17 @@ export const pyGamesCourse: RawCourse = {
 			curriculum: [
 				{
 					title: "Single Projectile Mechanics",
-					content:
-						'Introduce projectiles as common game elements such as bullets, arrows, or magic spells. Create a simple scene with an alien Actor on the left side of the screen. Define a ZRect p representing a projectile with a small width and height (e.g., 10x10). Add a global boolean fired = False to track whether the projectile is currently in flight. In on_key_down(key), when space is pressed and fired is False, set fired = True and position p at the alien\'s current location. In update(), if fired is False, keep p locked to the alien and do not draw it; if fired is True, move p to the right each frame. In draw(), only draw the projectile when fired is True. When p reaches the right edge of the screen, reset fired to False so the player can fire again. Discuss how this pattern can generalize to any weapon or spell that must "return" before firing again.'
+					content: `**Concept focus:** Projectiles are common game elements such as bullets, arrows, or magic spells. The key pattern is that a projectile has an inactive state, a fired state, movement while active, and a reset condition before it can be fired again.
+
+**Practice sequence:**
+- Create a simple scene with an alien Actor on the left side of the screen.
+- Define a ZRect p representing a projectile with a small width and height, such as 10x10.
+- Add a global boolean fired = False to track whether the projectile is currently in flight.
+- In on_key_down(key), when space is pressed and fired is False, set fired = True and position p at the alien's current location.
+- In update(), if fired is False, keep p locked to the alien and do not draw it; if fired is True, move p to the right each frame.
+- In draw(), only draw the projectile when fired is True.
+- When p reaches the right edge of the screen, reset fired to False so the player can fire again.
+- Connect this pattern to any weapon or spell that must return or reset before firing again.`
 				},
 				{
 					title: "PyG8 Project 1: Target Shoot",
