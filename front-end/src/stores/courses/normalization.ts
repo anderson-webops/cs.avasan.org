@@ -575,8 +575,20 @@ function beforeStartingMatchedFirstLetter(_match: string, first: string) {
 	return `Before starting, ${first}`;
 }
 
+function beforeMatchedFirstLetter(_match: string, first: string) {
+	return `before ${first}`;
+}
+
 function toMatchedFirstLetter(_match: string, first: string) {
 	return `to ${first}`;
+}
+
+function workCanMatchedFirstLetter(_match: string, first: string) {
+	return `the work can ${first}`;
+}
+
+function taskRequiresMatchedFirstLetter(_match: string, first: string) {
+	return `the task requires ${first}`;
 }
 
 function enoughToMatchedFirstLetter(_match: string, first: string) {
@@ -1206,6 +1218,24 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bthe lesson should\b/g, "the focus is to")
 				.replace(/\bThe work should make\b/g, "The work makes")
 				.replace(/\bthe work should make\b/g, "the work makes")
+				.replace(/\bThe project should make\b/g, "The project makes")
+				.replace(/\bthe project should make\b/g, "the project makes")
+				.replace(/\bThe output should make\b/g, "The output makes")
+				.replace(/\bthe output should make\b/g, "the output makes")
+				.replace(
+					/\bThe representation should make\b/g,
+					"The representation makes"
+				)
+				.replace(
+					/\bthe representation should make\b/g,
+					"the representation makes"
+				)
+				.replace(/\bThe page should make\b/g, "The page makes")
+				.replace(/\bthe page should make\b/g, "the page makes")
+				.replace(/\bThe code should make\b/g, "The code makes")
+				.replace(/\bthe code should make\b/g, "the code makes")
+				.replace(/\b([A-Z][^.!?\n]{0,180}?) should make\b/g, "$1 makes")
+				.replace(/\b([a-z][^.!?\n]{0,180}?) should make\b/g, "$1 makes")
 				.replace(
 					/\bThe finished project should have\b/g,
 					"The finished project has"
@@ -1224,6 +1254,11 @@ function neutralizeStudentFacingText(text: string) {
 				)
 				.replace(/\bThe project should feel\b/g, "The project feels")
 				.replace(/\bthe project should feel\b/g, "the project feels")
+				.replace(/\bThis path should feel\b/g, "This path functions")
+				.replace(/\bthis path should feel\b/g, "this path functions")
+				.replace(/\bshould feel like\b/g, "functions as")
+				.replace(/\bThe output should feel\b/g, "The output functions")
+				.replace(/\bthe output should feel\b/g, "the output functions")
 				.replace(/\bwork should emphasize\b/g, "work emphasizes")
 				.replace(/\bWork should emphasize\b/g, "Work emphasizes")
 				.replace(/\bstudent-facing course\b/gi, "visible course")
@@ -1232,6 +1267,10 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bstudents\b/g, "learners")
 				.replace(/\bA student\b/g, "A learner")
 				.replace(/\ba student\b/g, "a learner")
+				.replace(
+					/\bLearners Can See and Model\b/g,
+					"Visible Systems and Models"
+				)
 				.replace(
 					/\bthe tutor should know whether\b/gi,
 					"the priority indicates whether"
@@ -1569,6 +1608,58 @@ function neutralizeStudentFacingText(text: string) {
 					capitalizeMatchedFirstLetter
 				)
 				.replace(/\bthe learner can ([a-z])/g, keepMatchedFirstLetter)
+				.replace(/\bso learners can ([a-z])/g, toMatchedFirstLetter)
+				.replace(/\bso learners build\b/g, "to build")
+				.replace(/\bbefore learners ([a-z])/g, beforeMatchedFirstLetter)
+				.replace(
+					/\bwhether learners can ([a-z])/g,
+					workCanMatchedFirstLetter
+				)
+				.replace(
+					/\bLearners can ([a-z])/g,
+					capitalizeMatchedFirstLetter
+				)
+				.replace(/\blearners can ([a-z])/g, keepMatchedFirstLetter)
+				.replace(
+					/\blearners must ([a-z])/g,
+					taskRequiresMatchedFirstLetter
+				)
+				.replace(
+					/\bshould force learners to ([a-z])/g,
+					taskRequiresMatchedFirstLetter
+				)
+				.replace(
+					/\bshould force students to ([a-z])/g,
+					taskRequiresMatchedFirstLetter
+				)
+				.replace(
+					/\bmodel learners can still inspect\b/g,
+					"model remains inspectable"
+				)
+				.replace(
+					/\bwhich project or assessment proves that a learner can use the mapped skill independently\b/g,
+					"which project or assessment proves independent use of the mapped skill"
+				)
+				.replace(/\blearners will actually use\b/g, "appear")
+				.replace(/\blearners will actually see\b/g, "appear")
+				.replace(
+					/\blearners will actually encounter\b/g,
+					"are common in practice"
+				)
+				.replace(
+					/\bthat learners will compare at least two approaches on most serious datasets\b/g,
+					"that serious datasets include at least two compared approaches"
+				)
+				.replace(
+					/\bthat learners will finish the course able to ([a-z])/g,
+					(_match, first: string) =>
+						`that the course builds the ability to ${first}`
+				)
+				.replace(
+					/\bthat learners will read binary and hexadecimal representations, use bitwise operators confidently, reason about layout and lifetime, and build small systems-style tools in C\b/g,
+					"that this course covers binary and hexadecimal representations, confident bitwise operations, layout and lifetime reasoning, and small systems-style tools in C"
+				)
+				.replace(/\blearners will keep seeing\b/g, "recur")
 				.replace(
 					/\bhelps learners decide whether\b/gi,
 					"helps identify whether"

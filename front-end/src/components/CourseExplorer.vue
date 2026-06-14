@@ -1026,6 +1026,17 @@ function mediaLabel(url: string) {
 		return "PhET simulation";
 	}
 
+	if (
+		normalizedUrl.includes("youtube.com") ||
+		normalizedUrl.includes("youtu.be")
+	) {
+		return "Demo video";
+	}
+
+	if (normalizedUrl.includes("javalab.org")) {
+		return "Interactive simulation";
+	}
+
 	return "Media resource";
 }
 

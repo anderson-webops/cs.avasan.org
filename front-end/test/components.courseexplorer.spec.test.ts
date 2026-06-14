@@ -600,6 +600,8 @@ describe("CourseExplorer.vue", () => {
 		const assignedCourse = coursesStore.courses[0];
 		const phetLink =
 			"https://phet.colorado.edu/en/simulations/filter?subjects=middle-school";
+		const youtubeLink = "https://youtu.be/qCuFjXGSVB4";
+		const javalabLink = "https://javalab.org/en/dissolution_process_en/";
 
 		vi.spyOn(coursesStore, "loadCourseById").mockResolvedValue({
 			id: assignedCourse.id,
@@ -612,6 +614,18 @@ describe("CourseExplorer.vue", () => {
 							id: "science-resource",
 							mediaLink: phetLink,
 							title: "Simulation Resource"
+						},
+						{
+							content: "Review a safe demo video.",
+							id: "video-resource",
+							mediaLink: youtubeLink,
+							title: "Video Resource"
+						},
+						{
+							content: "Use an interactive chemistry simulation.",
+							id: "interactive-resource",
+							mediaLink: javalabLink,
+							title: "Interactive Resource"
 						}
 					],
 					id: "module-1",
@@ -642,11 +656,17 @@ describe("CourseExplorer.vue", () => {
 
 		await vi.waitFor(() => {
 			expect(wrapper.text()).toContain("Simulation collection");
+			expect(wrapper.text()).toContain("Demo video");
+			expect(wrapper.text()).toContain("Interactive simulation");
 		});
 
-		const link = wrapper.find(`a[href="${phetLink}"]`);
-		expect(link.exists()).toBe(true);
-		expect(wrapper.find(`img[src="${phetLink}"]`).exists()).toBe(false);
+		for (const resourceLink of [phetLink, youtubeLink, javalabLink]) {
+			const link = wrapper.find(`a[href="${resourceLink}"]`);
+			expect(link.exists()).toBe(true);
+			expect(wrapper.find(`img[src="${resourceLink}"]`).exists()).toBe(
+				false
+			);
+		}
 	});
 
 	it("labels science reference links by purpose instead of calling every link a dataset", async () => {
