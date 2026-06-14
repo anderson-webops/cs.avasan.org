@@ -1463,6 +1463,15 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bIdentify\b/g, "Identify")
 				.replace(/\bthe student should identify\b/g, "identify")
 				.replace(/\bIdentify\b/g, "Identify")
+				.replace(
+					/\bThey should not re-enter\b/g,
+					"Keep these materials out of"
+				)
+				.replace(
+					/\bThey should ([a-z]+)/g,
+					(_match, verb: string) =>
+						`A strong response ${thirdPersonVerb(verb)}`
+				)
 				.replace(/\bThe student should\b/g, "The goal is to")
 				.replace(/\bStudents should\b/g, "The goal is to")
 				.replace(/\bthe student should\b/g, "the goal is to")

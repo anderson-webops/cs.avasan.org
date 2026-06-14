@@ -249,7 +249,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "NAT and Port Forwarding",
 					content:
-						"Explain NAT as address translation at the internet edge and pair it with port forwarding so students can see why inbound reachability on a home network is different from running a service on a public server. This is where they should learn why local success does not automatically imply outside reachability."
+						"Explain NAT as address translation at the internet edge and pair it with port forwarding to show why inbound reachability on a home network is different from running a service on a public server. This is where local success must be separated from outside reachability."
 				},
 				{
 					title: "Why Home Networks Differ from Public Servers",
@@ -459,7 +459,7 @@ export const networkSystemsCourse: RawCourse = {
 				{
 					title: "Timeout versus Refusal versus Reset",
 					content:
-						"Repeat the failure signatures until students can classify them by default: timeout usually means a packet is not getting through or not coming back, refusal usually means the host is reachable but nothing is listening, and reset usually means a TCP conversation was actively torn down. They should still verify, but this classification should become instinctive."
+						"Repeat the failure signatures until they become quick to classify: timeout usually means a packet is not getting through or not coming back, refusal usually means the host is reachable but nothing is listening, and reset usually means a TCP conversation was actively torn down. Verification still matters, but this classification should become instinctive."
 				},
 				{
 					title: "Project: Diagnose Why a Service Is Reachable Locally but Not from Another Machine",

@@ -311,7 +311,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Makes an App Feel Release-Ready?",
 					content:
-						"Explain why a stable build can still be unready for testing or review if the metadata and presentation are weak. They should identify at least one non-code requirement that affects the shipping pipeline."
+						"Explain why a stable build can still be unready for testing or review if the metadata and presentation are weak. A strong response identifies at least one non-code requirement that affects the shipping pipeline."
 				},
 				{
 					title: "SAD5 App Store Connect and TestFlight Workflow: Core Project",
@@ -531,7 +531,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Does Modifier Order Matter?",
 					content:
-						"Explain one example where changing modifier order changes the result. They should focus on layout or styling consequences, not just say that SwiftUI is 'sensitive.'."
+						"Explain one example where changing modifier order changes the result. Focus on layout or styling consequences, not just the claim that SwiftUI is sensitive."
 				}
 			],
 			supplementalProjects: [
@@ -1078,7 +1078,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Changes Once Data Lasts?",
 					content:
-						"Explain how persistence changes testing, debugging, and user expectations. They should identify at least one new edge case that only appears after data survives between launches."
+						"Explain how persistence changes testing, debugging, and user expectations. A strong response identifies at least one new edge case that only appears after data survives between launches."
 				}
 			],
 			supplementalProjects: [
@@ -1211,7 +1211,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Makes an App Feel Intentionally Designed?",
 					content:
-						"Identify the difference between a screen that merely functions and a screen that feels deliberate, readable, and respectful of the user. They should reference both aesthetics and accessibility."
+						"Identify the difference between a screen that merely functions and a screen that feels deliberate, readable, and respectful of the user. A strong response references both aesthetics and accessibility."
 				},
 				{
 					title: "SAD18 App Design and Accessibility: Core Project",
@@ -1357,7 +1357,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Reflection Question: What Did You Learn About Shipping, Not Just Coding?",
 					content:
-						"Explain which parts of the course most changed how they think about building for Apple platforms. They should mention at least one setup, architecture, testing, accessibility, or publishing lesson in addition to SwiftUI code."
+						"Explain which parts of the course most changed the approach to building for Apple platforms. A strong response mentions at least one setup, architecture, testing, accessibility, or publishing lesson in addition to SwiftUI code."
 				}
 			],
 			supplementalProjects: [
@@ -1409,7 +1409,7 @@ export const introToSwiftAppDevelopmentCourse: RawCourse = {
 				{
 					title: "Legacy Means Reference, Not Core Scope",
 					content:
-						"Keep the `legacy/` materials and the older `Mod*` folders available only for historical demo recovery or scaffold comparison. They should not re-enter the main public course flow."
+						"Keep the `legacy/` materials and the older `Mod*` folders available only for historical demo recovery or scaffold comparison. These materials should not re-enter the main public course flow."
 				},
 				{
 					title: "Shapes Studio as Intentional Enrichment",

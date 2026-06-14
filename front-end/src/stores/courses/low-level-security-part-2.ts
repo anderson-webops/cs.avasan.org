@@ -693,7 +693,7 @@ export const lowLevelSecurityPart2Course: RawCourse = {
 				{
 					title: "Review a Larger Intentionally Flawed Toy Codebase",
 					content:
-						"The capstone should combine multiple bug classes in one local-only toy system so students must move beyond one-bug-one-technique thinking. They should identify the issues, explain the trust boundaries, and rank the findings based on impact and attacker assumptions rather than on how dramatic the output looks."
+						"The capstone should combine multiple bug classes in one local-only toy system so the work moves beyond one-bug-one-technique thinking. A strong response identifies the issues, explains the trust boundaries, and ranks the findings based on impact and attacker assumptions rather than on how dramatic the output looks."
 				},
 				{
 					title: "Rank Findings, Patch, and Verify",

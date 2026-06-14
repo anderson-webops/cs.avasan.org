@@ -47,7 +47,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Watch for the idea that a graph is a picture of the path rather than a relationship between variables. Students also often assume more decimal places always mean better science, or that uncertainty means the experiment failed."
+						"Common pitfalls include treating a graph as a picture of the path rather than a relationship between variables, assuming more decimal places always mean better science, and treating uncertainty as failed experimentation."
 				},
 				{
 					title: "Extension Project: Measurement Scavenger Hunt",
@@ -99,7 +99,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think the steepest graph point means the object is physically highest, or that crossing the time axis means the object disappears. Another common issue is confusing negative velocity with negative speed."
+						"Common pitfalls include treating the steepest graph point as the object's highest physical position, interpreting a time-axis crossing as the object disappearing, and confusing negative velocity with negative speed."
 				},
 				{
 					title: "Extension Project: Track Star vs. Marathon Runner",
@@ -124,7 +124,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Graph and Data Exercise: Net Force and Acceleration",
 					content:
-						"Use a small data table or simulation output showing how acceleration changes as net force changes for the same mass. Graph acceleration versus net force and interpret the trend in plain language. Then repeat with a larger mass so students can compare how the slope changes and what that says about inertia."
+						"Use a small data table or simulation output showing how acceleration changes as net force changes for the same mass. Graph acceleration versus net force and interpret the trend in plain language. Then repeat with a larger mass so the slope comparison reveals what inertia changes."
 				},
 				{
 					title: "Mini Lab: Paper Bridge or Tower Force Analysis",
@@ -151,7 +151,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often draw a 'force of motion' or confuse Newton's third-law pairs with forces acting on the same object. Another recurring issue is treating mass and weight as interchangeable."
+						"Common pitfalls include drawing a nonexistent 'force of motion,' confusing Newton's third-law pairs with forces acting on the same object, and treating mass and weight as interchangeable."
 				},
 				{
 					title: "Extension Project: Test of Strength",
@@ -166,12 +166,12 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Gravity and Energy as a Unifying Theme",
 					content:
-						"Connect gravity to the broader idea of energy so mechanics feels like one coherent story rather than disconnected topics. Compare mass and weight, introduce gravitational potential and kinetic energy, and explain work as energy transfer. Frame energy as a bookkeeping tool that helps students organize many different motion situations."
+						"Connect gravity to the broader idea of energy so mechanics feels like one coherent story rather than disconnected topics. Compare mass and weight, introduce gravitational potential and kinetic energy, and explain work as energy transfer. Frame energy as a bookkeeping tool for organizing many different motion situations."
 				},
 				{
 					title: "Worked Example Set: Ball Drops, Ramps, and Pendulums",
 					content:
-						"Work through falling objects, ramp motion, and pendulum swings to show energy changing form while the total stays interpretable. Include at least one frictionless example and one real-world example where thermal energy matters. Push students to describe where the energy is, not just to plug numbers into formulas."
+						"Work through falling objects, ramp motion, and pendulum swings to show energy changing form while the total stays interpretable. Include at least one frictionless example and one real-world example where thermal energy matters. Emphasize describing where the energy is, not just plugging numbers into formulas."
 				},
 				{
 					title: "Graph and Data Exercise: Height-Speed and Energy Bar Charts",
@@ -191,7 +191,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: Why Is Energy Such a Useful Idea?",
 					content:
-						"Compare solving a motion problem with forces versus with energy. They should explain one case where energy makes the structure of the problem clearer and one case where force analysis is still more natural."
+						"Compare solving a motion problem with forces versus with energy. A strong response explains one case where energy makes the structure of the problem clearer and one case where force analysis is still more natural."
 				}
 			],
 			supplementalProjects: [
@@ -203,7 +203,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often treat energy as something that gets 'used up' rather than transferred or transformed. They also commonly assume heavier objects fall faster simply because they have more weight."
+						"Common pitfalls include treating energy as something that gets 'used up' rather than transferred or transformed, and assuming heavier objects fall faster simply because they have more weight."
 				},
 				{
 					title: "Extension Project: Pendulum Design",
@@ -223,7 +223,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set: Series and Parallel Circuits",
 					content:
-						"Work small examples where students compare bulb brightness, current paths, and the effect of opening one branch. Use Ohm's law in simple numeric settings, but keep the focus on how the circuit behaves as a system. Include troubleshooting-style questions so they learn to reason from symptoms to structure."
+						"Work small examples that compare bulb brightness, current paths, and the effect of opening one branch. Use Ohm's law in simple numeric settings, but keep the focus on how the circuit behaves as a system. Include troubleshooting-style questions that connect symptoms back to structure."
 				},
 				{
 					title: "Graph and Data Exercise: Current-Voltage Tables",
@@ -243,7 +243,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: What Does a Diagram Hide or Reveal?",
 					content:
-						"Compare a physical breadboard or battery-and-bulb setup with its schematic diagram. They should explain which representation helps more with building, and which helps more with reasoning."
+						"Compare a physical breadboard or battery-and-bulb setup with its schematic diagram. A strong response explains which representation helps more with building and which helps more with reasoning."
 				}
 			],
 			supplementalProjects: [
@@ -255,7 +255,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think current gets 'used up' by the first bulb in a series circuit, or that a battery supplies a fixed current no matter the circuit. They also may confuse an open circuit with a weaker circuit rather than a broken path."
+						"Common pitfalls include treating current as something that gets 'used up' by the first bulb in a series circuit, assuming a battery supplies a fixed current no matter the circuit, and confusing an open circuit with a weaker circuit rather than a broken path."
 				},
 				{
 					title: "Extension Project: Home Device Power Survey",
@@ -280,7 +280,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Graph and Data Exercise: Reading Waveforms",
 					content:
-						"Interpret snapshots of waves and wave-versus-time graphs so students can read amplitude, period, and wavelength from more than one representation. If possible, compare a generated sound waveform with the sound students actually hear. Use the exercise to reinforce that graphs describe measurable quantities, not artistic shapes."
+						"Interpret snapshots of waves and wave-versus-time graphs so amplitude, period, and wavelength can be read from more than one representation. If possible, compare a generated sound waveform with the sound being heard. Use the exercise to reinforce that graphs describe measurable quantities, not artistic shapes."
 				},
 				{
 					title: "Mini Lab: Resonance and Sound Demo",
@@ -327,7 +327,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set: Turning a Question into a Testable Plan",
 					content:
-						"Work through how to refine a broad idea into a focused question, how to identify independent and dependent variables, and how to choose a useful graph before collecting data. Include one weak plan and one improved plan so students can see what makes an investigation manageable."
+						"Work through how to refine a broad idea into a focused question, how to identify independent and dependent variables, and how to choose a useful graph before collecting data. Include one weak plan and one improved plan so the contrast makes a manageable investigation easier to recognize."
 				},
 				{
 					title: "Graph and Data Exercise: Choosing the Best Representation",
@@ -342,12 +342,12 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Communication and Defense of Results",
 					content:
-						"Include a short report, slideshow, poster, or recorded explanation that includes the question, setup, graph or table, claim, and evidence. Also explain one limitation of their investigation and one improvement they would make with more time."
+						"Include a short report, slideshow, poster, or recorded explanation with the question, setup, graph or table, claim, and evidence. Also explain one investigation limitation and one improvement that would matter with more time."
 				},
 				{
 					title: "Reflection Question: How Has Your Physics Thinking Changed?",
 					content:
-						"Compare how they approached evidence, graphs, and models at the start of the course versus at the end. The goal is to make scientific growth visible, not just to review vocabulary."
+						"Compare how evidence, graphs, and models were handled at the start of the course versus at the end. The goal is to make scientific growth visible, not just to review vocabulary."
 				}
 			],
 			supplementalProjects: [
@@ -359,7 +359,7 @@ export const introToPhysicsCourse: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students may think a lab is only successful if the hypothesis is confirmed, or that a polished presentation can replace weak evidence. They also sometimes jump to explanations before controlling variables."
+						"Common pitfalls include treating a lab as successful only when the hypothesis is confirmed, using polish to hide weak evidence, and jumping to explanations before controlling variables."
 				},
 				{
 					title: "Capstone Option: A Grand Experiment",

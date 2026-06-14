@@ -896,7 +896,7 @@ export const networkSecurityCourse: RawCourse = {
 				{
 					title: "Rules of Engagement and Safe Penetration-Test Scope",
 					content:
-						"This section covers penetration testing as an authorized defensive activity with explicit scope, approval, timing, and stop conditions. Only test local labs, staging systems, or environments they own or have written permission to assess, and they should learn to define what counts as in-bounds before any probing begins."
+						"This section covers penetration testing as an authorized defensive activity with explicit scope, approval, timing, and stop conditions. Only test local labs, staging systems, owned environments, or systems with written permission to assess. In-bounds targets must be defined before any probing begins."
 				},
 				{
 					title: "Build a Repeatable Defensive Test Plan",

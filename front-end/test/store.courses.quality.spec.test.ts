@@ -3,7 +3,10 @@ import fs from "node:fs";
 import { createPinia, setActivePinia } from "pinia";
 import { useCoursesStore } from "@/stores/courses";
 import { courseCatalog, loadRawCourse } from "@/stores/courses/index";
-import { slugMarkdownHeading } from "@/modules/courseAssetPreview";
+import {
+	parseCourseAssetUrl,
+	slugMarkdownHeading
+} from "@/modules/courseAssetPreview";
 
 const COURSE_SWEEP_TIMEOUT = 180000;
 
@@ -48,6 +51,33 @@ function markdownHeadingSlugs(path: string) {
 	return new Set(
 		[...markdown.matchAll(/^##+\s+(.+)$/gm)].map(match =>
 			slugMarkdownHeading(match[1])
+		)
+	);
+}
+
+function courseItemLinks(
+	courseId: string,
+	course: NonNullable<Awaited<ReturnType<typeof loadRawCourse>>>
+) {
+	return course.modules.flatMap(module =>
+		[...module.curriculum, ...module.supplementalProjects].flatMap(item =>
+			[
+				item.projectLink,
+				item.solutionLink,
+				item.datasetLink,
+				item.mediaLink
+			].flatMap(link =>
+				link
+					? [
+							{
+								course: courseId,
+								item: item.title,
+								link,
+								module: module.title
+							}
+						]
+					: []
+			)
 		)
 	);
 }
@@ -1770,6 +1800,51 @@ describe("course text quality normalization", () => {
 
 		expect(missingFragments).toEqual([]);
 	});
+
+	it(
+		"keeps every local markdown course asset link backed by a real file and heading fragment",
+		async () => {
+			const missingAssets: string[] = [];
+			const missingFragments: string[] = [];
+			const headingCache = new Map<string, Set<string>>();
+
+			for (const entry of courseCatalog) {
+				const course = await loadRawCourse(entry.id);
+				expect(course).not.toBeNull();
+
+				for (const resource of courseItemLinks(entry.id, course!)) {
+					const parsed = parseCourseAssetUrl(resource.link);
+					if (!parsed) continue;
+
+					const assetPath = `public${parsed.path}`;
+					if (!fs.existsSync(assetPath)) {
+						missingAssets.push(
+							`${resource.course} / ${resource.module} / ${resource.item}: ${resource.link}`
+						);
+						continue;
+					}
+
+					if (!parsed.hash) continue;
+
+					let headings = headingCache.get(assetPath);
+					if (!headings) {
+						headings = markdownHeadingSlugs(assetPath);
+						headingCache.set(assetPath, headings);
+					}
+
+					if (!headings.has(parsed.hash)) {
+						missingFragments.push(
+							`${resource.course} / ${resource.module} / ${resource.item}: ${resource.link}`
+						);
+					}
+				}
+			}
+
+			expect(missingAssets).toEqual([]);
+			expect(missingFragments).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 
 	it("turns applied studio labs into explicit studio specifications", async () => {
 		const course = await loadRawCourse("low-level-security");

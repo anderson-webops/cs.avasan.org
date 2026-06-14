@@ -106,7 +106,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Entry Expectations from JavaScript Level 1 and 2",
 					content:
-						"Students entering this course should already be comfortable reading and writing small-to-medium JavaScript programs, working with HTML and CSS, manipulating the DOM, responding to events, and reasoning about APIs and basic data models. This course can briefly reinforce those ideas, but it should not spend most of its time reteaching them. The real transition is from `browser-only projects` into `file-based local development, Git, npm, dev servers, back-end services, databases, and deployment`. Strong JavaScript Level 2 students may move quickly through the early setup material, but they should still take it because workflow and environment habits are now part of the curriculum, not optional side topics."
+						"This course assumes comfort reading and writing small-to-medium JavaScript programs, working with HTML and CSS, manipulating the DOM, responding to events, and reasoning about APIs and basic data models. It can briefly reinforce those ideas, but it should not spend most of its time reteaching them. The real transition is from `browser-only projects` into `file-based local development, Git, npm, dev servers, back-end services, databases, and deployment`. Strong JavaScript Level 2 preparation may make the early setup material move quickly, but workflow and environment habits remain part of the curriculum rather than optional side topics."
 				},
 				{
 					title: "What This Course Is Not",
@@ -420,7 +420,7 @@ export const webDevelopmentFoundationsCourse: RawCourse = {
 				{
 					title: "Auth Basics and Session vs Token Concepts",
 					content:
-						"Introduce authentication at a conceptual level by distinguishing identity, authorization, sessions, and tokens. Students do not need a complete production auth system here, but they should understand why login state, cookies, bearer tokens, and protected routes change the design of both front-end and back-end code."
+						"Introduce authentication at a conceptual level by distinguishing identity, authorization, sessions, and tokens. A complete production auth system is not required here, but the lesson should explain why login state, cookies, bearer tokens, and protected routes change the design of both front-end and back-end code."
 				},
 				{
 					title: "WDF5 Stage 4: Back-End Basics: Core Project",

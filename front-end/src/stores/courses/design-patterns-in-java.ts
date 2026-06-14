@@ -209,7 +209,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Reflection Question: How Much Creation Logic Is Too Much?",
 					content:
-						"Explain the point at which direct constructor calls become a maintenance problem. They should mention duplicated rules, hidden dependencies, or families that must stay compatible."
+						"Explain the point at which direct constructor calls become a maintenance problem. A strong response mentions duplicated rules, hidden dependencies, or families that must stay compatible."
 				},
 				{
 					title: "DPJ3 Creational Patterns I: Core Project",
@@ -294,7 +294,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Reflection Question: Why Is Singleton So Tempting?",
 					content:
-						"Explain why Singleton often feels convenient at first and why that convenience creates hidden cost later. They should compare it with constructor injection or explicit application wiring."
+						"Explain why Singleton often feels convenient at first and why that convenience creates hidden cost later. A strong response compares it with constructor injection or explicit application wiring."
 				},
 				{
 					title: "DPJ4 Creational Patterns II and Boundary Patterns: Core Project",
@@ -467,7 +467,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Reflection Question: Where Does the Decision Live Now?",
 					content:
-						"Explain how Strategy, State, and Template Method relocate variation compared with a giant conditional block. They should identify whether the variability is chosen from outside, driven by object state, or fixed in an algorithm skeleton."
+						"Explain how Strategy, State, and Template Method relocate variation compared with a giant conditional block. A strong response identifies whether the variability is chosen from outside, driven by object state, or fixed in an algorithm skeleton."
 				},
 				{
 					title: "DPJ6 Behavioral Patterns I: Core Project",
@@ -552,7 +552,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Reflection Question: Which Pattern Owns the Conversation?",
 					content:
-						"Identify where message flow is centered in Observer, Chain of Responsibility, and Mediator. They should explain how each changes coupling and control flow."
+						"Identify where message flow is centered in Observer, Chain of Responsibility, and Mediator. A strong response explains how each changes coupling and control flow."
 				},
 				{
 					title: "DPJ7 Behavioral Patterns II: Core Project",
@@ -637,7 +637,7 @@ export const designPatternsInJavaCourse: RawCourse = {
 				{
 					title: "Reflection Question: When Does a Pattern Become Architecture?",
 					content:
-						"Explain the difference between class-level pattern use and architecture-level responsibility separation. They should identify when the main design question shifts from one class to the shape of the whole system."
+						"Explain the difference between class-level pattern use and architecture-level responsibility separation. A strong response identifies when the main design question shifts from one class to the shape of the whole system."
 				},
 				{
 					title: "DPJ8 Modern Extensions and Architecture-Level Patterns: Core Project",

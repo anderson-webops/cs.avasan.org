@@ -577,7 +577,7 @@ export const usacoGoldCourse: RawCourse = {
 				{
 					title: "Problem: Roadblock",
 					content:
-						"Use shortest-path sensitivity analysis to deepen the student's understanding of weighted-graph optimization.",
+						"Use shortest-path sensitivity analysis to deepen understanding of weighted-graph optimization.",
 					projectLink:
 						"https://github.com/instruction-material/USACO-Gold/tree/main/UG10-Roadblock"
 				},

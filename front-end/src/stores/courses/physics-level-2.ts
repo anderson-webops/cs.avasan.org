@@ -20,7 +20,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Worked Example Set: Relative Velocity and Projectile Motion",
 					content:
-						"Work a wind-and-aircraft example, a river-crossing example, and a projectile example where horizontal and vertical motion are separated cleanly. Use component form, not memorized shortcuts alone, so students understand where the equations come from. Connect the mathematics back to physical storylines such as rescue drones, kicked balls, or supply drops."
+						"Work a wind-and-aircraft example, a river-crossing example, and a projectile example where horizontal and vertical motion are separated cleanly. Use component form, not memorized shortcuts alone, so the source of each equation is clear. Connect the mathematics back to physical storylines such as rescue drones, kicked balls, or supply drops."
 				},
 				{
 					title: "Graph and Data Exercise: Motion Graph Detective 2D",
@@ -35,7 +35,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: When Do Components Clarify a Problem?",
 					content:
-						"Explain one motion problem that looked complex until it was decomposed into perpendicular components. They should identify exactly which quantity became easier to reason about after the coordinate system was chosen."
+						"Explain one motion problem that looked complex until it was decomposed into perpendicular components. A strong response identifies exactly which quantity became easier to reason about after the coordinate system was chosen."
 				}
 			],
 			supplementalProjects: [
@@ -47,7 +47,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think the horizontal motion somehow 'runs out' at the top of a projectile, or that vectors can be added by simply adding magnitudes. Another common issue is treating sign mistakes as minor when they actually signal a broken coordinate setup."
+						"Common pitfalls include treating horizontal motion as if it 'runs out' at the top of a projectile, adding vectors by simply adding magnitudes, and treating sign mistakes as minor when they actually signal a broken coordinate setup."
 				},
 				{
 					title: "Extension Project: Rescue Drone Navigation",
@@ -82,7 +82,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: What Does Equilibrium Really Mean?",
 					content:
-						"Explain why equilibrium is not the same thing as 'nothing is happening.' They should distinguish between static equilibrium and constant-velocity motion with zero net force."
+						"Explain why equilibrium is not the same thing as 'nothing is happening.' A strong response distinguishes between static equilibrium and constant-velocity motion with zero net force."
 				}
 			],
 			supplementalProjects: [
@@ -94,7 +94,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often mix up the force pair in Newton's third law with the set of forces on one object. They also commonly assume a larger scale reading means the object's mass changed."
+						"Common pitfalls include mixing up the force pair in Newton's third law with the set of forces on one object, and assuming a larger scale reading means the object's mass changed."
 				},
 				{
 					title: "Extension Project: Tug-of-War System Audit",
@@ -109,7 +109,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Friction and Ramp Geometry",
 					content:
-						"Develop static and kinetic friction carefully and connect both to the normal force and the surfaces involved. Use inclined planes to make force components concrete and to show why geometry matters in mechanics. Add connected systems such as pulleys so students must coordinate several equations rather than solve only one object at a time."
+						"Develop static and kinetic friction carefully and connect both to the normal force and the surfaces involved. Use inclined planes to make force components concrete and to show why geometry matters in mechanics. Add connected systems such as pulleys so the model coordinates several equations rather than solving only one object at a time."
 				},
 				{
 					title: "Worked Example Set: Blocks, Ramps, and Pulleys",
@@ -141,7 +141,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often assume friction always equals mu times N, even in static situations where it only adjusts up to a maximum. They also commonly project the full weight down the ramp instead of resolving gravity into components."
+						"Common pitfalls include assuming friction always equals mu times N even in static situations where it only adjusts up to a maximum, and projecting the full weight down the ramp instead of resolving gravity into components."
 				},
 				{
 					title: "Extension Project: Ramp Design Challenge",
@@ -176,7 +176,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: Why Is System Choice So Important?",
 					content:
-						"Explain how the same event looks different when the chosen system changes. They should use the words momentum, external force, and impulse correctly in the response."
+						"Explain how the same event looks different when the chosen system changes. A strong response uses the words momentum, external force, and impulse correctly."
 				}
 			],
 			supplementalProjects: [
@@ -188,7 +188,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think momentum is conserved only when objects bounce apart, or that heavier objects always 'win' a collision regardless of velocity. They also sometimes confuse impulse with impact duration alone."
+						"Common pitfalls include treating momentum as conserved only when objects bounce apart, assuming heavier objects always 'win' a collision regardless of velocity, and confusing impulse with impact duration alone."
 				},
 				{
 					title: "Extension Project: Safety System Design Review",
@@ -235,7 +235,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think only force magnitude matters and ignore the location of the force. They may also confuse clockwise versus counterclockwise sign choices with right versus wrong answers rather than conventions."
+						"Common pitfalls include treating force magnitude as the only important factor, ignoring the location of the force, and confusing clockwise versus counterclockwise sign choices with right versus wrong answers rather than conventions."
 				},
 				{
 					title: "Extension Project: Torque Design Challenge",
@@ -250,7 +250,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Universal Gravitation and Inward Acceleration",
 					content:
-						"Develop gravity as a universal interaction between masses rather than only as a local downward pull. Pair that idea with circular motion so students can see how an inward net force changes direction continuously even when speed stays constant. This module should feel like a bridge from terrestrial mechanics to space applications."
+						"Develop gravity as a universal interaction between masses rather than only as a local downward pull. Pair that idea with circular motion so the inward net force explains continuous direction change even when speed stays constant. This module functions as a bridge from terrestrial mechanics to space applications."
 				},
 				{
 					title: "Worked Example Set: Loops, Satellites, and Orbital Speed",
@@ -270,7 +270,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: Why Doesn't an Orbiting Object 'Run Out of Gravity'?",
 					content:
-						"Explain why astronauts feel weightless in orbit even though gravity is still present. They should connect free fall, orbital motion, and continuous inward acceleration in one coherent explanation."
+						"Explain why astronauts feel weightless in orbit even though gravity is still present. A strong response connects free fall, orbital motion, and continuous inward acceleration in one coherent explanation."
 				}
 			],
 			supplementalProjects: [
@@ -282,7 +282,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think a centrifugal force must be added automatically in every inertial-frame analysis, or that satellites orbit because gravity has become negligible. They also may confuse speed being constant with velocity being constant."
+						"Common pitfalls include adding centrifugal force automatically in every inertial-frame analysis, assuming satellites orbit because gravity has become negligible, and confusing constant speed with constant velocity."
 				},
 				{
 					title: "Extension Project: Orbit Planner",
@@ -317,7 +317,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: What Does Voltage Explain Better Than Current Alone?",
 					content:
-						"Explain one circuit behavior that becomes clearer once potential difference is considered explicitly. They should avoid the shortcut claim that voltage is just 'electricity strength.'"
+						"Explain one circuit behavior that becomes clearer once potential difference is considered explicitly. Avoid the shortcut claim that voltage is just 'electricity strength.'"
 				}
 			],
 			supplementalProjects: [
@@ -329,7 +329,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often think the battery provides a fixed current regardless of circuit structure, or that voltage is used up the same way current is imagined to be used up. They may also overgeneralize rules from pure series circuits to every mixed circuit."
+						"Common pitfalls include assuming the battery provides a fixed current regardless of circuit structure, treating voltage as if it is used up the same way current is imagined to be used up, and overgeneralizing pure-series rules to every mixed circuit."
 				},
 				{
 					title: "Extension Project: Circuit Design Audit",
@@ -344,7 +344,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Heat Transfer and Model Boundaries",
 					content:
-						"Introduce temperature, internal energy, specific heat, and the three main heat-transfer pathways: conduction, convection, and radiation. Then bridge to optics and early modern-physics ideas by showing how models can shift when wave behavior, energy quantization, or light-matter interaction becomes important. This module is intentionally a bridge module: it broadens the student's map of physics without requiring a full advanced course in each topic."
+						"Introduce temperature, internal energy, specific heat, and the three main heat-transfer pathways: conduction, convection, and radiation. Then bridge to optics and early modern-physics ideas by showing how models can shift when wave behavior, energy quantization, or light-matter interaction becomes important. This module is intentionally a bridge module: it broadens the physics map without requiring a full advanced course in each topic."
 				},
 				{
 					title: "Worked Example Set: Heating Curves, Lenses, and Threshold Ideas",
@@ -376,7 +376,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students often use heat and temperature interchangeably, or assume shiny means automatically hotter or colder without mechanism. In optics, they may think an image physically sits on a screen even when the setup is producing a virtual image."
+						"Common pitfalls include using heat and temperature interchangeably, assuming shiny automatically means hotter or colder without a mechanism, and treating a virtual image as if it physically sits on a screen."
 				},
 				{
 					title: "Extension Project: Thermal Design Challenge",
@@ -411,7 +411,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Reflection Question: What Makes a Physics Answer Convincing?",
 					content:
-						"Explain how diagrams, equations, graphs, and plain-language reasoning support one another in a strong final explanation. They should describe one weakness in their own model and one improvement they would prioritize next."
+						"Explain how diagrams, equations, graphs, and plain-language reasoning support one another in a strong final explanation. Include one model weakness and one improvement that would matter most in a later revision."
 				}
 			],
 			supplementalProjects: [
@@ -423,7 +423,7 @@ export const physicsLevel2Course: RawCourse = contextualizePhysicsCourse({
 				{
 					title: "Misconception Watchlist",
 					content:
-						"Students may hide weak reasoning behind long calculations, or treat simulation output as automatically trustworthy because a computer produced it. They also may mistake complexity for rigor and avoid simpler, better-justified models."
+						"Common pitfalls include hiding weak reasoning behind long calculations, treating simulation output as automatically trustworthy because a computer produced it, and mistaking complexity for rigor instead of choosing a simpler, better-justified model."
 				},
 				{
 					title: "Capstone Option: Physics Modeling Challenge",

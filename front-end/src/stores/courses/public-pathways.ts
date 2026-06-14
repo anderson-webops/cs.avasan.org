@@ -150,7 +150,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 		],
 		safetyAndAccess: [
 			"Use licensed or provided assets only.",
-			"Make heavy Unity editor work optional when a student's computer cannot run the full toolchain.",
+			"Make heavy Unity editor work optional when the available computer cannot run the full toolchain.",
 			"Keep multiplayer, analytics, ads, and monetization out of the core course."
 		],
 		adminExpansionBacklog: [
@@ -400,7 +400,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Maintain separate source links for graphics and non-graphics tracks."
 		],
 		safetyAndAccess: [
-			"Avoid requiring graphics libraries that are unavailable on the student's machine unless a fallback exists.",
+			"Avoid requiring graphics libraries that are unavailable on the working machine unless a fallback exists.",
 			"Keep projects local and avoid external service credentials for core work.",
 			"Do not mix AP exam constraints into non-AP Java unless explicitly useful."
 		],
@@ -447,7 +447,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Guardrails to refresh each cycle: official Java subset, Bluebook-style typed and uncompiled practice, four FRQ families, AP Lab Quartet references, data ethics, text-file/dataset practice, wrapper parsing, recursion, ArrayList analysis, and 2D arrays."
 		],
 		safetyAndAccess: [
-			"Do not expose completed-state links to students where they should only see starters.",
+			"Do not expose completed-state links where only starter materials should be visible.",
 			"Avoid copying proprietary textbook material into course text.",
 			"Use practice problems in a way that respects source and licensing boundaries."
 		],
@@ -479,7 +479,7 @@ export const coursePublicPathways: CoursePublicPathway[] = [
 			"Avoid random chronological contest browsing; choose official problems by division, topic, and slot difficulty so each assignment has a specific purpose."
 		],
 		projectExpectations: [
-			"Problem set with one P1, one P2, and one P3 style task at the student's current division.",
+			"Problem set with one P1, one P2, and one P3 style task at the current division.",
 			"Edge-case generator or manual test suite for a problem family.",
 			"Contest postmortem with timeline, bug categories, final accepted approach, and next drill."
 		],

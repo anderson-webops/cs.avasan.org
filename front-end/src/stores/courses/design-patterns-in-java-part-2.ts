@@ -36,7 +36,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: What Makes a Refactor Reckless?",
 					content:
-						"Explain how a good refactor differs from a rewrite that merely hopes the new version will be better. They should mention verification and change granularity explicitly."
+						"Explain how a good refactor differs from a rewrite that merely hopes the new version will be better. A strong response mentions verification and change granularity explicitly."
 				},
 				{
 					title: "DPR1 Code Smells and Safe Refactoring Workflow: Core Project",
@@ -124,7 +124,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: When Is Extraction Enough?",
 					content:
-						"Explain when they should stop at smaller methods and when they should continue toward a new class or pattern. The answer should reference responsibility, not raw line count alone."
+						"Explain when smaller methods are enough and when a new class or pattern becomes justified. The answer should reference responsibility, not raw line count alone."
 				},
 				{
 					title: "DPR2 Composing Methods: Core Project",
@@ -294,7 +294,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: When Is a Primitive No Longer Good Enough?",
 					content:
-						"Explain what signs show that a string, int, or array has turned into a disguised domain concept. They should mention validation rules, behavior, or repeated interpretation logic."
+						"Explain what signs show that a string, int, or array has turned into a disguised domain concept. A strong response mentions validation rules, behavior, or repeated interpretation logic."
 				},
 				{
 					title: "DPR4 Organizing Data: Core Project",
@@ -379,7 +379,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: When Does a Conditional Signal a Missing Type?",
 					content:
-						"Explain when a conditional is just logic and when it reveals a deeper modeling problem. They should point to recurring variation, duplicated branches, or type-code-driven behavior."
+						"Explain when a conditional is just logic and when it reveals a deeper modeling problem. A strong response points to recurring variation, duplicated branches, or type-code-driven behavior."
 				},
 				{
 					title: "DPR5 Simplifying Conditional Expressions: Core Project",
@@ -464,7 +464,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: What Makes a Call Site Honest?",
 					content:
-						"Explain when an API reveals intent and when it leaks too much internal detail. They should mention naming, parameter shape, and side-effect clarity."
+						"Explain when an API reveals intent and when it leaks too much internal detail. A strong response mentions naming, parameter shape, and side-effect clarity."
 				},
 				{
 					title: "DPR6 Simplifying Method Calls: Core Project",
@@ -549,7 +549,7 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Reflection Question: Which Abstraction Actually Earned Its Place?",
 					content:
-						"Identify an abstraction they removed or collapsed and explain why it no longer served the model. They should distinguish meaningful generalization from speculative generality."
+						"Identify a removed or collapsed abstraction and explain why it no longer served the model. A strong response distinguishes meaningful generalization from speculative generality."
 				},
 				{
 					title: "DPR7 Dealing with Generalization: Core Project",
@@ -714,12 +714,12 @@ export const designPatternsInJavaPart2Course: RawCourse = {
 				{
 					title: "Design Review: Refactoring Pace and Reviewability",
 					content:
-						"This section covers how to package refactors into readable commits or change sets rather than one giant diff. This makes the work maintainable for teams and for the student's future self."
+						"This section covers how to package refactors into readable commits or change sets rather than one giant diff. This keeps the work maintainable for teams and future maintenance."
 				},
 				{
 					title: "Reflection Question: What Let You Move Faster Safely?",
 					content:
-						"Name the exact seam, test, or dependency change that reduced refactoring risk the most. They should connect confidence to design structure, not luck."
+						"Name the exact seam, test, or dependency change that reduced refactoring risk the most. A strong response connects confidence to design structure, not luck."
 				},
 				{
 					title: "DPR9 Testability, DI, and Refactoring with Confidence: Core Project",

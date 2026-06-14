@@ -788,7 +788,7 @@ export const machineLearningCourse: RawCourse = {
 				{
 					title: "Master Project Planning",
 					content:
-						"Introduce the Master Project as a capstone where the student chooses a real dataset and builds a substantial machine learning project around it. Explain that the project can be classification or regression and can use any combination of algorithms learned throughout the course (k-means, KNN, Naive Bayes, neural networks, regression, etc.). Browse suggested datasets and project ideas such as classification tasks (fake news detection, credit card fraud detection, Titanic survival prediction) or regression tasks (loan amount prediction, Bitcoin price prediction, stock price prediction, medical insurance cost), then pick one idea that genuinely fits the student's interests and clearly define the problem to solve."
+						"Introduce the Master Project as a capstone built around a real dataset and a substantial machine learning problem. Explain that the project can be classification or regression and can use any combination of algorithms learned throughout the course (k-means, KNN, Naive Bayes, neural networks, regression, etc.). Browse suggested datasets and project ideas such as classification tasks (fake news detection, credit card fraud detection, Titanic survival prediction) or regression tasks (loan amount prediction, Bitcoin price prediction, stock price prediction, medical insurance cost), then pick one idea that genuinely fits personal interests and clearly define the problem to solve."
 				},
 				{
 					title: "Master Project Implementation",

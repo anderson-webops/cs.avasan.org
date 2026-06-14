@@ -932,7 +932,7 @@ const cSystemsProfile: ResearchExpansionProfile = {
 		"Sanitizer and debugger command guide.",
 		"Toy input files with malformed cases."
 	],
-	safety: "Use local fixtures and toy programs only. Do not require changes to the student's real shell, network, or system services."
+	safety: "Use local fixtures and toy programs only. Do not require changes to the real shell, network, or system services."
 };
 
 const assemblyProfile: ResearchExpansionProfile = {
@@ -1447,7 +1447,7 @@ const linuxProfile: ResearchExpansionProfile = {
 		"Safe command checklist.",
 		"Broken-service troubleshooting fixtures."
 	],
-	safety: "Do not run destructive commands against the student's host machine. Use lab directories, VMs, containers, or read-only examples."
+	safety: "Do not run destructive commands against the real host machine. Use lab directories, VMs, containers, or read-only examples."
 };
 
 const networkingProfile: ResearchExpansionProfile = {
