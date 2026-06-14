@@ -1281,6 +1281,10 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bMake sure\b/gi, "Ensure")
 				.replace(/,\s+Ensure\b/g, ", ensure")
 				.replace(/\bto Ensure\b/g, "to ensure")
+				.replace(/\bEnsure to ([a-z])/g, capitalizeMatchedFirstLetter)
+				.replace(/\bensure to ([a-z])/g, keepMatchedFirstLetter)
+				.replace(/\bThe goal is to be able to\b/g, "The goal is to")
+				.replace(/\bthe goal is to be able to\b/g, "the goal is to")
 				.replace(
 					/\bBroadcast messages between\b/g,
 					"Use broadcasts between"
@@ -1526,6 +1530,8 @@ function neutralizeStudentFacingText(text: string) {
 				.replace(/\bLearners should\b/g, "The goal is to")
 				.replace(/\bthe learner should\b/g, "the goal is to")
 				.replace(/\blearners should\b/g, "the goal is to")
+				.replace(/\bThe goal is to be able to\b/g, "The goal is to")
+				.replace(/\bthe goal is to be able to\b/g, "the goal is to")
 				.replace(
 					/\bThe learner can ([a-z])/g,
 					capitalizeMatchedFirstLetter
@@ -3879,7 +3885,7 @@ function projectSupport(context: CourseTextContext) {
 		subject =>
 			`**Project goal:** Use **${subject}** to connect the prompt requirements to ${focus}, then document the evidence that proves the connection works.`,
 		subject =>
-			`**Project goal:** Complete **${subject}** with a clear input, process, and output path that makes ${focus} easier to inspect.`
+			`**Project goal:** Complete **${subject}** with a clear input, process, and output path, then connect the result to ${focus}.`
 	]);
 
 	return [

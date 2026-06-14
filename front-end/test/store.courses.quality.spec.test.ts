@@ -1402,6 +1402,12 @@ describe("course text quality normalization", () => {
 
 			for (const phrase of internalPhrases)
 				expect(corpus).not.toMatch(phrase);
+
+			expect(corpus).not.toMatch(/The goal is to be able to/i);
+			expect(corpus).not.toMatch(/\bensure to [a-z]/i);
+			expect(corpus).not.toMatch(
+				/with a clear input, process, and output path that makes .+ easier to inspect/i
+			);
 		},
 		COURSE_SWEEP_TIMEOUT
 	);
