@@ -1846,12 +1846,20 @@ describe("course text quality normalization", () => {
 		COURSE_SWEEP_TIMEOUT
 	);
 
-	it("keeps physics addendum checkpoints and misconception watchlists topic-specific", async () => {
+	it("keeps physics addendum guidance topic-specific instead of template-generated", async () => {
 		const courseIds = ["intro-to-physics", "physics-level-2"];
-		const repeatedTemplate =
+		const genericMisconceptionTemplate =
 			/formula-first reasoning, missing units, hidden assumptions, and explanations that confuse a representation with the physical system/i;
 		const genericCheckpointTemplate =
 			/core quantities, system boundary, and model assumption are identified/i;
+		const genericCurriculumTemplates = [
+			/usable physics model rather than a memorized list/i,
+			/Build the model by first naming the system/i,
+			/Each example should include a diagram or table/i,
+			/Use a safe remote-friendly simulation, provided dataset, video observation, or paper design case/i,
+			/State what stays the same, what changes, which assumption is most fragile/i,
+			/Include a visual model, one quantitative or evidence-based element, a limitation, and a brief revision note/i
+		];
 
 		for (const courseId of courseIds) {
 			const course = await loadRawCourse(courseId);
@@ -1868,10 +1876,14 @@ describe("course text quality normalization", () => {
 					.map(item => item.content)
 			);
 			const combined = [...diagnostics, ...misconceptions].join("\n");
+			const courseText = allCourseText(course);
 
-			expect(combined).not.toMatch(repeatedTemplate);
+			expect(combined).not.toMatch(genericMisconceptionTemplate);
 			expect(combined).not.toMatch(genericCheckpointTemplate);
 			expect(combined).not.toMatch(/\bWatch for\b/i);
+			for (const pattern of genericCurriculumTemplates) {
+				expect(courseText).not.toMatch(pattern);
+			}
 			expect(new Set(diagnostics).size).toBe(diagnostics.length);
 			expect(new Set(misconceptions).size).toBe(misconceptions.length);
 		}
