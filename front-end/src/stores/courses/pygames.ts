@@ -920,8 +920,16 @@ export const pyGamesCourse: RawCourse = {
 				},
 				{
 					title: "Multiple Projectiles with Lists",
-					content:
-						"Explain that many games allow firing multiple bullets at once and that storing projectiles in a list is the natural solution. Create a global list projectiles. In on_key_down(key), whenever space is pressed, build a new projectile (e.g., a small ZRect or Actor) at the firing origin and append it to projectiles. In update(), loop through projectiles and advance each projectile in the appropriate direction. In draw(), iterate through projectiles and draw each one. Add logic so that if a projectile reaches the end of the screen, it is removed from the list to free memory and avoid clutter. Discuss safe removal patterns (such as building a new list or iterating over a copy) so the does not modify the list while iterating over it in a naive for-loop."
+					content: `**Concept focus:** Many games allow multiple bullets, lasers, or spells to exist at the same time. A list is the natural structure because each projectile follows the same update and draw pattern while keeping its own position.
+
+**Practice sequence:**
+- Create a global list named \`projectiles\`.
+- In \`on_key_down(key)\`, whenever space is pressed, create a new projectile at the firing origin and append it to \`projectiles\`.
+- Represent each projectile as a small ZRect or Actor, depending on what fits the game.
+- In \`update()\`, loop through \`projectiles\` and move each projectile in the appropriate direction.
+- In \`draw()\`, loop through \`projectiles\` and draw each projectile.
+- Remove a projectile when it reaches the edge of the screen so the list does not grow forever.
+- Use a safe removal pattern, such as building a new list of still-active projectiles or iterating over a copy, so the code does not modify the same list it is currently looping through.`
 				},
 				{
 					title: "PyG8 Project 2: Asteroid Shoot",
