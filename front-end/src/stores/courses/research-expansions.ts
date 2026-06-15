@@ -80,7 +80,7 @@ function sourceBullets(names: string[]) {
 }
 
 function courseUseNote(courseLabel: string, emphasis: string) {
-	return `**Course map:** This ${courseLabel} section connects the reference list to concrete lesson or project focus areas and to visible evidence in the course artifact. ${emphasis}`;
+	return `**Course map:** This section for ${courseLabel} connects the reference list to concrete lesson or project focus areas and to visible evidence in the course artifact. ${emphasis}`;
 }
 
 function standardsEvidenceNote(courseLabel: string) {
@@ -354,7 +354,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Source Map`,
 				content: [
-					`**Course focus:** This ${courseLabel} section identifies the standards, documentation, and tooling references that keep the course aligned with current expectations. Priority is **${profile.priority}**, so these items shape pacing and practice before lower-priority enrichment.`,
+					`**Course focus:** This section identifies the standards, documentation, and tooling references that keep ${courseLabel} aligned with current expectations. Priority is **${profile.priority}**, so these items shape pacing and practice before lower-priority enrichment.`,
 					`**Authoritative sources to use:**\n${sourceBullets(profile.sources)}`,
 					standardsEvidenceNote(courseLabel),
 					`**Evidence target:** ${courseLabel} is traceable to these standards, docs, or tooling references rather than only to inherited project names.`
@@ -375,7 +375,7 @@ function buildStandardsModule(
 			{
 				title: `${courseLabel} Next Topics`,
 				content: [
-					`**Course focus:** These ${courseLabel} topics mark the next areas where the course can become more complete. The topic order follows prerequisite dependency and connects each addition to a concrete project or checkpoint.`,
+					`**Course focus:** These topics for ${courseLabel} mark the next areas where the course can become more complete. The topic order follows prerequisite dependency and connects each addition to a concrete project or checkpoint.`,
 					`**Expansion topics:**\n${bullets(profile.topics)}`,
 					courseUseNote(
 						courseLabel,
