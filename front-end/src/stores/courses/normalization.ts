@@ -327,7 +327,7 @@ function compactAppliedLabTitle(title: string) {
 
 function neutralizeLessonPointText(text: string) {
 	const hasSupportLabel =
-		/\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Remote investigation|Science explanation|Studio focus|Build sequence|Completion checks|Evidence target|Extension):?\*\*/i.test(
+		/\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Concept path|Readiness check|Common pitfalls|Mastery check|Remote investigation|Science explanation|Studio focus|Build sequence|Completion checks|Evidence target|Evidence targets|Extension):?\*\*/i.test(
 			text
 		);
 	const source =
@@ -515,7 +515,7 @@ interface CourseTextContext {
 }
 
 const structuredSupportPattern =
-	/\*\*(?:Project goal|Teaching flow|Concept path|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Remote investigation|Science explanation|Studio focus|Evidence target|AP connection):?\*\*/i;
+	/\*\*(?:Project goal|Teaching flow|Concept path|Learning sequence|Diagnostic guidance|Readiness check|Misconception check|Common pitfalls|Exit check|Mastery check|Remote investigation|Science explanation|Studio focus|Evidence target|Evidence targets|AP connection):?\*\*/i;
 
 const placeholderContentPattern =
 	/\b(?:introduce the main goal|build the central artifact|define the success criteria|use the .* snapshot|alternate supplemental snapshot)\b/i;
@@ -687,7 +687,7 @@ function formatInlineNumberedLists(text: string) {
 
 function formatSupportLabels(text: string) {
 	return text.replace(
-		/(\S)[ \t]+(\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Required outcome|Completion checks|Evidence target|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
+		/(\S)[ \t]+(\*\*(?:Focus|Expected outcome|Verification focus|Readable output|Project goal|Required outcome|Completion checks|Evidence target|Evidence targets|Extension|Concept path|Common pitfalls|Mastery check|Readiness check|Evidence of proficiency|If this is difficult|Remote investigation|Science explanation|Output|Practice target|Visible pattern|Key idea|Skill target):\*\*)/g,
 		(_match, prefix: string, label: string, offset: number) => {
 			const lineStart = text.lastIndexOf("\n", offset) + 1;
 			const indentation =
