@@ -65,7 +65,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Basic event listeners",
 					content:
-						'Introduce the concept of event listeners (blocks that wait for something to happen). Show the "when green flag clicked" and "when arrow key pressed" events. Demonstrate how event listeners start scripts when specific keys are pressed.'
+						'Event listeners are blocks that wait for something to happen and then start a script. The "when green flag clicked" and "when arrow key pressed" blocks connect user actions to sprite behavior, so a project can respond when the game starts or when a specific key is pressed.'
 				},
 				{
 					title: "Project 1 – Spinner",
@@ -118,7 +118,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Pen extension introduction",
 					content:
-						"Show how to add the Pen extension in Scratch. Explain that the Pen down block makes the sprite draw, Pen up stops drawing, Erase all clears drawings and Change color changes the pen color."
+						"The Pen extension adds drawing blocks to Scratch. `Pen down` makes the sprite draw as it moves, `Pen up` stops drawing, `erase all` clears the stage drawings, and `change color` changes the pen color."
 				},
 				{
 					title: "Project 1 – Bouncy Ball with Pen",
@@ -171,7 +171,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Introduction to loops",
 					content:
-						'Explain that loops are used to repeat code blocks. Show the Repeat and Forever blocks. Demonstrate how loops can control a sprite\'s movement by repeating "move" and "turn" instructions.'
+						'Loops repeat code blocks without copying the same instructions many times. The `repeat` block runs a set number of times, while the `forever` block keeps running until the project stops. Repeated "move" and "turn" instructions can create animations, patterns, and continuous sprite movement.'
 				},
 				{
 					title: "Project 1 – Elephant Effects",
@@ -221,7 +221,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Introducing conditionals",
 					content:
-						'Explain that conditionals let a program make decisions. Discuss real-life examples of conditions. Show the "if … then" block and sensing blocks like "touching mouse pointer", "key right arrow pressed" and "touching color ___". Emphasize that conditionals need to be inside a forever loop.'
+						'Conditionals let a program make decisions. The "if … then" block checks a condition, and sensing blocks such as "touching mouse pointer", "key right arrow pressed", and "touching color ___" provide facts the condition can test. In games, conditionals often sit inside a `forever` loop so Scratch keeps checking for changes.'
 				},
 				{
 					title: "Project 1 – Dino's Colors",
@@ -233,7 +233,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Project 2 – Noisy Reactions",
 					content:
-						'1. When the green flag is clicked, make the ball bounce around the screen forever.\n2. Use a conditional so that when the bell touches the ball, the bell swings back and forth and rings four times.\n3. When the ball touches lightning, make the lightning strike the ground and play a thunder sound, then return the lightning to the cloud. (Introduce the "go to [sprite]" block.)\n4. When the chick touches the ball, make the chick move 5 steps and chirp.',
+						'1. When the green flag is clicked, make the ball bounce around the screen forever.\n2. Use a conditional so that when the bell touches the ball, the bell swings back and forth and rings four times.\n3. When the ball touches lightning, make the lightning strike the ground and play a thunder sound, then return the lightning to the cloud. Use the "go to [sprite]" block to reset the lightning.\n4. When the chick touches the ball, make the chick move 5 steps and chirp.',
 					projectLink: "https://scratch.mit.edu/projects/291542721/",
 					solutionLink: "https://scratch.mit.edu/projects/291530292/"
 				},
@@ -273,7 +273,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Conditionals: if/then/else",
 					content:
-						'Explain that "if … then … else" allows multiple outcomes. Discuss real-life examples of decisions with two possible results. Introduce the "if … then … else" block and demonstrate how it can be used to choose between two actions.',
+						'The "if … then … else" block allows two possible outcomes. If the condition is true, Scratch runs the first branch; otherwise, it runs the else branch. This structure is useful for choices such as correct versus incorrect, win versus lose, touching versus not touching, or enough points versus not enough points.',
 					projectLink: "https://scratch.mit.edu/projects/293372295/",
 					solutionLink: "https://scratch.mit.edu/projects/293366003/"
 				},
@@ -380,7 +380,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Introduction to X & Y coordinates",
 					content:
-						'Explain the coordinate plane in Scratch. The X-axis goes left and right; the Y-axis goes up and down. Show how to use "go to x: ___ y: ___" and "glide ___ secs to x: ___ y: ___" blocks. Discuss how sprites can be positioned at specific coordinates.'
+						'The Scratch stage uses an X and Y coordinate plane. The X-axis moves left and right, and the Y-axis moves up and down. The "go to x: ___ y: ___" and "glide ___ secs to x: ___ y: ___" blocks place sprites at specific coordinates or move them smoothly to a target point.'
 				},
 				{
 					title: "Project 1 – Bug Eater",
@@ -432,7 +432,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Introducing variables",
 					content:
-						'Explain that variables store information such as scores, timers or other values. Show how to make a variable in Scratch and demonstrate the "set [variable] to" and "change [variable] by" blocks. Use a loop for the cat to count from 1 to 10. Ask how to count backwards. Discuss customizing variables.'
+						'Variables store information such as scores, timers, answers, or other values that can change while a project runs. The "set [variable] to" block replaces the current value, while "change [variable] by" increases or decreases it. A counting loop can make a sprite count from 1 to 10, count backward, or count by larger steps.'
 				},
 				{
 					title: "Project 1 – Speed Click",
@@ -492,14 +492,14 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS10 Project 1 – Dance Off",
 					content:
-						"It's dancing time! Let's give each sprite a turn to \"perform\" on the stage.\n\n1. When the green flag is clicked, make the ballerina glide to the middle of the stage and cycle twice through all of her costumes. When she's done, have her glide off to the right side of the stage.\n2. One by one, make each of the other dancers do the same thing. Can you add some clapping between each performer? We also need to be sure to make them start back on the left when the green flag is clicked!\n3. A dance party isn't very fun without music! Add some code to the backdrop so that it plays dancing music forever. When Champ is done dancing, broadcast a message that stops the music.\n4. Can you make it so that the lights change, too? How about some clapping once everyone is done?",
+						"Build a dance sequence where each sprite gets a turn to perform on the stage.\n\n1. When the green flag is clicked, make the ballerina glide to the middle of the stage and cycle twice through all of her costumes. When she is done, have her glide off to the right side of the stage.\n2. Make each of the other dancers follow the same pattern one by one. Add clapping or applause between performers, and reset each dancer to the left side when the green flag is clicked.\n3. Add backdrop code that plays dancing music forever. When Champ is done dancing, broadcast a message that stops the music.\n4. Optional extension: add lighting changes, a final applause sequence, or a closing pose after everyone is done.",
 					projectLink: "https://scratch.mit.edu/projects/301002220/",
 					solutionLink: "https://scratch.mit.edu/projects/300644693/"
 				},
 				{
 					title: "GS10 Project 2 – Bowl Fill",
 					content:
-						'Let\'s make a game where you control a bowl and try to collect various items!\n\n1. Start by programming the bowl so that it can be controlled by the arrow keys once the green flag is clicked.\n2. When a sprite is touched by the bowl, make it broadcast a message (like "Cheese touched", for example).\n3. Think about what each sprite should do when it receives these messages. Should they move? Make a sound? What should the bowl do?\n4. Add variables to your program that keep track of the number of times each object has been collected.\n5. Add a timer that stops the game after 15 seconds. When the timer runs out, broadcast a message that makes all sprites on the screen do something (e.g., spin in a circle, grow and shrink, etc.).\n\nFinally, share the project!',
+						'Build a collection game where the player controls a bowl and collects different items.\n\n1. Program the bowl so it can be controlled with the arrow keys after the green flag is clicked.\n2. When a sprite is touched by the bowl, make it broadcast a message such as "Cheese touched".\n3. Decide what each sprite should do when it receives its message. It might move, play a sound, hide, or trigger a bowl reaction.\n4. Add variables that track how many times each object has been collected.\n5. Add a timer that stops the game after 15 seconds. When the timer runs out, broadcast a message that makes all sprites on the screen react, such as spinning, growing, shrinking, or showing the final result.',
 					projectLink: "https://scratch.mit.edu/projects/303008513/",
 					solutionLink: "https://scratch.mit.edu/projects/302811491/"
 				},
@@ -540,7 +540,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS11 Project 1 – Hedgehog Race",
 					content:
-						"Build Hedgehog Race by planning the moving pieces before programming. Play through the demo and identify the game elements that need to be built: sprite behavior, controls, event reactions, variables, scoring, and end conditions.\n\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.\n\nFinally, share the project!",
+						"Build Hedgehog Race by planning the moving pieces before programming. Play through the demo and identify the game elements that need to be built: sprite behavior, controls, event reactions, variables, scoring, and end conditions.\n\nAdd a project comment that lists the implementation steps. Starter code is provided, but a custom version can also be built from a blank project with original sprites, costumes, and backdrops.",
 					projectLink: "https://scratch.mit.edu/projects/304551665/",
 					solutionLink: "https://scratch.mit.edu/projects/305082197/"
 				},
@@ -595,7 +595,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "GS12 Project 1 – Asteroid Dodge",
 					content:
-						"Build Asteroid Dodge by identifying the player controls, asteroid movement, collision rules, score or survival timer, and restart behavior before programming.\n\nAdd a project comment that lists the implementation steps. The starter project can be used as a base, or the same mechanics can be rebuilt from a blank project with original sprites, costumes, and backdrops.\n\nTest that the player can move, asteroids reset cleanly, collisions are detected reliably, and the game has a clear ending or replay path. Finally, share the project!",
+						"Build Asteroid Dodge by identifying the player controls, asteroid movement, collision rules, score or survival timer, and restart behavior before programming.\n\nAdd a project comment that lists the implementation steps. The starter project can be used as a base, or the same mechanics can be rebuilt from a blank project with original sprites, costumes, and backdrops.\n\nTest that the player can move, asteroids reset cleanly, collisions are detected reliably, and the game has a clear ending or replay path.",
 					projectLink: "https://scratch.mit.edu/projects/303001451/",
 					solutionLink: "https://scratch.mit.edu/projects/302948550/"
 				},
@@ -668,7 +668,7 @@ export const scratchLevel1Course: RawCourse = {
 				{
 					title: "Optional Extra Practice – Typing Games",
 					content:
-						"This optional section is for those transitioning from Scratch Level 1 into Python Level 1.\n\nThe purpose of this section is to prepare for the shift from block-based to text-based coding and to strengthen typing and computer literacy skills. These typing games are optional and do not need to be completed in full. Choose games that feel useful, spend about 15 to 20 minutes practicing as needed, and move to the intermediate options if the beginner games feel too easy.\n\nOne of the biggest differences between Python and Scratch is that we'll need to type our code out rather than using blocks. Let's play a few games to practice typing as we prepare ourselves to write Python code.\n\nBeginner Typing Games:\n• Practice with the Keyboard – Typing Letters: https://scratch.mit.edu/projects/214833806/\n• Practice with the Keyboard – Typing Numbers: https://scratch.mit.edu/projects/214828609/\n• Practice with the Keyboard – Typing Letters Race: https://www.nitrotype.com/\n\nIntermediate Typing Games:\n• Cup Stack Typing: https://www.abcya.com/games/cup-stack-typing-game\n• Ghost Typing: https://www.abcya.com/games/ghost_typing\n• Koala Paddleboards (spelling and typing practice): https://www.abcya.com/games/spelling_practice\n\nAdvanced Typing Games:\n• Typing Rocket: https://www.abcya.com/games/typing_rocket\n• Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer"
+						"This optional section supports the transition from Scratch Level 1 into Python Level 1.\n\nThe purpose of this section is to prepare for the shift from block-based to text-based coding and to strengthen typing and computer literacy skills. These typing games are optional and do not need to be completed in full. Choose games that feel useful, spend about 15 to 20 minutes practicing as needed, and move to the intermediate options if the beginner games feel too easy.\n\nOne of the biggest differences between Python and Scratch is that Python code is typed rather than assembled from blocks. Typing practice makes that transition smoother and reduces friction when writing Python programs.\n\nBeginner Typing Games:\n• Practice with the Keyboard – Typing Letters: https://scratch.mit.edu/projects/214833806/\n• Practice with the Keyboard – Typing Numbers: https://scratch.mit.edu/projects/214828609/\n• Practice with the Keyboard – Typing Letters Race: https://www.nitrotype.com/\n\nIntermediate Typing Games:\n• Cup Stack Typing: https://www.abcya.com/games/cup-stack-typing-game\n• Ghost Typing: https://www.abcya.com/games/ghost_typing\n• Koala Paddleboards (spelling and typing practice): https://www.abcya.com/games/spelling_practice\n\nAdvanced Typing Games:\n• Typing Rocket: https://www.abcya.com/games/typing_rocket\n• Type Racer: https://github.com/instruction-material/Python-Level-2/tree/main/PS12-Type-Racer"
 				}
 			],
 			supplementalProjects: [

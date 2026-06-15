@@ -155,6 +155,31 @@ const forbiddenRawGeneratedPatterns = [
 	/\bcourse placeholder asset\b/i
 ];
 
+const forbiddenScratchRawPatterns = [
+	/\bIntroduce the concept\b/i,
+	/\bShow how to\b/i,
+	/\bDemonstrate how\b/i,
+	/\bDiscuss real-life examples\b/i,
+	/\bCan you remember\b/i,
+	/\bCan you show me\b/i,
+	/\bClick on the Events section\b/i,
+	/\bTalk about how\b/i,
+	/\bWhat do you think an event listener\b/i,
+	/\bLet's make\b/i,
+	/\bLet’s make\b/i,
+	/\bwe need\b/i,
+	/\bwe should\b/i,
+	/\bwe want\b/i,
+	/\bwe can\b/i,
+	/\bwe're\b/i,
+	/\bwe have\b/i,
+	/\bRemember, if we\b/i,
+	/\bHave you ever heard\b/i,
+	/Finally, share the project!/i,
+	/Great work!/i,
+	/\(Introduce the /i
+];
+
 const rawCourseFiles = readdirSync(coursesSourceDir)
 	.filter(file => file.endsWith(".ts"))
 	.filter(
@@ -192,6 +217,28 @@ describe("student-facing course copy", () => {
 			const source = readFileSync(file, "utf8");
 
 			for (const pattern of forbiddenRawGeneratedPatterns) {
+				if (!pattern.test(source)) continue;
+
+				failures.push(
+					`${file.replace(`${repoRoot}/`, "")}: ${snippet(source, pattern)}`
+				);
+			}
+		}
+
+		expect(failures).toEqual([]);
+	});
+
+	it("keeps Scratch raw course copy neutral instead of instructor-scripted", () => {
+		const files = [
+			resolve(coursesSourceDir, "scratch-level-1.ts"),
+			resolve(coursesSourceDir, "scratch-level-2.ts")
+		];
+		const failures: string[] = [];
+
+		for (const file of files) {
+			const source = readFileSync(file, "utf8");
+
+			for (const pattern of forbiddenScratchRawPatterns) {
 				if (!pattern.test(source)) continue;
 
 				failures.push(
@@ -323,7 +370,9 @@ describe("student-facing course copy", () => {
 					];
 
 					for (const field of fields) {
-						const match = field.value.match(forbiddenCourseArticlePattern);
+						const match = field.value.match(
+							forbiddenCourseArticlePattern
+						);
 
 						if (!match) continue;
 
