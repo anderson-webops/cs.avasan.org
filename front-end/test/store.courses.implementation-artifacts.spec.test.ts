@@ -380,19 +380,26 @@ describe("implemented course development artifacts", () => {
 		expect(unityText).toContain("current full-project baseline");
 	}, 30000);
 
-	it("backfills reference solution links for source-backed project links", async () => {
-		for (const courseId of Object.keys(courseImplementationSourceRepos)) {
-			const course = await requireCourse(courseId);
-			const missingSolutionItems = course.modules.flatMap(module =>
-				[...module.curriculum, ...module.supplementalProjects].filter(
-					item =>
-						item.projectLink?.includes(
-							"github.com/instruction-material/"
-						) && !item.solutionLink
-				)
-			);
+	it(
+		"backfills reference solution links for source-backed project links",
+		async () => {
+			for (const courseId of Object.keys(courseImplementationSourceRepos)) {
+				const course = await requireCourse(courseId);
+				const missingSolutionItems = course.modules.flatMap(module =>
+					[
+						...module.curriculum,
+						...module.supplementalProjects
+					].filter(
+						item =>
+							item.projectLink?.includes(
+								"github.com/instruction-material/"
+							) && !item.solutionLink
+					)
+				);
 
-			expect(missingSolutionItems, courseId).toHaveLength(0);
-		}
-	}, 30000);
+				expect(missingSolutionItems, courseId).toHaveLength(0);
+			}
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
 });

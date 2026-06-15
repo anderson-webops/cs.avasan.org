@@ -1631,7 +1631,7 @@ function addAlgebraStandardsArchitectureModule(
 			{
 				title: "Extension Project: Changed Constraint",
 				content:
-					"**Project goal:** Extend the anchor project by changing one constraint, adding a second method, or comparing two models. The extension should test whether the method is understood structurally: a changed condition may preserve the same relationship, require a new representation, or expose where the original model was too narrow.\n\n**Completion checks:**\n- The changed condition is explicit.\n- The work explains why the original method still works or must change.\n- The result is compared against the original case."
+					"**Project goal:** Extend the anchor project by changing one constraint, adding a second method, or comparing two models. The extension tests whether the method is understood structurally: a changed condition may preserve the same relationship, require a new representation, or expose where the original model was too narrow.\n\n**Completion checks:**\n- The changed condition is explicit.\n- The work explains why the original method still works or must change.\n- The result is compared against the original case."
 			}
 		]
 	});

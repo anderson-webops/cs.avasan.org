@@ -1327,6 +1327,8 @@ describe("course text quality normalization", () => {
 			expect(corpus).not.toMatch(/should use the checkpoint/i);
 			expect(corpus).not.toMatch(/\bThe checkpoint should\b/i);
 			expect(corpus).not.toMatch(/\bmodule idea\b/i);
+			expect(corpus).not.toMatch(/\bThe final note should\b/i);
+			expect(corpus).not.toMatch(/\bThe extension should\b/i);
 			expect(corpus).not.toMatch(/typical the response example/i);
 			expect(corpus).not.toMatch(/the response known values/i);
 			expect(corpus).not.toMatch(/the response answer/i);

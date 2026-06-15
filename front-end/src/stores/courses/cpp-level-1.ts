@@ -339,7 +339,7 @@ export const cppLevel1Course: RawCourse = {
 				{
 					title: "CPPF8 Project 2: Profile Posts State Machine Extension",
 					content:
-						"Add a written state diagram and update the capstone so the user can move between at least three explicit modes. The extension should justify why a `switch` plus `enum class` is clearer than another long `if`/`else if` chain.",
+						"Add a written state diagram and update the capstone so the user can move between at least three explicit modes. The extension justifies why a `switch` plus `enum class` is clearer than another long `if`/`else if` chain.",
 					projectLink:
 						"https://github.com/instruction-material/CPP-Level-1/tree/main/CPPF8-State-Machine-Profile-Posts",
 					solutionLink:
