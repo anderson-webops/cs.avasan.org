@@ -92,7 +92,7 @@ function sequencingEvidenceNote(courseLabel: string) {
 }
 
 function projectEvidenceNote(courseLabel: string) {
-	return `**Project evidence:** A ${courseLabel} project is ready when the expected artifact, success criteria, normal case, edge case, explanation target, and extension path can be read without guessing what the work is meant to prove.`;
+	return `**Project evidence:** Project work in ${courseLabel} is ready when the expected artifact, success criteria, normal case, edge case, explanation target, and extension path can be read without guessing what the work is meant to prove.`;
 }
 
 function projectDescription(project: string) {
@@ -150,34 +150,34 @@ function projectOptionGoal(
 		return `**Project goal:** Build this as a playable ${courseLabel} project with clear sprite roles, event flow, state changes, and end conditions.`;
 	}
 	if (family.includes("python")) {
-		return `**Project goal:** Implement this as a ${courseLabel} program with named inputs, reusable functions or classes where helpful, and reproducible console or file output.`;
+		return `**Project goal:** Implement a program for ${courseLabel} with named inputs, reusable functions or classes where helpful, and reproducible console or file output.`;
 	}
 	if (family.includes("pygame")) {
 		return "**Project goal:** Prototype this as a game loop with actors, controls, collision or state rules, scoring or progress feedback, and a reset path.";
 	}
 	if (family.includes("data") || family.includes("machine learning")) {
-		return `**Project goal:** Complete this as a ${courseLabel} analysis artifact with a defined question, source data, cleaning or feature choices, evidence, and limitations.`;
+		return `**Project goal:** Complete an analysis artifact for ${courseLabel} with a defined question, source data, cleaning or feature choices, evidence, and limitations.`;
 	}
 	if (family.includes("ai")) {
-		return `**Project goal:** Build this as an ${courseLabel} reasoning artifact with an explicit state representation, decision rule or search strategy, traceable output, and limitation note.`;
+		return `**Project goal:** Build a reasoning artifact for ${courseLabel} with an explicit state representation, decision rule or search strategy, traceable output, and limitation note.`;
 	}
 	if (family.includes("algebra")) {
-		return `**Project goal:** Use this project to model, solve, graph, or justify a ${courseLabel} relationship with visible steps and a reasonableness check.`;
+		return `**Project goal:** Use this project to model, solve, graph, or justify relationships in ${courseLabel} with visible steps and a reasonableness check.`;
 	}
 	if (family.includes("c++")) {
-		return `**Project goal:** Build this as a ${courseLabel} program with a documented compile command, data representation, ownership or container decision, and test cases.`;
+		return `**Project goal:** Build a program for ${courseLabel} with a documented compile command, data representation, ownership or container decision, and test cases.`;
 	}
 	if (family.includes("javascript") || family.includes("web")) {
-		return `**Project goal:** Build this as a ${courseLabel} browser feature with visible UI state, event handling, validation, and responsive layout evidence.`;
+		return `**Project goal:** Build a browser feature for ${courseLabel} with visible UI state, event handling, validation, and responsive layout evidence.`;
 	}
 	if (family.includes("java")) {
-		return `**Project goal:** Implement this as a ${courseLabel} Java artifact with clear class responsibilities, method contracts, state changes, and compile/run evidence.`;
+		return `**Project goal:** Implement a Java artifact for ${courseLabel} with clear class responsibilities, method contracts, state changes, and compile/run evidence.`;
 	}
 	if (family.includes("usaco")) {
-		return `**Project goal:** Solve this as a ${courseLabel} contest problem with exact input/output behavior, constraints, invariants, and complexity reasoning.`;
+		return `**Project goal:** Solve a contest problem for ${courseLabel} with exact input/output behavior, constraints, invariants, and complexity reasoning.`;
 	}
 	if (isScienceFamily(family)) {
-		return `**Project goal:** Investigate this as a ${courseLabel} model, data, or explanation task that connects a claim to evidence and reasoning.`;
+		return `**Project goal:** Investigate a model, data, or explanation task in ${courseLabel} that connects a claim to evidence and reasoning.`;
 	}
 	if (
 		family.includes("security") ||
@@ -185,15 +185,15 @@ function projectOptionGoal(
 		family.includes("linux") ||
 		family.includes("network")
 	) {
-		return `**Project goal:** Complete this as a ${courseLabel} local lab with explicit scope, allowed target, command evidence, interpretation, and rollback or remediation.`;
+		return `**Project goal:** Complete a local lab for ${courseLabel} with explicit scope, allowed target, command evidence, interpretation, and rollback or remediation.`;
 	}
 	if (family.includes("swift")) {
-		return `**Project goal:** Build this as a ${courseLabel} app feature with a defined screen, state owner, user flow, simulator evidence, and accessibility check.`;
+		return `**Project goal:** Build an app feature for ${courseLabel} with a defined screen, state owner, user flow, simulator evidence, and accessibility check.`;
 	}
 	if (family.includes("unity")) {
-		return `**Project goal:** Build this as a ${courseLabel} Unity scene or mechanic with player action, state feedback, playtest evidence, and reset behavior.`;
+		return `**Project goal:** Build a Unity scene or mechanic for ${courseLabel} with player action, state feedback, playtest evidence, and reset behavior.`;
 	}
-	return `**Project goal:** Complete this as a ${courseLabel} artifact with named inputs, expected behavior, evidence of correctness, and one limitation or edge case.`;
+	return `**Project goal:** Complete an artifact for ${courseLabel} with named inputs, expected behavior, evidence of correctness, and one limitation or edge case.`;
 }
 
 function projectOptionRequiredOutcome(
@@ -369,7 +369,7 @@ function buildStandardsModule(
 						courseLabel,
 						"One core-skill item can become a short lesson, a diagnostic checkpoint, or a remediation path depending on the course pacing."
 					),
-					`**Evidence target:** A ${courseLabel} lesson or project is ready when it includes a concrete explanation, worked example, practice task, and observable evidence for one of these skills.`
+					`**Evidence target:** Lesson or project readiness in ${courseLabel} requires a concrete explanation, worked example, practice task, and observable evidence for one of these skills.`
 				].join("\n\n")
 			},
 			{
@@ -381,7 +381,7 @@ function buildStandardsModule(
 						courseLabel,
 						"Topic additions are strongest when they include vocabulary, one representative example, one misconception check, and one transfer task."
 					),
-					`**Common pitfalls:** A ${courseLabel} topic is strongest when it connects to a real project. If the connection is unclear, a smaller bridge lesson belongs before the major project.`
+					`**Common pitfalls:** Topics in ${courseLabel} are strongest when they connect to real projects. If the connection is unclear, a smaller bridge lesson belongs before the major project.`
 				].join("\n\n")
 			},
 			{
@@ -494,10 +494,10 @@ function buildProjectModule(
 			{
 				title: `${courseLabel} Project Ladder`,
 				content: [
-					`**Course focus:** These ${profile.family} project types create a ${courseLabel} progression from guided practice to independent capstone work. Every ${courseLabel} project names the artifact, required behavior, evidence of correctness, and one extension path.`,
+					`**Course focus:** These ${profile.family} project types create a progression for ${courseLabel} from guided practice to independent capstone work. Every ${courseLabel} project names the artifact, required behavior, evidence of correctness, and one extension path.`,
 					`**Project ladder:**\n${bullets(profile.projectTypes)}`,
 					projectEvidenceNote(courseLabel),
-					`**Evidence target:** A ${courseLabel} project is complete when the main design, model, proof, or reasoning choice is explained, not only when it runs or produces an answer.`
+					`**Evidence target:** Project work in ${courseLabel} is complete when the main design, model, proof, or reasoning choice is explained, not only when it runs or produces an answer.`
 				].join("\n\n")
 			},
 			{
@@ -520,7 +520,7 @@ function buildProjectModule(
 			{
 				title: `${courseLabel} Capstone Gate`,
 				content: [
-					`**Readiness check:** Before a ${courseLabel} capstone begins, prerequisite modules, project ladder, and assessment model are practiced on smaller artifacts.`,
+					`**Readiness check:** Before the ${courseLabel} capstone begins, prerequisite modules, project ladder, and assessment model are practiced on smaller artifacts.`,
 					`**Gate guidance:** The ${courseLabel} capstone is ready when it combines known skills in a larger context rather than introducing several untested ideas at once. The first version stays narrow, demonstrable, and easy to verify before optional polish is added.`,
 					`**Evidence of proficiency:** ${courseLabel} capstone work demonstrates the ability to state the goal, choose an approach, predict two risks, define tests or evidence, and explain what would count as a complete first version.`
 				].join("\n\n")

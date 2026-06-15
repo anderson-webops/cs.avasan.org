@@ -173,6 +173,10 @@ function snippet(value: string, pattern: RegExp) {
 	return value.slice(start, start + 180).replace(/\s+/g, " ");
 }
 
+function escapeRegExp(value: string) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 describe("student-facing course copy", () => {
 	it("keeps generated boilerplate and recovery notes out of raw course source", () => {
 		const files = [
@@ -264,6 +268,68 @@ describe("student-facing course copy", () => {
 								`${entry.id} / ${module.title} / ${field.label}: ${snippet(field.value, pattern)}`
 							);
 						}
+					}
+				}
+			}
+
+			expect(failures).toEqual([]);
+		},
+		COURSE_SWEEP_TIMEOUT
+	);
+
+	it(
+		"does not prepend awkward indefinite articles to exact course names",
+		async () => {
+			const failures: string[] = [];
+
+			for (const entry of courseCatalog) {
+				const course = await loadRawCourse(entry.id);
+
+				if (!course) {
+					failures.push(`${entry.id}: failed to load`);
+					continue;
+				}
+
+				const forbiddenCourseArticlePattern = new RegExp(
+					`(^|[^A-Za-z])(A|a) ${escapeRegExp(course.name)}\\b`
+				);
+
+				for (const module of course.modules) {
+					const fields = [
+						{
+							label: "module title",
+							value: module.title
+						},
+						...module.curriculum.flatMap(item => [
+							{
+								label: `curriculum title: ${item.title}`,
+								value: item.title
+							},
+							{
+								label: `curriculum content: ${item.title}`,
+								value: item.content
+							}
+						]),
+						...module.supplementalProjects.flatMap(item => [
+							{
+								label: `supplemental title: ${item.title}`,
+								value: item.title
+							},
+							{
+								label: `supplemental content: ${item.title}`,
+								value: item.content
+							}
+						])
+					];
+
+					for (const field of fields) {
+						const match = field.value.match(forbiddenCourseArticlePattern);
+
+						if (!match) continue;
+
+						failures.push(
+							`${entry.id} / ${module.title} / ${field.label}: ${match[0].trim()}`
+						);
 					}
 				}
 			}
