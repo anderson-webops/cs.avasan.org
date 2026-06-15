@@ -369,7 +369,7 @@ function buildStandardsModule(
 						courseLabel,
 						"One core-skill item can become a short lesson, a diagnostic checkpoint, or a remediation path depending on the course pacing."
 					),
-					`**Completion check:** A ${courseLabel} lesson or project is ready when it includes a concrete explanation, worked example, practice task, and completion check for one of these skills.`
+					`**Evidence target:** A ${courseLabel} lesson or project is ready when it includes a concrete explanation, worked example, practice task, and observable evidence for one of these skills.`
 				].join("\n\n")
 			},
 			{

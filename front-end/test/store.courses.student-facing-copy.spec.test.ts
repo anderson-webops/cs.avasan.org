@@ -67,6 +67,7 @@ const forbiddenStudentFacingPatterns = [
 	/\bCourse scope:\b/i,
 	/\bGaps to close:\b/i,
 	/\bTopic backlog:\b/i,
+	/\*\*Completion check:\*\*/i,
 	/\bModule Backlog\b/i,
 	/\bReady-to-Author\b/i,
 	/\bPlanning Project\b/i,
